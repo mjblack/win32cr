@@ -1,9 +1,10 @@
 require "./../windows_and_messaging.cr"
 require "./../../foundation.cr"
-require "./../controls.cr"
+require "./../../graphics/gdi.cr"
 
 module Win32cr::UI::Input::Pointer
   extend self
+  alias HSYNTHETICPOINTERDEVICE = Void*
 
   @[Flags]
   enum POINTER_FLAGS : UInt32
@@ -44,6 +45,24 @@ module Win32cr::UI::Input::Pointer
     POINTER_CHANGE_FOURTHBUTTON_UP = 8_i32
     POINTER_CHANGE_FIFTHBUTTON_DOWN = 9_i32
     POINTER_CHANGE_FIFTHBUTTON_UP = 10_i32
+  end
+  enum POINTER_FEEDBACK_MODE
+    POINTER_FEEDBACK_DEFAULT = 1_i32
+    POINTER_FEEDBACK_INDIRECT = 2_i32
+    POINTER_FEEDBACK_NONE = 3_i32
+  end
+  enum POINTER_DEVICE_TYPE
+    POINTER_DEVICE_TYPE_INTEGRATED_PEN = 1_i32
+    POINTER_DEVICE_TYPE_EXTERNAL_PEN = 2_i32
+    POINTER_DEVICE_TYPE_TOUCH = 3_i32
+    POINTER_DEVICE_TYPE_TOUCH_PAD = 4_i32
+    POINTER_DEVICE_TYPE_MAX = -1_i32
+  end
+  enum POINTER_DEVICE_CURSOR_TYPE
+    POINTER_DEVICE_CURSOR_TYPE_UNKNOWN = 0_i32
+    POINTER_DEVICE_CURSOR_TYPE_TIP = 1_i32
+    POINTER_DEVICE_CURSOR_TYPE_ERASER = 2_i32
+    POINTER_DEVICE_CURSOR_TYPE_MAX = -1_i32
   end
 
   @[Extern]
@@ -91,6 +110,25 @@ module Win32cr::UI::Input::Pointer
     property tiltX : Int32
     property tiltY : Int32
     def initialize(@pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO, @penFlags : UInt32, @penMask : UInt32, @pressure : UInt32, @rotation : UInt32, @tiltX : Int32, @tiltY : Int32)
+    end
+  end
+
+  @[Extern]
+  struct POINTER_TYPE_INFO
+    property type__ : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO
+    property touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO
+    property penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO
+    def initialize(@pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO, @touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO, @penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, @anonymous : Anonymous_e__Union_)
     end
   end
 
@@ -145,119 +183,217 @@ module Win32cr::UI::Input::Pointer
     end
   end
 
+  @[Extern]
+  struct POINTER_DEVICE_INFO
+    property displayOrientation : UInt32
+    property device : Win32cr::Foundation::HANDLE
+    property pointerDeviceType : Win32cr::UI::Input::Pointer::POINTER_DEVICE_TYPE
+    property monitor : Win32cr::Graphics::Gdi::HMONITOR
+    property startingCursorId : UInt32
+    property maxActiveContacts : UInt16
+    property productString : UInt16[520]
+    def initialize(@displayOrientation : UInt32, @device : Win32cr::Foundation::HANDLE, @pointerDeviceType : Win32cr::UI::Input::Pointer::POINTER_DEVICE_TYPE, @monitor : Win32cr::Graphics::Gdi::HMONITOR, @startingCursorId : UInt32, @maxActiveContacts : UInt16, @productString : UInt16[520])
+    end
+  end
+
+  @[Extern]
+  struct POINTER_DEVICE_PROPERTY
+    property logicalMin : Int32
+    property logicalMax : Int32
+    property physicalMin : Int32
+    property physicalMax : Int32
+    property unit : UInt32
+    property unitExponent : UInt32
+    property usagePageId : UInt16
+    property usageId : UInt16
+    def initialize(@logicalMin : Int32, @logicalMax : Int32, @physicalMin : Int32, @physicalMax : Int32, @unit : UInt32, @unitExponent : UInt32, @usagePageId : UInt16, @usageId : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct POINTER_DEVICE_CURSOR_INFO
+    property cursorId : UInt32
+    property cursor : Win32cr::UI::Input::Pointer::POINTER_DEVICE_CURSOR_TYPE
+    def initialize(@cursorId : UInt32, @cursor : Win32cr::UI::Input::Pointer::POINTER_DEVICE_CURSOR_TYPE)
+    end
+  end
+
   def getUnpredictedMessagePos : UInt32
+    {% if !flag?(:docs) %}
     C.GetUnpredictedMessagePos
+    {% end %}
   end
 
   def initializeTouchInjection(maxCount : UInt32, dwMode : Win32cr::UI::Input::Pointer::TOUCH_FEEDBACK_MODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeTouchInjection(maxCount, dwMode)
+    {% end %}
   end
 
   def injectTouchInput(count : UInt32, contacts : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InjectTouchInput(count, contacts)
+    {% end %}
   end
 
   def getPointerType(pointerId : UInt32, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerType(pointerId, pointerType)
+    {% end %}
   end
 
   def getPointerCursorId(pointerId : UInt32, cursorId : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerCursorId(pointerId, cursorId)
+    {% end %}
   end
 
   def getPointerInfo(pointerId : UInt32, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerInfo(pointerId, pointerInfo)
+    {% end %}
   end
 
   def getPointerInfoHistory(pointerId : UInt32, entriesCount : UInt32*, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerInfoHistory(pointerId, entriesCount, pointerInfo)
+    {% end %}
   end
 
   def getPointerFrameInfo(pointerId : UInt32, pointerCount : UInt32*, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerFrameInfo(pointerId, pointerCount, pointerInfo)
+    {% end %}
   end
 
   def getPointerFrameInfoHistory(pointerId : UInt32, entriesCount : UInt32*, pointerCount : UInt32*, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerFrameInfoHistory(pointerId, entriesCount, pointerCount, pointerInfo)
+    {% end %}
   end
 
   def getPointerTouchInfo(pointerId : UInt32, touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerTouchInfo(pointerId, touchInfo)
+    {% end %}
   end
 
   def getPointerTouchInfoHistory(pointerId : UInt32, entriesCount : UInt32*, touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerTouchInfoHistory(pointerId, entriesCount, touchInfo)
+    {% end %}
   end
 
   def getPointerFrameTouchInfo(pointerId : UInt32, pointerCount : UInt32*, touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerFrameTouchInfo(pointerId, pointerCount, touchInfo)
+    {% end %}
   end
 
   def getPointerFrameTouchInfoHistory(pointerId : UInt32, entriesCount : UInt32*, pointerCount : UInt32*, touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerFrameTouchInfoHistory(pointerId, entriesCount, pointerCount, touchInfo)
+    {% end %}
   end
 
   def getPointerPenInfo(pointerId : UInt32, penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerPenInfo(pointerId, penInfo)
+    {% end %}
   end
 
   def getPointerPenInfoHistory(pointerId : UInt32, entriesCount : UInt32*, penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerPenInfoHistory(pointerId, entriesCount, penInfo)
+    {% end %}
   end
 
   def getPointerFramePenInfo(pointerId : UInt32, pointerCount : UInt32*, penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerFramePenInfo(pointerId, pointerCount, penInfo)
+    {% end %}
   end
 
   def getPointerFramePenInfoHistory(pointerId : UInt32, entriesCount : UInt32*, pointerCount : UInt32*, penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerFramePenInfoHistory(pointerId, entriesCount, pointerCount, penInfo)
+    {% end %}
   end
 
   def skipPointerFrameMessages(pointerId : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SkipPointerFrameMessages(pointerId)
+    {% end %}
   end
 
-  def injectSyntheticPointerInput(device : Win32cr::UI::Controls::HSYNTHETICPOINTERDEVICE, pointerInfo : Win32cr::UI::Controls::POINTER_TYPE_INFO*, count : UInt32) : Win32cr::Foundation::BOOL
+  def injectSyntheticPointerInput(device : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_TYPE_INFO*, count : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InjectSyntheticPointerInput(device, pointerInfo, count)
+    {% end %}
+  end
+
+  def destroySyntheticPointerDevice(device : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE) : Void
+    {% if !flag?(:docs) %}
+    C.DestroySyntheticPointerDevice(device)
+    {% end %}
   end
 
   def enableMouseInPointer(fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnableMouseInPointer(fEnable)
+    {% end %}
   end
 
   def isMouseInPointerEnabled : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsMouseInPointerEnabled
+    {% end %}
   end
 
   def getPointerInputTransform(pointerId : UInt32, historyCount : UInt32, inputTransform : Win32cr::UI::Input::Pointer::INPUT_TRANSFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerInputTransform(pointerId, historyCount, inputTransform)
+    {% end %}
   end
 
-  def getPointerDevices(deviceCount : UInt32*, pointerDevices : Win32cr::UI::Controls::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+  def getPointerDevices(deviceCount : UInt32*, pointerDevices : Win32cr::UI::Input::Pointer::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerDevices(deviceCount, pointerDevices)
+    {% end %}
   end
 
-  def getPointerDevice(device : Win32cr::Foundation::HANDLE, pointerDevice : Win32cr::UI::Controls::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+  def getPointerDevice(device : Win32cr::Foundation::HANDLE, pointerDevice : Win32cr::UI::Input::Pointer::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerDevice(device, pointerDevice)
+    {% end %}
   end
 
-  def getPointerDeviceProperties(device : Win32cr::Foundation::HANDLE, propertyCount : UInt32*, pointerProperties : Win32cr::UI::Controls::POINTER_DEVICE_PROPERTY*) : Win32cr::Foundation::BOOL
+  def getPointerDeviceProperties(device : Win32cr::Foundation::HANDLE, propertyCount : UInt32*, pointerProperties : Win32cr::UI::Input::Pointer::POINTER_DEVICE_PROPERTY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerDeviceProperties(device, propertyCount, pointerProperties)
+    {% end %}
   end
 
   def getPointerDeviceRects(device : Win32cr::Foundation::HANDLE, pointerDeviceRect : Win32cr::Foundation::RECT*, displayRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerDeviceRects(device, pointerDeviceRect, displayRect)
+    {% end %}
   end
 
-  def getPointerDeviceCursors(device : Win32cr::Foundation::HANDLE, cursorCount : UInt32*, deviceCursors : Win32cr::UI::Controls::POINTER_DEVICE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
+  def getPointerDeviceCursors(device : Win32cr::Foundation::HANDLE, cursorCount : UInt32*, deviceCursors : Win32cr::UI::Input::Pointer::POINTER_DEVICE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPointerDeviceCursors(device, cursorCount, deviceCursors)
+    {% end %}
   end
 
-  def getRawPointerDeviceData(pointerId : UInt32, historyCount : UInt32, propertiesCount : UInt32, pProperties : Win32cr::UI::Controls::POINTER_DEVICE_PROPERTY*, pValues : Int32*) : Win32cr::Foundation::BOOL
+  def getRawPointerDeviceData(pointerId : UInt32, historyCount : UInt32, propertiesCount : UInt32, pProperties : Win32cr::UI::Input::Pointer::POINTER_DEVICE_PROPERTY*, pValues : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetRawPointerDeviceData(pointerId, historyCount, propertiesCount, pProperties, pValues)
+    {% end %}
   end
 
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetUnpredictedMessagePos : UInt32
@@ -314,7 +450,10 @@ module Win32cr::UI::Input::Pointer
     fun SkipPointerFrameMessages(pointerId : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun InjectSyntheticPointerInput(device : Win32cr::UI::Controls::HSYNTHETICPOINTERDEVICE, pointerInfo : Win32cr::UI::Controls::POINTER_TYPE_INFO*, count : UInt32) : Win32cr::Foundation::BOOL
+    fun InjectSyntheticPointerInput(device : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_TYPE_INFO*, count : UInt32) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun DestroySyntheticPointerDevice(device : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE) : Void
 
     # :nodoc:
     fun EnableMouseInPointer(fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -326,22 +465,23 @@ module Win32cr::UI::Input::Pointer
     fun GetPointerInputTransform(pointerId : UInt32, historyCount : UInt32, inputTransform : Win32cr::UI::Input::Pointer::INPUT_TRANSFORM*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetPointerDevices(deviceCount : UInt32*, pointerDevices : Win32cr::UI::Controls::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    fun GetPointerDevices(deviceCount : UInt32*, pointerDevices : Win32cr::UI::Input::Pointer::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetPointerDevice(device : Win32cr::Foundation::HANDLE, pointerDevice : Win32cr::UI::Controls::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    fun GetPointerDevice(device : Win32cr::Foundation::HANDLE, pointerDevice : Win32cr::UI::Input::Pointer::POINTER_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetPointerDeviceProperties(device : Win32cr::Foundation::HANDLE, propertyCount : UInt32*, pointerProperties : Win32cr::UI::Controls::POINTER_DEVICE_PROPERTY*) : Win32cr::Foundation::BOOL
+    fun GetPointerDeviceProperties(device : Win32cr::Foundation::HANDLE, propertyCount : UInt32*, pointerProperties : Win32cr::UI::Input::Pointer::POINTER_DEVICE_PROPERTY*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetPointerDeviceRects(device : Win32cr::Foundation::HANDLE, pointerDeviceRect : Win32cr::Foundation::RECT*, displayRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetPointerDeviceCursors(device : Win32cr::Foundation::HANDLE, cursorCount : UInt32*, deviceCursors : Win32cr::UI::Controls::POINTER_DEVICE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
+    fun GetPointerDeviceCursors(device : Win32cr::Foundation::HANDLE, cursorCount : UInt32*, deviceCursors : Win32cr::UI::Input::Pointer::POINTER_DEVICE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetRawPointerDeviceData(pointerId : UInt32, historyCount : UInt32, propertiesCount : UInt32, pProperties : Win32cr::UI::Controls::POINTER_DEVICE_PROPERTY*, pValues : Int32*) : Win32cr::Foundation::BOOL
+    fun GetRawPointerDeviceData(pointerId : UInt32, historyCount : UInt32, propertiesCount : UInt32, pProperties : Win32cr::UI::Input::Pointer::POINTER_DEVICE_PROPERTY*, pValues : Int32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

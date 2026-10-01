@@ -1,5 +1,5 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/com.cr"
 require "./direct2_d/common.cr"
 require "./gdi.cr"
 require "./../globalization.cr"
@@ -13,6 +13,8 @@ module Win32cr::Graphics::DirectWrite
   DWRITE_E_DOWNLOADCANCELLED = -2003283954_i32
   DWRITE_E_DOWNLOADFAILED = -2003283953_i32
   DWRITE_E_TOOMANYDOWNLOADS = -2003283952_i32
+  DWRITE_STANDARD_FONT_AXIS_COUNT = 5_u32
+  DWRITE_NO_PALETTE_INDEX = 65535_u32
 
   enum DWRITE_FONT_AXIS_TAG : UInt32
     DWRITE_FONT_AXIS_TAG_WEIGHT = 1952999287_u32
@@ -27,16 +29,17 @@ module Win32cr::Graphics::DirectWrite
     DWRITE_MEASURING_MODE_GDI_NATURAL = 2_i32
   end
   @[Flags]
-  enum DWRITE_GLYPH_IMAGE_FORMATS : UInt32
-    DWRITE_GLYPH_IMAGE_FORMATS_NONE = 0_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_TRUETYPE = 1_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_CFF = 2_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_COLR = 4_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_SVG = 8_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_PNG = 16_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_JPEG = 32_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_TIFF = 64_u32
-    DWRITE_GLYPH_IMAGE_FORMATS_PREMULTIPLIED_B8G8R8A8 = 128_u32
+  enum DWRITE_GLYPH_IMAGE_FORMATS
+    DWRITE_GLYPH_IMAGE_FORMATS_NONE = 0_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_TRUETYPE = 1_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_CFF = 2_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_COLR = 4_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_SVG = 8_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_PNG = 16_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_JPEG = 32_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_TIFF = 64_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_PREMULTIPLIED_B8G8R8A8 = 128_i32
+    DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE = 256_i32
   end
   enum DWRITE_FONT_FILE_TYPE
     DWRITE_FONT_FILE_TYPE_UNKNOWN = 0_i32
@@ -61,10 +64,10 @@ module Win32cr::Graphics::DirectWrite
     DWRITE_FONT_FACE_TYPE_TRUETYPE_COLLECTION = 2_i32
   end
   @[Flags]
-  enum DWRITE_FONT_SIMULATIONS : UInt32
-    DWRITE_FONT_SIMULATIONS_NONE = 0_u32
-    DWRITE_FONT_SIMULATIONS_BOLD = 1_u32
-    DWRITE_FONT_SIMULATIONS_OBLIQUE = 2_u32
+  enum DWRITE_FONT_SIMULATIONS
+    DWRITE_FONT_SIMULATIONS_NONE = 0_i32
+    DWRITE_FONT_SIMULATIONS_BOLD = 1_i32
+    DWRITE_FONT_SIMULATIONS_OBLIQUE = 2_i32
   end
   enum DWRITE_FONT_WEIGHT
     DWRITE_FONT_WEIGHT_THIN = 100_i32
@@ -276,9 +279,9 @@ module Win32cr::Graphics::DirectWrite
     DWRITE_FONT_FEATURE_TAG_SLASHED_ZERO = 1869768058_u32
   end
   @[Flags]
-  enum DWRITE_SCRIPT_SHAPES : UInt32
-    DWRITE_SCRIPT_SHAPES_DEFAULT = 0_u32
-    DWRITE_SCRIPT_SHAPES_NO_VISUAL = 1_u32
+  enum DWRITE_SCRIPT_SHAPES
+    DWRITE_SCRIPT_SHAPES_DEFAULT = 0_i32
+    DWRITE_SCRIPT_SHAPES_NO_VISUAL = 1_i32
   end
   enum DWRITE_BREAK_CONDITION
     DWRITE_BREAK_CONDITION_NEUTRAL = 0_i32
@@ -721,15 +724,15 @@ module Win32cr::Graphics::DirectWrite
     DWRITE_FONT_FAMILY_MODEL_WEIGHT_STRETCH_STYLE = 1_i32
   end
   @[Flags]
-  enum DWRITE_AUTOMATIC_FONT_AXES : UInt32
-    DWRITE_AUTOMATIC_FONT_AXES_NONE = 0_u32
-    DWRITE_AUTOMATIC_FONT_AXES_OPTICAL_SIZE = 1_u32
+  enum DWRITE_AUTOMATIC_FONT_AXES
+    DWRITE_AUTOMATIC_FONT_AXES_NONE = 0_i32
+    DWRITE_AUTOMATIC_FONT_AXES_OPTICAL_SIZE = 1_i32
   end
   @[Flags]
-  enum DWRITE_FONT_AXIS_ATTRIBUTES : UInt32
-    DWRITE_FONT_AXIS_ATTRIBUTES_NONE = 0_u32
-    DWRITE_FONT_AXIS_ATTRIBUTES_VARIABLE = 1_u32
-    DWRITE_FONT_AXIS_ATTRIBUTES_HIDDEN = 2_u32
+  enum DWRITE_FONT_AXIS_ATTRIBUTES
+    DWRITE_FONT_AXIS_ATTRIBUTES_NONE = 0_i32
+    DWRITE_FONT_AXIS_ATTRIBUTES_VARIABLE = 1_i32
+    DWRITE_FONT_AXIS_ATTRIBUTES_HIDDEN = 2_i32
   end
   enum DWRITE_FONT_SOURCE_TYPE
     DWRITE_FONT_SOURCE_TYPE_UNKNOWN = 0_i32
@@ -737,6 +740,60 @@ module Win32cr::Graphics::DirectWrite
     DWRITE_FONT_SOURCE_TYPE_PER_USER = 2_i32
     DWRITE_FONT_SOURCE_TYPE_APPX_PACKAGE = 3_i32
     DWRITE_FONT_SOURCE_TYPE_REMOTE_FONT_PROVIDER = 4_i32
+  end
+  enum DWRITE_PAINT_FEATURE_LEVEL
+    DWRITE_PAINT_FEATURE_LEVEL_NONE = 0_i32
+    DWRITE_PAINT_FEATURE_LEVEL_COLR_V0 = 1_i32
+    DWRITE_PAINT_FEATURE_LEVEL_COLR_V1 = 2_i32
+  end
+  @[Flags]
+  enum DWRITE_PAINT_ATTRIBUTES
+    DWRITE_PAINT_ATTRIBUTES_NONE = 0_i32
+    DWRITE_PAINT_ATTRIBUTES_USES_PALETTE = 1_i32
+    DWRITE_PAINT_ATTRIBUTES_USES_TEXT_COLOR = 2_i32
+  end
+  enum DWRITE_COLOR_COMPOSITE_MODE
+    DWRITE_COLOR_COMPOSITE_CLEAR = 0_i32
+    DWRITE_COLOR_COMPOSITE_SRC = 1_i32
+    DWRITE_COLOR_COMPOSITE_DEST = 2_i32
+    DWRITE_COLOR_COMPOSITE_SRC_OVER = 3_i32
+    DWRITE_COLOR_COMPOSITE_DEST_OVER = 4_i32
+    DWRITE_COLOR_COMPOSITE_SRC_IN = 5_i32
+    DWRITE_COLOR_COMPOSITE_DEST_IN = 6_i32
+    DWRITE_COLOR_COMPOSITE_SRC_OUT = 7_i32
+    DWRITE_COLOR_COMPOSITE_DEST_OUT = 8_i32
+    DWRITE_COLOR_COMPOSITE_SRC_ATOP = 9_i32
+    DWRITE_COLOR_COMPOSITE_DEST_ATOP = 10_i32
+    DWRITE_COLOR_COMPOSITE_XOR = 11_i32
+    DWRITE_COLOR_COMPOSITE_PLUS = 12_i32
+    DWRITE_COLOR_COMPOSITE_SCREEN = 13_i32
+    DWRITE_COLOR_COMPOSITE_OVERLAY = 14_i32
+    DWRITE_COLOR_COMPOSITE_DARKEN = 15_i32
+    DWRITE_COLOR_COMPOSITE_LIGHTEN = 16_i32
+    DWRITE_COLOR_COMPOSITE_COLOR_DODGE = 17_i32
+    DWRITE_COLOR_COMPOSITE_COLOR_BURN = 18_i32
+    DWRITE_COLOR_COMPOSITE_HARD_LIGHT = 19_i32
+    DWRITE_COLOR_COMPOSITE_SOFT_LIGHT = 20_i32
+    DWRITE_COLOR_COMPOSITE_DIFFERENCE = 21_i32
+    DWRITE_COLOR_COMPOSITE_EXCLUSION = 22_i32
+    DWRITE_COLOR_COMPOSITE_MULTIPLY = 23_i32
+    DWRITE_COLOR_COMPOSITE_HSL_HUE = 24_i32
+    DWRITE_COLOR_COMPOSITE_HSL_SATURATION = 25_i32
+    DWRITE_COLOR_COMPOSITE_HSL_COLOR = 26_i32
+    DWRITE_COLOR_COMPOSITE_HSL_LUMINOSITY = 27_i32
+  end
+  enum DWRITE_PAINT_TYPE
+    DWRITE_PAINT_TYPE_NONE = 0_i32
+    DWRITE_PAINT_TYPE_LAYERS = 1_i32
+    DWRITE_PAINT_TYPE_SOLID_GLYPH = 2_i32
+    DWRITE_PAINT_TYPE_SOLID = 3_i32
+    DWRITE_PAINT_TYPE_LINEAR_GRADIENT = 4_i32
+    DWRITE_PAINT_TYPE_RADIAL_GRADIENT = 5_i32
+    DWRITE_PAINT_TYPE_SWEEP_GRADIENT = 6_i32
+    DWRITE_PAINT_TYPE_GLYPH = 7_i32
+    DWRITE_PAINT_TYPE_COLOR_GLYPH = 8_i32
+    DWRITE_PAINT_TYPE_TRANSFORM = 9_i32
+    DWRITE_PAINT_TYPE_COMPOSITE = 10_i32
   end
 
   @[Extern]
@@ -985,7 +1042,7 @@ module Win32cr::Graphics::DirectWrite
 
   @[Extern]
   struct DWRITE_FONT_METRICS1
-    property __anonymous_base_d_write_1_l627_c38 : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS
+    property base : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS
     property glyphBoxLeft : Int16
     property glyphBoxTop : Int16
     property glyphBoxRight : Int16
@@ -999,7 +1056,7 @@ module Win32cr::Graphics::DirectWrite
     property superscriptSizeX : Int16
     property superscriptSizeY : Int16
     property hasTypographicMetrics : Win32cr::Foundation::BOOL
-    def initialize(@__anonymous_base_d_write_1_l627_c38 : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS, @glyphBoxLeft : Int16, @glyphBoxTop : Int16, @glyphBoxRight : Int16, @glyphBoxBottom : Int16, @subscriptPositionX : Int16, @subscriptPositionY : Int16, @subscriptSizeX : Int16, @subscriptSizeY : Int16, @superscriptPositionX : Int16, @superscriptPositionY : Int16, @superscriptSizeX : Int16, @superscriptSizeY : Int16, @hasTypographicMetrics : Win32cr::Foundation::BOOL)
+    def initialize(@base : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS, @glyphBoxLeft : Int16, @glyphBoxTop : Int16, @glyphBoxRight : Int16, @glyphBoxBottom : Int16, @subscriptPositionX : Int16, @subscriptPositionY : Int16, @subscriptSizeX : Int16, @subscriptSizeY : Int16, @superscriptPositionX : Int16, @superscriptPositionY : Int16, @superscriptSizeX : Int16, @superscriptSizeY : Int16, @hasTypographicMetrics : Win32cr::Foundation::BOOL)
     end
   end
 
@@ -1021,24 +1078,6 @@ module Win32cr::Graphics::DirectWrite
     property decorative : Decorative_e__struct_
     property symbol : Symbol_e__struct_
 
-    # Nested Type Decorative_e__struct_
-    @[Extern]
-    struct Decorative_e__struct_
-    property familyKind : UInt8
-    property decorativeClass : UInt8
-    property weight : UInt8
-    property aspect : UInt8
-    property contrast : UInt8
-    property serifVariant : UInt8
-    property fill : UInt8
-    property lining : UInt8
-    property decorativeTopology : UInt8
-    property characterRange : UInt8
-    def initialize(@familyKind : UInt8, @decorativeClass : UInt8, @weight : UInt8, @aspect : UInt8, @contrast : UInt8, @serifVariant : UInt8, @fill : UInt8, @lining : UInt8, @decorativeTopology : UInt8, @characterRange : UInt8)
-    end
-    end
-
-
     # Nested Type Text_e__struct_
     @[Extern]
     struct Text_e__struct_
@@ -1057,24 +1096,6 @@ module Win32cr::Graphics::DirectWrite
     end
 
 
-    # Nested Type Symbol_e__struct_
-    @[Extern]
-    struct Symbol_e__struct_
-    property familyKind : UInt8
-    property symbolKind : UInt8
-    property weight : UInt8
-    property spacing : UInt8
-    property aspectRatioAndContrast : UInt8
-    property aspectRatio94 : UInt8
-    property aspectRatio119 : UInt8
-    property aspectRatio157 : UInt8
-    property aspectRatio163 : UInt8
-    property aspectRatio211 : UInt8
-    def initialize(@familyKind : UInt8, @symbolKind : UInt8, @weight : UInt8, @spacing : UInt8, @aspectRatioAndContrast : UInt8, @aspectRatio94 : UInt8, @aspectRatio119 : UInt8, @aspectRatio157 : UInt8, @aspectRatio163 : UInt8, @aspectRatio211 : UInt8)
-    end
-    end
-
-
     # Nested Type Script_e__struct_
     @[Extern]
     struct Script_e__struct_
@@ -1089,6 +1110,42 @@ module Win32cr::Graphics::DirectWrite
     property finials : UInt8
     property xAscent : UInt8
     def initialize(@familyKind : UInt8, @toolKind : UInt8, @weight : UInt8, @spacing : UInt8, @aspectRatio : UInt8, @contrast : UInt8, @scriptTopology : UInt8, @scriptForm : UInt8, @finials : UInt8, @xAscent : UInt8)
+    end
+    end
+
+
+    # Nested Type Decorative_e__struct_
+    @[Extern]
+    struct Decorative_e__struct_
+    property familyKind : UInt8
+    property decorativeClass : UInt8
+    property weight : UInt8
+    property aspect : UInt8
+    property contrast : UInt8
+    property serifVariant : UInt8
+    property fill : UInt8
+    property lining : UInt8
+    property decorativeTopology : UInt8
+    property characterRange : UInt8
+    def initialize(@familyKind : UInt8, @decorativeClass : UInt8, @weight : UInt8, @aspect : UInt8, @contrast : UInt8, @serifVariant : UInt8, @fill : UInt8, @lining : UInt8, @decorativeTopology : UInt8, @characterRange : UInt8)
+    end
+    end
+
+
+    # Nested Type Symbol_e__struct_
+    @[Extern]
+    struct Symbol_e__struct_
+    property familyKind : UInt8
+    property symbolKind : UInt8
+    property weight : UInt8
+    property spacing : UInt8
+    property aspectRatioAndContrast : UInt8
+    property aspectRatio94 : UInt8
+    property aspectRatio119 : UInt8
+    property aspectRatio157 : UInt8
+    property aspectRatio163 : UInt8
+    property aspectRatio211 : UInt8
+    def initialize(@familyKind : UInt8, @symbolKind : UInt8, @weight : UInt8, @spacing : UInt8, @aspectRatioAndContrast : UInt8, @aspectRatio94 : UInt8, @aspectRatio119 : UInt8, @aspectRatio157 : UInt8, @aspectRatio163 : UInt8, @aspectRatio211 : UInt8)
     end
     end
 
@@ -1224,7 +1281,146 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileLoaderVtbl,
+  struct DWRITE_BITMAP_DATA_BGRA32
+    property width : UInt32
+    property height : UInt32
+    property pixels : UInt32*
+    def initialize(@width : UInt32, @height : UInt32, @pixels : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DWRITE_PAINT_COLOR
+    property value : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F
+    property paletteEntryIndex : UInt16
+    property alphaMultiplier : Float32
+    property colorAttributes : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ATTRIBUTES
+    def initialize(@value : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F, @paletteEntryIndex : UInt16, @alphaMultiplier : Float32, @colorAttributes : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ATTRIBUTES)
+    end
+  end
+
+  @[Extern]
+  struct DWRITE_PAINT_ELEMENT
+    property paintType : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_TYPE
+    property paint : PAINT_UNION
+
+    # Nested Type PAINT_UNION
+    @[Extern(union: true)]
+    struct PAINT_UNION
+    property layers : PAINT_LAYERS
+    property solidGlyph : PAINT_SOLID_GLYPH
+    property solid : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_COLOR
+    property linearGradient : PAINT_LINEAR_GRADIENT
+    property radialGradient : PAINT_RADIAL_GRADIENT
+    property sweepGradient : PAINT_SWEEP_GRADIENT
+    property glyph : PAINT_GLYPH
+    property colorGlyph : PAINT_COLOR_GLYPH
+    property transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX
+    property composite : PAINT_COMPOSITE
+
+      # Nested Type PAINT_LAYERS
+      @[Extern]
+      struct PAINT_LAYERS
+    property childCount : UInt32
+    def initialize(@childCount : UInt32)
+    end
+      end
+
+
+      # Nested Type PAINT_SOLID_GLYPH
+      @[Extern]
+      struct PAINT_SOLID_GLYPH
+    property glyphIndex : UInt32
+    property color : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_COLOR
+    def initialize(@glyphIndex : UInt32, @color : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_COLOR)
+    end
+      end
+
+
+      # Nested Type PAINT_LINEAR_GRADIENT
+      @[Extern]
+      struct PAINT_LINEAR_GRADIENT
+    property extendMode : UInt32
+    property gradientStopCount : UInt32
+    property x0 : Float32
+    property y0 : Float32
+    property x1 : Float32
+    property y1 : Float32
+    property x2 : Float32
+    property y2 : Float32
+    def initialize(@extendMode : UInt32, @gradientStopCount : UInt32, @x0 : Float32, @y0 : Float32, @x1 : Float32, @y1 : Float32, @x2 : Float32, @y2 : Float32)
+    end
+      end
+
+
+      # Nested Type PAINT_RADIAL_GRADIENT
+      @[Extern]
+      struct PAINT_RADIAL_GRADIENT
+    property extendMode : UInt32
+    property gradientStopCount : UInt32
+    property x0 : Float32
+    property y0 : Float32
+    property radius0 : Float32
+    property x1 : Float32
+    property y1 : Float32
+    property radius1 : Float32
+    def initialize(@extendMode : UInt32, @gradientStopCount : UInt32, @x0 : Float32, @y0 : Float32, @radius0 : Float32, @x1 : Float32, @y1 : Float32, @radius1 : Float32)
+    end
+      end
+
+
+      # Nested Type PAINT_SWEEP_GRADIENT
+      @[Extern]
+      struct PAINT_SWEEP_GRADIENT
+    property extendMode : UInt32
+    property gradientStopCount : UInt32
+    property centerX : Float32
+    property centerY : Float32
+    property startAngle : Float32
+    property endAngle : Float32
+    def initialize(@extendMode : UInt32, @gradientStopCount : UInt32, @centerX : Float32, @centerY : Float32, @startAngle : Float32, @endAngle : Float32)
+    end
+      end
+
+
+      # Nested Type PAINT_GLYPH
+      @[Extern]
+      struct PAINT_GLYPH
+    property glyphIndex : UInt32
+    def initialize(@glyphIndex : UInt32)
+    end
+      end
+
+
+      # Nested Type PAINT_COLOR_GLYPH
+      @[Extern]
+      struct PAINT_COLOR_GLYPH
+    property glyphIndex : UInt32
+    property clipBox : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+    def initialize(@glyphIndex : UInt32, @clipBox : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F)
+    end
+      end
+
+
+      # Nested Type PAINT_COMPOSITE
+      @[Extern]
+      struct PAINT_COMPOSITE
+    property mode : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_COMPOSITE_MODE
+    def initialize(@mode : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_COMPOSITE_MODE)
+    end
+      end
+
+    def initialize(@layers : PAINT_LAYERS, @solidGlyph : PAINT_SOLID_GLYPH, @solid : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_COLOR, @linearGradient : PAINT_LINEAR_GRADIENT, @radialGradient : PAINT_RADIAL_GRADIENT, @sweepGradient : PAINT_SWEEP_GRADIENT, @glyph : PAINT_GLYPH, @colorGlyph : PAINT_COLOR_GLYPH, @transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX, @composite : PAINT_COMPOSITE)
+    end
+    end
+
+    def initialize(@paintType : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_TYPE, @paint : PAINT_UNION)
+    end
+  end
+
+  @[Extern]
+
+  record IDWriteFontFileLoaderVtable,
     query_interface : Proc(IDWriteFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFileLoader*, UInt32),
     release : Proc(IDWriteFontFileLoader*, UInt32),
@@ -1232,7 +1428,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFileLoader, lpVtbl : IDWriteFontFileLoaderVtbl* do
+  record IDWriteFontFileLoader, lpVtbl : IDWriteFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0x727cad4e_u32, 0xd6af_u16, 0x4c9e_u16, StaticArray[0x8a_u8, 0x8_u8, 0xd6_u8, 0x95_u8, 0xb1_u8, 0x1c_u8, 0xaa_u8, 0x49_u8])
     def query_interface(this : IDWriteFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1250,18 +1446,19 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteLocalFontFileLoaderVtbl,
+
+  record IDWriteLocalFontFileLoaderVtable,
     query_interface : Proc(IDWriteLocalFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteLocalFontFileLoader*, UInt32),
     release : Proc(IDWriteLocalFontFileLoader*, UInt32),
     create_stream_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_file_path_length_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_file_path_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_file_path_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_last_write_time_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, Win32cr::Foundation::FILETIME*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteLocalFontFileLoader, lpVtbl : IDWriteLocalFontFileLoaderVtbl* do
+  record IDWriteLocalFontFileLoader, lpVtbl : IDWriteLocalFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0xb2d9f3ec_u32, 0xc9fe_u16, 0x4a11_u16, StaticArray[0xa2_u8, 0xec_u8, 0xd8_u8, 0x62_u8, 0x8_u8, 0xf7_u8, 0xc0_u8, 0xa2_u8])
     def query_interface(this : IDWriteLocalFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1278,7 +1475,7 @@ module Win32cr::Graphics::DirectWrite
     def get_file_path_length_from_key(this : IDWriteLocalFontFileLoader*, fontFileReferenceKey : Void*, fontFileReferenceKeySize : UInt32, filePathLength : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_file_path_length_from_key.call(this, fontFileReferenceKey, fontFileReferenceKeySize, filePathLength)
     end
-    def get_file_path_from_key(this : IDWriteLocalFontFileLoader*, fontFileReferenceKey : Void*, fontFileReferenceKeySize : UInt32, filePath : UInt16*, filePathSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_file_path_from_key(this : IDWriteLocalFontFileLoader*, fontFileReferenceKey : Void*, fontFileReferenceKeySize : UInt32, filePath : Win32cr::Foundation::PWSTR, filePathSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_file_path_from_key.call(this, fontFileReferenceKey, fontFileReferenceKeySize, filePath, filePathSize)
     end
     def get_last_write_time_from_key(this : IDWriteLocalFontFileLoader*, fontFileReferenceKey : Void*, fontFileReferenceKeySize : UInt32, lastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
@@ -1288,7 +1485,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileStreamVtbl,
+
+  record IDWriteFontFileStreamVtable,
     query_interface : Proc(IDWriteFontFileStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFileStream*, UInt32),
     release : Proc(IDWriteFontFileStream*, UInt32),
@@ -1299,7 +1497,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFileStream, lpVtbl : IDWriteFontFileStreamVtbl* do
+  record IDWriteFontFileStream, lpVtbl : IDWriteFontFileStreamVtable* do
     GUID = LibC::GUID.new(0x6d4865fe_u32, 0xab8_u16, 0x4d91_u16, StaticArray[0x8f_u8, 0x62_u8, 0x5d_u8, 0xd6_u8, 0xbe_u8, 0x34_u8, 0xa3_u8, 0xe0_u8])
     def query_interface(this : IDWriteFontFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1326,7 +1524,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileVtbl,
+
+  record IDWriteFontFileVtable,
     query_interface : Proc(IDWriteFontFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFile*, UInt32),
     release : Proc(IDWriteFontFile*, UInt32),
@@ -1336,7 +1535,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFile, lpVtbl : IDWriteFontFileVtbl* do
+  record IDWriteFontFile, lpVtbl : IDWriteFontFileVtable* do
     GUID = LibC::GUID.new(0x739d886a_u32, 0xcef5_u16, 0x47dc_u16, StaticArray[0x87_u8, 0x69_u8, 0x1a_u8, 0x8b_u8, 0x41_u8, 0xbe_u8, 0xbb_u8, 0xb0_u8])
     def query_interface(this : IDWriteFontFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1360,7 +1559,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRenderingParamsVtbl,
+
+  record IDWriteRenderingParamsVtable,
     query_interface : Proc(IDWriteRenderingParams*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams*, UInt32),
     release : Proc(IDWriteRenderingParams*, UInt32),
@@ -1372,7 +1572,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams, lpVtbl : IDWriteRenderingParamsVtbl* do
+  record IDWriteRenderingParams, lpVtbl : IDWriteRenderingParamsVtable* do
     GUID = LibC::GUID.new(0x2f0da53a_u32, 0x2add_u16, 0x47cd_u16, StaticArray[0x82_u8, 0xee_u8, 0xd9_u8, 0xec_u8, 0x34_u8, 0x68_u8, 0x8e_u8, 0x75_u8])
     def query_interface(this : IDWriteRenderingParams*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1402,7 +1602,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFaceVtbl,
+
+  record IDWriteFontFaceVtable,
     query_interface : Proc(IDWriteFontFace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace*, UInt32),
     release : Proc(IDWriteFontFace*, UInt32),
@@ -1411,20 +1612,20 @@ module Win32cr::Graphics::DirectWrite
     get_index : Proc(IDWriteFontFace*, UInt32),
     get_simulations : Proc(IDWriteFontFace*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS),
     is_symbol_font : Proc(IDWriteFontFace*, Win32cr::Foundation::BOOL),
-    get_metrics_1 : Proc(IDWriteFontFace*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Void),
+    get_metrics : Proc(IDWriteFontFace*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Void),
     get_glyph_count : Proc(IDWriteFontFace*, UInt16),
     get_design_glyph_metrics : Proc(IDWriteFontFace*, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_glyph_indices : Proc(IDWriteFontFace*, UInt32*, UInt32, UInt16*, Win32cr::Foundation::HRESULT),
     try_get_font_table : Proc(IDWriteFontFace*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     release_font_table : Proc(IDWriteFontFace*, Void*, Void),
     get_glyph_run_outline : Proc(IDWriteFontFace*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_1 : Proc(IDWriteFontFace*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
-    get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode : Proc(IDWriteFontFace*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_gdi_compatible_metrics : Proc(IDWriteFontFace*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontFace, lpVtbl : IDWriteFontFaceVtbl* do
+  record IDWriteFontFace, lpVtbl : IDWriteFontFaceVtable* do
     GUID = LibC::GUID.new(0x5f49804d_u32, 0x7024_u16, 0x4d43_u16, StaticArray[0xbf_u8, 0xa9_u8, 0xd2_u8, 0x59_u8, 0x84_u8, 0xf5_u8, 0x38_u8, 0x49_u8])
     def query_interface(this : IDWriteFontFace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1450,8 +1651,8 @@ module Win32cr::Graphics::DirectWrite
     def is_symbol_font(this : IDWriteFontFace*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_symbol_font.call(this)
     end
-    def get_metrics_1(this : IDWriteFontFace*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Void
-      @lpVtbl.try &.value.get_metrics_1.call(this, fontFaceMetrics)
+    def get_metrics(this : IDWriteFontFace*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Void
+      @lpVtbl.try &.value.get_metrics.call(this, fontFaceMetrics)
     end
     def get_glyph_count(this : IDWriteFontFace*) : UInt16
       @lpVtbl.try &.value.get_glyph_count.call(this)
@@ -1471,11 +1672,11 @@ module Win32cr::Graphics::DirectWrite
     def get_glyph_run_outline(this : IDWriteFontFace*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
     end
-    def get_recommended_rendering_mode_1_1(this : IDWriteFontFace*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    def get_recommended_rendering_mode(this : IDWriteFontFace*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
     end
-    def get_gdi_compatible_metrics_1(this : IDWriteFontFace*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
+    def get_gdi_compatible_metrics(this : IDWriteFontFace*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gdi_compatible_metrics.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
     end
     def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, glyphIndices : UInt16*, glyphCount : UInt32, glyphMetrics : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, isSideways : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_glyph_metrics.call(this, emSize, pixelsPerDip, transform, useGdiNatural, glyphIndices, glyphCount, glyphMetrics, isSideways)
@@ -1484,7 +1685,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollectionLoaderVtbl,
+
+  record IDWriteFontCollectionLoaderVtable,
     query_interface : Proc(IDWriteFontCollectionLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollectionLoader*, UInt32),
     release : Proc(IDWriteFontCollectionLoader*, UInt32),
@@ -1492,7 +1694,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontCollectionLoader, lpVtbl : IDWriteFontCollectionLoaderVtbl* do
+  record IDWriteFontCollectionLoader, lpVtbl : IDWriteFontCollectionLoaderVtable* do
     GUID = LibC::GUID.new(0xcca920e4_u32, 0x52f0_u16, 0x492b_u16, StaticArray[0xbf_u8, 0xa8_u8, 0x29_u8, 0xc7_u8, 0x2e_u8, 0xe0_u8, 0xa4_u8, 0x68_u8])
     def query_interface(this : IDWriteFontCollectionLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1510,7 +1712,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileEnumeratorVtbl,
+
+  record IDWriteFontFileEnumeratorVtable,
     query_interface : Proc(IDWriteFontFileEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFileEnumerator*, UInt32),
     release : Proc(IDWriteFontFileEnumerator*, UInt32),
@@ -1519,7 +1722,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFileEnumerator, lpVtbl : IDWriteFontFileEnumeratorVtbl* do
+  record IDWriteFontFileEnumerator, lpVtbl : IDWriteFontFileEnumeratorVtable* do
     GUID = LibC::GUID.new(0x72755049_u32, 0x5ff7_u16, 0x435d_u16, StaticArray[0x83_u8, 0x48_u8, 0x4b_u8, 0xe9_u8, 0x7c_u8, 0xfa_u8, 0x6c_u8, 0x7c_u8])
     def query_interface(this : IDWriteFontFileEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1540,20 +1743,21 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteLocalizedStringsVtbl,
+
+  record IDWriteLocalizedStringsVtable,
     query_interface : Proc(IDWriteLocalizedStrings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteLocalizedStrings*, UInt32),
     release : Proc(IDWriteLocalizedStrings*, UInt32),
     get_count : Proc(IDWriteLocalizedStrings*, UInt32),
     find_locale_name : Proc(IDWriteLocalizedStrings*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_locale_name_length : Proc(IDWriteLocalizedStrings*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_locale_name : Proc(IDWriteLocalizedStrings*, UInt32, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_locale_name : Proc(IDWriteLocalizedStrings*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_string_length : Proc(IDWriteLocalizedStrings*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_string : Proc(IDWriteLocalizedStrings*, UInt32, UInt16*, UInt32, Win32cr::Foundation::HRESULT)
+    get_string : Proc(IDWriteLocalizedStrings*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteLocalizedStrings, lpVtbl : IDWriteLocalizedStringsVtbl* do
+  record IDWriteLocalizedStrings, lpVtbl : IDWriteLocalizedStringsVtable* do
     GUID = LibC::GUID.new(0x8256209_u32, 0x99a_u16, 0x4b34_u16, StaticArray[0xb8_u8, 0x6d_u8, 0xc2_u8, 0x2b_u8, 0x11_u8, 0xe_u8, 0x77_u8, 0x71_u8])
     def query_interface(this : IDWriteLocalizedStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1573,31 +1777,32 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length(this : IDWriteLocalizedStrings*, index : UInt32, length : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_length.call(this, index, length)
     end
-    def get_locale_name(this : IDWriteLocalizedStrings*, index : UInt32, localeName : UInt16*, size : UInt32) : Win32cr::Foundation::HRESULT
+    def get_locale_name(this : IDWriteLocalizedStrings*, index : UInt32, localeName : Win32cr::Foundation::PWSTR, size : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name.call(this, index, localeName, size)
     end
     def get_string_length(this : IDWriteLocalizedStrings*, index : UInt32, length : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_length.call(this, index, length)
     end
-    def get_string(this : IDWriteLocalizedStrings*, index : UInt32, stringBuffer : UInt16*, size : UInt32) : Win32cr::Foundation::HRESULT
+    def get_string(this : IDWriteLocalizedStrings*, index : UInt32, stringBuffer : Win32cr::Foundation::PWSTR, size : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string.call(this, index, stringBuffer, size)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontCollectionVtbl,
+
+  record IDWriteFontCollectionVtable,
     query_interface : Proc(IDWriteFontCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection*, UInt32),
     release : Proc(IDWriteFontCollection*, UInt32),
     get_font_family_count : Proc(IDWriteFontCollection*, UInt32),
-    get_font_family_1 : Proc(IDWriteFontCollection*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font_family : Proc(IDWriteFontCollection*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     find_family_name : Proc(IDWriteFontCollection*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_font_from_font_face : Proc(IDWriteFontCollection*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontCollection, lpVtbl : IDWriteFontCollectionVtbl* do
+  record IDWriteFontCollection, lpVtbl : IDWriteFontCollectionVtable* do
     GUID = LibC::GUID.new(0xa84cee02_u32, 0x3eea_u16, 0x4eee_u16, StaticArray[0xa8_u8, 0x27_u8, 0x87_u8, 0xc1_u8, 0xa0_u8, 0x2a_u8, 0xf_u8, 0xcc_u8])
     def query_interface(this : IDWriteFontCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1611,8 +1816,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_count(this : IDWriteFontCollection*) : UInt32
       @lpVtbl.try &.value.get_font_family_count.call(this)
     end
-    def get_font_family_1(this : IDWriteFontCollection*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_family_1.call(this, index, fontFamily)
+    def get_font_family(this : IDWriteFontCollection*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_family.call(this, index, fontFamily)
     end
     def find_family_name(this : IDWriteFontCollection*, familyName : Win32cr::Foundation::PWSTR, index : UInt32*, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_family_name.call(this, familyName, index, exists)
@@ -1624,17 +1829,18 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontListVtbl,
+
+  record IDWriteFontListVtable,
     query_interface : Proc(IDWriteFontList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontList*, UInt32),
     release : Proc(IDWriteFontList*, UInt32),
     get_font_collection : Proc(IDWriteFontList*, Void**, Win32cr::Foundation::HRESULT),
     get_font_count : Proc(IDWriteFontList*, UInt32),
-    get_font_1 : Proc(IDWriteFontList*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+    get_font : Proc(IDWriteFontList*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontList, lpVtbl : IDWriteFontListVtbl* do
+  record IDWriteFontList, lpVtbl : IDWriteFontListVtable* do
     GUID = LibC::GUID.new(0x1a0d8438_u32, 0x1d97_u16, 0x4ec1_u16, StaticArray[0xae_u8, 0xf9_u8, 0xa2_u8, 0xfb_u8, 0x86_u8, 0xed_u8, 0x6a_u8, 0xcb_u8])
     def query_interface(this : IDWriteFontList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1651,27 +1857,28 @@ module Win32cr::Graphics::DirectWrite
     def get_font_count(this : IDWriteFontList*) : UInt32
       @lpVtbl.try &.value.get_font_count.call(this)
     end
-    def get_font_1(this : IDWriteFontList*, index : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_1.call(this, index, font)
+    def get_font(this : IDWriteFontList*, index : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font.call(this, index, font)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontFamilyVtbl,
+
+  record IDWriteFontFamilyVtable,
     query_interface : Proc(IDWriteFontFamily*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFamily*, UInt32),
     release : Proc(IDWriteFontFamily*, UInt32),
     get_font_collection : Proc(IDWriteFontFamily*, Void**, Win32cr::Foundation::HRESULT),
     get_font_count : Proc(IDWriteFontFamily*, UInt32),
-    get_font_1 : Proc(IDWriteFontFamily*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font : Proc(IDWriteFontFamily*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_family_names : Proc(IDWriteFontFamily*, Void**, Win32cr::Foundation::HRESULT),
     get_first_matching_font : Proc(IDWriteFontFamily*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
-    get_matching_fonts_1 : Proc(IDWriteFontFamily*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT)
+    get_matching_fonts : Proc(IDWriteFontFamily*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontFamily, lpVtbl : IDWriteFontFamilyVtbl* do
+  record IDWriteFontFamily, lpVtbl : IDWriteFontFamilyVtable* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xdd_u8])
     def query_interface(this : IDWriteFontFamily*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1688,8 +1895,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_count(this : IDWriteFontFamily*) : UInt32
       @lpVtbl.try &.value.get_font_count.call(this)
     end
-    def get_font_1(this : IDWriteFontFamily*, index : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_1.call(this, index, font)
+    def get_font(this : IDWriteFontFamily*, index : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font.call(this, index, font)
     end
     def get_family_names(this : IDWriteFontFamily*, names : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_family_names.call(this, names)
@@ -1697,14 +1904,15 @@ module Win32cr::Graphics::DirectWrite
     def get_first_matching_font(this : IDWriteFontFamily*, weight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, stretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, style : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, matchingFont : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_first_matching_font.call(this, weight, stretch, style, matchingFont)
     end
-    def get_matching_fonts_1(this : IDWriteFontFamily*, weight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, stretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, style : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_matching_fonts_1.call(this, weight, stretch, style, matchingFonts)
+    def get_matching_fonts(this : IDWriteFontFamily*, weight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, stretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, style : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts.call(this, weight, stretch, style, matchingFonts)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontVtbl,
+
+  record IDWriteFontVtable,
     query_interface : Proc(IDWriteFont*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont*, UInt32),
     release : Proc(IDWriteFont*, UInt32),
@@ -1716,13 +1924,13 @@ module Win32cr::Graphics::DirectWrite
     get_face_names : Proc(IDWriteFont*, Void**, Win32cr::Foundation::HRESULT),
     get_informational_strings : Proc(IDWriteFont*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_simulations : Proc(IDWriteFont*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS),
-    get_metrics_1 : Proc(IDWriteFont*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Void),
-    has_character_1 : Proc(IDWriteFont*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    create_font_face_1 : Proc(IDWriteFont*, Void**, Win32cr::Foundation::HRESULT)
+    get_metrics : Proc(IDWriteFont*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Void),
+    has_character : Proc(IDWriteFont*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_font_face : Proc(IDWriteFont*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFont, lpVtbl : IDWriteFontVtbl* do
+  record IDWriteFont, lpVtbl : IDWriteFontVtable* do
     GUID = LibC::GUID.new(0xacd16696_u32, 0x8c14_u16, 0x4f5d_u16, StaticArray[0x87_u8, 0x7e_u8, 0xfe_u8, 0x3f_u8, 0xc1_u8, 0xd3_u8, 0x27_u8, 0x37_u8])
     def query_interface(this : IDWriteFont*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1757,20 +1965,21 @@ module Win32cr::Graphics::DirectWrite
     def get_simulations(this : IDWriteFont*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS
       @lpVtbl.try &.value.get_simulations.call(this)
     end
-    def get_metrics_1(this : IDWriteFont*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Void
-      @lpVtbl.try &.value.get_metrics_1.call(this, fontMetrics)
+    def get_metrics(this : IDWriteFont*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Void
+      @lpVtbl.try &.value.get_metrics.call(this, fontMetrics)
     end
-    def has_character_1(this : IDWriteFont*, unicodeValue : UInt32, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.has_character_1.call(this, unicodeValue, exists)
+    def has_character(this : IDWriteFont*, unicodeValue : UInt32, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.has_character.call(this, unicodeValue, exists)
     end
-    def create_font_face_1(this : IDWriteFont*, fontFace : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_face_1.call(this, fontFace)
+    def create_font_face(this : IDWriteFont*, fontFace : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face.call(this, fontFace)
     end
 
   end
 
   @[Extern]
-  record IDWriteTextFormatVtbl,
+
+  record IDWriteTextFormatVtable,
     query_interface : Proc(IDWriteTextFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat*, UInt32),
     release : Proc(IDWriteTextFormat*, UInt32),
@@ -1781,7 +1990,7 @@ module Win32cr::Graphics::DirectWrite
     set_flow_direction : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION, Win32cr::Foundation::HRESULT),
     set_incremental_tab_stop : Proc(IDWriteTextFormat*, Float32, Win32cr::Foundation::HRESULT),
     set_trimming : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void*, Win32cr::Foundation::HRESULT),
-    set_line_spacing_1 : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
+    set_line_spacing : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_text_alignment : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT),
     get_paragraph_alignment : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_PARAGRAPH_ALIGNMENT),
     get_word_wrapping : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_WORD_WRAPPING),
@@ -1789,20 +1998,20 @@ module Win32cr::Graphics::DirectWrite
     get_flow_direction : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION),
     get_incremental_tab_stop : Proc(IDWriteTextFormat*, Float32),
     get_trimming : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void**, Win32cr::Foundation::HRESULT),
-    get_line_spacing_1 : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
-    get_font_collection_1 : Proc(IDWriteTextFormat*, Void**, Win32cr::Foundation::HRESULT),
-    get_font_family_name_length_1 : Proc(IDWriteTextFormat*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextFormat*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_font_weight_1 : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
-    get_font_style_1 : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
-    get_font_stretch_1 : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
-    get_font_size_1 : Proc(IDWriteTextFormat*, Float32),
-    get_locale_name_length_1 : Proc(IDWriteTextFormat*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextFormat*, UInt16*, UInt32, Win32cr::Foundation::HRESULT)
+    get_line_spacing : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_font_collection : Proc(IDWriteTextFormat*, Void**, Win32cr::Foundation::HRESULT),
+    get_font_family_name_length : Proc(IDWriteTextFormat*, UInt32),
+    get_font_family_name : Proc(IDWriteTextFormat*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_weight : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
+    get_font_style : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
+    get_font_stretch : Proc(IDWriteTextFormat*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
+    get_font_size : Proc(IDWriteTextFormat*, Float32),
+    get_locale_name_length : Proc(IDWriteTextFormat*, UInt32),
+    get_locale_name : Proc(IDWriteTextFormat*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteTextFormat, lpVtbl : IDWriteTextFormatVtbl* do
+  record IDWriteTextFormat, lpVtbl : IDWriteTextFormatVtable* do
     GUID = LibC::GUID.new(0x9c906818_u32, 0x31d7_u16, 0x4fd3_u16, StaticArray[0xa1_u8, 0x51_u8, 0x7c_u8, 0x5e_u8, 0x22_u8, 0x5d_u8, 0xb5_u8, 0x5a_u8])
     def query_interface(this : IDWriteTextFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1834,8 +2043,8 @@ module Win32cr::Graphics::DirectWrite
     def set_trimming(this : IDWriteTextFormat*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def set_line_spacing_1(this : IDWriteTextFormat*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def set_line_spacing(this : IDWriteTextFormat*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_text_alignment(this : IDWriteTextFormat*) : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT
       @lpVtbl.try &.value.get_text_alignment.call(this)
@@ -1858,41 +2067,42 @@ module Win32cr::Graphics::DirectWrite
     def get_trimming(this : IDWriteTextFormat*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def get_line_spacing_1(this : IDWriteTextFormat*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def get_line_spacing(this : IDWriteTextFormat*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
-    def get_font_collection_1(this : IDWriteTextFormat*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_collection_1.call(this, fontCollection)
+    def get_font_collection(this : IDWriteTextFormat*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_collection.call(this, fontCollection)
     end
-    def get_font_family_name_length_1(this : IDWriteTextFormat*) : UInt32
-      @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
+    def get_font_family_name_length(this : IDWriteTextFormat*) : UInt32
+      @lpVtbl.try &.value.get_font_family_name_length.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextFormat*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
+    def get_font_family_name(this : IDWriteTextFormat*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_family_name.call(this, fontFamilyName, nameSize)
     end
-    def get_font_weight_1(this : IDWriteTextFormat*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
-      @lpVtbl.try &.value.get_font_weight_1.call(this)
+    def get_font_weight(this : IDWriteTextFormat*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
+      @lpVtbl.try &.value.get_font_weight.call(this)
     end
-    def get_font_style_1(this : IDWriteTextFormat*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
-      @lpVtbl.try &.value.get_font_style_1.call(this)
+    def get_font_style(this : IDWriteTextFormat*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
+      @lpVtbl.try &.value.get_font_style.call(this)
     end
-    def get_font_stretch_1(this : IDWriteTextFormat*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
-      @lpVtbl.try &.value.get_font_stretch_1.call(this)
+    def get_font_stretch(this : IDWriteTextFormat*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
+      @lpVtbl.try &.value.get_font_stretch.call(this)
     end
-    def get_font_size_1(this : IDWriteTextFormat*) : Float32
-      @lpVtbl.try &.value.get_font_size_1.call(this)
+    def get_font_size(this : IDWriteTextFormat*) : Float32
+      @lpVtbl.try &.value.get_font_size.call(this)
     end
-    def get_locale_name_length_1(this : IDWriteTextFormat*) : UInt32
-      @lpVtbl.try &.value.get_locale_name_length_1.call(this)
+    def get_locale_name_length(this : IDWriteTextFormat*) : UInt32
+      @lpVtbl.try &.value.get_locale_name_length.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextFormat*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
+    def get_locale_name(this : IDWriteTextFormat*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_locale_name.call(this, localeName, nameSize)
     end
 
   end
 
   @[Extern]
-  record IDWriteTypographyVtbl,
+
+  record IDWriteTypographyVtable,
     query_interface : Proc(IDWriteTypography*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTypography*, UInt32),
     release : Proc(IDWriteTypography*, UInt32),
@@ -1902,7 +2112,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTypography, lpVtbl : IDWriteTypographyVtbl* do
+  record IDWriteTypography, lpVtbl : IDWriteTypographyVtable* do
     GUID = LibC::GUID.new(0x55f1112b_u32, 0x1dc2_u16, 0x4b3c_u16, StaticArray[0x95_u8, 0x41_u8, 0xf4_u8, 0x68_u8, 0x94_u8, 0xed_u8, 0x85_u8, 0xb6_u8])
     def query_interface(this : IDWriteTypography*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1926,14 +2136,15 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteNumberSubstitutionVtbl,
+
+  record IDWriteNumberSubstitutionVtable,
     query_interface : Proc(IDWriteNumberSubstitution*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteNumberSubstitution*, UInt32),
     release : Proc(IDWriteNumberSubstitution*, UInt32)
 
 
   @[Extern]
-  record IDWriteNumberSubstitution, lpVtbl : IDWriteNumberSubstitutionVtbl* do
+  record IDWriteNumberSubstitution, lpVtbl : IDWriteNumberSubstitutionVtable* do
     GUID = LibC::GUID.new(0x14885cc9_u32, 0xbab0_u16, 0x4f90_u16, StaticArray[0xb6_u8, 0xed_u8, 0x5c_u8, 0x36_u8, 0x6a_u8, 0x2c_u8, 0xd0_u8, 0x3d_u8])
     def query_interface(this : IDWriteNumberSubstitution*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1948,7 +2159,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSourceVtbl,
+
+  record IDWriteTextAnalysisSourceVtable,
     query_interface : Proc(IDWriteTextAnalysisSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSource*, UInt32),
     release : Proc(IDWriteTextAnalysisSource*, UInt32),
@@ -1960,7 +2172,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSource, lpVtbl : IDWriteTextAnalysisSourceVtbl* do
+  record IDWriteTextAnalysisSource, lpVtbl : IDWriteTextAnalysisSourceVtable* do
     GUID = LibC::GUID.new(0x688e1a58_u32, 0x5094_u16, 0x47c8_u16, StaticArray[0xad_u8, 0xc8_u8, 0xfb_u8, 0xce_u8, 0xa6_u8, 0xa_u8, 0xe9_u8, 0x2b_u8])
     def query_interface(this : IDWriteTextAnalysisSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1990,7 +2202,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSinkVtbl,
+
+  record IDWriteTextAnalysisSinkVtable,
     query_interface : Proc(IDWriteTextAnalysisSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSink*, UInt32),
     release : Proc(IDWriteTextAnalysisSink*, UInt32),
@@ -2001,7 +2214,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSink, lpVtbl : IDWriteTextAnalysisSinkVtbl* do
+  record IDWriteTextAnalysisSink, lpVtbl : IDWriteTextAnalysisSinkVtable* do
     GUID = LibC::GUID.new(0x5810cd44_u32, 0xca0_u16, 0x4701_u16, StaticArray[0xb3_u8, 0xfa_u8, 0xbe_u8, 0xc5_u8, 0x18_u8, 0x2a_u8, 0xe4_u8, 0xf6_u8])
     def query_interface(this : IDWriteTextAnalysisSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2028,7 +2241,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalyzerVtbl,
+
+  record IDWriteTextAnalyzerVtable,
     query_interface : Proc(IDWriteTextAnalyzer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalyzer*, UInt32),
     release : Proc(IDWriteTextAnalyzer*, UInt32),
@@ -2036,13 +2250,13 @@ module Win32cr::Graphics::DirectWrite
     analyze_bidi : Proc(IDWriteTextAnalyzer*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
     analyze_number_substitution : Proc(IDWriteTextAnalyzer*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
     analyze_line_breakpoints : Proc(IDWriteTextAnalyzer*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    get_glyphs : Proc(IDWriteTextAnalyzer*, UInt16*, UInt32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_glyph_placements : Proc(IDWriteTextAnalyzer*, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
-    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer*, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT)
+    get_glyphs : Proc(IDWriteTextAnalyzer*, Win32cr::Foundation::PWSTR, UInt32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_glyph_placements : Proc(IDWriteTextAnalyzer*, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
+    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer*, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteTextAnalyzer, lpVtbl : IDWriteTextAnalyzerVtbl* do
+  record IDWriteTextAnalyzer, lpVtbl : IDWriteTextAnalyzerVtable* do
     GUID = LibC::GUID.new(0xb7e6163e_u32, 0x7f46_u16, 0x43b4_u16, StaticArray[0x84_u8, 0xb3_u8, 0xe4_u8, 0xe6_u8, 0x24_u8, 0x9c_u8, 0x36_u8, 0x5d_u8])
     def query_interface(this : IDWriteTextAnalyzer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2065,20 +2279,21 @@ module Win32cr::Graphics::DirectWrite
     def analyze_line_breakpoints(this : IDWriteTextAnalyzer*, analysisSource : Void*, textPosition : UInt32, textLength : UInt32, analysisSink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.analyze_line_breakpoints.call(this, analysisSource, textPosition, textLength, analysisSink)
     end
-    def get_glyphs(this : IDWriteTextAnalyzer*, textString : UInt16*, textLength : UInt32, fontFace : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, numberSubstitution : Void*, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, maxGlyphCount : UInt32, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, actualGlyphCount : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_glyphs(this : IDWriteTextAnalyzer*, textString : Win32cr::Foundation::PWSTR, textLength : UInt32, fontFace : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, numberSubstitution : Void*, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, maxGlyphCount : UInt32, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, actualGlyphCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyphs.call(this, textString, textLength, fontFace, isSideways, isRightToLeft, scriptAnalysis, localeName, numberSubstitution, features, featureRangeLengths, featureRanges, maxGlyphCount, clusterMap, textProps, glyphIndices, glyphProps, actualGlyphCount)
     end
-    def get_glyph_placements(this : IDWriteTextAnalyzer*, textString : UInt16*, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
+    def get_glyph_placements(this : IDWriteTextAnalyzer*, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_placements.call(this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, fontFace, fontEmSize, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets)
     end
-    def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer*, textString : UInt16*, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
+    def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer*, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_glyph_placements.call(this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, fontFace, fontEmSize, pixelsPerDip, transform, useGdiNatural, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets)
     end
 
   end
 
   @[Extern]
-  record IDWriteInlineObjectVtbl,
+
+  record IDWriteInlineObjectVtable,
     query_interface : Proc(IDWriteInlineObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteInlineObject*, UInt32),
     release : Proc(IDWriteInlineObject*, UInt32),
@@ -2089,7 +2304,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteInlineObject, lpVtbl : IDWriteInlineObjectVtbl* do
+  record IDWriteInlineObject, lpVtbl : IDWriteInlineObjectVtable* do
     GUID = LibC::GUID.new(0x8339fde3_u32, 0x106f_u16, 0x47ab_u16, StaticArray[0x83_u8, 0x73_u8, 0x1c_u8, 0x62_u8, 0x95_u8, 0xeb_u8, 0x10_u8, 0xb3_u8])
     def query_interface(this : IDWriteInlineObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2116,7 +2331,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWritePixelSnappingVtbl,
+
+  record IDWritePixelSnappingVtable,
     query_interface : Proc(IDWritePixelSnapping*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWritePixelSnapping*, UInt32),
     release : Proc(IDWritePixelSnapping*, UInt32),
@@ -2126,7 +2342,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWritePixelSnapping, lpVtbl : IDWritePixelSnappingVtbl* do
+  record IDWritePixelSnapping, lpVtbl : IDWritePixelSnappingVtable* do
     GUID = LibC::GUID.new(0xeaf3a2da_u32, 0xecf4_u16, 0x4d24_u16, StaticArray[0xb6_u8, 0x44_u8, 0xb3_u8, 0x4f_u8, 0x68_u8, 0x42_u8, 0x2_u8, 0x4b_u8])
     def query_interface(this : IDWritePixelSnapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2150,21 +2366,22 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextRendererVtbl,
+
+  record IDWriteTextRendererVtable,
     query_interface : Proc(IDWriteTextRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextRenderer*, UInt32),
     release : Proc(IDWriteTextRenderer*, UInt32),
     is_pixel_snapping_disabled : Proc(IDWriteTextRenderer*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_current_transform : Proc(IDWriteTextRenderer*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
     get_pixels_per_dip : Proc(IDWriteTextRenderer*, Void*, Float32*, Win32cr::Foundation::HRESULT),
-    draw_glyph_run_1 : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Void*, Win32cr::Foundation::HRESULT),
-    draw_underline_1 : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_UNDERLINE*, Void*, Win32cr::Foundation::HRESULT),
-    draw_strikethrough_1 : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_STRIKETHROUGH*, Void*, Win32cr::Foundation::HRESULT),
-    draw_inline_object_1 : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT)
+    draw_glyph_run : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Void*, Win32cr::Foundation::HRESULT),
+    draw_underline : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_UNDERLINE*, Void*, Win32cr::Foundation::HRESULT),
+    draw_strikethrough : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_STRIKETHROUGH*, Void*, Win32cr::Foundation::HRESULT),
+    draw_inline_object : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteTextRenderer, lpVtbl : IDWriteTextRendererVtbl* do
+  record IDWriteTextRenderer, lpVtbl : IDWriteTextRendererVtable* do
     GUID = LibC::GUID.new(0xef8a8135_u32, 0x5cc6_u16, 0x45fe_u16, StaticArray[0x88_u8, 0x25_u8, 0xc5_u8, 0xa0_u8, 0x72_u8, 0x4e_u8, 0xb8_u8, 0x19_u8])
     def query_interface(this : IDWriteTextRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2184,23 +2401,24 @@ module Win32cr::Graphics::DirectWrite
     def get_pixels_per_dip(this : IDWriteTextRenderer*, clientDrawingContext : Void*, pixelsPerDip : Float32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_pixels_per_dip.call(this, clientDrawingContext, pixelsPerDip)
     end
-    def draw_glyph_run_1(this : IDWriteTextRenderer*, clientDrawingContext : Void*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.draw_glyph_run_1.call(this, clientDrawingContext, baselineOriginX, baselineOriginY, measuringMode, glyphRun, glyphRunDescription, clientDrawingEffect)
+    def draw_glyph_run(this : IDWriteTextRenderer*, clientDrawingContext : Void*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_glyph_run.call(this, clientDrawingContext, baselineOriginX, baselineOriginY, measuringMode, glyphRun, glyphRunDescription, clientDrawingEffect)
     end
-    def draw_underline_1(this : IDWriteTextRenderer*, clientDrawingContext : Void*, baselineOriginX : Float32, baselineOriginY : Float32, underline : Win32cr::Graphics::DirectWrite::DWRITE_UNDERLINE*, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.draw_underline_1.call(this, clientDrawingContext, baselineOriginX, baselineOriginY, underline, clientDrawingEffect)
+    def draw_underline(this : IDWriteTextRenderer*, clientDrawingContext : Void*, baselineOriginX : Float32, baselineOriginY : Float32, underline : Win32cr::Graphics::DirectWrite::DWRITE_UNDERLINE*, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_underline.call(this, clientDrawingContext, baselineOriginX, baselineOriginY, underline, clientDrawingEffect)
     end
-    def draw_strikethrough_1(this : IDWriteTextRenderer*, clientDrawingContext : Void*, baselineOriginX : Float32, baselineOriginY : Float32, strikethrough : Win32cr::Graphics::DirectWrite::DWRITE_STRIKETHROUGH*, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.draw_strikethrough_1.call(this, clientDrawingContext, baselineOriginX, baselineOriginY, strikethrough, clientDrawingEffect)
+    def draw_strikethrough(this : IDWriteTextRenderer*, clientDrawingContext : Void*, baselineOriginX : Float32, baselineOriginY : Float32, strikethrough : Win32cr::Graphics::DirectWrite::DWRITE_STRIKETHROUGH*, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_strikethrough.call(this, clientDrawingContext, baselineOriginX, baselineOriginY, strikethrough, clientDrawingEffect)
     end
-    def draw_inline_object_1(this : IDWriteTextRenderer*, clientDrawingContext : Void*, originX : Float32, originY : Float32, inlineObject : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.draw_inline_object_1.call(this, clientDrawingContext, originX, originY, inlineObject, isSideways, isRightToLeft, clientDrawingEffect)
+    def draw_inline_object(this : IDWriteTextRenderer*, clientDrawingContext : Void*, originX : Float32, originY : Float32, inlineObject : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, clientDrawingEffect : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_inline_object.call(this, clientDrawingContext, originX, originY, inlineObject, isSideways, isRightToLeft, clientDrawingEffect)
     end
 
   end
 
   @[Extern]
-  record IDWriteTextLayoutVtbl,
+
+  record IDWriteTextLayoutVtable,
     query_interface : Proc(IDWriteTextLayout*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout*, UInt32),
     release : Proc(IDWriteTextLayout*, UInt32),
@@ -2211,7 +2429,7 @@ module Win32cr::Graphics::DirectWrite
     set_flow_direction : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION, Win32cr::Foundation::HRESULT),
     set_incremental_tab_stop : Proc(IDWriteTextLayout*, Float32, Win32cr::Foundation::HRESULT),
     set_trimming : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void*, Win32cr::Foundation::HRESULT),
-    set_line_spacing_1 : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
+    set_line_spacing : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_text_alignment : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT),
     get_paragraph_alignment : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_PARAGRAPH_ALIGNMENT),
     get_word_wrapping : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_WORD_WRAPPING),
@@ -2219,16 +2437,16 @@ module Win32cr::Graphics::DirectWrite
     get_flow_direction : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION),
     get_incremental_tab_stop : Proc(IDWriteTextLayout*, Float32),
     get_trimming : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void**, Win32cr::Foundation::HRESULT),
-    get_line_spacing_1 : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_line_spacing : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
     get_font_collection_1 : Proc(IDWriteTextLayout*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_1 : Proc(IDWriteTextLayout*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextLayout*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_family_name_1 : Proc(IDWriteTextLayout*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_font_weight_1 : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_font_style_1 : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
     get_font_stretch_1 : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_font_size_1 : Proc(IDWriteTextLayout*, Float32),
     get_locale_name_length_1 : Proc(IDWriteTextLayout*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextLayout*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_locale_name_1 : Proc(IDWriteTextLayout*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_max_width : Proc(IDWriteTextLayout*, Float32, Win32cr::Foundation::HRESULT),
     set_max_height : Proc(IDWriteTextLayout*, Float32, Win32cr::Foundation::HRESULT),
     set_font_collection : Proc(IDWriteTextLayout*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE, Win32cr::Foundation::HRESULT),
@@ -2247,7 +2465,7 @@ module Win32cr::Graphics::DirectWrite
     get_max_height : Proc(IDWriteTextLayout*, Float32),
     get_font_collection_2 : Proc(IDWriteTextLayout*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_2 : Proc(IDWriteTextLayout*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_font_family_name_2 : Proc(IDWriteTextLayout*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_font_family_name_2 : Proc(IDWriteTextLayout*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_weight_2 : Proc(IDWriteTextLayout*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_style_2 : Proc(IDWriteTextLayout*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_stretch_2 : Proc(IDWriteTextLayout*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
@@ -2258,10 +2476,10 @@ module Win32cr::Graphics::DirectWrite
     get_inline_object : Proc(IDWriteTextLayout*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_typography : Proc(IDWriteTextLayout*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_locale_name_length_2 : Proc(IDWriteTextLayout*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_locale_name_2 : Proc(IDWriteTextLayout*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_locale_name_2 : Proc(IDWriteTextLayout*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     draw : Proc(IDWriteTextLayout*, Void*, Void*, Float32, Float32, Win32cr::Foundation::HRESULT),
-    get_line_metrics_1 : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_metrics_1 : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*, Win32cr::Foundation::HRESULT),
+    get_line_metrics : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_metrics : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*, Win32cr::Foundation::HRESULT),
     get_overhang_metrics : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_OVERHANG_METRICS*, Win32cr::Foundation::HRESULT),
     get_cluster_metrics : Proc(IDWriteTextLayout*, Win32cr::Graphics::DirectWrite::DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     determine_min_width : Proc(IDWriteTextLayout*, Float32*, Win32cr::Foundation::HRESULT),
@@ -2271,7 +2489,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout, lpVtbl : IDWriteTextLayoutVtbl* do
+  record IDWriteTextLayout, lpVtbl : IDWriteTextLayoutVtable* do
     GUID = LibC::GUID.new(0x53737037_u32, 0x6d14_u16, 0x410b_u16, StaticArray[0x9b_u8, 0xfe_u8, 0xb_u8, 0x18_u8, 0x2b_u8, 0xb7_u8, 0x9_u8, 0x61_u8])
     def query_interface(this : IDWriteTextLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2303,8 +2521,8 @@ module Win32cr::Graphics::DirectWrite
     def set_trimming(this : IDWriteTextLayout*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def set_line_spacing_1(this : IDWriteTextLayout*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def set_line_spacing(this : IDWriteTextLayout*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_text_alignment(this : IDWriteTextLayout*) : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT
       @lpVtbl.try &.value.get_text_alignment.call(this)
@@ -2327,8 +2545,8 @@ module Win32cr::Graphics::DirectWrite
     def get_trimming(this : IDWriteTextLayout*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def get_line_spacing_1(this : IDWriteTextLayout*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def get_line_spacing(this : IDWriteTextLayout*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_font_collection_1(this : IDWriteTextLayout*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_collection_1.call(this, fontCollection)
@@ -2336,7 +2554,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_1(this : IDWriteTextLayout*) : UInt32
       @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextLayout*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_1(this : IDWriteTextLayout*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
     end
     def get_font_weight_1(this : IDWriteTextLayout*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
@@ -2354,7 +2572,7 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_1(this : IDWriteTextLayout*) : UInt32
       @lpVtbl.try &.value.get_locale_name_length_1.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextLayout*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_locale_name_1(this : IDWriteTextLayout*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
     end
     def set_max_width(this : IDWriteTextLayout*, maxWidth : Float32) : Win32cr::Foundation::HRESULT
@@ -2411,7 +2629,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_2(this : IDWriteTextLayout*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_font_family_name_2(this : IDWriteTextLayout*, currentPosition : UInt32, fontFamilyName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_2(this : IDWriteTextLayout*, currentPosition : UInt32, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_2.call(this, currentPosition, fontFamilyName, nameSize, textRange)
     end
     def get_font_weight_2(this : IDWriteTextLayout*, currentPosition : UInt32, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
@@ -2444,17 +2662,17 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_2(this : IDWriteTextLayout*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_locale_name_2(this : IDWriteTextLayout*, currentPosition : UInt32, localeName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_locale_name_2(this : IDWriteTextLayout*, currentPosition : UInt32, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_2.call(this, currentPosition, localeName, nameSize, textRange)
     end
     def draw(this : IDWriteTextLayout*, clientDrawingContext : Void*, renderer : Void*, originX : Float32, originY : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.draw.call(this, clientDrawingContext, renderer, originX, originY)
     end
-    def get_line_metrics_1(this : IDWriteTextLayout*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_metrics_1.call(this, lineMetrics, maxLineCount, actualLineCount)
+    def get_line_metrics(this : IDWriteTextLayout*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_metrics.call(this, lineMetrics, maxLineCount, actualLineCount)
     end
-    def get_metrics_1(this : IDWriteTextLayout*, textMetrics : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_metrics_1.call(this, textMetrics)
+    def get_metrics(this : IDWriteTextLayout*, textMetrics : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metrics.call(this, textMetrics)
     end
     def get_overhang_metrics(this : IDWriteTextLayout*, overhangs : Win32cr::Graphics::DirectWrite::DWRITE_OVERHANG_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_overhang_metrics.call(this, overhangs)
@@ -2478,11 +2696,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteBitmapRenderTargetVtbl,
+
+  record IDWriteBitmapRenderTargetVtable,
     query_interface : Proc(IDWriteBitmapRenderTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteBitmapRenderTarget*, UInt32),
     release : Proc(IDWriteBitmapRenderTarget*, UInt32),
-    draw_glyph_run : Proc(IDWriteBitmapRenderTarget*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Void*, UInt32, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
+    draw_glyph_run : Proc(IDWriteBitmapRenderTarget*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Void*, Win32cr::Foundation::COLORREF, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
     get_memory_dc : Proc(IDWriteBitmapRenderTarget*, Win32cr::Graphics::Gdi::HDC),
     get_pixels_per_dip : Proc(IDWriteBitmapRenderTarget*, Float32),
     set_pixels_per_dip : Proc(IDWriteBitmapRenderTarget*, Float32, Win32cr::Foundation::HRESULT),
@@ -2493,7 +2712,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteBitmapRenderTarget, lpVtbl : IDWriteBitmapRenderTargetVtbl* do
+  record IDWriteBitmapRenderTarget, lpVtbl : IDWriteBitmapRenderTargetVtable* do
     GUID = LibC::GUID.new(0x5e5a32a3_u32, 0x8dff_u16, 0x4773_u16, StaticArray[0x9f_u8, 0xf6_u8, 0x6_u8, 0x96_u8, 0xea_u8, 0xb7_u8, 0x72_u8, 0x67_u8])
     def query_interface(this : IDWriteBitmapRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2504,7 +2723,7 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteBitmapRenderTarget*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def draw_glyph_run(this : IDWriteBitmapRenderTarget*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, renderingParams : Void*, textColor : UInt32, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    def draw_glyph_run(this : IDWriteBitmapRenderTarget*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, renderingParams : Void*, textColor : Win32cr::Foundation::COLORREF, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.draw_glyph_run.call(this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, renderingParams, textColor, blackBoxRect)
     end
     def get_memory_dc(this : IDWriteBitmapRenderTarget*) : Win32cr::Graphics::Gdi::HDC
@@ -2532,11 +2751,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteGdiInteropVtbl,
+
+  record IDWriteGdiInteropVtable,
     query_interface : Proc(IDWriteGdiInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteGdiInterop*, UInt32),
     release : Proc(IDWriteGdiInterop*, UInt32),
-    create_font_from_logfont_1 : Proc(IDWriteGdiInterop*, Win32cr::Graphics::Gdi::LOGFONTW*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_from_logfont : Proc(IDWriteGdiInterop*, Win32cr::Graphics::Gdi::LOGFONTW*, Void**, Win32cr::Foundation::HRESULT),
     convert_font_to_logfont : Proc(IDWriteGdiInterop*, Void*, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     convert_font_face_to_logfont : Proc(IDWriteGdiInterop*, Void*, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
     create_font_face_from_hdc : Proc(IDWriteGdiInterop*, Win32cr::Graphics::Gdi::HDC, Void**, Win32cr::Foundation::HRESULT),
@@ -2544,7 +2764,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteGdiInterop, lpVtbl : IDWriteGdiInteropVtbl* do
+  record IDWriteGdiInterop, lpVtbl : IDWriteGdiInteropVtable* do
     GUID = LibC::GUID.new(0x1edd9491_u32, 0x9853_u16, 0x4299_u16, StaticArray[0x89_u8, 0x8f_u8, 0x64_u8, 0x32_u8, 0x98_u8, 0x3b_u8, 0x6f_u8, 0x3a_u8])
     def query_interface(this : IDWriteGdiInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2555,8 +2775,8 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteGdiInterop*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def create_font_from_logfont_1(this : IDWriteGdiInterop*, logFont : Win32cr::Graphics::Gdi::LOGFONTW*, font : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_from_logfont_1.call(this, logFont, font)
+    def create_font_from_logfont(this : IDWriteGdiInterop*, logFont : Win32cr::Graphics::Gdi::LOGFONTW*, font : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_from_logfont.call(this, logFont, font)
     end
     def convert_font_to_logfont(this : IDWriteGdiInterop*, font : Void*, logFont : Win32cr::Graphics::Gdi::LOGFONTW*, isSystemFont : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.convert_font_to_logfont.call(this, font, logFont, isSystemFont)
@@ -2574,7 +2794,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteGlyphRunAnalysisVtbl,
+
+  record IDWriteGlyphRunAnalysisVtable,
     query_interface : Proc(IDWriteGlyphRunAnalysis*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteGlyphRunAnalysis*, UInt32),
     release : Proc(IDWriteGlyphRunAnalysis*, UInt32),
@@ -2584,7 +2805,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteGlyphRunAnalysis, lpVtbl : IDWriteGlyphRunAnalysisVtbl* do
+  record IDWriteGlyphRunAnalysis, lpVtbl : IDWriteGlyphRunAnalysisVtable* do
     GUID = LibC::GUID.new(0x7d97dbf7_u32, 0xe085_u16, 0x42d4_u16, StaticArray[0x81_u8, 0xe3_u8, 0x6a_u8, 0x88_u8, 0x3b_u8, 0xde_u8, 0xd1_u8, 0x18_u8])
     def query_interface(this : IDWriteGlyphRunAnalysis*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2608,11 +2829,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactoryVtbl,
+
+  record IDWriteFactoryVtable,
     query_interface : Proc(IDWriteFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory*, UInt32),
     release : Proc(IDWriteFactory*, UInt32),
-    get_system_font_collection_1 : Proc(IDWriteFactory*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_collection : Proc(IDWriteFactory*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     create_custom_font_collection : Proc(IDWriteFactory*, Void*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     register_font_collection_loader : Proc(IDWriteFactory*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_collection_loader : Proc(IDWriteFactory*, Void*, Win32cr::Foundation::HRESULT),
@@ -2621,22 +2843,22 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params : Proc(IDWriteFactory*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory*, Void*, Win32cr::Foundation::HRESULT),
-    create_text_format_1 : Proc(IDWriteFactory*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_text_format : Proc(IDWriteFactory*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
-    create_glyph_run_analysis_1 : Proc(IDWriteFactory*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT)
+    create_glyph_run_analysis : Proc(IDWriteFactory*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFactory, lpVtbl : IDWriteFactoryVtbl* do
+  record IDWriteFactory, lpVtbl : IDWriteFactoryVtable* do
     GUID = LibC::GUID.new(0xb859ee5a_u32, 0xd838_u16, 0x4b5b_u16, StaticArray[0xa2_u8, 0xe8_u8, 0x1a_u8, 0xdc_u8, 0x7d_u8, 0x93_u8, 0xdb_u8, 0x48_u8])
     def query_interface(this : IDWriteFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2647,8 +2869,8 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteFactory*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_system_font_collection_1(this : IDWriteFactory*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_1.call(this, fontCollection, checkForUpdates)
+    def get_system_font_collection(this : IDWriteFactory*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection.call(this, fontCollection, checkForUpdates)
     end
     def create_custom_font_collection(this : IDWriteFactory*, collectionLoader : Void*, collectionKey : Void*, collectionKeySize : UInt32, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_custom_font_collection.call(this, collectionLoader, collectionKey, collectionKeySize, fontCollection)
@@ -2674,8 +2896,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params(this : IDWriteFactory*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -2683,8 +2905,8 @@ module Win32cr::Graphics::DirectWrite
     def unregister_font_file_loader(this : IDWriteFactory*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_font_file_loader.call(this, fontFileLoader)
     end
-    def create_text_format_1(this : IDWriteFactory*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_text_format_1.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
+    def create_text_format(this : IDWriteFactory*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
     end
     def create_typography(this : IDWriteFactory*, typography : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_typography.call(this, typography)
@@ -2692,10 +2914,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -2707,18 +2929,19 @@ module Win32cr::Graphics::DirectWrite
     def create_number_substitution(this : IDWriteFactory*, substitutionMethod : Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, localeName : Win32cr::Foundation::PWSTR, ignoreUserOverride : Win32cr::Foundation::BOOL, numberSubstitution : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_number_substitution.call(this, substitutionMethod, localeName, ignoreUserOverride, numberSubstitution)
     end
-    def create_glyph_run_analysis_1(this : IDWriteFactory*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_glyph_run_analysis_1.call(this, glyphRun, pixelsPerDip, transform, renderingMode, measuringMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    def create_glyph_run_analysis(this : IDWriteFactory*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis.call(this, glyphRun, pixelsPerDip, transform, renderingMode, measuringMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
 
   end
 
   @[Extern]
-  record IDWriteFactory1Vtbl,
+
+  record IDWriteFactory1Vtable,
     query_interface : Proc(IDWriteFactory1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory1*, UInt32),
     release : Proc(IDWriteFactory1*, UInt32),
-    get_system_font_collection_1 : Proc(IDWriteFactory1*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_collection : Proc(IDWriteFactory1*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     create_custom_font_collection : Proc(IDWriteFactory1*, Void*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     register_font_collection_loader : Proc(IDWriteFactory1*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_collection_loader : Proc(IDWriteFactory1*, Void*, Win32cr::Foundation::HRESULT),
@@ -2727,24 +2950,24 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory1*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory1*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory1*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory1*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory1*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory1*, Void*, Win32cr::Foundation::HRESULT),
-    create_text_format_1 : Proc(IDWriteFactory1*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_text_format : Proc(IDWriteFactory1*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory1*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory1*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory1*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory1*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory1*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory1*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory1*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory1*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory1*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
-    create_glyph_run_analysis_1 : Proc(IDWriteFactory1*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis : Proc(IDWriteFactory1*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_eudc_font_collection : Proc(IDWriteFactory1*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_1 : Proc(IDWriteFactory1*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT)
+    create_custom_rendering_params_2 : Proc(IDWriteFactory1*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFactory1, lpVtbl : IDWriteFactory1Vtbl* do
+  record IDWriteFactory1, lpVtbl : IDWriteFactory1Vtable* do
     GUID = LibC::GUID.new(0x30572f99_u32, 0xdac6_u16, 0x41db_u16, StaticArray[0xa1_u8, 0x6e_u8, 0x4_u8, 0x86_u8, 0x30_u8, 0x7e_u8, 0x60_u8, 0x6a_u8])
     def query_interface(this : IDWriteFactory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2755,8 +2978,8 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteFactory1*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_system_font_collection_1(this : IDWriteFactory1*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_1.call(this, fontCollection, checkForUpdates)
+    def get_system_font_collection(this : IDWriteFactory1*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection.call(this, fontCollection, checkForUpdates)
     end
     def create_custom_font_collection(this : IDWriteFactory1*, collectionLoader : Void*, collectionKey : Void*, collectionKeySize : UInt32, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_custom_font_collection.call(this, collectionLoader, collectionKey, collectionKeySize, fontCollection)
@@ -2782,8 +3005,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory1*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory1*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_1(this : IDWriteFactory1*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory1*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -2791,8 +3014,8 @@ module Win32cr::Graphics::DirectWrite
     def unregister_font_file_loader(this : IDWriteFactory1*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_font_file_loader.call(this, fontFileLoader)
     end
-    def create_text_format_1(this : IDWriteFactory1*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_text_format_1.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
+    def create_text_format(this : IDWriteFactory1*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
     end
     def create_typography(this : IDWriteFactory1*, typography : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_typography.call(this, typography)
@@ -2800,10 +3023,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory1*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory1*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory1*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory1*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory1*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory1*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -2815,20 +3038,21 @@ module Win32cr::Graphics::DirectWrite
     def create_number_substitution(this : IDWriteFactory1*, substitutionMethod : Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, localeName : Win32cr::Foundation::PWSTR, ignoreUserOverride : Win32cr::Foundation::BOOL, numberSubstitution : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_number_substitution.call(this, substitutionMethod, localeName, ignoreUserOverride, numberSubstitution)
     end
-    def create_glyph_run_analysis_1(this : IDWriteFactory1*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_glyph_run_analysis_1.call(this, glyphRun, pixelsPerDip, transform, renderingMode, measuringMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    def create_glyph_run_analysis(this : IDWriteFactory1*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis.call(this, glyphRun, pixelsPerDip, transform, renderingMode, measuringMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
     def get_eudc_font_collection(this : IDWriteFactory1*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
     end
-    def create_custom_rendering_params_2_1(this : IDWriteFactory1*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_1.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_2(this : IDWriteFactory1*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontFace1Vtbl,
+
+  record IDWriteFontFace1Vtable,
     query_interface : Proc(IDWriteFontFace1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace1*, UInt32),
     release : Proc(IDWriteFontFace1*, UInt32),
@@ -2844,7 +3068,7 @@ module Win32cr::Graphics::DirectWrite
     try_get_font_table : Proc(IDWriteFontFace1*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     release_font_table : Proc(IDWriteFontFace1*, Void*, Void),
     get_glyph_run_outline : Proc(IDWriteFontFace1*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_1 : Proc(IDWriteFontFace1*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_1 : Proc(IDWriteFontFace1*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace1*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace1*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFontFace1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
@@ -2856,13 +3080,13 @@ module Win32cr::Graphics::DirectWrite
     get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace1*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     get_kerning_pair_adjustments : Proc(IDWriteFontFace1*, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     has_kerning_pairs : Proc(IDWriteFontFace1*, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_1 : Proc(IDWriteFontFace1*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_2 : Proc(IDWriteFontFace1*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_variants : Proc(IDWriteFontFace1*, UInt32, UInt16*, UInt16*, Win32cr::Foundation::HRESULT),
     has_vertical_glyph_variants : Proc(IDWriteFontFace1*, Win32cr::Foundation::BOOL)
 
 
   @[Extern]
-  record IDWriteFontFace1, lpVtbl : IDWriteFontFace1Vtbl* do
+  record IDWriteFontFace1, lpVtbl : IDWriteFontFace1Vtable* do
     GUID = LibC::GUID.new(0xa71efdb4_u32, 0x9fdb_u16, 0x4838_u16, StaticArray[0xad_u8, 0x90_u8, 0xcf_u8, 0xc3_u8, 0xbe_u8, 0x8c_u8, 0x3d_u8, 0xaf_u8])
     def query_interface(this : IDWriteFontFace1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2909,8 +3133,8 @@ module Win32cr::Graphics::DirectWrite
     def get_glyph_run_outline(this : IDWriteFontFace1*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
     end
-    def get_recommended_rendering_mode_1_1(this : IDWriteFontFace1*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    def get_recommended_rendering_mode_1(this : IDWriteFontFace1*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
     end
     def get_gdi_compatible_metrics_1(this : IDWriteFontFace1*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
@@ -2945,8 +3169,8 @@ module Win32cr::Graphics::DirectWrite
     def has_kerning_pairs(this : IDWriteFontFace1*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_kerning_pairs.call(this)
     end
-    def get_recommended_rendering_mode_2_1(this : IDWriteFontFace1*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_1.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
+    def get_recommended_rendering_mode_2(this : IDWriteFontFace1*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
     end
     def get_vertical_glyph_variants(this : IDWriteFontFace1*, glyphCount : UInt32, nominalGlyphIndices : UInt16*, verticalGlyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_glyph_variants.call(this, glyphCount, nominalGlyphIndices, verticalGlyphIndices)
@@ -2958,7 +3182,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFont1Vtbl,
+
+  record IDWriteFont1Vtable,
     query_interface : Proc(IDWriteFont1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont1*, UInt32),
     release : Proc(IDWriteFont1*, UInt32),
@@ -2971,8 +3196,8 @@ module Win32cr::Graphics::DirectWrite
     get_informational_strings : Proc(IDWriteFont1*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_simulations : Proc(IDWriteFont1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS),
     get_metrics_1 : Proc(IDWriteFont1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Void),
-    has_character_1 : Proc(IDWriteFont1*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    create_font_face_1 : Proc(IDWriteFont1*, Void**, Win32cr::Foundation::HRESULT),
+    has_character : Proc(IDWriteFont1*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_font_face : Proc(IDWriteFont1*, Void**, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFont1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
     get_panose : Proc(IDWriteFont1*, Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*, Void),
     get_unicode_ranges : Proc(IDWriteFont1*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_UNICODE_RANGE*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -2980,7 +3205,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFont1, lpVtbl : IDWriteFont1Vtbl* do
+  record IDWriteFont1, lpVtbl : IDWriteFont1Vtable* do
     GUID = LibC::GUID.new(0xacd16696_u32, 0x8c14_u16, 0x4f5d_u16, StaticArray[0x87_u8, 0x7e_u8, 0xfe_u8, 0x3f_u8, 0xc1_u8, 0xd3_u8, 0x27_u8, 0x38_u8])
     def query_interface(this : IDWriteFont1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3018,11 +3243,11 @@ module Win32cr::Graphics::DirectWrite
     def get_metrics_1(this : IDWriteFont1*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Void
       @lpVtbl.try &.value.get_metrics_1.call(this, fontMetrics)
     end
-    def has_character_1(this : IDWriteFont1*, unicodeValue : UInt32, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.has_character_1.call(this, unicodeValue, exists)
+    def has_character(this : IDWriteFont1*, unicodeValue : UInt32, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.has_character.call(this, unicodeValue, exists)
     end
-    def create_font_face_1(this : IDWriteFont1*, fontFace : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_face_1.call(this, fontFace)
+    def create_font_face(this : IDWriteFont1*, fontFace : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face.call(this, fontFace)
     end
     def get_metrics_2(this : IDWriteFont1*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*) : Void
       @lpVtbl.try &.value.get_metrics_2.call(this, fontMetrics)
@@ -3040,7 +3265,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRenderingParams1Vtbl,
+
+  record IDWriteRenderingParams1Vtable,
     query_interface : Proc(IDWriteRenderingParams1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams1*, UInt32),
     release : Proc(IDWriteRenderingParams1*, UInt32),
@@ -3053,7 +3279,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams1, lpVtbl : IDWriteRenderingParams1Vtbl* do
+  record IDWriteRenderingParams1, lpVtbl : IDWriteRenderingParams1Vtable* do
     GUID = LibC::GUID.new(0x94413cf4_u32, 0xa6fc_u16, 0x4248_u16, StaticArray[0x8b_u8, 0x50_u8, 0x66_u8, 0x74_u8, 0x34_u8, 0x8f_u8, 0xca_u8, 0xd3_u8])
     def query_interface(this : IDWriteRenderingParams1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3086,7 +3312,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalyzer1Vtbl,
+
+  record IDWriteTextAnalyzer1Vtable,
     query_interface : Proc(IDWriteTextAnalyzer1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalyzer1*, UInt32),
     release : Proc(IDWriteTextAnalyzer1*, UInt32),
@@ -3094,22 +3321,22 @@ module Win32cr::Graphics::DirectWrite
     analyze_bidi : Proc(IDWriteTextAnalyzer1*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
     analyze_number_substitution : Proc(IDWriteTextAnalyzer1*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
     analyze_line_breakpoints : Proc(IDWriteTextAnalyzer1*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    get_glyphs : Proc(IDWriteTextAnalyzer1*, UInt16*, UInt32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_glyph_placements : Proc(IDWriteTextAnalyzer1*, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
-    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer1*, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
+    get_glyphs : Proc(IDWriteTextAnalyzer1*, Win32cr::Foundation::PWSTR, UInt32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_glyph_placements : Proc(IDWriteTextAnalyzer1*, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
+    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer1*, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
     apply_character_spacing : Proc(IDWriteTextAnalyzer1*, Float32, Float32, Float32, UInt32, UInt32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
     get_baseline : Proc(IDWriteTextAnalyzer1*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_BASELINE, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     analyze_vertical_glyph_orientation : Proc(IDWriteTextAnalyzer1*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    get_glyph_orientation_transform_1 : Proc(IDWriteTextAnalyzer1*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_ORIENTATION_ANGLE, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
+    get_glyph_orientation_transform : Proc(IDWriteTextAnalyzer1*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_ORIENTATION_ANGLE, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
     get_script_properties : Proc(IDWriteTextAnalyzer1*, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_PROPERTIES*, Win32cr::Foundation::HRESULT),
-    get_text_complexity : Proc(IDWriteTextAnalyzer1*, UInt16*, UInt32, Void*, Win32cr::Foundation::BOOL*, UInt32*, UInt16*, Win32cr::Foundation::HRESULT),
-    get_justification_opportunities : Proc(IDWriteTextAnalyzer1*, Void*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, Win32cr::Foundation::HRESULT),
+    get_text_complexity : Proc(IDWriteTextAnalyzer1*, Win32cr::Foundation::PWSTR, UInt32, Void*, Win32cr::Foundation::BOOL*, UInt32*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_justification_opportunities : Proc(IDWriteTextAnalyzer1*, Void*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, Win32cr::Foundation::HRESULT),
     justify_glyph_advances : Proc(IDWriteTextAnalyzer1*, Float32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
     get_justified_glyphs : Proc(IDWriteTextAnalyzer1*, Void*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt32, UInt16*, UInt16*, Float32*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, UInt16*, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteTextAnalyzer1, lpVtbl : IDWriteTextAnalyzer1Vtbl* do
+  record IDWriteTextAnalyzer1, lpVtbl : IDWriteTextAnalyzer1Vtable* do
     GUID = LibC::GUID.new(0x80dad800_u32, 0xe21f_u16, 0x4e83_u16, StaticArray[0x96_u8, 0xce_u8, 0xbf_u8, 0xcc_u8, 0xe5_u8, 0x0_u8, 0xdb_u8, 0x7c_u8])
     def query_interface(this : IDWriteTextAnalyzer1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3132,13 +3359,13 @@ module Win32cr::Graphics::DirectWrite
     def analyze_line_breakpoints(this : IDWriteTextAnalyzer1*, analysisSource : Void*, textPosition : UInt32, textLength : UInt32, analysisSink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.analyze_line_breakpoints.call(this, analysisSource, textPosition, textLength, analysisSink)
     end
-    def get_glyphs(this : IDWriteTextAnalyzer1*, textString : UInt16*, textLength : UInt32, fontFace : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, numberSubstitution : Void*, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, maxGlyphCount : UInt32, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, actualGlyphCount : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_glyphs(this : IDWriteTextAnalyzer1*, textString : Win32cr::Foundation::PWSTR, textLength : UInt32, fontFace : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, numberSubstitution : Void*, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, maxGlyphCount : UInt32, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, actualGlyphCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyphs.call(this, textString, textLength, fontFace, isSideways, isRightToLeft, scriptAnalysis, localeName, numberSubstitution, features, featureRangeLengths, featureRanges, maxGlyphCount, clusterMap, textProps, glyphIndices, glyphProps, actualGlyphCount)
     end
-    def get_glyph_placements(this : IDWriteTextAnalyzer1*, textString : UInt16*, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
+    def get_glyph_placements(this : IDWriteTextAnalyzer1*, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_placements.call(this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, fontFace, fontEmSize, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets)
     end
-    def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer1*, textString : UInt16*, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
+    def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer1*, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_glyph_placements.call(this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, fontFace, fontEmSize, pixelsPerDip, transform, useGdiNatural, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets)
     end
     def apply_character_spacing(this : IDWriteTextAnalyzer1*, leadingSpacing : Float32, trailingSpacing : Float32, minimumAdvanceWidth : Float32, textLength : UInt32, glyphCount : UInt32, clusterMap : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphProperties : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, modifiedGlyphAdvances : Float32*, modifiedGlyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
@@ -3150,16 +3377,16 @@ module Win32cr::Graphics::DirectWrite
     def analyze_vertical_glyph_orientation(this : IDWriteTextAnalyzer1*, analysisSource : Void*, textPosition : UInt32, textLength : UInt32, analysisSink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.analyze_vertical_glyph_orientation.call(this, analysisSource, textPosition, textLength, analysisSink)
     end
-    def get_glyph_orientation_transform_1(this : IDWriteTextAnalyzer1*, glyphOrientationAngle : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_ORIENTATION_ANGLE, isSideways : Win32cr::Foundation::BOOL, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_glyph_orientation_transform_1.call(this, glyphOrientationAngle, isSideways, transform)
+    def get_glyph_orientation_transform(this : IDWriteTextAnalyzer1*, glyphOrientationAngle : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_ORIENTATION_ANGLE, isSideways : Win32cr::Foundation::BOOL, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_glyph_orientation_transform.call(this, glyphOrientationAngle, isSideways, transform)
     end
     def get_script_properties(this : IDWriteTextAnalyzer1*, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, scriptProperties : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_PROPERTIES*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_script_properties.call(this, scriptAnalysis, scriptProperties)
     end
-    def get_text_complexity(this : IDWriteTextAnalyzer1*, textString : UInt16*, textLength : UInt32, fontFace : Void*, isTextSimple : Win32cr::Foundation::BOOL*, textLengthRead : UInt32*, glyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_text_complexity(this : IDWriteTextAnalyzer1*, textString : Win32cr::Foundation::PWSTR, textLength : UInt32, fontFace : Void*, isTextSimple : Win32cr::Foundation::BOOL*, textLengthRead : UInt32*, glyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_text_complexity.call(this, textString, textLength, fontFace, isTextSimple, textLengthRead, glyphIndices)
     end
-    def get_justification_opportunities(this : IDWriteTextAnalyzer1*, fontFace : Void*, fontEmSize : Float32, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, textLength : UInt32, glyphCount : UInt32, textString : UInt16*, clusterMap : UInt16*, glyphProperties : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationOpportunities : Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*) : Win32cr::Foundation::HRESULT
+    def get_justification_opportunities(this : IDWriteTextAnalyzer1*, fontFace : Void*, fontEmSize : Float32, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, textLength : UInt32, glyphCount : UInt32, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, glyphProperties : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationOpportunities : Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_justification_opportunities.call(this, fontFace, fontEmSize, scriptAnalysis, textLength, glyphCount, textString, clusterMap, glyphProperties, justificationOpportunities)
     end
     def justify_glyph_advances(this : IDWriteTextAnalyzer1*, lineWidth : Float32, glyphCount : UInt32, justificationOpportunities : Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, justifiedGlyphAdvances : Float32*, justifiedGlyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
@@ -3172,7 +3399,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSource1Vtbl,
+
+  record IDWriteTextAnalysisSource1Vtable,
     query_interface : Proc(IDWriteTextAnalysisSource1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSource1*, UInt32),
     release : Proc(IDWriteTextAnalysisSource1*, UInt32),
@@ -3185,7 +3413,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSource1, lpVtbl : IDWriteTextAnalysisSource1Vtbl* do
+  record IDWriteTextAnalysisSource1, lpVtbl : IDWriteTextAnalysisSource1Vtable* do
     GUID = LibC::GUID.new(0x639cfad8_u32, 0xfb4_u16, 0x4b21_u16, StaticArray[0xa5_u8, 0x8a_u8, 0x6_u8, 0x79_u8, 0x20_u8, 0x12_u8, 0x0_u8, 0x9_u8])
     def query_interface(this : IDWriteTextAnalysisSource1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3218,7 +3446,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSink1Vtbl,
+
+  record IDWriteTextAnalysisSink1Vtable,
     query_interface : Proc(IDWriteTextAnalysisSink1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSink1*, UInt32),
     release : Proc(IDWriteTextAnalysisSink1*, UInt32),
@@ -3230,7 +3459,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSink1, lpVtbl : IDWriteTextAnalysisSink1Vtbl* do
+  record IDWriteTextAnalysisSink1, lpVtbl : IDWriteTextAnalysisSink1Vtable* do
     GUID = LibC::GUID.new(0xb0d941a0_u32, 0x85e7_u16, 0x4d8b_u16, StaticArray[0x9f_u8, 0xd3_u8, 0x5c_u8, 0xed_u8, 0x99_u8, 0x34_u8, 0x48_u8, 0x2a_u8])
     def query_interface(this : IDWriteTextAnalysisSink1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3260,7 +3489,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout1Vtbl,
+
+  record IDWriteTextLayout1Vtable,
     query_interface : Proc(IDWriteTextLayout1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout1*, UInt32),
     release : Proc(IDWriteTextLayout1*, UInt32),
@@ -3271,7 +3501,7 @@ module Win32cr::Graphics::DirectWrite
     set_flow_direction : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION, Win32cr::Foundation::HRESULT),
     set_incremental_tab_stop : Proc(IDWriteTextLayout1*, Float32, Win32cr::Foundation::HRESULT),
     set_trimming : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void*, Win32cr::Foundation::HRESULT),
-    set_line_spacing_1 : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
+    set_line_spacing : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_text_alignment : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT),
     get_paragraph_alignment : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_PARAGRAPH_ALIGNMENT),
     get_word_wrapping : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_WORD_WRAPPING),
@@ -3279,16 +3509,16 @@ module Win32cr::Graphics::DirectWrite
     get_flow_direction : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION),
     get_incremental_tab_stop : Proc(IDWriteTextLayout1*, Float32),
     get_trimming : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void**, Win32cr::Foundation::HRESULT),
-    get_line_spacing_1 : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_line_spacing : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
     get_font_collection_1 : Proc(IDWriteTextLayout1*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_1 : Proc(IDWriteTextLayout1*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextLayout1*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_family_name_1 : Proc(IDWriteTextLayout1*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_font_weight_1 : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_font_style_1 : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
     get_font_stretch_1 : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_font_size_1 : Proc(IDWriteTextLayout1*, Float32),
     get_locale_name_length_1 : Proc(IDWriteTextLayout1*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextLayout1*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_locale_name_1 : Proc(IDWriteTextLayout1*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_max_width : Proc(IDWriteTextLayout1*, Float32, Win32cr::Foundation::HRESULT),
     set_max_height : Proc(IDWriteTextLayout1*, Float32, Win32cr::Foundation::HRESULT),
     set_font_collection : Proc(IDWriteTextLayout1*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE, Win32cr::Foundation::HRESULT),
@@ -3307,7 +3537,7 @@ module Win32cr::Graphics::DirectWrite
     get_max_height : Proc(IDWriteTextLayout1*, Float32),
     get_font_collection_2 : Proc(IDWriteTextLayout1*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_2 : Proc(IDWriteTextLayout1*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_font_family_name_2 : Proc(IDWriteTextLayout1*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_font_family_name_2 : Proc(IDWriteTextLayout1*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_weight_2 : Proc(IDWriteTextLayout1*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_style_2 : Proc(IDWriteTextLayout1*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_stretch_2 : Proc(IDWriteTextLayout1*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
@@ -3318,10 +3548,10 @@ module Win32cr::Graphics::DirectWrite
     get_inline_object : Proc(IDWriteTextLayout1*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_typography : Proc(IDWriteTextLayout1*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_locale_name_length_2 : Proc(IDWriteTextLayout1*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_locale_name_2 : Proc(IDWriteTextLayout1*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_locale_name_2 : Proc(IDWriteTextLayout1*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     draw : Proc(IDWriteTextLayout1*, Void*, Void*, Float32, Float32, Win32cr::Foundation::HRESULT),
-    get_line_metrics_1 : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_metrics_1 : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*, Win32cr::Foundation::HRESULT),
+    get_line_metrics : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_metrics : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*, Win32cr::Foundation::HRESULT),
     get_overhang_metrics : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_OVERHANG_METRICS*, Win32cr::Foundation::HRESULT),
     get_cluster_metrics : Proc(IDWriteTextLayout1*, Win32cr::Graphics::DirectWrite::DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     determine_min_width : Proc(IDWriteTextLayout1*, Float32*, Win32cr::Foundation::HRESULT),
@@ -3335,7 +3565,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout1, lpVtbl : IDWriteTextLayout1Vtbl* do
+  record IDWriteTextLayout1, lpVtbl : IDWriteTextLayout1Vtable* do
     GUID = LibC::GUID.new(0x9064d822_u32, 0x80a7_u16, 0x465c_u16, StaticArray[0xa9_u8, 0x86_u8, 0xdf_u8, 0x65_u8, 0xf7_u8, 0x8b_u8, 0x8f_u8, 0xeb_u8])
     def query_interface(this : IDWriteTextLayout1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3367,8 +3597,8 @@ module Win32cr::Graphics::DirectWrite
     def set_trimming(this : IDWriteTextLayout1*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def set_line_spacing_1(this : IDWriteTextLayout1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def set_line_spacing(this : IDWriteTextLayout1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_text_alignment(this : IDWriteTextLayout1*) : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT
       @lpVtbl.try &.value.get_text_alignment.call(this)
@@ -3391,8 +3621,8 @@ module Win32cr::Graphics::DirectWrite
     def get_trimming(this : IDWriteTextLayout1*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def get_line_spacing_1(this : IDWriteTextLayout1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def get_line_spacing(this : IDWriteTextLayout1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_font_collection_1(this : IDWriteTextLayout1*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_collection_1.call(this, fontCollection)
@@ -3400,7 +3630,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_1(this : IDWriteTextLayout1*) : UInt32
       @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextLayout1*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_1(this : IDWriteTextLayout1*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
     end
     def get_font_weight_1(this : IDWriteTextLayout1*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
@@ -3418,7 +3648,7 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_1(this : IDWriteTextLayout1*) : UInt32
       @lpVtbl.try &.value.get_locale_name_length_1.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextLayout1*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_locale_name_1(this : IDWriteTextLayout1*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
     end
     def set_max_width(this : IDWriteTextLayout1*, maxWidth : Float32) : Win32cr::Foundation::HRESULT
@@ -3475,7 +3705,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_2(this : IDWriteTextLayout1*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_font_family_name_2(this : IDWriteTextLayout1*, currentPosition : UInt32, fontFamilyName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_2(this : IDWriteTextLayout1*, currentPosition : UInt32, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_2.call(this, currentPosition, fontFamilyName, nameSize, textRange)
     end
     def get_font_weight_2(this : IDWriteTextLayout1*, currentPosition : UInt32, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
@@ -3508,17 +3738,17 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_2(this : IDWriteTextLayout1*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_locale_name_2(this : IDWriteTextLayout1*, currentPosition : UInt32, localeName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_locale_name_2(this : IDWriteTextLayout1*, currentPosition : UInt32, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_2.call(this, currentPosition, localeName, nameSize, textRange)
     end
     def draw(this : IDWriteTextLayout1*, clientDrawingContext : Void*, renderer : Void*, originX : Float32, originY : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.draw.call(this, clientDrawingContext, renderer, originX, originY)
     end
-    def get_line_metrics_1(this : IDWriteTextLayout1*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_metrics_1.call(this, lineMetrics, maxLineCount, actualLineCount)
+    def get_line_metrics(this : IDWriteTextLayout1*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_metrics.call(this, lineMetrics, maxLineCount, actualLineCount)
     end
-    def get_metrics_1(this : IDWriteTextLayout1*, textMetrics : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_metrics_1.call(this, textMetrics)
+    def get_metrics(this : IDWriteTextLayout1*, textMetrics : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metrics.call(this, textMetrics)
     end
     def get_overhang_metrics(this : IDWriteTextLayout1*, overhangs : Win32cr::Graphics::DirectWrite::DWRITE_OVERHANG_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_overhang_metrics.call(this, overhangs)
@@ -3554,11 +3784,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteBitmapRenderTarget1Vtbl,
+
+  record IDWriteBitmapRenderTarget1Vtable,
     query_interface : Proc(IDWriteBitmapRenderTarget1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteBitmapRenderTarget1*, UInt32),
     release : Proc(IDWriteBitmapRenderTarget1*, UInt32),
-    draw_glyph_run : Proc(IDWriteBitmapRenderTarget1*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Void*, UInt32, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
+    draw_glyph_run : Proc(IDWriteBitmapRenderTarget1*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Void*, Win32cr::Foundation::COLORREF, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
     get_memory_dc : Proc(IDWriteBitmapRenderTarget1*, Win32cr::Graphics::Gdi::HDC),
     get_pixels_per_dip : Proc(IDWriteBitmapRenderTarget1*, Float32),
     set_pixels_per_dip : Proc(IDWriteBitmapRenderTarget1*, Float32, Win32cr::Foundation::HRESULT),
@@ -3571,7 +3802,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteBitmapRenderTarget1, lpVtbl : IDWriteBitmapRenderTarget1Vtbl* do
+  record IDWriteBitmapRenderTarget1, lpVtbl : IDWriteBitmapRenderTarget1Vtable* do
     GUID = LibC::GUID.new(0x791e8298_u32, 0x3ef3_u16, 0x4230_u16, StaticArray[0x98_u8, 0x80_u8, 0xc9_u8, 0xbd_u8, 0xec_u8, 0xc4_u8, 0x20_u8, 0x64_u8])
     def query_interface(this : IDWriteBitmapRenderTarget1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3582,7 +3813,7 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteBitmapRenderTarget1*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def draw_glyph_run(this : IDWriteBitmapRenderTarget1*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, renderingParams : Void*, textColor : UInt32, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+    def draw_glyph_run(this : IDWriteBitmapRenderTarget1*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, renderingParams : Void*, textColor : Win32cr::Foundation::COLORREF, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.draw_glyph_run.call(this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, renderingParams, textColor, blackBoxRect)
     end
     def get_memory_dc(this : IDWriteBitmapRenderTarget1*) : Win32cr::Graphics::Gdi::HDC
@@ -3616,7 +3847,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextRenderer1Vtbl,
+
+  record IDWriteTextRenderer1Vtable,
     query_interface : Proc(IDWriteTextRenderer1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextRenderer1*, UInt32),
     release : Proc(IDWriteTextRenderer1*, UInt32),
@@ -3634,7 +3866,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextRenderer1, lpVtbl : IDWriteTextRenderer1Vtbl* do
+  record IDWriteTextRenderer1, lpVtbl : IDWriteTextRenderer1Vtable* do
     GUID = LibC::GUID.new(0xd3e0e934_u32, 0x22a0_u16, 0x427e_u16, StaticArray[0xaa_u8, 0xe4_u8, 0x7d_u8, 0x95_u8, 0x74_u8, 0xb5_u8, 0x9d_u8, 0xb1_u8])
     def query_interface(this : IDWriteTextRenderer1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3682,7 +3914,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextFormat1Vtbl,
+
+  record IDWriteTextFormat1Vtable,
     query_interface : Proc(IDWriteTextFormat1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat1*, UInt32),
     release : Proc(IDWriteTextFormat1*, UInt32),
@@ -3693,7 +3926,7 @@ module Win32cr::Graphics::DirectWrite
     set_flow_direction : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION, Win32cr::Foundation::HRESULT),
     set_incremental_tab_stop : Proc(IDWriteTextFormat1*, Float32, Win32cr::Foundation::HRESULT),
     set_trimming : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void*, Win32cr::Foundation::HRESULT),
-    set_line_spacing_1 : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
+    set_line_spacing : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_text_alignment : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT),
     get_paragraph_alignment : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_PARAGRAPH_ALIGNMENT),
     get_word_wrapping : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_WORD_WRAPPING),
@@ -3701,16 +3934,16 @@ module Win32cr::Graphics::DirectWrite
     get_flow_direction : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION),
     get_incremental_tab_stop : Proc(IDWriteTextFormat1*, Float32),
     get_trimming : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void**, Win32cr::Foundation::HRESULT),
-    get_line_spacing_1 : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
-    get_font_collection_1 : Proc(IDWriteTextFormat1*, Void**, Win32cr::Foundation::HRESULT),
-    get_font_family_name_length_1 : Proc(IDWriteTextFormat1*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextFormat1*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_font_weight_1 : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
-    get_font_style_1 : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
-    get_font_stretch_1 : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
-    get_font_size_1 : Proc(IDWriteTextFormat1*, Float32),
-    get_locale_name_length_1 : Proc(IDWriteTextFormat1*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextFormat1*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_line_spacing : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_font_collection : Proc(IDWriteTextFormat1*, Void**, Win32cr::Foundation::HRESULT),
+    get_font_family_name_length : Proc(IDWriteTextFormat1*, UInt32),
+    get_font_family_name : Proc(IDWriteTextFormat1*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_weight : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
+    get_font_style : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
+    get_font_stretch : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
+    get_font_size : Proc(IDWriteTextFormat1*, Float32),
+    get_locale_name_length : Proc(IDWriteTextFormat1*, UInt32),
+    get_locale_name : Proc(IDWriteTextFormat1*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_vertical_glyph_orientation : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_orientation : Proc(IDWriteTextFormat1*, Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION),
     set_last_line_wrapping : Proc(IDWriteTextFormat1*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
@@ -3722,7 +3955,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextFormat1, lpVtbl : IDWriteTextFormat1Vtbl* do
+  record IDWriteTextFormat1, lpVtbl : IDWriteTextFormat1Vtable* do
     GUID = LibC::GUID.new(0x5f174b49_u32, 0xd8b_u16, 0x4cfb_u16, StaticArray[0x8b_u8, 0xca_u8, 0xf1_u8, 0xcc_u8, 0xe9_u8, 0xd0_u8, 0x6c_u8, 0x67_u8])
     def query_interface(this : IDWriteTextFormat1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3754,8 +3987,8 @@ module Win32cr::Graphics::DirectWrite
     def set_trimming(this : IDWriteTextFormat1*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def set_line_spacing_1(this : IDWriteTextFormat1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def set_line_spacing(this : IDWriteTextFormat1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_text_alignment(this : IDWriteTextFormat1*) : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT
       @lpVtbl.try &.value.get_text_alignment.call(this)
@@ -3778,35 +4011,35 @@ module Win32cr::Graphics::DirectWrite
     def get_trimming(this : IDWriteTextFormat1*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def get_line_spacing_1(this : IDWriteTextFormat1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def get_line_spacing(this : IDWriteTextFormat1*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
-    def get_font_collection_1(this : IDWriteTextFormat1*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_collection_1.call(this, fontCollection)
+    def get_font_collection(this : IDWriteTextFormat1*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_collection.call(this, fontCollection)
     end
-    def get_font_family_name_length_1(this : IDWriteTextFormat1*) : UInt32
-      @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
+    def get_font_family_name_length(this : IDWriteTextFormat1*) : UInt32
+      @lpVtbl.try &.value.get_font_family_name_length.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextFormat1*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
+    def get_font_family_name(this : IDWriteTextFormat1*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_family_name.call(this, fontFamilyName, nameSize)
     end
-    def get_font_weight_1(this : IDWriteTextFormat1*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
-      @lpVtbl.try &.value.get_font_weight_1.call(this)
+    def get_font_weight(this : IDWriteTextFormat1*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
+      @lpVtbl.try &.value.get_font_weight.call(this)
     end
-    def get_font_style_1(this : IDWriteTextFormat1*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
-      @lpVtbl.try &.value.get_font_style_1.call(this)
+    def get_font_style(this : IDWriteTextFormat1*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
+      @lpVtbl.try &.value.get_font_style.call(this)
     end
-    def get_font_stretch_1(this : IDWriteTextFormat1*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
-      @lpVtbl.try &.value.get_font_stretch_1.call(this)
+    def get_font_stretch(this : IDWriteTextFormat1*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
+      @lpVtbl.try &.value.get_font_stretch.call(this)
     end
-    def get_font_size_1(this : IDWriteTextFormat1*) : Float32
-      @lpVtbl.try &.value.get_font_size_1.call(this)
+    def get_font_size(this : IDWriteTextFormat1*) : Float32
+      @lpVtbl.try &.value.get_font_size.call(this)
     end
-    def get_locale_name_length_1(this : IDWriteTextFormat1*) : UInt32
-      @lpVtbl.try &.value.get_locale_name_length_1.call(this)
+    def get_locale_name_length(this : IDWriteTextFormat1*) : UInt32
+      @lpVtbl.try &.value.get_locale_name_length.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextFormat1*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
+    def get_locale_name(this : IDWriteTextFormat1*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_locale_name.call(this, localeName, nameSize)
     end
     def set_vertical_glyph_orientation(this : IDWriteTextFormat1*, glyphOrientation : Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_vertical_glyph_orientation.call(this, glyphOrientation)
@@ -3836,7 +4069,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout2Vtbl,
+
+  record IDWriteTextLayout2Vtable,
     query_interface : Proc(IDWriteTextLayout2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout2*, UInt32),
     release : Proc(IDWriteTextLayout2*, UInt32),
@@ -3847,7 +4081,7 @@ module Win32cr::Graphics::DirectWrite
     set_flow_direction : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION, Win32cr::Foundation::HRESULT),
     set_incremental_tab_stop : Proc(IDWriteTextLayout2*, Float32, Win32cr::Foundation::HRESULT),
     set_trimming : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void*, Win32cr::Foundation::HRESULT),
-    set_line_spacing_1 : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
+    set_line_spacing : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_text_alignment : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT),
     get_paragraph_alignment : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_PARAGRAPH_ALIGNMENT),
     get_word_wrapping : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_WORD_WRAPPING),
@@ -3855,16 +4089,16 @@ module Win32cr::Graphics::DirectWrite
     get_flow_direction : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION),
     get_incremental_tab_stop : Proc(IDWriteTextLayout2*, Float32),
     get_trimming : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void**, Win32cr::Foundation::HRESULT),
-    get_line_spacing_1 : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_line_spacing : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
     get_font_collection_1 : Proc(IDWriteTextLayout2*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_1 : Proc(IDWriteTextLayout2*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextLayout2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_family_name_1 : Proc(IDWriteTextLayout2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_font_weight_1 : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_font_style_1 : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
     get_font_stretch_1 : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_font_size_1 : Proc(IDWriteTextLayout2*, Float32),
     get_locale_name_length_1 : Proc(IDWriteTextLayout2*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextLayout2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_locale_name_1 : Proc(IDWriteTextLayout2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_max_width : Proc(IDWriteTextLayout2*, Float32, Win32cr::Foundation::HRESULT),
     set_max_height : Proc(IDWriteTextLayout2*, Float32, Win32cr::Foundation::HRESULT),
     set_font_collection : Proc(IDWriteTextLayout2*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE, Win32cr::Foundation::HRESULT),
@@ -3883,7 +4117,7 @@ module Win32cr::Graphics::DirectWrite
     get_max_height : Proc(IDWriteTextLayout2*, Float32),
     get_font_collection_2 : Proc(IDWriteTextLayout2*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_2 : Proc(IDWriteTextLayout2*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_font_family_name_2 : Proc(IDWriteTextLayout2*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_font_family_name_2 : Proc(IDWriteTextLayout2*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_weight_2 : Proc(IDWriteTextLayout2*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_style_2 : Proc(IDWriteTextLayout2*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_stretch_2 : Proc(IDWriteTextLayout2*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
@@ -3894,9 +4128,9 @@ module Win32cr::Graphics::DirectWrite
     get_inline_object : Proc(IDWriteTextLayout2*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_typography : Proc(IDWriteTextLayout2*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_locale_name_length_2 : Proc(IDWriteTextLayout2*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_locale_name_2 : Proc(IDWriteTextLayout2*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_locale_name_2 : Proc(IDWriteTextLayout2*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     draw : Proc(IDWriteTextLayout2*, Void*, Void*, Float32, Float32, Win32cr::Foundation::HRESULT),
-    get_line_metrics_1 : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_line_metrics : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     get_metrics_1 : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*, Win32cr::Foundation::HRESULT),
     get_overhang_metrics : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_OVERHANG_METRICS*, Win32cr::Foundation::HRESULT),
     get_cluster_metrics : Proc(IDWriteTextLayout2*, Win32cr::Graphics::DirectWrite::DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
@@ -3920,7 +4154,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout2, lpVtbl : IDWriteTextLayout2Vtbl* do
+  record IDWriteTextLayout2, lpVtbl : IDWriteTextLayout2Vtable* do
     GUID = LibC::GUID.new(0x1093c18f_u32, 0x8d5e_u16, 0x43f0_u16, StaticArray[0xb0_u8, 0x64_u8, 0x9_u8, 0x17_u8, 0x31_u8, 0x1b_u8, 0x52_u8, 0x5e_u8])
     def query_interface(this : IDWriteTextLayout2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3952,8 +4186,8 @@ module Win32cr::Graphics::DirectWrite
     def set_trimming(this : IDWriteTextLayout2*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def set_line_spacing_1(this : IDWriteTextLayout2*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def set_line_spacing(this : IDWriteTextLayout2*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, lineSpacing : Float32, baseline : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_text_alignment(this : IDWriteTextLayout2*) : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ALIGNMENT
       @lpVtbl.try &.value.get_text_alignment.call(this)
@@ -3976,8 +4210,8 @@ module Win32cr::Graphics::DirectWrite
     def get_trimming(this : IDWriteTextLayout2*, trimmingOptions : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_trimming.call(this, trimmingOptions, trimmingSign)
     end
-    def get_line_spacing_1(this : IDWriteTextLayout2*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
+    def get_line_spacing(this : IDWriteTextLayout2*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_spacing.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
     def get_font_collection_1(this : IDWriteTextLayout2*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_collection_1.call(this, fontCollection)
@@ -3985,7 +4219,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_1(this : IDWriteTextLayout2*) : UInt32
       @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextLayout2*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_1(this : IDWriteTextLayout2*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
     end
     def get_font_weight_1(this : IDWriteTextLayout2*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
@@ -4003,7 +4237,7 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_1(this : IDWriteTextLayout2*) : UInt32
       @lpVtbl.try &.value.get_locale_name_length_1.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextLayout2*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_locale_name_1(this : IDWriteTextLayout2*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
     end
     def set_max_width(this : IDWriteTextLayout2*, maxWidth : Float32) : Win32cr::Foundation::HRESULT
@@ -4060,7 +4294,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_2(this : IDWriteTextLayout2*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_font_family_name_2(this : IDWriteTextLayout2*, currentPosition : UInt32, fontFamilyName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_2(this : IDWriteTextLayout2*, currentPosition : UInt32, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_2.call(this, currentPosition, fontFamilyName, nameSize, textRange)
     end
     def get_font_weight_2(this : IDWriteTextLayout2*, currentPosition : UInt32, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
@@ -4093,14 +4327,14 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_2(this : IDWriteTextLayout2*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_locale_name_2(this : IDWriteTextLayout2*, currentPosition : UInt32, localeName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_locale_name_2(this : IDWriteTextLayout2*, currentPosition : UInt32, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_2.call(this, currentPosition, localeName, nameSize, textRange)
     end
     def draw(this : IDWriteTextLayout2*, clientDrawingContext : Void*, renderer : Void*, originX : Float32, originY : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.draw.call(this, clientDrawingContext, renderer, originX, originY)
     end
-    def get_line_metrics_1(this : IDWriteTextLayout2*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_metrics_1.call(this, lineMetrics, maxLineCount, actualLineCount)
+    def get_line_metrics(this : IDWriteTextLayout2*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_metrics.call(this, lineMetrics, maxLineCount, actualLineCount)
     end
     def get_metrics_1(this : IDWriteTextLayout2*, textMetrics : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_metrics_1.call(this, textMetrics)
@@ -4166,7 +4400,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalyzer2Vtbl,
+
+  record IDWriteTextAnalyzer2Vtable,
     query_interface : Proc(IDWriteTextAnalyzer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalyzer2*, UInt32),
     release : Proc(IDWriteTextAnalyzer2*, UInt32),
@@ -4174,16 +4409,16 @@ module Win32cr::Graphics::DirectWrite
     analyze_bidi : Proc(IDWriteTextAnalyzer2*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
     analyze_number_substitution : Proc(IDWriteTextAnalyzer2*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
     analyze_line_breakpoints : Proc(IDWriteTextAnalyzer2*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    get_glyphs : Proc(IDWriteTextAnalyzer2*, UInt16*, UInt32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_glyph_placements : Proc(IDWriteTextAnalyzer2*, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
-    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer2*, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
+    get_glyphs : Proc(IDWriteTextAnalyzer2*, Win32cr::Foundation::PWSTR, UInt32, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_glyph_placements : Proc(IDWriteTextAnalyzer2*, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
+    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer2*, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, Void*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
     apply_character_spacing : Proc(IDWriteTextAnalyzer2*, Float32, Float32, Float32, UInt32, UInt32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
     get_baseline : Proc(IDWriteTextAnalyzer2*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_BASELINE, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     analyze_vertical_glyph_orientation : Proc(IDWriteTextAnalyzer2*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT),
     get_glyph_orientation_transform_1 : Proc(IDWriteTextAnalyzer2*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_ORIENTATION_ANGLE, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
     get_script_properties : Proc(IDWriteTextAnalyzer2*, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_PROPERTIES*, Win32cr::Foundation::HRESULT),
-    get_text_complexity : Proc(IDWriteTextAnalyzer2*, UInt16*, UInt32, Void*, Win32cr::Foundation::BOOL*, UInt32*, UInt16*, Win32cr::Foundation::HRESULT),
-    get_justification_opportunities : Proc(IDWriteTextAnalyzer2*, Void*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt16*, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, Win32cr::Foundation::HRESULT),
+    get_text_complexity : Proc(IDWriteTextAnalyzer2*, Win32cr::Foundation::PWSTR, UInt32, Void*, Win32cr::Foundation::BOOL*, UInt32*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_justification_opportunities : Proc(IDWriteTextAnalyzer2*, Void*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, Win32cr::Foundation::HRESULT),
     justify_glyph_advances : Proc(IDWriteTextAnalyzer2*, Float32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
     get_justified_glyphs : Proc(IDWriteTextAnalyzer2*, Void*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt32, UInt16*, UInt16*, Float32*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, UInt16*, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, Win32cr::Foundation::HRESULT),
     get_glyph_orientation_transform_2 : Proc(IDWriteTextAnalyzer2*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_ORIENTATION_ANGLE, Win32cr::Foundation::BOOL, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
@@ -4192,7 +4427,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalyzer2, lpVtbl : IDWriteTextAnalyzer2Vtbl* do
+  record IDWriteTextAnalyzer2, lpVtbl : IDWriteTextAnalyzer2Vtable* do
     GUID = LibC::GUID.new(0x553a9ff3_u32, 0x5693_u16, 0x4df7_u16, StaticArray[0xb5_u8, 0x2b_u8, 0x74_u8, 0x80_u8, 0x6f_u8, 0x7f_u8, 0x2e_u8, 0xb9_u8])
     def query_interface(this : IDWriteTextAnalyzer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4215,13 +4450,13 @@ module Win32cr::Graphics::DirectWrite
     def analyze_line_breakpoints(this : IDWriteTextAnalyzer2*, analysisSource : Void*, textPosition : UInt32, textLength : UInt32, analysisSink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.analyze_line_breakpoints.call(this, analysisSource, textPosition, textLength, analysisSink)
     end
-    def get_glyphs(this : IDWriteTextAnalyzer2*, textString : UInt16*, textLength : UInt32, fontFace : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, numberSubstitution : Void*, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, maxGlyphCount : UInt32, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, actualGlyphCount : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_glyphs(this : IDWriteTextAnalyzer2*, textString : Win32cr::Foundation::PWSTR, textLength : UInt32, fontFace : Void*, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, numberSubstitution : Void*, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, maxGlyphCount : UInt32, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, actualGlyphCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyphs.call(this, textString, textLength, fontFace, isSideways, isRightToLeft, scriptAnalysis, localeName, numberSubstitution, features, featureRangeLengths, featureRanges, maxGlyphCount, clusterMap, textProps, glyphIndices, glyphProps, actualGlyphCount)
     end
-    def get_glyph_placements(this : IDWriteTextAnalyzer2*, textString : UInt16*, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
+    def get_glyph_placements(this : IDWriteTextAnalyzer2*, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_placements.call(this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, fontFace, fontEmSize, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets)
     end
-    def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer2*, textString : UInt16*, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
+    def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer2*, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, textProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_TEXT_PROPERTIES*, textLength : UInt32, glyphIndices : UInt16*, glyphProps : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphCount : UInt32, fontFace : Void*, fontEmSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS*, localeName : Win32cr::Foundation::PWSTR, features : Win32cr::Graphics::DirectWrite::DWRITE_TYPOGRAPHIC_FEATURES**, featureRangeLengths : UInt32*, featureRanges : UInt32, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_glyph_placements.call(this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, fontFace, fontEmSize, pixelsPerDip, transform, useGdiNatural, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets)
     end
     def apply_character_spacing(this : IDWriteTextAnalyzer2*, leadingSpacing : Float32, trailingSpacing : Float32, minimumAdvanceWidth : Float32, textLength : UInt32, glyphCount : UInt32, clusterMap : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphProperties : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, modifiedGlyphAdvances : Float32*, modifiedGlyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
@@ -4239,10 +4474,10 @@ module Win32cr::Graphics::DirectWrite
     def get_script_properties(this : IDWriteTextAnalyzer2*, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, scriptProperties : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_PROPERTIES*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_script_properties.call(this, scriptAnalysis, scriptProperties)
     end
-    def get_text_complexity(this : IDWriteTextAnalyzer2*, textString : UInt16*, textLength : UInt32, fontFace : Void*, isTextSimple : Win32cr::Foundation::BOOL*, textLengthRead : UInt32*, glyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_text_complexity(this : IDWriteTextAnalyzer2*, textString : Win32cr::Foundation::PWSTR, textLength : UInt32, fontFace : Void*, isTextSimple : Win32cr::Foundation::BOOL*, textLengthRead : UInt32*, glyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_text_complexity.call(this, textString, textLength, fontFace, isTextSimple, textLengthRead, glyphIndices)
     end
-    def get_justification_opportunities(this : IDWriteTextAnalyzer2*, fontFace : Void*, fontEmSize : Float32, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, textLength : UInt32, glyphCount : UInt32, textString : UInt16*, clusterMap : UInt16*, glyphProperties : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationOpportunities : Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*) : Win32cr::Foundation::HRESULT
+    def get_justification_opportunities(this : IDWriteTextAnalyzer2*, fontFace : Void*, fontEmSize : Float32, scriptAnalysis : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_ANALYSIS, textLength : UInt32, glyphCount : UInt32, textString : Win32cr::Foundation::PWSTR, clusterMap : UInt16*, glyphProperties : Win32cr::Graphics::DirectWrite::DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationOpportunities : Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_justification_opportunities.call(this, fontFace, fontEmSize, scriptAnalysis, textLength, glyphCount, textString, clusterMap, glyphProperties, justificationOpportunities)
     end
     def justify_glyph_advances(this : IDWriteTextAnalyzer2*, lineWidth : Float32, glyphCount : UInt32, justificationOpportunities : Win32cr::Graphics::DirectWrite::DWRITE_JUSTIFICATION_OPPORTUNITY*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, justifiedGlyphAdvances : Float32*, justifiedGlyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*) : Win32cr::Foundation::HRESULT
@@ -4264,15 +4499,16 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFallbackVtbl,
+
+  record IDWriteFontFallbackVtable,
     query_interface : Proc(IDWriteFontFallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFallback*, UInt32),
     release : Proc(IDWriteFontFallback*, UInt32),
-    map_characters_1 : Proc(IDWriteFontFallback*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, UInt32*, Void**, Float32*, Win32cr::Foundation::HRESULT)
+    map_characters : Proc(IDWriteFontFallback*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, UInt32*, Void**, Float32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontFallback, lpVtbl : IDWriteFontFallbackVtbl* do
+  record IDWriteFontFallback, lpVtbl : IDWriteFontFallbackVtable* do
     GUID = LibC::GUID.new(0xefa008f9_u32, 0xf7a1_u16, 0x48bf_u16, StaticArray[0xb0_u8, 0x5c_u8, 0xf2_u8, 0x24_u8, 0x71_u8, 0x3c_u8, 0xc0_u8, 0xff_u8])
     def query_interface(this : IDWriteFontFallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4283,14 +4519,15 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteFontFallback*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def map_characters_1(this : IDWriteFontFallback*, analysisSource : Void*, textPosition : UInt32, textLength : UInt32, baseFontCollection : Void*, baseFamilyName : Win32cr::Foundation::PWSTR, baseWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, baseStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, baseStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, mappedLength : UInt32*, mappedFont : Void**, scale : Float32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.map_characters_1.call(this, analysisSource, textPosition, textLength, baseFontCollection, baseFamilyName, baseWeight, baseStyle, baseStretch, mappedLength, mappedFont, scale)
+    def map_characters(this : IDWriteFontFallback*, analysisSource : Void*, textPosition : UInt32, textLength : UInt32, baseFontCollection : Void*, baseFamilyName : Win32cr::Foundation::PWSTR, baseWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, baseStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, baseStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, mappedLength : UInt32*, mappedFont : Void**, scale : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.map_characters.call(this, analysisSource, textPosition, textLength, baseFontCollection, baseFamilyName, baseWeight, baseStyle, baseStretch, mappedLength, mappedFont, scale)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontFallbackBuilderVtbl,
+
+  record IDWriteFontFallbackBuilderVtable,
     query_interface : Proc(IDWriteFontFallbackBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFallbackBuilder*, UInt32),
     release : Proc(IDWriteFontFallbackBuilder*, UInt32),
@@ -4300,7 +4537,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFallbackBuilder, lpVtbl : IDWriteFontFallbackBuilderVtbl* do
+  record IDWriteFontFallbackBuilder, lpVtbl : IDWriteFontFallbackBuilderVtable* do
     GUID = LibC::GUID.new(0xfd882d06_u32, 0x8aba_u16, 0x4fb8_u16, StaticArray[0xb8_u8, 0x49_u8, 0x8b_u8, 0xe8_u8, 0xb7_u8, 0x3e_u8, 0x14_u8, 0xde_u8])
     def query_interface(this : IDWriteFontFallbackBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4324,7 +4561,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFont2Vtbl,
+
+  record IDWriteFont2Vtable,
     query_interface : Proc(IDWriteFont2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont2*, UInt32),
     release : Proc(IDWriteFont2*, UInt32),
@@ -4337,8 +4575,8 @@ module Win32cr::Graphics::DirectWrite
     get_informational_strings : Proc(IDWriteFont2*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_simulations : Proc(IDWriteFont2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS),
     get_metrics_1 : Proc(IDWriteFont2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Void),
-    has_character_1 : Proc(IDWriteFont2*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    create_font_face_1 : Proc(IDWriteFont2*, Void**, Win32cr::Foundation::HRESULT),
+    has_character : Proc(IDWriteFont2*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_font_face : Proc(IDWriteFont2*, Void**, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFont2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
     get_panose : Proc(IDWriteFont2*, Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*, Void),
     get_unicode_ranges : Proc(IDWriteFont2*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_UNICODE_RANGE*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -4347,7 +4585,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFont2, lpVtbl : IDWriteFont2Vtbl* do
+  record IDWriteFont2, lpVtbl : IDWriteFont2Vtable* do
     GUID = LibC::GUID.new(0x29748ed6_u32, 0x8c9c_u16, 0x4a6a_u16, StaticArray[0xbe_u8, 0xb_u8, 0xd9_u8, 0x12_u8, 0xe8_u8, 0x53_u8, 0x89_u8, 0x44_u8])
     def query_interface(this : IDWriteFont2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4385,11 +4623,11 @@ module Win32cr::Graphics::DirectWrite
     def get_metrics_1(this : IDWriteFont2*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Void
       @lpVtbl.try &.value.get_metrics_1.call(this, fontMetrics)
     end
-    def has_character_1(this : IDWriteFont2*, unicodeValue : UInt32, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.has_character_1.call(this, unicodeValue, exists)
+    def has_character(this : IDWriteFont2*, unicodeValue : UInt32, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.has_character.call(this, unicodeValue, exists)
     end
-    def create_font_face_1(this : IDWriteFont2*, fontFace : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_face_1.call(this, fontFace)
+    def create_font_face(this : IDWriteFont2*, fontFace : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face.call(this, fontFace)
     end
     def get_metrics_2(this : IDWriteFont2*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*) : Void
       @lpVtbl.try &.value.get_metrics_2.call(this, fontMetrics)
@@ -4410,7 +4648,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace2Vtbl,
+
+  record IDWriteFontFace2Vtable,
     query_interface : Proc(IDWriteFontFace2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace2*, UInt32),
     release : Proc(IDWriteFontFace2*, UInt32),
@@ -4426,7 +4665,7 @@ module Win32cr::Graphics::DirectWrite
     try_get_font_table : Proc(IDWriteFontFace2*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     release_font_table : Proc(IDWriteFontFace2*, Void*, Void),
     get_glyph_run_outline : Proc(IDWriteFontFace2*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_1 : Proc(IDWriteFontFace2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_1 : Proc(IDWriteFontFace2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFontFace2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
@@ -4438,18 +4677,18 @@ module Win32cr::Graphics::DirectWrite
     get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     get_kerning_pair_adjustments : Proc(IDWriteFontFace2*, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     has_kerning_pairs : Proc(IDWriteFontFace2*, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_1 : Proc(IDWriteFontFace2*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_2 : Proc(IDWriteFontFace2*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_variants : Proc(IDWriteFontFace2*, UInt32, UInt16*, UInt16*, Win32cr::Foundation::HRESULT),
     has_vertical_glyph_variants : Proc(IDWriteFontFace2*, Win32cr::Foundation::BOOL),
     is_color_font : Proc(IDWriteFontFace2*, Win32cr::Foundation::BOOL),
     get_color_palette_count : Proc(IDWriteFontFace2*, UInt32),
     get_palette_entry_count : Proc(IDWriteFontFace2*, UInt32),
     get_palette_entries : Proc(IDWriteFontFace2*, UInt32, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_2 : Proc(IDWriteFontFace2*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT)
+    get_recommended_rendering_mode_3 : Proc(IDWriteFontFace2*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontFace2, lpVtbl : IDWriteFontFace2Vtbl* do
+  record IDWriteFontFace2, lpVtbl : IDWriteFontFace2Vtable* do
     GUID = LibC::GUID.new(0xd8b768ff_u32, 0x64bc_u16, 0x4e66_u16, StaticArray[0x98_u8, 0x2b_u8, 0xec_u8, 0x8e_u8, 0x87_u8, 0xf6_u8, 0x93_u8, 0xf7_u8])
     def query_interface(this : IDWriteFontFace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4496,8 +4735,8 @@ module Win32cr::Graphics::DirectWrite
     def get_glyph_run_outline(this : IDWriteFontFace2*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
     end
-    def get_recommended_rendering_mode_1_1(this : IDWriteFontFace2*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    def get_recommended_rendering_mode_1(this : IDWriteFontFace2*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
     end
     def get_gdi_compatible_metrics_1(this : IDWriteFontFace2*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
@@ -4532,8 +4771,8 @@ module Win32cr::Graphics::DirectWrite
     def has_kerning_pairs(this : IDWriteFontFace2*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_kerning_pairs.call(this)
     end
-    def get_recommended_rendering_mode_2_1(this : IDWriteFontFace2*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_1.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
+    def get_recommended_rendering_mode_2(this : IDWriteFontFace2*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
     end
     def get_vertical_glyph_variants(this : IDWriteFontFace2*, glyphCount : UInt32, nominalGlyphIndices : UInt16*, verticalGlyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_glyph_variants.call(this, glyphCount, nominalGlyphIndices, verticalGlyphIndices)
@@ -4553,23 +4792,24 @@ module Win32cr::Graphics::DirectWrite
     def get_palette_entries(this : IDWriteFontFace2*, colorPaletteIndex : UInt32, firstEntryIndex : UInt32, entryCount : UInt32, paletteEntries : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_palette_entries.call(this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries)
     end
-    def get_recommended_rendering_mode_1_2(this : IDWriteFontFace2*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_3(this : IDWriteFontFace2*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_3.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
 
   end
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumeratorVtbl,
+
+  record IDWriteColorGlyphRunEnumeratorVtable,
     query_interface : Proc(IDWriteColorGlyphRunEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteColorGlyphRunEnumerator*, UInt32),
     release : Proc(IDWriteColorGlyphRunEnumerator*, UInt32),
     move_next : Proc(IDWriteColorGlyphRunEnumerator*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_current_run_1 : Proc(IDWriteColorGlyphRunEnumerator*, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_GLYPH_RUN**, Win32cr::Foundation::HRESULT)
+    get_current_run : Proc(IDWriteColorGlyphRunEnumerator*, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_GLYPH_RUN**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumerator, lpVtbl : IDWriteColorGlyphRunEnumeratorVtbl* do
+  record IDWriteColorGlyphRunEnumerator, lpVtbl : IDWriteColorGlyphRunEnumeratorVtable* do
     GUID = LibC::GUID.new(0xd31fbe17_u32, 0xf157_u16, 0x41a2_u16, StaticArray[0x8d_u8, 0x24_u8, 0xcb_u8, 0x77_u8, 0x9e_u8, 0x5_u8, 0x60_u8, 0xe8_u8])
     def query_interface(this : IDWriteColorGlyphRunEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4583,14 +4823,15 @@ module Win32cr::Graphics::DirectWrite
     def move_next(this : IDWriteColorGlyphRunEnumerator*, hasRun : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_next.call(this, hasRun)
     end
-    def get_current_run_1(this : IDWriteColorGlyphRunEnumerator*, colorGlyphRun : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_GLYPH_RUN**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_current_run_1.call(this, colorGlyphRun)
+    def get_current_run(this : IDWriteColorGlyphRunEnumerator*, colorGlyphRun : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_GLYPH_RUN**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_run.call(this, colorGlyphRun)
     end
 
   end
 
   @[Extern]
-  record IDWriteRenderingParams2Vtbl,
+
+  record IDWriteRenderingParams2Vtable,
     query_interface : Proc(IDWriteRenderingParams2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams2*, UInt32),
     release : Proc(IDWriteRenderingParams2*, UInt32),
@@ -4604,7 +4845,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams2, lpVtbl : IDWriteRenderingParams2Vtbl* do
+  record IDWriteRenderingParams2, lpVtbl : IDWriteRenderingParams2Vtable* do
     GUID = LibC::GUID.new(0xf9d711c3_u32, 0x9777_u16, 0x40ae_u16, StaticArray[0x87_u8, 0xe8_u8, 0x3e_u8, 0x5a_u8, 0xf9_u8, 0xbf_u8, 0x9_u8, 0x48_u8])
     def query_interface(this : IDWriteRenderingParams2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4640,11 +4881,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory2Vtbl,
+
+  record IDWriteFactory2Vtable,
     query_interface : Proc(IDWriteFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory2*, UInt32),
     release : Proc(IDWriteFactory2*, UInt32),
-    get_system_font_collection_1 : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_collection : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     create_custom_font_collection : Proc(IDWriteFactory2*, Void*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     register_font_collection_loader : Proc(IDWriteFactory2*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_collection_loader : Proc(IDWriteFactory2*, Void*, Win32cr::Foundation::HRESULT),
@@ -4653,29 +4895,29 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory2*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory2*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory2*, Void*, Win32cr::Foundation::HRESULT),
-    create_text_format_1 : Proc(IDWriteFactory2*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_text_format : Proc(IDWriteFactory2*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory2*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory2*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory2*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory2*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory2*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_1 : Proc(IDWriteFactory2*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_eudc_font_collection : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_1 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_2 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_fallback : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::HRESULT),
     create_font_fallback_builder : Proc(IDWriteFactory2*, Void**, Win32cr::Foundation::HRESULT),
-    translate_color_glyph_run_1 : Proc(IDWriteFactory2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_2 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    translate_color_glyph_run : Proc(IDWriteFactory2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_3 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_2 : Proc(IDWriteFactory2*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFactory2, lpVtbl : IDWriteFactory2Vtbl* do
+  record IDWriteFactory2, lpVtbl : IDWriteFactory2Vtable* do
     GUID = LibC::GUID.new(0x439fc60_u32, 0xca44_u16, 0x4994_u16, StaticArray[0x8d_u8, 0xee_u8, 0x3a_u8, 0x9a_u8, 0xf7_u8, 0xb7_u8, 0x32_u8, 0xec_u8])
     def query_interface(this : IDWriteFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4686,8 +4928,8 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteFactory2*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_system_font_collection_1(this : IDWriteFactory2*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_1.call(this, fontCollection, checkForUpdates)
+    def get_system_font_collection(this : IDWriteFactory2*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection.call(this, fontCollection, checkForUpdates)
     end
     def create_custom_font_collection(this : IDWriteFactory2*, collectionLoader : Void*, collectionKey : Void*, collectionKeySize : UInt32, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_custom_font_collection.call(this, collectionLoader, collectionKey, collectionKeySize, fontCollection)
@@ -4713,8 +4955,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory2*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory2*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_1(this : IDWriteFactory2*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory2*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -4722,8 +4964,8 @@ module Win32cr::Graphics::DirectWrite
     def unregister_font_file_loader(this : IDWriteFactory2*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_font_file_loader.call(this, fontFileLoader)
     end
-    def create_text_format_1(this : IDWriteFactory2*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_text_format_1.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
+    def create_text_format(this : IDWriteFactory2*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
     end
     def create_typography(this : IDWriteFactory2*, typography : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_typography.call(this, typography)
@@ -4731,10 +4973,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory2*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory2*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory2*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory2*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory2*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory2*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -4752,8 +4994,8 @@ module Win32cr::Graphics::DirectWrite
     def get_eudc_font_collection(this : IDWriteFactory2*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
     end
-    def create_custom_rendering_params_2_1(this : IDWriteFactory2*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_1.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_2(this : IDWriteFactory2*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def get_system_font_fallback(this : IDWriteFactory2*, fontFallback : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_fallback.call(this, fontFallback)
@@ -4761,11 +5003,11 @@ module Win32cr::Graphics::DirectWrite
     def create_font_fallback_builder(this : IDWriteFactory2*, fontFallbackBuilder : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_fallback_builder.call(this, fontFallbackBuilder)
     end
-    def translate_color_glyph_run_1(this : IDWriteFactory2*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.translate_color_glyph_run_1.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
+    def translate_color_glyph_run(this : IDWriteFactory2*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.translate_color_glyph_run.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
     end
-    def create_custom_rendering_params_1_2(this : IDWriteFactory2*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_3(this : IDWriteFactory2*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_3.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_glyph_run_analysis_2(this : IDWriteFactory2*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_glyph_run_analysis_2.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
@@ -4774,7 +5016,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRenderingParams3Vtbl,
+
+  record IDWriteRenderingParams3Vtable,
     query_interface : Proc(IDWriteRenderingParams3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams3*, UInt32),
     release : Proc(IDWriteRenderingParams3*, UInt32),
@@ -4789,7 +5032,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams3, lpVtbl : IDWriteRenderingParams3Vtbl* do
+  record IDWriteRenderingParams3, lpVtbl : IDWriteRenderingParams3Vtable* do
     GUID = LibC::GUID.new(0xb7924baa_u32, 0x391b_u16, 0x412a_u16, StaticArray[0x8c_u8, 0x5c_u8, 0xe4_u8, 0x4c_u8, 0xc2_u8, 0xd8_u8, 0x67_u8, 0xdc_u8])
     def query_interface(this : IDWriteRenderingParams3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4828,7 +5071,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory3Vtbl,
+
+  record IDWriteFactory3Vtable,
     query_interface : Proc(IDWriteFactory3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory3*, UInt32),
     release : Proc(IDWriteFactory3*, UInt32),
@@ -4841,38 +5085,38 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory3*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory3*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory3*, Void*, Win32cr::Foundation::HRESULT),
-    create_text_format_1 : Proc(IDWriteFactory3*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_text_format : Proc(IDWriteFactory3*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory3*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory3*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory3*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory3*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory3*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_1 : Proc(IDWriteFactory3*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_eudc_font_collection : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_1 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_2 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_fallback : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
     create_font_fallback_builder : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
-    translate_color_glyph_run_1 : Proc(IDWriteFactory3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_2 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    translate_color_glyph_run : Proc(IDWriteFactory3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_3 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_2 : Proc(IDWriteFactory3*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_glyph_run_analysis : Proc(IDWriteFactory3*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_2 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_3 : Proc(IDWriteFactory3*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_4 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_1 : Proc(IDWriteFactory3*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_2 : Proc(IDWriteFactory3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_set_1 : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
-    create_font_set_builder_1 : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
-    create_font_collection_from_font_set_1 : Proc(IDWriteFactory3*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_2_1 : Proc(IDWriteFactory3*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_set : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_set_builder : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_collection_from_font_set : Proc(IDWriteFactory3*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_2 : Proc(IDWriteFactory3*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_font_download_queue : Proc(IDWriteFactory3*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFactory3, lpVtbl : IDWriteFactory3Vtbl* do
+  record IDWriteFactory3, lpVtbl : IDWriteFactory3Vtable* do
     GUID = LibC::GUID.new(0x9a1b41c3_u32, 0xd3bb_u16, 0x466a_u16, StaticArray[0x87_u8, 0xfc_u8, 0xfe_u8, 0x67_u8, 0x55_u8, 0x6a_u8, 0x3b_u8, 0x65_u8])
     def query_interface(this : IDWriteFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4910,8 +5154,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory3*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_1(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory3*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -4919,8 +5163,8 @@ module Win32cr::Graphics::DirectWrite
     def unregister_font_file_loader(this : IDWriteFactory3*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_font_file_loader.call(this, fontFileLoader)
     end
-    def create_text_format_1(this : IDWriteFactory3*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_text_format_1.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
+    def create_text_format(this : IDWriteFactory3*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
     end
     def create_typography(this : IDWriteFactory3*, typography : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_typography.call(this, typography)
@@ -4928,10 +5172,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory3*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory3*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory3*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory3*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory3*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory3*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -4949,8 +5193,8 @@ module Win32cr::Graphics::DirectWrite
     def get_eudc_font_collection(this : IDWriteFactory3*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
     end
-    def create_custom_rendering_params_2_1(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_1.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_2(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def get_system_font_fallback(this : IDWriteFactory3*, fontFallback : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_fallback.call(this, fontFallback)
@@ -4958,20 +5202,20 @@ module Win32cr::Graphics::DirectWrite
     def create_font_fallback_builder(this : IDWriteFactory3*, fontFallbackBuilder : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_fallback_builder.call(this, fontFallbackBuilder)
     end
-    def translate_color_glyph_run_1(this : IDWriteFactory3*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.translate_color_glyph_run_1.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
+    def translate_color_glyph_run(this : IDWriteFactory3*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.translate_color_glyph_run.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
     end
-    def create_custom_rendering_params_1_2(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_3(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_3.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_glyph_run_analysis_2(this : IDWriteFactory3*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_glyph_run_analysis_2.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_glyph_run_analysis(this : IDWriteFactory3*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_glyph_run_analysis.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    def create_glyph_run_analysis_3(this : IDWriteFactory3*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_3.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_custom_rendering_params_2_2(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_4(this : IDWriteFactory3*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_4.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_font_face_reference_1(this : IDWriteFactory3*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_1.call(this, fontFile, faceIndex, fontSimulations, fontFaceReference)
@@ -4979,17 +5223,17 @@ module Win32cr::Graphics::DirectWrite
     def create_font_face_reference_2(this : IDWriteFactory3*, filePath : Win32cr::Foundation::PWSTR, lastWriteTime : Win32cr::Foundation::FILETIME*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_2.call(this, filePath, lastWriteTime, faceIndex, fontSimulations, fontFaceReference)
     end
-    def get_system_font_set_1(this : IDWriteFactory3*, fontSet : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_set_1.call(this, fontSet)
+    def get_system_font_set(this : IDWriteFactory3*, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_set.call(this, fontSet)
     end
-    def create_font_set_builder_1(this : IDWriteFactory3*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_set_builder_1.call(this, fontSetBuilder)
+    def create_font_set_builder(this : IDWriteFactory3*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_set_builder.call(this, fontSetBuilder)
     end
-    def create_font_collection_from_font_set_1(this : IDWriteFactory3*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_collection_from_font_set_1.call(this, fontSet, fontCollection)
+    def create_font_collection_from_font_set(this : IDWriteFactory3*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_collection_from_font_set.call(this, fontSet, fontCollection)
     end
-    def get_system_font_collection_2_1(this : IDWriteFactory3*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_2_1.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
+    def get_system_font_collection_2(this : IDWriteFactory3*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_2.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
     end
     def get_font_download_queue(this : IDWriteFactory3*, fontDownloadQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_download_queue.call(this, fontDownloadQueue)
@@ -4998,12 +5242,13 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetVtbl,
+
+  record IDWriteFontSetVtable,
     query_interface : Proc(IDWriteFontSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet*, UInt32),
     release : Proc(IDWriteFontSet*, UInt32),
     get_font_count : Proc(IDWriteFontSet*, UInt32),
-    get_font_face_reference_1 : Proc(IDWriteFontSet*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font_face_reference : Proc(IDWriteFontSet*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     find_font_face_reference : Proc(IDWriteFontSet*, Void*, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     find_font_face : Proc(IDWriteFontSet*, Void*, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_property_values_1 : Proc(IDWriteFontSet*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, Void**, Win32cr::Foundation::HRESULT),
@@ -5015,7 +5260,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSet, lpVtbl : IDWriteFontSetVtbl* do
+  record IDWriteFontSet, lpVtbl : IDWriteFontSetVtable* do
     GUID = LibC::GUID.new(0x53585141_u32, 0xd9f8_u16, 0x4095_u16, StaticArray[0x83_u8, 0x21_u8, 0xd7_u8, 0x3c_u8, 0xf6_u8, 0xbd_u8, 0x11_u8, 0x6b_u8])
     def query_interface(this : IDWriteFontSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5029,8 +5274,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_count(this : IDWriteFontSet*) : UInt32
       @lpVtbl.try &.value.get_font_count.call(this)
     end
-    def get_font_face_reference_1(this : IDWriteFontSet*, listIndex : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_face_reference_1.call(this, listIndex, fontFaceReference)
+    def get_font_face_reference(this : IDWriteFontSet*, listIndex : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_face_reference.call(this, listIndex, fontFaceReference)
     end
     def find_font_face_reference(this : IDWriteFontSet*, fontFaceReference : Void*, listIndex : UInt32*, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_font_face_reference.call(this, fontFaceReference, listIndex, exists)
@@ -5060,7 +5305,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetBuilderVtbl,
+
+  record IDWriteFontSetBuilderVtable,
     query_interface : Proc(IDWriteFontSetBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSetBuilder*, UInt32),
     release : Proc(IDWriteFontSetBuilder*, UInt32),
@@ -5071,7 +5317,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSetBuilder, lpVtbl : IDWriteFontSetBuilderVtbl* do
+  record IDWriteFontSetBuilder, lpVtbl : IDWriteFontSetBuilderVtable* do
     GUID = LibC::GUID.new(0x2f642afe_u32, 0x9c68_u16, 0x4f40_u16, StaticArray[0xb8_u8, 0xbe_u8, 0x45_u8, 0x74_u8, 0x1_u8, 0xaf_u8, 0xcb_u8, 0x3d_u8])
     def query_interface(this : IDWriteFontSetBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5098,7 +5344,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollection1Vtbl,
+
+  record IDWriteFontCollection1Vtable,
     query_interface : Proc(IDWriteFontCollection1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection1*, UInt32),
     release : Proc(IDWriteFontCollection1*, UInt32),
@@ -5106,12 +5353,12 @@ module Win32cr::Graphics::DirectWrite
     get_font_family_1 : Proc(IDWriteFontCollection1*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     find_family_name : Proc(IDWriteFontCollection1*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_font_from_font_face : Proc(IDWriteFontCollection1*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    get_font_set_1 : Proc(IDWriteFontCollection1*, Void**, Win32cr::Foundation::HRESULT),
+    get_font_set : Proc(IDWriteFontCollection1*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_2 : Proc(IDWriteFontCollection1*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontCollection1, lpVtbl : IDWriteFontCollection1Vtbl* do
+  record IDWriteFontCollection1, lpVtbl : IDWriteFontCollection1Vtable* do
     GUID = LibC::GUID.new(0x53585141_u32, 0xd9f8_u16, 0x4095_u16, StaticArray[0x83_u8, 0x21_u8, 0xd7_u8, 0x3c_u8, 0xf6_u8, 0xbd_u8, 0x11_u8, 0x6c_u8])
     def query_interface(this : IDWriteFontCollection1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5134,8 +5381,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_from_font_face(this : IDWriteFontCollection1*, fontFace : Void*, font : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_from_font_face.call(this, fontFace, font)
     end
-    def get_font_set_1(this : IDWriteFontCollection1*, fontSet : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_set_1.call(this, fontSet)
+    def get_font_set(this : IDWriteFontCollection1*, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_set.call(this, fontSet)
     end
     def get_font_family_2(this : IDWriteFontCollection1*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_2.call(this, index, fontFamily)
@@ -5144,7 +5391,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFamily1Vtbl,
+
+  record IDWriteFontFamily1Vtable,
     query_interface : Proc(IDWriteFontFamily1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFamily1*, UInt32),
     release : Proc(IDWriteFontFamily1*, UInt32),
@@ -5153,14 +5401,14 @@ module Win32cr::Graphics::DirectWrite
     get_font_1 : Proc(IDWriteFontFamily1*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_family_names : Proc(IDWriteFontFamily1*, Void**, Win32cr::Foundation::HRESULT),
     get_first_matching_font : Proc(IDWriteFontFamily1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
-    get_matching_fonts_1 : Proc(IDWriteFontFamily1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
+    get_matching_fonts : Proc(IDWriteFontFamily1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
     get_font_locality : Proc(IDWriteFontFamily1*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY),
     get_font_2 : Proc(IDWriteFontFamily1*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_face_reference : Proc(IDWriteFontFamily1*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontFamily1, lpVtbl : IDWriteFontFamily1Vtbl* do
+  record IDWriteFontFamily1, lpVtbl : IDWriteFontFamily1Vtable* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xdf_u8])
     def query_interface(this : IDWriteFontFamily1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5186,8 +5434,8 @@ module Win32cr::Graphics::DirectWrite
     def get_first_matching_font(this : IDWriteFontFamily1*, weight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, stretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, style : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, matchingFont : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_first_matching_font.call(this, weight, stretch, style, matchingFont)
     end
-    def get_matching_fonts_1(this : IDWriteFontFamily1*, weight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, stretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, style : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_matching_fonts_1.call(this, weight, stretch, style, matchingFonts)
+    def get_matching_fonts(this : IDWriteFontFamily1*, weight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, stretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, style : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts.call(this, weight, stretch, style, matchingFonts)
     end
     def get_font_locality(this : IDWriteFontFamily1*, listIndex : UInt32) : Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY
       @lpVtbl.try &.value.get_font_locality.call(this, listIndex)
@@ -5202,7 +5450,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontList1Vtbl,
+
+  record IDWriteFontList1Vtable,
     query_interface : Proc(IDWriteFontList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontList1*, UInt32),
     release : Proc(IDWriteFontList1*, UInt32),
@@ -5210,12 +5459,12 @@ module Win32cr::Graphics::DirectWrite
     get_font_count : Proc(IDWriteFontList1*, UInt32),
     get_font_1 : Proc(IDWriteFontList1*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_locality : Proc(IDWriteFontList1*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY),
-    get_font : Proc(IDWriteFontList1*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font_2 : Proc(IDWriteFontList1*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_face_reference : Proc(IDWriteFontList1*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontList1, lpVtbl : IDWriteFontList1Vtbl* do
+  record IDWriteFontList1, lpVtbl : IDWriteFontList1Vtable* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xde_u8])
     def query_interface(this : IDWriteFontList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5238,8 +5487,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_locality(this : IDWriteFontList1*, listIndex : UInt32) : Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY
       @lpVtbl.try &.value.get_font_locality.call(this, listIndex)
     end
-    def get_font(this : IDWriteFontList1*, listIndex : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font.call(this, listIndex, font)
+    def get_font_2(this : IDWriteFontList1*, listIndex : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_2.call(this, listIndex, font)
     end
     def get_font_face_reference(this : IDWriteFontList1*, listIndex : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_face_reference.call(this, listIndex, fontFaceReference)
@@ -5248,11 +5497,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFaceReferenceVtbl,
+
+  record IDWriteFontFaceReferenceVtable,
     query_interface : Proc(IDWriteFontFaceReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFaceReference*, UInt32),
     release : Proc(IDWriteFontFaceReference*, UInt32),
-    create_font_face_1 : Proc(IDWriteFontFaceReference*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face : Proc(IDWriteFontFaceReference*, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_with_simulations : Proc(IDWriteFontFaceReference*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     equals : Proc(IDWriteFontFaceReference*, Void*, Win32cr::Foundation::BOOL),
     get_font_face_index : Proc(IDWriteFontFaceReference*, UInt32),
@@ -5263,13 +5513,13 @@ module Win32cr::Graphics::DirectWrite
     get_file_time : Proc(IDWriteFontFaceReference*, Win32cr::Foundation::FILETIME*, Win32cr::Foundation::HRESULT),
     get_locality : Proc(IDWriteFontFaceReference*, Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY),
     enqueue_font_download_request : Proc(IDWriteFontFaceReference*, Win32cr::Foundation::HRESULT),
-    enqueue_character_download_request : Proc(IDWriteFontFaceReference*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    enqueue_character_download_request : Proc(IDWriteFontFaceReference*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     enqueue_glyph_download_request : Proc(IDWriteFontFaceReference*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
     enqueue_file_fragment_download_request : Proc(IDWriteFontFaceReference*, UInt64, UInt64, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontFaceReference, lpVtbl : IDWriteFontFaceReferenceVtbl* do
+  record IDWriteFontFaceReference, lpVtbl : IDWriteFontFaceReferenceVtable* do
     GUID = LibC::GUID.new(0x5e7fa7ca_u32, 0xdde3_u16, 0x424c_u16, StaticArray[0x89_u8, 0xf0_u8, 0x9f_u8, 0xcd_u8, 0x6f_u8, 0xed_u8, 0x58_u8, 0xcd_u8])
     def query_interface(this : IDWriteFontFaceReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5280,8 +5530,8 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteFontFaceReference*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def create_font_face_1(this : IDWriteFontFaceReference*, fontFace : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_face_1.call(this, fontFace)
+    def create_font_face(this : IDWriteFontFaceReference*, fontFace : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face.call(this, fontFace)
     end
     def create_font_face_with_simulations(this : IDWriteFontFaceReference*, fontFaceSimulationFlags : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFace : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_with_simulations.call(this, fontFaceSimulationFlags, fontFace)
@@ -5313,7 +5563,7 @@ module Win32cr::Graphics::DirectWrite
     def enqueue_font_download_request(this : IDWriteFontFaceReference*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enqueue_font_download_request.call(this)
     end
-    def enqueue_character_download_request(this : IDWriteFontFaceReference*, characters : UInt16*, characterCount : UInt32) : Win32cr::Foundation::HRESULT
+    def enqueue_character_download_request(this : IDWriteFontFaceReference*, characters : Win32cr::Foundation::PWSTR, characterCount : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enqueue_character_download_request.call(this, characters, characterCount)
     end
     def enqueue_glyph_download_request(this : IDWriteFontFaceReference*, glyphIndices : UInt16*, glyphCount : UInt32) : Win32cr::Foundation::HRESULT
@@ -5326,7 +5576,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFont3Vtbl,
+
+  record IDWriteFont3Vtable,
     query_interface : Proc(IDWriteFont3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont3*, UInt32),
     release : Proc(IDWriteFont3*, UInt32),
@@ -5354,7 +5605,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFont3, lpVtbl : IDWriteFont3Vtbl* do
+  record IDWriteFont3, lpVtbl : IDWriteFont3Vtable* do
     GUID = LibC::GUID.new(0x29748ed6_u32, 0x8c9c_u16, 0x4a6a_u16, StaticArray[0xbe_u8, 0xb_u8, 0xd9_u8, 0x12_u8, 0xe8_u8, 0x53_u8, 0x89_u8, 0x44_u8])
     def query_interface(this : IDWriteFont3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5432,7 +5683,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace3Vtbl,
+
+  record IDWriteFontFace3Vtable,
     query_interface : Proc(IDWriteFontFace3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace3*, UInt32),
     release : Proc(IDWriteFontFace3*, UInt32),
@@ -5448,7 +5700,7 @@ module Win32cr::Graphics::DirectWrite
     try_get_font_table : Proc(IDWriteFontFace3*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     release_font_table : Proc(IDWriteFontFace3*, Void*, Void),
     get_glyph_run_outline : Proc(IDWriteFontFace3*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_1 : Proc(IDWriteFontFace3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_1 : Proc(IDWriteFontFace3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFontFace3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
@@ -5460,32 +5712,32 @@ module Win32cr::Graphics::DirectWrite
     get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     get_kerning_pair_adjustments : Proc(IDWriteFontFace3*, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     has_kerning_pairs : Proc(IDWriteFontFace3*, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_1 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_2 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_variants : Proc(IDWriteFontFace3*, UInt32, UInt16*, UInt16*, Win32cr::Foundation::HRESULT),
     has_vertical_glyph_variants : Proc(IDWriteFontFace3*, Win32cr::Foundation::BOOL),
     is_color_font : Proc(IDWriteFontFace3*, Win32cr::Foundation::BOOL),
     get_color_palette_count : Proc(IDWriteFontFace3*, UInt32),
     get_palette_entry_count : Proc(IDWriteFontFace3*, UInt32),
     get_palette_entries : Proc(IDWriteFontFace3*, UInt32, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_2 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_3 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     get_font_face_reference : Proc(IDWriteFontFace3*, Void**, Win32cr::Foundation::HRESULT),
     get_panose : Proc(IDWriteFontFace3*, Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*, Void),
     get_weight : Proc(IDWriteFontFace3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_stretch : Proc(IDWriteFontFace3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_style : Proc(IDWriteFontFace3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
-    get_family_names_1 : Proc(IDWriteFontFace3*, Void**, Win32cr::Foundation::HRESULT),
-    get_face_names_1 : Proc(IDWriteFontFace3*, Void**, Win32cr::Foundation::HRESULT),
+    get_family_names : Proc(IDWriteFontFace3*, Void**, Win32cr::Foundation::HRESULT),
+    get_face_names : Proc(IDWriteFontFace3*, Void**, Win32cr::Foundation::HRESULT),
     get_informational_strings : Proc(IDWriteFontFace3*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     has_character : Proc(IDWriteFontFace3*, UInt32, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_2 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_4 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     is_character_local : Proc(IDWriteFontFace3*, UInt32, Win32cr::Foundation::BOOL),
     is_glyph_local : Proc(IDWriteFontFace3*, UInt16, Win32cr::Foundation::BOOL),
-    are_characters_local : Proc(IDWriteFontFace3*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    are_characters_local : Proc(IDWriteFontFace3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     are_glyphs_local : Proc(IDWriteFontFace3*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontFace3, lpVtbl : IDWriteFontFace3Vtbl* do
+  record IDWriteFontFace3, lpVtbl : IDWriteFontFace3Vtable* do
     GUID = LibC::GUID.new(0xd37d7598_u32, 0x9be_u16, 0x4222_u16, StaticArray[0xa2_u8, 0x36_u8, 0x20_u8, 0x81_u8, 0x34_u8, 0x1c_u8, 0xc1_u8, 0xf2_u8])
     def query_interface(this : IDWriteFontFace3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5532,8 +5784,8 @@ module Win32cr::Graphics::DirectWrite
     def get_glyph_run_outline(this : IDWriteFontFace3*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
     end
-    def get_recommended_rendering_mode_1_1(this : IDWriteFontFace3*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    def get_recommended_rendering_mode_1(this : IDWriteFontFace3*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
     end
     def get_gdi_compatible_metrics_1(this : IDWriteFontFace3*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
@@ -5568,8 +5820,8 @@ module Win32cr::Graphics::DirectWrite
     def has_kerning_pairs(this : IDWriteFontFace3*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_kerning_pairs.call(this)
     end
-    def get_recommended_rendering_mode_2_1(this : IDWriteFontFace3*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_1.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
+    def get_recommended_rendering_mode_2(this : IDWriteFontFace3*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
     end
     def get_vertical_glyph_variants(this : IDWriteFontFace3*, glyphCount : UInt32, nominalGlyphIndices : UInt16*, verticalGlyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_glyph_variants.call(this, glyphCount, nominalGlyphIndices, verticalGlyphIndices)
@@ -5589,8 +5841,8 @@ module Win32cr::Graphics::DirectWrite
     def get_palette_entries(this : IDWriteFontFace3*, colorPaletteIndex : UInt32, firstEntryIndex : UInt32, entryCount : UInt32, paletteEntries : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_palette_entries.call(this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries)
     end
-    def get_recommended_rendering_mode_1_2(this : IDWriteFontFace3*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_3(this : IDWriteFontFace3*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_3.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def get_font_face_reference(this : IDWriteFontFace3*, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_face_reference.call(this, fontFaceReference)
@@ -5607,11 +5859,11 @@ module Win32cr::Graphics::DirectWrite
     def get_style(this : IDWriteFontFace3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
       @lpVtbl.try &.value.get_style.call(this)
     end
-    def get_family_names_1(this : IDWriteFontFace3*, names : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_family_names_1.call(this, names)
+    def get_family_names(this : IDWriteFontFace3*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_family_names.call(this, names)
     end
-    def get_face_names_1(this : IDWriteFontFace3*, names : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_face_names_1.call(this, names)
+    def get_face_names(this : IDWriteFontFace3*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_face_names.call(this, names)
     end
     def get_informational_strings(this : IDWriteFontFace3*, informationalStringID : Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, informationalStrings : Void**, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_informational_strings.call(this, informationalStringID, informationalStrings, exists)
@@ -5619,8 +5871,8 @@ module Win32cr::Graphics::DirectWrite
     def has_character(this : IDWriteFontFace3*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_character.call(this, unicodeValue)
     end
-    def get_recommended_rendering_mode_2_2(this : IDWriteFontFace3*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_4(this : IDWriteFontFace3*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_4.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def is_character_local(this : IDWriteFontFace3*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_character_local.call(this, unicodeValue)
@@ -5628,7 +5880,7 @@ module Win32cr::Graphics::DirectWrite
     def is_glyph_local(this : IDWriteFontFace3*, glyphId : UInt16) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_glyph_local.call(this, glyphId)
     end
-    def are_characters_local(this : IDWriteFontFace3*, characters : UInt16*, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    def are_characters_local(this : IDWriteFontFace3*, characters : Win32cr::Foundation::PWSTR, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.are_characters_local.call(this, characters, characterCount, enqueueIfNotLocal, isLocal)
     end
     def are_glyphs_local(this : IDWriteFontFace3*, glyphIndices : UInt16*, glyphCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -5638,19 +5890,20 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteStringListVtbl,
+
+  record IDWriteStringListVtable,
     query_interface : Proc(IDWriteStringList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteStringList*, UInt32),
     release : Proc(IDWriteStringList*, UInt32),
     get_count : Proc(IDWriteStringList*, UInt32),
     get_locale_name_length : Proc(IDWriteStringList*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_locale_name : Proc(IDWriteStringList*, UInt32, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_locale_name : Proc(IDWriteStringList*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_string_length : Proc(IDWriteStringList*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_string : Proc(IDWriteStringList*, UInt32, UInt16*, UInt32, Win32cr::Foundation::HRESULT)
+    get_string : Proc(IDWriteStringList*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteStringList, lpVtbl : IDWriteStringListVtbl* do
+  record IDWriteStringList, lpVtbl : IDWriteStringListVtable* do
     GUID = LibC::GUID.new(0xcfee3140_u32, 0x1157_u16, 0x47ca_u16, StaticArray[0x8b_u8, 0x85_u8, 0x31_u8, 0xbf_u8, 0xcf_u8, 0x3f_u8, 0x2d_u8, 0xe_u8])
     def query_interface(this : IDWriteStringList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5667,20 +5920,21 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length(this : IDWriteStringList*, listIndex : UInt32, length : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_length.call(this, listIndex, length)
     end
-    def get_locale_name(this : IDWriteStringList*, listIndex : UInt32, localeName : UInt16*, size : UInt32) : Win32cr::Foundation::HRESULT
+    def get_locale_name(this : IDWriteStringList*, listIndex : UInt32, localeName : Win32cr::Foundation::PWSTR, size : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name.call(this, listIndex, localeName, size)
     end
     def get_string_length(this : IDWriteStringList*, listIndex : UInt32, length : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_length.call(this, listIndex, length)
     end
-    def get_string(this : IDWriteStringList*, listIndex : UInt32, stringBuffer : UInt16*, stringBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_string(this : IDWriteStringList*, listIndex : UInt32, stringBuffer : Win32cr::Foundation::PWSTR, stringBufferSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string.call(this, listIndex, stringBuffer, stringBufferSize)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontDownloadListenerVtbl,
+
+  record IDWriteFontDownloadListenerVtable,
     query_interface : Proc(IDWriteFontDownloadListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontDownloadListener*, UInt32),
     release : Proc(IDWriteFontDownloadListener*, UInt32),
@@ -5688,7 +5942,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontDownloadListener, lpVtbl : IDWriteFontDownloadListenerVtbl* do
+  record IDWriteFontDownloadListener, lpVtbl : IDWriteFontDownloadListenerVtable* do
     GUID = LibC::GUID.new(0xb06fe5b9_u32, 0x43ec_u16, 0x4393_u16, StaticArray[0x88_u8, 0x1b_u8, 0xdb_u8, 0xe4_u8, 0xdc_u8, 0x72_u8, 0xfd_u8, 0xa7_u8])
     def query_interface(this : IDWriteFontDownloadListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5706,7 +5960,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontDownloadQueueVtbl,
+
+  record IDWriteFontDownloadQueueVtable,
     query_interface : Proc(IDWriteFontDownloadQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontDownloadQueue*, UInt32),
     release : Proc(IDWriteFontDownloadQueue*, UInt32),
@@ -5719,7 +5974,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontDownloadQueue, lpVtbl : IDWriteFontDownloadQueueVtbl* do
+  record IDWriteFontDownloadQueue, lpVtbl : IDWriteFontDownloadQueueVtable* do
     GUID = LibC::GUID.new(0xb71e6052_u32, 0x5aea_u16, 0x4fa3_u16, StaticArray[0x83_u8, 0x2e_u8, 0xf6_u8, 0xd_u8, 0x43_u8, 0x1f_u8, 0x7e_u8, 0x91_u8])
     def query_interface(this : IDWriteFontDownloadQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5752,7 +6007,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteGdiInterop1Vtbl,
+
+  record IDWriteGdiInterop1Vtable,
     query_interface : Proc(IDWriteGdiInterop1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteGdiInterop1*, UInt32),
     release : Proc(IDWriteGdiInterop1*, UInt32),
@@ -5768,7 +6024,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteGdiInterop1, lpVtbl : IDWriteGdiInterop1Vtbl* do
+  record IDWriteGdiInterop1, lpVtbl : IDWriteGdiInterop1Vtable* do
     GUID = LibC::GUID.new(0x4556be70_u32, 0x3abd_u16, 0x4f70_u16, StaticArray[0x90_u8, 0xbe_u8, 0x42_u8, 0x17_u8, 0x80_u8, 0xa6_u8, 0xf5_u8, 0x15_u8])
     def query_interface(this : IDWriteGdiInterop1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5810,7 +6066,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextFormat2Vtbl,
+
+  record IDWriteTextFormat2Vtable,
     query_interface : Proc(IDWriteTextFormat2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat2*, UInt32),
     release : Proc(IDWriteTextFormat2*, UInt32),
@@ -5830,15 +6087,15 @@ module Win32cr::Graphics::DirectWrite
     get_incremental_tab_stop : Proc(IDWriteTextFormat2*, Float32),
     get_trimming : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void**, Win32cr::Foundation::HRESULT),
     get_line_spacing_1 : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
-    get_font_collection_1 : Proc(IDWriteTextFormat2*, Void**, Win32cr::Foundation::HRESULT),
-    get_font_family_name_length_1 : Proc(IDWriteTextFormat2*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextFormat2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_font_weight_1 : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
-    get_font_style_1 : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
-    get_font_stretch_1 : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
-    get_font_size_1 : Proc(IDWriteTextFormat2*, Float32),
-    get_locale_name_length_1 : Proc(IDWriteTextFormat2*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextFormat2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_collection : Proc(IDWriteTextFormat2*, Void**, Win32cr::Foundation::HRESULT),
+    get_font_family_name_length : Proc(IDWriteTextFormat2*, UInt32),
+    get_font_family_name : Proc(IDWriteTextFormat2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_weight : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
+    get_font_style : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
+    get_font_stretch : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
+    get_font_size : Proc(IDWriteTextFormat2*, Float32),
+    get_locale_name_length : Proc(IDWriteTextFormat2*, UInt32),
+    get_locale_name : Proc(IDWriteTextFormat2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_vertical_glyph_orientation : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_orientation : Proc(IDWriteTextFormat2*, Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION),
     set_last_line_wrapping : Proc(IDWriteTextFormat2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
@@ -5852,7 +6109,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextFormat2, lpVtbl : IDWriteTextFormat2Vtbl* do
+  record IDWriteTextFormat2, lpVtbl : IDWriteTextFormat2Vtable* do
     GUID = LibC::GUID.new(0xf67e0edd_u32, 0x9e3d_u16, 0x4ecc_u16, StaticArray[0x8c_u8, 0x32_u8, 0x41_u8, 0x83_u8, 0x25_u8, 0x3d_u8, 0xfe_u8, 0x70_u8])
     def query_interface(this : IDWriteTextFormat2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5911,32 +6168,32 @@ module Win32cr::Graphics::DirectWrite
     def get_line_spacing_1(this : IDWriteTextFormat2*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
-    def get_font_collection_1(this : IDWriteTextFormat2*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_collection_1.call(this, fontCollection)
+    def get_font_collection(this : IDWriteTextFormat2*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_collection.call(this, fontCollection)
     end
-    def get_font_family_name_length_1(this : IDWriteTextFormat2*) : UInt32
-      @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
+    def get_font_family_name_length(this : IDWriteTextFormat2*) : UInt32
+      @lpVtbl.try &.value.get_font_family_name_length.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextFormat2*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
+    def get_font_family_name(this : IDWriteTextFormat2*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_family_name.call(this, fontFamilyName, nameSize)
     end
-    def get_font_weight_1(this : IDWriteTextFormat2*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
-      @lpVtbl.try &.value.get_font_weight_1.call(this)
+    def get_font_weight(this : IDWriteTextFormat2*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
+      @lpVtbl.try &.value.get_font_weight.call(this)
     end
-    def get_font_style_1(this : IDWriteTextFormat2*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
-      @lpVtbl.try &.value.get_font_style_1.call(this)
+    def get_font_style(this : IDWriteTextFormat2*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
+      @lpVtbl.try &.value.get_font_style.call(this)
     end
-    def get_font_stretch_1(this : IDWriteTextFormat2*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
-      @lpVtbl.try &.value.get_font_stretch_1.call(this)
+    def get_font_stretch(this : IDWriteTextFormat2*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
+      @lpVtbl.try &.value.get_font_stretch.call(this)
     end
-    def get_font_size_1(this : IDWriteTextFormat2*) : Float32
-      @lpVtbl.try &.value.get_font_size_1.call(this)
+    def get_font_size(this : IDWriteTextFormat2*) : Float32
+      @lpVtbl.try &.value.get_font_size.call(this)
     end
-    def get_locale_name_length_1(this : IDWriteTextFormat2*) : UInt32
-      @lpVtbl.try &.value.get_locale_name_length_1.call(this)
+    def get_locale_name_length(this : IDWriteTextFormat2*) : UInt32
+      @lpVtbl.try &.value.get_locale_name_length.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextFormat2*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
+    def get_locale_name(this : IDWriteTextFormat2*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_locale_name.call(this, localeName, nameSize)
     end
     def set_vertical_glyph_orientation(this : IDWriteTextFormat2*, glyphOrientation : Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_vertical_glyph_orientation.call(this, glyphOrientation)
@@ -5972,7 +6229,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout3Vtbl,
+
+  record IDWriteTextLayout3Vtable,
     query_interface : Proc(IDWriteTextLayout3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout3*, UInt32),
     release : Proc(IDWriteTextLayout3*, UInt32),
@@ -5994,13 +6252,13 @@ module Win32cr::Graphics::DirectWrite
     get_line_spacing_1 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
     get_font_collection_1 : Proc(IDWriteTextLayout3*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_1 : Proc(IDWriteTextLayout3*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextLayout3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_family_name_1 : Proc(IDWriteTextLayout3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_font_weight_1 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_font_style_1 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
     get_font_stretch_1 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_font_size_1 : Proc(IDWriteTextLayout3*, Float32),
     get_locale_name_length_1 : Proc(IDWriteTextLayout3*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextLayout3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_locale_name_1 : Proc(IDWriteTextLayout3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_max_width : Proc(IDWriteTextLayout3*, Float32, Win32cr::Foundation::HRESULT),
     set_max_height : Proc(IDWriteTextLayout3*, Float32, Win32cr::Foundation::HRESULT),
     set_font_collection : Proc(IDWriteTextLayout3*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE, Win32cr::Foundation::HRESULT),
@@ -6019,7 +6277,7 @@ module Win32cr::Graphics::DirectWrite
     get_max_height : Proc(IDWriteTextLayout3*, Float32),
     get_font_collection_2 : Proc(IDWriteTextLayout3*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_2 : Proc(IDWriteTextLayout3*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_font_family_name_2 : Proc(IDWriteTextLayout3*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_font_family_name_2 : Proc(IDWriteTextLayout3*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_weight_2 : Proc(IDWriteTextLayout3*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_style_2 : Proc(IDWriteTextLayout3*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_stretch_2 : Proc(IDWriteTextLayout3*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
@@ -6030,7 +6288,7 @@ module Win32cr::Graphics::DirectWrite
     get_inline_object : Proc(IDWriteTextLayout3*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_typography : Proc(IDWriteTextLayout3*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_locale_name_length_2 : Proc(IDWriteTextLayout3*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_locale_name_2 : Proc(IDWriteTextLayout3*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_locale_name_2 : Proc(IDWriteTextLayout3*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     draw : Proc(IDWriteTextLayout3*, Void*, Void*, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_line_metrics_1 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     get_metrics_1 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*, Win32cr::Foundation::HRESULT),
@@ -6054,13 +6312,13 @@ module Win32cr::Graphics::DirectWrite
     set_font_fallback : Proc(IDWriteTextLayout3*, Void*, Win32cr::Foundation::HRESULT),
     get_font_fallback : Proc(IDWriteTextLayout3*, Void**, Win32cr::Foundation::HRESULT),
     invalidate_layout : Proc(IDWriteTextLayout3*, Win32cr::Foundation::HRESULT),
-    set_line_spacing : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
-    get_line_spacing : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
+    set_line_spacing_2 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
+    get_line_spacing_2 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
     get_line_metrics_2 : Proc(IDWriteTextLayout3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS1*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteTextLayout3, lpVtbl : IDWriteTextLayout3Vtbl* do
+  record IDWriteTextLayout3, lpVtbl : IDWriteTextLayout3Vtable* do
     GUID = LibC::GUID.new(0x7ddcd52_u32, 0x20e_u16, 0x4de8_u16, StaticArray[0xac_u8, 0x33_u8, 0x6c_u8, 0x95_u8, 0x3d_u8, 0x83_u8, 0xf9_u8, 0x2d_u8])
     def query_interface(this : IDWriteTextLayout3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6125,7 +6383,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_1(this : IDWriteTextLayout3*) : UInt32
       @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextLayout3*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_1(this : IDWriteTextLayout3*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
     end
     def get_font_weight_1(this : IDWriteTextLayout3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
@@ -6143,7 +6401,7 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_1(this : IDWriteTextLayout3*) : UInt32
       @lpVtbl.try &.value.get_locale_name_length_1.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextLayout3*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_locale_name_1(this : IDWriteTextLayout3*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
     end
     def set_max_width(this : IDWriteTextLayout3*, maxWidth : Float32) : Win32cr::Foundation::HRESULT
@@ -6200,7 +6458,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_2(this : IDWriteTextLayout3*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_font_family_name_2(this : IDWriteTextLayout3*, currentPosition : UInt32, fontFamilyName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_2(this : IDWriteTextLayout3*, currentPosition : UInt32, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_2.call(this, currentPosition, fontFamilyName, nameSize, textRange)
     end
     def get_font_weight_2(this : IDWriteTextLayout3*, currentPosition : UInt32, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
@@ -6233,7 +6491,7 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_2(this : IDWriteTextLayout3*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_locale_name_2(this : IDWriteTextLayout3*, currentPosition : UInt32, localeName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_locale_name_2(this : IDWriteTextLayout3*, currentPosition : UInt32, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_2.call(this, currentPosition, localeName, nameSize, textRange)
     end
     def draw(this : IDWriteTextLayout3*, clientDrawingContext : Void*, renderer : Void*, originX : Float32, originY : Float32) : Win32cr::Foundation::HRESULT
@@ -6305,11 +6563,11 @@ module Win32cr::Graphics::DirectWrite
     def invalidate_layout(this : IDWriteTextLayout3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invalidate_layout.call(this)
     end
-    def set_line_spacing(this : IDWriteTextLayout3*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_line_spacing.call(this, lineSpacingOptions)
+    def set_line_spacing_2(this : IDWriteTextLayout3*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_spacing_2.call(this, lineSpacingOptions)
     end
-    def get_line_spacing(this : IDWriteTextLayout3*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_spacing.call(this, lineSpacingOptions)
+    def get_line_spacing_2(this : IDWriteTextLayout3*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_spacing_2.call(this, lineSpacingOptions)
     end
     def get_line_metrics_2(this : IDWriteTextLayout3*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS1*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_line_metrics_2.call(this, lineMetrics, maxLineCount, actualLineCount)
@@ -6318,7 +6576,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumerator1Vtbl,
+
+  record IDWriteColorGlyphRunEnumerator1Vtable,
     query_interface : Proc(IDWriteColorGlyphRunEnumerator1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteColorGlyphRunEnumerator1*, UInt32),
     release : Proc(IDWriteColorGlyphRunEnumerator1*, UInt32),
@@ -6328,7 +6587,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumerator1, lpVtbl : IDWriteColorGlyphRunEnumerator1Vtbl* do
+  record IDWriteColorGlyphRunEnumerator1, lpVtbl : IDWriteColorGlyphRunEnumerator1Vtable* do
     GUID = LibC::GUID.new(0x7c5f86da_u32, 0xc7a1_u16, 0x4f05_u16, StaticArray[0xb8_u8, 0xe1_u8, 0x55_u8, 0xa1_u8, 0x79_u8, 0xfe_u8, 0x5a_u8, 0x35_u8])
     def query_interface(this : IDWriteColorGlyphRunEnumerator1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6352,7 +6611,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace4Vtbl,
+
+  record IDWriteFontFace4Vtable,
     query_interface : Proc(IDWriteFontFace4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace4*, UInt32),
     release : Proc(IDWriteFontFace4*, UInt32),
@@ -6368,7 +6628,7 @@ module Win32cr::Graphics::DirectWrite
     try_get_font_table : Proc(IDWriteFontFace4*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     release_font_table : Proc(IDWriteFontFace4*, Void*, Void),
     get_glyph_run_outline : Proc(IDWriteFontFace4*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_1 : Proc(IDWriteFontFace4*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_1 : Proc(IDWriteFontFace4*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace4*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace4*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFontFace4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
@@ -6380,27 +6640,27 @@ module Win32cr::Graphics::DirectWrite
     get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace4*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     get_kerning_pair_adjustments : Proc(IDWriteFontFace4*, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     has_kerning_pairs : Proc(IDWriteFontFace4*, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_1 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_2 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_variants : Proc(IDWriteFontFace4*, UInt32, UInt16*, UInt16*, Win32cr::Foundation::HRESULT),
     has_vertical_glyph_variants : Proc(IDWriteFontFace4*, Win32cr::Foundation::BOOL),
     is_color_font : Proc(IDWriteFontFace4*, Win32cr::Foundation::BOOL),
     get_color_palette_count : Proc(IDWriteFontFace4*, UInt32),
     get_palette_entry_count : Proc(IDWriteFontFace4*, UInt32),
     get_palette_entries : Proc(IDWriteFontFace4*, UInt32, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_2 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_3 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     get_font_face_reference : Proc(IDWriteFontFace4*, Void**, Win32cr::Foundation::HRESULT),
     get_panose : Proc(IDWriteFontFace4*, Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*, Void),
     get_weight : Proc(IDWriteFontFace4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_stretch : Proc(IDWriteFontFace4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_style : Proc(IDWriteFontFace4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
-    get_family_names_1 : Proc(IDWriteFontFace4*, Void**, Win32cr::Foundation::HRESULT),
-    get_face_names_1 : Proc(IDWriteFontFace4*, Void**, Win32cr::Foundation::HRESULT),
+    get_family_names : Proc(IDWriteFontFace4*, Void**, Win32cr::Foundation::HRESULT),
+    get_face_names : Proc(IDWriteFontFace4*, Void**, Win32cr::Foundation::HRESULT),
     get_informational_strings : Proc(IDWriteFontFace4*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     has_character : Proc(IDWriteFontFace4*, UInt32, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_2 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_4 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     is_character_local : Proc(IDWriteFontFace4*, UInt32, Win32cr::Foundation::BOOL),
     is_glyph_local : Proc(IDWriteFontFace4*, UInt16, Win32cr::Foundation::BOOL),
-    are_characters_local : Proc(IDWriteFontFace4*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    are_characters_local : Proc(IDWriteFontFace4*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     are_glyphs_local : Proc(IDWriteFontFace4*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_glyph_image_formats_1 : Proc(IDWriteFontFace4*, UInt16, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS*, Win32cr::Foundation::HRESULT),
     get_glyph_image_formats_2 : Proc(IDWriteFontFace4*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS),
@@ -6409,7 +6669,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace4, lpVtbl : IDWriteFontFace4Vtbl* do
+  record IDWriteFontFace4, lpVtbl : IDWriteFontFace4Vtable* do
     GUID = LibC::GUID.new(0x27f2a904_u32, 0x4eb8_u16, 0x441d_u16, StaticArray[0x96_u8, 0x78_u8, 0x5_u8, 0x63_u8, 0xf5_u8, 0x3e_u8, 0x3e_u8, 0x2f_u8])
     def query_interface(this : IDWriteFontFace4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6456,8 +6716,8 @@ module Win32cr::Graphics::DirectWrite
     def get_glyph_run_outline(this : IDWriteFontFace4*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
     end
-    def get_recommended_rendering_mode_1_1(this : IDWriteFontFace4*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    def get_recommended_rendering_mode_1(this : IDWriteFontFace4*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
     end
     def get_gdi_compatible_metrics_1(this : IDWriteFontFace4*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
@@ -6492,8 +6752,8 @@ module Win32cr::Graphics::DirectWrite
     def has_kerning_pairs(this : IDWriteFontFace4*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_kerning_pairs.call(this)
     end
-    def get_recommended_rendering_mode_2_1(this : IDWriteFontFace4*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_1.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
+    def get_recommended_rendering_mode_2(this : IDWriteFontFace4*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
     end
     def get_vertical_glyph_variants(this : IDWriteFontFace4*, glyphCount : UInt32, nominalGlyphIndices : UInt16*, verticalGlyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_glyph_variants.call(this, glyphCount, nominalGlyphIndices, verticalGlyphIndices)
@@ -6513,8 +6773,8 @@ module Win32cr::Graphics::DirectWrite
     def get_palette_entries(this : IDWriteFontFace4*, colorPaletteIndex : UInt32, firstEntryIndex : UInt32, entryCount : UInt32, paletteEntries : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_palette_entries.call(this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries)
     end
-    def get_recommended_rendering_mode_1_2(this : IDWriteFontFace4*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_3(this : IDWriteFontFace4*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_3.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def get_font_face_reference(this : IDWriteFontFace4*, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_face_reference.call(this, fontFaceReference)
@@ -6531,11 +6791,11 @@ module Win32cr::Graphics::DirectWrite
     def get_style(this : IDWriteFontFace4*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
       @lpVtbl.try &.value.get_style.call(this)
     end
-    def get_family_names_1(this : IDWriteFontFace4*, names : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_family_names_1.call(this, names)
+    def get_family_names(this : IDWriteFontFace4*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_family_names.call(this, names)
     end
-    def get_face_names_1(this : IDWriteFontFace4*, names : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_face_names_1.call(this, names)
+    def get_face_names(this : IDWriteFontFace4*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_face_names.call(this, names)
     end
     def get_informational_strings(this : IDWriteFontFace4*, informationalStringID : Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, informationalStrings : Void**, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_informational_strings.call(this, informationalStringID, informationalStrings, exists)
@@ -6543,8 +6803,8 @@ module Win32cr::Graphics::DirectWrite
     def has_character(this : IDWriteFontFace4*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_character.call(this, unicodeValue)
     end
-    def get_recommended_rendering_mode_2_2(this : IDWriteFontFace4*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_4(this : IDWriteFontFace4*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_4.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def is_character_local(this : IDWriteFontFace4*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_character_local.call(this, unicodeValue)
@@ -6552,7 +6812,7 @@ module Win32cr::Graphics::DirectWrite
     def is_glyph_local(this : IDWriteFontFace4*, glyphId : UInt16) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_glyph_local.call(this, glyphId)
     end
-    def are_characters_local(this : IDWriteFontFace4*, characters : UInt16*, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    def are_characters_local(this : IDWriteFontFace4*, characters : Win32cr::Foundation::PWSTR, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.are_characters_local.call(this, characters, characterCount, enqueueIfNotLocal, isLocal)
     end
     def are_glyphs_local(this : IDWriteFontFace4*, glyphIndices : UInt16*, glyphCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -6574,7 +6834,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory4Vtbl,
+
+  record IDWriteFactory4Vtable,
     query_interface : Proc(IDWriteFactory4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory4*, UInt32),
     release : Proc(IDWriteFactory4*, UInt32),
@@ -6587,33 +6848,33 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory4*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory4*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory4*, Void*, Win32cr::Foundation::HRESULT),
-    create_text_format_1 : Proc(IDWriteFactory4*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_text_format : Proc(IDWriteFactory4*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory4*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory4*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory4*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory4*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory4*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory4*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_1 : Proc(IDWriteFactory4*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_eudc_font_collection : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_1 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_2 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_fallback : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
     create_font_fallback_builder : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_1 : Proc(IDWriteFactory4*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_2 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_3 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_2 : Proc(IDWriteFactory4*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_glyph_run_analysis : Proc(IDWriteFactory4*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_2 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_3 : Proc(IDWriteFactory4*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_4 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_1 : Proc(IDWriteFactory4*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_2 : Proc(IDWriteFactory4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_set_1 : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
-    create_font_set_builder_1 : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
-    create_font_collection_from_font_set_1 : Proc(IDWriteFactory4*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_2_1 : Proc(IDWriteFactory4*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_set : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_set_builder : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_collection_from_font_set : Proc(IDWriteFactory4*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_2 : Proc(IDWriteFactory4*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_font_download_queue : Proc(IDWriteFactory4*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_2 : Proc(IDWriteFactory4*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     compute_glyph_origins_1 : Proc(IDWriteFactory4*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, Win32cr::Foundation::HRESULT),
@@ -6621,7 +6882,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory4, lpVtbl : IDWriteFactory4Vtbl* do
+  record IDWriteFactory4, lpVtbl : IDWriteFactory4Vtable* do
     GUID = LibC::GUID.new(0x4b0b5bd3_u32, 0x797_u16, 0x4549_u16, StaticArray[0x8a_u8, 0xc5_u8, 0xfe_u8, 0x91_u8, 0x5c_u8, 0xc5_u8, 0x38_u8, 0x56_u8])
     def query_interface(this : IDWriteFactory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6659,8 +6920,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory4*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_1(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory4*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -6668,8 +6929,8 @@ module Win32cr::Graphics::DirectWrite
     def unregister_font_file_loader(this : IDWriteFactory4*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_font_file_loader.call(this, fontFileLoader)
     end
-    def create_text_format_1(this : IDWriteFactory4*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_text_format_1.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
+    def create_text_format(this : IDWriteFactory4*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
     end
     def create_typography(this : IDWriteFactory4*, typography : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_typography.call(this, typography)
@@ -6677,10 +6938,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory4*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory4*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory4*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory4*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory4*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory4*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -6698,8 +6959,8 @@ module Win32cr::Graphics::DirectWrite
     def get_eudc_font_collection(this : IDWriteFactory4*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
     end
-    def create_custom_rendering_params_2_1(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_1.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_2(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def get_system_font_fallback(this : IDWriteFactory4*, fontFallback : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_fallback.call(this, fontFallback)
@@ -6710,17 +6971,17 @@ module Win32cr::Graphics::DirectWrite
     def translate_color_glyph_run_1(this : IDWriteFactory4*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.translate_color_glyph_run_1.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
     end
-    def create_custom_rendering_params_1_2(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_3(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_3.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_glyph_run_analysis_2(this : IDWriteFactory4*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_glyph_run_analysis_2.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_glyph_run_analysis(this : IDWriteFactory4*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_glyph_run_analysis.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    def create_glyph_run_analysis_3(this : IDWriteFactory4*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_3.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_custom_rendering_params_2_2(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_4(this : IDWriteFactory4*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_4.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_font_face_reference_1(this : IDWriteFactory4*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_1.call(this, fontFile, faceIndex, fontSimulations, fontFaceReference)
@@ -6728,17 +6989,17 @@ module Win32cr::Graphics::DirectWrite
     def create_font_face_reference_2(this : IDWriteFactory4*, filePath : Win32cr::Foundation::PWSTR, lastWriteTime : Win32cr::Foundation::FILETIME*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_2.call(this, filePath, lastWriteTime, faceIndex, fontSimulations, fontFaceReference)
     end
-    def get_system_font_set_1(this : IDWriteFactory4*, fontSet : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_set_1.call(this, fontSet)
+    def get_system_font_set(this : IDWriteFactory4*, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_set.call(this, fontSet)
     end
-    def create_font_set_builder_1(this : IDWriteFactory4*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_set_builder_1.call(this, fontSetBuilder)
+    def create_font_set_builder(this : IDWriteFactory4*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_set_builder.call(this, fontSetBuilder)
     end
-    def create_font_collection_from_font_set_1(this : IDWriteFactory4*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_collection_from_font_set_1.call(this, fontSet, fontCollection)
+    def create_font_collection_from_font_set(this : IDWriteFactory4*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_collection_from_font_set.call(this, fontSet, fontCollection)
     end
-    def get_system_font_collection_2_1(this : IDWriteFactory4*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_2_1.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
+    def get_system_font_collection_2(this : IDWriteFactory4*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_2.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
     end
     def get_font_download_queue(this : IDWriteFactory4*, fontDownloadQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_download_queue.call(this, fontDownloadQueue)
@@ -6756,7 +7017,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetBuilder1Vtbl,
+
+  record IDWriteFontSetBuilder1Vtable,
     query_interface : Proc(IDWriteFontSetBuilder1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSetBuilder1*, UInt32),
     release : Proc(IDWriteFontSetBuilder1*, UInt32),
@@ -6764,11 +7026,11 @@ module Win32cr::Graphics::DirectWrite
     add_font_face_reference_2 : Proc(IDWriteFontSetBuilder1*, Void*, Win32cr::Foundation::HRESULT),
     add_font_set : Proc(IDWriteFontSetBuilder1*, Void*, Win32cr::Foundation::HRESULT),
     create_font_set : Proc(IDWriteFontSetBuilder1*, Void**, Win32cr::Foundation::HRESULT),
-    add_font_file_1 : Proc(IDWriteFontSetBuilder1*, Void*, Win32cr::Foundation::HRESULT)
+    add_font_file : Proc(IDWriteFontSetBuilder1*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontSetBuilder1, lpVtbl : IDWriteFontSetBuilder1Vtbl* do
+  record IDWriteFontSetBuilder1, lpVtbl : IDWriteFontSetBuilder1Vtable* do
     GUID = LibC::GUID.new(0x3ff7715f_u32, 0x3cdc_u16, 0x4dc6_u16, StaticArray[0x9b_u8, 0x72_u8, 0xec_u8, 0x56_u8, 0x21_u8, 0xdc_u8, 0xca_u8, 0xfd_u8])
     def query_interface(this : IDWriteFontSetBuilder1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6791,14 +7053,15 @@ module Win32cr::Graphics::DirectWrite
     def create_font_set(this : IDWriteFontSetBuilder1*, fontSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_set.call(this, fontSet)
     end
-    def add_font_file_1(this : IDWriteFontSetBuilder1*, fontFile : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.add_font_file_1.call(this, fontFile)
+    def add_font_file(this : IDWriteFontSetBuilder1*, fontFile : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_font_file.call(this, fontFile)
     end
 
   end
 
   @[Extern]
-  record IDWriteAsyncResultVtbl,
+
+  record IDWriteAsyncResultVtable,
     query_interface : Proc(IDWriteAsyncResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteAsyncResult*, UInt32),
     release : Proc(IDWriteAsyncResult*, UInt32),
@@ -6807,7 +7070,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteAsyncResult, lpVtbl : IDWriteAsyncResultVtbl* do
+  record IDWriteAsyncResult, lpVtbl : IDWriteAsyncResultVtable* do
     GUID = LibC::GUID.new(0xce25f8fd_u32, 0x863b_u16, 0x4d13_u16, StaticArray[0x96_u8, 0x51_u8, 0xc1_u8, 0xf8_u8, 0x8d_u8, 0xc7_u8, 0x3f_u8, 0xe2_u8])
     def query_interface(this : IDWriteAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6828,7 +7091,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRemoteFontFileStreamVtbl,
+
+  record IDWriteRemoteFontFileStreamVtable,
     query_interface : Proc(IDWriteRemoteFontFileStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRemoteFontFileStream*, UInt32),
     release : Proc(IDWriteRemoteFontFileStream*, UInt32),
@@ -6843,7 +7107,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRemoteFontFileStream, lpVtbl : IDWriteRemoteFontFileStreamVtbl* do
+  record IDWriteRemoteFontFileStream, lpVtbl : IDWriteRemoteFontFileStreamVtable* do
     GUID = LibC::GUID.new(0x4db3757a_u32, 0x2c72_u16, 0x4ed9_u16, StaticArray[0xb2_u8, 0xb6_u8, 0x1a_u8, 0xba_u8, 0xbe_u8, 0x1a_u8, 0xff_u8, 0x9c_u8])
     def query_interface(this : IDWriteRemoteFontFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6882,7 +7146,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRemoteFontFileLoaderVtbl,
+
+  record IDWriteRemoteFontFileLoaderVtable,
     query_interface : Proc(IDWriteRemoteFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRemoteFontFileLoader*, UInt32),
     release : Proc(IDWriteRemoteFontFileLoader*, UInt32),
@@ -6893,7 +7158,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRemoteFontFileLoader, lpVtbl : IDWriteRemoteFontFileLoaderVtbl* do
+  record IDWriteRemoteFontFileLoader, lpVtbl : IDWriteRemoteFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0x68648c83_u32, 0x6ede_u16, 0x46c0_u16, StaticArray[0xab_u8, 0x46_u8, 0x20_u8, 0x8_u8, 0x3a_u8, 0x88_u8, 0x7f_u8, 0xde_u8])
     def query_interface(this : IDWriteRemoteFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6920,7 +7185,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteInMemoryFontFileLoaderVtbl,
+
+  record IDWriteInMemoryFontFileLoaderVtable,
     query_interface : Proc(IDWriteInMemoryFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteInMemoryFontFileLoader*, UInt32),
     release : Proc(IDWriteInMemoryFontFileLoader*, UInt32),
@@ -6930,7 +7196,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteInMemoryFontFileLoader, lpVtbl : IDWriteInMemoryFontFileLoaderVtbl* do
+  record IDWriteInMemoryFontFileLoader, lpVtbl : IDWriteInMemoryFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0xdc102f47_u32, 0xa12d_u16, 0x4b1c_u16, StaticArray[0x82_u8, 0x2d_u8, 0x9e_u8, 0x11_u8, 0x7e_u8, 0x33_u8, 0x4_u8, 0x3f_u8])
     def query_interface(this : IDWriteInMemoryFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6954,7 +7220,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory5Vtbl,
+
+  record IDWriteFactory5Vtable,
     query_interface : Proc(IDWriteFactory5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory5*, UInt32),
     release : Proc(IDWriteFactory5*, UInt32),
@@ -6967,33 +7234,33 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory5*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory5*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory5*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory5*, Void*, Win32cr::Foundation::HRESULT),
-    create_text_format_1 : Proc(IDWriteFactory5*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_text_format : Proc(IDWriteFactory5*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory5*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory5*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory5*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory5*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory5*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory5*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_1 : Proc(IDWriteFactory5*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_eudc_font_collection : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_1 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_2 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_fallback : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
     create_font_fallback_builder : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_1 : Proc(IDWriteFactory5*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_2 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_3 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_2 : Proc(IDWriteFactory5*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_glyph_run_analysis : Proc(IDWriteFactory5*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_2 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_3 : Proc(IDWriteFactory5*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_4 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_1 : Proc(IDWriteFactory5*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_2 : Proc(IDWriteFactory5*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_set_1 : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_set : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
     create_font_set_builder_1 : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
-    create_font_collection_from_font_set_1 : Proc(IDWriteFactory5*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_2_1 : Proc(IDWriteFactory5*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    create_font_collection_from_font_set : Proc(IDWriteFactory5*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_2 : Proc(IDWriteFactory5*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_font_download_queue : Proc(IDWriteFactory5*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_2 : Proc(IDWriteFactory5*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     compute_glyph_origins_1 : Proc(IDWriteFactory5*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, Win32cr::Foundation::HRESULT),
@@ -7006,7 +7273,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory5, lpVtbl : IDWriteFactory5Vtbl* do
+  record IDWriteFactory5, lpVtbl : IDWriteFactory5Vtable* do
     GUID = LibC::GUID.new(0x958db99a_u32, 0xbe2a_u16, 0x4f09_u16, StaticArray[0xaf_u8, 0x7d_u8, 0x65_u8, 0x18_u8, 0x98_u8, 0x3_u8, 0xd1_u8, 0xd3_u8])
     def query_interface(this : IDWriteFactory5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7044,8 +7311,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory5*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_1(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory5*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -7053,8 +7320,8 @@ module Win32cr::Graphics::DirectWrite
     def unregister_font_file_loader(this : IDWriteFactory5*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_font_file_loader.call(this, fontFileLoader)
     end
-    def create_text_format_1(this : IDWriteFactory5*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_text_format_1.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
+    def create_text_format(this : IDWriteFactory5*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
     end
     def create_typography(this : IDWriteFactory5*, typography : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_typography.call(this, typography)
@@ -7062,10 +7329,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory5*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory5*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory5*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory5*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory5*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory5*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -7083,8 +7350,8 @@ module Win32cr::Graphics::DirectWrite
     def get_eudc_font_collection(this : IDWriteFactory5*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
     end
-    def create_custom_rendering_params_2_1(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_1.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_2(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def get_system_font_fallback(this : IDWriteFactory5*, fontFallback : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_fallback.call(this, fontFallback)
@@ -7095,17 +7362,17 @@ module Win32cr::Graphics::DirectWrite
     def translate_color_glyph_run_1(this : IDWriteFactory5*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.translate_color_glyph_run_1.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
     end
-    def create_custom_rendering_params_1_2(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_3(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_3.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_glyph_run_analysis_2(this : IDWriteFactory5*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_glyph_run_analysis_2.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_glyph_run_analysis(this : IDWriteFactory5*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_glyph_run_analysis.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    def create_glyph_run_analysis_3(this : IDWriteFactory5*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_3.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_custom_rendering_params_2_2(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_4(this : IDWriteFactory5*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_4.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_font_face_reference_1(this : IDWriteFactory5*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_1.call(this, fontFile, faceIndex, fontSimulations, fontFaceReference)
@@ -7113,17 +7380,17 @@ module Win32cr::Graphics::DirectWrite
     def create_font_face_reference_2(this : IDWriteFactory5*, filePath : Win32cr::Foundation::PWSTR, lastWriteTime : Win32cr::Foundation::FILETIME*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_2.call(this, filePath, lastWriteTime, faceIndex, fontSimulations, fontFaceReference)
     end
-    def get_system_font_set_1(this : IDWriteFactory5*, fontSet : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_set_1.call(this, fontSet)
+    def get_system_font_set(this : IDWriteFactory5*, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_set.call(this, fontSet)
     end
     def create_font_set_builder_1(this : IDWriteFactory5*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_set_builder_1.call(this, fontSetBuilder)
     end
-    def create_font_collection_from_font_set_1(this : IDWriteFactory5*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_collection_from_font_set_1.call(this, fontSet, fontCollection)
+    def create_font_collection_from_font_set(this : IDWriteFactory5*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_collection_from_font_set.call(this, fontSet, fontCollection)
     end
-    def get_system_font_collection_2_1(this : IDWriteFactory5*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_2_1.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
+    def get_system_font_collection_2(this : IDWriteFactory5*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_2.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
     end
     def get_font_download_queue(this : IDWriteFactory5*, fontDownloadQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_download_queue.call(this, fontDownloadQueue)
@@ -7156,11 +7423,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory6Vtbl,
+
+  record IDWriteFactory6Vtable,
     query_interface : Proc(IDWriteFactory6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory6*, UInt32),
     release : Proc(IDWriteFactory6*, UInt32),
-    get_system_font_collection_1_1 : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_1 : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     create_custom_font_collection : Proc(IDWriteFactory6*, Void*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     register_font_collection_loader : Proc(IDWriteFactory6*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_collection_loader : Proc(IDWriteFactory6*, Void*, Win32cr::Foundation::HRESULT),
@@ -7169,33 +7437,33 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory6*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory6*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory6*, Void*, Win32cr::Foundation::HRESULT),
     create_text_format_1 : Proc(IDWriteFactory6*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory6*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory6*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory6*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory6*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory6*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_1 : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_eudc_font_collection : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_1 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_2 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_fallback : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     create_font_fallback_builder : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_1 : Proc(IDWriteFactory6*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_2 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_3 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_2 : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_glyph_run_analysis : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_2 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_3 : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_4 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_1 : Proc(IDWriteFactory6*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_2 : Proc(IDWriteFactory6*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_set_1 : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     create_font_set_builder_1 : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     create_font_collection_from_font_set_1 : Proc(IDWriteFactory6*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_2_1 : Proc(IDWriteFactory6*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_2 : Proc(IDWriteFactory6*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_font_download_queue : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_2 : Proc(IDWriteFactory6*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     compute_glyph_origins_1 : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, Win32cr::Foundation::HRESULT),
@@ -7205,17 +7473,17 @@ module Win32cr::Graphics::DirectWrite
     create_http_font_file_loader : Proc(IDWriteFactory6*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     analyze_container_type : Proc(IDWriteFactory6*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE),
     unpack_font_file : Proc(IDWriteFactory6*, Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_font_face_reference : Proc(IDWriteFactory6*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face_reference_3 : Proc(IDWriteFactory6*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     create_font_resource : Proc(IDWriteFactory6*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_set_2 : Proc(IDWriteFactory6*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_1_2 : Proc(IDWriteFactory6*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_3 : Proc(IDWriteFactory6*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
     create_font_collection_from_font_set_2 : Proc(IDWriteFactory6*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
-    create_font_set_builder : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_set_builder_3 : Proc(IDWriteFactory6*, Void**, Win32cr::Foundation::HRESULT),
     create_text_format_2 : Proc(IDWriteFactory6*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFactory6, lpVtbl : IDWriteFactory6Vtbl* do
+  record IDWriteFactory6, lpVtbl : IDWriteFactory6Vtable* do
     GUID = LibC::GUID.new(0xf3744d80_u32, 0x21f7_u16, 0x42eb_u16, StaticArray[0xb3_u8, 0x5d_u8, 0x99_u8, 0x5b_u8, 0xc7_u8, 0x2f_u8, 0xc2_u8, 0x23_u8])
     def query_interface(this : IDWriteFactory6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7226,8 +7494,8 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteFactory6*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_system_font_collection_1_1(this : IDWriteFactory6*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_1_1.call(this, fontCollection, checkForUpdates)
+    def get_system_font_collection_1(this : IDWriteFactory6*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_1.call(this, fontCollection, checkForUpdates)
     end
     def create_custom_font_collection(this : IDWriteFactory6*, collectionLoader : Void*, collectionKey : Void*, collectionKeySize : UInt32, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_custom_font_collection.call(this, collectionLoader, collectionKey, collectionKeySize, fontCollection)
@@ -7253,8 +7521,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory6*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_1(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory6*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -7271,10 +7539,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory6*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory6*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory6*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory6*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory6*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory6*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -7292,8 +7560,8 @@ module Win32cr::Graphics::DirectWrite
     def get_eudc_font_collection(this : IDWriteFactory6*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
     end
-    def create_custom_rendering_params_2_1(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_1.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_2(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def get_system_font_fallback(this : IDWriteFactory6*, fontFallback : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_fallback.call(this, fontFallback)
@@ -7304,17 +7572,17 @@ module Win32cr::Graphics::DirectWrite
     def translate_color_glyph_run_1(this : IDWriteFactory6*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.translate_color_glyph_run_1.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
     end
-    def create_custom_rendering_params_1_2(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_3(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_3.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_glyph_run_analysis_2(this : IDWriteFactory6*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_glyph_run_analysis_2.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_glyph_run_analysis(this : IDWriteFactory6*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_glyph_run_analysis.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    def create_glyph_run_analysis_3(this : IDWriteFactory6*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_3.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_custom_rendering_params_2_2(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_4(this : IDWriteFactory6*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_4.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_font_face_reference_1(this : IDWriteFactory6*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_1.call(this, fontFile, faceIndex, fontSimulations, fontFaceReference)
@@ -7331,8 +7599,8 @@ module Win32cr::Graphics::DirectWrite
     def create_font_collection_from_font_set_1(this : IDWriteFactory6*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_collection_from_font_set_1.call(this, fontSet, fontCollection)
     end
-    def get_system_font_collection_2_1(this : IDWriteFactory6*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_2_1.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
+    def get_system_font_collection_2(this : IDWriteFactory6*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_2.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
     end
     def get_font_download_queue(this : IDWriteFactory6*, fontDownloadQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_download_queue.call(this, fontDownloadQueue)
@@ -7361,8 +7629,8 @@ module Win32cr::Graphics::DirectWrite
     def unpack_font_file(this : IDWriteFactory6*, containerType : Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE, fileData : Void*, fileDataSize : UInt32, unpackedFontStream : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unpack_font_file.call(this, containerType, fileData, fileDataSize, unpackedFontStream)
     end
-    def create_font_face_reference(this : IDWriteFactory6*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_face_reference.call(this, fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontFaceReference)
+    def create_font_face_reference_3(this : IDWriteFactory6*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face_reference_3.call(this, fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontFaceReference)
     end
     def create_font_resource(this : IDWriteFactory6*, fontFile : Void*, faceIndex : UInt32, fontResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_resource.call(this, fontFile, faceIndex, fontResource)
@@ -7370,14 +7638,14 @@ module Win32cr::Graphics::DirectWrite
     def get_system_font_set_2(this : IDWriteFactory6*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_set_2.call(this, includeDownloadableFonts, fontSet)
     end
-    def get_system_font_collection_1_2(this : IDWriteFactory6*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_1_2.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
+    def get_system_font_collection_3(this : IDWriteFactory6*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_3.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
     end
     def create_font_collection_from_font_set_2(this : IDWriteFactory6*, fontSet : Void*, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_collection_from_font_set_2.call(this, fontSet, fontFamilyModel, fontCollection)
     end
-    def create_font_set_builder(this : IDWriteFactory6*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_set_builder.call(this, fontSetBuilder)
+    def create_font_set_builder_3(this : IDWriteFactory6*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_set_builder_3.call(this, fontSetBuilder)
     end
     def create_text_format_2(this : IDWriteFactory6*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_format_2.call(this, fontFamilyName, fontCollection, fontAxisValues, fontAxisValueCount, fontSize, localeName, textFormat)
@@ -7386,7 +7654,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace5Vtbl,
+
+  record IDWriteFontFace5Vtable,
     query_interface : Proc(IDWriteFontFace5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace5*, UInt32),
     release : Proc(IDWriteFontFace5*, UInt32),
@@ -7402,7 +7671,7 @@ module Win32cr::Graphics::DirectWrite
     try_get_font_table : Proc(IDWriteFontFace5*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     release_font_table : Proc(IDWriteFontFace5*, Void*, Void),
     get_glyph_run_outline : Proc(IDWriteFontFace5*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_1 : Proc(IDWriteFontFace5*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_1 : Proc(IDWriteFontFace5*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace5*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace5*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFontFace5*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
@@ -7414,27 +7683,27 @@ module Win32cr::Graphics::DirectWrite
     get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace5*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     get_kerning_pair_adjustments : Proc(IDWriteFontFace5*, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     has_kerning_pairs : Proc(IDWriteFontFace5*, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_1 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_2 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_variants : Proc(IDWriteFontFace5*, UInt32, UInt16*, UInt16*, Win32cr::Foundation::HRESULT),
     has_vertical_glyph_variants : Proc(IDWriteFontFace5*, Win32cr::Foundation::BOOL),
     is_color_font : Proc(IDWriteFontFace5*, Win32cr::Foundation::BOOL),
     get_color_palette_count : Proc(IDWriteFontFace5*, UInt32),
     get_palette_entry_count : Proc(IDWriteFontFace5*, UInt32),
     get_palette_entries : Proc(IDWriteFontFace5*, UInt32, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_2 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_3 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     get_font_face_reference : Proc(IDWriteFontFace5*, Void**, Win32cr::Foundation::HRESULT),
     get_panose : Proc(IDWriteFontFace5*, Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*, Void),
     get_weight : Proc(IDWriteFontFace5*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_stretch : Proc(IDWriteFontFace5*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_style : Proc(IDWriteFontFace5*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
-    get_family_names_1 : Proc(IDWriteFontFace5*, Void**, Win32cr::Foundation::HRESULT),
-    get_face_names_1 : Proc(IDWriteFontFace5*, Void**, Win32cr::Foundation::HRESULT),
+    get_family_names : Proc(IDWriteFontFace5*, Void**, Win32cr::Foundation::HRESULT),
+    get_face_names : Proc(IDWriteFontFace5*, Void**, Win32cr::Foundation::HRESULT),
     get_informational_strings : Proc(IDWriteFontFace5*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     has_character : Proc(IDWriteFontFace5*, UInt32, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_2 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_4 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     is_character_local : Proc(IDWriteFontFace5*, UInt32, Win32cr::Foundation::BOOL),
     is_glyph_local : Proc(IDWriteFontFace5*, UInt16, Win32cr::Foundation::BOOL),
-    are_characters_local : Proc(IDWriteFontFace5*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    are_characters_local : Proc(IDWriteFontFace5*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     are_glyphs_local : Proc(IDWriteFontFace5*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_glyph_image_formats_1 : Proc(IDWriteFontFace5*, UInt16, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS*, Win32cr::Foundation::HRESULT),
     get_glyph_image_formats_2 : Proc(IDWriteFontFace5*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS),
@@ -7448,7 +7717,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace5, lpVtbl : IDWriteFontFace5Vtbl* do
+  record IDWriteFontFace5, lpVtbl : IDWriteFontFace5Vtable* do
     GUID = LibC::GUID.new(0x98eff3a5_u32, 0xb667_u16, 0x479a_u16, StaticArray[0xb1_u8, 0x45_u8, 0xe2_u8, 0xfa_u8, 0x5b_u8, 0x9f_u8, 0xdc_u8, 0x29_u8])
     def query_interface(this : IDWriteFontFace5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7495,8 +7764,8 @@ module Win32cr::Graphics::DirectWrite
     def get_glyph_run_outline(this : IDWriteFontFace5*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
     end
-    def get_recommended_rendering_mode_1_1(this : IDWriteFontFace5*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    def get_recommended_rendering_mode_1(this : IDWriteFontFace5*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
     end
     def get_gdi_compatible_metrics_1(this : IDWriteFontFace5*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
@@ -7531,8 +7800,8 @@ module Win32cr::Graphics::DirectWrite
     def has_kerning_pairs(this : IDWriteFontFace5*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_kerning_pairs.call(this)
     end
-    def get_recommended_rendering_mode_2_1(this : IDWriteFontFace5*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_1.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
+    def get_recommended_rendering_mode_2(this : IDWriteFontFace5*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
     end
     def get_vertical_glyph_variants(this : IDWriteFontFace5*, glyphCount : UInt32, nominalGlyphIndices : UInt16*, verticalGlyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_glyph_variants.call(this, glyphCount, nominalGlyphIndices, verticalGlyphIndices)
@@ -7552,8 +7821,8 @@ module Win32cr::Graphics::DirectWrite
     def get_palette_entries(this : IDWriteFontFace5*, colorPaletteIndex : UInt32, firstEntryIndex : UInt32, entryCount : UInt32, paletteEntries : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_palette_entries.call(this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries)
     end
-    def get_recommended_rendering_mode_1_2(this : IDWriteFontFace5*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_3(this : IDWriteFontFace5*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_3.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def get_font_face_reference(this : IDWriteFontFace5*, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_face_reference.call(this, fontFaceReference)
@@ -7570,11 +7839,11 @@ module Win32cr::Graphics::DirectWrite
     def get_style(this : IDWriteFontFace5*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
       @lpVtbl.try &.value.get_style.call(this)
     end
-    def get_family_names_1(this : IDWriteFontFace5*, names : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_family_names_1.call(this, names)
+    def get_family_names(this : IDWriteFontFace5*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_family_names.call(this, names)
     end
-    def get_face_names_1(this : IDWriteFontFace5*, names : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_face_names_1.call(this, names)
+    def get_face_names(this : IDWriteFontFace5*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_face_names.call(this, names)
     end
     def get_informational_strings(this : IDWriteFontFace5*, informationalStringID : Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, informationalStrings : Void**, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_informational_strings.call(this, informationalStringID, informationalStrings, exists)
@@ -7582,8 +7851,8 @@ module Win32cr::Graphics::DirectWrite
     def has_character(this : IDWriteFontFace5*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_character.call(this, unicodeValue)
     end
-    def get_recommended_rendering_mode_2_2(this : IDWriteFontFace5*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_4(this : IDWriteFontFace5*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_4.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def is_character_local(this : IDWriteFontFace5*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_character_local.call(this, unicodeValue)
@@ -7591,7 +7860,7 @@ module Win32cr::Graphics::DirectWrite
     def is_glyph_local(this : IDWriteFontFace5*, glyphId : UInt16) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_glyph_local.call(this, glyphId)
     end
-    def are_characters_local(this : IDWriteFontFace5*, characters : UInt16*, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    def are_characters_local(this : IDWriteFontFace5*, characters : Win32cr::Foundation::PWSTR, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.are_characters_local.call(this, characters, characterCount, enqueueIfNotLocal, isLocal)
     end
     def are_glyphs_local(this : IDWriteFontFace5*, glyphIndices : UInt16*, glyphCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -7628,7 +7897,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontResourceVtbl,
+
+  record IDWriteFontResourceVtable,
     query_interface : Proc(IDWriteFontResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontResource*, UInt32),
     release : Proc(IDWriteFontResource*, UInt32),
@@ -7647,7 +7917,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontResource, lpVtbl : IDWriteFontResourceVtbl* do
+  record IDWriteFontResource, lpVtbl : IDWriteFontResourceVtable* do
     GUID = LibC::GUID.new(0x1f803a76_u32, 0x6871_u16, 0x48e8_u16, StaticArray[0x98_u8, 0x7f_u8, 0xb9_u8, 0x75_u8, 0x55_u8, 0x1c_u8, 0x50_u8, 0xf2_u8])
     def query_interface(this : IDWriteFontResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7698,7 +7968,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFaceReference1Vtbl,
+
+  record IDWriteFontFaceReference1Vtable,
     query_interface : Proc(IDWriteFontFaceReference1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFaceReference1*, UInt32),
     release : Proc(IDWriteFontFaceReference1*, UInt32),
@@ -7713,7 +7984,7 @@ module Win32cr::Graphics::DirectWrite
     get_file_time : Proc(IDWriteFontFaceReference1*, Win32cr::Foundation::FILETIME*, Win32cr::Foundation::HRESULT),
     get_locality : Proc(IDWriteFontFaceReference1*, Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY),
     enqueue_font_download_request : Proc(IDWriteFontFaceReference1*, Win32cr::Foundation::HRESULT),
-    enqueue_character_download_request : Proc(IDWriteFontFaceReference1*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    enqueue_character_download_request : Proc(IDWriteFontFaceReference1*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     enqueue_glyph_download_request : Proc(IDWriteFontFaceReference1*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
     enqueue_file_fragment_download_request : Proc(IDWriteFontFaceReference1*, UInt64, UInt64, Win32cr::Foundation::HRESULT),
     create_font_face_2 : Proc(IDWriteFontFaceReference1*, Void**, Win32cr::Foundation::HRESULT),
@@ -7722,7 +7993,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFaceReference1, lpVtbl : IDWriteFontFaceReference1Vtbl* do
+  record IDWriteFontFaceReference1, lpVtbl : IDWriteFontFaceReference1Vtable* do
     GUID = LibC::GUID.new(0xc081fe77_u32, 0x2fd1_u16, 0x41ac_u16, StaticArray[0xa5_u8, 0xa3_u8, 0x34_u8, 0x98_u8, 0x3c_u8, 0x4b_u8, 0xa6_u8, 0x1a_u8])
     def query_interface(this : IDWriteFontFaceReference1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7766,7 +8037,7 @@ module Win32cr::Graphics::DirectWrite
     def enqueue_font_download_request(this : IDWriteFontFaceReference1*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enqueue_font_download_request.call(this)
     end
-    def enqueue_character_download_request(this : IDWriteFontFaceReference1*, characters : UInt16*, characterCount : UInt32) : Win32cr::Foundation::HRESULT
+    def enqueue_character_download_request(this : IDWriteFontFaceReference1*, characters : Win32cr::Foundation::PWSTR, characterCount : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enqueue_character_download_request.call(this, characters, characterCount)
     end
     def enqueue_glyph_download_request(this : IDWriteFontFaceReference1*, glyphIndices : UInt16*, glyphCount : UInt32) : Win32cr::Foundation::HRESULT
@@ -7788,7 +8059,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetBuilder2Vtbl,
+
+  record IDWriteFontSetBuilder2Vtable,
     query_interface : Proc(IDWriteFontSetBuilder2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSetBuilder2*, UInt32),
     release : Proc(IDWriteFontSetBuilder2*, UInt32),
@@ -7802,7 +8074,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSetBuilder2, lpVtbl : IDWriteFontSetBuilder2Vtbl* do
+  record IDWriteFontSetBuilder2, lpVtbl : IDWriteFontSetBuilder2Vtable* do
     GUID = LibC::GUID.new(0xee5ba612_u32, 0xb131_u16, 0x463c_u16, StaticArray[0x8f_u8, 0x4f_u8, 0x31_u8, 0x89_u8, 0xb9_u8, 0x40_u8, 0x1e_u8, 0x45_u8])
     def query_interface(this : IDWriteFontSetBuilder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7838,7 +8110,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSet1Vtbl,
+
+  record IDWriteFontSet1Vtable,
     query_interface : Proc(IDWriteFontSet1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet1*, UInt32),
     release : Proc(IDWriteFontSet1*, UInt32),
@@ -7852,7 +8125,7 @@ module Win32cr::Graphics::DirectWrite
     get_property_occurrence_count : Proc(IDWriteFontSet1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32*, Win32cr::Foundation::HRESULT),
     get_matching_fonts_1 : Proc(IDWriteFontSet1*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
     get_matching_fonts_2 : Proc(IDWriteFontSet1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_matching_fonts : Proc(IDWriteFontSet1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_matching_fonts_3 : Proc(IDWriteFontSet1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_first_font_resources : Proc(IDWriteFontSet1*, Void**, Win32cr::Foundation::HRESULT),
     get_filtered_fonts_1 : Proc(IDWriteFontSet1*, UInt32*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_filtered_fonts_2 : Proc(IDWriteFontSet1*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, UInt32, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
@@ -7868,7 +8141,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSet1, lpVtbl : IDWriteFontSet1Vtbl* do
+  record IDWriteFontSet1, lpVtbl : IDWriteFontSet1Vtable* do
     GUID = LibC::GUID.new(0x7e9fda85_u32, 0x6c92_u16, 0x4053_u16, StaticArray[0xbc_u8, 0x47_u8, 0x7a_u8, 0xe3_u8, 0x53_u8, 0xd_u8, 0xb4_u8, 0xd3_u8])
     def query_interface(this : IDWriteFontSet1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7909,8 +8182,8 @@ module Win32cr::Graphics::DirectWrite
     def get_matching_fonts_2(this : IDWriteFontSet1*, properties : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, propertyCount : UInt32, filteredSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_matching_fonts_2.call(this, properties, propertyCount, filteredSet)
     end
-    def get_matching_fonts(this : IDWriteFontSet1*, fontProperty : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_matching_fonts.call(this, fontProperty, fontAxisValues, fontAxisValueCount, matchingFonts)
+    def get_matching_fonts_3(this : IDWriteFontSet1*, fontProperty : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts_3.call(this, fontProperty, fontAxisValues, fontAxisValueCount, matchingFonts)
     end
     def get_first_font_resources(this : IDWriteFontSet1*, filteredFontSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_first_font_resources.call(this, filteredFontSet)
@@ -7952,7 +8225,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontList2Vtbl,
+
+  record IDWriteFontList2Vtable,
     query_interface : Proc(IDWriteFontList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontList2*, UInt32),
     release : Proc(IDWriteFontList2*, UInt32),
@@ -7960,13 +8234,13 @@ module Win32cr::Graphics::DirectWrite
     get_font_count : Proc(IDWriteFontList2*, UInt32),
     get_font_1 : Proc(IDWriteFontList2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_locality : Proc(IDWriteFontList2*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY),
-    get_font : Proc(IDWriteFontList2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font_2 : Proc(IDWriteFontList2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_face_reference : Proc(IDWriteFontList2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_set : Proc(IDWriteFontList2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontList2, lpVtbl : IDWriteFontList2Vtbl* do
+  record IDWriteFontList2, lpVtbl : IDWriteFontList2Vtable* do
     GUID = LibC::GUID.new(0xc0763a34_u32, 0x77af_u16, 0x445a_u16, StaticArray[0xb7_u8, 0x35_u8, 0x8_u8, 0xc3_u8, 0x7b_u8, 0xa_u8, 0x5b_u8, 0xf5_u8])
     def query_interface(this : IDWriteFontList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7989,8 +8263,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_locality(this : IDWriteFontList2*, listIndex : UInt32) : Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY
       @lpVtbl.try &.value.get_font_locality.call(this, listIndex)
     end
-    def get_font(this : IDWriteFontList2*, listIndex : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font.call(this, listIndex, font)
+    def get_font_2(this : IDWriteFontList2*, listIndex : UInt32, font : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_2.call(this, listIndex, font)
     end
     def get_font_face_reference(this : IDWriteFontList2*, listIndex : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_face_reference.call(this, listIndex, fontFaceReference)
@@ -8002,7 +8276,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFamily2Vtbl,
+
+  record IDWriteFontFamily2Vtable,
     query_interface : Proc(IDWriteFontFamily2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFamily2*, UInt32),
     release : Proc(IDWriteFontFamily2*, UInt32),
@@ -8020,7 +8295,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFamily2, lpVtbl : IDWriteFontFamily2Vtbl* do
+  record IDWriteFontFamily2, lpVtbl : IDWriteFontFamily2Vtable* do
     GUID = LibC::GUID.new(0x3ed49e77_u32, 0xa398_u16, 0x4261_u16, StaticArray[0xb9_u8, 0xcf_u8, 0xc1_u8, 0x26_u8, 0xc2_u8, 0x13_u8, 0x1e_u8, 0xf3_u8])
     def query_interface(this : IDWriteFontFamily2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8068,7 +8343,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollection2Vtbl,
+
+  record IDWriteFontCollection2Vtable,
     query_interface : Proc(IDWriteFontCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection2*, UInt32),
     release : Proc(IDWriteFontCollection2*, UInt32),
@@ -8078,14 +8354,14 @@ module Win32cr::Graphics::DirectWrite
     get_font_from_font_face : Proc(IDWriteFontCollection2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_font_set_1 : Proc(IDWriteFontCollection2*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_2 : Proc(IDWriteFontCollection2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_font_family : Proc(IDWriteFontCollection2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font_family_3 : Proc(IDWriteFontCollection2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_matching_fonts : Proc(IDWriteFontCollection2*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_model : Proc(IDWriteFontCollection2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL),
     get_font_set_2 : Proc(IDWriteFontCollection2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontCollection2, lpVtbl : IDWriteFontCollection2Vtbl* do
+  record IDWriteFontCollection2, lpVtbl : IDWriteFontCollection2Vtable* do
     GUID = LibC::GUID.new(0x514039c6_u32, 0x4617_u16, 0x4064_u16, StaticArray[0xbf_u8, 0x8b_u8, 0x92_u8, 0xea_u8, 0x83_u8, 0xe5_u8, 0x6_u8, 0xe0_u8])
     def query_interface(this : IDWriteFontCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8114,8 +8390,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_2(this : IDWriteFontCollection2*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_2.call(this, index, fontFamily)
     end
-    def get_font_family(this : IDWriteFontCollection2*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_family.call(this, index, fontFamily)
+    def get_font_family_3(this : IDWriteFontCollection2*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_family_3.call(this, index, fontFamily)
     end
     def get_matching_fonts(this : IDWriteFontCollection2*, familyName : Win32cr::Foundation::PWSTR, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontList : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_matching_fonts.call(this, familyName, fontAxisValues, fontAxisValueCount, fontList)
@@ -8130,7 +8406,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout4Vtbl,
+
+  record IDWriteTextLayout4Vtable,
     query_interface : Proc(IDWriteTextLayout4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout4*, UInt32),
     release : Proc(IDWriteTextLayout4*, UInt32),
@@ -8152,13 +8429,13 @@ module Win32cr::Graphics::DirectWrite
     get_line_spacing_1 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
     get_font_collection_1 : Proc(IDWriteTextLayout4*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_1 : Proc(IDWriteTextLayout4*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextLayout4*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_family_name_1 : Proc(IDWriteTextLayout4*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_font_weight_1 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
     get_font_style_1 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
     get_font_stretch_1 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
     get_font_size_1 : Proc(IDWriteTextLayout4*, Float32),
     get_locale_name_length_1 : Proc(IDWriteTextLayout4*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextLayout4*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_locale_name_1 : Proc(IDWriteTextLayout4*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_max_width : Proc(IDWriteTextLayout4*, Float32, Win32cr::Foundation::HRESULT),
     set_max_height : Proc(IDWriteTextLayout4*, Float32, Win32cr::Foundation::HRESULT),
     set_font_collection : Proc(IDWriteTextLayout4*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE, Win32cr::Foundation::HRESULT),
@@ -8177,7 +8454,7 @@ module Win32cr::Graphics::DirectWrite
     get_max_height : Proc(IDWriteTextLayout4*, Float32),
     get_font_collection_2 : Proc(IDWriteTextLayout4*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_family_name_length_2 : Proc(IDWriteTextLayout4*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_font_family_name_2 : Proc(IDWriteTextLayout4*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_font_family_name_2 : Proc(IDWriteTextLayout4*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_weight_2 : Proc(IDWriteTextLayout4*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_style_2 : Proc(IDWriteTextLayout4*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_font_stretch_2 : Proc(IDWriteTextLayout4*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
@@ -8188,7 +8465,7 @@ module Win32cr::Graphics::DirectWrite
     get_inline_object : Proc(IDWriteTextLayout4*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_typography : Proc(IDWriteTextLayout4*, UInt32, Void**, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     get_locale_name_length_2 : Proc(IDWriteTextLayout4*, UInt32, UInt32*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
-    get_locale_name_2 : Proc(IDWriteTextLayout4*, UInt32, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
+    get_locale_name_2 : Proc(IDWriteTextLayout4*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*, Win32cr::Foundation::HRESULT),
     draw : Proc(IDWriteTextLayout4*, Void*, Void*, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_line_metrics_1 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     get_metrics_1 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS*, Win32cr::Foundation::HRESULT),
@@ -8212,8 +8489,8 @@ module Win32cr::Graphics::DirectWrite
     set_font_fallback : Proc(IDWriteTextLayout4*, Void*, Win32cr::Foundation::HRESULT),
     get_font_fallback : Proc(IDWriteTextLayout4*, Void**, Win32cr::Foundation::HRESULT),
     invalidate_layout : Proc(IDWriteTextLayout4*, Win32cr::Foundation::HRESULT),
-    set_line_spacing : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
-    get_line_spacing : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
+    set_line_spacing_2 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
+    get_line_spacing_2 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*, Win32cr::Foundation::HRESULT),
     get_line_metrics_2 : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS1*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     set_font_axis_values : Proc(IDWriteTextLayout4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE, Win32cr::Foundation::HRESULT),
     get_font_axis_value_count : Proc(IDWriteTextLayout4*, UInt32, UInt32),
@@ -8223,7 +8500,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout4, lpVtbl : IDWriteTextLayout4Vtbl* do
+  record IDWriteTextLayout4, lpVtbl : IDWriteTextLayout4Vtable* do
     GUID = LibC::GUID.new(0x5a9bf42_u32, 0x223f_u16, 0x4441_u16, StaticArray[0xb5_u8, 0xfb_u8, 0x82_u8, 0x63_u8, 0x68_u8, 0x5f_u8, 0x55_u8, 0xe9_u8])
     def query_interface(this : IDWriteTextLayout4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8288,7 +8565,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_1(this : IDWriteTextLayout4*) : UInt32
       @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextLayout4*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_1(this : IDWriteTextLayout4*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
     end
     def get_font_weight_1(this : IDWriteTextLayout4*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
@@ -8306,7 +8583,7 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_1(this : IDWriteTextLayout4*) : UInt32
       @lpVtbl.try &.value.get_locale_name_length_1.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextLayout4*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_locale_name_1(this : IDWriteTextLayout4*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
     end
     def set_max_width(this : IDWriteTextLayout4*, maxWidth : Float32) : Win32cr::Foundation::HRESULT
@@ -8363,7 +8640,7 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_name_length_2(this : IDWriteTextLayout4*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_font_family_name_2(this : IDWriteTextLayout4*, currentPosition : UInt32, fontFamilyName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_font_family_name_2(this : IDWriteTextLayout4*, currentPosition : UInt32, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_name_2.call(this, currentPosition, fontFamilyName, nameSize, textRange)
     end
     def get_font_weight_2(this : IDWriteTextLayout4*, currentPosition : UInt32, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
@@ -8396,7 +8673,7 @@ module Win32cr::Graphics::DirectWrite
     def get_locale_name_length_2(this : IDWriteTextLayout4*, currentPosition : UInt32, nameLength : UInt32*, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_length_2.call(this, currentPosition, nameLength, textRange)
     end
-    def get_locale_name_2(this : IDWriteTextLayout4*, currentPosition : UInt32, localeName : UInt16*, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
+    def get_locale_name_2(this : IDWriteTextLayout4*, currentPosition : UInt32, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32, textRange : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_RANGE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_locale_name_2.call(this, currentPosition, localeName, nameSize, textRange)
     end
     def draw(this : IDWriteTextLayout4*, clientDrawingContext : Void*, renderer : Void*, originX : Float32, originY : Float32) : Win32cr::Foundation::HRESULT
@@ -8468,11 +8745,11 @@ module Win32cr::Graphics::DirectWrite
     def invalidate_layout(this : IDWriteTextLayout4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invalidate_layout.call(this)
     end
-    def set_line_spacing(this : IDWriteTextLayout4*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_line_spacing.call(this, lineSpacingOptions)
+    def set_line_spacing_2(this : IDWriteTextLayout4*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_spacing_2.call(this, lineSpacingOptions)
     end
-    def get_line_spacing(this : IDWriteTextLayout4*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_line_spacing.call(this, lineSpacingOptions)
+    def get_line_spacing_2(this : IDWriteTextLayout4*, lineSpacingOptions : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_spacing_2.call(this, lineSpacingOptions)
     end
     def get_line_metrics_2(this : IDWriteTextLayout4*, lineMetrics : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS1*, maxLineCount : UInt32, actualLineCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_line_metrics_2.call(this, lineMetrics, maxLineCount, actualLineCount)
@@ -8496,7 +8773,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextFormat3Vtbl,
+
+  record IDWriteTextFormat3Vtable,
     query_interface : Proc(IDWriteTextFormat3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat3*, UInt32),
     release : Proc(IDWriteTextFormat3*, UInt32),
@@ -8516,15 +8794,15 @@ module Win32cr::Graphics::DirectWrite
     get_incremental_tab_stop : Proc(IDWriteTextFormat3*, Float32),
     get_trimming : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING*, Void**, Win32cr::Foundation::HRESULT),
     get_line_spacing_1 : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
-    get_font_collection_1 : Proc(IDWriteTextFormat3*, Void**, Win32cr::Foundation::HRESULT),
-    get_font_family_name_length_1 : Proc(IDWriteTextFormat3*, UInt32),
-    get_font_family_name_1 : Proc(IDWriteTextFormat3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_font_weight_1 : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
-    get_font_style_1 : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
-    get_font_stretch_1 : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
-    get_font_size_1 : Proc(IDWriteTextFormat3*, Float32),
-    get_locale_name_length_1 : Proc(IDWriteTextFormat3*, UInt32),
-    get_locale_name_1 : Proc(IDWriteTextFormat3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_collection : Proc(IDWriteTextFormat3*, Void**, Win32cr::Foundation::HRESULT),
+    get_font_family_name_length : Proc(IDWriteTextFormat3*, UInt32),
+    get_font_family_name : Proc(IDWriteTextFormat3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_font_weight : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
+    get_font_style : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
+    get_font_stretch : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
+    get_font_size : Proc(IDWriteTextFormat3*, Float32),
+    get_locale_name_length : Proc(IDWriteTextFormat3*, UInt32),
+    get_locale_name : Proc(IDWriteTextFormat3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_vertical_glyph_orientation : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_orientation : Proc(IDWriteTextFormat3*, Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION),
     set_last_line_wrapping : Proc(IDWriteTextFormat3*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
@@ -8543,7 +8821,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextFormat3, lpVtbl : IDWriteTextFormat3Vtbl* do
+  record IDWriteTextFormat3, lpVtbl : IDWriteTextFormat3Vtable* do
     GUID = LibC::GUID.new(0x6d3b5641_u32, 0xe550_u16, 0x430d_u16, StaticArray[0xa8_u8, 0x5b_u8, 0xb7_u8, 0xbf_u8, 0x48_u8, 0xa9_u8, 0x34_u8, 0x27_u8])
     def query_interface(this : IDWriteTextFormat3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8602,32 +8880,32 @@ module Win32cr::Graphics::DirectWrite
     def get_line_spacing_1(this : IDWriteTextFormat3*, lineSpacingMethod : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD*, lineSpacing : Float32*, baseline : Float32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_line_spacing_1.call(this, lineSpacingMethod, lineSpacing, baseline)
     end
-    def get_font_collection_1(this : IDWriteTextFormat3*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_collection_1.call(this, fontCollection)
+    def get_font_collection(this : IDWriteTextFormat3*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_collection.call(this, fontCollection)
     end
-    def get_font_family_name_length_1(this : IDWriteTextFormat3*) : UInt32
-      @lpVtbl.try &.value.get_font_family_name_length_1.call(this)
+    def get_font_family_name_length(this : IDWriteTextFormat3*) : UInt32
+      @lpVtbl.try &.value.get_font_family_name_length.call(this)
     end
-    def get_font_family_name_1(this : IDWriteTextFormat3*, fontFamilyName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_family_name_1.call(this, fontFamilyName, nameSize)
+    def get_font_family_name(this : IDWriteTextFormat3*, fontFamilyName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_family_name.call(this, fontFamilyName, nameSize)
     end
-    def get_font_weight_1(this : IDWriteTextFormat3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
-      @lpVtbl.try &.value.get_font_weight_1.call(this)
+    def get_font_weight(this : IDWriteTextFormat3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
+      @lpVtbl.try &.value.get_font_weight.call(this)
     end
-    def get_font_style_1(this : IDWriteTextFormat3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
-      @lpVtbl.try &.value.get_font_style_1.call(this)
+    def get_font_style(this : IDWriteTextFormat3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
+      @lpVtbl.try &.value.get_font_style.call(this)
     end
-    def get_font_stretch_1(this : IDWriteTextFormat3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
-      @lpVtbl.try &.value.get_font_stretch_1.call(this)
+    def get_font_stretch(this : IDWriteTextFormat3*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
+      @lpVtbl.try &.value.get_font_stretch.call(this)
     end
-    def get_font_size_1(this : IDWriteTextFormat3*) : Float32
-      @lpVtbl.try &.value.get_font_size_1.call(this)
+    def get_font_size(this : IDWriteTextFormat3*) : Float32
+      @lpVtbl.try &.value.get_font_size.call(this)
     end
-    def get_locale_name_length_1(this : IDWriteTextFormat3*) : UInt32
-      @lpVtbl.try &.value.get_locale_name_length_1.call(this)
+    def get_locale_name_length(this : IDWriteTextFormat3*) : UInt32
+      @lpVtbl.try &.value.get_locale_name_length.call(this)
     end
-    def get_locale_name_1(this : IDWriteTextFormat3*, localeName : UInt16*, nameSize : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_locale_name_1.call(this, localeName, nameSize)
+    def get_locale_name(this : IDWriteTextFormat3*, localeName : Win32cr::Foundation::PWSTR, nameSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_locale_name.call(this, localeName, nameSize)
     end
     def set_vertical_glyph_orientation(this : IDWriteTextFormat3*, glyphOrientation : Win32cr::Graphics::DirectWrite::DWRITE_VERTICAL_GLYPH_ORIENTATION) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_vertical_glyph_orientation.call(this, glyphOrientation)
@@ -8678,7 +8956,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFallback1Vtbl,
+
+  record IDWriteFontFallback1Vtable,
     query_interface : Proc(IDWriteFontFallback1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFallback1*, UInt32),
     release : Proc(IDWriteFontFallback1*, UInt32),
@@ -8687,7 +8966,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFallback1, lpVtbl : IDWriteFontFallback1Vtbl* do
+  record IDWriteFontFallback1, lpVtbl : IDWriteFontFallback1Vtable* do
     GUID = LibC::GUID.new(0x2397599d_u32, 0xdd0d_u16, 0x4681_u16, StaticArray[0xbd_u8, 0x6a_u8, 0xf4_u8, 0xf3_u8, 0x1e_u8, 0xaa_u8, 0xde_u8, 0x77_u8])
     def query_interface(this : IDWriteFontFallback1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8708,7 +8987,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSet2Vtbl,
+
+  record IDWriteFontSet2Vtable,
     query_interface : Proc(IDWriteFontSet2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet2*, UInt32),
     release : Proc(IDWriteFontSet2*, UInt32),
@@ -8722,7 +9002,7 @@ module Win32cr::Graphics::DirectWrite
     get_property_occurrence_count : Proc(IDWriteFontSet2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32*, Win32cr::Foundation::HRESULT),
     get_matching_fonts_1 : Proc(IDWriteFontSet2*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
     get_matching_fonts_2 : Proc(IDWriteFontSet2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_matching_fonts : Proc(IDWriteFontSet2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_matching_fonts_3 : Proc(IDWriteFontSet2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_first_font_resources : Proc(IDWriteFontSet2*, Void**, Win32cr::Foundation::HRESULT),
     get_filtered_fonts_1 : Proc(IDWriteFontSet2*, UInt32*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_filtered_fonts_2 : Proc(IDWriteFontSet2*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, UInt32, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
@@ -8739,7 +9019,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSet2, lpVtbl : IDWriteFontSet2Vtbl* do
+  record IDWriteFontSet2, lpVtbl : IDWriteFontSet2Vtable* do
     GUID = LibC::GUID.new(0xdc7ead19_u32, 0xe54c_u16, 0x43af_u16, StaticArray[0xb2_u8, 0xda_u8, 0x4e_u8, 0x2b_u8, 0x79_u8, 0xba_u8, 0x3f_u8, 0x7f_u8])
     def query_interface(this : IDWriteFontSet2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8780,8 +9060,8 @@ module Win32cr::Graphics::DirectWrite
     def get_matching_fonts_2(this : IDWriteFontSet2*, properties : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, propertyCount : UInt32, filteredSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_matching_fonts_2.call(this, properties, propertyCount, filteredSet)
     end
-    def get_matching_fonts(this : IDWriteFontSet2*, fontProperty : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_matching_fonts.call(this, fontProperty, fontAxisValues, fontAxisValueCount, matchingFonts)
+    def get_matching_fonts_3(this : IDWriteFontSet2*, fontProperty : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts_3.call(this, fontProperty, fontAxisValues, fontAxisValueCount, matchingFonts)
     end
     def get_first_font_resources(this : IDWriteFontSet2*, filteredFontSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_first_font_resources.call(this, filteredFontSet)
@@ -8826,7 +9106,8 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollection3Vtbl,
+
+  record IDWriteFontCollection3Vtable,
     query_interface : Proc(IDWriteFontCollection3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection3*, UInt32),
     release : Proc(IDWriteFontCollection3*, UInt32),
@@ -8836,7 +9117,7 @@ module Win32cr::Graphics::DirectWrite
     get_font_from_font_face : Proc(IDWriteFontCollection3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_font_set_1 : Proc(IDWriteFontCollection3*, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_2 : Proc(IDWriteFontCollection3*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_font_family : Proc(IDWriteFontCollection3*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font_family_3 : Proc(IDWriteFontCollection3*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_matching_fonts : Proc(IDWriteFontCollection3*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_font_family_model : Proc(IDWriteFontCollection3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL),
     get_font_set_2 : Proc(IDWriteFontCollection3*, Void**, Win32cr::Foundation::HRESULT),
@@ -8844,7 +9125,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontCollection3, lpVtbl : IDWriteFontCollection3Vtbl* do
+  record IDWriteFontCollection3, lpVtbl : IDWriteFontCollection3Vtable* do
     GUID = LibC::GUID.new(0xa4d055a6_u32, 0xf9e3_u16, 0x4e25_u16, StaticArray[0x93_u8, 0xb7_u8, 0x9e_u8, 0x30_u8, 0x9f_u8, 0x3a_u8, 0xf8_u8, 0xe9_u8])
     def query_interface(this : IDWriteFontCollection3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8873,8 +9154,8 @@ module Win32cr::Graphics::DirectWrite
     def get_font_family_2(this : IDWriteFontCollection3*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_family_2.call(this, index, fontFamily)
     end
-    def get_font_family(this : IDWriteFontCollection3*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_font_family.call(this, index, fontFamily)
+    def get_font_family_3(this : IDWriteFontCollection3*, index : UInt32, fontFamily : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_family_3.call(this, index, fontFamily)
     end
     def get_matching_fonts(this : IDWriteFontCollection3*, familyName : Win32cr::Foundation::PWSTR, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontList : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_matching_fonts.call(this, familyName, fontAxisValues, fontAxisValueCount, fontList)
@@ -8892,11 +9173,12 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory7Vtbl,
+
+  record IDWriteFactory7Vtable,
     query_interface : Proc(IDWriteFactory7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory7*, UInt32),
     release : Proc(IDWriteFactory7*, UInt32),
-    get_system_font_collection_1_1 : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_1 : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     create_custom_font_collection : Proc(IDWriteFactory7*, Void*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     register_font_collection_loader : Proc(IDWriteFactory7*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_collection_loader : Proc(IDWriteFactory7*, Void*, Win32cr::Foundation::HRESULT),
@@ -8905,33 +9187,33 @@ module Win32cr::Graphics::DirectWrite
     create_font_face : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_rendering_params : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     create_monitor_rendering_params : Proc(IDWriteFactory7*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_1 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     register_font_file_loader : Proc(IDWriteFactory7*, Void*, Win32cr::Foundation::HRESULT),
     unregister_font_file_loader : Proc(IDWriteFactory7*, Void*, Win32cr::Foundation::HRESULT),
     create_text_format_1 : Proc(IDWriteFactory7*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_typography : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     get_gdi_interop : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
-    create_text_layout : Proc(IDWriteFactory7*, UInt16*, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory7*, UInt16*, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory7*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory7*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_ellipsis_trimming_sign : Proc(IDWriteFactory7*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_text_analyzer : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     create_number_substitution : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_1 : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_eudc_font_collection : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_1 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_2 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_fallback : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     create_font_fallback_builder : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_1 : Proc(IDWriteFactory7*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_1_2 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_3 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_glyph_run_analysis_2 : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_glyph_run_analysis : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
-    create_custom_rendering_params_2_2 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_3 : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_4 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_1 : Proc(IDWriteFactory7*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     create_font_face_reference_2 : Proc(IDWriteFactory7*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_set_1 : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     create_font_set_builder_1 : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     create_font_collection_from_font_set_1 : Proc(IDWriteFactory7*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_2_1 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_2 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_font_download_queue : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     translate_color_glyph_run_2 : Proc(IDWriteFactory7*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     compute_glyph_origins_1 : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, Win32cr::Foundation::HRESULT),
@@ -8941,19 +9223,19 @@ module Win32cr::Graphics::DirectWrite
     create_http_font_file_loader : Proc(IDWriteFactory7*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     analyze_container_type : Proc(IDWriteFactory7*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE),
     unpack_font_file : Proc(IDWriteFactory7*, Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    create_font_face_reference : Proc(IDWriteFactory7*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face_reference_3 : Proc(IDWriteFactory7*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     create_font_resource : Proc(IDWriteFactory7*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_system_font_set_2 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_1_2 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_3 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
     create_font_collection_from_font_set_2 : Proc(IDWriteFactory7*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
-    create_font_set_builder : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_set_builder_3 : Proc(IDWriteFactory7*, Void**, Win32cr::Foundation::HRESULT),
     create_text_format_2 : Proc(IDWriteFactory7*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_set : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
-    get_system_font_collection_2_2 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT)
+    get_system_font_set_3 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_4 : Proc(IDWriteFactory7*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFactory7, lpVtbl : IDWriteFactory7Vtbl* do
+  record IDWriteFactory7, lpVtbl : IDWriteFactory7Vtable* do
     GUID = LibC::GUID.new(0x35d0e0b3_u32, 0x9076_u16, 0x4d2e_u16, StaticArray[0xa0_u8, 0x16_u8, 0xa9_u8, 0x1b_u8, 0x56_u8, 0x8a_u8, 0x6_u8, 0xb4_u8])
     def query_interface(this : IDWriteFactory7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8964,8 +9246,8 @@ module Win32cr::Graphics::DirectWrite
     def release(this : IDWriteFactory7*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_system_font_collection_1_1(this : IDWriteFactory7*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_1_1.call(this, fontCollection, checkForUpdates)
+    def get_system_font_collection_1(this : IDWriteFactory7*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_1.call(this, fontCollection, checkForUpdates)
     end
     def create_custom_font_collection(this : IDWriteFactory7*, collectionLoader : Void*, collectionKey : Void*, collectionKeySize : UInt32, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_custom_font_collection.call(this, collectionLoader, collectionKey, collectionKeySize, fontCollection)
@@ -8991,8 +9273,8 @@ module Win32cr::Graphics::DirectWrite
     def create_monitor_rendering_params(this : IDWriteFactory7*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
     end
-    def create_custom_rendering_params_1_1(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_1(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def register_font_file_loader(this : IDWriteFactory7*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
@@ -9009,10 +9291,10 @@ module Win32cr::Graphics::DirectWrite
     def get_gdi_interop(this : IDWriteFactory7*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
     end
-    def create_text_layout(this : IDWriteFactory7*, string : UInt16*, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_text_layout(this : IDWriteFactory7*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
     end
-    def create_gdi_compatible_text_layout(this : IDWriteFactory7*, string : UInt16*, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+    def create_gdi_compatible_text_layout(this : IDWriteFactory7*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
     end
     def create_ellipsis_trimming_sign(this : IDWriteFactory7*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
@@ -9030,8 +9312,8 @@ module Win32cr::Graphics::DirectWrite
     def get_eudc_font_collection(this : IDWriteFactory7*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
     end
-    def create_custom_rendering_params_2_1(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_1.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    def create_custom_rendering_params_2(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
     end
     def get_system_font_fallback(this : IDWriteFactory7*, fontFallback : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_fallback.call(this, fontFallback)
@@ -9042,17 +9324,17 @@ module Win32cr::Graphics::DirectWrite
     def translate_color_glyph_run_1(this : IDWriteFactory7*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.translate_color_glyph_run_1.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
     end
-    def create_custom_rendering_params_1_2(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_1_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_3(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_3.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_glyph_run_analysis_2(this : IDWriteFactory7*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_glyph_run_analysis_2.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_glyph_run_analysis(this : IDWriteFactory7*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_glyph_run_analysis.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    def create_glyph_run_analysis_3(this : IDWriteFactory7*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_3.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
     end
-    def create_custom_rendering_params_2_2(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_custom_rendering_params_2_2.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    def create_custom_rendering_params_4(this : IDWriteFactory7*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_4.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
     end
     def create_font_face_reference_1(this : IDWriteFactory7*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_face_reference_1.call(this, fontFile, faceIndex, fontSimulations, fontFaceReference)
@@ -9069,8 +9351,8 @@ module Win32cr::Graphics::DirectWrite
     def create_font_collection_from_font_set_1(this : IDWriteFactory7*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_collection_from_font_set_1.call(this, fontSet, fontCollection)
     end
-    def get_system_font_collection_2_1(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_2_1.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
+    def get_system_font_collection_2(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_2.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
     end
     def get_font_download_queue(this : IDWriteFactory7*, fontDownloadQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_download_queue.call(this, fontDownloadQueue)
@@ -9099,8 +9381,8 @@ module Win32cr::Graphics::DirectWrite
     def unpack_font_file(this : IDWriteFactory7*, containerType : Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE, fileData : Void*, fileDataSize : UInt32, unpackedFontStream : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unpack_font_file.call(this, containerType, fileData, fileDataSize, unpackedFontStream)
     end
-    def create_font_face_reference(this : IDWriteFactory7*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_face_reference.call(this, fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontFaceReference)
+    def create_font_face_reference_3(this : IDWriteFactory7*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face_reference_3.call(this, fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontFaceReference)
     end
     def create_font_resource(this : IDWriteFactory7*, fontFile : Void*, faceIndex : UInt32, fontResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_resource.call(this, fontFile, faceIndex, fontResource)
@@ -9108,29 +9390,30 @@ module Win32cr::Graphics::DirectWrite
     def get_system_font_set_2(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_system_font_set_2.call(this, includeDownloadableFonts, fontSet)
     end
-    def get_system_font_collection_1_2(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_1_2.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
+    def get_system_font_collection_3(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_3.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
     end
     def create_font_collection_from_font_set_2(this : IDWriteFactory7*, fontSet : Void*, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_font_collection_from_font_set_2.call(this, fontSet, fontFamilyModel, fontCollection)
     end
-    def create_font_set_builder(this : IDWriteFactory7*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_font_set_builder.call(this, fontSetBuilder)
+    def create_font_set_builder_3(this : IDWriteFactory7*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_set_builder_3.call(this, fontSetBuilder)
     end
     def create_text_format_2(this : IDWriteFactory7*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_text_format_2.call(this, fontFamilyName, fontCollection, fontAxisValues, fontAxisValueCount, fontSize, localeName, textFormat)
     end
-    def get_system_font_set(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontSet : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_set.call(this, includeDownloadableFonts, fontSet)
+    def get_system_font_set_3(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_set_3.call(this, includeDownloadableFonts, fontSet)
     end
-    def get_system_font_collection_2_2(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_system_font_collection_2_2.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
+    def get_system_font_collection_4(this : IDWriteFactory7*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_4.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontSet3Vtbl,
+
+  record IDWriteFontSet3Vtable,
     query_interface : Proc(IDWriteFontSet3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet3*, UInt32),
     release : Proc(IDWriteFontSet3*, UInt32),
@@ -9144,7 +9427,7 @@ module Win32cr::Graphics::DirectWrite
     get_property_occurrence_count : Proc(IDWriteFontSet3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32*, Win32cr::Foundation::HRESULT),
     get_matching_fonts_1 : Proc(IDWriteFontSet3*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
     get_matching_fonts_2 : Proc(IDWriteFontSet3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_matching_fonts : Proc(IDWriteFontSet3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_matching_fonts_3 : Proc(IDWriteFontSet3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_first_font_resources : Proc(IDWriteFontSet3*, Void**, Win32cr::Foundation::HRESULT),
     get_filtered_fonts_1 : Proc(IDWriteFontSet3*, UInt32*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_filtered_fonts_2 : Proc(IDWriteFontSet3*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, UInt32, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
@@ -9160,11 +9443,11 @@ module Win32cr::Graphics::DirectWrite
     get_expiration_event : Proc(IDWriteFontSet3*, Win32cr::Foundation::HANDLE),
     get_font_source_type : Proc(IDWriteFontSet3*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SOURCE_TYPE),
     get_font_source_name_length : Proc(IDWriteFontSet3*, UInt32, UInt32),
-    get_font_source_name : Proc(IDWriteFontSet3*, UInt32, UInt16*, UInt32, Win32cr::Foundation::HRESULT)
+    get_font_source_name : Proc(IDWriteFontSet3*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDWriteFontSet3, lpVtbl : IDWriteFontSet3Vtbl* do
+  record IDWriteFontSet3, lpVtbl : IDWriteFontSet3Vtable* do
     GUID = LibC::GUID.new(0x7c073ef2_u32, 0xa7f4_u16, 0x4045_u16, StaticArray[0x8c_u8, 0x32_u8, 0x8a_u8, 0xb8_u8, 0xae_u8, 0x64_u8, 0xf_u8, 0x90_u8])
     def query_interface(this : IDWriteFontSet3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9205,8 +9488,8 @@ module Win32cr::Graphics::DirectWrite
     def get_matching_fonts_2(this : IDWriteFontSet3*, properties : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, propertyCount : UInt32, filteredSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_matching_fonts_2.call(this, properties, propertyCount, filteredSet)
     end
-    def get_matching_fonts(this : IDWriteFontSet3*, fontProperty : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_matching_fonts.call(this, fontProperty, fontAxisValues, fontAxisValueCount, matchingFonts)
+    def get_matching_fonts_3(this : IDWriteFontSet3*, fontProperty : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts_3.call(this, fontProperty, fontAxisValues, fontAxisValueCount, matchingFonts)
     end
     def get_first_font_resources(this : IDWriteFontSet3*, filteredFontSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_first_font_resources.call(this, filteredFontSet)
@@ -9253,14 +9536,15 @@ module Win32cr::Graphics::DirectWrite
     def get_font_source_name_length(this : IDWriteFontSet3*, listIndex : UInt32) : UInt32
       @lpVtbl.try &.value.get_font_source_name_length.call(this, listIndex)
     end
-    def get_font_source_name(this : IDWriteFontSet3*, listIndex : UInt32, stringBuffer : UInt16*, stringBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_font_source_name(this : IDWriteFontSet3*, listIndex : UInt32, stringBuffer : Win32cr::Foundation::PWSTR, stringBufferSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_source_name.call(this, listIndex, stringBuffer, stringBufferSize)
     end
 
   end
 
   @[Extern]
-  record IDWriteFontFace6Vtbl,
+
+  record IDWriteFontFace6Vtable,
     query_interface : Proc(IDWriteFontFace6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace6*, UInt32),
     release : Proc(IDWriteFontFace6*, UInt32),
@@ -9276,7 +9560,7 @@ module Win32cr::Graphics::DirectWrite
     try_get_font_table : Proc(IDWriteFontFace6*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     release_font_table : Proc(IDWriteFontFace6*, Void*, Void),
     get_glyph_run_outline : Proc(IDWriteFontFace6*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_1 : Proc(IDWriteFontFace6*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_1 : Proc(IDWriteFontFace6*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace6*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace6*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_metrics_2 : Proc(IDWriteFontFace6*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
@@ -9288,14 +9572,14 @@ module Win32cr::Graphics::DirectWrite
     get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace6*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     get_kerning_pair_adjustments : Proc(IDWriteFontFace6*, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
     has_kerning_pairs : Proc(IDWriteFontFace6*, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_1 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_2 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
     get_vertical_glyph_variants : Proc(IDWriteFontFace6*, UInt32, UInt16*, UInt16*, Win32cr::Foundation::HRESULT),
     has_vertical_glyph_variants : Proc(IDWriteFontFace6*, Win32cr::Foundation::BOOL),
     is_color_font : Proc(IDWriteFontFace6*, Win32cr::Foundation::BOOL),
     get_color_palette_count : Proc(IDWriteFontFace6*, UInt32),
     get_palette_entry_count : Proc(IDWriteFontFace6*, UInt32),
     get_palette_entries : Proc(IDWriteFontFace6*, UInt32, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, Win32cr::Foundation::HRESULT),
-    get_recommended_rendering_mode_1_2 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_3 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     get_font_face_reference : Proc(IDWriteFontFace6*, Void**, Win32cr::Foundation::HRESULT),
     get_panose : Proc(IDWriteFontFace6*, Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*, Void),
     get_weight : Proc(IDWriteFontFace6*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
@@ -9305,10 +9589,10 @@ module Win32cr::Graphics::DirectWrite
     get_face_names_1 : Proc(IDWriteFontFace6*, Void**, Win32cr::Foundation::HRESULT),
     get_informational_strings : Proc(IDWriteFontFace6*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     has_character : Proc(IDWriteFontFace6*, UInt32, Win32cr::Foundation::BOOL),
-    get_recommended_rendering_mode_2_2 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_4 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
     is_character_local : Proc(IDWriteFontFace6*, UInt32, Win32cr::Foundation::BOOL),
     is_glyph_local : Proc(IDWriteFontFace6*, UInt16, Win32cr::Foundation::BOOL),
-    are_characters_local : Proc(IDWriteFontFace6*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    are_characters_local : Proc(IDWriteFontFace6*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     are_glyphs_local : Proc(IDWriteFontFace6*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_glyph_image_formats_1 : Proc(IDWriteFontFace6*, UInt16, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS*, Win32cr::Foundation::HRESULT),
     get_glyph_image_formats_2 : Proc(IDWriteFontFace6*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS),
@@ -9324,7 +9608,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace6, lpVtbl : IDWriteFontFace6Vtbl* do
+  record IDWriteFontFace6, lpVtbl : IDWriteFontFace6Vtable* do
     GUID = LibC::GUID.new(0xc4b1fe1b_u32, 0x6e84_u16, 0x47d5_u16, StaticArray[0xb5_u8, 0x4c_u8, 0xa5_u8, 0x97_u8, 0x98_u8, 0x1b_u8, 0x6_u8, 0xad_u8])
     def query_interface(this : IDWriteFontFace6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9371,8 +9655,8 @@ module Win32cr::Graphics::DirectWrite
     def get_glyph_run_outline(this : IDWriteFontFace6*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
     end
-    def get_recommended_rendering_mode_1_1(this : IDWriteFontFace6*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    def get_recommended_rendering_mode_1(this : IDWriteFontFace6*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
     end
     def get_gdi_compatible_metrics_1(this : IDWriteFontFace6*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
@@ -9407,8 +9691,8 @@ module Win32cr::Graphics::DirectWrite
     def has_kerning_pairs(this : IDWriteFontFace6*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_kerning_pairs.call(this)
     end
-    def get_recommended_rendering_mode_2_1(this : IDWriteFontFace6*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_1.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
+    def get_recommended_rendering_mode_2(this : IDWriteFontFace6*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
     end
     def get_vertical_glyph_variants(this : IDWriteFontFace6*, glyphCount : UInt32, nominalGlyphIndices : UInt16*, verticalGlyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_glyph_variants.call(this, glyphCount, nominalGlyphIndices, verticalGlyphIndices)
@@ -9428,8 +9712,8 @@ module Win32cr::Graphics::DirectWrite
     def get_palette_entries(this : IDWriteFontFace6*, colorPaletteIndex : UInt32, firstEntryIndex : UInt32, entryCount : UInt32, paletteEntries : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_palette_entries.call(this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries)
     end
-    def get_recommended_rendering_mode_1_2(this : IDWriteFontFace6*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_1_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_3(this : IDWriteFontFace6*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_3.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def get_font_face_reference(this : IDWriteFontFace6*, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_font_face_reference.call(this, fontFaceReference)
@@ -9458,8 +9742,8 @@ module Win32cr::Graphics::DirectWrite
     def has_character(this : IDWriteFontFace6*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.has_character.call(this, unicodeValue)
     end
-    def get_recommended_rendering_mode_2_2(this : IDWriteFontFace6*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_recommended_rendering_mode_2_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    def get_recommended_rendering_mode_4(this : IDWriteFontFace6*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_4.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
     end
     def is_character_local(this : IDWriteFontFace6*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_character_local.call(this, unicodeValue)
@@ -9467,7 +9751,7 @@ module Win32cr::Graphics::DirectWrite
     def is_glyph_local(this : IDWriteFontFace6*, glyphId : UInt16) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_glyph_local.call(this, glyphId)
     end
-    def are_characters_local(this : IDWriteFontFace6*, characters : UInt16*, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    def are_characters_local(this : IDWriteFontFace6*, characters : Win32cr::Foundation::PWSTR, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.are_characters_local.call(this, characters, characterCount, enqueueIfNotLocal, isLocal)
     end
     def are_glyphs_local(this : IDWriteFontFace6*, glyphIndices : UInt16*, glyphCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -9509,14 +9793,864 @@ module Win32cr::Graphics::DirectWrite
 
   end
 
+  @[Extern]
+
+  record IDWriteFontSet4Vtable,
+    query_interface : Proc(IDWriteFontSet4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDWriteFontSet4*, UInt32),
+    release : Proc(IDWriteFontSet4*, UInt32),
+    get_font_count : Proc(IDWriteFontSet4*, UInt32),
+    get_font_face_reference_1 : Proc(IDWriteFontSet4*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    find_font_face_reference : Proc(IDWriteFontSet4*, Void*, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    find_font_face : Proc(IDWriteFontSet4*, Void*, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_property_values_1 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, Void**, Win32cr::Foundation::HRESULT),
+    get_property_values_2 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_property_values_3 : Proc(IDWriteFontSet4*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, Win32cr::Foundation::BOOL*, Void**, Win32cr::Foundation::HRESULT),
+    get_property_occurrence_count : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_matching_fonts_1 : Proc(IDWriteFontSet4*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Void**, Win32cr::Foundation::HRESULT),
+    get_matching_fonts_2 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_matching_fonts_3 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_first_font_resources : Proc(IDWriteFontSet4*, Void**, Win32cr::Foundation::HRESULT),
+    get_filtered_fonts_1 : Proc(IDWriteFontSet4*, UInt32*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_filtered_fonts_2 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, UInt32, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    get_filtered_fonts_3 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    get_filtered_font_indices_1 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, UInt32, Win32cr::Foundation::BOOL, UInt32*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_filtered_font_indices_2 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, UInt32, Win32cr::Foundation::BOOL, UInt32*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_font_axis_ranges_1 : Proc(IDWriteFontSet4*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_font_axis_ranges_2 : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_font_face_reference_2 : Proc(IDWriteFontSet4*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_font_resource : Proc(IDWriteFontSet4*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face : Proc(IDWriteFontSet4*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_font_locality : Proc(IDWriteFontSet4*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY),
+    get_expiration_event : Proc(IDWriteFontSet4*, Win32cr::Foundation::HANDLE),
+    get_font_source_type : Proc(IDWriteFontSet4*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SOURCE_TYPE),
+    get_font_source_name_length : Proc(IDWriteFontSet4*, UInt32, UInt32),
+    get_font_source_name : Proc(IDWriteFontSet4*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    convert_weight_stretch_style_to_font_axis_values : Proc(IDWriteFontSet4*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Float32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32),
+    get_matching_fonts_4 : Proc(IDWriteFontSet4*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDWriteFontSet4, lpVtbl : IDWriteFontSet4Vtable* do
+    GUID = LibC::GUID.new(0xeec175fc_u32, 0xbea9_u16, 0x4c86_u16, StaticArray[0x8b_u8, 0x53_u8, 0xcc_u8, 0xbd_u8, 0xd7_u8, 0xdf_u8, 0xc_u8, 0x82_u8])
+    def query_interface(this : IDWriteFontSet4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDWriteFontSet4*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDWriteFontSet4*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_font_count(this : IDWriteFontSet4*) : UInt32
+      @lpVtbl.try &.value.get_font_count.call(this)
+    end
+    def get_font_face_reference_1(this : IDWriteFontSet4*, listIndex : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_face_reference_1.call(this, listIndex, fontFaceReference)
+    end
+    def find_font_face_reference(this : IDWriteFontSet4*, fontFaceReference : Void*, listIndex : UInt32*, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_font_face_reference.call(this, fontFaceReference, listIndex, exists)
+    end
+    def find_font_face(this : IDWriteFontSet4*, fontFace : Void*, listIndex : UInt32*, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_font_face.call(this, fontFace, listIndex, exists)
+    end
+    def get_property_values_1(this : IDWriteFontSet4*, propertyID : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, values : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_values_1.call(this, propertyID, values)
+    end
+    def get_property_values_2(this : IDWriteFontSet4*, propertyID : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, preferredLocaleNames : Win32cr::Foundation::PWSTR, values : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_values_2.call(this, propertyID, preferredLocaleNames, values)
+    end
+    def get_property_values_3(this : IDWriteFontSet4*, listIndex : UInt32, propertyId : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, exists : Win32cr::Foundation::BOOL*, values : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_values_3.call(this, listIndex, propertyId, exists, values)
+    end
+    def get_property_occurrence_count(this : IDWriteFontSet4*, property : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, propertyOccurrenceCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_occurrence_count.call(this, property, propertyOccurrenceCount)
+    end
+    def get_matching_fonts_1(this : IDWriteFontSet4*, familyName : Win32cr::Foundation::PWSTR, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, filteredSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts_1.call(this, familyName, fontWeight, fontStretch, fontStyle, filteredSet)
+    end
+    def get_matching_fonts_2(this : IDWriteFontSet4*, properties : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, propertyCount : UInt32, filteredSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts_2.call(this, properties, propertyCount, filteredSet)
+    end
+    def get_matching_fonts_3(this : IDWriteFontSet4*, fontProperty : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts_3.call(this, fontProperty, fontAxisValues, fontAxisValueCount, matchingFonts)
+    end
+    def get_first_font_resources(this : IDWriteFontSet4*, filteredFontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_first_font_resources.call(this, filteredFontSet)
+    end
+    def get_filtered_fonts_1(this : IDWriteFontSet4*, indices : UInt32*, indexCount : UInt32, filteredFontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_filtered_fonts_1.call(this, indices, indexCount, filteredFontSet)
+    end
+    def get_filtered_fonts_2(this : IDWriteFontSet4*, fontAxisRanges : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, fontAxisRangeCount : UInt32, selectAnyRange : Win32cr::Foundation::BOOL, filteredFontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_filtered_fonts_2.call(this, fontAxisRanges, fontAxisRangeCount, selectAnyRange, filteredFontSet)
+    end
+    def get_filtered_fonts_3(this : IDWriteFontSet4*, properties : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, propertyCount : UInt32, selectAnyProperty : Win32cr::Foundation::BOOL, filteredFontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_filtered_fonts_3.call(this, properties, propertyCount, selectAnyProperty, filteredFontSet)
+    end
+    def get_filtered_font_indices_1(this : IDWriteFontSet4*, fontAxisRanges : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, fontAxisRangeCount : UInt32, selectAnyRange : Win32cr::Foundation::BOOL, indices : UInt32*, maxIndexCount : UInt32, actualIndexCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_filtered_font_indices_1.call(this, fontAxisRanges, fontAxisRangeCount, selectAnyRange, indices, maxIndexCount, actualIndexCount)
+    end
+    def get_filtered_font_indices_2(this : IDWriteFontSet4*, properties : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY*, propertyCount : UInt32, selectAnyProperty : Win32cr::Foundation::BOOL, indices : UInt32*, maxIndexCount : UInt32, actualIndexCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_filtered_font_indices_2.call(this, properties, propertyCount, selectAnyProperty, indices, maxIndexCount, actualIndexCount)
+    end
+    def get_font_axis_ranges_1(this : IDWriteFontSet4*, listIndex : UInt32, fontAxisRanges : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, maxFontAxisRangeCount : UInt32, actualFontAxisRangeCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_axis_ranges_1.call(this, listIndex, fontAxisRanges, maxFontAxisRangeCount, actualFontAxisRangeCount)
+    end
+    def get_font_axis_ranges_2(this : IDWriteFontSet4*, fontAxisRanges : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_RANGE*, maxFontAxisRangeCount : UInt32, actualFontAxisRangeCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_axis_ranges_2.call(this, fontAxisRanges, maxFontAxisRangeCount, actualFontAxisRangeCount)
+    end
+    def get_font_face_reference_2(this : IDWriteFontSet4*, listIndex : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_face_reference_2.call(this, listIndex, fontFaceReference)
+    end
+    def create_font_resource(this : IDWriteFontSet4*, listIndex : UInt32, fontResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_resource.call(this, listIndex, fontResource)
+    end
+    def create_font_face(this : IDWriteFontSet4*, listIndex : UInt32, fontFace : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face.call(this, listIndex, fontFace)
+    end
+    def get_font_locality(this : IDWriteFontSet4*, listIndex : UInt32) : Win32cr::Graphics::DirectWrite::DWRITE_LOCALITY
+      @lpVtbl.try &.value.get_font_locality.call(this, listIndex)
+    end
+    def get_expiration_event(this : IDWriteFontSet4*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_expiration_event.call(this)
+    end
+    def get_font_source_type(this : IDWriteFontSet4*, fontIndex : UInt32) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SOURCE_TYPE
+      @lpVtbl.try &.value.get_font_source_type.call(this, fontIndex)
+    end
+    def get_font_source_name_length(this : IDWriteFontSet4*, listIndex : UInt32) : UInt32
+      @lpVtbl.try &.value.get_font_source_name_length.call(this, listIndex)
+    end
+    def get_font_source_name(this : IDWriteFontSet4*, listIndex : UInt32, stringBuffer : Win32cr::Foundation::PWSTR, stringBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_source_name.call(this, listIndex, stringBuffer, stringBufferSize)
+    end
+    def convert_weight_stretch_style_to_font_axis_values(this : IDWriteFontSet4*, inputAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, inputAxisCount : UInt32, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontSize : Float32, outputAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*) : UInt32
+      @lpVtbl.try &.value.convert_weight_stretch_style_to_font_axis_values.call(this, inputAxisValues, inputAxisCount, fontWeight, fontStretch, fontStyle, fontSize, outputAxisValues)
+    end
+    def get_matching_fonts_4(this : IDWriteFontSet4*, familyName : Win32cr::Foundation::PWSTR, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, allowedSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, matchingFonts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matching_fonts_4.call(this, familyName, fontAxisValues, fontAxisValueCount, allowedSimulations, matchingFonts)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDWriteBitmapRenderTarget2Vtable,
+    query_interface : Proc(IDWriteBitmapRenderTarget2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDWriteBitmapRenderTarget2*, UInt32),
+    release : Proc(IDWriteBitmapRenderTarget2*, UInt32),
+    draw_glyph_run : Proc(IDWriteBitmapRenderTarget2*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Void*, Win32cr::Foundation::COLORREF, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
+    get_memory_dc : Proc(IDWriteBitmapRenderTarget2*, Win32cr::Graphics::Gdi::HDC),
+    get_pixels_per_dip : Proc(IDWriteBitmapRenderTarget2*, Float32),
+    set_pixels_per_dip : Proc(IDWriteBitmapRenderTarget2*, Float32, Win32cr::Foundation::HRESULT),
+    get_current_transform : Proc(IDWriteBitmapRenderTarget2*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
+    set_current_transform : Proc(IDWriteBitmapRenderTarget2*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
+    get_size : Proc(IDWriteBitmapRenderTarget2*, Win32cr::Foundation::SIZE*, Win32cr::Foundation::HRESULT),
+    resize : Proc(IDWriteBitmapRenderTarget2*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    get_text_antialias_mode : Proc(IDWriteBitmapRenderTarget2*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE),
+    set_text_antialias_mode : Proc(IDWriteBitmapRenderTarget2*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Win32cr::Foundation::HRESULT),
+    get_bitmap_data : Proc(IDWriteBitmapRenderTarget2*, Win32cr::Graphics::DirectWrite::DWRITE_BITMAP_DATA_BGRA32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDWriteBitmapRenderTarget2, lpVtbl : IDWriteBitmapRenderTarget2Vtable* do
+    GUID = LibC::GUID.new(0xc553a742_u32, 0xfc01_u16, 0x44da_u16, StaticArray[0xa6_u8, 0x6e_u8, 0xb8_u8, 0xb9_u8, 0xed_u8, 0x6c_u8, 0x39_u8, 0x95_u8])
+    def query_interface(this : IDWriteBitmapRenderTarget2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDWriteBitmapRenderTarget2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDWriteBitmapRenderTarget2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def draw_glyph_run(this : IDWriteBitmapRenderTarget2*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, renderingParams : Void*, textColor : Win32cr::Foundation::COLORREF, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_glyph_run.call(this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, renderingParams, textColor, blackBoxRect)
+    end
+    def get_memory_dc(this : IDWriteBitmapRenderTarget2*) : Win32cr::Graphics::Gdi::HDC
+      @lpVtbl.try &.value.get_memory_dc.call(this)
+    end
+    def get_pixels_per_dip(this : IDWriteBitmapRenderTarget2*) : Float32
+      @lpVtbl.try &.value.get_pixels_per_dip.call(this)
+    end
+    def set_pixels_per_dip(this : IDWriteBitmapRenderTarget2*, pixelsPerDip : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_pixels_per_dip.call(this, pixelsPerDip)
+    end
+    def get_current_transform(this : IDWriteBitmapRenderTarget2*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_transform.call(this, transform)
+    end
+    def set_current_transform(this : IDWriteBitmapRenderTarget2*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_current_transform.call(this, transform)
+    end
+    def get_size(this : IDWriteBitmapRenderTarget2*, size : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, size)
+    end
+    def resize(this : IDWriteBitmapRenderTarget2*, width : UInt32, height : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resize.call(this, width, height)
+    end
+    def get_text_antialias_mode(this : IDWriteBitmapRenderTarget2*) : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE
+      @lpVtbl.try &.value.get_text_antialias_mode.call(this)
+    end
+    def set_text_antialias_mode(this : IDWriteBitmapRenderTarget2*, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_antialias_mode.call(this, antialiasMode)
+    end
+    def get_bitmap_data(this : IDWriteBitmapRenderTarget2*, bitmapData : Win32cr::Graphics::DirectWrite::DWRITE_BITMAP_DATA_BGRA32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_bitmap_data.call(this, bitmapData)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDWritePaintReaderVtable,
+    query_interface : Proc(IDWritePaintReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDWritePaintReader*, UInt32),
+    release : Proc(IDWritePaintReader*, UInt32),
+    set_current_glyph : Proc(IDWritePaintReader*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ELEMENT*, UInt32, Win32cr::Graphics::Direct2D::Common::D2D_RECT_F*, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ATTRIBUTES*, Win32cr::Foundation::HRESULT),
+    set_text_color : Proc(IDWritePaintReader*, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, Win32cr::Foundation::HRESULT),
+    set_color_palette_index : Proc(IDWritePaintReader*, UInt32, Win32cr::Foundation::HRESULT),
+    set_custom_color_palette : Proc(IDWritePaintReader*, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, UInt32, Win32cr::Foundation::HRESULT),
+    move_to_first_child : Proc(IDWritePaintReader*, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ELEMENT*, UInt32, Win32cr::Foundation::HRESULT),
+    move_to_next_sibling : Proc(IDWritePaintReader*, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ELEMENT*, UInt32, Win32cr::Foundation::HRESULT),
+    move_to_parent : Proc(IDWritePaintReader*, Win32cr::Foundation::HRESULT),
+    get_gradient_stops : Proc(IDWritePaintReader*, UInt32, UInt32, Win32cr::Graphics::Direct2D::Common::D2D1_GRADIENT_STOP*, Win32cr::Foundation::HRESULT),
+    get_gradient_stop_colors : Proc(IDWritePaintReader*, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_COLOR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDWritePaintReader, lpVtbl : IDWritePaintReaderVtable* do
+    GUID = LibC::GUID.new(0x8128e912_u32, 0x3b97_u16, 0x42a5_u16, StaticArray[0xab_u8, 0x6c_u8, 0x24_u8, 0xaa_u8, 0xd3_u8, 0xa8_u8, 0x6e_u8, 0x54_u8])
+    def query_interface(this : IDWritePaintReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDWritePaintReader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDWritePaintReader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_current_glyph(this : IDWritePaintReader*, glyphIndex : UInt32, paintElement : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ELEMENT*, structSize : UInt32, clipBox : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F*, glyphAttributes : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_current_glyph.call(this, glyphIndex, paintElement, structSize, clipBox, glyphAttributes)
+    end
+    def set_text_color(this : IDWritePaintReader*, textColor : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_color.call(this, textColor)
+    end
+    def set_color_palette_index(this : IDWritePaintReader*, colorPaletteIndex : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_color_palette_index.call(this, colorPaletteIndex)
+    end
+    def set_custom_color_palette(this : IDWritePaintReader*, paletteEntries : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, paletteEntryCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_custom_color_palette.call(this, paletteEntries, paletteEntryCount)
+    end
+    def move_to_first_child(this : IDWritePaintReader*, paintElement : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ELEMENT*, structSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.move_to_first_child.call(this, paintElement, structSize)
+    end
+    def move_to_next_sibling(this : IDWritePaintReader*, paintElement : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_ELEMENT*, structSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.move_to_next_sibling.call(this, paintElement, structSize)
+    end
+    def move_to_parent(this : IDWritePaintReader*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.move_to_parent.call(this)
+    end
+    def get_gradient_stops(this : IDWritePaintReader*, firstGradientStopIndex : UInt32, gradientStopCount : UInt32, gradientStops : Win32cr::Graphics::Direct2D::Common::D2D1_GRADIENT_STOP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gradient_stops.call(this, firstGradientStopIndex, gradientStopCount, gradientStops)
+    end
+    def get_gradient_stop_colors(this : IDWritePaintReader*, firstGradientStopIndex : UInt32, gradientStopCount : UInt32, gradientStopColors : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_COLOR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gradient_stop_colors.call(this, firstGradientStopIndex, gradientStopCount, gradientStopColors)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDWriteFontFace7Vtable,
+    query_interface : Proc(IDWriteFontFace7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDWriteFontFace7*, UInt32),
+    release : Proc(IDWriteFontFace7*, UInt32),
+    get_type : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE),
+    get_files : Proc(IDWriteFontFace7*, UInt32*, Void**, Win32cr::Foundation::HRESULT),
+    get_index : Proc(IDWriteFontFace7*, UInt32),
+    get_simulations : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS),
+    is_symbol_font : Proc(IDWriteFontFace7*, Win32cr::Foundation::BOOL),
+    get_metrics_1 : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Void),
+    get_glyph_count : Proc(IDWriteFontFace7*, UInt16),
+    get_design_glyph_metrics : Proc(IDWriteFontFace7*, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_glyph_indices : Proc(IDWriteFontFace7*, UInt32*, UInt32, UInt16*, Win32cr::Foundation::HRESULT),
+    try_get_font_table : Proc(IDWriteFontFace7*, UInt32, Void**, UInt32*, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    release_font_table : Proc(IDWriteFontFace7*, Void*, Void),
+    get_glyph_run_outline : Proc(IDWriteFontFace7*, Float32, UInt16*, Float32*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_1 : Proc(IDWriteFontFace7*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_gdi_compatible_metrics_1 : Proc(IDWriteFontFace7*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*, Win32cr::Foundation::HRESULT),
+    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace7*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, UInt16*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_metrics_2 : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Void),
+    get_gdi_compatible_metrics_2 : Proc(IDWriteFontFace7*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*, Win32cr::Foundation::HRESULT),
+    get_caret_metrics : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_CARET_METRICS*, Void),
+    get_unicode_ranges : Proc(IDWriteFontFace7*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_UNICODE_RANGE*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_monospaced_font : Proc(IDWriteFontFace7*, Win32cr::Foundation::BOOL),
+    get_design_glyph_advances : Proc(IDWriteFontFace7*, UInt32, UInt16*, Int32*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace7*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
+    get_kerning_pair_adjustments : Proc(IDWriteFontFace7*, UInt32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
+    has_kerning_pairs : Proc(IDWriteFontFace7*, Win32cr::Foundation::BOOL),
+    get_recommended_rendering_mode_2 : Proc(IDWriteFontFace7*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Foundation::HRESULT),
+    get_vertical_glyph_variants : Proc(IDWriteFontFace7*, UInt32, UInt16*, UInt16*, Win32cr::Foundation::HRESULT),
+    has_vertical_glyph_variants : Proc(IDWriteFontFace7*, Win32cr::Foundation::BOOL),
+    is_color_font : Proc(IDWriteFontFace7*, Win32cr::Foundation::BOOL),
+    get_color_palette_count : Proc(IDWriteFontFace7*, UInt32),
+    get_palette_entry_count : Proc(IDWriteFontFace7*, UInt32),
+    get_palette_entries : Proc(IDWriteFontFace7*, UInt32, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*, Win32cr::Foundation::HRESULT),
+    get_recommended_rendering_mode_3 : Proc(IDWriteFontFace7*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    get_font_face_reference : Proc(IDWriteFontFace7*, Void**, Win32cr::Foundation::HRESULT),
+    get_panose : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*, Void),
+    get_weight : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT),
+    get_stretch : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH),
+    get_style : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE),
+    get_family_names_1 : Proc(IDWriteFontFace7*, Void**, Win32cr::Foundation::HRESULT),
+    get_face_names_1 : Proc(IDWriteFontFace7*, Void**, Win32cr::Foundation::HRESULT),
+    get_informational_strings : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, Void**, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    has_character : Proc(IDWriteFontFace7*, UInt32, Win32cr::Foundation::BOOL),
+    get_recommended_rendering_mode_4 : Proc(IDWriteFontFace7*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Void*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*, Win32cr::Foundation::HRESULT),
+    is_character_local : Proc(IDWriteFontFace7*, UInt32, Win32cr::Foundation::BOOL),
+    is_glyph_local : Proc(IDWriteFontFace7*, UInt16, Win32cr::Foundation::BOOL),
+    are_characters_local : Proc(IDWriteFontFace7*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    are_glyphs_local : Proc(IDWriteFontFace7*, UInt16*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_glyph_image_formats_1 : Proc(IDWriteFontFace7*, UInt16, UInt32, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS*, Win32cr::Foundation::HRESULT),
+    get_glyph_image_formats_2 : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS),
+    get_glyph_image_data : Proc(IDWriteFontFace7*, UInt16, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_DATA*, Void**, Win32cr::Foundation::HRESULT),
+    release_glyph_image_data : Proc(IDWriteFontFace7*, Void*, Void),
+    get_font_axis_value_count : Proc(IDWriteFontFace7*, UInt32),
+    get_font_axis_values : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Win32cr::Foundation::HRESULT),
+    has_variations : Proc(IDWriteFontFace7*, Win32cr::Foundation::BOOL),
+    get_font_resource : Proc(IDWriteFontFace7*, Void**, Win32cr::Foundation::HRESULT),
+    equals : Proc(IDWriteFontFace7*, Void*, Win32cr::Foundation::BOOL),
+    get_family_names_2 : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
+    get_face_names_2 : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
+    get_paint_feature_level : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL),
+    create_paint_reader : Proc(IDWriteFontFace7*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDWriteFontFace7, lpVtbl : IDWriteFontFace7Vtable* do
+    GUID = LibC::GUID.new(0x3945b85b_u32, 0xbc95_u16, 0x40f7_u16, StaticArray[0xb7_u8, 0x2c_u8, 0x8b_u8, 0x73_u8, 0xbf_u8, 0xc7_u8, 0xe1_u8, 0x3b_u8])
+    def query_interface(this : IDWriteFontFace7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDWriteFontFace7*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDWriteFontFace7*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type(this : IDWriteFontFace7*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE
+      @lpVtbl.try &.value.get_type.call(this)
+    end
+    def get_files(this : IDWriteFontFace7*, numberOfFiles : UInt32*, fontFiles : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_files.call(this, numberOfFiles, fontFiles)
+    end
+    def get_index(this : IDWriteFontFace7*) : UInt32
+      @lpVtbl.try &.value.get_index.call(this)
+    end
+    def get_simulations(this : IDWriteFontFace7*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS
+      @lpVtbl.try &.value.get_simulations.call(this)
+    end
+    def is_symbol_font(this : IDWriteFontFace7*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_symbol_font.call(this)
+    end
+    def get_metrics_1(this : IDWriteFontFace7*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Void
+      @lpVtbl.try &.value.get_metrics_1.call(this, fontFaceMetrics)
+    end
+    def get_glyph_count(this : IDWriteFontFace7*) : UInt16
+      @lpVtbl.try &.value.get_glyph_count.call(this)
+    end
+    def get_design_glyph_metrics(this : IDWriteFontFace7*, glyphIndices : UInt16*, glyphCount : UInt32, glyphMetrics : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, isSideways : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_design_glyph_metrics.call(this, glyphIndices, glyphCount, glyphMetrics, isSideways)
+    end
+    def get_glyph_indices(this : IDWriteFontFace7*, codePoints : UInt32*, codePointCount : UInt32, glyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_glyph_indices.call(this, codePoints, codePointCount, glyphIndices)
+    end
+    def try_get_font_table(this : IDWriteFontFace7*, openTypeTableTag : UInt32, tableData : Void**, tableSize : UInt32*, tableContext : Void**, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_get_font_table.call(this, openTypeTableTag, tableData, tableSize, tableContext, exists)
+    end
+    def release_font_table(this : IDWriteFontFace7*, tableContext : Void*) : Void
+      @lpVtbl.try &.value.release_font_table.call(this, tableContext)
+    end
+    def get_glyph_run_outline(this : IDWriteFontFace7*, emSize : Float32, glyphIndices : UInt16*, glyphAdvances : Float32*, glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, glyphCount : UInt32, isSideways : Win32cr::Foundation::BOOL, isRightToLeft : Win32cr::Foundation::BOOL, geometrySink : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_glyph_run_outline.call(this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink)
+    end
+    def get_recommended_rendering_mode_1(this : IDWriteFontFace7*, emSize : Float32, pixelsPerDip : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_1.call(this, emSize, pixelsPerDip, measuringMode, renderingParams, renderingMode)
+    end
+    def get_gdi_compatible_metrics_1(this : IDWriteFontFace7*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontFaceMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gdi_compatible_metrics_1.call(this, emSize, pixelsPerDip, transform, fontFaceMetrics)
+    end
+    def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace7*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, glyphIndices : UInt16*, glyphCount : UInt32, glyphMetrics : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_METRICS*, isSideways : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gdi_compatible_glyph_metrics.call(this, emSize, pixelsPerDip, transform, useGdiNatural, glyphIndices, glyphCount, glyphMetrics, isSideways)
+    end
+    def get_metrics_2(this : IDWriteFontFace7*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*) : Void
+      @lpVtbl.try &.value.get_metrics_2.call(this, fontMetrics)
+    end
+    def get_gdi_compatible_metrics_2(this : IDWriteFontFace7*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, fontMetrics : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS1*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gdi_compatible_metrics_2.call(this, emSize, pixelsPerDip, transform, fontMetrics)
+    end
+    def get_caret_metrics(this : IDWriteFontFace7*, caretMetrics : Win32cr::Graphics::DirectWrite::DWRITE_CARET_METRICS*) : Void
+      @lpVtbl.try &.value.get_caret_metrics.call(this, caretMetrics)
+    end
+    def get_unicode_ranges(this : IDWriteFontFace7*, maxRangeCount : UInt32, unicodeRanges : Win32cr::Graphics::DirectWrite::DWRITE_UNICODE_RANGE*, actualRangeCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_unicode_ranges.call(this, maxRangeCount, unicodeRanges, actualRangeCount)
+    end
+    def is_monospaced_font(this : IDWriteFontFace7*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_monospaced_font.call(this)
+    end
+    def get_design_glyph_advances(this : IDWriteFontFace7*, glyphCount : UInt32, glyphIndices : UInt16*, glyphAdvances : Int32*, isSideways : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_design_glyph_advances.call(this, glyphCount, glyphIndices, glyphAdvances, isSideways)
+    end
+    def get_gdi_compatible_glyph_advances(this : IDWriteFontFace7*, emSize : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, isSideways : Win32cr::Foundation::BOOL, glyphCount : UInt32, glyphIndices : UInt16*, glyphAdvances : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gdi_compatible_glyph_advances.call(this, emSize, pixelsPerDip, transform, useGdiNatural, isSideways, glyphCount, glyphIndices, glyphAdvances)
+    end
+    def get_kerning_pair_adjustments(this : IDWriteFontFace7*, glyphCount : UInt32, glyphIndices : UInt16*, glyphAdvanceAdjustments : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_kerning_pair_adjustments.call(this, glyphCount, glyphIndices, glyphAdvanceAdjustments)
+    end
+    def has_kerning_pairs(this : IDWriteFontFace7*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.has_kerning_pairs.call(this)
+    end
+    def get_recommended_rendering_mode_2(this : IDWriteFontFace7*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_2.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingMode)
+    end
+    def get_vertical_glyph_variants(this : IDWriteFontFace7*, glyphCount : UInt32, nominalGlyphIndices : UInt16*, verticalGlyphIndices : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vertical_glyph_variants.call(this, glyphCount, nominalGlyphIndices, verticalGlyphIndices)
+    end
+    def has_vertical_glyph_variants(this : IDWriteFontFace7*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.has_vertical_glyph_variants.call(this)
+    end
+    def is_color_font(this : IDWriteFontFace7*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_color_font.call(this)
+    end
+    def get_color_palette_count(this : IDWriteFontFace7*) : UInt32
+      @lpVtbl.try &.value.get_color_palette_count.call(this)
+    end
+    def get_palette_entry_count(this : IDWriteFontFace7*) : UInt32
+      @lpVtbl.try &.value.get_palette_entry_count.call(this)
+    end
+    def get_palette_entries(this : IDWriteFontFace7*, colorPaletteIndex : UInt32, firstEntryIndex : UInt32, entryCount : UInt32, paletteEntries : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_palette_entries.call(this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries)
+    end
+    def get_recommended_rendering_mode_3(this : IDWriteFontFace7*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_3.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    end
+    def get_font_face_reference(this : IDWriteFontFace7*, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_face_reference.call(this, fontFaceReference)
+    end
+    def get_panose(this : IDWriteFontFace7*, panose : Win32cr::Graphics::DirectWrite::DWRITE_PANOSE*) : Void
+      @lpVtbl.try &.value.get_panose.call(this, panose)
+    end
+    def get_weight(this : IDWriteFontFace7*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT
+      @lpVtbl.try &.value.get_weight.call(this)
+    end
+    def get_stretch(this : IDWriteFontFace7*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH
+      @lpVtbl.try &.value.get_stretch.call(this)
+    end
+    def get_style(this : IDWriteFontFace7*) : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE
+      @lpVtbl.try &.value.get_style.call(this)
+    end
+    def get_family_names_1(this : IDWriteFontFace7*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_family_names_1.call(this, names)
+    end
+    def get_face_names_1(this : IDWriteFontFace7*, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_face_names_1.call(this, names)
+    end
+    def get_informational_strings(this : IDWriteFontFace7*, informationalStringID : Win32cr::Graphics::DirectWrite::DWRITE_INFORMATIONAL_STRING_ID, informationalStrings : Void**, exists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_informational_strings.call(this, informationalStringID, informationalStrings, exists)
+    end
+    def has_character(this : IDWriteFontFace7*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.has_character.call(this, unicodeValue)
+    end
+    def get_recommended_rendering_mode_4(this : IDWriteFontFace7*, fontEmSize : Float32, dpiX : Float32, dpiY : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, isSideways : Win32cr::Foundation::BOOL, outlineThreshold : Win32cr::Graphics::DirectWrite::DWRITE_OUTLINE_THRESHOLD, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, renderingParams : Void*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1*, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recommended_rendering_mode_4.call(this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, renderingMode, gridFitMode)
+    end
+    def is_character_local(this : IDWriteFontFace7*, unicodeValue : UInt32) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_character_local.call(this, unicodeValue)
+    end
+    def is_glyph_local(this : IDWriteFontFace7*, glyphId : UInt16) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_glyph_local.call(this, glyphId)
+    end
+    def are_characters_local(this : IDWriteFontFace7*, characters : Win32cr::Foundation::PWSTR, characterCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.are_characters_local.call(this, characters, characterCount, enqueueIfNotLocal, isLocal)
+    end
+    def are_glyphs_local(this : IDWriteFontFace7*, glyphIndices : UInt16*, glyphCount : UInt32, enqueueIfNotLocal : Win32cr::Foundation::BOOL, isLocal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.are_glyphs_local.call(this, glyphIndices, glyphCount, enqueueIfNotLocal, isLocal)
+    end
+    def get_glyph_image_formats_1(this : IDWriteFontFace7*, glyphId : UInt16, pixelsPerEmFirst : UInt32, pixelsPerEmLast : UInt32, glyphImageFormats : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_glyph_image_formats_1.call(this, glyphId, pixelsPerEmFirst, pixelsPerEmLast, glyphImageFormats)
+    end
+    def get_glyph_image_formats_2(this : IDWriteFontFace7*) : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS
+      @lpVtbl.try &.value.get_glyph_image_formats_2.call(this)
+    end
+    def get_glyph_image_data(this : IDWriteFontFace7*, glyphId : UInt16, pixelsPerEm : UInt32, glyphImageFormat : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, glyphData : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_DATA*, glyphDataContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_glyph_image_data.call(this, glyphId, pixelsPerEm, glyphImageFormat, glyphData, glyphDataContext)
+    end
+    def release_glyph_image_data(this : IDWriteFontFace7*, glyphDataContext : Void*) : Void
+      @lpVtbl.try &.value.release_glyph_image_data.call(this, glyphDataContext)
+    end
+    def get_font_axis_value_count(this : IDWriteFontFace7*) : UInt32
+      @lpVtbl.try &.value.get_font_axis_value_count.call(this)
+    end
+    def get_font_axis_values(this : IDWriteFontFace7*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_axis_values.call(this, fontAxisValues, fontAxisValueCount)
+    end
+    def has_variations(this : IDWriteFontFace7*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.has_variations.call(this)
+    end
+    def get_font_resource(this : IDWriteFontFace7*, fontResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_resource.call(this, fontResource)
+    end
+    def equals(this : IDWriteFontFace7*, fontFace : Void*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.equals.call(this, fontFace)
+    end
+    def get_family_names_2(this : IDWriteFontFace7*, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_family_names_2.call(this, fontFamilyModel, names)
+    end
+    def get_face_names_2(this : IDWriteFontFace7*, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, names : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_face_names_2.call(this, fontFamilyModel, names)
+    end
+    def get_paint_feature_level(this : IDWriteFontFace7*, glyphImageFormat : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS) : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL
+      @lpVtbl.try &.value.get_paint_feature_level.call(this, glyphImageFormat)
+    end
+    def create_paint_reader(this : IDWriteFontFace7*, glyphImageFormat : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, paintFeatureLevel : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL, paintReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_paint_reader.call(this, glyphImageFormat, paintFeatureLevel, paintReader)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDWriteFactory8Vtable,
+    query_interface : Proc(IDWriteFactory8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDWriteFactory8*, UInt32),
+    release : Proc(IDWriteFactory8*, UInt32),
+    get_system_font_collection_1 : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    create_custom_font_collection : Proc(IDWriteFactory8*, Void*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    register_font_collection_loader : Proc(IDWriteFactory8*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_font_collection_loader : Proc(IDWriteFactory8*, Void*, Win32cr::Foundation::HRESULT),
+    create_font_file_reference : Proc(IDWriteFactory8*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_font_file_reference : Proc(IDWriteFactory8*, Void*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, UInt32, Void**, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
+    create_rendering_params : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_monitor_rendering_params : Proc(IDWriteFactory8*, Win32cr::Graphics::Gdi::HMONITOR, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_1 : Proc(IDWriteFactory8*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    register_font_file_loader : Proc(IDWriteFactory8*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_font_file_loader : Proc(IDWriteFactory8*, Void*, Win32cr::Foundation::HRESULT),
+    create_text_format_1 : Proc(IDWriteFactory8*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_typography : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    get_gdi_interop : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_text_layout : Proc(IDWriteFactory8*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_gdi_compatible_text_layout : Proc(IDWriteFactory8*, Win32cr::Foundation::PWSTR, UInt32, Void*, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_ellipsis_trimming_sign : Proc(IDWriteFactory8*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_text_analyzer : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_number_substitution : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_1 : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    get_eudc_font_collection : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_2 : Proc(IDWriteFactory8*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_fallback : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_fallback_builder : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    translate_color_glyph_run_1 : Proc(IDWriteFactory8*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_3 : Proc(IDWriteFactory8*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_2 : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_glyph_run_analysis_3 : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, Void**, Win32cr::Foundation::HRESULT),
+    create_custom_rendering_params_4 : Proc(IDWriteFactory8*, Float32, Float32, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face_reference_1 : Proc(IDWriteFactory8*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face_reference_2 : Proc(IDWriteFactory8*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_set_1 : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_set_builder_1 : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_font_collection_from_font_set_1 : Proc(IDWriteFactory8*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_2 : Proc(IDWriteFactory8*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_font_download_queue : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    translate_color_glyph_run_2 : Proc(IDWriteFactory8*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    compute_glyph_origins_1 : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, Win32cr::Foundation::HRESULT),
+    compute_glyph_origins_2 : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, Win32cr::Foundation::HRESULT),
+    create_font_set_builder_2 : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_in_memory_font_file_loader : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_http_font_file_loader : Proc(IDWriteFactory8*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    analyze_container_type : Proc(IDWriteFactory8*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE),
+    unpack_font_file : Proc(IDWriteFactory8*, Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_font_face_reference_3 : Proc(IDWriteFactory8*, Void*, UInt32, Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_font_resource : Proc(IDWriteFactory8*, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_set_2 : Proc(IDWriteFactory8*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_3 : Proc(IDWriteFactory8*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
+    create_font_collection_from_font_set_2 : Proc(IDWriteFactory8*, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
+    create_font_set_builder_3 : Proc(IDWriteFactory8*, Void**, Win32cr::Foundation::HRESULT),
+    create_text_format_2 : Proc(IDWriteFactory8*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_set_3 : Proc(IDWriteFactory8*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    get_system_font_collection_4 : Proc(IDWriteFactory8*, Win32cr::Foundation::BOOL, Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, Void**, Win32cr::Foundation::HRESULT),
+    translate_color_glyph_run_3 : Proc(IDWriteFactory8*, Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDWriteFactory8, lpVtbl : IDWriteFactory8Vtable* do
+    GUID = LibC::GUID.new(0xee0a7fb5_u32, 0xdef4_u16, 0x4c23_u16, StaticArray[0xa4_u8, 0x54_u8, 0xc9_u8, 0xc7_u8, 0xdc_u8, 0x87_u8, 0x83_u8, 0x98_u8])
+    def query_interface(this : IDWriteFactory8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDWriteFactory8*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDWriteFactory8*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_system_font_collection_1(this : IDWriteFactory8*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_1.call(this, fontCollection, checkForUpdates)
+    end
+    def create_custom_font_collection(this : IDWriteFactory8*, collectionLoader : Void*, collectionKey : Void*, collectionKeySize : UInt32, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_font_collection.call(this, collectionLoader, collectionKey, collectionKeySize, fontCollection)
+    end
+    def register_font_collection_loader(this : IDWriteFactory8*, fontCollectionLoader : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_font_collection_loader.call(this, fontCollectionLoader)
+    end
+    def unregister_font_collection_loader(this : IDWriteFactory8*, fontCollectionLoader : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_font_collection_loader.call(this, fontCollectionLoader)
+    end
+    def create_font_file_reference(this : IDWriteFactory8*, filePath : Win32cr::Foundation::PWSTR, lastWriteTime : Win32cr::Foundation::FILETIME*, fontFile : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_file_reference.call(this, filePath, lastWriteTime, fontFile)
+    end
+    def create_custom_font_file_reference(this : IDWriteFactory8*, fontFileReferenceKey : Void*, fontFileReferenceKeySize : UInt32, fontFileLoader : Void*, fontFile : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_font_file_reference.call(this, fontFileReferenceKey, fontFileReferenceKeySize, fontFileLoader, fontFile)
+    end
+    def create_font_face(this : IDWriteFactory8*, fontFaceType : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FACE_TYPE, numberOfFiles : UInt32, fontFiles : Void**, faceIndex : UInt32, fontFaceSimulationFlags : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFace : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face.call(this, fontFaceType, numberOfFiles, fontFiles, faceIndex, fontFaceSimulationFlags, fontFace)
+    end
+    def create_rendering_params(this : IDWriteFactory8*, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_rendering_params.call(this, renderingParams)
+    end
+    def create_monitor_rendering_params(this : IDWriteFactory8*, monitor : Win32cr::Graphics::Gdi::HMONITOR, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_monitor_rendering_params.call(this, monitor, renderingParams)
+    end
+    def create_custom_rendering_params_1(this : IDWriteFactory8*, gamma : Float32, enhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_1.call(this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    end
+    def register_font_file_loader(this : IDWriteFactory8*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_font_file_loader.call(this, fontFileLoader)
+    end
+    def unregister_font_file_loader(this : IDWriteFactory8*, fontFileLoader : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_font_file_loader.call(this, fontFileLoader)
+    end
+    def create_text_format_1(this : IDWriteFactory8*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontWeight : Win32cr::Graphics::DirectWrite::DWRITE_FONT_WEIGHT, fontStyle : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STYLE, fontStretch : Win32cr::Graphics::DirectWrite::DWRITE_FONT_STRETCH, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format_1.call(this, fontFamilyName, fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName, textFormat)
+    end
+    def create_typography(this : IDWriteFactory8*, typography : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_typography.call(this, typography)
+    end
+    def get_gdi_interop(this : IDWriteFactory8*, gdiInterop : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gdi_interop.call(this, gdiInterop)
+    end
+    def create_text_layout(this : IDWriteFactory8*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, maxWidth : Float32, maxHeight : Float32, textLayout : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_layout.call(this, string, stringLength, textFormat, maxWidth, maxHeight, textLayout)
+    end
+    def create_gdi_compatible_text_layout(this : IDWriteFactory8*, string : Win32cr::Foundation::PWSTR, stringLength : UInt32, textFormat : Void*, layoutWidth : Float32, layoutHeight : Float32, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, useGdiNatural : Win32cr::Foundation::BOOL, textLayout : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_gdi_compatible_text_layout.call(this, string, stringLength, textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, textLayout)
+    end
+    def create_ellipsis_trimming_sign(this : IDWriteFactory8*, textFormat : Void*, trimmingSign : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_ellipsis_trimming_sign.call(this, textFormat, trimmingSign)
+    end
+    def create_text_analyzer(this : IDWriteFactory8*, textAnalyzer : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_analyzer.call(this, textAnalyzer)
+    end
+    def create_number_substitution(this : IDWriteFactory8*, substitutionMethod : Win32cr::Graphics::DirectWrite::DWRITE_NUMBER_SUBSTITUTION_METHOD, localeName : Win32cr::Foundation::PWSTR, ignoreUserOverride : Win32cr::Foundation::BOOL, numberSubstitution : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_number_substitution.call(this, substitutionMethod, localeName, ignoreUserOverride, numberSubstitution)
+    end
+    def create_glyph_run_analysis_1(this : IDWriteFactory8*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, pixelsPerDip : Float32, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_1.call(this, glyphRun, pixelsPerDip, transform, renderingMode, measuringMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    end
+    def get_eudc_font_collection(this : IDWriteFactory8*, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_eudc_font_collection.call(this, fontCollection, checkForUpdates)
+    end
+    def create_custom_rendering_params_2(this : IDWriteFactory8*, gamma : Float32, enhancedContrast : Float32, enhancedContrastGrayscale : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_2.call(this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, renderingParams)
+    end
+    def get_system_font_fallback(this : IDWriteFactory8*, fontFallback : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_fallback.call(this, fontFallback)
+    end
+    def create_font_fallback_builder(this : IDWriteFactory8*, fontFallbackBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_fallback_builder.call(this, fontFallbackBuilder)
+    end
+    def translate_color_glyph_run_1(this : IDWriteFactory8*, baselineOriginX : Float32, baselineOriginY : Float32, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldToDeviceTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.translate_color_glyph_run_1.call(this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, colorLayers)
+    end
+    def create_custom_rendering_params_3(this : IDWriteFactory8*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_3.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    end
+    def create_glyph_run_analysis_2(this : IDWriteFactory8*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_2.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    end
+    def create_glyph_run_analysis_3(this : IDWriteFactory8*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX : Float32, baselineOriginY : Float32, glyphRunAnalysis : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_glyph_run_analysis_3.call(this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, glyphRunAnalysis)
+    end
+    def create_custom_rendering_params_4(this : IDWriteFactory8*, gamma : Float32, enhancedContrast : Float32, grayscaleEnhancedContrast : Float32, clearTypeLevel : Float32, pixelGeometry : Win32cr::Graphics::DirectWrite::DWRITE_PIXEL_GEOMETRY, renderingMode : Win32cr::Graphics::DirectWrite::DWRITE_RENDERING_MODE1, gridFitMode : Win32cr::Graphics::DirectWrite::DWRITE_GRID_FIT_MODE, renderingParams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_custom_rendering_params_4.call(this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, renderingParams)
+    end
+    def create_font_face_reference_1(this : IDWriteFactory8*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face_reference_1.call(this, fontFile, faceIndex, fontSimulations, fontFaceReference)
+    end
+    def create_font_face_reference_2(this : IDWriteFactory8*, filePath : Win32cr::Foundation::PWSTR, lastWriteTime : Win32cr::Foundation::FILETIME*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face_reference_2.call(this, filePath, lastWriteTime, faceIndex, fontSimulations, fontFaceReference)
+    end
+    def get_system_font_set_1(this : IDWriteFactory8*, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_set_1.call(this, fontSet)
+    end
+    def create_font_set_builder_1(this : IDWriteFactory8*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_set_builder_1.call(this, fontSetBuilder)
+    end
+    def create_font_collection_from_font_set_1(this : IDWriteFactory8*, fontSet : Void*, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_collection_from_font_set_1.call(this, fontSet, fontCollection)
+    end
+    def get_system_font_collection_2(this : IDWriteFactory8*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontCollection : Void**, checkForUpdates : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_2.call(this, includeDownloadableFonts, fontCollection, checkForUpdates)
+    end
+    def get_font_download_queue(this : IDWriteFactory8*, fontDownloadQueue : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_font_download_queue.call(this, fontDownloadQueue)
+    end
+    def translate_color_glyph_run_2(this : IDWriteFactory8*, baselineOrigin : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, desiredGlyphImageFormats : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldAndDpiTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorLayers : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.translate_color_glyph_run_2.call(this, baselineOrigin, glyphRun, glyphRunDescription, desiredGlyphImageFormats, measuringMode, worldAndDpiTransform, colorPaletteIndex, colorLayers)
+    end
+    def compute_glyph_origins_1(this : IDWriteFactory8*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, baselineOrigin : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, glyphOrigins : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.compute_glyph_origins_1.call(this, glyphRun, baselineOrigin, glyphOrigins)
+    end
+    def compute_glyph_origins_2(this : IDWriteFactory8*, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, baselineOrigin : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, worldAndDpiTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, glyphOrigins : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.compute_glyph_origins_2.call(this, glyphRun, measuringMode, baselineOrigin, worldAndDpiTransform, glyphOrigins)
+    end
+    def create_font_set_builder_2(this : IDWriteFactory8*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_set_builder_2.call(this, fontSetBuilder)
+    end
+    def create_in_memory_font_file_loader(this : IDWriteFactory8*, newLoader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_in_memory_font_file_loader.call(this, newLoader)
+    end
+    def create_http_font_file_loader(this : IDWriteFactory8*, referrerUrl : Win32cr::Foundation::PWSTR, extraHeaders : Win32cr::Foundation::PWSTR, newLoader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_http_font_file_loader.call(this, referrerUrl, extraHeaders, newLoader)
+    end
+    def analyze_container_type(this : IDWriteFactory8*, fileData : Void*, fileDataSize : UInt32) : Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE
+      @lpVtbl.try &.value.analyze_container_type.call(this, fileData, fileDataSize)
+    end
+    def unpack_font_file(this : IDWriteFactory8*, containerType : Win32cr::Graphics::DirectWrite::DWRITE_CONTAINER_TYPE, fileData : Void*, fileDataSize : UInt32, unpackedFontStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unpack_font_file.call(this, containerType, fileData, fileDataSize, unpackedFontStream)
+    end
+    def create_font_face_reference_3(this : IDWriteFactory8*, fontFile : Void*, faceIndex : UInt32, fontSimulations : Win32cr::Graphics::DirectWrite::DWRITE_FONT_SIMULATIONS, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontFaceReference : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_face_reference_3.call(this, fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontFaceReference)
+    end
+    def create_font_resource(this : IDWriteFactory8*, fontFile : Void*, faceIndex : UInt32, fontResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_resource.call(this, fontFile, faceIndex, fontResource)
+    end
+    def get_system_font_set_2(this : IDWriteFactory8*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_set_2.call(this, includeDownloadableFonts, fontSet)
+    end
+    def get_system_font_collection_3(this : IDWriteFactory8*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_3.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
+    end
+    def create_font_collection_from_font_set_2(this : IDWriteFactory8*, fontSet : Void*, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_collection_from_font_set_2.call(this, fontSet, fontFamilyModel, fontCollection)
+    end
+    def create_font_set_builder_3(this : IDWriteFactory8*, fontSetBuilder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_font_set_builder_3.call(this, fontSetBuilder)
+    end
+    def create_text_format_2(this : IDWriteFactory8*, fontFamilyName : Win32cr::Foundation::PWSTR, fontCollection : Void*, fontAxisValues : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_VALUE*, fontAxisValueCount : UInt32, fontSize : Float32, localeName : Win32cr::Foundation::PWSTR, textFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_text_format_2.call(this, fontFamilyName, fontCollection, fontAxisValues, fontAxisValueCount, fontSize, localeName, textFormat)
+    end
+    def get_system_font_set_3(this : IDWriteFactory8*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_set_3.call(this, includeDownloadableFonts, fontSet)
+    end
+    def get_system_font_collection_4(this : IDWriteFactory8*, includeDownloadableFonts : Win32cr::Foundation::BOOL, fontFamilyModel : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FAMILY_MODEL, fontCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_system_font_collection_4.call(this, includeDownloadableFonts, fontFamilyModel, fontCollection)
+    end
+    def translate_color_glyph_run_3(this : IDWriteFactory8*, baselineOrigin : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, desiredGlyphImageFormats : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, paintFeatureLevel : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, worldAndDpiTransform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, colorPaletteIndex : UInt32, colorEnumerator : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.translate_color_glyph_run_3.call(this, baselineOrigin, glyphRun, glyphRunDescription, desiredGlyphImageFormats, paintFeatureLevel, measuringMode, worldAndDpiTransform, colorPaletteIndex, colorEnumerator)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDWriteBitmapRenderTarget3Vtable,
+    query_interface : Proc(IDWriteBitmapRenderTarget3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDWriteBitmapRenderTarget3*, UInt32),
+    release : Proc(IDWriteBitmapRenderTarget3*, UInt32),
+    draw_glyph_run : Proc(IDWriteBitmapRenderTarget3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Void*, Win32cr::Foundation::COLORREF, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
+    get_memory_dc : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Graphics::Gdi::HDC),
+    get_pixels_per_dip : Proc(IDWriteBitmapRenderTarget3*, Float32),
+    set_pixels_per_dip : Proc(IDWriteBitmapRenderTarget3*, Float32, Win32cr::Foundation::HRESULT),
+    get_current_transform : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
+    set_current_transform : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*, Win32cr::Foundation::HRESULT),
+    get_size : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Foundation::SIZE*, Win32cr::Foundation::HRESULT),
+    resize : Proc(IDWriteBitmapRenderTarget3*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    get_text_antialias_mode : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE),
+    set_text_antialias_mode : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE, Win32cr::Foundation::HRESULT),
+    get_bitmap_data : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Graphics::DirectWrite::DWRITE_BITMAP_DATA_BGRA32*, Win32cr::Foundation::HRESULT),
+    get_paint_feature_level : Proc(IDWriteBitmapRenderTarget3*, Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL),
+    draw_paint_glyph_run : Proc(IDWriteBitmapRenderTarget3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, Win32cr::Foundation::COLORREF, UInt32, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
+    draw_glyph_run_with_color_support : Proc(IDWriteBitmapRenderTarget3*, Float32, Float32, Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, Void*, Win32cr::Foundation::COLORREF, UInt32, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDWriteBitmapRenderTarget3, lpVtbl : IDWriteBitmapRenderTarget3Vtable* do
+    GUID = LibC::GUID.new(0xaeec37db_u32, 0xc337_u16, 0x40f1_u16, StaticArray[0x8e_u8, 0x2a_u8, 0x9a_u8, 0x41_u8, 0xb1_u8, 0x67_u8, 0xb2_u8, 0x38_u8])
+    def query_interface(this : IDWriteBitmapRenderTarget3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDWriteBitmapRenderTarget3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDWriteBitmapRenderTarget3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def draw_glyph_run(this : IDWriteBitmapRenderTarget3*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, renderingParams : Void*, textColor : Win32cr::Foundation::COLORREF, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_glyph_run.call(this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, renderingParams, textColor, blackBoxRect)
+    end
+    def get_memory_dc(this : IDWriteBitmapRenderTarget3*) : Win32cr::Graphics::Gdi::HDC
+      @lpVtbl.try &.value.get_memory_dc.call(this)
+    end
+    def get_pixels_per_dip(this : IDWriteBitmapRenderTarget3*) : Float32
+      @lpVtbl.try &.value.get_pixels_per_dip.call(this)
+    end
+    def set_pixels_per_dip(this : IDWriteBitmapRenderTarget3*, pixelsPerDip : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_pixels_per_dip.call(this, pixelsPerDip)
+    end
+    def get_current_transform(this : IDWriteBitmapRenderTarget3*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_transform.call(this, transform)
+    end
+    def set_current_transform(this : IDWriteBitmapRenderTarget3*, transform : Win32cr::Graphics::DirectWrite::DWRITE_MATRIX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_current_transform.call(this, transform)
+    end
+    def get_size(this : IDWriteBitmapRenderTarget3*, size : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, size)
+    end
+    def resize(this : IDWriteBitmapRenderTarget3*, width : UInt32, height : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resize.call(this, width, height)
+    end
+    def get_text_antialias_mode(this : IDWriteBitmapRenderTarget3*) : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE
+      @lpVtbl.try &.value.get_text_antialias_mode.call(this)
+    end
+    def set_text_antialias_mode(this : IDWriteBitmapRenderTarget3*, antialiasMode : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_ANTIALIAS_MODE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_antialias_mode.call(this, antialiasMode)
+    end
+    def get_bitmap_data(this : IDWriteBitmapRenderTarget3*, bitmapData : Win32cr::Graphics::DirectWrite::DWRITE_BITMAP_DATA_BGRA32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_bitmap_data.call(this, bitmapData)
+    end
+    def get_paint_feature_level(this : IDWriteBitmapRenderTarget3*) : Win32cr::Graphics::DirectWrite::DWRITE_PAINT_FEATURE_LEVEL
+      @lpVtbl.try &.value.get_paint_feature_level.call(this)
+    end
+    def draw_paint_glyph_run(this : IDWriteBitmapRenderTarget3*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, glyphImageFormat : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, textColor : Win32cr::Foundation::COLORREF, colorPaletteIndex : UInt32, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_paint_glyph_run.call(this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, glyphImageFormat, textColor, colorPaletteIndex, blackBoxRect)
+    end
+    def draw_glyph_run_with_color_support(this : IDWriteBitmapRenderTarget3*, baselineOriginX : Float32, baselineOriginY : Float32, measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE, glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN*, renderingParams : Void*, textColor : Win32cr::Foundation::COLORREF, colorPaletteIndex : UInt32, blackBoxRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.draw_glyph_run_with_color_support.call(this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, renderingParams, textColor, colorPaletteIndex, blackBoxRect)
+    end
+
+  end
+
   def dWriteCreateFactory(factoryType : Win32cr::Graphics::DirectWrite::DWRITE_FACTORY_TYPE, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DWriteCreateFactory(factoryType, iid, factory)
+    {% end %}
   end
 
   @[Link("dwrite")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DWriteCreateFactory(factoryType : Win32cr::Graphics::DirectWrite::DWRITE_FACTORY_TYPE, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

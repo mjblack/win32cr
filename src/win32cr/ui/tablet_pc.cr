@@ -1,16 +1,17 @@
 require "./../foundation.cr"
 require "./../system/com.cr"
+require "./../system/variant.cr"
 require "./../graphics/gdi.cr"
 require "./../system/ole.cr"
 require "./controls.cr"
 
 module Win32cr::UI::TabletPC
   extend self
-  alias HRECOALT = LibC::IntPtrT
-  alias HRECOCONTEXT = LibC::IntPtrT
-  alias HRECOGNIZER = LibC::IntPtrT
-  alias HRECOLATTICE = LibC::IntPtrT
-  alias HRECOWORDLIST = LibC::IntPtrT
+  alias HRECOALT = Void*
+  alias HRECOCONTEXT = Void*
+  alias HRECOGNIZER = Void*
+  alias HRECOLATTICE = Void*
+  alias HRECOWORDLIST = Void*
   alias PfnRecoCallback = Proc(UInt32, UInt8*, Win32cr::UI::TabletPC::HRECOCONTEXT, Win32cr::Foundation::HRESULT)
 
   MICROSOFT_URL_EXPERIENCE_PROPERTY = "Microsoft TIP URL Experience"
@@ -319,33 +320,33 @@ module Win32cr::UI::TabletPC
   GESTURE_TRIPLE_TAP = 61682_u32
   GESTURE_QUAD_TAP = 61683_u32
   FACILITY_INK = 40_u32
-  GUID_PACKETPROPERTY_GUID_X = "598a6a8f-52c0-4ba0-93af-af357411a561"
-  GUID_PACKETPROPERTY_GUID_Y = "b53f9f75-04e0-4498-a7ee-c30dbb5a9011"
-  GUID_PACKETPROPERTY_GUID_Z = "735adb30-0ebb-4788-a0e4-0f316490055d"
-  GUID_PACKETPROPERTY_GUID_PACKET_STATUS = "6e0e07bf-afe7-4cf7-87d1-af6446208418"
-  GUID_PACKETPROPERTY_GUID_TIMER_TICK = "436510c5-fed3-45d1-8b76-71d3ea7a829d"
-  GUID_PACKETPROPERTY_GUID_SERIAL_NUMBER = "78a81b56-0935-4493-baae-00541a8a16c4"
-  GUID_PACKETPROPERTY_GUID_NORMAL_PRESSURE = "7307502d-f9f4-4e18-b3f2-2ce1b1a3610c"
-  GUID_PACKETPROPERTY_GUID_TANGENT_PRESSURE = "6da4488b-5244-41ec-905b-32d89ab80809"
-  GUID_PACKETPROPERTY_GUID_BUTTON_PRESSURE = "8b7fefc4-96aa-4bfe-ac26-8a5f0be07bf5"
-  GUID_PACKETPROPERTY_GUID_X_TILT_ORIENTATION = "a8d07b3a-8bf0-40b0-95a9-b80a6bb787bf"
-  GUID_PACKETPROPERTY_GUID_Y_TILT_ORIENTATION = "0e932389-1d77-43af-ac00-5b950d6d4b2d"
-  GUID_PACKETPROPERTY_GUID_AZIMUTH_ORIENTATION = "029123b4-8828-410b-b250-a0536595e5dc"
-  GUID_PACKETPROPERTY_GUID_ALTITUDE_ORIENTATION = "82dec5c7-f6ba-4906-894f-66d68dfc456c"
-  GUID_PACKETPROPERTY_GUID_TWIST_ORIENTATION = "0d324960-13b2-41e4-ace6-7ae9d43d2d3b"
-  GUID_PACKETPROPERTY_GUID_PITCH_ROTATION = "7f7e57b7-be37-4be1-a356-7a84160e1893"
-  GUID_PACKETPROPERTY_GUID_ROLL_ROTATION = "5d5d5e56-6ba9-4c5b-9fb0-851c91714e56"
-  GUID_PACKETPROPERTY_GUID_YAW_ROTATION = "6a849980-7c3a-45b7-aa82-90a262950e89"
-  GUID_PACKETPROPERTY_GUID_WIDTH = "baabe94d-2712-48f5-be9d-8f8b5ea0711a"
-  GUID_PACKETPROPERTY_GUID_HEIGHT = "e61858d2-e447-4218-9d3f-18865c203df4"
-  GUID_PACKETPROPERTY_GUID_FINGERCONTACTCONFIDENCE = "e706c804-57f0-4f00-8a0c-853d57789be9"
-  GUID_PACKETPROPERTY_GUID_DEVICE_CONTACT_ID = "02585b91-049b-4750-9615-df8948ab3c9c"
+  GUID_PACKETPROPERTY_GUID_X = LibC::GUID.new(0x598a6a8f_u32, 0x52c0_u16, 0x4ba0_u16, StaticArray[0x93_u8, 0xaf_u8, 0xaf_u8, 0x35_u8, 0x74_u8, 0x11_u8, 0xa5_u8, 0x61_u8])
+  GUID_PACKETPROPERTY_GUID_Y = LibC::GUID.new(0xb53f9f75_u32, 0x4e0_u16, 0x4498_u16, StaticArray[0xa7_u8, 0xee_u8, 0xc3_u8, 0xd_u8, 0xbb_u8, 0x5a_u8, 0x90_u8, 0x11_u8])
+  GUID_PACKETPROPERTY_GUID_Z = LibC::GUID.new(0x735adb30_u32, 0xebb_u16, 0x4788_u16, StaticArray[0xa0_u8, 0xe4_u8, 0xf_u8, 0x31_u8, 0x64_u8, 0x90_u8, 0x5_u8, 0x5d_u8])
+  GUID_PACKETPROPERTY_GUID_PACKET_STATUS = LibC::GUID.new(0x6e0e07bf_u32, 0xafe7_u16, 0x4cf7_u16, StaticArray[0x87_u8, 0xd1_u8, 0xaf_u8, 0x64_u8, 0x46_u8, 0x20_u8, 0x84_u8, 0x18_u8])
+  GUID_PACKETPROPERTY_GUID_TIMER_TICK = LibC::GUID.new(0x436510c5_u32, 0xfed3_u16, 0x45d1_u16, StaticArray[0x8b_u8, 0x76_u8, 0x71_u8, 0xd3_u8, 0xea_u8, 0x7a_u8, 0x82_u8, 0x9d_u8])
+  GUID_PACKETPROPERTY_GUID_SERIAL_NUMBER = LibC::GUID.new(0x78a81b56_u32, 0x935_u16, 0x4493_u16, StaticArray[0xba_u8, 0xae_u8, 0x0_u8, 0x54_u8, 0x1a_u8, 0x8a_u8, 0x16_u8, 0xc4_u8])
+  GUID_PACKETPROPERTY_GUID_NORMAL_PRESSURE = LibC::GUID.new(0x7307502d_u32, 0xf9f4_u16, 0x4e18_u16, StaticArray[0xb3_u8, 0xf2_u8, 0x2c_u8, 0xe1_u8, 0xb1_u8, 0xa3_u8, 0x61_u8, 0xc_u8])
+  GUID_PACKETPROPERTY_GUID_TANGENT_PRESSURE = LibC::GUID.new(0x6da4488b_u32, 0x5244_u16, 0x41ec_u16, StaticArray[0x90_u8, 0x5b_u8, 0x32_u8, 0xd8_u8, 0x9a_u8, 0xb8_u8, 0x8_u8, 0x9_u8])
+  GUID_PACKETPROPERTY_GUID_BUTTON_PRESSURE = LibC::GUID.new(0x8b7fefc4_u32, 0x96aa_u16, 0x4bfe_u16, StaticArray[0xac_u8, 0x26_u8, 0x8a_u8, 0x5f_u8, 0xb_u8, 0xe0_u8, 0x7b_u8, 0xf5_u8])
+  GUID_PACKETPROPERTY_GUID_X_TILT_ORIENTATION = LibC::GUID.new(0xa8d07b3a_u32, 0x8bf0_u16, 0x40b0_u16, StaticArray[0x95_u8, 0xa9_u8, 0xb8_u8, 0xa_u8, 0x6b_u8, 0xb7_u8, 0x87_u8, 0xbf_u8])
+  GUID_PACKETPROPERTY_GUID_Y_TILT_ORIENTATION = LibC::GUID.new(0xe932389_u32, 0x1d77_u16, 0x43af_u16, StaticArray[0xac_u8, 0x0_u8, 0x5b_u8, 0x95_u8, 0xd_u8, 0x6d_u8, 0x4b_u8, 0x2d_u8])
+  GUID_PACKETPROPERTY_GUID_AZIMUTH_ORIENTATION = LibC::GUID.new(0x29123b4_u32, 0x8828_u16, 0x410b_u16, StaticArray[0xb2_u8, 0x50_u8, 0xa0_u8, 0x53_u8, 0x65_u8, 0x95_u8, 0xe5_u8, 0xdc_u8])
+  GUID_PACKETPROPERTY_GUID_ALTITUDE_ORIENTATION = LibC::GUID.new(0x82dec5c7_u32, 0xf6ba_u16, 0x4906_u16, StaticArray[0x89_u8, 0x4f_u8, 0x66_u8, 0xd6_u8, 0x8d_u8, 0xfc_u8, 0x45_u8, 0x6c_u8])
+  GUID_PACKETPROPERTY_GUID_TWIST_ORIENTATION = LibC::GUID.new(0xd324960_u32, 0x13b2_u16, 0x41e4_u16, StaticArray[0xac_u8, 0xe6_u8, 0x7a_u8, 0xe9_u8, 0xd4_u8, 0x3d_u8, 0x2d_u8, 0x3b_u8])
+  GUID_PACKETPROPERTY_GUID_PITCH_ROTATION = LibC::GUID.new(0x7f7e57b7_u32, 0xbe37_u16, 0x4be1_u16, StaticArray[0xa3_u8, 0x56_u8, 0x7a_u8, 0x84_u8, 0x16_u8, 0xe_u8, 0x18_u8, 0x93_u8])
+  GUID_PACKETPROPERTY_GUID_ROLL_ROTATION = LibC::GUID.new(0x5d5d5e56_u32, 0x6ba9_u16, 0x4c5b_u16, StaticArray[0x9f_u8, 0xb0_u8, 0x85_u8, 0x1c_u8, 0x91_u8, 0x71_u8, 0x4e_u8, 0x56_u8])
+  GUID_PACKETPROPERTY_GUID_YAW_ROTATION = LibC::GUID.new(0x6a849980_u32, 0x7c3a_u16, 0x45b7_u16, StaticArray[0xaa_u8, 0x82_u8, 0x90_u8, 0xa2_u8, 0x62_u8, 0x95_u8, 0xe_u8, 0x89_u8])
+  GUID_PACKETPROPERTY_GUID_WIDTH = LibC::GUID.new(0xbaabe94d_u32, 0x2712_u16, 0x48f5_u16, StaticArray[0xbe_u8, 0x9d_u8, 0x8f_u8, 0x8b_u8, 0x5e_u8, 0xa0_u8, 0x71_u8, 0x1a_u8])
+  GUID_PACKETPROPERTY_GUID_HEIGHT = LibC::GUID.new(0xe61858d2_u32, 0xe447_u16, 0x4218_u16, StaticArray[0x9d_u8, 0x3f_u8, 0x18_u8, 0x86_u8, 0x5c_u8, 0x20_u8, 0x3d_u8, 0xf4_u8])
+  GUID_PACKETPROPERTY_GUID_FINGERCONTACTCONFIDENCE = LibC::GUID.new(0xe706c804_u32, 0x57f0_u16, 0x4f00_u16, StaticArray[0x8a_u8, 0xc_u8, 0x85_u8, 0x3d_u8, 0x57_u8, 0x78_u8, 0x9b_u8, 0xe9_u8])
+  GUID_PACKETPROPERTY_GUID_DEVICE_CONTACT_ID = LibC::GUID.new(0x2585b91_u32, 0x49b_u16, 0x4750_u16, StaticArray[0x96_u8, 0x15_u8, 0xdf_u8, 0x89_u8, 0x48_u8, 0xab_u8, 0x3c_u8, 0x9c_u8])
   InkMinTransparencyValue = 0_i32
   InkMaxTransparencyValue = 255_i32
   InkCollectorClipInkToMargin = 0_i32
   InkCollectorDefaultMargin = -2147483648_i32
-  GUID_GESTURE_DATA = "41e4ec0f-26aa-455a-9aa5-2cd36cf63fb9"
-  GUID_DYNAMIC_RENDERER_CACHED_DATA = "bf531b92-25bf-4a95-89ad-0e476b34b4f5"
+  GUID_GESTURE_DATA = LibC::GUID.new(0x41e4ec0f_u32, 0x26aa_u16, 0x455a_u16, StaticArray[0x9a_u8, 0xa5_u8, 0x2c_u8, 0xd3_u8, 0x6c_u8, 0xf6_u8, 0x3f_u8, 0xb9_u8])
+  GUID_DYNAMIC_RENDERER_CACHED_DATA = LibC::GUID.new(0xbf531b92_u32, 0x25bf_u16, 0x4a95_u16, StaticArray[0x89_u8, 0xad_u8, 0xe_u8, 0x47_u8, 0x6b_u8, 0x34_u8, 0xb4_u8, 0xf5_u8])
 
   CLSID_InkDisp = LibC::GUID.new(0x937c1a34_u32, 0x151d_u16, 0x4610_u16, StaticArray[0x9c_u8, 0xa6_u8, 0xa8_u8, 0xcc_u8, 0x9b_u8, 0xdb_u8, 0x5d_u8, 0x83_u8])
 
@@ -422,12 +423,12 @@ module Win32cr::UI::TabletPC
     PROPERTY_UNITS_AMPERE = 15_i32
     PROPERTY_UNITS_CANDELA = 16_i32
   end
-  enum Enuminkmetric_flags
+  enum INK_METRIC_FLAGS
     IMF_FONT_SELECTED_IN_HDC = 1_i32
     IMF_ITALIC = 2_i32
     IMF_BOLD = 4_i32
   end
-  enum Enumgetcandidateflags
+  enum GET_DANDIDATE_FLAGS
     TCF_ALLOW_RECOGNITION = 1_i32
     TCF_FORCE_RECOGNITION = 2_i32
   end
@@ -1452,7 +1453,7 @@ module Win32cr::UI::TabletPC
     ALT_BREAKS_UNIQUE = 1_i32
     ALT_BREAKS_FULL = 2_i32
   end
-  enum Enumreco_type
+  enum RECO_TYPE
     RECO_TYPE_WSTRING = 0_i32
     RECO_TYPE_WCHAR = 1_i32
   end
@@ -1512,8 +1513,8 @@ module Win32cr::UI::TabletPC
     property iFontAscent : Int32
     property iFontDescent : Int32
     property dwFlags : UInt32
-    property color : UInt32
-    def initialize(@iHeight : Int32, @iFontAscent : Int32, @iFontDescent : Int32, @dwFlags : UInt32, @color : UInt32)
+    property color : Win32cr::Foundation::COLORREF
+    def initialize(@iHeight : Int32, @iFontAscent : Int32, @iFontDescent : Int32, @dwFlags : UInt32, @color : Win32cr::Foundation::COLORREF)
     end
   end
 
@@ -1556,8 +1557,8 @@ module Win32cr::UI::TabletPC
     property nmhdr : Win32cr::UI::Controls::NMHDR
     property cursor : Void*
     property strokes : Void*
-    property gestures : Win32cr::System::Com::VARIANT
-    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cursor : Void*, @strokes : Void*, @gestures : Win32cr::System::Com::VARIANT)
+    property gestures : Win32cr::System::Variant::VARIANT
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cursor : Void*, @strokes : Void*, @gestures : Win32cr::System::Variant::VARIANT)
     end
   end
 
@@ -1707,14 +1708,15 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkRectangleVtbl,
+
+  record IInkRectangleVtable,
     query_interface : Proc(IInkRectangle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRectangle*, UInt32),
     release : Proc(IInkRectangle*, UInt32),
     get_type_info_count : Proc(IInkRectangle*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRectangle*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRectangle*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRectangle*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRectangle*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Top : Proc(IInkRectangle*, Int32*, Win32cr::Foundation::HRESULT),
     put_Top : Proc(IInkRectangle*, Int32, Win32cr::Foundation::HRESULT),
     get_Left : Proc(IInkRectangle*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1730,7 +1732,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkRectangle, lpVtbl : IInkRectangleVtbl* do
+  record IInkRectangle, lpVtbl : IInkRectangleVtable* do
     GUID = LibC::GUID.new(0x9794ff82_u32, 0x6071_u16, 0x4717_u16, StaticArray[0x8a_u8, 0x8b_u8, 0x6a_u8, 0xc7_u8, 0xc6_u8, 0x4a_u8, 0x68_u8, 0x6e_u8])
     def query_interface(this : IInkRectangle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1750,8 +1752,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRectangle*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRectangle*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRectangle*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Top(this : IInkRectangle*, units : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Top.call(this, units)
@@ -1793,21 +1795,22 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkExtendedPropertyVtbl,
+
+  record IInkExtendedPropertyVtable,
     query_interface : Proc(IInkExtendedProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkExtendedProperty*, UInt32),
     release : Proc(IInkExtendedProperty*, UInt32),
     get_type_info_count : Proc(IInkExtendedProperty*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkExtendedProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkExtendedProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkExtendedProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkExtendedProperty*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Guid : Proc(IInkExtendedProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Data : Proc(IInkExtendedProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Data : Proc(IInkExtendedProperty*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_Data : Proc(IInkExtendedProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Data : Proc(IInkExtendedProperty*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkExtendedProperty, lpVtbl : IInkExtendedPropertyVtbl* do
+  record IInkExtendedProperty, lpVtbl : IInkExtendedPropertyVtable* do
     GUID = LibC::GUID.new(0xdb489209_u32, 0xb7c3_u16, 0x411d_u16, StaticArray[0x90_u8, 0xf6_u8, 0x15_u8, 0x48_u8, 0xcf_u8, 0xff_u8, 0x27_u8, 0x1e_u8])
     def query_interface(this : IInkExtendedProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1827,41 +1830,42 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkExtendedProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkExtendedProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkExtendedProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Guid(this : IInkExtendedProperty*, guid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Guid.call(this, guid)
     end
-    def get_Data(this : IInkExtendedProperty*, data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Data(this : IInkExtendedProperty*, data : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Data.call(this, data)
     end
-    def put_Data(this : IInkExtendedProperty*, data : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Data(this : IInkExtendedProperty*, data : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Data.call(this, data)
     end
 
   end
 
   @[Extern]
-  record IInkExtendedPropertiesVtbl,
+
+  record IInkExtendedPropertiesVtable,
     query_interface : Proc(IInkExtendedProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkExtendedProperties*, UInt32),
     release : Proc(IInkExtendedProperties*, UInt32),
     get_type_info_count : Proc(IInkExtendedProperties*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkExtendedProperties*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkExtendedProperties*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkExtendedProperties*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkExtendedProperties*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkExtendedProperties*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkExtendedProperties*, Void**, Win32cr::Foundation::HRESULT),
-    item : Proc(IInkExtendedProperties*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    add : Proc(IInkExtendedProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    remove : Proc(IInkExtendedProperties*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    item : Proc(IInkExtendedProperties*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(IInkExtendedProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    remove : Proc(IInkExtendedProperties*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     clear : Proc(IInkExtendedProperties*, Win32cr::Foundation::HRESULT),
-    does_property_exist : Proc(IInkExtendedProperties*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+    does_property_exist : Proc(IInkExtendedProperties*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkExtendedProperties, lpVtbl : IInkExtendedPropertiesVtbl* do
+  record IInkExtendedProperties, lpVtbl : IInkExtendedPropertiesVtable* do
     GUID = LibC::GUID.new(0x89f2a8be_u32, 0x95a9_u16, 0x4530_u16, StaticArray[0x8b_u8, 0x8f_u8, 0x88_u8, 0xe9_u8, 0x71_u8, 0xe3_u8, 0xe2_u8, 0x5f_u8])
     def query_interface(this : IInkExtendedProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1881,8 +1885,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkExtendedProperties*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkExtendedProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkExtendedProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkExtendedProperties*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -1890,45 +1894,46 @@ module Win32cr::UI::TabletPC
     def get__NewEnum(this : IInkExtendedProperties*, _new_enum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, _new_enum)
     end
-    def item(this : IInkExtendedProperties*, identifier : Win32cr::System::Com::VARIANT, item : Void**) : Win32cr::Foundation::HRESULT
+    def item(this : IInkExtendedProperties*, identifier : Win32cr::System::Variant::VARIANT, item : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, identifier, item)
     end
-    def add(this : IInkExtendedProperties*, guid : Win32cr::Foundation::BSTR, data : Win32cr::System::Com::VARIANT, ink_extended_property : Void**) : Win32cr::Foundation::HRESULT
+    def add(this : IInkExtendedProperties*, guid : Win32cr::Foundation::BSTR, data : Win32cr::System::Variant::VARIANT, ink_extended_property : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, guid, data, ink_extended_property)
     end
-    def remove(this : IInkExtendedProperties*, identifier : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove(this : IInkExtendedProperties*, identifier : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, identifier)
     end
     def clear(this : IInkExtendedProperties*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clear.call(this)
     end
-    def does_property_exist(this : IInkExtendedProperties*, guid : Win32cr::Foundation::BSTR, does_property_exist : Int16*) : Win32cr::Foundation::HRESULT
+    def does_property_exist(this : IInkExtendedProperties*, guid : Win32cr::Foundation::BSTR, does_property_exist : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.does_property_exist.call(this, guid, does_property_exist)
     end
 
   end
 
   @[Extern]
-  record IInkDrawingAttributesVtbl,
+
+  record IInkDrawingAttributesVtable,
     query_interface : Proc(IInkDrawingAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkDrawingAttributes*, UInt32),
     release : Proc(IInkDrawingAttributes*, UInt32),
     get_type_info_count : Proc(IInkDrawingAttributes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkDrawingAttributes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkDrawingAttributes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkDrawingAttributes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkDrawingAttributes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Color : Proc(IInkDrawingAttributes*, Int32*, Win32cr::Foundation::HRESULT),
     put_Color : Proc(IInkDrawingAttributes*, Int32, Win32cr::Foundation::HRESULT),
     get_Width : Proc(IInkDrawingAttributes*, Float32*, Win32cr::Foundation::HRESULT),
     put_Width : Proc(IInkDrawingAttributes*, Float32, Win32cr::Foundation::HRESULT),
     get_Height : Proc(IInkDrawingAttributes*, Float32*, Win32cr::Foundation::HRESULT),
     put_Height : Proc(IInkDrawingAttributes*, Float32, Win32cr::Foundation::HRESULT),
-    get_FitToCurve : Proc(IInkDrawingAttributes*, Int16*, Win32cr::Foundation::HRESULT),
-    put_FitToCurve : Proc(IInkDrawingAttributes*, Int16, Win32cr::Foundation::HRESULT),
-    get_IgnorePressure : Proc(IInkDrawingAttributes*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IgnorePressure : Proc(IInkDrawingAttributes*, Int16, Win32cr::Foundation::HRESULT),
-    get_AntiAliased : Proc(IInkDrawingAttributes*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AntiAliased : Proc(IInkDrawingAttributes*, Int16, Win32cr::Foundation::HRESULT),
+    get_FitToCurve : Proc(IInkDrawingAttributes*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_FitToCurve : Proc(IInkDrawingAttributes*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IgnorePressure : Proc(IInkDrawingAttributes*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IgnorePressure : Proc(IInkDrawingAttributes*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AntiAliased : Proc(IInkDrawingAttributes*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AntiAliased : Proc(IInkDrawingAttributes*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Transparency : Proc(IInkDrawingAttributes*, Int32*, Win32cr::Foundation::HRESULT),
     put_Transparency : Proc(IInkDrawingAttributes*, Int32, Win32cr::Foundation::HRESULT),
     get_RasterOperation : Proc(IInkDrawingAttributes*, Win32cr::UI::TabletPC::InkRasterOperation*, Win32cr::Foundation::HRESULT),
@@ -1940,7 +1945,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkDrawingAttributes, lpVtbl : IInkDrawingAttributesVtbl* do
+  record IInkDrawingAttributes, lpVtbl : IInkDrawingAttributesVtable* do
     GUID = LibC::GUID.new(0xbf519b75_u32, 0xa15_u16, 0x4623_u16, StaticArray[0xad_u8, 0xc9_u8, 0xc0_u8, 0xd_u8, 0x43_u8, 0x6a_u8, 0x80_u8, 0x92_u8])
     def query_interface(this : IInkDrawingAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1960,8 +1965,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkDrawingAttributes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkDrawingAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkDrawingAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Color(this : IInkDrawingAttributes*, current_color : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Color.call(this, current_color)
@@ -1981,22 +1986,22 @@ module Win32cr::UI::TabletPC
     def put_Height(this : IInkDrawingAttributes*, new_height : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Height.call(this, new_height)
     end
-    def get_FitToCurve(this : IInkDrawingAttributes*, flag : Int16*) : Win32cr::Foundation::HRESULT
+    def get_FitToCurve(this : IInkDrawingAttributes*, flag : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FitToCurve.call(this, flag)
     end
-    def put_FitToCurve(this : IInkDrawingAttributes*, flag : Int16) : Win32cr::Foundation::HRESULT
+    def put_FitToCurve(this : IInkDrawingAttributes*, flag : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_FitToCurve.call(this, flag)
     end
-    def get_IgnorePressure(this : IInkDrawingAttributes*, flag : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IgnorePressure(this : IInkDrawingAttributes*, flag : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IgnorePressure.call(this, flag)
     end
-    def put_IgnorePressure(this : IInkDrawingAttributes*, flag : Int16) : Win32cr::Foundation::HRESULT
+    def put_IgnorePressure(this : IInkDrawingAttributes*, flag : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IgnorePressure.call(this, flag)
     end
-    def get_AntiAliased(this : IInkDrawingAttributes*, flag : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AntiAliased(this : IInkDrawingAttributes*, flag : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AntiAliased.call(this, flag)
     end
-    def put_AntiAliased(this : IInkDrawingAttributes*, flag : Int16) : Win32cr::Foundation::HRESULT
+    def put_AntiAliased(this : IInkDrawingAttributes*, flag : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AntiAliased.call(this, flag)
     end
     def get_Transparency(this : IInkDrawingAttributes*, current_transparency : Int32*) : Win32cr::Foundation::HRESULT
@@ -2027,18 +2032,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkTransformVtbl,
+
+  record IInkTransformVtable,
     query_interface : Proc(IInkTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkTransform*, UInt32),
     release : Proc(IInkTransform*, UInt32),
     get_type_info_count : Proc(IInkTransform*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkTransform*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkTransform*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkTransform*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkTransform*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(IInkTransform*, Win32cr::Foundation::HRESULT),
     translate : Proc(IInkTransform*, Float32, Float32, Win32cr::Foundation::HRESULT),
     rotate : Proc(IInkTransform*, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
-    reflect : Proc(IInkTransform*, Int16, Int16, Win32cr::Foundation::HRESULT),
+    reflect : Proc(IInkTransform*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     shear : Proc(IInkTransform*, Float32, Float32, Win32cr::Foundation::HRESULT),
     scale_transform : Proc(IInkTransform*, Float32, Float32, Win32cr::Foundation::HRESULT),
     get_transform : Proc(IInkTransform*, Float32*, Float32*, Float32*, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
@@ -2060,7 +2066,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkTransform, lpVtbl : IInkTransformVtbl* do
+  record IInkTransform, lpVtbl : IInkTransformVtable* do
     GUID = LibC::GUID.new(0x615f1d43_u32, 0x8703_u16, 0x4565_u16, StaticArray[0x88_u8, 0xe2_u8, 0x82_u8, 0x1_u8, 0xd2_u8, 0xec_u8, 0xd7_u8, 0xb7_u8])
     def query_interface(this : IInkTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2080,8 +2086,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkTransform*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkTransform*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkTransform*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def reset(this : IInkTransform*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
@@ -2092,7 +2098,7 @@ module Win32cr::UI::TabletPC
     def rotate(this : IInkTransform*, degrees : Float32, x : Float32, y : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.rotate.call(this, degrees, x, y)
     end
-    def reflect(this : IInkTransform*, horizontally : Int16, vertically : Int16) : Win32cr::Foundation::HRESULT
+    def reflect(this : IInkTransform*, horizontally : Win32cr::Foundation::VARIANT_BOOL, vertically : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reflect.call(this, horizontally, vertically)
     end
     def shear(this : IInkTransform*, horizontal_component : Float32, vertical_component : Float32) : Win32cr::Foundation::HRESULT
@@ -2153,21 +2159,22 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkGestureVtbl,
+
+  record IInkGestureVtable,
     query_interface : Proc(IInkGesture*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkGesture*, UInt32),
     release : Proc(IInkGesture*, UInt32),
     get_type_info_count : Proc(IInkGesture*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkGesture*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkGesture*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkGesture*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkGesture*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Confidence : Proc(IInkGesture*, Win32cr::UI::TabletPC::InkRecognitionConfidence*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IInkGesture*, Win32cr::UI::TabletPC::InkApplicationGesture*, Win32cr::Foundation::HRESULT),
     get_hot_point : Proc(IInkGesture*, Int32*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkGesture, lpVtbl : IInkGestureVtbl* do
+  record IInkGesture, lpVtbl : IInkGestureVtable* do
     GUID = LibC::GUID.new(0x3bdc0a97_u32, 0x4e5_u16, 0x4e26_u16, StaticArray[0xb8_u8, 0x13_u8, 0x18_u8, 0xf0_u8, 0x52_u8, 0xd4_u8, 0x1d_u8, 0xef_u8])
     def query_interface(this : IInkGesture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2187,8 +2194,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkGesture*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkGesture*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkGesture*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Confidence(this : IInkGesture*, confidence : Win32cr::UI::TabletPC::InkRecognitionConfidence*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Confidence.call(this, confidence)
@@ -2203,17 +2210,18 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkCursorVtbl,
+
+  record IInkCursorVtable,
     query_interface : Proc(IInkCursor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCursor*, UInt32),
     release : Proc(IInkCursor*, UInt32),
     get_type_info_count : Proc(IInkCursor*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkCursor*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkCursor*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkCursor*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkCursor*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IInkCursor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IInkCursor*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Inverted : Proc(IInkCursor*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Inverted : Proc(IInkCursor*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_DrawingAttributes : Proc(IInkCursor*, Void**, Win32cr::Foundation::HRESULT),
     putref_DrawingAttributes : Proc(IInkCursor*, Void*, Win32cr::Foundation::HRESULT),
     get_Tablet : Proc(IInkCursor*, Void**, Win32cr::Foundation::HRESULT),
@@ -2221,7 +2229,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkCursor, lpVtbl : IInkCursorVtbl* do
+  record IInkCursor, lpVtbl : IInkCursorVtable* do
     GUID = LibC::GUID.new(0xad30c630_u32, 0x40c5_u16, 0x4350_u16, StaticArray[0x84_u8, 0x5_u8, 0x9c_u8, 0x71_u8, 0x1_u8, 0x2f_u8, 0xc5_u8, 0x58_u8])
     def query_interface(this : IInkCursor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2241,8 +2249,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkCursor*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkCursor*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkCursor*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IInkCursor*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -2250,7 +2258,7 @@ module Win32cr::UI::TabletPC
     def get_Id(this : IInkCursor*, id : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
     end
-    def get_Inverted(this : IInkCursor*, status : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Inverted(this : IInkCursor*, status : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Inverted.call(this, status)
     end
     def get_DrawingAttributes(this : IInkCursor*, attributes : Void**) : Win32cr::Foundation::HRESULT
@@ -2269,21 +2277,22 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkCursorsVtbl,
+
+  record IInkCursorsVtable,
     query_interface : Proc(IInkCursors*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCursors*, UInt32),
     release : Proc(IInkCursors*, UInt32),
     get_type_info_count : Proc(IInkCursors*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkCursors*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkCursors*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkCursors*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkCursors*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkCursors*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkCursors*, Void**, Win32cr::Foundation::HRESULT),
     item : Proc(IInkCursors*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkCursors, lpVtbl : IInkCursorsVtbl* do
+  record IInkCursors, lpVtbl : IInkCursorsVtable* do
     GUID = LibC::GUID.new(0xa248c1ac_u32, 0xc698_u16, 0x4e06_u16, StaticArray[0x9e_u8, 0x5c_u8, 0xd5_u8, 0x7f_u8, 0x77_u8, 0xc7_u8, 0xe6_u8, 0x47_u8])
     def query_interface(this : IInkCursors*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2303,8 +2312,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkCursors*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkCursors*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkCursors*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkCursors*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -2319,21 +2328,22 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkCursorButtonVtbl,
+
+  record IInkCursorButtonVtable,
     query_interface : Proc(IInkCursorButton*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCursorButton*, UInt32),
     release : Proc(IInkCursorButton*, UInt32),
     get_type_info_count : Proc(IInkCursorButton*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkCursorButton*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkCursorButton*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkCursorButton*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkCursorButton*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IInkCursorButton*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IInkCursorButton*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_State : Proc(IInkCursorButton*, Win32cr::UI::TabletPC::InkCursorButtonState*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkCursorButton, lpVtbl : IInkCursorButtonVtbl* do
+  record IInkCursorButton, lpVtbl : IInkCursorButtonVtable* do
     GUID = LibC::GUID.new(0x85ef9417_u32, 0x1d59_u16, 0x49b2_u16, StaticArray[0xa1_u8, 0x3c_u8, 0x70_u8, 0x2c_u8, 0x85_u8, 0x43_u8, 0x8_u8, 0x94_u8])
     def query_interface(this : IInkCursorButton*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2353,8 +2363,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkCursorButton*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkCursorButton*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkCursorButton*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IInkCursorButton*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -2369,21 +2379,22 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkCursorButtonsVtbl,
+
+  record IInkCursorButtonsVtable,
     query_interface : Proc(IInkCursorButtons*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCursorButtons*, UInt32),
     release : Proc(IInkCursorButtons*, UInt32),
     get_type_info_count : Proc(IInkCursorButtons*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkCursorButtons*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkCursorButtons*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkCursorButtons*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkCursorButtons*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkCursorButtons*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkCursorButtons*, Void**, Win32cr::Foundation::HRESULT),
-    item : Proc(IInkCursorButtons*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    item : Proc(IInkCursorButtons*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkCursorButtons, lpVtbl : IInkCursorButtonsVtbl* do
+  record IInkCursorButtons, lpVtbl : IInkCursorButtonsVtable* do
     GUID = LibC::GUID.new(0x3671cc40_u32, 0xb624_u16, 0x4671_u16, StaticArray[0x9f_u8, 0xa0_u8, 0xdb_u8, 0x11_u8, 0x9d_u8, 0x95_u8, 0x2d_u8, 0x54_u8])
     def query_interface(this : IInkCursorButtons*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2403,8 +2414,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkCursorButtons*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkCursorButtons*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkCursorButtons*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkCursorButtons*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -2412,31 +2423,32 @@ module Win32cr::UI::TabletPC
     def get__NewEnum(this : IInkCursorButtons*, _new_enum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, _new_enum)
     end
-    def item(this : IInkCursorButtons*, identifier : Win32cr::System::Com::VARIANT, button : Void**) : Win32cr::Foundation::HRESULT
+    def item(this : IInkCursorButtons*, identifier : Win32cr::System::Variant::VARIANT, button : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, identifier, button)
     end
 
   end
 
   @[Extern]
-  record IInkTabletVtbl,
+
+  record IInkTabletVtable,
     query_interface : Proc(IInkTablet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkTablet*, UInt32),
     release : Proc(IInkTablet*, UInt32),
     get_type_info_count : Proc(IInkTablet*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkTablet*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkTablet*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkTablet*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkTablet*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IInkTablet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_PlugAndPlayId : Proc(IInkTablet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MaximumInputRectangle : Proc(IInkTablet*, Void**, Win32cr::Foundation::HRESULT),
     get_HardwareCapabilities : Proc(IInkTablet*, Win32cr::UI::TabletPC::TabletHardwareCapabilities*, Win32cr::Foundation::HRESULT),
-    is_packet_property_supported : Proc(IInkTablet*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    is_packet_property_supported : Proc(IInkTablet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_property_metrics : Proc(IInkTablet*, Win32cr::Foundation::BSTR, Int32*, Int32*, Win32cr::UI::TabletPC::TabletPropertyMetricUnit*, Float32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkTablet, lpVtbl : IInkTabletVtbl* do
+  record IInkTablet, lpVtbl : IInkTabletVtable* do
     GUID = LibC::GUID.new(0x2de25eaa_u32, 0x6ef8_u16, 0x42d5_u16, StaticArray[0xae_u8, 0xe9_u8, 0x18_u8, 0x5b_u8, 0xc8_u8, 0x1b_u8, 0x91_u8, 0x2d_u8])
     def query_interface(this : IInkTablet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2456,8 +2468,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkTablet*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkTablet*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkTablet*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IInkTablet*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -2471,7 +2483,7 @@ module Win32cr::UI::TabletPC
     def get_HardwareCapabilities(this : IInkTablet*, capabilities : Win32cr::UI::TabletPC::TabletHardwareCapabilities*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HardwareCapabilities.call(this, capabilities)
     end
-    def is_packet_property_supported(this : IInkTablet*, packetPropertyName : Win32cr::Foundation::BSTR, supported : Int16*) : Win32cr::Foundation::HRESULT
+    def is_packet_property_supported(this : IInkTablet*, packetPropertyName : Win32cr::Foundation::BSTR, supported : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_packet_property_supported.call(this, packetPropertyName, supported)
     end
     def get_property_metrics(this : IInkTablet*, propertyName : Win32cr::Foundation::BSTR, minimum : Int32*, maximum : Int32*, units : Win32cr::UI::TabletPC::TabletPropertyMetricUnit*, resolution : Float32*) : Win32cr::Foundation::HRESULT
@@ -2481,19 +2493,20 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkTablet2Vtbl,
+
+  record IInkTablet2Vtable,
     query_interface : Proc(IInkTablet2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkTablet2*, UInt32),
     release : Proc(IInkTablet2*, UInt32),
     get_type_info_count : Proc(IInkTablet2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkTablet2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkTablet2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkTablet2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkTablet2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DeviceKind : Proc(IInkTablet2*, Win32cr::UI::TabletPC::TabletDeviceKind*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkTablet2, lpVtbl : IInkTablet2Vtbl* do
+  record IInkTablet2, lpVtbl : IInkTablet2Vtable* do
     GUID = LibC::GUID.new(0x90c91ad2_u32, 0xfa36_u16, 0x49d6_u16, StaticArray[0x95_u8, 0x16_u8, 0xce_u8, 0x8d_u8, 0x57_u8, 0xf_u8, 0x6f_u8, 0x85_u8])
     def query_interface(this : IInkTablet2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2513,8 +2526,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkTablet2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkTablet2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkTablet2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DeviceKind(this : IInkTablet2*, kind : Win32cr::UI::TabletPC::TabletDeviceKind*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeviceKind.call(this, kind)
@@ -2523,20 +2536,21 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkTablet3Vtbl,
+
+  record IInkTablet3Vtable,
     query_interface : Proc(IInkTablet3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkTablet3*, UInt32),
     release : Proc(IInkTablet3*, UInt32),
     get_type_info_count : Proc(IInkTablet3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkTablet3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkTablet3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkTablet3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_IsMultiTouch : Proc(IInkTablet3*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkTablet3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_IsMultiTouch : Proc(IInkTablet3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_MaximumCursors : Proc(IInkTablet3*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkTablet3, lpVtbl : IInkTablet3Vtbl* do
+  record IInkTablet3, lpVtbl : IInkTablet3Vtable* do
     GUID = LibC::GUID.new(0x7e313997_u32, 0x1327_u16, 0x41dd_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x79_u8, 0xf2_u8, 0x4b_u8, 0xe1_u8, 0x72_u8, 0x50_u8])
     def query_interface(this : IInkTablet3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2556,10 +2570,10 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkTablet3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkTablet3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkTablet3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_IsMultiTouch(this : IInkTablet3*, pIsMultiTouch : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMultiTouch(this : IInkTablet3*, pIsMultiTouch : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMultiTouch.call(this, pIsMultiTouch)
     end
     def get_MaximumCursors(this : IInkTablet3*, pMaximumCursors : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2569,23 +2583,24 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkTabletsVtbl,
+
+  record IInkTabletsVtable,
     query_interface : Proc(IInkTablets*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkTablets*, UInt32),
     release : Proc(IInkTablets*, UInt32),
     get_type_info_count : Proc(IInkTablets*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkTablets*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkTablets*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkTablets*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkTablets*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkTablets*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkTablets*, Void**, Win32cr::Foundation::HRESULT),
     get_DefaultTablet : Proc(IInkTablets*, Void**, Win32cr::Foundation::HRESULT),
     item : Proc(IInkTablets*, Int32, Void**, Win32cr::Foundation::HRESULT),
-    is_packet_property_supported : Proc(IInkTablets*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+    is_packet_property_supported : Proc(IInkTablets*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkTablets, lpVtbl : IInkTabletsVtbl* do
+  record IInkTablets, lpVtbl : IInkTabletsVtable* do
     GUID = LibC::GUID.new(0x112086d9_u32, 0x7779_u16, 0x4535_u16, StaticArray[0xa6_u8, 0x99_u8, 0x86_u8, 0x2b_u8, 0x43_u8, 0xac_u8, 0x18_u8, 0x63_u8])
     def query_interface(this : IInkTablets*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2605,8 +2620,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkTablets*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkTablets*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkTablets*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkTablets*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -2620,49 +2635,50 @@ module Win32cr::UI::TabletPC
     def item(this : IInkTablets*, index : Int32, tablet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, index, tablet)
     end
-    def is_packet_property_supported(this : IInkTablets*, packetPropertyName : Win32cr::Foundation::BSTR, supported : Int16*) : Win32cr::Foundation::HRESULT
+    def is_packet_property_supported(this : IInkTablets*, packetPropertyName : Win32cr::Foundation::BSTR, supported : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_packet_property_supported.call(this, packetPropertyName, supported)
     end
 
   end
 
   @[Extern]
-  record IInkStrokeDispVtbl,
+
+  record IInkStrokeDispVtable,
     query_interface : Proc(IInkStrokeDisp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkStrokeDisp*, UInt32),
     release : Proc(IInkStrokeDisp*, UInt32),
     get_type_info_count : Proc(IInkStrokeDisp*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkStrokeDisp*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkStrokeDisp*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkStrokeDisp*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkStrokeDisp*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ID : Proc(IInkStrokeDisp*, Int32*, Win32cr::Foundation::HRESULT),
-    get_BezierPoints : Proc(IInkStrokeDisp*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_BezierPoints : Proc(IInkStrokeDisp*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_DrawingAttributes : Proc(IInkStrokeDisp*, Void**, Win32cr::Foundation::HRESULT),
     putref_DrawingAttributes : Proc(IInkStrokeDisp*, Void*, Win32cr::Foundation::HRESULT),
     get_Ink : Proc(IInkStrokeDisp*, Void**, Win32cr::Foundation::HRESULT),
     get_ExtendedProperties : Proc(IInkStrokeDisp*, Void**, Win32cr::Foundation::HRESULT),
-    get_PolylineCusps : Proc(IInkStrokeDisp*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_BezierCusps : Proc(IInkStrokeDisp*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_SelfIntersections : Proc(IInkStrokeDisp*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolylineCusps : Proc(IInkStrokeDisp*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_BezierCusps : Proc(IInkStrokeDisp*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SelfIntersections : Proc(IInkStrokeDisp*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_PacketCount : Proc(IInkStrokeDisp*, Int32*, Win32cr::Foundation::HRESULT),
     get_PacketSize : Proc(IInkStrokeDisp*, Int32*, Win32cr::Foundation::HRESULT),
-    get_PacketDescription : Proc(IInkStrokeDisp*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Deleted : Proc(IInkStrokeDisp*, Int16*, Win32cr::Foundation::HRESULT),
+    get_PacketDescription : Proc(IInkStrokeDisp*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Deleted : Proc(IInkStrokeDisp*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_bounding_box : Proc(IInkStrokeDisp*, Win32cr::UI::TabletPC::InkBoundingBoxMode, Void**, Win32cr::Foundation::HRESULT),
-    find_intersections : Proc(IInkStrokeDisp*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_rectangle_intersections : Proc(IInkStrokeDisp*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    find_intersections : Proc(IInkStrokeDisp*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_rectangle_intersections : Proc(IInkStrokeDisp*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     clip : Proc(IInkStrokeDisp*, Void*, Win32cr::Foundation::HRESULT),
-    hit_test_circle : Proc(IInkStrokeDisp*, Int32, Int32, Float32, Int16*, Win32cr::Foundation::HRESULT),
+    hit_test_circle : Proc(IInkStrokeDisp*, Int32, Int32, Float32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     nearest_point : Proc(IInkStrokeDisp*, Int32, Int32, Float32*, Float32*, Win32cr::Foundation::HRESULT),
     split : Proc(IInkStrokeDisp*, Float32, Void**, Win32cr::Foundation::HRESULT),
     get_packet_description_property_metrics : Proc(IInkStrokeDisp*, Win32cr::Foundation::BSTR, Int32*, Int32*, Win32cr::UI::TabletPC::TabletPropertyMetricUnit*, Float32*, Win32cr::Foundation::HRESULT),
-    get_points : Proc(IInkStrokeDisp*, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_points : Proc(IInkStrokeDisp*, Win32cr::System::Com::VARIANT, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    get_packet_data : Proc(IInkStrokeDisp*, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_packet_values_by_property : Proc(IInkStrokeDisp*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_packet_values_by_property : Proc(IInkStrokeDisp*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    get_flattened_bezier_points : Proc(IInkStrokeDisp*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    transform : Proc(IInkStrokeDisp*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    get_points : Proc(IInkStrokeDisp*, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_points : Proc(IInkStrokeDisp*, Win32cr::System::Variant::VARIANT, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    get_packet_data : Proc(IInkStrokeDisp*, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_packet_values_by_property : Proc(IInkStrokeDisp*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_packet_values_by_property : Proc(IInkStrokeDisp*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    get_flattened_bezier_points : Proc(IInkStrokeDisp*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    transform : Proc(IInkStrokeDisp*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     scale_to_rectangle : Proc(IInkStrokeDisp*, Void*, Win32cr::Foundation::HRESULT),
     move : Proc(IInkStrokeDisp*, Float32, Float32, Win32cr::Foundation::HRESULT),
     rotate : Proc(IInkStrokeDisp*, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
@@ -2671,7 +2687,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkStrokeDisp, lpVtbl : IInkStrokeDispVtbl* do
+  record IInkStrokeDisp, lpVtbl : IInkStrokeDispVtable* do
     GUID = LibC::GUID.new(0x43242fea_u32, 0x91d1_u16, 0x4a72_u16, StaticArray[0x96_u8, 0x3e_u8, 0xfb_u8, 0xb9_u8, 0x18_u8, 0x29_u8, 0xcf_u8, 0xa2_u8])
     def query_interface(this : IInkStrokeDisp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2691,13 +2707,13 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkStrokeDisp*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkStrokeDisp*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkStrokeDisp*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ID(this : IInkStrokeDisp*, id : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ID.call(this, id)
     end
-    def get_BezierPoints(this : IInkStrokeDisp*, points : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_BezierPoints(this : IInkStrokeDisp*, points : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BezierPoints.call(this, points)
     end
     def get_DrawingAttributes(this : IInkStrokeDisp*, draw_attrs : Void**) : Win32cr::Foundation::HRESULT
@@ -2712,13 +2728,13 @@ module Win32cr::UI::TabletPC
     def get_ExtendedProperties(this : IInkStrokeDisp*, properties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ExtendedProperties.call(this, properties)
     end
-    def get_PolylineCusps(this : IInkStrokeDisp*, cusps : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolylineCusps(this : IInkStrokeDisp*, cusps : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolylineCusps.call(this, cusps)
     end
-    def get_BezierCusps(this : IInkStrokeDisp*, cusps : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_BezierCusps(this : IInkStrokeDisp*, cusps : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BezierCusps.call(this, cusps)
     end
-    def get_SelfIntersections(this : IInkStrokeDisp*, intersections : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelfIntersections(this : IInkStrokeDisp*, intersections : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelfIntersections.call(this, intersections)
     end
     def get_PacketCount(this : IInkStrokeDisp*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -2727,25 +2743,25 @@ module Win32cr::UI::TabletPC
     def get_PacketSize(this : IInkStrokeDisp*, plSize : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PacketSize.call(this, plSize)
     end
-    def get_PacketDescription(this : IInkStrokeDisp*, packet_description : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PacketDescription(this : IInkStrokeDisp*, packet_description : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PacketDescription.call(this, packet_description)
     end
-    def get_Deleted(this : IInkStrokeDisp*, deleted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Deleted(this : IInkStrokeDisp*, deleted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deleted.call(this, deleted)
     end
     def get_bounding_box(this : IInkStrokeDisp*, bounding_box_mode : Win32cr::UI::TabletPC::InkBoundingBoxMode, rectangle : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_bounding_box.call(this, bounding_box_mode, rectangle)
     end
-    def find_intersections(this : IInkStrokeDisp*, strokes : Void*, intersections : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def find_intersections(this : IInkStrokeDisp*, strokes : Void*, intersections : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_intersections.call(this, strokes, intersections)
     end
-    def get_rectangle_intersections(this : IInkStrokeDisp*, rectangle : Void*, intersections : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_rectangle_intersections(this : IInkStrokeDisp*, rectangle : Void*, intersections : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_rectangle_intersections.call(this, rectangle, intersections)
     end
     def clip(this : IInkStrokeDisp*, rectangle : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clip.call(this, rectangle)
     end
-    def hit_test_circle(this : IInkStrokeDisp*, x : Int32, y : Int32, radius : Float32, intersects : Int16*) : Win32cr::Foundation::HRESULT
+    def hit_test_circle(this : IInkStrokeDisp*, x : Int32, y : Int32, radius : Float32, intersects : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hit_test_circle.call(this, x, y, radius, intersects)
     end
     def nearest_point(this : IInkStrokeDisp*, x : Int32, y : Int32, distance : Float32*, point : Float32*) : Win32cr::Foundation::HRESULT
@@ -2757,25 +2773,25 @@ module Win32cr::UI::TabletPC
     def get_packet_description_property_metrics(this : IInkStrokeDisp*, property_name : Win32cr::Foundation::BSTR, minimum : Int32*, maximum : Int32*, units : Win32cr::UI::TabletPC::TabletPropertyMetricUnit*, resolution : Float32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_packet_description_property_metrics.call(this, property_name, minimum, maximum, units, resolution)
     end
-    def get_points(this : IInkStrokeDisp*, index : Int32, count : Int32, points : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_points(this : IInkStrokeDisp*, index : Int32, count : Int32, points : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_points.call(this, index, count, points)
     end
-    def set_points(this : IInkStrokeDisp*, points : Win32cr::System::Com::VARIANT, index : Int32, count : Int32, number_of_points_set : Int32*) : Win32cr::Foundation::HRESULT
+    def set_points(this : IInkStrokeDisp*, points : Win32cr::System::Variant::VARIANT, index : Int32, count : Int32, number_of_points_set : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_points.call(this, points, index, count, number_of_points_set)
     end
-    def get_packet_data(this : IInkStrokeDisp*, index : Int32, count : Int32, packet_data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_packet_data(this : IInkStrokeDisp*, index : Int32, count : Int32, packet_data : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_packet_data.call(this, index, count, packet_data)
     end
-    def get_packet_values_by_property(this : IInkStrokeDisp*, property_name : Win32cr::Foundation::BSTR, index : Int32, count : Int32, packet_values : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_packet_values_by_property(this : IInkStrokeDisp*, property_name : Win32cr::Foundation::BSTR, index : Int32, count : Int32, packet_values : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_packet_values_by_property.call(this, property_name, index, count, packet_values)
     end
-    def set_packet_values_by_property(this : IInkStrokeDisp*, bstrPropertyName : Win32cr::Foundation::BSTR, packet_values : Win32cr::System::Com::VARIANT, index : Int32, count : Int32, number_of_packets_set : Int32*) : Win32cr::Foundation::HRESULT
+    def set_packet_values_by_property(this : IInkStrokeDisp*, bstrPropertyName : Win32cr::Foundation::BSTR, packet_values : Win32cr::System::Variant::VARIANT, index : Int32, count : Int32, number_of_packets_set : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_packet_values_by_property.call(this, bstrPropertyName, packet_values, index, count, number_of_packets_set)
     end
-    def get_flattened_bezier_points(this : IInkStrokeDisp*, fitting_error : Int32, flattened_bezier_points : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_flattened_bezier_points(this : IInkStrokeDisp*, fitting_error : Int32, flattened_bezier_points : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_flattened_bezier_points.call(this, fitting_error, flattened_bezier_points)
     end
-    def transform(this : IInkStrokeDisp*, transform : Void*, apply_on_pen_width : Int16) : Win32cr::Foundation::HRESULT
+    def transform(this : IInkStrokeDisp*, transform : Void*, apply_on_pen_width : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transform.call(this, transform, apply_on_pen_width)
     end
     def scale_to_rectangle(this : IInkStrokeDisp*, rectangle : Void*) : Win32cr::Foundation::HRESULT
@@ -2797,14 +2813,15 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkStrokesVtbl,
+
+  record IInkStrokesVtable,
     query_interface : Proc(IInkStrokes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkStrokes*, UInt32),
     release : Proc(IInkStrokes*, UInt32),
     get_type_info_count : Proc(IInkStrokes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkStrokes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkStrokes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkStrokes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkStrokes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkStrokes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkStrokes*, Void**, Win32cr::Foundation::HRESULT),
     get_Ink : Proc(IInkStrokes*, Void**, Win32cr::Foundation::HRESULT),
@@ -2817,7 +2834,7 @@ module Win32cr::UI::TabletPC
     remove_strokes : Proc(IInkStrokes*, Void*, Win32cr::Foundation::HRESULT),
     modify_drawing_attributes : Proc(IInkStrokes*, Void*, Win32cr::Foundation::HRESULT),
     get_bounding_box : Proc(IInkStrokes*, Win32cr::UI::TabletPC::InkBoundingBoxMode, Void**, Win32cr::Foundation::HRESULT),
-    transform : Proc(IInkStrokes*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    transform : Proc(IInkStrokes*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     scale_to_rectangle : Proc(IInkStrokes*, Void*, Win32cr::Foundation::HRESULT),
     move : Proc(IInkStrokes*, Float32, Float32, Win32cr::Foundation::HRESULT),
     rotate : Proc(IInkStrokes*, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
@@ -2828,7 +2845,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkStrokes, lpVtbl : IInkStrokesVtbl* do
+  record IInkStrokes, lpVtbl : IInkStrokesVtable* do
     GUID = LibC::GUID.new(0xf1f4c9d8_u32, 0x590a_u16, 0x4963_u16, StaticArray[0xb3_u8, 0xae_u8, 0x19_u8, 0x35_u8, 0x67_u8, 0x1b_u8, 0xb6_u8, 0xf3_u8])
     def query_interface(this : IInkStrokes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2848,8 +2865,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkStrokes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkStrokes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkStrokes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkStrokes*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -2887,7 +2904,7 @@ module Win32cr::UI::TabletPC
     def get_bounding_box(this : IInkStrokes*, bounding_box_mode : Win32cr::UI::TabletPC::InkBoundingBoxMode, bounding_box : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_bounding_box.call(this, bounding_box_mode, bounding_box)
     end
-    def transform(this : IInkStrokes*, transform : Void*, apply_on_pen_width : Int16) : Win32cr::Foundation::HRESULT
+    def transform(this : IInkStrokes*, transform : Void*, apply_on_pen_width : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transform.call(this, transform, apply_on_pen_width)
     end
     def scale_to_rectangle(this : IInkStrokes*, rectangle : Void*) : Win32cr::Foundation::HRESULT
@@ -2915,24 +2932,25 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkCustomStrokesVtbl,
+
+  record IInkCustomStrokesVtable,
     query_interface : Proc(IInkCustomStrokes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCustomStrokes*, UInt32),
     release : Proc(IInkCustomStrokes*, UInt32),
     get_type_info_count : Proc(IInkCustomStrokes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkCustomStrokes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkCustomStrokes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkCustomStrokes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkCustomStrokes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkCustomStrokes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkCustomStrokes*, Void**, Win32cr::Foundation::HRESULT),
-    item : Proc(IInkCustomStrokes*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    item : Proc(IInkCustomStrokes*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     add : Proc(IInkCustomStrokes*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
-    remove : Proc(IInkCustomStrokes*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    remove : Proc(IInkCustomStrokes*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     clear : Proc(IInkCustomStrokes*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkCustomStrokes, lpVtbl : IInkCustomStrokesVtbl* do
+  record IInkCustomStrokes, lpVtbl : IInkCustomStrokesVtable* do
     GUID = LibC::GUID.new(0x7e23a88f_u32, 0xc30e_u16, 0x420f_u16, StaticArray[0x9b_u8, 0xdb_u8, 0x28_u8, 0x90_u8, 0x25_u8, 0x43_u8, 0xf0_u8, 0xc1_u8])
     def query_interface(this : IInkCustomStrokes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2952,8 +2970,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkCustomStrokes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkCustomStrokes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkCustomStrokes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkCustomStrokes*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -2961,13 +2979,13 @@ module Win32cr::UI::TabletPC
     def get__NewEnum(this : IInkCustomStrokes*, _new_enum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, _new_enum)
     end
-    def item(this : IInkCustomStrokes*, identifier : Win32cr::System::Com::VARIANT, strokes : Void**) : Win32cr::Foundation::HRESULT
+    def item(this : IInkCustomStrokes*, identifier : Win32cr::System::Variant::VARIANT, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, identifier, strokes)
     end
     def add(this : IInkCustomStrokes*, name : Win32cr::Foundation::BSTR, strokes : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, name, strokes)
     end
-    def remove(this : IInkCustomStrokes*, identifier : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove(this : IInkCustomStrokes*, identifier : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, identifier)
     end
     def clear(this : IInkCustomStrokes*) : Win32cr::Foundation::HRESULT
@@ -2977,18 +2995,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkStrokesEvents_Vtbl,
+
+  record IInkStrokesEvents_Vtable,
     query_interface : Proc(IInkStrokesEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkStrokesEvents_*, UInt32),
     release : Proc(IInkStrokesEvents_*, UInt32),
     get_type_info_count : Proc(IInkStrokesEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkStrokesEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkStrokesEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkStrokesEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkStrokesEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkStrokesEvents_, lpVtbl : IInkStrokesEvents_Vtbl* do
+  record IInkStrokesEvents_, lpVtbl : IInkStrokesEvents_Vtable* do
     GUID = LibC::GUID.new(0xf33053ec_u32, 0x5d25_u16, 0x430a_u16, StaticArray[0x92_u8, 0x8f_u8, 0x76_u8, 0xa6_u8, 0x49_u8, 0x1d_u8, 0xde_u8, 0x15_u8])
     def query_interface(this : IInkStrokesEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3008,25 +3027,26 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkStrokesEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkStrokesEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkStrokesEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkDispVtbl,
+
+  record IInkDispVtable,
     query_interface : Proc(IInkDisp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkDisp*, UInt32),
     release : Proc(IInkDisp*, UInt32),
     get_type_info_count : Proc(IInkDisp*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkDisp*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkDisp*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkDisp*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkDisp*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Strokes : Proc(IInkDisp*, Void**, Win32cr::Foundation::HRESULT),
     get_ExtendedProperties : Proc(IInkDisp*, Void**, Win32cr::Foundation::HRESULT),
-    get_Dirty : Proc(IInkDisp*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Dirty : Proc(IInkDisp*, Int16, Win32cr::Foundation::HRESULT),
+    get_Dirty : Proc(IInkDisp*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Dirty : Proc(IInkDisp*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_CustomStrokes : Proc(IInkDisp*, Void**, Win32cr::Foundation::HRESULT),
     get_bounding_box : Proc(IInkDisp*, Win32cr::UI::TabletPC::InkBoundingBoxMode, Void**, Win32cr::Foundation::HRESULT),
     delete_strokes : Proc(IInkDisp*, Void*, Win32cr::Foundation::HRESULT),
@@ -3037,21 +3057,21 @@ module Win32cr::UI::TabletPC
     clone : Proc(IInkDisp*, Void**, Win32cr::Foundation::HRESULT),
     hit_test_circle : Proc(IInkDisp*, Int32, Int32, Float32, Void**, Win32cr::Foundation::HRESULT),
     hit_test_with_rectangle : Proc(IInkDisp*, Void*, Float32, Void**, Win32cr::Foundation::HRESULT),
-    hit_test_with_lasso : Proc(IInkDisp*, Win32cr::System::Com::VARIANT, Float32, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    hit_test_with_lasso : Proc(IInkDisp*, Win32cr::System::Variant::VARIANT, Float32, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     nearest_point : Proc(IInkDisp*, Int32, Int32, Float32*, Float32*, Void**, Win32cr::Foundation::HRESULT),
-    create_strokes : Proc(IInkDisp*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_strokes : Proc(IInkDisp*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     add_strokes_at_rectangle : Proc(IInkDisp*, Void*, Void*, Win32cr::Foundation::HRESULT),
-    save : Proc(IInkDisp*, Win32cr::UI::TabletPC::InkPersistenceFormat, Win32cr::UI::TabletPC::InkPersistenceCompressionMode, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    load : Proc(IInkDisp*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    create_stroke : Proc(IInkDisp*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    save : Proc(IInkDisp*, Win32cr::UI::TabletPC::InkPersistenceFormat, Win32cr::UI::TabletPC::InkPersistenceCompressionMode, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    load : Proc(IInkDisp*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    create_stroke : Proc(IInkDisp*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     clipboard_copy_with_rectangle : Proc(IInkDisp*, Void*, Win32cr::UI::TabletPC::InkClipboardFormats, Win32cr::UI::TabletPC::InkClipboardModes, Void**, Win32cr::Foundation::HRESULT),
     clipboard_copy : Proc(IInkDisp*, Void*, Win32cr::UI::TabletPC::InkClipboardFormats, Win32cr::UI::TabletPC::InkClipboardModes, Void**, Win32cr::Foundation::HRESULT),
-    can_paste : Proc(IInkDisp*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    can_paste : Proc(IInkDisp*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     clipboard_paste : Proc(IInkDisp*, Int32, Int32, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkDisp, lpVtbl : IInkDispVtbl* do
+  record IInkDisp, lpVtbl : IInkDispVtable* do
     GUID = LibC::GUID.new(0x9d398fa0_u32, 0xc4e2_u16, 0x4fcd_u16, StaticArray[0x99_u8, 0x73_u8, 0x97_u8, 0x5c_u8, 0xaa_u8, 0xf4_u8, 0x7e_u8, 0xa6_u8])
     def query_interface(this : IInkDisp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3071,8 +3091,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkDisp*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkDisp*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkDisp*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Strokes(this : IInkDisp*, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Strokes.call(this, strokes)
@@ -3080,10 +3100,10 @@ module Win32cr::UI::TabletPC
     def get_ExtendedProperties(this : IInkDisp*, properties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ExtendedProperties.call(this, properties)
     end
-    def get_Dirty(this : IInkDisp*, dirty : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Dirty(this : IInkDisp*, dirty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Dirty.call(this, dirty)
     end
-    def put_Dirty(this : IInkDisp*, dirty : Int16) : Win32cr::Foundation::HRESULT
+    def put_Dirty(this : IInkDisp*, dirty : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Dirty.call(this, dirty)
     end
     def get_CustomStrokes(this : IInkDisp*, ppunkInkCustomStrokes : Void**) : Win32cr::Foundation::HRESULT
@@ -3116,25 +3136,25 @@ module Win32cr::UI::TabletPC
     def hit_test_with_rectangle(this : IInkDisp*, selection_rectangle : Void*, intersect_percent : Float32, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hit_test_with_rectangle.call(this, selection_rectangle, intersect_percent, strokes)
     end
-    def hit_test_with_lasso(this : IInkDisp*, points : Win32cr::System::Com::VARIANT, intersect_percent : Float32, lasso_points : Win32cr::System::Com::VARIANT*, strokes : Void**) : Win32cr::Foundation::HRESULT
+    def hit_test_with_lasso(this : IInkDisp*, points : Win32cr::System::Variant::VARIANT, intersect_percent : Float32, lasso_points : Win32cr::System::Variant::VARIANT*, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hit_test_with_lasso.call(this, points, intersect_percent, lasso_points, strokes)
     end
     def nearest_point(this : IInkDisp*, x : Int32, y : Int32, point_on_stroke : Float32*, distance_from_packet : Float32*, stroke : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.nearest_point.call(this, x, y, point_on_stroke, distance_from_packet, stroke)
     end
-    def create_strokes(this : IInkDisp*, stroke_ids : Win32cr::System::Com::VARIANT, strokes : Void**) : Win32cr::Foundation::HRESULT
+    def create_strokes(this : IInkDisp*, stroke_ids : Win32cr::System::Variant::VARIANT, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_strokes.call(this, stroke_ids, strokes)
     end
     def add_strokes_at_rectangle(this : IInkDisp*, source_strokes : Void*, target_rectangle : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_strokes_at_rectangle.call(this, source_strokes, target_rectangle)
     end
-    def save(this : IInkDisp*, persistence_format : Win32cr::UI::TabletPC::InkPersistenceFormat, compression_mode : Win32cr::UI::TabletPC::InkPersistenceCompressionMode, data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def save(this : IInkDisp*, persistence_format : Win32cr::UI::TabletPC::InkPersistenceFormat, compression_mode : Win32cr::UI::TabletPC::InkPersistenceCompressionMode, data : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, persistence_format, compression_mode, data)
     end
-    def load(this : IInkDisp*, data : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def load(this : IInkDisp*, data : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.load.call(this, data)
     end
-    def create_stroke(this : IInkDisp*, packet_data : Win32cr::System::Com::VARIANT, packet_description : Win32cr::System::Com::VARIANT, stroke : Void**) : Win32cr::Foundation::HRESULT
+    def create_stroke(this : IInkDisp*, packet_data : Win32cr::System::Variant::VARIANT, packet_description : Win32cr::System::Variant::VARIANT, stroke : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_stroke.call(this, packet_data, packet_description, stroke)
     end
     def clipboard_copy_with_rectangle(this : IInkDisp*, rectangle : Void*, clipboard_formats : Win32cr::UI::TabletPC::InkClipboardFormats, clipboard_modes : Win32cr::UI::TabletPC::InkClipboardModes, data_object : Void**) : Win32cr::Foundation::HRESULT
@@ -3143,7 +3163,7 @@ module Win32cr::UI::TabletPC
     def clipboard_copy(this : IInkDisp*, strokes : Void*, clipboard_formats : Win32cr::UI::TabletPC::InkClipboardFormats, clipboard_modes : Win32cr::UI::TabletPC::InkClipboardModes, data_object : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clipboard_copy.call(this, strokes, clipboard_formats, clipboard_modes, data_object)
     end
-    def can_paste(this : IInkDisp*, data_object : Void*, can_paste : Int16*) : Win32cr::Foundation::HRESULT
+    def can_paste(this : IInkDisp*, data_object : Void*, can_paste : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_paste.call(this, data_object, can_paste)
     end
     def clipboard_paste(this : IInkDisp*, x : Int32, y : Int32, data_object : Void*, strokes : Void**) : Win32cr::Foundation::HRESULT
@@ -3153,18 +3173,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkEvents_Vtbl,
+
+  record IInkEvents_Vtable,
     query_interface : Proc(IInkEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkEvents_*, UInt32),
     release : Proc(IInkEvents_*, UInt32),
     get_type_info_count : Proc(IInkEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkEvents_, lpVtbl : IInkEvents_Vtbl* do
+  record IInkEvents_, lpVtbl : IInkEvents_Vtable* do
     GUID = LibC::GUID.new(0x427b1865_u32, 0xca3f_u16, 0x479a_u16, StaticArray[0x83_u8, 0xa9_u8, 0xf_u8, 0x42_u8, 0xf_u8, 0x2a_u8, 0x0_u8, 0x73_u8])
     def query_interface(this : IInkEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3184,21 +3205,22 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkRendererVtbl,
+
+  record IInkRendererVtable,
     query_interface : Proc(IInkRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRenderer*, UInt32),
     release : Proc(IInkRenderer*, UInt32),
     get_type_info_count : Proc(IInkRenderer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRenderer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRenderer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRenderer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRenderer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_view_transform : Proc(IInkRenderer*, Void*, Win32cr::Foundation::HRESULT),
     set_view_transform : Proc(IInkRenderer*, Void*, Win32cr::Foundation::HRESULT),
     get_object_transform : Proc(IInkRenderer*, Void*, Win32cr::Foundation::HRESULT),
@@ -3207,17 +3229,17 @@ module Win32cr::UI::TabletPC
     draw_stroke : Proc(IInkRenderer*, LibC::IntPtrT, Void*, Void*, Win32cr::Foundation::HRESULT),
     pixel_to_ink_space : Proc(IInkRenderer*, LibC::IntPtrT, Int32*, Int32*, Win32cr::Foundation::HRESULT),
     ink_space_to_pixel : Proc(IInkRenderer*, LibC::IntPtrT, Int32*, Int32*, Win32cr::Foundation::HRESULT),
-    pixel_to_ink_space_from_points : Proc(IInkRenderer*, LibC::IntPtrT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    ink_space_to_pixel_from_points : Proc(IInkRenderer*, LibC::IntPtrT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    pixel_to_ink_space_from_points : Proc(IInkRenderer*, LibC::IntPtrT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    ink_space_to_pixel_from_points : Proc(IInkRenderer*, LibC::IntPtrT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     measure : Proc(IInkRenderer*, Void*, Void**, Win32cr::Foundation::HRESULT),
     measure_stroke : Proc(IInkRenderer*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     move : Proc(IInkRenderer*, Float32, Float32, Win32cr::Foundation::HRESULT),
     rotate : Proc(IInkRenderer*, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
-    scale_transform : Proc(IInkRenderer*, Float32, Float32, Int16, Win32cr::Foundation::HRESULT)
+    scale_transform : Proc(IInkRenderer*, Float32, Float32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkRenderer, lpVtbl : IInkRendererVtbl* do
+  record IInkRenderer, lpVtbl : IInkRendererVtable* do
     GUID = LibC::GUID.new(0xe6257a9c_u32, 0xb511_u16, 0x4f4c_u16, StaticArray[0xa8_u8, 0xb0_u8, 0xa7_u8, 0xdb_u8, 0xc9_u8, 0x50_u8, 0x6b_u8, 0x83_u8])
     def query_interface(this : IInkRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3237,8 +3259,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRenderer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRenderer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRenderer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_view_transform(this : IInkRenderer*, view_transform : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_view_transform.call(this, view_transform)
@@ -3264,10 +3286,10 @@ module Win32cr::UI::TabletPC
     def ink_space_to_pixel(this : IInkRenderer*, hdcDisplay : LibC::IntPtrT, x : Int32*, y : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.ink_space_to_pixel.call(this, hdcDisplay, x, y)
     end
-    def pixel_to_ink_space_from_points(this : IInkRenderer*, hDC : LibC::IntPtrT, points : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def pixel_to_ink_space_from_points(this : IInkRenderer*, hDC : LibC::IntPtrT, points : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.pixel_to_ink_space_from_points.call(this, hDC, points)
     end
-    def ink_space_to_pixel_from_points(this : IInkRenderer*, hDC : LibC::IntPtrT, points : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def ink_space_to_pixel_from_points(this : IInkRenderer*, hDC : LibC::IntPtrT, points : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.ink_space_to_pixel_from_points.call(this, hDC, points)
     end
     def measure(this : IInkRenderer*, strokes : Void*, rectangle : Void**) : Win32cr::Foundation::HRESULT
@@ -3282,40 +3304,41 @@ module Win32cr::UI::TabletPC
     def rotate(this : IInkRenderer*, degrees : Float32, x : Float32, y : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.rotate.call(this, degrees, x, y)
     end
-    def scale_transform(this : IInkRenderer*, horizontal_multiplier : Float32, vertical_multiplier : Float32, apply_on_pen_width : Int16) : Win32cr::Foundation::HRESULT
+    def scale_transform(this : IInkRenderer*, horizontal_multiplier : Float32, vertical_multiplier : Float32, apply_on_pen_width : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.scale_transform.call(this, horizontal_multiplier, vertical_multiplier, apply_on_pen_width)
     end
 
   end
 
   @[Extern]
-  record IInkCollectorVtbl,
+
+  record IInkCollectorVtable,
     query_interface : Proc(IInkCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCollector*, UInt32),
     release : Proc(IInkCollector*, UInt32),
     get_type_info_count : Proc(IInkCollector*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkCollector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkCollector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkCollector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkCollector*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_hWnd : Proc(IInkCollector*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     put_hWnd : Proc(IInkCollector*, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IInkCollector*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IInkCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DefaultDrawingAttributes : Proc(IInkCollector*, Void**, Win32cr::Foundation::HRESULT),
     putref_DefaultDrawingAttributes : Proc(IInkCollector*, Void*, Win32cr::Foundation::HRESULT),
     get_Renderer : Proc(IInkCollector*, Void**, Win32cr::Foundation::HRESULT),
     putref_Renderer : Proc(IInkCollector*, Void*, Win32cr::Foundation::HRESULT),
     get_Ink : Proc(IInkCollector*, Void**, Win32cr::Foundation::HRESULT),
     putref_Ink : Proc(IInkCollector*, Void*, Win32cr::Foundation::HRESULT),
-    get_AutoRedraw : Proc(IInkCollector*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoRedraw : Proc(IInkCollector*, Int16, Win32cr::Foundation::HRESULT),
-    get_CollectingInk : Proc(IInkCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoRedraw : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoRedraw : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_CollectingInk : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CollectionMode : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkCollectionMode*, Win32cr::Foundation::HRESULT),
     put_CollectionMode : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkCollectionMode, Win32cr::Foundation::HRESULT),
-    get_DynamicRendering : Proc(IInkCollector*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DynamicRendering : Proc(IInkCollector*, Int16, Win32cr::Foundation::HRESULT),
-    get_DesiredPacketDescription : Proc(IInkCollector*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_DesiredPacketDescription : Proc(IInkCollector*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DynamicRendering : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DynamicRendering : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DesiredPacketDescription : Proc(IInkCollector*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_DesiredPacketDescription : Proc(IInkCollector*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_MouseIcon : Proc(IInkCollector*, Void**, Win32cr::Foundation::HRESULT),
     put_MouseIcon : Proc(IInkCollector*, Void*, Win32cr::Foundation::HRESULT),
     putref_MouseIcon : Proc(IInkCollector*, Void*, Win32cr::Foundation::HRESULT),
@@ -3327,20 +3350,20 @@ module Win32cr::UI::TabletPC
     get_MarginY : Proc(IInkCollector*, Int32*, Win32cr::Foundation::HRESULT),
     put_MarginY : Proc(IInkCollector*, Int32, Win32cr::Foundation::HRESULT),
     get_Tablet : Proc(IInkCollector*, Void**, Win32cr::Foundation::HRESULT),
-    get_SupportHighContrastInk : Proc(IInkCollector*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SupportHighContrastInk : Proc(IInkCollector*, Int16, Win32cr::Foundation::HRESULT),
-    set_gesture_status : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16, Win32cr::Foundation::HRESULT),
-    get_gesture_status : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportHighContrastInk : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SupportHighContrastInk : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_gesture_status : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_gesture_status : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_window_input_rectangle : Proc(IInkCollector*, Void**, Win32cr::Foundation::HRESULT),
     set_window_input_rectangle : Proc(IInkCollector*, Void*, Win32cr::Foundation::HRESULT),
-    set_all_tablets_mode : Proc(IInkCollector*, Int16, Win32cr::Foundation::HRESULT),
+    set_all_tablets_mode : Proc(IInkCollector*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     set_single_tablet_integrated_mode : Proc(IInkCollector*, Void*, Win32cr::Foundation::HRESULT),
-    get_event_interest : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Int16*, Win32cr::Foundation::HRESULT),
-    set_event_interest : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Int16, Win32cr::Foundation::HRESULT)
+    get_event_interest : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    set_event_interest : Proc(IInkCollector*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkCollector, lpVtbl : IInkCollectorVtbl* do
+  record IInkCollector, lpVtbl : IInkCollectorVtable* do
     GUID = LibC::GUID.new(0xf0f060b5_u32, 0x8b1f_u16, 0x4a7c_u16, StaticArray[0x89_u8, 0xec_u8, 0x88_u8, 0x6_u8, 0x92_u8, 0x58_u8, 0x8a_u8, 0x4f_u8])
     def query_interface(this : IInkCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3360,8 +3383,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkCollector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_hWnd(this : IInkCollector*, current_window : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hWnd.call(this, current_window)
@@ -3369,10 +3392,10 @@ module Win32cr::UI::TabletPC
     def put_hWnd(this : IInkCollector*, new_window : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_hWnd.call(this, new_window)
     end
-    def get_Enabled(this : IInkCollector*, collecting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IInkCollector*, collecting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, collecting)
     end
-    def put_Enabled(this : IInkCollector*, collecting : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IInkCollector*, collecting : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, collecting)
     end
     def get_DefaultDrawingAttributes(this : IInkCollector*, current_attributes : Void**) : Win32cr::Foundation::HRESULT
@@ -3393,13 +3416,13 @@ module Win32cr::UI::TabletPC
     def putref_Ink(this : IInkCollector*, new_ink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_Ink.call(this, new_ink)
     end
-    def get_AutoRedraw(this : IInkCollector*, auto_redraw : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoRedraw(this : IInkCollector*, auto_redraw : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoRedraw.call(this, auto_redraw)
     end
-    def put_AutoRedraw(this : IInkCollector*, auto_redraw : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoRedraw(this : IInkCollector*, auto_redraw : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoRedraw.call(this, auto_redraw)
     end
-    def get_CollectingInk(this : IInkCollector*, collecting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CollectingInk(this : IInkCollector*, collecting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CollectingInk.call(this, collecting)
     end
     def get_CollectionMode(this : IInkCollector*, mode : Win32cr::UI::TabletPC::InkCollectionMode*) : Win32cr::Foundation::HRESULT
@@ -3408,16 +3431,16 @@ module Win32cr::UI::TabletPC
     def put_CollectionMode(this : IInkCollector*, mode : Win32cr::UI::TabletPC::InkCollectionMode) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CollectionMode.call(this, mode)
     end
-    def get_DynamicRendering(this : IInkCollector*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DynamicRendering(this : IInkCollector*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DynamicRendering.call(this, enabled)
     end
-    def put_DynamicRendering(this : IInkCollector*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_DynamicRendering(this : IInkCollector*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DynamicRendering.call(this, enabled)
     end
-    def get_DesiredPacketDescription(this : IInkCollector*, packet_guids : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DesiredPacketDescription(this : IInkCollector*, packet_guids : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DesiredPacketDescription.call(this, packet_guids)
     end
-    def put_DesiredPacketDescription(this : IInkCollector*, packet_guids : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_DesiredPacketDescription(this : IInkCollector*, packet_guids : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DesiredPacketDescription.call(this, packet_guids)
     end
     def get_MouseIcon(this : IInkCollector*, mouse_icon : Void**) : Win32cr::Foundation::HRESULT
@@ -3453,16 +3476,16 @@ module Win32cr::UI::TabletPC
     def get_Tablet(this : IInkCollector*, single_tablet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tablet.call(this, single_tablet)
     end
-    def get_SupportHighContrastInk(this : IInkCollector*, support : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SupportHighContrastInk(this : IInkCollector*, support : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SupportHighContrastInk.call(this, support)
     end
-    def put_SupportHighContrastInk(this : IInkCollector*, support : Int16) : Win32cr::Foundation::HRESULT
+    def put_SupportHighContrastInk(this : IInkCollector*, support : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SupportHighContrastInk.call(this, support)
     end
-    def set_gesture_status(this : IInkCollector*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Int16) : Win32cr::Foundation::HRESULT
+    def set_gesture_status(this : IInkCollector*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_gesture_status.call(this, gesture, listen)
     end
-    def get_gesture_status(this : IInkCollector*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listening : Int16*) : Win32cr::Foundation::HRESULT
+    def get_gesture_status(this : IInkCollector*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listening : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gesture_status.call(this, gesture, listening)
     end
     def get_window_input_rectangle(this : IInkCollector*, window_input_rectangle : Void**) : Win32cr::Foundation::HRESULT
@@ -3471,34 +3494,35 @@ module Win32cr::UI::TabletPC
     def set_window_input_rectangle(this : IInkCollector*, window_input_rectangle : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_window_input_rectangle.call(this, window_input_rectangle)
     end
-    def set_all_tablets_mode(this : IInkCollector*, use_mouse_for_input : Int16) : Win32cr::Foundation::HRESULT
+    def set_all_tablets_mode(this : IInkCollector*, use_mouse_for_input : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_all_tablets_mode.call(this, use_mouse_for_input)
     end
     def set_single_tablet_integrated_mode(this : IInkCollector*, tablet : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_single_tablet_integrated_mode.call(this, tablet)
     end
-    def get_event_interest(this : IInkCollector*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_event_interest(this : IInkCollector*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_event_interest.call(this, event_id, listen)
     end
-    def set_event_interest(this : IInkCollector*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Int16) : Win32cr::Foundation::HRESULT
+    def set_event_interest(this : IInkCollector*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_event_interest.call(this, event_id, listen)
     end
 
   end
 
   @[Extern]
-  record IInkCollectorEvents_Vtbl,
+
+  record IInkCollectorEvents_Vtable,
     query_interface : Proc(IInkCollectorEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCollectorEvents_*, UInt32),
     release : Proc(IInkCollectorEvents_*, UInt32),
     get_type_info_count : Proc(IInkCollectorEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkCollectorEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkCollectorEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkCollectorEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkCollectorEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkCollectorEvents_, lpVtbl : IInkCollectorEvents_Vtbl* do
+  record IInkCollectorEvents_, lpVtbl : IInkCollectorEvents_Vtable* do
     GUID = LibC::GUID.new(0x11a583f2_u32, 0x712d_u16, 0x4fea_u16, StaticArray[0xab_u8, 0xcf_u8, 0xab_u8, 0x4a_u8, 0xf3_u8, 0x8e_u8, 0xa0_u8, 0x6b_u8])
     def query_interface(this : IInkCollectorEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3518,40 +3542,41 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkCollectorEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkCollectorEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkCollectorEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkOverlayVtbl,
+
+  record IInkOverlayVtable,
     query_interface : Proc(IInkOverlay*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkOverlay*, UInt32),
     release : Proc(IInkOverlay*, UInt32),
     get_type_info_count : Proc(IInkOverlay*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkOverlay*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkOverlay*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkOverlay*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkOverlay*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_hWnd : Proc(IInkOverlay*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     put_hWnd : Proc(IInkOverlay*, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IInkOverlay*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IInkOverlay*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DefaultDrawingAttributes : Proc(IInkOverlay*, Void**, Win32cr::Foundation::HRESULT),
     putref_DefaultDrawingAttributes : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
     get_Renderer : Proc(IInkOverlay*, Void**, Win32cr::Foundation::HRESULT),
     putref_Renderer : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
     get_Ink : Proc(IInkOverlay*, Void**, Win32cr::Foundation::HRESULT),
     putref_Ink : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
-    get_AutoRedraw : Proc(IInkOverlay*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoRedraw : Proc(IInkOverlay*, Int16, Win32cr::Foundation::HRESULT),
-    get_CollectingInk : Proc(IInkOverlay*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoRedraw : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoRedraw : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_CollectingInk : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CollectionMode : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkCollectionMode*, Win32cr::Foundation::HRESULT),
     put_CollectionMode : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkCollectionMode, Win32cr::Foundation::HRESULT),
-    get_DynamicRendering : Proc(IInkOverlay*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DynamicRendering : Proc(IInkOverlay*, Int16, Win32cr::Foundation::HRESULT),
-    get_DesiredPacketDescription : Proc(IInkOverlay*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_DesiredPacketDescription : Proc(IInkOverlay*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DynamicRendering : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DynamicRendering : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DesiredPacketDescription : Proc(IInkOverlay*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_DesiredPacketDescription : Proc(IInkOverlay*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_MouseIcon : Proc(IInkOverlay*, Void**, Win32cr::Foundation::HRESULT),
     put_MouseIcon : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
     putref_MouseIcon : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
@@ -3573,24 +3598,24 @@ module Win32cr::UI::TabletPC
     get_MarginY : Proc(IInkOverlay*, Int32*, Win32cr::Foundation::HRESULT),
     put_MarginY : Proc(IInkOverlay*, Int32, Win32cr::Foundation::HRESULT),
     get_Tablet : Proc(IInkOverlay*, Void**, Win32cr::Foundation::HRESULT),
-    get_SupportHighContrastInk : Proc(IInkOverlay*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SupportHighContrastInk : Proc(IInkOverlay*, Int16, Win32cr::Foundation::HRESULT),
-    get_SupportHighContrastSelectionUI : Proc(IInkOverlay*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SupportHighContrastSelectionUI : Proc(IInkOverlay*, Int16, Win32cr::Foundation::HRESULT),
+    get_SupportHighContrastInk : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SupportHighContrastInk : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_SupportHighContrastSelectionUI : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SupportHighContrastSelectionUI : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     hit_test_selection : Proc(IInkOverlay*, Int32, Int32, Win32cr::UI::TabletPC::SelectionHitResult*, Win32cr::Foundation::HRESULT),
     draw : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
-    set_gesture_status : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16, Win32cr::Foundation::HRESULT),
-    get_gesture_status : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16*, Win32cr::Foundation::HRESULT),
+    set_gesture_status : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_gesture_status : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_window_input_rectangle : Proc(IInkOverlay*, Void**, Win32cr::Foundation::HRESULT),
     set_window_input_rectangle : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
-    set_all_tablets_mode : Proc(IInkOverlay*, Int16, Win32cr::Foundation::HRESULT),
+    set_all_tablets_mode : Proc(IInkOverlay*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     set_single_tablet_integrated_mode : Proc(IInkOverlay*, Void*, Win32cr::Foundation::HRESULT),
-    get_event_interest : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Int16*, Win32cr::Foundation::HRESULT),
-    set_event_interest : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Int16, Win32cr::Foundation::HRESULT)
+    get_event_interest : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    set_event_interest : Proc(IInkOverlay*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkOverlay, lpVtbl : IInkOverlayVtbl* do
+  record IInkOverlay, lpVtbl : IInkOverlayVtable* do
     GUID = LibC::GUID.new(0xb82a463b_u32, 0xc1c5_u16, 0x45a3_u16, StaticArray[0x99_u8, 0x7c_u8, 0xde_u8, 0xab_u8, 0x56_u8, 0x51_u8, 0xb6_u8, 0x7a_u8])
     def query_interface(this : IInkOverlay*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3610,8 +3635,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkOverlay*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkOverlay*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkOverlay*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_hWnd(this : IInkOverlay*, current_window : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hWnd.call(this, current_window)
@@ -3619,10 +3644,10 @@ module Win32cr::UI::TabletPC
     def put_hWnd(this : IInkOverlay*, new_window : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_hWnd.call(this, new_window)
     end
-    def get_Enabled(this : IInkOverlay*, collecting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IInkOverlay*, collecting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, collecting)
     end
-    def put_Enabled(this : IInkOverlay*, collecting : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IInkOverlay*, collecting : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, collecting)
     end
     def get_DefaultDrawingAttributes(this : IInkOverlay*, current_attributes : Void**) : Win32cr::Foundation::HRESULT
@@ -3643,13 +3668,13 @@ module Win32cr::UI::TabletPC
     def putref_Ink(this : IInkOverlay*, new_ink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_Ink.call(this, new_ink)
     end
-    def get_AutoRedraw(this : IInkOverlay*, auto_redraw : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoRedraw(this : IInkOverlay*, auto_redraw : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoRedraw.call(this, auto_redraw)
     end
-    def put_AutoRedraw(this : IInkOverlay*, auto_redraw : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoRedraw(this : IInkOverlay*, auto_redraw : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoRedraw.call(this, auto_redraw)
     end
-    def get_CollectingInk(this : IInkOverlay*, collecting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CollectingInk(this : IInkOverlay*, collecting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CollectingInk.call(this, collecting)
     end
     def get_CollectionMode(this : IInkOverlay*, mode : Win32cr::UI::TabletPC::InkCollectionMode*) : Win32cr::Foundation::HRESULT
@@ -3658,16 +3683,16 @@ module Win32cr::UI::TabletPC
     def put_CollectionMode(this : IInkOverlay*, mode : Win32cr::UI::TabletPC::InkCollectionMode) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CollectionMode.call(this, mode)
     end
-    def get_DynamicRendering(this : IInkOverlay*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DynamicRendering(this : IInkOverlay*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DynamicRendering.call(this, enabled)
     end
-    def put_DynamicRendering(this : IInkOverlay*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_DynamicRendering(this : IInkOverlay*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DynamicRendering.call(this, enabled)
     end
-    def get_DesiredPacketDescription(this : IInkOverlay*, packet_guids : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DesiredPacketDescription(this : IInkOverlay*, packet_guids : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DesiredPacketDescription.call(this, packet_guids)
     end
-    def put_DesiredPacketDescription(this : IInkOverlay*, packet_guids : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_DesiredPacketDescription(this : IInkOverlay*, packet_guids : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DesiredPacketDescription.call(this, packet_guids)
     end
     def get_MouseIcon(this : IInkOverlay*, mouse_icon : Void**) : Win32cr::Foundation::HRESULT
@@ -3733,16 +3758,16 @@ module Win32cr::UI::TabletPC
     def get_Tablet(this : IInkOverlay*, single_tablet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tablet.call(this, single_tablet)
     end
-    def get_SupportHighContrastInk(this : IInkOverlay*, support : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SupportHighContrastInk(this : IInkOverlay*, support : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SupportHighContrastInk.call(this, support)
     end
-    def put_SupportHighContrastInk(this : IInkOverlay*, support : Int16) : Win32cr::Foundation::HRESULT
+    def put_SupportHighContrastInk(this : IInkOverlay*, support : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SupportHighContrastInk.call(this, support)
     end
-    def get_SupportHighContrastSelectionUI(this : IInkOverlay*, support : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SupportHighContrastSelectionUI(this : IInkOverlay*, support : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SupportHighContrastSelectionUI.call(this, support)
     end
-    def put_SupportHighContrastSelectionUI(this : IInkOverlay*, support : Int16) : Win32cr::Foundation::HRESULT
+    def put_SupportHighContrastSelectionUI(this : IInkOverlay*, support : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SupportHighContrastSelectionUI.call(this, support)
     end
     def hit_test_selection(this : IInkOverlay*, x : Int32, y : Int32, sel_area : Win32cr::UI::TabletPC::SelectionHitResult*) : Win32cr::Foundation::HRESULT
@@ -3751,10 +3776,10 @@ module Win32cr::UI::TabletPC
     def draw(this : IInkOverlay*, rect : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.draw.call(this, rect)
     end
-    def set_gesture_status(this : IInkOverlay*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Int16) : Win32cr::Foundation::HRESULT
+    def set_gesture_status(this : IInkOverlay*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_gesture_status.call(this, gesture, listen)
     end
-    def get_gesture_status(this : IInkOverlay*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listening : Int16*) : Win32cr::Foundation::HRESULT
+    def get_gesture_status(this : IInkOverlay*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listening : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gesture_status.call(this, gesture, listening)
     end
     def get_window_input_rectangle(this : IInkOverlay*, window_input_rectangle : Void**) : Win32cr::Foundation::HRESULT
@@ -3763,34 +3788,35 @@ module Win32cr::UI::TabletPC
     def set_window_input_rectangle(this : IInkOverlay*, window_input_rectangle : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_window_input_rectangle.call(this, window_input_rectangle)
     end
-    def set_all_tablets_mode(this : IInkOverlay*, use_mouse_for_input : Int16) : Win32cr::Foundation::HRESULT
+    def set_all_tablets_mode(this : IInkOverlay*, use_mouse_for_input : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_all_tablets_mode.call(this, use_mouse_for_input)
     end
     def set_single_tablet_integrated_mode(this : IInkOverlay*, tablet : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_single_tablet_integrated_mode.call(this, tablet)
     end
-    def get_event_interest(this : IInkOverlay*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_event_interest(this : IInkOverlay*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_event_interest.call(this, event_id, listen)
     end
-    def set_event_interest(this : IInkOverlay*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Int16) : Win32cr::Foundation::HRESULT
+    def set_event_interest(this : IInkOverlay*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_event_interest.call(this, event_id, listen)
     end
 
   end
 
   @[Extern]
-  record IInkOverlayEvents_Vtbl,
+
+  record IInkOverlayEvents_Vtable,
     query_interface : Proc(IInkOverlayEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkOverlayEvents_*, UInt32),
     release : Proc(IInkOverlayEvents_*, UInt32),
     get_type_info_count : Proc(IInkOverlayEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkOverlayEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkOverlayEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkOverlayEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkOverlayEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkOverlayEvents_, lpVtbl : IInkOverlayEvents_Vtbl* do
+  record IInkOverlayEvents_, lpVtbl : IInkOverlayEvents_Vtable* do
     GUID = LibC::GUID.new(0x31179b69_u32, 0xe563_u16, 0x489e_u16, StaticArray[0xb1_u8, 0x6f_u8, 0x71_u8, 0x2f_u8, 0x1e_u8, 0x8a_u8, 0x6_u8, 0x51_u8])
     def query_interface(this : IInkOverlayEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3810,21 +3836,22 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkOverlayEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkOverlayEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkOverlayEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkPictureVtbl,
+
+  record IInkPictureVtable,
     query_interface : Proc(IInkPicture*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkPicture*, UInt32),
     release : Proc(IInkPicture*, UInt32),
     get_type_info_count : Proc(IInkPicture*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkPicture*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkPicture*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkPicture*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkPicture*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_hWnd : Proc(IInkPicture*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     get_DefaultDrawingAttributes : Proc(IInkPicture*, Void**, Win32cr::Foundation::HRESULT),
     putref_DefaultDrawingAttributes : Proc(IInkPicture*, Void*, Win32cr::Foundation::HRESULT),
@@ -3832,15 +3859,15 @@ module Win32cr::UI::TabletPC
     putref_Renderer : Proc(IInkPicture*, Void*, Win32cr::Foundation::HRESULT),
     get_Ink : Proc(IInkPicture*, Void**, Win32cr::Foundation::HRESULT),
     putref_Ink : Proc(IInkPicture*, Void*, Win32cr::Foundation::HRESULT),
-    get_AutoRedraw : Proc(IInkPicture*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoRedraw : Proc(IInkPicture*, Int16, Win32cr::Foundation::HRESULT),
-    get_CollectingInk : Proc(IInkPicture*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoRedraw : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoRedraw : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_CollectingInk : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CollectionMode : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkCollectionMode*, Win32cr::Foundation::HRESULT),
     put_CollectionMode : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkCollectionMode, Win32cr::Foundation::HRESULT),
-    get_DynamicRendering : Proc(IInkPicture*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DynamicRendering : Proc(IInkPicture*, Int16, Win32cr::Foundation::HRESULT),
-    get_DesiredPacketDescription : Proc(IInkPicture*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_DesiredPacketDescription : Proc(IInkPicture*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DynamicRendering : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DynamicRendering : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DesiredPacketDescription : Proc(IInkPicture*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_DesiredPacketDescription : Proc(IInkPicture*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_MouseIcon : Proc(IInkPicture*, Void**, Win32cr::Foundation::HRESULT),
     put_MouseIcon : Proc(IInkPicture*, Void*, Win32cr::Foundation::HRESULT),
     putref_MouseIcon : Proc(IInkPicture*, Void*, Win32cr::Foundation::HRESULT),
@@ -3867,27 +3894,27 @@ module Win32cr::UI::TabletPC
     get_MarginY : Proc(IInkPicture*, Int32*, Win32cr::Foundation::HRESULT),
     put_MarginY : Proc(IInkPicture*, Int32, Win32cr::Foundation::HRESULT),
     get_Tablet : Proc(IInkPicture*, Void**, Win32cr::Foundation::HRESULT),
-    get_SupportHighContrastInk : Proc(IInkPicture*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SupportHighContrastInk : Proc(IInkPicture*, Int16, Win32cr::Foundation::HRESULT),
-    get_SupportHighContrastSelectionUI : Proc(IInkPicture*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SupportHighContrastSelectionUI : Proc(IInkPicture*, Int16, Win32cr::Foundation::HRESULT),
+    get_SupportHighContrastInk : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SupportHighContrastInk : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_SupportHighContrastSelectionUI : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SupportHighContrastSelectionUI : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     hit_test_selection : Proc(IInkPicture*, Int32, Int32, Win32cr::UI::TabletPC::SelectionHitResult*, Win32cr::Foundation::HRESULT),
-    set_gesture_status : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16, Win32cr::Foundation::HRESULT),
-    get_gesture_status : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16*, Win32cr::Foundation::HRESULT),
+    set_gesture_status : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_gesture_status : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_window_input_rectangle : Proc(IInkPicture*, Void**, Win32cr::Foundation::HRESULT),
     set_window_input_rectangle : Proc(IInkPicture*, Void*, Win32cr::Foundation::HRESULT),
-    set_all_tablets_mode : Proc(IInkPicture*, Int16, Win32cr::Foundation::HRESULT),
+    set_all_tablets_mode : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     set_single_tablet_integrated_mode : Proc(IInkPicture*, Void*, Win32cr::Foundation::HRESULT),
-    get_event_interest : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Int16*, Win32cr::Foundation::HRESULT),
-    set_event_interest : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Int16, Win32cr::Foundation::HRESULT),
-    get_InkEnabled : Proc(IInkPicture*, Int16*, Win32cr::Foundation::HRESULT),
-    put_InkEnabled : Proc(IInkPicture*, Int16, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IInkPicture*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IInkPicture*, Int16, Win32cr::Foundation::HRESULT)
+    get_event_interest : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    set_event_interest : Proc(IInkPicture*, Win32cr::UI::TabletPC::InkCollectorEventInterest, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_InkEnabled : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_InkEnabled : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IInkPicture*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkPicture, lpVtbl : IInkPictureVtbl* do
+  record IInkPicture, lpVtbl : IInkPictureVtable* do
     GUID = LibC::GUID.new(0xe85662e0_u32, 0x379a_u16, 0x40d7_u16, StaticArray[0x9b_u8, 0x5c_u8, 0x75_u8, 0x7d_u8, 0x23_u8, 0x3f_u8, 0x99_u8, 0x23_u8])
     def query_interface(this : IInkPicture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3907,8 +3934,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkPicture*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkPicture*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkPicture*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_hWnd(this : IInkPicture*, current_window : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hWnd.call(this, current_window)
@@ -3931,13 +3958,13 @@ module Win32cr::UI::TabletPC
     def putref_Ink(this : IInkPicture*, new_ink : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_Ink.call(this, new_ink)
     end
-    def get_AutoRedraw(this : IInkPicture*, auto_redraw : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoRedraw(this : IInkPicture*, auto_redraw : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoRedraw.call(this, auto_redraw)
     end
-    def put_AutoRedraw(this : IInkPicture*, auto_redraw : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoRedraw(this : IInkPicture*, auto_redraw : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoRedraw.call(this, auto_redraw)
     end
-    def get_CollectingInk(this : IInkPicture*, collecting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CollectingInk(this : IInkPicture*, collecting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CollectingInk.call(this, collecting)
     end
     def get_CollectionMode(this : IInkPicture*, mode : Win32cr::UI::TabletPC::InkCollectionMode*) : Win32cr::Foundation::HRESULT
@@ -3946,16 +3973,16 @@ module Win32cr::UI::TabletPC
     def put_CollectionMode(this : IInkPicture*, mode : Win32cr::UI::TabletPC::InkCollectionMode) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CollectionMode.call(this, mode)
     end
-    def get_DynamicRendering(this : IInkPicture*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DynamicRendering(this : IInkPicture*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DynamicRendering.call(this, enabled)
     end
-    def put_DynamicRendering(this : IInkPicture*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_DynamicRendering(this : IInkPicture*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DynamicRendering.call(this, enabled)
     end
-    def get_DesiredPacketDescription(this : IInkPicture*, packet_guids : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DesiredPacketDescription(this : IInkPicture*, packet_guids : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DesiredPacketDescription.call(this, packet_guids)
     end
-    def put_DesiredPacketDescription(this : IInkPicture*, packet_guids : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_DesiredPacketDescription(this : IInkPicture*, packet_guids : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DesiredPacketDescription.call(this, packet_guids)
     end
     def get_MouseIcon(this : IInkPicture*, mouse_icon : Void**) : Win32cr::Foundation::HRESULT
@@ -4036,25 +4063,25 @@ module Win32cr::UI::TabletPC
     def get_Tablet(this : IInkPicture*, single_tablet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tablet.call(this, single_tablet)
     end
-    def get_SupportHighContrastInk(this : IInkPicture*, support : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SupportHighContrastInk(this : IInkPicture*, support : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SupportHighContrastInk.call(this, support)
     end
-    def put_SupportHighContrastInk(this : IInkPicture*, support : Int16) : Win32cr::Foundation::HRESULT
+    def put_SupportHighContrastInk(this : IInkPicture*, support : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SupportHighContrastInk.call(this, support)
     end
-    def get_SupportHighContrastSelectionUI(this : IInkPicture*, support : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SupportHighContrastSelectionUI(this : IInkPicture*, support : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SupportHighContrastSelectionUI.call(this, support)
     end
-    def put_SupportHighContrastSelectionUI(this : IInkPicture*, support : Int16) : Win32cr::Foundation::HRESULT
+    def put_SupportHighContrastSelectionUI(this : IInkPicture*, support : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SupportHighContrastSelectionUI.call(this, support)
     end
     def hit_test_selection(this : IInkPicture*, x : Int32, y : Int32, sel_area : Win32cr::UI::TabletPC::SelectionHitResult*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hit_test_selection.call(this, x, y, sel_area)
     end
-    def set_gesture_status(this : IInkPicture*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Int16) : Win32cr::Foundation::HRESULT
+    def set_gesture_status(this : IInkPicture*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_gesture_status.call(this, gesture, listen)
     end
-    def get_gesture_status(this : IInkPicture*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listening : Int16*) : Win32cr::Foundation::HRESULT
+    def get_gesture_status(this : IInkPicture*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listening : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gesture_status.call(this, gesture, listening)
     end
     def get_window_input_rectangle(this : IInkPicture*, window_input_rectangle : Void**) : Win32cr::Foundation::HRESULT
@@ -4063,46 +4090,47 @@ module Win32cr::UI::TabletPC
     def set_window_input_rectangle(this : IInkPicture*, window_input_rectangle : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_window_input_rectangle.call(this, window_input_rectangle)
     end
-    def set_all_tablets_mode(this : IInkPicture*, use_mouse_for_input : Int16) : Win32cr::Foundation::HRESULT
+    def set_all_tablets_mode(this : IInkPicture*, use_mouse_for_input : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_all_tablets_mode.call(this, use_mouse_for_input)
     end
     def set_single_tablet_integrated_mode(this : IInkPicture*, tablet : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_single_tablet_integrated_mode.call(this, tablet)
     end
-    def get_event_interest(this : IInkPicture*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_event_interest(this : IInkPicture*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_event_interest.call(this, event_id, listen)
     end
-    def set_event_interest(this : IInkPicture*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Int16) : Win32cr::Foundation::HRESULT
+    def set_event_interest(this : IInkPicture*, event_id : Win32cr::UI::TabletPC::InkCollectorEventInterest, listen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_event_interest.call(this, event_id, listen)
     end
-    def get_InkEnabled(this : IInkPicture*, collecting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_InkEnabled(this : IInkPicture*, collecting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InkEnabled.call(this, collecting)
     end
-    def put_InkEnabled(this : IInkPicture*, collecting : Int16) : Win32cr::Foundation::HRESULT
+    def put_InkEnabled(this : IInkPicture*, collecting : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_InkEnabled.call(this, collecting)
     end
-    def get_Enabled(this : IInkPicture*, pbool : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IInkPicture*, pbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pbool)
     end
-    def put_Enabled(this : IInkPicture*, vbool : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IInkPicture*, vbool : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, vbool)
     end
 
   end
 
   @[Extern]
-  record IInkPictureEvents_Vtbl,
+
+  record IInkPictureEvents_Vtable,
     query_interface : Proc(IInkPictureEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkPictureEvents_*, UInt32),
     release : Proc(IInkPictureEvents_*, UInt32),
     get_type_info_count : Proc(IInkPictureEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkPictureEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkPictureEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkPictureEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkPictureEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkPictureEvents_, lpVtbl : IInkPictureEvents_Vtbl* do
+  record IInkPictureEvents_, lpVtbl : IInkPictureEvents_Vtable* do
     GUID = LibC::GUID.new(0x60ff4fee_u32, 0x22ff_u16, 0x4484_u16, StaticArray[0xac_u8, 0xc1_u8, 0xd3_u8, 0x8_u8, 0xd9_u8, 0xcd_u8, 0x7e_u8, 0xa3_u8])
     def query_interface(this : IInkPictureEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4122,32 +4150,33 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkPictureEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkPictureEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkPictureEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkRecognizerVtbl,
+
+  record IInkRecognizerVtable,
     query_interface : Proc(IInkRecognizer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognizer*, UInt32),
     release : Proc(IInkRecognizer*, UInt32),
     get_type_info_count : Proc(IInkRecognizer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognizer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognizer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognizer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognizer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IInkRecognizer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Vendor : Proc(IInkRecognizer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Capabilities : Proc(IInkRecognizer*, Win32cr::UI::TabletPC::InkRecognizerCapabilities*, Win32cr::Foundation::HRESULT),
-    get_Languages : Proc(IInkRecognizer*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_SupportedProperties : Proc(IInkRecognizer*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PreferredPacketDescription : Proc(IInkRecognizer*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Languages : Proc(IInkRecognizer*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SupportedProperties : Proc(IInkRecognizer*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PreferredPacketDescription : Proc(IInkRecognizer*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     create_recognizer_context : Proc(IInkRecognizer*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkRecognizer, lpVtbl : IInkRecognizerVtbl* do
+  record IInkRecognizer, lpVtbl : IInkRecognizerVtable* do
     GUID = LibC::GUID.new(0x782bf7cf_u32, 0x34b_u16, 0x4396_u16, StaticArray[0x8a_u8, 0x32_u8, 0x3a_u8, 0x18_u8, 0x33_u8, 0xcf_u8, 0x6b_u8, 0x56_u8])
     def query_interface(this : IInkRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4167,8 +4196,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognizer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognizer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognizer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IInkRecognizer*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -4179,13 +4208,13 @@ module Win32cr::UI::TabletPC
     def get_Capabilities(this : IInkRecognizer*, capabilities_flags : Win32cr::UI::TabletPC::InkRecognizerCapabilities*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Capabilities.call(this, capabilities_flags)
     end
-    def get_Languages(this : IInkRecognizer*, languages : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Languages(this : IInkRecognizer*, languages : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Languages.call(this, languages)
     end
-    def get_SupportedProperties(this : IInkRecognizer*, supported_properties : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SupportedProperties(this : IInkRecognizer*, supported_properties : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SupportedProperties.call(this, supported_properties)
     end
-    def get_PreferredPacketDescription(this : IInkRecognizer*, preferred_packet_description : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PreferredPacketDescription(this : IInkRecognizer*, preferred_packet_description : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredPacketDescription.call(this, preferred_packet_description)
     end
     def create_recognizer_context(this : IInkRecognizer*, context : Void**) : Win32cr::Foundation::HRESULT
@@ -4195,20 +4224,21 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkRecognizer2Vtbl,
+
+  record IInkRecognizer2Vtable,
     query_interface : Proc(IInkRecognizer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognizer2*, UInt32),
     release : Proc(IInkRecognizer2*, UInt32),
     get_type_info_count : Proc(IInkRecognizer2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognizer2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognizer2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognizer2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognizer2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IInkRecognizer2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_UnicodeRanges : Proc(IInkRecognizer2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_UnicodeRanges : Proc(IInkRecognizer2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkRecognizer2, lpVtbl : IInkRecognizer2Vtbl* do
+  record IInkRecognizer2, lpVtbl : IInkRecognizer2Vtable* do
     GUID = LibC::GUID.new(0x6110118a_u32, 0x3a75_u16, 0x4ad6_u16, StaticArray[0xb2_u8, 0xaa_u8, 0x4_u8, 0xb2_u8, 0xb7_u8, 0x2b_u8, 0xbe_u8, 0x65_u8])
     def query_interface(this : IInkRecognizer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4228,27 +4258,28 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognizer2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognizer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognizer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IInkRecognizer2*, pbstrId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pbstrId)
     end
-    def get_UnicodeRanges(this : IInkRecognizer2*, unicode_ranges : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_UnicodeRanges(this : IInkRecognizer2*, unicode_ranges : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UnicodeRanges.call(this, unicode_ranges)
     end
 
   end
 
   @[Extern]
-  record IInkRecognizersVtbl,
+
+  record IInkRecognizersVtable,
     query_interface : Proc(IInkRecognizers*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognizers*, UInt32),
     release : Proc(IInkRecognizers*, UInt32),
     get_type_info_count : Proc(IInkRecognizers*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognizers*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognizers*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognizers*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognizers*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkRecognizers*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkRecognizers*, Void**, Win32cr::Foundation::HRESULT),
     get_default_recognizer : Proc(IInkRecognizers*, Int32, Void**, Win32cr::Foundation::HRESULT),
@@ -4256,7 +4287,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkRecognizers, lpVtbl : IInkRecognizersVtbl* do
+  record IInkRecognizers, lpVtbl : IInkRecognizersVtable* do
     GUID = LibC::GUID.new(0x9ccc4f12_u32, 0xb0b7_u16, 0x4a8b_u16, StaticArray[0xbf_u8, 0x58_u8, 0x4a_u8, 0xec_u8, 0xa4_u8, 0xe8_u8, 0xce_u8, 0xfd_u8])
     def query_interface(this : IInkRecognizers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4276,8 +4307,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognizers*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognizers*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognizers*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkRecognizers*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -4295,18 +4326,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkRecognitionEvents_Vtbl,
+
+  record IInkRecognitionEvents_Vtable,
     query_interface : Proc(IInkRecognitionEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognitionEvents_*, UInt32),
     release : Proc(IInkRecognitionEvents_*, UInt32),
     get_type_info_count : Proc(IInkRecognitionEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognitionEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognitionEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognitionEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkRecognitionEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkRecognitionEvents_, lpVtbl : IInkRecognitionEvents_Vtbl* do
+  record IInkRecognitionEvents_, lpVtbl : IInkRecognitionEvents_Vtable* do
     GUID = LibC::GUID.new(0x17bce92f_u32, 0x2e21_u16, 0x47fd_u16, StaticArray[0x9d_u8, 0x33_u8, 0x3c_u8, 0x6a_u8, 0xfb_u8, 0xfd_u8, 0x8c_u8, 0x59_u8])
     def query_interface(this : IInkRecognitionEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4326,21 +4358,22 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognitionEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognitionEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognitionEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkRecognizerContextVtbl,
+
+  record IInkRecognizerContextVtable,
     query_interface : Proc(IInkRecognizerContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognizerContext*, UInt32),
     release : Proc(IInkRecognizerContext*, UInt32),
     get_type_info_count : Proc(IInkRecognizerContext*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognizerContext*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognizerContext*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognizerContext*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognizerContext*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Strokes : Proc(IInkRecognizerContext*, Void**, Win32cr::Foundation::HRESULT),
     putref_Strokes : Proc(IInkRecognizerContext*, Void*, Win32cr::Foundation::HRESULT),
     get_CharacterAutoCompletionMode : Proc(IInkRecognizerContext*, Win32cr::UI::TabletPC::InkRecognizerCharacterAutoCompletionMode*, Win32cr::Foundation::HRESULT),
@@ -4361,14 +4394,14 @@ module Win32cr::UI::TabletPC
     recognize : Proc(IInkRecognizerContext*, Win32cr::UI::TabletPC::InkRecognitionStatus*, Void**, Win32cr::Foundation::HRESULT),
     stop_background_recognition : Proc(IInkRecognizerContext*, Win32cr::Foundation::HRESULT),
     end_ink_input : Proc(IInkRecognizerContext*, Win32cr::Foundation::HRESULT),
-    background_recognize : Proc(IInkRecognizerContext*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    background_recognize_with_alternates : Proc(IInkRecognizerContext*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    background_recognize : Proc(IInkRecognizerContext*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    background_recognize_with_alternates : Proc(IInkRecognizerContext*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     clone : Proc(IInkRecognizerContext*, Void**, Win32cr::Foundation::HRESULT),
-    is_string_supported : Proc(IInkRecognizerContext*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+    is_string_supported : Proc(IInkRecognizerContext*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkRecognizerContext, lpVtbl : IInkRecognizerContextVtbl* do
+  record IInkRecognizerContext, lpVtbl : IInkRecognizerContextVtable* do
     GUID = LibC::GUID.new(0xc68f52f9_u32, 0x32a3_u16, 0x4625_u16, StaticArray[0x90_u8, 0x6c_u8, 0x44_u8, 0xfc_u8, 0x23_u8, 0xb4_u8, 0x9_u8, 0x58_u8])
     def query_interface(this : IInkRecognizerContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4388,8 +4421,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognizerContext*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognizerContext*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognizerContext*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Strokes(this : IInkRecognizerContext*, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Strokes.call(this, strokes)
@@ -4451,36 +4484,37 @@ module Win32cr::UI::TabletPC
     def end_ink_input(this : IInkRecognizerContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.end_ink_input.call(this)
     end
-    def background_recognize(this : IInkRecognizerContext*, custom_data : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def background_recognize(this : IInkRecognizerContext*, custom_data : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.background_recognize.call(this, custom_data)
     end
-    def background_recognize_with_alternates(this : IInkRecognizerContext*, custom_data : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def background_recognize_with_alternates(this : IInkRecognizerContext*, custom_data : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.background_recognize_with_alternates.call(this, custom_data)
     end
     def clone(this : IInkRecognizerContext*, reco_context : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clone.call(this, reco_context)
     end
-    def is_string_supported(this : IInkRecognizerContext*, string : Win32cr::Foundation::BSTR, supported : Int16*) : Win32cr::Foundation::HRESULT
+    def is_string_supported(this : IInkRecognizerContext*, string : Win32cr::Foundation::BSTR, supported : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_string_supported.call(this, string, supported)
     end
 
   end
 
   @[Extern]
-  record IInkRecognizerContext2Vtbl,
+
+  record IInkRecognizerContext2Vtable,
     query_interface : Proc(IInkRecognizerContext2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognizerContext2*, UInt32),
     release : Proc(IInkRecognizerContext2*, UInt32),
     get_type_info_count : Proc(IInkRecognizerContext2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognizerContext2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognizerContext2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognizerContext2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_EnabledUnicodeRanges : Proc(IInkRecognizerContext2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_EnabledUnicodeRanges : Proc(IInkRecognizerContext2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkRecognizerContext2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_EnabledUnicodeRanges : Proc(IInkRecognizerContext2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_EnabledUnicodeRanges : Proc(IInkRecognizerContext2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkRecognizerContext2, lpVtbl : IInkRecognizerContext2Vtbl* do
+  record IInkRecognizerContext2, lpVtbl : IInkRecognizerContext2Vtable* do
     GUID = LibC::GUID.new(0xd6f0e32f_u32, 0x73d8_u16, 0x408e_u16, StaticArray[0x8e_u8, 0x9f_u8, 0x5f_u8, 0xea_u8, 0x59_u8, 0x2c_u8, 0x36_u8, 0x3f_u8])
     def query_interface(this : IInkRecognizerContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4500,27 +4534,28 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognizerContext2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognizerContext2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognizerContext2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_EnabledUnicodeRanges(this : IInkRecognizerContext2*, unicode_ranges : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_EnabledUnicodeRanges(this : IInkRecognizerContext2*, unicode_ranges : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnabledUnicodeRanges.call(this, unicode_ranges)
     end
-    def put_EnabledUnicodeRanges(this : IInkRecognizerContext2*, unicode_ranges : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_EnabledUnicodeRanges(this : IInkRecognizerContext2*, unicode_ranges : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EnabledUnicodeRanges.call(this, unicode_ranges)
     end
 
   end
 
   @[Extern]
-  record IInkRecognitionResultVtbl,
+
+  record IInkRecognitionResultVtable,
     query_interface : Proc(IInkRecognitionResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognitionResult*, UInt32),
     release : Proc(IInkRecognitionResult*, UInt32),
     get_type_info_count : Proc(IInkRecognitionResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognitionResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognitionResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognitionResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognitionResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_TopString : Proc(IInkRecognitionResult*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TopAlternate : Proc(IInkRecognitionResult*, Void**, Win32cr::Foundation::HRESULT),
     get_TopConfidence : Proc(IInkRecognitionResult*, Win32cr::UI::TabletPC::InkRecognitionConfidence*, Win32cr::Foundation::HRESULT),
@@ -4531,7 +4566,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkRecognitionResult, lpVtbl : IInkRecognitionResultVtbl* do
+  record IInkRecognitionResult, lpVtbl : IInkRecognitionResultVtable* do
     GUID = LibC::GUID.new(0x3bc129a8_u32, 0x86cd_u16, 0x45ad_u16, StaticArray[0xbd_u8, 0xe8_u8, 0xe0_u8, 0xd3_u8, 0x2d_u8, 0x61_u8, 0xc1_u8, 0x6d_u8])
     def query_interface(this : IInkRecognitionResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4551,8 +4586,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognitionResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognitionResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognitionResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_TopString(this : IInkRecognitionResult*, top_string : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TopString.call(this, top_string)
@@ -4579,20 +4614,21 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkRecognitionAlternateVtbl,
+
+  record IInkRecognitionAlternateVtable,
     query_interface : Proc(IInkRecognitionAlternate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognitionAlternate*, UInt32),
     release : Proc(IInkRecognitionAlternate*, UInt32),
     get_type_info_count : Proc(IInkRecognitionAlternate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognitionAlternate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognitionAlternate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognitionAlternate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognitionAlternate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_String : Proc(IInkRecognitionAlternate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Confidence : Proc(IInkRecognitionAlternate*, Win32cr::UI::TabletPC::InkRecognitionConfidence*, Win32cr::Foundation::HRESULT),
-    get_Baseline : Proc(IInkRecognitionAlternate*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Midline : Proc(IInkRecognitionAlternate*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Ascender : Proc(IInkRecognitionAlternate*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Descender : Proc(IInkRecognitionAlternate*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Baseline : Proc(IInkRecognitionAlternate*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Midline : Proc(IInkRecognitionAlternate*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Ascender : Proc(IInkRecognitionAlternate*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Descender : Proc(IInkRecognitionAlternate*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_LineNumber : Proc(IInkRecognitionAlternate*, Int32*, Win32cr::Foundation::HRESULT),
     get_Strokes : Proc(IInkRecognitionAlternate*, Void**, Win32cr::Foundation::HRESULT),
     get_LineAlternates : Proc(IInkRecognitionAlternate*, Void**, Win32cr::Foundation::HRESULT),
@@ -4601,11 +4637,11 @@ module Win32cr::UI::TabletPC
     get_strokes_from_text_range : Proc(IInkRecognitionAlternate*, Int32*, Int32*, Void**, Win32cr::Foundation::HRESULT),
     get_text_range_from_strokes : Proc(IInkRecognitionAlternate*, Void*, Int32*, Int32*, Win32cr::Foundation::HRESULT),
     alternates_with_constant_property_values : Proc(IInkRecognitionAlternate*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_property_value : Proc(IInkRecognitionAlternate*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_property_value : Proc(IInkRecognitionAlternate*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkRecognitionAlternate, lpVtbl : IInkRecognitionAlternateVtbl* do
+  record IInkRecognitionAlternate, lpVtbl : IInkRecognitionAlternateVtable* do
     GUID = LibC::GUID.new(0xb7e660ad_u32, 0x77e4_u16, 0x429b_u16, StaticArray[0xad_u8, 0xda_u8, 0x87_u8, 0x37_u8, 0x80_u8, 0xd1_u8, 0xfc_u8, 0x4a_u8])
     def query_interface(this : IInkRecognitionAlternate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4625,8 +4661,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognitionAlternate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognitionAlternate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognitionAlternate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_String(this : IInkRecognitionAlternate*, reco_string : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_String.call(this, reco_string)
@@ -4634,16 +4670,16 @@ module Win32cr::UI::TabletPC
     def get_Confidence(this : IInkRecognitionAlternate*, confidence : Win32cr::UI::TabletPC::InkRecognitionConfidence*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Confidence.call(this, confidence)
     end
-    def get_Baseline(this : IInkRecognitionAlternate*, baseline : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Baseline(this : IInkRecognitionAlternate*, baseline : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Baseline.call(this, baseline)
     end
-    def get_Midline(this : IInkRecognitionAlternate*, midline : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Midline(this : IInkRecognitionAlternate*, midline : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Midline.call(this, midline)
     end
-    def get_Ascender(this : IInkRecognitionAlternate*, ascender : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Ascender(this : IInkRecognitionAlternate*, ascender : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Ascender.call(this, ascender)
     end
-    def get_Descender(this : IInkRecognitionAlternate*, descender : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Descender(this : IInkRecognitionAlternate*, descender : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Descender.call(this, descender)
     end
     def get_LineNumber(this : IInkRecognitionAlternate*, line_number : Int32*) : Win32cr::Foundation::HRESULT
@@ -4670,21 +4706,22 @@ module Win32cr::UI::TabletPC
     def alternates_with_constant_property_values(this : IInkRecognitionAlternate*, property_type : Win32cr::Foundation::BSTR, alternates_with_constant_property_values : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.alternates_with_constant_property_values.call(this, property_type, alternates_with_constant_property_values)
     end
-    def get_property_value(this : IInkRecognitionAlternate*, property_type : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property_value(this : IInkRecognitionAlternate*, property_type : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property_value.call(this, property_type, property_value)
     end
 
   end
 
   @[Extern]
-  record IInkRecognitionAlternatesVtbl,
+
+  record IInkRecognitionAlternatesVtable,
     query_interface : Proc(IInkRecognitionAlternates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognitionAlternates*, UInt32),
     release : Proc(IInkRecognitionAlternates*, UInt32),
     get_type_info_count : Proc(IInkRecognitionAlternates*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognitionAlternates*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognitionAlternates*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognitionAlternates*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognitionAlternates*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkRecognitionAlternates*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkRecognitionAlternates*, Void**, Win32cr::Foundation::HRESULT),
     get_Strokes : Proc(IInkRecognitionAlternates*, Void**, Win32cr::Foundation::HRESULT),
@@ -4692,7 +4729,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkRecognitionAlternates, lpVtbl : IInkRecognitionAlternatesVtbl* do
+  record IInkRecognitionAlternates, lpVtbl : IInkRecognitionAlternatesVtable* do
     GUID = LibC::GUID.new(0x286a167f_u32, 0x9f19_u16, 0x4c61_u16, StaticArray[0x9d_u8, 0x53_u8, 0x4f_u8, 0x7_u8, 0xbe_u8, 0x62_u8, 0x2b_u8, 0x84_u8])
     def query_interface(this : IInkRecognitionAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4712,8 +4749,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognitionAlternates*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognitionAlternates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognitionAlternates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkRecognitionAlternates*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -4731,14 +4768,15 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkRecognizerGuideVtbl,
+
+  record IInkRecognizerGuideVtable,
     query_interface : Proc(IInkRecognizerGuide*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkRecognizerGuide*, UInt32),
     release : Proc(IInkRecognizerGuide*, UInt32),
     get_type_info_count : Proc(IInkRecognizerGuide*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkRecognizerGuide*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkRecognizerGuide*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkRecognizerGuide*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkRecognizerGuide*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_WritingBox : Proc(IInkRecognizerGuide*, Void**, Win32cr::Foundation::HRESULT),
     put_WritingBox : Proc(IInkRecognizerGuide*, Void*, Win32cr::Foundation::HRESULT),
     get_DrawnBox : Proc(IInkRecognizerGuide*, Void**, Win32cr::Foundation::HRESULT),
@@ -4754,7 +4792,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkRecognizerGuide, lpVtbl : IInkRecognizerGuideVtbl* do
+  record IInkRecognizerGuide, lpVtbl : IInkRecognizerGuideVtable* do
     GUID = LibC::GUID.new(0xd934be07_u32, 0x7b84_u16, 0x4208_u16, StaticArray[0x91_u8, 0x36_u8, 0x83_u8, 0xc2_u8, 0x9_u8, 0x94_u8, 0xe9_u8, 0x5_u8])
     def query_interface(this : IInkRecognizerGuide*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4774,8 +4812,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkRecognizerGuide*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkRecognizerGuide*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkRecognizerGuide*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_WritingBox(this : IInkRecognizerGuide*, rectangle : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WritingBox.call(this, rectangle)
@@ -4817,21 +4855,22 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkWordListVtbl,
+
+  record IInkWordListVtable,
     query_interface : Proc(IInkWordList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkWordList*, UInt32),
     release : Proc(IInkWordList*, UInt32),
     get_type_info_count : Proc(IInkWordList*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkWordList*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkWordList*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkWordList*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkWordList*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     add_word : Proc(IInkWordList*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     remove_word : Proc(IInkWordList*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     merge : Proc(IInkWordList*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkWordList, lpVtbl : IInkWordListVtbl* do
+  record IInkWordList, lpVtbl : IInkWordListVtable* do
     GUID = LibC::GUID.new(0x76ba3491_u32, 0xcb2f_u16, 0x406b_u16, StaticArray[0x99_u8, 0x61_u8, 0xe_u8, 0xc_u8, 0x4c_u8, 0xda_u8, 0xae_u8, 0xf2_u8])
     def query_interface(this : IInkWordList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4851,8 +4890,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkWordList*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkWordList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkWordList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def add_word(this : IInkWordList*, new_word : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_word.call(this, new_word)
@@ -4867,19 +4906,20 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkWordList2Vtbl,
+
+  record IInkWordList2Vtable,
     query_interface : Proc(IInkWordList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkWordList2*, UInt32),
     release : Proc(IInkWordList2*, UInt32),
     get_type_info_count : Proc(IInkWordList2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkWordList2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkWordList2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkWordList2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkWordList2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     add_words : Proc(IInkWordList2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkWordList2, lpVtbl : IInkWordList2Vtbl* do
+  record IInkWordList2, lpVtbl : IInkWordList2Vtable* do
     GUID = LibC::GUID.new(0x14542586_u32, 0x11bf_u16, 0x4f5f_u16, StaticArray[0xb6_u8, 0xe7_u8, 0x49_u8, 0xd0_u8, 0x74_u8, 0x4a_u8, 0xab_u8, 0x6e_u8])
     def query_interface(this : IInkWordList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4899,8 +4939,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkWordList2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkWordList2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkWordList2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def add_words(this : IInkWordList2*, new_words : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_words.call(this, new_words)
@@ -4909,18 +4949,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkVtbl,
+
+  record IInkVtable,
     query_interface : Proc(IInk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInk*, UInt32),
     release : Proc(IInk*, UInt32),
     get_type_info_count : Proc(IInk*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInk*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInk*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInk*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInk*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInk, lpVtbl : IInkVtbl* do
+  record IInk, lpVtbl : IInkVtable* do
     GUID = LibC::GUID.new(0x3f8e511_u32, 0x43a1_u16, 0x11d3_u16, StaticArray[0x8b_u8, 0xb6_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd6_u8, 0xba_u8, 0xd5_u8])
     def query_interface(this : IInk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4940,14 +4981,15 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInk*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInk*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInk*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkLineInfoVtbl,
+
+  record IInkLineInfoVtable,
     query_interface : Proc(IInkLineInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkLineInfo*, UInt32),
     release : Proc(IInkLineInfo*, UInt32),
@@ -4960,7 +5002,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkLineInfo, lpVtbl : IInkLineInfoVtbl* do
+  record IInkLineInfo, lpVtbl : IInkLineInfoVtable* do
     GUID = LibC::GUID.new(0x9c1c5ad6_u32, 0xf22f_u16, 0x4de4_u16, StaticArray[0xb4_u8, 0x53_u8, 0xa2_u8, 0xcc_u8, 0x48_u8, 0x2e_u8, 0x7c_u8, 0x33_u8])
     def query_interface(this : IInkLineInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4993,18 +5035,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record ISketchInkVtbl,
+
+  record ISketchInkVtable,
     query_interface : Proc(ISketchInk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISketchInk*, UInt32),
     release : Proc(ISketchInk*, UInt32),
     get_type_info_count : Proc(ISketchInk*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISketchInk*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISketchInk*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISketchInk*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ISketchInk*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISketchInk, lpVtbl : ISketchInkVtbl* do
+  record ISketchInk, lpVtbl : ISketchInkVtable* do
     GUID = LibC::GUID.new(0xb4563688_u32, 0x98eb_u16, 0x4646_u16, StaticArray[0xb2_u8, 0x79_u8, 0x44_u8, 0xda_u8, 0x14_u8, 0xd4_u8, 0x57_u8, 0x48_u8])
     def query_interface(this : ISketchInk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5024,21 +5067,22 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : ISketchInk*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISketchInk*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISketchInk*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInkDividerVtbl,
+
+  record IInkDividerVtable,
     query_interface : Proc(IInkDivider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkDivider*, UInt32),
     release : Proc(IInkDivider*, UInt32),
     get_type_info_count : Proc(IInkDivider*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkDivider*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkDivider*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkDivider*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkDivider*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Strokes : Proc(IInkDivider*, Void**, Win32cr::Foundation::HRESULT),
     putref_Strokes : Proc(IInkDivider*, Void*, Win32cr::Foundation::HRESULT),
     get_RecognizerContext : Proc(IInkDivider*, Void**, Win32cr::Foundation::HRESULT),
@@ -5049,7 +5093,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkDivider, lpVtbl : IInkDividerVtbl* do
+  record IInkDivider, lpVtbl : IInkDividerVtable* do
     GUID = LibC::GUID.new(0x5de00405_u32, 0xf9a4_u16, 0x4651_u16, StaticArray[0xb0_u8, 0xc5_u8, 0xc3_u8, 0x17_u8, 0xde_u8, 0xfd_u8, 0x58_u8, 0xb9_u8])
     def query_interface(this : IInkDivider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5069,8 +5113,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkDivider*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkDivider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkDivider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Strokes(this : IInkDivider*, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Strokes.call(this, strokes)
@@ -5097,20 +5141,21 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkDivisionResultVtbl,
+
+  record IInkDivisionResultVtable,
     query_interface : Proc(IInkDivisionResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkDivisionResult*, UInt32),
     release : Proc(IInkDivisionResult*, UInt32),
     get_type_info_count : Proc(IInkDivisionResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkDivisionResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkDivisionResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkDivisionResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkDivisionResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Strokes : Proc(IInkDivisionResult*, Void**, Win32cr::Foundation::HRESULT),
     result_by_type : Proc(IInkDivisionResult*, Win32cr::UI::TabletPC::InkDivisionType, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkDivisionResult, lpVtbl : IInkDivisionResultVtbl* do
+  record IInkDivisionResult, lpVtbl : IInkDivisionResultVtable* do
     GUID = LibC::GUID.new(0x2dbec0a7_u32, 0x74c7_u16, 0x4b38_u16, StaticArray[0x81_u8, 0xeb_u8, 0xaa_u8, 0x8e_u8, 0xf0_u8, 0xc2_u8, 0x49_u8, 0x0_u8])
     def query_interface(this : IInkDivisionResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5130,8 +5175,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkDivisionResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkDivisionResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkDivisionResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Strokes(this : IInkDivisionResult*, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Strokes.call(this, strokes)
@@ -5143,14 +5188,15 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkDivisionUnitVtbl,
+
+  record IInkDivisionUnitVtable,
     query_interface : Proc(IInkDivisionUnit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkDivisionUnit*, UInt32),
     release : Proc(IInkDivisionUnit*, UInt32),
     get_type_info_count : Proc(IInkDivisionUnit*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkDivisionUnit*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkDivisionUnit*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkDivisionUnit*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkDivisionUnit*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Strokes : Proc(IInkDivisionUnit*, Void**, Win32cr::Foundation::HRESULT),
     get_DivisionType : Proc(IInkDivisionUnit*, Win32cr::UI::TabletPC::InkDivisionType*, Win32cr::Foundation::HRESULT),
     get_RecognizedString : Proc(IInkDivisionUnit*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5158,7 +5204,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkDivisionUnit, lpVtbl : IInkDivisionUnitVtbl* do
+  record IInkDivisionUnit, lpVtbl : IInkDivisionUnitVtable* do
     GUID = LibC::GUID.new(0x85aee342_u32, 0x48b0_u16, 0x4244_u16, StaticArray[0x9d_u8, 0xd5_u8, 0x1e_u8, 0xd4_u8, 0x35_u8, 0x41_u8, 0xf_u8, 0xab_u8])
     def query_interface(this : IInkDivisionUnit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5178,8 +5224,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkDivisionUnit*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkDivisionUnit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkDivisionUnit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Strokes(this : IInkDivisionUnit*, strokes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Strokes.call(this, strokes)
@@ -5197,21 +5243,22 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkDivisionUnitsVtbl,
+
+  record IInkDivisionUnitsVtable,
     query_interface : Proc(IInkDivisionUnits*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkDivisionUnits*, UInt32),
     release : Proc(IInkDivisionUnits*, UInt32),
     get_type_info_count : Proc(IInkDivisionUnits*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkDivisionUnits*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkDivisionUnits*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkDivisionUnits*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkDivisionUnits*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IInkDivisionUnits*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IInkDivisionUnits*, Void**, Win32cr::Foundation::HRESULT),
     item : Proc(IInkDivisionUnits*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkDivisionUnits, lpVtbl : IInkDivisionUnitsVtbl* do
+  record IInkDivisionUnits, lpVtbl : IInkDivisionUnitsVtable* do
     GUID = LibC::GUID.new(0x1bb5ddc2_u32, 0x31cc_u16, 0x4135_u16, StaticArray[0xab_u8, 0x82_u8, 0x2c_u8, 0x66_u8, 0xc9_u8, 0xf0_u8, 0xc_u8, 0x41_u8])
     def query_interface(this : IInkDivisionUnits*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5231,8 +5278,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkDivisionUnits*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkDivisionUnits*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkDivisionUnits*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IInkDivisionUnits*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -5247,15 +5294,16 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IPenInputPanelVtbl,
+
+  record IPenInputPanelVtable,
     query_interface : Proc(IPenInputPanel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPenInputPanel*, UInt32),
     release : Proc(IPenInputPanel*, UInt32),
     get_type_info_count : Proc(IPenInputPanel*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IPenInputPanel*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IPenInputPanel*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IPenInputPanel*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Busy : Proc(IPenInputPanel*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IPenInputPanel*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Busy : Proc(IPenInputPanel*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Factoid : Proc(IPenInputPanel*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Factoid : Proc(IPenInputPanel*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_AttachedEditWindow : Proc(IPenInputPanel*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5264,8 +5312,8 @@ module Win32cr::UI::TabletPC
     put_CurrentPanel : Proc(IPenInputPanel*, Win32cr::UI::TabletPC::PanelType, Win32cr::Foundation::HRESULT),
     get_DefaultPanel : Proc(IPenInputPanel*, Win32cr::UI::TabletPC::PanelType*, Win32cr::Foundation::HRESULT),
     put_DefaultPanel : Proc(IPenInputPanel*, Win32cr::UI::TabletPC::PanelType, Win32cr::Foundation::HRESULT),
-    get_Visible : Proc(IPenInputPanel*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Visible : Proc(IPenInputPanel*, Int16, Win32cr::Foundation::HRESULT),
+    get_Visible : Proc(IPenInputPanel*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Visible : Proc(IPenInputPanel*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Top : Proc(IPenInputPanel*, Int32*, Win32cr::Foundation::HRESULT),
     get_Left : Proc(IPenInputPanel*, Int32*, Win32cr::Foundation::HRESULT),
     get_Width : Proc(IPenInputPanel*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5274,16 +5322,16 @@ module Win32cr::UI::TabletPC
     put_VerticalOffset : Proc(IPenInputPanel*, Int32, Win32cr::Foundation::HRESULT),
     get_HorizontalOffset : Proc(IPenInputPanel*, Int32*, Win32cr::Foundation::HRESULT),
     put_HorizontalOffset : Proc(IPenInputPanel*, Int32, Win32cr::Foundation::HRESULT),
-    get_AutoShow : Proc(IPenInputPanel*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoShow : Proc(IPenInputPanel*, Int16, Win32cr::Foundation::HRESULT),
+    get_AutoShow : Proc(IPenInputPanel*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoShow : Proc(IPenInputPanel*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     move_to : Proc(IPenInputPanel*, Int32, Int32, Win32cr::Foundation::HRESULT),
     commit_pending_input : Proc(IPenInputPanel*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IPenInputPanel*, Win32cr::Foundation::HRESULT),
-    enable_tsf : Proc(IPenInputPanel*, Int16, Win32cr::Foundation::HRESULT)
+    enable_tsf : Proc(IPenInputPanel*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IPenInputPanel, lpVtbl : IPenInputPanelVtbl* do
+  record IPenInputPanel, lpVtbl : IPenInputPanelVtable* do
     GUID = LibC::GUID.new(0xfa7a4083_u32, 0x5747_u16, 0x4040_u16, StaticArray[0xa1_u8, 0x82_u8, 0xb_u8, 0xe_u8, 0x9f_u8, 0xd4_u8, 0xfa_u8, 0xc7_u8])
     def query_interface(this : IPenInputPanel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5303,10 +5351,10 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IPenInputPanel*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IPenInputPanel*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IPenInputPanel*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Busy(this : IPenInputPanel*, busy : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Busy(this : IPenInputPanel*, busy : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Busy.call(this, busy)
     end
     def get_Factoid(this : IPenInputPanel*, factoid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5333,10 +5381,10 @@ module Win32cr::UI::TabletPC
     def put_DefaultPanel(this : IPenInputPanel*, default_panel : Win32cr::UI::TabletPC::PanelType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DefaultPanel.call(this, default_panel)
     end
-    def get_Visible(this : IPenInputPanel*, visible : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Visible(this : IPenInputPanel*, visible : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Visible.call(this, visible)
     end
-    def put_Visible(this : IPenInputPanel*, visible : Int16) : Win32cr::Foundation::HRESULT
+    def put_Visible(this : IPenInputPanel*, visible : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Visible.call(this, visible)
     end
     def get_Top(this : IPenInputPanel*, top : Int32*) : Win32cr::Foundation::HRESULT
@@ -5363,10 +5411,10 @@ module Win32cr::UI::TabletPC
     def put_HorizontalOffset(this : IPenInputPanel*, horizontal_offset : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HorizontalOffset.call(this, horizontal_offset)
     end
-    def get_AutoShow(this : IPenInputPanel*, pAutoShow : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoShow(this : IPenInputPanel*, pAutoShow : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoShow.call(this, pAutoShow)
     end
-    def put_AutoShow(this : IPenInputPanel*, auto_show : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoShow(this : IPenInputPanel*, auto_show : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoShow.call(this, auto_show)
     end
     def move_to(this : IPenInputPanel*, left : Int32, top : Int32) : Win32cr::Foundation::HRESULT
@@ -5378,25 +5426,26 @@ module Win32cr::UI::TabletPC
     def refresh(this : IPenInputPanel*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def enable_tsf(this : IPenInputPanel*, enable : Int16) : Win32cr::Foundation::HRESULT
+    def enable_tsf(this : IPenInputPanel*, enable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_tsf.call(this, enable)
     end
 
   end
 
   @[Extern]
-  record IPenInputPanelEvents_Vtbl,
+
+  record IPenInputPanelEvents_Vtable,
     query_interface : Proc(IPenInputPanelEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPenInputPanelEvents_*, UInt32),
     release : Proc(IPenInputPanelEvents_*, UInt32),
     get_type_info_count : Proc(IPenInputPanelEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IPenInputPanelEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IPenInputPanelEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IPenInputPanelEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IPenInputPanelEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IPenInputPanelEvents_, lpVtbl : IPenInputPanelEvents_Vtbl* do
+  record IPenInputPanelEvents_, lpVtbl : IPenInputPanelEvents_Vtable* do
     GUID = LibC::GUID.new(0xb7e489da_u32, 0x3719_u16, 0x439f_u16, StaticArray[0x84_u8, 0x8f_u8, 0xe7_u8, 0xac_u8, 0xbd_u8, 0x82_u8, 0xf_u8, 0x17_u8])
     def query_interface(this : IPenInputPanelEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5416,14 +5465,15 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IPenInputPanelEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IPenInputPanelEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IPenInputPanelEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IHandwrittenTextInsertionVtbl,
+
+  record IHandwrittenTextInsertionVtable,
     query_interface : Proc(IHandwrittenTextInsertion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHandwrittenTextInsertion*, UInt32),
     release : Proc(IHandwrittenTextInsertion*, UInt32),
@@ -5432,7 +5482,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IHandwrittenTextInsertion, lpVtbl : IHandwrittenTextInsertionVtbl* do
+  record IHandwrittenTextInsertion, lpVtbl : IHandwrittenTextInsertionVtable* do
     GUID = LibC::GUID.new(0x56fdea97_u32, 0xecd6_u16, 0x43e7_u16, StaticArray[0xaa_u8, 0x3a_u8, 0x81_u8, 0x6b_u8, 0xe7_u8, 0x78_u8, 0x58_u8, 0x60_u8])
     def query_interface(this : IHandwrittenTextInsertion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5453,7 +5503,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record ITextInputPanelEventSinkVtbl,
+
+  record ITextInputPanelEventSinkVtable,
     query_interface : Proc(ITextInputPanelEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextInputPanelEventSink*, UInt32),
     release : Proc(ITextInputPanelEventSink*, UInt32),
@@ -5472,7 +5523,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record ITextInputPanelEventSink, lpVtbl : ITextInputPanelEventSinkVtbl* do
+  record ITextInputPanelEventSink, lpVtbl : ITextInputPanelEventSinkVtable* do
     GUID = LibC::GUID.new(0x27560408_u32, 0x8e64_u16, 0x4fe1_u16, StaticArray[0x80_u8, 0x4e_u8, 0x42_u8, 0x12_u8, 0x1_u8, 0x58_u8, 0x4b_u8, 0x31_u8])
     def query_interface(this : ITextInputPanelEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5523,7 +5574,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record ITextInputPanelVtbl,
+
+  record ITextInputPanelVtable,
     query_interface : Proc(ITextInputPanel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextInputPanel*, UInt32),
     release : Proc(ITextInputPanel*, UInt32),
@@ -5555,7 +5607,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record ITextInputPanel, lpVtbl : ITextInputPanelVtbl* do
+  record ITextInputPanel, lpVtbl : ITextInputPanelVtable* do
     GUID = LibC::GUID.new(0x6b6a65a5_u32, 0x6af3_u16, 0x46c2_u16, StaticArray[0xb6_u8, 0xea_u8, 0x56_u8, 0xcd_u8, 0x1f_u8, 0x80_u8, 0xdf_u8, 0x71_u8])
     def query_interface(this : ITextInputPanel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5645,7 +5697,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInputPanelWindowHandleVtbl,
+
+  record IInputPanelWindowHandleVtable,
     query_interface : Proc(IInputPanelWindowHandle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInputPanelWindowHandle*, UInt32),
     release : Proc(IInputPanelWindowHandle*, UInt32),
@@ -5656,7 +5709,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInputPanelWindowHandle, lpVtbl : IInputPanelWindowHandleVtbl* do
+  record IInputPanelWindowHandle, lpVtbl : IInputPanelWindowHandleVtable* do
     GUID = LibC::GUID.new(0x4af81847_u32, 0xfdc4_u16, 0x4fc3_u16, StaticArray[0xad_u8, 0xb_u8, 0x42_u8, 0x24_u8, 0x79_u8, 0xc1_u8, 0xb9_u8, 0x35_u8])
     def query_interface(this : IInputPanelWindowHandle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5683,7 +5736,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record ITextInputPanelRunInfoVtbl,
+
+  record ITextInputPanelRunInfoVtable,
     query_interface : Proc(ITextInputPanelRunInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextInputPanelRunInfo*, UInt32),
     release : Proc(ITextInputPanelRunInfo*, UInt32),
@@ -5691,7 +5745,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record ITextInputPanelRunInfo, lpVtbl : ITextInputPanelRunInfoVtbl* do
+  record ITextInputPanelRunInfo, lpVtbl : ITextInputPanelRunInfoVtable* do
     GUID = LibC::GUID.new(0x9f424568_u32, 0x1920_u16, 0x48cc_u16, StaticArray[0x98_u8, 0x11_u8, 0xa9_u8, 0x93_u8, 0xcb_u8, 0xf5_u8, 0xad_u8, 0xba_u8])
     def query_interface(this : ITextInputPanelRunInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5709,17 +5763,18 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkEditVtbl,
+
+  record IInkEditVtable,
     query_interface : Proc(IInkEdit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkEdit*, UInt32),
     release : Proc(IInkEdit*, UInt32),
     get_type_info_count : Proc(IInkEdit*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkEdit*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkEdit*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkEdit*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInkEdit*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkEditStatus*, Win32cr::Foundation::HRESULT),
-    get_UseMouseForInput : Proc(IInkEdit*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseMouseForInput : Proc(IInkEdit*, Int16, Win32cr::Foundation::HRESULT),
+    get_UseMouseForInput : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseMouseForInput : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_InkMode : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkMode*, Win32cr::Foundation::HRESULT),
     put_InkMode : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkMode, Win32cr::Foundation::HRESULT),
     get_InkInsertMode : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkInsertMode*, Win32cr::Foundation::HRESULT),
@@ -5732,20 +5787,20 @@ module Win32cr::UI::TabletPC
     putref_Recognizer : Proc(IInkEdit*, Void*, Win32cr::Foundation::HRESULT),
     get_Factoid : Proc(IInkEdit*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Factoid : Proc(IInkEdit*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SelInks : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelInks : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelInks : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelInks : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_SelInksDisplayMode : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkDisplayMode*, Win32cr::Foundation::HRESULT),
     put_SelInksDisplayMode : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkDisplayMode, Win32cr::Foundation::HRESULT),
     recognize : Proc(IInkEdit*, Win32cr::Foundation::HRESULT),
-    get_gesture_status : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16*, Win32cr::Foundation::HRESULT),
-    set_gesture_status : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkApplicationGesture, Int16, Win32cr::Foundation::HRESULT),
+    get_gesture_status : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    set_gesture_status : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkApplicationGesture, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     put_BackColor : Proc(IInkEdit*, UInt32, Win32cr::Foundation::HRESULT),
     get_BackColor : Proc(IInkEdit*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Appearance : Proc(IInkEdit*, Win32cr::UI::TabletPC::AppearanceConstants*, Win32cr::Foundation::HRESULT),
     put_Appearance : Proc(IInkEdit*, Win32cr::UI::TabletPC::AppearanceConstants, Win32cr::Foundation::HRESULT),
     get_BorderStyle : Proc(IInkEdit*, Win32cr::UI::TabletPC::BorderStyleConstants*, Win32cr::Foundation::HRESULT),
     put_BorderStyle : Proc(IInkEdit*, Win32cr::UI::TabletPC::BorderStyleConstants, Win32cr::Foundation::HRESULT),
-    get_Hwnd : Proc(IInkEdit*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Hwnd : Proc(IInkEdit*, Win32cr::System::Ole::OLE_HANDLE*, Win32cr::Foundation::HRESULT),
     get_Font : Proc(IInkEdit*, Void**, Win32cr::Foundation::HRESULT),
     putref_Font : Proc(IInkEdit*, Void*, Win32cr::Foundation::HRESULT),
     get_Text : Proc(IInkEdit*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5755,34 +5810,34 @@ module Win32cr::UI::TabletPC
     putref_MouseIcon : Proc(IInkEdit*, Void*, Win32cr::Foundation::HRESULT),
     get_MousePointer : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkMousePointer*, Win32cr::Foundation::HRESULT),
     put_MousePointer : Proc(IInkEdit*, Win32cr::UI::TabletPC::InkMousePointer, Win32cr::Foundation::HRESULT),
-    get_Locked : Proc(IInkEdit*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Locked : Proc(IInkEdit*, Int16, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IInkEdit*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IInkEdit*, Int16, Win32cr::Foundation::HRESULT),
+    get_Locked : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Locked : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_MaxLength : Proc(IInkEdit*, Int32*, Win32cr::Foundation::HRESULT),
     put_MaxLength : Proc(IInkEdit*, Int32, Win32cr::Foundation::HRESULT),
-    get_MultiLine : Proc(IInkEdit*, Int16*, Win32cr::Foundation::HRESULT),
-    put_MultiLine : Proc(IInkEdit*, Int16, Win32cr::Foundation::HRESULT),
+    get_MultiLine : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_MultiLine : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ScrollBars : Proc(IInkEdit*, Win32cr::UI::TabletPC::ScrollBarsConstants*, Win32cr::Foundation::HRESULT),
     put_ScrollBars : Proc(IInkEdit*, Win32cr::UI::TabletPC::ScrollBarsConstants, Win32cr::Foundation::HRESULT),
-    get_DisableNoScroll : Proc(IInkEdit*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DisableNoScroll : Proc(IInkEdit*, Int16, Win32cr::Foundation::HRESULT),
-    get_SelAlignment : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelAlignment : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SelBold : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelBold : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SelItalic : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelItalic : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SelUnderline : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelUnderline : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SelColor : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelColor : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SelFontName : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelFontName : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SelFontSize : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelFontSize : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SelCharOffset : Proc(IInkEdit*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SelCharOffset : Proc(IInkEdit*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DisableNoScroll : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DisableNoScroll : Proc(IInkEdit*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_SelAlignment : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelAlignment : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelBold : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelBold : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelItalic : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelItalic : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelUnderline : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelUnderline : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelColor : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelColor : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelFontName : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelFontName : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelFontSize : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelFontSize : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SelCharOffset : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SelCharOffset : Proc(IInkEdit*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_TextRTF : Proc(IInkEdit*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_TextRTF : Proc(IInkEdit*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SelStart : Proc(IInkEdit*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5797,7 +5852,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IInkEdit, lpVtbl : IInkEditVtbl* do
+  record IInkEdit, lpVtbl : IInkEditVtable* do
     GUID = LibC::GUID.new(0xf2127a19_u32, 0xfbfb_u16, 0x4aed_u16, StaticArray[0x84_u8, 0x64_u8, 0x3f_u8, 0x36_u8, 0xd7_u8, 0x8c_u8, 0xfe_u8, 0xfb_u8])
     def query_interface(this : IInkEdit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5817,16 +5872,16 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkEdit*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkEdit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkEdit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Status(this : IInkEdit*, pStatus : Win32cr::UI::TabletPC::InkEditStatus*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Status.call(this, pStatus)
     end
-    def get_UseMouseForInput(this : IInkEdit*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseMouseForInput(this : IInkEdit*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseMouseForInput.call(this, pVal)
     end
-    def put_UseMouseForInput(this : IInkEdit*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseMouseForInput(this : IInkEdit*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseMouseForInput.call(this, newVal)
     end
     def get_InkMode(this : IInkEdit*, pVal : Win32cr::UI::TabletPC::InkMode*) : Win32cr::Foundation::HRESULT
@@ -5865,10 +5920,10 @@ module Win32cr::UI::TabletPC
     def put_Factoid(this : IInkEdit*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Factoid.call(this, newVal)
     end
-    def get_SelInks(this : IInkEdit*, pSelInk : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelInks(this : IInkEdit*, pSelInk : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelInks.call(this, pSelInk)
     end
-    def put_SelInks(this : IInkEdit*, sel_ink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelInks(this : IInkEdit*, sel_ink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelInks.call(this, sel_ink)
     end
     def get_SelInksDisplayMode(this : IInkEdit*, pInkDisplayMode : Win32cr::UI::TabletPC::InkDisplayMode*) : Win32cr::Foundation::HRESULT
@@ -5880,10 +5935,10 @@ module Win32cr::UI::TabletPC
     def recognize(this : IInkEdit*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.recognize.call(this)
     end
-    def get_gesture_status(this : IInkEdit*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, pListen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_gesture_status(this : IInkEdit*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, pListen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_gesture_status.call(this, gesture, pListen)
     end
-    def set_gesture_status(this : IInkEdit*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Int16) : Win32cr::Foundation::HRESULT
+    def set_gesture_status(this : IInkEdit*, gesture : Win32cr::UI::TabletPC::InkApplicationGesture, listen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_gesture_status.call(this, gesture, listen)
     end
     def put_BackColor(this : IInkEdit*, clr : UInt32) : Win32cr::Foundation::HRESULT
@@ -5904,7 +5959,7 @@ module Win32cr::UI::TabletPC
     def put_BorderStyle(this : IInkEdit*, pBorderStyle : Win32cr::UI::TabletPC::BorderStyleConstants) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BorderStyle.call(this, pBorderStyle)
     end
-    def get_Hwnd(this : IInkEdit*, pohHwnd : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_Hwnd(this : IInkEdit*, pohHwnd : Win32cr::System::Ole::OLE_HANDLE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Hwnd.call(this, pohHwnd)
     end
     def get_Font(this : IInkEdit*, ppFont : Void**) : Win32cr::Foundation::HRESULT
@@ -5934,16 +5989,16 @@ module Win32cr::UI::TabletPC
     def put_MousePointer(this : IInkEdit*, mouse_pointer : Win32cr::UI::TabletPC::InkMousePointer) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MousePointer.call(this, mouse_pointer)
     end
-    def get_Locked(this : IInkEdit*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Locked(this : IInkEdit*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Locked.call(this, pVal)
     end
-    def put_Locked(this : IInkEdit*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_Locked(this : IInkEdit*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Locked.call(this, newVal)
     end
-    def get_Enabled(this : IInkEdit*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IInkEdit*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pVal)
     end
-    def put_Enabled(this : IInkEdit*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IInkEdit*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, newVal)
     end
     def get_MaxLength(this : IInkEdit*, plMaxLength : Int32*) : Win32cr::Foundation::HRESULT
@@ -5952,10 +6007,10 @@ module Win32cr::UI::TabletPC
     def put_MaxLength(this : IInkEdit*, lMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MaxLength.call(this, lMaxLength)
     end
-    def get_MultiLine(this : IInkEdit*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MultiLine(this : IInkEdit*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MultiLine.call(this, pVal)
     end
-    def put_MultiLine(this : IInkEdit*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_MultiLine(this : IInkEdit*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MultiLine.call(this, newVal)
     end
     def get_ScrollBars(this : IInkEdit*, pVal : Win32cr::UI::TabletPC::ScrollBarsConstants*) : Win32cr::Foundation::HRESULT
@@ -5964,58 +6019,58 @@ module Win32cr::UI::TabletPC
     def put_ScrollBars(this : IInkEdit*, newVal : Win32cr::UI::TabletPC::ScrollBarsConstants) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ScrollBars.call(this, newVal)
     end
-    def get_DisableNoScroll(this : IInkEdit*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DisableNoScroll(this : IInkEdit*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisableNoScroll.call(this, pVal)
     end
-    def put_DisableNoScroll(this : IInkEdit*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_DisableNoScroll(this : IInkEdit*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DisableNoScroll.call(this, newVal)
     end
-    def get_SelAlignment(this : IInkEdit*, pvarSelAlignment : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelAlignment(this : IInkEdit*, pvarSelAlignment : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelAlignment.call(this, pvarSelAlignment)
     end
-    def put_SelAlignment(this : IInkEdit*, pvarSelAlignment : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelAlignment(this : IInkEdit*, pvarSelAlignment : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelAlignment.call(this, pvarSelAlignment)
     end
-    def get_SelBold(this : IInkEdit*, pvarSelBold : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelBold(this : IInkEdit*, pvarSelBold : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelBold.call(this, pvarSelBold)
     end
-    def put_SelBold(this : IInkEdit*, pvarSelBold : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelBold(this : IInkEdit*, pvarSelBold : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelBold.call(this, pvarSelBold)
     end
-    def get_SelItalic(this : IInkEdit*, pvarSelItalic : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelItalic(this : IInkEdit*, pvarSelItalic : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelItalic.call(this, pvarSelItalic)
     end
-    def put_SelItalic(this : IInkEdit*, pvarSelItalic : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelItalic(this : IInkEdit*, pvarSelItalic : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelItalic.call(this, pvarSelItalic)
     end
-    def get_SelUnderline(this : IInkEdit*, pvarSelUnderline : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelUnderline(this : IInkEdit*, pvarSelUnderline : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelUnderline.call(this, pvarSelUnderline)
     end
-    def put_SelUnderline(this : IInkEdit*, pvarSelUnderline : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelUnderline(this : IInkEdit*, pvarSelUnderline : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelUnderline.call(this, pvarSelUnderline)
     end
-    def get_SelColor(this : IInkEdit*, pvarSelColor : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelColor(this : IInkEdit*, pvarSelColor : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelColor.call(this, pvarSelColor)
     end
-    def put_SelColor(this : IInkEdit*, pvarSelColor : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelColor(this : IInkEdit*, pvarSelColor : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelColor.call(this, pvarSelColor)
     end
-    def get_SelFontName(this : IInkEdit*, pvarSelFontName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelFontName(this : IInkEdit*, pvarSelFontName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelFontName.call(this, pvarSelFontName)
     end
-    def put_SelFontName(this : IInkEdit*, pvarSelFontName : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelFontName(this : IInkEdit*, pvarSelFontName : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelFontName.call(this, pvarSelFontName)
     end
-    def get_SelFontSize(this : IInkEdit*, pvarSelFontSize : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelFontSize(this : IInkEdit*, pvarSelFontSize : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelFontSize.call(this, pvarSelFontSize)
     end
-    def put_SelFontSize(this : IInkEdit*, pvarSelFontSize : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelFontSize(this : IInkEdit*, pvarSelFontSize : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelFontSize.call(this, pvarSelFontSize)
     end
-    def get_SelCharOffset(this : IInkEdit*, pvarSelCharOffset : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelCharOffset(this : IInkEdit*, pvarSelCharOffset : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelCharOffset.call(this, pvarSelCharOffset)
     end
-    def put_SelCharOffset(this : IInkEdit*, pvarSelCharOffset : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SelCharOffset(this : IInkEdit*, pvarSelCharOffset : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SelCharOffset.call(this, pvarSelCharOffset)
     end
     def get_TextRTF(this : IInkEdit*, pbstrTextRTF : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -6055,18 +6110,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IInkEditEvents_Vtbl,
+
+  record IInkEditEvents_Vtable,
     query_interface : Proc(IInkEditEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkEditEvents_*, UInt32),
     release : Proc(IInkEditEvents_*, UInt32),
     get_type_info_count : Proc(IInkEditEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInkEditEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInkEditEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInkEditEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInkEditEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInkEditEvents_, lpVtbl : IInkEditEvents_Vtbl* do
+  record IInkEditEvents_, lpVtbl : IInkEditEvents_Vtable* do
     GUID = LibC::GUID.new(0xe3b0b797_u32, 0xa72e_u16, 0x46db_u16, StaticArray[0xa0_u8, 0xd7_u8, 0x6c_u8, 0x9e_u8, 0xba_u8, 0x8e_u8, 0x9b_u8, 0xbc_u8])
     def query_interface(this : IInkEditEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6086,42 +6142,43 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IInkEditEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInkEditEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInkEditEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IMathInputControlVtbl,
+
+  record IMathInputControlVtable,
     query_interface : Proc(IMathInputControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMathInputControl*, UInt32),
     release : Proc(IMathInputControl*, UInt32),
     get_type_info_count : Proc(IMathInputControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMathInputControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMathInputControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMathInputControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMathInputControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     show : Proc(IMathInputControl*, Win32cr::Foundation::HRESULT),
     hide : Proc(IMathInputControl*, Win32cr::Foundation::HRESULT),
-    is_visible : Proc(IMathInputControl*, Int16*, Win32cr::Foundation::HRESULT),
+    is_visible : Proc(IMathInputControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_position : Proc(IMathInputControl*, Int32*, Int32*, Int32*, Int32*, Win32cr::Foundation::HRESULT),
     set_position : Proc(IMathInputControl*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
     clear : Proc(IMathInputControl*, Win32cr::Foundation::HRESULT),
-    set_custom_paint : Proc(IMathInputControl*, Int32, Int16, Win32cr::Foundation::HRESULT),
+    set_custom_paint : Proc(IMathInputControl*, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     set_caption_text : Proc(IMathInputControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     load_ink : Proc(IMathInputControl*, Void*, Win32cr::Foundation::HRESULT),
     set_owner_window : Proc(IMathInputControl*, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
-    enable_extended_buttons : Proc(IMathInputControl*, Int16, Win32cr::Foundation::HRESULT),
+    enable_extended_buttons : Proc(IMathInputControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_preview_height : Proc(IMathInputControl*, Int32*, Win32cr::Foundation::HRESULT),
     set_preview_height : Proc(IMathInputControl*, Int32, Win32cr::Foundation::HRESULT),
-    enable_auto_grow : Proc(IMathInputControl*, Int16, Win32cr::Foundation::HRESULT),
+    enable_auto_grow : Proc(IMathInputControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     add_function_name : Proc(IMathInputControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     remove_function_name : Proc(IMathInputControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_hover_icon : Proc(IMathInputControl*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMathInputControl, lpVtbl : IMathInputControlVtbl* do
+  record IMathInputControl, lpVtbl : IMathInputControlVtable* do
     GUID = LibC::GUID.new(0xeba615aa_u32, 0xfac6_u16, 0x4738_u16, StaticArray[0xba_u8, 0x5f_u8, 0xff_u8, 0x9_u8, 0xe9_u8, 0xfe_u8, 0x47_u8, 0x3e_u8])
     def query_interface(this : IMathInputControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6141,8 +6198,8 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IMathInputControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMathInputControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMathInputControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def show(this : IMathInputControl*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.show.call(this)
@@ -6150,7 +6207,7 @@ module Win32cr::UI::TabletPC
     def hide(this : IMathInputControl*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hide.call(this)
     end
-    def is_visible(this : IMathInputControl*, pvbShown : Int16*) : Win32cr::Foundation::HRESULT
+    def is_visible(this : IMathInputControl*, pvbShown : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_visible.call(this, pvbShown)
     end
     def get_position(this : IMathInputControl*, left : Int32*, top : Int32*, right : Int32*, bottom : Int32*) : Win32cr::Foundation::HRESULT
@@ -6162,7 +6219,7 @@ module Win32cr::UI::TabletPC
     def clear(this : IMathInputControl*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clear.call(this)
     end
-    def set_custom_paint(this : IMathInputControl*, element : Int32, paint : Int16) : Win32cr::Foundation::HRESULT
+    def set_custom_paint(this : IMathInputControl*, element : Int32, paint : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_custom_paint.call(this, element, paint)
     end
     def set_caption_text(this : IMathInputControl*, caption_text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6174,7 +6231,7 @@ module Win32cr::UI::TabletPC
     def set_owner_window(this : IMathInputControl*, owner_window : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_owner_window.call(this, owner_window)
     end
-    def enable_extended_buttons(this : IMathInputControl*, extended : Int16) : Win32cr::Foundation::HRESULT
+    def enable_extended_buttons(this : IMathInputControl*, extended : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_extended_buttons.call(this, extended)
     end
     def get_preview_height(this : IMathInputControl*, height : Int32*) : Win32cr::Foundation::HRESULT
@@ -6183,7 +6240,7 @@ module Win32cr::UI::TabletPC
     def set_preview_height(this : IMathInputControl*, height : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_preview_height.call(this, height)
     end
-    def enable_auto_grow(this : IMathInputControl*, auto_grow : Int16) : Win32cr::Foundation::HRESULT
+    def enable_auto_grow(this : IMathInputControl*, auto_grow : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_auto_grow.call(this, auto_grow)
     end
     def add_function_name(this : IMathInputControl*, function_name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6199,18 +6256,19 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IMathInputControlEvents_Vtbl,
+
+  record IMathInputControlEvents_Vtable,
     query_interface : Proc(IMathInputControlEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMathInputControlEvents_*, UInt32),
     release : Proc(IMathInputControlEvents_*, UInt32),
     get_type_info_count : Proc(IMathInputControlEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMathInputControlEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMathInputControlEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMathInputControlEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IMathInputControlEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMathInputControlEvents_, lpVtbl : IMathInputControlEvents_Vtbl* do
+  record IMathInputControlEvents_, lpVtbl : IMathInputControlEvents_Vtable* do
     GUID = LibC::GUID.new(0x683336b5_u32, 0xa47d_u16, 0x4358_u16, StaticArray[0x96_u8, 0xf9_u8, 0x87_u8, 0x5a_u8, 0x47_u8, 0x2a_u8, 0xe7_u8, 0xa_u8])
     def query_interface(this : IMathInputControlEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6230,14 +6288,15 @@ module Win32cr::UI::TabletPC
     def get_i_ds_of_names(this : IMathInputControlEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMathInputControlEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMathInputControlEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IRealTimeStylusVtbl,
+
+  record IRealTimeStylusVtable,
     query_interface : Proc(IRealTimeStylus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRealTimeStylus*, UInt32),
     release : Proc(IRealTimeStylus*, UInt32),
@@ -6275,7 +6334,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IRealTimeStylus, lpVtbl : IRealTimeStylusVtbl* do
+  record IRealTimeStylus, lpVtbl : IRealTimeStylusVtable* do
     GUID = LibC::GUID.new(0xa8bb5d22_u32, 0x3144_u16, 0x4a7b_u16, StaticArray[0x93_u8, 0xcd_u8, 0xf3_u8, 0x4a_u8, 0x16_u8, 0xbe_u8, 0x51_u8, 0x3a_u8])
     def query_interface(this : IRealTimeStylus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6383,7 +6442,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IRealTimeStylus2Vtbl,
+
+  record IRealTimeStylus2Vtable,
     query_interface : Proc(IRealTimeStylus2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRealTimeStylus2*, UInt32),
     release : Proc(IRealTimeStylus2*, UInt32),
@@ -6392,7 +6452,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IRealTimeStylus2, lpVtbl : IRealTimeStylus2Vtbl* do
+  record IRealTimeStylus2, lpVtbl : IRealTimeStylus2Vtable* do
     GUID = LibC::GUID.new(0xb5f2a6cd_u32, 0x3179_u16, 0x4a3e_u16, StaticArray[0xb9_u8, 0xc4_u8, 0xbb_u8, 0x58_u8, 0x65_u8, 0x96_u8, 0x2b_u8, 0xe2_u8])
     def query_interface(this : IRealTimeStylus2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6413,7 +6473,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IRealTimeStylus3Vtbl,
+
+  record IRealTimeStylus3Vtable,
     query_interface : Proc(IRealTimeStylus3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRealTimeStylus3*, UInt32),
     release : Proc(IRealTimeStylus3*, UInt32),
@@ -6422,7 +6483,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IRealTimeStylus3, lpVtbl : IRealTimeStylus3Vtbl* do
+  record IRealTimeStylus3, lpVtbl : IRealTimeStylus3Vtable* do
     GUID = LibC::GUID.new(0xd70230a3_u32, 0x6986_u16, 0x4051_u16, StaticArray[0xb5_u8, 0x7a_u8, 0x1c_u8, 0xf6_u8, 0x9f_u8, 0x4d_u8, 0x9d_u8, 0xb5_u8])
     def query_interface(this : IRealTimeStylus3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6443,7 +6504,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IRealTimeStylusSynchronizationVtbl,
+
+  record IRealTimeStylusSynchronizationVtable,
     query_interface : Proc(IRealTimeStylusSynchronization*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRealTimeStylusSynchronization*, UInt32),
     release : Proc(IRealTimeStylusSynchronization*, UInt32),
@@ -6452,7 +6514,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IRealTimeStylusSynchronization, lpVtbl : IRealTimeStylusSynchronizationVtbl* do
+  record IRealTimeStylusSynchronization, lpVtbl : IRealTimeStylusSynchronizationVtable* do
     GUID = LibC::GUID.new(0xaa87eab8_u32, 0xab4a_u16, 0x4cea_u16, StaticArray[0xb5_u8, 0xcb_u8, 0x46_u8, 0xd8_u8, 0x4c_u8, 0x6a_u8, 0x25_u8, 0x9_u8])
     def query_interface(this : IRealTimeStylusSynchronization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6473,7 +6535,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IStrokeBuilderVtbl,
+
+  record IStrokeBuilderVtable,
     query_interface : Proc(IStrokeBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStrokeBuilder*, UInt32),
     release : Proc(IStrokeBuilder*, UInt32),
@@ -6486,7 +6549,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IStrokeBuilder, lpVtbl : IStrokeBuilderVtbl* do
+  record IStrokeBuilder, lpVtbl : IStrokeBuilderVtable* do
     GUID = LibC::GUID.new(0xa5fd4e2d_u32, 0xc44b_u16, 0x4092_u16, StaticArray[0x91_u8, 0x77_u8, 0x26_u8, 0x9_u8, 0x5_u8, 0xeb_u8, 0x67_u8, 0x2b_u8])
     def query_interface(this : IStrokeBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6519,7 +6582,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IStylusPluginVtbl,
+
+  record IStylusPluginVtable,
     query_interface : Proc(IStylusPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStylusPlugin*, UInt32),
     release : Proc(IStylusPlugin*, UInt32),
@@ -6543,7 +6607,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IStylusPlugin, lpVtbl : IStylusPluginVtbl* do
+  record IStylusPlugin, lpVtbl : IStylusPluginVtable* do
     GUID = LibC::GUID.new(0xa81436d8_u32, 0x4757_u16, 0x4fd1_u16, StaticArray[0xa1_u8, 0x85_u8, 0x13_u8, 0x3f_u8, 0x97_u8, 0xc6_u8, 0xc5_u8, 0x45_u8])
     def query_interface(this : IStylusPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6609,7 +6673,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IStylusSyncPluginVtbl,
+
+  record IStylusSyncPluginVtable,
     query_interface : Proc(IStylusSyncPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStylusSyncPlugin*, UInt32),
     release : Proc(IStylusSyncPlugin*, UInt32),
@@ -6633,7 +6698,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IStylusSyncPlugin, lpVtbl : IStylusSyncPluginVtbl* do
+  record IStylusSyncPlugin, lpVtbl : IStylusSyncPluginVtable* do
     GUID = LibC::GUID.new(0xa157b174_u32, 0x482f_u16, 0x4d71_u16, StaticArray[0xa3_u8, 0xf6_u8, 0x3a_u8, 0x41_u8, 0xdd_u8, 0xd1_u8, 0x1b_u8, 0xe9_u8])
     def query_interface(this : IStylusSyncPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6699,7 +6764,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IStylusAsyncPluginVtbl,
+
+  record IStylusAsyncPluginVtable,
     query_interface : Proc(IStylusAsyncPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStylusAsyncPlugin*, UInt32),
     release : Proc(IStylusAsyncPlugin*, UInt32),
@@ -6723,7 +6789,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IStylusAsyncPlugin, lpVtbl : IStylusAsyncPluginVtbl* do
+  record IStylusAsyncPlugin, lpVtbl : IStylusAsyncPluginVtable* do
     GUID = LibC::GUID.new(0xa7cca85a_u32, 0x31bc_u16, 0x4cd2_u16, StaticArray[0xaa_u8, 0xdc_u8, 0x32_u8, 0x89_u8, 0xa3_u8, 0xaf_u8, 0x11_u8, 0xc8_u8])
     def query_interface(this : IStylusAsyncPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6789,7 +6855,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IDynamicRendererVtbl,
+
+  record IDynamicRendererVtable,
     query_interface : Proc(IDynamicRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDynamicRenderer*, UInt32),
     release : Proc(IDynamicRenderer*, UInt32),
@@ -6811,7 +6878,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IDynamicRenderer, lpVtbl : IDynamicRendererVtbl* do
+  record IDynamicRenderer, lpVtbl : IDynamicRendererVtable* do
     GUID = LibC::GUID.new(0xa079468e_u32, 0x7165_u16, 0x46f9_u16, StaticArray[0xb7_u8, 0xaf_u8, 0x98_u8, 0xad_u8, 0x1_u8, 0xa9_u8, 0x30_u8, 0x9_u8])
     def query_interface(this : IDynamicRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6871,7 +6938,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record IGestureRecognizerVtbl,
+
+  record IGestureRecognizerVtable,
     query_interface : Proc(IGestureRecognizer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGestureRecognizer*, UInt32),
     release : Proc(IGestureRecognizer*, UInt32),
@@ -6884,7 +6952,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record IGestureRecognizer, lpVtbl : IGestureRecognizerVtbl* do
+  record IGestureRecognizer, lpVtbl : IGestureRecognizerVtable* do
     GUID = LibC::GUID.new(0xae9ef86b_u32, 0x7054_u16, 0x45e3_u16, StaticArray[0xae_u8, 0x22_u8, 0x31_u8, 0x74_u8, 0xdc_u8, 0x88_u8, 0x11_u8, 0xb7_u8])
     def query_interface(this : IGestureRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6917,7 +6985,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record ITipAutoCompleteProviderVtbl,
+
+  record ITipAutoCompleteProviderVtable,
     query_interface : Proc(ITipAutoCompleteProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITipAutoCompleteProvider*, UInt32),
     release : Proc(ITipAutoCompleteProvider*, UInt32),
@@ -6926,7 +6995,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record ITipAutoCompleteProvider, lpVtbl : ITipAutoCompleteProviderVtbl* do
+  record ITipAutoCompleteProvider, lpVtbl : ITipAutoCompleteProviderVtable* do
     GUID = LibC::GUID.new(0x7c6cf46d_u32, 0x8404_u16, 0x46b9_u16, StaticArray[0xad_u8, 0x33_u8, 0xf5_u8, 0xb6_u8, 0x3_u8, 0x6d_u8, 0x40_u8, 0x7_u8])
     def query_interface(this : ITipAutoCompleteProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6947,7 +7016,8 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record ITipAutoCompleteClientVtbl,
+
+  record ITipAutoCompleteClientVtable,
     query_interface : Proc(ITipAutoCompleteClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITipAutoCompleteClient*, UInt32),
     release : Proc(ITipAutoCompleteClient*, UInt32),
@@ -6959,7 +7029,7 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  record ITipAutoCompleteClient, lpVtbl : ITipAutoCompleteClientVtbl* do
+  record ITipAutoCompleteClient, lpVtbl : ITipAutoCompleteClientVtable* do
     GUID = LibC::GUID.new(0x5e078e03_u32, 0x8265_u16, 0x4bbe_u16, StaticArray[0x94_u8, 0x87_u8, 0xd2_u8, 0x42_u8, 0xed_u8, 0xbe_u8, 0xf9_u8, 0x10_u8])
     def query_interface(this : ITipAutoCompleteClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6989,114 +7059,235 @@ module Win32cr::UI::TabletPC
   end
 
   def createRecognizer(pCLSID : LibC::GUID*, phrec : Win32cr::UI::TabletPC::HRECOGNIZER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateRecognizer(pCLSID, phrec)
+    {% end %}
   end
 
   def destroyRecognizer(hrec : Win32cr::UI::TabletPC::HRECOGNIZER) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DestroyRecognizer(hrec)
+    {% end %}
   end
 
   def getRecoAttributes(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pRecoAttrs : Win32cr::UI::TabletPC::RECO_ATTRS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetRecoAttributes(hrec, pRecoAttrs)
+    {% end %}
   end
 
   def createContext(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, phrc : Win32cr::UI::TabletPC::HRECOCONTEXT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateContext(hrec, phrc)
+    {% end %}
   end
 
   def destroyContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DestroyContext(hrc)
+    {% end %}
   end
 
   def getResultPropertyList(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pPropertyCount : UInt32*, pPropertyGuid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetResultPropertyList(hrec, pPropertyCount, pPropertyGuid)
+    {% end %}
+  end
+
+  def getPreferredPacketDescription(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pPacketDescription : Win32cr::UI::TabletPC::PACKET_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetPreferredPacketDescription(hrec, pPacketDescription)
+    {% end %}
   end
 
   def getUnicodeRanges(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pcRanges : UInt32*, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetUnicodeRanges(hrec, pcRanges, pcr)
+    {% end %}
   end
 
   def addStroke(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pPacketDesc : Win32cr::UI::TabletPC::PACKET_DESCRIPTION*, cbPacket : UInt32, pPacket : UInt8*, pXForm : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddStroke(hrc, pPacketDesc, cbPacket, pPacket, pXForm)
+    {% end %}
   end
 
-  def getBestResultString(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcBestResult : UInt16*) : Win32cr::Foundation::HRESULT
+  def getBestResultString(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcBestResult : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetBestResultString(hrc, pcSize, pwcBestResult)
+    {% end %}
+  end
+
+  def destroyAlternate(hrcalt : Win32cr::UI::TabletPC::HRECOALT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.DestroyAlternate(hrcalt)
+    {% end %}
   end
 
   def setGuide(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuide : Win32cr::UI::TabletPC::RECO_GUIDE*, iIndex : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetGuide(hrc, pGuide, iIndex)
+    {% end %}
+  end
+
+  def getGuide(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuide : Win32cr::UI::TabletPC::RECO_GUIDE*, piIndex : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetGuide(hrc, pGuide, piIndex)
+    {% end %}
   end
 
   def adviseInkChange(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, bNewStroke : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AdviseInkChange(hrc, bNewStroke)
+    {% end %}
+  end
+
+  def setCACMode(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, iMode : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SetCACMode(hrc, iMode)
+    {% end %}
   end
 
   def endInkInput(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EndInkInput(hrc)
+    {% end %}
+  end
+
+  def cloneContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pCloneHrc : Win32cr::UI::TabletPC::HRECOCONTEXT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.CloneContext(hrc, pCloneHrc)
+    {% end %}
+  end
+
+  def resetContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.ResetContext(hrc)
+    {% end %}
   end
 
   def process(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pbPartialProcessing : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.Process(hrc, pbPartialProcessing)
+    {% end %}
   end
 
   def setFactoid(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcFactoid : UInt32, pwcFactoid : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetFactoid(hrc, cwcFactoid, pwcFactoid)
+    {% end %}
   end
 
   def setFlags(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetFlags(hrc, dwFlags)
+    {% end %}
   end
 
   def getLatticePtr(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, ppLattice : Win32cr::UI::TabletPC::RECO_LATTICE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetLatticePtr(hrc, ppLattice)
+    {% end %}
   end
 
-  def setTextContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcBefore : UInt32, pwcBefore : UInt16*, cwcAfter : UInt32, pwcAfter : UInt16*) : Win32cr::Foundation::HRESULT
+  def setTextContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcBefore : UInt32, pwcBefore : Win32cr::Foundation::PWSTR, cwcAfter : UInt32, pwcAfter : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetTextContext(hrc, cwcBefore, pwcBefore, cwcAfter, pwcAfter)
+    {% end %}
+  end
+
+  def getEnabledUnicodeRanges(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcRanges : UInt32*, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetEnabledUnicodeRanges(hrc, pcRanges, pcr)
+    {% end %}
   end
 
   def setEnabledUnicodeRanges(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cRanges : UInt32, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetEnabledUnicodeRanges(hrc, cRanges, pcr)
+    {% end %}
+  end
+
+  def getContextPropertyList(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcProperties : UInt32*, pPropertyGUIDS : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetContextPropertyList(hrc, pcProperties, pPropertyGUIDS)
+    {% end %}
+  end
+
+  def getContextPropertyValue(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuid : LibC::GUID*, pcbSize : UInt32*, pProperty : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetContextPropertyValue(hrc, pGuid, pcbSize, pProperty)
+    {% end %}
+  end
+
+  def setContextPropertyValue(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuid : LibC::GUID*, cbSize : UInt32, pProperty : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SetContextPropertyValue(hrc, pGuid, cbSize, pProperty)
+    {% end %}
   end
 
   def isStringSupported(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, wcString : UInt32, pwcString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsStringSupported(hrc, wcString, pwcString)
+    {% end %}
   end
 
   def setWordList(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetWordList(hrc, hwl)
+    {% end %}
   end
 
-  def getRightSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcRightSeparator : UInt16*) : Win32cr::Foundation::HRESULT
+  def getContextPreferenceFlags(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pdwContextPreferenceFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetContextPreferenceFlags(hrc, pdwContextPreferenceFlags)
+    {% end %}
+  end
+
+  def getRightSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcRightSeparator : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetRightSeparator(hrc, pcSize, pwcRightSeparator)
+    {% end %}
   end
 
-  def getLeftSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcLeftSeparator : UInt16*) : Win32cr::Foundation::HRESULT
+  def getLeftSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcLeftSeparator : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetLeftSeparator(hrc, pcSize, pwcLeftSeparator)
+    {% end %}
   end
 
   def destroyWordList(hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DestroyWordList(hwl)
+    {% end %}
   end
 
   def addWordsToWordList(hwl : Win32cr::UI::TabletPC::HRECOWORDLIST, pwcWords : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddWordsToWordList(hwl, pwcWords)
+    {% end %}
   end
 
   def makeWordList(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pBuffer : Win32cr::Foundation::PWSTR, phwl : Win32cr::UI::TabletPC::HRECOWORDLIST*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MakeWordList(hrec, pBuffer, phwl)
+    {% end %}
   end
 
   def getAllRecognizers(recognizerClsids : LibC::GUID**, count : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetAllRecognizers(recognizerClsids, count)
+    {% end %}
   end
 
   def loadCachedAttributes(clsid : LibC::GUID, pRecoAttributes : Win32cr::UI::TabletPC::RECO_ATTRS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadCachedAttributes(clsid, pRecoAttributes)
+    {% end %}
   end
 
   @[Link("inkobjcore")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateRecognizer(pCLSID : LibC::GUID*, phrec : Win32cr::UI::TabletPC::HRECOGNIZER*) : Win32cr::Foundation::HRESULT
@@ -7117,22 +7308,40 @@ module Win32cr::UI::TabletPC
     fun GetResultPropertyList(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pPropertyCount : UInt32*, pPropertyGuid : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
+    fun GetPreferredPacketDescription(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pPacketDescription : Win32cr::UI::TabletPC::PACKET_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
     fun GetUnicodeRanges(hrec : Win32cr::UI::TabletPC::HRECOGNIZER, pcRanges : UInt32*, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun AddStroke(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pPacketDesc : Win32cr::UI::TabletPC::PACKET_DESCRIPTION*, cbPacket : UInt32, pPacket : UInt8*, pXForm : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun GetBestResultString(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcBestResult : UInt16*) : Win32cr::Foundation::HRESULT
+    fun GetBestResultString(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcBestResult : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun DestroyAlternate(hrcalt : Win32cr::UI::TabletPC::HRECOALT) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun SetGuide(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuide : Win32cr::UI::TabletPC::RECO_GUIDE*, iIndex : UInt32) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
+    fun GetGuide(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuide : Win32cr::UI::TabletPC::RECO_GUIDE*, piIndex : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
     fun AdviseInkChange(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, bNewStroke : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
+    fun SetCACMode(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, iMode : Int32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
     fun EndInkInput(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun CloneContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pCloneHrc : Win32cr::UI::TabletPC::HRECOCONTEXT*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun ResetContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun Process(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pbPartialProcessing : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -7147,10 +7356,22 @@ module Win32cr::UI::TabletPC
     fun GetLatticePtr(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, ppLattice : Win32cr::UI::TabletPC::RECO_LATTICE**) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun SetTextContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcBefore : UInt32, pwcBefore : UInt16*, cwcAfter : UInt32, pwcAfter : UInt16*) : Win32cr::Foundation::HRESULT
+    fun SetTextContext(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cwcBefore : UInt32, pwcBefore : Win32cr::Foundation::PWSTR, cwcAfter : UInt32, pwcAfter : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetEnabledUnicodeRanges(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcRanges : UInt32*, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun SetEnabledUnicodeRanges(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, cRanges : UInt32, pcr : Win32cr::UI::TabletPC::CHARACTER_RANGE*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetContextPropertyList(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcProperties : UInt32*, pPropertyGUIDS : LibC::GUID*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetContextPropertyValue(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuid : LibC::GUID*, pcbSize : UInt32*, pProperty : UInt8*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SetContextPropertyValue(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pGuid : LibC::GUID*, cbSize : UInt32, pProperty : UInt8*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun IsStringSupported(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, wcString : UInt32, pwcString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -7159,10 +7380,13 @@ module Win32cr::UI::TabletPC
     fun SetWordList(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun GetRightSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcRightSeparator : UInt16*) : Win32cr::Foundation::HRESULT
+    fun GetContextPreferenceFlags(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pdwContextPreferenceFlags : UInt32*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun GetLeftSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcLeftSeparator : UInt16*) : Win32cr::Foundation::HRESULT
+    fun GetRightSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcRightSeparator : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetLeftSeparator(hrc : Win32cr::UI::TabletPC::HRECOCONTEXT, pcSize : UInt32*, pwcLeftSeparator : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun DestroyWordList(hwl : Win32cr::UI::TabletPC::HRECOWORDLIST) : Win32cr::Foundation::HRESULT
@@ -7180,4 +7404,5 @@ module Win32cr::UI::TabletPC
     fun LoadCachedAttributes(clsid : LibC::GUID, pRecoAttributes : Win32cr::UI::TabletPC::RECO_ATTRS*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

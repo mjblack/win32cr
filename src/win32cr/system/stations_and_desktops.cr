@@ -5,8 +5,8 @@ require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::System::StationsAndDesktops
   extend self
-  alias HWINSTA = LibC::IntPtrT
-  alias HDESK = LibC::IntPtrT
+  alias HWINSTA = Void*
+  alias HDESK = Void*
   alias WINSTAENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
   alias WINSTAENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
@@ -36,13 +36,32 @@ module Win32cr::System::StationsAndDesktops
     BSM_ALLDESKTOPS = 16_u32
     BSM_APPLICATIONS = 8_u32
   end
-  enum USER_OBJECT_INFORMATION_INDEX : UInt32
-    UOI_FLAGS = 1_u32
-    UOI_HEAPSIZE = 5_u32
-    UOI_IO = 6_u32
-    UOI_NAME = 2_u32
-    UOI_TYPE = 3_u32
-    UOI_USER_SID = 4_u32
+  enum USER_OBJECT_INFORMATION_INDEX
+    UOI_FLAGS = 1_i32
+    UOI_HEAPSIZE = 5_i32
+    UOI_IO = 6_i32
+    UOI_NAME = 2_i32
+    UOI_TYPE = 3_i32
+    UOI_USER_SID = 4_i32
+  end
+  enum DESKTOP_CONTROL_FLAGS : UInt32
+    DF_ALLOWOTHERACCOUNTHOOK = 1_u32
+  end
+  enum DESKTOP_ACCESS_FLAGS : UInt32
+    DESKTOP_DELETE = 65536_u32
+    DESKTOP_READ_CONTROL = 131072_u32
+    DESKTOP_WRITE_DAC = 262144_u32
+    DESKTOP_WRITE_OWNER = 524288_u32
+    DESKTOP_SYNCHRONIZE = 1048576_u32
+    DESKTOP_READOBJECTS = 1_u32
+    DESKTOP_CREATEWINDOW = 2_u32
+    DESKTOP_CREATEMENU = 4_u32
+    DESKTOP_HOOKCONTROL = 8_u32
+    DESKTOP_JOURNALRECORD = 16_u32
+    DESKTOP_JOURNALPLAYBACK = 32_u32
+    DESKTOP_ENUMERATE = 64_u32
+    DESKTOP_WRITEOBJECTS = 128_u32
+    DESKTOP_SWITCHDESKTOP = 256_u32
   end
 
   @[Extern]
@@ -64,152 +83,215 @@ module Win32cr::System::StationsAndDesktops
     end
   end
 
-  def createDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
+  def createDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.CreateDesktopA(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa)
+    {% end %}
   end
 
-  def createDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
+  def createDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.CreateDesktopW(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa)
+    {% end %}
   end
 
-  def createDesktopExA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
+  def createDesktopExA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.CreateDesktopExA(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa, ulHeapSize, pvoid)
+    {% end %}
   end
 
-  def createDesktopExW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
+  def createDesktopExW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.CreateDesktopExW(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa, ulHeapSize, pvoid)
+    {% end %}
   end
 
-  def openDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, dwFlags : UInt32, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+  def openDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.OpenDesktopA(lpszDesktop, dwFlags, fInherit, dwDesiredAccess)
+    {% end %}
   end
 
-  def openDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, dwFlags : UInt32, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+  def openDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.OpenDesktopW(lpszDesktop, dwFlags, fInherit, dwDesiredAccess)
+    {% end %}
   end
 
-  def openInputDesktop(dwFlags : UInt32, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+  def openInputDesktop(dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : Win32cr::System::StationsAndDesktops::DESKTOP_ACCESS_FLAGS) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.OpenInputDesktop(dwFlags, fInherit, dwDesiredAccess)
+    {% end %}
   end
 
   def enumDesktopsA(hwinsta : Win32cr::System::StationsAndDesktops::HWINSTA, lpEnumFunc : Win32cr::System::StationsAndDesktops::DESKTOPENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDesktopsA(hwinsta, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumDesktopsW(hwinsta : Win32cr::System::StationsAndDesktops::HWINSTA, lpEnumFunc : Win32cr::System::StationsAndDesktops::DESKTOPENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDesktopsW(hwinsta, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumDesktopWindows(hDesktop : Win32cr::System::StationsAndDesktops::HDESK, lpfn : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDesktopWindows(hDesktop, lpfn, lParam)
+    {% end %}
   end
 
   def switchDesktop(hDesktop : Win32cr::System::StationsAndDesktops::HDESK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SwitchDesktop(hDesktop)
+    {% end %}
   end
 
   def setThreadDesktop(hDesktop : Win32cr::System::StationsAndDesktops::HDESK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadDesktop(hDesktop)
+    {% end %}
   end
 
   def closeDesktop(hDesktop : Win32cr::System::StationsAndDesktops::HDESK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseDesktop(hDesktop)
+    {% end %}
   end
 
   def getThreadDesktop(dwThreadId : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+    {% if !flag?(:docs) %}
     C.GetThreadDesktop(dwThreadId)
+    {% end %}
   end
 
   def createWindowStationA(lpwinsta : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HWINSTA
+    {% if !flag?(:docs) %}
     C.CreateWindowStationA(lpwinsta, dwFlags, dwDesiredAccess, lpsa)
+    {% end %}
   end
 
   def createWindowStationW(lpwinsta : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HWINSTA
+    {% if !flag?(:docs) %}
     C.CreateWindowStationW(lpwinsta, dwFlags, dwDesiredAccess, lpsa)
+    {% end %}
   end
 
   def openWindowStationA(lpszWinSta : Win32cr::Foundation::PSTR, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HWINSTA
+    {% if !flag?(:docs) %}
     C.OpenWindowStationA(lpszWinSta, fInherit, dwDesiredAccess)
+    {% end %}
   end
 
   def openWindowStationW(lpszWinSta : Win32cr::Foundation::PWSTR, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HWINSTA
+    {% if !flag?(:docs) %}
     C.OpenWindowStationW(lpszWinSta, fInherit, dwDesiredAccess)
+    {% end %}
   end
 
   def enumWindowStationsA(lpEnumFunc : Win32cr::System::StationsAndDesktops::WINSTAENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumWindowStationsA(lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumWindowStationsW(lpEnumFunc : Win32cr::System::StationsAndDesktops::WINSTAENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumWindowStationsW(lpEnumFunc, lParam)
+    {% end %}
   end
 
   def closeWindowStation(hWinSta : Win32cr::System::StationsAndDesktops::HWINSTA) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseWindowStation(hWinSta)
+    {% end %}
   end
 
   def setProcessWindowStation(hWinSta : Win32cr::System::StationsAndDesktops::HWINSTA) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessWindowStation(hWinSta)
+    {% end %}
   end
 
   def getProcessWindowStation : Win32cr::System::StationsAndDesktops::HWINSTA
+    {% if !flag?(:docs) %}
     C.GetProcessWindowStation
+    {% end %}
   end
 
   def getUserObjectInformationA(hObj : Win32cr::Foundation::HANDLE, nIndex : Win32cr::System::StationsAndDesktops::USER_OBJECT_INFORMATION_INDEX, pvInfo : Void*, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUserObjectInformationA(hObj, nIndex, pvInfo, nLength, lpnLengthNeeded)
+    {% end %}
   end
 
   def getUserObjectInformationW(hObj : Win32cr::Foundation::HANDLE, nIndex : Win32cr::System::StationsAndDesktops::USER_OBJECT_INFORMATION_INDEX, pvInfo : Void*, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUserObjectInformationW(hObj, nIndex, pvInfo, nLength, lpnLengthNeeded)
+    {% end %}
   end
 
   def setUserObjectInformationA(hObj : Win32cr::Foundation::HANDLE, nIndex : Int32, pvInfo : Void*, nLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUserObjectInformationA(hObj, nIndex, pvInfo, nLength)
+    {% end %}
   end
 
   def setUserObjectInformationW(hObj : Win32cr::Foundation::HANDLE, nIndex : Int32, pvInfo : Void*, nLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUserObjectInformationW(hObj, nIndex, pvInfo, nLength)
+    {% end %}
   end
 
   def broadcastSystemMessageExA(flags : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_INFO*, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, pbsmInfo : Win32cr::System::StationsAndDesktops::BSMINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.BroadcastSystemMessageExA(flags, lpInfo, msg, wParam, lParam, pbsmInfo)
+    {% end %}
   end
 
   def broadcastSystemMessageExW(flags : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_INFO*, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, pbsmInfo : Win32cr::System::StationsAndDesktops::BSMINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.BroadcastSystemMessageExW(flags, lpInfo, msg, wParam, lParam, pbsmInfo)
+    {% end %}
   end
 
   def broadcastSystemMessageA(flags : UInt32, lpInfo : UInt32*, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.BroadcastSystemMessageA(flags, lpInfo, msg, wParam, lParam)
+    {% end %}
   end
 
   def broadcastSystemMessageW(flags : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_INFO*, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.BroadcastSystemMessageW(flags, lpInfo, msg, wParam, lParam)
+    {% end %}
   end
 
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun CreateDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
+    fun CreateDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
 
     # :nodoc:
-    fun CreateDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
+    fun CreateDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::System::StationsAndDesktops::HDESK
 
     # :nodoc:
-    fun CreateDesktopExA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
+    fun CreateDesktopExA(lpszDesktop : Win32cr::Foundation::PSTR, lpszDevice : Win32cr::Foundation::PSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
 
     # :nodoc:
-    fun CreateDesktopExW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
+    fun CreateDesktopExW(lpszDesktop : Win32cr::Foundation::PWSTR, lpszDevice : Win32cr::Foundation::PWSTR, pDevmode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, dwDesiredAccess : UInt32, lpsa : Win32cr::Security::SECURITY_ATTRIBUTES*, ulHeapSize : UInt32, pvoid : Void*) : Win32cr::System::StationsAndDesktops::HDESK
 
     # :nodoc:
-    fun OpenDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, dwFlags : UInt32, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+    fun OpenDesktopA(lpszDesktop : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
 
     # :nodoc:
-    fun OpenDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, dwFlags : UInt32, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+    fun OpenDesktopW(lpszDesktop : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
 
     # :nodoc:
-    fun OpenInputDesktop(dwFlags : UInt32, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::System::StationsAndDesktops::HDESK
+    fun OpenInputDesktop(dwFlags : Win32cr::System::StationsAndDesktops::DESKTOP_CONTROL_FLAGS, fInherit : Win32cr::Foundation::BOOL, dwDesiredAccess : Win32cr::System::StationsAndDesktops::DESKTOP_ACCESS_FLAGS) : Win32cr::System::StationsAndDesktops::HDESK
 
     # :nodoc:
     fun EnumDesktopsA(hwinsta : Win32cr::System::StationsAndDesktops::HWINSTA, lpEnumFunc : Win32cr::System::StationsAndDesktops::DESKTOPENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
@@ -284,4 +366,5 @@ module Win32cr::System::StationsAndDesktops
     fun BroadcastSystemMessageW(flags : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo : Win32cr::System::StationsAndDesktops::BROADCAST_SYSTEM_MESSAGE_INFO*, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Int32
 
   end
+  {% end %}
 end

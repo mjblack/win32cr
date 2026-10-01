@@ -2,69 +2,33 @@ name: Crystal Latest CI
 
 on:
   workflow_dispatch:
-    inputs: 
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
   schedule:
     - cron: "0 0 * * *"
 
 jobs:
   build:
-
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
-      - name: Install Latest Crystal
-        shell: pwsh
-        run: |
-          $release = gh release view --repo crystal-lang/crystal --json tagName|ConvertFrom-Json
-          gh release download -R crystal-lang/crystal -p "*.exe" -O crystal-installer.exe --clobber $release.tagName
-          $code = Start-Process .\crystal-installer.exe -Wait -ArgumentList "/VERYSILENT","/SP-","/SUPPRESSMSGBOXES","/LOG=$PWD\OUTPUT.LOG" -Verb RunAs
-          dir $env:LOCALAPPDATA\Programs\Crystal
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-      - name: Crystal Version
-        shell: pwsh
-        run: |
-          & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" version
       - uses: actions/checkout@v4
-      - name: Create json directory
-        shell: pwsh
-        run: |
-          mkdir json
-      - uses: actions/checkout@v4
+
+      - name: Install latest Crystal
+        uses: crystal-lang/install-crystal@v1
         with:
-          repository: marlersoft/win32json
-          path: json/win32json
+          crystal: latest
+
+      - name: Crystal version
+        run: crystal version
+
       - name: Install dependencies
-        shell: pwsh
-        run: |
-          & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
-      - name: Cleanup src directory
-        shell: pwsh
-        run: |
-          if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
-      - name: Build WinMD
-        shell: pwsh
-        run: |
-          echo $pwd
-          & .\scripts\build_winmd.ps1
-      - name: WinMD version
-        shell: cmd
-        run: |
-          bin\winmd.exe --version
+        run: shards install --skip-postinstall
+
       - name: Generate bindings
         shell: pwsh
-        run: |
-          & .\bin\winmd.exe generate -d json\win32json\api .
+        run: ./build.ps1
+
+      - name: WinMD version
+        run: bin\winmd.exe --version
+
       - name: Run tests
-        shell: pwsh
-        run: |
-          & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec --error-trace --debug
+        run: crystal spec --error-trace

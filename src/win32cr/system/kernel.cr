@@ -7,17 +7,6 @@ module Win32cr::System::Kernel
 
   OBJ_HANDLE_TAGBITS = 3_i32
   RTL_BALANCED_NODE_RESERVED_PARENT_MASK = 3_u32
-  OBJ_INHERIT = 2_i32
-  OBJ_PERMANENT = 16_i32
-  OBJ_EXCLUSIVE = 32_i32
-  OBJ_CASE_INSENSITIVE = 64_i32
-  OBJ_OPENIF = 128_i32
-  OBJ_OPENLINK = 256_i32
-  OBJ_KERNEL_HANDLE = 512_i32
-  OBJ_FORCE_ACCESS_CHECK = 1024_i32
-  OBJ_IGNORE_IMPERSONATED_DEVICEMAP = 2048_i32
-  OBJ_DONT_REPARSE = 4096_i32
-  OBJ_VALID_ATTRIBUTES = 8178_i32
   NULL64 = 0_u32
   MAXUCHAR = 255_u32
   MAXUSHORT = 65535_u32
@@ -176,16 +165,6 @@ module Win32cr::System::Kernel
     property anonymous1 : Anonymous1_e__Union_
     property anonymous2 : Anonymous2_e__Union_
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property _bitfield : UInt8
-    property parent_value : LibC::UIntPtrT
-    def initialize(@_bitfield : UInt8, @parent_value : LibC::UIntPtrT)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
@@ -202,6 +181,16 @@ module Win32cr::System::Kernel
       end
 
     def initialize(@children : Win32cr::System::Kernel::RTL_BALANCED_NODE*[2], @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property _bitfield : UInt8
+    property parent_value : LibC::UIntPtrT
+    def initialize(@_bitfield : UInt8, @parent_value : LibC::UIntPtrT)
     end
     end
 
@@ -258,65 +247,10 @@ module Win32cr::System::Kernel
   end
 
   @[Extern]
-  struct OBJECT_ATTRIBUTES64
-    property length : UInt32
-    property root_directory : UInt64
-    property object_name : UInt64
-    property attributes : UInt32
-    property security_descriptor : UInt64
-    property security_quality_of_service : UInt64
-    def initialize(@length : UInt32, @root_directory : UInt64, @object_name : UInt64, @attributes : UInt32, @security_descriptor : UInt64, @security_quality_of_service : UInt64)
-    end
-  end
-
-  @[Extern]
-  struct OBJECT_ATTRIBUTES32
-    property length : UInt32
-    property root_directory : UInt32
-    property object_name : UInt32
-    property attributes : UInt32
-    property security_descriptor : UInt32
-    property security_quality_of_service : UInt32
-    def initialize(@length : UInt32, @root_directory : UInt32, @object_name : UInt32, @attributes : UInt32, @security_descriptor : UInt32, @security_quality_of_service : UInt32)
-    end
-  end
-
-  @[Extern]
   struct OBJECTID
     property lineage : LibC::GUID
     property uniquifier : UInt32
     def initialize(@lineage : LibC::GUID, @uniquifier : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct EXCEPTION_REGISTRATION_RECORD
-    property next__ : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*
-    property handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE
-    def initialize(@next__ : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*, @handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE)
-    end
-  end
-
-  @[Extern]
-  struct NT_TIB
-    property exception_list : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*
-    property stack_base : Void*
-    property stack_limit : Void*
-    property sub_system_tib : Void*
-    property anonymous : Anonymous_e__Union_
-    property arbitrary_user_pointer : Void*
-    property self__ : Win32cr::System::Kernel::NT_TIB*
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous_e__Union_
-    property fiber_data : Void*
-    property version : UInt32
-    def initialize(@fiber_data : Void*, @version : UInt32)
-    end
-    end
-
-    def initialize(@exception_list : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*, @stack_base : Void*, @stack_limit : Void*, @sub_system_tib : Void*, @anonymous : Anonymous_e__Union_, @arbitrary_user_pointer : Void*, @self__ : Win32cr::System::Kernel::NT_TIB*)
     end
   end
 
@@ -384,6 +318,37 @@ module Win32cr::System::Kernel
   end
   {% end %}
 
+  @[Extern]
+  struct EXCEPTION_REGISTRATION_RECORD
+    property next__ : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*
+    property handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    def initialize(@next__ : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*, @handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE)
+    end
+  end
+
+  @[Extern]
+  struct NT_TIB
+    property exception_list : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*
+    property stack_base : Void*
+    property stack_limit : Void*
+    property sub_system_tib : Void*
+    property anonymous : Anonymous_e__Union_
+    property arbitrary_user_pointer : Void*
+    property self__ : Win32cr::System::Kernel::NT_TIB*
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property fiber_data : Void*
+    property version : UInt32
+    def initialize(@fiber_data : Void*, @version : UInt32)
+    end
+    end
+
+    def initialize(@exception_list : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*, @stack_base : Void*, @stack_limit : Void*, @sub_system_tib : Void*, @anonymous : Anonymous_e__Union_, @arbitrary_user_pointer : Void*, @self__ : Win32cr::System::Kernel::NT_TIB*)
+    end
+  end
+
   {% if flag?(:i386) %}
   @[Extern(union: true)]
   struct SLIST_HEADER
@@ -406,34 +371,49 @@ module Win32cr::System::Kernel
   {% end %}
 
   def rtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
+    {% if !flag?(:docs) %}
     C.RtlInitializeSListHead(list_head)
+    {% end %}
   end
 
   def rtlFirstEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlFirstEntrySList(list_head)
+    {% end %}
   end
 
   def rtlInterlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPopEntrySList(list_head)
+    {% end %}
   end
 
   def rtlInterlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPushEntrySList(list_head, list_entry)
+    {% end %}
   end
 
   def rtlInterlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPushListSListEx(list_head, list, list_end, count)
+    {% end %}
   end
 
   def rtlInterlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedFlushSList(list_head)
+    {% end %}
   end
 
   def rtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
+    {% if !flag?(:docs) %}
     C.RtlQueryDepthSList(list_head)
+    {% end %}
   end
 
   @[Link("ntdll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
@@ -457,4 +437,5 @@ module Win32cr::System::Kernel
     fun RtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
 
   end
+  {% end %}
 end

@@ -2,16 +2,6 @@ name: Crystal CI
 
 on:
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
   push:
     branches:
       - master
@@ -20,55 +10,49 @@ on:
     branches:
       - master
       - 'development/**'
-    types: [opened, reopened, ready_for_review, review_requested]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
+
     steps:
-    - name: crystal version
-      shell: pwsh
-      run: |
-        (New-Object Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.15.0/crystal-1.15.0-windows-x86_64-msvc-unsupported.exe", "$PWD\crystal-1.15.0-windows-x86_64-msvc-unsupported.exe")
-        $code = Start-Process .\crystal-1.15.0-windows-x86_64-msvc-unsupported.exe -Wait -ArgumentList "/VERYSILENT","/CURRENTUSER","/SP-","/SUPPRESSMSGBOXES","/LOG=$PWD\OUTPUT.LOG" -Verb RunAs
-        & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" version
-    - uses: actions/checkout@v4
-    - name: Create json directory
-      shell: pwsh
-      run: |
-        mkdir json
-    - uses: actions/checkout@v4
-      with:
-        repository: marlersoft/win32json
-        path: json/win32json
-    - name: Install dependencies
-      shell: pwsh
-      run: |
-        & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
-    - name: Cleanup src directory
-      shell: pwsh
-      run: |
-        if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
-    - name: Build WinMD
-      shell: pwsh
-      run: |
-        echo $pwd
-        & .\scripts\build_winmd.ps1
-    - name: WinMD version
-      shell: cmd
-      run: |
-        bin\winmd.exe --version
-    - name: Generate bindings
-      shell: pwsh
-      run: |
-        & .\bin\winmd.exe generate -d json\win32json\api .
-    - name: Run tests
-      shell: pwsh
-      run: |
-        & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec --error-trace --debug
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      with:
-        limit-access-to-actor: true
-      timeout-minutes: 15
-      if: ${{ failure() }}
+      - uses: actions/checkout@v4
+
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: 1.20.2
+
+      - name: Install dependencies
+        run: shards install --skip-postinstall
+
+      # Builds winmd from lib/winmd, fetches the pinned Windows.Win32.winmd and
+      # regenerates src/win32cr with the override files in this repo.
+      - name: Generate bindings
+        shell: pwsh
+        run: ./build.ps1
+
+      - name: WinMD version
+        run: bin\winmd.exe --version
+
+      - name: Report drift from committed bindings
+        shell: pwsh
+        run: |
+          $changed = git status --porcelain src
+          if ($changed) {
+            Write-Host "Regenerated bindings differ from the committed ones:"
+            git diff --stat src | Select-Object -Last 5
+          } else {
+            Write-Host "Regenerated bindings match the committed ones."
+          }
+
+      - name: Run tests
+        run: crystal spec --error-trace
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+        timeout-minutes: 15
+        if: ${{ failure() }}

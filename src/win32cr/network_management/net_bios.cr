@@ -111,6 +111,29 @@ module Win32cr::NetworkManagement::NetBios
   end
   {% end %}
 
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct NCB
+    property ncb_command : UInt8
+    property ncb_retcode : UInt8
+    property ncb_lsn : UInt8
+    property ncb_num : UInt8
+    property ncb_buffer : UInt8*
+    property ncb_length : UInt16
+    property ncb_callname : UInt8[16]
+    property ncb_name : UInt8[16]
+    property ncb_rto : UInt8
+    property ncb_sto : UInt8
+    property ncb_post : LibC::IntPtrT
+    property ncb_lana_num : UInt8
+    property ncb_cmd_cplt : UInt8
+    property ncb_reserve : UInt8[10]
+    property ncb_event : Win32cr::Foundation::HANDLE
+    def initialize(@ncb_command : UInt8, @ncb_retcode : UInt8, @ncb_lsn : UInt8, @ncb_num : UInt8, @ncb_buffer : UInt8*, @ncb_length : UInt16, @ncb_callname : UInt8[16], @ncb_name : UInt8[16], @ncb_rto : UInt8, @ncb_sto : UInt8, @ncb_post : LibC::IntPtrT, @ncb_lana_num : UInt8, @ncb_cmd_cplt : UInt8, @ncb_reserve : UInt8[10], @ncb_event : Win32cr::Foundation::HANDLE)
+    end
+  end
+  {% end %}
+
   @[Extern]
   struct ADAPTER_STATUS
     property adapter_address : UInt8[6]
@@ -213,37 +236,18 @@ module Win32cr::NetworkManagement::NetBios
     end
   end
 
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct NCB
-    property ncb_command : UInt8
-    property ncb_retcode : UInt8
-    property ncb_lsn : UInt8
-    property ncb_num : UInt8
-    property ncb_buffer : UInt8*
-    property ncb_length : UInt16
-    property ncb_callname : UInt8[16]
-    property ncb_name : UInt8[16]
-    property ncb_rto : UInt8
-    property ncb_sto : UInt8
-    property ncb_post : LibC::IntPtrT
-    property ncb_lana_num : UInt8
-    property ncb_cmd_cplt : UInt8
-    property ncb_reserve : UInt8[10]
-    property ncb_event : Win32cr::Foundation::HANDLE
-    def initialize(@ncb_command : UInt8, @ncb_retcode : UInt8, @ncb_lsn : UInt8, @ncb_num : UInt8, @ncb_buffer : UInt8*, @ncb_length : UInt16, @ncb_callname : UInt8[16], @ncb_name : UInt8[16], @ncb_rto : UInt8, @ncb_sto : UInt8, @ncb_post : LibC::IntPtrT, @ncb_lana_num : UInt8, @ncb_cmd_cplt : UInt8, @ncb_reserve : UInt8[10], @ncb_event : Win32cr::Foundation::HANDLE)
-    end
-  end
-  {% end %}
-
   def netbios(pncb : Win32cr::NetworkManagement::NetBios::NCB*) : UInt8
+    {% if !flag?(:docs) %}
     C.Netbios(pncb)
+    {% end %}
   end
 
   @[Link("netapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun Netbios(pncb : Win32cr::NetworkManagement::NetBios::NCB*) : UInt8
 
   end
+  {% end %}
 end

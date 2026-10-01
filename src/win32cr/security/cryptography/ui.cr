@@ -54,6 +54,7 @@ module Win32cr::Security::Cryptography::UI
   CERT_FILTER_LEAF_CERTS_ONLY = 8_u32
   CERT_FILTER_ISSUER_CERTS_ONLY = 16_u32
   CERT_FILTER_KEY_EXISTS = 32_u32
+  CERT_CERTIFICATE_ACTION_VERIFY = LibC::GUID.new(0x7801ebd0_u32, 0xcf4b_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x1f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x93_u8, 0x87_u8, 0xea_u8])
   Szcert_certificate_action_verify = "{7801ebd0-cf4b-11d0-851f-0060979387ea}"
   CERT_VALIDITY_BEFORE_START = 1_u32
   CERT_VALIDITY_AFTER_END = 2_u32
@@ -308,7 +309,7 @@ module Win32cr::Security::Cryptography::UI
   end
 
   @[Extern]
-  struct CMOID
+  struct CERT_FILTER_EXTENSION_MATCH
     property szExtensionOID : Win32cr::Foundation::PSTR
     property dwTestOperation : UInt32
     property pbTestData : UInt8*
@@ -318,12 +319,12 @@ module Win32cr::Security::Cryptography::UI
   end
 
   @[Extern]
-  struct CMFLTR
+  struct CERT_FILTER_DATA
     property dwSize : UInt32
     property cExtensionChecks : UInt32
-    property arrayExtensionChecks : Win32cr::Security::Cryptography::UI::CMOID*
+    property arrayExtensionChecks : Win32cr::Security::Cryptography::UI::CERT_FILTER_EXTENSION_MATCH*
     property dwCheckingFlags : UInt32
-    def initialize(@dwSize : UInt32, @cExtensionChecks : UInt32, @arrayExtensionChecks : Win32cr::Security::Cryptography::UI::CMOID*, @dwCheckingFlags : UInt32)
+    def initialize(@dwSize : UInt32, @cExtensionChecks : UInt32, @arrayExtensionChecks : Win32cr::Security::Cryptography::UI::CERT_FILTER_EXTENSION_MATCH*, @dwCheckingFlags : UInt32)
     end
   end
 
@@ -347,8 +348,8 @@ module Win32cr::Security::Cryptography::UI
     property pcChain : UInt32*
     property prgChain : Win32cr::Security::Cryptography::CERT_CONTEXT***
     property prgdwErrors : UInt32**
-    property prgpbTrustInfo : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**
-    def initialize(@cbSize : UInt32, @pccert : Win32cr::Security::Cryptography::CERT_CONTEXT*, @dwFlags : UInt32, @dwIgnoreErr : UInt32, @pdwErrors : UInt32*, @pszUsageOid : Win32cr::Foundation::PSTR, @hprov : LibC::UIntPtrT, @cRootStores : UInt32, @rghstoreRoots : Win32cr::Security::Cryptography::HCERTSTORE*, @cStores : UInt32, @rghstoreCAs : Win32cr::Security::Cryptography::HCERTSTORE*, @cTrustStores : UInt32, @rghstoreTrust : Win32cr::Security::Cryptography::HCERTSTORE*, @lCustData : Win32cr::Foundation::LPARAM, @pfnTrustHelper : Win32cr::Security::Cryptography::UI::PFNTRUSTHELPER, @pcChain : UInt32*, @prgChain : Win32cr::Security::Cryptography::CERT_CONTEXT***, @prgdwErrors : UInt32**, @prgpbTrustInfo : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**)
+    property prgpbTrustInfo : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB**
+    def initialize(@cbSize : UInt32, @pccert : Win32cr::Security::Cryptography::CERT_CONTEXT*, @dwFlags : UInt32, @dwIgnoreErr : UInt32, @pdwErrors : UInt32*, @pszUsageOid : Win32cr::Foundation::PSTR, @hprov : LibC::UIntPtrT, @cRootStores : UInt32, @rghstoreRoots : Win32cr::Security::Cryptography::HCERTSTORE*, @cStores : UInt32, @rghstoreCAs : Win32cr::Security::Cryptography::HCERTSTORE*, @cTrustStores : UInt32, @rghstoreTrust : Win32cr::Security::Cryptography::HCERTSTORE*, @lCustData : Win32cr::Foundation::LPARAM, @pfnTrustHelper : Win32cr::Security::Cryptography::UI::PFNTRUSTHELPER, @pcChain : UInt32*, @prgChain : Win32cr::Security::Cryptography::CERT_CONTEXT***, @prgdwErrors : UInt32**, @prgpbTrustInfo : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB**)
     end
   end
 
@@ -459,6 +460,16 @@ module Win32cr::Security::Cryptography::UI
     property dwAdditionalCertChoice : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE
     property pSignExtInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO*
 
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property pwszFileName : Win32cr::Foundation::PWSTR
+    property pSignBlobInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO*
+    def initialize(@pwszFileName : Win32cr::Foundation::PWSTR, @pSignBlobInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO*)
+    end
+    end
+
+
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
@@ -466,16 +477,6 @@ module Win32cr::Security::Cryptography::UI
     property pSigningCertStore : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO*
     property pSigningCertPvkInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO*
     def initialize(@pSigningCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, @pSigningCertStore : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO*, @pSigningCertPvkInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO*)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property pwszFileName : Win32cr::Foundation::PWSTR
-    property pSignBlobInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO*
-    def initialize(@pwszFileName : Win32cr::Foundation::PWSTR, @pSignBlobInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO*)
     end
     end
 
@@ -629,46 +630,67 @@ module Win32cr::Security::Cryptography::UI
   end
 
   def cryptUIDlgViewContext(dwContextType : UInt32, pvContext : Void*, hwnd : Win32cr::Foundation::HWND, pwszTitle : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgViewContext(dwContextType, pvContext, hwnd, pwszTitle, dwFlags, pvReserved)
+    {% end %}
   end
 
   def cryptUIDlgSelectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, hwnd : Win32cr::Foundation::HWND, pwszTitle : Win32cr::Foundation::PWSTR, pwszDisplayString : Win32cr::Foundation::PWSTR, dwDontUseColumn : UInt32, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CryptUIDlgSelectCertificateFromStore(hCertStore, hwnd, pwszTitle, pwszDisplayString, dwDontUseColumn, dwFlags, pvReserved)
+    {% end %}
   end
 
   def certSelectionGetSerializedBlob(pcsi : Win32cr::Security::Cryptography::UI::CERT_SELECTUI_INPUT*, ppOutBuffer : Void**, pulOutBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSelectionGetSerializedBlob(pcsi, ppOutBuffer, pulOutBufferSize)
+    {% end %}
   end
 
   def cryptUIDlgCertMgr(pCryptUICertMgr : Win32cr::Security::Cryptography::UI::CRYPTUI_CERT_MGR_STRUCT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgCertMgr(pCryptUICertMgr)
+    {% end %}
   end
 
   def cryptUIWizDigitalSign(dwFlags : UInt32, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pDigitalSignInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_INFO*, ppSignContext : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizDigitalSign(dwFlags, hwndParent, pwszWizardTitle, pDigitalSignInfo, ppSignContext)
+    {% end %}
   end
 
   def cryptUIWizFreeDigitalSignContext(pSignContext : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizFreeDigitalSignContext(pSignContext)
+    {% end %}
   end
 
   def cryptUIDlgViewCertificateW(pCertViewInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_VIEWCERTIFICATE_STRUCTW*, pfPropertiesChanged : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgViewCertificateW(pCertViewInfo, pfPropertiesChanged)
+    {% end %}
   end
 
   def cryptUIDlgViewCertificateA(pCertViewInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_VIEWCERTIFICATE_STRUCTA*, pfPropertiesChanged : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgViewCertificateA(pCertViewInfo, pfPropertiesChanged)
+    {% end %}
   end
 
   def cryptUIWizExport(dwFlags : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_FLAGS, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pExportInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_EXPORT_INFO*, pvoid : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizExport(dwFlags, hwndParent, pwszWizardTitle, pExportInfo, pvoid)
+    {% end %}
   end
 
   def cryptUIWizImport(dwFlags : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_FLAGS, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pImportSrc : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_IMPORT_SRC_INFO*, hDestCertStore : Win32cr::Security::Cryptography::HCERTSTORE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizImport(dwFlags, hwndParent, pwszWizardTitle, pImportSrc, hDestCertStore)
+    {% end %}
   end
 
   @[Link("cryptui")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CryptUIDlgViewContext(dwContextType : UInt32, pvContext : Void*, hwnd : Win32cr::Foundation::HWND, pwszTitle : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
@@ -701,4 +723,5 @@ module Win32cr::Security::Cryptography::UI
     fun CryptUIWizImport(dwFlags : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_FLAGS, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pImportSrc : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_IMPORT_SRC_INFO*, hDestCertStore : Win32cr::Security::Cryptography::HCERTSTORE) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

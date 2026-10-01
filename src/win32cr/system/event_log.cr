@@ -1,10 +1,10 @@
 require "./../foundation.cr"
+require "./../security.cr"
 
 module Win32cr::System::EventLog
   extend self
-  alias EventLogHandle = LibC::IntPtrT
-  alias EventSourceHandle = LibC::IntPtrT
-  alias EVT_SUBSCRIBE_CALLBACK = Proc(Win32cr::System::EventLog::EVT_SUBSCRIBE_NOTIFY_ACTION, Void*, LibC::IntPtrT, UInt32)
+  alias EVT_HANDLE = LibC::IntPtrT
+  alias EVT_SUBSCRIBE_CALLBACK = Proc(Win32cr::System::EventLog::EVT_SUBSCRIBE_NOTIFY_ACTION, Void*, Win32cr::System::EventLog::EVT_HANDLE, UInt32)
 
   EVT_VARIANT_TYPE_MASK = 127_u32
   EVT_VARIANT_TYPE_ARRAY = 128_u32
@@ -21,9 +21,12 @@ module Win32cr::System::EventLog
     EVENTLOG_INFORMATION_TYPE = 4_u16
     EVENTLOG_WARNING_TYPE = 2_u16
   end
+  @[Flags]
   enum READ_EVENT_LOG_READ_FLAGS : UInt32
     EVENTLOG_SEEK_READ = 2_u32
     EVENTLOG_SEQUENTIAL_READ = 1_u32
+    EVENTLOG_FORWARDS_READ = 4_u32
+    EVENTLOG_BACKWARDS_READ = 8_u32
   end
   enum EVT_VARIANT_TYPE
     EvtVarTypeNull = 0_i32
@@ -54,34 +57,34 @@ module Win32cr::System::EventLog
   enum EVT_LOGIN_CLASS
     EvtRpcLogin = 1_i32
   end
-  enum EVT_RPC_LOGIN_FLAGS
-    EvtRpcLoginAuthDefault = 0_i32
-    EvtRpcLoginAuthNegotiate = 1_i32
-    EvtRpcLoginAuthKerberos = 2_i32
-    EvtRpcLoginAuthNTLM = 3_i32
+  enum EVT_RPC_LOGIN_FLAGS : UInt32
+    EvtRpcLoginAuthDefault = 0_u32
+    EvtRpcLoginAuthNegotiate = 1_u32
+    EvtRpcLoginAuthKerberos = 2_u32
+    EvtRpcLoginAuthNTLM = 3_u32
   end
-  enum EVT_QUERY_FLAGS
-    EvtQueryChannelPath = 1_i32
-    EvtQueryFilePath = 2_i32
-    EvtQueryForwardDirection = 256_i32
-    EvtQueryReverseDirection = 512_i32
-    EvtQueryTolerateQueryErrors = 4096_i32
+  enum EVT_QUERY_FLAGS : UInt32
+    EvtQueryChannelPath = 1_u32
+    EvtQueryFilePath = 2_u32
+    EvtQueryForwardDirection = 256_u32
+    EvtQueryReverseDirection = 512_u32
+    EvtQueryTolerateQueryErrors = 4096_u32
   end
-  enum EVT_SEEK_FLAGS
-    EvtSeekRelativeToFirst = 1_i32
-    EvtSeekRelativeToLast = 2_i32
-    EvtSeekRelativeToCurrent = 3_i32
-    EvtSeekRelativeToBookmark = 4_i32
-    EvtSeekOriginMask = 7_i32
-    EvtSeekStrict = 65536_i32
+  enum EVT_SEEK_FLAGS : UInt32
+    EvtSeekRelativeToFirst = 1_u32
+    EvtSeekRelativeToLast = 2_u32
+    EvtSeekRelativeToCurrent = 3_u32
+    EvtSeekRelativeToBookmark = 4_u32
+    EvtSeekOriginMask = 7_u32
+    EvtSeekStrict = 65536_u32
   end
-  enum EVT_SUBSCRIBE_FLAGS
-    EvtSubscribeToFutureEvents = 1_i32
-    EvtSubscribeStartAtOldestRecord = 2_i32
-    EvtSubscribeStartAfterBookmark = 3_i32
-    EvtSubscribeOriginMask = 3_i32
-    EvtSubscribeTolerateQueryErrors = 4096_i32
-    EvtSubscribeStrict = 65536_i32
+  enum EVT_SUBSCRIBE_FLAGS : UInt32
+    EvtSubscribeToFutureEvents = 1_u32
+    EvtSubscribeStartAtOldestRecord = 2_u32
+    EvtSubscribeStartAfterBookmark = 3_u32
+    EvtSubscribeOriginMask = 3_u32
+    EvtSubscribeTolerateQueryErrors = 4096_u32
+    EvtSubscribeStrict = 65536_u32
   end
   enum EVT_SUBSCRIBE_NOTIFY_ACTION
     EvtSubscribeActionError = 0_i32
@@ -108,30 +111,30 @@ module Win32cr::System::EventLog
     EvtSystemVersion = 17_i32
     EvtSystemPropertyIdEND = 18_i32
   end
-  enum EVT_RENDER_CONTEXT_FLAGS
-    EvtRenderContextValues = 0_i32
-    EvtRenderContextSystem = 1_i32
-    EvtRenderContextUser = 2_i32
+  enum EVT_RENDER_CONTEXT_FLAGS : UInt32
+    EvtRenderContextValues = 0_u32
+    EvtRenderContextSystem = 1_u32
+    EvtRenderContextUser = 2_u32
   end
-  enum EVT_RENDER_FLAGS
-    EvtRenderEventValues = 0_i32
-    EvtRenderEventXml = 1_i32
-    EvtRenderBookmark = 2_i32
+  enum EVT_RENDER_FLAGS : UInt32
+    EvtRenderEventValues = 0_u32
+    EvtRenderEventXml = 1_u32
+    EvtRenderBookmark = 2_u32
   end
-  enum EVT_FORMAT_MESSAGE_FLAGS
-    EvtFormatMessageEvent = 1_i32
-    EvtFormatMessageLevel = 2_i32
-    EvtFormatMessageTask = 3_i32
-    EvtFormatMessageOpcode = 4_i32
-    EvtFormatMessageKeyword = 5_i32
-    EvtFormatMessageChannel = 6_i32
-    EvtFormatMessageProvider = 7_i32
-    EvtFormatMessageId = 8_i32
-    EvtFormatMessageXml = 9_i32
+  enum EVT_FORMAT_MESSAGE_FLAGS : UInt32
+    EvtFormatMessageEvent = 1_u32
+    EvtFormatMessageLevel = 2_u32
+    EvtFormatMessageTask = 3_u32
+    EvtFormatMessageOpcode = 4_u32
+    EvtFormatMessageKeyword = 5_u32
+    EvtFormatMessageChannel = 6_u32
+    EvtFormatMessageProvider = 7_u32
+    EvtFormatMessageId = 8_u32
+    EvtFormatMessageXml = 9_u32
   end
-  enum EVT_OPEN_LOG_FLAGS
-    EvtOpenChannelPath = 1_i32
-    EvtOpenFilePath = 2_i32
+  enum EVT_OPEN_LOG_FLAGS : UInt32
+    EvtOpenChannelPath = 1_u32
+    EvtOpenFilePath = 2_u32
   end
   enum EVT_LOG_PROPERTY_ID
     EvtLogCreationTime = 0_i32
@@ -143,11 +146,11 @@ module Win32cr::System::EventLog
     EvtLogOldestRecordNumber = 6_i32
     EvtLogFull = 7_i32
   end
-  enum EVT_EXPORTLOG_FLAGS
-    EvtExportLogChannelPath = 1_i32
-    EvtExportLogFilePath = 2_i32
-    EvtExportLogTolerateQueryErrors = 4096_i32
-    EvtExportLogOverwrite = 8192_i32
+  enum EVT_EXPORTLOG_FLAGS : UInt32
+    EvtExportLogChannelPath = 1_u32
+    EvtExportLogFilePath = 2_u32
+    EvtExportLogTolerateQueryErrors = 4096_u32
+    EvtExportLogOverwrite = 8192_u32
   end
   enum EVT_CHANNEL_CONFIG_PROPERTY_ID
     EvtChannelConfigEnabled = 0_i32
@@ -192,8 +195,8 @@ module Win32cr::System::EventLog
     EvtChannelSidTypeNone = 0_i32
     EvtChannelSidTypePublishing = 1_i32
   end
-  enum EVT_CHANNEL_REFERENCE_FLAGS
-    EvtChannelReferenceImported = 1_i32
+  enum EVT_CHANNEL_REFERENCE_FLAGS : UInt32
+    EvtChannelReferenceImported = 1_u32
   end
   enum EVT_PUBLISHER_METADATA_PROPERTY_ID
     EvtPublisherMetadataPublisherGuid = 0_i32
@@ -276,7 +279,7 @@ module Win32cr::System::EventLog
     property string_val : Win32cr::Foundation::PWSTR
     property ansi_string_val : Win32cr::Foundation::PSTR
     property binary_val : UInt8*
-    property sid_val : Win32cr::Foundation::PSID
+    property sid_val : Win32cr::Security::PSID
     property size_t_val : LibC::UIntPtrT
     property boolean_arr : Win32cr::Foundation::BOOL*
     property s_byte_arr : Int8*
@@ -294,12 +297,12 @@ module Win32cr::System::EventLog
     property guid_arr : LibC::GUID*
     property string_arr : Win32cr::Foundation::PWSTR*
     property ansi_string_arr : Win32cr::Foundation::PSTR*
-    property sid_arr : Win32cr::Foundation::PSID*
+    property sid_arr : Win32cr::Security::PSID*
     property size_t_arr : LibC::UIntPtrT*
-    property evt_handle_val : LibC::IntPtrT
+    property evt_handle_val : Win32cr::System::EventLog::EVT_HANDLE
     property xml_val : Win32cr::Foundation::PWSTR
     property xml_val_arr : Win32cr::Foundation::PWSTR*
-    def initialize(@boolean_val : Win32cr::Foundation::BOOL, @s_byte_val : Int8, @int16_val : Int16, @int32_val : Int32, @int64_val : Int64, @byte_val : UInt8, @u_int16_val : UInt16, @u_int32_val : UInt32, @u_int64_val : UInt64, @single_val : Float32, @double_val : Float64, @file_time_val : UInt64, @sys_time_val : Win32cr::Foundation::SYSTEMTIME*, @guid_val : LibC::GUID*, @string_val : Win32cr::Foundation::PWSTR, @ansi_string_val : Win32cr::Foundation::PSTR, @binary_val : UInt8*, @sid_val : Win32cr::Foundation::PSID, @size_t_val : LibC::UIntPtrT, @boolean_arr : Win32cr::Foundation::BOOL*, @s_byte_arr : Int8*, @int16_arr : Int16*, @int32_arr : Int32*, @int64_arr : Int64*, @byte_arr : UInt8*, @u_int16_arr : UInt16*, @u_int32_arr : UInt32*, @u_int64_arr : UInt64*, @single_arr : Float32*, @double_arr : Float64*, @file_time_arr : Win32cr::Foundation::FILETIME*, @sys_time_arr : Win32cr::Foundation::SYSTEMTIME*, @guid_arr : LibC::GUID*, @string_arr : Win32cr::Foundation::PWSTR*, @ansi_string_arr : Win32cr::Foundation::PSTR*, @sid_arr : Win32cr::Foundation::PSID*, @size_t_arr : LibC::UIntPtrT*, @evt_handle_val : LibC::IntPtrT, @xml_val : Win32cr::Foundation::PWSTR, @xml_val_arr : Win32cr::Foundation::PWSTR*)
+    def initialize(@boolean_val : Win32cr::Foundation::BOOL, @s_byte_val : Int8, @int16_val : Int16, @int32_val : Int32, @int64_val : Int64, @byte_val : UInt8, @u_int16_val : UInt16, @u_int32_val : UInt32, @u_int64_val : UInt64, @single_val : Float32, @double_val : Float64, @file_time_val : UInt64, @sys_time_val : Win32cr::Foundation::SYSTEMTIME*, @guid_val : LibC::GUID*, @string_val : Win32cr::Foundation::PWSTR, @ansi_string_val : Win32cr::Foundation::PSTR, @binary_val : UInt8*, @sid_val : Win32cr::Security::PSID, @size_t_val : LibC::UIntPtrT, @boolean_arr : Win32cr::Foundation::BOOL*, @s_byte_arr : Int8*, @int16_arr : Int16*, @int32_arr : Int32*, @int64_arr : Int64*, @byte_arr : UInt8*, @u_int16_arr : UInt16*, @u_int32_arr : UInt32*, @u_int64_arr : UInt64*, @single_arr : Float32*, @double_arr : Float64*, @file_time_arr : Win32cr::Foundation::FILETIME*, @sys_time_arr : Win32cr::Foundation::SYSTEMTIME*, @guid_arr : LibC::GUID*, @string_arr : Win32cr::Foundation::PWSTR*, @ansi_string_arr : Win32cr::Foundation::PSTR*, @sid_arr : Win32cr::Security::PSID*, @size_t_arr : LibC::UIntPtrT*, @evt_handle_val : Win32cr::System::EventLog::EVT_HANDLE, @xml_val : Win32cr::Foundation::PWSTR, @xml_val_arr : Win32cr::Foundation::PWSTR*)
     end
     end
 
@@ -345,8 +348,8 @@ module Win32cr::System::EventLog
     property ulSize : UInt32
     property szLogicalLogFile : UInt16[256]
     property ulNumRecords : UInt32
-    property pEventLogRecords : Win32cr::System::EventLog::EVENTLOGRECORD*
-    def initialize(@ulSize : UInt32, @szLogicalLogFile : UInt16[256], @ulNumRecords : UInt32, @pEventLogRecords : Win32cr::System::EventLog::EVENTLOGRECORD*)
+    property pEventLogRecords : Win32cr::System::EventLog::EVENTLOGRECORD[1]
+    def initialize(@ulSize : UInt32, @szLogicalLogFile : UInt16[256], @ulNumRecords : UInt32, @pEventLogRecords : Win32cr::System::EventLog::EVENTLOGRECORD[1])
     end
   end
 
@@ -357,315 +360,426 @@ module Win32cr::System::EventLog
     end
   end
 
-  def evtOpenSession(login_class : Win32cr::System::EventLog::EVT_LOGIN_CLASS, login : Void*, timeout : UInt32, flags : UInt32) : LibC::IntPtrT
+  def evtOpenSession(login_class : Win32cr::System::EventLog::EVT_LOGIN_CLASS, login : Void*, timeout : UInt32, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtOpenSession(login_class, login, timeout, flags)
+    {% end %}
   end
 
-  def evtClose(object : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+  def evtClose(object : Win32cr::System::EventLog::EVT_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtClose(object)
+    {% end %}
   end
 
-  def evtCancel(object : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+  def evtCancel(object : Win32cr::System::EventLog::EVT_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtCancel(object)
+    {% end %}
   end
 
-  def evtGetExtendedStatus(buffer_size : UInt32, buffer : UInt16*, buffer_used : UInt32*) : UInt32
+  def evtGetExtendedStatus(buffer_size : UInt32, buffer : Win32cr::Foundation::PWSTR, buffer_used : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.EvtGetExtendedStatus(buffer_size, buffer, buffer_used)
+    {% end %}
   end
 
-  def evtQuery(session : LibC::IntPtrT, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, flags : UInt32) : LibC::IntPtrT
+  def evtQuery(session : Win32cr::System::EventLog::EVT_HANDLE, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtQuery(session, path, query, flags)
+    {% end %}
   end
 
-  def evtNext(result_set : LibC::IntPtrT, events_size : UInt32, events : LibC::IntPtrT*, timeout : UInt32, flags : UInt32, returned : UInt32*) : Win32cr::Foundation::BOOL
+  def evtNext(result_set : Win32cr::System::EventLog::EVT_HANDLE, events_size : UInt32, events : LibC::IntPtrT*, timeout : UInt32, flags : UInt32, returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtNext(result_set, events_size, events, timeout, flags, returned)
+    {% end %}
   end
 
-  def evtSeek(result_set : LibC::IntPtrT, position : Int64, bookmark : LibC::IntPtrT, timeout : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+  def evtSeek(result_set : Win32cr::System::EventLog::EVT_HANDLE, position : Int64, bookmark : Win32cr::System::EventLog::EVT_HANDLE, timeout : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtSeek(result_set, position, bookmark, timeout, flags)
+    {% end %}
   end
 
-  def evtSubscribe(session : LibC::IntPtrT, signal_event : Win32cr::Foundation::HANDLE, channel_path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, bookmark : LibC::IntPtrT, context : Void*, callback : Win32cr::System::EventLog::EVT_SUBSCRIBE_CALLBACK, flags : UInt32) : LibC::IntPtrT
+  def evtSubscribe(session : Win32cr::System::EventLog::EVT_HANDLE, signal_event : Win32cr::Foundation::HANDLE, channel_path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, bookmark : Win32cr::System::EventLog::EVT_HANDLE, context : Void*, callback : Win32cr::System::EventLog::EVT_SUBSCRIBE_CALLBACK, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtSubscribe(session, signal_event, channel_path, query, bookmark, context, callback, flags)
+    {% end %}
   end
 
-  def evtCreateRenderContext(value_paths_count : UInt32, value_paths : Win32cr::Foundation::PWSTR*, flags : UInt32) : LibC::IntPtrT
+  def evtCreateRenderContext(value_paths_count : UInt32, value_paths : Win32cr::Foundation::PWSTR*, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtCreateRenderContext(value_paths_count, value_paths, flags)
+    {% end %}
   end
 
-  def evtRender(context : LibC::IntPtrT, fragment : LibC::IntPtrT, flags : UInt32, buffer_size : UInt32, buffer : Void*, buffer_used : UInt32*, property_count : UInt32*) : Win32cr::Foundation::BOOL
+  def evtRender(context : Win32cr::System::EventLog::EVT_HANDLE, fragment : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32, buffer_size : UInt32, buffer : Void*, buffer_used : UInt32*, property_count : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtRender(context, fragment, flags, buffer_size, buffer, buffer_used, property_count)
+    {% end %}
   end
 
-  def evtFormatMessage(publisher_metadata : LibC::IntPtrT, event : LibC::IntPtrT, message_id : UInt32, value_count : UInt32, values : Win32cr::System::EventLog::EVT_VARIANT*, flags : UInt32, buffer_size : UInt32, buffer : UInt16*, buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtFormatMessage(publisher_metadata : Win32cr::System::EventLog::EVT_HANDLE, event : Win32cr::System::EventLog::EVT_HANDLE, message_id : UInt32, value_count : UInt32, values : Win32cr::System::EventLog::EVT_VARIANT*, flags : UInt32, buffer_size : UInt32, buffer : Win32cr::Foundation::PWSTR, buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtFormatMessage(publisher_metadata, event, message_id, value_count, values, flags, buffer_size, buffer, buffer_used)
+    {% end %}
   end
 
-  def evtOpenLog(session : LibC::IntPtrT, path : Win32cr::Foundation::PWSTR, flags : UInt32) : LibC::IntPtrT
+  def evtOpenLog(session : Win32cr::System::EventLog::EVT_HANDLE, path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtOpenLog(session, path, flags)
+    {% end %}
   end
 
-  def evtGetLogInfo(log : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_LOG_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtGetLogInfo(log : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_LOG_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetLogInfo(log, property_id, property_value_buffer_size, property_value_buffer, property_value_buffer_used)
+    {% end %}
   end
 
-  def evtClearLog(session : LibC::IntPtrT, channel_path : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+  def evtClearLog(session : Win32cr::System::EventLog::EVT_HANDLE, channel_path : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtClearLog(session, channel_path, target_file_path, flags)
+    {% end %}
   end
 
-  def evtExportLog(session : LibC::IntPtrT, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+  def evtExportLog(session : Win32cr::System::EventLog::EVT_HANDLE, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtExportLog(session, path, query, target_file_path, flags)
+    {% end %}
   end
 
-  def evtArchiveExportedLog(session : LibC::IntPtrT, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+  def evtArchiveExportedLog(session : Win32cr::System::EventLog::EVT_HANDLE, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtArchiveExportedLog(session, log_file_path, locale, flags)
+    {% end %}
   end
 
-  def evtOpenChannelEnum(session : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+  def evtOpenChannelEnum(session : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtOpenChannelEnum(session, flags)
+    {% end %}
   end
 
-  def evtNextChannelPath(channel_enum : LibC::IntPtrT, channel_path_buffer_size : UInt32, channel_path_buffer : UInt16*, channel_path_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtNextChannelPath(channel_enum : Win32cr::System::EventLog::EVT_HANDLE, channel_path_buffer_size : UInt32, channel_path_buffer : Win32cr::Foundation::PWSTR, channel_path_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtNextChannelPath(channel_enum, channel_path_buffer_size, channel_path_buffer, channel_path_buffer_used)
+    {% end %}
   end
 
-  def evtOpenChannelConfig(session : LibC::IntPtrT, channel_path : Win32cr::Foundation::PWSTR, flags : UInt32) : LibC::IntPtrT
+  def evtOpenChannelConfig(session : Win32cr::System::EventLog::EVT_HANDLE, channel_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtOpenChannelConfig(session, channel_path, flags)
+    {% end %}
   end
 
-  def evtSaveChannelConfig(channel_config : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+  def evtSaveChannelConfig(channel_config : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtSaveChannelConfig(channel_config, flags)
+    {% end %}
   end
 
-  def evtSetChannelConfigProperty(channel_config : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value : Win32cr::System::EventLog::EVT_VARIANT*) : Win32cr::Foundation::BOOL
+  def evtSetChannelConfigProperty(channel_config : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value : Win32cr::System::EventLog::EVT_VARIANT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtSetChannelConfigProperty(channel_config, property_id, flags, property_value)
+    {% end %}
   end
 
-  def evtGetChannelConfigProperty(channel_config : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtGetChannelConfigProperty(channel_config : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetChannelConfigProperty(channel_config, property_id, flags, property_value_buffer_size, property_value_buffer, property_value_buffer_used)
+    {% end %}
   end
 
-  def evtOpenPublisherEnum(session : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+  def evtOpenPublisherEnum(session : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtOpenPublisherEnum(session, flags)
+    {% end %}
   end
 
-  def evtNextPublisherId(publisher_enum : LibC::IntPtrT, publisher_id_buffer_size : UInt32, publisher_id_buffer : UInt16*, publisher_id_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtNextPublisherId(publisher_enum : Win32cr::System::EventLog::EVT_HANDLE, publisher_id_buffer_size : UInt32, publisher_id_buffer : Win32cr::Foundation::PWSTR, publisher_id_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtNextPublisherId(publisher_enum, publisher_id_buffer_size, publisher_id_buffer, publisher_id_buffer_used)
+    {% end %}
   end
 
-  def evtOpenPublisherMetadata(session : LibC::IntPtrT, publisher_id : Win32cr::Foundation::PWSTR, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : LibC::IntPtrT
+  def evtOpenPublisherMetadata(session : Win32cr::System::EventLog::EVT_HANDLE, publisher_id : Win32cr::Foundation::PWSTR, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtOpenPublisherMetadata(session, publisher_id, log_file_path, locale, flags)
+    {% end %}
   end
 
-  def evtGetPublisherMetadataProperty(publisher_metadata : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_PUBLISHER_METADATA_PROPERTY_ID, flags : UInt32, publisher_metadata_property_buffer_size : UInt32, publisher_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, publisher_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtGetPublisherMetadataProperty(publisher_metadata : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_PUBLISHER_METADATA_PROPERTY_ID, flags : UInt32, publisher_metadata_property_buffer_size : UInt32, publisher_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, publisher_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetPublisherMetadataProperty(publisher_metadata, property_id, flags, publisher_metadata_property_buffer_size, publisher_metadata_property_buffer, publisher_metadata_property_buffer_used)
+    {% end %}
   end
 
-  def evtOpenEventMetadataEnum(publisher_metadata : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+  def evtOpenEventMetadataEnum(publisher_metadata : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtOpenEventMetadataEnum(publisher_metadata, flags)
+    {% end %}
   end
 
-  def evtNextEventMetadata(event_metadata_enum : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+  def evtNextEventMetadata(event_metadata_enum : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtNextEventMetadata(event_metadata_enum, flags)
+    {% end %}
   end
 
-  def evtGetEventMetadataProperty(event_metadata : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_EVENT_METADATA_PROPERTY_ID, flags : UInt32, event_metadata_property_buffer_size : UInt32, event_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, event_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtGetEventMetadataProperty(event_metadata : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_EVENT_METADATA_PROPERTY_ID, flags : UInt32, event_metadata_property_buffer_size : UInt32, event_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, event_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetEventMetadataProperty(event_metadata, property_id, flags, event_metadata_property_buffer_size, event_metadata_property_buffer, event_metadata_property_buffer_used)
+    {% end %}
   end
 
   def evtGetObjectArraySize(object_array : LibC::IntPtrT, object_array_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetObjectArraySize(object_array, object_array_size)
+    {% end %}
   end
 
   def evtGetObjectArrayProperty(object_array : LibC::IntPtrT, property_id : UInt32, array_index : UInt32, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetObjectArrayProperty(object_array, property_id, array_index, flags, property_value_buffer_size, property_value_buffer, property_value_buffer_used)
+    {% end %}
   end
 
-  def evtGetQueryInfo(query_or_subscription : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_QUERY_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtGetQueryInfo(query_or_subscription : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_QUERY_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetQueryInfo(query_or_subscription, property_id, property_value_buffer_size, property_value_buffer, property_value_buffer_used)
+    {% end %}
   end
 
-  def evtCreateBookmark(bookmark_xml : Win32cr::Foundation::PWSTR) : LibC::IntPtrT
+  def evtCreateBookmark(bookmark_xml : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EVT_HANDLE
+    {% if !flag?(:docs) %}
     C.EvtCreateBookmark(bookmark_xml)
+    {% end %}
   end
 
-  def evtUpdateBookmark(bookmark : LibC::IntPtrT, event : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+  def evtUpdateBookmark(bookmark : Win32cr::System::EventLog::EVT_HANDLE, event : Win32cr::System::EventLog::EVT_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtUpdateBookmark(bookmark, event)
+    {% end %}
   end
 
-  def evtGetEventInfo(event : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_EVENT_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+  def evtGetEventInfo(event : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_EVENT_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EvtGetEventInfo(event, property_id, property_value_buffer_size, property_value_buffer, property_value_buffer_used)
+    {% end %}
   end
 
-  def clearEventLogA(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+  def clearEventLogA(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClearEventLogA(hEventLog, lpBackupFileName)
+    {% end %}
   end
 
-  def clearEventLogW(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+  def clearEventLogW(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClearEventLogW(hEventLog, lpBackupFileName)
+    {% end %}
   end
 
-  def backupEventLogA(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+  def backupEventLogA(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BackupEventLogA(hEventLog, lpBackupFileName)
+    {% end %}
   end
 
-  def backupEventLogW(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+  def backupEventLogW(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BackupEventLogW(hEventLog, lpBackupFileName)
+    {% end %}
   end
 
-  def closeEventLog(hEventLog : Win32cr::System::EventLog::EventLogHandle) : Win32cr::Foundation::BOOL
+  def closeEventLog(hEventLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseEventLog(hEventLog)
+    {% end %}
   end
 
-  def deregisterEventSource(hEventLog : Win32cr::System::EventLog::EventSourceHandle) : Win32cr::Foundation::BOOL
+  def deregisterEventSource(hEventLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeregisterEventSource(hEventLog)
+    {% end %}
   end
 
-  def notifyChangeEventLog(hEventLog : Win32cr::System::EventLog::EventLogHandle, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+  def notifyChangeEventLog(hEventLog : Win32cr::Foundation::HANDLE, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.NotifyChangeEventLog(hEventLog, hEvent)
+    {% end %}
   end
 
-  def getNumberOfEventLogRecords(hEventLog : Win32cr::System::EventLog::EventLogHandle, number_of_records : UInt32*) : Win32cr::Foundation::BOOL
+  def getNumberOfEventLogRecords(hEventLog : Win32cr::Foundation::HANDLE, number_of_records : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumberOfEventLogRecords(hEventLog, number_of_records)
+    {% end %}
   end
 
-  def getOldestEventLogRecord(hEventLog : Win32cr::System::EventLog::EventLogHandle, oldest_record : UInt32*) : Win32cr::Foundation::BOOL
+  def getOldestEventLogRecord(hEventLog : Win32cr::Foundation::HANDLE, oldest_record : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOldestEventLogRecord(hEventLog, oldest_record)
+    {% end %}
   end
 
-  def openEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::System::EventLog::EventLogHandle
+  def openEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenEventLogA(lpUNCServerName, lpSourceName)
+    {% end %}
   end
 
-  def openEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EventLogHandle
+  def openEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenEventLogW(lpUNCServerName, lpSourceName)
+    {% end %}
   end
 
-  def registerEventSourceA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::System::EventLog::EventSourceHandle
+  def registerEventSourceA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RegisterEventSourceA(lpUNCServerName, lpSourceName)
+    {% end %}
   end
 
-  def registerEventSourceW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EventSourceHandle
+  def registerEventSourceW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RegisterEventSourceW(lpUNCServerName, lpSourceName)
+    {% end %}
   end
 
-  def openBackupEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::System::EventLog::EventLogHandle
+  def openBackupEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenBackupEventLogA(lpUNCServerName, lpFileName)
+    {% end %}
   end
 
-  def openBackupEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EventLogHandle
+  def openBackupEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenBackupEventLogW(lpUNCServerName, lpFileName)
+    {% end %}
   end
 
-  def readEventLogA(hEventLog : Win32cr::System::EventLog::EventLogHandle, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+  def readEventLogA(hEventLog : Win32cr::Foundation::HANDLE, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadEventLogA(hEventLog, dwReadFlags, dwRecordOffset, lpBuffer, nNumberOfBytesToRead, pnBytesRead, pnMinNumberOfBytesNeeded)
+    {% end %}
   end
 
-  def readEventLogW(hEventLog : Win32cr::System::EventLog::EventLogHandle, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+  def readEventLogW(hEventLog : Win32cr::Foundation::HANDLE, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadEventLogW(hEventLog, dwReadFlags, dwRecordOffset, lpBuffer, nNumberOfBytesToRead, pnBytesRead, pnMinNumberOfBytesNeeded)
+    {% end %}
   end
 
-  def reportEventA(hEventLog : Win32cr::System::EventLog::EventSourceHandle, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Foundation::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
+  def reportEventA(hEventLog : Win32cr::Foundation::HANDLE, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Security::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReportEventA(hEventLog, wType, wCategory, dwEventID, lpUserSid, wNumStrings, dwDataSize, lpStrings, lpRawData)
+    {% end %}
   end
 
-  def reportEventW(hEventLog : Win32cr::System::EventLog::EventSourceHandle, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Foundation::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PWSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
+  def reportEventW(hEventLog : Win32cr::Foundation::HANDLE, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Security::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PWSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReportEventW(hEventLog, wType, wCategory, dwEventID, lpUserSid, wNumStrings, dwDataSize, lpStrings, lpRawData)
+    {% end %}
   end
 
-  def getEventLogInformation(hEventLog : Win32cr::System::EventLog::EventLogHandle, dwInfoLevel : UInt32, lpBuffer : Void*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+  def getEventLogInformation(hEventLog : Win32cr::Foundation::HANDLE, dwInfoLevel : UInt32, lpBuffer : Void*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetEventLogInformation(hEventLog, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded)
+    {% end %}
   end
 
   @[Link("wevtapi")]
   @[Link("advapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun EvtOpenSession(login_class : Win32cr::System::EventLog::EVT_LOGIN_CLASS, login : Void*, timeout : UInt32, flags : UInt32) : LibC::IntPtrT
+    fun EvtOpenSession(login_class : Win32cr::System::EventLog::EVT_LOGIN_CLASS, login : Void*, timeout : UInt32, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtClose(object : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    fun EvtClose(object : Win32cr::System::EventLog::EVT_HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtCancel(object : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    fun EvtCancel(object : Win32cr::System::EventLog::EVT_HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtGetExtendedStatus(buffer_size : UInt32, buffer : UInt16*, buffer_used : UInt32*) : UInt32
+    fun EvtGetExtendedStatus(buffer_size : UInt32, buffer : Win32cr::Foundation::PWSTR, buffer_used : UInt32*) : UInt32
 
     # :nodoc:
-    fun EvtQuery(session : LibC::IntPtrT, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, flags : UInt32) : LibC::IntPtrT
+    fun EvtQuery(session : Win32cr::System::EventLog::EVT_HANDLE, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtNext(result_set : LibC::IntPtrT, events_size : UInt32, events : LibC::IntPtrT*, timeout : UInt32, flags : UInt32, returned : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtNext(result_set : Win32cr::System::EventLog::EVT_HANDLE, events_size : UInt32, events : LibC::IntPtrT*, timeout : UInt32, flags : UInt32, returned : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtSeek(result_set : LibC::IntPtrT, position : Int64, bookmark : LibC::IntPtrT, timeout : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    fun EvtSeek(result_set : Win32cr::System::EventLog::EVT_HANDLE, position : Int64, bookmark : Win32cr::System::EventLog::EVT_HANDLE, timeout : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtSubscribe(session : LibC::IntPtrT, signal_event : Win32cr::Foundation::HANDLE, channel_path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, bookmark : LibC::IntPtrT, context : Void*, callback : Win32cr::System::EventLog::EVT_SUBSCRIBE_CALLBACK, flags : UInt32) : LibC::IntPtrT
+    fun EvtSubscribe(session : Win32cr::System::EventLog::EVT_HANDLE, signal_event : Win32cr::Foundation::HANDLE, channel_path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, bookmark : Win32cr::System::EventLog::EVT_HANDLE, context : Void*, callback : Win32cr::System::EventLog::EVT_SUBSCRIBE_CALLBACK, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtCreateRenderContext(value_paths_count : UInt32, value_paths : Win32cr::Foundation::PWSTR*, flags : UInt32) : LibC::IntPtrT
+    fun EvtCreateRenderContext(value_paths_count : UInt32, value_paths : Win32cr::Foundation::PWSTR*, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtRender(context : LibC::IntPtrT, fragment : LibC::IntPtrT, flags : UInt32, buffer_size : UInt32, buffer : Void*, buffer_used : UInt32*, property_count : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtRender(context : Win32cr::System::EventLog::EVT_HANDLE, fragment : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32, buffer_size : UInt32, buffer : Void*, buffer_used : UInt32*, property_count : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtFormatMessage(publisher_metadata : LibC::IntPtrT, event : LibC::IntPtrT, message_id : UInt32, value_count : UInt32, values : Win32cr::System::EventLog::EVT_VARIANT*, flags : UInt32, buffer_size : UInt32, buffer : UInt16*, buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtFormatMessage(publisher_metadata : Win32cr::System::EventLog::EVT_HANDLE, event : Win32cr::System::EventLog::EVT_HANDLE, message_id : UInt32, value_count : UInt32, values : Win32cr::System::EventLog::EVT_VARIANT*, flags : UInt32, buffer_size : UInt32, buffer : Win32cr::Foundation::PWSTR, buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtOpenLog(session : LibC::IntPtrT, path : Win32cr::Foundation::PWSTR, flags : UInt32) : LibC::IntPtrT
+    fun EvtOpenLog(session : Win32cr::System::EventLog::EVT_HANDLE, path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtGetLogInfo(log : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_LOG_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtGetLogInfo(log : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_LOG_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtClearLog(session : LibC::IntPtrT, channel_path : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    fun EvtClearLog(session : Win32cr::System::EventLog::EVT_HANDLE, channel_path : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtExportLog(session : LibC::IntPtrT, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    fun EvtExportLog(session : Win32cr::System::EventLog::EVT_HANDLE, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, target_file_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtArchiveExportedLog(session : LibC::IntPtrT, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    fun EvtArchiveExportedLog(session : Win32cr::System::EventLog::EVT_HANDLE, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtOpenChannelEnum(session : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+    fun EvtOpenChannelEnum(session : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtNextChannelPath(channel_enum : LibC::IntPtrT, channel_path_buffer_size : UInt32, channel_path_buffer : UInt16*, channel_path_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtNextChannelPath(channel_enum : Win32cr::System::EventLog::EVT_HANDLE, channel_path_buffer_size : UInt32, channel_path_buffer : Win32cr::Foundation::PWSTR, channel_path_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtOpenChannelConfig(session : LibC::IntPtrT, channel_path : Win32cr::Foundation::PWSTR, flags : UInt32) : LibC::IntPtrT
+    fun EvtOpenChannelConfig(session : Win32cr::System::EventLog::EVT_HANDLE, channel_path : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtSaveChannelConfig(channel_config : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    fun EvtSaveChannelConfig(channel_config : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtSetChannelConfigProperty(channel_config : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value : Win32cr::System::EventLog::EVT_VARIANT*) : Win32cr::Foundation::BOOL
+    fun EvtSetChannelConfigProperty(channel_config : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value : Win32cr::System::EventLog::EVT_VARIANT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtGetChannelConfigProperty(channel_config : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtGetChannelConfigProperty(channel_config : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_CHANNEL_CONFIG_PROPERTY_ID, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtOpenPublisherEnum(session : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+    fun EvtOpenPublisherEnum(session : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtNextPublisherId(publisher_enum : LibC::IntPtrT, publisher_id_buffer_size : UInt32, publisher_id_buffer : UInt16*, publisher_id_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtNextPublisherId(publisher_enum : Win32cr::System::EventLog::EVT_HANDLE, publisher_id_buffer_size : UInt32, publisher_id_buffer : Win32cr::Foundation::PWSTR, publisher_id_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtOpenPublisherMetadata(session : LibC::IntPtrT, publisher_id : Win32cr::Foundation::PWSTR, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : LibC::IntPtrT
+    fun EvtOpenPublisherMetadata(session : Win32cr::System::EventLog::EVT_HANDLE, publisher_id : Win32cr::Foundation::PWSTR, log_file_path : Win32cr::Foundation::PWSTR, locale : UInt32, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtGetPublisherMetadataProperty(publisher_metadata : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_PUBLISHER_METADATA_PROPERTY_ID, flags : UInt32, publisher_metadata_property_buffer_size : UInt32, publisher_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, publisher_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtGetPublisherMetadataProperty(publisher_metadata : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_PUBLISHER_METADATA_PROPERTY_ID, flags : UInt32, publisher_metadata_property_buffer_size : UInt32, publisher_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, publisher_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtOpenEventMetadataEnum(publisher_metadata : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+    fun EvtOpenEventMetadataEnum(publisher_metadata : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtNextEventMetadata(event_metadata_enum : LibC::IntPtrT, flags : UInt32) : LibC::IntPtrT
+    fun EvtNextEventMetadata(event_metadata_enum : Win32cr::System::EventLog::EVT_HANDLE, flags : UInt32) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtGetEventMetadataProperty(event_metadata : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_EVENT_METADATA_PROPERTY_ID, flags : UInt32, event_metadata_property_buffer_size : UInt32, event_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, event_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtGetEventMetadataProperty(event_metadata : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_EVENT_METADATA_PROPERTY_ID, flags : UInt32, event_metadata_property_buffer_size : UInt32, event_metadata_property_buffer : Win32cr::System::EventLog::EVT_VARIANT*, event_metadata_property_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun EvtGetObjectArraySize(object_array : LibC::IntPtrT, object_array_size : UInt32*) : Win32cr::Foundation::BOOL
@@ -674,76 +788,77 @@ module Win32cr::System::EventLog
     fun EvtGetObjectArrayProperty(object_array : LibC::IntPtrT, property_id : UInt32, array_index : UInt32, flags : UInt32, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtGetQueryInfo(query_or_subscription : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_QUERY_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtGetQueryInfo(query_or_subscription : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_QUERY_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtCreateBookmark(bookmark_xml : Win32cr::Foundation::PWSTR) : LibC::IntPtrT
+    fun EvtCreateBookmark(bookmark_xml : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EVT_HANDLE
 
     # :nodoc:
-    fun EvtUpdateBookmark(bookmark : LibC::IntPtrT, event : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    fun EvtUpdateBookmark(bookmark : Win32cr::System::EventLog::EVT_HANDLE, event : Win32cr::System::EventLog::EVT_HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EvtGetEventInfo(event : LibC::IntPtrT, property_id : Win32cr::System::EventLog::EVT_EVENT_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
+    fun EvtGetEventInfo(event : Win32cr::System::EventLog::EVT_HANDLE, property_id : Win32cr::System::EventLog::EVT_EVENT_PROPERTY_ID, property_value_buffer_size : UInt32, property_value_buffer : Win32cr::System::EventLog::EVT_VARIANT*, property_value_buffer_used : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClearEventLogA(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    fun ClearEventLogA(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClearEventLogW(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    fun ClearEventLogW(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun BackupEventLogA(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    fun BackupEventLogA(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun BackupEventLogW(hEventLog : Win32cr::System::EventLog::EventLogHandle, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    fun BackupEventLogW(hEventLog : Win32cr::Foundation::HANDLE, lpBackupFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CloseEventLog(hEventLog : Win32cr::System::EventLog::EventLogHandle) : Win32cr::Foundation::BOOL
+    fun CloseEventLog(hEventLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun DeregisterEventSource(hEventLog : Win32cr::System::EventLog::EventSourceHandle) : Win32cr::Foundation::BOOL
+    fun DeregisterEventSource(hEventLog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun NotifyChangeEventLog(hEventLog : Win32cr::System::EventLog::EventLogHandle, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    fun NotifyChangeEventLog(hEventLog : Win32cr::Foundation::HANDLE, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetNumberOfEventLogRecords(hEventLog : Win32cr::System::EventLog::EventLogHandle, number_of_records : UInt32*) : Win32cr::Foundation::BOOL
+    fun GetNumberOfEventLogRecords(hEventLog : Win32cr::Foundation::HANDLE, number_of_records : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetOldestEventLogRecord(hEventLog : Win32cr::System::EventLog::EventLogHandle, oldest_record : UInt32*) : Win32cr::Foundation::BOOL
+    fun GetOldestEventLogRecord(hEventLog : Win32cr::Foundation::HANDLE, oldest_record : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun OpenEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::System::EventLog::EventLogHandle
+    fun OpenEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun OpenEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EventLogHandle
+    fun OpenEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun RegisterEventSourceA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::System::EventLog::EventSourceHandle
+    fun RegisterEventSourceA(lpUNCServerName : Win32cr::Foundation::PSTR, lpSourceName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun RegisterEventSourceW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EventSourceHandle
+    fun RegisterEventSourceW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun OpenBackupEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::System::EventLog::EventLogHandle
+    fun OpenBackupEventLogA(lpUNCServerName : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun OpenBackupEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::System::EventLog::EventLogHandle
+    fun OpenBackupEventLogW(lpUNCServerName : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun ReadEventLogA(hEventLog : Win32cr::System::EventLog::EventLogHandle, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    fun ReadEventLogA(hEventLog : Win32cr::Foundation::HANDLE, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ReadEventLogW(hEventLog : Win32cr::System::EventLog::EventLogHandle, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    fun ReadEventLogW(hEventLog : Win32cr::Foundation::HANDLE, dwReadFlags : Win32cr::System::EventLog::READ_EVENT_LOG_READ_FLAGS, dwRecordOffset : UInt32, lpBuffer : Void*, nNumberOfBytesToRead : UInt32, pnBytesRead : UInt32*, pnMinNumberOfBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ReportEventA(hEventLog : Win32cr::System::EventLog::EventSourceHandle, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Foundation::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
+    fun ReportEventA(hEventLog : Win32cr::Foundation::HANDLE, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Security::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ReportEventW(hEventLog : Win32cr::System::EventLog::EventSourceHandle, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Foundation::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PWSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
+    fun ReportEventW(hEventLog : Win32cr::Foundation::HANDLE, wType : Win32cr::System::EventLog::REPORT_EVENT_TYPE, wCategory : UInt16, dwEventID : UInt32, lpUserSid : Win32cr::Security::PSID, wNumStrings : UInt16, dwDataSize : UInt32, lpStrings : Win32cr::Foundation::PWSTR*, lpRawData : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetEventLogInformation(hEventLog : Win32cr::System::EventLog::EventLogHandle, dwInfoLevel : UInt32, lpBuffer : Void*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    fun GetEventLogInformation(hEventLog : Win32cr::Foundation::HANDLE, dwInfoLevel : UInt32, lpBuffer : Void*, cbBufSize : UInt32, pcbBytesNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

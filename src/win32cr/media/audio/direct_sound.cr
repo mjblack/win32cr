@@ -1,6 +1,6 @@
+require "./../../foundation.cr"
 require "./../audio.cr"
 require "./../../graphics/direct3_d.cr"
-require "./../../foundation.cr"
 require "./../../system/com.cr"
 
 module Win32cr::Media::Audio::DirectSound
@@ -11,22 +11,22 @@ module Win32cr::Media::Audio::DirectSound
 
   DIRECTSOUND_VERSION = 1792_u32
   FACDS_ = 2168_u32
-  CLSID_DirectSound = "47d4d946-62e8-11cf-93bc-444553540000"
-  CLSID_DirectSound8 = "3901cc3f-84b5-4fa4-ba35-aa8172b8a09b"
-  CLSID_DirectSoundCapture = "b0210780-89cd-11d0-af08-00a0c925cd16"
-  CLSID_DirectSoundCapture8 = "e4bcac13-7f99-4908-9a8e-74e3bf24b6e1"
-  CLSID_DirectSoundFullDuplex = "fea4300c-7959-4147-b26a-2377b9e7a91d"
-  DSDEVID_DefaultPlayback = "def00000-9c6d-47ed-aaf1-4dda8f2b5c03"
-  DSDEVID_DefaultCapture = "def00001-9c6d-47ed-aaf1-4dda8f2b5c03"
-  DSDEVID_DefaultVoicePlayback = "def00002-9c6d-47ed-aaf1-4dda8f2b5c03"
-  DSDEVID_DefaultVoiceCapture = "def00003-9c6d-47ed-aaf1-4dda8f2b5c03"
+  CLSID_DirectSound = LibC::GUID.new(0x47d4d946_u32, 0x62e8_u16, 0x11cf_u16, StaticArray[0x93_u8, 0xbc_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
+  CLSID_DirectSound8 = LibC::GUID.new(0x3901cc3f_u32, 0x84b5_u16, 0x4fa4_u16, StaticArray[0xba_u8, 0x35_u8, 0xaa_u8, 0x81_u8, 0x72_u8, 0xb8_u8, 0xa0_u8, 0x9b_u8])
+  CLSID_DirectSoundCapture = LibC::GUID.new(0xb0210780_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
+  CLSID_DirectSoundCapture8 = LibC::GUID.new(0xe4bcac13_u32, 0x7f99_u16, 0x4908_u16, StaticArray[0x9a_u8, 0x8e_u8, 0x74_u8, 0xe3_u8, 0xbf_u8, 0x24_u8, 0xb6_u8, 0xe1_u8])
+  CLSID_DirectSoundFullDuplex = LibC::GUID.new(0xfea4300c_u32, 0x7959_u16, 0x4147_u16, StaticArray[0xb2_u8, 0x6a_u8, 0x23_u8, 0x77_u8, 0xb9_u8, 0xe7_u8, 0xa9_u8, 0x1d_u8])
+  DSDEVID_DefaultPlayback = LibC::GUID.new(0xdef00000_u32, 0x9c6d_u16, 0x47ed_u16, StaticArray[0xaa_u8, 0xf1_u8, 0x4d_u8, 0xda_u8, 0x8f_u8, 0x2b_u8, 0x5c_u8, 0x3_u8])
+  DSDEVID_DefaultCapture = LibC::GUID.new(0xdef00001_u32, 0x9c6d_u16, 0x47ed_u16, StaticArray[0xaa_u8, 0xf1_u8, 0x4d_u8, 0xda_u8, 0x8f_u8, 0x2b_u8, 0x5c_u8, 0x3_u8])
+  DSDEVID_DefaultVoicePlayback = LibC::GUID.new(0xdef00002_u32, 0x9c6d_u16, 0x47ed_u16, StaticArray[0xaa_u8, 0xf1_u8, 0x4d_u8, 0xda_u8, 0x8f_u8, 0x2b_u8, 0x5c_u8, 0x3_u8])
+  DSDEVID_DefaultVoiceCapture = LibC::GUID.new(0xdef00003_u32, 0x9c6d_u16, 0x47ed_u16, StaticArray[0xaa_u8, 0xf1_u8, 0x4d_u8, 0xda_u8, 0x8f_u8, 0x2b_u8, 0x5c_u8, 0x3_u8])
   DSFX_LOCHARDWARE = 1_u32
   DSFX_LOCSOFTWARE = 2_u32
   DSCFX_LOCHARDWARE = 1_u32
   DSCFX_LOCSOFTWARE = 2_u32
   DSCFXR_LOCHARDWARE = 16_u32
   DSCFXR_LOCSOFTWARE = 32_u32
-  GUID_All_Objects = "aa114de5-c262-4169-a1c8-23d698cc73b5"
+  GUID_All_Objects = LibC::GUID.new(0xaa114de5_u32, 0xc262_u16, 0x4169_u16, StaticArray[0xa1_u8, 0xc8_u8, 0x23_u8, 0xd6_u8, 0x98_u8, 0xcc_u8, 0x73_u8, 0xb5_u8])
   KSPROPERTY_SUPPORT_GET = 1_u32
   KSPROPERTY_SUPPORT_SET = 2_u32
   DSFXGARGLE_WAVE_TRIANGLE = 0_u32
@@ -35,16 +35,16 @@ module Win32cr::Media::Audio::DirectSound
   DSFXGARGLE_RATEHZ_MAX = 1000_u32
   DSFXCHORUS_WAVE_TRIANGLE = 0_u32
   DSFXCHORUS_WAVE_SIN = 1_u32
-  DSFXCHORUS_WETDRYMIX_MIN = 0
-  DSFXCHORUS_WETDRYMIX_MAX = 100
-  DSFXCHORUS_DEPTH_MIN = 0
-  DSFXCHORUS_DEPTH_MAX = 100
-  DSFXCHORUS_FEEDBACK_MIN = -99
-  DSFXCHORUS_FEEDBACK_MAX = 99
-  DSFXCHORUS_FREQUENCY_MIN = 0
-  DSFXCHORUS_FREQUENCY_MAX = 10
-  DSFXCHORUS_DELAY_MIN = 0
-  DSFXCHORUS_DELAY_MAX = 20
+  DSFXCHORUS_WETDRYMIX_MIN = 0.0
+  DSFXCHORUS_WETDRYMIX_MAX = 100.0
+  DSFXCHORUS_DEPTH_MIN = 0.0
+  DSFXCHORUS_DEPTH_MAX = 100.0
+  DSFXCHORUS_FEEDBACK_MIN = -99.0
+  DSFXCHORUS_FEEDBACK_MAX = 99.0
+  DSFXCHORUS_FREQUENCY_MIN = 0.0
+  DSFXCHORUS_FREQUENCY_MAX = 10.0
+  DSFXCHORUS_DELAY_MIN = 0.0
+  DSFXCHORUS_DELAY_MAX = 20.0
   DSFXCHORUS_PHASE_MIN = 0_u32
   DSFXCHORUS_PHASE_MAX = 4_u32
   DSFXCHORUS_PHASE_NEG_180 = 0_u32
@@ -54,109 +54,109 @@ module Win32cr::Media::Audio::DirectSound
   DSFXCHORUS_PHASE_180 = 4_u32
   DSFXFLANGER_WAVE_TRIANGLE = 0_u32
   DSFXFLANGER_WAVE_SIN = 1_u32
-  DSFXFLANGER_WETDRYMIX_MIN = 0
-  DSFXFLANGER_WETDRYMIX_MAX = 100
-  DSFXFLANGER_FREQUENCY_MIN = 0
-  DSFXFLANGER_FREQUENCY_MAX = 10
-  DSFXFLANGER_DEPTH_MIN = 0
-  DSFXFLANGER_DEPTH_MAX = 100
+  DSFXFLANGER_WETDRYMIX_MIN = 0.0
+  DSFXFLANGER_WETDRYMIX_MAX = 100.0
+  DSFXFLANGER_FREQUENCY_MIN = 0.0
+  DSFXFLANGER_FREQUENCY_MAX = 10.0
+  DSFXFLANGER_DEPTH_MIN = 0.0
+  DSFXFLANGER_DEPTH_MAX = 100.0
   DSFXFLANGER_PHASE_MIN = 0_u32
   DSFXFLANGER_PHASE_MAX = 4_u32
-  DSFXFLANGER_FEEDBACK_MIN = -99
-  DSFXFLANGER_FEEDBACK_MAX = 99
-  DSFXFLANGER_DELAY_MIN = 0
-  DSFXFLANGER_DELAY_MAX = 4
+  DSFXFLANGER_FEEDBACK_MIN = -99.0
+  DSFXFLANGER_FEEDBACK_MAX = 99.0
+  DSFXFLANGER_DELAY_MIN = 0.0
+  DSFXFLANGER_DELAY_MAX = 4.0
   DSFXFLANGER_PHASE_NEG_180 = 0_u32
   DSFXFLANGER_PHASE_NEG_90 = 1_u32
   DSFXFLANGER_PHASE_ZERO = 2_u32
   DSFXFLANGER_PHASE_90 = 3_u32
   DSFXFLANGER_PHASE_180 = 4_u32
-  DSFXECHO_WETDRYMIX_MIN = 0
-  DSFXECHO_WETDRYMIX_MAX = 100
-  DSFXECHO_FEEDBACK_MIN = 0
-  DSFXECHO_FEEDBACK_MAX = 100
-  DSFXECHO_LEFTDELAY_MIN = 1
-  DSFXECHO_LEFTDELAY_MAX = 2000
-  DSFXECHO_RIGHTDELAY_MIN = 1
-  DSFXECHO_RIGHTDELAY_MAX = 2000
+  DSFXECHO_WETDRYMIX_MIN = 0.0
+  DSFXECHO_WETDRYMIX_MAX = 100.0
+  DSFXECHO_FEEDBACK_MIN = 0.0
+  DSFXECHO_FEEDBACK_MAX = 100.0
+  DSFXECHO_LEFTDELAY_MIN = 1.0
+  DSFXECHO_LEFTDELAY_MAX = 2000.0
+  DSFXECHO_RIGHTDELAY_MIN = 1.0
+  DSFXECHO_RIGHTDELAY_MAX = 2000.0
   DSFXECHO_PANDELAY_MIN = 0_u32
   DSFXECHO_PANDELAY_MAX = 1_u32
-  DSFXDISTORTION_GAIN_MIN = -60
-  DSFXDISTORTION_GAIN_MAX = 0
-  DSFXDISTORTION_EDGE_MIN = 0
-  DSFXDISTORTION_EDGE_MAX = 100
-  DSFXDISTORTION_POSTEQCENTERFREQUENCY_MIN = 100
-  DSFXDISTORTION_POSTEQCENTERFREQUENCY_MAX = 8000
-  DSFXDISTORTION_POSTEQBANDWIDTH_MIN = 100
-  DSFXDISTORTION_POSTEQBANDWIDTH_MAX = 8000
-  DSFXDISTORTION_PRELOWPASSCUTOFF_MIN = 100
-  DSFXDISTORTION_PRELOWPASSCUTOFF_MAX = 8000
-  DSFXCOMPRESSOR_GAIN_MIN = -60
-  DSFXCOMPRESSOR_GAIN_MAX = 60
+  DSFXDISTORTION_GAIN_MIN = -60.0
+  DSFXDISTORTION_GAIN_MAX = 0.0
+  DSFXDISTORTION_EDGE_MIN = 0.0
+  DSFXDISTORTION_EDGE_MAX = 100.0
+  DSFXDISTORTION_POSTEQCENTERFREQUENCY_MIN = 100.0
+  DSFXDISTORTION_POSTEQCENTERFREQUENCY_MAX = 8000.0
+  DSFXDISTORTION_POSTEQBANDWIDTH_MIN = 100.0
+  DSFXDISTORTION_POSTEQBANDWIDTH_MAX = 8000.0
+  DSFXDISTORTION_PRELOWPASSCUTOFF_MIN = 100.0
+  DSFXDISTORTION_PRELOWPASSCUTOFF_MAX = 8000.0
+  DSFXCOMPRESSOR_GAIN_MIN = -60.0
+  DSFXCOMPRESSOR_GAIN_MAX = 60.0
   DSFXCOMPRESSOR_ATTACK_MIN = 0.01
-  DSFXCOMPRESSOR_ATTACK_MAX = 500
-  DSFXCOMPRESSOR_RELEASE_MIN = 50
-  DSFXCOMPRESSOR_RELEASE_MAX = 3000
-  DSFXCOMPRESSOR_THRESHOLD_MIN = -60
-  DSFXCOMPRESSOR_THRESHOLD_MAX = 0
-  DSFXCOMPRESSOR_RATIO_MIN = 1
-  DSFXCOMPRESSOR_RATIO_MAX = 100
-  DSFXCOMPRESSOR_PREDELAY_MIN = 0
-  DSFXCOMPRESSOR_PREDELAY_MAX = 4
-  DSFXPARAMEQ_CENTER_MIN = 80
-  DSFXPARAMEQ_CENTER_MAX = 16000
-  DSFXPARAMEQ_BANDWIDTH_MIN = 1
-  DSFXPARAMEQ_BANDWIDTH_MAX = 36
-  DSFXPARAMEQ_GAIN_MIN = -15
-  DSFXPARAMEQ_GAIN_MAX = 15
+  DSFXCOMPRESSOR_ATTACK_MAX = 500.0
+  DSFXCOMPRESSOR_RELEASE_MIN = 50.0
+  DSFXCOMPRESSOR_RELEASE_MAX = 3000.0
+  DSFXCOMPRESSOR_THRESHOLD_MIN = -60.0
+  DSFXCOMPRESSOR_THRESHOLD_MAX = 0.0
+  DSFXCOMPRESSOR_RATIO_MIN = 1.0
+  DSFXCOMPRESSOR_RATIO_MAX = 100.0
+  DSFXCOMPRESSOR_PREDELAY_MIN = 0.0
+  DSFXCOMPRESSOR_PREDELAY_MAX = 4.0
+  DSFXPARAMEQ_CENTER_MIN = 80.0
+  DSFXPARAMEQ_CENTER_MAX = 16000.0
+  DSFXPARAMEQ_BANDWIDTH_MIN = 1.0
+  DSFXPARAMEQ_BANDWIDTH_MAX = 36.0
+  DSFXPARAMEQ_GAIN_MIN = -15.0
+  DSFXPARAMEQ_GAIN_MAX = 15.0
   DSFX_I3DL2REVERB_ROOM_MIN = -10000_i32
   DSFX_I3DL2REVERB_ROOM_MAX = 0_u32
   DSFX_I3DL2REVERB_ROOM_DEFAULT = -1000_i32
   DSFX_I3DL2REVERB_ROOMHF_MIN = -10000_i32
   DSFX_I3DL2REVERB_ROOMHF_MAX = 0_u32
   DSFX_I3DL2REVERB_ROOMHF_DEFAULT = -100_i32
-  DSFX_I3DL2REVERB_ROOMROLLOFFFACTOR_MIN = 0
-  DSFX_I3DL2REVERB_ROOMROLLOFFFACTOR_MAX = 10
-  DSFX_I3DL2REVERB_ROOMROLLOFFFACTOR_DEFAULT = 0
+  DSFX_I3DL2REVERB_ROOMROLLOFFFACTOR_MIN = 0.0
+  DSFX_I3DL2REVERB_ROOMROLLOFFFACTOR_MAX = 10.0
+  DSFX_I3DL2REVERB_ROOMROLLOFFFACTOR_DEFAULT = 0.0
   DSFX_I3DL2REVERB_DECAYTIME_MIN = 0.1
-  DSFX_I3DL2REVERB_DECAYTIME_MAX = 20
+  DSFX_I3DL2REVERB_DECAYTIME_MAX = 20.0
   DSFX_I3DL2REVERB_DECAYTIME_DEFAULT = 1.49
   DSFX_I3DL2REVERB_DECAYHFRATIO_MIN = 0.1
-  DSFX_I3DL2REVERB_DECAYHFRATIO_MAX = 2
+  DSFX_I3DL2REVERB_DECAYHFRATIO_MAX = 2.0
   DSFX_I3DL2REVERB_DECAYHFRATIO_DEFAULT = 0.83
   DSFX_I3DL2REVERB_REFLECTIONS_MIN = -10000_i32
   DSFX_I3DL2REVERB_REFLECTIONS_MAX = 1000_u32
   DSFX_I3DL2REVERB_REFLECTIONS_DEFAULT = -2602_i32
-  DSFX_I3DL2REVERB_REFLECTIONSDELAY_MIN = 0
+  DSFX_I3DL2REVERB_REFLECTIONSDELAY_MIN = 0.0
   DSFX_I3DL2REVERB_REFLECTIONSDELAY_MAX = 0.3
   DSFX_I3DL2REVERB_REFLECTIONSDELAY_DEFAULT = 0.007
   DSFX_I3DL2REVERB_REVERB_MIN = -10000_i32
   DSFX_I3DL2REVERB_REVERB_MAX = 2000_u32
   DSFX_I3DL2REVERB_REVERB_DEFAULT = 200_u32
-  DSFX_I3DL2REVERB_REVERBDELAY_MIN = 0
+  DSFX_I3DL2REVERB_REVERBDELAY_MIN = 0.0
   DSFX_I3DL2REVERB_REVERBDELAY_MAX = 0.1
   DSFX_I3DL2REVERB_REVERBDELAY_DEFAULT = 0.011
-  DSFX_I3DL2REVERB_DIFFUSION_MIN = 0
-  DSFX_I3DL2REVERB_DIFFUSION_MAX = 100
-  DSFX_I3DL2REVERB_DIFFUSION_DEFAULT = 100
-  DSFX_I3DL2REVERB_DENSITY_MIN = 0
-  DSFX_I3DL2REVERB_DENSITY_MAX = 100
-  DSFX_I3DL2REVERB_DENSITY_DEFAULT = 100
-  DSFX_I3DL2REVERB_HFREFERENCE_MIN = 20
-  DSFX_I3DL2REVERB_HFREFERENCE_MAX = 20000
-  DSFX_I3DL2REVERB_HFREFERENCE_DEFAULT = 5000
+  DSFX_I3DL2REVERB_DIFFUSION_MIN = 0.0
+  DSFX_I3DL2REVERB_DIFFUSION_MAX = 100.0
+  DSFX_I3DL2REVERB_DIFFUSION_DEFAULT = 100.0
+  DSFX_I3DL2REVERB_DENSITY_MIN = 0.0
+  DSFX_I3DL2REVERB_DENSITY_MAX = 100.0
+  DSFX_I3DL2REVERB_DENSITY_DEFAULT = 100.0
+  DSFX_I3DL2REVERB_HFREFERENCE_MIN = 20.0
+  DSFX_I3DL2REVERB_HFREFERENCE_MAX = 20000.0
+  DSFX_I3DL2REVERB_HFREFERENCE_DEFAULT = 5000.0
   DSFX_I3DL2REVERB_QUALITY_MIN = 0_u32
   DSFX_I3DL2REVERB_QUALITY_MAX = 3_u32
   DSFX_I3DL2REVERB_QUALITY_DEFAULT = 2_u32
-  DSFX_WAVESREVERB_INGAIN_MIN = -96
-  DSFX_WAVESREVERB_INGAIN_MAX = 0
-  DSFX_WAVESREVERB_INGAIN_DEFAULT = 0
-  DSFX_WAVESREVERB_REVERBMIX_MIN = -96
-  DSFX_WAVESREVERB_REVERBMIX_MAX = 0
-  DSFX_WAVESREVERB_REVERBMIX_DEFAULT = 0
+  DSFX_WAVESREVERB_INGAIN_MIN = -96.0
+  DSFX_WAVESREVERB_INGAIN_MAX = 0.0
+  DSFX_WAVESREVERB_INGAIN_DEFAULT = 0.0
+  DSFX_WAVESREVERB_REVERBMIX_MIN = -96.0
+  DSFX_WAVESREVERB_REVERBMIX_MAX = 0.0
+  DSFX_WAVESREVERB_REVERBMIX_DEFAULT = 0.0
   DSFX_WAVESREVERB_REVERBTIME_MIN = 0.001
-  DSFX_WAVESREVERB_REVERBTIME_MAX = 3000
-  DSFX_WAVESREVERB_REVERBTIME_DEFAULT = 1000
+  DSFX_WAVESREVERB_REVERBTIME_MAX = 3000.0
+  DSFX_WAVESREVERB_REVERBTIME_DEFAULT = 1000.0
   DSFX_WAVESREVERB_HIGHFREQRTRATIO_MIN = 0.001
   DSFX_WAVESREVERB_HIGHFREQRTRATIO_MAX = 0.999
   DSFX_WAVESREVERB_HIGHFREQRTRATIO_DEFAULT = 0.001
@@ -246,15 +246,15 @@ module Win32cr::Media::Audio::DirectSound
   DS3DMODE_DISABLE = 2_u32
   DS3D_IMMEDIATE = 0_u32
   DS3D_DEFERRED = 1_u32
-  DS3D_DEFAULTDISTANCEFACTOR = 1
-  DS3D_MINROLLOFFFACTOR = 0
-  DS3D_MAXROLLOFFFACTOR = 10
-  DS3D_DEFAULTROLLOFFFACTOR = 1
-  DS3D_MINDOPPLERFACTOR = 0
-  DS3D_MAXDOPPLERFACTOR = 10
-  DS3D_DEFAULTDOPPLERFACTOR = 1
-  DS3D_DEFAULTMINDISTANCE = 1
-  DS3D_DEFAULTMAXDISTANCE = 1E+09
+  DS3D_DEFAULTDISTANCEFACTOR = 1.0
+  DS3D_MINROLLOFFFACTOR = 0.0
+  DS3D_MAXROLLOFFFACTOR = 10.0
+  DS3D_DEFAULTROLLOFFFACTOR = 1.0
+  DS3D_MINDOPPLERFACTOR = 0.0
+  DS3D_MAXDOPPLERFACTOR = 10.0
+  DS3D_DEFAULTDOPPLERFACTOR = 1.0
+  DS3D_DEFAULTMINDISTANCE = 1.0
+  DS3D_DEFAULTMAXDISTANCE = 1000000000.0
   DS3D_MINCONEANGLE = 0_u32
   DS3D_MAXCONEANGLE = 360_u32
   DS3D_DEFAULTCONEANGLE = 360_u32
@@ -271,24 +271,24 @@ module Win32cr::Media::Audio::DirectSound
   DSBPN_OFFSETSTOP = 4294967295_u32
   DS_CERTIFIED = 0_u32
   DS_UNCERTIFIED = 1_u32
-  DS3DALG_NO_VIRTUALIZATION = "c241333f-1c1b-11d2-94f5-00c04fc28aca"
-  DS3DALG_HRTF_FULL = "c2413340-1c1b-11d2-94f5-00c04fc28aca"
-  DS3DALG_HRTF_LIGHT = "c2413342-1c1b-11d2-94f5-00c04fc28aca"
-  GUID_DSFX_STANDARD_GARGLE = "dafd8210-5711-4b91-9fe3-f75b7ae279bf"
-  GUID_DSFX_STANDARD_CHORUS = "efe6629c-81f7-4281-bd91-c9d604a95af6"
-  GUID_DSFX_STANDARD_FLANGER = "efca3d92-dfd8-4672-a603-7420894bad98"
-  GUID_DSFX_STANDARD_ECHO = "ef3e932c-d40b-4f51-8ccf-3f98f1b29d5d"
-  GUID_DSFX_STANDARD_DISTORTION = "ef114c90-cd1d-484e-96e5-09cfaf912a21"
-  GUID_DSFX_STANDARD_COMPRESSOR = "ef011f79-4000-406d-87af-bffb3fc39d57"
-  GUID_DSFX_STANDARD_PARAMEQ = "120ced89-3bf4-4173-a132-3cb406cf3231"
-  GUID_DSFX_STANDARD_I3DL2REVERB = "ef985e71-d5c7-42d4-ba4d-2d073e2e96f4"
-  GUID_DSFX_WAVES_REVERB = "87fc0268-9a55-4360-95aa-004a1d9de26c"
-  GUID_DSCFX_CLASS_AEC = "bf963d80-c559-11d0-8a2b-00a0c9255ac1"
-  GUID_DSCFX_MS_AEC = "cdebb919-379a-488a-8765-f53cfd36de40"
-  GUID_DSCFX_SYSTEM_AEC = "1c22c56d-9879-4f5b-a389-27996ddc2810"
-  GUID_DSCFX_CLASS_NS = "e07f903f-62fd-4e60-8cdd-dea7236665b5"
-  GUID_DSCFX_MS_NS = "11c5c73b-66e9-4ba1-a0ba-e814c6eed92d"
-  GUID_DSCFX_SYSTEM_NS = "5ab0882e-7274-4516-877d-4eee99ba4fd0"
+  DS3DALG_NO_VIRTUALIZATION = LibC::GUID.new(0xc241333f_u32, 0x1c1b_u16, 0x11d2_u16, StaticArray[0x94_u8, 0xf5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x8a_u8, 0xca_u8])
+  DS3DALG_HRTF_FULL = LibC::GUID.new(0xc2413340_u32, 0x1c1b_u16, 0x11d2_u16, StaticArray[0x94_u8, 0xf5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x8a_u8, 0xca_u8])
+  DS3DALG_HRTF_LIGHT = LibC::GUID.new(0xc2413342_u32, 0x1c1b_u16, 0x11d2_u16, StaticArray[0x94_u8, 0xf5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x8a_u8, 0xca_u8])
+  GUID_DSFX_STANDARD_GARGLE = LibC::GUID.new(0xdafd8210_u32, 0x5711_u16, 0x4b91_u16, StaticArray[0x9f_u8, 0xe3_u8, 0xf7_u8, 0x5b_u8, 0x7a_u8, 0xe2_u8, 0x79_u8, 0xbf_u8])
+  GUID_DSFX_STANDARD_CHORUS = LibC::GUID.new(0xefe6629c_u32, 0x81f7_u16, 0x4281_u16, StaticArray[0xbd_u8, 0x91_u8, 0xc9_u8, 0xd6_u8, 0x4_u8, 0xa9_u8, 0x5a_u8, 0xf6_u8])
+  GUID_DSFX_STANDARD_FLANGER = LibC::GUID.new(0xefca3d92_u32, 0xdfd8_u16, 0x4672_u16, StaticArray[0xa6_u8, 0x3_u8, 0x74_u8, 0x20_u8, 0x89_u8, 0x4b_u8, 0xad_u8, 0x98_u8])
+  GUID_DSFX_STANDARD_ECHO = LibC::GUID.new(0xef3e932c_u32, 0xd40b_u16, 0x4f51_u16, StaticArray[0x8c_u8, 0xcf_u8, 0x3f_u8, 0x98_u8, 0xf1_u8, 0xb2_u8, 0x9d_u8, 0x5d_u8])
+  GUID_DSFX_STANDARD_DISTORTION = LibC::GUID.new(0xef114c90_u32, 0xcd1d_u16, 0x484e_u16, StaticArray[0x96_u8, 0xe5_u8, 0x9_u8, 0xcf_u8, 0xaf_u8, 0x91_u8, 0x2a_u8, 0x21_u8])
+  GUID_DSFX_STANDARD_COMPRESSOR = LibC::GUID.new(0xef011f79_u32, 0x4000_u16, 0x406d_u16, StaticArray[0x87_u8, 0xaf_u8, 0xbf_u8, 0xfb_u8, 0x3f_u8, 0xc3_u8, 0x9d_u8, 0x57_u8])
+  GUID_DSFX_STANDARD_PARAMEQ = LibC::GUID.new(0x120ced89_u32, 0x3bf4_u16, 0x4173_u16, StaticArray[0xa1_u8, 0x32_u8, 0x3c_u8, 0xb4_u8, 0x6_u8, 0xcf_u8, 0x32_u8, 0x31_u8])
+  GUID_DSFX_STANDARD_I3DL2REVERB = LibC::GUID.new(0xef985e71_u32, 0xd5c7_u16, 0x42d4_u16, StaticArray[0xba_u8, 0x4d_u8, 0x2d_u8, 0x7_u8, 0x3e_u8, 0x2e_u8, 0x96_u8, 0xf4_u8])
+  GUID_DSFX_WAVES_REVERB = LibC::GUID.new(0x87fc0268_u32, 0x9a55_u16, 0x4360_u16, StaticArray[0x95_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x1d_u8, 0x9d_u8, 0xe2_u8, 0x6c_u8])
+  GUID_DSCFX_CLASS_AEC = LibC::GUID.new(0xbf963d80_u32, 0xc559_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0x2b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0x5a_u8, 0xc1_u8])
+  GUID_DSCFX_MS_AEC = LibC::GUID.new(0xcdebb919_u32, 0x379a_u16, 0x488a_u16, StaticArray[0x87_u8, 0x65_u8, 0xf5_u8, 0x3c_u8, 0xfd_u8, 0x36_u8, 0xde_u8, 0x40_u8])
+  GUID_DSCFX_SYSTEM_AEC = LibC::GUID.new(0x1c22c56d_u32, 0x9879_u16, 0x4f5b_u16, StaticArray[0xa3_u8, 0x89_u8, 0x27_u8, 0x99_u8, 0x6d_u8, 0xdc_u8, 0x28_u8, 0x10_u8])
+  GUID_DSCFX_CLASS_NS = LibC::GUID.new(0xe07f903f_u32, 0x62fd_u16, 0x4e60_u16, StaticArray[0x8c_u8, 0xdd_u8, 0xde_u8, 0xa7_u8, 0x23_u8, 0x66_u8, 0x65_u8, 0xb5_u8])
+  GUID_DSCFX_MS_NS = LibC::GUID.new(0x11c5c73b_u32, 0x66e9_u16, 0x4ba1_u16, StaticArray[0xa0_u8, 0xba_u8, 0xe8_u8, 0x14_u8, 0xc6_u8, 0xee_u8, 0xd9_u8, 0x2d_u8])
+  GUID_DSCFX_SYSTEM_NS = LibC::GUID.new(0x5ab0882e_u32, 0x7274_u16, 0x4516_u16, StaticArray[0x87_u8, 0x7d_u8, 0x4e_u8, 0xee_u8, 0x99_u8, 0xba_u8, 0x4f_u8, 0xd0_u8])
   DSFXR_PRESENT = 0_i32
   DSFXR_LOCHARDWARE = 1_i32
   DSFXR_LOCSOFTWARE = 2_i32
@@ -627,7 +627,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundVtbl,
+
+  record IDirectSoundVtable,
     query_interface : Proc(IDirectSound*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSound*, UInt32),
     release : Proc(IDirectSound*, UInt32),
@@ -642,7 +643,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSound, lpVtbl : IDirectSoundVtbl* do
+  record IDirectSound, lpVtbl : IDirectSoundVtable* do
     GUID = LibC::GUID.new(0x279afa83_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSound*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -681,7 +682,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSound8Vtbl,
+
+  record IDirectSound8Vtable,
     query_interface : Proc(IDirectSound8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSound8*, UInt32),
     release : Proc(IDirectSound8*, UInt32),
@@ -697,7 +699,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSound8, lpVtbl : IDirectSound8Vtbl* do
+  record IDirectSound8, lpVtbl : IDirectSound8Vtable* do
     GUID = LibC::GUID.new(0xc50a7e93_u32, 0xf395_u16, 0x4834_u16, StaticArray[0x9e_u8, 0xf6_u8, 0x7f_u8, 0xa9_u8, 0x9d_u8, 0xe5_u8, 0x9_u8, 0x66_u8])
     def query_interface(this : IDirectSound8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -739,7 +741,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundBufferVtbl,
+
+  record IDirectSoundBufferVtable,
     query_interface : Proc(IDirectSoundBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundBuffer*, UInt32),
     release : Proc(IDirectSoundBuffer*, UInt32),
@@ -764,7 +767,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundBuffer, lpVtbl : IDirectSoundBufferVtbl* do
+  record IDirectSoundBuffer, lpVtbl : IDirectSoundBufferVtable* do
     GUID = LibC::GUID.new(0x279afa85_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSoundBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -833,7 +836,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundBuffer8Vtbl,
+
+  record IDirectSoundBuffer8Vtable,
     query_interface : Proc(IDirectSoundBuffer8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundBuffer8*, UInt32),
     release : Proc(IDirectSoundBuffer8*, UInt32),
@@ -861,7 +865,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundBuffer8, lpVtbl : IDirectSoundBuffer8Vtbl* do
+  record IDirectSoundBuffer8, lpVtbl : IDirectSoundBuffer8Vtable* do
     GUID = LibC::GUID.new(0x6825a449_u32, 0x7524_u16, 0x4d82_u16, StaticArray[0x92_u8, 0xf_u8, 0x50_u8, 0xe3_u8, 0x6a_u8, 0xb3_u8, 0xab_u8, 0x1e_u8])
     def query_interface(this : IDirectSoundBuffer8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -939,7 +943,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSound3DListenerVtbl,
+
+  record IDirectSound3DListenerVtable,
     query_interface : Proc(IDirectSound3DListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSound3DListener*, UInt32),
     release : Proc(IDirectSound3DListener*, UInt32),
@@ -961,7 +966,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSound3DListener, lpVtbl : IDirectSound3DListenerVtbl* do
+  record IDirectSound3DListener, lpVtbl : IDirectSound3DListenerVtable* do
     GUID = LibC::GUID.new(0x279afa84_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSound3DListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1021,7 +1026,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSound3DBufferVtbl,
+
+  record IDirectSound3DBufferVtable,
     query_interface : Proc(IDirectSound3DBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSound3DBuffer*, UInt32),
     release : Proc(IDirectSound3DBuffer*, UInt32),
@@ -1046,7 +1052,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSound3DBuffer, lpVtbl : IDirectSound3DBufferVtbl* do
+  record IDirectSound3DBuffer, lpVtbl : IDirectSound3DBufferVtable* do
     GUID = LibC::GUID.new(0x279afa86_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectSound3DBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1115,7 +1121,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundCaptureVtbl,
+
+  record IDirectSoundCaptureVtable,
     query_interface : Proc(IDirectSoundCapture*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundCapture*, UInt32),
     release : Proc(IDirectSoundCapture*, UInt32),
@@ -1125,7 +1132,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundCapture, lpVtbl : IDirectSoundCaptureVtbl* do
+  record IDirectSoundCapture, lpVtbl : IDirectSoundCaptureVtable* do
     GUID = LibC::GUID.new(0xb0210781_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
     def query_interface(this : IDirectSoundCapture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1149,7 +1156,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundCaptureBufferVtbl,
+
+  record IDirectSoundCaptureBufferVtable,
     query_interface : Proc(IDirectSoundCaptureBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundCaptureBuffer*, UInt32),
     release : Proc(IDirectSoundCaptureBuffer*, UInt32),
@@ -1165,7 +1173,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundCaptureBuffer, lpVtbl : IDirectSoundCaptureBufferVtbl* do
+  record IDirectSoundCaptureBuffer, lpVtbl : IDirectSoundCaptureBufferVtable* do
     GUID = LibC::GUID.new(0xb0210782_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
     def query_interface(this : IDirectSoundCaptureBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1207,7 +1215,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundCaptureBuffer8Vtbl,
+
+  record IDirectSoundCaptureBuffer8Vtable,
     query_interface : Proc(IDirectSoundCaptureBuffer8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundCaptureBuffer8*, UInt32),
     release : Proc(IDirectSoundCaptureBuffer8*, UInt32),
@@ -1225,7 +1234,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundCaptureBuffer8, lpVtbl : IDirectSoundCaptureBuffer8Vtbl* do
+  record IDirectSoundCaptureBuffer8, lpVtbl : IDirectSoundCaptureBuffer8Vtable* do
     GUID = LibC::GUID.new(0x990df4_u32, 0xdbb_u16, 0x4872_u16, StaticArray[0x83_u8, 0x3e_u8, 0x6d_u8, 0x30_u8, 0x3e_u8, 0x80_u8, 0xae_u8, 0xb6_u8])
     def query_interface(this : IDirectSoundCaptureBuffer8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1273,7 +1282,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundNotifyVtbl,
+
+  record IDirectSoundNotifyVtable,
     query_interface : Proc(IDirectSoundNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundNotify*, UInt32),
     release : Proc(IDirectSoundNotify*, UInt32),
@@ -1281,7 +1291,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundNotify, lpVtbl : IDirectSoundNotifyVtbl* do
+  record IDirectSoundNotify, lpVtbl : IDirectSoundNotifyVtable* do
     GUID = LibC::GUID.new(0xb0210783_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
     def query_interface(this : IDirectSoundNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1299,7 +1309,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXGargleVtbl,
+
+  record IDirectSoundFXGargleVtable,
     query_interface : Proc(IDirectSoundFXGargle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXGargle*, UInt32),
     release : Proc(IDirectSoundFXGargle*, UInt32),
@@ -1308,7 +1319,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXGargle, lpVtbl : IDirectSoundFXGargleVtbl* do
+  record IDirectSoundFXGargle, lpVtbl : IDirectSoundFXGargleVtable* do
     GUID = LibC::GUID.new(0xd616f352_u32, 0xd622_u16, 0x11ce_u16, StaticArray[0xaa_u8, 0xc5_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0x99_u8, 0xa3_u8])
     def query_interface(this : IDirectSoundFXGargle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1329,7 +1340,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXChorusVtbl,
+
+  record IDirectSoundFXChorusVtable,
     query_interface : Proc(IDirectSoundFXChorus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXChorus*, UInt32),
     release : Proc(IDirectSoundFXChorus*, UInt32),
@@ -1338,7 +1350,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXChorus, lpVtbl : IDirectSoundFXChorusVtbl* do
+  record IDirectSoundFXChorus, lpVtbl : IDirectSoundFXChorusVtable* do
     GUID = LibC::GUID.new(0x880842e3_u32, 0x145f_u16, 0x43e6_u16, StaticArray[0xa9_u8, 0x34_u8, 0xa7_u8, 0x18_u8, 0x6_u8, 0xe5_u8, 0x5_u8, 0x47_u8])
     def query_interface(this : IDirectSoundFXChorus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1359,7 +1371,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXFlangerVtbl,
+
+  record IDirectSoundFXFlangerVtable,
     query_interface : Proc(IDirectSoundFXFlanger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXFlanger*, UInt32),
     release : Proc(IDirectSoundFXFlanger*, UInt32),
@@ -1368,7 +1381,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXFlanger, lpVtbl : IDirectSoundFXFlangerVtbl* do
+  record IDirectSoundFXFlanger, lpVtbl : IDirectSoundFXFlangerVtable* do
     GUID = LibC::GUID.new(0x903e9878_u32, 0x2c92_u16, 0x4072_u16, StaticArray[0x9b_u8, 0x2c_u8, 0xea_u8, 0x68_u8, 0xf5_u8, 0x39_u8, 0x67_u8, 0x83_u8])
     def query_interface(this : IDirectSoundFXFlanger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1389,7 +1402,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXEchoVtbl,
+
+  record IDirectSoundFXEchoVtable,
     query_interface : Proc(IDirectSoundFXEcho*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXEcho*, UInt32),
     release : Proc(IDirectSoundFXEcho*, UInt32),
@@ -1398,7 +1412,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXEcho, lpVtbl : IDirectSoundFXEchoVtbl* do
+  record IDirectSoundFXEcho, lpVtbl : IDirectSoundFXEchoVtable* do
     GUID = LibC::GUID.new(0x8bd28edf_u32, 0x50db_u16, 0x4e92_u16, StaticArray[0xa2_u8, 0xbd_u8, 0x44_u8, 0x54_u8, 0x88_u8, 0xd1_u8, 0xed_u8, 0x42_u8])
     def query_interface(this : IDirectSoundFXEcho*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1419,7 +1433,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXDistortionVtbl,
+
+  record IDirectSoundFXDistortionVtable,
     query_interface : Proc(IDirectSoundFXDistortion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXDistortion*, UInt32),
     release : Proc(IDirectSoundFXDistortion*, UInt32),
@@ -1428,7 +1443,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXDistortion, lpVtbl : IDirectSoundFXDistortionVtbl* do
+  record IDirectSoundFXDistortion, lpVtbl : IDirectSoundFXDistortionVtable* do
     GUID = LibC::GUID.new(0x8ecf4326_u32, 0x455f_u16, 0x4d8b_u16, StaticArray[0xbd_u8, 0xa9_u8, 0x8d_u8, 0x5d_u8, 0x3e_u8, 0x9e_u8, 0x3e_u8, 0xb_u8])
     def query_interface(this : IDirectSoundFXDistortion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1449,7 +1464,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXCompressorVtbl,
+
+  record IDirectSoundFXCompressorVtable,
     query_interface : Proc(IDirectSoundFXCompressor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXCompressor*, UInt32),
     release : Proc(IDirectSoundFXCompressor*, UInt32),
@@ -1458,7 +1474,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXCompressor, lpVtbl : IDirectSoundFXCompressorVtbl* do
+  record IDirectSoundFXCompressor, lpVtbl : IDirectSoundFXCompressorVtable* do
     GUID = LibC::GUID.new(0x4bbd1154_u32, 0x62f6_u16, 0x4e2c_u16, StaticArray[0xa1_u8, 0x5c_u8, 0xd3_u8, 0xb6_u8, 0xc4_u8, 0x17_u8, 0xf7_u8, 0xa0_u8])
     def query_interface(this : IDirectSoundFXCompressor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1479,7 +1495,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXParamEqVtbl,
+
+  record IDirectSoundFXParamEqVtable,
     query_interface : Proc(IDirectSoundFXParamEq*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXParamEq*, UInt32),
     release : Proc(IDirectSoundFXParamEq*, UInt32),
@@ -1488,7 +1505,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXParamEq, lpVtbl : IDirectSoundFXParamEqVtbl* do
+  record IDirectSoundFXParamEq, lpVtbl : IDirectSoundFXParamEqVtable* do
     GUID = LibC::GUID.new(0xc03ca9fe_u32, 0xfe90_u16, 0x4204_u16, StaticArray[0x80_u8, 0x78_u8, 0x82_u8, 0x33_u8, 0x4c_u8, 0xd1_u8, 0x77_u8, 0xda_u8])
     def query_interface(this : IDirectSoundFXParamEq*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1509,7 +1526,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXI3DL2ReverbVtbl,
+
+  record IDirectSoundFXI3DL2ReverbVtable,
     query_interface : Proc(IDirectSoundFXI3DL2Reverb*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXI3DL2Reverb*, UInt32),
     release : Proc(IDirectSoundFXI3DL2Reverb*, UInt32),
@@ -1522,7 +1540,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXI3DL2Reverb, lpVtbl : IDirectSoundFXI3DL2ReverbVtbl* do
+  record IDirectSoundFXI3DL2Reverb, lpVtbl : IDirectSoundFXI3DL2ReverbVtable* do
     GUID = LibC::GUID.new(0x4b166a6a_u32, 0xd66_u16, 0x43f3_u16, StaticArray[0x80_u8, 0xe3_u8, 0xee_u8, 0x62_u8, 0x80_u8, 0xde_u8, 0xe1_u8, 0xa4_u8])
     def query_interface(this : IDirectSoundFXI3DL2Reverb*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1555,7 +1573,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFXWavesReverbVtbl,
+
+  record IDirectSoundFXWavesReverbVtable,
     query_interface : Proc(IDirectSoundFXWavesReverb*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFXWavesReverb*, UInt32),
     release : Proc(IDirectSoundFXWavesReverb*, UInt32),
@@ -1564,7 +1583,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFXWavesReverb, lpVtbl : IDirectSoundFXWavesReverbVtbl* do
+  record IDirectSoundFXWavesReverb, lpVtbl : IDirectSoundFXWavesReverbVtable* do
     GUID = LibC::GUID.new(0x46858c3a_u32, 0xdc6_u16, 0x45e3_u16, StaticArray[0xb7_u8, 0x60_u8, 0xd4_u8, 0xee_u8, 0xf1_u8, 0x6c_u8, 0xb3_u8, 0x25_u8])
     def query_interface(this : IDirectSoundFXWavesReverb*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1585,7 +1604,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundCaptureFXAecVtbl,
+
+  record IDirectSoundCaptureFXAecVtable,
     query_interface : Proc(IDirectSoundCaptureFXAec*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundCaptureFXAec*, UInt32),
     release : Proc(IDirectSoundCaptureFXAec*, UInt32),
@@ -1596,7 +1616,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundCaptureFXAec, lpVtbl : IDirectSoundCaptureFXAecVtbl* do
+  record IDirectSoundCaptureFXAec, lpVtbl : IDirectSoundCaptureFXAecVtable* do
     GUID = LibC::GUID.new(0xad74143d_u32, 0x903d_u16, 0x4ab7_u16, StaticArray[0x80_u8, 0x66_u8, 0x28_u8, 0xd3_u8, 0x63_u8, 0x3_u8, 0x6d_u8, 0x65_u8])
     def query_interface(this : IDirectSoundCaptureFXAec*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1623,7 +1643,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundCaptureFXNoiseSuppressVtbl,
+
+  record IDirectSoundCaptureFXNoiseSuppressVtable,
     query_interface : Proc(IDirectSoundCaptureFXNoiseSuppress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundCaptureFXNoiseSuppress*, UInt32),
     release : Proc(IDirectSoundCaptureFXNoiseSuppress*, UInt32),
@@ -1633,7 +1654,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundCaptureFXNoiseSuppress, lpVtbl : IDirectSoundCaptureFXNoiseSuppressVtbl* do
+  record IDirectSoundCaptureFXNoiseSuppress, lpVtbl : IDirectSoundCaptureFXNoiseSuppressVtable* do
     GUID = LibC::GUID.new(0xed311e41_u32, 0xfbae_u16, 0x4175_u16, StaticArray[0x96_u8, 0x25_u8, 0xcd_u8, 0x8_u8, 0x54_u8, 0xf6_u8, 0x93_u8, 0xca_u8])
     def query_interface(this : IDirectSoundCaptureFXNoiseSuppress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1657,7 +1678,8 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   @[Extern]
-  record IDirectSoundFullDuplexVtbl,
+
+  record IDirectSoundFullDuplexVtable,
     query_interface : Proc(IDirectSoundFullDuplex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectSoundFullDuplex*, UInt32),
     release : Proc(IDirectSoundFullDuplex*, UInt32),
@@ -1665,7 +1687,7 @@ module Win32cr::Media::Audio::DirectSound
 
 
   @[Extern]
-  record IDirectSoundFullDuplex, lpVtbl : IDirectSoundFullDuplexVtbl* do
+  record IDirectSoundFullDuplex, lpVtbl : IDirectSoundFullDuplexVtable* do
     GUID = LibC::GUID.new(0xedcb4c7a_u32, 0xdaab_u16, 0x4216_u16, StaticArray[0xa4_u8, 0x2e_u8, 0x6c_u8, 0x50_u8, 0x59_u8, 0x6d_u8, 0xdc_u8, 0x1d_u8])
     def query_interface(this : IDirectSoundFullDuplex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1683,46 +1705,67 @@ module Win32cr::Media::Audio::DirectSound
   end
 
   def directSoundCreate(pcGuidDevice : LibC::GUID*, ppDS : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundCreate(pcGuidDevice, ppDS, pUnkOuter)
+    {% end %}
   end
 
   def directSoundEnumerateA(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKA, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundEnumerateA(pDSEnumCallback, pContext)
+    {% end %}
   end
 
   def directSoundEnumerateW(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKW, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundEnumerateW(pDSEnumCallback, pContext)
+    {% end %}
   end
 
   def directSoundCaptureCreate(pcGuidDevice : LibC::GUID*, ppDSC : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundCaptureCreate(pcGuidDevice, ppDSC, pUnkOuter)
+    {% end %}
   end
 
   def directSoundCaptureEnumerateA(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKA, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundCaptureEnumerateA(pDSEnumCallback, pContext)
+    {% end %}
   end
 
   def directSoundCaptureEnumerateW(pDSEnumCallback : Win32cr::Media::Audio::DirectSound::LPDSENUMCALLBACKW, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundCaptureEnumerateW(pDSEnumCallback, pContext)
+    {% end %}
   end
 
   def directSoundCreate8(pcGuidDevice : LibC::GUID*, ppDS8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundCreate8(pcGuidDevice, ppDS8, pUnkOuter)
+    {% end %}
   end
 
   def directSoundCaptureCreate8(pcGuidDevice : LibC::GUID*, ppDSC8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundCaptureCreate8(pcGuidDevice, ppDSC8, pUnkOuter)
+    {% end %}
   end
 
   def directSoundFullDuplexCreate(pcGuidCaptureDevice : LibC::GUID*, pcGuidRenderDevice : LibC::GUID*, pcDSCBufferDesc : Win32cr::Media::Audio::DirectSound::DSCBUFFERDESC*, pcDSBufferDesc : Win32cr::Media::Audio::DirectSound::DSBUFFERDESC*, hWnd : Win32cr::Foundation::HWND, dwLevel : UInt32, ppDSFD : Void**, ppDSCBuffer8 : Void**, ppDSBuffer8 : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectSoundFullDuplexCreate(pcGuidCaptureDevice, pcGuidRenderDevice, pcDSCBufferDesc, pcDSBufferDesc, hWnd, dwLevel, ppDSFD, ppDSCBuffer8, ppDSBuffer8, pUnkOuter)
+    {% end %}
   end
 
   def getDeviceID(pGuidSrc : LibC::GUID*, pGuidDest : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetDeviceID(pGuidSrc, pGuidDest)
+    {% end %}
   end
 
   @[Link("dsound")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DirectSoundCreate(pcGuidDevice : LibC::GUID*, ppDS : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
@@ -1755,4 +1798,5 @@ module Win32cr::Media::Audio::DirectSound
     fun GetDeviceID(pGuidSrc : LibC::GUID*, pGuidDest : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

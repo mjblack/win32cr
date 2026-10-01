@@ -59,7 +59,7 @@ module Win32cr::System::Restore
   end
 
   @[Extern]
-  struct RESTOREPTINFOEX_
+  struct RESTOREPOINTINFOEX
     property ftCreation : Win32cr::Foundation::FILETIME
     property dwEventType : UInt32
     property dwRestorePtType : UInt32
@@ -71,21 +71,33 @@ module Win32cr::System::Restore
 
   @[Extern]
   struct STATEMGRSTATUS
-    property nStatus : UInt32
+    property nStatus : Win32cr::Foundation::WIN32_ERROR
     property llSequenceNumber : Int64
-    def initialize(@nStatus : UInt32, @llSequenceNumber : Int64)
+    def initialize(@nStatus : Win32cr::Foundation::WIN32_ERROR, @llSequenceNumber : Int64)
     end
   end
 
   def sRSetRestorePointA(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOA*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SRSetRestorePointA(pRestorePtSpec, pSMgrStatus)
+    {% end %}
   end
 
   def sRSetRestorePointW(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOW*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SRSetRestorePointW(pRestorePtSpec, pSMgrStatus)
+    {% end %}
+  end
+
+  def sRRemoveRestorePoint(dwRPNum : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    C.SRRemoveRestorePoint(dwRPNum)
+    {% end %}
   end
 
   @[Link("sfc")]
+  @[Link("srclient")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SRSetRestorePointA(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOA*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
@@ -93,5 +105,9 @@ module Win32cr::System::Restore
     # :nodoc:
     fun SRSetRestorePointW(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOW*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
+    fun SRRemoveRestorePoint(dwRPNum : UInt32) : UInt32
+
   end
+  {% end %}
 end

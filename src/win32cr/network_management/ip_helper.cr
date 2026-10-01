@@ -1,13 +1,13 @@
-require "./ndis.cr"
-require "./../foundation.cr"
 require "./../networking/win_sock.cr"
-require "./../system/windows_programming.cr"
+require "./../foundation.cr"
+require "./ndis.cr"
 require "./../system/io.cr"
 
 module Win32cr::NetworkManagement::IpHelper
   extend self
-  alias IcmpHandle = LibC::IntPtrT
-  alias HIFTIMESTAMPCHANGE = LibC::IntPtrT
+  alias HIFTIMESTAMPCHANGE = Void*
+  alias PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK = Proc(Void*, Void)
+
   alias PIPINTERFACE_CHANGE_CALLBACK = Proc(Void*, Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*, Win32cr::NetworkManagement::IpHelper::MIB_NOTIFICATION_TYPE, Void)
 
   alias PUNICAST_IPADDRESS_CHANGE_CALLBACK = Proc(Void*, Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*, Win32cr::NetworkManagement::IpHelper::MIB_NOTIFICATION_TYPE, Void)
@@ -19,8 +19,6 @@ module Win32cr::NetworkManagement::IpHelper
   alias PTEREDO_PORT_CHANGE_CALLBACK = Proc(Void*, UInt16, Win32cr::NetworkManagement::IpHelper::MIB_NOTIFICATION_TYPE, Void)
 
   alias PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK = Proc(Void*, Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT, Void)
-
-  alias PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK = Proc(Void*, Void)
 
   ANY_SIZE = 1_u32
   MAXLEN_PHYSADDR = 8_u32
@@ -307,6 +305,7 @@ module Win32cr::NetworkManagement::IpHelper
   DNS_INTERFACE_SETTINGS_VERSION1 = 1_u32
   DNS_INTERFACE_SETTINGS_VERSION2 = 2_u32
   DNS_INTERFACE_SETTINGS_VERSION3 = 3_u32
+  DNS_INTERFACE_SETTINGS_VERSION4 = 4_u32
   DNS_SETTING_IPV6 = 1_u32
   DNS_SETTING_NAMESERVER = 2_u32
   DNS_SETTING_SEARCHLIST = 4_u32
@@ -321,17 +320,44 @@ module Win32cr::NetworkManagement::IpHelper
   DNS_SETTING_SUPPLEMENTAL_SEARCH_LIST = 2048_u32
   DNS_SETTING_DOH = 4096_u32
   DNS_SETTING_DOH_PROFILE = 8192_u32
+  DNS_SETTING_ENCRYPTED_DNS_ADAPTER_FLAGS = 16384_u32
+  DNS_SETTING_DDR = 32768_u32
+  DNS_SETTING_DOT = 65536_u32
+  DNS_SETTING_DOT_PROFILE = 131072_u32
   DNS_ENABLE_DOH = 1_u32
   DNS_DOH_POLICY_NOT_CONFIGURED = 4_u32
   DNS_DOH_POLICY_DISABLE = 8_u32
   DNS_DOH_POLICY_AUTO = 16_u32
   DNS_DOH_POLICY_REQUIRED = 32_u32
+  DNS_ENCRYPTION_POLICY_NOT_CONFIGURED = 4_u32
+  DNS_ENCRYPTION_POLICY_DISABLE = 8_u32
+  DNS_ENCRYPTION_POLICY_AUTO = 16_u32
+  DNS_ENCRYPTION_POLICY_REQUIRED = 32_u32
+  DNS_ENABLE_DDR = 64_u32
+  DNS_ENABLE_DOT = 128_u32
+  DNS_DOT_POLICY_BLOCK = 256_u32
+  DNS_DOH_POLICY_BLOCK = 512_u32
+  DNS_ENABLE_DNR = 1024_u32
   DNS_SERVER_PROPERTY_VERSION1 = 1_u32
   DNS_DOH_SERVER_SETTINGS_ENABLE_AUTO = 1_u32
   DNS_DOH_SERVER_SETTINGS_ENABLE = 2_u32
   DNS_DOH_SERVER_SETTINGS_FALLBACK_TO_UDP = 4_u32
   DNS_DOH_AUTO_UPGRADE_SERVER = 8_u32
+  DNS_DOH_SERVER_SETTINGS_ENABLE_DDR = 16_u32
+  DNS_DOH_SERVER_SETTINGS_MAKE_DDR_NON_BLOCKING = 32_u32
+  DNS_DOT_SERVER_SETTINGS_ENABLE = 1_u32
+  DNS_DOT_SERVER_SETTINGS_FALLBACK_TO_UDP = 2_u32
+  DNS_DOT_AUTO_UPGRADE_SERVER = 4_u32
+  DNS_DOT_SERVER_SETTINGS_ENABLE_AUTO = 8_u32
+  DNS_DOT_SERVER_SETTINGS_ENABLE_DDR = 16_u32
+  DNS_DOT_SERVER_SETTINGS_MAKE_DDR_NON_BLOCKING = 32_u32
+  DNS_DDR_ADAPTER_ENABLE_DOH = 1_u32
+  DNS_DDR_ADAPTER_ENABLE = 1_u32
+  DNS_DDR_ADAPTER_ENABLE_UDP_FALLBACK = 2_u32
+  DNS_DDR_ADAPTER_MAKE_DDR_NON_BLOCKING = 4_u32
   TCPIP_OWNING_MODULE_SIZE = 16_u32
+  FILTER_ICMP_TYPE_ANY = 255
+  FILTER_ICMP_CODE_ANY = 255
   FD_FLAGS_NOSYN = 1_u32
   FD_FLAGS_ALLFLAGS = 1_u32
   LB_SRC_ADDR_USE_SRCADDR_FLAG = 1_u32
@@ -407,6 +433,8 @@ module Win32cr::NetworkManagement::IpHelper
   IOCTL_IP_INTERFACE_INFO = 104_u32
   IOCTL_IP_GET_BEST_INTERFACE = 105_u32
   IOCTL_IP_UNIDIRECTIONAL_ADAPTER_ADDRESS = 106_u32
+  INTERFACE_TIMESTAMP_CAPABILITIES_VERSION_1 = 1_u32
+  INTERFACE_HARDWARE_CROSSTIMESTAMP_VERSION_1 = 1_u32
   NET_STRING_IPV4_ADDRESS = 1_u32
   NET_STRING_IPV4_SERVICE = 2_u32
   NET_STRING_IPV4_NETWORK = 4_u32
@@ -497,25 +525,6 @@ module Win32cr::NetworkManagement::IpHelper
     IF_OPER_STATUS_CONNECTING = 3_i32
     IF_OPER_STATUS_CONNECTED = 4_i32
     IF_OPER_STATUS_OPERATIONAL = 5_i32
-  end
-  enum MIB_NOTIFICATION_TYPE
-    MibParameterNotification = 0_i32
-    MibAddInstance = 1_i32
-    MibDeleteInstance = 2_i32
-    MibInitialNotification = 3_i32
-  end
-  enum MIB_IF_ENTRY_LEVEL
-    MibIfEntryNormal = 0_i32
-    MibIfEntryNormalWithoutStatistics = 2_i32
-  end
-  enum MIB_IF_TABLE_LEVEL
-    MibIfTableNormal = 0_i32
-    MibIfTableRaw = 1_i32
-    MibIfTableNormalWithoutStatistics = 2_i32
-  end
-  enum DNS_SERVER_PROPERTY_TYPE
-    DnsServerInvalidProperty = 0_i32
-    DnsServerDohProperty = 1_i32
   end
   enum MIB_IPFORWARD_TYPE
     MIB_IPROUTE_TYPE_OTHER = 1_i32
@@ -651,6 +660,36 @@ module Win32cr::NetworkManagement::IpHelper
     NET_ADDRESS_IPV4 = 2_i32
     NET_ADDRESS_IPV6 = 3_i32
   end
+  enum MIB_NOTIFICATION_TYPE
+    MibParameterNotification = 0_i32
+    MibAddInstance = 1_i32
+    MibDeleteInstance = 2_i32
+    MibInitialNotification = 3_i32
+  end
+  enum MIB_IF_ENTRY_LEVEL
+    MibIfEntryNormal = 0_i32
+    MibIfEntryNormalWithoutStatistics = 2_i32
+  end
+  enum MIB_IF_TABLE_LEVEL
+    MibIfTableNormal = 0_i32
+    MibIfTableRaw = 1_i32
+    MibIfTableNormalWithoutStatistics = 2_i32
+  end
+  enum DNS_SERVER_PROPERTY_TYPE
+    DnsServerInvalidProperty = 0_i32
+    DnsServerDohProperty = 1_i32
+    DnsServerDotProperty = 2_i32
+  end
+  enum NET_FL_VIRTUAL_INTERFACE_ORIGIN
+    NetFlVirtualInterfaceOriginOid = 0_i32
+    NetFlVirtualInterfaceOriginApi = 1_i32
+    NetFlVirtualInterfaceOriginDefault = 2_i32
+  end
+  enum NET_FL_ISOLATION_MODE
+    NetFlIsolationModeNone = 0_i32
+    NetFlIsolationModeVlan = 1_i32
+    NetFlIsolationModeVsid = 2_i32
+  end
   enum GLOBAL_FILTER
     GF_FRAGMENTS = 2_i32
     GF_STRONGHOST = 8_i32
@@ -670,20 +709,9 @@ module Win32cr::NetworkManagement::IpHelper
     PFFT_SPOOF = 3_i32
   end
 
-  @[Extern]
-  struct Ip_option_information
-    property ttl : UInt8
-    property tos : UInt8
-    property flags : UInt8
-    property options_size : UInt8
-    property options_data : UInt8*
-    def initialize(@ttl : UInt8, @tos : UInt8, @flags : UInt8, @options_size : UInt8, @options_data : UInt8*)
-    end
-  end
-
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  struct Ip_option_information32
+  struct IP_OPTION_INFORMATION32
     property ttl : UInt8
     property tos : UInt8
     property flags : UInt8
@@ -694,33 +722,44 @@ module Win32cr::NetworkManagement::IpHelper
   end
   {% end %}
 
-  @[Extern]
-  struct Icmp_echo_reply
-    property address : UInt32
-    property status : UInt32
-    property round_trip_time : UInt32
-    property data_size : UInt16
-    property reserved : UInt16
-    property data : Void*
-    property options : Win32cr::NetworkManagement::IpHelper::Ip_option_information
-    def initialize(@address : UInt32, @status : UInt32, @round_trip_time : UInt32, @data_size : UInt16, @reserved : UInt16, @data : Void*, @options : Win32cr::NetworkManagement::IpHelper::Ip_option_information)
-    end
-  end
-
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  struct Icmp_echo_reply32
+  struct ICMP_ECHO_REPLY32
     property address : UInt32
     property status : UInt32
     property round_trip_time : UInt32
     property data_size : UInt16
     property reserved : UInt16
     property data : Void*
-    property options : Win32cr::NetworkManagement::IpHelper::Ip_option_information32
-    def initialize(@address : UInt32, @status : UInt32, @round_trip_time : UInt32, @data_size : UInt16, @reserved : UInt16, @data : Void*, @options : Win32cr::NetworkManagement::IpHelper::Ip_option_information32)
+    property options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION32
+    def initialize(@address : UInt32, @status : UInt32, @round_trip_time : UInt32, @data_size : UInt16, @reserved : UInt16, @data : Void*, @options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION32)
     end
   end
   {% end %}
+
+  @[Extern]
+  struct IP_OPTION_INFORMATION
+    property ttl : UInt8
+    property tos : UInt8
+    property flags : UInt8
+    property options_size : UInt8
+    property options_data : UInt8*
+    def initialize(@ttl : UInt8, @tos : UInt8, @flags : UInt8, @options_size : UInt8, @options_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct ICMP_ECHO_REPLY
+    property address : UInt32
+    property status : UInt32
+    property round_trip_time : UInt32
+    property data_size : UInt16
+    property reserved : UInt16
+    property data : Void*
+    property options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION
+    def initialize(@address : UInt32, @status : UInt32, @round_trip_time : UInt32, @data_size : UInt16, @reserved : UInt16, @data : Void*, @options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION)
+    end
+  end
 
   @[Extern]
   struct IPV6_ADDRESS_EX
@@ -733,7 +772,7 @@ module Win32cr::NetworkManagement::IpHelper
   end
 
   @[Extern]
-  struct Icmpv6_echo_reply_lh
+  struct ICMPV6_ECHO_REPLY_LH
     property address : Win32cr::NetworkManagement::IpHelper::IPV6_ADDRESS_EX
     property status : UInt32
     property round_trip_time : UInt32
@@ -742,7 +781,7 @@ module Win32cr::NetworkManagement::IpHelper
   end
 
   @[Extern]
-  struct Arp_send_reply
+  struct ARP_SEND_REPLY
     property dest_address : UInt32
     property src_address : UInt32
     def initialize(@dest_address : UInt32, @src_address : UInt32)
@@ -750,7 +789,7 @@ module Win32cr::NetworkManagement::IpHelper
   end
 
   @[Extern]
-  struct Tcp_reserve_port_range
+  struct TCP_RESERVE_PORT_RANGE
     property upper_range : UInt16
     property lower_range : UInt16
     def initialize(@upper_range : UInt16, @lower_range : UInt16)
@@ -768,24 +807,24 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct IP_INTERFACE_INFO
     property num_adapters : Int32
-    property adapter : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INDEX_MAP*
-    def initialize(@num_adapters : Int32, @adapter : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INDEX_MAP*)
+    property adapter : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INDEX_MAP[1]
+    def initialize(@num_adapters : Int32, @adapter : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INDEX_MAP[1])
     end
   end
 
   @[Extern]
   struct IP_UNIDIRECTIONAL_ADAPTER_ADDRESS
     property num_adapters : UInt32
-    property address : UInt32*
-    def initialize(@num_adapters : UInt32, @address : UInt32*)
+    property address : UInt32[1]
+    def initialize(@num_adapters : UInt32, @address : UInt32[1])
     end
   end
 
   @[Extern]
   struct IP_ADAPTER_ORDER_MAP
     property num_adapters : UInt32
-    property adapter_order : UInt32*
-    def initialize(@num_adapters : UInt32, @adapter_order : UInt32*)
+    property adapter_order : UInt32[1]
+    def initialize(@num_adapters : UInt32, @adapter_order : UInt32[1])
     end
   end
 
@@ -800,444 +839,10 @@ module Win32cr::NetworkManagement::IpHelper
   end
 
   @[Extern]
-  struct MIB_IF_ROW2
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property interface_index : UInt32
-    property interface_guid : LibC::GUID
-    property alias__ : UInt16[257]
-    property description : UInt16[257]
-    property physical_address_length : UInt32
-    property physical_address : UInt8[32]
-    property permanent_physical_address : UInt8[32]
-    property mtu : UInt32
-    property type__ : UInt32
-    property tunnel_type : Win32cr::NetworkManagement::Ndis::TUNNEL_TYPE
-    property media_type : Win32cr::NetworkManagement::Ndis::NDIS_MEDIUM
-    property physical_medium_type : Win32cr::NetworkManagement::Ndis::NDIS_PHYSICAL_MEDIUM
-    property access_type : Win32cr::NetworkManagement::Ndis::NET_IF_ACCESS_TYPE
-    property direction_type : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE
-    property interface_and_oper_status_flags : InterfaceAndOperStatusFlags_e__Struct_
-    property oper_status : Win32cr::NetworkManagement::Ndis::IF_OPER_STATUS
-    property admin_status : Win32cr::NetworkManagement::Ndis::NET_IF_ADMIN_STATUS
-    property media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE
-    property network_guid : LibC::GUID
-    property connection_type : Win32cr::NetworkManagement::Ndis::NET_IF_CONNECTION_TYPE
-    property transmit_link_speed : UInt64
-    property receive_link_speed : UInt64
-    property in_octets : UInt64
-    property in_ucast_pkts : UInt64
-    property in_n_ucast_pkts : UInt64
-    property in_discards : UInt64
-    property in_errors : UInt64
-    property in_unknown_protos : UInt64
-    property in_ucast_octets : UInt64
-    property in_multicast_octets : UInt64
-    property in_broadcast_octets : UInt64
-    property out_octets : UInt64
-    property out_ucast_pkts : UInt64
-    property out_n_ucast_pkts : UInt64
-    property out_discards : UInt64
-    property out_errors : UInt64
-    property out_ucast_octets : UInt64
-    property out_multicast_octets : UInt64
-    property out_broadcast_octets : UInt64
-    property out_q_len : UInt64
-
-    # Nested Type InterfaceAndOperStatusFlags_e__Struct_
-    @[Extern]
-    struct InterfaceAndOperStatusFlags_e__Struct_
-    property _bitfield : UInt8
-    def initialize(@_bitfield : UInt8)
-    end
-    end
-
-    def initialize(@interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @interface_guid : LibC::GUID, @alias__ : UInt16[257], @description : UInt16[257], @physical_address_length : UInt32, @physical_address : UInt8[32], @permanent_physical_address : UInt8[32], @mtu : UInt32, @type__ : UInt32, @tunnel_type : Win32cr::NetworkManagement::Ndis::TUNNEL_TYPE, @media_type : Win32cr::NetworkManagement::Ndis::NDIS_MEDIUM, @physical_medium_type : Win32cr::NetworkManagement::Ndis::NDIS_PHYSICAL_MEDIUM, @access_type : Win32cr::NetworkManagement::Ndis::NET_IF_ACCESS_TYPE, @direction_type : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE, @interface_and_oper_status_flags : InterfaceAndOperStatusFlags_e__Struct_, @oper_status : Win32cr::NetworkManagement::Ndis::IF_OPER_STATUS, @admin_status : Win32cr::NetworkManagement::Ndis::NET_IF_ADMIN_STATUS, @media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE, @network_guid : LibC::GUID, @connection_type : Win32cr::NetworkManagement::Ndis::NET_IF_CONNECTION_TYPE, @transmit_link_speed : UInt64, @receive_link_speed : UInt64, @in_octets : UInt64, @in_ucast_pkts : UInt64, @in_n_ucast_pkts : UInt64, @in_discards : UInt64, @in_errors : UInt64, @in_unknown_protos : UInt64, @in_ucast_octets : UInt64, @in_multicast_octets : UInt64, @in_broadcast_octets : UInt64, @out_octets : UInt64, @out_ucast_pkts : UInt64, @out_n_ucast_pkts : UInt64, @out_discards : UInt64, @out_errors : UInt64, @out_ucast_octets : UInt64, @out_multicast_octets : UInt64, @out_broadcast_octets : UInt64, @out_q_len : UInt64)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IF_TABLE2
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPINTERFACE_ROW
-    property family : UInt16
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property interface_index : UInt32
-    property max_reassembly_size : UInt32
-    property interface_identifier : UInt64
-    property min_router_advertisement_interval : UInt32
-    property max_router_advertisement_interval : UInt32
-    property advertising_enabled : Win32cr::Foundation::BOOLEAN
-    property forwarding_enabled : Win32cr::Foundation::BOOLEAN
-    property weak_host_send : Win32cr::Foundation::BOOLEAN
-    property weak_host_receive : Win32cr::Foundation::BOOLEAN
-    property use_automatic_metric : Win32cr::Foundation::BOOLEAN
-    property use_neighbor_unreachability_detection : Win32cr::Foundation::BOOLEAN
-    property managed_address_configuration_supported : Win32cr::Foundation::BOOLEAN
-    property other_stateful_configuration_supported : Win32cr::Foundation::BOOLEAN
-    property advertise_default_route : Win32cr::Foundation::BOOLEAN
-    property router_discovery_behavior : Win32cr::Networking::WinSock::NL_ROUTER_DISCOVERY_BEHAVIOR
-    property dad_transmits : UInt32
-    property base_reachable_time : UInt32
-    property retransmit_time : UInt32
-    property path_mtu_discovery_timeout : UInt32
-    property link_local_address_behavior : Win32cr::Networking::WinSock::NL_LINK_LOCAL_ADDRESS_BEHAVIOR
-    property link_local_address_timeout : UInt32
-    property zone_indices : UInt32[16]
-    property site_prefix_length : UInt32
-    property metric : UInt32
-    property nl_mtu : UInt32
-    property connected : Win32cr::Foundation::BOOLEAN
-    property supports_wake_up_patterns : Win32cr::Foundation::BOOLEAN
-    property supports_neighbor_discovery : Win32cr::Foundation::BOOLEAN
-    property supports_router_discovery : Win32cr::Foundation::BOOLEAN
-    property reachable_time : UInt32
-    property transmit_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD
-    property receive_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD
-    property disable_default_routes : Win32cr::Foundation::BOOLEAN
-    def initialize(@family : UInt16, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @max_reassembly_size : UInt32, @interface_identifier : UInt64, @min_router_advertisement_interval : UInt32, @max_router_advertisement_interval : UInt32, @advertising_enabled : Win32cr::Foundation::BOOLEAN, @forwarding_enabled : Win32cr::Foundation::BOOLEAN, @weak_host_send : Win32cr::Foundation::BOOLEAN, @weak_host_receive : Win32cr::Foundation::BOOLEAN, @use_automatic_metric : Win32cr::Foundation::BOOLEAN, @use_neighbor_unreachability_detection : Win32cr::Foundation::BOOLEAN, @managed_address_configuration_supported : Win32cr::Foundation::BOOLEAN, @other_stateful_configuration_supported : Win32cr::Foundation::BOOLEAN, @advertise_default_route : Win32cr::Foundation::BOOLEAN, @router_discovery_behavior : Win32cr::Networking::WinSock::NL_ROUTER_DISCOVERY_BEHAVIOR, @dad_transmits : UInt32, @base_reachable_time : UInt32, @retransmit_time : UInt32, @path_mtu_discovery_timeout : UInt32, @link_local_address_behavior : Win32cr::Networking::WinSock::NL_LINK_LOCAL_ADDRESS_BEHAVIOR, @link_local_address_timeout : UInt32, @zone_indices : UInt32[16], @site_prefix_length : UInt32, @metric : UInt32, @nl_mtu : UInt32, @connected : Win32cr::Foundation::BOOLEAN, @supports_wake_up_patterns : Win32cr::Foundation::BOOLEAN, @supports_neighbor_discovery : Win32cr::Foundation::BOOLEAN, @supports_router_discovery : Win32cr::Foundation::BOOLEAN, @reachable_time : UInt32, @transmit_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD, @receive_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD, @disable_default_routes : Win32cr::Foundation::BOOLEAN)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPINTERFACE_TABLE
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IFSTACK_ROW
-    property higher_layer_interface_index : UInt32
-    property lower_layer_interface_index : UInt32
-    def initialize(@higher_layer_interface_index : UInt32, @lower_layer_interface_index : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct MIB_INVERTEDIFSTACK_ROW
-    property lower_layer_interface_index : UInt32
-    property higher_layer_interface_index : UInt32
-    def initialize(@lower_layer_interface_index : UInt32, @higher_layer_interface_index : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IFSTACK_TABLE
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_ROW*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_ROW*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_INVERTEDIFSTACK_TABLE
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_ROW*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_ROW*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES
-    property inbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION
-    property outbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION
-    def initialize(@inbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION, @outbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION)
-    end
-  end
-
-  @[Extern]
-  struct MIB_UNICASTIPADDRESS_ROW
-    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property interface_index : UInt32
-    property prefix_origin : Win32cr::Networking::WinSock::NL_PREFIX_ORIGIN
-    property suffix_origin : Win32cr::Networking::WinSock::NL_SUFFIX_ORIGIN
-    property valid_lifetime : UInt32
-    property preferred_lifetime : UInt32
-    property on_link_prefix_length : UInt8
-    property skip_as_source : Win32cr::Foundation::BOOLEAN
-    property dad_state : Win32cr::Networking::WinSock::NL_DAD_STATE
-    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
-    property creation_time_stamp : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @prefix_origin : Win32cr::Networking::WinSock::NL_PREFIX_ORIGIN, @suffix_origin : Win32cr::Networking::WinSock::NL_SUFFIX_ORIGIN, @valid_lifetime : UInt32, @preferred_lifetime : UInt32, @on_link_prefix_length : UInt8, @skip_as_source : Win32cr::Foundation::BOOLEAN, @dad_state : Win32cr::Networking::WinSock::NL_DAD_STATE, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID, @creation_time_stamp : Win32cr::Foundation::LARGE_INTEGER)
-    end
-  end
-
-  @[Extern]
-  struct MIB_UNICASTIPADDRESS_TABLE
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_ANYCASTIPADDRESS_ROW
-    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property interface_index : UInt32
-    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
-    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID)
-    end
-  end
-
-  @[Extern]
-  struct MIB_ANYCASTIPADDRESS_TABLE
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_MULTICASTIPADDRESS_ROW
-    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property interface_index : UInt32
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
-    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_index : UInt32, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID)
-    end
-  end
-
-  @[Extern]
-  struct MIB_MULTICASTIPADDRESS_TABLE
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW*)
-    end
-  end
-
-  @[Extern]
-  struct IP_ADDRESS_PREFIX
-    property prefix : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property prefix_length : UInt8
-    def initialize(@prefix : Win32cr::Networking::WinSock::SOCKADDR_INET, @prefix_length : UInt8)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPFORWARD_ROW2
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property interface_index : UInt32
-    property destination_prefix : Win32cr::NetworkManagement::IpHelper::IP_ADDRESS_PREFIX
-    property next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property site_prefix_length : UInt8
-    property valid_lifetime : UInt32
-    property preferred_lifetime : UInt32
-    property metric : UInt32
-    property protocol : Win32cr::Networking::WinSock::NL_ROUTE_PROTOCOL
-    property loopback : Win32cr::Foundation::BOOLEAN
-    property autoconfigure_address : Win32cr::Foundation::BOOLEAN
-    property publish : Win32cr::Foundation::BOOLEAN
-    property immortal : Win32cr::Foundation::BOOLEAN
-    property age : UInt32
-    property origin : Win32cr::Networking::WinSock::NL_ROUTE_ORIGIN
-    def initialize(@interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @destination_prefix : Win32cr::NetworkManagement::IpHelper::IP_ADDRESS_PREFIX, @next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET, @site_prefix_length : UInt8, @valid_lifetime : UInt32, @preferred_lifetime : UInt32, @metric : UInt32, @protocol : Win32cr::Networking::WinSock::NL_ROUTE_PROTOCOL, @loopback : Win32cr::Foundation::BOOLEAN, @autoconfigure_address : Win32cr::Foundation::BOOLEAN, @publish : Win32cr::Foundation::BOOLEAN, @immortal : Win32cr::Foundation::BOOLEAN, @age : UInt32, @origin : Win32cr::Networking::WinSock::NL_ROUTE_ORIGIN)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPFORWARD_TABLE2
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPPATH_ROW
-    property source : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property destination : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property interface_index : UInt32
-    property current_next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property path_mtu : UInt32
-    property rtt_mean : UInt32
-    property rtt_deviation : UInt32
-    property anonymous : Anonymous_e__Union_
-    property is_reachable : Win32cr::Foundation::BOOLEAN
-    property link_transmit_speed : UInt64
-    property link_receive_speed : UInt64
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous_e__Union_
-    property last_reachable : UInt32
-    property last_unreachable : UInt32
-    def initialize(@last_reachable : UInt32, @last_unreachable : UInt32)
-    end
-    end
-
-    def initialize(@source : Win32cr::Networking::WinSock::SOCKADDR_INET, @destination : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @current_next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET, @path_mtu : UInt32, @rtt_mean : UInt32, @rtt_deviation : UInt32, @anonymous : Anonymous_e__Union_, @is_reachable : Win32cr::Foundation::BOOLEAN, @link_transmit_speed : UInt64, @link_receive_speed : UInt64)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPPATH_TABLE
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW*)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPNET_ROW2
-    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
-    property interface_index : UInt32
-    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
-    property physical_address : UInt8[32]
-    property physical_address_length : UInt32
-    property state : Win32cr::Networking::WinSock::NL_NEIGHBOR_STATE
-    property anonymous : Anonymous_e__Union_
-    property reachability_time : ReachabilityTime_e__Union_
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous_e__Union_
-    property anonymous : Anonymous_e__Struct_
-    property flags : UInt8
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt8
-    def initialize(@_bitfield : UInt8)
-    end
-      end
-
-    def initialize(@anonymous : Anonymous_e__Struct_, @flags : UInt8)
-    end
-    end
-
-
-    # Nested Type ReachabilityTime_e__Union_
-    @[Extern(union: true)]
-    struct ReachabilityTime_e__Union_
-    property last_reachable : UInt32
-    property last_unreachable : UInt32
-    def initialize(@last_reachable : UInt32, @last_unreachable : UInt32)
-    end
-    end
-
-    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_index : UInt32, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @physical_address : UInt8[32], @physical_address_length : UInt32, @state : Win32cr::Networking::WinSock::NL_NEIGHBOR_STATE, @anonymous : Anonymous_e__Union_, @reachability_time : ReachabilityTime_e__Union_)
-    end
-  end
-
-  @[Extern]
-  struct MIB_IPNET_TABLE2
-    property num_entries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*
-    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*)
-    end
-  end
-
-  @[Extern]
-  struct DNS_SETTINGS
-    property version : UInt32
-    property flags : UInt64
-    property hostname : Win32cr::Foundation::PWSTR
-    property domain : Win32cr::Foundation::PWSTR
-    property search_list : Win32cr::Foundation::PWSTR
-    def initialize(@version : UInt32, @flags : UInt64, @hostname : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR)
-    end
-  end
-
-  @[Extern]
-  struct DNS_SETTINGS2
-    property version : UInt32
-    property flags : UInt64
-    property hostname : Win32cr::Foundation::PWSTR
-    property domain : Win32cr::Foundation::PWSTR
-    property search_list : Win32cr::Foundation::PWSTR
-    property setting_flags : UInt64
-    def initialize(@version : UInt32, @flags : UInt64, @hostname : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR, @setting_flags : UInt64)
-    end
-  end
-
-  @[Extern]
-  struct DNS_DOH_SERVER_SETTINGS
-    property template : Win32cr::Foundation::PWSTR
-    property flags : UInt64
-    def initialize(@template : Win32cr::Foundation::PWSTR, @flags : UInt64)
-    end
-  end
-
-  @[Extern(union: true)]
-  struct DNS_SERVER_PROPERTY_TYPES
-    property doh_settings : Win32cr::NetworkManagement::IpHelper::DNS_DOH_SERVER_SETTINGS*
-    def initialize(@doh_settings : Win32cr::NetworkManagement::IpHelper::DNS_DOH_SERVER_SETTINGS*)
-    end
-  end
-
-  @[Extern]
-  struct DNS_SERVER_PROPERTY
-    property version : UInt32
-    property server_index : UInt32
-    property type__ : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPE
-    property property : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPES
-    def initialize(@version : UInt32, @server_index : UInt32, @type__ : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPE, @property : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPES)
-    end
-  end
-
-  @[Extern]
-  struct DNS_INTERFACE_SETTINGS
-    property version : UInt32
-    property flags : UInt64
-    property domain : Win32cr::Foundation::PWSTR
-    property name_server : Win32cr::Foundation::PWSTR
-    property search_list : Win32cr::Foundation::PWSTR
-    property registration_enabled : UInt32
-    property register_adapter_name : UInt32
-    property enable_llmnr : UInt32
-    property query_adapter_name : UInt32
-    property profile_name_server : Win32cr::Foundation::PWSTR
-    def initialize(@version : UInt32, @flags : UInt64, @domain : Win32cr::Foundation::PWSTR, @name_server : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR, @registration_enabled : UInt32, @register_adapter_name : UInt32, @enable_llmnr : UInt32, @query_adapter_name : UInt32, @profile_name_server : Win32cr::Foundation::PWSTR)
-    end
-  end
-
-  @[Extern]
-  struct DNS_INTERFACE_SETTINGS_EX
-    property settings_v1 : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS
-    property disable_unconstrained_queries : UInt32
-    property supplemental_search_list : Win32cr::Foundation::PWSTR
-    def initialize(@settings_v1 : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS, @disable_unconstrained_queries : UInt32, @supplemental_search_list : Win32cr::Foundation::PWSTR)
-    end
-  end
-
-  @[Extern]
-  struct DNS_INTERFACE_SETTINGS3
-    property version : UInt32
-    property flags : UInt64
-    property domain : Win32cr::Foundation::PWSTR
-    property name_server : Win32cr::Foundation::PWSTR
-    property search_list : Win32cr::Foundation::PWSTR
-    property registration_enabled : UInt32
-    property register_adapter_name : UInt32
-    property enable_llmnr : UInt32
-    property query_adapter_name : UInt32
-    property profile_name_server : Win32cr::Foundation::PWSTR
-    property disable_unconstrained_queries : UInt32
-    property supplemental_search_list : Win32cr::Foundation::PWSTR
-    property cServerProperties : UInt32
-    property server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*
-    property cProfileServerProperties : UInt32
-    property profile_server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*
-    def initialize(@version : UInt32, @flags : UInt64, @domain : Win32cr::Foundation::PWSTR, @name_server : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR, @registration_enabled : UInt32, @register_adapter_name : UInt32, @enable_llmnr : UInt32, @query_adapter_name : UInt32, @profile_name_server : Win32cr::Foundation::PWSTR, @disable_unconstrained_queries : UInt32, @supplemental_search_list : Win32cr::Foundation::PWSTR, @cServerProperties : UInt32, @server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*, @cProfileServerProperties : UInt32, @profile_server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*)
-    end
-  end
-
-  @[Extern]
   struct MIB_OPAQUE_QUERY
     property dwVarId : UInt32
-    property rgdwVarIndex : UInt32*
-    def initialize(@dwVarId : UInt32, @rgdwVarIndex : UInt32*)
+    property rgdwVarIndex : UInt32[1]
+    def initialize(@dwVarId : UInt32, @rgdwVarIndex : UInt32[1])
     end
   end
 
@@ -1281,8 +886,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_IFTABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IFROW*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IFROW*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IFROW[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IFROW[1])
     end
   end
 
@@ -1315,8 +920,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_IPADDRTABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPADDRROW_XP*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPADDRROW_XP*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPADDRROW_XP[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPADDRROW_XP[1])
     end
   end
 
@@ -1370,8 +975,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_IPFORWARDTABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW[1])
     end
   end
 
@@ -1410,8 +1015,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_IPNETTABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPNETROW_LH*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPNETROW_LH*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPNETROW_LH[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPNETROW_LH[1])
     end
   end
 
@@ -1571,16 +1176,16 @@ module Win32cr::NetworkManagement::IpHelper
     property ulNumOutIf : UInt32
     property fFlags : UInt32
     property dwReserved : UInt32
-    property rgmioOutInfo : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_XP*
-    def initialize(@dwGroup : UInt32, @dwSource : UInt32, @dwSrcMask : UInt32, @dwUpStrmNgbr : UInt32, @dwInIfIndex : UInt32, @dwInIfProtocol : UInt32, @dwRouteProtocol : UInt32, @dwRouteNetwork : UInt32, @dwRouteMask : UInt32, @ulUpTime : UInt32, @ulExpiryTime : UInt32, @ulTimeOut : UInt32, @ulNumOutIf : UInt32, @fFlags : UInt32, @dwReserved : UInt32, @rgmioOutInfo : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_XP*)
+    property rgmioOutInfo : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_XP[1]
+    def initialize(@dwGroup : UInt32, @dwSource : UInt32, @dwSrcMask : UInt32, @dwUpStrmNgbr : UInt32, @dwInIfIndex : UInt32, @dwInIfProtocol : UInt32, @dwRouteProtocol : UInt32, @dwRouteNetwork : UInt32, @dwRouteMask : UInt32, @ulUpTime : UInt32, @ulExpiryTime : UInt32, @ulTimeOut : UInt32, @ulNumOutIf : UInt32, @fFlags : UInt32, @dwReserved : UInt32, @rgmioOutInfo : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_XP[1])
     end
   end
 
   @[Extern]
   struct MIB_MFE_TABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE[1])
     end
   end
 
@@ -1628,16 +1233,16 @@ module Win32cr::NetworkManagement::IpHelper
     property ulInOctets : UInt32
     property ulPktsDifferentIf : UInt32
     property ulQueueOverflow : UInt32
-    property rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH*
-    def initialize(@dwGroup : UInt32, @dwSource : UInt32, @dwSrcMask : UInt32, @dwUpStrmNgbr : UInt32, @dwInIfIndex : UInt32, @dwInIfProtocol : UInt32, @dwRouteProtocol : UInt32, @dwRouteNetwork : UInt32, @dwRouteMask : UInt32, @ulUpTime : UInt32, @ulExpiryTime : UInt32, @ulNumOutIf : UInt32, @ulInPkts : UInt32, @ulInOctets : UInt32, @ulPktsDifferentIf : UInt32, @ulQueueOverflow : UInt32, @rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH*)
+    property rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH[1]
+    def initialize(@dwGroup : UInt32, @dwSource : UInt32, @dwSrcMask : UInt32, @dwUpStrmNgbr : UInt32, @dwInIfIndex : UInt32, @dwInIfProtocol : UInt32, @dwRouteProtocol : UInt32, @dwRouteNetwork : UInt32, @dwRouteMask : UInt32, @ulUpTime : UInt32, @ulExpiryTime : UInt32, @ulNumOutIf : UInt32, @ulInPkts : UInt32, @ulInOctets : UInt32, @ulPktsDifferentIf : UInt32, @ulQueueOverflow : UInt32, @rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH[1])
     end
   end
 
   @[Extern]
   struct MIB_MFE_STATS_TABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS[1])
     end
   end
 
@@ -1664,16 +1269,16 @@ module Win32cr::NetworkManagement::IpHelper
     property ulInDiscards : UInt32
     property ulInHdrErrors : UInt32
     property ulTotalOutPackets : UInt32
-    property rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH*
-    def initialize(@dwGroup : UInt32, @dwSource : UInt32, @dwSrcMask : UInt32, @dwUpStrmNgbr : UInt32, @dwInIfIndex : UInt32, @dwInIfProtocol : UInt32, @dwRouteProtocol : UInt32, @dwRouteNetwork : UInt32, @dwRouteMask : UInt32, @ulUpTime : UInt32, @ulExpiryTime : UInt32, @ulNumOutIf : UInt32, @ulInPkts : UInt32, @ulInOctets : UInt32, @ulPktsDifferentIf : UInt32, @ulQueueOverflow : UInt32, @ulUninitMfe : UInt32, @ulNegativeMfe : UInt32, @ulInDiscards : UInt32, @ulInHdrErrors : UInt32, @ulTotalOutPackets : UInt32, @rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH*)
+    property rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH[1]
+    def initialize(@dwGroup : UInt32, @dwSource : UInt32, @dwSrcMask : UInt32, @dwUpStrmNgbr : UInt32, @dwInIfIndex : UInt32, @dwInIfProtocol : UInt32, @dwRouteProtocol : UInt32, @dwRouteNetwork : UInt32, @dwRouteMask : UInt32, @ulUpTime : UInt32, @ulExpiryTime : UInt32, @ulNumOutIf : UInt32, @ulInPkts : UInt32, @ulInOctets : UInt32, @ulPktsDifferentIf : UInt32, @ulQueueOverflow : UInt32, @ulUninitMfe : UInt32, @ulNegativeMfe : UInt32, @ulInDiscards : UInt32, @ulInHdrErrors : UInt32, @ulTotalOutPackets : UInt32, @rgmiosOutStats : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_OIF_STATS_LH[1])
     end
   end
 
   @[Extern]
   struct MIB_MFE_STATS_TABLE_EX_XP
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS_EX_XP**
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS_EX_XP**)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS_EX_XP*[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE_STATS_EX_XP*[1])
     end
   end
 
@@ -1699,8 +1304,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_IPMCAST_IF_TABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_IF_ENTRY*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_IF_ENTRY*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_IF_ENTRY[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_IF_ENTRY[1])
     end
   end
 
@@ -1715,9 +1320,9 @@ module Win32cr::NetworkManagement::IpHelper
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
     struct Anonymous_e__Union_
-    property dwState : UInt32
+    property dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE
     property state : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE
-    def initialize(@dwState : UInt32, @state : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE)
+    def initialize(@dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE, @state : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE)
     end
     end
 
@@ -1727,20 +1332,20 @@ module Win32cr::NetworkManagement::IpHelper
 
   @[Extern]
   struct MIB_TCPROW_W2K
-    property dwState : UInt32
+    property dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE
     property dwLocalAddr : UInt32
     property dwLocalPort : UInt32
     property dwRemoteAddr : UInt32
     property dwRemotePort : UInt32
-    def initialize(@dwState : UInt32, @dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwRemoteAddr : UInt32, @dwRemotePort : UInt32)
+    def initialize(@dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE, @dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwRemoteAddr : UInt32, @dwRemotePort : UInt32)
     end
   end
 
   @[Extern]
   struct MIB_TCPTABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_LH*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_LH*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_LH[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_LH[1])
     end
   end
 
@@ -1760,50 +1365,50 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_TCPTABLE2
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW2*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW2*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW2[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW2[1])
     end
   end
 
   @[Extern]
   struct MIB_TCPROW_OWNER_PID
-    property dwState : UInt32
+    property dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE
     property dwLocalAddr : UInt32
     property dwLocalPort : UInt32
     property dwRemoteAddr : UInt32
     property dwRemotePort : UInt32
     property dwOwningPid : UInt32
-    def initialize(@dwState : UInt32, @dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwRemoteAddr : UInt32, @dwRemotePort : UInt32, @dwOwningPid : UInt32)
+    def initialize(@dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE, @dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwRemoteAddr : UInt32, @dwRemotePort : UInt32, @dwOwningPid : UInt32)
     end
   end
 
   @[Extern]
   struct MIB_TCPTABLE_OWNER_PID
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_PID*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_PID*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_PID[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_PID[1])
     end
   end
 
   @[Extern]
   struct MIB_TCPROW_OWNER_MODULE
-    property dwState : UInt32
+    property dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE
     property dwLocalAddr : UInt32
     property dwLocalPort : UInt32
     property dwRemoteAddr : UInt32
     property dwRemotePort : UInt32
     property dwOwningPid : UInt32
-    property liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER
+    property liCreateTimestamp : Int64
     property owning_module_info : UInt64[16]
-    def initialize(@dwState : UInt32, @dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwRemoteAddr : UInt32, @dwRemotePort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER, @owning_module_info : UInt64[16])
+    def initialize(@dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE, @dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwRemoteAddr : UInt32, @dwRemotePort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Int64, @owning_module_info : UInt64[16])
     end
   end
 
   @[Extern]
   struct MIB_TCPTABLE_OWNER_MODULE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_MODULE*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_MODULE*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_MODULE[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_MODULE[1])
     end
   end
 
@@ -1823,8 +1428,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_TCP6TABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW[1])
     end
   end
 
@@ -1846,8 +1451,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_TCP6TABLE2
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW2*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW2*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW2[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW2[1])
     end
   end
 
@@ -1859,17 +1464,17 @@ module Win32cr::NetworkManagement::IpHelper
     property ucRemoteAddr : UInt8[16]
     property dwRemoteScopeId : UInt32
     property dwRemotePort : UInt32
-    property dwState : UInt32
+    property dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE
     property dwOwningPid : UInt32
-    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @ucRemoteAddr : UInt8[16], @dwRemoteScopeId : UInt32, @dwRemotePort : UInt32, @dwState : UInt32, @dwOwningPid : UInt32)
+    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @ucRemoteAddr : UInt8[16], @dwRemoteScopeId : UInt32, @dwRemotePort : UInt32, @dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE, @dwOwningPid : UInt32)
     end
   end
 
   @[Extern]
   struct MIB_TCP6TABLE_OWNER_PID
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_PID*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_PID*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_PID[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_PID[1])
     end
   end
 
@@ -1881,19 +1486,19 @@ module Win32cr::NetworkManagement::IpHelper
     property ucRemoteAddr : UInt8[16]
     property dwRemoteScopeId : UInt32
     property dwRemotePort : UInt32
-    property dwState : UInt32
+    property dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE
     property dwOwningPid : UInt32
-    property liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER
+    property liCreateTimestamp : Int64
     property owning_module_info : UInt64[16]
-    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @ucRemoteAddr : UInt8[16], @dwRemoteScopeId : UInt32, @dwRemotePort : UInt32, @dwState : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER, @owning_module_info : UInt64[16])
+    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @ucRemoteAddr : UInt8[16], @dwRemoteScopeId : UInt32, @dwRemotePort : UInt32, @dwState : Win32cr::NetworkManagement::IpHelper::MIB_TCP_STATE, @dwOwningPid : UInt32, @liCreateTimestamp : Int64, @owning_module_info : UInt64[16])
     end
   end
 
   @[Extern]
   struct MIB_TCP6TABLE_OWNER_MODULE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_MODULE*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_MODULE*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_MODULE[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_MODULE[1])
     end
   end
 
@@ -1981,8 +1586,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_UDPTABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW[1])
     end
   end
 
@@ -1998,8 +1603,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_UDPTABLE_OWNER_PID
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_PID*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_PID*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_PID[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_PID[1])
     end
   end
 
@@ -2008,7 +1613,7 @@ module Win32cr::NetworkManagement::IpHelper
     property dwLocalAddr : UInt32
     property dwLocalPort : UInt32
     property dwOwningPid : UInt32
-    property liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER
+    property liCreateTimestamp : Int64
     property anonymous : Anonymous_e__Union_
     property owning_module_info : UInt64[16]
 
@@ -2030,15 +1635,15 @@ module Win32cr::NetworkManagement::IpHelper
     end
     end
 
-    def initialize(@dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16])
+    def initialize(@dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Int64, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16])
     end
   end
 
   @[Extern]
   struct MIB_UDPTABLE_OWNER_MODULE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_MODULE*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_MODULE*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_MODULE[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_MODULE[1])
     end
   end
 
@@ -2047,7 +1652,7 @@ module Win32cr::NetworkManagement::IpHelper
     property dwLocalAddr : UInt32
     property dwLocalPort : UInt32
     property dwOwningPid : UInt32
-    property liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER
+    property liCreateTimestamp : Int64
     property anonymous : Anonymous_e__Union_
     property owning_module_info : UInt64[16]
     property dwRemoteAddr : UInt32
@@ -2071,15 +1676,15 @@ module Win32cr::NetworkManagement::IpHelper
     end
     end
 
-    def initialize(@dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16], @dwRemoteAddr : UInt32, @dwRemotePort : UInt32)
+    def initialize(@dwLocalAddr : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Int64, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16], @dwRemoteAddr : UInt32, @dwRemotePort : UInt32)
     end
   end
 
   @[Extern]
   struct MIB_UDPTABLE2
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW2*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW2*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW2[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW2[1])
     end
   end
 
@@ -2095,8 +1700,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_UDP6TABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW[1])
     end
   end
 
@@ -2113,8 +1718,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_UDP6TABLE_OWNER_PID
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_PID*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_PID*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_PID[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_PID[1])
     end
   end
 
@@ -2124,7 +1729,7 @@ module Win32cr::NetworkManagement::IpHelper
     property dwLocalScopeId : UInt32
     property dwLocalPort : UInt32
     property dwOwningPid : UInt32
-    property liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER
+    property liCreateTimestamp : Int64
     property anonymous : Anonymous_e__Union_
     property owning_module_info : UInt64[16]
 
@@ -2146,15 +1751,15 @@ module Win32cr::NetworkManagement::IpHelper
     end
     end
 
-    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16])
+    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Int64, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16])
     end
   end
 
   @[Extern]
   struct MIB_UDP6TABLE_OWNER_MODULE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_MODULE*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_MODULE*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_MODULE[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_MODULE[1])
     end
   end
 
@@ -2164,7 +1769,7 @@ module Win32cr::NetworkManagement::IpHelper
     property dwLocalScopeId : UInt32
     property dwLocalPort : UInt32
     property dwOwningPid : UInt32
-    property liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER
+    property liCreateTimestamp : Int64
     property anonymous : Anonymous_e__Union_
     property owning_module_info : UInt64[16]
     property ucRemoteAddr : UInt8[16]
@@ -2189,15 +1794,15 @@ module Win32cr::NetworkManagement::IpHelper
     end
     end
 
-    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Win32cr::Foundation::LARGE_INTEGER, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16], @ucRemoteAddr : UInt8[16], @dwRemoteScopeId : UInt32, @dwRemotePort : UInt32)
+    def initialize(@ucLocalAddr : UInt8[16], @dwLocalScopeId : UInt32, @dwLocalPort : UInt32, @dwOwningPid : UInt32, @liCreateTimestamp : Int64, @anonymous : Anonymous_e__Union_, @owning_module_info : UInt64[16], @ucRemoteAddr : UInt8[16], @dwRemoteScopeId : UInt32, @dwRemotePort : UInt32)
     end
   end
 
   @[Extern]
   struct MIB_UDP6TABLE2
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW2*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW2*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW2[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW2[1])
     end
   end
 
@@ -2244,8 +1849,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_IPMCAST_BOUNDARY_TABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_BOUNDARY*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_BOUNDARY*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_BOUNDARY[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_BOUNDARY[1])
     end
   end
 
@@ -2287,8 +1892,8 @@ module Win32cr::NetworkManagement::IpHelper
   @[Extern]
   struct MIB_IPDESTTABLE
     property dwNumEntries : UInt32
-    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPDESTROW*
-    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPDESTROW*)
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPDESTROW[1]
+    def initialize(@dwNumEntries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPDESTROW[1])
     end
   end
 
@@ -2336,8 +1941,8 @@ module Win32cr::NetworkManagement::IpHelper
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property ullAlign : UInt64
-    property rgbyData : UInt8*
-    def initialize(@ullAlign : UInt64, @rgbyData : UInt8*)
+    property rgbyData : UInt8[1]
+    def initialize(@ullAlign : UInt64, @rgbyData : UInt8[1])
     end
     end
 
@@ -2669,7 +2274,7 @@ module Win32cr::NetworkManagement::IpHelper
     property ipv6_metric : UInt32
     property luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
     property dhcpv4_server : Win32cr::Networking::WinSock::SOCKET_ADDRESS
-    property compartment_id : UInt32
+    property compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
     property network_guid : LibC::GUID
     property connection_type : Win32cr::NetworkManagement::Ndis::NET_IF_CONNECTION_TYPE
     property tunnel_type : Win32cr::NetworkManagement::Ndis::TUNNEL_TYPE
@@ -2678,25 +2283,6 @@ module Win32cr::NetworkManagement::IpHelper
     property dhcpv6_client_duid_length : UInt32
     property dhcpv6_iaid : UInt32
     property first_dns_suffix : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_DNS_SUFFIX*
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property flags : UInt32
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt32
-    def initialize(@_bitfield : UInt32)
-    end
-      end
-
-    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
@@ -2717,7 +2303,26 @@ module Win32cr::NetworkManagement::IpHelper
     end
     end
 
-    def initialize(@anonymous1 : Anonymous1_e__Union_, @next__ : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ADDRESSES_LH*, @adapter_name : Win32cr::Foundation::PSTR, @first_unicast_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_UNICAST_ADDRESS_LH*, @first_anycast_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ANYCAST_ADDRESS_XP*, @first_multicast_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_MULTICAST_ADDRESS_XP*, @first_dns_server_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_DNS_SERVER_ADDRESS_XP*, @dns_suffix : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @friendly_name : Win32cr::Foundation::PWSTR, @physical_address : UInt8[8], @physical_address_length : UInt32, @anonymous2 : Anonymous2_e__Union_, @mtu : UInt32, @if_type : UInt32, @oper_status : Win32cr::NetworkManagement::Ndis::IF_OPER_STATUS, @ipv6_if_index : UInt32, @zone_indices : UInt32[16], @first_prefix : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_PREFIX_XP*, @transmit_link_speed : UInt64, @receive_link_speed : UInt64, @first_wins_server_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_WINS_SERVER_ADDRESS_LH*, @first_gateway_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_GATEWAY_ADDRESS_LH*, @ipv4_metric : UInt32, @ipv6_metric : UInt32, @luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @dhcpv4_server : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @compartment_id : UInt32, @network_guid : LibC::GUID, @connection_type : Win32cr::NetworkManagement::Ndis::NET_IF_CONNECTION_TYPE, @tunnel_type : Win32cr::NetworkManagement::Ndis::TUNNEL_TYPE, @dhcpv6_server : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @dhcpv6_client_duid : UInt8[130], @dhcpv6_client_duid_length : UInt32, @dhcpv6_iaid : UInt32, @first_dns_suffix : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_DNS_SUFFIX*)
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @next__ : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ADDRESSES_LH*, @adapter_name : Win32cr::Foundation::PSTR, @first_unicast_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_UNICAST_ADDRESS_LH*, @first_anycast_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ANYCAST_ADDRESS_XP*, @first_multicast_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_MULTICAST_ADDRESS_XP*, @first_dns_server_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_DNS_SERVER_ADDRESS_XP*, @dns_suffix : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @friendly_name : Win32cr::Foundation::PWSTR, @physical_address : UInt8[8], @physical_address_length : UInt32, @anonymous2 : Anonymous2_e__Union_, @mtu : UInt32, @if_type : UInt32, @oper_status : Win32cr::NetworkManagement::Ndis::IF_OPER_STATUS, @ipv6_if_index : UInt32, @zone_indices : UInt32[16], @first_prefix : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_PREFIX_XP*, @transmit_link_speed : UInt64, @receive_link_speed : UInt64, @first_wins_server_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_WINS_SERVER_ADDRESS_LH*, @first_gateway_address : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_GATEWAY_ADDRESS_LH*, @ipv4_metric : UInt32, @ipv6_metric : UInt32, @luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @dhcpv4_server : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID, @network_guid : LibC::GUID, @connection_type : Win32cr::NetworkManagement::Ndis::NET_IF_CONNECTION_TYPE, @tunnel_type : Win32cr::NetworkManagement::Ndis::TUNNEL_TYPE, @dhcpv6_server : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @dhcpv6_client_duid : UInt8[130], @dhcpv6_client_duid_length : UInt32, @dhcpv6_iaid : UInt32, @first_dns_suffix : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_DNS_SUFFIX*)
     end
   end
 
@@ -2792,7 +2397,7 @@ module Win32cr::NetworkManagement::IpHelper
   end
 
   @[Extern]
-  struct Ip_interface_name_info_w2ksp1
+  struct IP_INTERFACE_NAME_INFO_W2KSP1
     property index : UInt32
     property media_type : UInt32
     property connection_type : UInt8
@@ -3074,6 +2679,543 @@ module Win32cr::NetworkManagement::IpHelper
   end
 
   @[Extern]
+  struct NET_ADDRESS_INFO
+    property format : Win32cr::NetworkManagement::IpHelper::NET_ADDRESS_FORMAT
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property named_address : NamedAddress_e__Struct_
+    property ipv4_address : Win32cr::Networking::WinSock::SOCKADDR_IN
+    property ipv6_address : Win32cr::Networking::WinSock::SOCKADDR_IN6
+    property ip_address : Win32cr::Networking::WinSock::SOCKADDR
+
+      # Nested Type NamedAddress_e__Struct_
+      @[Extern]
+      struct NamedAddress_e__Struct_
+    property address : UInt16[256]
+    property port : UInt16[6]
+    def initialize(@address : UInt16[256], @port : UInt16[6])
+    end
+      end
+
+    def initialize(@named_address : NamedAddress_e__Struct_, @ipv4_address : Win32cr::Networking::WinSock::SOCKADDR_IN, @ipv6_address : Win32cr::Networking::WinSock::SOCKADDR_IN6, @ip_address : Win32cr::Networking::WinSock::SOCKADDR)
+    end
+    end
+
+    def initialize(@format : Win32cr::NetworkManagement::IpHelper::NET_ADDRESS_FORMAT, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IF_ROW2
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property interface_index : UInt32
+    property interface_guid : LibC::GUID
+    property alias__ : UInt16[257]
+    property description : UInt16[257]
+    property physical_address_length : UInt32
+    property physical_address : UInt8[32]
+    property permanent_physical_address : UInt8[32]
+    property mtu : UInt32
+    property type__ : UInt32
+    property tunnel_type : Win32cr::NetworkManagement::Ndis::TUNNEL_TYPE
+    property media_type : Win32cr::NetworkManagement::Ndis::NDIS_MEDIUM
+    property physical_medium_type : Win32cr::NetworkManagement::Ndis::NDIS_PHYSICAL_MEDIUM
+    property access_type : Win32cr::NetworkManagement::Ndis::NET_IF_ACCESS_TYPE
+    property direction_type : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE
+    property interface_and_oper_status_flags : InterfaceAndOperStatusFlags_e__Struct_
+    property oper_status : Win32cr::NetworkManagement::Ndis::IF_OPER_STATUS
+    property admin_status : Win32cr::NetworkManagement::Ndis::NET_IF_ADMIN_STATUS
+    property media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE
+    property network_guid : LibC::GUID
+    property connection_type : Win32cr::NetworkManagement::Ndis::NET_IF_CONNECTION_TYPE
+    property transmit_link_speed : UInt64
+    property receive_link_speed : UInt64
+    property in_octets : UInt64
+    property in_ucast_pkts : UInt64
+    property in_n_ucast_pkts : UInt64
+    property in_discards : UInt64
+    property in_errors : UInt64
+    property in_unknown_protos : UInt64
+    property in_ucast_octets : UInt64
+    property in_multicast_octets : UInt64
+    property in_broadcast_octets : UInt64
+    property out_octets : UInt64
+    property out_ucast_pkts : UInt64
+    property out_n_ucast_pkts : UInt64
+    property out_discards : UInt64
+    property out_errors : UInt64
+    property out_ucast_octets : UInt64
+    property out_multicast_octets : UInt64
+    property out_broadcast_octets : UInt64
+    property out_q_len : UInt64
+
+    # Nested Type InterfaceAndOperStatusFlags_e__Struct_
+    @[Extern]
+    struct InterfaceAndOperStatusFlags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @interface_guid : LibC::GUID, @alias__ : UInt16[257], @description : UInt16[257], @physical_address_length : UInt32, @physical_address : UInt8[32], @permanent_physical_address : UInt8[32], @mtu : UInt32, @type__ : UInt32, @tunnel_type : Win32cr::NetworkManagement::Ndis::TUNNEL_TYPE, @media_type : Win32cr::NetworkManagement::Ndis::NDIS_MEDIUM, @physical_medium_type : Win32cr::NetworkManagement::Ndis::NDIS_PHYSICAL_MEDIUM, @access_type : Win32cr::NetworkManagement::Ndis::NET_IF_ACCESS_TYPE, @direction_type : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE, @interface_and_oper_status_flags : InterfaceAndOperStatusFlags_e__Struct_, @oper_status : Win32cr::NetworkManagement::Ndis::IF_OPER_STATUS, @admin_status : Win32cr::NetworkManagement::Ndis::NET_IF_ADMIN_STATUS, @media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE, @network_guid : LibC::GUID, @connection_type : Win32cr::NetworkManagement::Ndis::NET_IF_CONNECTION_TYPE, @transmit_link_speed : UInt64, @receive_link_speed : UInt64, @in_octets : UInt64, @in_ucast_pkts : UInt64, @in_n_ucast_pkts : UInt64, @in_discards : UInt64, @in_errors : UInt64, @in_unknown_protos : UInt64, @in_ucast_octets : UInt64, @in_multicast_octets : UInt64, @in_broadcast_octets : UInt64, @out_octets : UInt64, @out_ucast_pkts : UInt64, @out_n_ucast_pkts : UInt64, @out_discards : UInt64, @out_errors : UInt64, @out_ucast_octets : UInt64, @out_multicast_octets : UInt64, @out_broadcast_octets : UInt64, @out_q_len : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IF_TABLE2
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPINTERFACE_ROW
+    property family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property interface_index : UInt32
+    property max_reassembly_size : UInt32
+    property interface_identifier : UInt64
+    property min_router_advertisement_interval : UInt32
+    property max_router_advertisement_interval : UInt32
+    property advertising_enabled : Win32cr::Foundation::BOOLEAN
+    property forwarding_enabled : Win32cr::Foundation::BOOLEAN
+    property weak_host_send : Win32cr::Foundation::BOOLEAN
+    property weak_host_receive : Win32cr::Foundation::BOOLEAN
+    property use_automatic_metric : Win32cr::Foundation::BOOLEAN
+    property use_neighbor_unreachability_detection : Win32cr::Foundation::BOOLEAN
+    property managed_address_configuration_supported : Win32cr::Foundation::BOOLEAN
+    property other_stateful_configuration_supported : Win32cr::Foundation::BOOLEAN
+    property advertise_default_route : Win32cr::Foundation::BOOLEAN
+    property router_discovery_behavior : Win32cr::Networking::WinSock::NL_ROUTER_DISCOVERY_BEHAVIOR
+    property dad_transmits : UInt32
+    property base_reachable_time : UInt32
+    property retransmit_time : UInt32
+    property path_mtu_discovery_timeout : UInt32
+    property link_local_address_behavior : Win32cr::Networking::WinSock::NL_LINK_LOCAL_ADDRESS_BEHAVIOR
+    property link_local_address_timeout : UInt32
+    property zone_indices : UInt32[16]
+    property site_prefix_length : UInt32
+    property metric : UInt32
+    property nl_mtu : UInt32
+    property connected : Win32cr::Foundation::BOOLEAN
+    property supports_wake_up_patterns : Win32cr::Foundation::BOOLEAN
+    property supports_neighbor_discovery : Win32cr::Foundation::BOOLEAN
+    property supports_router_discovery : Win32cr::Foundation::BOOLEAN
+    property reachable_time : UInt32
+    property transmit_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD
+    property receive_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD
+    property disable_default_routes : Win32cr::Foundation::BOOLEAN
+    def initialize(@family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @max_reassembly_size : UInt32, @interface_identifier : UInt64, @min_router_advertisement_interval : UInt32, @max_router_advertisement_interval : UInt32, @advertising_enabled : Win32cr::Foundation::BOOLEAN, @forwarding_enabled : Win32cr::Foundation::BOOLEAN, @weak_host_send : Win32cr::Foundation::BOOLEAN, @weak_host_receive : Win32cr::Foundation::BOOLEAN, @use_automatic_metric : Win32cr::Foundation::BOOLEAN, @use_neighbor_unreachability_detection : Win32cr::Foundation::BOOLEAN, @managed_address_configuration_supported : Win32cr::Foundation::BOOLEAN, @other_stateful_configuration_supported : Win32cr::Foundation::BOOLEAN, @advertise_default_route : Win32cr::Foundation::BOOLEAN, @router_discovery_behavior : Win32cr::Networking::WinSock::NL_ROUTER_DISCOVERY_BEHAVIOR, @dad_transmits : UInt32, @base_reachable_time : UInt32, @retransmit_time : UInt32, @path_mtu_discovery_timeout : UInt32, @link_local_address_behavior : Win32cr::Networking::WinSock::NL_LINK_LOCAL_ADDRESS_BEHAVIOR, @link_local_address_timeout : UInt32, @zone_indices : UInt32[16], @site_prefix_length : UInt32, @metric : UInt32, @nl_mtu : UInt32, @connected : Win32cr::Foundation::BOOLEAN, @supports_wake_up_patterns : Win32cr::Foundation::BOOLEAN, @supports_neighbor_discovery : Win32cr::Foundation::BOOLEAN, @supports_router_discovery : Win32cr::Foundation::BOOLEAN, @reachable_time : UInt32, @transmit_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD, @receive_offload : Win32cr::Networking::WinSock::NL_INTERFACE_OFFLOAD_ROD, @disable_default_routes : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPINTERFACE_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_IFSTACK_ROW
+    property higher_layer_interface_index : UInt32
+    property lower_layer_interface_index : UInt32
+    def initialize(@higher_layer_interface_index : UInt32, @lower_layer_interface_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MIB_INVERTEDIFSTACK_ROW
+    property lower_layer_interface_index : UInt32
+    property higher_layer_interface_index : UInt32
+    def initialize(@lower_layer_interface_index : UInt32, @higher_layer_interface_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IFSTACK_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_ROW[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_INVERTEDIFSTACK_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_ROW[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES
+    property inbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION
+    property outbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION
+    def initialize(@inbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION, @outbound_bandwidth_information : Win32cr::Networking::WinSock::NL_BANDWIDTH_INFORMATION)
+    end
+  end
+
+  @[Extern]
+  struct MIB_UNICASTIPADDRESS_ROW
+    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property interface_index : UInt32
+    property prefix_origin : Win32cr::Networking::WinSock::NL_PREFIX_ORIGIN
+    property suffix_origin : Win32cr::Networking::WinSock::NL_SUFFIX_ORIGIN
+    property valid_lifetime : UInt32
+    property preferred_lifetime : UInt32
+    property on_link_prefix_length : UInt8
+    property skip_as_source : Win32cr::Foundation::BOOLEAN
+    property dad_state : Win32cr::Networking::WinSock::NL_DAD_STATE
+    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+    property creation_time_stamp : Int64
+    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @prefix_origin : Win32cr::Networking::WinSock::NL_PREFIX_ORIGIN, @suffix_origin : Win32cr::Networking::WinSock::NL_SUFFIX_ORIGIN, @valid_lifetime : UInt32, @preferred_lifetime : UInt32, @on_link_prefix_length : UInt8, @skip_as_source : Win32cr::Foundation::BOOLEAN, @dad_state : Win32cr::Networking::WinSock::NL_DAD_STATE, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID, @creation_time_stamp : Int64)
+    end
+  end
+
+  @[Extern]
+  struct MIB_UNICASTIPADDRESS_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_ANYCASTIPADDRESS_ROW
+    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property interface_index : UInt32
+    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID)
+    end
+  end
+
+  @[Extern]
+  struct MIB_ANYCASTIPADDRESS_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_MULTICASTIPADDRESS_ROW
+    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property interface_index : UInt32
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_index : UInt32, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID)
+    end
+  end
+
+  @[Extern]
+  struct MIB_MULTICASTIPADDRESS_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW[1])
+    end
+  end
+
+  @[Extern]
+  struct IP_ADDRESS_PREFIX
+    property prefix : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property prefix_length : UInt8
+    def initialize(@prefix : Win32cr::Networking::WinSock::SOCKADDR_INET, @prefix_length : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPFORWARD_ROW2
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property interface_index : UInt32
+    property destination_prefix : Win32cr::NetworkManagement::IpHelper::IP_ADDRESS_PREFIX
+    property next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property site_prefix_length : UInt8
+    property valid_lifetime : UInt32
+    property preferred_lifetime : UInt32
+    property metric : UInt32
+    property protocol : Win32cr::Networking::WinSock::NL_ROUTE_PROTOCOL
+    property loopback : Win32cr::Foundation::BOOLEAN
+    property autoconfigure_address : Win32cr::Foundation::BOOLEAN
+    property publish : Win32cr::Foundation::BOOLEAN
+    property immortal : Win32cr::Foundation::BOOLEAN
+    property age : UInt32
+    property origin : Win32cr::Networking::WinSock::NL_ROUTE_ORIGIN
+    def initialize(@interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @destination_prefix : Win32cr::NetworkManagement::IpHelper::IP_ADDRESS_PREFIX, @next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET, @site_prefix_length : UInt8, @valid_lifetime : UInt32, @preferred_lifetime : UInt32, @metric : UInt32, @protocol : Win32cr::Networking::WinSock::NL_ROUTE_PROTOCOL, @loopback : Win32cr::Foundation::BOOLEAN, @autoconfigure_address : Win32cr::Foundation::BOOLEAN, @publish : Win32cr::Foundation::BOOLEAN, @immortal : Win32cr::Foundation::BOOLEAN, @age : UInt32, @origin : Win32cr::Networking::WinSock::NL_ROUTE_ORIGIN)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPFORWARD_TABLE2
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPPATH_ROW
+    property source : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property destination : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property interface_index : UInt32
+    property current_next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property path_mtu : UInt32
+    property rtt_mean : UInt32
+    property rtt_deviation : UInt32
+    property anonymous : Anonymous_e__Union_
+    property is_reachable : Win32cr::Foundation::BOOLEAN
+    property link_transmit_speed : UInt64
+    property link_receive_speed : UInt64
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property last_reachable : UInt32
+    property last_unreachable : UInt32
+    def initialize(@last_reachable : UInt32, @last_unreachable : UInt32)
+    end
+    end
+
+    def initialize(@source : Win32cr::Networking::WinSock::SOCKADDR_INET, @destination : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @interface_index : UInt32, @current_next_hop : Win32cr::Networking::WinSock::SOCKADDR_INET, @path_mtu : UInt32, @rtt_mean : UInt32, @rtt_deviation : UInt32, @anonymous : Anonymous_e__Union_, @is_reachable : Win32cr::Foundation::BOOLEAN, @link_transmit_speed : UInt64, @link_receive_speed : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPPATH_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW[1])
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPNET_ROW2
+    property address : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property interface_index : UInt32
+    property interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property physical_address : UInt8[32]
+    property physical_address_length : UInt32
+    property state : Win32cr::Networking::WinSock::NL_NEIGHBOR_STATE
+    property anonymous : Anonymous_e__Union_
+    property reachability_time : ReachabilityTime_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property flags : UInt8
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @flags : UInt8)
+    end
+    end
+
+
+    # Nested Type ReachabilityTime_e__Union_
+    @[Extern(union: true)]
+    struct ReachabilityTime_e__Union_
+    property last_reachable : UInt32
+    property last_unreachable : UInt32
+    def initialize(@last_reachable : UInt32, @last_unreachable : UInt32)
+    end
+    end
+
+    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR_INET, @interface_index : UInt32, @interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @physical_address : UInt8[32], @physical_address_length : UInt32, @state : Win32cr::Networking::WinSock::NL_NEIGHBOR_STATE, @anonymous : Anonymous_e__Union_, @reachability_time : ReachabilityTime_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct MIB_IPNET_TABLE2
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2[1])
+    end
+  end
+
+  @[Extern]
+  struct DNS_SETTINGS
+    property version : UInt32
+    property flags : UInt64
+    property hostname : Win32cr::Foundation::PWSTR
+    property domain : Win32cr::Foundation::PWSTR
+    property search_list : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt32, @flags : UInt64, @hostname : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DNS_SETTINGS2
+    property version : UInt32
+    property flags : UInt64
+    property hostname : Win32cr::Foundation::PWSTR
+    property domain : Win32cr::Foundation::PWSTR
+    property search_list : Win32cr::Foundation::PWSTR
+    property setting_flags : UInt64
+    def initialize(@version : UInt32, @flags : UInt64, @hostname : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR, @setting_flags : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DNS_DOH_SERVER_SETTINGS
+    property template : Win32cr::Foundation::PWSTR
+    property flags : UInt64
+    def initialize(@template : Win32cr::Foundation::PWSTR, @flags : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DNS_DOT_SERVER_SETTINGS
+    property hostname : Win32cr::Foundation::PWSTR
+    property flags : UInt64
+    property port : UInt16
+    def initialize(@hostname : Win32cr::Foundation::PWSTR, @flags : UInt64, @port : UInt16)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct DNS_SERVER_PROPERTY_TYPES
+    property doh_settings : Win32cr::NetworkManagement::IpHelper::DNS_DOH_SERVER_SETTINGS*
+    property dot_settings : Win32cr::NetworkManagement::IpHelper::DNS_DOT_SERVER_SETTINGS*
+    def initialize(@doh_settings : Win32cr::NetworkManagement::IpHelper::DNS_DOH_SERVER_SETTINGS*, @dot_settings : Win32cr::NetworkManagement::IpHelper::DNS_DOT_SERVER_SETTINGS*)
+    end
+  end
+
+  @[Extern]
+  struct DNS_SERVER_PROPERTY
+    property version : UInt32
+    property server_index : UInt32
+    property type__ : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPE
+    property property : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPES
+    def initialize(@version : UInt32, @server_index : UInt32, @type__ : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPE, @property : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY_TYPES)
+    end
+  end
+
+  @[Extern]
+  struct DNS_INTERFACE_SETTINGS
+    property version : UInt32
+    property flags : UInt64
+    property domain : Win32cr::Foundation::PWSTR
+    property name_server : Win32cr::Foundation::PWSTR
+    property search_list : Win32cr::Foundation::PWSTR
+    property registration_enabled : UInt32
+    property register_adapter_name : UInt32
+    property enable_llmnr : UInt32
+    property query_adapter_name : UInt32
+    property profile_name_server : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt32, @flags : UInt64, @domain : Win32cr::Foundation::PWSTR, @name_server : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR, @registration_enabled : UInt32, @register_adapter_name : UInt32, @enable_llmnr : UInt32, @query_adapter_name : UInt32, @profile_name_server : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DNS_INTERFACE_SETTINGS_EX
+    property settings_v1 : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS
+    property disable_unconstrained_queries : UInt32
+    property supplemental_search_list : Win32cr::Foundation::PWSTR
+    def initialize(@settings_v1 : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS, @disable_unconstrained_queries : UInt32, @supplemental_search_list : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DNS_INTERFACE_SETTINGS3
+    property version : UInt32
+    property flags : UInt64
+    property domain : Win32cr::Foundation::PWSTR
+    property name_server : Win32cr::Foundation::PWSTR
+    property search_list : Win32cr::Foundation::PWSTR
+    property registration_enabled : UInt32
+    property register_adapter_name : UInt32
+    property enable_llmnr : UInt32
+    property query_adapter_name : UInt32
+    property profile_name_server : Win32cr::Foundation::PWSTR
+    property disable_unconstrained_queries : UInt32
+    property supplemental_search_list : Win32cr::Foundation::PWSTR
+    property cServerProperties : UInt32
+    property server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*
+    property cProfileServerProperties : UInt32
+    property profile_server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*
+    def initialize(@version : UInt32, @flags : UInt64, @domain : Win32cr::Foundation::PWSTR, @name_server : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR, @registration_enabled : UInt32, @register_adapter_name : UInt32, @enable_llmnr : UInt32, @query_adapter_name : UInt32, @profile_name_server : Win32cr::Foundation::PWSTR, @disable_unconstrained_queries : UInt32, @supplemental_search_list : Win32cr::Foundation::PWSTR, @cServerProperties : UInt32, @server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*, @cProfileServerProperties : UInt32, @profile_server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*)
+    end
+  end
+
+  @[Extern]
+  struct DNS_INTERFACE_SETTINGS4
+    property version : UInt32
+    property flags : UInt64
+    property domain : Win32cr::Foundation::PWSTR
+    property name_server : Win32cr::Foundation::PWSTR
+    property search_list : Win32cr::Foundation::PWSTR
+    property registration_enabled : UInt32
+    property register_adapter_name : UInt32
+    property enable_llmnr : UInt32
+    property query_adapter_name : UInt32
+    property profile_name_server : Win32cr::Foundation::PWSTR
+    property disable_unconstrained_queries : UInt32
+    property supplemental_search_list : Win32cr::Foundation::PWSTR
+    property cServerProperties : UInt32
+    property server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*
+    property cProfileServerProperties : UInt32
+    property profile_server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*
+    property encrypted_dns_adapter_flags : UInt32
+    def initialize(@version : UInt32, @flags : UInt64, @domain : Win32cr::Foundation::PWSTR, @name_server : Win32cr::Foundation::PWSTR, @search_list : Win32cr::Foundation::PWSTR, @registration_enabled : UInt32, @register_adapter_name : UInt32, @enable_llmnr : UInt32, @query_adapter_name : UInt32, @profile_name_server : Win32cr::Foundation::PWSTR, @disable_unconstrained_queries : UInt32, @supplemental_search_list : Win32cr::Foundation::PWSTR, @cServerProperties : UInt32, @server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*, @cProfileServerProperties : UInt32, @profile_server_properties : Win32cr::NetworkManagement::IpHelper::DNS_SERVER_PROPERTY*, @encrypted_dns_adapter_flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MIB_FL_VIRTUAL_INTERFACE_ROW
+    property family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
+    property if_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property virtual_if_id : UInt32
+    property compartment_guid : LibC::GUID
+    property isolation_mode : Win32cr::NetworkManagement::IpHelper::NET_FL_ISOLATION_MODE
+    property origin : Win32cr::NetworkManagement::IpHelper::NET_FL_VIRTUAL_INTERFACE_ORIGIN
+    property virtual_if_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property virtual_if_index : UInt32
+    property allow_local_nd : Win32cr::Foundation::BOOLEAN
+    property attached_flsnpi_clients : UInt32
+    property flsnpi_client_config_errors : UInt32
+    property flsnpi_client_inject_errors : UInt64
+    property flsnpi_client_clone_errors : UInt64
+    property in_flsnpi_indicated_packets : UInt64
+    property in_flsnpi_client_returned_packets : UInt64
+    property in_flsnpi_client_silently_dropped_packets : UInt64
+    property in_flsnpi_client_dropped_packets : UInt64
+    property in_flsnpi_client_injected_packets : UInt64
+    property in_flsnpi_client_cloned_packets : UInt64
+    property out_flsnpi_indicated_packets : UInt64
+    property out_flsnpi_client_returned_packets : UInt64
+    property out_flsnpi_client_dropped_packets : UInt64
+    property out_flsnpi_client_silently_dropped_packets : UInt64
+    property out_flsnpi_client_injected_packets : UInt64
+    property out_flsnpi_client_cloned_packets : UInt64
+    property out_flsnpi_client_cloned_packets_for_nb_split : UInt64
+    def initialize(@family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @if_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @virtual_if_id : UInt32, @compartment_guid : LibC::GUID, @isolation_mode : Win32cr::NetworkManagement::IpHelper::NET_FL_ISOLATION_MODE, @origin : Win32cr::NetworkManagement::IpHelper::NET_FL_VIRTUAL_INTERFACE_ORIGIN, @virtual_if_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @virtual_if_index : UInt32, @allow_local_nd : Win32cr::Foundation::BOOLEAN, @attached_flsnpi_clients : UInt32, @flsnpi_client_config_errors : UInt32, @flsnpi_client_inject_errors : UInt64, @flsnpi_client_clone_errors : UInt64, @in_flsnpi_indicated_packets : UInt64, @in_flsnpi_client_returned_packets : UInt64, @in_flsnpi_client_silently_dropped_packets : UInt64, @in_flsnpi_client_dropped_packets : UInt64, @in_flsnpi_client_injected_packets : UInt64, @in_flsnpi_client_cloned_packets : UInt64, @out_flsnpi_indicated_packets : UInt64, @out_flsnpi_client_returned_packets : UInt64, @out_flsnpi_client_dropped_packets : UInt64, @out_flsnpi_client_silently_dropped_packets : UInt64, @out_flsnpi_client_injected_packets : UInt64, @out_flsnpi_client_cloned_packets : UInt64, @out_flsnpi_client_cloned_packets_for_nb_split : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MIB_FL_VIRTUAL_INTERFACE_TABLE
+    property num_entries : UInt32
+    property table : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW[1]
+    def initialize(@num_entries : UInt32, @table : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW[1])
+    end
+  end
+
+  @[Extern]
   struct PF_FILTER_DESCRIPTOR
     property dwFilterFlags : UInt32
     property dwRule : UInt32
@@ -3114,11 +3256,11 @@ module Win32cr::NetworkManagement::IpHelper
     property dwSpoof : UInt32
     property dwReserved1 : UInt32
     property dwReserved2 : UInt32
-    property liSYN : Win32cr::Foundation::LARGE_INTEGER
-    property liTotalLogged : Win32cr::Foundation::LARGE_INTEGER
+    property liSYN : Int64
+    property liTotalLogged : Int64
     property dwLostLogEntries : UInt32
-    property filter_info : Win32cr::NetworkManagement::IpHelper::PF_FILTER_STATS*
-    def initialize(@pvDriverContext : Void*, @dwFlags : UInt32, @dwInDrops : UInt32, @dwOutDrops : UInt32, @eaInAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, @eaOutAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, @dwNumInFilters : UInt32, @dwNumOutFilters : UInt32, @dwFrag : UInt32, @dwSpoof : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @liSYN : Win32cr::Foundation::LARGE_INTEGER, @liTotalLogged : Win32cr::Foundation::LARGE_INTEGER, @dwLostLogEntries : UInt32, @filter_info : Win32cr::NetworkManagement::IpHelper::PF_FILTER_STATS*)
+    property filter_info : Win32cr::NetworkManagement::IpHelper::PF_FILTER_STATS[1]
+    def initialize(@pvDriverContext : Void*, @dwFlags : UInt32, @dwInDrops : UInt32, @dwOutDrops : UInt32, @eaInAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, @eaOutAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, @dwNumInFilters : UInt32, @dwNumOutFilters : UInt32, @dwFrag : UInt32, @dwSpoof : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @liSYN : Int64, @liTotalLogged : Int64, @dwLostLogEntries : UInt32, @filter_info : Win32cr::NetworkManagement::IpHelper::PF_FILTER_STATS[1])
     end
   end
 
@@ -3133,7 +3275,7 @@ module Win32cr::NetworkManagement::IpHelper
 
   @[Extern]
   struct PFLOGFRAME
-    property timestamp : Win32cr::Foundation::LARGE_INTEGER
+    property timestamp : Int64
     property pfeTypeOfFrame : Win32cr::NetworkManagement::IpHelper::PFFRAMETYPE
     property dwTotalSizeUsed : UInt32
     property dwFilterRule : UInt32
@@ -3141,1072 +3283,1272 @@ module Win32cr::NetworkManagement::IpHelper
     property wSizeOfIpHeader : UInt16
     property dwInterfaceName : UInt32
     property dwIPIndex : UInt32
-    property bPacketData : UInt8*
-    def initialize(@timestamp : Win32cr::Foundation::LARGE_INTEGER, @pfeTypeOfFrame : Win32cr::NetworkManagement::IpHelper::PFFRAMETYPE, @dwTotalSizeUsed : UInt32, @dwFilterRule : UInt32, @wSizeOfAdditionalData : UInt16, @wSizeOfIpHeader : UInt16, @dwInterfaceName : UInt32, @dwIPIndex : UInt32, @bPacketData : UInt8*)
+    property bPacketData : UInt8[1]
+    def initialize(@timestamp : Int64, @pfeTypeOfFrame : Win32cr::NetworkManagement::IpHelper::PFFRAMETYPE, @dwTotalSizeUsed : UInt32, @dwFilterRule : UInt32, @wSizeOfAdditionalData : UInt16, @wSizeOfIpHeader : UInt16, @dwInterfaceName : UInt32, @dwIPIndex : UInt32, @bPacketData : UInt8[1])
     end
   end
 
-  def getIfEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.GetIfEntry2(row)
-  end
-
-  def getIfEntry2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_ENTRY_LEVEL, row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.GetIfEntry2Ex(level, row)
-  end
-
-  def getIfTable2(table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::NTSTATUS
-    C.GetIfTable2(table)
-  end
-
-  def getIfTable2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE_LEVEL, table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::NTSTATUS
-    C.GetIfTable2Ex(level, table)
-  end
-
-  def getIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_TABLE**) : Win32cr::Foundation::NTSTATUS
-    C.GetIfStackTable(table)
-  end
-
-  def getInvertedIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_TABLE**) : Win32cr::Foundation::NTSTATUS
-    C.GetInvertedIfStackTable(table)
-  end
-
-  def getIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.GetIpInterfaceEntry(row)
-  end
-
-  def getIpInterfaceTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_TABLE**) : Win32cr::Foundation::NTSTATUS
-    C.GetIpInterfaceTable(family, table)
-  end
-
-  def initializeIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Void
-    C.InitializeIpInterfaceEntry(row)
-  end
-
-  def notifyIpInterfaceChange(family : UInt16, callback : Win32cr::NetworkManagement::IpHelper::PIPINTERFACE_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-    C.NotifyIpInterfaceChange(family, callback, caller_context, initial_notification, notification_handle)
-  end
-
-  def setIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.SetIpInterfaceEntry(row)
-  end
-
-  def getIpNetworkConnectionBandwidthEstimates(interface_index : UInt32, address_family : UInt16, bandwidth_estimates : Win32cr::NetworkManagement::IpHelper::MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES*) : Win32cr::Foundation::NTSTATUS
-    C.GetIpNetworkConnectionBandwidthEstimates(interface_index, address_family, bandwidth_estimates)
-  end
-
-  def createUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.CreateUnicastIpAddressEntry(row)
-  end
-
-  def deleteUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.DeleteUnicastIpAddressEntry(row)
-  end
-
-  def getUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.GetUnicastIpAddressEntry(row)
-  end
-
-  def getUnicastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**) : Win32cr::Foundation::NTSTATUS
-    C.GetUnicastIpAddressTable(family, table)
-  end
-
-  def initializeUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Void
-    C.InitializeUnicastIpAddressEntry(row)
-  end
-
-  def notifyUnicastIpAddressChange(family : UInt16, callback : Win32cr::NetworkManagement::IpHelper::PUNICAST_IPADDRESS_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-    C.NotifyUnicastIpAddressChange(family, callback, caller_context, initial_notification, notification_handle)
-  end
-
-  def notifyStableUnicastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**, caller_callback : Win32cr::NetworkManagement::IpHelper::PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, caller_context : Void*, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-    C.NotifyStableUnicastIpAddressTable(family, table, caller_callback, caller_context, notification_handle)
-  end
-
-  def setUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.SetUnicastIpAddressEntry(row)
-  end
-
-  def createAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.CreateAnycastIpAddressEntry(row)
-  end
-
-  def deleteAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.DeleteAnycastIpAddressEntry(row)
-  end
-
-  def getAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.GetAnycastIpAddressEntry(row)
-  end
-
-  def getAnycastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_TABLE**) : Win32cr::Foundation::NTSTATUS
-    C.GetAnycastIpAddressTable(family, table)
-  end
-
-  def getMulticastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.GetMulticastIpAddressEntry(row)
-  end
-
-  def getMulticastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_TABLE**) : Win32cr::Foundation::NTSTATUS
-    C.GetMulticastIpAddressTable(family, table)
-  end
-
-  def createIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.CreateIpForwardEntry2(row)
-  end
-
-  def deleteIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.DeleteIpForwardEntry2(row)
-  end
-
-  def getBestRoute2(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, address_sort_options : UInt32, best_route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*, best_source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::NTSTATUS
-    C.GetBestRoute2(interface_luid, interface_index, source_address, destination_address, address_sort_options, best_route, best_source_address)
-  end
-
-  def getIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.GetIpForwardEntry2(row)
-  end
-
-  def getIpForwardTable2(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_TABLE2**) : Win32cr::Foundation::NTSTATUS
-    C.GetIpForwardTable2(family, table)
-  end
-
-  def initializeIpForwardEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Void
-    C.InitializeIpForwardEntry(row)
-  end
-
-  def notifyRouteChange2(address_family : UInt16, callback : Win32cr::NetworkManagement::IpHelper::PIPFORWARD_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-    C.NotifyRouteChange2(address_family, callback, caller_context, initial_notification, notification_handle)
-  end
-
-  def setIpForwardEntry2(route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.SetIpForwardEntry2(route)
-  end
-
-  def flushIpPathTable(family : UInt16) : Win32cr::Foundation::NTSTATUS
-    C.FlushIpPathTable(family)
-  end
-
-  def getIpPathEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW*) : Win32cr::Foundation::NTSTATUS
-    C.GetIpPathEntry(row)
-  end
-
-  def getIpPathTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_TABLE**) : Win32cr::Foundation::NTSTATUS
-    C.GetIpPathTable(family, table)
-  end
-
-  def createIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.CreateIpNetEntry2(row)
-  end
-
-  def deleteIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.DeleteIpNetEntry2(row)
-  end
-
-  def flushIpNetTable2(family : UInt16, interface_index : UInt32) : Win32cr::Foundation::NTSTATUS
-    C.FlushIpNetTable2(family, interface_index)
-  end
-
-  def getIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.GetIpNetEntry2(row)
-  end
-
-  def getIpNetTable2(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_TABLE2**) : Win32cr::Foundation::NTSTATUS
-    C.GetIpNetTable2(family, table)
-  end
-
-  def resolveIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::NTSTATUS
-    C.ResolveIpNetEntry2(row, source_address)
-  end
-
-  def setIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-    C.SetIpNetEntry2(row)
-  end
-
-  def notifyTeredoPortChange(callback : Win32cr::NetworkManagement::IpHelper::PTEREDO_PORT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-    C.NotifyTeredoPortChange(callback, caller_context, initial_notification, notification_handle)
-  end
-
-  def getTeredoPort(port : UInt16*) : Win32cr::Foundation::NTSTATUS
-    C.GetTeredoPort(port)
-  end
-
-  def cancelMibChangeNotify2(notification_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::NTSTATUS
-    C.CancelMibChangeNotify2(notification_handle)
-  end
-
-  def freeMibTable(memory : Void*) : Void
-    C.FreeMibTable(memory)
-  end
-
-  def createSortedAddressPairs(source_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, source_address_count : UInt32, destination_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address_count : UInt32, address_sort_options : UInt32, sorted_address_pair_list : Win32cr::Networking::WinSock::SOCKADDR_IN6_PAIR**, sorted_address_pair_count : UInt32*) : Win32cr::Foundation::NTSTATUS
-    C.CreateSortedAddressPairs(source_address_list, source_address_count, destination_address_list, destination_address_count, address_sort_options, sorted_address_pair_list, sorted_address_pair_count)
-  end
-
-  def convertCompartmentGuidToId(compartment_guid : LibC::GUID*, compartment_id : UInt32*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertCompartmentGuidToId(compartment_guid, compartment_id)
-  end
-
-  def convertCompartmentIdToGuid(compartment_id : UInt32, compartment_guid : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertCompartmentIdToGuid(compartment_id, compartment_guid)
-  end
-
-  def convertInterfaceNameToLuidA(interface_name : Win32cr::Foundation::PSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceNameToLuidA(interface_name, interface_luid)
-  end
-
-  def convertInterfaceNameToLuidW(interface_name : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceNameToLuidW(interface_name, interface_luid)
-  end
-
-  def convertInterfaceLuidToNameA(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : UInt8*, length : LibC::UIntPtrT) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceLuidToNameA(interface_luid, interface_name, length)
-  end
-
-  def convertInterfaceLuidToNameW(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : UInt16*, length : LibC::UIntPtrT) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceLuidToNameW(interface_luid, interface_name, length)
-  end
-
-  def convertInterfaceLuidToIndex(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceLuidToIndex(interface_luid, interface_index)
-  end
-
-  def convertInterfaceIndexToLuid(interface_index : UInt32, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceIndexToLuid(interface_index, interface_luid)
-  end
-
-  def convertInterfaceLuidToAlias(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_alias : UInt16*, length : LibC::UIntPtrT) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceLuidToAlias(interface_luid, interface_alias, length)
-  end
-
-  def convertInterfaceAliasToLuid(interface_alias : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceAliasToLuid(interface_alias, interface_luid)
-  end
-
-  def convertInterfaceLuidToGuid(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_guid : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceLuidToGuid(interface_luid, interface_guid)
-  end
-
-  def convertInterfaceGuidToLuid(interface_guid : LibC::GUID*, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertInterfaceGuidToLuid(interface_guid, interface_luid)
-  end
-
-  def ifNametoindex(interface_name : Win32cr::Foundation::PSTR) : UInt32
-    C.if_nametoindex(interface_name)
-  end
-
-  def ifIndextoname(interface_index : UInt32, interface_name : UInt8*) : Win32cr::Foundation::PSTR
-    C.if_indextoname(interface_index, interface_name)
-  end
-
-  def getCurrentThreadCompartmentId : UInt32
-    C.GetCurrentThreadCompartmentId
-  end
-
-  def setCurrentThreadCompartmentId(compartment_id : UInt32) : Win32cr::Foundation::NTSTATUS
-    C.SetCurrentThreadCompartmentId(compartment_id)
-  end
-
-  def getCurrentThreadCompartmentScope(compartment_scope : UInt32*, compartment_id : UInt32*) : Void
-    C.GetCurrentThreadCompartmentScope(compartment_scope, compartment_id)
-  end
-
-  def setCurrentThreadCompartmentScope(compartment_scope : UInt32) : Win32cr::Foundation::NTSTATUS
-    C.SetCurrentThreadCompartmentScope(compartment_scope)
-  end
-
-  def getJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE) : UInt32
-    C.GetJobCompartmentId(job_handle)
-  end
-
-  def setJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE, compartment_id : UInt32) : Win32cr::Foundation::NTSTATUS
-    C.SetJobCompartmentId(job_handle, compartment_id)
-  end
-
-  def getSessionCompartmentId(session_id : UInt32) : UInt32
-    C.GetSessionCompartmentId(session_id)
-  end
-
-  def setSessionCompartmentId(session_id : UInt32, compartment_id : UInt32) : Win32cr::Foundation::NTSTATUS
-    C.SetSessionCompartmentId(session_id, compartment_id)
-  end
-
-  def getDefaultCompartmentId : UInt32
-    C.GetDefaultCompartmentId
-  end
-
-  def getNetworkInformation(network_guid : LibC::GUID*, compartment_id : UInt32*, site_id : UInt32*, network_name : UInt16*, length : UInt32) : Win32cr::Foundation::NTSTATUS
-    C.GetNetworkInformation(network_guid, compartment_id, site_id, network_name, length)
-  end
-
-  def setNetworkInformation(network_guid : LibC::GUID*, compartment_id : UInt32, network_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
-    C.SetNetworkInformation(network_guid, compartment_id, network_name)
-  end
-
-  def convertLengthToIpv4Mask(mask_length : UInt32, mask : UInt32*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertLengthToIpv4Mask(mask_length, mask)
-  end
-
-  def convertIpv4MaskToLength(mask : UInt32, mask_length : UInt8*) : Win32cr::Foundation::NTSTATUS
-    C.ConvertIpv4MaskToLength(mask, mask_length)
-  end
-
-  def getDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-    C.GetDnsSettings(settings)
-  end
-
-  def freeDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Void
-    C.FreeDnsSettings(settings)
-  end
-
-  def setDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-    C.SetDnsSettings(settings)
-  end
-
-  def getInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-    C.GetInterfaceDnsSettings(interface, settings)
-  end
-
-  def freeInterfaceDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Void
-    C.FreeInterfaceDnsSettings(settings)
-  end
-
-  def setInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-    C.SetInterfaceDnsSettings(interface, settings)
-  end
-
-  def getNetworkConnectivityHint(connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::NTSTATUS
-    C.GetNetworkConnectivityHint(connectivity_hint)
-  end
-
-  def getNetworkConnectivityHintForInterface(interface_index : UInt32, connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::NTSTATUS
-    C.GetNetworkConnectivityHintForInterface(interface_index, connectivity_hint)
-  end
-
-  def notifyNetworkConnectivityHintChange(callback : Win32cr::NetworkManagement::IpHelper::PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-    C.NotifyNetworkConnectivityHintChange(callback, caller_context, initial_notification, notification_handle)
-  end
-
-  def icmpCreateFile : Win32cr::NetworkManagement::IpHelper::IcmpHandle
+  def icmpCreateFile : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.IcmpCreateFile
+    {% end %}
   end
 
-  def icmp6CreateFile : Win32cr::NetworkManagement::IpHelper::IcmpHandle
+  def icmp6CreateFile : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.Icmp6CreateFile
+    {% end %}
   end
 
-  def icmpCloseHandle(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle) : Win32cr::Foundation::BOOL
+  def icmpCloseHandle(icmp_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IcmpCloseHandle(icmp_handle)
+    {% end %}
   end
 
-  def icmpSendEcho(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+  def icmpSendEcho(icmp_handle : Win32cr::Foundation::HANDLE, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.IcmpSendEcho(icmp_handle, destination_address, request_data, request_size, request_options, reply_buffer, reply_size, timeout)
+    {% end %}
   end
 
-  def icmpSendEcho2(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+  def icmpSendEcho2(icmp_handle : Win32cr::Foundation::HANDLE, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::IO::PIO_APC_ROUTINE, apc_context : Void*, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.IcmpSendEcho2(icmp_handle, event, apc_routine, apc_context, destination_address, request_data, request_size, request_options, reply_buffer, reply_size, timeout)
+    {% end %}
   end
 
-  def icmpSendEcho2Ex(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, source_address : UInt32, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+  def icmpSendEcho2Ex(icmp_handle : Win32cr::Foundation::HANDLE, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::IO::PIO_APC_ROUTINE, apc_context : Void*, source_address : UInt32, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.IcmpSendEcho2Ex(icmp_handle, event, apc_routine, apc_context, source_address, destination_address, request_data, request_size, request_options, reply_buffer, reply_size, timeout)
+    {% end %}
   end
 
-  def icmp6SendEcho2(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, source_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+  def icmp6SendEcho2(icmp_handle : Win32cr::Foundation::HANDLE, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::IO::PIO_APC_ROUTINE, apc_context : Void*, source_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.Icmp6SendEcho2(icmp_handle, event, apc_routine, apc_context, source_address, destination_address, request_data, request_size, request_options, reply_buffer, reply_size, timeout)
+    {% end %}
   end
 
   def icmpParseReplies(reply_buffer : Void*, reply_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.IcmpParseReplies(reply_buffer, reply_size)
+    {% end %}
   end
 
   def icmp6ParseReplies(reply_buffer : Void*, reply_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.Icmp6ParseReplies(reply_buffer, reply_size)
+    {% end %}
   end
 
   def getNumberOfInterfaces(pdwNumIf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetNumberOfInterfaces(pdwNumIf)
+    {% end %}
   end
 
   def getIfEntry(pIfRow : Win32cr::NetworkManagement::IpHelper::MIB_IFROW*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIfEntry(pIfRow)
+    {% end %}
   end
 
   def getIfTable(pIfTable : Win32cr::NetworkManagement::IpHelper::MIB_IFTABLE*, pdwSize : UInt32*, bOrder : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIfTable(pIfTable, pdwSize, bOrder)
+    {% end %}
   end
 
   def getIpAddrTable(pIpAddrTable : Win32cr::NetworkManagement::IpHelper::MIB_IPADDRTABLE*, pdwSize : UInt32*, bOrder : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIpAddrTable(pIpAddrTable, pdwSize, bOrder)
+    {% end %}
   end
 
   def getIpNetTable(ip_net_table : Win32cr::NetworkManagement::IpHelper::MIB_IPNETTABLE*, size_pointer : UInt32*, order : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIpNetTable(ip_net_table, size_pointer, order)
+    {% end %}
   end
 
   def getIpForwardTable(pIpForwardTable : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDTABLE*, pdwSize : UInt32*, bOrder : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIpForwardTable(pIpForwardTable, pdwSize, bOrder)
+    {% end %}
   end
 
   def getTcpTable(tcp_table : Win32cr::NetworkManagement::IpHelper::MIB_TCPTABLE*, size_pointer : UInt32*, order : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTcpTable(tcp_table, size_pointer, order)
+    {% end %}
   end
 
   def getExtendedTcpTable(pTcpTable : Void*, pdwSize : UInt32*, bOrder : Win32cr::Foundation::BOOL, ulAf : UInt32, table_class : Win32cr::NetworkManagement::IpHelper::TCP_TABLE_CLASS, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetExtendedTcpTable(pTcpTable, pdwSize, bOrder, ulAf, table_class, reserved)
+    {% end %}
   end
 
   def getOwnerModuleFromTcpEntry(pTcpEntry : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_OWNER_MODULE*, class__ : Win32cr::NetworkManagement::IpHelper::TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer : Void*, pdwSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetOwnerModuleFromTcpEntry(pTcpEntry, class__, pBuffer, pdwSize)
+    {% end %}
   end
 
   def getUdpTable(udp_table : Win32cr::NetworkManagement::IpHelper::MIB_UDPTABLE*, size_pointer : UInt32*, order : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetUdpTable(udp_table, size_pointer, order)
+    {% end %}
   end
 
   def getExtendedUdpTable(pUdpTable : Void*, pdwSize : UInt32*, bOrder : Win32cr::Foundation::BOOL, ulAf : UInt32, table_class : Win32cr::NetworkManagement::IpHelper::UDP_TABLE_CLASS, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetExtendedUdpTable(pUdpTable, pdwSize, bOrder, ulAf, table_class, reserved)
+    {% end %}
   end
 
   def getOwnerModuleFromUdpEntry(pUdpEntry : Win32cr::NetworkManagement::IpHelper::MIB_UDPROW_OWNER_MODULE*, class__ : Win32cr::NetworkManagement::IpHelper::TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer : Void*, pdwSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetOwnerModuleFromUdpEntry(pUdpEntry, class__, pBuffer, pdwSize)
+    {% end %}
   end
 
   def getTcpTable2(tcp_table : Win32cr::NetworkManagement::IpHelper::MIB_TCPTABLE2*, size_pointer : UInt32*, order : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTcpTable2(tcp_table, size_pointer, order)
+    {% end %}
   end
 
   def getTcp6Table(tcp_table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6TABLE*, size_pointer : UInt32*, order : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTcp6Table(tcp_table, size_pointer, order)
+    {% end %}
   end
 
   def getTcp6Table2(tcp_table : Win32cr::NetworkManagement::IpHelper::MIB_TCP6TABLE2*, size_pointer : UInt32*, order : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTcp6Table2(tcp_table, size_pointer, order)
+    {% end %}
   end
 
   def getPerTcpConnectionEStats(row : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_LH*, estats_type : Win32cr::NetworkManagement::IpHelper::TCP_ESTATS_TYPE, rw : UInt8*, rw_version : UInt32, rw_size : UInt32, ros : UInt8*, ros_version : UInt32, ros_size : UInt32, rod : UInt8*, rod_version : UInt32, rod_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPerTcpConnectionEStats(row, estats_type, rw, rw_version, rw_size, ros, ros_version, ros_size, rod, rod_version, rod_size)
+    {% end %}
   end
 
   def setPerTcpConnectionEStats(row : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_LH*, estats_type : Win32cr::NetworkManagement::IpHelper::TCP_ESTATS_TYPE, rw : UInt8*, rw_version : UInt32, rw_size : UInt32, offset : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetPerTcpConnectionEStats(row, estats_type, rw, rw_version, rw_size, offset)
+    {% end %}
   end
 
   def getPerTcp6ConnectionEStats(row : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW*, estats_type : Win32cr::NetworkManagement::IpHelper::TCP_ESTATS_TYPE, rw : UInt8*, rw_version : UInt32, rw_size : UInt32, ros : UInt8*, ros_version : UInt32, ros_size : UInt32, rod : UInt8*, rod_version : UInt32, rod_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPerTcp6ConnectionEStats(row, estats_type, rw, rw_version, rw_size, ros, ros_version, ros_size, rod, rod_version, rod_size)
+    {% end %}
   end
 
   def setPerTcp6ConnectionEStats(row : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW*, estats_type : Win32cr::NetworkManagement::IpHelper::TCP_ESTATS_TYPE, rw : UInt8*, rw_version : UInt32, rw_size : UInt32, offset : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetPerTcp6ConnectionEStats(row, estats_type, rw, rw_version, rw_size, offset)
+    {% end %}
   end
 
   def getOwnerModuleFromTcp6Entry(pTcpEntry : Win32cr::NetworkManagement::IpHelper::MIB_TCP6ROW_OWNER_MODULE*, class__ : Win32cr::NetworkManagement::IpHelper::TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer : Void*, pdwSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetOwnerModuleFromTcp6Entry(pTcpEntry, class__, pBuffer, pdwSize)
+    {% end %}
   end
 
   def getUdp6Table(udp6_table : Win32cr::NetworkManagement::IpHelper::MIB_UDP6TABLE*, size_pointer : UInt32*, order : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetUdp6Table(udp6_table, size_pointer, order)
+    {% end %}
   end
 
   def getOwnerModuleFromUdp6Entry(pUdpEntry : Win32cr::NetworkManagement::IpHelper::MIB_UDP6ROW_OWNER_MODULE*, class__ : Win32cr::NetworkManagement::IpHelper::TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer : Void*, pdwSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetOwnerModuleFromUdp6Entry(pUdpEntry, class__, pBuffer, pdwSize)
+    {% end %}
   end
 
   def getOwnerModuleFromPidAndInfo(ulPid : UInt32, pInfo : UInt64*, class__ : Win32cr::NetworkManagement::IpHelper::TCPIP_OWNER_MODULE_INFO_CLASS, pBuffer : Void*, pdwSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetOwnerModuleFromPidAndInfo(ulPid, pInfo, class__, pBuffer, pdwSize)
+    {% end %}
   end
 
   def getIpStatistics(statistics : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIpStatistics(statistics)
+    {% end %}
   end
 
   def getIcmpStatistics(statistics : Win32cr::NetworkManagement::IpHelper::MIB_ICMP*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIcmpStatistics(statistics)
+    {% end %}
   end
 
   def getTcpStatistics(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS_LH*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTcpStatistics(statistics)
+    {% end %}
   end
 
   def getUdpStatistics(stats : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetUdpStatistics(stats)
+    {% end %}
   end
 
   def setIpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*, family : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIpStatisticsEx(statistics, family)
+    {% end %}
   end
 
-  def getIpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+  def getIpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*, family : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIpStatisticsEx(statistics, family)
+    {% end %}
   end
 
   def getIcmpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_ICMP_EX_XPSP1*, family : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIcmpStatisticsEx(statistics, family)
+    {% end %}
   end
 
-  def getTcpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS_LH*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+  def getTcpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS_LH*, family : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTcpStatisticsEx(statistics, family)
+    {% end %}
   end
 
-  def getUdpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+  def getUdpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS*, family : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetUdpStatisticsEx(statistics, family)
+    {% end %}
   end
 
-  def getTcpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS2*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+  def getTcpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS2*, family : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTcpStatisticsEx2(statistics, family)
+    {% end %}
   end
 
-  def getUdpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS2*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+  def getUdpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS2*, family : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetUdpStatisticsEx2(statistics, family)
+    {% end %}
   end
 
   def setIfEntry(pIfRow : Win32cr::NetworkManagement::IpHelper::MIB_IFROW*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIfEntry(pIfRow)
+    {% end %}
   end
 
   def createIpForwardEntry(pRoute : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*) : UInt32
+    {% if !flag?(:docs) %}
     C.CreateIpForwardEntry(pRoute)
+    {% end %}
   end
 
   def setIpForwardEntry(pRoute : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIpForwardEntry(pRoute)
+    {% end %}
   end
 
   def deleteIpForwardEntry(pRoute : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteIpForwardEntry(pRoute)
+    {% end %}
   end
 
   def setIpStatistics(pIpStats : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIpStatistics(pIpStats)
+    {% end %}
   end
 
   def setIpTTL(nTTL : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIpTTL(nTTL)
+    {% end %}
   end
 
   def createIpNetEntry(pArpEntry : Win32cr::NetworkManagement::IpHelper::MIB_IPNETROW_LH*) : UInt32
+    {% if !flag?(:docs) %}
     C.CreateIpNetEntry(pArpEntry)
+    {% end %}
   end
 
   def setIpNetEntry(pArpEntry : Win32cr::NetworkManagement::IpHelper::MIB_IPNETROW_LH*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIpNetEntry(pArpEntry)
+    {% end %}
   end
 
   def deleteIpNetEntry(pArpEntry : Win32cr::NetworkManagement::IpHelper::MIB_IPNETROW_LH*) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteIpNetEntry(pArpEntry)
+    {% end %}
   end
 
   def flushIpNetTable(dwIfIndex : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.FlushIpNetTable(dwIfIndex)
+    {% end %}
   end
 
   def createProxyArpEntry(dwAddress : UInt32, dwMask : UInt32, dwIfIndex : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CreateProxyArpEntry(dwAddress, dwMask, dwIfIndex)
+    {% end %}
   end
 
   def deleteProxyArpEntry(dwAddress : UInt32, dwMask : UInt32, dwIfIndex : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteProxyArpEntry(dwAddress, dwMask, dwIfIndex)
+    {% end %}
   end
 
   def setTcpEntry(pTcpRow : Win32cr::NetworkManagement::IpHelper::MIB_TCPROW_LH*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetTcpEntry(pTcpRow)
+    {% end %}
   end
 
   def getInterfaceInfo(pIfTable : Win32cr::NetworkManagement::IpHelper::IP_INTERFACE_INFO*, dwOutBufLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetInterfaceInfo(pIfTable, dwOutBufLen)
+    {% end %}
   end
 
   def getUniDirectionalAdapterInfo(pIPIfInfo : Win32cr::NetworkManagement::IpHelper::IP_UNIDIRECTIONAL_ADAPTER_ADDRESS*, dwOutBufLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetUniDirectionalAdapterInfo(pIPIfInfo, dwOutBufLen)
+    {% end %}
   end
 
-  def nhpAllocateAndGetInterfaceInfoFromStack(ppTable : Win32cr::NetworkManagement::IpHelper::Ip_interface_name_info_w2ksp1**, pdwCount : UInt32*, bOrder : Win32cr::Foundation::BOOL, hHeap : Win32cr::Foundation::HANDLE, dwFlags : UInt32) : UInt32
+  def nhpAllocateAndGetInterfaceInfoFromStack(ppTable : Win32cr::NetworkManagement::IpHelper::IP_INTERFACE_NAME_INFO_W2KSP1**, pdwCount : UInt32*, bOrder : Win32cr::Foundation::BOOL, hHeap : Win32cr::Foundation::HANDLE, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NhpAllocateAndGetInterfaceInfoFromStack(ppTable, pdwCount, bOrder, hHeap, dwFlags)
+    {% end %}
   end
 
   def getBestInterface(dwDestAddr : UInt32, pdwBestIfIndex : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetBestInterface(dwDestAddr, pdwBestIfIndex)
+    {% end %}
   end
 
   def getBestInterfaceEx(pDestAddr : Win32cr::Networking::WinSock::SOCKADDR*, pdwBestIfIndex : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetBestInterfaceEx(pDestAddr, pdwBestIfIndex)
+    {% end %}
   end
 
   def getBestRoute(dwDestAddr : UInt32, dwSourceAddr : UInt32, pBestRoute : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetBestRoute(dwDestAddr, dwSourceAddr, pBestRoute)
+    {% end %}
   end
 
   def notifyAddrChange(handle : Win32cr::Foundation::HANDLE*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.NotifyAddrChange(handle, overlapped)
+    {% end %}
   end
 
   def notifyRouteChange(handle : Win32cr::Foundation::HANDLE*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.NotifyRouteChange(handle, overlapped)
+    {% end %}
   end
 
   def cancelIPChangeNotify(notifyOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CancelIPChangeNotify(notifyOverlapped)
+    {% end %}
   end
 
   def getAdapterIndex(adapter_name : Win32cr::Foundation::PWSTR, if_index : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAdapterIndex(adapter_name, if_index)
+    {% end %}
   end
 
   def addIPAddress(address : UInt32, ip_mask : UInt32, if_index : UInt32, nte_context : UInt32*, nte_instance : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.AddIPAddress(address, ip_mask, if_index, nte_context, nte_instance)
+    {% end %}
   end
 
   def deleteIPAddress(nte_context : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteIPAddress(nte_context)
+    {% end %}
   end
 
   def getNetworkParams(pFixedInfo : Win32cr::NetworkManagement::IpHelper::FIXED_INFO_W2KSP1*, pOutBufLen : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetNetworkParams(pFixedInfo, pOutBufLen)
+    {% end %}
   end
 
   def getAdaptersInfo(adapter_info : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INFO*, size_pointer : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAdaptersInfo(adapter_info, size_pointer)
+    {% end %}
   end
 
   def getAdapterOrderMap : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ORDER_MAP*
+    {% if !flag?(:docs) %}
     C.GetAdapterOrderMap
+    {% end %}
   end
 
-  def getAdaptersAddresses(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, flags : Win32cr::NetworkManagement::IpHelper::GET_ADAPTERS_ADDRESSES_FLAGS, reserved : Void*, adapter_addresses : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ADDRESSES_LH*, size_pointer : UInt32*) : UInt32
+  def getAdaptersAddresses(family : UInt32, flags : Win32cr::NetworkManagement::IpHelper::GET_ADAPTERS_ADDRESSES_FLAGS, reserved : Void*, adapter_addresses : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ADDRESSES_LH*, size_pointer : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAdaptersAddresses(family, flags, reserved, adapter_addresses, size_pointer)
+    {% end %}
   end
 
   def getPerAdapterInfo(if_index : UInt32, pPerAdapterInfo : Win32cr::NetworkManagement::IpHelper::IP_PER_ADAPTER_INFO_W2KSP1*, pOutBufLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPerAdapterInfo(if_index, pPerAdapterInfo, pOutBufLen)
+    {% end %}
   end
 
   def getInterfaceActiveTimestampCapabilities(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, timestamp_capabilites : Win32cr::NetworkManagement::IpHelper::INTERFACE_TIMESTAMP_CAPABILITIES*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetInterfaceActiveTimestampCapabilities(interface_luid, timestamp_capabilites)
+    {% end %}
   end
 
   def getInterfaceSupportedTimestampCapabilities(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, timestamp_capabilites : Win32cr::NetworkManagement::IpHelper::INTERFACE_TIMESTAMP_CAPABILITIES*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetInterfaceSupportedTimestampCapabilities(interface_luid, timestamp_capabilites)
+    {% end %}
   end
 
   def captureInterfaceHardwareCrossTimestamp(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, cross_timestamp : Win32cr::NetworkManagement::IpHelper::INTERFACE_HARDWARE_CROSSTIMESTAMP*) : UInt32
+    {% if !flag?(:docs) %}
     C.CaptureInterfaceHardwareCrossTimestamp(interface_luid, cross_timestamp)
+    {% end %}
   end
 
   def registerInterfaceTimestampConfigChange(callback : Win32cr::NetworkManagement::IpHelper::PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, caller_context : Void*, notification_handle : Win32cr::NetworkManagement::IpHelper::HIFTIMESTAMPCHANGE*) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterInterfaceTimestampConfigChange(callback, caller_context, notification_handle)
+    {% end %}
   end
 
   def unregisterInterfaceTimestampConfigChange(notification_handle : Win32cr::NetworkManagement::IpHelper::HIFTIMESTAMPCHANGE) : Void
+    {% if !flag?(:docs) %}
     C.UnregisterInterfaceTimestampConfigChange(notification_handle)
+    {% end %}
+  end
+
+  def getInterfaceCurrentTimestampCapabilities(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, timestamp_capabilites : Win32cr::NetworkManagement::IpHelper::INTERFACE_TIMESTAMP_CAPABILITIES*) : UInt32
+    {% if !flag?(:docs) %}
+    C.GetInterfaceCurrentTimestampCapabilities(interface_luid, timestamp_capabilites)
+    {% end %}
+  end
+
+  def getInterfaceHardwareTimestampCapabilities(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, timestamp_capabilites : Win32cr::NetworkManagement::IpHelper::INTERFACE_TIMESTAMP_CAPABILITIES*) : UInt32
+    {% if !flag?(:docs) %}
+    C.GetInterfaceHardwareTimestampCapabilities(interface_luid, timestamp_capabilites)
+    {% end %}
+  end
+
+  def notifyIfTimestampConfigChange(caller_context : Void*, callback : Win32cr::NetworkManagement::IpHelper::PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, notification_handle : Win32cr::NetworkManagement::IpHelper::HIFTIMESTAMPCHANGE*) : UInt32
+    {% if !flag?(:docs) %}
+    C.NotifyIfTimestampConfigChange(caller_context, callback, notification_handle)
+    {% end %}
+  end
+
+  def cancelIfTimestampConfigChange(notification_handle : Win32cr::NetworkManagement::IpHelper::HIFTIMESTAMPCHANGE) : Void
+    {% if !flag?(:docs) %}
+    C.CancelIfTimestampConfigChange(notification_handle)
+    {% end %}
   end
 
   def ipReleaseAddress(adapter_info : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INDEX_MAP*) : UInt32
+    {% if !flag?(:docs) %}
     C.IpReleaseAddress(adapter_info)
+    {% end %}
   end
 
   def ipRenewAddress(adapter_info : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INDEX_MAP*) : UInt32
+    {% if !flag?(:docs) %}
     C.IpRenewAddress(adapter_info)
+    {% end %}
   end
 
   def sendARP(dest_ip : UInt32, src_ip : UInt32, pMacAddr : Void*, phy_addr_len : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.SendARP(dest_ip, src_ip, pMacAddr, phy_addr_len)
+    {% end %}
   end
 
   def getRTTAndHopCount(dest_ip_address : UInt32, hop_count : UInt32*, max_hops : UInt32, rtt : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetRTTAndHopCount(dest_ip_address, hop_count, max_hops, rtt)
+    {% end %}
   end
 
   def getFriendlyIfIndex(if_index : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFriendlyIfIndex(if_index)
+    {% end %}
   end
 
   def enableRouter(pHandle : Win32cr::Foundation::HANDLE*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.EnableRouter(pHandle, pOverlapped)
+    {% end %}
   end
 
   def unenableRouter(pOverlapped : Win32cr::System::IO::OVERLAPPED*, lpdwEnableCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.UnenableRouter(pOverlapped, lpdwEnableCount)
+    {% end %}
   end
 
   def disableMediaSense(pHandle : Win32cr::Foundation::HANDLE*, pOverLapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.DisableMediaSense(pHandle, pOverLapped)
+    {% end %}
   end
 
   def restoreMediaSense(pOverlapped : Win32cr::System::IO::OVERLAPPED*, lpdwEnableCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RestoreMediaSense(pOverlapped, lpdwEnableCount)
+    {% end %}
   end
 
   def getIpErrorString(error_code : UInt32, buffer : Win32cr::Foundation::PWSTR, size : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIpErrorString(error_code, buffer, size)
+    {% end %}
   end
 
   def resolveNeighbor(network_address : Win32cr::Networking::WinSock::SOCKADDR*, physical_address : Void*, physical_address_length : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResolveNeighbor(network_address, physical_address, physical_address_length)
+    {% end %}
   end
 
   def createPersistentTcpPortReservation(start_port : UInt16, number_of_ports : UInt16, token : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.CreatePersistentTcpPortReservation(start_port, number_of_ports, token)
+    {% end %}
   end
 
   def createPersistentUdpPortReservation(start_port : UInt16, number_of_ports : UInt16, token : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.CreatePersistentUdpPortReservation(start_port, number_of_ports, token)
+    {% end %}
   end
 
   def deletePersistentTcpPortReservation(start_port : UInt16, number_of_ports : UInt16) : UInt32
+    {% if !flag?(:docs) %}
     C.DeletePersistentTcpPortReservation(start_port, number_of_ports)
+    {% end %}
   end
 
   def deletePersistentUdpPortReservation(start_port : UInt16, number_of_ports : UInt16) : UInt32
+    {% if !flag?(:docs) %}
     C.DeletePersistentUdpPortReservation(start_port, number_of_ports)
+    {% end %}
   end
 
   def lookupPersistentTcpPortReservation(start_port : UInt16, number_of_ports : UInt16, token : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.LookupPersistentTcpPortReservation(start_port, number_of_ports, token)
+    {% end %}
   end
 
   def lookupPersistentUdpPortReservation(start_port : UInt16, number_of_ports : UInt16, token : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.LookupPersistentUdpPortReservation(start_port, number_of_ports, token)
+    {% end %}
+  end
+
+  def parseNetworkString(network_string : Win32cr::Foundation::PWSTR, types : UInt32, address_info : Win32cr::NetworkManagement::IpHelper::NET_ADDRESS_INFO*, port_number : UInt16*, prefix_length : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
+    C.ParseNetworkString(network_string, types, address_info, port_number, prefix_length)
+    {% end %}
+  end
+
+  def getIfEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIfEntry2(row)
+    {% end %}
+  end
+
+  def getIfEntry2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_ENTRY_LEVEL, row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIfEntry2Ex(level, row)
+    {% end %}
+  end
+
+  def getIfTable2(table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIfTable2(table)
+    {% end %}
+  end
+
+  def getIfTable2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE_LEVEL, table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIfTable2Ex(level, table)
+    {% end %}
+  end
+
+  def getIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIfStackTable(table)
+    {% end %}
+  end
+
+  def getInvertedIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetInvertedIfStackTable(table)
+    {% end %}
+  end
+
+  def getIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpInterfaceEntry(row)
+    {% end %}
+  end
+
+  def getIpInterfaceTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpInterfaceTable(family, table)
+    {% end %}
+  end
+
+  def initializeIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Void
+    {% if !flag?(:docs) %}
+    C.InitializeIpInterfaceEntry(row)
+    {% end %}
+  end
+
+  def notifyIpInterfaceChange(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, callback : Win32cr::NetworkManagement::IpHelper::PIPINTERFACE_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.NotifyIpInterfaceChange(family, callback, caller_context, initial_notification, notification_handle)
+    {% end %}
+  end
+
+  def setIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetIpInterfaceEntry(row)
+    {% end %}
+  end
+
+  def getIpNetworkConnectionBandwidthEstimates(interface_index : UInt32, address_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, bandwidth_estimates : Win32cr::NetworkManagement::IpHelper::MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpNetworkConnectionBandwidthEstimates(interface_index, address_family, bandwidth_estimates)
+    {% end %}
+  end
+
+  def createUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.CreateUnicastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def deleteUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.DeleteUnicastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def getUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetUnicastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def getUnicastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetUnicastIpAddressTable(family, table)
+    {% end %}
+  end
+
+  def initializeUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Void
+    {% if !flag?(:docs) %}
+    C.InitializeUnicastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def notifyUnicastIpAddressChange(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, callback : Win32cr::NetworkManagement::IpHelper::PUNICAST_IPADDRESS_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.NotifyUnicastIpAddressChange(family, callback, caller_context, initial_notification, notification_handle)
+    {% end %}
+  end
+
+  def notifyStableUnicastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**, caller_callback : Win32cr::NetworkManagement::IpHelper::PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, caller_context : Void*, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.NotifyStableUnicastIpAddressTable(family, table, caller_callback, caller_context, notification_handle)
+    {% end %}
+  end
+
+  def setUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetUnicastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def createAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.CreateAnycastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def deleteAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.DeleteAnycastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def getAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetAnycastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def getAnycastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetAnycastIpAddressTable(family, table)
+    {% end %}
+  end
+
+  def getMulticastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetMulticastIpAddressEntry(row)
+    {% end %}
+  end
+
+  def getMulticastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetMulticastIpAddressTable(family, table)
+    {% end %}
+  end
+
+  def createIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.CreateIpForwardEntry2(row)
+    {% end %}
+  end
+
+  def deleteIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.DeleteIpForwardEntry2(row)
+    {% end %}
+  end
+
+  def getBestRoute2(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, address_sort_options : UInt32, best_route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*, best_source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetBestRoute2(interface_luid, interface_index, source_address, destination_address, address_sort_options, best_route, best_source_address)
+    {% end %}
+  end
+
+  def getIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpForwardEntry2(row)
+    {% end %}
+  end
+
+  def getIpForwardTable2(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpForwardTable2(family, table)
+    {% end %}
+  end
+
+  def initializeIpForwardEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Void
+    {% if !flag?(:docs) %}
+    C.InitializeIpForwardEntry(row)
+    {% end %}
+  end
+
+  def notifyRouteChange2(address_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, callback : Win32cr::NetworkManagement::IpHelper::PIPFORWARD_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.NotifyRouteChange2(address_family, callback, caller_context, initial_notification, notification_handle)
+    {% end %}
+  end
+
+  def setIpForwardEntry2(route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetIpForwardEntry2(route)
+    {% end %}
+  end
+
+  def flushIpPathTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.FlushIpPathTable(family)
+    {% end %}
+  end
+
+  def getIpPathEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpPathEntry(row)
+    {% end %}
+  end
+
+  def getIpPathTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpPathTable(family, table)
+    {% end %}
+  end
+
+  def createIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.CreateIpNetEntry2(row)
+    {% end %}
+  end
+
+  def deleteIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.DeleteIpNetEntry2(row)
+    {% end %}
+  end
+
+  def flushIpNetTable2(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, interface_index : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.FlushIpNetTable2(family, interface_index)
+    {% end %}
+  end
+
+  def getIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpNetEntry2(row)
+    {% end %}
+  end
+
+  def getIpNetTable2(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetIpNetTable2(family, table)
+    {% end %}
+  end
+
+  def resolveIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ResolveIpNetEntry2(row, source_address)
+    {% end %}
+  end
+
+  def setIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetIpNetEntry2(row)
+    {% end %}
+  end
+
+  def notifyTeredoPortChange(callback : Win32cr::NetworkManagement::IpHelper::PTEREDO_PORT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.NotifyTeredoPortChange(callback, caller_context, initial_notification, notification_handle)
+    {% end %}
+  end
+
+  def getTeredoPort(port : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetTeredoPort(port)
+    {% end %}
+  end
+
+  def cancelMibChangeNotify2(notification_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.CancelMibChangeNotify2(notification_handle)
+    {% end %}
+  end
+
+  def freeMibTable(memory : Void*) : Void
+    {% if !flag?(:docs) %}
+    C.FreeMibTable(memory)
+    {% end %}
+  end
+
+  def createSortedAddressPairs(source_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, source_address_count : UInt32, destination_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address_count : UInt32, address_sort_options : UInt32, sorted_address_pair_list : Win32cr::Networking::WinSock::SOCKADDR_IN6_PAIR**, sorted_address_pair_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.CreateSortedAddressPairs(source_address_list, source_address_count, destination_address_list, destination_address_count, address_sort_options, sorted_address_pair_list, sorted_address_pair_count)
+    {% end %}
+  end
+
+  def convertCompartmentGuidToId(compartment_guid : LibC::GUID*, compartment_id : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertCompartmentGuidToId(compartment_guid, compartment_id)
+    {% end %}
+  end
+
+  def convertCompartmentIdToGuid(compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID, compartment_guid : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertCompartmentIdToGuid(compartment_id, compartment_guid)
+    {% end %}
+  end
+
+  def convertInterfaceNameToLuidA(interface_name : Win32cr::Foundation::PSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceNameToLuidA(interface_name, interface_luid)
+    {% end %}
+  end
+
+  def convertInterfaceNameToLuidW(interface_name : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceNameToLuidW(interface_name, interface_luid)
+    {% end %}
+  end
+
+  def convertInterfaceLuidToNameA(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : Win32cr::Foundation::PSTR, length : LibC::UIntPtrT) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceLuidToNameA(interface_luid, interface_name, length)
+    {% end %}
+  end
+
+  def convertInterfaceLuidToNameW(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : Win32cr::Foundation::PWSTR, length : LibC::UIntPtrT) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceLuidToNameW(interface_luid, interface_name, length)
+    {% end %}
+  end
+
+  def convertInterfaceLuidToIndex(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceLuidToIndex(interface_luid, interface_index)
+    {% end %}
+  end
+
+  def convertInterfaceIndexToLuid(interface_index : UInt32, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceIndexToLuid(interface_index, interface_luid)
+    {% end %}
+  end
+
+  def convertInterfaceLuidToAlias(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_alias : Win32cr::Foundation::PWSTR, length : LibC::UIntPtrT) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceLuidToAlias(interface_luid, interface_alias, length)
+    {% end %}
+  end
+
+  def convertInterfaceAliasToLuid(interface_alias : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceAliasToLuid(interface_alias, interface_luid)
+    {% end %}
+  end
+
+  def convertInterfaceLuidToGuid(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_guid : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceLuidToGuid(interface_luid, interface_guid)
+    {% end %}
+  end
+
+  def convertInterfaceGuidToLuid(interface_guid : LibC::GUID*, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertInterfaceGuidToLuid(interface_guid, interface_luid)
+    {% end %}
+  end
+
+  #def ifNametoindex(interface_name : Win32cr::Foundation::PSTR) : UInt32
+    #C.if_nametoindex(interface_name)
+  #end
+
+  #def ifIndextoname(interface_index : UInt32, interface_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    #C.if_indextoname(interface_index, interface_name)
+  #end
+
+  def getCurrentThreadCompartmentId : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+    {% if !flag?(:docs) %}
+    C.GetCurrentThreadCompartmentId
+    {% end %}
+  end
+
+  def setCurrentThreadCompartmentId(compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetCurrentThreadCompartmentId(compartment_id)
+    {% end %}
+  end
+
+  def getCurrentThreadCompartmentScope(compartment_scope : UInt32*, compartment_id : UInt32*) : Void
+    {% if !flag?(:docs) %}
+    C.GetCurrentThreadCompartmentScope(compartment_scope, compartment_id)
+    {% end %}
+  end
+
+  def setCurrentThreadCompartmentScope(compartment_scope : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetCurrentThreadCompartmentScope(compartment_scope)
+    {% end %}
+  end
+
+  def getJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE) : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+    {% if !flag?(:docs) %}
+    C.GetJobCompartmentId(job_handle)
+    {% end %}
+  end
+
+  def setJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE, compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetJobCompartmentId(job_handle, compartment_id)
+    {% end %}
+  end
+
+  def getSessionCompartmentId(session_id : UInt32) : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+    {% if !flag?(:docs) %}
+    C.GetSessionCompartmentId(session_id)
+    {% end %}
+  end
+
+  def setSessionCompartmentId(session_id : UInt32, compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetSessionCompartmentId(session_id, compartment_id)
+    {% end %}
+  end
+
+  def getDefaultCompartmentId : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+    {% if !flag?(:docs) %}
+    C.GetDefaultCompartmentId
+    {% end %}
+  end
+
+  def getNetworkInformation(network_guid : LibC::GUID*, compartment_id : UInt32*, site_id : UInt32*, network_name : Win32cr::Foundation::PWSTR, length : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetNetworkInformation(network_guid, compartment_id, site_id, network_name, length)
+    {% end %}
+  end
+
+  def setNetworkInformation(network_guid : LibC::GUID*, compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID, network_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetNetworkInformation(network_guid, compartment_id, network_name)
+    {% end %}
+  end
+
+  def convertLengthToIpv4Mask(mask_length : UInt32, mask : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertLengthToIpv4Mask(mask_length, mask)
+    {% end %}
+  end
+
+  def convertIpv4MaskToLength(mask : UInt32, mask_length : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ConvertIpv4MaskToLength(mask, mask_length)
+    {% end %}
+  end
+
+  def getDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetDnsSettings(settings)
+    {% end %}
+  end
+
+  def freeDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Void
+    {% if !flag?(:docs) %}
+    C.FreeDnsSettings(settings)
+    {% end %}
+  end
+
+  def setDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetDnsSettings(settings)
+    {% end %}
+  end
+
+  def getInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetInterfaceDnsSettings(interface, settings)
+    {% end %}
+  end
+
+  def freeInterfaceDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Void
+    {% if !flag?(:docs) %}
+    C.FreeInterfaceDnsSettings(settings)
+    {% end %}
+  end
+
+  def setInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.SetInterfaceDnsSettings(interface, settings)
+    {% end %}
+  end
+
+  def getNetworkConnectivityHint(connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetNetworkConnectivityHint(connectivity_hint)
+    {% end %}
+  end
+
+  def getNetworkConnectivityHintForInterface(interface_index : UInt32, connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.GetNetworkConnectivityHintForInterface(interface_index, connectivity_hint)
+    {% end %}
+  end
+
+  def notifyNetworkConnectivityHintChange(callback : Win32cr::NetworkManagement::IpHelper::PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.NotifyNetworkConnectivityHintChange(callback, caller_context, initial_notification, notification_handle)
+    {% end %}
+  end
+
+  def createFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+    {% if !flag?(:docs) %}
+    C.CreateFlVirtualInterface(row)
+    {% end %}
+  end
+
+  def deleteFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+    {% if !flag?(:docs) %}
+    C.DeleteFlVirtualInterface(row)
+    {% end %}
+  end
+
+  def initializeFlVirtualInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : Void
+    {% if !flag?(:docs) %}
+    C.InitializeFlVirtualInterfaceEntry(row)
+    {% end %}
+  end
+
+  def setFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetFlVirtualInterface(row)
+    {% end %}
+  end
+
+  def getFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+    {% if !flag?(:docs) %}
+    C.GetFlVirtualInterface(row)
+    {% end %}
+  end
+
+  def getFlVirtualInterfaceTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_TABLE**) : UInt32
+    {% if !flag?(:docs) %}
+    C.GetFlVirtualInterfaceTable(family, table)
+    {% end %}
   end
 
   def pfCreateInterface(dwName : UInt32, inAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, outAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, bUseLog : Win32cr::Foundation::BOOL, bMustBeUnique : Win32cr::Foundation::BOOL, ppInterface : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.PfCreateInterface(dwName, inAction, outAction, bUseLog, bMustBeUnique, ppInterface)
+    {% end %}
   end
 
   def pfDeleteInterface(pInterface : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfDeleteInterface(pInterface)
+    {% end %}
   end
 
   def pfAddFiltersToInterface(ih : Void*, cInFilters : UInt32, pfiltIn : Win32cr::NetworkManagement::IpHelper::PF_FILTER_DESCRIPTOR*, cOutFilters : UInt32, pfiltOut : Win32cr::NetworkManagement::IpHelper::PF_FILTER_DESCRIPTOR*, pfHandle : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.PfAddFiltersToInterface(ih, cInFilters, pfiltIn, cOutFilters, pfiltOut, pfHandle)
+    {% end %}
   end
 
   def pfRemoveFiltersFromInterface(ih : Void*, cInFilters : UInt32, pfiltIn : Win32cr::NetworkManagement::IpHelper::PF_FILTER_DESCRIPTOR*, cOutFilters : UInt32, pfiltOut : Win32cr::NetworkManagement::IpHelper::PF_FILTER_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfRemoveFiltersFromInterface(ih, cInFilters, pfiltIn, cOutFilters, pfiltOut)
+    {% end %}
   end
 
   def pfRemoveFilterHandles(pInterface : Void*, cFilters : UInt32, pvHandles : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.PfRemoveFilterHandles(pInterface, cFilters, pvHandles)
+    {% end %}
   end
 
   def pfUnBindInterface(pInterface : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfUnBindInterface(pInterface)
+    {% end %}
   end
 
   def pfBindInterfaceToIndex(pInterface : Void*, dwIndex : UInt32, pfatLinkType : Win32cr::NetworkManagement::IpHelper::PFADDRESSTYPE, link_ip_address : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfBindInterfaceToIndex(pInterface, dwIndex, pfatLinkType, link_ip_address)
+    {% end %}
   end
 
   def pfBindInterfaceToIPAddress(pInterface : Void*, pfatType : Win32cr::NetworkManagement::IpHelper::PFADDRESSTYPE, ip_address : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfBindInterfaceToIPAddress(pInterface, pfatType, ip_address)
+    {% end %}
   end
 
   def pfRebindFilters(pInterface : Void*, pLateBindInfo : Win32cr::NetworkManagement::IpHelper::PF_LATEBIND_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfRebindFilters(pInterface, pLateBindInfo)
+    {% end %}
   end
 
   def pfAddGlobalFilterToInterface(pInterface : Void*, gfFilter : Win32cr::NetworkManagement::IpHelper::GLOBAL_FILTER) : UInt32
+    {% if !flag?(:docs) %}
     C.PfAddGlobalFilterToInterface(pInterface, gfFilter)
+    {% end %}
   end
 
   def pfRemoveGlobalFilterFromInterface(pInterface : Void*, gfFilter : Win32cr::NetworkManagement::IpHelper::GLOBAL_FILTER) : UInt32
+    {% if !flag?(:docs) %}
     C.PfRemoveGlobalFilterFromInterface(pInterface, gfFilter)
+    {% end %}
   end
 
   def pfMakeLog(hEvent : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.PfMakeLog(hEvent)
+    {% end %}
   end
 
   def pfSetLogBuffer(pbBuffer : UInt8*, dwSize : UInt32, dwThreshold : UInt32, dwEntries : UInt32, pdwLoggedEntries : UInt32*, pdwLostEntries : UInt32*, pdwSizeUsed : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfSetLogBuffer(pbBuffer, dwSize, dwThreshold, dwEntries, pdwLoggedEntries, pdwLostEntries, pdwSizeUsed)
+    {% end %}
   end
 
   def pfDeleteLog : UInt32
+    {% if !flag?(:docs) %}
     C.PfDeleteLog
+    {% end %}
   end
 
   def pfGetInterfaceStatistics(pInterface : Void*, ppfStats : Win32cr::NetworkManagement::IpHelper::PF_INTERFACE_STATS*, pdwBufferSize : UInt32*, fResetCounters : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.PfGetInterfaceStatistics(pInterface, ppfStats, pdwBufferSize, fResetCounters)
+    {% end %}
   end
 
   def pfTestPacket(pInInterface : Void*, pOutInterface : Void*, cBytes : UInt32, pbPacket : UInt8*, ppAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION*) : UInt32
+    {% if !flag?(:docs) %}
     C.PfTestPacket(pInInterface, pOutInterface, cBytes, pbPacket, ppAction)
+    {% end %}
   end
 
   @[Link("iphlpapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun GetIfEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::NTSTATUS
+    fun IcmpCreateFile : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun GetIfEntry2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_ENTRY_LEVEL, row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::NTSTATUS
+    fun Icmp6CreateFile : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun GetIfTable2(table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::NTSTATUS
+    fun IcmpCloseHandle(icmp_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetIfTable2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE_LEVEL, table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::NTSTATUS
+    fun IcmpSendEcho(icmp_handle : Win32cr::Foundation::HANDLE, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
 
     # :nodoc:
-    fun GetIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_TABLE**) : Win32cr::Foundation::NTSTATUS
+    fun IcmpSendEcho2(icmp_handle : Win32cr::Foundation::HANDLE, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::IO::PIO_APC_ROUTINE, apc_context : Void*, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
 
     # :nodoc:
-    fun GetInvertedIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_TABLE**) : Win32cr::Foundation::NTSTATUS
+    fun IcmpSendEcho2Ex(icmp_handle : Win32cr::Foundation::HANDLE, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::IO::PIO_APC_ROUTINE, apc_context : Void*, source_address : UInt32, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
 
     # :nodoc:
-    fun GetIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpInterfaceTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_TABLE**) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun InitializeIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Void
-
-    # :nodoc:
-    fun NotifyIpInterfaceChange(family : UInt16, callback : Win32cr::NetworkManagement::IpHelper::PIPINTERFACE_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun SetIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpNetworkConnectionBandwidthEstimates(interface_index : UInt32, address_family : UInt16, bandwidth_estimates : Win32cr::NetworkManagement::IpHelper::MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun CreateUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun DeleteUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetUnicastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun InitializeUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Void
-
-    # :nodoc:
-    fun NotifyUnicastIpAddressChange(family : UInt16, callback : Win32cr::NetworkManagement::IpHelper::PUNICAST_IPADDRESS_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun NotifyStableUnicastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**, caller_callback : Win32cr::NetworkManagement::IpHelper::PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, caller_context : Void*, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun SetUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun CreateAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun DeleteAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetAnycastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_TABLE**) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetMulticastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetMulticastIpAddressTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_TABLE**) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun CreateIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun DeleteIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetBestRoute2(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, address_sort_options : UInt32, best_route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*, best_source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpForwardTable2(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_TABLE2**) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun InitializeIpForwardEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Void
-
-    # :nodoc:
-    fun NotifyRouteChange2(address_family : UInt16, callback : Win32cr::NetworkManagement::IpHelper::PIPFORWARD_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun SetIpForwardEntry2(route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun FlushIpPathTable(family : UInt16) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpPathEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpPathTable(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_TABLE**) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun CreateIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun DeleteIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun FlushIpNetTable2(family : UInt16, interface_index : UInt32) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetIpNetTable2(family : UInt16, table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_TABLE2**) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ResolveIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun SetIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun NotifyTeredoPortChange(callback : Win32cr::NetworkManagement::IpHelper::PTEREDO_PORT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetTeredoPort(port : UInt16*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun CancelMibChangeNotify2(notification_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun FreeMibTable(memory : Void*) : Void
-
-    # :nodoc:
-    fun CreateSortedAddressPairs(source_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, source_address_count : UInt32, destination_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address_count : UInt32, address_sort_options : UInt32, sorted_address_pair_list : Win32cr::Networking::WinSock::SOCKADDR_IN6_PAIR**, sorted_address_pair_count : UInt32*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertCompartmentGuidToId(compartment_guid : LibC::GUID*, compartment_id : UInt32*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertCompartmentIdToGuid(compartment_id : UInt32, compartment_guid : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceNameToLuidA(interface_name : Win32cr::Foundation::PSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceNameToLuidW(interface_name : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceLuidToNameA(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : UInt8*, length : LibC::UIntPtrT) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceLuidToNameW(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : UInt16*, length : LibC::UIntPtrT) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceLuidToIndex(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceIndexToLuid(interface_index : UInt32, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceLuidToAlias(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_alias : UInt16*, length : LibC::UIntPtrT) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceAliasToLuid(interface_alias : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceLuidToGuid(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_guid : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertInterfaceGuidToLuid(interface_guid : LibC::GUID*, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun if_nametoindex(interface_name : Win32cr::Foundation::PSTR) : UInt32
-
-    # :nodoc:
-    fun if_indextoname(interface_index : UInt32, interface_name : UInt8*) : Win32cr::Foundation::PSTR
-
-    # :nodoc:
-    fun GetCurrentThreadCompartmentId : UInt32
-
-    # :nodoc:
-    fun SetCurrentThreadCompartmentId(compartment_id : UInt32) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetCurrentThreadCompartmentScope(compartment_scope : UInt32*, compartment_id : UInt32*) : Void
-
-    # :nodoc:
-    fun SetCurrentThreadCompartmentScope(compartment_scope : UInt32) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE) : UInt32
-
-    # :nodoc:
-    fun SetJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE, compartment_id : UInt32) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetSessionCompartmentId(session_id : UInt32) : UInt32
-
-    # :nodoc:
-    fun SetSessionCompartmentId(session_id : UInt32, compartment_id : UInt32) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetDefaultCompartmentId : UInt32
-
-    # :nodoc:
-    fun GetNetworkInformation(network_guid : LibC::GUID*, compartment_id : UInt32*, site_id : UInt32*, network_name : UInt16*, length : UInt32) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun SetNetworkInformation(network_guid : LibC::GUID*, compartment_id : UInt32, network_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertLengthToIpv4Mask(mask_length : UInt32, mask : UInt32*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun ConvertIpv4MaskToLength(mask : UInt32, mask_length : UInt8*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun FreeDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Void
-
-    # :nodoc:
-    fun SetDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun FreeInterfaceDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Void
-
-    # :nodoc:
-    fun SetInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetNetworkConnectivityHint(connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun GetNetworkConnectivityHintForInterface(interface_index : UInt32, connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun NotifyNetworkConnectivityHintChange(callback : Win32cr::NetworkManagement::IpHelper::PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
-
-    # :nodoc:
-    fun IcmpCreateFile : Win32cr::NetworkManagement::IpHelper::IcmpHandle
-
-    # :nodoc:
-    fun Icmp6CreateFile : Win32cr::NetworkManagement::IpHelper::IcmpHandle
-
-    # :nodoc:
-    fun IcmpCloseHandle(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle) : Win32cr::Foundation::BOOL
-
-    # :nodoc:
-    fun IcmpSendEcho(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
-
-    # :nodoc:
-    fun IcmpSendEcho2(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
-
-    # :nodoc:
-    fun IcmpSendEcho2Ex(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, source_address : UInt32, destination_address : UInt32, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
-
-    # :nodoc:
-    fun Icmp6SendEcho2(icmp_handle : Win32cr::NetworkManagement::IpHelper::IcmpHandle, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, source_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::Ip_option_information*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
+    fun Icmp6SendEcho2(icmp_handle : Win32cr::Foundation::HANDLE, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::IO::PIO_APC_ROUTINE, apc_context : Void*, source_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, request_data : Void*, request_size : UInt16, request_options : Win32cr::NetworkManagement::IpHelper::IP_OPTION_INFORMATION*, reply_buffer : Void*, reply_size : UInt32, timeout : UInt32) : UInt32
 
     # :nodoc:
     fun IcmpParseReplies(reply_buffer : Void*, reply_size : UInt32) : UInt32
@@ -4299,22 +4641,22 @@ module Win32cr::NetworkManagement::IpHelper
     fun SetIpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*, family : UInt32) : UInt32
 
     # :nodoc:
-    fun GetIpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+    fun GetIpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_IPSTATS_LH*, family : UInt32) : UInt32
 
     # :nodoc:
     fun GetIcmpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_ICMP_EX_XPSP1*, family : UInt32) : UInt32
 
     # :nodoc:
-    fun GetTcpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS_LH*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+    fun GetTcpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS_LH*, family : UInt32) : UInt32
 
     # :nodoc:
-    fun GetUdpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+    fun GetUdpStatisticsEx(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS*, family : UInt32) : UInt32
 
     # :nodoc:
-    fun GetTcpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS2*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+    fun GetTcpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_TCPSTATS2*, family : UInt32) : UInt32
 
     # :nodoc:
-    fun GetUdpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS2*, family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : UInt32
+    fun GetUdpStatisticsEx2(statistics : Win32cr::NetworkManagement::IpHelper::MIB_UDPSTATS2*, family : UInt32) : UInt32
 
     # :nodoc:
     fun SetIfEntry(pIfRow : Win32cr::NetworkManagement::IpHelper::MIB_IFROW*) : UInt32
@@ -4362,7 +4704,7 @@ module Win32cr::NetworkManagement::IpHelper
     fun GetUniDirectionalAdapterInfo(pIPIfInfo : Win32cr::NetworkManagement::IpHelper::IP_UNIDIRECTIONAL_ADAPTER_ADDRESS*, dwOutBufLen : UInt32*) : UInt32
 
     # :nodoc:
-    fun NhpAllocateAndGetInterfaceInfoFromStack(ppTable : Win32cr::NetworkManagement::IpHelper::Ip_interface_name_info_w2ksp1**, pdwCount : UInt32*, bOrder : Win32cr::Foundation::BOOL, hHeap : Win32cr::Foundation::HANDLE, dwFlags : UInt32) : UInt32
+    fun NhpAllocateAndGetInterfaceInfoFromStack(ppTable : Win32cr::NetworkManagement::IpHelper::IP_INTERFACE_NAME_INFO_W2KSP1**, pdwCount : UInt32*, bOrder : Win32cr::Foundation::BOOL, hHeap : Win32cr::Foundation::HANDLE, dwFlags : UInt32) : UInt32
 
     # :nodoc:
     fun GetBestInterface(dwDestAddr : UInt32, pdwBestIfIndex : UInt32*) : UInt32
@@ -4401,7 +4743,7 @@ module Win32cr::NetworkManagement::IpHelper
     fun GetAdapterOrderMap : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ORDER_MAP*
 
     # :nodoc:
-    fun GetAdaptersAddresses(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, flags : Win32cr::NetworkManagement::IpHelper::GET_ADAPTERS_ADDRESSES_FLAGS, reserved : Void*, adapter_addresses : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ADDRESSES_LH*, size_pointer : UInt32*) : UInt32
+    fun GetAdaptersAddresses(family : UInt32, flags : Win32cr::NetworkManagement::IpHelper::GET_ADAPTERS_ADDRESSES_FLAGS, reserved : Void*, adapter_addresses : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_ADDRESSES_LH*, size_pointer : UInt32*) : UInt32
 
     # :nodoc:
     fun GetPerAdapterInfo(if_index : UInt32, pPerAdapterInfo : Win32cr::NetworkManagement::IpHelper::IP_PER_ADAPTER_INFO_W2KSP1*, pOutBufLen : UInt32*) : UInt32
@@ -4420,6 +4762,18 @@ module Win32cr::NetworkManagement::IpHelper
 
     # :nodoc:
     fun UnregisterInterfaceTimestampConfigChange(notification_handle : Win32cr::NetworkManagement::IpHelper::HIFTIMESTAMPCHANGE) : Void
+
+    # :nodoc:
+    fun GetInterfaceCurrentTimestampCapabilities(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, timestamp_capabilites : Win32cr::NetworkManagement::IpHelper::INTERFACE_TIMESTAMP_CAPABILITIES*) : UInt32
+
+    # :nodoc:
+    fun GetInterfaceHardwareTimestampCapabilities(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, timestamp_capabilites : Win32cr::NetworkManagement::IpHelper::INTERFACE_TIMESTAMP_CAPABILITIES*) : UInt32
+
+    # :nodoc:
+    fun NotifyIfTimestampConfigChange(caller_context : Void*, callback : Win32cr::NetworkManagement::IpHelper::PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, notification_handle : Win32cr::NetworkManagement::IpHelper::HIFTIMESTAMPCHANGE*) : UInt32
+
+    # :nodoc:
+    fun CancelIfTimestampConfigChange(notification_handle : Win32cr::NetworkManagement::IpHelper::HIFTIMESTAMPCHANGE) : Void
 
     # :nodoc:
     fun IpReleaseAddress(adapter_info : Win32cr::NetworkManagement::IpHelper::IP_ADAPTER_INDEX_MAP*) : UInt32
@@ -4473,6 +4827,284 @@ module Win32cr::NetworkManagement::IpHelper
     fun LookupPersistentUdpPortReservation(start_port : UInt16, number_of_ports : UInt16, token : UInt64*) : UInt32
 
     # :nodoc:
+    fun ParseNetworkString(network_string : Win32cr::Foundation::PWSTR, types : UInt32, address_info : Win32cr::NetworkManagement::IpHelper::NET_ADDRESS_INFO*, port_number : UInt16*, prefix_length : UInt8*) : UInt32
+
+    # :nodoc:
+    fun GetIfEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIfEntry2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_ENTRY_LEVEL, row : Win32cr::NetworkManagement::IpHelper::MIB_IF_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIfTable2(table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIfTable2Ex(level : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE_LEVEL, table : Win32cr::NetworkManagement::IpHelper::MIB_IF_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_IFSTACK_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetInvertedIfStackTable(table : Win32cr::NetworkManagement::IpHelper::MIB_INVERTEDIFSTACK_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpInterfaceTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun InitializeIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Void
+
+    # :nodoc:
+    fun NotifyIpInterfaceChange(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, callback : Win32cr::NetworkManagement::IpHelper::PIPINTERFACE_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun SetIpInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPINTERFACE_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpNetworkConnectionBandwidthEstimates(interface_index : UInt32, address_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, bandwidth_estimates : Win32cr::NetworkManagement::IpHelper::MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun CreateUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun DeleteUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetUnicastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun InitializeUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Void
+
+    # :nodoc:
+    fun NotifyUnicastIpAddressChange(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, callback : Win32cr::NetworkManagement::IpHelper::PUNICAST_IPADDRESS_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun NotifyStableUnicastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_TABLE**, caller_callback : Win32cr::NetworkManagement::IpHelper::PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, caller_context : Void*, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun SetUnicastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_UNICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun CreateAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun DeleteAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetAnycastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetAnycastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_ANYCASTIPADDRESS_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetMulticastIpAddressEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetMulticastIpAddressTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_MULTICASTIPADDRESS_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun CreateIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun DeleteIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetBestRoute2(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, destination_address : Win32cr::Networking::WinSock::SOCKADDR_INET*, address_sort_options : UInt32, best_route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*, best_source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpForwardEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpForwardTable2(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun InitializeIpForwardEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Void
+
+    # :nodoc:
+    fun NotifyRouteChange2(address_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, callback : Win32cr::NetworkManagement::IpHelper::PIPFORWARD_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun SetIpForwardEntry2(route : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARD_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun FlushIpPathTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpPathEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_ROW*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpPathTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPPATH_TABLE**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun CreateIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun DeleteIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun FlushIpNetTable2(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, interface_index : UInt32) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetIpNetTable2(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_TABLE2**) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ResolveIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*, source_address : Win32cr::Networking::WinSock::SOCKADDR_INET*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun SetIpNetEntry2(row : Win32cr::NetworkManagement::IpHelper::MIB_IPNET_ROW2*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun NotifyTeredoPortChange(callback : Win32cr::NetworkManagement::IpHelper::PTEREDO_PORT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetTeredoPort(port : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun CancelMibChangeNotify2(notification_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun FreeMibTable(memory : Void*) : Void
+
+    # :nodoc:
+    fun CreateSortedAddressPairs(source_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, source_address_count : UInt32, destination_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address_count : UInt32, address_sort_options : UInt32, sorted_address_pair_list : Win32cr::Networking::WinSock::SOCKADDR_IN6_PAIR**, sorted_address_pair_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertCompartmentGuidToId(compartment_guid : LibC::GUID*, compartment_id : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertCompartmentIdToGuid(compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID, compartment_guid : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceNameToLuidA(interface_name : Win32cr::Foundation::PSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceNameToLuidW(interface_name : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceLuidToNameA(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : Win32cr::Foundation::PSTR, length : LibC::UIntPtrT) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceLuidToNameW(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_name : Win32cr::Foundation::PWSTR, length : LibC::UIntPtrT) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceLuidToIndex(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_index : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceIndexToLuid(interface_index : UInt32, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceLuidToAlias(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_alias : Win32cr::Foundation::PWSTR, length : LibC::UIntPtrT) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceAliasToLuid(interface_alias : Win32cr::Foundation::PWSTR, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceLuidToGuid(interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*, interface_guid : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertInterfaceGuidToLuid(interface_guid : LibC::GUID*, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
+
+    # Commented out due to being part of LibC
+    # :nodoc:
+    #fun if_nametoindex(interface_name : Win32cr::Foundation::PSTR) : UInt32
+
+    # Commented out due to being part of LibC
+    # :nodoc:
+    #fun if_indextoname(interface_index : UInt32, interface_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+
+    # :nodoc:
+    fun GetCurrentThreadCompartmentId : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+
+    # :nodoc:
+    fun SetCurrentThreadCompartmentId(compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetCurrentThreadCompartmentScope(compartment_scope : UInt32*, compartment_id : UInt32*) : Void
+
+    # :nodoc:
+    fun SetCurrentThreadCompartmentScope(compartment_scope : UInt32) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE) : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+
+    # :nodoc:
+    fun SetJobCompartmentId(job_handle : Win32cr::Foundation::HANDLE, compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetSessionCompartmentId(session_id : UInt32) : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+
+    # :nodoc:
+    fun SetSessionCompartmentId(session_id : UInt32, compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetDefaultCompartmentId : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
+
+    # :nodoc:
+    fun GetNetworkInformation(network_guid : LibC::GUID*, compartment_id : UInt32*, site_id : UInt32*, network_name : Win32cr::Foundation::PWSTR, length : UInt32) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun SetNetworkInformation(network_guid : LibC::GUID*, compartment_id : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID, network_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertLengthToIpv4Mask(mask_length : UInt32, mask : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun ConvertIpv4MaskToLength(mask : UInt32, mask_length : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun FreeDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Void
+
+    # :nodoc:
+    fun SetDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun FreeInterfaceDnsSettings(settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Void
+
+    # :nodoc:
+    fun SetInterfaceDnsSettings(interface : LibC::GUID, settings : Win32cr::NetworkManagement::IpHelper::DNS_INTERFACE_SETTINGS*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetNetworkConnectivityHint(connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetNetworkConnectivityHintForInterface(interface_index : UInt32, connectivity_hint : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_HINT*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun NotifyNetworkConnectivityHintChange(callback : Win32cr::NetworkManagement::IpHelper::PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK, caller_context : Void*, initial_notification : Win32cr::Foundation::BOOLEAN, notification_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun CreateFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+
+    # :nodoc:
+    fun DeleteFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+
+    # :nodoc:
+    fun InitializeFlVirtualInterfaceEntry(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : Void
+
+    # :nodoc:
+    fun SetFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+
+    # :nodoc:
+    fun GetFlVirtualInterface(row : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_ROW*) : UInt32
+
+    # :nodoc:
+    fun GetFlVirtualInterfaceTable(family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, table : Win32cr::NetworkManagement::IpHelper::MIB_FL_VIRTUAL_INTERFACE_TABLE**) : UInt32
+
+    # :nodoc:
     fun PfCreateInterface(dwName : UInt32, inAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, outAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION, bUseLog : Win32cr::Foundation::BOOL, bMustBeUnique : Win32cr::Foundation::BOOL, ppInterface : Void**) : UInt32
 
     # :nodoc:
@@ -4521,4 +5153,5 @@ module Win32cr::NetworkManagement::IpHelper
     fun PfTestPacket(pInInterface : Void*, pOutInterface : Void*, cBytes : UInt32, pbPacket : UInt8*, ppAction : Win32cr::NetworkManagement::IpHelper::PFFORWARD_ACTION*) : UInt32
 
   end
+  {% end %}
 end

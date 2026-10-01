@@ -72,6 +72,8 @@ module Win32cr::AI::MachineLearning::WinML
   enum MLOperatorEdgeType : UInt32
     Undefined = 0_u32
     Tensor = 1_u32
+    SequenceTensor = 2_u32
+    Primitive = 3_u32
   end
   @[Flags]
   enum MLOperatorParameterOptions : UInt32
@@ -134,6 +136,16 @@ module Win32cr::AI::MachineLearning::WinML
     property fields : Win32cr::AI::MachineLearning::WinML::WINML_TENSOR_DATA_TYPE
     property anonymous2 : Anonymous2_e__Union_
 
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property pStringKeys : Win32cr::Foundation::PWSTR*
+    property pIntKeys : Int64*
+    def initialize(@pStringKeys : Win32cr::Foundation::PWSTR*, @pIntKeys : Int64*)
+    end
+    end
+
+
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
@@ -142,16 +154,6 @@ module Win32cr::AI::MachineLearning::WinML
     property pFloatFields : Float32*
     property pDoubleFields : Float64*
     def initialize(@pStringFields : Win32cr::Foundation::PWSTR*, @pIntFields : Int64*, @pFloatFields : Float32*, @pDoubleFields : Float64*)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property pStringKeys : Win32cr::Foundation::PWSTR*
-    property pIntKeys : Int64*
-    def initialize(@pStringKeys : Win32cr::Foundation::PWSTR*, @pIntKeys : Int64*)
     end
     end
 
@@ -320,8 +322,8 @@ module Win32cr::AI::MachineLearning::WinML
   struct MLOperatorAttribute
     property name : Win32cr::Foundation::PSTR
     property type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType
-    property required : Bool
-    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, @required : Bool)
+    property required : UInt8
+    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, @required : UInt8)
     end
   end
 
@@ -390,7 +392,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IWinMLModelVtbl,
+
+  record IWinMLModelVtable,
     query_interface : Proc(IWinMLModel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWinMLModel*, UInt32),
     release : Proc(IWinMLModel*, UInt32),
@@ -401,7 +404,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IWinMLModel, lpVtbl : IWinMLModelVtbl* do
+  record IWinMLModel, lpVtbl : IWinMLModelVtable* do
     GUID = LibC::GUID.new(0xe2eeb6a9_u32, 0xf31f_u16, 0x4055_u16, StaticArray[0xa5_u8, 0x21_u8, 0xe3_u8, 0xb_u8, 0x5b_u8, 0x33_u8, 0x66_u8, 0x4a_u8])
     def query_interface(this : IWinMLModel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -428,7 +431,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IWinMLEvaluationContextVtbl,
+
+  record IWinMLEvaluationContextVtable,
     query_interface : Proc(IWinMLEvaluationContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWinMLEvaluationContext*, UInt32),
     release : Proc(IWinMLEvaluationContext*, UInt32),
@@ -438,7 +442,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IWinMLEvaluationContext, lpVtbl : IWinMLEvaluationContextVtbl* do
+  record IWinMLEvaluationContext, lpVtbl : IWinMLEvaluationContextVtable* do
     GUID = LibC::GUID.new(0x95848f9e_u32, 0x583d_u16, 0x4054_u16, StaticArray[0xaf_u8, 0x12_u8, 0x91_u8, 0x63_u8, 0x87_u8, 0xcd_u8, 0x84_u8, 0x26_u8])
     def query_interface(this : IWinMLEvaluationContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -462,7 +466,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IWinMLRuntimeVtbl,
+
+  record IWinMLRuntimeVtable,
     query_interface : Proc(IWinMLRuntime*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWinMLRuntime*, UInt32),
     release : Proc(IWinMLRuntime*, UInt32),
@@ -472,7 +477,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IWinMLRuntime, lpVtbl : IWinMLRuntimeVtbl* do
+  record IWinMLRuntime, lpVtbl : IWinMLRuntimeVtable* do
     GUID = LibC::GUID.new(0xa0425329_u32, 0x40ae_u16, 0x48d9_u16, StaticArray[0xbc_u8, 0xe3_u8, 0x82_u8, 0x9e_u8, 0xf7_u8, 0xb8_u8, 0xa4_u8, 0x1a_u8])
     def query_interface(this : IWinMLRuntime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -496,7 +501,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IWinMLRuntimeFactoryVtbl,
+
+  record IWinMLRuntimeFactoryVtable,
     query_interface : Proc(IWinMLRuntimeFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWinMLRuntimeFactory*, UInt32),
     release : Proc(IWinMLRuntimeFactory*, UInt32),
@@ -504,7 +510,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IWinMLRuntimeFactory, lpVtbl : IWinMLRuntimeFactoryVtbl* do
+  record IWinMLRuntimeFactory, lpVtbl : IWinMLRuntimeFactoryVtable* do
     GUID = LibC::GUID.new(0xa807b84d_u32, 0x4ae5_u16, 0x4bc0_u16, StaticArray[0xa7_u8, 0x6a_u8, 0x94_u8, 0x1a_u8, 0xa2_u8, 0x46_u8, 0xbd_u8, 0x41_u8])
     def query_interface(this : IWinMLRuntimeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -522,18 +528,19 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorAttributesVtbl,
+
+  record IMLOperatorAttributesVtable,
     query_interface : Proc(IMLOperatorAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorAttributes*, UInt32),
     release : Proc(IMLOperatorAttributes*, UInt32),
     get_attribute_element_count : Proc(IMLOperatorAttributes*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32*, Win32cr::Foundation::HRESULT),
     get_attribute : Proc(IMLOperatorAttributes*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32, LibC::UIntPtrT, Void*, Win32cr::Foundation::HRESULT),
     get_string_attribute_element_length : Proc(IMLOperatorAttributes*, Win32cr::Foundation::PSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_string_attribute_element : Proc(IMLOperatorAttributes*, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT)
+    get_string_attribute_element : Proc(IMLOperatorAttributes*, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMLOperatorAttributes, lpVtbl : IMLOperatorAttributesVtbl* do
+  record IMLOperatorAttributes, lpVtbl : IMLOperatorAttributesVtable* do
     GUID = LibC::GUID.new(0x4b1b1759_u32, 0xec40_u16, 0x466c_u16, StaticArray[0xaa_u8, 0xb4_u8, 0xbe_u8, 0xb5_u8, 0x34_u8, 0x7f_u8, 0xd2_u8, 0x4c_u8])
     def query_interface(this : IMLOperatorAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -553,14 +560,15 @@ module Win32cr::AI::MachineLearning::WinML
     def get_string_attribute_element_length(this : IMLOperatorAttributes*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element_length.call(this, name, elementIndex, attributeElementByteSize)
     end
-    def get_string_attribute_element(this : IMLOperatorAttributes*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : UInt8*) : Win32cr::Foundation::HRESULT
+    def get_string_attribute_element(this : IMLOperatorAttributes*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element.call(this, name, elementIndex, attributeElementByteSize, attributeElement)
     end
 
   end
 
   @[Extern]
-  record IMLOperatorTensorShapeDescriptionVtbl,
+
+  record IMLOperatorTensorShapeDescriptionVtable,
     query_interface : Proc(IMLOperatorTensorShapeDescription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorTensorShapeDescription*, UInt32),
     release : Proc(IMLOperatorTensorShapeDescription*, UInt32),
@@ -572,7 +580,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorTensorShapeDescription, lpVtbl : IMLOperatorTensorShapeDescriptionVtbl* do
+  record IMLOperatorTensorShapeDescription, lpVtbl : IMLOperatorTensorShapeDescriptionVtable* do
     GUID = LibC::GUID.new(0xf20e8cbe_u32, 0x3b28_u16, 0x4248_u16, StaticArray[0xbe_u8, 0x95_u8, 0xf9_u8, 0x6f_u8, 0xbc_u8, 0x6e_u8, 0x46_u8, 0x43_u8])
     def query_interface(this : IMLOperatorTensorShapeDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -602,14 +610,15 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorKernelCreationContextVtbl,
+
+  record IMLOperatorKernelCreationContextVtable,
     query_interface : Proc(IMLOperatorKernelCreationContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorKernelCreationContext*, UInt32),
     release : Proc(IMLOperatorKernelCreationContext*, UInt32),
     get_attribute_element_count : Proc(IMLOperatorKernelCreationContext*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32*, Win32cr::Foundation::HRESULT),
     get_attribute : Proc(IMLOperatorKernelCreationContext*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32, LibC::UIntPtrT, Void*, Win32cr::Foundation::HRESULT),
     get_string_attribute_element_length : Proc(IMLOperatorKernelCreationContext*, Win32cr::Foundation::PSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_string_attribute_element : Proc(IMLOperatorKernelCreationContext*, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_string_attribute_element : Proc(IMLOperatorKernelCreationContext*, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
     get_input_count : Proc(IMLOperatorKernelCreationContext*, UInt32),
     get_output_count : Proc(IMLOperatorKernelCreationContext*, UInt32),
     is_input_valid : Proc(IMLOperatorKernelCreationContext*, UInt32, Bool),
@@ -622,7 +631,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorKernelCreationContext, lpVtbl : IMLOperatorKernelCreationContextVtbl* do
+  record IMLOperatorKernelCreationContext, lpVtbl : IMLOperatorKernelCreationContextVtable* do
     GUID = LibC::GUID.new(0x5459b53d_u32, 0xa0fc_u16, 0x4665_u16, StaticArray[0xad_u8, 0xdd_u8, 0x70_u8, 0x17_u8, 0x1e_u8, 0xf7_u8, 0xe6_u8, 0x31_u8])
     def query_interface(this : IMLOperatorKernelCreationContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -642,7 +651,7 @@ module Win32cr::AI::MachineLearning::WinML
     def get_string_attribute_element_length(this : IMLOperatorKernelCreationContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element_length.call(this, name, elementIndex, attributeElementByteSize)
     end
-    def get_string_attribute_element(this : IMLOperatorKernelCreationContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : UInt8*) : Win32cr::Foundation::HRESULT
+    def get_string_attribute_element(this : IMLOperatorKernelCreationContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element.call(this, name, elementIndex, attributeElementByteSize, attributeElement)
     end
     def get_input_count(this : IMLOperatorKernelCreationContext*) : UInt32
@@ -676,7 +685,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorTensorVtbl,
+
+  record IMLOperatorTensorVtable,
     query_interface : Proc(IMLOperatorTensor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorTensor*, UInt32),
     release : Proc(IMLOperatorTensor*, UInt32),
@@ -690,7 +700,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorTensor, lpVtbl : IMLOperatorTensorVtbl* do
+  record IMLOperatorTensor, lpVtbl : IMLOperatorTensorVtable* do
     GUID = LibC::GUID.new(0x7fe41f41_u32, 0xf430_u16, 0x440e_u16, StaticArray[0xae_u8, 0xce_u8, 0x54_u8, 0x41_u8, 0x6d_u8, 0xc8_u8, 0xb9_u8, 0xdb_u8])
     def query_interface(this : IMLOperatorTensor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -726,7 +736,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorKernelContextVtbl,
+
+  record IMLOperatorKernelContextVtable,
     query_interface : Proc(IMLOperatorKernelContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorKernelContext*, UInt32),
     release : Proc(IMLOperatorKernelContext*, UInt32),
@@ -738,7 +749,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorKernelContext, lpVtbl : IMLOperatorKernelContextVtbl* do
+  record IMLOperatorKernelContext, lpVtbl : IMLOperatorKernelContextVtable* do
     GUID = LibC::GUID.new(0x82536a28_u32, 0xf022_u16, 0x4769_u16, StaticArray[0x9d_u8, 0x3f_u8, 0x8b_u8, 0x27_u8, 0x8f_u8, 0x84_u8, 0xc0_u8, 0xc3_u8])
     def query_interface(this : IMLOperatorKernelContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -768,7 +779,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorKernelVtbl,
+
+  record IMLOperatorKernelVtable,
     query_interface : Proc(IMLOperatorKernel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorKernel*, UInt32),
     release : Proc(IMLOperatorKernel*, UInt32),
@@ -776,7 +788,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorKernel, lpVtbl : IMLOperatorKernelVtbl* do
+  record IMLOperatorKernel, lpVtbl : IMLOperatorKernelVtable* do
     GUID = LibC::GUID.new(0x11c4b4a0_u32, 0xb467_u16, 0x4eaa_u16, StaticArray[0xa1_u8, 0xa6_u8, 0xb9_u8, 0x61_u8, 0xd8_u8, 0xd0_u8, 0xed_u8, 0x79_u8])
     def query_interface(this : IMLOperatorKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -794,14 +806,15 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorShapeInferenceContextVtbl,
+
+  record IMLOperatorShapeInferenceContextVtable,
     query_interface : Proc(IMLOperatorShapeInferenceContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorShapeInferenceContext*, UInt32),
     release : Proc(IMLOperatorShapeInferenceContext*, UInt32),
     get_attribute_element_count : Proc(IMLOperatorShapeInferenceContext*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32*, Win32cr::Foundation::HRESULT),
     get_attribute : Proc(IMLOperatorShapeInferenceContext*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32, LibC::UIntPtrT, Void*, Win32cr::Foundation::HRESULT),
     get_string_attribute_element_length : Proc(IMLOperatorShapeInferenceContext*, Win32cr::Foundation::PSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_string_attribute_element : Proc(IMLOperatorShapeInferenceContext*, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_string_attribute_element : Proc(IMLOperatorShapeInferenceContext*, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
     get_input_count : Proc(IMLOperatorShapeInferenceContext*, UInt32),
     get_output_count : Proc(IMLOperatorShapeInferenceContext*, UInt32),
     is_input_valid : Proc(IMLOperatorShapeInferenceContext*, UInt32, Bool),
@@ -813,7 +826,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorShapeInferenceContext, lpVtbl : IMLOperatorShapeInferenceContextVtbl* do
+  record IMLOperatorShapeInferenceContext, lpVtbl : IMLOperatorShapeInferenceContextVtable* do
     GUID = LibC::GUID.new(0x105b6b29_u32, 0x5408_u16, 0x4a68_u16, StaticArray[0x99_u8, 0x59_u8, 0x9_u8, 0xb5_u8, 0x95_u8, 0x5a_u8, 0x34_u8, 0x92_u8])
     def query_interface(this : IMLOperatorShapeInferenceContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -833,7 +846,7 @@ module Win32cr::AI::MachineLearning::WinML
     def get_string_attribute_element_length(this : IMLOperatorShapeInferenceContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element_length.call(this, name, elementIndex, attributeElementByteSize)
     end
-    def get_string_attribute_element(this : IMLOperatorShapeInferenceContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : UInt8*) : Win32cr::Foundation::HRESULT
+    def get_string_attribute_element(this : IMLOperatorShapeInferenceContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element.call(this, name, elementIndex, attributeElementByteSize, attributeElement)
     end
     def get_input_count(this : IMLOperatorShapeInferenceContext*) : UInt32
@@ -864,14 +877,15 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorTypeInferenceContextVtbl,
+
+  record IMLOperatorTypeInferenceContextVtable,
     query_interface : Proc(IMLOperatorTypeInferenceContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorTypeInferenceContext*, UInt32),
     release : Proc(IMLOperatorTypeInferenceContext*, UInt32),
     get_attribute_element_count : Proc(IMLOperatorTypeInferenceContext*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32*, Win32cr::Foundation::HRESULT),
     get_attribute : Proc(IMLOperatorTypeInferenceContext*, Win32cr::Foundation::PSTR, Win32cr::AI::MachineLearning::WinML::MLOperatorAttributeType, UInt32, LibC::UIntPtrT, Void*, Win32cr::Foundation::HRESULT),
     get_string_attribute_element_length : Proc(IMLOperatorTypeInferenceContext*, Win32cr::Foundation::PSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_string_attribute_element : Proc(IMLOperatorTypeInferenceContext*, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_string_attribute_element : Proc(IMLOperatorTypeInferenceContext*, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
     get_input_count : Proc(IMLOperatorTypeInferenceContext*, UInt32),
     get_output_count : Proc(IMLOperatorTypeInferenceContext*, UInt32),
     is_input_valid : Proc(IMLOperatorTypeInferenceContext*, UInt32, Bool),
@@ -881,7 +895,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorTypeInferenceContext, lpVtbl : IMLOperatorTypeInferenceContextVtbl* do
+  record IMLOperatorTypeInferenceContext, lpVtbl : IMLOperatorTypeInferenceContextVtable* do
     GUID = LibC::GUID.new(0xec893bb1_u32, 0xf938_u16, 0x427b_u16, StaticArray[0x84_u8, 0x88_u8, 0xc8_u8, 0xdc_u8, 0xf7_u8, 0x75_u8, 0xf1_u8, 0x38_u8])
     def query_interface(this : IMLOperatorTypeInferenceContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -901,7 +915,7 @@ module Win32cr::AI::MachineLearning::WinML
     def get_string_attribute_element_length(this : IMLOperatorTypeInferenceContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element_length.call(this, name, elementIndex, attributeElementByteSize)
     end
-    def get_string_attribute_element(this : IMLOperatorTypeInferenceContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : UInt8*) : Win32cr::Foundation::HRESULT
+    def get_string_attribute_element(this : IMLOperatorTypeInferenceContext*, name : Win32cr::Foundation::PSTR, elementIndex : UInt32, attributeElementByteSize : UInt32, attributeElement : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute_element.call(this, name, elementIndex, attributeElementByteSize, attributeElement)
     end
     def get_input_count(this : IMLOperatorTypeInferenceContext*) : UInt32
@@ -926,7 +940,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorTypeInferrerVtbl,
+
+  record IMLOperatorTypeInferrerVtable,
     query_interface : Proc(IMLOperatorTypeInferrer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorTypeInferrer*, UInt32),
     release : Proc(IMLOperatorTypeInferrer*, UInt32),
@@ -934,7 +949,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorTypeInferrer, lpVtbl : IMLOperatorTypeInferrerVtbl* do
+  record IMLOperatorTypeInferrer, lpVtbl : IMLOperatorTypeInferrerVtable* do
     GUID = LibC::GUID.new(0x781aeb48_u32, 0x9bcb_u16, 0x4797_u16, StaticArray[0xbf_u8, 0x77_u8, 0x8b_u8, 0xf4_u8, 0x55_u8, 0x21_u8, 0x7b_u8, 0xeb_u8])
     def query_interface(this : IMLOperatorTypeInferrer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -952,7 +967,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorShapeInferrerVtbl,
+
+  record IMLOperatorShapeInferrerVtable,
     query_interface : Proc(IMLOperatorShapeInferrer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorShapeInferrer*, UInt32),
     release : Proc(IMLOperatorShapeInferrer*, UInt32),
@@ -960,7 +976,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorShapeInferrer, lpVtbl : IMLOperatorShapeInferrerVtbl* do
+  record IMLOperatorShapeInferrer, lpVtbl : IMLOperatorShapeInferrerVtable* do
     GUID = LibC::GUID.new(0x540be5be_u32, 0xa6c9_u16, 0x40ee_u16, StaticArray[0x83_u8, 0xf6_u8, 0xd2_u8, 0xb8_u8, 0xb4_u8, 0xa_u8, 0x77_u8, 0x98_u8])
     def query_interface(this : IMLOperatorShapeInferrer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -978,7 +994,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorKernelFactoryVtbl,
+
+  record IMLOperatorKernelFactoryVtable,
     query_interface : Proc(IMLOperatorKernelFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorKernelFactory*, UInt32),
     release : Proc(IMLOperatorKernelFactory*, UInt32),
@@ -986,7 +1003,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorKernelFactory, lpVtbl : IMLOperatorKernelFactoryVtbl* do
+  record IMLOperatorKernelFactory, lpVtbl : IMLOperatorKernelFactoryVtable* do
     GUID = LibC::GUID.new(0xef15ad6f_u32, 0xdc9_u16, 0x4908_u16, StaticArray[0xab_u8, 0x35_u8, 0xa5_u8, 0x75_u8, 0xa3_u8, 0xd_u8, 0xfb_u8, 0xf8_u8])
     def query_interface(this : IMLOperatorKernelFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1004,7 +1021,8 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   @[Extern]
-  record IMLOperatorRegistryVtbl,
+
+  record IMLOperatorRegistryVtable,
     query_interface : Proc(IMLOperatorRegistry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLOperatorRegistry*, UInt32),
     release : Proc(IMLOperatorRegistry*, UInt32),
@@ -1013,7 +1031,7 @@ module Win32cr::AI::MachineLearning::WinML
 
 
   @[Extern]
-  record IMLOperatorRegistry, lpVtbl : IMLOperatorRegistryVtbl* do
+  record IMLOperatorRegistry, lpVtbl : IMLOperatorRegistryVtable* do
     GUID = LibC::GUID.new(0x2af9dd2d_u32, 0xb516_u16, 0x4672_u16, StaticArray[0x9a_u8, 0xb5_u8, 0x53_u8, 0xc_u8, 0x20_u8, 0x84_u8, 0x93_u8, 0xad_u8])
     def query_interface(this : IMLOperatorRegistry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1034,15 +1052,20 @@ module Win32cr::AI::MachineLearning::WinML
   end
 
   def winMLCreateRuntime(runtime : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinMLCreateRuntime(runtime)
+    {% end %}
   end
 
   def mLCreateOperatorRegistry(registry : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MLCreateOperatorRegistry(registry)
+    {% end %}
   end
 
   @[Link("winml")]
   @[Link("windows.ai.machinelearning")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WinMLCreateRuntime(runtime : Void**) : Win32cr::Foundation::HRESULT
@@ -1051,4 +1074,5 @@ module Win32cr::AI::MachineLearning::WinML
     fun MLCreateOperatorRegistry(registry : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -3,6 +3,9 @@ require "./../system/io.cr"
 
 module Win32cr::Devices::BiometricFramework
   extend self
+  alias WINIBIO_SENSOR_CONTEXT = LibC::IntPtrT
+  alias WINIBIO_ENGINE_CONTEXT = LibC::IntPtrT
+  alias WINIBIO_STORAGE_CONTEXT = LibC::IntPtrT
   alias PWINBIO_ASYNC_COMPLETION_CALLBACK = Proc(Win32cr::Devices::BiometricFramework::WINBIO_ASYNC_RESULT*, Void)
 
   alias PWINBIO_VERIFY_CALLBACK = Proc(Void*, Win32cr::Foundation::HRESULT, UInt32, Win32cr::Foundation::BOOLEAN, UInt32, Void)
@@ -275,6 +278,28 @@ module Win32cr::Devices::BiometricFramework
   WINBIO_SCP_ENCRYPTION_KEY_SIZE_V1 = 32_u32
   WINBIO_BIR_ALIGN_SIZE = 8_u32
   WINBIO_BIR_ALGIN_SIZE = 8_u32
+  WINBIO_DATA_FLAG_PRIVACY = 2_u16
+  WINBIO_DATA_FLAG_INTEGRITY = 1_u16
+  WINBIO_DATA_FLAG_SIGNED = 4_u16
+  WINBIO_DATA_FLAG_RAW = 32_u16
+  WINBIO_DATA_FLAG_INTERMEDIATE = 64_u16
+  WINBIO_DATA_FLAG_PROCESSED = 128_u16
+  WINBIO_DATA_FLAG_OPTION_MASK_PRESENT = 8_u16
+  WINBIO_ANSI_381_PIXELS_PER_INCH = 1_u16
+  WINBIO_ANSI_381_PIXELS_PER_CM = 2_u16
+  WINBIO_ANSI_381_IMG_UNCOMPRESSED = 0_u16
+  WINBIO_ANSI_381_IMG_BIT_PACKED = 1_u16
+  WINBIO_ANSI_381_IMG_COMPRESSED_WSQ = 2_u16
+  WINBIO_ANSI_381_IMG_COMPRESSED_JPEG = 3_u16
+  WINBIO_ANSI_381_IMG_COMPRESSED_JPEG2000 = 4_u16
+  WINBIO_ANSI_381_IMG_COMPRESSED_PNG = 5_u16
+  WINBIO_ANSI_381_IMP_TYPE_LIVE_SCAN_PLAIN = 0_u16
+  WINBIO_ANSI_381_IMP_TYPE_LIVE_SCAN_ROLLED = 1_u16
+  WINBIO_ANSI_381_IMP_TYPE_NONLIVE_SCAN_PLAIN = 2_u16
+  WINBIO_ANSI_381_IMP_TYPE_NONLIVE_SCAN_ROLLED = 3_u16
+  WINBIO_ANSI_381_IMP_TYPE_LATENT = 7_u16
+  WINBIO_ANSI_381_IMP_TYPE_SWIPE = 8_u16
+  WINBIO_ANSI_381_IMP_TYPE_LIVE_SCAN_CONTACTLESS = 9_u16
   FACILITY_WINBIO = 9_u32
   FACILITY_NONE = 0_u32
   WINBIO_E_UNSUPPORTED_FACTOR = -2146861055_i32
@@ -363,7 +388,7 @@ module Win32cr::Devices::BiometricFramework
   WINBIO_E_ENROLLMENT_CANCELED_BY_SUSPEND = -2146860965_i32
   WINBIO_I_MORE_DATA = 589825_i32
   WINBIO_I_EXTENDED_STATUS_INFORMATION = 589826_i32
-  GUID_DEVINTERFACE_BIOMETRIC_READER = "e2b5183a-99ea-4cc3-ad6b-80ca8d715b80"
+  GUID_DEVINTERFACE_BIOMETRIC_READER = LibC::GUID.new(0xe2b5183a_u32, 0x99ea_u16, 0x4cc3_u16, StaticArray[0xad_u8, 0x6b_u8, 0x80_u8, 0xca_u8, 0x8d_u8, 0x71_u8, 0x5b_u8, 0x80_u8])
   IOCTL_BIOMETRIC_VENDOR = 4464640_u32
   WINBIO_WBDI_MAJOR_VERSION = 1_u32
   WINBIO_WBDI_MINOR_VERSION = 0_u32
@@ -406,6 +431,24 @@ module Win32cr::Devices::BiometricFramework
   enum WINBIO_CREDENTIAL_STATE
     WINBIO_CREDENTIAL_NOT_SET = 1_i32
     WINBIO_CREDENTIAL_SET = 2_i32
+  end
+  enum WINBIO_ESS_STATE_FLAGS
+    WINBIO_ESS_REQUIRES_TPM2 = 1_i32
+    WINBIO_ESS_REQUIRES_VBS_CAPABLE = 2_i32
+    WINBIO_ESS_REQUIRES_NON_VBS_WINDOWS_HELLO_ABSENCE = 4_i32
+    WINBIO_ESS_REQUIRES_VBS_WINDOWS_HELLO = 8_i32
+    WINBIO_ESS_REQUIRES_VBS_RUNNING = 16_i32
+    WINBIO_ESS_REQUIRES_VBS_ENCRYPTION_KEY = 32_i32
+    WINBIO_ESS_REQUIRES_ENABLEMENT = 64_i32
+    WINBIO_ESS_MANAGED_BY_POLICY = 128_i32
+    WINBIO_ESS_REQUIRES_NON_VBS_BIOMETRIC_ENROLLMENT_ABSENCE = 256_i32
+    WINBIO_ESS_REQUIRES_VBS_BIOMETRIC_ENROLLMENT = 512_i32
+    WINBIO_ESS_REQUIRES_FACE_SENSOR = 1024_i32
+    WINBIO_ESS_REQUIRES_FPR_SENSOR = 2048_i32
+    WINBIO_ESS_REQUIRES_ISOLATED_PROCESS = 4096_i32
+    WINBIO_ESS_BLOCKED_NON_ESS_FPR = 8192_i32
+    WINBIO_ESS_BLOCKED_NON_ESS_CAMERA = 16384_i32
+    WINBIO_ESS_SOURCE_DEFAULT = 32768_i32
   end
   enum WINBIO_ASYNC_NOTIFICATION_METHOD
     WINBIO_ASYNC_NOTIFY_NONE = 0_i32
@@ -510,7 +553,7 @@ module Win32cr::Devices::BiometricFramework
     property subtype : UInt8
     property purpose : UInt8
     property data_quality : Int8
-    property creation_date : Win32cr::Foundation::LARGE_INTEGER
+    property creation_date : Int64
     property validity_period : ValidityPeriod_e__Struct_
     property biometric_data_format : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT
     property product_id : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT
@@ -518,13 +561,13 @@ module Win32cr::Devices::BiometricFramework
     # Nested Type ValidityPeriod_e__Struct_
     @[Extern]
     struct ValidityPeriod_e__Struct_
-    property begin_date : Win32cr::Foundation::LARGE_INTEGER
-    property end_date : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@begin_date : Win32cr::Foundation::LARGE_INTEGER, @end_date : Win32cr::Foundation::LARGE_INTEGER)
+    property begin_date : Int64
+    property end_date : Int64
+    def initialize(@begin_date : Int64, @end_date : Int64)
     end
     end
 
-    def initialize(@valid_fields : UInt16, @header_version : UInt8, @patron_header_version : UInt8, @data_flags : UInt8, @type__ : UInt32, @subtype : UInt8, @purpose : UInt8, @data_quality : Int8, @creation_date : Win32cr::Foundation::LARGE_INTEGER, @validity_period : ValidityPeriod_e__Struct_, @biometric_data_format : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT, @product_id : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT)
+    def initialize(@valid_fields : UInt16, @header_version : UInt8, @patron_header_version : UInt8, @data_flags : UInt8, @type__ : UInt32, @subtype : UInt8, @purpose : UInt8, @data_quality : Int8, @creation_date : Int64, @validity_period : ValidityPeriod_e__Struct_, @biometric_data_format : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT, @product_id : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT)
     end
   end
 
@@ -586,6 +629,16 @@ module Win32cr::Devices::BiometricFramework
     property unclaimed_identify : UnclaimedIdentify_e__Struct_
     property error : Error_e__Struct_
 
+      # Nested Type Unclaimed_e__Struct_
+      @[Extern]
+      struct Unclaimed_e__Struct_
+    property unit_id : UInt32
+    property reject_detail : UInt32
+    def initialize(@unit_id : UInt32, @reject_detail : UInt32)
+    end
+      end
+
+
       # Nested Type UnclaimedIdentify_e__Struct_
       @[Extern]
       struct UnclaimedIdentify_e__Struct_
@@ -594,16 +647,6 @@ module Win32cr::Devices::BiometricFramework
     property sub_factor : UInt8
     property reject_detail : UInt32
     def initialize(@unit_id : UInt32, @identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8, @reject_detail : UInt32)
-    end
-      end
-
-
-      # Nested Type Unclaimed_e__Struct_
-      @[Extern]
-      struct Unclaimed_e__Struct_
-    property unit_id : UInt32
-    property reject_detail : UInt32
-    def initialize(@unit_id : UInt32, @reject_detail : UInt32)
     end
       end
 
@@ -629,19 +672,6 @@ module Win32cr::Devices::BiometricFramework
     property facial_features : FacialFeatures_e__Struct_
     property iris : Iris_e__Struct_
 
-    # Nested Type Iris_e__Struct_
-    @[Extern]
-    struct Iris_e__Struct_
-    property eye_bounding_box_1 : Win32cr::Foundation::RECT
-    property eye_bounding_box_2 : Win32cr::Foundation::RECT
-    property pupil_center_1 : Win32cr::Foundation::POINT
-    property pupil_center_2 : Win32cr::Foundation::POINT
-    property distance : Int32
-    def initialize(@eye_bounding_box_1 : Win32cr::Foundation::RECT, @eye_bounding_box_2 : Win32cr::Foundation::RECT, @pupil_center_1 : Win32cr::Foundation::POINT, @pupil_center_2 : Win32cr::Foundation::POINT, @distance : Int32)
-    end
-    end
-
-
     # Nested Type FacialFeatures_e__Struct_
     @[Extern]
     struct FacialFeatures_e__Struct_
@@ -659,6 +689,19 @@ module Win32cr::Devices::BiometricFramework
       end
 
     def initialize(@bounding_box : Win32cr::Foundation::RECT, @distance : Int32, @opaque_engine_data : OpaqueEngineData_e__Struct_)
+    end
+    end
+
+
+    # Nested Type Iris_e__Struct_
+    @[Extern]
+    struct Iris_e__Struct_
+    property eye_bounding_box_1 : Win32cr::Foundation::RECT
+    property eye_bounding_box_2 : Win32cr::Foundation::RECT
+    property pupil_center_1 : Win32cr::Foundation::POINT
+    property pupil_center_2 : Win32cr::Foundation::POINT
+    property distance : Int32
+    def initialize(@eye_bounding_box_1 : Win32cr::Foundation::RECT, @eye_bounding_box_2 : Win32cr::Foundation::RECT, @pupil_center_1 : Win32cr::Foundation::POINT, @pupil_center_2 : Win32cr::Foundation::POINT, @distance : Int32)
     end
     end
 
@@ -746,17 +789,6 @@ module Win32cr::Devices::BiometricFramework
     property iris : Iris_e__Struct_
     property voice : Voice_e__Struct_
 
-      # Nested Type Iris_e__Struct_
-      @[Extern]
-      struct Iris_e__Struct_
-    property frame_size : Win32cr::Foundation::RECT
-    property frame_offset : Win32cr::Foundation::POINT
-    property mandatory_orientation : UInt32
-    def initialize(@frame_size : Win32cr::Foundation::RECT, @frame_offset : Win32cr::Foundation::POINT, @mandatory_orientation : UInt32)
-    end
-      end
-
-
       # Nested Type FacialFeatures_e__Struct_
       @[Extern]
       struct FacialFeatures_e__Struct_
@@ -785,6 +817,17 @@ module Win32cr::Devices::BiometricFramework
       struct Fingerprint_e__Struct_
     property reserved : UInt32
     def initialize(@reserved : UInt32)
+    end
+      end
+
+
+      # Nested Type Iris_e__Struct_
+      @[Extern]
+      struct Iris_e__Struct_
+    property frame_size : Win32cr::Foundation::RECT
+    property frame_offset : Win32cr::Foundation::POINT
+    property mandatory_orientation : UInt32
+    def initialize(@frame_size : Win32cr::Foundation::RECT, @frame_offset : Win32cr::Foundation::POINT, @mandatory_orientation : UInt32)
     end
       end
 
@@ -820,28 +863,9 @@ module Win32cr::Devices::BiometricFramework
     property iris : Iris_e__Struct_
     property voice : Voice_e__Struct_
 
-      # Nested Type Voice_e__Struct_
+      # Nested Type FacialFeatures_e__Struct_
       @[Extern]
-      struct Voice_e__Struct_
-    property capabilities : UInt32
-    property enrollment_requirements : EnrollmentRequirements_e__Struct_
-
-        # Nested Type EnrollmentRequirements_e__Struct_
-        @[Extern]
-        struct EnrollmentRequirements_e__Struct_
-    property null : UInt32
-    def initialize(@null : UInt32)
-    end
-        end
-
-    def initialize(@capabilities : UInt32, @enrollment_requirements : EnrollmentRequirements_e__Struct_)
-    end
-      end
-
-
-      # Nested Type Iris_e__Struct_
-      @[Extern]
-      struct Iris_e__Struct_
+      struct FacialFeatures_e__Struct_
     property capabilities : UInt32
     property enrollment_requirements : EnrollmentRequirements_e__Struct_
 
@@ -882,9 +906,28 @@ module Win32cr::Devices::BiometricFramework
       end
 
 
-      # Nested Type FacialFeatures_e__Struct_
+      # Nested Type Iris_e__Struct_
       @[Extern]
-      struct FacialFeatures_e__Struct_
+      struct Iris_e__Struct_
+    property capabilities : UInt32
+    property enrollment_requirements : EnrollmentRequirements_e__Struct_
+
+        # Nested Type EnrollmentRequirements_e__Struct_
+        @[Extern]
+        struct EnrollmentRequirements_e__Struct_
+    property null : UInt32
+    def initialize(@null : UInt32)
+    end
+        end
+
+    def initialize(@capabilities : UInt32, @enrollment_requirements : EnrollmentRequirements_e__Struct_)
+    end
+      end
+
+
+      # Nested Type Voice_e__Struct_
+      @[Extern]
+      struct Voice_e__Struct_
     property capabilities : UInt32
     property enrollment_requirements : EnrollmentRequirements_e__Struct_
 
@@ -923,15 +966,6 @@ module Win32cr::Devices::BiometricFramework
     property iris : Iris_e__Struct_
     property voice : Voice_e__Struct_
 
-      # Nested Type Iris_e__Struct_
-      @[Extern]
-      struct Iris_e__Struct_
-    property capabilities : UInt32
-    def initialize(@capabilities : UInt32)
-    end
-      end
-
-
       # Nested Type FacialFeatures_e__Struct_
       @[Extern]
       struct FacialFeatures_e__Struct_
@@ -944,6 +978,15 @@ module Win32cr::Devices::BiometricFramework
       # Nested Type Fingerprint_e__Struct_
       @[Extern]
       struct Fingerprint_e__Struct_
+    property capabilities : UInt32
+    def initialize(@capabilities : UInt32)
+    end
+      end
+
+
+      # Nested Type Iris_e__Struct_
+      @[Extern]
+      struct Iris_e__Struct_
     property capabilities : UInt32
     def initialize(@capabilities : UInt32)
     end
@@ -984,11 +1027,37 @@ module Win32cr::Devices::BiometricFramework
     property iris : Iris_e__Struct_
     property voice : Voice_e__Struct_
 
-      # Nested Type Voice_e__Struct_
+      # Nested Type FacialFeatures_e__Struct_
       @[Extern]
-      struct Voice_e__Struct_
-    property reserved : UInt32
-    def initialize(@reserved : UInt32)
+      struct FacialFeatures_e__Struct_
+    property bounding_box : Win32cr::Foundation::RECT
+    property distance : Int32
+    property opaque_engine_data : OpaqueEngineData_e__Struct_
+
+        # Nested Type OpaqueEngineData_e__Struct_
+        @[Extern]
+        struct OpaqueEngineData_e__Struct_
+    property adapter_id : LibC::GUID
+    property data : UInt32[78]
+    def initialize(@adapter_id : LibC::GUID, @data : UInt32[78])
+    end
+        end
+
+    def initialize(@bounding_box : Win32cr::Foundation::RECT, @distance : Int32, @opaque_engine_data : OpaqueEngineData_e__Struct_)
+    end
+      end
+
+
+      # Nested Type Fingerprint_e__Struct_
+      @[Extern]
+      struct Fingerprint_e__Struct_
+    property general_samples : UInt32
+    property center : UInt32
+    property top_edge : UInt32
+    property bottom_edge : UInt32
+    property left_edge : UInt32
+    property right_edge : UInt32
+    def initialize(@general_samples : UInt32, @center : UInt32, @top_edge : UInt32, @bottom_edge : UInt32, @left_edge : UInt32, @right_edge : UInt32)
     end
       end
 
@@ -1021,37 +1090,11 @@ module Win32cr::Devices::BiometricFramework
       end
 
 
-      # Nested Type FacialFeatures_e__Struct_
+      # Nested Type Voice_e__Struct_
       @[Extern]
-      struct FacialFeatures_e__Struct_
-    property bounding_box : Win32cr::Foundation::RECT
-    property distance : Int32
-    property opaque_engine_data : OpaqueEngineData_e__Struct_
-
-        # Nested Type OpaqueEngineData_e__Struct_
-        @[Extern]
-        struct OpaqueEngineData_e__Struct_
-    property adapter_id : LibC::GUID
-    property data : UInt32[78]
-    def initialize(@adapter_id : LibC::GUID, @data : UInt32[78])
-    end
-        end
-
-    def initialize(@bounding_box : Win32cr::Foundation::RECT, @distance : Int32, @opaque_engine_data : OpaqueEngineData_e__Struct_)
-    end
-      end
-
-
-      # Nested Type Fingerprint_e__Struct_
-      @[Extern]
-      struct Fingerprint_e__Struct_
-    property general_samples : UInt32
-    property center : UInt32
-    property top_edge : UInt32
-    property bottom_edge : UInt32
-    property left_edge : UInt32
-    property right_edge : UInt32
-    def initialize(@general_samples : UInt32, @center : UInt32, @top_edge : UInt32, @bottom_edge : UInt32, @left_edge : UInt32, @right_edge : UInt32)
+      struct Voice_e__Struct_
+    property reserved : UInt32
+    def initialize(@reserved : UInt32)
     end
       end
 
@@ -1126,6 +1169,14 @@ module Win32cr::Devices::BiometricFramework
   end
 
   @[Extern]
+  struct WINBIO_CONNECTED_SENSOR
+    property biometricType : UInt32
+    property isEnhancedSignInSecurityCapable : Win32cr::Foundation::BOOL
+    def initialize(@biometricType : UInt32, @isEnhancedSignInSecurityCapable : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
   struct WINBIO_ASYNC_RESULT
     property session_handle : UInt32
     property operation : UInt32
@@ -1161,42 +1212,120 @@ module Win32cr::Devices::BiometricFramework
     property get_protection_policy : GetProtectionPolicy_e__Struct_
     property notify_unit_status_change : NotifyUnitStatusChange_e__Struct_
 
-      # Nested Type GetProtectionPolicy_e__Struct_
+      # Nested Type Verify_e__Struct_
       @[Extern]
-      struct GetProtectionPolicy_e__Struct_
-    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
-    property policy : Win32cr::Devices::BiometricFramework::WINBIO_PROTECTION_POLICY
-    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @policy : Win32cr::Devices::BiometricFramework::WINBIO_PROTECTION_POLICY)
-    end
-      end
-
-
-      # Nested Type EnrollSelect_e__Struct_
-      @[Extern]
-      struct EnrollSelect_e__Struct_
-    property selector_value : UInt64
-    def initialize(@selector_value : UInt64)
-    end
-      end
-
-
-      # Nested Type VerifyAndReleaseTicket_e__Struct_
-      @[Extern]
-      struct VerifyAndReleaseTicket_e__Struct_
+      struct Verify_e__Struct_
     property match : Win32cr::Foundation::BOOLEAN
     property reject_detail : UInt32
-    property ticket : UInt64
-    def initialize(@match : Win32cr::Foundation::BOOLEAN, @reject_detail : UInt32, @ticket : UInt64)
+    def initialize(@match : Win32cr::Foundation::BOOLEAN, @reject_detail : UInt32)
     end
       end
 
 
-      # Nested Type EnumBiometricUnits_e__Struct_
+      # Nested Type Identify_e__Struct_
       @[Extern]
-      struct EnumBiometricUnits_e__Struct_
-    property unit_count : LibC::UIntPtrT
-    property unit_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_UNIT_SCHEMA*
-    def initialize(@unit_count : LibC::UIntPtrT, @unit_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_UNIT_SCHEMA*)
+      struct Identify_e__Struct_
+    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
+    property sub_factor : UInt8
+    property reject_detail : UInt32
+    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8, @reject_detail : UInt32)
+    end
+      end
+
+
+      # Nested Type EnrollBegin_e__Struct_
+      @[Extern]
+      struct EnrollBegin_e__Struct_
+    property sub_factor : UInt8
+    def initialize(@sub_factor : UInt8)
+    end
+      end
+
+
+      # Nested Type EnrollCapture_e__Struct_
+      @[Extern]
+      struct EnrollCapture_e__Struct_
+    property reject_detail : UInt32
+    def initialize(@reject_detail : UInt32)
+    end
+      end
+
+
+      # Nested Type EnrollCommit_e__Struct_
+      @[Extern]
+      struct EnrollCommit_e__Struct_
+    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
+    property is_new_template : Win32cr::Foundation::BOOLEAN
+    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @is_new_template : Win32cr::Foundation::BOOLEAN)
+    end
+      end
+
+
+      # Nested Type EnumEnrollments_e__Struct_
+      @[Extern]
+      struct EnumEnrollments_e__Struct_
+    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
+    property sub_factor_count : LibC::UIntPtrT
+    property sub_factor_array : UInt8*
+    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor_count : LibC::UIntPtrT, @sub_factor_array : UInt8*)
+    end
+      end
+
+
+      # Nested Type CaptureSample_e__Struct_
+      @[Extern]
+      struct CaptureSample_e__Struct_
+    property sample : Win32cr::Devices::BiometricFramework::WINBIO_BIR*
+    property sample_size : LibC::UIntPtrT
+    property reject_detail : UInt32
+    def initialize(@sample : Win32cr::Devices::BiometricFramework::WINBIO_BIR*, @sample_size : LibC::UIntPtrT, @reject_detail : UInt32)
+    end
+      end
+
+
+      # Nested Type DeleteTemplate_e__Struct_
+      @[Extern]
+      struct DeleteTemplate_e__Struct_
+    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
+    property sub_factor : UInt8
+    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8)
+    end
+      end
+
+
+      # Nested Type GetProperty_e__Struct_
+      @[Extern]
+      struct GetProperty_e__Struct_
+    property property_type : UInt32
+    property property_id : UInt32
+    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
+    property sub_factor : UInt8
+    property property_buffer_size : LibC::UIntPtrT
+    property property_buffer : Void*
+    def initialize(@property_type : UInt32, @property_id : UInt32, @identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8, @property_buffer_size : LibC::UIntPtrT, @property_buffer : Void*)
+    end
+      end
+
+
+      # Nested Type SetProperty_e__Struct_
+      @[Extern]
+      struct SetProperty_e__Struct_
+    property property_type : UInt32
+    property property_id : UInt32
+    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
+    property sub_factor : UInt8
+    property property_buffer_size : LibC::UIntPtrT
+    property property_buffer : Void*
+    def initialize(@property_type : UInt32, @property_id : UInt32, @identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8, @property_buffer_size : LibC::UIntPtrT, @property_buffer : Void*)
+    end
+      end
+
+
+      # Nested Type GetEvent_e__Struct_
+      @[Extern]
+      struct GetEvent_e__Struct_
+    property event : Win32cr::Devices::BiometricFramework::WINBIO_EVENT
+    def initialize(@event : Win32cr::Devices::BiometricFramework::WINBIO_EVENT)
     end
       end
 
@@ -1217,68 +1346,22 @@ module Win32cr::Devices::BiometricFramework
       end
 
 
-      # Nested Type SetProperty_e__Struct_
+      # Nested Type EnumServiceProviders_e__Struct_
       @[Extern]
-      struct SetProperty_e__Struct_
-    property property_type : UInt32
-    property property_id : UInt32
-    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
-    property sub_factor : UInt8
-    property property_buffer_size : LibC::UIntPtrT
-    property property_buffer : Void*
-    def initialize(@property_type : UInt32, @property_id : UInt32, @identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8, @property_buffer_size : LibC::UIntPtrT, @property_buffer : Void*)
+      struct EnumServiceProviders_e__Struct_
+    property bsp_count : LibC::UIntPtrT
+    property bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA*
+    def initialize(@bsp_count : LibC::UIntPtrT, @bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA*)
     end
       end
 
 
-      # Nested Type DeleteTemplate_e__Struct_
+      # Nested Type EnumBiometricUnits_e__Struct_
       @[Extern]
-      struct DeleteTemplate_e__Struct_
-    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
-    property sub_factor : UInt8
-    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8)
-    end
-      end
-
-
-      # Nested Type EnumEnrollments_e__Struct_
-      @[Extern]
-      struct EnumEnrollments_e__Struct_
-    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
-    property sub_factor_count : LibC::UIntPtrT
-    property sub_factor_array : UInt8*
-    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor_count : LibC::UIntPtrT, @sub_factor_array : UInt8*)
-    end
-      end
-
-
-      # Nested Type EnrollCapture_e__Struct_
-      @[Extern]
-      struct EnrollCapture_e__Struct_
-    property reject_detail : UInt32
-    def initialize(@reject_detail : UInt32)
-    end
-      end
-
-
-      # Nested Type Identify_e__Struct_
-      @[Extern]
-      struct Identify_e__Struct_
-    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
-    property sub_factor : UInt8
-    property reject_detail : UInt32
-    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8, @reject_detail : UInt32)
-    end
-      end
-
-
-      # Nested Type MonitorPresence_e__Struct_
-      @[Extern]
-      struct MonitorPresence_e__Struct_
-    property change_type : UInt32
-    property presence_count : LibC::UIntPtrT
-    property presence_array : Win32cr::Devices::BiometricFramework::WINBIO_PRESENCE*
-    def initialize(@change_type : UInt32, @presence_count : LibC::UIntPtrT, @presence_array : Win32cr::Devices::BiometricFramework::WINBIO_PRESENCE*)
+      struct EnumBiometricUnits_e__Struct_
+    property unit_count : LibC::UIntPtrT
+    property unit_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_UNIT_SCHEMA*
+    def initialize(@unit_count : LibC::UIntPtrT, @unit_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_UNIT_SCHEMA*)
     end
       end
 
@@ -1293,74 +1376,13 @@ module Win32cr::Devices::BiometricFramework
       end
 
 
-      # Nested Type GetEvent_e__Struct_
+      # Nested Type VerifyAndReleaseTicket_e__Struct_
       @[Extern]
-      struct GetEvent_e__Struct_
-    property event : Win32cr::Devices::BiometricFramework::WINBIO_EVENT
-    def initialize(@event : Win32cr::Devices::BiometricFramework::WINBIO_EVENT)
-    end
-      end
-
-
-      # Nested Type CaptureSample_e__Struct_
-      @[Extern]
-      struct CaptureSample_e__Struct_
-    property sample : Win32cr::Devices::BiometricFramework::WINBIO_BIR*
-    property sample_size : LibC::UIntPtrT
+      struct VerifyAndReleaseTicket_e__Struct_
+    property match : Win32cr::Foundation::BOOLEAN
     property reject_detail : UInt32
-    def initialize(@sample : Win32cr::Devices::BiometricFramework::WINBIO_BIR*, @sample_size : LibC::UIntPtrT, @reject_detail : UInt32)
-    end
-      end
-
-
-      # Nested Type EnrollBegin_e__Struct_
-      @[Extern]
-      struct EnrollBegin_e__Struct_
-    property sub_factor : UInt8
-    def initialize(@sub_factor : UInt8)
-    end
-      end
-
-
-      # Nested Type NotifyUnitStatusChange_e__Struct_
-      @[Extern]
-      struct NotifyUnitStatusChange_e__Struct_
-    property extended_status : Win32cr::Devices::BiometricFramework::WINBIO_EXTENDED_UNIT_STATUS
-    def initialize(@extended_status : Win32cr::Devices::BiometricFramework::WINBIO_EXTENDED_UNIT_STATUS)
-    end
-      end
-
-
-      # Nested Type EnumServiceProviders_e__Struct_
-      @[Extern]
-      struct EnumServiceProviders_e__Struct_
-    property bsp_count : LibC::UIntPtrT
-    property bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA*
-    def initialize(@bsp_count : LibC::UIntPtrT, @bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA*)
-    end
-      end
-
-
-      # Nested Type EnrollCommit_e__Struct_
-      @[Extern]
-      struct EnrollCommit_e__Struct_
-    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
-    property is_new_template : Win32cr::Foundation::BOOLEAN
-    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @is_new_template : Win32cr::Foundation::BOOLEAN)
-    end
-      end
-
-
-      # Nested Type GetProperty_e__Struct_
-      @[Extern]
-      struct GetProperty_e__Struct_
-    property property_type : UInt32
-    property property_id : UInt32
-    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
-    property sub_factor : UInt8
-    property property_buffer_size : LibC::UIntPtrT
-    property property_buffer : Void*
-    def initialize(@property_type : UInt32, @property_id : UInt32, @identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @sub_factor : UInt8, @property_buffer_size : LibC::UIntPtrT, @property_buffer : Void*)
+    property ticket : UInt64
+    def initialize(@match : Win32cr::Foundation::BOOLEAN, @reject_detail : UInt32, @ticket : UInt64)
     end
       end
 
@@ -1377,12 +1399,41 @@ module Win32cr::Devices::BiometricFramework
       end
 
 
-      # Nested Type Verify_e__Struct_
+      # Nested Type EnrollSelect_e__Struct_
       @[Extern]
-      struct Verify_e__Struct_
-    property match : Win32cr::Foundation::BOOLEAN
-    property reject_detail : UInt32
-    def initialize(@match : Win32cr::Foundation::BOOLEAN, @reject_detail : UInt32)
+      struct EnrollSelect_e__Struct_
+    property selector_value : UInt64
+    def initialize(@selector_value : UInt64)
+    end
+      end
+
+
+      # Nested Type MonitorPresence_e__Struct_
+      @[Extern]
+      struct MonitorPresence_e__Struct_
+    property change_type : UInt32
+    property presence_count : LibC::UIntPtrT
+    property presence_array : Win32cr::Devices::BiometricFramework::WINBIO_PRESENCE*
+    def initialize(@change_type : UInt32, @presence_count : LibC::UIntPtrT, @presence_array : Win32cr::Devices::BiometricFramework::WINBIO_PRESENCE*)
+    end
+      end
+
+
+      # Nested Type GetProtectionPolicy_e__Struct_
+      @[Extern]
+      struct GetProtectionPolicy_e__Struct_
+    property identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY
+    property policy : Win32cr::Devices::BiometricFramework::WINBIO_PROTECTION_POLICY
+    def initialize(@identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, @policy : Win32cr::Devices::BiometricFramework::WINBIO_PROTECTION_POLICY)
+    end
+      end
+
+
+      # Nested Type NotifyUnitStatusChange_e__Struct_
+      @[Extern]
+      struct NotifyUnitStatusChange_e__Struct_
+    property extended_status : Win32cr::Devices::BiometricFramework::WINBIO_EXTENDED_UNIT_STATUS
+    def initialize(@extended_status : Win32cr::Devices::BiometricFramework::WINBIO_EXTENDED_UNIT_STATUS)
     end
       end
 
@@ -1391,24 +1442,6 @@ module Win32cr::Devices::BiometricFramework
     end
 
     def initialize(@session_handle : UInt32, @operation : UInt32, @sequence_number : UInt64, @time_stamp : Int64, @api_status : Win32cr::Foundation::HRESULT, @unit_id : UInt32, @user_data : Void*, @parameters : Parameters_e__Union_)
-    end
-  end
-
-  @[Extern]
-  struct WINIBIO_SENSOR_CONTEXT_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct WINIBIO_ENGINE_CONTEXT_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct WINIBIO_STORAGE_CONTEXT_
-    def initialize()
     end
   end
 
@@ -1434,11 +1467,11 @@ module Win32cr::Devices::BiometricFramework
     property sensor_interface : Win32cr::Devices::BiometricFramework::WINBIO_SENSOR_INTERFACE*
     property engine_interface : Win32cr::Devices::BiometricFramework::WINBIO_ENGINE_INTERFACE*
     property storage_interface : Win32cr::Devices::BiometricFramework::WINBIO_STORAGE_INTERFACE*
-    property sensor_context : Win32cr::Devices::BiometricFramework::WINIBIO_SENSOR_CONTEXT_*
-    property engine_context : Win32cr::Devices::BiometricFramework::WINIBIO_ENGINE_CONTEXT_*
-    property storage_context : Win32cr::Devices::BiometricFramework::WINIBIO_STORAGE_CONTEXT_*
+    property sensor_context : Win32cr::Devices::BiometricFramework::WINIBIO_SENSOR_CONTEXT*
+    property engine_context : Win32cr::Devices::BiometricFramework::WINIBIO_ENGINE_CONTEXT*
+    property storage_context : Win32cr::Devices::BiometricFramework::WINIBIO_STORAGE_CONTEXT*
     property framework_interface : Win32cr::Devices::BiometricFramework::WINBIO_FRAMEWORK_INTERFACE*
-    def initialize(@sensor_handle : Win32cr::Foundation::HANDLE, @engine_handle : Win32cr::Foundation::HANDLE, @storage_handle : Win32cr::Foundation::HANDLE, @sensor_interface : Win32cr::Devices::BiometricFramework::WINBIO_SENSOR_INTERFACE*, @engine_interface : Win32cr::Devices::BiometricFramework::WINBIO_ENGINE_INTERFACE*, @storage_interface : Win32cr::Devices::BiometricFramework::WINBIO_STORAGE_INTERFACE*, @sensor_context : Win32cr::Devices::BiometricFramework::WINIBIO_SENSOR_CONTEXT_*, @engine_context : Win32cr::Devices::BiometricFramework::WINIBIO_ENGINE_CONTEXT_*, @storage_context : Win32cr::Devices::BiometricFramework::WINIBIO_STORAGE_CONTEXT_*, @framework_interface : Win32cr::Devices::BiometricFramework::WINBIO_FRAMEWORK_INTERFACE*)
+    def initialize(@sensor_handle : Win32cr::Foundation::HANDLE, @engine_handle : Win32cr::Foundation::HANDLE, @storage_handle : Win32cr::Foundation::HANDLE, @sensor_interface : Win32cr::Devices::BiometricFramework::WINBIO_SENSOR_INTERFACE*, @engine_interface : Win32cr::Devices::BiometricFramework::WINBIO_ENGINE_INTERFACE*, @storage_interface : Win32cr::Devices::BiometricFramework::WINBIO_STORAGE_INTERFACE*, @sensor_context : Win32cr::Devices::BiometricFramework::WINIBIO_SENSOR_CONTEXT*, @engine_context : Win32cr::Devices::BiometricFramework::WINIBIO_ENGINE_CONTEXT*, @storage_context : Win32cr::Devices::BiometricFramework::WINIBIO_STORAGE_CONTEXT*, @framework_interface : Win32cr::Devices::BiometricFramework::WINBIO_FRAMEWORK_INTERFACE*)
     end
   end
 
@@ -1649,16 +1682,16 @@ module Win32cr::Devices::BiometricFramework
     property serial_number : UInt16[256]
     property firmware_version : Win32cr::Devices::BiometricFramework::WINBIO_VERSION
     property supported_format_entries : UInt32
-    property supported_format : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT*
-    def initialize(@payload_size : UInt32, @win_bio_hresult : Win32cr::Foundation::HRESULT, @win_bio_version : Win32cr::Devices::BiometricFramework::WINBIO_VERSION, @sensor_type : UInt32, @sensor_sub_type : UInt32, @capabilities : UInt32, @manufacturer_name : UInt16[256], @model_name : UInt16[256], @serial_number : UInt16[256], @firmware_version : Win32cr::Devices::BiometricFramework::WINBIO_VERSION, @supported_format_entries : UInt32, @supported_format : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT*)
+    property supported_format : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT[1]
+    def initialize(@payload_size : UInt32, @win_bio_hresult : Win32cr::Foundation::HRESULT, @win_bio_version : Win32cr::Devices::BiometricFramework::WINBIO_VERSION, @sensor_type : UInt32, @sensor_sub_type : UInt32, @capabilities : UInt32, @manufacturer_name : UInt16[256], @model_name : UInt16[256], @serial_number : UInt16[256], @firmware_version : Win32cr::Devices::BiometricFramework::WINBIO_VERSION, @supported_format_entries : UInt32, @supported_format : Win32cr::Devices::BiometricFramework::WINBIO_REGISTERED_FORMAT[1])
     end
   end
 
   @[Extern]
   struct WINBIO_DATA
     property size : UInt32
-    property data : UInt8*
-    def initialize(@size : UInt32, @data : UInt8*)
+    property data : UInt8[1]
+    def initialize(@size : UInt32, @data : UInt8[1])
     end
   end
 
@@ -1777,222 +1810,337 @@ module Win32cr::Devices::BiometricFramework
   end
 
   def winBioEnumServiceProviders(factor : UInt32, bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA**, bsp_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumServiceProviders(factor, bsp_schema_array, bsp_count)
+    {% end %}
   end
 
   def winBioEnumBiometricUnits(factor : UInt32, unit_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_UNIT_SCHEMA**, unit_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumBiometricUnits(factor, unit_schema_array, unit_count)
+    {% end %}
   end
 
   def winBioEnumDatabases(factor : UInt32, storage_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_STORAGE_SCHEMA**, storage_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumDatabases(factor, storage_schema_array, storage_count)
+    {% end %}
   end
 
   def winBioAsyncOpenFramework(notification_method : Win32cr::Devices::BiometricFramework::WINBIO_ASYNC_NOTIFICATION_METHOD, target_window : Win32cr::Foundation::HWND, message_code : UInt32, callback_routine : Win32cr::Devices::BiometricFramework::PWINBIO_ASYNC_COMPLETION_CALLBACK, user_data : Void*, asynchronous_open : Win32cr::Foundation::BOOL, framework_handle : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncOpenFramework(notification_method, target_window, message_code, callback_routine, user_data, asynchronous_open, framework_handle)
+    {% end %}
   end
 
   def winBioCloseFramework(framework_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCloseFramework(framework_handle)
+    {% end %}
   end
 
   def winBioAsyncEnumServiceProviders(framework_handle : UInt32, factor : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncEnumServiceProviders(framework_handle, factor)
+    {% end %}
   end
 
   def winBioAsyncEnumBiometricUnits(framework_handle : UInt32, factor : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncEnumBiometricUnits(framework_handle, factor)
+    {% end %}
   end
 
   def winBioAsyncEnumDatabases(framework_handle : UInt32, factor : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncEnumDatabases(framework_handle, factor)
+    {% end %}
   end
 
   def winBioAsyncMonitorFrameworkChanges(framework_handle : UInt32, change_types : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncMonitorFrameworkChanges(framework_handle, change_types)
+    {% end %}
   end
 
   def winBioOpenSession(factor : UInt32, pool_type : Win32cr::Devices::BiometricFramework::WINBIO_POOL, flags : UInt32, unit_array : UInt32*, unit_count : LibC::UIntPtrT, database_id : LibC::GUID*, session_handle : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioOpenSession(factor, pool_type, flags, unit_array, unit_count, database_id, session_handle)
+    {% end %}
   end
 
   def winBioAsyncOpenSession(factor : UInt32, pool_type : Win32cr::Devices::BiometricFramework::WINBIO_POOL, flags : UInt32, unit_array : UInt32*, unit_count : LibC::UIntPtrT, database_id : LibC::GUID*, notification_method : Win32cr::Devices::BiometricFramework::WINBIO_ASYNC_NOTIFICATION_METHOD, target_window : Win32cr::Foundation::HWND, message_code : UInt32, callback_routine : Win32cr::Devices::BiometricFramework::PWINBIO_ASYNC_COMPLETION_CALLBACK, user_data : Void*, asynchronous_open : Win32cr::Foundation::BOOL, session_handle : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncOpenSession(factor, pool_type, flags, unit_array, unit_count, database_id, notification_method, target_window, message_code, callback_routine, user_data, asynchronous_open, session_handle)
+    {% end %}
   end
 
   def winBioCloseSession(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCloseSession(session_handle)
+    {% end %}
   end
 
   def winBioVerify(session_handle : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, unit_id : UInt32*, match : UInt8*, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioVerify(session_handle, identity, sub_factor, unit_id, match, reject_detail)
+    {% end %}
   end
 
   def winBioVerifyWithCallback(session_handle : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, verify_callback : Win32cr::Devices::BiometricFramework::PWINBIO_VERIFY_CALLBACK, verify_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioVerifyWithCallback(session_handle, identity, sub_factor, verify_callback, verify_callback_context)
+    {% end %}
   end
 
   def winBioIdentify(session_handle : UInt32, unit_id : UInt32*, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8*, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioIdentify(session_handle, unit_id, identity, sub_factor, reject_detail)
+    {% end %}
   end
 
   def winBioIdentifyWithCallback(session_handle : UInt32, identify_callback : Win32cr::Devices::BiometricFramework::PWINBIO_IDENTIFY_CALLBACK, identify_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioIdentifyWithCallback(session_handle, identify_callback, identify_callback_context)
+    {% end %}
   end
 
   def winBioWait(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioWait(session_handle)
+    {% end %}
   end
 
   def winBioCancel(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCancel(session_handle)
+    {% end %}
   end
 
   def winBioLocateSensor(session_handle : UInt32, unit_id : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLocateSensor(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioLocateSensorWithCallback(session_handle : UInt32, locate_callback : Win32cr::Devices::BiometricFramework::PWINBIO_LOCATE_SENSOR_CALLBACK, locate_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLocateSensorWithCallback(session_handle, locate_callback, locate_callback_context)
+    {% end %}
   end
 
   def winBioEnrollBegin(session_handle : UInt32, sub_factor : UInt8, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollBegin(session_handle, sub_factor, unit_id)
+    {% end %}
   end
 
   def winBioEnrollSelect(session_handle : UInt32, selector_value : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollSelect(session_handle, selector_value)
+    {% end %}
   end
 
   def winBioEnrollCapture(session_handle : UInt32, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollCapture(session_handle, reject_detail)
+    {% end %}
   end
 
   def winBioEnrollCaptureWithCallback(session_handle : UInt32, enroll_callback : Win32cr::Devices::BiometricFramework::PWINBIO_ENROLL_CAPTURE_CALLBACK, enroll_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollCaptureWithCallback(session_handle, enroll_callback, enroll_callback_context)
+    {% end %}
   end
 
   def winBioEnrollCommit(session_handle : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, is_new_template : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollCommit(session_handle, identity, is_new_template)
+    {% end %}
   end
 
   def winBioEnrollDiscard(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollDiscard(session_handle)
+    {% end %}
   end
 
   def winBioEnumEnrollments(session_handle : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor_array : UInt8**, sub_factor_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumEnrollments(session_handle, unit_id, identity, sub_factor_array, sub_factor_count)
+    {% end %}
   end
 
   def winBioImproveBegin(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioImproveBegin(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioImproveEnd(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioImproveEnd(session_handle)
+    {% end %}
   end
 
   def winBioRegisterEventMonitor(session_handle : UInt32, event_mask : UInt32, event_callback : Win32cr::Devices::BiometricFramework::PWINBIO_EVENT_CALLBACK, event_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRegisterEventMonitor(session_handle, event_mask, event_callback, event_callback_context)
+    {% end %}
   end
 
   def winBioUnregisterEventMonitor(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioUnregisterEventMonitor(session_handle)
+    {% end %}
   end
 
   def winBioMonitorPresence(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioMonitorPresence(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioCaptureSample(session_handle : UInt32, purpose : UInt8, flags : UInt8, unit_id : UInt32*, sample : Win32cr::Devices::BiometricFramework::WINBIO_BIR**, sample_size : LibC::UIntPtrT*, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCaptureSample(session_handle, purpose, flags, unit_id, sample, sample_size, reject_detail)
+    {% end %}
   end
 
   def winBioCaptureSampleWithCallback(session_handle : UInt32, purpose : UInt8, flags : UInt8, capture_callback : Win32cr::Devices::BiometricFramework::PWINBIO_CAPTURE_CALLBACK, capture_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCaptureSampleWithCallback(session_handle, purpose, flags, capture_callback, capture_callback_context)
+    {% end %}
   end
 
   def winBioDeleteTemplate(session_handle : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioDeleteTemplate(session_handle, unit_id, identity, sub_factor)
+    {% end %}
   end
 
   def winBioLockUnit(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLockUnit(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioUnlockUnit(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioUnlockUnit(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioControlUnit(session_handle : UInt32, unit_id : UInt32, component : Win32cr::Devices::BiometricFramework::WINBIO_COMPONENT, control_code : UInt32, send_buffer : UInt8*, send_buffer_size : LibC::UIntPtrT, receive_buffer : UInt8*, receive_buffer_size : LibC::UIntPtrT, receive_data_size : LibC::UIntPtrT*, operation_status : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioControlUnit(session_handle, unit_id, component, control_code, send_buffer, send_buffer_size, receive_buffer, receive_buffer_size, receive_data_size, operation_status)
+    {% end %}
   end
 
   def winBioControlUnitPrivileged(session_handle : UInt32, unit_id : UInt32, component : Win32cr::Devices::BiometricFramework::WINBIO_COMPONENT, control_code : UInt32, send_buffer : UInt8*, send_buffer_size : LibC::UIntPtrT, receive_buffer : UInt8*, receive_buffer_size : LibC::UIntPtrT, receive_data_size : LibC::UIntPtrT*, operation_status : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioControlUnitPrivileged(session_handle, unit_id, component, control_code, send_buffer, send_buffer_size, receive_buffer, receive_buffer_size, receive_data_size, operation_status)
+    {% end %}
   end
 
   def winBioGetProperty(session_handle : UInt32, property_type : UInt32, property_id : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, property_buffer : Void**, property_buffer_size : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioGetProperty(session_handle, property_type, property_id, unit_id, identity, sub_factor, property_buffer, property_buffer_size)
+    {% end %}
   end
 
   def winBioSetProperty(session_handle : UInt32, property_type : UInt32, property_id : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, property_buffer : Void*, property_buffer_size : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioSetProperty(session_handle, property_type, property_id, unit_id, identity, sub_factor, property_buffer, property_buffer_size)
+    {% end %}
   end
 
   def winBioFree(address : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioFree(address)
+    {% end %}
   end
 
   def winBioSetCredential(type__ : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_TYPE, credential : UInt8*, credential_size : LibC::UIntPtrT, format : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_FORMAT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioSetCredential(type__, credential, credential_size, format)
+    {% end %}
   end
 
   def winBioRemoveCredential(identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, type__ : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_TYPE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRemoveCredential(identity, type__)
+    {% end %}
   end
 
   def winBioRemoveAllCredentials : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRemoveAllCredentials
+    {% end %}
   end
 
   def winBioRemoveAllDomainCredentials : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRemoveAllDomainCredentials
+    {% end %}
   end
 
   def winBioGetCredentialState(identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, type__ : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_TYPE, credential_state : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_STATE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioGetCredentialState(identity, type__, credential_state)
+    {% end %}
   end
 
   def winBioLogonIdentifiedUser(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLogonIdentifiedUser(session_handle)
+    {% end %}
   end
 
   def winBioGetEnrolledFactors(account_owner : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, enrolled_factors : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioGetEnrolledFactors(account_owner, enrolled_factors)
+    {% end %}
   end
 
   def winBioGetEnabledSetting(value : UInt8*, source : Win32cr::Devices::BiometricFramework::WINBIO_SETTING_SOURCE*) : Void
+    {% if !flag?(:docs) %}
     C.WinBioGetEnabledSetting(value, source)
+    {% end %}
   end
 
   def winBioGetLogonSetting(value : UInt8*, source : Win32cr::Devices::BiometricFramework::WINBIO_SETTING_SOURCE*) : Void
+    {% if !flag?(:docs) %}
     C.WinBioGetLogonSetting(value, source)
+    {% end %}
   end
 
   def winBioGetDomainLogonSetting(value : UInt8*, source : Win32cr::Devices::BiometricFramework::WINBIO_SETTING_SOURCE*) : Void
+    {% if !flag?(:docs) %}
     C.WinBioGetDomainLogonSetting(value, source)
+    {% end %}
+  end
+
+  def winBioIsESSCapable(value : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WinBioIsESSCapable(value)
+    {% end %}
   end
 
   def winBioAcquireFocus : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAcquireFocus
+    {% end %}
   end
 
   def winBioReleaseFocus : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioReleaseFocus
+    {% end %}
   end
 
   @[Link("winbio")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WinBioEnumServiceProviders(factor : UInt32, bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA**, bsp_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
@@ -2151,10 +2299,14 @@ module Win32cr::Devices::BiometricFramework
     fun WinBioGetDomainLogonSetting(value : UInt8*, source : Win32cr::Devices::BiometricFramework::WINBIO_SETTING_SOURCE*) : Void
 
     # :nodoc:
+    fun WinBioIsESSCapable(value : UInt8*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
     fun WinBioAcquireFocus : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun WinBioReleaseFocus : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

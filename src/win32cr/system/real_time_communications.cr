@@ -1,5 +1,6 @@
-require "./com.cr"
 require "./../foundation.cr"
+require "./com.cr"
+require "./variant.cr"
 require "./../media/direct_show.cr"
 require "./../networking/win_sock.cr"
 
@@ -554,7 +555,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCClientVtbl,
+
+  record IRTCClientVtable,
     query_interface : Proc(IRTCClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClient*, UInt32),
     release : Proc(IRTCClient*, UInt32),
@@ -563,24 +565,24 @@ module Win32cr::System::RealTimeCommunications
     prepare_for_shutdown : Proc(IRTCClient*, Win32cr::Foundation::HRESULT),
     put_EventFilter : Proc(IRTCClient*, Int32, Win32cr::Foundation::HRESULT),
     get_EventFilter : Proc(IRTCClient*, Int32*, Win32cr::Foundation::HRESULT),
-    set_preferred_media_types : Proc(IRTCClient*, Int32, Int16, Win32cr::Foundation::HRESULT),
+    set_preferred_media_types : Proc(IRTCClient*, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_PreferredMediaTypes : Proc(IRTCClient*, Int32*, Win32cr::Foundation::HRESULT),
     get_MediaCapabilities : Proc(IRTCClient*, Int32*, Win32cr::Foundation::HRESULT),
     create_session : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_SESSION_TYPE, Win32cr::Foundation::BSTR, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
     put_ListenForIncomingSessions : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_LISTEN_MODE, Win32cr::Foundation::HRESULT),
     get_ListenForIncomingSessions : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_LISTEN_MODE*, Win32cr::Foundation::HRESULT),
-    get_NetworkAddresses : Proc(IRTCClient*, Int16, Int16, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NetworkAddresses : Proc(IRTCClient*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_Volume : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32, Win32cr::Foundation::HRESULT),
     get_Volume : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32*, Win32cr::Foundation::HRESULT),
-    put_AudioMuted : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int16, Win32cr::Foundation::HRESULT),
-    get_AudioMuted : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int16*, Win32cr::Foundation::HRESULT),
+    put_AudioMuted : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AudioMuted : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_IVideoWindow : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_VIDEO_DEVICE, Void**, Win32cr::Foundation::HRESULT),
     put_PreferredAudioDevice : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PreferredAudioDevice : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_PreferredVolume : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32, Win32cr::Foundation::HRESULT),
     get_PreferredVolume : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32*, Win32cr::Foundation::HRESULT),
-    put_PreferredAEC : Proc(IRTCClient*, Int16, Win32cr::Foundation::HRESULT),
-    get_PreferredAEC : Proc(IRTCClient*, Int16*, Win32cr::Foundation::HRESULT),
+    put_PreferredAEC : Proc(IRTCClient*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_PreferredAEC : Proc(IRTCClient*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_PreferredVideoDevice : Proc(IRTCClient*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PreferredVideoDevice : Proc(IRTCClient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ActiveMedia : Proc(IRTCClient*, Int32*, Win32cr::Foundation::HRESULT),
@@ -591,19 +593,19 @@ module Win32cr::System::RealTimeCommunications
     get_NetworkQuality : Proc(IRTCClient*, Int32*, Win32cr::Foundation::HRESULT),
     start_t120_applet : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, Win32cr::Foundation::HRESULT),
     stop_t120_applets : Proc(IRTCClient*, Win32cr::Foundation::HRESULT),
-    get_IsT120AppletRunning : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsT120AppletRunning : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_LocalUserURI : Proc(IRTCClient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_LocalUserURI : Proc(IRTCClient*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_LocalUserName : Proc(IRTCClient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_LocalUserName : Proc(IRTCClient*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    play_ring : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, Int16, Win32cr::Foundation::HRESULT),
+    play_ring : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     send_dtmf : Proc(IRTCClient*, Win32cr::System::RealTimeCommunications::RTC_DTMF, Win32cr::Foundation::HRESULT),
     invoke_tuning_wizard : Proc(IRTCClient*, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
-    get_IsTuned : Proc(IRTCClient*, Int16*, Win32cr::Foundation::HRESULT)
+    get_IsTuned : Proc(IRTCClient*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCClient, lpVtbl : IRTCClientVtbl* do
+  record IRTCClient, lpVtbl : IRTCClientVtable* do
     GUID = LibC::GUID.new(0x7829e45_u32, 0x9a34_u16, 0x408e_u16, StaticArray[0xa0_u8, 0x11_u8, 0xbd_u8, 0xdf_u8, 0x13_u8, 0x48_u8, 0x7c_u8, 0xd1_u8])
     def query_interface(this : IRTCClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -629,7 +631,7 @@ module Win32cr::System::RealTimeCommunications
     def get_EventFilter(this : IRTCClient*, plFilter : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventFilter.call(this, plFilter)
     end
-    def set_preferred_media_types(this : IRTCClient*, lMediaTypes : Int32, fPersistent : Int16) : Win32cr::Foundation::HRESULT
+    def set_preferred_media_types(this : IRTCClient*, lMediaTypes : Int32, fPersistent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_preferred_media_types.call(this, lMediaTypes, fPersistent)
     end
     def get_PreferredMediaTypes(this : IRTCClient*, plMediaTypes : Int32*) : Win32cr::Foundation::HRESULT
@@ -647,7 +649,7 @@ module Win32cr::System::RealTimeCommunications
     def get_ListenForIncomingSessions(this : IRTCClient*, penListen : Win32cr::System::RealTimeCommunications::RTC_LISTEN_MODE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ListenForIncomingSessions.call(this, penListen)
     end
-    def get_NetworkAddresses(this : IRTCClient*, fTCP : Int16, fExternal : Int16, pvAddresses : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_NetworkAddresses(this : IRTCClient*, fTCP : Win32cr::Foundation::VARIANT_BOOL, fExternal : Win32cr::Foundation::VARIANT_BOOL, pvAddresses : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NetworkAddresses.call(this, fTCP, fExternal, pvAddresses)
     end
     def put_Volume(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, lVolume : Int32) : Win32cr::Foundation::HRESULT
@@ -656,10 +658,10 @@ module Win32cr::System::RealTimeCommunications
     def get_Volume(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, plVolume : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Volume.call(this, enDevice, plVolume)
     end
-    def put_AudioMuted(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, fMuted : Int16) : Win32cr::Foundation::HRESULT
+    def put_AudioMuted(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, fMuted : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AudioMuted.call(this, enDevice, fMuted)
     end
-    def get_AudioMuted(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, pfMuted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AudioMuted(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, pfMuted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AudioMuted.call(this, enDevice, pfMuted)
     end
     def get_IVideoWindow(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_VIDEO_DEVICE, ppIVideoWindow : Void**) : Win32cr::Foundation::HRESULT
@@ -677,10 +679,10 @@ module Win32cr::System::RealTimeCommunications
     def get_PreferredVolume(this : IRTCClient*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, plVolume : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredVolume.call(this, enDevice, plVolume)
     end
-    def put_PreferredAEC(this : IRTCClient*, bEnable : Int16) : Win32cr::Foundation::HRESULT
+    def put_PreferredAEC(this : IRTCClient*, bEnable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PreferredAEC.call(this, bEnable)
     end
-    def get_PreferredAEC(this : IRTCClient*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PreferredAEC(this : IRTCClient*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredAEC.call(this, pbEnabled)
     end
     def put_PreferredVideoDevice(this : IRTCClient*, bstrDeviceName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -713,7 +715,7 @@ module Win32cr::System::RealTimeCommunications
     def stop_t120_applets(this : IRTCClient*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.stop_t120_applets.call(this)
     end
-    def get_IsT120AppletRunning(this : IRTCClient*, enApplet : Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, pfRunning : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsT120AppletRunning(this : IRTCClient*, enApplet : Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, pfRunning : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsT120AppletRunning.call(this, enApplet, pfRunning)
     end
     def get_LocalUserURI(this : IRTCClient*, pbstrUserURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -728,7 +730,7 @@ module Win32cr::System::RealTimeCommunications
     def put_LocalUserName(this : IRTCClient*, bstrUserName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LocalUserName.call(this, bstrUserName)
     end
-    def play_ring(this : IRTCClient*, enType : Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, bPlay : Int16) : Win32cr::Foundation::HRESULT
+    def play_ring(this : IRTCClient*, enType : Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, bPlay : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.play_ring.call(this, enType, bPlay)
     end
     def send_dtmf(this : IRTCClient*, enDTMF : Win32cr::System::RealTimeCommunications::RTC_DTMF) : Win32cr::Foundation::HRESULT
@@ -737,14 +739,15 @@ module Win32cr::System::RealTimeCommunications
     def invoke_tuning_wizard(this : IRTCClient*, hwndParent : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invoke_tuning_wizard.call(this, hwndParent)
     end
-    def get_IsTuned(this : IRTCClient*, pfTuned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsTuned(this : IRTCClient*, pfTuned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsTuned.call(this, pfTuned)
     end
 
   end
 
   @[Extern]
-  record IRTCClient2Vtbl,
+
+  record IRTCClient2Vtable,
     query_interface : Proc(IRTCClient2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClient2*, UInt32),
     release : Proc(IRTCClient2*, UInt32),
@@ -753,24 +756,24 @@ module Win32cr::System::RealTimeCommunications
     prepare_for_shutdown : Proc(IRTCClient2*, Win32cr::Foundation::HRESULT),
     put_EventFilter : Proc(IRTCClient2*, Int32, Win32cr::Foundation::HRESULT),
     get_EventFilter : Proc(IRTCClient2*, Int32*, Win32cr::Foundation::HRESULT),
-    set_preferred_media_types : Proc(IRTCClient2*, Int32, Int16, Win32cr::Foundation::HRESULT),
+    set_preferred_media_types : Proc(IRTCClient2*, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_PreferredMediaTypes : Proc(IRTCClient2*, Int32*, Win32cr::Foundation::HRESULT),
     get_MediaCapabilities : Proc(IRTCClient2*, Int32*, Win32cr::Foundation::HRESULT),
     create_session : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_SESSION_TYPE, Win32cr::Foundation::BSTR, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
     put_ListenForIncomingSessions : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_LISTEN_MODE, Win32cr::Foundation::HRESULT),
     get_ListenForIncomingSessions : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_LISTEN_MODE*, Win32cr::Foundation::HRESULT),
-    get_NetworkAddresses : Proc(IRTCClient2*, Int16, Int16, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NetworkAddresses : Proc(IRTCClient2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_Volume : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32, Win32cr::Foundation::HRESULT),
     get_Volume : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32*, Win32cr::Foundation::HRESULT),
-    put_AudioMuted : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int16, Win32cr::Foundation::HRESULT),
-    get_AudioMuted : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int16*, Win32cr::Foundation::HRESULT),
+    put_AudioMuted : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AudioMuted : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_IVideoWindow : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_VIDEO_DEVICE, Void**, Win32cr::Foundation::HRESULT),
     put_PreferredAudioDevice : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PreferredAudioDevice : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_PreferredVolume : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32, Win32cr::Foundation::HRESULT),
     get_PreferredVolume : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, Int32*, Win32cr::Foundation::HRESULT),
-    put_PreferredAEC : Proc(IRTCClient2*, Int16, Win32cr::Foundation::HRESULT),
-    get_PreferredAEC : Proc(IRTCClient2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_PreferredAEC : Proc(IRTCClient2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_PreferredAEC : Proc(IRTCClient2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_PreferredVideoDevice : Proc(IRTCClient2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PreferredVideoDevice : Proc(IRTCClient2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ActiveMedia : Proc(IRTCClient2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -781,18 +784,18 @@ module Win32cr::System::RealTimeCommunications
     get_NetworkQuality : Proc(IRTCClient2*, Int32*, Win32cr::Foundation::HRESULT),
     start_t120_applet : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, Win32cr::Foundation::HRESULT),
     stop_t120_applets : Proc(IRTCClient2*, Win32cr::Foundation::HRESULT),
-    get_IsT120AppletRunning : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsT120AppletRunning : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_LocalUserURI : Proc(IRTCClient2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_LocalUserURI : Proc(IRTCClient2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_LocalUserName : Proc(IRTCClient2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_LocalUserName : Proc(IRTCClient2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    play_ring : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, Int16, Win32cr::Foundation::HRESULT),
+    play_ring : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     send_dtmf : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_DTMF, Win32cr::Foundation::HRESULT),
     invoke_tuning_wizard : Proc(IRTCClient2*, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
-    get_IsTuned : Proc(IRTCClient2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsTuned : Proc(IRTCClient2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_AnswerMode : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_SESSION_TYPE, Win32cr::System::RealTimeCommunications::RTC_ANSWER_MODE, Win32cr::Foundation::HRESULT),
     get_AnswerMode : Proc(IRTCClient2*, Win32cr::System::RealTimeCommunications::RTC_SESSION_TYPE, Win32cr::System::RealTimeCommunications::RTC_ANSWER_MODE*, Win32cr::Foundation::HRESULT),
-    invoke_tuning_wizard_ex : Proc(IRTCClient2*, LibC::IntPtrT, Int16, Int16, Win32cr::Foundation::HRESULT),
+    invoke_tuning_wizard_ex : Proc(IRTCClient2*, LibC::IntPtrT, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Version : Proc(IRTCClient2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ClientName : Proc(IRTCClient2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     put_ClientCurVer : Proc(IRTCClient2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -806,7 +809,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCClient2, lpVtbl : IRTCClient2Vtbl* do
+  record IRTCClient2, lpVtbl : IRTCClient2Vtable* do
     GUID = LibC::GUID.new(0xc91d71d_u32, 0x1064_u16, 0x42da_u16, StaticArray[0xbf_u8, 0xa5_u8, 0x57_u8, 0x2b_u8, 0xeb_u8, 0x8e_u8, 0xea_u8, 0x84_u8])
     def query_interface(this : IRTCClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -832,7 +835,7 @@ module Win32cr::System::RealTimeCommunications
     def get_EventFilter(this : IRTCClient2*, plFilter : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventFilter.call(this, plFilter)
     end
-    def set_preferred_media_types(this : IRTCClient2*, lMediaTypes : Int32, fPersistent : Int16) : Win32cr::Foundation::HRESULT
+    def set_preferred_media_types(this : IRTCClient2*, lMediaTypes : Int32, fPersistent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_preferred_media_types.call(this, lMediaTypes, fPersistent)
     end
     def get_PreferredMediaTypes(this : IRTCClient2*, plMediaTypes : Int32*) : Win32cr::Foundation::HRESULT
@@ -850,7 +853,7 @@ module Win32cr::System::RealTimeCommunications
     def get_ListenForIncomingSessions(this : IRTCClient2*, penListen : Win32cr::System::RealTimeCommunications::RTC_LISTEN_MODE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ListenForIncomingSessions.call(this, penListen)
     end
-    def get_NetworkAddresses(this : IRTCClient2*, fTCP : Int16, fExternal : Int16, pvAddresses : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_NetworkAddresses(this : IRTCClient2*, fTCP : Win32cr::Foundation::VARIANT_BOOL, fExternal : Win32cr::Foundation::VARIANT_BOOL, pvAddresses : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NetworkAddresses.call(this, fTCP, fExternal, pvAddresses)
     end
     def put_Volume(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, lVolume : Int32) : Win32cr::Foundation::HRESULT
@@ -859,10 +862,10 @@ module Win32cr::System::RealTimeCommunications
     def get_Volume(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, plVolume : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Volume.call(this, enDevice, plVolume)
     end
-    def put_AudioMuted(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, fMuted : Int16) : Win32cr::Foundation::HRESULT
+    def put_AudioMuted(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, fMuted : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AudioMuted.call(this, enDevice, fMuted)
     end
-    def get_AudioMuted(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, pfMuted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AudioMuted(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, pfMuted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AudioMuted.call(this, enDevice, pfMuted)
     end
     def get_IVideoWindow(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_VIDEO_DEVICE, ppIVideoWindow : Void**) : Win32cr::Foundation::HRESULT
@@ -880,10 +883,10 @@ module Win32cr::System::RealTimeCommunications
     def get_PreferredVolume(this : IRTCClient2*, enDevice : Win32cr::System::RealTimeCommunications::RTC_AUDIO_DEVICE, plVolume : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredVolume.call(this, enDevice, plVolume)
     end
-    def put_PreferredAEC(this : IRTCClient2*, bEnable : Int16) : Win32cr::Foundation::HRESULT
+    def put_PreferredAEC(this : IRTCClient2*, bEnable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PreferredAEC.call(this, bEnable)
     end
-    def get_PreferredAEC(this : IRTCClient2*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PreferredAEC(this : IRTCClient2*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredAEC.call(this, pbEnabled)
     end
     def put_PreferredVideoDevice(this : IRTCClient2*, bstrDeviceName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -916,7 +919,7 @@ module Win32cr::System::RealTimeCommunications
     def stop_t120_applets(this : IRTCClient2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.stop_t120_applets.call(this)
     end
-    def get_IsT120AppletRunning(this : IRTCClient2*, enApplet : Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, pfRunning : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsT120AppletRunning(this : IRTCClient2*, enApplet : Win32cr::System::RealTimeCommunications::RTC_T120_APPLET, pfRunning : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsT120AppletRunning.call(this, enApplet, pfRunning)
     end
     def get_LocalUserURI(this : IRTCClient2*, pbstrUserURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -931,7 +934,7 @@ module Win32cr::System::RealTimeCommunications
     def put_LocalUserName(this : IRTCClient2*, bstrUserName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LocalUserName.call(this, bstrUserName)
     end
-    def play_ring(this : IRTCClient2*, enType : Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, bPlay : Int16) : Win32cr::Foundation::HRESULT
+    def play_ring(this : IRTCClient2*, enType : Win32cr::System::RealTimeCommunications::RTC_RING_TYPE, bPlay : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.play_ring.call(this, enType, bPlay)
     end
     def send_dtmf(this : IRTCClient2*, enDTMF : Win32cr::System::RealTimeCommunications::RTC_DTMF) : Win32cr::Foundation::HRESULT
@@ -940,7 +943,7 @@ module Win32cr::System::RealTimeCommunications
     def invoke_tuning_wizard(this : IRTCClient2*, hwndParent : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invoke_tuning_wizard.call(this, hwndParent)
     end
-    def get_IsTuned(this : IRTCClient2*, pfTuned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsTuned(this : IRTCClient2*, pfTuned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsTuned.call(this, pfTuned)
     end
     def put_AnswerMode(this : IRTCClient2*, enType : Win32cr::System::RealTimeCommunications::RTC_SESSION_TYPE, enMode : Win32cr::System::RealTimeCommunications::RTC_ANSWER_MODE) : Win32cr::Foundation::HRESULT
@@ -949,7 +952,7 @@ module Win32cr::System::RealTimeCommunications
     def get_AnswerMode(this : IRTCClient2*, enType : Win32cr::System::RealTimeCommunications::RTC_SESSION_TYPE, penMode : Win32cr::System::RealTimeCommunications::RTC_ANSWER_MODE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AnswerMode.call(this, enType, penMode)
     end
-    def invoke_tuning_wizard_ex(this : IRTCClient2*, hwndParent : LibC::IntPtrT, fAllowAudio : Int16, fAllowVideo : Int16) : Win32cr::Foundation::HRESULT
+    def invoke_tuning_wizard_ex(this : IRTCClient2*, hwndParent : LibC::IntPtrT, fAllowAudio : Win32cr::Foundation::VARIANT_BOOL, fAllowVideo : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invoke_tuning_wizard_ex.call(this, hwndParent, fAllowAudio, fAllowVideo)
     end
     def get_Version(this : IRTCClient2*, plVersion : Int32*) : Win32cr::Foundation::HRESULT
@@ -986,22 +989,23 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCClientPresenceVtbl,
+
+  record IRTCClientPresenceVtable,
     query_interface : Proc(IRTCClientPresence*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClientPresence*, UInt32),
     release : Proc(IRTCClientPresence*, UInt32),
-    enable_presence : Proc(IRTCClientPresence*, Int16, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    export : Proc(IRTCClientPresence*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    import : Proc(IRTCClientPresence*, Win32cr::System::Com::VARIANT, Int16, Win32cr::Foundation::HRESULT),
+    enable_presence : Proc(IRTCClientPresence*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    export : Proc(IRTCClientPresence*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    import : Proc(IRTCClientPresence*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     enumerate_buddies : Proc(IRTCClientPresence*, Void**, Win32cr::Foundation::HRESULT),
     get_Buddies : Proc(IRTCClientPresence*, Void**, Win32cr::Foundation::HRESULT),
     get_Buddy : Proc(IRTCClientPresence*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    add_buddy : Proc(IRTCClientPresence*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    add_buddy : Proc(IRTCClientPresence*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
     remove_buddy : Proc(IRTCClientPresence*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_watchers : Proc(IRTCClientPresence*, Void**, Win32cr::Foundation::HRESULT),
     get_Watchers : Proc(IRTCClientPresence*, Void**, Win32cr::Foundation::HRESULT),
     get_Watcher : Proc(IRTCClientPresence*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    add_watcher : Proc(IRTCClientPresence*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Int16, Void**, Win32cr::Foundation::HRESULT),
+    add_watcher : Proc(IRTCClientPresence*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     remove_watcher : Proc(IRTCClientPresence*, Void*, Win32cr::Foundation::HRESULT),
     set_local_presence_info : Proc(IRTCClientPresence*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_OfferWatcherMode : Proc(IRTCClientPresence*, Win32cr::System::RealTimeCommunications::RTC_OFFER_WATCHER_MODE*, Win32cr::Foundation::HRESULT),
@@ -1011,7 +1015,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCClientPresence, lpVtbl : IRTCClientPresenceVtbl* do
+  record IRTCClientPresence, lpVtbl : IRTCClientPresenceVtable* do
     GUID = LibC::GUID.new(0x11c3cbcc_u32, 0x744_u16, 0x42d1_u16, StaticArray[0x96_u8, 0x8a_u8, 0x51_u8, 0xaa_u8, 0x1b_u8, 0xb2_u8, 0x74_u8, 0xc6_u8])
     def query_interface(this : IRTCClientPresence*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1022,13 +1026,13 @@ module Win32cr::System::RealTimeCommunications
     def release(this : IRTCClientPresence*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def enable_presence(this : IRTCClientPresence*, fUseStorage : Int16, varStorage : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def enable_presence(this : IRTCClientPresence*, fUseStorage : Win32cr::Foundation::VARIANT_BOOL, varStorage : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_presence.call(this, fUseStorage, varStorage)
     end
-    def export(this : IRTCClientPresence*, varStorage : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def export(this : IRTCClientPresence*, varStorage : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export.call(this, varStorage)
     end
-    def import(this : IRTCClientPresence*, varStorage : Win32cr::System::Com::VARIANT, fReplaceAll : Int16) : Win32cr::Foundation::HRESULT
+    def import(this : IRTCClientPresence*, varStorage : Win32cr::System::Variant::VARIANT, fReplaceAll : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import.call(this, varStorage, fReplaceAll)
     end
     def enumerate_buddies(this : IRTCClientPresence*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -1040,7 +1044,7 @@ module Win32cr::System::RealTimeCommunications
     def get_Buddy(this : IRTCClientPresence*, bstrPresentityURI : Win32cr::Foundation::BSTR, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Buddy.call(this, bstrPresentityURI, ppBuddy)
     end
-    def add_buddy(this : IRTCClientPresence*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fPersistent : Int16, pProfile : Void*, lFlags : Int32, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
+    def add_buddy(this : IRTCClientPresence*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fPersistent : Win32cr::Foundation::VARIANT_BOOL, pProfile : Void*, lFlags : Int32, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_buddy.call(this, bstrPresentityURI, bstrUserName, bstrData, fPersistent, pProfile, lFlags, ppBuddy)
     end
     def remove_buddy(this : IRTCClientPresence*, pBuddy : Void*) : Win32cr::Foundation::HRESULT
@@ -1055,7 +1059,7 @@ module Win32cr::System::RealTimeCommunications
     def get_Watcher(this : IRTCClientPresence*, bstrPresentityURI : Win32cr::Foundation::BSTR, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Watcher.call(this, bstrPresentityURI, ppWatcher)
     end
-    def add_watcher(this : IRTCClientPresence*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fBlocked : Int16, fPersistent : Int16, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
+    def add_watcher(this : IRTCClientPresence*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fBlocked : Win32cr::Foundation::VARIANT_BOOL, fPersistent : Win32cr::Foundation::VARIANT_BOOL, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_watcher.call(this, bstrPresentityURI, bstrUserName, bstrData, fBlocked, fPersistent, ppWatcher)
     end
     def remove_watcher(this : IRTCClientPresence*, pWatcher : Void*) : Win32cr::Foundation::HRESULT
@@ -1080,47 +1084,48 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCClientPresence2Vtbl,
+
+  record IRTCClientPresence2Vtable,
     query_interface : Proc(IRTCClientPresence2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClientPresence2*, UInt32),
     release : Proc(IRTCClientPresence2*, UInt32),
-    enable_presence : Proc(IRTCClientPresence2*, Int16, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    export : Proc(IRTCClientPresence2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    import : Proc(IRTCClientPresence2*, Win32cr::System::Com::VARIANT, Int16, Win32cr::Foundation::HRESULT),
+    enable_presence : Proc(IRTCClientPresence2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    export : Proc(IRTCClientPresence2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    import : Proc(IRTCClientPresence2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     enumerate_buddies : Proc(IRTCClientPresence2*, Void**, Win32cr::Foundation::HRESULT),
     get_Buddies : Proc(IRTCClientPresence2*, Void**, Win32cr::Foundation::HRESULT),
     get_Buddy : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    add_buddy : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    add_buddy : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
     remove_buddy : Proc(IRTCClientPresence2*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_watchers : Proc(IRTCClientPresence2*, Void**, Win32cr::Foundation::HRESULT),
     get_Watchers : Proc(IRTCClientPresence2*, Void**, Win32cr::Foundation::HRESULT),
     get_Watcher : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    add_watcher : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Int16, Void**, Win32cr::Foundation::HRESULT),
+    add_watcher : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     remove_watcher : Proc(IRTCClientPresence2*, Void*, Win32cr::Foundation::HRESULT),
     set_local_presence_info : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_OfferWatcherMode : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_OFFER_WATCHER_MODE*, Win32cr::Foundation::HRESULT),
     put_OfferWatcherMode : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_OFFER_WATCHER_MODE, Win32cr::Foundation::HRESULT),
     get_PrivacyMode : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_PRIVACY_MODE*, Win32cr::Foundation::HRESULT),
     put_PrivacyMode : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_PRIVACY_MODE, Win32cr::Foundation::HRESULT),
-    enable_presence_ex : Proc(IRTCClientPresence2*, Void*, Win32cr::System::Com::VARIANT, Int32, Win32cr::Foundation::HRESULT),
+    enable_presence_ex : Proc(IRTCClientPresence2*, Void*, Win32cr::System::Variant::VARIANT, Int32, Win32cr::Foundation::HRESULT),
     disable_presence : Proc(IRTCClientPresence2*, Win32cr::Foundation::HRESULT),
     add_group : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
     remove_group : Proc(IRTCClientPresence2*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_groups : Proc(IRTCClientPresence2*, Void**, Win32cr::Foundation::HRESULT),
     get_Groups : Proc(IRTCClientPresence2*, Void**, Win32cr::Foundation::HRESULT),
     get_Group : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    add_watcher_ex : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE, Int16, Win32cr::System::RealTimeCommunications::RTC_ACE_SCOPE, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    add_watcher_ex : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::RealTimeCommunications::RTC_ACE_SCOPE, Void*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_WatcherEx : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_WATCHER_MATCH_MODE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     put_PresenceProperty : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_PROPERTY, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PresenceProperty : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_PROPERTY, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_presence_data : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_presence_data : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_local_presence_info : Proc(IRTCClientPresence2*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    add_buddy_ex : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Win32cr::System::RealTimeCommunications::RTC_BUDDY_SUBSCRIPTION_TYPE, Void*, Int32, Void**, Win32cr::Foundation::HRESULT)
+    add_buddy_ex : Proc(IRTCClientPresence2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::RealTimeCommunications::RTC_BUDDY_SUBSCRIPTION_TYPE, Void*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCClientPresence2, lpVtbl : IRTCClientPresence2Vtbl* do
+  record IRTCClientPresence2, lpVtbl : IRTCClientPresence2Vtable* do
     GUID = LibC::GUID.new(0xad1809e8_u32, 0x62f7_u16, 0x4783_u16, StaticArray[0x90_u8, 0x9a_u8, 0x29_u8, 0xc9_u8, 0xd2_u8, 0xcb_u8, 0x1d_u8, 0x34_u8])
     def query_interface(this : IRTCClientPresence2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1131,13 +1136,13 @@ module Win32cr::System::RealTimeCommunications
     def release(this : IRTCClientPresence2*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def enable_presence(this : IRTCClientPresence2*, fUseStorage : Int16, varStorage : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def enable_presence(this : IRTCClientPresence2*, fUseStorage : Win32cr::Foundation::VARIANT_BOOL, varStorage : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_presence.call(this, fUseStorage, varStorage)
     end
-    def export(this : IRTCClientPresence2*, varStorage : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def export(this : IRTCClientPresence2*, varStorage : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export.call(this, varStorage)
     end
-    def import(this : IRTCClientPresence2*, varStorage : Win32cr::System::Com::VARIANT, fReplaceAll : Int16) : Win32cr::Foundation::HRESULT
+    def import(this : IRTCClientPresence2*, varStorage : Win32cr::System::Variant::VARIANT, fReplaceAll : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import.call(this, varStorage, fReplaceAll)
     end
     def enumerate_buddies(this : IRTCClientPresence2*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -1149,7 +1154,7 @@ module Win32cr::System::RealTimeCommunications
     def get_Buddy(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Buddy.call(this, bstrPresentityURI, ppBuddy)
     end
-    def add_buddy(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fPersistent : Int16, pProfile : Void*, lFlags : Int32, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
+    def add_buddy(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fPersistent : Win32cr::Foundation::VARIANT_BOOL, pProfile : Void*, lFlags : Int32, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_buddy.call(this, bstrPresentityURI, bstrUserName, bstrData, fPersistent, pProfile, lFlags, ppBuddy)
     end
     def remove_buddy(this : IRTCClientPresence2*, pBuddy : Void*) : Win32cr::Foundation::HRESULT
@@ -1164,7 +1169,7 @@ module Win32cr::System::RealTimeCommunications
     def get_Watcher(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Watcher.call(this, bstrPresentityURI, ppWatcher)
     end
-    def add_watcher(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fBlocked : Int16, fPersistent : Int16, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
+    def add_watcher(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fBlocked : Win32cr::Foundation::VARIANT_BOOL, fPersistent : Win32cr::Foundation::VARIANT_BOOL, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_watcher.call(this, bstrPresentityURI, bstrUserName, bstrData, fBlocked, fPersistent, ppWatcher)
     end
     def remove_watcher(this : IRTCClientPresence2*, pWatcher : Void*) : Win32cr::Foundation::HRESULT
@@ -1185,7 +1190,7 @@ module Win32cr::System::RealTimeCommunications
     def put_PrivacyMode(this : IRTCClientPresence2*, enMode : Win32cr::System::RealTimeCommunications::RTC_PRIVACY_MODE) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PrivacyMode.call(this, enMode)
     end
-    def enable_presence_ex(this : IRTCClientPresence2*, pProfile : Void*, varStorage : Win32cr::System::Com::VARIANT, lFlags : Int32) : Win32cr::Foundation::HRESULT
+    def enable_presence_ex(this : IRTCClientPresence2*, pProfile : Void*, varStorage : Win32cr::System::Variant::VARIANT, lFlags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_presence_ex.call(this, pProfile, varStorage, lFlags)
     end
     def disable_presence(this : IRTCClientPresence2*) : Win32cr::Foundation::HRESULT
@@ -1206,7 +1211,7 @@ module Win32cr::System::RealTimeCommunications
     def get_Group(this : IRTCClientPresence2*, bstrGroupName : Win32cr::Foundation::BSTR, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Group.call(this, bstrGroupName, ppGroup)
     end
-    def add_watcher_ex(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, enState : Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE, fPersistent : Int16, enScope : Win32cr::System::RealTimeCommunications::RTC_ACE_SCOPE, pProfile : Void*, lFlags : Int32, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
+    def add_watcher_ex(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, enState : Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE, fPersistent : Win32cr::Foundation::VARIANT_BOOL, enScope : Win32cr::System::RealTimeCommunications::RTC_ACE_SCOPE, pProfile : Void*, lFlags : Int32, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_watcher_ex.call(this, bstrPresentityURI, bstrUserName, bstrData, enState, fPersistent, enScope, pProfile, lFlags, ppWatcher)
     end
     def get_WatcherEx(this : IRTCClientPresence2*, enMode : Win32cr::System::RealTimeCommunications::RTC_WATCHER_MATCH_MODE, bstrPresentityURI : Win32cr::Foundation::BSTR, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
@@ -1227,14 +1232,15 @@ module Win32cr::System::RealTimeCommunications
     def get_local_presence_info(this : IRTCClientPresence2*, penStatus : Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS*, pbstrNotes : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_local_presence_info.call(this, penStatus, pbstrNotes)
     end
-    def add_buddy_ex(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fPersistent : Int16, enSubscriptionType : Win32cr::System::RealTimeCommunications::RTC_BUDDY_SUBSCRIPTION_TYPE, pProfile : Void*, lFlags : Int32, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
+    def add_buddy_ex(this : IRTCClientPresence2*, bstrPresentityURI : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrData : Win32cr::Foundation::BSTR, fPersistent : Win32cr::Foundation::VARIANT_BOOL, enSubscriptionType : Win32cr::System::RealTimeCommunications::RTC_BUDDY_SUBSCRIPTION_TYPE, pProfile : Void*, lFlags : Int32, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_buddy_ex.call(this, bstrPresentityURI, bstrUserName, bstrData, fPersistent, enSubscriptionType, pProfile, lFlags, ppBuddy)
     end
 
   end
 
   @[Extern]
-  record IRTCClientProvisioningVtbl,
+
+  record IRTCClientProvisioningVtable,
     query_interface : Proc(IRTCClientProvisioning*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClientProvisioning*, UInt32),
     release : Proc(IRTCClientProvisioning*, UInt32),
@@ -1248,7 +1254,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCClientProvisioning, lpVtbl : IRTCClientProvisioningVtbl* do
+  record IRTCClientProvisioning, lpVtbl : IRTCClientProvisioningVtable* do
     GUID = LibC::GUID.new(0xb9f5cf06_u32, 0x65b9_u16, 0x4a80_u16, StaticArray[0xa0_u8, 0xe6_u8, 0x73_u8, 0xca_u8, 0xe3_u8, 0xef_u8, 0x38_u8, 0x22_u8])
     def query_interface(this : IRTCClientProvisioning*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1284,7 +1290,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCClientProvisioning2Vtbl,
+
+  record IRTCClientProvisioning2Vtable,
     query_interface : Proc(IRTCClientProvisioning2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClientProvisioning2*, UInt32),
     release : Proc(IRTCClientProvisioning2*, UInt32),
@@ -1299,7 +1306,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCClientProvisioning2, lpVtbl : IRTCClientProvisioning2Vtbl* do
+  record IRTCClientProvisioning2, lpVtbl : IRTCClientProvisioning2Vtable* do
     GUID = LibC::GUID.new(0xa70909b5_u32, 0xf40e_u16, 0x4587_u16, StaticArray[0xbb_u8, 0x75_u8, 0xe6_u8, 0xbc_u8, 0x8_u8, 0x45_u8, 0x2_u8, 0x3e_u8])
     def query_interface(this : IRTCClientProvisioning2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1338,7 +1345,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCProfileVtbl,
+
+  record IRTCProfileVtable,
     query_interface : Proc(IRTCProfile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCProfile*, UInt32),
     release : Proc(IRTCProfile*, UInt32),
@@ -1349,7 +1357,7 @@ module Win32cr::System::RealTimeCommunications
     get_ProviderURI : Proc(IRTCProfile*, Win32cr::System::RealTimeCommunications::RTC_PROVIDER_URI, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ProviderData : Proc(IRTCProfile*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClientName : Proc(IRTCProfile*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_ClientBanner : Proc(IRTCProfile*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ClientBanner : Proc(IRTCProfile*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ClientMinVer : Proc(IRTCProfile*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClientCurVer : Proc(IRTCProfile*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClientUpdateURI : Proc(IRTCProfile*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1363,7 +1371,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCProfile, lpVtbl : IRTCProfileVtbl* do
+  record IRTCProfile, lpVtbl : IRTCProfileVtable* do
     GUID = LibC::GUID.new(0xd07eca9e_u32, 0x4062_u16, 0x4dd4_u16, StaticArray[0x9e_u8, 0x7d_u8, 0x72_u8, 0x2a_u8, 0x49_u8, 0xba_u8, 0x73_u8, 0x3_u8])
     def query_interface(this : IRTCProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1395,7 +1403,7 @@ module Win32cr::System::RealTimeCommunications
     def get_ClientName(this : IRTCProfile*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientName.call(this, pbstrName)
     end
-    def get_ClientBanner(this : IRTCProfile*, pfBanner : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ClientBanner(this : IRTCProfile*, pfBanner : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientBanner.call(this, pfBanner)
     end
     def get_ClientMinVer(this : IRTCProfile*, pbstrMinVer : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1432,7 +1440,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCProfile2Vtbl,
+
+  record IRTCProfile2Vtable,
     query_interface : Proc(IRTCProfile2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCProfile2*, UInt32),
     release : Proc(IRTCProfile2*, UInt32),
@@ -1443,7 +1452,7 @@ module Win32cr::System::RealTimeCommunications
     get_ProviderURI : Proc(IRTCProfile2*, Win32cr::System::RealTimeCommunications::RTC_PROVIDER_URI, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ProviderData : Proc(IRTCProfile2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClientName : Proc(IRTCProfile2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_ClientBanner : Proc(IRTCProfile2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ClientBanner : Proc(IRTCProfile2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ClientMinVer : Proc(IRTCProfile2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClientCurVer : Proc(IRTCProfile2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClientUpdateURI : Proc(IRTCProfile2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1461,7 +1470,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCProfile2, lpVtbl : IRTCProfile2Vtbl* do
+  record IRTCProfile2, lpVtbl : IRTCProfile2Vtable* do
     GUID = LibC::GUID.new(0x4b81f84e_u32, 0xbdc7_u16, 0x4184_u16, StaticArray[0x91_u8, 0x54_u8, 0x3c_u8, 0xb2_u8, 0xdd_u8, 0x79_u8, 0x17_u8, 0xfb_u8])
     def query_interface(this : IRTCProfile2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1493,7 +1502,7 @@ module Win32cr::System::RealTimeCommunications
     def get_ClientName(this : IRTCProfile2*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientName.call(this, pbstrName)
     end
-    def get_ClientBanner(this : IRTCProfile2*, pfBanner : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ClientBanner(this : IRTCProfile2*, pfBanner : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientBanner.call(this, pfBanner)
     end
     def get_ClientMinVer(this : IRTCProfile2*, pbstrMinVer : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1542,7 +1551,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionVtbl,
+
+  record IRTCSessionVtable,
     query_interface : Proc(IRTCSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSession*, UInt32),
     release : Proc(IRTCSession*, UInt32),
@@ -1557,7 +1567,7 @@ module Win32cr::System::RealTimeCommunications
     add_participant : Proc(IRTCSession*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     remove_participant : Proc(IRTCSession*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_participants : Proc(IRTCSession*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanAddParticipants : Proc(IRTCSession*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanAddParticipants : Proc(IRTCSession*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_RedirectedUserURI : Proc(IRTCSession*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RedirectedUserName : Proc(IRTCSession*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     next_redirected_user : Proc(IRTCSession*, Win32cr::Foundation::HRESULT),
@@ -1569,7 +1579,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCSession, lpVtbl : IRTCSessionVtbl* do
+  record IRTCSession, lpVtbl : IRTCSessionVtable* do
     GUID = LibC::GUID.new(0x387c8086_u32, 0x99be_u16, 0x42fb_u16, StaticArray[0x99_u8, 0x73_u8, 0x7c_u8, 0xf_u8, 0xc0_u8, 0xca_u8, 0x9f_u8, 0xa8_u8])
     def query_interface(this : IRTCSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1613,7 +1623,7 @@ module Win32cr::System::RealTimeCommunications
     def enumerate_participants(this : IRTCSession*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_participants.call(this, ppEnum)
     end
-    def get_CanAddParticipants(this : IRTCSession*, pfCanAdd : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanAddParticipants(this : IRTCSession*, pfCanAdd : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanAddParticipants.call(this, pfCanAdd)
     end
     def get_RedirectedUserURI(this : IRTCSession*, pbstrUserURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1644,7 +1654,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSession2Vtbl,
+
+  record IRTCSession2Vtable,
     query_interface : Proc(IRTCSession2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSession2*, UInt32),
     release : Proc(IRTCSession2*, UInt32),
@@ -1659,7 +1670,7 @@ module Win32cr::System::RealTimeCommunications
     add_participant : Proc(IRTCSession2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     remove_participant : Proc(IRTCSession2*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_participants : Proc(IRTCSession2*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanAddParticipants : Proc(IRTCSession2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanAddParticipants : Proc(IRTCSession2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_RedirectedUserURI : Proc(IRTCSession2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RedirectedUserName : Proc(IRTCSession2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     next_redirected_user : Proc(IRTCSession2*, Win32cr::Foundation::HRESULT),
@@ -1671,13 +1682,13 @@ module Win32cr::System::RealTimeCommunications
     send_info : Proc(IRTCSession2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
     put_PreferredSecurityLevel : Proc(IRTCSession2*, Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, Win32cr::System::RealTimeCommunications::RTC_SECURITY_LEVEL, Win32cr::Foundation::HRESULT),
     get_PreferredSecurityLevel : Proc(IRTCSession2*, Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, Win32cr::System::RealTimeCommunications::RTC_SECURITY_LEVEL*, Win32cr::Foundation::HRESULT),
-    is_security_enabled : Proc(IRTCSession2*, Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, Int16*, Win32cr::Foundation::HRESULT),
+    is_security_enabled : Proc(IRTCSession2*, Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     answer_with_session_description : Proc(IRTCSession2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     re_invite_with_session_description : Proc(IRTCSession2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, LibC::IntPtrT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCSession2, lpVtbl : IRTCSession2Vtbl* do
+  record IRTCSession2, lpVtbl : IRTCSession2Vtable* do
     GUID = LibC::GUID.new(0x17d7cdfc_u32, 0xb007_u16, 0x484c_u16, StaticArray[0x99_u8, 0xd2_u8, 0x86_u8, 0xa8_u8, 0xa8_u8, 0x20_u8, 0x99_u8, 0x1d_u8])
     def query_interface(this : IRTCSession2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1721,7 +1732,7 @@ module Win32cr::System::RealTimeCommunications
     def enumerate_participants(this : IRTCSession2*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_participants.call(this, ppEnum)
     end
-    def get_CanAddParticipants(this : IRTCSession2*, pfCanAdd : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanAddParticipants(this : IRTCSession2*, pfCanAdd : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanAddParticipants.call(this, pfCanAdd)
     end
     def get_RedirectedUserURI(this : IRTCSession2*, pbstrUserURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1757,7 +1768,7 @@ module Win32cr::System::RealTimeCommunications
     def get_PreferredSecurityLevel(this : IRTCSession2*, enSecurityType : Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, penSecurityLevel : Win32cr::System::RealTimeCommunications::RTC_SECURITY_LEVEL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredSecurityLevel.call(this, enSecurityType, penSecurityLevel)
     end
-    def is_security_enabled(this : IRTCSession2*, enSecurityType : Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, pfSecurityEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_security_enabled(this : IRTCSession2*, enSecurityType : Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, pfSecurityEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_security_enabled.call(this, enSecurityType, pfSecurityEnabled)
     end
     def answer_with_session_description(this : IRTCSession2*, bstrContentType : Win32cr::Foundation::BSTR, bstrSessionDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1770,7 +1781,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionCallControlVtbl,
+
+  record IRTCSessionCallControlVtable,
     query_interface : Proc(IRTCSessionCallControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionCallControl*, UInt32),
     release : Proc(IRTCSessionCallControl*, UInt32),
@@ -1782,11 +1794,11 @@ module Win32cr::System::RealTimeCommunications
     get_ReferredByURI : Proc(IRTCSessionCallControl*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ReferCookie : Proc(IRTCSessionCallControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ReferCookie : Proc(IRTCSessionCallControl*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsReferred : Proc(IRTCSessionCallControl*, Int16*, Win32cr::Foundation::HRESULT)
+    get_IsReferred : Proc(IRTCSessionCallControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCSessionCallControl, lpVtbl : IRTCSessionCallControlVtbl* do
+  record IRTCSessionCallControl, lpVtbl : IRTCSessionCallControlVtable* do
     GUID = LibC::GUID.new(0xe9a50d94_u32, 0x190b_u16, 0x4f82_u16, StaticArray[0x95_u8, 0x30_u8, 0x3b_u8, 0x8e_u8, 0xbf_u8, 0x60_u8, 0x75_u8, 0x8a_u8])
     def query_interface(this : IRTCSessionCallControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1821,26 +1833,27 @@ module Win32cr::System::RealTimeCommunications
     def get_ReferCookie(this : IRTCSessionCallControl*, pbstrReferCookie : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReferCookie.call(this, pbstrReferCookie)
     end
-    def get_IsReferred(this : IRTCSessionCallControl*, pfIsReferred : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsReferred(this : IRTCSessionCallControl*, pfIsReferred : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsReferred.call(this, pfIsReferred)
     end
 
   end
 
   @[Extern]
-  record IRTCParticipantVtbl,
+
+  record IRTCParticipantVtable,
     query_interface : Proc(IRTCParticipant*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCParticipant*, UInt32),
     release : Proc(IRTCParticipant*, UInt32),
     get_UserURI : Proc(IRTCParticipant*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IRTCParticipant*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Removable : Proc(IRTCParticipant*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Removable : Proc(IRTCParticipant*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRTCParticipant*, Win32cr::System::RealTimeCommunications::RTC_PARTICIPANT_STATE*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCParticipant*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCParticipant, lpVtbl : IRTCParticipantVtbl* do
+  record IRTCParticipant, lpVtbl : IRTCParticipantVtable* do
     GUID = LibC::GUID.new(0xae86add5_u32, 0x26b1_u16, 0x4414_u16, StaticArray[0xaf_u8, 0x1d_u8, 0xb9_u8, 0x4c_u8, 0xd9_u8, 0x38_u8, 0xd7_u8, 0x39_u8])
     def query_interface(this : IRTCParticipant*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1857,7 +1870,7 @@ module Win32cr::System::RealTimeCommunications
     def get_Name(this : IRTCParticipant*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
     end
-    def get_Removable(this : IRTCParticipant*, pfRemovable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Removable(this : IRTCParticipant*, pfRemovable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Removable.call(this, pfRemovable)
     end
     def get_State(this : IRTCParticipant*, penState : Win32cr::System::RealTimeCommunications::RTC_PARTICIPANT_STATE*) : Win32cr::Foundation::HRESULT
@@ -1870,14 +1883,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCRoamingEventVtbl,
+
+  record IRTCRoamingEventVtable,
     query_interface : Proc(IRTCRoamingEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCRoamingEvent*, UInt32),
     release : Proc(IRTCRoamingEvent*, UInt32),
     get_type_info_count : Proc(IRTCRoamingEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCRoamingEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCRoamingEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCRoamingEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCRoamingEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_EventType : Proc(IRTCRoamingEvent*, Win32cr::System::RealTimeCommunications::RTC_ROAMING_EVENT_TYPE*, Win32cr::Foundation::HRESULT),
     get_Profile : Proc(IRTCRoamingEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCRoamingEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1885,7 +1899,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCRoamingEvent, lpVtbl : IRTCRoamingEventVtbl* do
+  record IRTCRoamingEvent, lpVtbl : IRTCRoamingEventVtable* do
     GUID = LibC::GUID.new(0x79960a6b_u32, 0xcb1_u16, 0x4dc8_u16, StaticArray[0xa8_u8, 0x5_u8, 0x73_u8, 0x18_u8, 0xe9_u8, 0x99_u8, 0x2_u8, 0xe8_u8])
     def query_interface(this : IRTCRoamingEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1905,8 +1919,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCRoamingEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCRoamingEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCRoamingEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_EventType(this : IRTCRoamingEvent*, pEventType : Win32cr::System::RealTimeCommunications::RTC_ROAMING_EVENT_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventType.call(this, pEventType)
@@ -1924,21 +1938,22 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCProfileEventVtbl,
+
+  record IRTCProfileEventVtable,
     query_interface : Proc(IRTCProfileEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCProfileEvent*, UInt32),
     release : Proc(IRTCProfileEvent*, UInt32),
     get_type_info_count : Proc(IRTCProfileEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCProfileEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCProfileEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCProfileEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCProfileEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Profile : Proc(IRTCProfileEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Cookie : Proc(IRTCProfileEvent*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCProfileEvent*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCProfileEvent, lpVtbl : IRTCProfileEventVtbl* do
+  record IRTCProfileEvent, lpVtbl : IRTCProfileEventVtable* do
     GUID = LibC::GUID.new(0xd6d5ab3b_u32, 0x770e_u16, 0x43e8_u16, StaticArray[0x80_u8, 0xa_u8, 0x79_u8, 0xb0_u8, 0x62_u8, 0x39_u8, 0x5f_u8, 0xca_u8])
     def query_interface(this : IRTCProfileEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1958,8 +1973,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCProfileEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCProfileEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCProfileEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Profile(this : IRTCProfileEvent*, ppProfile : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Profile.call(this, ppProfile)
@@ -1974,14 +1989,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCProfileEvent2Vtbl,
+
+  record IRTCProfileEvent2Vtable,
     query_interface : Proc(IRTCProfileEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCProfileEvent2*, UInt32),
     release : Proc(IRTCProfileEvent2*, UInt32),
     get_type_info_count : Proc(IRTCProfileEvent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCProfileEvent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCProfileEvent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCProfileEvent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCProfileEvent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Profile : Proc(IRTCProfileEvent2*, Void**, Win32cr::Foundation::HRESULT),
     get_Cookie : Proc(IRTCProfileEvent2*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCProfileEvent2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1989,7 +2005,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCProfileEvent2, lpVtbl : IRTCProfileEvent2Vtbl* do
+  record IRTCProfileEvent2, lpVtbl : IRTCProfileEvent2Vtable* do
     GUID = LibC::GUID.new(0x62e56edc_u32, 0x3fa_u16, 0x4121_u16, StaticArray[0x94_u8, 0xfb_u8, 0x23_u8, 0x49_u8, 0x3f_u8, 0xd0_u8, 0xae_u8, 0x64_u8])
     def query_interface(this : IRTCProfileEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2009,8 +2025,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCProfileEvent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCProfileEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCProfileEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Profile(this : IRTCProfileEvent2*, ppProfile : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Profile.call(this, ppProfile)
@@ -2028,20 +2044,21 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCClientEventVtbl,
+
+  record IRTCClientEventVtable,
     query_interface : Proc(IRTCClientEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClientEvent*, UInt32),
     release : Proc(IRTCClientEvent*, UInt32),
     get_type_info_count : Proc(IRTCClientEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCClientEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCClientEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCClientEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCClientEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_EventType : Proc(IRTCClientEvent*, Win32cr::System::RealTimeCommunications::RTC_CLIENT_EVENT_TYPE*, Win32cr::Foundation::HRESULT),
     get_Client : Proc(IRTCClientEvent*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCClientEvent, lpVtbl : IRTCClientEventVtbl* do
+  record IRTCClientEvent, lpVtbl : IRTCClientEventVtable* do
     GUID = LibC::GUID.new(0x2b493b7a_u32, 0x3cba_u16, 0x4170_u16, StaticArray[0x9c_u8, 0x8b_u8, 0x76_u8, 0xa9_u8, 0xda_u8, 0xcd_u8, 0xd6_u8, 0x44_u8])
     def query_interface(this : IRTCClientEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2061,8 +2078,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCClientEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCClientEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCClientEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_EventType(this : IRTCClientEvent*, penEventType : Win32cr::System::RealTimeCommunications::RTC_CLIENT_EVENT_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventType.call(this, penEventType)
@@ -2074,14 +2091,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCRegistrationStateChangeEventVtbl,
+
+  record IRTCRegistrationStateChangeEventVtable,
     query_interface : Proc(IRTCRegistrationStateChangeEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCRegistrationStateChangeEvent*, UInt32),
     release : Proc(IRTCRegistrationStateChangeEvent*, UInt32),
     get_type_info_count : Proc(IRTCRegistrationStateChangeEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCRegistrationStateChangeEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCRegistrationStateChangeEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCRegistrationStateChangeEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCRegistrationStateChangeEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Profile : Proc(IRTCRegistrationStateChangeEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRTCRegistrationStateChangeEvent*, Win32cr::System::RealTimeCommunications::RTC_REGISTRATION_STATE*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCRegistrationStateChangeEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2089,7 +2107,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCRegistrationStateChangeEvent, lpVtbl : IRTCRegistrationStateChangeEventVtbl* do
+  record IRTCRegistrationStateChangeEvent, lpVtbl : IRTCRegistrationStateChangeEventVtable* do
     GUID = LibC::GUID.new(0x62d0991b_u32, 0x50ab_u16, 0x4f02_u16, StaticArray[0xb9_u8, 0x48_u8, 0xca_u8, 0x94_u8, 0xf2_u8, 0x6f_u8, 0x8f_u8, 0x95_u8])
     def query_interface(this : IRTCRegistrationStateChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2109,8 +2127,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCRegistrationStateChangeEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCRegistrationStateChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCRegistrationStateChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Profile(this : IRTCRegistrationStateChangeEvent*, ppProfile : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Profile.call(this, ppProfile)
@@ -2128,14 +2146,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionStateChangeEventVtbl,
+
+  record IRTCSessionStateChangeEventVtable,
     query_interface : Proc(IRTCSessionStateChangeEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionStateChangeEvent*, UInt32),
     release : Proc(IRTCSessionStateChangeEvent*, UInt32),
     get_type_info_count : Proc(IRTCSessionStateChangeEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCSessionStateChangeEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCSessionStateChangeEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCSessionStateChangeEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCSessionStateChangeEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCSessionStateChangeEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRTCSessionStateChangeEvent*, Win32cr::System::RealTimeCommunications::RTC_SESSION_STATE*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCSessionStateChangeEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2143,7 +2162,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCSessionStateChangeEvent, lpVtbl : IRTCSessionStateChangeEventVtbl* do
+  record IRTCSessionStateChangeEvent, lpVtbl : IRTCSessionStateChangeEventVtable* do
     GUID = LibC::GUID.new(0xb5bad703_u32, 0x5952_u16, 0x48b3_u16, StaticArray[0x93_u8, 0x21_u8, 0x7f_u8, 0x45_u8, 0x0_u8, 0x52_u8, 0x15_u8, 0x6_u8])
     def query_interface(this : IRTCSessionStateChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2163,8 +2182,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCSessionStateChangeEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCSessionStateChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCSessionStateChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCSessionStateChangeEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -2182,26 +2201,27 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionStateChangeEvent2Vtbl,
+
+  record IRTCSessionStateChangeEvent2Vtable,
     query_interface : Proc(IRTCSessionStateChangeEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionStateChangeEvent2*, UInt32),
     release : Proc(IRTCSessionStateChangeEvent2*, UInt32),
     get_type_info_count : Proc(IRTCSessionStateChangeEvent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCSessionStateChangeEvent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCSessionStateChangeEvent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCSessionStateChangeEvent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCSessionStateChangeEvent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCSessionStateChangeEvent2*, Void**, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRTCSessionStateChangeEvent2*, Win32cr::System::RealTimeCommunications::RTC_SESSION_STATE*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCSessionStateChangeEvent2*, Int32*, Win32cr::Foundation::HRESULT),
     get_StatusText : Proc(IRTCSessionStateChangeEvent2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MediaTypes : Proc(IRTCSessionStateChangeEvent2*, Int32*, Win32cr::Foundation::HRESULT),
     get_RemotePreferredSecurityLevel : Proc(IRTCSessionStateChangeEvent2*, Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, Win32cr::System::RealTimeCommunications::RTC_SECURITY_LEVEL*, Win32cr::Foundation::HRESULT),
-    get_IsForked : Proc(IRTCSessionStateChangeEvent2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsForked : Proc(IRTCSessionStateChangeEvent2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_remote_session_description : Proc(IRTCSessionStateChangeEvent2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCSessionStateChangeEvent2, lpVtbl : IRTCSessionStateChangeEvent2Vtbl* do
+  record IRTCSessionStateChangeEvent2, lpVtbl : IRTCSessionStateChangeEvent2Vtable* do
     GUID = LibC::GUID.new(0x4f933171_u32, 0x6f95_u16, 0x4880_u16, StaticArray[0x80_u8, 0xd9_u8, 0x2e_u8, 0xc8_u8, 0xd4_u8, 0x95_u8, 0xd2_u8, 0x61_u8])
     def query_interface(this : IRTCSessionStateChangeEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2221,8 +2241,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCSessionStateChangeEvent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCSessionStateChangeEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCSessionStateChangeEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCSessionStateChangeEvent2*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -2242,7 +2262,7 @@ module Win32cr::System::RealTimeCommunications
     def get_RemotePreferredSecurityLevel(this : IRTCSessionStateChangeEvent2*, enSecurityType : Win32cr::System::RealTimeCommunications::RTC_SECURITY_TYPE, penSecurityLevel : Win32cr::System::RealTimeCommunications::RTC_SECURITY_LEVEL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RemotePreferredSecurityLevel.call(this, enSecurityType, penSecurityLevel)
     end
-    def get_IsForked(this : IRTCSessionStateChangeEvent2*, pfIsForked : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsForked(this : IRTCSessionStateChangeEvent2*, pfIsForked : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsForked.call(this, pfIsForked)
     end
     def get_remote_session_description(this : IRTCSessionStateChangeEvent2*, pbstrContentType : Win32cr::Foundation::BSTR*, pbstrSessionDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2252,14 +2272,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionOperationCompleteEventVtbl,
+
+  record IRTCSessionOperationCompleteEventVtable,
     query_interface : Proc(IRTCSessionOperationCompleteEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionOperationCompleteEvent*, UInt32),
     release : Proc(IRTCSessionOperationCompleteEvent*, UInt32),
     get_type_info_count : Proc(IRTCSessionOperationCompleteEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCSessionOperationCompleteEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCSessionOperationCompleteEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCSessionOperationCompleteEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCSessionOperationCompleteEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCSessionOperationCompleteEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Cookie : Proc(IRTCSessionOperationCompleteEvent*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCSessionOperationCompleteEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2267,7 +2288,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCSessionOperationCompleteEvent, lpVtbl : IRTCSessionOperationCompleteEventVtbl* do
+  record IRTCSessionOperationCompleteEvent, lpVtbl : IRTCSessionOperationCompleteEventVtable* do
     GUID = LibC::GUID.new(0xa6bff4c0_u32, 0xf7c8_u16, 0x4d3c_u16, StaticArray[0x9a_u8, 0x41_u8, 0x35_u8, 0x50_u8, 0xf7_u8, 0x8a_u8, 0x95_u8, 0xb0_u8])
     def query_interface(this : IRTCSessionOperationCompleteEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2287,8 +2308,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCSessionOperationCompleteEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCSessionOperationCompleteEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCSessionOperationCompleteEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCSessionOperationCompleteEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -2306,14 +2327,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionOperationCompleteEvent2Vtbl,
+
+  record IRTCSessionOperationCompleteEvent2Vtable,
     query_interface : Proc(IRTCSessionOperationCompleteEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionOperationCompleteEvent2*, UInt32),
     release : Proc(IRTCSessionOperationCompleteEvent2*, UInt32),
     get_type_info_count : Proc(IRTCSessionOperationCompleteEvent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCSessionOperationCompleteEvent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCSessionOperationCompleteEvent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCSessionOperationCompleteEvent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCSessionOperationCompleteEvent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCSessionOperationCompleteEvent2*, Void**, Win32cr::Foundation::HRESULT),
     get_Cookie : Proc(IRTCSessionOperationCompleteEvent2*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCSessionOperationCompleteEvent2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2323,7 +2345,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCSessionOperationCompleteEvent2, lpVtbl : IRTCSessionOperationCompleteEvent2Vtbl* do
+  record IRTCSessionOperationCompleteEvent2, lpVtbl : IRTCSessionOperationCompleteEvent2Vtable* do
     GUID = LibC::GUID.new(0xf6fc2a9b_u32, 0xd5bc_u16, 0x4241_u16, StaticArray[0xb4_u8, 0x36_u8, 0x1b_u8, 0x84_u8, 0x60_u8, 0xc1_u8, 0x38_u8, 0x32_u8])
     def query_interface(this : IRTCSessionOperationCompleteEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2343,8 +2365,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCSessionOperationCompleteEvent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCSessionOperationCompleteEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCSessionOperationCompleteEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCSessionOperationCompleteEvent2*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -2368,21 +2390,22 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCParticipantStateChangeEventVtbl,
+
+  record IRTCParticipantStateChangeEventVtable,
     query_interface : Proc(IRTCParticipantStateChangeEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCParticipantStateChangeEvent*, UInt32),
     release : Proc(IRTCParticipantStateChangeEvent*, UInt32),
     get_type_info_count : Proc(IRTCParticipantStateChangeEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCParticipantStateChangeEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCParticipantStateChangeEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCParticipantStateChangeEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCParticipantStateChangeEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Participant : Proc(IRTCParticipantStateChangeEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRTCParticipantStateChangeEvent*, Win32cr::System::RealTimeCommunications::RTC_PARTICIPANT_STATE*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCParticipantStateChangeEvent*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCParticipantStateChangeEvent, lpVtbl : IRTCParticipantStateChangeEventVtbl* do
+  record IRTCParticipantStateChangeEvent, lpVtbl : IRTCParticipantStateChangeEventVtable* do
     GUID = LibC::GUID.new(0x9bcb597_u32, 0xf0fa_u16, 0x48f9_u16, StaticArray[0xb4_u8, 0x20_u8, 0x46_u8, 0x8c_u8, 0xea_u8, 0x7f_u8, 0xde_u8, 0x4_u8])
     def query_interface(this : IRTCParticipantStateChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2402,8 +2425,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCParticipantStateChangeEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCParticipantStateChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCParticipantStateChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Participant(this : IRTCParticipantStateChangeEvent*, ppParticipant : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Participant.call(this, ppParticipant)
@@ -2418,21 +2441,22 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCMediaEventVtbl,
+
+  record IRTCMediaEventVtable,
     query_interface : Proc(IRTCMediaEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCMediaEvent*, UInt32),
     release : Proc(IRTCMediaEvent*, UInt32),
     get_type_info_count : Proc(IRTCMediaEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCMediaEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCMediaEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCMediaEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCMediaEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_MediaType : Proc(IRTCMediaEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_EventType : Proc(IRTCMediaEvent*, Win32cr::System::RealTimeCommunications::RTC_MEDIA_EVENT_TYPE*, Win32cr::Foundation::HRESULT),
     get_EventReason : Proc(IRTCMediaEvent*, Win32cr::System::RealTimeCommunications::RTC_MEDIA_EVENT_REASON*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCMediaEvent, lpVtbl : IRTCMediaEventVtbl* do
+  record IRTCMediaEvent, lpVtbl : IRTCMediaEventVtable* do
     GUID = LibC::GUID.new(0x99944fb_u32, 0xbcda_u16, 0x453e_u16, StaticArray[0x8c_u8, 0x41_u8, 0xe1_u8, 0x3d_u8, 0xa2_u8, 0xad_u8, 0xf7_u8, 0xf3_u8])
     def query_interface(this : IRTCMediaEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2452,8 +2476,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCMediaEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCMediaEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCMediaEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_MediaType(this : IRTCMediaEvent*, pMediaType : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MediaType.call(this, pMediaType)
@@ -2468,14 +2492,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCIntensityEventVtbl,
+
+  record IRTCIntensityEventVtable,
     query_interface : Proc(IRTCIntensityEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCIntensityEvent*, UInt32),
     release : Proc(IRTCIntensityEvent*, UInt32),
     get_type_info_count : Proc(IRTCIntensityEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCIntensityEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCIntensityEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCIntensityEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCIntensityEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Level : Proc(IRTCIntensityEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_Min : Proc(IRTCIntensityEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_Max : Proc(IRTCIntensityEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2483,7 +2508,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCIntensityEvent, lpVtbl : IRTCIntensityEventVtbl* do
+  record IRTCIntensityEvent, lpVtbl : IRTCIntensityEventVtable* do
     GUID = LibC::GUID.new(0x4c23bf51_u32, 0x390c_u16, 0x4992_u16, StaticArray[0xa4_u8, 0x1d_u8, 0x41_u8, 0xee_u8, 0xc0_u8, 0x5b_u8, 0x2a_u8, 0x4b_u8])
     def query_interface(this : IRTCIntensityEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2503,8 +2528,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCIntensityEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCIntensityEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCIntensityEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Level(this : IRTCIntensityEvent*, plLevel : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Level.call(this, plLevel)
@@ -2522,14 +2547,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCMessagingEventVtbl,
+
+  record IRTCMessagingEventVtable,
     query_interface : Proc(IRTCMessagingEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCMessagingEvent*, UInt32),
     release : Proc(IRTCMessagingEvent*, UInt32),
     get_type_info_count : Proc(IRTCMessagingEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCMessagingEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCMessagingEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCMessagingEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCMessagingEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCMessagingEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Participant : Proc(IRTCMessagingEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_EventType : Proc(IRTCMessagingEvent*, Win32cr::System::RealTimeCommunications::RTC_MESSAGING_EVENT_TYPE*, Win32cr::Foundation::HRESULT),
@@ -2539,7 +2565,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCMessagingEvent, lpVtbl : IRTCMessagingEventVtbl* do
+  record IRTCMessagingEvent, lpVtbl : IRTCMessagingEventVtable* do
     GUID = LibC::GUID.new(0xd3609541_u32, 0x1b29_u16, 0x4de5_u16, StaticArray[0xa4_u8, 0xad_u8, 0x5a_u8, 0xeb_u8, 0xaf_u8, 0x31_u8, 0x95_u8, 0x12_u8])
     def query_interface(this : IRTCMessagingEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2559,8 +2585,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCMessagingEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCMessagingEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCMessagingEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCMessagingEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -2584,19 +2610,20 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCBuddyEventVtbl,
+
+  record IRTCBuddyEventVtable,
     query_interface : Proc(IRTCBuddyEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCBuddyEvent*, UInt32),
     release : Proc(IRTCBuddyEvent*, UInt32),
     get_type_info_count : Proc(IRTCBuddyEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCBuddyEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCBuddyEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCBuddyEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCBuddyEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Buddy : Proc(IRTCBuddyEvent*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCBuddyEvent, lpVtbl : IRTCBuddyEventVtbl* do
+  record IRTCBuddyEvent, lpVtbl : IRTCBuddyEventVtable* do
     GUID = LibC::GUID.new(0xf36d755d_u32, 0x17e6_u16, 0x404e_u16, StaticArray[0x95_u8, 0x4f_u8, 0xf_u8, 0xc0_u8, 0x75_u8, 0x74_u8, 0xc7_u8, 0x8d_u8])
     def query_interface(this : IRTCBuddyEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2616,8 +2643,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCBuddyEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCBuddyEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCBuddyEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Buddy(this : IRTCBuddyEvent*, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Buddy.call(this, ppBuddy)
@@ -2626,14 +2653,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCBuddyEvent2Vtbl,
+
+  record IRTCBuddyEvent2Vtable,
     query_interface : Proc(IRTCBuddyEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCBuddyEvent2*, UInt32),
     release : Proc(IRTCBuddyEvent2*, UInt32),
     get_type_info_count : Proc(IRTCBuddyEvent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCBuddyEvent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCBuddyEvent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCBuddyEvent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCBuddyEvent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Buddy : Proc(IRTCBuddyEvent2*, Void**, Win32cr::Foundation::HRESULT),
     get_EventType : Proc(IRTCBuddyEvent2*, Win32cr::System::RealTimeCommunications::RTC_BUDDY_EVENT_TYPE*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCBuddyEvent2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2641,7 +2669,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCBuddyEvent2, lpVtbl : IRTCBuddyEvent2Vtbl* do
+  record IRTCBuddyEvent2, lpVtbl : IRTCBuddyEvent2Vtable* do
     GUID = LibC::GUID.new(0x484a7f1e_u32, 0x73f0_u16, 0x4990_u16, StaticArray[0xbf_u8, 0xc2_u8, 0x60_u8, 0xbc_u8, 0x39_u8, 0x78_u8, 0xa7_u8, 0x20_u8])
     def query_interface(this : IRTCBuddyEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2661,8 +2689,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCBuddyEvent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCBuddyEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCBuddyEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Buddy(this : IRTCBuddyEvent2*, ppBuddy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Buddy.call(this, ppBuddy)
@@ -2680,19 +2708,20 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCWatcherEventVtbl,
+
+  record IRTCWatcherEventVtable,
     query_interface : Proc(IRTCWatcherEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCWatcherEvent*, UInt32),
     release : Proc(IRTCWatcherEvent*, UInt32),
     get_type_info_count : Proc(IRTCWatcherEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCWatcherEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCWatcherEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCWatcherEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCWatcherEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Watcher : Proc(IRTCWatcherEvent*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCWatcherEvent, lpVtbl : IRTCWatcherEventVtbl* do
+  record IRTCWatcherEvent, lpVtbl : IRTCWatcherEventVtable* do
     GUID = LibC::GUID.new(0xf30d7261_u32, 0x587a_u16, 0x424f_u16, StaticArray[0x82_u8, 0x2c_u8, 0x31_u8, 0x27_u8, 0x88_u8, 0xf4_u8, 0x35_u8, 0x48_u8])
     def query_interface(this : IRTCWatcherEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2712,8 +2741,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCWatcherEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCWatcherEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCWatcherEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Watcher(this : IRTCWatcherEvent*, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Watcher.call(this, ppWatcher)
@@ -2722,21 +2751,22 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCWatcherEvent2Vtbl,
+
+  record IRTCWatcherEvent2Vtable,
     query_interface : Proc(IRTCWatcherEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCWatcherEvent2*, UInt32),
     release : Proc(IRTCWatcherEvent2*, UInt32),
     get_type_info_count : Proc(IRTCWatcherEvent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCWatcherEvent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCWatcherEvent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCWatcherEvent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCWatcherEvent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Watcher : Proc(IRTCWatcherEvent2*, Void**, Win32cr::Foundation::HRESULT),
     get_EventType : Proc(IRTCWatcherEvent2*, Win32cr::System::RealTimeCommunications::RTC_WATCHER_EVENT_TYPE*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCWatcherEvent2*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCWatcherEvent2, lpVtbl : IRTCWatcherEvent2Vtbl* do
+  record IRTCWatcherEvent2, lpVtbl : IRTCWatcherEvent2Vtable* do
     GUID = LibC::GUID.new(0xe52891e8_u32, 0x188c_u16, 0x49af_u16, StaticArray[0xb0_u8, 0x5_u8, 0x98_u8, 0xed_u8, 0x13_u8, 0xf8_u8, 0x3f_u8, 0x9c_u8])
     def query_interface(this : IRTCWatcherEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2756,8 +2786,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCWatcherEvent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCWatcherEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCWatcherEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Watcher(this : IRTCWatcherEvent2*, ppWatcher : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Watcher.call(this, ppWatcher)
@@ -2772,14 +2802,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCBuddyGroupEventVtbl,
+
+  record IRTCBuddyGroupEventVtable,
     query_interface : Proc(IRTCBuddyGroupEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCBuddyGroupEvent*, UInt32),
     release : Proc(IRTCBuddyGroupEvent*, UInt32),
     get_type_info_count : Proc(IRTCBuddyGroupEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCBuddyGroupEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCBuddyGroupEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCBuddyGroupEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCBuddyGroupEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_EventType : Proc(IRTCBuddyGroupEvent*, Win32cr::System::RealTimeCommunications::RTC_GROUP_EVENT_TYPE*, Win32cr::Foundation::HRESULT),
     get_Group : Proc(IRTCBuddyGroupEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Buddy : Proc(IRTCBuddyGroupEvent*, Void**, Win32cr::Foundation::HRESULT),
@@ -2787,7 +2818,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCBuddyGroupEvent, lpVtbl : IRTCBuddyGroupEventVtbl* do
+  record IRTCBuddyGroupEvent, lpVtbl : IRTCBuddyGroupEventVtable* do
     GUID = LibC::GUID.new(0x3a79e1d1_u32, 0xb736_u16, 0x4414_u16, StaticArray[0x96_u8, 0xf8_u8, 0xbb_u8, 0xc7_u8, 0xf0_u8, 0x88_u8, 0x63_u8, 0xe4_u8])
     def query_interface(this : IRTCBuddyGroupEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2807,8 +2838,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCBuddyGroupEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCBuddyGroupEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCBuddyGroupEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_EventType(this : IRTCBuddyGroupEvent*, pEventType : Win32cr::System::RealTimeCommunications::RTC_GROUP_EVENT_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventType.call(this, pEventType)
@@ -2826,14 +2857,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCInfoEventVtbl,
+
+  record IRTCInfoEventVtable,
     query_interface : Proc(IRTCInfoEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCInfoEvent*, UInt32),
     release : Proc(IRTCInfoEvent*, UInt32),
     get_type_info_count : Proc(IRTCInfoEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCInfoEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCInfoEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCInfoEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCInfoEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCInfoEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Participant : Proc(IRTCInfoEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Info : Proc(IRTCInfoEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2841,7 +2873,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCInfoEvent, lpVtbl : IRTCInfoEventVtbl* do
+  record IRTCInfoEvent, lpVtbl : IRTCInfoEventVtable* do
     GUID = LibC::GUID.new(0x4e1d68ae_u32, 0x1912_u16, 0x4f49_u16, StaticArray[0xb2_u8, 0xc3_u8, 0x59_u8, 0x4f_u8, 0xad_u8, 0xfd_u8, 0x42_u8, 0x5f_u8])
     def query_interface(this : IRTCInfoEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2861,8 +2893,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCInfoEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCInfoEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCInfoEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCInfoEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -2880,14 +2912,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCMediaRequestEventVtbl,
+
+  record IRTCMediaRequestEventVtable,
     query_interface : Proc(IRTCMediaRequestEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCMediaRequestEvent*, UInt32),
     release : Proc(IRTCMediaRequestEvent*, UInt32),
     get_type_info_count : Proc(IRTCMediaRequestEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCMediaRequestEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCMediaRequestEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCMediaRequestEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCMediaRequestEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCMediaRequestEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_ProposedMedia : Proc(IRTCMediaRequestEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_CurrentMedia : Proc(IRTCMediaRequestEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2898,7 +2931,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCMediaRequestEvent, lpVtbl : IRTCMediaRequestEventVtbl* do
+  record IRTCMediaRequestEvent, lpVtbl : IRTCMediaRequestEventVtable* do
     GUID = LibC::GUID.new(0x52572d15_u32, 0x148c_u16, 0x4d97_u16, StaticArray[0xa3_u8, 0x6c_u8, 0x2d_u8, 0xa5_u8, 0x5c_u8, 0x28_u8, 0x9d_u8, 0x63_u8])
     def query_interface(this : IRTCMediaRequestEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2918,8 +2951,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCMediaRequestEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCMediaRequestEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCMediaRequestEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCMediaRequestEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -2946,14 +2979,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCReInviteEventVtbl,
+
+  record IRTCReInviteEventVtable,
     query_interface : Proc(IRTCReInviteEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCReInviteEvent*, UInt32),
     release : Proc(IRTCReInviteEvent*, UInt32),
     get_type_info_count : Proc(IRTCReInviteEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCReInviteEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCReInviteEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCReInviteEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCReInviteEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCReInviteEvent*, Void**, Win32cr::Foundation::HRESULT),
     accept : Proc(IRTCReInviteEvent*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     reject : Proc(IRTCReInviteEvent*, Win32cr::Foundation::HRESULT),
@@ -2962,7 +2996,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCReInviteEvent, lpVtbl : IRTCReInviteEventVtbl* do
+  record IRTCReInviteEvent, lpVtbl : IRTCReInviteEventVtable* do
     GUID = LibC::GUID.new(0x11558d84_u32, 0x204c_u16, 0x43e7_u16, StaticArray[0x99_u8, 0xb0_u8, 0x20_u8, 0x34_u8, 0xe9_u8, 0x41_u8, 0x7f_u8, 0x7d_u8])
     def query_interface(this : IRTCReInviteEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2982,8 +3016,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCReInviteEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCReInviteEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCReInviteEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCReInviteEvent*, ppSession2 : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession2)
@@ -3004,14 +3038,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCPresencePropertyEventVtbl,
+
+  record IRTCPresencePropertyEventVtable,
     query_interface : Proc(IRTCPresencePropertyEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCPresencePropertyEvent*, UInt32),
     release : Proc(IRTCPresencePropertyEvent*, UInt32),
     get_type_info_count : Proc(IRTCPresencePropertyEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCPresencePropertyEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCPresencePropertyEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCPresencePropertyEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCPresencePropertyEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCPresencePropertyEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_StatusText : Proc(IRTCPresencePropertyEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_PresenceProperty : Proc(IRTCPresencePropertyEvent*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_PROPERTY*, Win32cr::Foundation::HRESULT),
@@ -3019,7 +3054,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCPresencePropertyEvent, lpVtbl : IRTCPresencePropertyEventVtbl* do
+  record IRTCPresencePropertyEvent, lpVtbl : IRTCPresencePropertyEventVtable* do
     GUID = LibC::GUID.new(0xf777f570_u32, 0xa820_u16, 0x49d5_u16, StaticArray[0x86_u8, 0xbd_u8, 0xe0_u8, 0x99_u8, 0x49_u8, 0x3f_u8, 0x15_u8, 0x18_u8])
     def query_interface(this : IRTCPresencePropertyEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3039,8 +3074,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCPresencePropertyEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCPresencePropertyEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCPresencePropertyEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_StatusCode(this : IRTCPresencePropertyEvent*, plStatusCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StatusCode.call(this, plStatusCode)
@@ -3058,21 +3093,22 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCPresenceDataEventVtbl,
+
+  record IRTCPresenceDataEventVtable,
     query_interface : Proc(IRTCPresenceDataEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCPresenceDataEvent*, UInt32),
     release : Proc(IRTCPresenceDataEvent*, UInt32),
     get_type_info_count : Proc(IRTCPresenceDataEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCPresenceDataEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCPresenceDataEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCPresenceDataEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCPresenceDataEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCPresenceDataEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_StatusText : Proc(IRTCPresenceDataEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_presence_data : Proc(IRTCPresenceDataEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCPresenceDataEvent, lpVtbl : IRTCPresenceDataEventVtbl* do
+  record IRTCPresenceDataEvent, lpVtbl : IRTCPresenceDataEventVtable* do
     GUID = LibC::GUID.new(0x38f0e78c_u32, 0x8b87_u16, 0x4c04_u16, StaticArray[0xa8_u8, 0x2d_u8, 0xae_u8, 0xdd_u8, 0x83_u8, 0xc9_u8, 0x9_u8, 0xbb_u8])
     def query_interface(this : IRTCPresenceDataEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3092,8 +3128,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCPresenceDataEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCPresenceDataEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCPresenceDataEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_StatusCode(this : IRTCPresenceDataEvent*, plStatusCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StatusCode.call(this, plStatusCode)
@@ -3108,21 +3144,22 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCPresenceStatusEventVtbl,
+
+  record IRTCPresenceStatusEventVtable,
     query_interface : Proc(IRTCPresenceStatusEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCPresenceStatusEvent*, UInt32),
     release : Proc(IRTCPresenceStatusEvent*, UInt32),
     get_type_info_count : Proc(IRTCPresenceStatusEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCPresenceStatusEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCPresenceStatusEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCPresenceStatusEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCPresenceStatusEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCPresenceStatusEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_StatusText : Proc(IRTCPresenceStatusEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_local_presence_info : Proc(IRTCPresenceStatusEvent*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCPresenceStatusEvent, lpVtbl : IRTCPresenceStatusEventVtbl* do
+  record IRTCPresenceStatusEvent, lpVtbl : IRTCPresenceStatusEventVtable* do
     GUID = LibC::GUID.new(0x78673f32_u32, 0x4a0f_u16, 0x462c_u16, StaticArray[0x89_u8, 0xaa_u8, 0xee_u8, 0x77_u8, 0x6_u8, 0x70_u8, 0x76_u8, 0x78_u8])
     def query_interface(this : IRTCPresenceStatusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3142,8 +3179,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCPresenceStatusEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCPresenceStatusEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCPresenceStatusEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_StatusCode(this : IRTCPresenceStatusEvent*, plStatusCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StatusCode.call(this, plStatusCode)
@@ -3158,21 +3195,22 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCCollectionVtbl,
+
+  record IRTCCollectionVtable,
     query_interface : Proc(IRTCCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCCollection*, UInt32),
     release : Proc(IRTCCollection*, UInt32),
     get_type_info_count : Proc(IRTCCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IRTCCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IRTCCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IRTCCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRTCCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCCollection, lpVtbl : IRTCCollectionVtbl* do
+  record IRTCCollection, lpVtbl : IRTCCollectionVtable* do
     GUID = LibC::GUID.new(0xec7c8096_u32, 0xb918_u16, 0x4044_u16, StaticArray[0x94_u8, 0xf1_u8, 0xe4_u8, 0xfb_u8, 0xa0_u8, 0x36_u8, 0x1d_u8, 0x5c_u8])
     def query_interface(this : IRTCCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3192,13 +3230,13 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IRTCCollection*, lCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, lCount)
     end
-    def get_Item(this : IRTCCollection*, index : Int32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IRTCCollection*, index : Int32, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pVariant)
     end
     def get__NewEnum(this : IRTCCollection*, ppNewEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -3208,7 +3246,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCEnumParticipantsVtbl,
+
+  record IRTCEnumParticipantsVtable,
     query_interface : Proc(IRTCEnumParticipants*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEnumParticipants*, UInt32),
     release : Proc(IRTCEnumParticipants*, UInt32),
@@ -3219,7 +3258,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEnumParticipants, lpVtbl : IRTCEnumParticipantsVtbl* do
+  record IRTCEnumParticipants, lpVtbl : IRTCEnumParticipantsVtable* do
     GUID = LibC::GUID.new(0xfcd56f29_u32, 0x4a4f_u16, 0x41b2_u16, StaticArray[0xba_u8, 0x5c_u8, 0xf5_u8, 0xbc_u8, 0xcc_u8, 0x6_u8, 0xb_u8, 0xf6_u8])
     def query_interface(this : IRTCEnumParticipants*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3246,7 +3285,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCEnumProfilesVtbl,
+
+  record IRTCEnumProfilesVtable,
     query_interface : Proc(IRTCEnumProfiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEnumProfiles*, UInt32),
     release : Proc(IRTCEnumProfiles*, UInt32),
@@ -3257,7 +3297,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEnumProfiles, lpVtbl : IRTCEnumProfilesVtbl* do
+  record IRTCEnumProfiles, lpVtbl : IRTCEnumProfilesVtable* do
     GUID = LibC::GUID.new(0x29b7c41c_u32, 0xed82_u16, 0x4bca_u16, StaticArray[0x84_u8, 0xad_u8, 0x39_u8, 0xd5_u8, 0x10_u8, 0x1b_u8, 0x58_u8, 0xe3_u8])
     def query_interface(this : IRTCEnumProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3284,7 +3324,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCEnumBuddiesVtbl,
+
+  record IRTCEnumBuddiesVtable,
     query_interface : Proc(IRTCEnumBuddies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEnumBuddies*, UInt32),
     release : Proc(IRTCEnumBuddies*, UInt32),
@@ -3295,7 +3336,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEnumBuddies, lpVtbl : IRTCEnumBuddiesVtbl* do
+  record IRTCEnumBuddies, lpVtbl : IRTCEnumBuddiesVtable* do
     GUID = LibC::GUID.new(0xf7296917_u32, 0x5569_u16, 0x4b3b_u16, StaticArray[0xb3_u8, 0xaf_u8, 0x98_u8, 0xd1_u8, 0x14_u8, 0x4b_u8, 0x2b_u8, 0x87_u8])
     def query_interface(this : IRTCEnumBuddies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3322,7 +3363,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCEnumWatchersVtbl,
+
+  record IRTCEnumWatchersVtable,
     query_interface : Proc(IRTCEnumWatchers*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEnumWatchers*, UInt32),
     release : Proc(IRTCEnumWatchers*, UInt32),
@@ -3333,7 +3375,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEnumWatchers, lpVtbl : IRTCEnumWatchersVtbl* do
+  record IRTCEnumWatchers, lpVtbl : IRTCEnumWatchersVtable* do
     GUID = LibC::GUID.new(0xa87d55d7_u32, 0xdb74_u16, 0x4ed1_u16, StaticArray[0x9c_u8, 0xa4_u8, 0x77_u8, 0xa0_u8, 0xe4_u8, 0x1b_u8, 0x41_u8, 0x3e_u8])
     def query_interface(this : IRTCEnumWatchers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3360,7 +3402,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCEnumGroupsVtbl,
+
+  record IRTCEnumGroupsVtable,
     query_interface : Proc(IRTCEnumGroups*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEnumGroups*, UInt32),
     release : Proc(IRTCEnumGroups*, UInt32),
@@ -3371,7 +3414,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEnumGroups, lpVtbl : IRTCEnumGroupsVtbl* do
+  record IRTCEnumGroups, lpVtbl : IRTCEnumGroupsVtable* do
     GUID = LibC::GUID.new(0x742378d6_u32, 0xa141_u16, 0x4415_u16, StaticArray[0x8f_u8, 0x27_u8, 0x35_u8, 0xd9_u8, 0x90_u8, 0x76_u8, 0xcf_u8, 0x5d_u8])
     def query_interface(this : IRTCEnumGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3398,7 +3441,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCPresenceContactVtbl,
+
+  record IRTCPresenceContactVtable,
     query_interface : Proc(IRTCPresenceContact*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCPresenceContact*, UInt32),
     release : Proc(IRTCPresenceContact*, UInt32),
@@ -3408,12 +3452,12 @@ module Win32cr::System::RealTimeCommunications
     put_Name : Proc(IRTCPresenceContact*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Data : Proc(IRTCPresenceContact*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Data : Proc(IRTCPresenceContact*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Persistent : Proc(IRTCPresenceContact*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Persistent : Proc(IRTCPresenceContact*, Int16, Win32cr::Foundation::HRESULT)
+    get_Persistent : Proc(IRTCPresenceContact*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Persistent : Proc(IRTCPresenceContact*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCPresenceContact, lpVtbl : IRTCPresenceContactVtbl* do
+  record IRTCPresenceContact, lpVtbl : IRTCPresenceContactVtable* do
     GUID = LibC::GUID.new(0x8b22f92c_u32, 0xcd90_u16, 0x42db_u16, StaticArray[0xa7_u8, 0x33_u8, 0x21_u8, 0x22_u8, 0x5_u8, 0xc3_u8, 0xe3_u8, 0xdf_u8])
     def query_interface(this : IRTCPresenceContact*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3442,17 +3486,18 @@ module Win32cr::System::RealTimeCommunications
     def put_Data(this : IRTCPresenceContact*, bstrData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Data.call(this, bstrData)
     end
-    def get_Persistent(this : IRTCPresenceContact*, pfPersistent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Persistent(this : IRTCPresenceContact*, pfPersistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Persistent.call(this, pfPersistent)
     end
-    def put_Persistent(this : IRTCPresenceContact*, fPersistent : Int16) : Win32cr::Foundation::HRESULT
+    def put_Persistent(this : IRTCPresenceContact*, fPersistent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Persistent.call(this, fPersistent)
     end
 
   end
 
   @[Extern]
-  record IRTCBuddyVtbl,
+
+  record IRTCBuddyVtable,
     query_interface : Proc(IRTCBuddy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCBuddy*, UInt32),
     release : Proc(IRTCBuddy*, UInt32),
@@ -3462,14 +3507,14 @@ module Win32cr::System::RealTimeCommunications
     put_Name : Proc(IRTCBuddy*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Data : Proc(IRTCBuddy*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Data : Proc(IRTCBuddy*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Persistent : Proc(IRTCBuddy*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Persistent : Proc(IRTCBuddy*, Int16, Win32cr::Foundation::HRESULT),
+    get_Persistent : Proc(IRTCBuddy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Persistent : Proc(IRTCBuddy*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IRTCBuddy*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS*, Win32cr::Foundation::HRESULT),
     get_Notes : Proc(IRTCBuddy*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCBuddy, lpVtbl : IRTCBuddyVtbl* do
+  record IRTCBuddy, lpVtbl : IRTCBuddyVtable* do
     GUID = LibC::GUID.new(0xfcb136c8_u32, 0x7b90_u16, 0x4e0c_u16, StaticArray[0xbe_u8, 0xfe_u8, 0x56_u8, 0xed_u8, 0xf0_u8, 0xba_u8, 0x6f_u8, 0x1c_u8])
     def query_interface(this : IRTCBuddy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3498,10 +3543,10 @@ module Win32cr::System::RealTimeCommunications
     def put_Data(this : IRTCBuddy*, bstrData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Data.call(this, bstrData)
     end
-    def get_Persistent(this : IRTCBuddy*, pfPersistent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Persistent(this : IRTCBuddy*, pfPersistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Persistent.call(this, pfPersistent)
     end
-    def put_Persistent(this : IRTCBuddy*, fPersistent : Int16) : Win32cr::Foundation::HRESULT
+    def put_Persistent(this : IRTCBuddy*, fPersistent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Persistent.call(this, fPersistent)
     end
     def get_Status(this : IRTCBuddy*, penStatus : Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS*) : Win32cr::Foundation::HRESULT
@@ -3514,7 +3559,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCBuddy2Vtbl,
+
+  record IRTCBuddy2Vtable,
     query_interface : Proc(IRTCBuddy2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCBuddy2*, UInt32),
     release : Proc(IRTCBuddy2*, UInt32),
@@ -3524,8 +3570,8 @@ module Win32cr::System::RealTimeCommunications
     put_Name : Proc(IRTCBuddy2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Data : Proc(IRTCBuddy2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Data : Proc(IRTCBuddy2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Persistent : Proc(IRTCBuddy2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Persistent : Proc(IRTCBuddy2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Persistent : Proc(IRTCBuddy2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Persistent : Proc(IRTCBuddy2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IRTCBuddy2*, Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS*, Win32cr::Foundation::HRESULT),
     get_Notes : Proc(IRTCBuddy2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Profile : Proc(IRTCBuddy2*, Void**, Win32cr::Foundation::HRESULT),
@@ -3539,7 +3585,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCBuddy2, lpVtbl : IRTCBuddy2Vtbl* do
+  record IRTCBuddy2, lpVtbl : IRTCBuddy2Vtable* do
     GUID = LibC::GUID.new(0x102f9588_u32, 0x23e7_u16, 0x40e3_u16, StaticArray[0x95_u8, 0x4d_u8, 0xcd_u8, 0x7a_u8, 0x1d_u8, 0x5c_u8, 0x3_u8, 0x61_u8])
     def query_interface(this : IRTCBuddy2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3568,10 +3614,10 @@ module Win32cr::System::RealTimeCommunications
     def put_Data(this : IRTCBuddy2*, bstrData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Data.call(this, bstrData)
     end
-    def get_Persistent(this : IRTCBuddy2*, pfPersistent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Persistent(this : IRTCBuddy2*, pfPersistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Persistent.call(this, pfPersistent)
     end
-    def put_Persistent(this : IRTCBuddy2*, fPersistent : Int16) : Win32cr::Foundation::HRESULT
+    def put_Persistent(this : IRTCBuddy2*, fPersistent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Persistent.call(this, fPersistent)
     end
     def get_Status(this : IRTCBuddy2*, penStatus : Win32cr::System::RealTimeCommunications::RTC_PRESENCE_STATUS*) : Win32cr::Foundation::HRESULT
@@ -3608,7 +3654,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCWatcherVtbl,
+
+  record IRTCWatcherVtable,
     query_interface : Proc(IRTCWatcher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCWatcher*, UInt32),
     release : Proc(IRTCWatcher*, UInt32),
@@ -3618,14 +3665,14 @@ module Win32cr::System::RealTimeCommunications
     put_Name : Proc(IRTCWatcher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Data : Proc(IRTCWatcher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Data : Proc(IRTCWatcher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Persistent : Proc(IRTCWatcher*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Persistent : Proc(IRTCWatcher*, Int16, Win32cr::Foundation::HRESULT),
+    get_Persistent : Proc(IRTCWatcher*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Persistent : Proc(IRTCWatcher*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRTCWatcher*, Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE*, Win32cr::Foundation::HRESULT),
     put_State : Proc(IRTCWatcher*, Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCWatcher, lpVtbl : IRTCWatcherVtbl* do
+  record IRTCWatcher, lpVtbl : IRTCWatcherVtable* do
     GUID = LibC::GUID.new(0xc7cedad8_u32, 0x346b_u16, 0x4d1b_u16, StaticArray[0xac_u8, 0x2_u8, 0xa2_u8, 0x8_u8, 0x8d_u8, 0xf9_u8, 0xbe_u8, 0x4f_u8])
     def query_interface(this : IRTCWatcher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3654,10 +3701,10 @@ module Win32cr::System::RealTimeCommunications
     def put_Data(this : IRTCWatcher*, bstrData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Data.call(this, bstrData)
     end
-    def get_Persistent(this : IRTCWatcher*, pfPersistent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Persistent(this : IRTCWatcher*, pfPersistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Persistent.call(this, pfPersistent)
     end
-    def put_Persistent(this : IRTCWatcher*, fPersistent : Int16) : Win32cr::Foundation::HRESULT
+    def put_Persistent(this : IRTCWatcher*, fPersistent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Persistent.call(this, fPersistent)
     end
     def get_State(this : IRTCWatcher*, penState : Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE*) : Win32cr::Foundation::HRESULT
@@ -3670,7 +3717,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCWatcher2Vtbl,
+
+  record IRTCWatcher2Vtable,
     query_interface : Proc(IRTCWatcher2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCWatcher2*, UInt32),
     release : Proc(IRTCWatcher2*, UInt32),
@@ -3680,8 +3728,8 @@ module Win32cr::System::RealTimeCommunications
     put_Name : Proc(IRTCWatcher2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Data : Proc(IRTCWatcher2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Data : Proc(IRTCWatcher2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Persistent : Proc(IRTCWatcher2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Persistent : Proc(IRTCWatcher2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Persistent : Proc(IRTCWatcher2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Persistent : Proc(IRTCWatcher2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRTCWatcher2*, Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE*, Win32cr::Foundation::HRESULT),
     put_State : Proc(IRTCWatcher2*, Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE, Win32cr::Foundation::HRESULT),
     get_Profile : Proc(IRTCWatcher2*, Void**, Win32cr::Foundation::HRESULT),
@@ -3689,7 +3737,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCWatcher2, lpVtbl : IRTCWatcher2Vtbl* do
+  record IRTCWatcher2, lpVtbl : IRTCWatcher2Vtable* do
     GUID = LibC::GUID.new(0xd4d9967f_u32, 0xd011_u16, 0x4b1d_u16, StaticArray[0x91_u8, 0xe3_u8, 0xab_u8, 0xa7_u8, 0x8f_u8, 0x96_u8, 0x39_u8, 0x3d_u8])
     def query_interface(this : IRTCWatcher2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3718,10 +3766,10 @@ module Win32cr::System::RealTimeCommunications
     def put_Data(this : IRTCWatcher2*, bstrData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Data.call(this, bstrData)
     end
-    def get_Persistent(this : IRTCWatcher2*, pfPersistent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Persistent(this : IRTCWatcher2*, pfPersistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Persistent.call(this, pfPersistent)
     end
-    def put_Persistent(this : IRTCWatcher2*, fPersistent : Int16) : Win32cr::Foundation::HRESULT
+    def put_Persistent(this : IRTCWatcher2*, fPersistent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Persistent.call(this, fPersistent)
     end
     def get_State(this : IRTCWatcher2*, penState : Win32cr::System::RealTimeCommunications::RTC_WATCHER_STATE*) : Win32cr::Foundation::HRESULT
@@ -3740,7 +3788,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCBuddyGroupVtbl,
+
+  record IRTCBuddyGroupVtable,
     query_interface : Proc(IRTCBuddyGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCBuddyGroup*, UInt32),
     release : Proc(IRTCBuddyGroup*, UInt32),
@@ -3756,7 +3805,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCBuddyGroup, lpVtbl : IRTCBuddyGroupVtbl* do
+  record IRTCBuddyGroup, lpVtbl : IRTCBuddyGroupVtable* do
     GUID = LibC::GUID.new(0x60361e68_u32, 0x9164_u16, 0x4389_u16, StaticArray[0xa4_u8, 0xc6_u8, 0xd0_u8, 0xb3_u8, 0x92_u8, 0x5b_u8, 0xda_u8, 0x5e_u8])
     def query_interface(this : IRTCBuddyGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3798,7 +3847,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCEventNotificationVtbl,
+
+  record IRTCEventNotificationVtable,
     query_interface : Proc(IRTCEventNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEventNotification*, UInt32),
     release : Proc(IRTCEventNotification*, UInt32),
@@ -3806,7 +3856,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEventNotification, lpVtbl : IRTCEventNotificationVtbl* do
+  record IRTCEventNotification, lpVtbl : IRTCEventNotificationVtable* do
     GUID = LibC::GUID.new(0x13fa24c7_u32, 0x5748_u16, 0x4b21_u16, StaticArray[0x91_u8, 0xf5_u8, 0x73_u8, 0x97_u8, 0x60_u8, 0x9c_u8, 0xe7_u8, 0x47_u8])
     def query_interface(this : IRTCEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3824,7 +3874,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCPortManagerVtbl,
+
+  record IRTCPortManagerVtable,
     query_interface : Proc(IRTCPortManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCPortManager*, UInt32),
     release : Proc(IRTCPortManager*, UInt32),
@@ -3834,7 +3885,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCPortManager, lpVtbl : IRTCPortManagerVtbl* do
+  record IRTCPortManager, lpVtbl : IRTCPortManagerVtable* do
     GUID = LibC::GUID.new(0xda77c14b_u32, 0x6208_u16, 0x43ca_u16, StaticArray[0x8d_u8, 0xdf_u8, 0x5b_u8, 0x60_u8, 0xa0_u8, 0xa6_u8, 0x9f_u8, 0xac_u8])
     def query_interface(this : IRTCPortManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3858,7 +3909,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionPortManagementVtbl,
+
+  record IRTCSessionPortManagementVtable,
     query_interface : Proc(IRTCSessionPortManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionPortManagement*, UInt32),
     release : Proc(IRTCSessionPortManagement*, UInt32),
@@ -3866,7 +3918,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCSessionPortManagement, lpVtbl : IRTCSessionPortManagementVtbl* do
+  record IRTCSessionPortManagement, lpVtbl : IRTCSessionPortManagementVtable* do
     GUID = LibC::GUID.new(0xa072f1d6_u32, 0x286_u16, 0x4e1f_u16, StaticArray[0x85_u8, 0xf2_u8, 0x17_u8, 0xa2_u8, 0x94_u8, 0x84_u8, 0x56_u8, 0xec_u8])
     def query_interface(this : IRTCSessionPortManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3884,7 +3936,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCClientPortManagementVtbl,
+
+  record IRTCClientPortManagementVtable,
     query_interface : Proc(IRTCClientPortManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCClientPortManagement*, UInt32),
     release : Proc(IRTCClientPortManagement*, UInt32),
@@ -3894,7 +3947,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCClientPortManagement, lpVtbl : IRTCClientPortManagementVtbl* do
+  record IRTCClientPortManagement, lpVtbl : IRTCClientPortManagementVtable* do
     GUID = LibC::GUID.new(0xd5df3f03_u32, 0x4bde_u16, 0x4417_u16, StaticArray[0xae_u8, 0xfe_u8, 0x71_u8, 0x17_u8, 0x7b_u8, 0xda_u8, 0xea_u8, 0x66_u8])
     def query_interface(this : IRTCClientPortManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3918,7 +3971,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCUserSearchVtbl,
+
+  record IRTCUserSearchVtable,
     query_interface : Proc(IRTCUserSearch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCUserSearch*, UInt32),
     release : Proc(IRTCUserSearch*, UInt32),
@@ -3927,7 +3981,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCUserSearch, lpVtbl : IRTCUserSearchVtbl* do
+  record IRTCUserSearch, lpVtbl : IRTCUserSearchVtable* do
     GUID = LibC::GUID.new(0xb619882b_u32, 0x860c_u16, 0x4db4_u16, StaticArray[0xbe_u8, 0x1b_u8, 0x69_u8, 0x3b_u8, 0x65_u8, 0x5_u8, 0xbb_u8, 0xe5_u8])
     def query_interface(this : IRTCUserSearch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3948,7 +4002,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCUserSearchQueryVtbl,
+
+  record IRTCUserSearchQueryVtable,
     query_interface : Proc(IRTCUserSearchQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCUserSearchQuery*, UInt32),
     release : Proc(IRTCUserSearchQuery*, UInt32),
@@ -3962,7 +4017,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCUserSearchQuery, lpVtbl : IRTCUserSearchQueryVtbl* do
+  record IRTCUserSearchQuery, lpVtbl : IRTCUserSearchQueryVtable* do
     GUID = LibC::GUID.new(0x288300f5_u32, 0xd23a_u16, 0x4365_u16, StaticArray[0x9a_u8, 0x73_u8, 0x99_u8, 0x85_u8, 0xc9_u8, 0x8c_u8, 0x28_u8, 0x81_u8])
     def query_interface(this : IRTCUserSearchQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3998,7 +4053,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCUserSearchResultVtbl,
+
+  record IRTCUserSearchResultVtable,
     query_interface : Proc(IRTCUserSearchResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCUserSearchResult*, UInt32),
     release : Proc(IRTCUserSearchResult*, UInt32),
@@ -4006,7 +4062,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCUserSearchResult, lpVtbl : IRTCUserSearchResultVtbl* do
+  record IRTCUserSearchResult, lpVtbl : IRTCUserSearchResultVtable* do
     GUID = LibC::GUID.new(0x851278b2_u32, 0x9592_u16, 0x480f_u16, StaticArray[0x8d_u8, 0xb5_u8, 0x2d_u8, 0xe8_u8, 0x6b_u8, 0x26_u8, 0xb5_u8, 0x4d_u8])
     def query_interface(this : IRTCUserSearchResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4024,7 +4080,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCEnumUserSearchResultsVtbl,
+
+  record IRTCEnumUserSearchResultsVtable,
     query_interface : Proc(IRTCEnumUserSearchResults*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEnumUserSearchResults*, UInt32),
     release : Proc(IRTCEnumUserSearchResults*, UInt32),
@@ -4035,7 +4092,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEnumUserSearchResults, lpVtbl : IRTCEnumUserSearchResultsVtbl* do
+  record IRTCEnumUserSearchResults, lpVtbl : IRTCEnumUserSearchResultsVtable* do
     GUID = LibC::GUID.new(0x83d4d877_u32, 0xaa5d_u16, 0x4a5b_u16, StaticArray[0x8d_u8, 0xe_u8, 0x0_u8, 0x2a_u8, 0x80_u8, 0x67_u8, 0xe0_u8, 0xe8_u8])
     def query_interface(this : IRTCEnumUserSearchResults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4062,25 +4119,26 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCUserSearchResultsEventVtbl,
+
+  record IRTCUserSearchResultsEventVtable,
     query_interface : Proc(IRTCUserSearchResultsEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCUserSearchResultsEvent*, UInt32),
     release : Proc(IRTCUserSearchResultsEvent*, UInt32),
     get_type_info_count : Proc(IRTCUserSearchResultsEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCUserSearchResultsEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCUserSearchResultsEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCUserSearchResultsEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCUserSearchResultsEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     enumerate_results : Proc(IRTCUserSearchResultsEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Results : Proc(IRTCUserSearchResultsEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Profile : Proc(IRTCUserSearchResultsEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Query : Proc(IRTCUserSearchResultsEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Cookie : Proc(IRTCUserSearchResultsEvent*, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCUserSearchResultsEvent*, Int32*, Win32cr::Foundation::HRESULT),
-    get_MoreAvailable : Proc(IRTCUserSearchResultsEvent*, Int16*, Win32cr::Foundation::HRESULT)
+    get_MoreAvailable : Proc(IRTCUserSearchResultsEvent*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCUserSearchResultsEvent, lpVtbl : IRTCUserSearchResultsEventVtbl* do
+  record IRTCUserSearchResultsEvent, lpVtbl : IRTCUserSearchResultsEventVtable* do
     GUID = LibC::GUID.new(0xd8c8c3cd_u32, 0x7fac_u16, 0x4088_u16, StaticArray[0x81_u8, 0xc5_u8, 0xc2_u8, 0x4c_u8, 0xbc_u8, 0x9_u8, 0x38_u8, 0xe3_u8])
     def query_interface(this : IRTCUserSearchResultsEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4100,8 +4158,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCUserSearchResultsEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCUserSearchResultsEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCUserSearchResultsEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def enumerate_results(this : IRTCUserSearchResultsEvent*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_results.call(this, ppEnum)
@@ -4121,21 +4179,22 @@ module Win32cr::System::RealTimeCommunications
     def get_StatusCode(this : IRTCUserSearchResultsEvent*, plStatusCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StatusCode.call(this, plStatusCode)
     end
-    def get_MoreAvailable(this : IRTCUserSearchResultsEvent*, pfMoreAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MoreAvailable(this : IRTCUserSearchResultsEvent*, pfMoreAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MoreAvailable.call(this, pfMoreAvailable)
     end
 
   end
 
   @[Extern]
-  record IRTCSessionReferStatusEventVtbl,
+
+  record IRTCSessionReferStatusEventVtable,
     query_interface : Proc(IRTCSessionReferStatusEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionReferStatusEvent*, UInt32),
     release : Proc(IRTCSessionReferStatusEvent*, UInt32),
     get_type_info_count : Proc(IRTCSessionReferStatusEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCSessionReferStatusEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCSessionReferStatusEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCSessionReferStatusEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCSessionReferStatusEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCSessionReferStatusEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_ReferStatus : Proc(IRTCSessionReferStatusEvent*, Win32cr::System::RealTimeCommunications::RTC_SESSION_REFER_STATUS*, Win32cr::Foundation::HRESULT),
     get_StatusCode : Proc(IRTCSessionReferStatusEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4143,7 +4202,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCSessionReferStatusEvent, lpVtbl : IRTCSessionReferStatusEventVtbl* do
+  record IRTCSessionReferStatusEvent, lpVtbl : IRTCSessionReferStatusEventVtable* do
     GUID = LibC::GUID.new(0x3d8fc2cd_u32, 0x5d76_u16, 0x44ab_u16, StaticArray[0xbb_u8, 0x68_u8, 0x2a_u8, 0x80_u8, 0x35_u8, 0x3b_u8, 0x34_u8, 0xa2_u8])
     def query_interface(this : IRTCSessionReferStatusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4163,8 +4222,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCSessionReferStatusEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCSessionReferStatusEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCSessionReferStatusEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCSessionReferStatusEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -4182,14 +4241,15 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionReferredEventVtbl,
+
+  record IRTCSessionReferredEventVtable,
     query_interface : Proc(IRTCSessionReferredEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionReferredEvent*, UInt32),
     release : Proc(IRTCSessionReferredEvent*, UInt32),
     get_type_info_count : Proc(IRTCSessionReferredEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCSessionReferredEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCSessionReferredEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCSessionReferredEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRTCSessionReferredEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IRTCSessionReferredEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_ReferredByURI : Proc(IRTCSessionReferredEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ReferToURI : Proc(IRTCSessionReferredEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4200,7 +4260,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCSessionReferredEvent, lpVtbl : IRTCSessionReferredEventVtbl* do
+  record IRTCSessionReferredEvent, lpVtbl : IRTCSessionReferredEventVtable* do
     GUID = LibC::GUID.new(0x176a6828_u32, 0x4fcc_u16, 0x4f28_u16, StaticArray[0xa8_u8, 0x62_u8, 0x4_u8, 0x59_u8, 0x7a_u8, 0x6c_u8, 0xf1_u8, 0xc4_u8])
     def query_interface(this : IRTCSessionReferredEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4220,8 +4280,8 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCSessionReferredEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCSessionReferredEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCSessionReferredEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IRTCSessionReferredEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -4248,15 +4308,16 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCSessionDescriptionManagerVtbl,
+
+  record IRTCSessionDescriptionManagerVtable,
     query_interface : Proc(IRTCSessionDescriptionManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCSessionDescriptionManager*, UInt32),
     release : Proc(IRTCSessionDescriptionManager*, UInt32),
-    evaluate_session_description : Proc(IRTCSessionDescriptionManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+    evaluate_session_description : Proc(IRTCSessionDescriptionManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCSessionDescriptionManager, lpVtbl : IRTCSessionDescriptionManagerVtbl* do
+  record IRTCSessionDescriptionManager, lpVtbl : IRTCSessionDescriptionManagerVtable* do
     GUID = LibC::GUID.new(0xba7f518e_u32, 0xd336_u16, 0x4070_u16, StaticArray[0x93_u8, 0xa6_u8, 0x86_u8, 0x53_u8, 0x95_u8, 0xc8_u8, 0x43_u8, 0xf9_u8])
     def query_interface(this : IRTCSessionDescriptionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4267,14 +4328,15 @@ module Win32cr::System::RealTimeCommunications
     def release(this : IRTCSessionDescriptionManager*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def evaluate_session_description(this : IRTCSessionDescriptionManager*, bstrContentType : Win32cr::Foundation::BSTR, bstrSessionDescription : Win32cr::Foundation::BSTR, pfApplicationSession : Int16*) : Win32cr::Foundation::HRESULT
+    def evaluate_session_description(this : IRTCSessionDescriptionManager*, bstrContentType : Win32cr::Foundation::BSTR, bstrSessionDescription : Win32cr::Foundation::BSTR, pfApplicationSession : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.evaluate_session_description.call(this, bstrContentType, bstrSessionDescription, pfApplicationSession)
     end
 
   end
 
   @[Extern]
-  record IRTCEnumPresenceDevicesVtbl,
+
+  record IRTCEnumPresenceDevicesVtable,
     query_interface : Proc(IRTCEnumPresenceDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCEnumPresenceDevices*, UInt32),
     release : Proc(IRTCEnumPresenceDevices*, UInt32),
@@ -4285,7 +4347,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCEnumPresenceDevices, lpVtbl : IRTCEnumPresenceDevicesVtbl* do
+  record IRTCEnumPresenceDevices, lpVtbl : IRTCEnumPresenceDevicesVtable* do
     GUID = LibC::GUID.new(0x708c2ab7_u32, 0x8bf8_u16, 0x42f8_u16, StaticArray[0x8c_u8, 0x7d_u8, 0x63_u8, 0x51_u8, 0x97_u8, 0xad_u8, 0x55_u8, 0x39_u8])
     def query_interface(this : IRTCEnumPresenceDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4312,7 +4374,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCPresenceDeviceVtbl,
+
+  record IRTCPresenceDeviceVtable,
     query_interface : Proc(IRTCPresenceDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCPresenceDevice*, UInt32),
     release : Proc(IRTCPresenceDevice*, UInt32),
@@ -4323,7 +4386,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record IRTCPresenceDevice, lpVtbl : IRTCPresenceDeviceVtbl* do
+  record IRTCPresenceDevice, lpVtbl : IRTCPresenceDeviceVtable* do
     GUID = LibC::GUID.new(0xbc6a90dd_u32, 0xad9a_u16, 0x48da_u16, StaticArray[0x9b_u8, 0xc_u8, 0x25_u8, 0x15_u8, 0xe3_u8, 0x85_u8, 0x21_u8, 0xad_u8])
     def query_interface(this : IRTCPresenceDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4350,18 +4413,19 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record IRTCDispatchEventNotificationVtbl,
+
+  record IRTCDispatchEventNotificationVtable,
     query_interface : Proc(IRTCDispatchEventNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRTCDispatchEventNotification*, UInt32),
     release : Proc(IRTCDispatchEventNotification*, UInt32),
     get_type_info_count : Proc(IRTCDispatchEventNotification*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRTCDispatchEventNotification*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRTCDispatchEventNotification*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRTCDispatchEventNotification*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IRTCDispatchEventNotification*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRTCDispatchEventNotification, lpVtbl : IRTCDispatchEventNotificationVtbl* do
+  record IRTCDispatchEventNotification, lpVtbl : IRTCDispatchEventNotificationVtable* do
     GUID = LibC::GUID.new(0x176ddfbe_u32, 0xfec0_u16, 0x4d55_u16, StaticArray[0xbc_u8, 0x87_u8, 0x84_u8, 0xcf_u8, 0xf1_u8, 0xef_u8, 0x7f_u8, 0x91_u8])
     def query_interface(this : IRTCDispatchEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4381,14 +4445,15 @@ module Win32cr::System::RealTimeCommunications
     def get_i_ds_of_names(this : IRTCDispatchEventNotification*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRTCDispatchEventNotification*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRTCDispatchEventNotification*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record ITransportSettingsInternalVtbl,
+
+  record ITransportSettingsInternalVtable,
     query_interface : Proc(ITransportSettingsInternal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITransportSettingsInternal*, UInt32),
     release : Proc(ITransportSettingsInternal*, UInt32),
@@ -4397,7 +4462,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record ITransportSettingsInternal, lpVtbl : ITransportSettingsInternalVtbl* do
+  record ITransportSettingsInternal, lpVtbl : ITransportSettingsInternalVtable* do
     GUID = LibC::GUID.new(0x5123e076_u32, 0x29e3_u16, 0x4bfd_u16, StaticArray[0x84_u8, 0xfe_u8, 0x1_u8, 0x92_u8, 0xd4_u8, 0x11_u8, 0xe3_u8, 0xe8_u8])
     def query_interface(this : ITransportSettingsInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4418,7 +4483,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record INetworkTransportSettingsVtbl,
+
+  record INetworkTransportSettingsVtable,
     query_interface : Proc(INetworkTransportSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkTransportSettings*, UInt32),
     release : Proc(INetworkTransportSettings*, UInt32),
@@ -4427,7 +4493,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record INetworkTransportSettings, lpVtbl : INetworkTransportSettingsVtbl* do
+  record INetworkTransportSettings, lpVtbl : INetworkTransportSettingsVtable* do
     GUID = LibC::GUID.new(0x5e7abb2c_u32, 0xf2c1_u16, 0x4a61_u16, StaticArray[0xbd_u8, 0x35_u8, 0xde_u8, 0xb7_u8, 0xa0_u8, 0x8a_u8, 0xb0_u8, 0xf1_u8])
     def query_interface(this : INetworkTransportSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4448,7 +4514,8 @@ module Win32cr::System::RealTimeCommunications
   end
 
   @[Extern]
-  record INotificationTransportSyncVtbl,
+
+  record INotificationTransportSyncVtable,
     query_interface : Proc(INotificationTransportSync*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INotificationTransportSync*, UInt32),
     release : Proc(INotificationTransportSync*, UInt32),
@@ -4457,7 +4524,7 @@ module Win32cr::System::RealTimeCommunications
 
 
   @[Extern]
-  record INotificationTransportSync, lpVtbl : INotificationTransportSyncVtbl* do
+  record INotificationTransportSync, lpVtbl : INotificationTransportSyncVtable* do
     GUID = LibC::GUID.new(0x79eb1402_u32, 0xab8_u16, 0x49c0_u16, StaticArray[0x9e_u8, 0x14_u8, 0xa1_u8, 0xae_u8, 0x4b_u8, 0xa9_u8, 0x30_u8, 0x58_u8])
     def query_interface(this : INotificationTransportSync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

@@ -5,17 +5,26 @@ require "./../security/cryptography.cr"
 
 module Win32cr::System::Rpc
   extend self
+  alias PNDR_ASYNC_MESSAGE = LibC::IntPtrT
+  alias PNDR_CORRELATION_INFO = LibC::IntPtrT
+  alias NDR_PROC_CONTEXT_ = LibC::IntPtrT
+  alias NDR_ALLOC_ALL_NODES_CONTEXT = LibC::IntPtrT
+  alias NDR_POINTER_QUEUE_STATE = LibC::IntPtrT
+  alias PFN_RPC_ALLOCATE = Proc(LibC::UIntPtrT, Void*)
+
+  alias PFN_RPC_FREE = Proc(Void*, Void)
+
   alias RPC_OBJECT_INQ_FN = Proc(LibC::GUID*, LibC::GUID*, Win32cr::System::Rpc::RPC_STATUS*, Void)
 
   alias RPC_IF_CALLBACK_FN = Proc(Void*, Void*, Win32cr::System::Rpc::RPC_STATUS)
 
   alias RPC_SECURITY_CALLBACK_FN = Proc(Void*, Void)
 
-  alias RPC_NEW_HTTP_PROXY_CHANNEL = Proc(Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE, UInt16*, UInt16*, UInt16*, UInt16*, Void*, Void*, Void*, Void*, UInt32, UInt16**, UInt16**, Win32cr::System::Rpc::RPC_STATUS)
+  alias RPC_NEW_HTTP_PROXY_CHANNEL = Proc(Win32cr::System::Rpc::RPC_HTTP_REDIRECTOR_STAGE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Void*, Void*, Void*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias RPC_HTTP_PROXY_FREE_STRING = Proc(UInt16*, Void)
+  alias RPC_HTTP_PROXY_FREE_STRING = Proc(Win32cr::Foundation::PWSTR, Void)
 
-  alias RPC_AUTH_KEY_RETRIEVAL_FN = Proc(Void*, UInt16*, UInt32, Void**, Win32cr::System::Rpc::RPC_STATUS*, Void)
+  alias RPC_AUTH_KEY_RETRIEVAL_FN = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::System::Rpc::RPC_STATUS*, Void)
 
   alias RPC_MGMT_AUTHORIZATION_FN = Proc(Void*, UInt32, Win32cr::System::Rpc::RPC_STATUS*, Int32)
 
@@ -35,7 +44,7 @@ module Win32cr::System::Rpc
 
   alias RPC_BLOCKING_FN = Proc(Void*, Void*, Void*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcProxyIsValidMachineFn = Proc(UInt16*, UInt16*, UInt32, Win32cr::System::Rpc::RPC_STATUS)
+  alias I_RpcProxyIsValidMachineFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Rpc::RPC_STATUS)
 
   alias I_RpcProxyGetClientAddressFn = Proc(Void*, Win32cr::Foundation::PSTR, UInt32*, Win32cr::System::Rpc::RPC_STATUS)
 
@@ -49,7 +58,7 @@ module Win32cr::System::Rpc
 
   alias I_RpcProxyFilterIfFn = Proc(Void*, LibC::GUID*, UInt16, Int32*, Win32cr::System::Rpc::RPC_STATUS)
 
-  alias I_RpcProxyUpdatePerfCounterFn = Proc(Win32cr::System::Rpc::RpcProxyPerfCounters, Int32, UInt32, Void)
+  alias I_RpcProxyUpdatePerfCounterFn = Proc(Win32cr::System::Rpc::RpcPerfCounters, Int32, UInt32, Void)
 
   alias I_RpcProxyUpdatePerfCounterBackendServerFn = Proc(UInt16*, Int32, Void)
 
@@ -296,6 +305,8 @@ module Win32cr::System::Rpc
   RPC_C_PROFILE_MATCH_BY_MBR = 3_u32
   RPC_C_PROFILE_MATCH_BY_BOTH = 4_u32
   RPC_C_NS_DEFAULT_EXP_AGE = -1_i32
+  TARGET_IS_NT1012_OR_LATER = 1_u32
+  TARGET_IS_NT102_OR_LATER = 1_u32
   TARGET_IS_NT100_OR_LATER = 1_u32
   TARGET_IS_NT63_OR_LATER = 1_u32
   TARGET_IS_NT62_OR_LATER = 1_u32
@@ -328,7 +339,7 @@ module Win32cr::System::Rpc
   NDR64_FC_AUTO_HANDLE = 3_u32
   NDR64_FC_CALLBACK_HANDLE = 4_u32
   NDR64_FC_NO_HANDLE = 5_u32
-  RPCPROXY_H_VERSION____ = 475_u32
+  RPCPROXY_H_VERSION____ = 477_u32
   MidlInterceptionInfoVersionOne = 1_i32
   MidlWinrtTypeSerializationInfoVersionOne = 1_i32
 
@@ -363,6 +374,20 @@ module Win32cr::System::Rpc
     RPC_C_HTTP_AUTHN_TARGET_PROXY = 2_u32
   end
   enum RPC_STATUS
+    RPC_S_OK = 0_i32
+    RPC_S_ACCESS_DENIED = 5_i32
+    RPC_S_INVALID_ARG = 87_i32
+    RPC_S_OUT_OF_MEMORY = 14_i32
+    RPC_S_OUT_OF_THREADS = 164_i32
+    RPC_S_INVALID_LEVEL = 87_i32
+    RPC_S_BUFFER_TOO_SMALL = 122_i32
+    RPC_S_INVALID_SECURITY_DESC = 1338_i32
+    RPC_S_SERVER_OUT_OF_MEMORY = 1130_i32
+    RPC_S_ASYNC_CALL_PENDING = 997_i32
+    RPC_S_UNKNOWN_PRINCIPAL = 1332_i32
+    RPC_S_TIMEOUT = 1460_i32
+    RPC_S_RUNTIME_UNINITIALIZED = 1_i32
+    RPC_S_NOT_ENOUGH_QUOTA = 1816_i32
     RPC_S_INVALID_STRING_BINDING = 1700_i32
     RPC_S_WRONG_KIND_OF_BINDING = 1701_i32
     RPC_S_INVALID_BINDING = 1702_i32
@@ -493,7 +518,7 @@ module Win32cr::System::Rpc
     MarshalDirectionMarshal = 0_i32
     MarshalDirectionUnmarshal = 1_i32
   end
-  enum RpcProxyPerfCounters
+  enum RpcPerfCounters
     RpcCurrentUniqueUser = 1_i32
     RpcBackEndConnectionAttempts = 2_i32
     RpcBackEndConnectionFailed = 3_i32
@@ -620,26 +645,18 @@ module Win32cr::System::Rpc
   end
 
   @[Extern]
-  struct NDR_SCONTEXT_1
-    property pad : Void*[2]
-    property userContext : Void*
-    def initialize(@pad : Void*[2], @userContext : Void*)
-    end
-  end
-
-  @[Extern]
   struct RPC_BINDING_VECTOR
     property count : UInt32
-    property binding_h : Void**
-    def initialize(@count : UInt32, @binding_h : Void**)
+    property binding_h : Void*[1]
+    def initialize(@count : UInt32, @binding_h : Void*[1])
     end
   end
 
   @[Extern]
   struct UUID_VECTOR
     property count : UInt32
-    property uuid : LibC::GUID**
-    def initialize(@count : UInt32, @uuid : LibC::GUID**)
+    property uuid : LibC::GUID*[1]
+    def initialize(@count : UInt32, @uuid : LibC::GUID*[1])
     end
   end
 
@@ -655,16 +672,16 @@ module Win32cr::System::Rpc
   @[Extern]
   struct RPC_PROTSEQ_VECTORA
     property count : UInt32
-    property protseq : UInt8**
-    def initialize(@count : UInt32, @protseq : UInt8**)
+    property protseq : UInt8*[1]
+    def initialize(@count : UInt32, @protseq : UInt8*[1])
     end
   end
 
   @[Extern]
   struct RPC_PROTSEQ_VECTORW
     property count : UInt32
-    property protseq : UInt16**
-    def initialize(@count : UInt32, @protseq : UInt16**)
+    property protseq : UInt16*[1]
+    def initialize(@count : UInt32, @protseq : UInt16*[1])
     end
   end
 
@@ -680,16 +697,16 @@ module Win32cr::System::Rpc
   @[Extern]
   struct RPC_STATS_VECTOR
     property count : UInt32
-    property stats : UInt32*
-    def initialize(@count : UInt32, @stats : UInt32*)
+    property stats : UInt32[1]
+    def initialize(@count : UInt32, @stats : UInt32[1])
     end
   end
 
   @[Extern]
   struct RPC_IF_ID_VECTOR
     property count : UInt32
-    property if_id : Win32cr::System::Rpc::RPC_IF_ID**
-    def initialize(@count : UInt32, @if_id : Win32cr::System::Rpc::RPC_IF_ID**)
+    property if_id : Win32cr::System::Rpc::RPC_IF_ID*[1]
+    def initialize(@count : UInt32, @if_id : Win32cr::System::Rpc::RPC_IF_ID*[1])
     end
   end
 
@@ -1084,22 +1101,22 @@ module Win32cr::System::Rpc
   @[Extern]
   struct RPC_ENDPOINT_TEMPLATEW
     property version : UInt32
-    property prot_seq : UInt16*
-    property endpoint : UInt16*
+    property prot_seq : Win32cr::Foundation::PWSTR
+    property endpoint : Win32cr::Foundation::PWSTR
     property security_descriptor : Void*
     property backlog : UInt32
-    def initialize(@version : UInt32, @prot_seq : UInt16*, @endpoint : UInt16*, @security_descriptor : Void*, @backlog : UInt32)
+    def initialize(@version : UInt32, @prot_seq : Win32cr::Foundation::PWSTR, @endpoint : Win32cr::Foundation::PWSTR, @security_descriptor : Void*, @backlog : UInt32)
     end
   end
 
   @[Extern]
   struct RPC_ENDPOINT_TEMPLATEA
     property version : UInt32
-    property prot_seq : UInt8*
-    property endpoint : UInt8*
+    property prot_seq : Win32cr::Foundation::PSTR
+    property endpoint : Win32cr::Foundation::PSTR
     property security_descriptor : Void*
     property backlog : UInt32
-    def initialize(@version : UInt32, @prot_seq : UInt8*, @endpoint : UInt8*, @security_descriptor : Void*, @backlog : UInt32)
+    def initialize(@version : UInt32, @prot_seq : Win32cr::Foundation::PSTR, @endpoint : Win32cr::Foundation::PSTR, @security_descriptor : Void*, @backlog : UInt32)
     end
   end
 
@@ -1114,9 +1131,9 @@ module Win32cr::System::Rpc
     property max_rpc_size : UInt32
     property if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN
     property uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*
-    property annotation__ : UInt8*
+    property annotation__ : Win32cr::Foundation::PSTR
     property security_descriptor : Void*
-    def initialize(@version : UInt32, @if_spec : Void*, @mgr_type_uuid : LibC::GUID*, @mgr_epv : Void*, @flags : UInt32, @max_calls : UInt32, @max_rpc_size : UInt32, @if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN, @uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, @annotation__ : UInt8*, @security_descriptor : Void*)
+    def initialize(@version : UInt32, @if_spec : Void*, @mgr_type_uuid : LibC::GUID*, @mgr_epv : Void*, @flags : UInt32, @max_calls : UInt32, @max_rpc_size : UInt32, @if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN, @uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, @annotation__ : Win32cr::Foundation::PSTR, @security_descriptor : Void*)
     end
   end
 
@@ -1131,9 +1148,9 @@ module Win32cr::System::Rpc
     property max_rpc_size : UInt32
     property if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN
     property uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*
-    property annotation__ : UInt16*
+    property annotation__ : Win32cr::Foundation::PWSTR
     property security_descriptor : Void*
-    def initialize(@version : UInt32, @if_spec : Void*, @mgr_type_uuid : LibC::GUID*, @mgr_epv : Void*, @flags : UInt32, @max_calls : UInt32, @max_rpc_size : UInt32, @if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN, @uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, @annotation__ : UInt16*, @security_descriptor : Void*)
+    def initialize(@version : UInt32, @if_spec : Void*, @mgr_type_uuid : LibC::GUID*, @mgr_epv : Void*, @flags : UInt32, @max_calls : UInt32, @max_rpc_size : UInt32, @if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN, @uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, @annotation__ : Win32cr::Foundation::PWSTR, @security_descriptor : Void*)
     end
   end
 
@@ -1286,6 +1303,16 @@ module Win32cr::System::Rpc
     property hEvent : Win32cr::Foundation::HANDLE
     property notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE
 
+    # Nested Type APC_e__Struct_
+    @[Extern]
+    struct APC_e__Struct_
+    property notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE
+    property hThread : Win32cr::Foundation::HANDLE
+    def initialize(@notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE, @hThread : Win32cr::Foundation::HANDLE)
+    end
+    end
+
+
     # Nested Type IOC_e__Struct_
     @[Extern]
     struct IOC_e__Struct_
@@ -1294,16 +1321,6 @@ module Win32cr::System::Rpc
     property dwCompletionKey : LibC::UIntPtrT
     property lpOverlapped : Win32cr::System::IO::OVERLAPPED*
     def initialize(@hIOPort : Win32cr::Foundation::HANDLE, @dwNumberOfBytesTransferred : UInt32, @dwCompletionKey : LibC::UIntPtrT, @lpOverlapped : Win32cr::System::IO::OVERLAPPED*)
-    end
-    end
-
-
-    # Nested Type APC_e__Struct_
-    @[Extern]
-    struct APC_e__Struct_
-    property notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE
-    property hThread : Win32cr::Foundation::HANDLE
-    def initialize(@notification_routine : Win32cr::System::Rpc::PFN_RPCNOTIFICATION_ROUTINE, @hThread : Win32cr::Foundation::HANDLE)
     end
     end
 
@@ -1553,7 +1570,7 @@ module Win32cr::System::Rpc
   end
 
   @[Extern]
-  struct NDR_SCONTEXT_
+  struct NDR_SCONTEXT
     property pad : Void*[2]
     property userContext : Void*
     def initialize(@pad : Void*[2], @userContext : Void*)
@@ -1563,8 +1580,8 @@ module Win32cr::System::Rpc
   @[Extern]
   struct SCONTEXT_QUEUE
     property number_of_objects : UInt32
-    property array_of_objects : Win32cr::System::Rpc::NDR_SCONTEXT_1**
-    def initialize(@number_of_objects : UInt32, @array_of_objects : Win32cr::System::Rpc::NDR_SCONTEXT_1**)
+    property array_of_objects : Win32cr::System::Rpc::NDR_SCONTEXT**
+    def initialize(@number_of_objects : UInt32, @array_of_objects : Win32cr::System::Rpc::NDR_SCONTEXT**)
     end
   end
 
@@ -1577,36 +1594,6 @@ module Win32cr::System::Rpc
     property offset_array : UInt32*
     property actual_count_array : UInt32*
     def initialize(@dimension : Int32, @buffer_conformance_mark : UInt32*, @buffer_variance_mark : UInt32*, @max_count_array : UInt32*, @offset_array : UInt32*, @actual_count_array : UInt32*)
-    end
-  end
-
-  @[Extern]
-  struct NDR_ASYNC_MESSAGE_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct NDR_CORRELATION_INFO_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct NDR_ALLOC_ALL_NODES_CONTEXT
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct NDR_POINTER_QUEUE_STATE
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct NDR_PROC_CONTEXT_
-    def initialize()
     end
   end
 
@@ -1634,8 +1621,8 @@ module Win32cr::System::Rpc
     property max_count : LibC::UIntPtrT
     property offset : UInt32
     property actual_count : UInt32
-    property pfnAllocate : LibC::IntPtrT
-    property pfnFree : LibC::IntPtrT
+    property pfnAllocate : Win32cr::System::Rpc::PFN_RPC_ALLOCATE
+    property pfnFree : Win32cr::System::Rpc::PFN_RPC_FREE
     property stack_top : UInt8*
     property pPresentedType : UInt8*
     property pTransmitType : UInt8*
@@ -1647,7 +1634,7 @@ module Win32cr::System::Rpc
     property _bitfield : Int32
     property dwDestContext : UInt32
     property pvDestContext : Void*
-    property saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT_1**
+    property saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT**
     property param_number : Int32
     property pRpcChannelBuffer : Void*
     property pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*
@@ -1657,8 +1644,8 @@ module Win32cr::System::Rpc
     property pArgQueue : Void*
     property dwStubPhase : UInt32
     property low_stack_mark : Void*
-    property pAsyncMsg : Win32cr::System::Rpc::NDR_ASYNC_MESSAGE_*
-    property pCorrInfo : Win32cr::System::Rpc::NDR_CORRELATION_INFO_*
+    property pAsyncMsg : Win32cr::System::Rpc::PNDR_ASYNC_MESSAGE
+    property pCorrInfo : Win32cr::System::Rpc::PNDR_CORRELATION_INFO
     property pCorrMemory : UInt8*
     property pMemoryList : Void*
     property pCSInfo : LibC::IntPtrT
@@ -1668,10 +1655,10 @@ module Win32cr::System::Rpc
     property pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*
     property context_handle_hash : Void*
     property pUserMarshalList : Void*
-    property reserved51_3 : LibC::IntPtrT
+    property pFullPtrFormat : UInt8*
     property reserved51_4 : LibC::IntPtrT
     property reserved51_5 : LibC::IntPtrT
-    def initialize(@rpc_msg : Win32cr::System::Rpc::RPC_MESSAGE*, @buffer : UInt8*, @buffer_start : UInt8*, @buffer_end : UInt8*, @buffer_mark : UInt8*, @buffer_length : UInt32, @memory_size : UInt32, @memory : UInt8*, @is_client : UInt8, @pad : UInt8, @uFlags2 : UInt16, @reuse_buffer : Int32, @pAllocAllNodesContext : Win32cr::System::Rpc::NDR_ALLOC_ALL_NODES_CONTEXT*, @pPointerQueueState : Win32cr::System::Rpc::NDR_POINTER_QUEUE_STATE*, @ignore_embedded_pointers : Int32, @pointer_buffer_mark : UInt8*, @corr_desp_increment : UInt8, @uFlags : UInt8, @unique_ptr_count : UInt16, @max_count : LibC::UIntPtrT, @offset : UInt32, @actual_count : UInt32, @pfnAllocate : LibC::IntPtrT, @pfnFree : LibC::IntPtrT, @stack_top : UInt8*, @pPresentedType : UInt8*, @pTransmitType : UInt8*, @saved_handle : Void*, @stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*, @full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*, @full_ptr_ref_id : UInt32, @pointer_length : UInt32, @_bitfield : Int32, @dwDestContext : UInt32, @pvDestContext : Void*, @saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT_1**, @param_number : Int32, @pRpcChannelBuffer : Void*, @pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*, @size_ptr_count_array : UInt32*, @size_ptr_offset_array : UInt32*, @size_ptr_length_array : UInt32*, @pArgQueue : Void*, @dwStubPhase : UInt32, @low_stack_mark : Void*, @pAsyncMsg : Win32cr::System::Rpc::NDR_ASYNC_MESSAGE_*, @pCorrInfo : Win32cr::System::Rpc::NDR_CORRELATION_INFO_*, @pCorrMemory : UInt8*, @pMemoryList : Void*, @pCSInfo : LibC::IntPtrT, @conformance_mark : UInt8*, @variance_mark : UInt8*, @unused : LibC::IntPtrT, @pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*, @context_handle_hash : Void*, @pUserMarshalList : Void*, @reserved51_3 : LibC::IntPtrT, @reserved51_4 : LibC::IntPtrT, @reserved51_5 : LibC::IntPtrT)
+    def initialize(@rpc_msg : Win32cr::System::Rpc::RPC_MESSAGE*, @buffer : UInt8*, @buffer_start : UInt8*, @buffer_end : UInt8*, @buffer_mark : UInt8*, @buffer_length : UInt32, @memory_size : UInt32, @memory : UInt8*, @is_client : UInt8, @pad : UInt8, @uFlags2 : UInt16, @reuse_buffer : Int32, @pAllocAllNodesContext : Win32cr::System::Rpc::NDR_ALLOC_ALL_NODES_CONTEXT*, @pPointerQueueState : Win32cr::System::Rpc::NDR_POINTER_QUEUE_STATE*, @ignore_embedded_pointers : Int32, @pointer_buffer_mark : UInt8*, @corr_desp_increment : UInt8, @uFlags : UInt8, @unique_ptr_count : UInt16, @max_count : LibC::UIntPtrT, @offset : UInt32, @actual_count : UInt32, @pfnAllocate : Win32cr::System::Rpc::PFN_RPC_ALLOCATE, @pfnFree : Win32cr::System::Rpc::PFN_RPC_FREE, @stack_top : UInt8*, @pPresentedType : UInt8*, @pTransmitType : UInt8*, @saved_handle : Void*, @stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*, @full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*, @full_ptr_ref_id : UInt32, @pointer_length : UInt32, @_bitfield : Int32, @dwDestContext : UInt32, @pvDestContext : Void*, @saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT**, @param_number : Int32, @pRpcChannelBuffer : Void*, @pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*, @size_ptr_count_array : UInt32*, @size_ptr_offset_array : UInt32*, @size_ptr_length_array : UInt32*, @pArgQueue : Void*, @dwStubPhase : UInt32, @low_stack_mark : Void*, @pAsyncMsg : Win32cr::System::Rpc::PNDR_ASYNC_MESSAGE, @pCorrInfo : Win32cr::System::Rpc::PNDR_CORRELATION_INFO, @pCorrMemory : UInt8*, @pMemoryList : Void*, @pCSInfo : LibC::IntPtrT, @conformance_mark : UInt8*, @variance_mark : UInt8*, @unused : LibC::IntPtrT, @pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*, @context_handle_hash : Void*, @pUserMarshalList : Void*, @pFullPtrFormat : UInt8*, @reserved51_4 : LibC::IntPtrT, @reserved51_5 : LibC::IntPtrT)
     end
   end
 
@@ -1771,8 +1758,8 @@ module Win32cr::System::Rpc
   @[Extern]
   struct MIDL_STUB_DESC
     property rpc_interface_information : Void*
-    property pfnAllocate : LibC::IntPtrT
-    property pfnFree : LibC::IntPtrT
+    property pfnAllocate : Win32cr::System::Rpc::PFN_RPC_ALLOCATE
+    property pfnFree : Win32cr::System::Rpc::PFN_RPC_FREE
     property implicit_handle_info : IMPLICIT_HANDLE_INFO_e__Union_
     property apfnNdrRundownRoutines : Win32cr::System::Rpc::NDR_RUNDOWN*
     property aGenericBindingRoutinePairs : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE_PAIR*
@@ -1801,15 +1788,15 @@ module Win32cr::System::Rpc
     end
     end
 
-    def initialize(@rpc_interface_information : Void*, @pfnAllocate : LibC::IntPtrT, @pfnFree : LibC::IntPtrT, @implicit_handle_info : IMPLICIT_HANDLE_INFO_e__Union_, @apfnNdrRundownRoutines : Win32cr::System::Rpc::NDR_RUNDOWN*, @aGenericBindingRoutinePairs : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE_PAIR*, @apfnExprEval : Win32cr::System::Rpc::EXPR_EVAL*, @aXmitQuintuple : Win32cr::System::Rpc::XMIT_ROUTINE_QUINTUPLE*, @pFormatTypes : UInt8*, @fCheckBounds : Int32, @version : UInt32, @pMallocFreeStruct : Win32cr::System::Rpc::MALLOC_FREE_STRUCT*, @midl_version : Int32, @comm_fault_offsets : Win32cr::System::Rpc::COMM_FAULT_OFFSETS*, @aUserMarshalQuadruple : Win32cr::System::Rpc::USER_MARSHAL_ROUTINE_QUADRUPLE*, @notify_routine_table : Win32cr::System::Rpc::NDR_NOTIFY_ROUTINE*, @mFlags : LibC::UIntPtrT, @cs_routine_tables : Win32cr::System::Rpc::NDR_CS_ROUTINES*, @proxy_server_info : Void*, @pExprInfo : Win32cr::System::Rpc::NDR_EXPR_DESC*)
+    def initialize(@rpc_interface_information : Void*, @pfnAllocate : Win32cr::System::Rpc::PFN_RPC_ALLOCATE, @pfnFree : Win32cr::System::Rpc::PFN_RPC_FREE, @implicit_handle_info : IMPLICIT_HANDLE_INFO_e__Union_, @apfnNdrRundownRoutines : Win32cr::System::Rpc::NDR_RUNDOWN*, @aGenericBindingRoutinePairs : Win32cr::System::Rpc::GENERIC_BINDING_ROUTINE_PAIR*, @apfnExprEval : Win32cr::System::Rpc::EXPR_EVAL*, @aXmitQuintuple : Win32cr::System::Rpc::XMIT_ROUTINE_QUINTUPLE*, @pFormatTypes : UInt8*, @fCheckBounds : Int32, @version : UInt32, @pMallocFreeStruct : Win32cr::System::Rpc::MALLOC_FREE_STRUCT*, @midl_version : Int32, @comm_fault_offsets : Win32cr::System::Rpc::COMM_FAULT_OFFSETS*, @aUserMarshalQuadruple : Win32cr::System::Rpc::USER_MARSHAL_ROUTINE_QUADRUPLE*, @notify_routine_table : Win32cr::System::Rpc::NDR_NOTIFY_ROUTINE*, @mFlags : LibC::UIntPtrT, @cs_routine_tables : Win32cr::System::Rpc::NDR_CS_ROUTINES*, @proxy_server_info : Void*, @pExprInfo : Win32cr::System::Rpc::NDR_EXPR_DESC*)
     end
   end
 
   @[Extern]
   struct MIDL_FORMAT_STRING
     property pad : Int16
-    property format : UInt8*
-    def initialize(@pad : Int16, @format : UInt8*)
+    property format : UInt8[1]
+    def initialize(@pad : Int16, @format : UInt8[1])
     end
   end
 
@@ -2597,2039 +2584,3056 @@ module Win32cr::System::Rpc
   end
 
   def iUnknownQueryInterfaceProxy(this : Void*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IUnknown_QueryInterface_Proxy(this, riid, ppvObject)
+    {% end %}
   end
 
   def iUnknownAddRefProxy(this : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.IUnknown_AddRef_Proxy(this)
+    {% end %}
   end
 
   def iUnknownReleaseProxy(this : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.IUnknown_Release_Proxy(this)
+    {% end %}
   end
 
   def rpcBindingCopy(source_binding : Void*, destination_binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingCopy(source_binding, destination_binding)
+    {% end %}
   end
 
   def rpcBindingFree(binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingFree(binding)
+    {% end %}
   end
 
   def rpcBindingSetOption(hBinding : Void*, option : UInt32, optionValue : LibC::UIntPtrT) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingSetOption(hBinding, option, optionValue)
+    {% end %}
   end
 
   def rpcBindingInqOption(hBinding : Void*, option : UInt32, pOptionValue : LibC::UIntPtrT*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqOption(hBinding, option, pOptionValue)
+    {% end %}
   end
 
-  def rpcBindingFromStringBindingA(string_binding : UInt8*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingFromStringBindingA(string_binding : Win32cr::Foundation::PSTR, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingFromStringBindingA(string_binding, binding)
+    {% end %}
   end
 
-  def rpcBindingFromStringBindingW(string_binding : UInt16*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingFromStringBindingW(string_binding : Win32cr::Foundation::PWSTR, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingFromStringBindingW(string_binding, binding)
+    {% end %}
   end
 
   def rpcSsGetContextBinding(context_handle : Void*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSsGetContextBinding(context_handle, binding)
+    {% end %}
   end
 
   def rpcBindingInqMaxCalls(binding : Void*, max_calls : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqMaxCalls(binding, max_calls)
+    {% end %}
   end
 
   def rpcBindingInqObject(binding : Void*, object_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqObject(binding, object_uuid)
+    {% end %}
   end
 
   def rpcBindingReset(binding : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingReset(binding)
+    {% end %}
   end
 
   def rpcBindingSetObject(binding : Void*, object_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingSetObject(binding, object_uuid)
+    {% end %}
   end
 
   def rpcMgmtInqDefaultProtectLevel(authn_svc : UInt32, authn_level : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtInqDefaultProtectLevel(authn_svc, authn_level)
+    {% end %}
   end
 
-  def rpcBindingToStringBindingA(binding : Void*, string_binding : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingToStringBindingA(binding : Void*, string_binding : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingToStringBindingA(binding, string_binding)
+    {% end %}
   end
 
-  def rpcBindingToStringBindingW(binding : Void*, string_binding : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingToStringBindingW(binding : Void*, string_binding : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingToStringBindingW(binding, string_binding)
+    {% end %}
   end
 
   def rpcBindingVectorFree(binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingVectorFree(binding_vector)
+    {% end %}
   end
 
-  def rpcStringBindingComposeA(obj_uuid : UInt8*, prot_seq : UInt8*, network_addr : UInt8*, endpoint : UInt8*, options : UInt8*, string_binding : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcStringBindingComposeA(obj_uuid : Win32cr::Foundation::PSTR, prot_seq : Win32cr::Foundation::PSTR, network_addr : Win32cr::Foundation::PSTR, endpoint : Win32cr::Foundation::PSTR, options : Win32cr::Foundation::PSTR, string_binding : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcStringBindingComposeA(obj_uuid, prot_seq, network_addr, endpoint, options, string_binding)
+    {% end %}
   end
 
-  def rpcStringBindingComposeW(obj_uuid : UInt16*, prot_seq : UInt16*, network_addr : UInt16*, endpoint : UInt16*, options : UInt16*, string_binding : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcStringBindingComposeW(obj_uuid : Win32cr::Foundation::PWSTR, prot_seq : Win32cr::Foundation::PWSTR, network_addr : Win32cr::Foundation::PWSTR, endpoint : Win32cr::Foundation::PWSTR, options : Win32cr::Foundation::PWSTR, string_binding : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcStringBindingComposeW(obj_uuid, prot_seq, network_addr, endpoint, options, string_binding)
+    {% end %}
   end
 
-  def rpcStringBindingParseA(string_binding : UInt8*, obj_uuid : UInt8**, protseq : UInt8**, network_addr : UInt8**, endpoint : UInt8**, network_options : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcStringBindingParseA(string_binding : Win32cr::Foundation::PSTR, obj_uuid : Win32cr::Foundation::PSTR*, protseq : Win32cr::Foundation::PSTR*, network_addr : Win32cr::Foundation::PSTR*, endpoint : Win32cr::Foundation::PSTR*, network_options : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcStringBindingParseA(string_binding, obj_uuid, protseq, network_addr, endpoint, network_options)
+    {% end %}
   end
 
-  def rpcStringBindingParseW(string_binding : UInt16*, obj_uuid : UInt16**, protseq : UInt16**, network_addr : UInt16**, endpoint : UInt16**, network_options : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcStringBindingParseW(string_binding : Win32cr::Foundation::PWSTR, obj_uuid : Win32cr::Foundation::PWSTR*, protseq : Win32cr::Foundation::PWSTR*, network_addr : Win32cr::Foundation::PWSTR*, endpoint : Win32cr::Foundation::PWSTR*, network_options : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcStringBindingParseW(string_binding, obj_uuid, protseq, network_addr, endpoint, network_options)
+    {% end %}
   end
 
-  def rpcStringFreeA(string : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcStringFreeA(string : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcStringFreeA(string)
+    {% end %}
   end
 
-  def rpcStringFreeW(string : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcStringFreeW(string : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcStringFreeW(string)
+    {% end %}
   end
 
   def rpcIfInqId(rpc_if_handle : Void*, rpc_if_id : Win32cr::System::Rpc::RPC_IF_ID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcIfInqId(rpc_if_handle, rpc_if_id)
+    {% end %}
   end
 
-  def rpcNetworkIsProtseqValidA(protseq : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNetworkIsProtseqValidA(protseq : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNetworkIsProtseqValidA(protseq)
+    {% end %}
   end
 
-  def rpcNetworkIsProtseqValidW(protseq : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNetworkIsProtseqValidW(protseq : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNetworkIsProtseqValidW(protseq)
+    {% end %}
   end
 
   def rpcMgmtInqComTimeout(binding : Void*, timeout : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtInqComTimeout(binding, timeout)
+    {% end %}
   end
 
   def rpcMgmtSetComTimeout(binding : Void*, timeout : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtSetComTimeout(binding, timeout)
+    {% end %}
   end
 
   def rpcMgmtSetCancelTimeout(timeout : Int32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtSetCancelTimeout(timeout)
+    {% end %}
   end
 
   def rpcNetworkInqProtseqsA(protseq_vector : Win32cr::System::Rpc::RPC_PROTSEQ_VECTORA**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNetworkInqProtseqsA(protseq_vector)
+    {% end %}
   end
 
   def rpcNetworkInqProtseqsW(protseq_vector : Win32cr::System::Rpc::RPC_PROTSEQ_VECTORW**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNetworkInqProtseqsW(protseq_vector)
+    {% end %}
   end
 
   def rpcObjectInqType(obj_uuid : LibC::GUID*, type_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcObjectInqType(obj_uuid, type_uuid)
+    {% end %}
   end
 
   def rpcObjectSetInqFn(inquiry_fn : Win32cr::System::Rpc::RPC_OBJECT_INQ_FN) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcObjectSetInqFn(inquiry_fn)
+    {% end %}
   end
 
   def rpcObjectSetType(obj_uuid : LibC::GUID*, type_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcObjectSetType(obj_uuid, type_uuid)
+    {% end %}
   end
 
   def rpcProtseqVectorFreeA(protseq_vector : Win32cr::System::Rpc::RPC_PROTSEQ_VECTORA**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcProtseqVectorFreeA(protseq_vector)
+    {% end %}
   end
 
   def rpcProtseqVectorFreeW(protseq_vector : Win32cr::System::Rpc::RPC_PROTSEQ_VECTORW**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcProtseqVectorFreeW(protseq_vector)
+    {% end %}
   end
 
   def rpcServerInqBindings(binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqBindings(binding_vector)
+    {% end %}
   end
 
   def rpcServerInqBindingsEx(security_descriptor : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqBindingsEx(security_descriptor, binding_vector)
+    {% end %}
   end
 
   def rpcServerInqIf(if_spec : Void*, mgr_type_uuid : LibC::GUID*, mgr_epv : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqIf(if_spec, mgr_type_uuid, mgr_epv)
+    {% end %}
   end
 
   def rpcServerListen(minimum_call_threads : UInt32, max_calls : UInt32, dont_wait : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerListen(minimum_call_threads, max_calls, dont_wait)
+    {% end %}
   end
 
   def rpcServerRegisterIf(if_spec : Void*, mgr_type_uuid : LibC::GUID*, mgr_epv : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerRegisterIf(if_spec, mgr_type_uuid, mgr_epv)
+    {% end %}
   end
 
   def rpcServerRegisterIfEx(if_spec : Void*, mgr_type_uuid : LibC::GUID*, mgr_epv : Void*, flags : UInt32, max_calls : UInt32, if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerRegisterIfEx(if_spec, mgr_type_uuid, mgr_epv, flags, max_calls, if_callback)
+    {% end %}
   end
 
   def rpcServerRegisterIf2(if_spec : Void*, mgr_type_uuid : LibC::GUID*, mgr_epv : Void*, flags : UInt32, max_calls : UInt32, max_rpc_size : UInt32, if_callback_fn : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerRegisterIf2(if_spec, mgr_type_uuid, mgr_epv, flags, max_calls, max_rpc_size, if_callback_fn)
+    {% end %}
   end
 
   def rpcServerRegisterIf3(if_spec : Void*, mgr_type_uuid : LibC::GUID*, mgr_epv : Void*, flags : UInt32, max_calls : UInt32, max_rpc_size : UInt32, if_callback : Win32cr::System::Rpc::RPC_IF_CALLBACK_FN, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerRegisterIf3(if_spec, mgr_type_uuid, mgr_epv, flags, max_calls, max_rpc_size, if_callback, security_descriptor)
+    {% end %}
   end
 
   def rpcServerUnregisterIf(if_spec : Void*, mgr_type_uuid : LibC::GUID*, wait_for_calls_to_complete : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUnregisterIf(if_spec, mgr_type_uuid, wait_for_calls_to_complete)
+    {% end %}
   end
 
   def rpcServerUnregisterIfEx(if_spec : Void*, mgr_type_uuid : LibC::GUID*, rundown_context_handles : Int32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUnregisterIfEx(if_spec, mgr_type_uuid, rundown_context_handles)
+    {% end %}
   end
 
   def rpcServerUseAllProtseqs(max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseAllProtseqs(max_calls, security_descriptor)
+    {% end %}
   end
 
   def rpcServerUseAllProtseqsEx(max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseAllProtseqsEx(max_calls, security_descriptor, policy)
+    {% end %}
   end
 
   def rpcServerUseAllProtseqsIf(max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseAllProtseqsIf(max_calls, if_spec, security_descriptor)
+    {% end %}
   end
 
   def rpcServerUseAllProtseqsIfEx(max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseAllProtseqsIfEx(max_calls, if_spec, security_descriptor, policy)
+    {% end %}
   end
 
-  def rpcServerUseProtseqA(protseq : UInt8*, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqA(protseq, max_calls, security_descriptor)
+    {% end %}
   end
 
-  def rpcServerUseProtseqExA(protseq : UInt8*, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqExA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqExA(protseq, max_calls, security_descriptor, policy)
+    {% end %}
   end
 
-  def rpcServerUseProtseqW(protseq : UInt16*, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqW(protseq, max_calls, security_descriptor)
+    {% end %}
   end
 
-  def rpcServerUseProtseqExW(protseq : UInt16*, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqExW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqExW(protseq, max_calls, security_descriptor, policy)
+    {% end %}
   end
 
-  def rpcServerUseProtseqEpA(protseq : UInt8*, max_calls : UInt32, endpoint : UInt8*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqEpA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PSTR, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqEpA(protseq, max_calls, endpoint, security_descriptor)
+    {% end %}
   end
 
-  def rpcServerUseProtseqEpExA(protseq : UInt8*, max_calls : UInt32, endpoint : UInt8*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqEpExA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PSTR, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqEpExA(protseq, max_calls, endpoint, security_descriptor, policy)
+    {% end %}
   end
 
-  def rpcServerUseProtseqEpW(protseq : UInt16*, max_calls : UInt32, endpoint : UInt16*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqEpW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PWSTR, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqEpW(protseq, max_calls, endpoint, security_descriptor)
+    {% end %}
   end
 
-  def rpcServerUseProtseqEpExW(protseq : UInt16*, max_calls : UInt32, endpoint : UInt16*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqEpExW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PWSTR, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqEpExW(protseq, max_calls, endpoint, security_descriptor, policy)
+    {% end %}
   end
 
-  def rpcServerUseProtseqIfA(protseq : UInt8*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqIfA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqIfA(protseq, max_calls, if_spec, security_descriptor)
+    {% end %}
   end
 
-  def rpcServerUseProtseqIfExA(protseq : UInt8*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqIfExA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqIfExA(protseq, max_calls, if_spec, security_descriptor, policy)
+    {% end %}
   end
 
-  def rpcServerUseProtseqIfW(protseq : UInt16*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqIfW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqIfW(protseq, max_calls, if_spec, security_descriptor)
+    {% end %}
   end
 
-  def rpcServerUseProtseqIfExW(protseq : UInt16*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerUseProtseqIfExW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUseProtseqIfExW(protseq, max_calls, if_spec, security_descriptor, policy)
+    {% end %}
   end
 
   def rpcServerYield : Void
+    {% if !flag?(:docs) %}
     C.RpcServerYield
+    {% end %}
   end
 
   def rpcMgmtStatsVectorFree(stats_vector : Win32cr::System::Rpc::RPC_STATS_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtStatsVectorFree(stats_vector)
+    {% end %}
   end
 
   def rpcMgmtInqStats(binding : Void*, statistics : Win32cr::System::Rpc::RPC_STATS_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtInqStats(binding, statistics)
+    {% end %}
   end
 
   def rpcMgmtIsServerListening(binding : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtIsServerListening(binding)
+    {% end %}
   end
 
   def rpcMgmtStopServerListening(binding : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtStopServerListening(binding)
+    {% end %}
   end
 
   def rpcMgmtWaitServerListen : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtWaitServerListen
+    {% end %}
   end
 
   def rpcMgmtSetServerStackSize(thread_stack_size : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtSetServerStackSize(thread_stack_size)
+    {% end %}
   end
 
   def rpcSsDontSerializeContext : Void
+    {% if !flag?(:docs) %}
     C.RpcSsDontSerializeContext
+    {% end %}
   end
 
   def rpcMgmtEnableIdleCleanup : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtEnableIdleCleanup
+    {% end %}
   end
 
   def rpcMgmtInqIfIds(binding : Void*, if_id_vector : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtInqIfIds(binding, if_id_vector)
+    {% end %}
   end
 
   def rpcIfIdVectorFree(if_id_vector : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcIfIdVectorFree(if_id_vector)
+    {% end %}
   end
 
-  def rpcMgmtInqServerPrincNameA(binding : Void*, authn_svc : UInt32, server_princ_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcMgmtInqServerPrincNameA(binding : Void*, authn_svc : UInt32, server_princ_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtInqServerPrincNameA(binding, authn_svc, server_princ_name)
+    {% end %}
   end
 
-  def rpcMgmtInqServerPrincNameW(binding : Void*, authn_svc : UInt32, server_princ_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcMgmtInqServerPrincNameW(binding : Void*, authn_svc : UInt32, server_princ_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtInqServerPrincNameW(binding, authn_svc, server_princ_name)
+    {% end %}
   end
 
-  def rpcServerInqDefaultPrincNameA(authn_svc : UInt32, princ_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerInqDefaultPrincNameA(authn_svc : UInt32, princ_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqDefaultPrincNameA(authn_svc, princ_name)
+    {% end %}
   end
 
-  def rpcServerInqDefaultPrincNameW(authn_svc : UInt32, princ_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerInqDefaultPrincNameW(authn_svc : UInt32, princ_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqDefaultPrincNameW(authn_svc, princ_name)
+    {% end %}
   end
 
   def rpcEpResolveBinding(binding : Void*, if_spec : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcEpResolveBinding(binding, if_spec)
+    {% end %}
   end
 
-  def rpcNsBindingInqEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingInqEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingInqEntryNameA(binding, entry_name_syntax, entry_name)
+    {% end %}
   end
 
-  def rpcNsBindingInqEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingInqEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingInqEntryNameW(binding, entry_name_syntax, entry_name)
+    {% end %}
   end
 
   def rpcBindingCreateA(template : Win32cr::System::Rpc::RPC_BINDING_HANDLE_TEMPLATE_V1_A*, security : Win32cr::System::Rpc::RPC_BINDING_HANDLE_SECURITY_V1_A*, options : Win32cr::System::Rpc::RPC_BINDING_HANDLE_OPTIONS_V1*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingCreateA(template, security, options, binding)
+    {% end %}
   end
 
   def rpcBindingCreateW(template : Win32cr::System::Rpc::RPC_BINDING_HANDLE_TEMPLATE_V1_W*, security : Win32cr::System::Rpc::RPC_BINDING_HANDLE_SECURITY_V1_W*, options : Win32cr::System::Rpc::RPC_BINDING_HANDLE_OPTIONS_V1*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingCreateW(template, security, options, binding)
+    {% end %}
   end
 
   def rpcServerInqBindingHandle(binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqBindingHandle(binding)
+    {% end %}
   end
 
   def rpcImpersonateClient(binding_handle : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcImpersonateClient(binding_handle)
+    {% end %}
   end
 
   def rpcImpersonateClient2(binding_handle : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcImpersonateClient2(binding_handle)
+    {% end %}
   end
 
   def rpcRevertToSelfEx(binding_handle : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcRevertToSelfEx(binding_handle)
+    {% end %}
   end
 
   def rpcRevertToSelf : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcRevertToSelf
+    {% end %}
   end
 
   def rpcImpersonateClientContainer(binding_handle : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcImpersonateClientContainer(binding_handle)
+    {% end %}
   end
 
   def rpcRevertContainerImpersonation : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcRevertContainerImpersonation
+    {% end %}
   end
 
-  def rpcBindingInqAuthClientA(client_binding : Void*, privs : Void**, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthClientA(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthClientA(client_binding, privs, server_princ_name, authn_level, authn_svc, authz_svc)
+    {% end %}
   end
 
-  def rpcBindingInqAuthClientW(client_binding : Void*, privs : Void**, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthClientW(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthClientW(client_binding, privs, server_princ_name, authn_level, authn_svc, authz_svc)
+    {% end %}
   end
 
-  def rpcBindingInqAuthClientExA(client_binding : Void*, privs : Void**, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthClientExA(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthClientExA(client_binding, privs, server_princ_name, authn_level, authn_svc, authz_svc, flags)
+    {% end %}
   end
 
-  def rpcBindingInqAuthClientExW(client_binding : Void*, privs : Void**, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthClientExW(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthClientExW(client_binding, privs, server_princ_name, authn_level, authn_svc, authz_svc, flags)
+    {% end %}
   end
 
-  def rpcBindingInqAuthInfoA(binding : Void*, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthInfoA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthInfoA(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc)
+    {% end %}
   end
 
-  def rpcBindingInqAuthInfoW(binding : Void*, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthInfoW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthInfoW(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc)
+    {% end %}
   end
 
-  def rpcBindingSetAuthInfoA(binding : Void*, server_princ_name : UInt8*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingSetAuthInfoA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingSetAuthInfoA(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc)
+    {% end %}
   end
 
-  def rpcBindingSetAuthInfoExA(binding : Void*, server_princ_name : UInt8*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingSetAuthInfoExA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingSetAuthInfoExA(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc, security_qos)
+    {% end %}
   end
 
-  def rpcBindingSetAuthInfoW(binding : Void*, server_princ_name : UInt16*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingSetAuthInfoW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingSetAuthInfoW(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc)
+    {% end %}
   end
 
-  def rpcBindingSetAuthInfoExW(binding : Void*, server_princ_name : UInt16*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingSetAuthInfoExW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingSetAuthInfoExW(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc, security_qos)
+    {% end %}
   end
 
-  def rpcBindingInqAuthInfoExA(binding : Void*, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthInfoExA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthInfoExA(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc, rpc_qos_version, security_qos)
+    {% end %}
   end
 
-  def rpcBindingInqAuthInfoExW(binding : Void*, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcBindingInqAuthInfoExW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingInqAuthInfoExW(binding, server_princ_name, authn_level, authn_svc, auth_identity, authz_svc, rpc_qos_version, security_qos)
+    {% end %}
   end
 
   def rpcServerCompleteSecurityCallback(binding_handle : Void*, status : Win32cr::System::Rpc::RPC_STATUS) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerCompleteSecurityCallback(binding_handle, status)
+    {% end %}
   end
 
-  def rpcServerRegisterAuthInfoA(server_princ_name : UInt8*, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerRegisterAuthInfoA(server_princ_name : Win32cr::Foundation::PSTR, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerRegisterAuthInfoA(server_princ_name, authn_svc, get_key_fn, arg)
+    {% end %}
   end
 
-  def rpcServerRegisterAuthInfoW(server_princ_name : UInt16*, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcServerRegisterAuthInfoW(server_princ_name : Win32cr::Foundation::PWSTR, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerRegisterAuthInfoW(server_princ_name, authn_svc, get_key_fn, arg)
+    {% end %}
   end
 
   def rpcBindingServerFromClient(client_binding : Void*, server_binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingServerFromClient(client_binding, server_binding)
+    {% end %}
   end
 
   def rpcRaiseException(exception : Win32cr::System::Rpc::RPC_STATUS) : Void
+    {% if !flag?(:docs) %}
     C.RpcRaiseException(exception)
+    {% end %}
   end
 
   def rpcTestCancel : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcTestCancel
+    {% end %}
   end
 
   def rpcServerTestCancel(binding_handle : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerTestCancel(binding_handle)
+    {% end %}
   end
 
   def rpcCancelThread(thread : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcCancelThread(thread)
+    {% end %}
   end
 
   def rpcCancelThreadEx(thread : Void*, timeout : Int32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcCancelThreadEx(thread, timeout)
+    {% end %}
   end
 
   def uuidCreate(uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.UuidCreate(uuid)
+    {% end %}
   end
 
   def uuidCreateSequential(uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.UuidCreateSequential(uuid)
+    {% end %}
   end
 
-  def uuidToStringA(uuid : LibC::GUID*, string_uuid : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def uuidToStringA(uuid : LibC::GUID*, string_uuid : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.UuidToStringA(uuid, string_uuid)
+    {% end %}
   end
 
-  def uuidFromStringA(string_uuid : UInt8*, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+  def uuidFromStringA(string_uuid : Win32cr::Foundation::PSTR, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.UuidFromStringA(string_uuid, uuid)
+    {% end %}
   end
 
-  def uuidToStringW(uuid : LibC::GUID*, string_uuid : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def uuidToStringW(uuid : LibC::GUID*, string_uuid : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.UuidToStringW(uuid, string_uuid)
+    {% end %}
   end
 
-  def uuidFromStringW(string_uuid : UInt16*, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+  def uuidFromStringW(string_uuid : Win32cr::Foundation::PWSTR, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.UuidFromStringW(string_uuid, uuid)
+    {% end %}
   end
 
   def uuidCompare(uuid1 : LibC::GUID*, uuid2 : LibC::GUID*, status : Win32cr::System::Rpc::RPC_STATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.UuidCompare(uuid1, uuid2, status)
+    {% end %}
   end
 
   def uuidCreateNil(nil_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.UuidCreateNil(nil_uuid)
+    {% end %}
   end
 
   def uuidEqual(uuid1 : LibC::GUID*, uuid2 : LibC::GUID*, status : Win32cr::System::Rpc::RPC_STATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.UuidEqual(uuid1, uuid2, status)
+    {% end %}
   end
 
   def uuidHash(uuid : LibC::GUID*, status : Win32cr::System::Rpc::RPC_STATUS*) : UInt16
+    {% if !flag?(:docs) %}
     C.UuidHash(uuid, status)
+    {% end %}
   end
 
   def uuidIsNil(uuid : LibC::GUID*, status : Win32cr::System::Rpc::RPC_STATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.UuidIsNil(uuid, status)
+    {% end %}
   end
 
-  def rpcEpRegisterNoReplaceA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcEpRegisterNoReplaceA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcEpRegisterNoReplaceA(if_spec, binding_vector, uuid_vector, annotation__)
+    {% end %}
   end
 
-  def rpcEpRegisterNoReplaceW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcEpRegisterNoReplaceW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcEpRegisterNoReplaceW(if_spec, binding_vector, uuid_vector, annotation__)
+    {% end %}
   end
 
-  def rpcEpRegisterA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcEpRegisterA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcEpRegisterA(if_spec, binding_vector, uuid_vector, annotation__)
+    {% end %}
   end
 
-  def rpcEpRegisterW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcEpRegisterW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcEpRegisterW(if_spec, binding_vector, uuid_vector, annotation__)
+    {% end %}
   end
 
   def rpcEpUnregister(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcEpUnregister(if_spec, binding_vector, uuid_vector)
+    {% end %}
   end
 
-  def dceErrorInqTextA(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def dceErrorInqTextA(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.DceErrorInqTextA(rpc_status, error_text)
+    {% end %}
   end
 
-  def dceErrorInqTextW(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def dceErrorInqTextW(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.DceErrorInqTextW(rpc_status, error_text)
+    {% end %}
   end
 
   def rpcMgmtEpEltInqBegin(ep_binding : Void*, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid : LibC::GUID*, inquiry_context : Void***) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtEpEltInqBegin(ep_binding, inquiry_type, if_id, vers_option, object_uuid, inquiry_context)
+    {% end %}
   end
 
   def rpcMgmtEpEltInqDone(inquiry_context : Void***) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtEpEltInqDone(inquiry_context)
+    {% end %}
   end
 
-  def rpcMgmtEpEltInqNextA(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcMgmtEpEltInqNextA(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtEpEltInqNextA(inquiry_context, if_id, binding, object_uuid, annotation__)
+    {% end %}
   end
 
-  def rpcMgmtEpEltInqNextW(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcMgmtEpEltInqNextW(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtEpEltInqNextW(inquiry_context, if_id, binding, object_uuid, annotation__)
+    {% end %}
   end
 
   def rpcMgmtEpUnregister(ep_binding : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void*, object_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtEpUnregister(ep_binding, if_id, binding, object_uuid)
+    {% end %}
   end
 
   def rpcMgmtSetAuthorizationFn(authorization_fn : Win32cr::System::Rpc::RPC_MGMT_AUTHORIZATION_FN) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcMgmtSetAuthorizationFn(authorization_fn)
+    {% end %}
   end
 
   def rpcExceptionFilter(exception_code : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.RpcExceptionFilter(exception_code)
+    {% end %}
   end
 
   def rpcServerInterfaceGroupCreateW(interfaces : Win32cr::System::Rpc::RPC_INTERFACE_TEMPLATEW*, num_ifs : UInt32, endpoints : Win32cr::System::Rpc::RPC_ENDPOINT_TEMPLATEW*, num_endpoints : UInt32, idle_period : UInt32, idle_callback_fn : Win32cr::System::Rpc::RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, idle_callback_context : Void*, if_group : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInterfaceGroupCreateW(interfaces, num_ifs, endpoints, num_endpoints, idle_period, idle_callback_fn, idle_callback_context, if_group)
+    {% end %}
   end
 
   def rpcServerInterfaceGroupCreateA(interfaces : Win32cr::System::Rpc::RPC_INTERFACE_TEMPLATEA*, num_ifs : UInt32, endpoints : Win32cr::System::Rpc::RPC_ENDPOINT_TEMPLATEA*, num_endpoints : UInt32, idle_period : UInt32, idle_callback_fn : Win32cr::System::Rpc::RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, idle_callback_context : Void*, if_group : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInterfaceGroupCreateA(interfaces, num_ifs, endpoints, num_endpoints, idle_period, idle_callback_fn, idle_callback_context, if_group)
+    {% end %}
   end
 
   def rpcServerInterfaceGroupClose(if_group : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInterfaceGroupClose(if_group)
+    {% end %}
   end
 
   def rpcServerInterfaceGroupActivate(if_group : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInterfaceGroupActivate(if_group)
+    {% end %}
   end
 
   def rpcServerInterfaceGroupDeactivate(if_group : Void*, force_deactivation : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInterfaceGroupDeactivate(if_group, force_deactivation)
+    {% end %}
   end
 
   def rpcServerInterfaceGroupInqBindings(if_group : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInterfaceGroupInqBindings(if_group, binding_vector)
+    {% end %}
   end
 
   def iRpcNegotiateTransferSyntax(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcNegotiateTransferSyntax(message)
+    {% end %}
   end
 
   def iRpcGetBuffer(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcGetBuffer(message)
+    {% end %}
   end
 
   def iRpcGetBufferWithObject(message : Win32cr::System::Rpc::RPC_MESSAGE*, object_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcGetBufferWithObject(message, object_uuid)
+    {% end %}
   end
 
   def iRpcSendReceive(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcSendReceive(message)
+    {% end %}
   end
 
   def iRpcFreeBuffer(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcFreeBuffer(message)
+    {% end %}
   end
 
   def iRpcSend(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcSend(message)
+    {% end %}
   end
 
   def iRpcReceive(message : Win32cr::System::Rpc::RPC_MESSAGE*, size : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcReceive(message, size)
+    {% end %}
   end
 
   def iRpcFreePipeBuffer(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcFreePipeBuffer(message)
+    {% end %}
   end
 
   def iRpcReallocPipeBuffer(message : Win32cr::System::Rpc::RPC_MESSAGE*, new_size : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcReallocPipeBuffer(message, new_size)
+    {% end %}
   end
 
   def iRpcRequestMutex(mutex : Void**) : Void
+    {% if !flag?(:docs) %}
     C.I_RpcRequestMutex(mutex)
+    {% end %}
   end
 
   def iRpcClearMutex(mutex : Void*) : Void
+    {% if !flag?(:docs) %}
     C.I_RpcClearMutex(mutex)
+    {% end %}
   end
 
   def iRpcDeleteMutex(mutex : Void*) : Void
+    {% if !flag?(:docs) %}
     C.I_RpcDeleteMutex(mutex)
+    {% end %}
   end
 
   def iRpcAllocate(size : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.I_RpcAllocate(size)
+    {% end %}
   end
 
   def iRpcFree(object : Void*) : Void
+    {% if !flag?(:docs) %}
     C.I_RpcFree(object)
+    {% end %}
   end
 
   def iRpcPauseExecution(milliseconds : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.I_RpcPauseExecution(milliseconds)
+    {% end %}
   end
 
   def iRpcGetExtendedError : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcGetExtendedError
+    {% end %}
   end
 
   def iRpcSystemHandleTypeSpecificWork(handle : Void*, actual_type : UInt8, idl_type : UInt8, marshal_direction : Win32cr::System::Rpc::LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcSystemHandleTypeSpecificWork(handle, actual_type, idl_type, marshal_direction)
+    {% end %}
   end
 
   def iRpcGetCurrentCallHandle : Void*
+    {% if !flag?(:docs) %}
     C.I_RpcGetCurrentCallHandle
+    {% end %}
   end
 
   def iRpcNsInterfaceExported(entry_name_syntax : UInt32, entry_name : UInt16*, rpc_interface_information : Win32cr::System::Rpc::RPC_SERVER_INTERFACE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcNsInterfaceExported(entry_name_syntax, entry_name, rpc_interface_information)
+    {% end %}
   end
 
   def iRpcNsInterfaceUnexported(entry_name_syntax : UInt32, entry_name : UInt16*, rpc_interface_information : Win32cr::System::Rpc::RPC_SERVER_INTERFACE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcNsInterfaceUnexported(entry_name_syntax, entry_name, rpc_interface_information)
+    {% end %}
   end
 
   def iRpcBindingToStaticStringBindingW(binding : Void*, string_binding : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingToStaticStringBindingW(binding, string_binding)
+    {% end %}
   end
 
   def iRpcBindingInqSecurityContext(binding : Void*, security_context_handle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqSecurityContext(binding, security_context_handle)
+    {% end %}
   end
 
   def iRpcBindingInqSecurityContextKeyInfo(binding : Void*, key_info : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqSecurityContextKeyInfo(binding, key_info)
+    {% end %}
   end
 
   def iRpcBindingInqWireIdForSnego(binding : Void*, wire_id : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqWireIdForSnego(binding, wire_id)
+    {% end %}
   end
 
-  def iRpcBindingInqMarshalledTargetInfo(binding : Void*, marshalled_target_info_size : UInt32*, marshalled_target_info : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcBindingInqMarshalledTargetInfo(binding : Void*, marshalled_target_info_size : UInt32*, marshalled_target_info : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqMarshalledTargetInfo(binding, marshalled_target_info_size, marshalled_target_info)
+    {% end %}
   end
 
   def iRpcBindingInqLocalClientPID(binding : Void*, pid : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqLocalClientPID(binding, pid)
+    {% end %}
   end
 
   def iRpcBindingHandleToAsyncHandle(binding : Void*, async_handle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingHandleToAsyncHandle(binding, async_handle)
+    {% end %}
   end
 
-  def iRpcNsBindingSetEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcNsBindingSetEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcNsBindingSetEntryNameW(binding, entry_name_syntax, entry_name)
+    {% end %}
   end
 
-  def iRpcNsBindingSetEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcNsBindingSetEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcNsBindingSetEntryNameA(binding, entry_name_syntax, entry_name)
+    {% end %}
   end
 
-  def iRpcServerUseProtseqEp2A(network_address : UInt8*, protseq : UInt8*, max_calls : UInt32, endpoint : UInt8*, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcServerUseProtseqEp2A(network_address : Win32cr::Foundation::PSTR, protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PSTR, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerUseProtseqEp2A(network_address, protseq, max_calls, endpoint, security_descriptor, policy)
+    {% end %}
   end
 
-  def iRpcServerUseProtseqEp2W(network_address : UInt16*, protseq : UInt16*, max_calls : UInt32, endpoint : UInt16*, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcServerUseProtseqEp2W(network_address : Win32cr::Foundation::PWSTR, protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PWSTR, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerUseProtseqEp2W(network_address, protseq, max_calls, endpoint, security_descriptor, policy)
+    {% end %}
   end
 
-  def iRpcServerUseProtseq2W(network_address : UInt16*, protseq : UInt16*, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcServerUseProtseq2W(network_address : Win32cr::Foundation::PWSTR, protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerUseProtseq2W(network_address, protseq, max_calls, security_descriptor, policy)
+    {% end %}
   end
 
-  def iRpcServerUseProtseq2A(network_address : UInt8*, protseq : UInt8*, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcServerUseProtseq2A(network_address : Win32cr::Foundation::PSTR, protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerUseProtseq2A(network_address, protseq, max_calls, security_descriptor, policy)
+    {% end %}
   end
 
-  def iRpcServerStartService(protseq : UInt16*, endpoint : UInt16*, if_spec : Void*) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcServerStartService(protseq : Win32cr::Foundation::PWSTR, endpoint : Win32cr::Foundation::PWSTR, if_spec : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerStartService(protseq, endpoint, if_spec)
+    {% end %}
   end
 
-  def iRpcBindingInqDynamicEndpointW(binding : Void*, dynamic_endpoint : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcBindingInqDynamicEndpointW(binding : Void*, dynamic_endpoint : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqDynamicEndpointW(binding, dynamic_endpoint)
+    {% end %}
   end
 
-  def iRpcBindingInqDynamicEndpointA(binding : Void*, dynamic_endpoint : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcBindingInqDynamicEndpointA(binding : Void*, dynamic_endpoint : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqDynamicEndpointA(binding, dynamic_endpoint)
+    {% end %}
   end
 
   def iRpcServerCheckClientRestriction(context : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerCheckClientRestriction(context)
+    {% end %}
   end
 
   def iRpcBindingInqTransportType(binding : Void*, type__ : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqTransportType(binding, type__)
+    {% end %}
   end
 
   def iRpcIfInqTransferSyntaxes(rpc_if_handle : Void*, transfer_syntaxes : Win32cr::System::Rpc::RPC_TRANSFER_SYNTAX*, transfer_syntax_size : UInt32, transfer_syntax_count : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcIfInqTransferSyntaxes(rpc_if_handle, transfer_syntaxes, transfer_syntax_size, transfer_syntax_count)
+    {% end %}
   end
 
   def iUuidCreate(uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_UuidCreate(uuid)
+    {% end %}
   end
 
   def iRpcBindingCopy(source_binding : Void*, destination_binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingCopy(source_binding, destination_binding)
+    {% end %}
   end
 
   def iRpcBindingIsClientLocal(binding_handle : Void*, client_local_flag : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingIsClientLocal(binding_handle, client_local_flag)
+    {% end %}
   end
 
-  def iRpcBindingCreateNP(server_name : UInt16*, service_name : UInt16*, network_options : UInt16*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def iRpcBindingCreateNP(server_name : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, network_options : Win32cr::Foundation::PWSTR, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingCreateNP(server_name, service_name, network_options, binding)
+    {% end %}
   end
 
   def iRpcSsDontSerializeContext : Void
+    {% if !flag?(:docs) %}
     C.I_RpcSsDontSerializeContext
+    {% end %}
   end
 
   def iRpcServerRegisterForwardFunction(pForwardFunction : Win32cr::System::Rpc::RPC_FORWARD_FUNCTION*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerRegisterForwardFunction(pForwardFunction)
+    {% end %}
   end
 
   def iRpcServerInqAddressChangeFn : Win32cr::System::Rpc::RPC_ADDRESS_CHANGE_FN*
+    {% if !flag?(:docs) %}
     C.I_RpcServerInqAddressChangeFn
+    {% end %}
   end
 
   def iRpcServerSetAddressChangeFn(pAddressChangeFn : Win32cr::System::Rpc::RPC_ADDRESS_CHANGE_FN*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerSetAddressChangeFn(pAddressChangeFn)
+    {% end %}
   end
 
   def iRpcServerInqLocalConnAddress(binding : Void*, buffer : Void*, buffer_size : UInt32*, address_format : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerInqLocalConnAddress(binding, buffer, buffer_size, address_format)
+    {% end %}
   end
 
   def iRpcServerInqRemoteConnAddress(binding : Void*, buffer : Void*, buffer_size : UInt32*, address_format : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerInqRemoteConnAddress(binding, buffer, buffer_size, address_format)
+    {% end %}
   end
 
   def iRpcSessionStrictContextHandle : Void
+    {% if !flag?(:docs) %}
     C.I_RpcSessionStrictContextHandle
+    {% end %}
   end
 
   def iRpcTurnOnEEInfoPropagation : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcTurnOnEEInfoPropagation
+    {% end %}
   end
 
   def iRpcServerInqTransportType(type__ : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerInqTransportType(type__)
+    {% end %}
   end
 
   def iRpcMapWin32Status(status : Win32cr::System::Rpc::RPC_STATUS) : Int32
+    {% if !flag?(:docs) %}
     C.I_RpcMapWin32Status(status)
+    {% end %}
   end
 
   def iRpcRecordCalloutFailure(rpc_status : Win32cr::System::Rpc::RPC_STATUS, call_out_state : Win32cr::System::Rpc::RDR_CALLOUT_STATE*, dll_name : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.I_RpcRecordCalloutFailure(rpc_status, call_out_state, dll_name)
+    {% end %}
   end
 
   def iRpcMgmtEnableDedicatedThreadPool : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcMgmtEnableDedicatedThreadPool
+    {% end %}
   end
 
   def iRpcGetDefaultSD(ppSecurityDescriptor : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcGetDefaultSD(ppSecurityDescriptor)
+    {% end %}
   end
 
   def iRpcOpenClientProcess(binding : Void*, desired_access : UInt32, client_process : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcOpenClientProcess(binding, desired_access, client_process)
+    {% end %}
   end
 
   def iRpcBindingIsServerLocal(binding : Void*, server_local_flag : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingIsServerLocal(binding, server_local_flag)
+    {% end %}
   end
 
   def iRpcBindingSetPrivateOption(hBinding : Void*, option : UInt32, optionValue : LibC::UIntPtrT) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingSetPrivateOption(hBinding, option, optionValue)
+    {% end %}
   end
 
   def iRpcServerSubscribeForDisconnectNotification(binding : Void*, hEvent : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerSubscribeForDisconnectNotification(binding, hEvent)
+    {% end %}
   end
 
   def iRpcServerGetAssociationID(binding : Void*, association_id : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerGetAssociationID(binding, association_id)
+    {% end %}
   end
 
   def iRpcServerDisableExceptionFilter : Int32
+    {% if !flag?(:docs) %}
     C.I_RpcServerDisableExceptionFilter
+    {% end %}
   end
 
   def iRpcServerSubscribeForDisconnectNotification2(binding : Void*, hEvent : Void*, subscription_id : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerSubscribeForDisconnectNotification2(binding, hEvent, subscription_id)
+    {% end %}
   end
 
   def iRpcServerUnsubscribeForDisconnectNotification(binding : Void*, subscription_id : LibC::GUID) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcServerUnsubscribeForDisconnectNotification(binding, subscription_id)
+    {% end %}
   end
 
-  def rpcNsBindingExportA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingExportA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingExportA(entry_name_syntax, entry_name, if_spec, binding_vec, object_uuid_vec)
+    {% end %}
   end
 
-  def rpcNsBindingUnexportA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingUnexportA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingUnexportA(entry_name_syntax, entry_name, if_spec, object_uuid_vec)
+    {% end %}
   end
 
-  def rpcNsBindingExportW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingExportW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingExportW(entry_name_syntax, entry_name, if_spec, binding_vec, object_uuid_vec)
+    {% end %}
   end
 
-  def rpcNsBindingUnexportW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingUnexportW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingUnexportW(entry_name_syntax, entry_name, if_spec, object_uuid_vec)
+    {% end %}
   end
 
-  def rpcNsBindingExportPnPA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingExportPnPA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingExportPnPA(entry_name_syntax, entry_name, if_spec, object_vector)
+    {% end %}
   end
 
-  def rpcNsBindingUnexportPnPA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingUnexportPnPA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingUnexportPnPA(entry_name_syntax, entry_name, if_spec, object_vector)
+    {% end %}
   end
 
-  def rpcNsBindingExportPnPW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingExportPnPW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingExportPnPW(entry_name_syntax, entry_name, if_spec, object_vector)
+    {% end %}
   end
 
-  def rpcNsBindingUnexportPnPW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingUnexportPnPW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingUnexportPnPW(entry_name_syntax, entry_name, if_spec, object_vector)
+    {% end %}
   end
 
-  def rpcNsBindingLookupBeginA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingLookupBeginA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingLookupBeginA(entry_name_syntax, entry_name, if_spec, obj_uuid, binding_max_count, lookup_context)
+    {% end %}
   end
 
-  def rpcNsBindingLookupBeginW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingLookupBeginW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingLookupBeginW(entry_name_syntax, entry_name, if_spec, obj_uuid, binding_max_count, lookup_context)
+    {% end %}
   end
 
   def rpcNsBindingLookupNext(lookup_context : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingLookupNext(lookup_context, binding_vec)
+    {% end %}
   end
 
   def rpcNsBindingLookupDone(lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingLookupDone(lookup_context)
+    {% end %}
   end
 
-  def rpcNsGroupDeleteA(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupDeleteA(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupDeleteA(group_name_syntax, group_name)
+    {% end %}
   end
 
-  def rpcNsGroupMbrAddA(group_name_syntax : UInt32, group_name : UInt8*, member_name_syntax : UInt32, member_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrAddA(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrAddA(group_name_syntax, group_name, member_name_syntax, member_name)
+    {% end %}
   end
 
-  def rpcNsGroupMbrRemoveA(group_name_syntax : UInt32, group_name : UInt8*, member_name_syntax : UInt32, member_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrRemoveA(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrRemoveA(group_name_syntax, group_name, member_name_syntax, member_name)
+    {% end %}
   end
 
-  def rpcNsGroupMbrInqBeginA(group_name_syntax : UInt32, group_name : UInt8*, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrInqBeginA(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PSTR, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrInqBeginA(group_name_syntax, group_name, member_name_syntax, inquiry_context)
+    {% end %}
   end
 
-  def rpcNsGroupMbrInqNextA(inquiry_context : Void*, member_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrInqNextA(inquiry_context : Void*, member_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrInqNextA(inquiry_context, member_name)
+    {% end %}
   end
 
-  def rpcNsGroupDeleteW(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupDeleteW(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupDeleteW(group_name_syntax, group_name)
+    {% end %}
   end
 
-  def rpcNsGroupMbrAddW(group_name_syntax : UInt32, group_name : UInt16*, member_name_syntax : UInt32, member_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrAddW(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PWSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrAddW(group_name_syntax, group_name, member_name_syntax, member_name)
+    {% end %}
   end
 
-  def rpcNsGroupMbrRemoveW(group_name_syntax : UInt32, group_name : UInt16*, member_name_syntax : UInt32, member_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrRemoveW(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PWSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrRemoveW(group_name_syntax, group_name, member_name_syntax, member_name)
+    {% end %}
   end
 
-  def rpcNsGroupMbrInqBeginW(group_name_syntax : UInt32, group_name : UInt16*, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrInqBeginW(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PWSTR, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrInqBeginW(group_name_syntax, group_name, member_name_syntax, inquiry_context)
+    {% end %}
   end
 
-  def rpcNsGroupMbrInqNextW(inquiry_context : Void*, member_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsGroupMbrInqNextW(inquiry_context : Void*, member_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrInqNextW(inquiry_context, member_name)
+    {% end %}
   end
 
   def rpcNsGroupMbrInqDone(inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsGroupMbrInqDone(inquiry_context)
+    {% end %}
   end
 
-  def rpcNsProfileDeleteA(profile_name_syntax : UInt32, profile_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileDeleteA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileDeleteA(profile_name_syntax, profile_name)
+    {% end %}
   end
 
-  def rpcNsProfileEltAddA(profile_name_syntax : UInt32, profile_name : UInt8*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt8*, priority : UInt32, annotation__ : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltAddA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR, priority : UInt32, annotation__ : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltAddA(profile_name_syntax, profile_name, if_id, member_name_syntax, member_name, priority, annotation__)
+    {% end %}
   end
 
-  def rpcNsProfileEltRemoveA(profile_name_syntax : UInt32, profile_name : UInt8*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltRemoveA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltRemoveA(profile_name_syntax, profile_name, if_id, member_name_syntax, member_name)
+    {% end %}
   end
 
-  def rpcNsProfileEltInqBeginA(profile_name_syntax : UInt32, profile_name : UInt8*, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : UInt8*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltInqBeginA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltInqBeginA(profile_name_syntax, profile_name, inquiry_type, if_id, vers_option, member_name_syntax, member_name, inquiry_context)
+    {% end %}
   end
 
-  def rpcNsProfileEltInqNextA(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : UInt8**, priority : UInt32*, annotation__ : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltInqNextA(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : Win32cr::Foundation::PSTR*, priority : UInt32*, annotation__ : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltInqNextA(inquiry_context, if_id, member_name, priority, annotation__)
+    {% end %}
   end
 
-  def rpcNsProfileDeleteW(profile_name_syntax : UInt32, profile_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileDeleteW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileDeleteW(profile_name_syntax, profile_name)
+    {% end %}
   end
 
-  def rpcNsProfileEltAddW(profile_name_syntax : UInt32, profile_name : UInt16*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt16*, priority : UInt32, annotation__ : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltAddW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR, priority : UInt32, annotation__ : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltAddW(profile_name_syntax, profile_name, if_id, member_name_syntax, member_name, priority, annotation__)
+    {% end %}
   end
 
-  def rpcNsProfileEltRemoveW(profile_name_syntax : UInt32, profile_name : UInt16*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltRemoveW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltRemoveW(profile_name_syntax, profile_name, if_id, member_name_syntax, member_name)
+    {% end %}
   end
 
-  def rpcNsProfileEltInqBeginW(profile_name_syntax : UInt32, profile_name : UInt16*, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : UInt16*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltInqBeginW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltInqBeginW(profile_name_syntax, profile_name, inquiry_type, if_id, vers_option, member_name_syntax, member_name, inquiry_context)
+    {% end %}
   end
 
-  def rpcNsProfileEltInqNextW(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : UInt16**, priority : UInt32*, annotation__ : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsProfileEltInqNextW(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : Win32cr::Foundation::PWSTR*, priority : UInt32*, annotation__ : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltInqNextW(inquiry_context, if_id, member_name, priority, annotation__)
+    {% end %}
   end
 
   def rpcNsProfileEltInqDone(inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsProfileEltInqDone(inquiry_context)
+    {% end %}
   end
 
-  def rpcNsEntryObjectInqBeginA(entry_name_syntax : UInt32, entry_name : UInt8*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsEntryObjectInqBeginA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsEntryObjectInqBeginA(entry_name_syntax, entry_name, inquiry_context)
+    {% end %}
   end
 
-  def rpcNsEntryObjectInqBeginW(entry_name_syntax : UInt32, entry_name : UInt16*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsEntryObjectInqBeginW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsEntryObjectInqBeginW(entry_name_syntax, entry_name, inquiry_context)
+    {% end %}
   end
 
   def rpcNsEntryObjectInqNext(inquiry_context : Void*, obj_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsEntryObjectInqNext(inquiry_context, obj_uuid)
+    {% end %}
   end
 
   def rpcNsEntryObjectInqDone(inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsEntryObjectInqDone(inquiry_context)
+    {% end %}
   end
 
-  def rpcNsEntryExpandNameA(entry_name_syntax : UInt32, entry_name : UInt8*, expanded_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsEntryExpandNameA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, expanded_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsEntryExpandNameA(entry_name_syntax, entry_name, expanded_name)
+    {% end %}
   end
 
-  def rpcNsMgmtBindingUnexportA(entry_name_syntax : UInt32, entry_name : UInt8*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtBindingUnexportA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtBindingUnexportA(entry_name_syntax, entry_name, if_id, vers_option, object_uuid_vec)
+    {% end %}
   end
 
-  def rpcNsMgmtEntryCreateA(entry_name_syntax : UInt32, entry_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtEntryCreateA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtEntryCreateA(entry_name_syntax, entry_name)
+    {% end %}
   end
 
-  def rpcNsMgmtEntryDeleteA(entry_name_syntax : UInt32, entry_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtEntryDeleteA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtEntryDeleteA(entry_name_syntax, entry_name)
+    {% end %}
   end
 
-  def rpcNsMgmtEntryInqIfIdsA(entry_name_syntax : UInt32, entry_name : UInt8*, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtEntryInqIfIdsA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtEntryInqIfIdsA(entry_name_syntax, entry_name, if_id_vec)
+    {% end %}
   end
 
   def rpcNsMgmtHandleSetExpAge(ns_handle : Void*, expiration_age : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtHandleSetExpAge(ns_handle, expiration_age)
+    {% end %}
   end
 
   def rpcNsMgmtInqExpAge(expiration_age : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtInqExpAge(expiration_age)
+    {% end %}
   end
 
   def rpcNsMgmtSetExpAge(expiration_age : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtSetExpAge(expiration_age)
+    {% end %}
   end
 
-  def rpcNsEntryExpandNameW(entry_name_syntax : UInt32, entry_name : UInt16*, expanded_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsEntryExpandNameW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, expanded_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsEntryExpandNameW(entry_name_syntax, entry_name, expanded_name)
+    {% end %}
   end
 
-  def rpcNsMgmtBindingUnexportW(entry_name_syntax : UInt32, entry_name : UInt16*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtBindingUnexportW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtBindingUnexportW(entry_name_syntax, entry_name, if_id, vers_option, object_uuid_vec)
+    {% end %}
   end
 
-  def rpcNsMgmtEntryCreateW(entry_name_syntax : UInt32, entry_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtEntryCreateW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtEntryCreateW(entry_name_syntax, entry_name)
+    {% end %}
   end
 
-  def rpcNsMgmtEntryDeleteW(entry_name_syntax : UInt32, entry_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtEntryDeleteW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtEntryDeleteW(entry_name_syntax, entry_name)
+    {% end %}
   end
 
-  def rpcNsMgmtEntryInqIfIdsW(entry_name_syntax : UInt32, entry_name : UInt16*, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsMgmtEntryInqIfIdsW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsMgmtEntryInqIfIdsW(entry_name_syntax, entry_name, if_id_vec)
+    {% end %}
   end
 
-  def rpcNsBindingImportBeginA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingImportBeginA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingImportBeginA(entry_name_syntax, entry_name, if_spec, obj_uuid, import_context)
+    {% end %}
   end
 
-  def rpcNsBindingImportBeginW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcNsBindingImportBeginW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingImportBeginW(entry_name_syntax, entry_name, if_spec, obj_uuid, import_context)
+    {% end %}
   end
 
   def rpcNsBindingImportNext(import_context : Void*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingImportNext(import_context, binding)
+    {% end %}
   end
 
   def rpcNsBindingImportDone(import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingImportDone(import_context)
+    {% end %}
   end
 
   def rpcNsBindingSelect(binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcNsBindingSelect(binding_vec, binding)
+    {% end %}
   end
 
   def rpcAsyncRegisterInfo(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcAsyncRegisterInfo(pAsync)
+    {% end %}
   end
 
   def rpcAsyncInitializeHandle(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*, size : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcAsyncInitializeHandle(pAsync, size)
+    {% end %}
   end
 
   def rpcAsyncGetCallStatus(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcAsyncGetCallStatus(pAsync)
+    {% end %}
   end
 
   def rpcAsyncCompleteCall(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*, reply : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcAsyncCompleteCall(pAsync, reply)
+    {% end %}
   end
 
   def rpcAsyncAbortCall(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*, exception_code : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcAsyncAbortCall(pAsync, exception_code)
+    {% end %}
   end
 
   def rpcAsyncCancelCall(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*, fAbort : Win32cr::Foundation::BOOL) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcAsyncCancelCall(pAsync, fAbort)
+    {% end %}
   end
 
   def rpcErrorStartEnumeration(enum_handle : Win32cr::System::Rpc::RPC_ERROR_ENUM_HANDLE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorStartEnumeration(enum_handle)
+    {% end %}
   end
 
   def rpcErrorGetNextRecord(enum_handle : Win32cr::System::Rpc::RPC_ERROR_ENUM_HANDLE*, copy_strings : Win32cr::Foundation::BOOL, error_info : Win32cr::System::Rpc::RPC_EXTENDED_ERROR_INFO*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorGetNextRecord(enum_handle, copy_strings, error_info)
+    {% end %}
   end
 
   def rpcErrorEndEnumeration(enum_handle : Win32cr::System::Rpc::RPC_ERROR_ENUM_HANDLE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorEndEnumeration(enum_handle)
+    {% end %}
   end
 
   def rpcErrorResetEnumeration(enum_handle : Win32cr::System::Rpc::RPC_ERROR_ENUM_HANDLE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorResetEnumeration(enum_handle)
+    {% end %}
   end
 
   def rpcErrorGetNumberOfRecords(enum_handle : Win32cr::System::Rpc::RPC_ERROR_ENUM_HANDLE*, records : Int32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorGetNumberOfRecords(enum_handle, records)
+    {% end %}
   end
 
   def rpcErrorSaveErrorInfo(enum_handle : Win32cr::System::Rpc::RPC_ERROR_ENUM_HANDLE*, error_blob : Void**, blob_size : LibC::UIntPtrT*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorSaveErrorInfo(enum_handle, error_blob, blob_size)
+    {% end %}
   end
 
   def rpcErrorLoadErrorInfo(error_blob : Void*, blob_size : LibC::UIntPtrT, enum_handle : Win32cr::System::Rpc::RPC_ERROR_ENUM_HANDLE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorLoadErrorInfo(error_blob, blob_size, enum_handle)
+    {% end %}
   end
 
   def rpcErrorAddRecord(error_info : Win32cr::System::Rpc::RPC_EXTENDED_ERROR_INFO*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcErrorAddRecord(error_info)
+    {% end %}
   end
 
   def rpcErrorClearInformation : Void
+    {% if !flag?(:docs) %}
     C.RpcErrorClearInformation
+    {% end %}
   end
 
-  def rpcGetAuthorizationContextForClient(client_binding : Void*, impersonate_on_return : Win32cr::Foundation::BOOL, reserved1 : Void*, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, reserved2 : Win32cr::Foundation::LUID, reserved3 : UInt32, reserved4 : Void*, pAuthzClientContext : Void**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcGetAuthorizationContextForClient(client_binding : Void*, impersonate_on_return : Win32cr::Foundation::BOOL, reserved1 : Void*, pExpirationTime : Int64*, reserved2 : Win32cr::Foundation::LUID, reserved3 : UInt32, reserved4 : Void*, pAuthzClientContext : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcGetAuthorizationContextForClient(client_binding, impersonate_on_return, reserved1, pExpirationTime, reserved2, reserved3, reserved4, pAuthzClientContext)
+    {% end %}
   end
 
   def rpcFreeAuthorizationContext(pAuthzClientContext : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcFreeAuthorizationContext(pAuthzClientContext)
+    {% end %}
   end
 
   def rpcSsContextLockExclusive(server_binding_handle : Void*, user_context : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSsContextLockExclusive(server_binding_handle, user_context)
+    {% end %}
   end
 
   def rpcSsContextLockShared(server_binding_handle : Void*, user_context : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSsContextLockShared(server_binding_handle, user_context)
+    {% end %}
   end
 
   def rpcServerInqCallAttributesW(client_binding : Void*, rpc_call_attributes : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqCallAttributesW(client_binding, rpc_call_attributes)
+    {% end %}
   end
 
   def rpcServerInqCallAttributesA(client_binding : Void*, rpc_call_attributes : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerInqCallAttributesA(client_binding, rpc_call_attributes)
+    {% end %}
   end
 
   def rpcServerSubscribeForNotification(binding : Void*, notification : Win32cr::System::Rpc::RPC_NOTIFICATIONS, notification_type : Win32cr::System::Rpc::RPC_NOTIFICATION_TYPES, notification_info : Win32cr::System::Rpc::RPC_ASYNC_NOTIFICATION_INFO*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerSubscribeForNotification(binding, notification, notification_type, notification_info)
+    {% end %}
   end
 
   def rpcServerUnsubscribeForNotification(binding : Void*, notification : Win32cr::System::Rpc::RPC_NOTIFICATIONS, notifications_queued : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcServerUnsubscribeForNotification(binding, notification, notifications_queued)
+    {% end %}
   end
 
   def rpcBindingBind(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*, binding : Void*, if_spec : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingBind(pAsync, binding, if_spec)
+    {% end %}
   end
 
   def rpcBindingUnbind(binding : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcBindingUnbind(binding)
+    {% end %}
   end
 
   def iRpcAsyncSetHandle(message : Win32cr::System::Rpc::RPC_MESSAGE*, pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcAsyncSetHandle(message, pAsync)
+    {% end %}
   end
 
   def iRpcAsyncAbortCall(pAsync : Win32cr::System::Rpc::RPC_ASYNC_STATE*, exception_code : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcAsyncAbortCall(pAsync, exception_code)
+    {% end %}
   end
 
   def iRpcExceptionFilter(exception_code : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.I_RpcExceptionFilter(exception_code)
+    {% end %}
   end
 
   def iRpcBindingInqClientTokenAttributes(binding : Void*, token_id : Win32cr::Foundation::LUID*, authentication_id : Win32cr::Foundation::LUID*, modified_id : Win32cr::Foundation::LUID*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcBindingInqClientTokenAttributes(binding, token_id, authentication_id, modified_id)
+    {% end %}
   end
 
   def iRpcNsGetBuffer(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcNsGetBuffer(message)
+    {% end %}
   end
 
   def iRpcNsSendReceive(message : Win32cr::System::Rpc::RPC_MESSAGE*, handle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcNsSendReceive(message, handle)
+    {% end %}
   end
 
   def iRpcNsRaiseException(message : Win32cr::System::Rpc::RPC_MESSAGE*, status : Win32cr::System::Rpc::RPC_STATUS) : Void
+    {% if !flag?(:docs) %}
     C.I_RpcNsRaiseException(message, status)
+    {% end %}
   end
 
   def iRpcReBindBuffer(message : Win32cr::System::Rpc::RPC_MESSAGE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.I_RpcReBindBuffer(message)
+    {% end %}
   end
 
   def nDRCContextBinding(c_context : LibC::IntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.NDRCContextBinding(c_context)
+    {% end %}
   end
 
   def nDRCContextMarshall(c_context : LibC::IntPtrT, pBuff : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NDRCContextMarshall(c_context, pBuff)
+    {% end %}
   end
 
   def nDRCContextUnmarshall(pCContext : LibC::IntPtrT*, hBinding : Void*, pBuff : Void*, data_representation : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.NDRCContextUnmarshall(pCContext, hBinding, pBuff, data_representation)
+    {% end %}
   end
 
-  def nDRSContextMarshall(c_context : Win32cr::System::Rpc::NDR_SCONTEXT_1*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+  def nDRSContextMarshall(c_context : Win32cr::System::Rpc::NDR_SCONTEXT*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+    {% if !flag?(:docs) %}
     C.NDRSContextMarshall(c_context, pBuff, userRunDownIn)
+    {% end %}
   end
 
-  def nDRSContextUnmarshall(pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+  def nDRSContextUnmarshall(pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT*
+    {% if !flag?(:docs) %}
     C.NDRSContextUnmarshall(pBuff, data_representation)
+    {% end %}
   end
 
-  def nDRSContextMarshallEx(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT_1*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+  def nDRSContextMarshallEx(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+    {% if !flag?(:docs) %}
     C.NDRSContextMarshallEx(binding_handle, c_context, pBuff, userRunDownIn)
+    {% end %}
   end
 
-  def nDRSContextMarshall2(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT_1*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN, ctx_guard : Void*, flags : UInt32) : Void
+  def nDRSContextMarshall2(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN, ctx_guard : Void*, flags : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.NDRSContextMarshall2(binding_handle, c_context, pBuff, userRunDownIn, ctx_guard, flags)
+    {% end %}
   end
 
-  def nDRSContextUnmarshallEx(binding_handle : Void*, pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+  def nDRSContextUnmarshallEx(binding_handle : Void*, pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT*
+    {% if !flag?(:docs) %}
     C.NDRSContextUnmarshallEx(binding_handle, pBuff, data_representation)
+    {% end %}
   end
 
-  def nDRSContextUnmarshall2(binding_handle : Void*, pBuff : Void*, data_representation : UInt32, ctx_guard : Void*, flags : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+  def nDRSContextUnmarshall2(binding_handle : Void*, pBuff : Void*, data_representation : UInt32, ctx_guard : Void*, flags : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT*
+    {% if !flag?(:docs) %}
     C.NDRSContextUnmarshall2(binding_handle, pBuff, data_representation, ctx_guard, flags)
+    {% end %}
   end
 
   def rpcSsDestroyClientContext(context_handle : Void**) : Void
+    {% if !flag?(:docs) %}
     C.RpcSsDestroyClientContext(context_handle)
+    {% end %}
   end
 
   def ndrSimpleTypeMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, format_char : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.NdrSimpleTypeMarshall(pStubMsg, pMemory, format_char)
+    {% end %}
   end
 
   def ndrPointerMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrPointerMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrSimpleStructMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrSimpleStructMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantStructMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantStructMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingStructMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingStructMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrComplexStructMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrComplexStructMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrFixedArrayMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrFixedArrayMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantArrayMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantArrayMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingArrayMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingArrayMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrVaryingArrayMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrVaryingArrayMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrComplexArrayMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrComplexArrayMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrNonConformantStringMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrNonConformantStringMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantStringMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantStringMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrEncapsulatedUnionMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrEncapsulatedUnionMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrNonEncapsulatedUnionMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrNonEncapsulatedUnionMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrByteCountPointerMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrByteCountPointerMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrXmitOrRepAsMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrXmitOrRepAsMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrUserMarshalMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrUserMarshalMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrInterfacePointerMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrInterfacePointerMarshall(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrClientContextMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : LibC::IntPtrT, fCheck : Int32) : Void
+    {% if !flag?(:docs) %}
     C.NdrClientContextMarshall(pStubMsg, context_handle, fCheck)
+    {% end %}
   end
 
-  def ndrServerContextMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT_1*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+  def ndrServerContextMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+    {% if !flag?(:docs) %}
     C.NdrServerContextMarshall(pStubMsg, context_handle, rundown_routine)
+    {% end %}
   end
 
-  def ndrServerContextNewMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT_1*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN, pFormat : UInt8*) : Void
+  def ndrServerContextNewMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrServerContextNewMarshall(pStubMsg, context_handle, rundown_routine, pFormat)
+    {% end %}
   end
 
   def ndrSimpleTypeUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, format_char : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.NdrSimpleTypeUnmarshall(pStubMsg, pMemory, format_char)
+    {% end %}
   end
 
   def ndrRangeUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrRangeUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrCorrelationInitialize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : Void*, cache_size : UInt32, flags : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.NdrCorrelationInitialize(pStubMsg, pMemory, cache_size, flags)
+    {% end %}
   end
 
   def ndrCorrelationPass(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrCorrelationPass(pStubMsg)
+    {% end %}
   end
 
   def ndrCorrelationFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrCorrelationFree(pStubMsg)
+    {% end %}
   end
 
   def ndrPointerUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrPointerUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrSimpleStructUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrSimpleStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrConformantStructUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrConformantVaryingStructUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrComplexStructUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrComplexStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrFixedArrayUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrFixedArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrConformantArrayUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrConformantVaryingArrayUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrVaryingArrayUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrVaryingArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrComplexArrayUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrComplexArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrNonConformantStringUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrNonConformantStringUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrConformantStringUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrConformantStringUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrEncapsulatedUnionUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrEncapsulatedUnionUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrNonEncapsulatedUnionUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrNonEncapsulatedUnionUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrByteCountPointerUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrByteCountPointerUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrXmitOrRepAsUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrXmitOrRepAsUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrUserMarshalUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrUserMarshalUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrInterfacePointerUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : UInt8**, pFormat : UInt8*, fMustAlloc : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrInterfacePointerUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+    {% end %}
   end
 
   def ndrClientContextUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pContextHandle : LibC::IntPtrT*, bind_handle : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrClientContextUnmarshall(pStubMsg, pContextHandle, bind_handle)
+    {% end %}
   end
 
-  def ndrServerContextUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+  def ndrServerContextUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Win32cr::System::Rpc::NDR_SCONTEXT*
+    {% if !flag?(:docs) %}
     C.NdrServerContextUnmarshall(pStubMsg)
+    {% end %}
   end
 
-  def ndrContextHandleInitialize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+  def ndrContextHandleInitialize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT*
+    {% if !flag?(:docs) %}
     C.NdrContextHandleInitialize(pStubMsg, pFormat)
+    {% end %}
   end
 
-  def ndrServerContextNewUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+  def ndrServerContextNewUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT*
+    {% if !flag?(:docs) %}
     C.NdrServerContextNewUnmarshall(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrPointerBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrPointerBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrSimpleStructBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrSimpleStructBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantStructBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantStructBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingStructBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingStructBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrComplexStructBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrComplexStructBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrFixedArrayBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrFixedArrayBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantArrayBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantArrayBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingArrayBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingArrayBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrVaryingArrayBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrVaryingArrayBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrComplexArrayBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrComplexArrayBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantStringBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantStringBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrNonConformantStringBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrNonConformantStringBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrEncapsulatedUnionBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrEncapsulatedUnionBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrNonEncapsulatedUnionBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrNonEncapsulatedUnionBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrByteCountPointerBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrByteCountPointerBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrXmitOrRepAsBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrXmitOrRepAsBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrUserMarshalBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrUserMarshalBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrInterfacePointerBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrInterfacePointerBufferSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrContextHandleSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrContextHandleSize(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrPointerMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrPointerMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrSimpleStructMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrSimpleStructMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrConformantStructMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrConformantStructMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingStructMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingStructMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrComplexStructMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrComplexStructMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrFixedArrayMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrFixedArrayMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrConformantArrayMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrConformantArrayMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingArrayMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingArrayMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrVaryingArrayMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrVaryingArrayMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrComplexArrayMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrComplexArrayMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrConformantStringMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrConformantStringMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrNonConformantStringMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrNonConformantStringMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrEncapsulatedUnionMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrEncapsulatedUnionMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrNonEncapsulatedUnionMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrNonEncapsulatedUnionMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrXmitOrRepAsMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrXmitOrRepAsMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrUserMarshalMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrUserMarshalMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrInterfacePointerMemorySize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NdrInterfacePointerMemorySize(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrPointerFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrPointerFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrSimpleStructFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrSimpleStructFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantStructFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantStructFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingStructFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingStructFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrComplexStructFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrComplexStructFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrFixedArrayFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrFixedArrayFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantArrayFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantArrayFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConformantVaryingArrayFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConformantVaryingArrayFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrVaryingArrayFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrVaryingArrayFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrComplexArrayFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrComplexArrayFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrEncapsulatedUnionFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrEncapsulatedUnionFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrNonEncapsulatedUnionFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrNonEncapsulatedUnionFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrByteCountPointerFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrByteCountPointerFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrXmitOrRepAsFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrXmitOrRepAsFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrUserMarshalFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrUserMarshalFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrInterfacePointerFree(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrInterfacePointerFree(pStubMsg, pMemory, pFormat)
+    {% end %}
   end
 
   def ndrConvert2(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*, number_params : Int32) : Void
+    {% if !flag?(:docs) %}
     C.NdrConvert2(pStubMsg, pFormat, number_params)
+    {% end %}
   end
 
   def ndrConvert(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrConvert(pStubMsg, pFormat)
+    {% end %}
   end
 
   def ndrUserMarshalSimpleTypeConvert(pFlags : UInt32*, pBuffer : UInt8*, format_char : UInt8) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrUserMarshalSimpleTypeConvert(pFlags, pBuffer, format_char)
+    {% end %}
   end
 
   def ndrClientInitializeNew(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*, proc_num : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.NdrClientInitializeNew(pRpcMsg, pStubMsg, pStubDescriptor, proc_num)
+    {% end %}
   end
 
   def ndrServerInitializeNew(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrServerInitializeNew(pRpcMsg, pStubMsg, pStubDescriptor)
+    {% end %}
   end
 
   def ndrServerInitializePartial(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*, requested_buffer_size : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.NdrServerInitializePartial(pRpcMsg, pStubMsg, pStubDescriptor, requested_buffer_size)
+    {% end %}
   end
 
   def ndrClientInitialize(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*, proc_num : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.NdrClientInitialize(pRpcMsg, pStubMsg, pStubDescriptor, proc_num)
+    {% end %}
   end
 
   def ndrServerInitialize(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrServerInitialize(pRpcMsg, pStubMsg, pStubDescriptor)
+    {% end %}
   end
 
   def ndrServerInitializeUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*, pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrServerInitializeUnmarshall(pStubMsg, pStubDescriptor, pRpcMsg)
+    {% end %}
   end
 
   def ndrServerInitializeMarshall(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrServerInitializeMarshall(pRpcMsg, pStubMsg)
+    {% end %}
   end
 
   def ndrGetBuffer(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, buffer_length : UInt32, handle : Void*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrGetBuffer(pStubMsg, buffer_length, handle)
+    {% end %}
   end
 
   def ndrNsGetBuffer(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, buffer_length : UInt32, handle : Void*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrNsGetBuffer(pStubMsg, buffer_length, handle)
+    {% end %}
   end
 
   def ndrSendReceive(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pBufferEnd : UInt8*) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrSendReceive(pStubMsg, pBufferEnd)
+    {% end %}
   end
 
   def ndrNsSendReceive(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pBufferEnd : UInt8*, pAutoHandle : Void**) : UInt8*
+    {% if !flag?(:docs) %}
     C.NdrNsSendReceive(pStubMsg, pBufferEnd, pAutoHandle)
+    {% end %}
   end
 
   def ndrFreeBuffer(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrFreeBuffer(pStubMsg)
+    {% end %}
   end
 
   def ndrGetDcomProtocolVersion(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pVersion : Win32cr::System::Rpc::RPC_VERSION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdrGetDcomProtocolVersion(pStubMsg, pVersion)
+    {% end %}
   end
 
   def ndrClientCall2(pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormat : UInt8*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.NdrClientCall2(pStubDescriptor, pFormat)
+    {% end %}
   end
 
   def ndrAsyncClientCall(pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormat : UInt8*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.NdrAsyncClientCall(pStubDescriptor, pFormat)
+    {% end %}
   end
 
   def ndrDcomAsyncClientCall(pStubDescriptor : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormat : UInt8*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.NdrDcomAsyncClientCall(pStubDescriptor, pFormat)
+    {% end %}
   end
 
   def ndrAsyncServerCall(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrAsyncServerCall(pRpcMsg)
+    {% end %}
   end
 
   def ndrDcomAsyncStubCall(pThis : Void*, pChannel : Void*, pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pdwStubPhase : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.NdrDcomAsyncStubCall(pThis, pChannel, pRpcMsg, pdwStubPhase)
+    {% end %}
   end
 
   def ndrStubCall2(pThis : Void*, pChannel : Void*, pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pdwStubPhase : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.NdrStubCall2(pThis, pChannel, pRpcMsg, pdwStubPhase)
+    {% end %}
   end
 
   def ndrServerCall2(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrServerCall2(pRpcMsg)
+    {% end %}
   end
 
   def ndrMapCommAndFaultStatus(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pCommStatus : UInt32*, pFaultStatus : UInt32*, status : Win32cr::System::Rpc::RPC_STATUS) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.NdrMapCommAndFaultStatus(pStubMsg, pCommStatus, pFaultStatus, status)
+    {% end %}
   end
 
   def rpcSsAllocate(size : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.RpcSsAllocate(size)
+    {% end %}
   end
 
   def rpcSsDisableAllocate : Void
+    {% if !flag?(:docs) %}
     C.RpcSsDisableAllocate
+    {% end %}
   end
 
   def rpcSsEnableAllocate : Void
+    {% if !flag?(:docs) %}
     C.RpcSsEnableAllocate
+    {% end %}
   end
 
   def rpcSsFree(node_to_free : Void*) : Void
+    {% if !flag?(:docs) %}
     C.RpcSsFree(node_to_free)
+    {% end %}
   end
 
   def rpcSsGetThreadHandle : Void*
+    {% if !flag?(:docs) %}
     C.RpcSsGetThreadHandle
+    {% end %}
   end
 
   def rpcSsSetClientAllocFree(client_alloc : Win32cr::System::Rpc::RPC_CLIENT_ALLOC, client_free : Win32cr::System::Rpc::RPC_CLIENT_FREE) : Void
+    {% if !flag?(:docs) %}
     C.RpcSsSetClientAllocFree(client_alloc, client_free)
+    {% end %}
   end
 
   def rpcSsSetThreadHandle(id : Void*) : Void
+    {% if !flag?(:docs) %}
     C.RpcSsSetThreadHandle(id)
+    {% end %}
   end
 
   def rpcSsSwapClientAllocFree(client_alloc : Win32cr::System::Rpc::RPC_CLIENT_ALLOC, client_free : Win32cr::System::Rpc::RPC_CLIENT_FREE, old_client_alloc : Win32cr::System::Rpc::RPC_CLIENT_ALLOC*, old_client_free : Win32cr::System::Rpc::RPC_CLIENT_FREE*) : Void
+    {% if !flag?(:docs) %}
     C.RpcSsSwapClientAllocFree(client_alloc, client_free, old_client_alloc, old_client_free)
+    {% end %}
   end
 
   def rpcSmAllocate(size : LibC::UIntPtrT, pStatus : Win32cr::System::Rpc::RPC_STATUS*) : Void*
+    {% if !flag?(:docs) %}
     C.RpcSmAllocate(size, pStatus)
+    {% end %}
   end
 
   def rpcSmClientFree(pNodeToFree : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmClientFree(pNodeToFree)
+    {% end %}
   end
 
   def rpcSmDestroyClientContext(context_handle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmDestroyClientContext(context_handle)
+    {% end %}
   end
 
   def rpcSmDisableAllocate : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmDisableAllocate
+    {% end %}
   end
 
   def rpcSmEnableAllocate : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmEnableAllocate
+    {% end %}
   end
 
   def rpcSmFree(node_to_free : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmFree(node_to_free)
+    {% end %}
   end
 
   def rpcSmGetThreadHandle(pStatus : Win32cr::System::Rpc::RPC_STATUS*) : Void*
+    {% if !flag?(:docs) %}
     C.RpcSmGetThreadHandle(pStatus)
+    {% end %}
   end
 
   def rpcSmSetClientAllocFree(client_alloc : Win32cr::System::Rpc::RPC_CLIENT_ALLOC, client_free : Win32cr::System::Rpc::RPC_CLIENT_FREE) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmSetClientAllocFree(client_alloc, client_free)
+    {% end %}
   end
 
   def rpcSmSetThreadHandle(id : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmSetThreadHandle(id)
+    {% end %}
   end
 
   def rpcSmSwapClientAllocFree(client_alloc : Win32cr::System::Rpc::RPC_CLIENT_ALLOC, client_free : Win32cr::System::Rpc::RPC_CLIENT_FREE, old_client_alloc : Win32cr::System::Rpc::RPC_CLIENT_ALLOC*, old_client_free : Win32cr::System::Rpc::RPC_CLIENT_FREE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcSmSwapClientAllocFree(client_alloc, client_free, old_client_alloc, old_client_free)
+    {% end %}
   end
 
   def ndrRpcSsEnableAllocate(pMessage : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrRpcSsEnableAllocate(pMessage)
+    {% end %}
   end
 
   def ndrRpcSsDisableAllocate(pMessage : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrRpcSsDisableAllocate(pMessage)
+    {% end %}
   end
 
   def ndrRpcSmSetClientToOsf(pMessage : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrRpcSmSetClientToOsf(pMessage)
+    {% end %}
   end
 
   def ndrRpcSmClientAllocate(size : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.NdrRpcSmClientAllocate(size)
+    {% end %}
   end
 
   def ndrRpcSmClientFree(node_to_free : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrRpcSmClientFree(node_to_free)
+    {% end %}
   end
 
   def ndrRpcSsDefaultAllocate(size : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.NdrRpcSsDefaultAllocate(size)
+    {% end %}
   end
 
   def ndrRpcSsDefaultFree(node_to_free : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrRpcSsDefaultFree(node_to_free)
+    {% end %}
   end
 
   def ndrFullPointerXlatInit(number_of_pointers : UInt32, xlat_side : Win32cr::System::Rpc::XLAT_SIDE) : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*
+    {% if !flag?(:docs) %}
     C.NdrFullPointerXlatInit(number_of_pointers, xlat_side)
+    {% end %}
   end
 
   def ndrFullPointerXlatFree(pXlatTables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*) : Void
+    {% if !flag?(:docs) %}
     C.NdrFullPointerXlatFree(pXlatTables)
+    {% end %}
   end
 
   def ndrAllocate(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, len : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.NdrAllocate(pStubMsg, len)
+    {% end %}
   end
 
   def ndrClearOutParameters(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*, arg_addr : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrClearOutParameters(pStubMsg, pFormat, arg_addr)
+    {% end %}
   end
 
   def ndrOleAllocate(size : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.NdrOleAllocate(size)
+    {% end %}
   end
 
   def ndrOleFree(node_to_free : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrOleFree(node_to_free)
+    {% end %}
   end
 
   def ndrGetUserMarshalInfo(pFlags : UInt32*, information_level : UInt32, pMarshalInfo : Win32cr::System::Rpc::NDR_USER_MARSHAL_INFO*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.NdrGetUserMarshalInfo(pFlags, information_level, pMarshalInfo)
+    {% end %}
   end
 
   def ndrCreateServerInterfaceFromStub(pStub : Void*, pServerIf : Win32cr::System::Rpc::RPC_SERVER_INTERFACE*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.NdrCreateServerInterfaceFromStub(pStub, pServerIf)
+    {% end %}
   end
 
   def ndrClientCall3(pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, nProcNum : UInt32, pReturnValue : Void*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.NdrClientCall3(pProxyInfo, nProcNum, pReturnValue)
+    {% end %}
   end
 
   def ndr64AsyncClientCall(pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, nProcNum : UInt32, pReturnValue : Void*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.Ndr64AsyncClientCall(pProxyInfo, nProcNum, pReturnValue)
+    {% end %}
   end
 
   def ndr64DcomAsyncClientCall(pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, nProcNum : UInt32, pReturnValue : Void*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.Ndr64DcomAsyncClientCall(pProxyInfo, nProcNum, pReturnValue)
+    {% end %}
   end
 
   def ndr64AsyncServerCall64(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.Ndr64AsyncServerCall64(pRpcMsg)
+    {% end %}
   end
 
   def ndr64AsyncServerCallAll(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.Ndr64AsyncServerCallAll(pRpcMsg)
+    {% end %}
   end
 
   def ndr64DcomAsyncStubCall(pThis : Void*, pChannel : Void*, pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pdwStubPhase : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.Ndr64DcomAsyncStubCall(pThis, pChannel, pRpcMsg, pdwStubPhase)
+    {% end %}
   end
 
   def ndrStubCall3(pThis : Void*, pChannel : Void*, pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*, pdwStubPhase : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.NdrStubCall3(pThis, pChannel, pRpcMsg, pdwStubPhase)
+    {% end %}
   end
 
   def ndrServerCallAll(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrServerCallAll(pRpcMsg)
+    {% end %}
   end
 
   def ndrServerCallNdr64(pRpcMsg : Win32cr::System::Rpc::RPC_MESSAGE*) : Void
+    {% if !flag?(:docs) %}
     C.NdrServerCallNdr64(pRpcMsg)
+    {% end %}
   end
 
   def ndrPartialIgnoreClientMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrPartialIgnoreClientMarshall(pStubMsg, pMemory)
+    {% end %}
   end
 
   def ndrPartialIgnoreServerUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : Void**) : Void
+    {% if !flag?(:docs) %}
     C.NdrPartialIgnoreServerUnmarshall(pStubMsg, ppMemory)
+    {% end %}
   end
 
   def ndrPartialIgnoreClientBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrPartialIgnoreClientBufferSize(pStubMsg, pMemory)
+    {% end %}
   end
 
   def ndrPartialIgnoreServerInitialize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, ppMemory : Void**, pFormat : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrPartialIgnoreServerInitialize(pStubMsg, ppMemory, pFormat)
+    {% end %}
   end
 
   def rpcUserFree(async_handle : Void*, pBuffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.RpcUserFree(async_handle, pBuffer)
+    {% end %}
   end
 
   def mesEncodeIncrementalHandleCreate(user_state : Void*, alloc_fn : Win32cr::System::Rpc::MIDL_ES_ALLOC, write_fn : Win32cr::System::Rpc::MIDL_ES_WRITE, pHandle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesEncodeIncrementalHandleCreate(user_state, alloc_fn, write_fn, pHandle)
+    {% end %}
   end
 
   def mesDecodeIncrementalHandleCreate(user_state : Void*, read_fn : Win32cr::System::Rpc::MIDL_ES_READ, pHandle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesDecodeIncrementalHandleCreate(user_state, read_fn, pHandle)
+    {% end %}
   end
 
   def mesIncrementalHandleReset(handle : Void*, user_state : Void*, alloc_fn : Win32cr::System::Rpc::MIDL_ES_ALLOC, write_fn : Win32cr::System::Rpc::MIDL_ES_WRITE, read_fn : Win32cr::System::Rpc::MIDL_ES_READ, operation : Win32cr::System::Rpc::MIDL_ES_CODE) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesIncrementalHandleReset(handle, user_state, alloc_fn, write_fn, read_fn, operation)
+    {% end %}
   end
 
   def mesEncodeFixedBufferHandleCreate(pBuffer : Win32cr::Foundation::PSTR, buffer_size : UInt32, pEncodedSize : UInt32*, pHandle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesEncodeFixedBufferHandleCreate(pBuffer, buffer_size, pEncodedSize, pHandle)
+    {% end %}
   end
 
   def mesEncodeDynBufferHandleCreate(pBuffer : Int8**, pEncodedSize : UInt32*, pHandle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesEncodeDynBufferHandleCreate(pBuffer, pEncodedSize, pHandle)
+    {% end %}
   end
 
   def mesDecodeBufferHandleCreate(buffer : Win32cr::Foundation::PSTR, buffer_size : UInt32, pHandle : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesDecodeBufferHandleCreate(buffer, buffer_size, pHandle)
+    {% end %}
   end
 
   def mesBufferHandleReset(handle : Void*, handle_style : UInt32, operation : Win32cr::System::Rpc::MIDL_ES_CODE, pBuffer : Int8**, buffer_size : UInt32, pEncodedSize : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesBufferHandleReset(handle, handle_style, operation, pBuffer, buffer_size, pEncodedSize)
+    {% end %}
   end
 
   def mesHandleFree(handle : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesHandleFree(handle)
+    {% end %}
   end
 
   def mesInqProcEncodingId(handle : Void*, pInterfaceId : Win32cr::System::Rpc::RPC_SYNTAX_IDENTIFIER*, pProcNum : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.MesInqProcEncodingId(handle, pInterfaceId, pProcNum)
+    {% end %}
   end
 
   def ndrMesSimpleTypeAlignSize(param0 : Void*) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.NdrMesSimpleTypeAlignSize(param0)
+    {% end %}
   end
 
   def ndrMesSimpleTypeDecode(handle : Void*, pObject : Void*, size : Int16) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesSimpleTypeDecode(handle, pObject, size)
+    {% end %}
   end
 
   def ndrMesSimpleTypeEncode(handle : Void*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pObject : Void*, size : Int16) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesSimpleTypeEncode(handle, pStubDesc, pObject, size)
+    {% end %}
   end
 
   def ndrMesTypeAlignSize(handle : Void*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*, pObject : Void*) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.NdrMesTypeAlignSize(handle, pStubDesc, pFormatString, pObject)
+    {% end %}
   end
 
   def ndrMesTypeEncode(handle : Void*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeEncode(handle, pStubDesc, pFormatString, pObject)
+    {% end %}
   end
 
   def ndrMesTypeDecode(handle : Void*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeDecode(handle, pStubDesc, pFormatString, pObject)
+    {% end %}
   end
 
   def ndrMesTypeAlignSize2(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*, pObject : Void*) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.NdrMesTypeAlignSize2(handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+    {% end %}
   end
 
   def ndrMesTypeEncode2(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeEncode2(handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+    {% end %}
   end
 
   def ndrMesTypeDecode2(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeDecode2(handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+    {% end %}
   end
 
   def ndrMesTypeFree2(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeFree2(handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+    {% end %}
   end
 
   def ndrMesProcEncodeDecode(handle : Void*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesProcEncodeDecode(handle, pStubDesc, pFormatString)
+    {% end %}
   end
 
   def ndrMesProcEncodeDecode2(handle : Void*, pStubDesc : Win32cr::System::Rpc::MIDL_STUB_DESC*, pFormatString : UInt8*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.NdrMesProcEncodeDecode2(handle, pStubDesc, pFormatString)
+    {% end %}
   end
 
   def ndrMesTypeAlignSize3(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, arr_type_offset : UInt32**, nTypeIndex : UInt32, pObject : Void*) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.NdrMesTypeAlignSize3(handle, pPicklingInfo, pProxyInfo, arr_type_offset, nTypeIndex, pObject)
+    {% end %}
   end
 
   def ndrMesTypeEncode3(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, arr_type_offset : UInt32**, nTypeIndex : UInt32, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeEncode3(handle, pPicklingInfo, pProxyInfo, arr_type_offset, nTypeIndex, pObject)
+    {% end %}
   end
 
   def ndrMesTypeDecode3(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, arr_type_offset : UInt32**, nTypeIndex : UInt32, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeDecode3(handle, pPicklingInfo, pProxyInfo, arr_type_offset, nTypeIndex, pObject)
+    {% end %}
   end
 
   def ndrMesTypeFree3(handle : Void*, pPicklingInfo : Win32cr::System::Rpc::MIDL_TYPE_PICKLING_INFO*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, arr_type_offset : UInt32**, nTypeIndex : UInt32, pObject : Void*) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesTypeFree3(handle, pPicklingInfo, pProxyInfo, arr_type_offset, nTypeIndex, pObject)
+    {% end %}
   end
 
   def ndrMesProcEncodeDecode3(handle : Void*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, nProcNum : UInt32, pReturnValue : Void*) : Win32cr::System::Rpc::CLIENT_CALL_RETURN
+    {% if !flag?(:docs) %}
     C.NdrMesProcEncodeDecode3(handle, pProxyInfo, nProcNum, pReturnValue)
+    {% end %}
   end
 
   def ndrMesSimpleTypeDecodeAll(handle : Void*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, pObject : Void*, size : Int16) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesSimpleTypeDecodeAll(handle, pProxyInfo, pObject, size)
+    {% end %}
   end
 
   def ndrMesSimpleTypeEncodeAll(handle : Void*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*, pObject : Void*, size : Int16) : Void
+    {% if !flag?(:docs) %}
     C.NdrMesSimpleTypeEncodeAll(handle, pProxyInfo, pObject, size)
+    {% end %}
   end
 
   def ndrMesSimpleTypeAlignSizeAll(handle : Void*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.NdrMesSimpleTypeAlignSizeAll(handle, pProxyInfo)
+    {% end %}
   end
 
-  def rpcCertGeneratePrincipalNameW(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcCertGeneratePrincipalNameW(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcCertGeneratePrincipalNameW(context, flags, pBuffer)
+    {% end %}
   end
 
-  def rpcCertGeneratePrincipalNameA(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+  def rpcCertGeneratePrincipalNameA(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
+    {% if !flag?(:docs) %}
     C.RpcCertGeneratePrincipalNameA(context, flags, pBuffer)
+    {% end %}
   end
 
   @[Link("rpcrt4")]
   @[Link("rpcns4")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun IUnknown_QueryInterface_Proxy(this : Void*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4653,10 +5657,10 @@ module Win32cr::System::Rpc
     fun RpcBindingInqOption(hBinding : Void*, option : UInt32, pOptionValue : LibC::UIntPtrT*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingFromStringBindingA(string_binding : UInt8*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingFromStringBindingA(string_binding : Win32cr::Foundation::PSTR, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingFromStringBindingW(string_binding : UInt16*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingFromStringBindingW(string_binding : Win32cr::Foundation::PWSTR, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcSsGetContextBinding(context_handle : Void*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
@@ -4677,40 +5681,40 @@ module Win32cr::System::Rpc
     fun RpcMgmtInqDefaultProtectLevel(authn_svc : UInt32, authn_level : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingToStringBindingA(binding : Void*, string_binding : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingToStringBindingA(binding : Void*, string_binding : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingToStringBindingW(binding : Void*, string_binding : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingToStringBindingW(binding : Void*, string_binding : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcBindingVectorFree(binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcStringBindingComposeA(obj_uuid : UInt8*, prot_seq : UInt8*, network_addr : UInt8*, endpoint : UInt8*, options : UInt8*, string_binding : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcStringBindingComposeA(obj_uuid : Win32cr::Foundation::PSTR, prot_seq : Win32cr::Foundation::PSTR, network_addr : Win32cr::Foundation::PSTR, endpoint : Win32cr::Foundation::PSTR, options : Win32cr::Foundation::PSTR, string_binding : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcStringBindingComposeW(obj_uuid : UInt16*, prot_seq : UInt16*, network_addr : UInt16*, endpoint : UInt16*, options : UInt16*, string_binding : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcStringBindingComposeW(obj_uuid : Win32cr::Foundation::PWSTR, prot_seq : Win32cr::Foundation::PWSTR, network_addr : Win32cr::Foundation::PWSTR, endpoint : Win32cr::Foundation::PWSTR, options : Win32cr::Foundation::PWSTR, string_binding : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcStringBindingParseA(string_binding : UInt8*, obj_uuid : UInt8**, protseq : UInt8**, network_addr : UInt8**, endpoint : UInt8**, network_options : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcStringBindingParseA(string_binding : Win32cr::Foundation::PSTR, obj_uuid : Win32cr::Foundation::PSTR*, protseq : Win32cr::Foundation::PSTR*, network_addr : Win32cr::Foundation::PSTR*, endpoint : Win32cr::Foundation::PSTR*, network_options : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcStringBindingParseW(string_binding : UInt16*, obj_uuid : UInt16**, protseq : UInt16**, network_addr : UInt16**, endpoint : UInt16**, network_options : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcStringBindingParseW(string_binding : Win32cr::Foundation::PWSTR, obj_uuid : Win32cr::Foundation::PWSTR*, protseq : Win32cr::Foundation::PWSTR*, network_addr : Win32cr::Foundation::PWSTR*, endpoint : Win32cr::Foundation::PWSTR*, network_options : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcStringFreeA(string : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcStringFreeA(string : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcStringFreeW(string : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcStringFreeW(string : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcIfInqId(rpc_if_handle : Void*, rpc_if_id : Win32cr::System::Rpc::RPC_IF_ID*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNetworkIsProtseqValidA(protseq : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNetworkIsProtseqValidA(protseq : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNetworkIsProtseqValidW(protseq : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNetworkIsProtseqValidW(protseq : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcMgmtInqComTimeout(binding : Void*, timeout : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
@@ -4785,40 +5789,40 @@ module Win32cr::System::Rpc
     fun RpcServerUseAllProtseqsIfEx(max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqA(protseq : UInt8*, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqExA(protseq : UInt8*, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqExA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqW(protseq : UInt16*, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqExW(protseq : UInt16*, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqExW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqEpA(protseq : UInt8*, max_calls : UInt32, endpoint : UInt8*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqEpA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PSTR, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqEpExA(protseq : UInt8*, max_calls : UInt32, endpoint : UInt8*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqEpExA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PSTR, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqEpW(protseq : UInt16*, max_calls : UInt32, endpoint : UInt16*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqEpW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PWSTR, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqEpExW(protseq : UInt16*, max_calls : UInt32, endpoint : UInt16*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqEpExW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PWSTR, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqIfA(protseq : UInt8*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqIfA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqIfExA(protseq : UInt8*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqIfExA(protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqIfW(protseq : UInt16*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqIfW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerUseProtseqIfExW(protseq : UInt16*, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerUseProtseqIfExW(protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, if_spec : Void*, security_descriptor : Void*, policy : Win32cr::System::Rpc::RPC_POLICY*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcServerYield : Void
@@ -4854,25 +5858,25 @@ module Win32cr::System::Rpc
     fun RpcIfIdVectorFree(if_id_vector : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcMgmtInqServerPrincNameA(binding : Void*, authn_svc : UInt32, server_princ_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcMgmtInqServerPrincNameA(binding : Void*, authn_svc : UInt32, server_princ_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcMgmtInqServerPrincNameW(binding : Void*, authn_svc : UInt32, server_princ_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcMgmtInqServerPrincNameW(binding : Void*, authn_svc : UInt32, server_princ_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerInqDefaultPrincNameA(authn_svc : UInt32, princ_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerInqDefaultPrincNameA(authn_svc : UInt32, princ_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerInqDefaultPrincNameW(authn_svc : UInt32, princ_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerInqDefaultPrincNameW(authn_svc : UInt32, princ_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcEpResolveBinding(binding : Void*, if_spec : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingInqEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingInqEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingInqEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingInqEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcBindingCreateA(template : Win32cr::System::Rpc::RPC_BINDING_HANDLE_TEMPLATE_V1_A*, security : Win32cr::System::Rpc::RPC_BINDING_HANDLE_SECURITY_V1_A*, options : Win32cr::System::Rpc::RPC_BINDING_HANDLE_OPTIONS_V1*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
@@ -4902,49 +5906,49 @@ module Win32cr::System::Rpc
     fun RpcRevertContainerImpersonation : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthClientA(client_binding : Void*, privs : Void**, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthClientA(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthClientW(client_binding : Void*, privs : Void**, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthClientW(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthClientExA(client_binding : Void*, privs : Void**, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthClientExA(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthClientExW(client_binding : Void*, privs : Void**, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthClientExW(client_binding : Void*, privs : Void**, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, authz_svc : UInt32*, flags : UInt32) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthInfoA(binding : Void*, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthInfoA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthInfoW(binding : Void*, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthInfoW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingSetAuthInfoA(binding : Void*, server_princ_name : UInt8*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingSetAuthInfoA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingSetAuthInfoExA(binding : Void*, server_princ_name : UInt8*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingSetAuthInfoExA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingSetAuthInfoW(binding : Void*, server_princ_name : UInt16*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingSetAuthInfoW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingSetAuthInfoExW(binding : Void*, server_princ_name : UInt16*, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingSetAuthInfoExW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR, authn_level : UInt32, authn_svc : UInt32, auth_identity : Void*, authz_svc : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthInfoExA(binding : Void*, server_princ_name : UInt8**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthInfoExA(binding : Void*, server_princ_name : Win32cr::Foundation::PSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcBindingInqAuthInfoExW(binding : Void*, server_princ_name : UInt16**, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcBindingInqAuthInfoExW(binding : Void*, server_princ_name : Win32cr::Foundation::PWSTR*, authn_level : UInt32*, authn_svc : UInt32*, auth_identity : Void**, authz_svc : UInt32*, rpc_qos_version : UInt32, security_qos : Win32cr::System::Rpc::RPC_SECURITY_QOS*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcServerCompleteSecurityCallback(binding_handle : Void*, status : Win32cr::System::Rpc::RPC_STATUS) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerRegisterAuthInfoA(server_princ_name : UInt8*, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerRegisterAuthInfoA(server_princ_name : Win32cr::Foundation::PSTR, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcServerRegisterAuthInfoW(server_princ_name : UInt16*, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcServerRegisterAuthInfoW(server_princ_name : Win32cr::Foundation::PWSTR, authn_svc : UInt32, get_key_fn : Win32cr::System::Rpc::RPC_AUTH_KEY_RETRIEVAL_FN, arg : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcBindingServerFromClient(client_binding : Void*, server_binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
@@ -4971,16 +5975,16 @@ module Win32cr::System::Rpc
     fun UuidCreateSequential(uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun UuidToStringA(uuid : LibC::GUID*, string_uuid : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun UuidToStringA(uuid : LibC::GUID*, string_uuid : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun UuidFromStringA(string_uuid : UInt8*, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    fun UuidFromStringA(string_uuid : Win32cr::Foundation::PSTR, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun UuidToStringW(uuid : LibC::GUID*, string_uuid : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun UuidToStringW(uuid : LibC::GUID*, string_uuid : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun UuidFromStringW(string_uuid : UInt16*, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
+    fun UuidFromStringW(string_uuid : Win32cr::Foundation::PWSTR, uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun UuidCompare(uuid1 : LibC::GUID*, uuid2 : LibC::GUID*, status : Win32cr::System::Rpc::RPC_STATUS*) : Int32
@@ -4998,25 +6002,25 @@ module Win32cr::System::Rpc
     fun UuidIsNil(uuid : LibC::GUID*, status : Win32cr::System::Rpc::RPC_STATUS*) : Int32
 
     # :nodoc:
-    fun RpcEpRegisterNoReplaceA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcEpRegisterNoReplaceA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcEpRegisterNoReplaceW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcEpRegisterNoReplaceW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcEpRegisterA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcEpRegisterA(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcEpRegisterW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcEpRegisterW(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*, annotation__ : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcEpUnregister(if_spec : Void*, binding_vector : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, uuid_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun DceErrorInqTextA(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun DceErrorInqTextA(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun DceErrorInqTextW(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun DceErrorInqTextW(rpc_status : Win32cr::System::Rpc::RPC_STATUS, error_text : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcMgmtEpEltInqBegin(ep_binding : Void*, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid : LibC::GUID*, inquiry_context : Void***) : Win32cr::System::Rpc::RPC_STATUS
@@ -5025,10 +6029,10 @@ module Win32cr::System::Rpc
     fun RpcMgmtEpEltInqDone(inquiry_context : Void***) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcMgmtEpEltInqNextA(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcMgmtEpEltInqNextA(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcMgmtEpEltInqNextW(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcMgmtEpEltInqNextW(inquiry_context : Void**, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void**, object_uuid : LibC::GUID*, annotation__ : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcMgmtEpUnregister(ep_binding : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, binding : Void*, object_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
@@ -5130,7 +6134,7 @@ module Win32cr::System::Rpc
     fun I_RpcBindingInqWireIdForSnego(binding : Void*, wire_id : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcBindingInqMarshalledTargetInfo(binding : Void*, marshalled_target_info_size : UInt32*, marshalled_target_info : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcBindingInqMarshalledTargetInfo(binding : Void*, marshalled_target_info_size : UInt32*, marshalled_target_info : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun I_RpcBindingInqLocalClientPID(binding : Void*, pid : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
@@ -5139,31 +6143,31 @@ module Win32cr::System::Rpc
     fun I_RpcBindingHandleToAsyncHandle(binding : Void*, async_handle : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcNsBindingSetEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcNsBindingSetEntryNameW(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcNsBindingSetEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcNsBindingSetEntryNameA(binding : Void*, entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcServerUseProtseqEp2A(network_address : UInt8*, protseq : UInt8*, max_calls : UInt32, endpoint : UInt8*, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcServerUseProtseqEp2A(network_address : Win32cr::Foundation::PSTR, protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PSTR, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcServerUseProtseqEp2W(network_address : UInt16*, protseq : UInt16*, max_calls : UInt32, endpoint : UInt16*, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcServerUseProtseqEp2W(network_address : Win32cr::Foundation::PWSTR, protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, endpoint : Win32cr::Foundation::PWSTR, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcServerUseProtseq2W(network_address : UInt16*, protseq : UInt16*, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcServerUseProtseq2W(network_address : Win32cr::Foundation::PWSTR, protseq : Win32cr::Foundation::PWSTR, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcServerUseProtseq2A(network_address : UInt8*, protseq : UInt8*, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcServerUseProtseq2A(network_address : Win32cr::Foundation::PSTR, protseq : Win32cr::Foundation::PSTR, max_calls : UInt32, security_descriptor : Void*, policy : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcServerStartService(protseq : UInt16*, endpoint : UInt16*, if_spec : Void*) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcServerStartService(protseq : Win32cr::Foundation::PWSTR, endpoint : Win32cr::Foundation::PWSTR, if_spec : Void*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcBindingInqDynamicEndpointW(binding : Void*, dynamic_endpoint : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcBindingInqDynamicEndpointW(binding : Void*, dynamic_endpoint : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcBindingInqDynamicEndpointA(binding : Void*, dynamic_endpoint : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcBindingInqDynamicEndpointA(binding : Void*, dynamic_endpoint : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun I_RpcServerCheckClientRestriction(context : Void*) : Win32cr::System::Rpc::RPC_STATUS
@@ -5184,7 +6188,7 @@ module Win32cr::System::Rpc
     fun I_RpcBindingIsClientLocal(binding_handle : Void*, client_local_flag : UInt32*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun I_RpcBindingCreateNP(server_name : UInt16*, service_name : UInt16*, network_options : UInt16*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun I_RpcBindingCreateNP(server_name : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, network_options : Win32cr::Foundation::PWSTR, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun I_RpcSsDontSerializeContext : Void
@@ -5250,34 +6254,34 @@ module Win32cr::System::Rpc
     fun I_RpcServerUnsubscribeForDisconnectNotification(binding : Void*, subscription_id : LibC::GUID) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingExportA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingExportA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingUnexportA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingUnexportA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingExportW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingExportW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingUnexportW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingUnexportW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingExportPnPA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingExportPnPA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingUnexportPnPA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingUnexportPnPA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingExportPnPW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingExportPnPW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingUnexportPnPW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingUnexportPnPW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, object_vector : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingLookupBeginA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingLookupBeginA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingLookupBeginW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingLookupBeginW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, obj_uuid : LibC::GUID*, binding_max_count : UInt32, lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcNsBindingLookupNext(lookup_context : Void*, binding_vec : Win32cr::System::Rpc::RPC_BINDING_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
@@ -5286,76 +6290,76 @@ module Win32cr::System::Rpc
     fun RpcNsBindingLookupDone(lookup_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupDeleteA(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupDeleteA(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrAddA(group_name_syntax : UInt32, group_name : UInt8*, member_name_syntax : UInt32, member_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrAddA(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrRemoveA(group_name_syntax : UInt32, group_name : UInt8*, member_name_syntax : UInt32, member_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrRemoveA(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrInqBeginA(group_name_syntax : UInt32, group_name : UInt8*, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrInqBeginA(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PSTR, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrInqNextA(inquiry_context : Void*, member_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrInqNextA(inquiry_context : Void*, member_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupDeleteW(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupDeleteW(group_name_syntax : Win32cr::System::Rpc::GROUP_NAME_SYNTAX, group_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrAddW(group_name_syntax : UInt32, group_name : UInt16*, member_name_syntax : UInt32, member_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrAddW(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PWSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrRemoveW(group_name_syntax : UInt32, group_name : UInt16*, member_name_syntax : UInt32, member_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrRemoveW(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PWSTR, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrInqBeginW(group_name_syntax : UInt32, group_name : UInt16*, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrInqBeginW(group_name_syntax : UInt32, group_name : Win32cr::Foundation::PWSTR, member_name_syntax : UInt32, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsGroupMbrInqNextW(inquiry_context : Void*, member_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsGroupMbrInqNextW(inquiry_context : Void*, member_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcNsGroupMbrInqDone(inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileDeleteA(profile_name_syntax : UInt32, profile_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileDeleteA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltAddA(profile_name_syntax : UInt32, profile_name : UInt8*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt8*, priority : UInt32, annotation__ : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltAddA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR, priority : UInt32, annotation__ : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltRemoveA(profile_name_syntax : UInt32, profile_name : UInt8*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltRemoveA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltInqBeginA(profile_name_syntax : UInt32, profile_name : UInt8*, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : UInt8*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltInqBeginA(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PSTR, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltInqNextA(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : UInt8**, priority : UInt32*, annotation__ : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltInqNextA(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : Win32cr::Foundation::PSTR*, priority : UInt32*, annotation__ : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileDeleteW(profile_name_syntax : UInt32, profile_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileDeleteW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltAddW(profile_name_syntax : UInt32, profile_name : UInt16*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt16*, priority : UInt32, annotation__ : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltAddW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR, priority : UInt32, annotation__ : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltRemoveW(profile_name_syntax : UInt32, profile_name : UInt16*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltRemoveW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltInqBeginW(profile_name_syntax : UInt32, profile_name : UInt16*, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : UInt16*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltInqBeginW(profile_name_syntax : UInt32, profile_name : Win32cr::Foundation::PWSTR, inquiry_type : UInt32, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, member_name_syntax : UInt32, member_name : Win32cr::Foundation::PWSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsProfileEltInqNextW(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : UInt16**, priority : UInt32*, annotation__ : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsProfileEltInqNextW(inquiry_context : Void*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, member_name : Win32cr::Foundation::PWSTR*, priority : UInt32*, annotation__ : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcNsProfileEltInqDone(inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsEntryObjectInqBeginA(entry_name_syntax : UInt32, entry_name : UInt8*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsEntryObjectInqBeginA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsEntryObjectInqBeginW(entry_name_syntax : UInt32, entry_name : UInt16*, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsEntryObjectInqBeginW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcNsEntryObjectInqNext(inquiry_context : Void*, obj_uuid : LibC::GUID*) : Win32cr::System::Rpc::RPC_STATUS
@@ -5364,19 +6368,19 @@ module Win32cr::System::Rpc
     fun RpcNsEntryObjectInqDone(inquiry_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsEntryExpandNameA(entry_name_syntax : UInt32, entry_name : UInt8*, expanded_name : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsEntryExpandNameA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, expanded_name : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtBindingUnexportA(entry_name_syntax : UInt32, entry_name : UInt8*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtBindingUnexportA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtEntryCreateA(entry_name_syntax : UInt32, entry_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtEntryCreateA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtEntryDeleteA(entry_name_syntax : UInt32, entry_name : UInt8*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtEntryDeleteA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtEntryInqIfIdsA(entry_name_syntax : UInt32, entry_name : UInt8*, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtEntryInqIfIdsA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcNsMgmtHandleSetExpAge(ns_handle : Void*, expiration_age : UInt32) : Win32cr::System::Rpc::RPC_STATUS
@@ -5388,25 +6392,25 @@ module Win32cr::System::Rpc
     fun RpcNsMgmtSetExpAge(expiration_age : UInt32) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsEntryExpandNameW(entry_name_syntax : UInt32, entry_name : UInt16*, expanded_name : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsEntryExpandNameW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, expanded_name : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtBindingUnexportW(entry_name_syntax : UInt32, entry_name : UInt16*, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtBindingUnexportW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_id : Win32cr::System::Rpc::RPC_IF_ID*, vers_option : UInt32, object_uuid_vec : Win32cr::System::Rpc::UUID_VECTOR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtEntryCreateW(entry_name_syntax : UInt32, entry_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtEntryCreateW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtEntryDeleteW(entry_name_syntax : UInt32, entry_name : UInt16*) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtEntryDeleteW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsMgmtEntryInqIfIdsW(entry_name_syntax : UInt32, entry_name : UInt16*, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsMgmtEntryInqIfIdsW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_id_vec : Win32cr::System::Rpc::RPC_IF_ID_VECTOR**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingImportBeginA(entry_name_syntax : UInt32, entry_name : UInt8*, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingImportBeginA(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PSTR, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcNsBindingImportBeginW(entry_name_syntax : UInt32, entry_name : UInt16*, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcNsBindingImportBeginW(entry_name_syntax : UInt32, entry_name : Win32cr::Foundation::PWSTR, if_spec : Void*, obj_uuid : LibC::GUID*, import_context : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcNsBindingImportNext(import_context : Void*, binding : Void**) : Win32cr::System::Rpc::RPC_STATUS
@@ -5463,7 +6467,7 @@ module Win32cr::System::Rpc
     fun RpcErrorClearInformation : Void
 
     # :nodoc:
-    fun RpcGetAuthorizationContextForClient(client_binding : Void*, impersonate_on_return : Win32cr::Foundation::BOOL, reserved1 : Void*, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, reserved2 : Win32cr::Foundation::LUID, reserved3 : UInt32, reserved4 : Void*, pAuthzClientContext : Void**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcGetAuthorizationContextForClient(client_binding : Void*, impersonate_on_return : Win32cr::Foundation::BOOL, reserved1 : Void*, pExpirationTime : Int64*, reserved2 : Win32cr::Foundation::LUID, reserved3 : UInt32, reserved4 : Void*, pAuthzClientContext : Void**) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
     fun RpcFreeAuthorizationContext(pAuthzClientContext : Void**) : Win32cr::System::Rpc::RPC_STATUS
@@ -5526,22 +6530,22 @@ module Win32cr::System::Rpc
     fun NDRCContextUnmarshall(pCContext : LibC::IntPtrT*, hBinding : Void*, pBuff : Void*, data_representation : UInt32) : Void
 
     # :nodoc:
-    fun NDRSContextMarshall(c_context : Win32cr::System::Rpc::NDR_SCONTEXT_1*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+    fun NDRSContextMarshall(c_context : Win32cr::System::Rpc::NDR_SCONTEXT*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
 
     # :nodoc:
-    fun NDRSContextUnmarshall(pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+    fun NDRSContextUnmarshall(pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT*
 
     # :nodoc:
-    fun NDRSContextMarshallEx(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT_1*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+    fun NDRSContextMarshallEx(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
 
     # :nodoc:
-    fun NDRSContextMarshall2(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT_1*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN, ctx_guard : Void*, flags : UInt32) : Void
+    fun NDRSContextMarshall2(binding_handle : Void*, c_context : Win32cr::System::Rpc::NDR_SCONTEXT*, pBuff : Void*, userRunDownIn : Win32cr::System::Rpc::NDR_RUNDOWN, ctx_guard : Void*, flags : UInt32) : Void
 
     # :nodoc:
-    fun NDRSContextUnmarshallEx(binding_handle : Void*, pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+    fun NDRSContextUnmarshallEx(binding_handle : Void*, pBuff : Void*, data_representation : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT*
 
     # :nodoc:
-    fun NDRSContextUnmarshall2(binding_handle : Void*, pBuff : Void*, data_representation : UInt32, ctx_guard : Void*, flags : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+    fun NDRSContextUnmarshall2(binding_handle : Void*, pBuff : Void*, data_representation : UInt32, ctx_guard : Void*, flags : UInt32) : Win32cr::System::Rpc::NDR_SCONTEXT*
 
     # :nodoc:
     fun RpcSsDestroyClientContext(context_handle : Void**) : Void
@@ -5607,10 +6611,10 @@ module Win32cr::System::Rpc
     fun NdrClientContextMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : LibC::IntPtrT, fCheck : Int32) : Void
 
     # :nodoc:
-    fun NdrServerContextMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT_1*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
+    fun NdrServerContextMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN) : Void
 
     # :nodoc:
-    fun NdrServerContextNewMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT_1*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN, pFormat : UInt8*) : Void
+    fun NdrServerContextNewMarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, context_handle : Win32cr::System::Rpc::NDR_SCONTEXT*, rundown_routine : Win32cr::System::Rpc::NDR_RUNDOWN, pFormat : UInt8*) : Void
 
     # :nodoc:
     fun NdrSimpleTypeUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, format_char : UInt8) : Void
@@ -5685,13 +6689,13 @@ module Win32cr::System::Rpc
     fun NdrClientContextUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pContextHandle : LibC::IntPtrT*, bind_handle : Void*) : Void
 
     # :nodoc:
-    fun NdrServerContextUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+    fun NdrServerContextUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*) : Win32cr::System::Rpc::NDR_SCONTEXT*
 
     # :nodoc:
-    fun NdrContextHandleInitialize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+    fun NdrContextHandleInitialize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT*
 
     # :nodoc:
-    fun NdrServerContextNewUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT_1*
+    fun NdrServerContextNewUnmarshall(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pFormat : UInt8*) : Win32cr::System::Rpc::NDR_SCONTEXT*
 
     # :nodoc:
     fun NdrPointerBufferSize(pStubMsg : Win32cr::System::Rpc::MIDL_STUB_MESSAGE*, pMemory : UInt8*, pFormat : UInt8*) : Void
@@ -6150,10 +7154,11 @@ module Win32cr::System::Rpc
     fun NdrMesSimpleTypeAlignSizeAll(handle : Void*, pProxyInfo : Win32cr::System::Rpc::MIDL_STUBLESS_PROXY_INFO*) : LibC::UIntPtrT
 
     # :nodoc:
-    fun RpcCertGeneratePrincipalNameW(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : UInt16**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcCertGeneratePrincipalNameW(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : Win32cr::Foundation::PWSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
     # :nodoc:
-    fun RpcCertGeneratePrincipalNameA(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : UInt8**) : Win32cr::System::Rpc::RPC_STATUS
+    fun RpcCertGeneratePrincipalNameA(context : Win32cr::Security::Cryptography::CERT_CONTEXT*, flags : UInt32, pBuffer : Win32cr::Foundation::PSTR*) : Win32cr::System::Rpc::RPC_STATUS
 
   end
+  {% end %}
 end

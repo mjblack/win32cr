@@ -1,5 +1,6 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/com.cr"
+require "./../system/variant.cr"
 
 module Win32cr::Storage::FileServerResourceManager
   extend self
@@ -478,14 +479,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmObjectVtbl,
+
+  record IFsrmObjectVtable,
     query_interface : Proc(IFsrmObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmObject*, UInt32),
     release : Proc(IFsrmObject*, UInt32),
     get_type_info_count : Proc(IFsrmObject*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmObject*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmObject*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmObject*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmObject*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmObject*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmObject*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmObject*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -494,7 +496,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmObject, lpVtbl : IFsrmObjectVtbl* do
+  record IFsrmObject, lpVtbl : IFsrmObjectVtable* do
     GUID = LibC::GUID.new(0x22bcef93_u32, 0x4a3f_u16, 0x4183_u16, StaticArray[0x89_u8, 0xf9_u8, 0x2f_u8, 0x8b_u8, 0x8a_u8, 0x62_u8, 0x8a_u8, 0xee_u8])
     def query_interface(this : IFsrmObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -514,8 +516,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmObject*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmObject*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -536,25 +538,26 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmCollectionVtbl,
+
+  record IFsrmCollectionVtable,
     query_interface : Proc(IFsrmCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmCollection*, UInt32),
     release : Proc(IFsrmCollection*, UInt32),
     get_type_info_count : Proc(IFsrmCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFsrmCollection*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFsrmCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFsrmCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFsrmCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_State : Proc(IFsrmCollection*, Win32cr::Storage::FileServerResourceManager::FsrmCollectionState*, Win32cr::Foundation::HRESULT),
     cancel : Proc(IFsrmCollection*, Win32cr::Foundation::HRESULT),
-    wait_for_completion : Proc(IFsrmCollection*, Int32, Int16*, Win32cr::Foundation::HRESULT),
-    get_by_id : Proc(IFsrmCollection*, LibC::GUID, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    wait_for_completion : Proc(IFsrmCollection*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_by_id : Proc(IFsrmCollection*, LibC::GUID, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmCollection, lpVtbl : IFsrmCollectionVtbl* do
+  record IFsrmCollection, lpVtbl : IFsrmCollectionVtable* do
     GUID = LibC::GUID.new(0xf76fbf3b_u32, 0x8ddd_u16, 0x4b42_u16, StaticArray[0xb0_u8, 0x5a_u8, 0xcb_u8, 0x1c_u8, 0x3f_u8, 0xf1_u8, 0xfe_u8, 0xe8_u8])
     def query_interface(this : IFsrmCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -574,13 +577,13 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFsrmCollection*, unknown : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, unknown)
     end
-    def get_Item(this : IFsrmCollection*, index : Int32, item : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFsrmCollection*, index : Int32, item : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, item)
     end
     def get_Count(this : IFsrmCollection*, count : Int32*) : Win32cr::Foundation::HRESULT
@@ -592,39 +595,40 @@ module Win32cr::Storage::FileServerResourceManager
     def cancel(this : IFsrmCollection*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cancel.call(this)
     end
-    def wait_for_completion(this : IFsrmCollection*, waitSeconds : Int32, completed : Int16*) : Win32cr::Foundation::HRESULT
+    def wait_for_completion(this : IFsrmCollection*, waitSeconds : Int32, completed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.wait_for_completion.call(this, waitSeconds, completed)
     end
-    def get_by_id(this : IFsrmCollection*, id : LibC::GUID, entry : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_by_id(this : IFsrmCollection*, id : LibC::GUID, entry : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_by_id.call(this, id, entry)
     end
 
   end
 
   @[Extern]
-  record IFsrmMutableCollectionVtbl,
+
+  record IFsrmMutableCollectionVtable,
     query_interface : Proc(IFsrmMutableCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmMutableCollection*, UInt32),
     release : Proc(IFsrmMutableCollection*, UInt32),
     get_type_info_count : Proc(IFsrmMutableCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmMutableCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmMutableCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmMutableCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmMutableCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFsrmMutableCollection*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFsrmMutableCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFsrmMutableCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFsrmMutableCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_State : Proc(IFsrmMutableCollection*, Win32cr::Storage::FileServerResourceManager::FsrmCollectionState*, Win32cr::Foundation::HRESULT),
     cancel : Proc(IFsrmMutableCollection*, Win32cr::Foundation::HRESULT),
-    wait_for_completion : Proc(IFsrmMutableCollection*, Int32, Int16*, Win32cr::Foundation::HRESULT),
-    get_by_id : Proc(IFsrmMutableCollection*, LibC::GUID, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add : Proc(IFsrmMutableCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    wait_for_completion : Proc(IFsrmMutableCollection*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_by_id : Proc(IFsrmMutableCollection*, LibC::GUID, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add : Proc(IFsrmMutableCollection*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     remove : Proc(IFsrmMutableCollection*, Int32, Win32cr::Foundation::HRESULT),
     remove_by_id : Proc(IFsrmMutableCollection*, LibC::GUID, Win32cr::Foundation::HRESULT),
     clone : Proc(IFsrmMutableCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmMutableCollection, lpVtbl : IFsrmMutableCollectionVtbl* do
+  record IFsrmMutableCollection, lpVtbl : IFsrmMutableCollectionVtable* do
     GUID = LibC::GUID.new(0x1bb617b8_u32, 0x3886_u16, 0x49dc_u16, StaticArray[0xaf_u8, 0x82_u8, 0xa6_u8, 0xc9_u8, 0xf_u8, 0xa3_u8, 0x5d_u8, 0xda_u8])
     def query_interface(this : IFsrmMutableCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -644,13 +648,13 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmMutableCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmMutableCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmMutableCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFsrmMutableCollection*, unknown : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, unknown)
     end
-    def get_Item(this : IFsrmMutableCollection*, index : Int32, item : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFsrmMutableCollection*, index : Int32, item : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, item)
     end
     def get_Count(this : IFsrmMutableCollection*, count : Int32*) : Win32cr::Foundation::HRESULT
@@ -662,13 +666,13 @@ module Win32cr::Storage::FileServerResourceManager
     def cancel(this : IFsrmMutableCollection*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cancel.call(this)
     end
-    def wait_for_completion(this : IFsrmMutableCollection*, waitSeconds : Int32, completed : Int16*) : Win32cr::Foundation::HRESULT
+    def wait_for_completion(this : IFsrmMutableCollection*, waitSeconds : Int32, completed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.wait_for_completion.call(this, waitSeconds, completed)
     end
-    def get_by_id(this : IFsrmMutableCollection*, id : LibC::GUID, entry : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_by_id(this : IFsrmMutableCollection*, id : LibC::GUID, entry : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_by_id.call(this, id, entry)
     end
-    def add(this : IFsrmMutableCollection*, item : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add(this : IFsrmMutableCollection*, item : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, item)
     end
     def remove(this : IFsrmMutableCollection*, index : Int32) : Win32cr::Foundation::HRESULT
@@ -684,22 +688,23 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmCommittableCollectionVtbl,
+
+  record IFsrmCommittableCollectionVtable,
     query_interface : Proc(IFsrmCommittableCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmCommittableCollection*, UInt32),
     release : Proc(IFsrmCommittableCollection*, UInt32),
     get_type_info_count : Proc(IFsrmCommittableCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmCommittableCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmCommittableCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmCommittableCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmCommittableCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFsrmCommittableCollection*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFsrmCommittableCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFsrmCommittableCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFsrmCommittableCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_State : Proc(IFsrmCommittableCollection*, Win32cr::Storage::FileServerResourceManager::FsrmCollectionState*, Win32cr::Foundation::HRESULT),
     cancel : Proc(IFsrmCommittableCollection*, Win32cr::Foundation::HRESULT),
-    wait_for_completion : Proc(IFsrmCommittableCollection*, Int32, Int16*, Win32cr::Foundation::HRESULT),
-    get_by_id : Proc(IFsrmCommittableCollection*, LibC::GUID, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add : Proc(IFsrmCommittableCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    wait_for_completion : Proc(IFsrmCommittableCollection*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_by_id : Proc(IFsrmCommittableCollection*, LibC::GUID, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add : Proc(IFsrmCommittableCollection*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     remove : Proc(IFsrmCommittableCollection*, Int32, Win32cr::Foundation::HRESULT),
     remove_by_id : Proc(IFsrmCommittableCollection*, LibC::GUID, Win32cr::Foundation::HRESULT),
     clone : Proc(IFsrmCommittableCollection*, Void**, Win32cr::Foundation::HRESULT),
@@ -707,7 +712,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmCommittableCollection, lpVtbl : IFsrmCommittableCollectionVtbl* do
+  record IFsrmCommittableCollection, lpVtbl : IFsrmCommittableCollectionVtable* do
     GUID = LibC::GUID.new(0x96deb3b5_u32, 0x8b91_u16, 0x4a2a_u16, StaticArray[0x9d_u8, 0x93_u8, 0x80_u8, 0xa3_u8, 0x5d_u8, 0x8a_u8, 0xa8_u8, 0x47_u8])
     def query_interface(this : IFsrmCommittableCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -727,13 +732,13 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmCommittableCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmCommittableCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmCommittableCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFsrmCommittableCollection*, unknown : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, unknown)
     end
-    def get_Item(this : IFsrmCommittableCollection*, index : Int32, item : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFsrmCommittableCollection*, index : Int32, item : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, item)
     end
     def get_Count(this : IFsrmCommittableCollection*, count : Int32*) : Win32cr::Foundation::HRESULT
@@ -745,13 +750,13 @@ module Win32cr::Storage::FileServerResourceManager
     def cancel(this : IFsrmCommittableCollection*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cancel.call(this)
     end
-    def wait_for_completion(this : IFsrmCommittableCollection*, waitSeconds : Int32, completed : Int16*) : Win32cr::Foundation::HRESULT
+    def wait_for_completion(this : IFsrmCommittableCollection*, waitSeconds : Int32, completed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.wait_for_completion.call(this, waitSeconds, completed)
     end
-    def get_by_id(this : IFsrmCommittableCollection*, id : LibC::GUID, entry : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_by_id(this : IFsrmCommittableCollection*, id : LibC::GUID, entry : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_by_id.call(this, id, entry)
     end
-    def add(this : IFsrmCommittableCollection*, item : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add(this : IFsrmCommittableCollection*, item : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, item)
     end
     def remove(this : IFsrmCommittableCollection*, index : Int32) : Win32cr::Foundation::HRESULT
@@ -770,14 +775,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionVtbl,
+
+  record IFsrmActionVtable,
     query_interface : Proc(IFsrmAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmAction*, UInt32),
     release : Proc(IFsrmAction*, UInt32),
     get_type_info_count : Proc(IFsrmAction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmAction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmAction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmAction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmAction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmAction*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_ActionType : Proc(IFsrmAction*, Win32cr::Storage::FileServerResourceManager::FsrmActionType*, Win32cr::Foundation::HRESULT),
     get_RunLimitInterval : Proc(IFsrmAction*, Int32*, Win32cr::Foundation::HRESULT),
@@ -786,7 +792,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmAction, lpVtbl : IFsrmActionVtbl* do
+  record IFsrmAction, lpVtbl : IFsrmActionVtable* do
     GUID = LibC::GUID.new(0x6cd6408a_u32, 0xae60_u16, 0x463b_u16, StaticArray[0x9e_u8, 0xf1_u8, 0xe1_u8, 0x17_u8, 0x53_u8, 0x4d_u8, 0x69_u8, 0xdc_u8])
     def query_interface(this : IFsrmAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -806,8 +812,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmAction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmAction*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -828,14 +834,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionEmailVtbl,
+
+  record IFsrmActionEmailVtable,
     query_interface : Proc(IFsrmActionEmail*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionEmail*, UInt32),
     release : Proc(IFsrmActionEmail*, UInt32),
     get_type_info_count : Proc(IFsrmActionEmail*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmActionEmail*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmActionEmail*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmActionEmail*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmActionEmail*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmActionEmail*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_ActionType : Proc(IFsrmActionEmail*, Win32cr::Storage::FileServerResourceManager::FsrmActionType*, Win32cr::Foundation::HRESULT),
     get_RunLimitInterval : Proc(IFsrmActionEmail*, Int32*, Win32cr::Foundation::HRESULT),
@@ -858,7 +865,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionEmail, lpVtbl : IFsrmActionEmailVtbl* do
+  record IFsrmActionEmail, lpVtbl : IFsrmActionEmailVtable* do
     GUID = LibC::GUID.new(0xd646567d_u32, 0x26ae_u16, 0x4caa_u16, StaticArray[0x9f_u8, 0x84_u8, 0x4e_u8, 0xa_u8, 0xad_u8, 0x20_u8, 0x7f_u8, 0xca_u8])
     def query_interface(this : IFsrmActionEmail*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -878,8 +885,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmActionEmail*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmActionEmail*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmActionEmail*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmActionEmail*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -942,14 +949,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionEmail2Vtbl,
+
+  record IFsrmActionEmail2Vtable,
     query_interface : Proc(IFsrmActionEmail2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionEmail2*, UInt32),
     release : Proc(IFsrmActionEmail2*, UInt32),
     get_type_info_count : Proc(IFsrmActionEmail2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmActionEmail2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmActionEmail2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmActionEmail2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmActionEmail2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmActionEmail2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_ActionType : Proc(IFsrmActionEmail2*, Win32cr::Storage::FileServerResourceManager::FsrmActionType*, Win32cr::Foundation::HRESULT),
     get_RunLimitInterval : Proc(IFsrmActionEmail2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -974,7 +982,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionEmail2, lpVtbl : IFsrmActionEmail2Vtbl* do
+  record IFsrmActionEmail2, lpVtbl : IFsrmActionEmail2Vtable* do
     GUID = LibC::GUID.new(0x8276702f_u32, 0x2532_u16, 0x4839_u16, StaticArray[0x89_u8, 0xbf_u8, 0x48_u8, 0x72_u8, 0x60_u8, 0x9a_u8, 0x2e_u8, 0xa4_u8])
     def query_interface(this : IFsrmActionEmail2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -994,8 +1002,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmActionEmail2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmActionEmail2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmActionEmail2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmActionEmail2*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -1064,14 +1072,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionReportVtbl,
+
+  record IFsrmActionReportVtable,
     query_interface : Proc(IFsrmActionReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionReport*, UInt32),
     release : Proc(IFsrmActionReport*, UInt32),
     get_type_info_count : Proc(IFsrmActionReport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmActionReport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmActionReport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmActionReport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmActionReport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmActionReport*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_ActionType : Proc(IFsrmActionReport*, Win32cr::Storage::FileServerResourceManager::FsrmActionType*, Win32cr::Foundation::HRESULT),
     get_RunLimitInterval : Proc(IFsrmActionReport*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1084,7 +1093,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionReport, lpVtbl : IFsrmActionReportVtbl* do
+  record IFsrmActionReport, lpVtbl : IFsrmActionReportVtable* do
     GUID = LibC::GUID.new(0x2dbe63c4_u32, 0xb340_u16, 0x48a0_u16, StaticArray[0xa5_u8, 0xb0_u8, 0x15_u8, 0x8e_u8, 0x7_u8, 0xfc_u8, 0x56_u8, 0x7e_u8])
     def query_interface(this : IFsrmActionReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1104,8 +1113,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmActionReport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmActionReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmActionReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmActionReport*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -1138,14 +1147,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionEventLogVtbl,
+
+  record IFsrmActionEventLogVtable,
     query_interface : Proc(IFsrmActionEventLog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionEventLog*, UInt32),
     release : Proc(IFsrmActionEventLog*, UInt32),
     get_type_info_count : Proc(IFsrmActionEventLog*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmActionEventLog*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmActionEventLog*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmActionEventLog*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmActionEventLog*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmActionEventLog*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_ActionType : Proc(IFsrmActionEventLog*, Win32cr::Storage::FileServerResourceManager::FsrmActionType*, Win32cr::Foundation::HRESULT),
     get_RunLimitInterval : Proc(IFsrmActionEventLog*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1158,7 +1168,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionEventLog, lpVtbl : IFsrmActionEventLogVtbl* do
+  record IFsrmActionEventLog, lpVtbl : IFsrmActionEventLogVtable* do
     GUID = LibC::GUID.new(0x4c8f96c3_u32, 0x5d94_u16, 0x4f37_u16, StaticArray[0xa4_u8, 0xf4_u8, 0xf5_u8, 0x6a_u8, 0xb4_u8, 0x63_u8, 0x54_u8, 0x6f_u8])
     def query_interface(this : IFsrmActionEventLog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1178,8 +1188,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmActionEventLog*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmActionEventLog*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmActionEventLog*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmActionEventLog*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -1212,14 +1222,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionCommandVtbl,
+
+  record IFsrmActionCommandVtable,
     query_interface : Proc(IFsrmActionCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionCommand*, UInt32),
     release : Proc(IFsrmActionCommand*, UInt32),
     get_type_info_count : Proc(IFsrmActionCommand*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmActionCommand*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmActionCommand*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmActionCommand*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmActionCommand*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmActionCommand*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_ActionType : Proc(IFsrmActionCommand*, Win32cr::Storage::FileServerResourceManager::FsrmActionType*, Win32cr::Foundation::HRESULT),
     get_RunLimitInterval : Proc(IFsrmActionCommand*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1233,16 +1244,16 @@ module Win32cr::Storage::FileServerResourceManager
     put_Account : Proc(IFsrmActionCommand*, Win32cr::Storage::FileServerResourceManager::FsrmAccountType, Win32cr::Foundation::HRESULT),
     get_WorkingDirectory : Proc(IFsrmActionCommand*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_WorkingDirectory : Proc(IFsrmActionCommand*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_MonitorCommand : Proc(IFsrmActionCommand*, Int16*, Win32cr::Foundation::HRESULT),
-    put_MonitorCommand : Proc(IFsrmActionCommand*, Int16, Win32cr::Foundation::HRESULT),
+    get_MonitorCommand : Proc(IFsrmActionCommand*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_MonitorCommand : Proc(IFsrmActionCommand*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_KillTimeOut : Proc(IFsrmActionCommand*, Int32*, Win32cr::Foundation::HRESULT),
     put_KillTimeOut : Proc(IFsrmActionCommand*, Int32, Win32cr::Foundation::HRESULT),
-    get_LogResult : Proc(IFsrmActionCommand*, Int16*, Win32cr::Foundation::HRESULT),
-    put_LogResult : Proc(IFsrmActionCommand*, Int16, Win32cr::Foundation::HRESULT)
+    get_LogResult : Proc(IFsrmActionCommand*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_LogResult : Proc(IFsrmActionCommand*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmActionCommand, lpVtbl : IFsrmActionCommandVtbl* do
+  record IFsrmActionCommand, lpVtbl : IFsrmActionCommandVtable* do
     GUID = LibC::GUID.new(0x12937789_u32, 0xe247_u16, 0x4917_u16, StaticArray[0x9c_u8, 0x20_u8, 0xf3_u8, 0xee_u8, 0x9c_u8, 0x7e_u8, 0xe7_u8, 0x83_u8])
     def query_interface(this : IFsrmActionCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1262,8 +1273,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmActionCommand*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmActionCommand*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmActionCommand*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmActionCommand*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -1304,10 +1315,10 @@ module Win32cr::Storage::FileServerResourceManager
     def put_WorkingDirectory(this : IFsrmActionCommand*, workingDirectory : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_WorkingDirectory.call(this, workingDirectory)
     end
-    def get_MonitorCommand(this : IFsrmActionCommand*, monitorCommand : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MonitorCommand(this : IFsrmActionCommand*, monitorCommand : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MonitorCommand.call(this, monitorCommand)
     end
-    def put_MonitorCommand(this : IFsrmActionCommand*, monitorCommand : Int16) : Win32cr::Foundation::HRESULT
+    def put_MonitorCommand(this : IFsrmActionCommand*, monitorCommand : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MonitorCommand.call(this, monitorCommand)
     end
     def get_KillTimeOut(this : IFsrmActionCommand*, minutes : Int32*) : Win32cr::Foundation::HRESULT
@@ -1316,41 +1327,42 @@ module Win32cr::Storage::FileServerResourceManager
     def put_KillTimeOut(this : IFsrmActionCommand*, minutes : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_KillTimeOut.call(this, minutes)
     end
-    def get_LogResult(this : IFsrmActionCommand*, logResults : Int16*) : Win32cr::Foundation::HRESULT
+    def get_LogResult(this : IFsrmActionCommand*, logResults : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LogResult.call(this, logResults)
     end
-    def put_LogResult(this : IFsrmActionCommand*, logResults : Int16) : Win32cr::Foundation::HRESULT
+    def put_LogResult(this : IFsrmActionCommand*, logResults : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LogResult.call(this, logResults)
     end
 
   end
 
   @[Extern]
-  record IFsrmSettingVtbl,
+
+  record IFsrmSettingVtable,
     query_interface : Proc(IFsrmSetting*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmSetting*, UInt32),
     release : Proc(IFsrmSetting*, UInt32),
     get_type_info_count : Proc(IFsrmSetting*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmSetting*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmSetting*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmSetting*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmSetting*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_SmtpServer : Proc(IFsrmSetting*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SmtpServer : Proc(IFsrmSetting*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_MailFrom : Proc(IFsrmSetting*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_MailFrom : Proc(IFsrmSetting*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_AdminEmail : Proc(IFsrmSetting*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_AdminEmail : Proc(IFsrmSetting*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_DisableCommandLine : Proc(IFsrmSetting*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DisableCommandLine : Proc(IFsrmSetting*, Int16, Win32cr::Foundation::HRESULT),
-    get_EnableScreeningAudit : Proc(IFsrmSetting*, Int16*, Win32cr::Foundation::HRESULT),
-    put_EnableScreeningAudit : Proc(IFsrmSetting*, Int16, Win32cr::Foundation::HRESULT),
+    get_DisableCommandLine : Proc(IFsrmSetting*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DisableCommandLine : Proc(IFsrmSetting*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_EnableScreeningAudit : Proc(IFsrmSetting*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_EnableScreeningAudit : Proc(IFsrmSetting*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     email_test : Proc(IFsrmSetting*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     set_action_run_limit_interval : Proc(IFsrmSetting*, Win32cr::Storage::FileServerResourceManager::FsrmActionType, Int32, Win32cr::Foundation::HRESULT),
     get_action_run_limit_interval : Proc(IFsrmSetting*, Win32cr::Storage::FileServerResourceManager::FsrmActionType, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmSetting, lpVtbl : IFsrmSettingVtbl* do
+  record IFsrmSetting, lpVtbl : IFsrmSettingVtable* do
     GUID = LibC::GUID.new(0xf411d4fd_u32, 0x14be_u16, 0x4260_u16, StaticArray[0x8c_u8, 0x40_u8, 0x3_u8, 0xb7_u8, 0xc9_u8, 0x5e_u8, 0x60_u8, 0x8a_u8])
     def query_interface(this : IFsrmSetting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1370,8 +1382,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmSetting*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmSetting*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmSetting*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_SmtpServer(this : IFsrmSetting*, smtpServer : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmtpServer.call(this, smtpServer)
@@ -1391,16 +1403,16 @@ module Win32cr::Storage::FileServerResourceManager
     def put_AdminEmail(this : IFsrmSetting*, adminEmail : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AdminEmail.call(this, adminEmail)
     end
-    def get_DisableCommandLine(this : IFsrmSetting*, disableCommandLine : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DisableCommandLine(this : IFsrmSetting*, disableCommandLine : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisableCommandLine.call(this, disableCommandLine)
     end
-    def put_DisableCommandLine(this : IFsrmSetting*, disableCommandLine : Int16) : Win32cr::Foundation::HRESULT
+    def put_DisableCommandLine(this : IFsrmSetting*, disableCommandLine : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DisableCommandLine.call(this, disableCommandLine)
     end
-    def get_EnableScreeningAudit(this : IFsrmSetting*, enableScreeningAudit : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EnableScreeningAudit(this : IFsrmSetting*, enableScreeningAudit : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnableScreeningAudit.call(this, enableScreeningAudit)
     end
-    def put_EnableScreeningAudit(this : IFsrmSetting*, enableScreeningAudit : Int16) : Win32cr::Foundation::HRESULT
+    def put_EnableScreeningAudit(this : IFsrmSetting*, enableScreeningAudit : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EnableScreeningAudit.call(this, enableScreeningAudit)
     end
     def email_test(this : IFsrmSetting*, mailTo : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1416,19 +1428,20 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPathMapperVtbl,
+
+  record IFsrmPathMapperVtable,
     query_interface : Proc(IFsrmPathMapper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPathMapper*, UInt32),
     release : Proc(IFsrmPathMapper*, UInt32),
     get_type_info_count : Proc(IFsrmPathMapper*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPathMapper*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPathMapper*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPathMapper*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPathMapper*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_share_paths_for_local_path : Proc(IFsrmPathMapper*, Win32cr::Foundation::BSTR, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmPathMapper, lpVtbl : IFsrmPathMapperVtbl* do
+  record IFsrmPathMapper, lpVtbl : IFsrmPathMapperVtable* do
     GUID = LibC::GUID.new(0x6f4dbfff_u32, 0x6920_u16, 0x4821_u16, StaticArray[0xa6_u8, 0xc3_u8, 0xb7_u8, 0xe9_u8, 0x4c_u8, 0x1f_u8, 0xd6_u8, 0xc_u8])
     def query_interface(this : IFsrmPathMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1448,8 +1461,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPathMapper*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPathMapper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPathMapper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_share_paths_for_local_path(this : IFsrmPathMapper*, localPath : Win32cr::Foundation::BSTR, sharePaths : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_share_paths_for_local_path.call(this, localPath, sharePaths)
@@ -1458,24 +1471,25 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmExportImportVtbl,
+
+  record IFsrmExportImportVtable,
     query_interface : Proc(IFsrmExportImport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmExportImport*, UInt32),
     release : Proc(IFsrmExportImport*, UInt32),
     get_type_info_count : Proc(IFsrmExportImport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmExportImport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmExportImport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmExportImport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    export_file_groups : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    import_file_groups : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    export_file_screen_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    import_file_screen_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    export_quota_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    import_quota_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IFsrmExportImport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    export_file_groups : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    import_file_groups : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    export_file_screen_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    import_file_screen_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    export_quota_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    import_quota_templates : Proc(IFsrmExportImport*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmExportImport, lpVtbl : IFsrmExportImportVtbl* do
+  record IFsrmExportImport, lpVtbl : IFsrmExportImportVtable* do
     GUID = LibC::GUID.new(0xefcb0ab1_u32, 0x16c4_u16, 0x4a79_u16, StaticArray[0x81_u8, 0x2c_u8, 0x72_u8, 0x56_u8, 0x14_u8, 0xc3_u8, 0x30_u8, 0x6b_u8])
     def query_interface(this : IFsrmExportImport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1495,45 +1509,46 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmExportImport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmExportImport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmExportImport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def export_file_groups(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, fileGroupNamesSafeArray : Win32cr::System::Com::VARIANT*, remoteHost : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def export_file_groups(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, fileGroupNamesSafeArray : Win32cr::System::Variant::VARIANT*, remoteHost : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export_file_groups.call(this, filePath, fileGroupNamesSafeArray, remoteHost)
     end
-    def import_file_groups(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, fileGroupNamesSafeArray : Win32cr::System::Com::VARIANT*, remoteHost : Win32cr::Foundation::BSTR, fileGroups : Void**) : Win32cr::Foundation::HRESULT
+    def import_file_groups(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, fileGroupNamesSafeArray : Win32cr::System::Variant::VARIANT*, remoteHost : Win32cr::Foundation::BSTR, fileGroups : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import_file_groups.call(this, filePath, fileGroupNamesSafeArray, remoteHost, fileGroups)
     end
-    def export_file_screen_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Com::VARIANT*, remoteHost : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def export_file_screen_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Variant::VARIANT*, remoteHost : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export_file_screen_templates.call(this, filePath, templateNamesSafeArray, remoteHost)
     end
-    def import_file_screen_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Com::VARIANT*, remoteHost : Win32cr::Foundation::BSTR, templates : Void**) : Win32cr::Foundation::HRESULT
+    def import_file_screen_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Variant::VARIANT*, remoteHost : Win32cr::Foundation::BSTR, templates : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import_file_screen_templates.call(this, filePath, templateNamesSafeArray, remoteHost, templates)
     end
-    def export_quota_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Com::VARIANT*, remoteHost : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def export_quota_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Variant::VARIANT*, remoteHost : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export_quota_templates.call(this, filePath, templateNamesSafeArray, remoteHost)
     end
-    def import_quota_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Com::VARIANT*, remoteHost : Win32cr::Foundation::BSTR, templates : Void**) : Win32cr::Foundation::HRESULT
+    def import_quota_templates(this : IFsrmExportImport*, filePath : Win32cr::Foundation::BSTR, templateNamesSafeArray : Win32cr::System::Variant::VARIANT*, remoteHost : Win32cr::Foundation::BSTR, templates : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import_quota_templates.call(this, filePath, templateNamesSafeArray, remoteHost, templates)
     end
 
   end
 
   @[Extern]
-  record IFsrmDerivedObjectsResultVtbl,
+
+  record IFsrmDerivedObjectsResultVtable,
     query_interface : Proc(IFsrmDerivedObjectsResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmDerivedObjectsResult*, UInt32),
     release : Proc(IFsrmDerivedObjectsResult*, UInt32),
     get_type_info_count : Proc(IFsrmDerivedObjectsResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmDerivedObjectsResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmDerivedObjectsResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmDerivedObjectsResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmDerivedObjectsResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DerivedObjects : Proc(IFsrmDerivedObjectsResult*, Void**, Win32cr::Foundation::HRESULT),
     get_Results : Proc(IFsrmDerivedObjectsResult*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmDerivedObjectsResult, lpVtbl : IFsrmDerivedObjectsResultVtbl* do
+  record IFsrmDerivedObjectsResult, lpVtbl : IFsrmDerivedObjectsResultVtable* do
     GUID = LibC::GUID.new(0x39322a2d_u32, 0x38ee_u16, 0x4d0d_u16, StaticArray[0x80_u8, 0x95_u8, 0x42_u8, 0x1a_u8, 0x80_u8, 0x84_u8, 0x9a_u8, 0x82_u8])
     def query_interface(this : IFsrmDerivedObjectsResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1553,8 +1568,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmDerivedObjectsResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmDerivedObjectsResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmDerivedObjectsResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DerivedObjects(this : IFsrmDerivedObjectsResult*, derivedObjects : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DerivedObjects.call(this, derivedObjects)
@@ -1566,19 +1581,20 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmAccessDeniedRemediationClientVtbl,
+
+  record IFsrmAccessDeniedRemediationClientVtable,
     query_interface : Proc(IFsrmAccessDeniedRemediationClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmAccessDeniedRemediationClient*, UInt32),
     release : Proc(IFsrmAccessDeniedRemediationClient*, UInt32),
     get_type_info_count : Proc(IFsrmAccessDeniedRemediationClient*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmAccessDeniedRemediationClient*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmAccessDeniedRemediationClient*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmAccessDeniedRemediationClient*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmAccessDeniedRemediationClient*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     show : Proc(IFsrmAccessDeniedRemediationClient*, LibC::UIntPtrT, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::AdrClientErrorType, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmAccessDeniedRemediationClient, lpVtbl : IFsrmAccessDeniedRemediationClientVtbl* do
+  record IFsrmAccessDeniedRemediationClient, lpVtbl : IFsrmAccessDeniedRemediationClientVtable* do
     GUID = LibC::GUID.new(0x40002314_u32, 0x590b_u16, 0x45a5_u16, StaticArray[0x8e_u8, 0x1b_u8, 0x8c_u8, 0x5_u8, 0xda_u8, 0x52_u8, 0x7e_u8, 0x52_u8])
     def query_interface(this : IFsrmAccessDeniedRemediationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1598,8 +1614,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmAccessDeniedRemediationClient*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmAccessDeniedRemediationClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmAccessDeniedRemediationClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def show(this : IFsrmAccessDeniedRemediationClient*, parentWnd : LibC::UIntPtrT, accessPath : Win32cr::Foundation::BSTR, errorType : Win32cr::Storage::FileServerResourceManager::AdrClientErrorType, flags : Int32, windowTitle : Win32cr::Foundation::BSTR, windowMessage : Win32cr::Foundation::BSTR, result : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.show.call(this, parentWnd, accessPath, errorType, flags, windowTitle, windowMessage, result)
@@ -1608,21 +1624,22 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaBaseVtbl,
+
+  record IFsrmQuotaBaseVtable,
     query_interface : Proc(IFsrmQuotaBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaBase*, UInt32),
     release : Proc(IFsrmQuotaBase*, UInt32),
     get_type_info_count : Proc(IFsrmQuotaBase*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuotaBase*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuotaBase*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuotaBase*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuotaBase*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmQuotaBase*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmQuotaBase*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmQuotaBase*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmQuotaBase*, Win32cr::Foundation::HRESULT),
     commit : Proc(IFsrmQuotaBase*, Win32cr::Foundation::HRESULT),
-    get_QuotaLimit : Proc(IFsrmQuotaBase*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_QuotaLimit : Proc(IFsrmQuotaBase*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_QuotaLimit : Proc(IFsrmQuotaBase*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_QuotaLimit : Proc(IFsrmQuotaBase*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_QuotaFlags : Proc(IFsrmQuotaBase*, Int32*, Win32cr::Foundation::HRESULT),
     put_QuotaFlags : Proc(IFsrmQuotaBase*, Int32, Win32cr::Foundation::HRESULT),
     get_Thresholds : Proc(IFsrmQuotaBase*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -1634,7 +1651,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaBase, lpVtbl : IFsrmQuotaBaseVtbl* do
+  record IFsrmQuotaBase, lpVtbl : IFsrmQuotaBaseVtable* do
     GUID = LibC::GUID.new(0x1568a795_u32, 0x3924_u16, 0x4118_u16, StaticArray[0xb7_u8, 0x4b_u8, 0x68_u8, 0xd8_u8, 0xf0_u8, 0xfa_u8, 0x5d_u8, 0xaf_u8])
     def query_interface(this : IFsrmQuotaBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1654,8 +1671,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuotaBase*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuotaBase*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuotaBase*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmQuotaBase*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -1672,10 +1689,10 @@ module Win32cr::Storage::FileServerResourceManager
     def commit(this : IFsrmQuotaBase*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this)
     end
-    def get_QuotaLimit(this : IFsrmQuotaBase*, quotaLimit : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaLimit(this : IFsrmQuotaBase*, quotaLimit : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaLimit.call(this, quotaLimit)
     end
-    def put_QuotaLimit(this : IFsrmQuotaBase*, quotaLimit : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_QuotaLimit(this : IFsrmQuotaBase*, quotaLimit : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_QuotaLimit.call(this, quotaLimit)
     end
     def get_QuotaFlags(this : IFsrmQuotaBase*, quotaFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -1706,21 +1723,22 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaObjectVtbl,
+
+  record IFsrmQuotaObjectVtable,
     query_interface : Proc(IFsrmQuotaObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaObject*, UInt32),
     release : Proc(IFsrmQuotaObject*, UInt32),
     get_type_info_count : Proc(IFsrmQuotaObject*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuotaObject*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuotaObject*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuotaObject*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuotaObject*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmQuotaObject*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmQuotaObject*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmQuotaObject*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmQuotaObject*, Win32cr::Foundation::HRESULT),
     commit : Proc(IFsrmQuotaObject*, Win32cr::Foundation::HRESULT),
-    get_QuotaLimit : Proc(IFsrmQuotaObject*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_QuotaLimit : Proc(IFsrmQuotaObject*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_QuotaLimit : Proc(IFsrmQuotaObject*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_QuotaLimit : Proc(IFsrmQuotaObject*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_QuotaFlags : Proc(IFsrmQuotaObject*, Int32*, Win32cr::Foundation::HRESULT),
     put_QuotaFlags : Proc(IFsrmQuotaObject*, Int32, Win32cr::Foundation::HRESULT),
     get_Thresholds : Proc(IFsrmQuotaObject*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -1733,12 +1751,12 @@ module Win32cr::Storage::FileServerResourceManager
     get_UserSid : Proc(IFsrmQuotaObject*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserAccount : Proc(IFsrmQuotaObject*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SourceTemplateName : Proc(IFsrmQuotaObject*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_MatchesSourceTemplate : Proc(IFsrmQuotaObject*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MatchesSourceTemplate : Proc(IFsrmQuotaObject*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     apply_template : Proc(IFsrmQuotaObject*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmQuotaObject, lpVtbl : IFsrmQuotaObjectVtbl* do
+  record IFsrmQuotaObject, lpVtbl : IFsrmQuotaObjectVtable* do
     GUID = LibC::GUID.new(0x42dc3511_u32, 0x61d5_u16, 0x48ae_u16, StaticArray[0xb6_u8, 0xdc_u8, 0x59_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0xa8_u8, 0xd6_u8])
     def query_interface(this : IFsrmQuotaObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1758,8 +1776,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuotaObject*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuotaObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuotaObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmQuotaObject*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -1776,10 +1794,10 @@ module Win32cr::Storage::FileServerResourceManager
     def commit(this : IFsrmQuotaObject*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this)
     end
-    def get_QuotaLimit(this : IFsrmQuotaObject*, quotaLimit : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaLimit(this : IFsrmQuotaObject*, quotaLimit : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaLimit.call(this, quotaLimit)
     end
-    def put_QuotaLimit(this : IFsrmQuotaObject*, quotaLimit : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_QuotaLimit(this : IFsrmQuotaObject*, quotaLimit : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_QuotaLimit.call(this, quotaLimit)
     end
     def get_QuotaFlags(this : IFsrmQuotaObject*, quotaFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -1818,7 +1836,7 @@ module Win32cr::Storage::FileServerResourceManager
     def get_SourceTemplateName(this : IFsrmQuotaObject*, quotaTemplateName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SourceTemplateName.call(this, quotaTemplateName)
     end
-    def get_MatchesSourceTemplate(this : IFsrmQuotaObject*, matches : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MatchesSourceTemplate(this : IFsrmQuotaObject*, matches : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MatchesSourceTemplate.call(this, matches)
     end
     def apply_template(this : IFsrmQuotaObject*, quotaTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1828,21 +1846,22 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaVtbl,
+
+  record IFsrmQuotaVtable,
     query_interface : Proc(IFsrmQuota*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuota*, UInt32),
     release : Proc(IFsrmQuota*, UInt32),
     get_type_info_count : Proc(IFsrmQuota*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuota*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuota*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuota*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuota*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmQuota*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmQuota*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmQuota*, Win32cr::Foundation::HRESULT),
     commit : Proc(IFsrmQuota*, Win32cr::Foundation::HRESULT),
-    get_QuotaLimit : Proc(IFsrmQuota*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_QuotaLimit : Proc(IFsrmQuota*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_QuotaLimit : Proc(IFsrmQuota*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_QuotaLimit : Proc(IFsrmQuota*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_QuotaFlags : Proc(IFsrmQuota*, Int32*, Win32cr::Foundation::HRESULT),
     put_QuotaFlags : Proc(IFsrmQuota*, Int32, Win32cr::Foundation::HRESULT),
     get_Thresholds : Proc(IFsrmQuota*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -1855,17 +1874,17 @@ module Win32cr::Storage::FileServerResourceManager
     get_UserSid : Proc(IFsrmQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserAccount : Proc(IFsrmQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SourceTemplateName : Proc(IFsrmQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_MatchesSourceTemplate : Proc(IFsrmQuota*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MatchesSourceTemplate : Proc(IFsrmQuota*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     apply_template : Proc(IFsrmQuota*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_QuotaUsed : Proc(IFsrmQuota*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_QuotaPeakUsage : Proc(IFsrmQuota*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_QuotaUsed : Proc(IFsrmQuota*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_QuotaPeakUsage : Proc(IFsrmQuota*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_QuotaPeakUsageTime : Proc(IFsrmQuota*, Float64*, Win32cr::Foundation::HRESULT),
     reset_peak_usage : Proc(IFsrmQuota*, Win32cr::Foundation::HRESULT),
     refresh_usage_properties : Proc(IFsrmQuota*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmQuota, lpVtbl : IFsrmQuotaVtbl* do
+  record IFsrmQuota, lpVtbl : IFsrmQuotaVtable* do
     GUID = LibC::GUID.new(0x377f739d_u32, 0x9647_u16, 0x4b8e_u16, StaticArray[0x97_u8, 0xd2_u8, 0x5f_u8, 0xfc_u8, 0xe6_u8, 0xd7_u8, 0x59_u8, 0xcd_u8])
     def query_interface(this : IFsrmQuota*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1885,8 +1904,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuota*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuota*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuota*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmQuota*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -1903,10 +1922,10 @@ module Win32cr::Storage::FileServerResourceManager
     def commit(this : IFsrmQuota*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this)
     end
-    def get_QuotaLimit(this : IFsrmQuota*, quotaLimit : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaLimit(this : IFsrmQuota*, quotaLimit : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaLimit.call(this, quotaLimit)
     end
-    def put_QuotaLimit(this : IFsrmQuota*, quotaLimit : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_QuotaLimit(this : IFsrmQuota*, quotaLimit : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_QuotaLimit.call(this, quotaLimit)
     end
     def get_QuotaFlags(this : IFsrmQuota*, quotaFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -1945,16 +1964,16 @@ module Win32cr::Storage::FileServerResourceManager
     def get_SourceTemplateName(this : IFsrmQuota*, quotaTemplateName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SourceTemplateName.call(this, quotaTemplateName)
     end
-    def get_MatchesSourceTemplate(this : IFsrmQuota*, matches : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MatchesSourceTemplate(this : IFsrmQuota*, matches : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MatchesSourceTemplate.call(this, matches)
     end
     def apply_template(this : IFsrmQuota*, quotaTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.apply_template.call(this, quotaTemplateName)
     end
-    def get_QuotaUsed(this : IFsrmQuota*, used : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaUsed(this : IFsrmQuota*, used : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaUsed.call(this, used)
     end
-    def get_QuotaPeakUsage(this : IFsrmQuota*, peakUsage : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaPeakUsage(this : IFsrmQuota*, peakUsage : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaPeakUsage.call(this, peakUsage)
     end
     def get_QuotaPeakUsageTime(this : IFsrmQuota*, peakUsageDateTime : Float64*) : Win32cr::Foundation::HRESULT
@@ -1970,21 +1989,22 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmAutoApplyQuotaVtbl,
+
+  record IFsrmAutoApplyQuotaVtable,
     query_interface : Proc(IFsrmAutoApplyQuota*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmAutoApplyQuota*, UInt32),
     release : Proc(IFsrmAutoApplyQuota*, UInt32),
     get_type_info_count : Proc(IFsrmAutoApplyQuota*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmAutoApplyQuota*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmAutoApplyQuota*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmAutoApplyQuota*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmAutoApplyQuota*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmAutoApplyQuota*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::HRESULT),
     commit : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::HRESULT),
-    get_QuotaLimit : Proc(IFsrmAutoApplyQuota*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_QuotaLimit : Proc(IFsrmAutoApplyQuota*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_QuotaLimit : Proc(IFsrmAutoApplyQuota*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_QuotaLimit : Proc(IFsrmAutoApplyQuota*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_QuotaFlags : Proc(IFsrmAutoApplyQuota*, Int32*, Win32cr::Foundation::HRESULT),
     put_QuotaFlags : Proc(IFsrmAutoApplyQuota*, Int32, Win32cr::Foundation::HRESULT),
     get_Thresholds : Proc(IFsrmAutoApplyQuota*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -1997,7 +2017,7 @@ module Win32cr::Storage::FileServerResourceManager
     get_UserSid : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserAccount : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SourceTemplateName : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_MatchesSourceTemplate : Proc(IFsrmAutoApplyQuota*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MatchesSourceTemplate : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     apply_template : Proc(IFsrmAutoApplyQuota*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ExcludeFolders : Proc(IFsrmAutoApplyQuota*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_ExcludeFolders : Proc(IFsrmAutoApplyQuota*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
@@ -2005,7 +2025,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmAutoApplyQuota, lpVtbl : IFsrmAutoApplyQuotaVtbl* do
+  record IFsrmAutoApplyQuota, lpVtbl : IFsrmAutoApplyQuotaVtable* do
     GUID = LibC::GUID.new(0xf82e5729_u32, 0x6aba_u16, 0x4740_u16, StaticArray[0xbf_u8, 0xc7_u8, 0xc7_u8, 0xf5_u8, 0x8f_u8, 0x75_u8, 0xfb_u8, 0x7b_u8])
     def query_interface(this : IFsrmAutoApplyQuota*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2025,8 +2045,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmAutoApplyQuota*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmAutoApplyQuota*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmAutoApplyQuota*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmAutoApplyQuota*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -2043,10 +2063,10 @@ module Win32cr::Storage::FileServerResourceManager
     def commit(this : IFsrmAutoApplyQuota*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this)
     end
-    def get_QuotaLimit(this : IFsrmAutoApplyQuota*, quotaLimit : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaLimit(this : IFsrmAutoApplyQuota*, quotaLimit : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaLimit.call(this, quotaLimit)
     end
-    def put_QuotaLimit(this : IFsrmAutoApplyQuota*, quotaLimit : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_QuotaLimit(this : IFsrmAutoApplyQuota*, quotaLimit : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_QuotaLimit.call(this, quotaLimit)
     end
     def get_QuotaFlags(this : IFsrmAutoApplyQuota*, quotaFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -2085,7 +2105,7 @@ module Win32cr::Storage::FileServerResourceManager
     def get_SourceTemplateName(this : IFsrmAutoApplyQuota*, quotaTemplateName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SourceTemplateName.call(this, quotaTemplateName)
     end
-    def get_MatchesSourceTemplate(this : IFsrmAutoApplyQuota*, matches : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MatchesSourceTemplate(this : IFsrmAutoApplyQuota*, matches : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MatchesSourceTemplate.call(this, matches)
     end
     def apply_template(this : IFsrmAutoApplyQuota*, quotaTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2104,14 +2124,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaManagerVtbl,
+
+  record IFsrmQuotaManagerVtable,
     query_interface : Proc(IFsrmQuotaManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaManager*, UInt32),
     release : Proc(IFsrmQuotaManager*, UInt32),
     get_type_info_count : Proc(IFsrmQuotaManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuotaManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuotaManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuotaManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuotaManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ActionVariables : Proc(IFsrmQuotaManager*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     get_ActionVariableDescriptions : Proc(IFsrmQuotaManager*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     create_quota : Proc(IFsrmQuotaManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -2127,7 +2148,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaManager, lpVtbl : IFsrmQuotaManagerVtbl* do
+  record IFsrmQuotaManager, lpVtbl : IFsrmQuotaManagerVtable* do
     GUID = LibC::GUID.new(0x8bb68c7d_u32, 0x19d8_u16, 0x4ffb_u16, StaticArray[0x80_u8, 0x9e_u8, 0xbe_u8, 0x4f_u8, 0xc1_u8, 0x73_u8, 0x40_u8, 0x14_u8])
     def query_interface(this : IFsrmQuotaManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2147,8 +2168,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuotaManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuotaManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuotaManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ActionVariables(this : IFsrmQuotaManager*, variables : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ActionVariables.call(this, variables)
@@ -2190,14 +2211,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaManagerExVtbl,
+
+  record IFsrmQuotaManagerExVtable,
     query_interface : Proc(IFsrmQuotaManagerEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaManagerEx*, UInt32),
     release : Proc(IFsrmQuotaManagerEx*, UInt32),
     get_type_info_count : Proc(IFsrmQuotaManagerEx*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuotaManagerEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuotaManagerEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuotaManagerEx*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuotaManagerEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ActionVariables : Proc(IFsrmQuotaManagerEx*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     get_ActionVariableDescriptions : Proc(IFsrmQuotaManagerEx*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     create_quota : Proc(IFsrmQuotaManagerEx*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -2210,11 +2232,11 @@ module Win32cr::Storage::FileServerResourceManager
     enum_effective_quotas : Proc(IFsrmQuotaManagerEx*, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Void**, Win32cr::Foundation::HRESULT),
     scan : Proc(IFsrmQuotaManagerEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     create_quota_collection : Proc(IFsrmQuotaManagerEx*, Void**, Win32cr::Foundation::HRESULT),
-    is_affected_by_quota : Proc(IFsrmQuotaManagerEx*, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Int16*, Win32cr::Foundation::HRESULT)
+    is_affected_by_quota : Proc(IFsrmQuotaManagerEx*, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmQuotaManagerEx, lpVtbl : IFsrmQuotaManagerExVtbl* do
+  record IFsrmQuotaManagerEx, lpVtbl : IFsrmQuotaManagerExVtable* do
     GUID = LibC::GUID.new(0x4846cb01_u32, 0xd430_u16, 0x494f_u16, StaticArray[0xab_u8, 0xb4_u8, 0xb1_u8, 0x5_u8, 0x49_u8, 0x99_u8, 0xfb_u8, 0x9_u8])
     def query_interface(this : IFsrmQuotaManagerEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2234,8 +2256,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuotaManagerEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuotaManagerEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuotaManagerEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ActionVariables(this : IFsrmQuotaManagerEx*, variables : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ActionVariables.call(this, variables)
@@ -2273,28 +2295,29 @@ module Win32cr::Storage::FileServerResourceManager
     def create_quota_collection(this : IFsrmQuotaManagerEx*, collection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_quota_collection.call(this, collection)
     end
-    def is_affected_by_quota(this : IFsrmQuotaManagerEx*, path : Win32cr::Foundation::BSTR, options : Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, affected : Int16*) : Win32cr::Foundation::HRESULT
+    def is_affected_by_quota(this : IFsrmQuotaManagerEx*, path : Win32cr::Foundation::BSTR, options : Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, affected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_affected_by_quota.call(this, path, options, affected)
     end
 
   end
 
   @[Extern]
-  record IFsrmQuotaTemplateVtbl,
+
+  record IFsrmQuotaTemplateVtable,
     query_interface : Proc(IFsrmQuotaTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaTemplate*, UInt32),
     release : Proc(IFsrmQuotaTemplate*, UInt32),
     get_type_info_count : Proc(IFsrmQuotaTemplate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuotaTemplate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuotaTemplate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuotaTemplate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuotaTemplate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmQuotaTemplate*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmQuotaTemplate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmQuotaTemplate*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmQuotaTemplate*, Win32cr::Foundation::HRESULT),
     commit : Proc(IFsrmQuotaTemplate*, Win32cr::Foundation::HRESULT),
-    get_QuotaLimit : Proc(IFsrmQuotaTemplate*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_QuotaLimit : Proc(IFsrmQuotaTemplate*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_QuotaLimit : Proc(IFsrmQuotaTemplate*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_QuotaLimit : Proc(IFsrmQuotaTemplate*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_QuotaFlags : Proc(IFsrmQuotaTemplate*, Int32*, Win32cr::Foundation::HRESULT),
     put_QuotaFlags : Proc(IFsrmQuotaTemplate*, Int32, Win32cr::Foundation::HRESULT),
     get_Thresholds : Proc(IFsrmQuotaTemplate*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -2310,7 +2333,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaTemplate, lpVtbl : IFsrmQuotaTemplateVtbl* do
+  record IFsrmQuotaTemplate, lpVtbl : IFsrmQuotaTemplateVtable* do
     GUID = LibC::GUID.new(0xa2efab31_u32, 0x295e_u16, 0x46bb_u16, StaticArray[0xb9_u8, 0x76_u8, 0xe8_u8, 0x6d_u8, 0x58_u8, 0xb5_u8, 0x2e_u8, 0x8b_u8])
     def query_interface(this : IFsrmQuotaTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2330,8 +2353,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuotaTemplate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuotaTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuotaTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmQuotaTemplate*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -2348,10 +2371,10 @@ module Win32cr::Storage::FileServerResourceManager
     def commit(this : IFsrmQuotaTemplate*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this)
     end
-    def get_QuotaLimit(this : IFsrmQuotaTemplate*, quotaLimit : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaLimit(this : IFsrmQuotaTemplate*, quotaLimit : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaLimit.call(this, quotaLimit)
     end
-    def put_QuotaLimit(this : IFsrmQuotaTemplate*, quotaLimit : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_QuotaLimit(this : IFsrmQuotaTemplate*, quotaLimit : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_QuotaLimit.call(this, quotaLimit)
     end
     def get_QuotaFlags(this : IFsrmQuotaTemplate*, quotaFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -2394,21 +2417,22 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaTemplateImportedVtbl,
+
+  record IFsrmQuotaTemplateImportedVtable,
     query_interface : Proc(IFsrmQuotaTemplateImported*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaTemplateImported*, UInt32),
     release : Proc(IFsrmQuotaTemplateImported*, UInt32),
     get_type_info_count : Proc(IFsrmQuotaTemplateImported*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuotaTemplateImported*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuotaTemplateImported*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuotaTemplateImported*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuotaTemplateImported*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmQuotaTemplateImported*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::HRESULT),
     commit : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::HRESULT),
-    get_QuotaLimit : Proc(IFsrmQuotaTemplateImported*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_QuotaLimit : Proc(IFsrmQuotaTemplateImported*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_QuotaLimit : Proc(IFsrmQuotaTemplateImported*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_QuotaLimit : Proc(IFsrmQuotaTemplateImported*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_QuotaFlags : Proc(IFsrmQuotaTemplateImported*, Int32*, Win32cr::Foundation::HRESULT),
     put_QuotaFlags : Proc(IFsrmQuotaTemplateImported*, Int32, Win32cr::Foundation::HRESULT),
     get_Thresholds : Proc(IFsrmQuotaTemplateImported*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -2421,12 +2445,12 @@ module Win32cr::Storage::FileServerResourceManager
     put_Name : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     copy_template : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     commit_and_update_derived : Proc(IFsrmQuotaTemplateImported*, Win32cr::Storage::FileServerResourceManager::FsrmCommitOptions, Win32cr::Storage::FileServerResourceManager::FsrmTemplateApplyOptions, Void**, Win32cr::Foundation::HRESULT),
-    get_OverwriteOnCommit : Proc(IFsrmQuotaTemplateImported*, Int16*, Win32cr::Foundation::HRESULT),
-    put_OverwriteOnCommit : Proc(IFsrmQuotaTemplateImported*, Int16, Win32cr::Foundation::HRESULT)
+    get_OverwriteOnCommit : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_OverwriteOnCommit : Proc(IFsrmQuotaTemplateImported*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmQuotaTemplateImported, lpVtbl : IFsrmQuotaTemplateImportedVtbl* do
+  record IFsrmQuotaTemplateImported, lpVtbl : IFsrmQuotaTemplateImportedVtable* do
     GUID = LibC::GUID.new(0x9a2bf113_u32, 0xa329_u16, 0x44cc_u16, StaticArray[0x80_u8, 0x9a_u8, 0x5c_u8, 0x0_u8, 0xfc_u8, 0xe8_u8, 0xda_u8, 0x40_u8])
     def query_interface(this : IFsrmQuotaTemplateImported*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2446,8 +2470,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuotaTemplateImported*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuotaTemplateImported*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuotaTemplateImported*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmQuotaTemplateImported*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -2464,10 +2488,10 @@ module Win32cr::Storage::FileServerResourceManager
     def commit(this : IFsrmQuotaTemplateImported*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this)
     end
-    def get_QuotaLimit(this : IFsrmQuotaTemplateImported*, quotaLimit : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_QuotaLimit(this : IFsrmQuotaTemplateImported*, quotaLimit : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QuotaLimit.call(this, quotaLimit)
     end
-    def put_QuotaLimit(this : IFsrmQuotaTemplateImported*, quotaLimit : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_QuotaLimit(this : IFsrmQuotaTemplateImported*, quotaLimit : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_QuotaLimit.call(this, quotaLimit)
     end
     def get_QuotaFlags(this : IFsrmQuotaTemplateImported*, quotaFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -2506,33 +2530,34 @@ module Win32cr::Storage::FileServerResourceManager
     def commit_and_update_derived(this : IFsrmQuotaTemplateImported*, commitOptions : Win32cr::Storage::FileServerResourceManager::FsrmCommitOptions, applyOptions : Win32cr::Storage::FileServerResourceManager::FsrmTemplateApplyOptions, derivedObjectsResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit_and_update_derived.call(this, commitOptions, applyOptions, derivedObjectsResult)
     end
-    def get_OverwriteOnCommit(this : IFsrmQuotaTemplateImported*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+    def get_OverwriteOnCommit(this : IFsrmQuotaTemplateImported*, overwrite : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OverwriteOnCommit.call(this, overwrite)
     end
-    def put_OverwriteOnCommit(this : IFsrmQuotaTemplateImported*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+    def put_OverwriteOnCommit(this : IFsrmQuotaTemplateImported*, overwrite : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_OverwriteOnCommit.call(this, overwrite)
     end
 
   end
 
   @[Extern]
-  record IFsrmQuotaTemplateManagerVtbl,
+
+  record IFsrmQuotaTemplateManagerVtable,
     query_interface : Proc(IFsrmQuotaTemplateManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaTemplateManager*, UInt32),
     release : Proc(IFsrmQuotaTemplateManager*, UInt32),
     get_type_info_count : Proc(IFsrmQuotaTemplateManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmQuotaTemplateManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmQuotaTemplateManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmQuotaTemplateManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmQuotaTemplateManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_template : Proc(IFsrmQuotaTemplateManager*, Void**, Win32cr::Foundation::HRESULT),
     get_template : Proc(IFsrmQuotaTemplateManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     enum_templates : Proc(IFsrmQuotaTemplateManager*, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Void**, Win32cr::Foundation::HRESULT),
-    export_templates : Proc(IFsrmQuotaTemplateManager*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    import_templates : Proc(IFsrmQuotaTemplateManager*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    export_templates : Proc(IFsrmQuotaTemplateManager*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    import_templates : Proc(IFsrmQuotaTemplateManager*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmQuotaTemplateManager, lpVtbl : IFsrmQuotaTemplateManagerVtbl* do
+  record IFsrmQuotaTemplateManager, lpVtbl : IFsrmQuotaTemplateManagerVtable* do
     GUID = LibC::GUID.new(0x4173ac41_u32, 0x172d_u16, 0x4d52_u16, StaticArray[0x96_u8, 0x3c_u8, 0xfd_u8, 0xc7_u8, 0xe4_u8, 0x15_u8, 0xf7_u8, 0x17_u8])
     def query_interface(this : IFsrmQuotaTemplateManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2552,8 +2577,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmQuotaTemplateManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmQuotaTemplateManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmQuotaTemplateManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_template(this : IFsrmQuotaTemplateManager*, quotaTemplate : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_template.call(this, quotaTemplate)
@@ -2564,24 +2589,25 @@ module Win32cr::Storage::FileServerResourceManager
     def enum_templates(this : IFsrmQuotaTemplateManager*, options : Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, quotaTemplates : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_templates.call(this, options, quotaTemplates)
     end
-    def export_templates(this : IFsrmQuotaTemplateManager*, quotaTemplateNamesArray : Win32cr::System::Com::VARIANT*, serializedQuotaTemplates : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def export_templates(this : IFsrmQuotaTemplateManager*, quotaTemplateNamesArray : Win32cr::System::Variant::VARIANT*, serializedQuotaTemplates : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export_templates.call(this, quotaTemplateNamesArray, serializedQuotaTemplates)
     end
-    def import_templates(this : IFsrmQuotaTemplateManager*, serializedQuotaTemplates : Win32cr::Foundation::BSTR, quotaTemplateNamesArray : Win32cr::System::Com::VARIANT*, quotaTemplates : Void**) : Win32cr::Foundation::HRESULT
+    def import_templates(this : IFsrmQuotaTemplateManager*, serializedQuotaTemplates : Win32cr::Foundation::BSTR, quotaTemplateNamesArray : Win32cr::System::Variant::VARIANT*, quotaTemplates : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import_templates.call(this, serializedQuotaTemplates, quotaTemplateNamesArray, quotaTemplates)
     end
 
   end
 
   @[Extern]
-  record IFsrmFileGroupVtbl,
+
+  record IFsrmFileGroupVtable,
     query_interface : Proc(IFsrmFileGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileGroup*, UInt32),
     release : Proc(IFsrmFileGroup*, UInt32),
     get_type_info_count : Proc(IFsrmFileGroup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileGroup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileGroup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileGroup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileGroup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileGroup*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileGroup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2596,7 +2622,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileGroup, lpVtbl : IFsrmFileGroupVtbl* do
+  record IFsrmFileGroup, lpVtbl : IFsrmFileGroupVtable* do
     GUID = LibC::GUID.new(0x8dd04909_u32, 0xe34_u16, 0x4d55_u16, StaticArray[0xaf_u8, 0xaa_u8, 0x89_u8, 0xe1_u8, 0xf1_u8, 0xa1_u8, 0xbb_u8, 0xb9_u8])
     def query_interface(this : IFsrmFileGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2616,8 +2642,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileGroup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileGroup*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -2656,14 +2682,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileGroupImportedVtbl,
+
+  record IFsrmFileGroupImportedVtable,
     query_interface : Proc(IFsrmFileGroupImported*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileGroupImported*, UInt32),
     release : Proc(IFsrmFileGroupImported*, UInt32),
     get_type_info_count : Proc(IFsrmFileGroupImported*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileGroupImported*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileGroupImported*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileGroupImported*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileGroupImported*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileGroupImported*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileGroupImported*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileGroupImported*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2675,12 +2702,12 @@ module Win32cr::Storage::FileServerResourceManager
     put_Members : Proc(IFsrmFileGroupImported*, Void*, Win32cr::Foundation::HRESULT),
     get_NonMembers : Proc(IFsrmFileGroupImported*, Void**, Win32cr::Foundation::HRESULT),
     put_NonMembers : Proc(IFsrmFileGroupImported*, Void*, Win32cr::Foundation::HRESULT),
-    get_OverwriteOnCommit : Proc(IFsrmFileGroupImported*, Int16*, Win32cr::Foundation::HRESULT),
-    put_OverwriteOnCommit : Proc(IFsrmFileGroupImported*, Int16, Win32cr::Foundation::HRESULT)
+    get_OverwriteOnCommit : Proc(IFsrmFileGroupImported*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_OverwriteOnCommit : Proc(IFsrmFileGroupImported*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmFileGroupImported, lpVtbl : IFsrmFileGroupImportedVtbl* do
+  record IFsrmFileGroupImported, lpVtbl : IFsrmFileGroupImportedVtable* do
     GUID = LibC::GUID.new(0xad55f10b_u32, 0x5f11_u16, 0x4be7_u16, StaticArray[0x94_u8, 0xef_u8, 0xd9_u8, 0xee_u8, 0x2e_u8, 0x47_u8, 0xd_u8, 0xed_u8])
     def query_interface(this : IFsrmFileGroupImported*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2700,8 +2727,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileGroupImported*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileGroupImported*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileGroupImported*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileGroupImported*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -2736,33 +2763,34 @@ module Win32cr::Storage::FileServerResourceManager
     def put_NonMembers(this : IFsrmFileGroupImported*, nonMembers : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NonMembers.call(this, nonMembers)
     end
-    def get_OverwriteOnCommit(this : IFsrmFileGroupImported*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+    def get_OverwriteOnCommit(this : IFsrmFileGroupImported*, overwrite : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OverwriteOnCommit.call(this, overwrite)
     end
-    def put_OverwriteOnCommit(this : IFsrmFileGroupImported*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+    def put_OverwriteOnCommit(this : IFsrmFileGroupImported*, overwrite : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_OverwriteOnCommit.call(this, overwrite)
     end
 
   end
 
   @[Extern]
-  record IFsrmFileGroupManagerVtbl,
+
+  record IFsrmFileGroupManagerVtable,
     query_interface : Proc(IFsrmFileGroupManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileGroupManager*, UInt32),
     release : Proc(IFsrmFileGroupManager*, UInt32),
     get_type_info_count : Proc(IFsrmFileGroupManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileGroupManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileGroupManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileGroupManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileGroupManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_file_group : Proc(IFsrmFileGroupManager*, Void**, Win32cr::Foundation::HRESULT),
     get_file_group : Proc(IFsrmFileGroupManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     enum_file_groups : Proc(IFsrmFileGroupManager*, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Void**, Win32cr::Foundation::HRESULT),
-    export_file_groups : Proc(IFsrmFileGroupManager*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    import_file_groups : Proc(IFsrmFileGroupManager*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    export_file_groups : Proc(IFsrmFileGroupManager*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    import_file_groups : Proc(IFsrmFileGroupManager*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmFileGroupManager, lpVtbl : IFsrmFileGroupManagerVtbl* do
+  record IFsrmFileGroupManager, lpVtbl : IFsrmFileGroupManagerVtable* do
     GUID = LibC::GUID.new(0x426677d5_u32, 0x18c_u16, 0x485c_u16, StaticArray[0x8a_u8, 0x51_u8, 0x20_u8, 0xb8_u8, 0x6d_u8, 0x0_u8, 0xbd_u8, 0xc4_u8])
     def query_interface(this : IFsrmFileGroupManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2782,8 +2810,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileGroupManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileGroupManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileGroupManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_file_group(this : IFsrmFileGroupManager*, fileGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_file_group.call(this, fileGroup)
@@ -2794,24 +2822,25 @@ module Win32cr::Storage::FileServerResourceManager
     def enum_file_groups(this : IFsrmFileGroupManager*, options : Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, fileGroups : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_file_groups.call(this, options, fileGroups)
     end
-    def export_file_groups(this : IFsrmFileGroupManager*, fileGroupNamesArray : Win32cr::System::Com::VARIANT*, serializedFileGroups : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def export_file_groups(this : IFsrmFileGroupManager*, fileGroupNamesArray : Win32cr::System::Variant::VARIANT*, serializedFileGroups : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export_file_groups.call(this, fileGroupNamesArray, serializedFileGroups)
     end
-    def import_file_groups(this : IFsrmFileGroupManager*, serializedFileGroups : Win32cr::Foundation::BSTR, fileGroupNamesArray : Win32cr::System::Com::VARIANT*, fileGroups : Void**) : Win32cr::Foundation::HRESULT
+    def import_file_groups(this : IFsrmFileGroupManager*, serializedFileGroups : Win32cr::Foundation::BSTR, fileGroupNamesArray : Win32cr::System::Variant::VARIANT*, fileGroups : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import_file_groups.call(this, serializedFileGroups, fileGroupNamesArray, fileGroups)
     end
 
   end
 
   @[Extern]
-  record IFsrmFileScreenBaseVtbl,
+
+  record IFsrmFileScreenBaseVtable,
     query_interface : Proc(IFsrmFileScreenBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenBase*, UInt32),
     release : Proc(IFsrmFileScreenBase*, UInt32),
     get_type_info_count : Proc(IFsrmFileScreenBase*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileScreenBase*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileScreenBase*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileScreenBase*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileScreenBase*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileScreenBase*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileScreenBase*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileScreenBase*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2826,7 +2855,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenBase, lpVtbl : IFsrmFileScreenBaseVtbl* do
+  record IFsrmFileScreenBase, lpVtbl : IFsrmFileScreenBaseVtable* do
     GUID = LibC::GUID.new(0xf3637e80_u32, 0x5b22_u16, 0x4a2b_u16, StaticArray[0xa6_u8, 0x37_u8, 0xbb_u8, 0xb6_u8, 0x42_u8, 0xb4_u8, 0x1c_u8, 0xfc_u8])
     def query_interface(this : IFsrmFileScreenBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2846,8 +2875,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileScreenBase*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileScreenBase*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileScreenBase*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileScreenBase*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -2886,14 +2915,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenVtbl,
+
+  record IFsrmFileScreenVtable,
     query_interface : Proc(IFsrmFileScreen*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreen*, UInt32),
     release : Proc(IFsrmFileScreen*, UInt32),
     get_type_info_count : Proc(IFsrmFileScreen*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileScreen*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileScreen*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileScreen*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileScreen*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileScreen*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileScreen*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileScreen*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2907,14 +2937,14 @@ module Win32cr::Storage::FileServerResourceManager
     enum_actions : Proc(IFsrmFileScreen*, Void**, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IFsrmFileScreen*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SourceTemplateName : Proc(IFsrmFileScreen*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_MatchesSourceTemplate : Proc(IFsrmFileScreen*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MatchesSourceTemplate : Proc(IFsrmFileScreen*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_UserSid : Proc(IFsrmFileScreen*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserAccount : Proc(IFsrmFileScreen*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     apply_template : Proc(IFsrmFileScreen*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmFileScreen, lpVtbl : IFsrmFileScreenVtbl* do
+  record IFsrmFileScreen, lpVtbl : IFsrmFileScreenVtable* do
     GUID = LibC::GUID.new(0x5f6325d3_u32, 0xce88_u16, 0x4733_u16, StaticArray[0x84_u8, 0xc1_u8, 0x2d_u8, 0x6a_u8, 0xef_u8, 0xc5_u8, 0xea_u8, 0x7_u8])
     def query_interface(this : IFsrmFileScreen*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2934,8 +2964,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileScreen*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileScreen*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileScreen*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileScreen*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -2976,7 +3006,7 @@ module Win32cr::Storage::FileServerResourceManager
     def get_SourceTemplateName(this : IFsrmFileScreen*, fileScreenTemplateName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SourceTemplateName.call(this, fileScreenTemplateName)
     end
-    def get_MatchesSourceTemplate(this : IFsrmFileScreen*, matches : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MatchesSourceTemplate(this : IFsrmFileScreen*, matches : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MatchesSourceTemplate.call(this, matches)
     end
     def get_UserSid(this : IFsrmFileScreen*, userSid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2992,14 +3022,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenExceptionVtbl,
+
+  record IFsrmFileScreenExceptionVtable,
     query_interface : Proc(IFsrmFileScreenException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenException*, UInt32),
     release : Proc(IFsrmFileScreenException*, UInt32),
     get_type_info_count : Proc(IFsrmFileScreenException*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileScreenException*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileScreenException*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileScreenException*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileScreenException*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileScreenException*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileScreenException*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileScreenException*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3011,7 +3042,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenException, lpVtbl : IFsrmFileScreenExceptionVtbl* do
+  record IFsrmFileScreenException, lpVtbl : IFsrmFileScreenExceptionVtable* do
     GUID = LibC::GUID.new(0xbee7ce02_u32, 0xdf77_u16, 0x4515_u16, StaticArray[0x93_u8, 0x89_u8, 0x78_u8, 0xf0_u8, 0x1c_u8, 0x5a_u8, 0xfc_u8, 0x1a_u8])
     def query_interface(this : IFsrmFileScreenException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3031,8 +3062,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileScreenException*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileScreenException*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileScreenException*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileScreenException*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -3062,14 +3093,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenManagerVtbl,
+
+  record IFsrmFileScreenManagerVtable,
     query_interface : Proc(IFsrmFileScreenManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenManager*, UInt32),
     release : Proc(IFsrmFileScreenManager*, UInt32),
     get_type_info_count : Proc(IFsrmFileScreenManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileScreenManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileScreenManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileScreenManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileScreenManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ActionVariables : Proc(IFsrmFileScreenManager*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     get_ActionVariableDescriptions : Proc(IFsrmFileScreenManager*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     create_file_screen : Proc(IFsrmFileScreenManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -3082,7 +3114,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenManager, lpVtbl : IFsrmFileScreenManagerVtbl* do
+  record IFsrmFileScreenManager, lpVtbl : IFsrmFileScreenManagerVtable* do
     GUID = LibC::GUID.new(0xff4fa04e_u32, 0x5a94_u16, 0x4bda_u16, StaticArray[0xa3_u8, 0xa0_u8, 0xd5_u8, 0xb4_u8, 0xd3_u8, 0xc5_u8, 0x2e_u8, 0xba_u8])
     def query_interface(this : IFsrmFileScreenManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3102,8 +3134,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileScreenManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileScreenManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileScreenManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ActionVariables(this : IFsrmFileScreenManager*, variables : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ActionVariables.call(this, variables)
@@ -3136,14 +3168,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenTemplateVtbl,
+
+  record IFsrmFileScreenTemplateVtable,
     query_interface : Proc(IFsrmFileScreenTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenTemplate*, UInt32),
     release : Proc(IFsrmFileScreenTemplate*, UInt32),
     get_type_info_count : Proc(IFsrmFileScreenTemplate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileScreenTemplate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileScreenTemplate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileScreenTemplate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileScreenTemplate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileScreenTemplate*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileScreenTemplate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileScreenTemplate*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3162,7 +3195,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenTemplate, lpVtbl : IFsrmFileScreenTemplateVtbl* do
+  record IFsrmFileScreenTemplate, lpVtbl : IFsrmFileScreenTemplateVtable* do
     GUID = LibC::GUID.new(0x205bebf8_u32, 0xdd93_u16, 0x452a_u16, StaticArray[0x95_u8, 0xa6_u8, 0x32_u8, 0xb5_u8, 0x66_u8, 0xb3_u8, 0x58_u8, 0x28_u8])
     def query_interface(this : IFsrmFileScreenTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3182,8 +3215,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileScreenTemplate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileScreenTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileScreenTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileScreenTemplate*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -3234,14 +3267,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenTemplateImportedVtbl,
+
+  record IFsrmFileScreenTemplateImportedVtable,
     query_interface : Proc(IFsrmFileScreenTemplateImported*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenTemplateImported*, UInt32),
     release : Proc(IFsrmFileScreenTemplateImported*, UInt32),
     get_type_info_count : Proc(IFsrmFileScreenTemplateImported*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileScreenTemplateImported*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileScreenTemplateImported*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileScreenTemplateImported*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileScreenTemplateImported*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileScreenTemplateImported*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileScreenTemplateImported*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileScreenTemplateImported*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3257,12 +3291,12 @@ module Win32cr::Storage::FileServerResourceManager
     put_Name : Proc(IFsrmFileScreenTemplateImported*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     copy_template : Proc(IFsrmFileScreenTemplateImported*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     commit_and_update_derived : Proc(IFsrmFileScreenTemplateImported*, Win32cr::Storage::FileServerResourceManager::FsrmCommitOptions, Win32cr::Storage::FileServerResourceManager::FsrmTemplateApplyOptions, Void**, Win32cr::Foundation::HRESULT),
-    get_OverwriteOnCommit : Proc(IFsrmFileScreenTemplateImported*, Int16*, Win32cr::Foundation::HRESULT),
-    put_OverwriteOnCommit : Proc(IFsrmFileScreenTemplateImported*, Int16, Win32cr::Foundation::HRESULT)
+    get_OverwriteOnCommit : Proc(IFsrmFileScreenTemplateImported*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_OverwriteOnCommit : Proc(IFsrmFileScreenTemplateImported*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmFileScreenTemplateImported, lpVtbl : IFsrmFileScreenTemplateImportedVtbl* do
+  record IFsrmFileScreenTemplateImported, lpVtbl : IFsrmFileScreenTemplateImportedVtable* do
     GUID = LibC::GUID.new(0xe1010359_u32, 0x3e5d_u16, 0x4ecd_u16, StaticArray[0x9f_u8, 0xe4_u8, 0xef_u8, 0x48_u8, 0x62_u8, 0x2f_u8, 0xdf_u8, 0x30_u8])
     def query_interface(this : IFsrmFileScreenTemplateImported*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3282,8 +3316,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileScreenTemplateImported*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileScreenTemplateImported*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileScreenTemplateImported*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileScreenTemplateImported*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -3330,33 +3364,34 @@ module Win32cr::Storage::FileServerResourceManager
     def commit_and_update_derived(this : IFsrmFileScreenTemplateImported*, commitOptions : Win32cr::Storage::FileServerResourceManager::FsrmCommitOptions, applyOptions : Win32cr::Storage::FileServerResourceManager::FsrmTemplateApplyOptions, derivedObjectsResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit_and_update_derived.call(this, commitOptions, applyOptions, derivedObjectsResult)
     end
-    def get_OverwriteOnCommit(this : IFsrmFileScreenTemplateImported*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+    def get_OverwriteOnCommit(this : IFsrmFileScreenTemplateImported*, overwrite : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OverwriteOnCommit.call(this, overwrite)
     end
-    def put_OverwriteOnCommit(this : IFsrmFileScreenTemplateImported*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+    def put_OverwriteOnCommit(this : IFsrmFileScreenTemplateImported*, overwrite : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_OverwriteOnCommit.call(this, overwrite)
     end
 
   end
 
   @[Extern]
-  record IFsrmFileScreenTemplateManagerVtbl,
+
+  record IFsrmFileScreenTemplateManagerVtable,
     query_interface : Proc(IFsrmFileScreenTemplateManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenTemplateManager*, UInt32),
     release : Proc(IFsrmFileScreenTemplateManager*, UInt32),
     get_type_info_count : Proc(IFsrmFileScreenTemplateManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileScreenTemplateManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileScreenTemplateManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileScreenTemplateManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileScreenTemplateManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_template : Proc(IFsrmFileScreenTemplateManager*, Void**, Win32cr::Foundation::HRESULT),
     get_template : Proc(IFsrmFileScreenTemplateManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     enum_templates : Proc(IFsrmFileScreenTemplateManager*, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Void**, Win32cr::Foundation::HRESULT),
-    export_templates : Proc(IFsrmFileScreenTemplateManager*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    import_templates : Proc(IFsrmFileScreenTemplateManager*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    export_templates : Proc(IFsrmFileScreenTemplateManager*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    import_templates : Proc(IFsrmFileScreenTemplateManager*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmFileScreenTemplateManager, lpVtbl : IFsrmFileScreenTemplateManagerVtbl* do
+  record IFsrmFileScreenTemplateManager, lpVtbl : IFsrmFileScreenTemplateManagerVtable* do
     GUID = LibC::GUID.new(0xcfe36cba_u32, 0x1949_u16, 0x4e74_u16, StaticArray[0xa1_u8, 0x4f_u8, 0xf1_u8, 0xd5_u8, 0x80_u8, 0xce_u8, 0xaf_u8, 0x13_u8])
     def query_interface(this : IFsrmFileScreenTemplateManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3376,8 +3411,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileScreenTemplateManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileScreenTemplateManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileScreenTemplateManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_template(this : IFsrmFileScreenTemplateManager*, fileScreenTemplate : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_template.call(this, fileScreenTemplate)
@@ -3388,38 +3423,39 @@ module Win32cr::Storage::FileServerResourceManager
     def enum_templates(this : IFsrmFileScreenTemplateManager*, options : Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, fileScreenTemplates : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_templates.call(this, options, fileScreenTemplates)
     end
-    def export_templates(this : IFsrmFileScreenTemplateManager*, fileScreenTemplateNamesArray : Win32cr::System::Com::VARIANT*, serializedFileScreenTemplates : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def export_templates(this : IFsrmFileScreenTemplateManager*, fileScreenTemplateNamesArray : Win32cr::System::Variant::VARIANT*, serializedFileScreenTemplates : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export_templates.call(this, fileScreenTemplateNamesArray, serializedFileScreenTemplates)
     end
-    def import_templates(this : IFsrmFileScreenTemplateManager*, serializedFileScreenTemplates : Win32cr::Foundation::BSTR, fileScreenTemplateNamesArray : Win32cr::System::Com::VARIANT*, fileScreenTemplates : Void**) : Win32cr::Foundation::HRESULT
+    def import_templates(this : IFsrmFileScreenTemplateManager*, serializedFileScreenTemplates : Win32cr::Foundation::BSTR, fileScreenTemplateNamesArray : Win32cr::System::Variant::VARIANT*, fileScreenTemplates : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import_templates.call(this, serializedFileScreenTemplates, fileScreenTemplateNamesArray, fileScreenTemplates)
     end
 
   end
 
   @[Extern]
-  record IFsrmReportManagerVtbl,
+
+  record IFsrmReportManagerVtable,
     query_interface : Proc(IFsrmReportManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReportManager*, UInt32),
     release : Proc(IFsrmReportManager*, UInt32),
     get_type_info_count : Proc(IFsrmReportManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmReportManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmReportManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmReportManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmReportManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     enum_report_jobs : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Void**, Win32cr::Foundation::HRESULT),
     create_report_job : Proc(IFsrmReportManager*, Void**, Win32cr::Foundation::HRESULT),
     get_report_job : Proc(IFsrmReportManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_output_directory : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_output_directory : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    is_filter_valid_for_report_type : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportType, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Int16*, Win32cr::Foundation::HRESULT),
-    get_default_filter : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportType, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_default_filter : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportType, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_report_size_limit : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_report_size_limit : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    is_filter_valid_for_report_type : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportType, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_default_filter : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportType, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_default_filter : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportType, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_report_size_limit : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_report_size_limit : Proc(IFsrmReportManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmReportManager, lpVtbl : IFsrmReportManagerVtbl* do
+  record IFsrmReportManager, lpVtbl : IFsrmReportManagerVtable* do
     GUID = LibC::GUID.new(0x27b899fe_u32, 0x6ffa_u16, 0x4481_u16, StaticArray[0xa1_u8, 0x84_u8, 0xd3_u8, 0xda_u8, 0xad_u8, 0xe8_u8, 0xa0_u8, 0x2b_u8])
     def query_interface(this : IFsrmReportManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3439,8 +3475,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmReportManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmReportManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmReportManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def enum_report_jobs(this : IFsrmReportManager*, options : Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, reportJobs : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_report_jobs.call(this, options, reportJobs)
@@ -3457,33 +3493,34 @@ module Win32cr::Storage::FileServerResourceManager
     def set_output_directory(this : IFsrmReportManager*, context : Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_output_directory.call(this, context, path)
     end
-    def is_filter_valid_for_report_type(this : IFsrmReportManager*, reportType : Win32cr::Storage::FileServerResourceManager::FsrmReportType, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, valid : Int16*) : Win32cr::Foundation::HRESULT
+    def is_filter_valid_for_report_type(this : IFsrmReportManager*, reportType : Win32cr::Storage::FileServerResourceManager::FsrmReportType, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, valid : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_filter_valid_for_report_type.call(this, reportType, filter, valid)
     end
-    def get_default_filter(this : IFsrmReportManager*, reportType : Win32cr::Storage::FileServerResourceManager::FsrmReportType, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_default_filter(this : IFsrmReportManager*, reportType : Win32cr::Storage::FileServerResourceManager::FsrmReportType, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_default_filter.call(this, reportType, filter, filterValue)
     end
-    def set_default_filter(this : IFsrmReportManager*, reportType : Win32cr::Storage::FileServerResourceManager::FsrmReportType, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_default_filter(this : IFsrmReportManager*, reportType : Win32cr::Storage::FileServerResourceManager::FsrmReportType, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_default_filter.call(this, reportType, filter, filterValue)
     end
-    def get_report_size_limit(this : IFsrmReportManager*, limit : Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, limitValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_report_size_limit(this : IFsrmReportManager*, limit : Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, limitValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_report_size_limit.call(this, limit, limitValue)
     end
-    def set_report_size_limit(this : IFsrmReportManager*, limit : Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, limitValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_report_size_limit(this : IFsrmReportManager*, limit : Win32cr::Storage::FileServerResourceManager::FsrmReportLimit, limitValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_report_size_limit.call(this, limit, limitValue)
     end
 
   end
 
   @[Extern]
-  record IFsrmReportJobVtbl,
+
+  record IFsrmReportJobVtable,
     query_interface : Proc(IFsrmReportJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReportJob*, UInt32),
     release : Proc(IFsrmReportJob*, UInt32),
     get_type_info_count : Proc(IFsrmReportJob*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmReportJob*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmReportJob*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmReportJob*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmReportJob*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmReportJob*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmReportJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmReportJob*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3504,12 +3541,12 @@ module Win32cr::Storage::FileServerResourceManager
     enum_reports : Proc(IFsrmReportJob*, Void**, Win32cr::Foundation::HRESULT),
     create_report : Proc(IFsrmReportJob*, Win32cr::Storage::FileServerResourceManager::FsrmReportType, Void**, Win32cr::Foundation::HRESULT),
     run : Proc(IFsrmReportJob*, Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, Win32cr::Foundation::HRESULT),
-    wait_for_completion : Proc(IFsrmReportJob*, Int32, Int16*, Win32cr::Foundation::HRESULT),
+    wait_for_completion : Proc(IFsrmReportJob*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     cancel : Proc(IFsrmReportJob*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmReportJob, lpVtbl : IFsrmReportJobVtbl* do
+  record IFsrmReportJob, lpVtbl : IFsrmReportJobVtable* do
     GUID = LibC::GUID.new(0x38e87280_u32, 0x715c_u16, 0x4c7d_u16, StaticArray[0xa2_u8, 0x80_u8, 0xea_u8, 0x16_u8, 0x51_u8, 0xa1_u8, 0x9f_u8, 0xef_u8])
     def query_interface(this : IFsrmReportJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3529,8 +3566,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmReportJob*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmReportJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmReportJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmReportJob*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -3592,7 +3629,7 @@ module Win32cr::Storage::FileServerResourceManager
     def run(this : IFsrmReportJob*, context : Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run.call(this, context)
     end
-    def wait_for_completion(this : IFsrmReportJob*, waitSeconds : Int32, completed : Int16*) : Win32cr::Foundation::HRESULT
+    def wait_for_completion(this : IFsrmReportJob*, waitSeconds : Int32, completed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.wait_for_completion.call(this, waitSeconds, completed)
     end
     def cancel(this : IFsrmReportJob*) : Win32cr::Foundation::HRESULT
@@ -3602,27 +3639,28 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmReportVtbl,
+
+  record IFsrmReportVtable,
     query_interface : Proc(IFsrmReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReport*, UInt32),
     release : Proc(IFsrmReport*, UInt32),
     get_type_info_count : Proc(IFsrmReport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmReport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmReport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmReport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmReport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IFsrmReport*, Win32cr::Storage::FileServerResourceManager::FsrmReportType*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFsrmReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IFsrmReport*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmReport*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_LastGeneratedFileNamePrefix : Proc(IFsrmReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_filter : Proc(IFsrmReport*, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_filter : Proc(IFsrmReport*, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_filter : Proc(IFsrmReport*, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_filter : Proc(IFsrmReport*, Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmReport*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmReport, lpVtbl : IFsrmReportVtbl* do
+  record IFsrmReport, lpVtbl : IFsrmReportVtable* do
     GUID = LibC::GUID.new(0xd8cc81d9_u32, 0x46b8_u16, 0x4fa4_u16, StaticArray[0xbf_u8, 0xa5_u8, 0x4a_u8, 0xa9_u8, 0xde_u8, 0xc9_u8, 0xb6_u8, 0x38_u8])
     def query_interface(this : IFsrmReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3642,8 +3680,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmReport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IFsrmReport*, reportType : Win32cr::Storage::FileServerResourceManager::FsrmReportType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, reportType)
@@ -3663,10 +3701,10 @@ module Win32cr::Storage::FileServerResourceManager
     def get_LastGeneratedFileNamePrefix(this : IFsrmReport*, prefix : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastGeneratedFileNamePrefix.call(this, prefix)
     end
-    def get_filter(this : IFsrmReport*, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_filter(this : IFsrmReport*, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_filter.call(this, filter, filterValue)
     end
-    def set_filter(this : IFsrmReport*, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_filter(this : IFsrmReport*, filter : Win32cr::Storage::FileServerResourceManager::FsrmReportFilter, filterValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_filter.call(this, filter, filterValue)
     end
     def delete(this : IFsrmReport*) : Win32cr::Foundation::HRESULT
@@ -3676,22 +3714,23 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmReportSchedulerVtbl,
+
+  record IFsrmReportSchedulerVtable,
     query_interface : Proc(IFsrmReportScheduler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReportScheduler*, UInt32),
     release : Proc(IFsrmReportScheduler*, UInt32),
     get_type_info_count : Proc(IFsrmReportScheduler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmReportScheduler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmReportScheduler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmReportScheduler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    verify_namespaces : Proc(IFsrmReportScheduler*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    create_schedule_task : Proc(IFsrmReportScheduler*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    modify_schedule_task : Proc(IFsrmReportScheduler*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmReportScheduler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    verify_namespaces : Proc(IFsrmReportScheduler*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    create_schedule_task : Proc(IFsrmReportScheduler*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    modify_schedule_task : Proc(IFsrmReportScheduler*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete_schedule_task : Proc(IFsrmReportScheduler*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmReportScheduler, lpVtbl : IFsrmReportSchedulerVtbl* do
+  record IFsrmReportScheduler, lpVtbl : IFsrmReportSchedulerVtable* do
     GUID = LibC::GUID.new(0x6879caf9_u32, 0x6617_u16, 0x4484_u16, StaticArray[0x87_u8, 0x19_u8, 0x71_u8, 0xc3_u8, 0xd8_u8, 0x64_u8, 0x5f_u8, 0x94_u8])
     def query_interface(this : IFsrmReportScheduler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3711,16 +3750,16 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmReportScheduler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmReportScheduler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmReportScheduler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def verify_namespaces(this : IFsrmReportScheduler*, namespacesSafeArray : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def verify_namespaces(this : IFsrmReportScheduler*, namespacesSafeArray : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.verify_namespaces.call(this, namespacesSafeArray)
     end
-    def create_schedule_task(this : IFsrmReportScheduler*, taskName : Win32cr::Foundation::BSTR, namespacesSafeArray : Win32cr::System::Com::VARIANT*, serializedTask : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def create_schedule_task(this : IFsrmReportScheduler*, taskName : Win32cr::Foundation::BSTR, namespacesSafeArray : Win32cr::System::Variant::VARIANT*, serializedTask : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_schedule_task.call(this, taskName, namespacesSafeArray, serializedTask)
     end
-    def modify_schedule_task(this : IFsrmReportScheduler*, taskName : Win32cr::Foundation::BSTR, namespacesSafeArray : Win32cr::System::Com::VARIANT*, serializedTask : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def modify_schedule_task(this : IFsrmReportScheduler*, taskName : Win32cr::Foundation::BSTR, namespacesSafeArray : Win32cr::System::Variant::VARIANT*, serializedTask : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.modify_schedule_task.call(this, taskName, namespacesSafeArray, serializedTask)
     end
     def delete_schedule_task(this : IFsrmReportScheduler*, taskName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3730,14 +3769,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileManagementJobManagerVtbl,
+
+  record IFsrmFileManagementJobManagerVtable,
     query_interface : Proc(IFsrmFileManagementJobManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileManagementJobManager*, UInt32),
     release : Proc(IFsrmFileManagementJobManager*, UInt32),
     get_type_info_count : Proc(IFsrmFileManagementJobManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileManagementJobManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileManagementJobManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileManagementJobManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileManagementJobManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ActionVariables : Proc(IFsrmFileManagementJobManager*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     get_ActionVariableDescriptions : Proc(IFsrmFileManagementJobManager*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     enum_file_management_jobs : Proc(IFsrmFileManagementJobManager*, Win32cr::Storage::FileServerResourceManager::FsrmEnumOptions, Void**, Win32cr::Foundation::HRESULT),
@@ -3746,7 +3786,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileManagementJobManager, lpVtbl : IFsrmFileManagementJobManagerVtbl* do
+  record IFsrmFileManagementJobManager, lpVtbl : IFsrmFileManagementJobManagerVtable* do
     GUID = LibC::GUID.new(0xee321ecb_u32, 0xd95e_u16, 0x48e9_u16, StaticArray[0x90_u8, 0x7c_u8, 0xc7_u8, 0x68_u8, 0x5a_u8, 0x1_u8, 0x32_u8, 0x35_u8])
     def query_interface(this : IFsrmFileManagementJobManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3766,8 +3806,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileManagementJobManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileManagementJobManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileManagementJobManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ActionVariables(this : IFsrmFileManagementJobManager*, variables : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ActionVariables.call(this, variables)
@@ -3788,14 +3828,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileManagementJobVtbl,
+
+  record IFsrmFileManagementJobVtable,
     query_interface : Proc(IFsrmFileManagementJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileManagementJob*, UInt32),
     release : Proc(IFsrmFileManagementJob*, UInt32),
     get_type_info_count : Proc(IFsrmFileManagementJob*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileManagementJob*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileManagementJob*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileManagementJob*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileManagementJob*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmFileManagementJob*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3805,8 +3846,8 @@ module Win32cr::Storage::FileServerResourceManager
     put_Name : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_NamespaceRoots : Proc(IFsrmFileManagementJob*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_NamespaceRoots : Proc(IFsrmFileManagementJob*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IFsrmFileManagementJob*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IFsrmFileManagementJob*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_OperationType : Proc(IFsrmFileManagementJob*, Win32cr::Storage::FileServerResourceManager::FsrmFileManagementType*, Win32cr::Foundation::HRESULT),
     put_OperationType : Proc(IFsrmFileManagementJob*, Win32cr::Storage::FileServerResourceManager::FsrmFileManagementType, Win32cr::Foundation::HRESULT),
     get_ExpirationDirectory : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3815,8 +3856,8 @@ module Win32cr::Storage::FileServerResourceManager
     get_Notifications : Proc(IFsrmFileManagementJob*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     get_Logging : Proc(IFsrmFileManagementJob*, Int32*, Win32cr::Foundation::HRESULT),
     put_Logging : Proc(IFsrmFileManagementJob*, Int32, Win32cr::Foundation::HRESULT),
-    get_ReportEnabled : Proc(IFsrmFileManagementJob*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ReportEnabled : Proc(IFsrmFileManagementJob*, Int16, Win32cr::Foundation::HRESULT),
+    get_ReportEnabled : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ReportEnabled : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Formats : Proc(IFsrmFileManagementJob*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_Formats : Proc(IFsrmFileManagementJob*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
     get_MailTo : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3841,7 +3882,7 @@ module Win32cr::Storage::FileServerResourceManager
     get_FileNamePattern : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_FileNamePattern : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     run : Proc(IFsrmFileManagementJob*, Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, Win32cr::Foundation::HRESULT),
-    wait_for_completion : Proc(IFsrmFileManagementJob*, Int32, Int16*, Win32cr::Foundation::HRESULT),
+    wait_for_completion : Proc(IFsrmFileManagementJob*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     cancel : Proc(IFsrmFileManagementJob*, Win32cr::Foundation::HRESULT),
     add_notification : Proc(IFsrmFileManagementJob*, Int32, Win32cr::Foundation::HRESULT),
     delete_notification : Proc(IFsrmFileManagementJob*, Int32, Win32cr::Foundation::HRESULT),
@@ -3853,7 +3894,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileManagementJob, lpVtbl : IFsrmFileManagementJobVtbl* do
+  record IFsrmFileManagementJob, lpVtbl : IFsrmFileManagementJobVtable* do
     GUID = LibC::GUID.new(0x770687e_u32, 0x9f36_u16, 0x4d6f_u16, StaticArray[0x87_u8, 0x78_u8, 0x59_u8, 0x9d_u8, 0x18_u8, 0x84_u8, 0x61_u8, 0xc9_u8])
     def query_interface(this : IFsrmFileManagementJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3873,8 +3914,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileManagementJob*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileManagementJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileManagementJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmFileManagementJob*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -3903,10 +3944,10 @@ module Win32cr::Storage::FileServerResourceManager
     def put_NamespaceRoots(this : IFsrmFileManagementJob*, namespaceRoots : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NamespaceRoots.call(this, namespaceRoots)
     end
-    def get_Enabled(this : IFsrmFileManagementJob*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IFsrmFileManagementJob*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, enabled)
     end
-    def put_Enabled(this : IFsrmFileManagementJob*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IFsrmFileManagementJob*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_OperationType(this : IFsrmFileManagementJob*, operationType : Win32cr::Storage::FileServerResourceManager::FsrmFileManagementType*) : Win32cr::Foundation::HRESULT
@@ -3933,10 +3974,10 @@ module Win32cr::Storage::FileServerResourceManager
     def put_Logging(this : IFsrmFileManagementJob*, loggingFlags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Logging.call(this, loggingFlags)
     end
-    def get_ReportEnabled(this : IFsrmFileManagementJob*, reportEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReportEnabled(this : IFsrmFileManagementJob*, reportEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReportEnabled.call(this, reportEnabled)
     end
-    def put_ReportEnabled(this : IFsrmFileManagementJob*, reportEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_ReportEnabled(this : IFsrmFileManagementJob*, reportEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ReportEnabled.call(this, reportEnabled)
     end
     def get_Formats(this : IFsrmFileManagementJob*, formats : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
@@ -4011,7 +4052,7 @@ module Win32cr::Storage::FileServerResourceManager
     def run(this : IFsrmFileManagementJob*, context : Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run.call(this, context)
     end
-    def wait_for_completion(this : IFsrmFileManagementJob*, waitSeconds : Int32, completed : Int16*) : Win32cr::Foundation::HRESULT
+    def wait_for_completion(this : IFsrmFileManagementJob*, waitSeconds : Int32, completed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.wait_for_completion.call(this, waitSeconds, completed)
     end
     def cancel(this : IFsrmFileManagementJob*) : Win32cr::Foundation::HRESULT
@@ -4042,14 +4083,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyConditionVtbl,
+
+  record IFsrmPropertyConditionVtable,
     query_interface : Proc(IFsrmPropertyCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyCondition*, UInt32),
     release : Proc(IFsrmPropertyCondition*, UInt32),
     get_type_info_count : Proc(IFsrmPropertyCondition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPropertyCondition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPropertyCondition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPropertyCondition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPropertyCondition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFsrmPropertyCondition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IFsrmPropertyCondition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IFsrmPropertyCondition*, Win32cr::Storage::FileServerResourceManager::FsrmPropertyConditionType*, Win32cr::Foundation::HRESULT),
@@ -4060,7 +4102,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyCondition, lpVtbl : IFsrmPropertyConditionVtbl* do
+  record IFsrmPropertyCondition, lpVtbl : IFsrmPropertyConditionVtable* do
     GUID = LibC::GUID.new(0x326af66f_u32, 0x2ac0_u16, 0x4f68_u16, StaticArray[0xbf_u8, 0x8c_u8, 0x47_u8, 0x59_u8, 0xf0_u8, 0x54_u8, 0xfa_u8, 0x29_u8])
     def query_interface(this : IFsrmPropertyCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4080,8 +4122,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPropertyCondition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPropertyCondition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPropertyCondition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IFsrmPropertyCondition*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -4108,20 +4150,21 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileConditionVtbl,
+
+  record IFsrmFileConditionVtable,
     query_interface : Proc(IFsrmFileCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileCondition*, UInt32),
     release : Proc(IFsrmFileCondition*, UInt32),
     get_type_info_count : Proc(IFsrmFileCondition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileCondition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileCondition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileCondition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileCondition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IFsrmFileCondition*, Win32cr::Storage::FileServerResourceManager::FsrmFileConditionType*, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmFileCondition*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmFileCondition, lpVtbl : IFsrmFileConditionVtbl* do
+  record IFsrmFileCondition, lpVtbl : IFsrmFileConditionVtable* do
     GUID = LibC::GUID.new(0x70684ffc_u32, 0x691a_u16, 0x4a1a_u16, StaticArray[0xb9_u8, 0x22_u8, 0x97_u8, 0x75_u8, 0x2e_u8, 0x13_u8, 0x8c_u8, 0xc1_u8])
     def query_interface(this : IFsrmFileCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4141,8 +4184,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileCondition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileCondition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileCondition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IFsrmFileCondition*, pVal : Win32cr::Storage::FileServerResourceManager::FsrmFileConditionType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pVal)
@@ -4154,14 +4197,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileConditionPropertyVtbl,
+
+  record IFsrmFileConditionPropertyVtable,
     query_interface : Proc(IFsrmFileConditionProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileConditionProperty*, UInt32),
     release : Proc(IFsrmFileConditionProperty*, UInt32),
     get_type_info_count : Proc(IFsrmFileConditionProperty*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmFileConditionProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmFileConditionProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmFileConditionProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmFileConditionProperty*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IFsrmFileConditionProperty*, Win32cr::Storage::FileServerResourceManager::FsrmFileConditionType*, Win32cr::Foundation::HRESULT),
     delete : Proc(IFsrmFileConditionProperty*, Win32cr::Foundation::HRESULT),
     get_PropertyName : Proc(IFsrmFileConditionProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4172,12 +4216,12 @@ module Win32cr::Storage::FileServerResourceManager
     put_Operator : Proc(IFsrmFileConditionProperty*, Win32cr::Storage::FileServerResourceManager::FsrmPropertyConditionType, Win32cr::Foundation::HRESULT),
     get_ValueType : Proc(IFsrmFileConditionProperty*, Win32cr::Storage::FileServerResourceManager::FsrmPropertyValueType*, Win32cr::Foundation::HRESULT),
     put_ValueType : Proc(IFsrmFileConditionProperty*, Win32cr::Storage::FileServerResourceManager::FsrmPropertyValueType, Win32cr::Foundation::HRESULT),
-    get_Value : Proc(IFsrmFileConditionProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Value : Proc(IFsrmFileConditionProperty*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_Value : Proc(IFsrmFileConditionProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Value : Proc(IFsrmFileConditionProperty*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmFileConditionProperty, lpVtbl : IFsrmFileConditionPropertyVtbl* do
+  record IFsrmFileConditionProperty, lpVtbl : IFsrmFileConditionPropertyVtable* do
     GUID = LibC::GUID.new(0x81926775_u32, 0xb981_u16, 0x4479_u16, StaticArray[0x98_u8, 0x8f_u8, 0xda_u8, 0x17_u8, 0x1d_u8, 0x62_u8, 0x73_u8, 0x60_u8])
     def query_interface(this : IFsrmFileConditionProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4197,8 +4241,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmFileConditionProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmFileConditionProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmFileConditionProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IFsrmFileConditionProperty*, pVal : Win32cr::Storage::FileServerResourceManager::FsrmFileConditionType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pVal)
@@ -4230,24 +4274,25 @@ module Win32cr::Storage::FileServerResourceManager
     def put_ValueType(this : IFsrmFileConditionProperty*, newVal : Win32cr::Storage::FileServerResourceManager::FsrmPropertyValueType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ValueType.call(this, newVal)
     end
-    def get_Value(this : IFsrmFileConditionProperty*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Value(this : IFsrmFileConditionProperty*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Value.call(this, pVal)
     end
-    def put_Value(this : IFsrmFileConditionProperty*, newVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Value(this : IFsrmFileConditionProperty*, newVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Value.call(this, newVal)
     end
 
   end
 
   @[Extern]
-  record IFsrmPropertyDefinitionVtbl,
+
+  record IFsrmPropertyDefinitionVtable,
     query_interface : Proc(IFsrmPropertyDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyDefinition*, UInt32),
     release : Proc(IFsrmPropertyDefinition*, UInt32),
     get_type_info_count : Proc(IFsrmPropertyDefinition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPropertyDefinition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPropertyDefinition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPropertyDefinition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPropertyDefinition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmPropertyDefinition*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmPropertyDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmPropertyDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4266,7 +4311,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyDefinition, lpVtbl : IFsrmPropertyDefinitionVtbl* do
+  record IFsrmPropertyDefinition, lpVtbl : IFsrmPropertyDefinitionVtable* do
     GUID = LibC::GUID.new(0xede0150f_u32, 0xe9a3_u16, 0x419c_u16, StaticArray[0x87_u8, 0x7c_u8, 0x1_u8, 0xfe_u8, 0x5d_u8, 0x24_u8, 0xc5_u8, 0xd3_u8])
     def query_interface(this : IFsrmPropertyDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4286,8 +4331,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPropertyDefinition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPropertyDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPropertyDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmPropertyDefinition*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -4338,14 +4383,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyDefinition2Vtbl,
+
+  record IFsrmPropertyDefinition2Vtable,
     query_interface : Proc(IFsrmPropertyDefinition2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyDefinition2*, UInt32),
     release : Proc(IFsrmPropertyDefinition2*, UInt32),
     get_type_info_count : Proc(IFsrmPropertyDefinition2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPropertyDefinition2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPropertyDefinition2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPropertyDefinition2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPropertyDefinition2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmPropertyDefinition2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmPropertyDefinition2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmPropertyDefinition2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4369,7 +4415,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyDefinition2, lpVtbl : IFsrmPropertyDefinition2Vtbl* do
+  record IFsrmPropertyDefinition2, lpVtbl : IFsrmPropertyDefinition2Vtable* do
     GUID = LibC::GUID.new(0x47782152_u32, 0xd16c_u16, 0x4229_u16, StaticArray[0xb4_u8, 0xe1_u8, 0xd_u8, 0xdf_u8, 0xe3_u8, 0x8_u8, 0xb9_u8, 0xf6_u8])
     def query_interface(this : IFsrmPropertyDefinition2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4389,8 +4435,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPropertyDefinition2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPropertyDefinition2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPropertyDefinition2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmPropertyDefinition2*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -4456,14 +4502,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyDefinitionValueVtbl,
+
+  record IFsrmPropertyDefinitionValueVtable,
     query_interface : Proc(IFsrmPropertyDefinitionValue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyDefinitionValue*, UInt32),
     release : Proc(IFsrmPropertyDefinitionValue*, UInt32),
     get_type_info_count : Proc(IFsrmPropertyDefinitionValue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPropertyDefinitionValue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPropertyDefinitionValue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPropertyDefinitionValue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPropertyDefinitionValue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFsrmPropertyDefinitionValue*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IFsrmPropertyDefinitionValue*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmPropertyDefinitionValue*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4471,7 +4518,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyDefinitionValue, lpVtbl : IFsrmPropertyDefinitionValueVtbl* do
+  record IFsrmPropertyDefinitionValue, lpVtbl : IFsrmPropertyDefinitionValueVtable* do
     GUID = LibC::GUID.new(0xe946d148_u32, 0xbd67_u16, 0x4178_u16, StaticArray[0x8e_u8, 0x22_u8, 0x1c_u8, 0x44_u8, 0x92_u8, 0x5e_u8, 0xd7_u8, 0x10_u8])
     def query_interface(this : IFsrmPropertyDefinitionValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4491,8 +4538,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPropertyDefinitionValue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPropertyDefinitionValue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPropertyDefinitionValue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IFsrmPropertyDefinitionValue*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -4510,14 +4557,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyVtbl,
+
+  record IFsrmPropertyVtable,
     query_interface : Proc(IFsrmProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmProperty*, UInt32),
     release : Proc(IFsrmProperty*, UInt32),
     get_type_info_count : Proc(IFsrmProperty*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmProperty*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFsrmProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Value : Proc(IFsrmProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Sources : Proc(IFsrmProperty*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -4525,7 +4573,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmProperty, lpVtbl : IFsrmPropertyVtbl* do
+  record IFsrmProperty, lpVtbl : IFsrmPropertyVtable* do
     GUID = LibC::GUID.new(0x4a73fee4_u32, 0x4102_u16, 0x4fcc_u16, StaticArray[0x9f_u8, 0xfb_u8, 0x38_u8, 0x61_u8, 0x4f_u8, 0x9e_u8, 0xe7_u8, 0x68_u8])
     def query_interface(this : IFsrmProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4545,8 +4593,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IFsrmProperty*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -4564,14 +4612,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmRuleVtbl,
+
+  record IFsrmRuleVtable,
     query_interface : Proc(IFsrmRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmRule*, UInt32),
     release : Proc(IFsrmRule*, UInt32),
     get_type_info_count : Proc(IFsrmRule*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmRule*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmRule*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmRule*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmRule*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmRule*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmRule*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmRule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4588,11 +4637,11 @@ module Win32cr::Storage::FileServerResourceManager
     put_RuleFlags : Proc(IFsrmRule*, Int32, Win32cr::Foundation::HRESULT),
     get_Parameters : Proc(IFsrmRule*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_Parameters : Proc(IFsrmRule*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
-    get_LastModified : Proc(IFsrmRule*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_LastModified : Proc(IFsrmRule*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmRule, lpVtbl : IFsrmRuleVtbl* do
+  record IFsrmRule, lpVtbl : IFsrmRuleVtable* do
     GUID = LibC::GUID.new(0xcb0df960_u32, 0x16f5_u16, 0x4495_u16, StaticArray[0x90_u8, 0x79_u8, 0x3f_u8, 0x93_u8, 0x60_u8, 0xd8_u8, 0x31_u8, 0xdf_u8])
     def query_interface(this : IFsrmRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4612,8 +4661,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmRule*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmRule*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -4663,21 +4712,22 @@ module Win32cr::Storage::FileServerResourceManager
     def put_Parameters(this : IFsrmRule*, parameters : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Parameters.call(this, parameters)
     end
-    def get_LastModified(this : IFsrmRule*, lastModified : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastModified(this : IFsrmRule*, lastModified : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastModified.call(this, lastModified)
     end
 
   end
 
   @[Extern]
-  record IFsrmClassificationRuleVtbl,
+
+  record IFsrmClassificationRuleVtable,
     query_interface : Proc(IFsrmClassificationRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassificationRule*, UInt32),
     release : Proc(IFsrmClassificationRule*, UInt32),
     get_type_info_count : Proc(IFsrmClassificationRule*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmClassificationRule*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmClassificationRule*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmClassificationRule*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmClassificationRule*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmClassificationRule*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmClassificationRule*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmClassificationRule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4694,7 +4744,7 @@ module Win32cr::Storage::FileServerResourceManager
     put_RuleFlags : Proc(IFsrmClassificationRule*, Int32, Win32cr::Foundation::HRESULT),
     get_Parameters : Proc(IFsrmClassificationRule*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_Parameters : Proc(IFsrmClassificationRule*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
-    get_LastModified : Proc(IFsrmClassificationRule*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_LastModified : Proc(IFsrmClassificationRule*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_ExecutionOption : Proc(IFsrmClassificationRule*, Win32cr::Storage::FileServerResourceManager::FsrmExecutionOption*, Win32cr::Foundation::HRESULT),
     put_ExecutionOption : Proc(IFsrmClassificationRule*, Win32cr::Storage::FileServerResourceManager::FsrmExecutionOption, Win32cr::Foundation::HRESULT),
     get_PropertyAffected : Proc(IFsrmClassificationRule*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4704,7 +4754,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassificationRule, lpVtbl : IFsrmClassificationRuleVtbl* do
+  record IFsrmClassificationRule, lpVtbl : IFsrmClassificationRuleVtable* do
     GUID = LibC::GUID.new(0xafc052c2_u32, 0x5315_u16, 0x45ab_u16, StaticArray[0x84_u8, 0x1b_u8, 0xc6_u8, 0xdb_u8, 0xe_u8, 0x12_u8, 0x1_u8, 0x48_u8])
     def query_interface(this : IFsrmClassificationRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4724,8 +4774,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmClassificationRule*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmClassificationRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmClassificationRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmClassificationRule*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -4775,7 +4825,7 @@ module Win32cr::Storage::FileServerResourceManager
     def put_Parameters(this : IFsrmClassificationRule*, parameters : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Parameters.call(this, parameters)
     end
-    def get_LastModified(this : IFsrmClassificationRule*, lastModified : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastModified(this : IFsrmClassificationRule*, lastModified : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastModified.call(this, lastModified)
     end
     def get_ExecutionOption(this : IFsrmClassificationRule*, executionOption : Win32cr::Storage::FileServerResourceManager::FsrmExecutionOption*) : Win32cr::Foundation::HRESULT
@@ -4800,14 +4850,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPipelineModuleDefinitionVtbl,
+
+  record IFsrmPipelineModuleDefinitionVtable,
     query_interface : Proc(IFsrmPipelineModuleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPipelineModuleDefinition*, UInt32),
     release : Proc(IFsrmPipelineModuleDefinition*, UInt32),
     get_type_info_count : Proc(IFsrmPipelineModuleDefinition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPipelineModuleDefinition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPipelineModuleDefinition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPipelineModuleDefinition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPipelineModuleDefinition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmPipelineModuleDefinition*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4822,10 +4873,10 @@ module Win32cr::Storage::FileServerResourceManager
     get_Version : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Version : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ModuleType : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType*, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IFsrmPipelineModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IFsrmPipelineModuleDefinition*, Int16, Win32cr::Foundation::HRESULT),
-    get_NeedsFileContent : Proc(IFsrmPipelineModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_NeedsFileContent : Proc(IFsrmPipelineModuleDefinition*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_NeedsFileContent : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_NeedsFileContent : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Account : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmAccountType*, Win32cr::Foundation::HRESULT),
     put_Account : Proc(IFsrmPipelineModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmAccountType, Win32cr::Foundation::HRESULT),
     get_SupportedExtensions : Proc(IFsrmPipelineModuleDefinition*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -4835,7 +4886,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPipelineModuleDefinition, lpVtbl : IFsrmPipelineModuleDefinitionVtbl* do
+  record IFsrmPipelineModuleDefinition, lpVtbl : IFsrmPipelineModuleDefinitionVtable* do
     GUID = LibC::GUID.new(0x515c1277_u32, 0x2c81_u16, 0x440e_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x36_u8, 0x79_u8, 0x21_u8, 0xed_u8, 0x4f_u8, 0x59_u8])
     def query_interface(this : IFsrmPipelineModuleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4855,8 +4906,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPipelineModuleDefinition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPipelineModuleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPipelineModuleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmPipelineModuleDefinition*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -4900,16 +4951,16 @@ module Win32cr::Storage::FileServerResourceManager
     def get_ModuleType(this : IFsrmPipelineModuleDefinition*, moduleType : Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModuleType.call(this, moduleType)
     end
-    def get_Enabled(this : IFsrmPipelineModuleDefinition*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IFsrmPipelineModuleDefinition*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, enabled)
     end
-    def put_Enabled(this : IFsrmPipelineModuleDefinition*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IFsrmPipelineModuleDefinition*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
-    def get_NeedsFileContent(this : IFsrmPipelineModuleDefinition*, needsFileContent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NeedsFileContent(this : IFsrmPipelineModuleDefinition*, needsFileContent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NeedsFileContent.call(this, needsFileContent)
     end
-    def put_NeedsFileContent(this : IFsrmPipelineModuleDefinition*, needsFileContent : Int16) : Win32cr::Foundation::HRESULT
+    def put_NeedsFileContent(this : IFsrmPipelineModuleDefinition*, needsFileContent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NeedsFileContent.call(this, needsFileContent)
     end
     def get_Account(this : IFsrmPipelineModuleDefinition*, retrievalAccount : Win32cr::Storage::FileServerResourceManager::FsrmAccountType*) : Win32cr::Foundation::HRESULT
@@ -4934,14 +4985,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassifierModuleDefinitionVtbl,
+
+  record IFsrmClassifierModuleDefinitionVtable,
     query_interface : Proc(IFsrmClassifierModuleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassifierModuleDefinition*, UInt32),
     release : Proc(IFsrmClassifierModuleDefinition*, UInt32),
     get_type_info_count : Proc(IFsrmClassifierModuleDefinition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmClassifierModuleDefinition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmClassifierModuleDefinition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmClassifierModuleDefinition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmClassifierModuleDefinition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmClassifierModuleDefinition*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4956,10 +5008,10 @@ module Win32cr::Storage::FileServerResourceManager
     get_Version : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Version : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ModuleType : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType*, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IFsrmClassifierModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IFsrmClassifierModuleDefinition*, Int16, Win32cr::Foundation::HRESULT),
-    get_NeedsFileContent : Proc(IFsrmClassifierModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_NeedsFileContent : Proc(IFsrmClassifierModuleDefinition*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_NeedsFileContent : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_NeedsFileContent : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Account : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmAccountType*, Win32cr::Foundation::HRESULT),
     put_Account : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmAccountType, Win32cr::Foundation::HRESULT),
     get_SupportedExtensions : Proc(IFsrmClassifierModuleDefinition*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -4970,12 +5022,12 @@ module Win32cr::Storage::FileServerResourceManager
     put_PropertiesAffected : Proc(IFsrmClassifierModuleDefinition*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
     get_PropertiesUsed : Proc(IFsrmClassifierModuleDefinition*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_PropertiesUsed : Proc(IFsrmClassifierModuleDefinition*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
-    get_NeedsExplicitValue : Proc(IFsrmClassifierModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_NeedsExplicitValue : Proc(IFsrmClassifierModuleDefinition*, Int16, Win32cr::Foundation::HRESULT)
+    get_NeedsExplicitValue : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_NeedsExplicitValue : Proc(IFsrmClassifierModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmClassifierModuleDefinition, lpVtbl : IFsrmClassifierModuleDefinitionVtbl* do
+  record IFsrmClassifierModuleDefinition, lpVtbl : IFsrmClassifierModuleDefinitionVtable* do
     GUID = LibC::GUID.new(0xbb36ea26_u32, 0x6318_u16, 0x4b8c_u16, StaticArray[0x85_u8, 0x92_u8, 0xf7_u8, 0x2d_u8, 0xd6_u8, 0x2_u8, 0xe7_u8, 0xa5_u8])
     def query_interface(this : IFsrmClassifierModuleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4995,8 +5047,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmClassifierModuleDefinition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmClassifierModuleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmClassifierModuleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmClassifierModuleDefinition*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -5040,16 +5092,16 @@ module Win32cr::Storage::FileServerResourceManager
     def get_ModuleType(this : IFsrmClassifierModuleDefinition*, moduleType : Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModuleType.call(this, moduleType)
     end
-    def get_Enabled(this : IFsrmClassifierModuleDefinition*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IFsrmClassifierModuleDefinition*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, enabled)
     end
-    def put_Enabled(this : IFsrmClassifierModuleDefinition*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IFsrmClassifierModuleDefinition*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
-    def get_NeedsFileContent(this : IFsrmClassifierModuleDefinition*, needsFileContent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NeedsFileContent(this : IFsrmClassifierModuleDefinition*, needsFileContent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NeedsFileContent.call(this, needsFileContent)
     end
-    def put_NeedsFileContent(this : IFsrmClassifierModuleDefinition*, needsFileContent : Int16) : Win32cr::Foundation::HRESULT
+    def put_NeedsFileContent(this : IFsrmClassifierModuleDefinition*, needsFileContent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NeedsFileContent.call(this, needsFileContent)
     end
     def get_Account(this : IFsrmClassifierModuleDefinition*, retrievalAccount : Win32cr::Storage::FileServerResourceManager::FsrmAccountType*) : Win32cr::Foundation::HRESULT
@@ -5082,24 +5134,25 @@ module Win32cr::Storage::FileServerResourceManager
     def put_PropertiesUsed(this : IFsrmClassifierModuleDefinition*, propertiesUsed : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PropertiesUsed.call(this, propertiesUsed)
     end
-    def get_NeedsExplicitValue(this : IFsrmClassifierModuleDefinition*, needsExplicitValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NeedsExplicitValue(this : IFsrmClassifierModuleDefinition*, needsExplicitValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NeedsExplicitValue.call(this, needsExplicitValue)
     end
-    def put_NeedsExplicitValue(this : IFsrmClassifierModuleDefinition*, needsExplicitValue : Int16) : Win32cr::Foundation::HRESULT
+    def put_NeedsExplicitValue(this : IFsrmClassifierModuleDefinition*, needsExplicitValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NeedsExplicitValue.call(this, needsExplicitValue)
     end
 
   end
 
   @[Extern]
-  record IFsrmStorageModuleDefinitionVtbl,
+
+  record IFsrmStorageModuleDefinitionVtable,
     query_interface : Proc(IFsrmStorageModuleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmStorageModuleDefinition*, UInt32),
     release : Proc(IFsrmStorageModuleDefinition*, UInt32),
     get_type_info_count : Proc(IFsrmStorageModuleDefinition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmStorageModuleDefinition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmStorageModuleDefinition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmStorageModuleDefinition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmStorageModuleDefinition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFsrmStorageModuleDefinition*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -5114,10 +5167,10 @@ module Win32cr::Storage::FileServerResourceManager
     get_Version : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Version : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ModuleType : Proc(IFsrmStorageModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType*, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IFsrmStorageModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IFsrmStorageModuleDefinition*, Int16, Win32cr::Foundation::HRESULT),
-    get_NeedsFileContent : Proc(IFsrmStorageModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_NeedsFileContent : Proc(IFsrmStorageModuleDefinition*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_NeedsFileContent : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_NeedsFileContent : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Account : Proc(IFsrmStorageModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmAccountType*, Win32cr::Foundation::HRESULT),
     put_Account : Proc(IFsrmStorageModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmAccountType, Win32cr::Foundation::HRESULT),
     get_SupportedExtensions : Proc(IFsrmStorageModuleDefinition*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -5128,12 +5181,12 @@ module Win32cr::Storage::FileServerResourceManager
     put_Capabilities : Proc(IFsrmStorageModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmStorageModuleCaps, Win32cr::Foundation::HRESULT),
     get_StorageType : Proc(IFsrmStorageModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmStorageModuleType*, Win32cr::Foundation::HRESULT),
     put_StorageType : Proc(IFsrmStorageModuleDefinition*, Win32cr::Storage::FileServerResourceManager::FsrmStorageModuleType, Win32cr::Foundation::HRESULT),
-    get_UpdatesFileContent : Proc(IFsrmStorageModuleDefinition*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UpdatesFileContent : Proc(IFsrmStorageModuleDefinition*, Int16, Win32cr::Foundation::HRESULT)
+    get_UpdatesFileContent : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UpdatesFileContent : Proc(IFsrmStorageModuleDefinition*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmStorageModuleDefinition, lpVtbl : IFsrmStorageModuleDefinitionVtbl* do
+  record IFsrmStorageModuleDefinition, lpVtbl : IFsrmStorageModuleDefinitionVtable* do
     GUID = LibC::GUID.new(0x15a81350_u32, 0x497d_u16, 0x4aba_u16, StaticArray[0x80_u8, 0xe9_u8, 0xd4_u8, 0xdb_u8, 0xcc_u8, 0x55_u8, 0x21_u8, 0xfe_u8])
     def query_interface(this : IFsrmStorageModuleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5153,8 +5206,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmStorageModuleDefinition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmStorageModuleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmStorageModuleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFsrmStorageModuleDefinition*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, id)
@@ -5198,16 +5251,16 @@ module Win32cr::Storage::FileServerResourceManager
     def get_ModuleType(this : IFsrmStorageModuleDefinition*, moduleType : Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModuleType.call(this, moduleType)
     end
-    def get_Enabled(this : IFsrmStorageModuleDefinition*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IFsrmStorageModuleDefinition*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, enabled)
     end
-    def put_Enabled(this : IFsrmStorageModuleDefinition*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IFsrmStorageModuleDefinition*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
-    def get_NeedsFileContent(this : IFsrmStorageModuleDefinition*, needsFileContent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NeedsFileContent(this : IFsrmStorageModuleDefinition*, needsFileContent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NeedsFileContent.call(this, needsFileContent)
     end
-    def put_NeedsFileContent(this : IFsrmStorageModuleDefinition*, needsFileContent : Int16) : Win32cr::Foundation::HRESULT
+    def put_NeedsFileContent(this : IFsrmStorageModuleDefinition*, needsFileContent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NeedsFileContent.call(this, needsFileContent)
     end
     def get_Account(this : IFsrmStorageModuleDefinition*, retrievalAccount : Win32cr::Storage::FileServerResourceManager::FsrmAccountType*) : Win32cr::Foundation::HRESULT
@@ -5240,32 +5293,33 @@ module Win32cr::Storage::FileServerResourceManager
     def put_StorageType(this : IFsrmStorageModuleDefinition*, storageType : Win32cr::Storage::FileServerResourceManager::FsrmStorageModuleType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_StorageType.call(this, storageType)
     end
-    def get_UpdatesFileContent(this : IFsrmStorageModuleDefinition*, updatesFileContent : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UpdatesFileContent(this : IFsrmStorageModuleDefinition*, updatesFileContent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UpdatesFileContent.call(this, updatesFileContent)
     end
-    def put_UpdatesFileContent(this : IFsrmStorageModuleDefinition*, updatesFileContent : Int16) : Win32cr::Foundation::HRESULT
+    def put_UpdatesFileContent(this : IFsrmStorageModuleDefinition*, updatesFileContent : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UpdatesFileContent.call(this, updatesFileContent)
     end
 
   end
 
   @[Extern]
-  record IFsrmClassificationManagerVtbl,
+
+  record IFsrmClassificationManagerVtable,
     query_interface : Proc(IFsrmClassificationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassificationManager*, UInt32),
     release : Proc(IFsrmClassificationManager*, UInt32),
     get_type_info_count : Proc(IFsrmClassificationManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmClassificationManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmClassificationManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmClassificationManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmClassificationManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClassificationReportFormats : Proc(IFsrmClassificationManager*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_ClassificationReportFormats : Proc(IFsrmClassificationManager*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
     get_Logging : Proc(IFsrmClassificationManager*, Int32*, Win32cr::Foundation::HRESULT),
     put_Logging : Proc(IFsrmClassificationManager*, Int32, Win32cr::Foundation::HRESULT),
     get_ClassificationReportMailTo : Proc(IFsrmClassificationManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClassificationReportMailTo : Proc(IFsrmClassificationManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_ClassificationReportEnabled : Proc(IFsrmClassificationManager*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ClassificationReportEnabled : Proc(IFsrmClassificationManager*, Int16, Win32cr::Foundation::HRESULT),
+    get_ClassificationReportEnabled : Proc(IFsrmClassificationManager*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ClassificationReportEnabled : Proc(IFsrmClassificationManager*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ClassificationLastReportPathWithoutExtension : Proc(IFsrmClassificationManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClassificationLastError : Proc(IFsrmClassificationManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClassificationRunningStatus : Proc(IFsrmClassificationManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportRunningStatus*, Win32cr::Foundation::HRESULT),
@@ -5279,7 +5333,7 @@ module Win32cr::Storage::FileServerResourceManager
     create_module_definition : Proc(IFsrmClassificationManager*, Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType, Void**, Win32cr::Foundation::HRESULT),
     get_module_definition : Proc(IFsrmClassificationManager*, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType, Void**, Win32cr::Foundation::HRESULT),
     run_classification : Proc(IFsrmClassificationManager*, Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    wait_for_classification_completion : Proc(IFsrmClassificationManager*, Int32, Int16*, Win32cr::Foundation::HRESULT),
+    wait_for_classification_completion : Proc(IFsrmClassificationManager*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     cancel_classification : Proc(IFsrmClassificationManager*, Win32cr::Foundation::HRESULT),
     enum_file_properties : Proc(IFsrmClassificationManager*, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmGetFilePropertyOptions, Void**, Win32cr::Foundation::HRESULT),
     get_file_property : Proc(IFsrmClassificationManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmGetFilePropertyOptions, Void**, Win32cr::Foundation::HRESULT),
@@ -5288,7 +5342,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassificationManager, lpVtbl : IFsrmClassificationManagerVtbl* do
+  record IFsrmClassificationManager, lpVtbl : IFsrmClassificationManagerVtable* do
     GUID = LibC::GUID.new(0xd2dc89da_u32, 0xee91_u16, 0x48a0_u16, StaticArray[0x85_u8, 0xd8_u8, 0xcc_u8, 0x72_u8, 0xa5_u8, 0x6f_u8, 0x7d_u8, 0x4_u8])
     def query_interface(this : IFsrmClassificationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5308,8 +5362,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmClassificationManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmClassificationManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmClassificationManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClassificationReportFormats(this : IFsrmClassificationManager*, formats : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClassificationReportFormats.call(this, formats)
@@ -5329,10 +5383,10 @@ module Win32cr::Storage::FileServerResourceManager
     def put_ClassificationReportMailTo(this : IFsrmClassificationManager*, mailTo : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClassificationReportMailTo.call(this, mailTo)
     end
-    def get_ClassificationReportEnabled(this : IFsrmClassificationManager*, reportEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ClassificationReportEnabled(this : IFsrmClassificationManager*, reportEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClassificationReportEnabled.call(this, reportEnabled)
     end
-    def put_ClassificationReportEnabled(this : IFsrmClassificationManager*, reportEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_ClassificationReportEnabled(this : IFsrmClassificationManager*, reportEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClassificationReportEnabled.call(this, reportEnabled)
     end
     def get_ClassificationLastReportPathWithoutExtension(this : IFsrmClassificationManager*, lastReportPath : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5374,7 +5428,7 @@ module Win32cr::Storage::FileServerResourceManager
     def run_classification(this : IFsrmClassificationManager*, context : Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, reserved : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run_classification.call(this, context, reserved)
     end
-    def wait_for_classification_completion(this : IFsrmClassificationManager*, waitSeconds : Int32, completed : Int16*) : Win32cr::Foundation::HRESULT
+    def wait_for_classification_completion(this : IFsrmClassificationManager*, waitSeconds : Int32, completed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.wait_for_classification_completion.call(this, waitSeconds, completed)
     end
     def cancel_classification(this : IFsrmClassificationManager*) : Win32cr::Foundation::HRESULT
@@ -5396,22 +5450,23 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassificationManager2Vtbl,
+
+  record IFsrmClassificationManager2Vtable,
     query_interface : Proc(IFsrmClassificationManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassificationManager2*, UInt32),
     release : Proc(IFsrmClassificationManager2*, UInt32),
     get_type_info_count : Proc(IFsrmClassificationManager2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmClassificationManager2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmClassificationManager2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmClassificationManager2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmClassificationManager2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClassificationReportFormats : Proc(IFsrmClassificationManager2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     put_ClassificationReportFormats : Proc(IFsrmClassificationManager2*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
     get_Logging : Proc(IFsrmClassificationManager2*, Int32*, Win32cr::Foundation::HRESULT),
     put_Logging : Proc(IFsrmClassificationManager2*, Int32, Win32cr::Foundation::HRESULT),
     get_ClassificationReportMailTo : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClassificationReportMailTo : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_ClassificationReportEnabled : Proc(IFsrmClassificationManager2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ClassificationReportEnabled : Proc(IFsrmClassificationManager2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ClassificationReportEnabled : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ClassificationReportEnabled : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ClassificationLastReportPathWithoutExtension : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClassificationLastError : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ClassificationRunningStatus : Proc(IFsrmClassificationManager2*, Win32cr::Storage::FileServerResourceManager::FsrmReportRunningStatus*, Win32cr::Foundation::HRESULT),
@@ -5425,7 +5480,7 @@ module Win32cr::Storage::FileServerResourceManager
     create_module_definition : Proc(IFsrmClassificationManager2*, Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType, Void**, Win32cr::Foundation::HRESULT),
     get_module_definition : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmPipelineModuleType, Void**, Win32cr::Foundation::HRESULT),
     run_classification : Proc(IFsrmClassificationManager2*, Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    wait_for_classification_completion : Proc(IFsrmClassificationManager2*, Int32, Int16*, Win32cr::Foundation::HRESULT),
+    wait_for_classification_completion : Proc(IFsrmClassificationManager2*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     cancel_classification : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::HRESULT),
     enum_file_properties : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmGetFilePropertyOptions, Void**, Win32cr::Foundation::HRESULT),
     get_file_property : Proc(IFsrmClassificationManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Storage::FileServerResourceManager::FsrmGetFilePropertyOptions, Void**, Win32cr::Foundation::HRESULT),
@@ -5435,7 +5490,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassificationManager2, lpVtbl : IFsrmClassificationManager2Vtbl* do
+  record IFsrmClassificationManager2, lpVtbl : IFsrmClassificationManager2Vtable* do
     GUID = LibC::GUID.new(0x4c1c9_u32, 0x127e_u16, 0x4765_u16, StaticArray[0xba_u8, 0x7_u8, 0x6a_u8, 0x31_u8, 0x47_u8, 0xbc_u8, 0xa1_u8, 0x12_u8])
     def query_interface(this : IFsrmClassificationManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5455,8 +5510,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmClassificationManager2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmClassificationManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmClassificationManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClassificationReportFormats(this : IFsrmClassificationManager2*, formats : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClassificationReportFormats.call(this, formats)
@@ -5476,10 +5531,10 @@ module Win32cr::Storage::FileServerResourceManager
     def put_ClassificationReportMailTo(this : IFsrmClassificationManager2*, mailTo : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClassificationReportMailTo.call(this, mailTo)
     end
-    def get_ClassificationReportEnabled(this : IFsrmClassificationManager2*, reportEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ClassificationReportEnabled(this : IFsrmClassificationManager2*, reportEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClassificationReportEnabled.call(this, reportEnabled)
     end
-    def put_ClassificationReportEnabled(this : IFsrmClassificationManager2*, reportEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_ClassificationReportEnabled(this : IFsrmClassificationManager2*, reportEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClassificationReportEnabled.call(this, reportEnabled)
     end
     def get_ClassificationLastReportPathWithoutExtension(this : IFsrmClassificationManager2*, lastReportPath : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5521,7 +5576,7 @@ module Win32cr::Storage::FileServerResourceManager
     def run_classification(this : IFsrmClassificationManager2*, context : Win32cr::Storage::FileServerResourceManager::FsrmReportGenerationContext, reserved : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run_classification.call(this, context, reserved)
     end
-    def wait_for_classification_completion(this : IFsrmClassificationManager2*, waitSeconds : Int32, completed : Int16*) : Win32cr::Foundation::HRESULT
+    def wait_for_classification_completion(this : IFsrmClassificationManager2*, waitSeconds : Int32, completed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.wait_for_classification_completion.call(this, waitSeconds, completed)
     end
     def cancel_classification(this : IFsrmClassificationManager2*) : Win32cr::Foundation::HRESULT
@@ -5546,26 +5601,27 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyBagVtbl,
+
+  record IFsrmPropertyBagVtable,
     query_interface : Proc(IFsrmPropertyBag*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyBag*, UInt32),
     release : Proc(IFsrmPropertyBag*, UInt32),
     get_type_info_count : Proc(IFsrmPropertyBag*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPropertyBag*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPropertyBag*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPropertyBag*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPropertyBag*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RelativePath : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_VolumeName : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RelativeNamespaceRoot : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_VolumeIndex : Proc(IFsrmPropertyBag*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_FileId : Proc(IFsrmPropertyBag*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ParentDirectoryId : Proc(IFsrmPropertyBag*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Size : Proc(IFsrmPropertyBag*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_SizeAllocated : Proc(IFsrmPropertyBag*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_CreationTime : Proc(IFsrmPropertyBag*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_LastAccessTime : Proc(IFsrmPropertyBag*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_LastModificationTime : Proc(IFsrmPropertyBag*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_FileId : Proc(IFsrmPropertyBag*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ParentDirectoryId : Proc(IFsrmPropertyBag*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Size : Proc(IFsrmPropertyBag*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SizeAllocated : Proc(IFsrmPropertyBag*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CreationTime : Proc(IFsrmPropertyBag*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_LastAccessTime : Proc(IFsrmPropertyBag*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_LastModificationTime : Proc(IFsrmPropertyBag*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Attributes : Proc(IFsrmPropertyBag*, UInt32*, Win32cr::Foundation::HRESULT),
     get_OwnerSid : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_FilePropertyNames : Proc(IFsrmPropertyBag*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -5574,11 +5630,11 @@ module Win32cr::Storage::FileServerResourceManager
     get_file_property : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     set_file_property : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     add_message : Proc(IFsrmPropertyBag*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_file_stream_interface : Proc(IFsrmPropertyBag*, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_file_stream_interface : Proc(IFsrmPropertyBag*, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmPropertyBag, lpVtbl : IFsrmPropertyBagVtbl* do
+  record IFsrmPropertyBag, lpVtbl : IFsrmPropertyBagVtable* do
     GUID = LibC::GUID.new(0x774589d1_u32, 0xd300_u16, 0x4f7a_u16, StaticArray[0x9a_u8, 0x24_u8, 0xf7_u8, 0xb7_u8, 0x66_u8, 0x80_u8, 0x2_u8, 0x50_u8])
     def query_interface(this : IFsrmPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5598,8 +5654,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPropertyBag*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPropertyBag*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPropertyBag*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IFsrmPropertyBag*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -5616,25 +5672,25 @@ module Win32cr::Storage::FileServerResourceManager
     def get_VolumeIndex(this : IFsrmPropertyBag*, volumeId : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_VolumeIndex.call(this, volumeId)
     end
-    def get_FileId(this : IFsrmPropertyBag*, fileId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_FileId(this : IFsrmPropertyBag*, fileId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FileId.call(this, fileId)
     end
-    def get_ParentDirectoryId(this : IFsrmPropertyBag*, parentDirectoryId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ParentDirectoryId(this : IFsrmPropertyBag*, parentDirectoryId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ParentDirectoryId.call(this, parentDirectoryId)
     end
-    def get_Size(this : IFsrmPropertyBag*, size : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Size(this : IFsrmPropertyBag*, size : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Size.call(this, size)
     end
-    def get_SizeAllocated(this : IFsrmPropertyBag*, sizeAllocated : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SizeAllocated(this : IFsrmPropertyBag*, sizeAllocated : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SizeAllocated.call(this, sizeAllocated)
     end
-    def get_CreationTime(this : IFsrmPropertyBag*, creationTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CreationTime(this : IFsrmPropertyBag*, creationTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CreationTime.call(this, creationTime)
     end
-    def get_LastAccessTime(this : IFsrmPropertyBag*, lastAccessTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastAccessTime(this : IFsrmPropertyBag*, lastAccessTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastAccessTime.call(this, lastAccessTime)
     end
-    def get_LastModificationTime(this : IFsrmPropertyBag*, lastModificationTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastModificationTime(this : IFsrmPropertyBag*, lastModificationTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastModificationTime.call(this, lastModificationTime)
     end
     def get_Attributes(this : IFsrmPropertyBag*, attributes : UInt32*) : Win32cr::Foundation::HRESULT
@@ -5661,33 +5717,34 @@ module Win32cr::Storage::FileServerResourceManager
     def add_message(this : IFsrmPropertyBag*, message : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_message.call(this, message)
     end
-    def get_file_stream_interface(this : IFsrmPropertyBag*, accessMode : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, interfaceType : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, pStreamInterface : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_file_stream_interface(this : IFsrmPropertyBag*, accessMode : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, interfaceType : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, pStreamInterface : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_file_stream_interface.call(this, accessMode, interfaceType, pStreamInterface)
     end
 
   end
 
   @[Extern]
-  record IFsrmPropertyBag2Vtbl,
+
+  record IFsrmPropertyBag2Vtable,
     query_interface : Proc(IFsrmPropertyBag2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyBag2*, UInt32),
     release : Proc(IFsrmPropertyBag2*, UInt32),
     get_type_info_count : Proc(IFsrmPropertyBag2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPropertyBag2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPropertyBag2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPropertyBag2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPropertyBag2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RelativePath : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_VolumeName : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RelativeNamespaceRoot : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_VolumeIndex : Proc(IFsrmPropertyBag2*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_FileId : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ParentDirectoryId : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Size : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_SizeAllocated : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_CreationTime : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_LastAccessTime : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_LastModificationTime : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_FileId : Proc(IFsrmPropertyBag2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ParentDirectoryId : Proc(IFsrmPropertyBag2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Size : Proc(IFsrmPropertyBag2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SizeAllocated : Proc(IFsrmPropertyBag2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CreationTime : Proc(IFsrmPropertyBag2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_LastAccessTime : Proc(IFsrmPropertyBag2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_LastModificationTime : Proc(IFsrmPropertyBag2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Attributes : Proc(IFsrmPropertyBag2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_OwnerSid : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_FilePropertyNames : Proc(IFsrmPropertyBag2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
@@ -5696,13 +5753,13 @@ module Win32cr::Storage::FileServerResourceManager
     get_file_property : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     set_file_property : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     add_message : Proc(IFsrmPropertyBag2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_file_stream_interface : Proc(IFsrmPropertyBag2*, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_field_value : Proc(IFsrmPropertyBag2*, Win32cr::Storage::FileServerResourceManager::FsrmPropertyBagField, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_file_stream_interface : Proc(IFsrmPropertyBag2*, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_field_value : Proc(IFsrmPropertyBag2*, Win32cr::Storage::FileServerResourceManager::FsrmPropertyBagField, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_untrusted_in_file_properties : Proc(IFsrmPropertyBag2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmPropertyBag2, lpVtbl : IFsrmPropertyBag2Vtbl* do
+  record IFsrmPropertyBag2, lpVtbl : IFsrmPropertyBag2Vtable* do
     GUID = LibC::GUID.new(0xe46bdbd_u32, 0x2402_u16, 0x4fed_u16, StaticArray[0x9c_u8, 0x30_u8, 0x92_u8, 0x66_u8, 0xe6_u8, 0xeb_u8, 0x2c_u8, 0xc9_u8])
     def query_interface(this : IFsrmPropertyBag2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5722,8 +5779,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPropertyBag2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPropertyBag2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPropertyBag2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IFsrmPropertyBag2*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, name)
@@ -5740,25 +5797,25 @@ module Win32cr::Storage::FileServerResourceManager
     def get_VolumeIndex(this : IFsrmPropertyBag2*, volumeId : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_VolumeIndex.call(this, volumeId)
     end
-    def get_FileId(this : IFsrmPropertyBag2*, fileId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_FileId(this : IFsrmPropertyBag2*, fileId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FileId.call(this, fileId)
     end
-    def get_ParentDirectoryId(this : IFsrmPropertyBag2*, parentDirectoryId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ParentDirectoryId(this : IFsrmPropertyBag2*, parentDirectoryId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ParentDirectoryId.call(this, parentDirectoryId)
     end
-    def get_Size(this : IFsrmPropertyBag2*, size : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Size(this : IFsrmPropertyBag2*, size : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Size.call(this, size)
     end
-    def get_SizeAllocated(this : IFsrmPropertyBag2*, sizeAllocated : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SizeAllocated(this : IFsrmPropertyBag2*, sizeAllocated : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SizeAllocated.call(this, sizeAllocated)
     end
-    def get_CreationTime(this : IFsrmPropertyBag2*, creationTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CreationTime(this : IFsrmPropertyBag2*, creationTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CreationTime.call(this, creationTime)
     end
-    def get_LastAccessTime(this : IFsrmPropertyBag2*, lastAccessTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastAccessTime(this : IFsrmPropertyBag2*, lastAccessTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastAccessTime.call(this, lastAccessTime)
     end
-    def get_LastModificationTime(this : IFsrmPropertyBag2*, lastModificationTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastModificationTime(this : IFsrmPropertyBag2*, lastModificationTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastModificationTime.call(this, lastModificationTime)
     end
     def get_Attributes(this : IFsrmPropertyBag2*, attributes : UInt32*) : Win32cr::Foundation::HRESULT
@@ -5785,10 +5842,10 @@ module Win32cr::Storage::FileServerResourceManager
     def add_message(this : IFsrmPropertyBag2*, message : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_message.call(this, message)
     end
-    def get_file_stream_interface(this : IFsrmPropertyBag2*, accessMode : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, interfaceType : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, pStreamInterface : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_file_stream_interface(this : IFsrmPropertyBag2*, accessMode : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingMode, interfaceType : Win32cr::Storage::FileServerResourceManager::FsrmFileStreamingInterfaceType, pStreamInterface : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_file_stream_interface.call(this, accessMode, interfaceType, pStreamInterface)
     end
-    def get_field_value(this : IFsrmPropertyBag2*, field : Win32cr::Storage::FileServerResourceManager::FsrmPropertyBagField, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_field_value(this : IFsrmPropertyBag2*, field : Win32cr::Storage::FileServerResourceManager::FsrmPropertyBagField, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_field_value.call(this, field, value)
     end
     def get_untrusted_in_file_properties(this : IFsrmPropertyBag2*, props : Void**) : Win32cr::Foundation::HRESULT
@@ -5798,20 +5855,21 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPipelineModuleImplementationVtbl,
+
+  record IFsrmPipelineModuleImplementationVtable,
     query_interface : Proc(IFsrmPipelineModuleImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPipelineModuleImplementation*, UInt32),
     release : Proc(IFsrmPipelineModuleImplementation*, UInt32),
     get_type_info_count : Proc(IFsrmPipelineModuleImplementation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPipelineModuleImplementation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPipelineModuleImplementation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPipelineModuleImplementation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPipelineModuleImplementation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     on_load : Proc(IFsrmPipelineModuleImplementation*, Void*, Void**, Win32cr::Foundation::HRESULT),
     on_unload : Proc(IFsrmPipelineModuleImplementation*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmPipelineModuleImplementation, lpVtbl : IFsrmPipelineModuleImplementationVtbl* do
+  record IFsrmPipelineModuleImplementation, lpVtbl : IFsrmPipelineModuleImplementationVtable* do
     GUID = LibC::GUID.new(0xb7907906_u32, 0x2b02_u16, 0x4cb5_u16, StaticArray[0x84_u8, 0xa9_u8, 0xfd_u8, 0xf5_u8, 0x46_u8, 0x13_u8, 0xd6_u8, 0xcd_u8])
     def query_interface(this : IFsrmPipelineModuleImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5831,8 +5889,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPipelineModuleImplementation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPipelineModuleImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPipelineModuleImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def on_load(this : IFsrmPipelineModuleImplementation*, moduleDefinition : Void*, moduleConnector : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_load.call(this, moduleDefinition, moduleConnector)
@@ -5844,26 +5902,27 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassifierModuleImplementationVtbl,
+
+  record IFsrmClassifierModuleImplementationVtable,
     query_interface : Proc(IFsrmClassifierModuleImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassifierModuleImplementation*, UInt32),
     release : Proc(IFsrmClassifierModuleImplementation*, UInt32),
     get_type_info_count : Proc(IFsrmClassifierModuleImplementation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmClassifierModuleImplementation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmClassifierModuleImplementation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmClassifierModuleImplementation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmClassifierModuleImplementation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     on_load : Proc(IFsrmClassifierModuleImplementation*, Void*, Void**, Win32cr::Foundation::HRESULT),
     on_unload : Proc(IFsrmClassifierModuleImplementation*, Win32cr::Foundation::HRESULT),
-    get_LastModified : Proc(IFsrmClassifierModuleImplementation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_LastModified : Proc(IFsrmClassifierModuleImplementation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     use_rules_and_definitions : Proc(IFsrmClassifierModuleImplementation*, Void*, Void*, Win32cr::Foundation::HRESULT),
     on_begin_file : Proc(IFsrmClassifierModuleImplementation*, Void*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
-    does_property_value_apply : Proc(IFsrmClassifierModuleImplementation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16*, LibC::GUID, LibC::GUID, Win32cr::Foundation::HRESULT),
+    does_property_value_apply : Proc(IFsrmClassifierModuleImplementation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, LibC::GUID, LibC::GUID, Win32cr::Foundation::HRESULT),
     get_property_value_to_apply : Proc(IFsrmClassifierModuleImplementation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, LibC::GUID, LibC::GUID, Win32cr::Foundation::HRESULT),
     on_end_file : Proc(IFsrmClassifierModuleImplementation*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFsrmClassifierModuleImplementation, lpVtbl : IFsrmClassifierModuleImplementationVtbl* do
+  record IFsrmClassifierModuleImplementation, lpVtbl : IFsrmClassifierModuleImplementationVtable* do
     GUID = LibC::GUID.new(0x4c968fc6_u32, 0x6edb_u16, 0x4051_u16, StaticArray[0x9c_u8, 0x18_u8, 0x73_u8, 0xb7_u8, 0x29_u8, 0x1a_u8, 0xe1_u8, 0x6_u8])
     def query_interface(this : IFsrmClassifierModuleImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5883,8 +5942,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmClassifierModuleImplementation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmClassifierModuleImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmClassifierModuleImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def on_load(this : IFsrmClassifierModuleImplementation*, moduleDefinition : Void*, moduleConnector : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_load.call(this, moduleDefinition, moduleConnector)
@@ -5892,7 +5951,7 @@ module Win32cr::Storage::FileServerResourceManager
     def on_unload(this : IFsrmClassifierModuleImplementation*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_unload.call(this)
     end
-    def get_LastModified(this : IFsrmClassifierModuleImplementation*, lastModified : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastModified(this : IFsrmClassifierModuleImplementation*, lastModified : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastModified.call(this, lastModified)
     end
     def use_rules_and_definitions(this : IFsrmClassifierModuleImplementation*, rules : Void*, propertyDefinitions : Void*) : Win32cr::Foundation::HRESULT
@@ -5901,7 +5960,7 @@ module Win32cr::Storage::FileServerResourceManager
     def on_begin_file(this : IFsrmClassifierModuleImplementation*, propertyBag : Void*, arrayRuleIds : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_begin_file.call(this, propertyBag, arrayRuleIds)
     end
-    def does_property_value_apply(this : IFsrmClassifierModuleImplementation*, property : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR, applyValue : Int16*, idRule : LibC::GUID, idPropDef : LibC::GUID) : Win32cr::Foundation::HRESULT
+    def does_property_value_apply(this : IFsrmClassifierModuleImplementation*, property : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR, applyValue : Win32cr::Foundation::VARIANT_BOOL*, idRule : LibC::GUID, idPropDef : LibC::GUID) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.does_property_value_apply.call(this, property, value, applyValue, idRule, idPropDef)
     end
     def get_property_value_to_apply(this : IFsrmClassifierModuleImplementation*, property : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR*, idRule : LibC::GUID, idPropDef : LibC::GUID) : Win32cr::Foundation::HRESULT
@@ -5914,14 +5973,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmStorageModuleImplementationVtbl,
+
+  record IFsrmStorageModuleImplementationVtable,
     query_interface : Proc(IFsrmStorageModuleImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmStorageModuleImplementation*, UInt32),
     release : Proc(IFsrmStorageModuleImplementation*, UInt32),
     get_type_info_count : Proc(IFsrmStorageModuleImplementation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmStorageModuleImplementation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmStorageModuleImplementation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmStorageModuleImplementation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmStorageModuleImplementation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     on_load : Proc(IFsrmStorageModuleImplementation*, Void*, Void**, Win32cr::Foundation::HRESULT),
     on_unload : Proc(IFsrmStorageModuleImplementation*, Win32cr::Foundation::HRESULT),
     use_definitions : Proc(IFsrmStorageModuleImplementation*, Void*, Win32cr::Foundation::HRESULT),
@@ -5930,7 +5990,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmStorageModuleImplementation, lpVtbl : IFsrmStorageModuleImplementationVtbl* do
+  record IFsrmStorageModuleImplementation, lpVtbl : IFsrmStorageModuleImplementationVtable* do
     GUID = LibC::GUID.new(0xaf4a0da_u32, 0x895a_u16, 0x4e50_u16, StaticArray[0x87_u8, 0x12_u8, 0xa9_u8, 0x67_u8, 0x24_u8, 0xbc_u8, 0xec_u8, 0x64_u8])
     def query_interface(this : IFsrmStorageModuleImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5950,8 +6010,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmStorageModuleImplementation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmStorageModuleImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmStorageModuleImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def on_load(this : IFsrmStorageModuleImplementation*, moduleDefinition : Void*, moduleConnector : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_load.call(this, moduleDefinition, moduleConnector)
@@ -5972,14 +6032,15 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPipelineModuleConnectorVtbl,
+
+  record IFsrmPipelineModuleConnectorVtable,
     query_interface : Proc(IFsrmPipelineModuleConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPipelineModuleConnector*, UInt32),
     release : Proc(IFsrmPipelineModuleConnector*, UInt32),
     get_type_info_count : Proc(IFsrmPipelineModuleConnector*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFsrmPipelineModuleConnector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFsrmPipelineModuleConnector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFsrmPipelineModuleConnector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFsrmPipelineModuleConnector*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ModuleImplementation : Proc(IFsrmPipelineModuleConnector*, Void**, Win32cr::Foundation::HRESULT),
     get_ModuleName : Proc(IFsrmPipelineModuleConnector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HostingUserAccount : Proc(IFsrmPipelineModuleConnector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5988,7 +6049,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPipelineModuleConnector, lpVtbl : IFsrmPipelineModuleConnectorVtbl* do
+  record IFsrmPipelineModuleConnector, lpVtbl : IFsrmPipelineModuleConnectorVtable* do
     GUID = LibC::GUID.new(0xc16014f3_u32, 0x9aa1_u16, 0x46b3_u16, StaticArray[0xb0_u8, 0xa7_u8, 0xab_u8, 0x14_u8, 0x6e_u8, 0xb2_u8, 0x5_u8, 0xf2_u8])
     def query_interface(this : IFsrmPipelineModuleConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6008,8 +6069,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : IFsrmPipelineModuleConnector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFsrmPipelineModuleConnector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFsrmPipelineModuleConnector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ModuleImplementation(this : IFsrmPipelineModuleConnector*, pipelineModuleImplementation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModuleImplementation.call(this, pipelineModuleImplementation)
@@ -6030,18 +6091,19 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record DIFsrmClassificationEventsVtbl,
+
+  record DIFsrmClassificationEventsVtable,
     query_interface : Proc(DIFsrmClassificationEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DIFsrmClassificationEvents*, UInt32),
     release : Proc(DIFsrmClassificationEvents*, UInt32),
     get_type_info_count : Proc(DIFsrmClassificationEvents*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(DIFsrmClassificationEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(DIFsrmClassificationEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(DIFsrmClassificationEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(DIFsrmClassificationEvents*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record DIFsrmClassificationEvents, lpVtbl : DIFsrmClassificationEventsVtbl* do
+  record DIFsrmClassificationEvents, lpVtbl : DIFsrmClassificationEventsVtable* do
     GUID = LibC::GUID.new(0x26942db0_u32, 0xdabf_u16, 0x41d8_u16, StaticArray[0xbb_u8, 0xdd_u8, 0xb1_u8, 0x29_u8, 0xa9_u8, 0xf7_u8, 0x4_u8, 0x24_u8])
     def query_interface(this : DIFsrmClassificationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6061,8 +6123,8 @@ module Win32cr::Storage::FileServerResourceManager
     def get_i_ds_of_names(this : DIFsrmClassificationEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : DIFsrmClassificationEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : DIFsrmClassificationEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end

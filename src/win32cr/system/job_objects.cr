@@ -62,7 +62,7 @@ module Win32cr::System::JobObjects
     JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP = 4_u32
     JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY = 8_u32
     JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE = 16_u32
-    JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS = 31_u32
+    JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS = 63_u32
   end
   enum JOB_OBJECT_TERMINATE_AT_END_ACTION : UInt32
     JOB_OBJECT_TERMINATE_AT_END_OF_JOB = 0_u32
@@ -79,12 +79,13 @@ module Win32cr::System::JobObjects
     ToleranceIntervalLong = 3_i32
   end
   @[Flags]
-  enum JOB_OBJECT_NET_RATE_CONTROL_FLAGS : UInt32
-    JOB_OBJECT_NET_RATE_CONTROL_ENABLE = 1_u32
-    JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH = 2_u32
-    JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG = 4_u32
-    JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS = 7_u32
+  enum JOB_OBJECT_NET_RATE_CONTROL_FLAGS
+    JOB_OBJECT_NET_RATE_CONTROL_ENABLE = 1_i32
+    JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH = 2_i32
+    JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG = 4_i32
+    JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS = 7_i32
   end
+  @[Flags]
   enum JOB_OBJECT_IO_RATE_CONTROL_FLAGS
     JOB_OBJECT_IO_RATE_CONTROL_ENABLE = 1_i32
     JOB_OBJECT_IO_RATE_CONTROL_STANDALONE_VOLUME = 2_i32
@@ -145,7 +146,11 @@ module Win32cr::System::JobObjects
     JobObjectReserved23Information = 45_i32
     JobObjectReserved24Information = 46_i32
     JobObjectReserved25Information = 47_i32
-    MaxJobObjectInfoClass = 48_i32
+    JobObjectReserved26Information = 48_i32
+    JobObjectReserved27Information = 49_i32
+    JobObjectReserved28Information = 50_i32
+    JobObjectNetworkAccountingInformation = 51_i32
+    MaxJobObjectInfoClass = 52_i32
   end
 
   @[Extern]
@@ -171,22 +176,22 @@ module Win32cr::System::JobObjects
 
   @[Extern]
   struct JOBOBJECT_BASIC_ACCOUNTING_INFORMATION
-    property total_user_time : Win32cr::Foundation::LARGE_INTEGER
-    property total_kernel_time : Win32cr::Foundation::LARGE_INTEGER
-    property this_period_total_user_time : Win32cr::Foundation::LARGE_INTEGER
-    property this_period_total_kernel_time : Win32cr::Foundation::LARGE_INTEGER
+    property total_user_time : Int64
+    property total_kernel_time : Int64
+    property this_period_total_user_time : Int64
+    property this_period_total_kernel_time : Int64
     property total_page_fault_count : UInt32
     property total_processes : UInt32
     property active_processes : UInt32
     property total_terminated_processes : UInt32
-    def initialize(@total_user_time : Win32cr::Foundation::LARGE_INTEGER, @total_kernel_time : Win32cr::Foundation::LARGE_INTEGER, @this_period_total_user_time : Win32cr::Foundation::LARGE_INTEGER, @this_period_total_kernel_time : Win32cr::Foundation::LARGE_INTEGER, @total_page_fault_count : UInt32, @total_processes : UInt32, @active_processes : UInt32, @total_terminated_processes : UInt32)
+    def initialize(@total_user_time : Int64, @total_kernel_time : Int64, @this_period_total_user_time : Int64, @this_period_total_kernel_time : Int64, @total_page_fault_count : UInt32, @total_processes : UInt32, @active_processes : UInt32, @total_terminated_processes : UInt32)
     end
   end
 
   @[Extern]
   struct JOBOBJECT_BASIC_LIMIT_INFORMATION
-    property per_process_user_time_limit : Win32cr::Foundation::LARGE_INTEGER
-    property per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER
+    property per_process_user_time_limit : Int64
+    property per_job_user_time_limit : Int64
     property limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT
     property minimum_working_set_size : LibC::UIntPtrT
     property maximum_working_set_size : LibC::UIntPtrT
@@ -194,7 +199,7 @@ module Win32cr::System::JobObjects
     property affinity : LibC::UIntPtrT
     property priority_class : UInt32
     property scheduling_class : UInt32
-    def initialize(@per_process_user_time_limit : Win32cr::Foundation::LARGE_INTEGER, @per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER, @limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @minimum_working_set_size : LibC::UIntPtrT, @maximum_working_set_size : LibC::UIntPtrT, @active_process_limit : UInt32, @affinity : LibC::UIntPtrT, @priority_class : UInt32, @scheduling_class : UInt32)
+    def initialize(@per_process_user_time_limit : Int64, @per_job_user_time_limit : Int64, @limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @minimum_working_set_size : LibC::UIntPtrT, @maximum_working_set_size : LibC::UIntPtrT, @active_process_limit : UInt32, @affinity : LibC::UIntPtrT, @priority_class : UInt32, @scheduling_class : UInt32)
     end
   end
 
@@ -214,8 +219,8 @@ module Win32cr::System::JobObjects
   struct JOBOBJECT_BASIC_PROCESS_ID_LIST
     property number_of_assigned_processes : UInt32
     property number_of_process_ids_in_list : UInt32
-    property process_id_list : LibC::UIntPtrT*
-    def initialize(@number_of_assigned_processes : UInt32, @number_of_process_ids_in_list : UInt32, @process_id_list : LibC::UIntPtrT*)
+    property process_id_list : LibC::UIntPtrT[1]
+    def initialize(@number_of_assigned_processes : UInt32, @number_of_process_ids_in_list : UInt32, @process_id_list : LibC::UIntPtrT[1])
     end
   end
 
@@ -271,12 +276,12 @@ module Win32cr::System::JobObjects
   struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION
     property io_read_bytes_limit : UInt64
     property io_write_bytes_limit : UInt64
-    property per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER
+    property per_job_user_time_limit : Int64
     property job_memory_limit : UInt64
     property rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
     property limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT
-    def initialize(@io_read_bytes_limit : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER, @job_memory_limit : UInt64, @rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL, @limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT)
+    def initialize(@io_read_bytes_limit : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time_limit : Int64, @job_memory_limit : UInt64, @rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL, @limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT)
     end
   end
 
@@ -284,7 +289,7 @@ module Win32cr::System::JobObjects
   struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2
     property io_read_bytes_limit : UInt64
     property io_write_bytes_limit : UInt64
-    property per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER
+    property per_job_user_time_limit : Int64
     property anonymous1 : Anonymous1_e__Union_
     property anonymous2 : Anonymous2_e__Union_
     property anonymous3 : Anonymous3_e__Union_
@@ -294,16 +299,6 @@ module Win32cr::System::JobObjects
     property io_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
     property net_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property net_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
-
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous3_e__Union_
-    property rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
-    property cpu_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
-    def initialize(@rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL, @cpu_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL)
-    end
-    end
-
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
@@ -324,7 +319,17 @@ module Win32cr::System::JobObjects
     end
     end
 
-    def initialize(@io_read_bytes_limit : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @io_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @job_low_memory_limit : UInt64, @io_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL, @net_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @net_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL)
+
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
+    property cpu_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
+    def initialize(@rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL, @cpu_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL)
+    end
+    end
+
+    def initialize(@io_read_bytes_limit : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time_limit : Int64, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @io_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @job_low_memory_limit : UInt64, @io_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL, @net_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @net_rate_control_tolerance_interval : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL)
     end
   end
 
@@ -336,13 +341,13 @@ module Win32cr::System::JobObjects
     property io_read_bytes_limit : UInt64
     property io_write_bytes : UInt64
     property io_write_bytes_limit : UInt64
-    property per_job_user_time : Win32cr::Foundation::LARGE_INTEGER
-    property per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER
+    property per_job_user_time : Int64
+    property per_job_user_time_limit : Int64
     property job_memory : UInt64
     property job_memory_limit : UInt64
     property rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
-    def initialize(@limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @violation_limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @io_read_bytes : UInt64, @io_read_bytes_limit : UInt64, @io_write_bytes : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time : Win32cr::Foundation::LARGE_INTEGER, @per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER, @job_memory : UInt64, @job_memory_limit : UInt64, @rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
+    def initialize(@limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @violation_limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @io_read_bytes : UInt64, @io_read_bytes_limit : UInt64, @io_write_bytes : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time : Int64, @per_job_user_time_limit : Int64, @job_memory : UInt64, @job_memory_limit : UInt64, @rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
     end
   end
 
@@ -354,8 +359,8 @@ module Win32cr::System::JobObjects
     property io_read_bytes_limit : UInt64
     property io_write_bytes : UInt64
     property io_write_bytes_limit : UInt64
-    property per_job_user_time : Win32cr::Foundation::LARGE_INTEGER
-    property per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER
+    property per_job_user_time : Int64
+    property per_job_user_time_limit : Int64
     property job_memory : UInt64
     property anonymous1 : Anonymous1_e__Union_
     property anonymous2 : Anonymous2_e__Union_
@@ -365,6 +370,16 @@ module Win32cr::System::JobObjects
     property io_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property net_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property net_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property job_high_memory_limit : UInt64
+    property job_memory_limit : UInt64
+    def initialize(@job_high_memory_limit : UInt64, @job_memory_limit : UInt64)
+    end
+    end
+
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
@@ -385,17 +400,7 @@ module Win32cr::System::JobObjects
     end
     end
 
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property job_high_memory_limit : UInt64
-    property job_memory_limit : UInt64
-    def initialize(@job_high_memory_limit : UInt64, @job_memory_limit : UInt64)
-    end
-    end
-
-    def initialize(@limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @violation_limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @io_read_bytes : UInt64, @io_read_bytes_limit : UInt64, @io_write_bytes : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time : Win32cr::Foundation::LARGE_INTEGER, @per_job_user_time_limit : Win32cr::Foundation::LARGE_INTEGER, @job_memory : UInt64, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @job_low_memory_limit : UInt64, @io_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @io_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @net_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @net_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
+    def initialize(@limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @violation_limit_flags : Win32cr::System::JobObjects::JOB_OBJECT_LIMIT, @io_read_bytes : UInt64, @io_read_bytes_limit : UInt64, @io_write_bytes : UInt64, @io_write_bytes_limit : UInt64, @per_job_user_time : Int64, @per_job_user_time_limit : Int64, @job_memory : UInt64, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @job_low_memory_limit : UInt64, @io_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @io_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @net_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @net_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
     end
   end
 
@@ -438,7 +443,7 @@ module Win32cr::System::JobObjects
   end
 
   @[Extern]
-  struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION_NATIVE
+  struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION_NATIVE_V1
     property max_iops : Int64
     property max_bandwidth : Int64
     property reservation_iops : Int64
@@ -514,7 +519,9 @@ module Win32cr::System::JobObjects
   end
 
   def isProcessInJob(process_handle : Win32cr::Foundation::HANDLE, job_handle : Win32cr::Foundation::HANDLE, result : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsProcessInJob(process_handle, job_handle, result)
+    {% end %}
   end
 
   #def createJobObjectW(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
@@ -522,11 +529,15 @@ module Win32cr::System::JobObjects
   #end
 
   def freeMemoryJobObject(buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.FreeMemoryJobObject(buffer)
+    {% end %}
   end
 
   def openJobObjectW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenJobObjectW(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   #def assignProcessToJobObject(hJob : Win32cr::Foundation::HANDLE, hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
@@ -534,7 +545,9 @@ module Win32cr::System::JobObjects
   #end
 
   def terminateJobObject(hJob : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TerminateJobObject(hJob, uExitCode)
+    {% end %}
   end
 
   #def setInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32) : Win32cr::Foundation::BOOL
@@ -542,35 +555,50 @@ module Win32cr::System::JobObjects
   #end
 
   def setIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, io_rate_control_info : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIoRateControlInformationJobObject(hJob, io_rate_control_info)
+    {% end %}
   end
 
   def queryInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32, lpReturnLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryInformationJobObject(hJob, job_object_information_class, lpJobObjectInformation, cbJobObjectInformationLength, lpReturnLength)
+    {% end %}
   end
 
   def queryIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, volume_name : Win32cr::Foundation::PWSTR, info_blocks : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION**, info_block_count : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.QueryIoRateControlInformationJobObject(hJob, volume_name, info_blocks, info_block_count)
+    {% end %}
   end
 
   def userHandleGrantAccess(hUserHandle : Win32cr::Foundation::HANDLE, hJob : Win32cr::Foundation::HANDLE, bGrant : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UserHandleGrantAccess(hUserHandle, hJob, bGrant)
+    {% end %}
   end
 
   def createJobObjectA(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateJobObjectA(lpJobAttributes, lpName)
+    {% end %}
   end
 
   def openJobObjectA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenJobObjectA(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def createJobSet(num_job : UInt32, user_job_set : Win32cr::System::JobObjects::JOB_SET_ARRAY*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateJobSet(num_job, user_job_set, flags)
+    {% end %}
   end
 
   @[Link("kernel32")]
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun IsProcessInJob(process_handle : Win32cr::Foundation::HANDLE, job_handle : Win32cr::Foundation::HANDLE, result : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
@@ -618,4 +646,5 @@ module Win32cr::System::JobObjects
     fun CreateJobSet(num_job : UInt32, user_job_set : Win32cr::System::JobObjects::JOB_SET_ARRAY*, flags : UInt32) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

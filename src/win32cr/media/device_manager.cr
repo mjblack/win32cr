@@ -17,10 +17,10 @@ module Win32cr::Media::DeviceManager
   SAC_PROTOCOL_V1 = 2_u32
   SAC_CERT_X509 = 1_u32
   SAC_CERT_V1 = 2_u32
-  WMDM_DEVICE_PROTOCOL_MTP = "979e54e5-0afc-4604-8d93-dc798a4bcf45"
-  WMDM_DEVICE_PROTOCOL_RAPI = "2a11ed91-8c8f-41e4-82d1-8386e003561c"
-  WMDM_DEVICE_PROTOCOL_MSC = "a4d2c26c-a881-44bb-bd5d-1f703c71f7a9"
-  WMDM_SERVICE_PROVIDER_VENDOR_MICROSOFT = "7de8686d-78ee-43ea-a496-c625ac91cc5d"
+  WMDM_DEVICE_PROTOCOL_MTP = LibC::GUID.new(0x979e54e5_u32, 0xafc_u16, 0x4604_u16, StaticArray[0x8d_u8, 0x93_u8, 0xdc_u8, 0x79_u8, 0x8a_u8, 0x4b_u8, 0xcf_u8, 0x45_u8])
+  WMDM_DEVICE_PROTOCOL_RAPI = LibC::GUID.new(0x2a11ed91_u32, 0x8c8f_u16, 0x41e4_u16, StaticArray[0x82_u8, 0xd1_u8, 0x83_u8, 0x86_u8, 0xe0_u8, 0x3_u8, 0x56_u8, 0x1c_u8])
+  WMDM_DEVICE_PROTOCOL_MSC = LibC::GUID.new(0xa4d2c26c_u32, 0xa881_u16, 0x44bb_u16, StaticArray[0xbd_u8, 0x5d_u8, 0x1f_u8, 0x70_u8, 0x3c_u8, 0x71_u8, 0xf7_u8, 0xa9_u8])
+  WMDM_SERVICE_PROVIDER_VENDOR_MICROSOFT = LibC::GUID.new(0x7de8686d_u32, 0x78ee_u16, 0x43ea_u16, StaticArray[0xa4_u8, 0x96_u8, 0xc6_u8, 0x25_u8, 0xac_u8, 0x91_u8, 0xcc_u8, 0x5d_u8])
   WMDMID_LENGTH = 128_u32
   WMDM_MAC_LENGTH = 8_u32
   WMDM_S_NOT_ALL_PROPERTIES_APPLIED = 282625_i32
@@ -175,10 +175,10 @@ module Win32cr::Media::DeviceManager
   WMDM_SCP_DRMINFO_NOT_DRMPROTECTED = 0_i32
   WMDM_SCP_DRMINFO_V1HEADER = 1_i32
   WMDM_SCP_DRMINFO_V2HEADER = 2_i32
-  SCP_EVENTID_ACQSECURECLOCK = "86248cc9-4a59-43e2-9146-48a7f3f4140c"
-  SCP_EVENTID_NEEDTOINDIV = "87a507c7-b469-4386-b976-d5d1ce538a6f"
-  SCP_EVENTID_DRMINFO = "213dd287-41d2-432b-9e3f-3b4f7b3581dd"
-  SCP_PARAMID_DRMVERSION = "41d0155d-7cc7-4217-ada9-005074624da4"
+  SCP_EVENTID_ACQSECURECLOCK = LibC::GUID.new(0x86248cc9_u32, 0x4a59_u16, 0x43e2_u16, StaticArray[0x91_u8, 0x46_u8, 0x48_u8, 0xa7_u8, 0xf3_u8, 0xf4_u8, 0x14_u8, 0xc_u8])
+  SCP_EVENTID_NEEDTOINDIV = LibC::GUID.new(0x87a507c7_u32, 0xb469_u16, 0x4386_u16, StaticArray[0xb9_u8, 0x76_u8, 0xd5_u8, 0xd1_u8, 0xce_u8, 0x53_u8, 0x8a_u8, 0x6f_u8])
+  SCP_EVENTID_DRMINFO = LibC::GUID.new(0x213dd287_u32, 0x41d2_u16, 0x432b_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x3b_u8, 0x4f_u8, 0x7b_u8, 0x35_u8, 0x81_u8, 0xdd_u8])
+  SCP_PARAMID_DRMVERSION = LibC::GUID.new(0x41d0155d_u32, 0x7cc7_u16, 0x4217_u16, StaticArray[0xad_u8, 0xa9_u8, 0x0_u8, 0x50_u8, 0x74_u8, 0x62_u8, 0x4d_u8, 0xa4_u8])
   SAC_MAC_LEN = 8_u32
   WMDM_LOG_SEV_INFO = 1_u32
   WMDM_LOG_SEV_WARN = 2_u32
@@ -280,7 +280,7 @@ module Win32cr::Media::DeviceManager
   G_wszwmdmtimetolive = "WMDM/TimeToLive"
   G_wszwmdmmediaguid = "WMDM/MediaGuid"
   G_wszwpdpassthroughpropertyvalues = "WPD/PassthroughPropertyValues"
-  EVENT_WMDM_CONTENT_TRANSFER = "339c9bf4-bcfe-4ed8-94df-eaf8c26ab61b"
+  EVENT_WMDM_CONTENT_TRANSFER = LibC::GUID.new(0x339c9bf4_u32, 0xbcfe_u16, 0x4ed8_u16, StaticArray[0x94_u8, 0xdf_u8, 0xea_u8, 0xf8_u8, 0xc2_u8, 0x6a_u8, 0xb6_u8, 0x1b_u8])
   MTP_COMMAND_MAX_PARAMS = 5_u32
   MTP_RESPONSE_MAX_PARAMS = 5_u32
   MTP_RESPONSE_OK = 8193_u16
@@ -437,7 +437,7 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  struct MACINFO__
+  struct MACINFO
     property fUsed : Win32cr::Foundation::BOOL
     property abMacState : UInt8[36]
     def initialize(@fUsed : Win32cr::Foundation::BOOL, @abMacState : UInt8[36])
@@ -654,8 +654,8 @@ module Win32cr::Media::DeviceManager
     property params : UInt32[5]
     property next_phase : UInt32
     property command_write_data_size : UInt32
-    property command_write_data : UInt8*
-    def initialize(@op_code : UInt16, @num_params : UInt32, @params : UInt32[5], @next_phase : UInt32, @command_write_data_size : UInt32, @command_write_data : UInt8*)
+    property command_write_data : UInt8[1]
+    def initialize(@op_code : UInt16, @num_params : UInt32, @params : UInt32[5], @next_phase : UInt32, @command_write_data_size : UInt32, @command_write_data : UInt8[1])
     end
   end
 
@@ -665,13 +665,14 @@ module Win32cr::Media::DeviceManager
     property num_params : UInt32
     property params : UInt32[5]
     property command_read_data_size : UInt32
-    property command_read_data : UInt8*
-    def initialize(@response_code : UInt16, @num_params : UInt32, @params : UInt32[5], @command_read_data_size : UInt32, @command_read_data : UInt8*)
+    property command_read_data : UInt8[1]
+    def initialize(@response_code : UInt16, @num_params : UInt32, @params : UInt32[5], @command_read_data_size : UInt32, @command_read_data : UInt8[1])
     end
   end
 
   @[Extern]
-  record IWMDMMetaDataVtbl,
+
+  record IWMDMMetaDataVtable,
     query_interface : Proc(IWMDMMetaData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMMetaData*, UInt32),
     release : Proc(IWMDMMetaData*, UInt32),
@@ -682,7 +683,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMMetaData, lpVtbl : IWMDMMetaDataVtbl* do
+  record IWMDMMetaData, lpVtbl : IWMDMMetaDataVtable* do
     GUID = LibC::GUID.new(0xec3b0663_u32, 0x951_u16, 0x460a_u16, StaticArray[0x9a_u8, 0x80_u8, 0xd_u8, 0xce_u8, 0xed_u8, 0x3c_u8, 0x4_u8, 0x3c_u8])
     def query_interface(this : IWMDMMetaData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -709,7 +710,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDeviceManagerVtbl,
+
+  record IWMDeviceManagerVtable,
     query_interface : Proc(IWMDeviceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDeviceManager*, UInt32),
     release : Proc(IWMDeviceManager*, UInt32),
@@ -719,7 +721,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDeviceManager, lpVtbl : IWMDeviceManagerVtbl* do
+  record IWMDeviceManager, lpVtbl : IWMDeviceManagerVtable* do
     GUID = LibC::GUID.new(0x1dcb3a00_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDeviceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -743,7 +745,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDeviceManager2Vtbl,
+
+  record IWMDeviceManager2Vtable,
     query_interface : Proc(IWMDeviceManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDeviceManager2*, UInt32),
     release : Proc(IWMDeviceManager2*, UInt32),
@@ -756,7 +759,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDeviceManager2, lpVtbl : IWMDeviceManager2Vtbl* do
+  record IWMDeviceManager2, lpVtbl : IWMDeviceManager2Vtable* do
     GUID = LibC::GUID.new(0x923e5249_u32, 0x8731_u16, 0x4c5b_u16, StaticArray[0x9b_u8, 0x1c_u8, 0xb8_u8, 0xb6_u8, 0xb_u8, 0x6e_u8, 0x46_u8, 0xaf_u8])
     def query_interface(this : IWMDeviceManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -789,7 +792,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDeviceManager3Vtbl,
+
+  record IWMDeviceManager3Vtable,
     query_interface : Proc(IWMDeviceManager3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDeviceManager3*, UInt32),
     release : Proc(IWMDeviceManager3*, UInt32),
@@ -803,7 +807,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDeviceManager3, lpVtbl : IWMDeviceManager3Vtbl* do
+  record IWMDeviceManager3, lpVtbl : IWMDeviceManager3Vtable* do
     GUID = LibC::GUID.new(0xaf185c41_u32, 0x100d_u16, 0x46ed_u16, StaticArray[0xbe_u8, 0x2e_u8, 0x9c_u8, 0xe8_u8, 0xc4_u8, 0x45_u8, 0x94_u8, 0xef_u8])
     def query_interface(this : IWMDeviceManager3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -839,7 +843,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorageGlobalsVtbl,
+
+  record IWMDMStorageGlobalsVtable,
     query_interface : Proc(IWMDMStorageGlobals*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorageGlobals*, UInt32),
     release : Proc(IWMDMStorageGlobals*, UInt32),
@@ -853,7 +858,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorageGlobals, lpVtbl : IWMDMStorageGlobalsVtbl* do
+  record IWMDMStorageGlobals, lpVtbl : IWMDMStorageGlobalsVtable* do
     GUID = LibC::GUID.new(0x1dcb3a07_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMStorageGlobals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -889,14 +894,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorageVtbl,
+
+  record IWMDMStorageVtable,
     query_interface : Proc(IWMDMStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorage*, UInt32),
     release : Proc(IWMDMStorage*, UInt32),
     set_attributes : Proc(IWMDMStorage*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IWMDMStorage*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IWMDMStorage*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IWMDMStorage*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IWMDMStorage*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IWMDMStorage*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IWMDMStorage*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IWMDMStorage*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -905,7 +911,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorage, lpVtbl : IWMDMStorageVtbl* do
+  record IWMDMStorage, lpVtbl : IWMDMStorageVtable* do
     GUID = LibC::GUID.new(0x1dcb3a06_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -925,7 +931,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IWMDMStorage*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IWMDMStorage*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IWMDMStorage*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IWMDMStorage*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -947,14 +953,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorage2Vtbl,
+
+  record IWMDMStorage2Vtable,
     query_interface : Proc(IWMDMStorage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorage2*, UInt32),
     release : Proc(IWMDMStorage2*, UInt32),
     set_attributes : Proc(IWMDMStorage2*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IWMDMStorage2*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IWMDMStorage2*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IWMDMStorage2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IWMDMStorage2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IWMDMStorage2*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IWMDMStorage2*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IWMDMStorage2*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -966,7 +973,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorage2, lpVtbl : IWMDMStorage2Vtbl* do
+  record IWMDMStorage2, lpVtbl : IWMDMStorage2Vtable* do
     GUID = LibC::GUID.new(0x1ed5a144_u32, 0x5cd5_u16, 0x4683_u16, StaticArray[0x9e_u8, 0xff_u8, 0x72_u8, 0xcb_u8, 0xdb_u8, 0x2d_u8, 0x95_u8, 0x33_u8])
     def query_interface(this : IWMDMStorage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -986,7 +993,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IWMDMStorage2*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IWMDMStorage2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IWMDMStorage2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IWMDMStorage2*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -1017,14 +1024,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorage3Vtbl,
+
+  record IWMDMStorage3Vtable,
     query_interface : Proc(IWMDMStorage3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorage3*, UInt32),
     release : Proc(IWMDMStorage3*, UInt32),
     set_attributes : Proc(IWMDMStorage3*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IWMDMStorage3*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IWMDMStorage3*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IWMDMStorage3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IWMDMStorage3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IWMDMStorage3*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IWMDMStorage3*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IWMDMStorage3*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -1040,7 +1048,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorage3, lpVtbl : IWMDMStorage3Vtbl* do
+  record IWMDMStorage3, lpVtbl : IWMDMStorage3Vtable* do
     GUID = LibC::GUID.new(0x97717eea_u32, 0x926a_u16, 0x464e_u16, StaticArray[0x96_u8, 0xa4_u8, 0x24_u8, 0x7b_u8, 0x2_u8, 0x16_u8, 0x2_u8, 0x6e_u8])
     def query_interface(this : IWMDMStorage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1060,7 +1068,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IWMDMStorage3*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IWMDMStorage3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IWMDMStorage3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IWMDMStorage3*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -1103,14 +1111,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorage4Vtbl,
+
+  record IWMDMStorage4Vtable,
     query_interface : Proc(IWMDMStorage4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorage4*, UInt32),
     release : Proc(IWMDMStorage4*, UInt32),
     set_attributes : Proc(IWMDMStorage4*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IWMDMStorage4*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IWMDMStorage4*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IWMDMStorage4*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IWMDMStorage4*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IWMDMStorage4*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IWMDMStorage4*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IWMDMStorage4*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -1132,7 +1141,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorage4, lpVtbl : IWMDMStorage4Vtbl* do
+  record IWMDMStorage4, lpVtbl : IWMDMStorage4Vtable* do
     GUID = LibC::GUID.new(0xc225bac5_u32, 0xa03a_u16, 0x40b8_u16, StaticArray[0x9a_u8, 0x23_u8, 0x91_u8, 0xcf_u8, 0x47_u8, 0x8c_u8, 0x64_u8, 0xa6_u8])
     def query_interface(this : IWMDMStorage4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1152,7 +1161,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IWMDMStorage4*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IWMDMStorage4*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IWMDMStorage4*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IWMDMStorage4*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -1213,14 +1222,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMOperationVtbl,
+
+  record IWMDMOperationVtable,
     query_interface : Proc(IWMDMOperation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMOperation*, UInt32),
     release : Proc(IWMDMOperation*, UInt32),
     begin_read : Proc(IWMDMOperation*, Win32cr::Foundation::HRESULT),
     begin_write : Proc(IWMDMOperation*, Win32cr::Foundation::HRESULT),
-    get_object_name : Proc(IWMDMOperation*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    set_object_name : Proc(IWMDMOperation*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_object_name : Proc(IWMDMOperation*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    set_object_name : Proc(IWMDMOperation*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_object_attributes : Proc(IWMDMOperation*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     set_object_attributes : Proc(IWMDMOperation*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_object_total_size : Proc(IWMDMOperation*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -1230,7 +1240,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMOperation, lpVtbl : IWMDMOperationVtbl* do
+  record IWMDMOperation, lpVtbl : IWMDMOperationVtable* do
     GUID = LibC::GUID.new(0x1dcb3a0b_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1247,10 +1257,10 @@ module Win32cr::Media::DeviceManager
     def begin_write(this : IWMDMOperation*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_write.call(this)
     end
-    def get_object_name(this : IWMDMOperation*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_object_name(this : IWMDMOperation*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_object_name.call(this, pwszName, nMaxChars)
     end
-    def set_object_name(this : IWMDMOperation*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def set_object_name(this : IWMDMOperation*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_object_name.call(this, pwszName, nMaxChars)
     end
     def get_object_attributes(this : IWMDMOperation*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
@@ -1275,14 +1285,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMOperation2Vtbl,
+
+  record IWMDMOperation2Vtable,
     query_interface : Proc(IWMDMOperation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMOperation2*, UInt32),
     release : Proc(IWMDMOperation2*, UInt32),
     begin_read : Proc(IWMDMOperation2*, Win32cr::Foundation::HRESULT),
     begin_write : Proc(IWMDMOperation2*, Win32cr::Foundation::HRESULT),
-    get_object_name : Proc(IWMDMOperation2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    set_object_name : Proc(IWMDMOperation2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_object_name : Proc(IWMDMOperation2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    set_object_name : Proc(IWMDMOperation2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_object_attributes : Proc(IWMDMOperation2*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     set_object_attributes : Proc(IWMDMOperation2*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_object_total_size : Proc(IWMDMOperation2*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -1294,7 +1305,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMOperation2, lpVtbl : IWMDMOperation2Vtbl* do
+  record IWMDMOperation2, lpVtbl : IWMDMOperation2Vtable* do
     GUID = LibC::GUID.new(0x33445b48_u32, 0x7df7_u16, 0x425c_u16, StaticArray[0xad_u8, 0x8f_u8, 0xf_u8, 0xc6_u8, 0xd8_u8, 0x2f_u8, 0x9f_u8, 0x75_u8])
     def query_interface(this : IWMDMOperation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1311,10 +1322,10 @@ module Win32cr::Media::DeviceManager
     def begin_write(this : IWMDMOperation2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_write.call(this)
     end
-    def get_object_name(this : IWMDMOperation2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_object_name(this : IWMDMOperation2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_object_name.call(this, pwszName, nMaxChars)
     end
-    def set_object_name(this : IWMDMOperation2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def set_object_name(this : IWMDMOperation2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_object_name.call(this, pwszName, nMaxChars)
     end
     def get_object_attributes(this : IWMDMOperation2*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
@@ -1345,14 +1356,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMOperation3Vtbl,
+
+  record IWMDMOperation3Vtable,
     query_interface : Proc(IWMDMOperation3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMOperation3*, UInt32),
     release : Proc(IWMDMOperation3*, UInt32),
     begin_read : Proc(IWMDMOperation3*, Win32cr::Foundation::HRESULT),
     begin_write : Proc(IWMDMOperation3*, Win32cr::Foundation::HRESULT),
-    get_object_name : Proc(IWMDMOperation3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    set_object_name : Proc(IWMDMOperation3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_object_name : Proc(IWMDMOperation3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    set_object_name : Proc(IWMDMOperation3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_object_attributes : Proc(IWMDMOperation3*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     set_object_attributes : Proc(IWMDMOperation3*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_object_total_size : Proc(IWMDMOperation3*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -1363,7 +1375,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMOperation3, lpVtbl : IWMDMOperation3Vtbl* do
+  record IWMDMOperation3, lpVtbl : IWMDMOperation3Vtable* do
     GUID = LibC::GUID.new(0xd1f9b46a_u32, 0x9ca8_u16, 0x46d8_u16, StaticArray[0x9d_u8, 0xf_u8, 0x1e_u8, 0xc9_u8, 0xba_u8, 0xe5_u8, 0x49_u8, 0x19_u8])
     def query_interface(this : IWMDMOperation3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1380,10 +1392,10 @@ module Win32cr::Media::DeviceManager
     def begin_write(this : IWMDMOperation3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_write.call(this)
     end
-    def get_object_name(this : IWMDMOperation3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_object_name(this : IWMDMOperation3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_object_name.call(this, pwszName, nMaxChars)
     end
-    def set_object_name(this : IWMDMOperation3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def set_object_name(this : IWMDMOperation3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_object_name.call(this, pwszName, nMaxChars)
     end
     def get_object_attributes(this : IWMDMOperation3*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
@@ -1411,7 +1423,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMProgressVtbl,
+
+  record IWMDMProgressVtable,
     query_interface : Proc(IWMDMProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMProgress*, UInt32),
     release : Proc(IWMDMProgress*, UInt32),
@@ -1421,7 +1434,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMProgress, lpVtbl : IWMDMProgressVtbl* do
+  record IWMDMProgress, lpVtbl : IWMDMProgressVtable* do
     GUID = LibC::GUID.new(0x1dcb3a0c_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1445,7 +1458,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMProgress2Vtbl,
+
+  record IWMDMProgress2Vtable,
     query_interface : Proc(IWMDMProgress2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMProgress2*, UInt32),
     release : Proc(IWMDMProgress2*, UInt32),
@@ -1456,7 +1470,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMProgress2, lpVtbl : IWMDMProgress2Vtbl* do
+  record IWMDMProgress2, lpVtbl : IWMDMProgress2Vtable* do
     GUID = LibC::GUID.new(0x3a43f550_u32, 0xb383_u16, 0x4e92_u16, StaticArray[0xb0_u8, 0x4a_u8, 0xe6_u8, 0xbb_u8, 0xc6_u8, 0x60_u8, 0xfe_u8, 0xfc_u8])
     def query_interface(this : IWMDMProgress2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1483,7 +1497,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMProgress3Vtbl,
+
+  record IWMDMProgress3Vtable,
     query_interface : Proc(IWMDMProgress3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMProgress3*, UInt32),
     release : Proc(IWMDMProgress3*, UInt32),
@@ -1497,7 +1512,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMProgress3, lpVtbl : IWMDMProgress3Vtbl* do
+  record IWMDMProgress3, lpVtbl : IWMDMProgress3Vtable* do
     GUID = LibC::GUID.new(0x21de01cb_u32, 0x3bb4_u16, 0x4929_u16, StaticArray[0xb2_u8, 0x1a_u8, 0x17_u8, 0xaf_u8, 0x3f_u8, 0x80_u8, 0xf6_u8, 0x58_u8])
     def query_interface(this : IWMDMProgress3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1533,12 +1548,13 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMDeviceVtbl,
+
+  record IWMDMDeviceVtable,
     query_interface : Proc(IWMDMDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMDevice*, UInt32),
     release : Proc(IWMDMDevice*, UInt32),
-    get_name : Proc(IWMDMDevice*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_manufacturer : Proc(IWMDMDevice*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IWMDMDevice*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_manufacturer : Proc(IWMDMDevice*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_version : Proc(IWMDMDevice*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IWMDMDevice*, UInt32*, Win32cr::Foundation::HRESULT),
     get_serial_number : Proc(IWMDMDevice*, Win32cr::Media::DeviceManager::WMDMID*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -1551,7 +1567,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMDevice, lpVtbl : IWMDMDeviceVtbl* do
+  record IWMDMDevice, lpVtbl : IWMDMDeviceVtable* do
     GUID = LibC::GUID.new(0x1dcb3a02_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1562,10 +1578,10 @@ module Win32cr::Media::DeviceManager
     def release(this : IWMDMDevice*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_name(this : IWMDMDevice*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IWMDMDevice*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
-    def get_manufacturer(this : IWMDMDevice*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_manufacturer(this : IWMDMDevice*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_manufacturer.call(this, pwszName, nMaxChars)
     end
     def get_version(this : IWMDMDevice*, pdwVersion : UInt32*) : Win32cr::Foundation::HRESULT
@@ -1599,12 +1615,13 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMDevice2Vtbl,
+
+  record IWMDMDevice2Vtable,
     query_interface : Proc(IWMDMDevice2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMDevice2*, UInt32),
     release : Proc(IWMDMDevice2*, UInt32),
-    get_name : Proc(IWMDMDevice2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_manufacturer : Proc(IWMDMDevice2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IWMDMDevice2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_manufacturer : Proc(IWMDMDevice2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_version : Proc(IWMDMDevice2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IWMDMDevice2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_serial_number : Proc(IWMDMDevice2*, Win32cr::Media::DeviceManager::WMDMID*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -1617,11 +1634,11 @@ module Win32cr::Media::DeviceManager
     get_storage : Proc(IWMDMDevice2*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     get_format_support2 : Proc(IWMDMDevice2*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX**, UInt32*, Win32cr::Media::MediaFoundation::VIDEOINFOHEADER**, UInt32*, Win32cr::Media::DeviceManager::WMFILECAPABILITIES**, UInt32*, Win32cr::Foundation::HRESULT),
     get_specify_property_pages : Proc(IWMDMDevice2*, Void**, Void***, UInt32*, Win32cr::Foundation::HRESULT),
-    get_canonical_name : Proc(IWMDMDevice2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT)
+    get_canonical_name : Proc(IWMDMDevice2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMDMDevice2, lpVtbl : IWMDMDevice2Vtbl* do
+  record IWMDMDevice2, lpVtbl : IWMDMDevice2Vtable* do
     GUID = LibC::GUID.new(0xe34f3d37_u32, 0x9d67_u16, 0x4fc1_u16, StaticArray[0x92_u8, 0x52_u8, 0x62_u8, 0xd2_u8, 0x8b_u8, 0x2f_u8, 0x8b_u8, 0x55_u8])
     def query_interface(this : IWMDMDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1632,10 +1649,10 @@ module Win32cr::Media::DeviceManager
     def release(this : IWMDMDevice2*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_name(this : IWMDMDevice2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IWMDMDevice2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
-    def get_manufacturer(this : IWMDMDevice2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_manufacturer(this : IWMDMDevice2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_manufacturer.call(this, pwszName, nMaxChars)
     end
     def get_version(this : IWMDMDevice2*, pdwVersion : UInt32*) : Win32cr::Foundation::HRESULT
@@ -1674,19 +1691,20 @@ module Win32cr::Media::DeviceManager
     def get_specify_property_pages(this : IWMDMDevice2*, ppSpecifyPropPages : Void**, pppUnknowns : Void***, pcUnks : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specify_property_pages.call(this, ppSpecifyPropPages, pppUnknowns, pcUnks)
     end
-    def get_canonical_name(this : IWMDMDevice2*, pwszPnPName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_canonical_name(this : IWMDMDevice2*, pwszPnPName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_canonical_name.call(this, pwszPnPName, nMaxChars)
     end
 
   end
 
   @[Extern]
-  record IWMDMDevice3Vtbl,
+
+  record IWMDMDevice3Vtable,
     query_interface : Proc(IWMDMDevice3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMDevice3*, UInt32),
     release : Proc(IWMDMDevice3*, UInt32),
-    get_name : Proc(IWMDMDevice3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_manufacturer : Proc(IWMDMDevice3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IWMDMDevice3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_manufacturer : Proc(IWMDMDevice3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_version : Proc(IWMDMDevice3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IWMDMDevice3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_serial_number : Proc(IWMDMDevice3*, Win32cr::Media::DeviceManager::WMDMID*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -1699,7 +1717,7 @@ module Win32cr::Media::DeviceManager
     get_storage : Proc(IWMDMDevice3*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     get_format_support2 : Proc(IWMDMDevice3*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX**, UInt32*, Win32cr::Media::MediaFoundation::VIDEOINFOHEADER**, UInt32*, Win32cr::Media::DeviceManager::WMFILECAPABILITIES**, UInt32*, Win32cr::Foundation::HRESULT),
     get_specify_property_pages : Proc(IWMDMDevice3*, Void**, Void***, UInt32*, Win32cr::Foundation::HRESULT),
-    get_canonical_name : Proc(IWMDMDevice3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_canonical_name : Proc(IWMDMDevice3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_property : Proc(IWMDMDevice3*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
     set_property : Proc(IWMDMDevice3*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
     get_format_capability : Proc(IWMDMDevice3*, Win32cr::Media::DeviceManager::WMDM_FORMATCODE, Win32cr::Media::DeviceManager::WMDM_FORMAT_CAPABILITY*, Win32cr::Foundation::HRESULT),
@@ -1708,7 +1726,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMDevice3, lpVtbl : IWMDMDevice3Vtbl* do
+  record IWMDMDevice3, lpVtbl : IWMDMDevice3Vtable* do
     GUID = LibC::GUID.new(0x6c03e4fe_u32, 0x5db_u16, 0x4dda_u16, StaticArray[0x9e_u8, 0x3c_u8, 0x6_u8, 0x23_u8, 0x3a_u8, 0x6d_u8, 0x5d_u8, 0x65_u8])
     def query_interface(this : IWMDMDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1719,10 +1737,10 @@ module Win32cr::Media::DeviceManager
     def release(this : IWMDMDevice3*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_name(this : IWMDMDevice3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IWMDMDevice3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
-    def get_manufacturer(this : IWMDMDevice3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_manufacturer(this : IWMDMDevice3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_manufacturer.call(this, pwszName, nMaxChars)
     end
     def get_version(this : IWMDMDevice3*, pdwVersion : UInt32*) : Win32cr::Foundation::HRESULT
@@ -1761,7 +1779,7 @@ module Win32cr::Media::DeviceManager
     def get_specify_property_pages(this : IWMDMDevice3*, ppSpecifyPropPages : Void**, pppUnknowns : Void***, pcUnks : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specify_property_pages.call(this, ppSpecifyPropPages, pppUnknowns, pcUnks)
     end
-    def get_canonical_name(this : IWMDMDevice3*, pwszPnPName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_canonical_name(this : IWMDMDevice3*, pwszPnPName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_canonical_name.call(this, pwszPnPName, nMaxChars)
     end
     def get_property(this : IWMDMDevice3*, pwszPropName : Win32cr::Foundation::PWSTR, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
@@ -1783,7 +1801,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMDeviceSessionVtbl,
+
+  record IWMDMDeviceSessionVtable,
     query_interface : Proc(IWMDMDeviceSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMDeviceSession*, UInt32),
     release : Proc(IWMDMDeviceSession*, UInt32),
@@ -1792,7 +1811,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMDeviceSession, lpVtbl : IWMDMDeviceSessionVtbl* do
+  record IWMDMDeviceSession, lpVtbl : IWMDMDeviceSessionVtable* do
     GUID = LibC::GUID.new(0x82af0a65_u32, 0x9d96_u16, 0x412c_u16, StaticArray[0x83_u8, 0xe5_u8, 0x3c_u8, 0x43_u8, 0xe4_u8, 0xb0_u8, 0x6c_u8, 0xc7_u8])
     def query_interface(this : IWMDMDeviceSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1813,7 +1832,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMEnumDeviceVtbl,
+
+  record IWMDMEnumDeviceVtable,
     query_interface : Proc(IWMDMEnumDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMEnumDevice*, UInt32),
     release : Proc(IWMDMEnumDevice*, UInt32),
@@ -1824,7 +1844,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMEnumDevice, lpVtbl : IWMDMEnumDeviceVtbl* do
+  record IWMDMEnumDevice, lpVtbl : IWMDMEnumDeviceVtable* do
     GUID = LibC::GUID.new(0x1dcb3a01_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMEnumDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1851,7 +1871,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMDeviceControlVtbl,
+
+  record IWMDMDeviceControlVtable,
     query_interface : Proc(IWMDMDeviceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMDeviceControl*, UInt32),
     release : Proc(IWMDMDeviceControl*, UInt32),
@@ -1866,7 +1887,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMDeviceControl, lpVtbl : IWMDMDeviceControlVtbl* do
+  record IWMDMDeviceControl, lpVtbl : IWMDMDeviceControlVtable* do
     GUID = LibC::GUID.new(0x1dcb3a04_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1905,7 +1926,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMEnumStorageVtbl,
+
+  record IWMDMEnumStorageVtable,
     query_interface : Proc(IWMDMEnumStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMEnumStorage*, UInt32),
     release : Proc(IWMDMEnumStorage*, UInt32),
@@ -1916,7 +1938,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMEnumStorage, lpVtbl : IWMDMEnumStorageVtbl* do
+  record IWMDMEnumStorage, lpVtbl : IWMDMEnumStorageVtable* do
     GUID = LibC::GUID.new(0x1dcb3a05_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMEnumStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1943,7 +1965,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorageControlVtbl,
+
+  record IWMDMStorageControlVtable,
     query_interface : Proc(IWMDMStorageControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorageControl*, UInt32),
     release : Proc(IWMDMStorageControl*, UInt32),
@@ -1955,7 +1978,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorageControl, lpVtbl : IWMDMStorageControlVtbl* do
+  record IWMDMStorageControl, lpVtbl : IWMDMStorageControlVtable* do
     GUID = LibC::GUID.new(0x1dcb3a08_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMStorageControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1985,7 +2008,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorageControl2Vtbl,
+
+  record IWMDMStorageControl2Vtable,
     query_interface : Proc(IWMDMStorageControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorageControl2*, UInt32),
     release : Proc(IWMDMStorageControl2*, UInt32),
@@ -1998,7 +2022,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorageControl2, lpVtbl : IWMDMStorageControl2Vtbl* do
+  record IWMDMStorageControl2, lpVtbl : IWMDMStorageControl2Vtable* do
     GUID = LibC::GUID.new(0x972c2e88_u32, 0xbd6c_u16, 0x4125_u16, StaticArray[0x8e_u8, 0x9_u8, 0x84_u8, 0xf8_u8, 0x37_u8, 0xe6_u8, 0x37_u8, 0xb6_u8])
     def query_interface(this : IWMDMStorageControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2031,7 +2055,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMStorageControl3Vtbl,
+
+  record IWMDMStorageControl3Vtable,
     query_interface : Proc(IWMDMStorageControl3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMStorageControl3*, UInt32),
     release : Proc(IWMDMStorageControl3*, UInt32),
@@ -2045,7 +2070,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMStorageControl3, lpVtbl : IWMDMStorageControl3Vtbl* do
+  record IWMDMStorageControl3, lpVtbl : IWMDMStorageControl3Vtable* do
     GUID = LibC::GUID.new(0xb3266365_u32, 0xd4f3_u16, 0x4696_u16, StaticArray[0x8d_u8, 0x53_u8, 0xbd_u8, 0x27_u8, 0xec_u8, 0x60_u8, 0x99_u8, 0x3a_u8])
     def query_interface(this : IWMDMStorageControl3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2081,7 +2106,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMObjectInfoVtbl,
+
+  record IWMDMObjectInfoVtable,
     query_interface : Proc(IWMDMObjectInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMObjectInfo*, UInt32),
     release : Proc(IWMDMObjectInfo*, UInt32),
@@ -2095,7 +2121,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMObjectInfo, lpVtbl : IWMDMObjectInfoVtbl* do
+  record IWMDMObjectInfo, lpVtbl : IWMDMObjectInfoVtable* do
     GUID = LibC::GUID.new(0x1dcb3a09_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IWMDMObjectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2131,7 +2157,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMRevokedVtbl,
+
+  record IWMDMRevokedVtable,
     query_interface : Proc(IWMDMRevoked*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMRevoked*, UInt32),
     release : Proc(IWMDMRevoked*, UInt32),
@@ -2139,7 +2166,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMRevoked, lpVtbl : IWMDMRevokedVtbl* do
+  record IWMDMRevoked, lpVtbl : IWMDMRevokedVtable* do
     GUID = LibC::GUID.new(0xebeccedb_u32, 0x88ee_u16, 0x4e55_u16, StaticArray[0xb6_u8, 0xa4_u8, 0x8d_u8, 0x9f_u8, 0x7_u8, 0xd6_u8, 0x96_u8, 0xaa_u8])
     def query_interface(this : IWMDMRevoked*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2157,7 +2184,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMNotificationVtbl,
+
+  record IWMDMNotificationVtable,
     query_interface : Proc(IWMDMNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMNotification*, UInt32),
     release : Proc(IWMDMNotification*, UInt32),
@@ -2165,7 +2193,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMNotification, lpVtbl : IWMDMNotificationVtbl* do
+  record IWMDMNotification, lpVtbl : IWMDMNotificationVtable* do
     GUID = LibC::GUID.new(0x3f5e95c0_u32, 0xf43_u16, 0x4ed4_u16, StaticArray[0x93_u8, 0xd2_u8, 0xc8_u8, 0x9a_u8, 0x45_u8, 0xd5_u8, 0x9b_u8, 0x81_u8])
     def query_interface(this : IWMDMNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2183,7 +2211,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDServiceProviderVtbl,
+
+  record IMDServiceProviderVtable,
     query_interface : Proc(IMDServiceProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDServiceProvider*, UInt32),
     release : Proc(IMDServiceProvider*, UInt32),
@@ -2192,7 +2221,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDServiceProvider, lpVtbl : IMDServiceProviderVtbl* do
+  record IMDServiceProvider, lpVtbl : IMDServiceProviderVtable* do
     GUID = LibC::GUID.new(0x1dcb3a10_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDServiceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2213,7 +2242,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDServiceProvider2Vtbl,
+
+  record IMDServiceProvider2Vtable,
     query_interface : Proc(IMDServiceProvider2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDServiceProvider2*, UInt32),
     release : Proc(IMDServiceProvider2*, UInt32),
@@ -2223,7 +2253,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDServiceProvider2, lpVtbl : IMDServiceProvider2Vtbl* do
+  record IMDServiceProvider2, lpVtbl : IMDServiceProvider2Vtable* do
     GUID = LibC::GUID.new(0xb2fa24b7_u32, 0xcda3_u16, 0x4694_u16, StaticArray[0x98_u8, 0x62_u8, 0x41_u8, 0x3a_u8, 0xe1_u8, 0xa3_u8, 0x48_u8, 0x19_u8])
     def query_interface(this : IMDServiceProvider2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2247,7 +2277,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDServiceProvider3Vtbl,
+
+  record IMDServiceProvider3Vtable,
     query_interface : Proc(IMDServiceProvider3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDServiceProvider3*, UInt32),
     release : Proc(IMDServiceProvider3*, UInt32),
@@ -2258,7 +2289,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDServiceProvider3, lpVtbl : IMDServiceProvider3Vtbl* do
+  record IMDServiceProvider3, lpVtbl : IMDServiceProvider3Vtable* do
     GUID = LibC::GUID.new(0x4ed13ef3_u32, 0xa971_u16, 0x4d19_u16, StaticArray[0x9f_u8, 0x51_u8, 0xe_u8, 0x18_u8, 0x26_u8, 0xb2_u8, 0xda_u8, 0x57_u8])
     def query_interface(this : IMDServiceProvider3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2285,7 +2316,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPEnumDeviceVtbl,
+
+  record IMDSPEnumDeviceVtable,
     query_interface : Proc(IMDSPEnumDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPEnumDevice*, UInt32),
     release : Proc(IMDSPEnumDevice*, UInt32),
@@ -2296,7 +2328,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPEnumDevice, lpVtbl : IMDSPEnumDeviceVtbl* do
+  record IMDSPEnumDevice, lpVtbl : IMDSPEnumDeviceVtable* do
     GUID = LibC::GUID.new(0x1dcb3a11_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPEnumDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2323,12 +2355,13 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPDeviceVtbl,
+
+  record IMDSPDeviceVtable,
     query_interface : Proc(IMDSPDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPDevice*, UInt32),
     release : Proc(IMDSPDevice*, UInt32),
-    get_name : Proc(IMDSPDevice*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_manufacturer : Proc(IMDSPDevice*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IMDSPDevice*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_manufacturer : Proc(IMDSPDevice*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_version : Proc(IMDSPDevice*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IMDSPDevice*, UInt32*, Win32cr::Foundation::HRESULT),
     get_serial_number : Proc(IMDSPDevice*, Win32cr::Media::DeviceManager::WMDMID*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -2341,7 +2374,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPDevice, lpVtbl : IMDSPDeviceVtbl* do
+  record IMDSPDevice, lpVtbl : IMDSPDeviceVtable* do
     GUID = LibC::GUID.new(0x1dcb3a12_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2352,10 +2385,10 @@ module Win32cr::Media::DeviceManager
     def release(this : IMDSPDevice*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_name(this : IMDSPDevice*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IMDSPDevice*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
-    def get_manufacturer(this : IMDSPDevice*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_manufacturer(this : IMDSPDevice*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_manufacturer.call(this, pwszName, nMaxChars)
     end
     def get_version(this : IMDSPDevice*, pdwVersion : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2389,12 +2422,13 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPDevice2Vtbl,
+
+  record IMDSPDevice2Vtable,
     query_interface : Proc(IMDSPDevice2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPDevice2*, UInt32),
     release : Proc(IMDSPDevice2*, UInt32),
-    get_name : Proc(IMDSPDevice2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_manufacturer : Proc(IMDSPDevice2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IMDSPDevice2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_manufacturer : Proc(IMDSPDevice2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_version : Proc(IMDSPDevice2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IMDSPDevice2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_serial_number : Proc(IMDSPDevice2*, Win32cr::Media::DeviceManager::WMDMID*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -2407,11 +2441,11 @@ module Win32cr::Media::DeviceManager
     get_storage : Proc(IMDSPDevice2*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     get_format_support2 : Proc(IMDSPDevice2*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX**, UInt32*, Win32cr::Media::MediaFoundation::VIDEOINFOHEADER**, UInt32*, Win32cr::Media::DeviceManager::WMFILECAPABILITIES**, UInt32*, Win32cr::Foundation::HRESULT),
     get_specify_property_pages : Proc(IMDSPDevice2*, Void**, Void***, UInt32*, Win32cr::Foundation::HRESULT),
-    get_canonical_name : Proc(IMDSPDevice2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT)
+    get_canonical_name : Proc(IMDSPDevice2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMDSPDevice2, lpVtbl : IMDSPDevice2Vtbl* do
+  record IMDSPDevice2, lpVtbl : IMDSPDevice2Vtable* do
     GUID = LibC::GUID.new(0x420d16ad_u32, 0xc97d_u16, 0x4e00_u16, StaticArray[0x82_u8, 0xaa_u8, 0x0_u8, 0xe9_u8, 0xf4_u8, 0x33_u8, 0x5d_u8, 0xdd_u8])
     def query_interface(this : IMDSPDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2422,10 +2456,10 @@ module Win32cr::Media::DeviceManager
     def release(this : IMDSPDevice2*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_name(this : IMDSPDevice2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IMDSPDevice2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
-    def get_manufacturer(this : IMDSPDevice2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_manufacturer(this : IMDSPDevice2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_manufacturer.call(this, pwszName, nMaxChars)
     end
     def get_version(this : IMDSPDevice2*, pdwVersion : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2464,19 +2498,20 @@ module Win32cr::Media::DeviceManager
     def get_specify_property_pages(this : IMDSPDevice2*, ppSpecifyPropPages : Void**, pppUnknowns : Void***, pcUnks : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specify_property_pages.call(this, ppSpecifyPropPages, pppUnknowns, pcUnks)
     end
-    def get_canonical_name(this : IMDSPDevice2*, pwszPnPName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_canonical_name(this : IMDSPDevice2*, pwszPnPName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_canonical_name.call(this, pwszPnPName, nMaxChars)
     end
 
   end
 
   @[Extern]
-  record IMDSPDevice3Vtbl,
+
+  record IMDSPDevice3Vtable,
     query_interface : Proc(IMDSPDevice3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPDevice3*, UInt32),
     release : Proc(IMDSPDevice3*, UInt32),
-    get_name : Proc(IMDSPDevice3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_manufacturer : Proc(IMDSPDevice3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IMDSPDevice3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_manufacturer : Proc(IMDSPDevice3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_version : Proc(IMDSPDevice3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IMDSPDevice3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_serial_number : Proc(IMDSPDevice3*, Win32cr::Media::DeviceManager::WMDMID*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -2489,7 +2524,7 @@ module Win32cr::Media::DeviceManager
     get_storage : Proc(IMDSPDevice3*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     get_format_support2 : Proc(IMDSPDevice3*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX**, UInt32*, Win32cr::Media::MediaFoundation::VIDEOINFOHEADER**, UInt32*, Win32cr::Media::DeviceManager::WMFILECAPABILITIES**, UInt32*, Win32cr::Foundation::HRESULT),
     get_specify_property_pages : Proc(IMDSPDevice3*, Void**, Void***, UInt32*, Win32cr::Foundation::HRESULT),
-    get_canonical_name : Proc(IMDSPDevice3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_canonical_name : Proc(IMDSPDevice3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_property : Proc(IMDSPDevice3*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
     set_property : Proc(IMDSPDevice3*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
     get_format_capability : Proc(IMDSPDevice3*, Win32cr::Media::DeviceManager::WMDM_FORMATCODE, Win32cr::Media::DeviceManager::WMDM_FORMAT_CAPABILITY*, Win32cr::Foundation::HRESULT),
@@ -2498,7 +2533,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPDevice3, lpVtbl : IMDSPDevice3Vtbl* do
+  record IMDSPDevice3, lpVtbl : IMDSPDevice3Vtable* do
     GUID = LibC::GUID.new(0x1a839845_u32, 0xfc55_u16, 0x487c_u16, StaticArray[0x97_u8, 0x6f_u8, 0xee_u8, 0x38_u8, 0xac_u8, 0xe_u8, 0x8c_u8, 0x4e_u8])
     def query_interface(this : IMDSPDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2509,10 +2544,10 @@ module Win32cr::Media::DeviceManager
     def release(this : IMDSPDevice3*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_name(this : IMDSPDevice3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IMDSPDevice3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
-    def get_manufacturer(this : IMDSPDevice3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_manufacturer(this : IMDSPDevice3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_manufacturer.call(this, pwszName, nMaxChars)
     end
     def get_version(this : IMDSPDevice3*, pdwVersion : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2551,7 +2586,7 @@ module Win32cr::Media::DeviceManager
     def get_specify_property_pages(this : IMDSPDevice3*, ppSpecifyPropPages : Void**, pppUnknowns : Void***, pcUnks : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specify_property_pages.call(this, ppSpecifyPropPages, pppUnknowns, pcUnks)
     end
-    def get_canonical_name(this : IMDSPDevice3*, pwszPnPName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_canonical_name(this : IMDSPDevice3*, pwszPnPName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_canonical_name.call(this, pwszPnPName, nMaxChars)
     end
     def get_property(this : IMDSPDevice3*, pwszPropName : Win32cr::Foundation::PWSTR, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
@@ -2573,7 +2608,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPDeviceControlVtbl,
+
+  record IMDSPDeviceControlVtable,
     query_interface : Proc(IMDSPDeviceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPDeviceControl*, UInt32),
     release : Proc(IMDSPDeviceControl*, UInt32),
@@ -2588,7 +2624,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPDeviceControl, lpVtbl : IMDSPDeviceControlVtbl* do
+  record IMDSPDeviceControl, lpVtbl : IMDSPDeviceControlVtable* do
     GUID = LibC::GUID.new(0x1dcb3a14_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2627,7 +2663,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPEnumStorageVtbl,
+
+  record IMDSPEnumStorageVtable,
     query_interface : Proc(IMDSPEnumStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPEnumStorage*, UInt32),
     release : Proc(IMDSPEnumStorage*, UInt32),
@@ -2638,7 +2675,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPEnumStorage, lpVtbl : IMDSPEnumStorageVtbl* do
+  record IMDSPEnumStorage, lpVtbl : IMDSPEnumStorageVtable* do
     GUID = LibC::GUID.new(0x1dcb3a15_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPEnumStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2665,14 +2702,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPStorageVtbl,
+
+  record IMDSPStorageVtable,
     query_interface : Proc(IMDSPStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPStorage*, UInt32),
     release : Proc(IMDSPStorage*, UInt32),
     set_attributes : Proc(IMDSPStorage*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IMDSPStorage*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IMDSPStorage*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IMDSPStorage*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IMDSPStorage*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IMDSPStorage*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IMDSPStorage*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IMDSPStorage*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -2682,7 +2720,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPStorage, lpVtbl : IMDSPStorageVtbl* do
+  record IMDSPStorage, lpVtbl : IMDSPStorageVtable* do
     GUID = LibC::GUID.new(0x1dcb3a16_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2702,7 +2740,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IMDSPStorage*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IMDSPStorage*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IMDSPStorage*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IMDSPStorage*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -2727,14 +2765,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPStorage2Vtbl,
+
+  record IMDSPStorage2Vtable,
     query_interface : Proc(IMDSPStorage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPStorage2*, UInt32),
     release : Proc(IMDSPStorage2*, UInt32),
     set_attributes : Proc(IMDSPStorage2*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IMDSPStorage2*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IMDSPStorage2*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IMDSPStorage2*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IMDSPStorage2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IMDSPStorage2*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IMDSPStorage2*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IMDSPStorage2*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -2748,7 +2787,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPStorage2, lpVtbl : IMDSPStorage2Vtbl* do
+  record IMDSPStorage2, lpVtbl : IMDSPStorage2Vtable* do
     GUID = LibC::GUID.new(0xa5e07a5_u32, 0x6454_u16, 0x4451_u16, StaticArray[0x9c_u8, 0x36_u8, 0x1c_u8, 0x6a_u8, 0xe7_u8, 0xe2_u8, 0xb1_u8, 0xd6_u8])
     def query_interface(this : IMDSPStorage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2768,7 +2807,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IMDSPStorage2*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IMDSPStorage2*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IMDSPStorage2*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IMDSPStorage2*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -2805,14 +2844,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPStorage3Vtbl,
+
+  record IMDSPStorage3Vtable,
     query_interface : Proc(IMDSPStorage3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPStorage3*, UInt32),
     release : Proc(IMDSPStorage3*, UInt32),
     set_attributes : Proc(IMDSPStorage3*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IMDSPStorage3*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IMDSPStorage3*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IMDSPStorage3*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IMDSPStorage3*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IMDSPStorage3*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IMDSPStorage3*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IMDSPStorage3*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -2828,7 +2868,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPStorage3, lpVtbl : IMDSPStorage3Vtbl* do
+  record IMDSPStorage3, lpVtbl : IMDSPStorage3Vtable* do
     GUID = LibC::GUID.new(0x6c669867_u32, 0x97ed_u16, 0x4a67_u16, StaticArray[0x97_u8, 0x6_u8, 0x1c_u8, 0x55_u8, 0x29_u8, 0xd2_u8, 0xa4_u8, 0x14_u8])
     def query_interface(this : IMDSPStorage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2848,7 +2888,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IMDSPStorage3*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IMDSPStorage3*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IMDSPStorage3*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IMDSPStorage3*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -2891,14 +2931,15 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPStorage4Vtbl,
+
+  record IMDSPStorage4Vtable,
     query_interface : Proc(IMDSPStorage4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPStorage4*, UInt32),
     release : Proc(IMDSPStorage4*, UInt32),
     set_attributes : Proc(IMDSPStorage4*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
     get_storage_globals : Proc(IMDSPStorage4*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IMDSPStorage4*, UInt32*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IMDSPStorage4*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IMDSPStorage4*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_date : Proc(IMDSPStorage4*, Win32cr::Media::DeviceManager::WMDMDATETIME*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IMDSPStorage4*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_rights : Proc(IMDSPStorage4*, Win32cr::Media::DeviceManager::WMDMRIGHTS**, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
@@ -2920,7 +2961,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPStorage4, lpVtbl : IMDSPStorage4Vtbl* do
+  record IMDSPStorage4, lpVtbl : IMDSPStorage4Vtable* do
     GUID = LibC::GUID.new(0x3133b2c4_u32, 0x515c_u16, 0x481b_u16, StaticArray[0xb1_u8, 0xce_u8, 0x39_u8, 0x32_u8, 0x7e_u8, 0xcb_u8, 0x4f_u8, 0x74_u8])
     def query_interface(this : IMDSPStorage4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2940,7 +2981,7 @@ module Win32cr::Media::DeviceManager
     def get_attributes(this : IMDSPStorage4*, pdwAttributes : UInt32*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, pdwAttributes, pFormat)
     end
-    def get_name(this : IMDSPStorage4*, pwszName : UInt16*, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IMDSPStorage4*, pwszName : Win32cr::Foundation::PWSTR, nMaxChars : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pwszName, nMaxChars)
     end
     def get_date(this : IMDSPStorage4*, pDateTimeUTC : Win32cr::Media::DeviceManager::WMDMDATETIME*) : Win32cr::Foundation::HRESULT
@@ -3001,7 +3042,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPStorageGlobalsVtbl,
+
+  record IMDSPStorageGlobalsVtable,
     query_interface : Proc(IMDSPStorageGlobals*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPStorageGlobals*, UInt32),
     release : Proc(IMDSPStorageGlobals*, UInt32),
@@ -3017,7 +3059,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPStorageGlobals, lpVtbl : IMDSPStorageGlobalsVtbl* do
+  record IMDSPStorageGlobals, lpVtbl : IMDSPStorageGlobalsVtable* do
     GUID = LibC::GUID.new(0x1dcb3a17_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPStorageGlobals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3059,7 +3101,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPObjectInfoVtbl,
+
+  record IMDSPObjectInfoVtable,
     query_interface : Proc(IMDSPObjectInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPObjectInfo*, UInt32),
     release : Proc(IMDSPObjectInfo*, UInt32),
@@ -3073,7 +3116,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPObjectInfo, lpVtbl : IMDSPObjectInfoVtbl* do
+  record IMDSPObjectInfo, lpVtbl : IMDSPObjectInfoVtable* do
     GUID = LibC::GUID.new(0x1dcb3a19_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPObjectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3109,7 +3152,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPObjectVtbl,
+
+  record IMDSPObjectVtable,
     query_interface : Proc(IMDSPObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPObject*, UInt32),
     release : Proc(IMDSPObject*, UInt32),
@@ -3124,7 +3168,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPObject, lpVtbl : IMDSPObjectVtbl* do
+  record IMDSPObject, lpVtbl : IMDSPObjectVtable* do
     GUID = LibC::GUID.new(0x1dcb3a18_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IMDSPObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3163,7 +3207,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPObject2Vtbl,
+
+  record IMDSPObject2Vtable,
     query_interface : Proc(IMDSPObject2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPObject2*, UInt32),
     release : Proc(IMDSPObject2*, UInt32),
@@ -3180,7 +3225,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPObject2, lpVtbl : IMDSPObject2Vtbl* do
+  record IMDSPObject2, lpVtbl : IMDSPObject2Vtable* do
     GUID = LibC::GUID.new(0x3f34cd3e_u32, 0x5907_u16, 0x4341_u16, StaticArray[0x9a_u8, 0xf9_u8, 0x97_u8, 0xf4_u8, 0x18_u8, 0x7c_u8, 0x3a_u8, 0xa5_u8])
     def query_interface(this : IMDSPObject2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3225,7 +3270,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPDirectTransferVtbl,
+
+  record IMDSPDirectTransferVtable,
     query_interface : Proc(IMDSPDirectTransfer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPDirectTransfer*, UInt32),
     release : Proc(IMDSPDirectTransfer*, UInt32),
@@ -3233,7 +3279,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPDirectTransfer, lpVtbl : IMDSPDirectTransferVtbl* do
+  record IMDSPDirectTransfer, lpVtbl : IMDSPDirectTransferVtable* do
     GUID = LibC::GUID.new(0xc2fe57a8_u32, 0x9304_u16, 0x478c_u16, StaticArray[0x9e_u8, 0xe4_u8, 0x47_u8, 0xe3_u8, 0x97_u8, 0xb9_u8, 0x12_u8, 0xd7_u8])
     def query_interface(this : IMDSPDirectTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3251,7 +3297,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IMDSPRevokedVtbl,
+
+  record IMDSPRevokedVtable,
     query_interface : Proc(IMDSPRevoked*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDSPRevoked*, UInt32),
     release : Proc(IMDSPRevoked*, UInt32),
@@ -3259,7 +3306,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IMDSPRevoked, lpVtbl : IMDSPRevokedVtbl* do
+  record IMDSPRevoked, lpVtbl : IMDSPRevokedVtable* do
     GUID = LibC::GUID.new(0xa4e8f2d4_u32, 0x3f31_u16, 0x464d_u16, StaticArray[0xb5_u8, 0x3d_u8, 0x4f_u8, 0xc3_u8, 0x35_u8, 0x99_u8, 0x81_u8, 0x84_u8])
     def query_interface(this : IMDSPRevoked*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3277,7 +3324,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureAuthenticateVtbl,
+
+  record ISCPSecureAuthenticateVtable,
     query_interface : Proc(ISCPSecureAuthenticate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureAuthenticate*, UInt32),
     release : Proc(ISCPSecureAuthenticate*, UInt32),
@@ -3285,7 +3333,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureAuthenticate, lpVtbl : ISCPSecureAuthenticateVtbl* do
+  record ISCPSecureAuthenticate, lpVtbl : ISCPSecureAuthenticateVtable* do
     GUID = LibC::GUID.new(0x1dcb3a0f_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : ISCPSecureAuthenticate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3303,7 +3351,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureAuthenticate2Vtbl,
+
+  record ISCPSecureAuthenticate2Vtable,
     query_interface : Proc(ISCPSecureAuthenticate2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureAuthenticate2*, UInt32),
     release : Proc(ISCPSecureAuthenticate2*, UInt32),
@@ -3312,7 +3361,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureAuthenticate2, lpVtbl : ISCPSecureAuthenticate2Vtbl* do
+  record ISCPSecureAuthenticate2, lpVtbl : ISCPSecureAuthenticate2Vtable* do
     GUID = LibC::GUID.new(0xb580cfae_u32, 0x1672_u16, 0x47e2_u16, StaticArray[0xac_u8, 0xaa_u8, 0x44_u8, 0xbb_u8, 0xec_u8, 0xbc_u8, 0xae_u8, 0x5b_u8])
     def query_interface(this : ISCPSecureAuthenticate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3333,7 +3382,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureQueryVtbl,
+
+  record ISCPSecureQueryVtable,
     query_interface : Proc(ISCPSecureQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureQuery*, UInt32),
     release : Proc(ISCPSecureQuery*, UInt32),
@@ -3344,7 +3394,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureQuery, lpVtbl : ISCPSecureQueryVtbl* do
+  record ISCPSecureQuery, lpVtbl : ISCPSecureQueryVtable* do
     GUID = LibC::GUID.new(0x1dcb3a0d_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : ISCPSecureQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3371,7 +3421,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureQuery2Vtbl,
+
+  record ISCPSecureQuery2Vtable,
     query_interface : Proc(ISCPSecureQuery2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureQuery2*, UInt32),
     release : Proc(ISCPSecureQuery2*, UInt32),
@@ -3383,7 +3434,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureQuery2, lpVtbl : ISCPSecureQuery2Vtbl* do
+  record ISCPSecureQuery2, lpVtbl : ISCPSecureQuery2Vtable* do
     GUID = LibC::GUID.new(0xebe17e25_u32, 0x4fd7_u16, 0x4632_u16, StaticArray[0xaf_u8, 0x46_u8, 0x6d_u8, 0x93_u8, 0xd4_u8, 0xfc_u8, 0xc7_u8, 0x2e_u8])
     def query_interface(this : ISCPSecureQuery2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3413,7 +3464,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureExchangeVtbl,
+
+  record ISCPSecureExchangeVtable,
     query_interface : Proc(ISCPSecureExchange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureExchange*, UInt32),
     release : Proc(ISCPSecureExchange*, UInt32),
@@ -3423,7 +3475,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureExchange, lpVtbl : ISCPSecureExchangeVtbl* do
+  record ISCPSecureExchange, lpVtbl : ISCPSecureExchangeVtable* do
     GUID = LibC::GUID.new(0x1dcb3a0e_u32, 0x33ed_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : ISCPSecureExchange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3447,7 +3499,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureExchange2Vtbl,
+
+  record ISCPSecureExchange2Vtable,
     query_interface : Proc(ISCPSecureExchange2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureExchange2*, UInt32),
     release : Proc(ISCPSecureExchange2*, UInt32),
@@ -3458,7 +3511,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureExchange2, lpVtbl : ISCPSecureExchange2Vtbl* do
+  record ISCPSecureExchange2, lpVtbl : ISCPSecureExchange2Vtable* do
     GUID = LibC::GUID.new(0x6c62fc7b_u32, 0x2690_u16, 0x483f_u16, StaticArray[0x9d_u8, 0x44_u8, 0xa_u8, 0x20_u8, 0xcb_u8, 0x35_u8, 0x57_u8, 0x7c_u8])
     def query_interface(this : ISCPSecureExchange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3485,7 +3538,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureExchange3Vtbl,
+
+  record ISCPSecureExchange3Vtable,
     query_interface : Proc(ISCPSecureExchange3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureExchange3*, UInt32),
     release : Proc(ISCPSecureExchange3*, UInt32),
@@ -3499,7 +3553,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureExchange3, lpVtbl : ISCPSecureExchange3Vtbl* do
+  record ISCPSecureExchange3, lpVtbl : ISCPSecureExchange3Vtable* do
     GUID = LibC::GUID.new(0xab4e77e4_u32, 0x8908_u16, 0x4b17_u16, StaticArray[0xbd_u8, 0x2a_u8, 0xb1_u8, 0xdb_u8, 0xe6_u8, 0xdd_u8, 0x69_u8, 0xe1_u8])
     def query_interface(this : ISCPSecureExchange3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3535,7 +3589,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSessionVtbl,
+
+  record ISCPSessionVtable,
     query_interface : Proc(ISCPSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSession*, UInt32),
     release : Proc(ISCPSession*, UInt32),
@@ -3545,7 +3600,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSession, lpVtbl : ISCPSessionVtbl* do
+  record ISCPSession, lpVtbl : ISCPSessionVtable* do
     GUID = LibC::GUID.new(0x88a3e6ed_u32, 0xeee4_u16, 0x4619_u16, StaticArray[0xbb_u8, 0xb3_u8, 0xfd_u8, 0x4f_u8, 0xb6_u8, 0x27_u8, 0x15_u8, 0xd1_u8])
     def query_interface(this : ISCPSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3569,7 +3624,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record ISCPSecureQuery3Vtbl,
+
+  record ISCPSecureQuery3Vtable,
     query_interface : Proc(ISCPSecureQuery3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCPSecureQuery3*, UInt32),
     release : Proc(ISCPSecureQuery3*, UInt32),
@@ -3583,7 +3639,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record ISCPSecureQuery3, lpVtbl : ISCPSecureQuery3Vtbl* do
+  record ISCPSecureQuery3, lpVtbl : ISCPSecureQuery3Vtable* do
     GUID = LibC::GUID.new(0xb7edd1a2_u32, 0x4dab_u16, 0x484b_u16, StaticArray[0xb3_u8, 0xc5_u8, 0xad_u8, 0x39_u8, 0xb8_u8, 0xb4_u8, 0xc0_u8, 0xb1_u8])
     def query_interface(this : ISCPSecureQuery3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3619,7 +3675,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IComponentAuthenticateVtbl,
+
+  record IComponentAuthenticateVtable,
     query_interface : Proc(IComponentAuthenticate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComponentAuthenticate*, UInt32),
     release : Proc(IComponentAuthenticate*, UInt32),
@@ -3628,7 +3685,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IComponentAuthenticate, lpVtbl : IComponentAuthenticateVtbl* do
+  record IComponentAuthenticate, lpVtbl : IComponentAuthenticateVtable* do
     GUID = LibC::GUID.new(0xa9889c00_u32, 0x6d2b_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xdb_u8, 0xc0_u8])
     def query_interface(this : IComponentAuthenticate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3649,7 +3706,8 @@ module Win32cr::Media::DeviceManager
   end
 
   @[Extern]
-  record IWMDMLoggerVtbl,
+
+  record IWMDMLoggerVtable,
     query_interface : Proc(IWMDMLogger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMDMLogger*, UInt32),
     release : Proc(IWMDMLogger*, UInt32),
@@ -3665,7 +3723,7 @@ module Win32cr::Media::DeviceManager
 
 
   @[Extern]
-  record IWMDMLogger, lpVtbl : IWMDMLoggerVtbl* do
+  record IWMDMLogger, lpVtbl : IWMDMLoggerVtable* do
     GUID = LibC::GUID.new(0x110a3200_u32, 0x5a79_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0x78_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IWMDMLogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

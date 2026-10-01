@@ -45,7 +45,9 @@ module Win32cr::Security::WinTrust
   WINTRUST_MAX_HEADER_BYTES_TO_MAP_DEFAULT = 10485760_u32
   WINTRUST_MAX_HASH_BYTES_TO_MAP_VALUE_NAME = "MaxHashBytesToMap"
   WINTRUST_MAX_HASH_BYTES_TO_MAP_DEFAULT = 1048576_u32
+  WTD_CHOICE_DETACHED_SIG = 6_u32
   WTD_PROV_FLAGS_MASK = 65535_u32
+  WTD_USE_LOCAL_MACHINE_CERTS = 8_u32
   WTD_CODE_INTEGRITY_DRIVER_MODE = 32768_u32
   WSS_VERIFY_SEALING = 4_u32
   WSS_INPUT_FLAG_MASK = 7_u32
@@ -53,6 +55,8 @@ module Win32cr::Security::WinTrust
   WSS_OUT_HAS_SEALING_INTENT = 1073741824_u32
   WSS_OUT_FILE_SUPPORTS_SEAL = 536870912_u32
   WSS_OUTPUT_FLAG_MASK = 3758096384_u32
+  WINTRUST_DETACHED_SIG_CHOICE_HANDLE = 1_u32
+  WINTRUST_DETACHED_SIG_CHOICE_BLOB = 2_u32
   WTCI_DONT_OPEN_STORES = 1_u32
   WTCI_OPEN_ONLY_ROOT = 2_u32
   WTCI_USE_LOCAL_MACHINE = 4_u32
@@ -90,6 +94,7 @@ module Win32cr::Security::WinTrust
   CPD_REVOCATION_CHECK_CHAIN = 262144_u32
   CPD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 524288_u32
   CPD_RETURN_LOWER_QUALITY_CHAINS = 1048576_u32
+  CPD_RFC3161v21 = 2097152_u32
   CPD_UISTATE_MODE_PROMPT = 0_u32
   CPD_UISTATE_MODE_BLOCK = 1_u32
   CPD_UISTATE_MODE_ALLOW = 2_u32
@@ -139,29 +144,39 @@ module Win32cr::Security::WinTrust
   Szoid_enhanced_hash = "1.3.6.1.4.1.311.2.5.1"
   SPC_RELAXED_PE_MARKER_CHECK_OBJID = "1.3.6.1.4.1.311.2.6.1"
   SPC_ENCRYPTED_DIGEST_RETRY_COUNT_OBJID = "1.3.6.1.4.1.311.2.6.2"
+  Szoid_signed_attribute_internal_name = "1.3.6.1.4.1.311.2.7.1"
+  Szoid_signed_attribute_file_version = "1.3.6.1.4.1.311.2.7.2"
+  Szoid_signed_attribute_file_description = "1.3.6.1.4.1.311.2.7.3"
+  Szoid_signed_attribute_product = "1.3.6.1.4.1.311.2.7.4"
+  Szoid_signed_attribute_product_version = "1.3.6.1.4.1.311.2.7.5"
+  Szoid_signed_attribute_original_filename = "1.3.6.1.4.1.311.2.7.6"
+  Szoid_signed_attribute_language = "1.3.6.1.4.1.311.2.7.7"
+  Szoid_signed_attribute_author = "1.3.6.1.4.1.311.2.7.8"
+  Szoid_signed_attribute_publish_time = "1.3.6.1.4.1.311.2.7.9"
+  Szoid_signed_attribute_source_url = "1.3.6.1.4.1.311.2.7.10"
   Szoid_pkcs_9_sequence_number = "1.2.840.113549.1.9.25.4"
   CAT_NAMEVALUE_OBJID = "1.3.6.1.4.1.311.12.2.1"
   CAT_MEMBERINFO_OBJID = "1.3.6.1.4.1.311.12.2.2"
   CAT_MEMBERINFO2_OBJID = "1.3.6.1.4.1.311.12.2.3"
   SPC_WINDOWS_HELLO_COMPATIBILITY_OBJID = "1.3.6.1.4.1.311.10.41.1"
   SPC_NATURAL_AUTH_PLUGIN_OBJID = "1.3.6.1.4.1.311.96.1.1"
-  SPC_SP_AGENCY_INFO_STRUCT = 2000_i32
-  SPC_MINIMAL_CRITERIA_STRUCT = 2001_i32
-  SPC_FINANCIAL_CRITERIA_STRUCT = 2002_i32
-  SPC_INDIRECT_DATA_CONTENT_STRUCT = 2003_i32
-  SPC_PE_IMAGE_DATA_STRUCT = 2004_i32
-  SPC_LINK_STRUCT = 2005_i32
-  SPC_STATEMENT_TYPE_STRUCT = 2006_i32
-  SPC_SP_OPUS_INFO_STRUCT = 2007_i32
-  SPC_CAB_DATA_STRUCT = 2008_i32
-  SPC_JAVA_CLASS_DATA_STRUCT = 2009_i32
-  INTENT_TO_SEAL_ATTRIBUTE_STRUCT = 2010_i32
-  SEALING_SIGNATURE_ATTRIBUTE_STRUCT = 2011_i32
-  SEALING_TIMESTAMP_ATTRIBUTE_STRUCT = 2012_i32
-  SPC_SIGINFO_STRUCT = 2130_i32
-  CAT_NAMEVALUE_STRUCT = 2221_i32
-  CAT_MEMBERINFO_STRUCT = 2222_i32
-  CAT_MEMBERINFO2_STRUCT = 2223_i32
+  SPC_SP_AGENCY_INFO_STRUCT = Win32cr::Foundation::PSTR.new(0x7d0_u64)
+  SPC_MINIMAL_CRITERIA_STRUCT = Win32cr::Foundation::PSTR.new(0x7d1_u64)
+  SPC_FINANCIAL_CRITERIA_STRUCT = Win32cr::Foundation::PSTR.new(0x7d2_u64)
+  SPC_INDIRECT_DATA_CONTENT_STRUCT = Win32cr::Foundation::PSTR.new(0x7d3_u64)
+  SPC_PE_IMAGE_DATA_STRUCT = Win32cr::Foundation::PSTR.new(0x7d4_u64)
+  SPC_LINK_STRUCT = Win32cr::Foundation::PSTR.new(0x7d5_u64)
+  SPC_STATEMENT_TYPE_STRUCT = Win32cr::Foundation::PSTR.new(0x7d6_u64)
+  SPC_SP_OPUS_INFO_STRUCT = Win32cr::Foundation::PSTR.new(0x7d7_u64)
+  SPC_CAB_DATA_STRUCT = Win32cr::Foundation::PSTR.new(0x7d8_u64)
+  SPC_JAVA_CLASS_DATA_STRUCT = Win32cr::Foundation::PSTR.new(0x7d9_u64)
+  INTENT_TO_SEAL_ATTRIBUTE_STRUCT = Win32cr::Foundation::PSTR.new(0x7da_u64)
+  SEALING_SIGNATURE_ATTRIBUTE_STRUCT = Win32cr::Foundation::PSTR.new(0x7db_u64)
+  SEALING_TIMESTAMP_ATTRIBUTE_STRUCT = Win32cr::Foundation::PSTR.new(0x7dc_u64)
+  SPC_SIGINFO_STRUCT = Win32cr::Foundation::PSTR.new(0x852_u64)
+  CAT_NAMEVALUE_STRUCT = Win32cr::Foundation::PSTR.new(0x8ad_u64)
+  CAT_MEMBERINFO_STRUCT = Win32cr::Foundation::PSTR.new(0x8ae_u64)
+  CAT_MEMBERINFO2_STRUCT = Win32cr::Foundation::PSTR.new(0x8af_u64)
   SPC_UUID_LENGTH = 16_u32
   SPC_URL_LINK_CHOICE = 1_u32
   SPC_MONIKER_LINK_CHOICE = 2_u32
@@ -172,30 +187,50 @@ module Win32cr::Security::WinTrust
   WIN_CERT_TYPE_PKCS_SIGNED_DATA = 2_u32
   WIN_CERT_TYPE_RESERVED_1 = 3_u32
   WIN_CERT_TYPE_TS_STACK_SIGNED = 4_u32
+  WIN_TRUST_SUBJTYPE_RAW_FILE = LibC::GUID.new(0x959dc450_u32, 0x8d9e_u16, 0x11cf_u16, StaticArray[0x87_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa4_u8, 0x85_u8, 0xeb_u8])
+  WIN_TRUST_SUBJTYPE_PE_IMAGE = LibC::GUID.new(0x43c9a1e0_u32, 0x8da0_u16, 0x11cf_u16, StaticArray[0x87_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa4_u8, 0x85_u8, 0xeb_u8])
+  WIN_TRUST_SUBJTYPE_JAVA_CLASS = LibC::GUID.new(0x8ad3990_u32, 0x8da1_u16, 0x11cf_u16, StaticArray[0x87_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa4_u8, 0x85_u8, 0xeb_u8])
+  WIN_TRUST_SUBJTYPE_CABINET = LibC::GUID.new(0xd17c5374_u32, 0xa392_u16, 0x11cf_u16, StaticArray[0x9d_u8, 0xf5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xc1_u8, 0x84_u8, 0xe0_u8])
+  WIN_TRUST_SUBJTYPE_RAW_FILEEX = LibC::GUID.new(0x6f458110_u32, 0xc2f1_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0x69_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x37_u8, 0x6_u8])
+  WIN_TRUST_SUBJTYPE_PE_IMAGEEX = LibC::GUID.new(0x6f458111_u32, 0xc2f1_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0x69_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x37_u8, 0x6_u8])
+  WIN_TRUST_SUBJTYPE_JAVA_CLASSEX = LibC::GUID.new(0x6f458113_u32, 0xc2f1_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0x69_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x37_u8, 0x6_u8])
+  WIN_TRUST_SUBJTYPE_CABINETEX = LibC::GUID.new(0x6f458114_u32, 0xc2f1_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0x69_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x37_u8, 0x6_u8])
+  WIN_TRUST_SUBJTYPE_OLE_STORAGE = LibC::GUID.new(0xc257e740_u32, 0x8da0_u16, 0x11cf_u16, StaticArray[0x87_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa4_u8, 0x85_u8, 0xeb_u8])
+  WIN_SPUB_ACTION_TRUSTED_PUBLISHER = LibC::GUID.new(0x66426730_u32, 0x8da1_u16, 0x11cf_u16, StaticArray[0x87_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa4_u8, 0x85_u8, 0xeb_u8])
+  WIN_SPUB_ACTION_NT_ACTIVATE_IMAGE = LibC::GUID.new(0x8bc96b00_u32, 0x8da1_u16, 0x11cf_u16, StaticArray[0x87_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa4_u8, 0x85_u8, 0xeb_u8])
+  WIN_SPUB_ACTION_PUBLISHED_SOFTWARE = LibC::GUID.new(0x64b9d180_u32, 0x8da2_u16, 0x11cf_u16, StaticArray[0x87_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa4_u8, 0x85_u8, 0xeb_u8])
   WT_TRUSTDBDIALOG_NO_UI_FLAG = 1_u32
   WT_TRUSTDBDIALOG_ONLY_PUB_TAB_FLAG = 2_u32
   WT_TRUSTDBDIALOG_WRITE_LEGACY_REG_FLAG = 256_u32
   WT_TRUSTDBDIALOG_WRITE_IEAK_STORE_FLAG = 512_u32
   SP_POLICY_PROVIDER_DLL_NAME = "WINTRUST.DLL"
+  WINTRUST_ACTION_GENERIC_VERIFY_V2 = LibC::GUID.new(0xaac56b_u32, 0xcd44_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xc2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xee_u8])
   SP_INIT_FUNCTION = "SoftpubInitialize"
   SP_OBJTRUST_FUNCTION = "SoftpubLoadMessage"
   SP_SIGTRUST_FUNCTION = "SoftpubLoadSignature"
   SP_CHKCERT_FUNCTION = "SoftpubCheckCert"
   SP_FINALPOLICY_FUNCTION = "SoftpubAuthenticode"
   SP_CLEANUPPOLICY_FUNCTION = "SoftpubCleanup"
+  WINTRUST_ACTION_TRUSTPROVIDER_TEST = LibC::GUID.new(0x573e31f8_u32, 0xddba_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xcb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xee_u8])
   SP_TESTDUMPPOLICY_FUNCTION_TEST = "SoftpubDumpStructure"
+  WINTRUST_ACTION_GENERIC_CERT_VERIFY = LibC::GUID.new(0x189a3842_u32, 0x3041_u16, 0x11d1_u16, StaticArray[0x85_u8, 0xe1_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xee_u8])
   SP_GENERIC_CERT_INIT_FUNCTION = "SoftpubDefCertInit"
+  WINTRUST_ACTION_GENERIC_CHAIN_VERIFY = LibC::GUID.new(0xfc451c16_u32, 0xac75_u16, 0x11d1_u16, StaticArray[0xb4_u8, 0xb8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x6e_u8, 0xa0_u8])
   GENERIC_CHAIN_FINALPOLICY_FUNCTION = "GenericChainFinalProv"
   GENERIC_CHAIN_CERTTRUST_FUNCTION = "GenericChainCertificateTrust"
+  HTTPSPROV_ACTION = LibC::GUID.new(0x573e31f8_u32, 0xaaba_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xcb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xee_u8])
   HTTPS_FINALPOLICY_FUNCTION = "HTTPSFinalProv"
   HTTPS_CHKCERT_FUNCTION = "HTTPSCheckCertProv"
   HTTPS_CERTTRUST_FUNCTION = "HTTPSCertificateTrust"
+  OFFICESIGN_ACTION_VERIFY = LibC::GUID.new(0x5555c2cd_u32, 0x17fb_u16, 0x11d1_u16, StaticArray[0x85_u8, 0xc4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xee_u8])
   OFFICE_POLICY_PROVIDER_DLL_NAME = "WINTRUST.DLL"
   OFFICE_INITPROV_FUNCTION = "OfficeInitializePolicy"
   OFFICE_CLEANUPPOLICY_FUNCTION = "OfficeCleanupPolicy"
+  DRIVER_ACTION_VERIFY = LibC::GUID.new(0xf750e6c3_u32, 0x38ee_u16, 0x11d1_u16, StaticArray[0x85_u8, 0xe5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xee_u8])
   DRIVER_INITPROV_FUNCTION = "DriverInitializePolicy"
   DRIVER_FINALPOLPROV_FUNCTION = "DriverFinalPolicy"
   DRIVER_CLEANUPPOLICY_FUNCTION = "DriverCleanupPolicy"
+  CONFIG_CI_ACTION_VERIFY = LibC::GUID.new(0x6078065b_u32, 0x8f22_u16, 0x4b13_u16, StaticArray[0xbd_u8, 0x9b_u8, 0x5b_u8, 0x76_u8, 0x27_u8, 0x76_u8, 0xf3_u8, 0x86_u8])
   CCPI_RESULT_ALLOW = 1_u32
   CCPI_RESULT_DENY = 2_u32
   CCPI_RESULT_AUDIT = 3_u32
@@ -241,6 +276,7 @@ module Win32cr::Security::WinTrust
     WTD_UI_NOBAD = 3_u32
     WTD_UI_NOGOOD = 4_u32
   end
+  @[Flags]
   enum WINTRUST_SIGNATURE_SETTINGS_FLAGS : UInt32
     WSS_VERIFY_SPECIFIC = 1_u32
     WSS_GET_SECONDARY_SIG_COUNT = 2_u32
@@ -292,7 +328,8 @@ module Win32cr::Security::WinTrust
     property pBlob : Win32cr::Security::WinTrust::WINTRUST_BLOB_INFO*
     property pSgnr : Win32cr::Security::WinTrust::WINTRUST_SGNR_INFO*
     property pCert : Win32cr::Security::WinTrust::WINTRUST_CERT_INFO*
-    def initialize(@pFile : Win32cr::Security::WinTrust::WINTRUST_FILE_INFO*, @pCatalog : Win32cr::Security::WinTrust::WINTRUST_CATALOG_INFO*, @pBlob : Win32cr::Security::WinTrust::WINTRUST_BLOB_INFO*, @pSgnr : Win32cr::Security::WinTrust::WINTRUST_SGNR_INFO*, @pCert : Win32cr::Security::WinTrust::WINTRUST_CERT_INFO*)
+    property pDetachedSig : Win32cr::Security::WinTrust::WINTRUST_DETACHED_SIG_INFO*
+    def initialize(@pFile : Win32cr::Security::WinTrust::WINTRUST_FILE_INFO*, @pCatalog : Win32cr::Security::WinTrust::WINTRUST_CATALOG_INFO*, @pBlob : Win32cr::Security::WinTrust::WINTRUST_BLOB_INFO*, @pSgnr : Win32cr::Security::WinTrust::WINTRUST_SGNR_INFO*, @pCert : Win32cr::Security::WinTrust::WINTRUST_CERT_INFO*, @pDetachedSig : Win32cr::Security::WinTrust::WINTRUST_DETACHED_SIG_INFO*)
     end
     end
 
@@ -319,6 +356,43 @@ module Win32cr::Security::WinTrust
     property hFile : Win32cr::Foundation::HANDLE
     property pgKnownSubject : LibC::GUID*
     def initialize(@cbStruct : UInt32, @pcwszFilePath : Win32cr::Foundation::PWSTR, @hFile : Win32cr::Foundation::HANDLE, @pgKnownSubject : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct WINTRUST_DETACHED_SIG_FILE_HANDLES
+    property hContentFile : Win32cr::Foundation::HANDLE
+    property hSignatureFile : Win32cr::Foundation::HANDLE
+    def initialize(@hContentFile : Win32cr::Foundation::HANDLE, @hSignatureFile : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct WINTRUST_DETACHED_SIG_BLOBS
+    property cbContentObject : Int64
+    property pbContentObject : UInt8*
+    property cbSignatureObject : UInt32
+    property pbSignatureObject : UInt8*
+    def initialize(@cbContentObject : Int64, @pbContentObject : UInt8*, @cbSignatureObject : UInt32, @pbSignatureObject : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WINTRUST_DETACHED_SIG_INFO
+    property cbStruct : UInt32
+    property dwUnionChoice : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pDetachedSigHandles : Win32cr::Security::WinTrust::WINTRUST_DETACHED_SIG_FILE_HANDLES*
+    property pDetachedSigBlobs : Win32cr::Security::WinTrust::WINTRUST_DETACHED_SIG_BLOBS*
+    def initialize(@pDetachedSigHandles : Win32cr::Security::WinTrust::WINTRUST_DETACHED_SIG_FILE_HANDLES*, @pDetachedSigBlobs : Win32cr::Security::WinTrust::WINTRUST_DETACHED_SIG_BLOBS*)
+    end
+    end
+
+    def initialize(@cbStruct : UInt32, @dwUnionChoice : UInt32, @anonymous : Anonymous_e__Union_)
     end
   end
 
@@ -598,8 +672,8 @@ module Win32cr::Security::WinTrust
   @[Extern]
   struct SPC_SERIALIZED_OBJECT
     property class_id : UInt8[16]
-    property serialized_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@class_id : UInt8[16], @serialized_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property serialized_data : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@class_id : UInt8[16], @serialized_data : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -647,8 +721,8 @@ module Win32cr::Security::WinTrust
   struct SPC_INDIRECT_DATA_CONTENT
     property data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE
     property digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property digest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE, @digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @digest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property digest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE, @digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @digest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -663,11 +737,11 @@ module Win32cr::Security::WinTrust
   @[Extern]
   struct SPC_IMAGE
     property pImageLink : Win32cr::Security::WinTrust::SPC_LINK*
-    property bitmap : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property enhanced_metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property gif_file : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pImageLink : Win32cr::Security::WinTrust::SPC_LINK*, @bitmap : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @enhanced_metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @gif_file : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property bitmap : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property metafile : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property enhanced_metafile : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property gif_file : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pImageLink : Win32cr::Security::WinTrust::SPC_LINK*, @bitmap : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @metafile : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @enhanced_metafile : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @gif_file : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -702,8 +776,8 @@ module Win32cr::Security::WinTrust
   struct CAT_NAMEVALUE
     property pwszTag : Win32cr::Foundation::PWSTR
     property fdwFlags : UInt32
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pwszTag : Win32cr::Foundation::PWSTR, @fdwFlags : UInt32, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pwszTag : Win32cr::Foundation::PWSTR, @fdwFlags : UInt32, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -736,8 +810,8 @@ module Win32cr::Security::WinTrust
     property version : UInt32
     property signerIndex : UInt32
     property signatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encryptedDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@version : UInt32, @signerIndex : UInt32, @signatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encryptedDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property encryptedDigest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@version : UInt32, @signerIndex : UInt32, @signatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encryptedDigest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -745,8 +819,8 @@ module Win32cr::Security::WinTrust
   struct SEALING_TIMESTAMP_ATTRIBUTE
     property version : UInt32
     property signerIndex : UInt32
-    property sealTimeStampToken : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@version : UInt32, @signerIndex : UInt32, @sealTimeStampToken : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property sealTimeStampToken : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@version : UInt32, @signerIndex : UInt32, @sealTimeStampToken : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -755,8 +829,8 @@ module Win32cr::Security::WinTrust
     property dwLength : UInt32
     property wRevision : UInt16
     property wCertificateType : UInt16
-    property bCertificate : UInt8*
-    def initialize(@dwLength : UInt32, @wRevision : UInt16, @wCertificateType : UInt16, @bCertificate : UInt8*)
+    property bCertificate : UInt8[1]
+    def initialize(@dwLength : UInt32, @wRevision : UInt16, @wCertificateType : UInt16, @bCertificate : UInt8[1])
     end
   end
 
@@ -904,89 +978,140 @@ module Win32cr::Security::WinTrust
   end
 
   @[Extern]
+  struct CONFIG_CI_PROV_INFO_RESULT2
+    property cbSize : UInt32
+    property hr : Win32cr::Foundation::HRESULT
+    property dwResult : UInt32
+    property dwPolicyIndex : UInt32
+    property fIsExplicitDeny : Win32cr::Foundation::BOOLEAN
+    property cbCalculatedFileHash : UInt32
+    property pbCalculatedFileHash : UInt8*
+    def initialize(@cbSize : UInt32, @hr : Win32cr::Foundation::HRESULT, @dwResult : UInt32, @dwPolicyIndex : UInt32, @fIsExplicitDeny : Win32cr::Foundation::BOOLEAN, @cbCalculatedFileHash : UInt32, @pbCalculatedFileHash : UInt8*)
+    end
+  end
+
+  @[Extern]
   struct CONFIG_CI_PROV_INFO
     property cbSize : UInt32
     property dwPolicies : UInt32
-    property pPolicies : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property pPolicies : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
     property result : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT
     property dwScenario : UInt32
-    def initialize(@cbSize : UInt32, @dwPolicies : UInt32, @pPolicies : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @result : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT, @dwScenario : UInt32)
+    property result2 : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT2*
+    def initialize(@cbSize : UInt32, @dwPolicies : UInt32, @pPolicies : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, @result : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT, @dwScenario : UInt32, @result2 : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT2*)
     end
   end
 
   def winVerifyTrust(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWVTData : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.WinVerifyTrust(hwnd, pgActionID, pWVTData)
+    {% end %}
   end
 
   def winVerifyTrustEx(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWinTrustData : Win32cr::Security::WinTrust::WINTRUST_DATA*) : Int32
+    {% if !flag?(:docs) %}
     C.WinVerifyTrustEx(hwnd, pgActionID, pWinTrustData)
+    {% end %}
   end
 
   def wintrustGetRegPolicyFlags(pdwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS*) : Void
+    {% if !flag?(:docs) %}
     C.WintrustGetRegPolicyFlags(pdwPolicyFlags)
+    {% end %}
   end
 
   def wintrustSetRegPolicyFlags(dwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustSetRegPolicyFlags(dwPolicyFlags)
+    {% end %}
   end
 
   def wintrustAddActionID(pgActionID : LibC::GUID*, fdwFlags : UInt32, psProvInfo : Win32cr::Security::WinTrust::CRYPT_REGISTER_ACTIONID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustAddActionID(pgActionID, fdwFlags, psProvInfo)
+    {% end %}
   end
 
   def wintrustRemoveActionID(pgActionID : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustRemoveActionID(pgActionID)
+    {% end %}
   end
 
   def wintrustLoadFunctionPointers(pgActionID : LibC::GUID*, pPfns : Win32cr::Security::WinTrust::CRYPT_PROVIDER_FUNCTIONS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustLoadFunctionPointers(pgActionID, pPfns)
+    {% end %}
   end
 
   def wintrustAddDefaultForUsage(pszUsageOID : Win32cr::Foundation::PSTR, psDefUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_REGDEFUSAGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustAddDefaultForUsage(pszUsageOID, psDefUsage)
+    {% end %}
   end
 
   def wintrustGetDefaultForUsage(dwAction : Win32cr::Security::WinTrust::WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION, pszUsageOID : Win32cr::Foundation::PSTR, psUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustGetDefaultForUsage(dwAction, pszUsageOID, psUsage)
+    {% end %}
   end
 
   def wTHelperGetProvSignerFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, idxSigner : UInt32, fCounterSigner : Win32cr::Foundation::BOOL, idxCounterSigner : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*
+    {% if !flag?(:docs) %}
     C.WTHelperGetProvSignerFromChain(pProvData, idxSigner, fCounterSigner, idxCounterSigner)
+    {% end %}
   end
 
   def wTHelperGetProvCertFromChain(pSgnr : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, idxCert : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_CERT*
+    {% if !flag?(:docs) %}
     C.WTHelperGetProvCertFromChain(pSgnr, idxCert)
+    {% end %}
   end
 
   def wTHelperProvDataFromStateData(hStateData : Win32cr::Foundation::HANDLE) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*
+    {% if !flag?(:docs) %}
     C.WTHelperProvDataFromStateData(hStateData)
+    {% end %}
   end
 
   def wTHelperGetProvPrivateDataFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, pgProviderID : LibC::GUID*) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*
+    {% if !flag?(:docs) %}
     C.WTHelperGetProvPrivateDataFromChain(pProvData, pgProviderID)
+    {% end %}
   end
 
   def wTHelperCertIsSelfSigned(dwEncoding : UInt32, pCert : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTHelperCertIsSelfSigned(dwEncoding, pCert)
+    {% end %}
   end
 
   def wTHelperCertCheckValidSignature(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WTHelperCertCheckValidSignature(pProvData)
+    {% end %}
   end
 
   def openPersonalTrustDBDialogEx(hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32, pvReserved : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OpenPersonalTrustDBDialogEx(hwndParent, dwFlags, pvReserved)
+    {% end %}
   end
 
   def openPersonalTrustDBDialog(hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OpenPersonalTrustDBDialog(hwndParent)
+    {% end %}
   end
 
   def wintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes)
+    {% end %}
   end
 
   @[Link("wintrust")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WinVerifyTrust(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWVTData : Void*) : Int32
@@ -1043,4 +1168,5 @@ module Win32cr::Security::WinTrust
     fun WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes : Win32cr::Foundation::BOOL) : Void
 
   end
+  {% end %}
 end

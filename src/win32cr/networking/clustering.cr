@@ -1,366 +1,491 @@
 require "./../foundation.cr"
 require "./../system/registry.cr"
-require "./../system/system_services.cr"
 require "./../security.cr"
+require "./../system/services.cr"
 require "./../system/com.cr"
 require "./../graphics/gdi.cr"
 require "./../ui/windows_and_messaging.cr"
+require "./../system/variant.cr"
 
 module Win32cr::Networking::Clustering
   extend self
+  alias HCHANGE = LibC::IntPtrT
+  alias HCLUSCRYPTPROVIDER = LibC::IntPtrT
+  alias HCLUSENUM = LibC::IntPtrT
+  alias HCLUSENUMEX = LibC::IntPtrT
+  alias HCLUSTER = LibC::IntPtrT
+  alias HGROUP = LibC::IntPtrT
+  alias HGROUPENUM = LibC::IntPtrT
+  alias HGROUPENUMEX = LibC::IntPtrT
+  alias HGROUPSET = LibC::IntPtrT
+  alias HGROUPSETENUM = LibC::IntPtrT
+  alias HNETINTERFACE = LibC::IntPtrT
+  alias HNETINTERFACEENUM = LibC::IntPtrT
+  alias HNETWORK = LibC::IntPtrT
+  alias HNETWORKENUM = LibC::IntPtrT
+  alias HNODE = LibC::IntPtrT
+  alias HNODEENUM = LibC::IntPtrT
+  alias HNODEENUMEX = LibC::IntPtrT
+  alias HREGBATCH = LibC::IntPtrT
+  alias HREGBATCHNOTIFICATION = LibC::IntPtrT
+  alias HREGBATCHPORT = LibC::IntPtrT
+  alias HREGREADBATCH = LibC::IntPtrT
+  alias HREGREADBATCHREPLY = LibC::IntPtrT
+  alias HRESENUM = LibC::IntPtrT
+  alias HRESENUMEX = LibC::IntPtrT
+  alias HRESOURCE = LibC::IntPtrT
+  alias HRESTYPEENUM = LibC::IntPtrT
+  alias PCLUSAPI_PFN_REASON_HANDLER = Proc(Void*, Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL)
+
+  alias PCLUSAPI_SET_REASON_HANDLER = Proc(Win32cr::Networking::Clustering::CLUSAPI_REASON_HANDLER*, Win32cr::Networking::Clustering::CLUSAPI_REASON_HANDLER*)
+
   alias PCLUSAPI_GET_NODE_CLUSTER_STATE = Proc(Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_OPEN_CLUSTER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_OPEN_CLUSTER_EX = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_OPEN_CLUSTER_EX = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_CLOSE_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_CLOSE_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_SetClusterName = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_SetClusterName = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_INFORMATION = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_NAME_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt16*, UInt32*, UInt16*, UInt32*, UInt32*, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_INFORMATION = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32*, UInt32)
 
-  alias PCLUSAPI_BACKUP_CLUSTER_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32, UInt32)
+
+  alias PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_BACKUP_CLUSTER_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32)
 
   alias PCLUSAPI_RESTORE_CLUSTER_DATABASE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_NETWORK_PRIORITY_ORDER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HNETWORK_**, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_NETWORK_PRIORITY_ORDER = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32, Win32cr::Networking::Clustering::HNETWORK*, UInt32)
 
   alias PCLUSAPI_SET_CLUSTER_SERVICE_ACCOUNT_PASSWORD = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::CLUSTER_SET_PASSWORD_STATUS*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+
+  alias PCLUSAPI_CLUSTER_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
   alias PCLUSTER_UPGRADE_PROGRESS_CALLBACK = Proc(Void*, Win32cr::Networking::Clustering::CLUSTER_UPGRADE_PHASE, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_UPGRADE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, Void*, UInt32)
+  alias PCLUSAPI_CLUSTER_UPGRADE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, Void*, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE_*)
+  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE, Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE)
 
-  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)
+  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)
 
-  alias PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Foundation::HANDLE*, UInt32)
+  alias PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE, Win32cr::Foundation::HANDLE*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE_*, LibC::UIntPtrT*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt8*, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_NOTIFY_V2 = Proc(Win32cr::Networking::Clustering::HCHANGE, LibC::UIntPtrT*, Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, UInt8*, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE_*)
+  alias PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE, Win32cr::Networking::Clustering::HCLUSTER, UInt32, LibC::UIntPtrT, Win32cr::Networking::Clustering::HCHANGE)
 
-  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE_*, UInt32, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)
+  alias PCLUSAPI_REGISTER_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE, UInt32, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE_*, LibC::UIntPtrT*, UInt32*, UInt16*, UInt32*, UInt32, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_NOTIFY = Proc(Win32cr::Networking::Clustering::HCHANGE, LibC::UIntPtrT*, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32, UInt32)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_CLOSE_CLUSTER_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HCHANGE, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HCLUSENUM_*)
+  alias PCLUSAPI_CLUSTER_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32, Win32cr::Networking::Clustering::HCLUSENUM)
 
-  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HCLUSENUM, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSENUM, UInt32)
 
-  alias PCLUSAPI_CLUSTER_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Void*, Win32cr::Networking::Clustering::HCLUSENUMEX_*)
+  alias PCLUSAPI_CLUSTER_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32, Void*, Win32cr::Networking::Clustering::HCLUSENUMEX)
 
-  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX_*, UInt32)
+  alias PCLUSAPI_CLUSTER_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSENUMEX, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET_*)
+  alias PCLUSAPI_CREATE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET)
 
-  alias PCLUSAPI_OPEN_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET_*)
+  alias PCLUSAPI_OPEN_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUPSET)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_CLOSE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
+  alias PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET_EX = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUPSET_WITH_DOMAINS_EX = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HGROUP, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET, UInt32)
 
-  alias PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET_EX = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
+  alias PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUPSET_*, UInt32)
+  alias PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_ADD_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_REMOVE_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HGROUPSET, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_AVAILABILITY_SET = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*, Win32cr::Networking::Clustering::HGROUPSET_*)
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_CREATE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REMOVE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION_EX = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HGROUPSET, UInt32)
 
-  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_AFFINITY_RULE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUPSET, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*)
+  alias PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNODE_*)
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUPSET, UInt32)
 
-  alias PCLUSAPI_OPEN_NODE_BY_ID = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::Networking::Clustering::HNODE_*)
+  alias PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP_GROUPSET = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_GET_CLUSTER_NODE_STATE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE)
+  alias PCLUSAPI_ADD_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NODE_ID = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_REMOVE_CROSS_CLUSTER_GROUPSET_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HGROUPSET, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_CREATE_CLUSTER_AVAILABILITY_SET = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*, Win32cr::Networking::Clustering::HGROUPSET)
 
-  alias PCLUSAPI_PAUSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_CLUSTER_CREATE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE, UInt32)
 
-  alias PCLUSAPI_RESUME_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_CLUSTER_REMOVE_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_EVICT_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_CLUSTER_ADD_GROUP_TO_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::Networking::Clustering::HNODEENUM_*)
+  alias PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_AFFINITY_RULE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, Win32cr::Networking::Clustering::HNODEENUMEX_*)
+  alias PCLUSAPI_CLUSTER_AFFINITY_RULE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32)
+  alias PCLUSAPI_OPEN_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE)
 
-  alias PCLUSAPI_CLUSTER_NODE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)
+  alias PCLUSAPI_OPEN_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNODE)
 
-  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX_*, UInt32)
+  alias PCLUSAPI_OPEN_NODE_BY_ID = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32, Win32cr::Networking::Clustering::HNODE)
 
-  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32)
+  alias PCLUSAPI_CLOSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_NODE_STATE = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE)
 
-  alias PCLUSAPI_CLUSTER_NODE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_NODE_ID = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_EVICT_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::Foundation::HRESULT*, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_FROM_NODE = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Registry::HKEY)
+  alias PCLUSAPI_PAUSE_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*)
+  alias PCLUSAPI_RESUME_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP_*)
+  alias PCLUSAPI_EVICT_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HNODE, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_GROUP_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HGROUP_*)
+  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNODE, UInt32, Win32cr::Networking::Clustering::HNODEENUM)
 
-  alias PCLUSAPI_PAUSE_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_CLUSTER_NODE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODE, UInt32, Void*, Win32cr::Networking::Clustering::HNODEENUMEX)
 
-  alias PCLUSAPI_RESUME_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, UInt32, UInt32)
+  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_GROUPEX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*, Win32cr::Networking::Clustering::HGROUP_*)
+  alias PCLUSAPI_CLUSTER_NODE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX, UInt32, Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HGROUPENUMEX_*)
+  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HNODEENUMEX, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32)
+  alias PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNODEENUM, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX_*, UInt32)
+  alias PCLUSAPI_CLUSTER_NODE_ENUM = Proc(Win32cr::Networking::Clustering::HNODEENUM, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HRESENUMEX_*)
+  alias PCLUSAPI_EVICT_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE, UInt32, Win32cr::Foundation::HRESULT*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32)
+  alias PCLUSAPI_EVICT_CLUSTER_NODE_EX2 = Proc(Win32cr::Networking::Clustering::HNODE, UInt32, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, UInt32*, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Registry::HKEY)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX_*, UInt32)
+  alias PCLUSAPI_CREATE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP)
 
-  alias PCLUSAPI_RESTART_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, UInt32)
+  alias PCLUSAPI_OPEN_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HGROUP)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_OPEN_CLUSTER_GROUP_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HGROUP)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_PAUSE_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HNODE, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_GROUP_STATE = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE)
+  alias PCLUSAPI_PAUSE_CLUSTER_NODE_EX2 = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HNODE, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_GROUP_NAME = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_RESUME_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, UInt32, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::Networking::Clustering::HNODE_**, UInt32)
+  alias PCLUSAPI_RESUME_CLUSTER_NODE_EX2 = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, UInt32, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_ONLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_CREATE_CLUSTER_GROUPEX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*, Win32cr::Networking::Clustering::HGROUP)
 
-  alias PCLUSAPI_MOVE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HGROUPENUMEX)
 
-  alias PCLUSAPI_OFFLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX, UInt32)
 
-  alias PCLUSAPI_DELETE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX, UInt32, Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_DESTROY_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HGROUPENUMEX, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::Networking::Clustering::HGROUPENUM_*)
+  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::HRESENUMEX)
 
-  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX, UInt32, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM_EX = Proc(Win32cr::Networking::Clustering::HRESENUMEX, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PCLUSAPI_RESTART_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PCLUSAPI_RESTART_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PCLUSAPI_CLOSE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_GET_CLUSTER_FROM_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_GET_CLUSTER_GROUP_STATE = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE)
 
-  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_GROUP_NAME = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_STATE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt16*, UInt32*, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE)
+  alias PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST = Proc(Win32cr::Networking::Clustering::HGROUP, UInt32, Win32cr::Networking::Clustering::HNODE*, UInt32)
 
-  alias PCLUSAPI_SET_CLUSTER_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_GROUP_NAME_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_FAIL_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST_EX = Proc(Win32cr::Networking::Clustering::HGROUP, UInt32, Win32cr::Networking::Clustering::HNODE*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_ONLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_ONLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HNODE, UInt32)
 
-  alias PCLUSAPI_OFFLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_MOVE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HNODE, UInt32)
 
-  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HGROUP_*, UInt32)
+  alias PCLUSAPI_OFFLINE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HGROUP_*, UInt64, UInt32)
+  alias PCLUSAPI_DELETE_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_DESTROY_CLUSTER_GROUP = Proc(Win32cr::Networking::Clustering::HGROUP, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32)
+  alias PCLUSAPI_DELETE_CLUSTER_GROUP_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_DESTROY_CLUSTER_GROUP_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HGROUP, UInt32, Win32cr::Networking::Clustering::HGROUPENUM)
 
-  alias PCLUSAPI_SET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HGROUPENUM, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_ADD_RESOURCE_TO_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HGROUPENUM, UInt32)
 
-  alias PCLUSAPI_REMOVE_RESOURCE_FROM_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32)
+  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE)
+
+  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE)
+
+  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE)
+
+  alias PCLUSAPI_OPEN_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HRESOURCE)
+
+  alias PCLUSAPI_CLOSE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::BOOL)
+
+  alias PCLUSAPI_GET_CLUSTER_FROM_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HCLUSTER)
+
+  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32)
+
+  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_STATE = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE)
+
+  alias PCLUSAPI_SET_CLUSTER_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_SET_CLUSTER_RESOURCE_NAME_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_FAIL_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32)
+
+  alias PCLUSAPI_FAIL_CLUSTER_RESOURCE_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_ONLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32)
+
+  alias PCLUSAPI_OFFLINE_CLUSTER_RESOURCE = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32)
+
+  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HGROUP, UInt32)
+
+  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HGROUP, UInt64, UInt32)
+
+  alias PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX2 = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HGROUP, UInt64, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HNODE, UInt32)
+
+  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HNODE, UInt32)
+
+  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HNODE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HNODE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, UInt32)
+
+  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, UInt32)
+
+  alias PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_SET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
+
+  alias PCLUSAPI_ADD_RESOURCE_TO_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32)
+
+  alias PCLUSAPI_REMOVE_RESOURCE_FROM_CLUSTER_SHARED_VOLUMES = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32)
 
   alias PCLUSAPI_IS_FILE_ON_CLUSTER_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, UInt32)
 
   alias PCLUSAPI_SHARED_VOLUME_SET_SNAPSHOT_STATE = Proc(LibC::GUID, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE, UInt32)
 
-  alias PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_CONTROL = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_CONTROL = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_GROUP_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_CONTROL = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NODE_CONTROL = Proc(Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_CLUSTER_RESOURCE_CONTROL_AS_USER_EX = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, Win32cr::Networking::Clustering::HRESENUM_*)
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_AS_USER_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_GROUP_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_NODE_CONTROL = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)
+  alias PCLUSAPI_CLUSTER_NODE_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HNODE, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESTYPEENUM_*)
+  alias PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32, Win32cr::Networking::Clustering::HRESENUM)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESENUM, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESENUM, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETWORK_*)
+  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NETWORK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETWORK_*)
+  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt32, Win32cr::Networking::Clustering::HNETWORKENUM_*)
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESTYPEENUM)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32, UInt32*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM_*, UInt32)
+  alias PCLUSAPI_CLUSTER_RESOURCE_TYPE_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HRESTYPEENUM, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NETWORK_STATE = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE)
+  alias PCLUSAPI_OPEN_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETWORK)
 
-  alias PCLUSAPI_SET_CLUSTER_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Foundation::PWSTR, UInt32)
+  alias PCLUSAPI_OPEN_CLUSTER_NETWORK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETWORK)
 
-  alias PCLUSAPI_GET_CLUSTER_NETWORK_ID = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLOSE_CLUSTER_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CLUSTER_NETWORK_CONTROL = Proc(Win32cr::Networking::Clustering::HNETWORK_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_GET_CLUSTER_FROM_NETWORK = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETINTERFACE_*)
+  alias PCLUSAPI_CLUSTER_NETWORK_OPEN_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORK, UInt32, Win32cr::Networking::Clustering::HNETWORKENUM)
 
-  alias PCLUSAPI_OPEN_CLUSTER_NETINTERFACE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETINTERFACE_*)
+  alias PCLUSAPI_CLUSTER_NETWORK_GET_ENUM_COUNT = Proc(Win32cr::Networking::Clustering::HNETWORKENUM, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_NETWORK_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_CLOSE_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Foundation::BOOL)
+  alias PCLUSAPI_CLUSTER_NETWORK_CLOSE_ENUM = Proc(Win32cr::Networking::Clustering::HNETWORKENUM, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_FROM_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_GET_CLUSTER_NETWORK_STATE = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE)
 
-  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_STATE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE)
+  alias PCLUSAPI_SET_CLUSTER_NETWORK_NAME = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, Win32cr::Networking::Clustering::HNODE_*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+  alias PCLUSAPI_SET_CLUSTER_NETWORK_NAME_EX = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Win32cr::System::Registry::HKEY)
+  alias PCLUSAPI_GET_CLUSTER_NETWORK_ID = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_GROUP_KEY = Proc(Win32cr::Networking::Clustering::HGROUP_*, UInt32, Win32cr::System::Registry::HKEY)
+  alias PCLUSAPI_CLUSTER_NETWORK_CONTROL = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_RESOURCE_KEY = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt32, Win32cr::System::Registry::HKEY)
+  alias PCLUSAPI_CLUSTER_NETWORK_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HNETWORK, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PCLUSAPI_GET_CLUSTER_NODE_KEY = Proc(Win32cr::Networking::Clustering::HNODE_*, UInt32, Win32cr::System::Registry::HKEY)
+  alias PCLUSAPI_OPEN_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HNETINTERFACE)
 
-  alias PCLUSAPI_GET_CLUSTER_NETWORK_KEY = Proc(Win32cr::Networking::Clustering::HNETWORK_*, UInt32, Win32cr::System::Registry::HKEY)
+  alias PCLUSAPI_OPEN_CLUSTER_NETINTERFACE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Networking::Clustering::HNETINTERFACE)
 
-  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY = Proc(Win32cr::Networking::Clustering::HNETINTERFACE_*, UInt32, Win32cr::System::Registry::HKEY)
+  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
+
+  alias PCLUSAPI_CLOSE_CLUSTER_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE, Win32cr::Foundation::BOOL)
+
+  alias PCLUSAPI_GET_CLUSTER_FROM_NET_INTERFACE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE, Win32cr::Networking::Clustering::HCLUSTER)
+
+  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_STATE = Proc(Win32cr::Networking::Clustering::HNETINTERFACE, Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE)
+
+  alias PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL = Proc(Win32cr::Networking::Clustering::HNETINTERFACE, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, UInt32)
+
+  alias PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL_EX = Proc(Win32cr::Networking::Clustering::HNETINTERFACE, Win32cr::Networking::Clustering::HNODE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_GET_CLUSTER_KEY = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32, Win32cr::System::Registry::HKEY)
+
+  alias PCLUSAPI_GET_CLUSTER_GROUP_KEY = Proc(Win32cr::Networking::Clustering::HGROUP, UInt32, Win32cr::System::Registry::HKEY)
+
+  alias PCLUSAPI_GET_CLUSTER_RESOURCE_KEY = Proc(Win32cr::Networking::Clustering::HRESOURCE, UInt32, Win32cr::System::Registry::HKEY)
+
+  alias PCLUSAPI_GET_CLUSTER_NODE_KEY = Proc(Win32cr::Networking::Clustering::HNODE, UInt32, Win32cr::System::Registry::HKEY)
+
+  alias PCLUSAPI_GET_CLUSTER_NETWORK_KEY = Proc(Win32cr::Networking::Clustering::HNETWORK, UInt32, Win32cr::System::Registry::HKEY)
+
+  alias PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY = Proc(Win32cr::Networking::Clustering::HNETINTERFACE, UInt32, Win32cr::System::Registry::HKEY)
 
   alias PCLUSAPI_CLUSTER_REG_CREATE_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Security::SECURITY_ATTRIBUTES*, Win32cr::System::Registry::HKEY*, UInt32*, Int32)
+
+  alias PCLUSAPI_CLUSTER_REG_CREATE_KEY_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Security::SECURITY_ATTRIBUTES*, Win32cr::System::Registry::HKEY*, UInt32*, Win32cr::Foundation::PWSTR, Int32)
 
   alias PCLUSAPI_CLUSTER_REG_OPEN_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, Win32cr::System::Registry::HKEY*, Int32)
 
   alias PCLUSAPI_CLUSTER_REG_DELETE_KEY = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Int32)
 
+  alias PCLUSAPI_CLUSTER_REG_DELETE_KEY_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32)
+
   alias PCLUSAPI_CLUSTER_REG_CLOSE_KEY = Proc(Win32cr::System::Registry::HKEY, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_ENUM_KEY = Proc(Win32cr::System::Registry::HKEY, UInt32, UInt16*, UInt32*, Win32cr::Foundation::FILETIME*, Int32)
+  alias PCLUSAPI_CLUSTER_REG_ENUM_KEY = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::FILETIME*, Int32)
 
   alias PCLUSAPI_CLUSTER_REG_SET_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, UInt32)
 
   alias PCLUSAPI_CLUSTER_REG_DELETE_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32)
 
+  alias PCLUSAPI_CLUSTER_REG_SET_VALUE_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, Win32cr::Foundation::PWSTR, UInt32)
+
+  alias PCLUSAPI_CLUSTER_REG_DELETE_VALUE_EX = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32)
+
   alias PCLUSAPI_CLUSTER_REG_QUERY_VALUE = Proc(Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, UInt32*, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_ENUM_VALUE = Proc(Win32cr::System::Registry::HKEY, UInt32, UInt16*, UInt32*, UInt32*, UInt8*, UInt32*, UInt32)
+  alias PCLUSAPI_CLUSTER_REG_ENUM_VALUE = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Foundation::PWSTR, UInt32*, UInt32*, UInt8*, UInt32*, UInt32)
 
   alias PCLUSAPI_CLUSTER_REG_QUERY_INFO_KEY = Proc(Win32cr::System::Registry::HKEY, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::FILETIME*, Int32)
 
@@ -368,53 +493,57 @@ module Win32cr::Networking::Clustering
 
   alias PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_SYNC_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32, Int32)
+  alias PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY_EX = Proc(Win32cr::System::Registry::HKEY, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, Win32cr::Foundation::PWSTR, Int32)
 
-  alias PCLUSAPI_CLUSTER_REG_CREATE_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCH_**, Int32)
+  alias PCLUSAPI_CLUSTER_REG_SYNC_DATABASE = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32, Int32)
 
-  alias PCLUSTER_REG_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCH_*, Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Int32)
+  alias PCLUSAPI_CLUSTER_REG_CREATE_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCH*, Int32)
 
-  alias PCLUSTER_REG_CLOSE_BATCH = Proc(Win32cr::Networking::Clustering::HREGBATCH_*, Win32cr::Foundation::BOOL, Int32*, Int32)
+  alias PCLUSTER_REG_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCH, Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, Win32cr::Foundation::PWSTR, UInt32, Void*, UInt32, Int32)
 
-  alias PCLUSTER_REG_BATCH_READ_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*, Int32)
+  alias PCLUSTER_REG_CLOSE_BATCH = Proc(Win32cr::Networking::Clustering::HREGBATCH, Win32cr::Foundation::BOOL, Int32*, Int32)
 
-  alias PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, Int32)
+  alias PCLUSTER_REG_BATCH_READ_COMMAND = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION, Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*, Int32)
 
-  alias PCLUSTER_REG_CREATE_BATCH_NOTIFY_PORT = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCHPORT_**, Int32)
+  alias PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION, Int32)
 
-  alias PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT_*, Int32)
+  alias PCLUSTER_REG_CREATE_BATCH_NOTIFY_PORT = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGBATCHPORT*, Int32)
 
-  alias PCLUSTER_REG_GET_BATCH_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT_*, Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_**, Int32)
+  alias PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT, Int32)
 
-  alias PCLUSTER_REG_CREATE_READ_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGREADBATCH_**, Int32)
+  alias PCLUSTER_REG_GET_BATCH_NOTIFICATION = Proc(Win32cr::Networking::Clustering::HREGBATCHPORT, Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION*, Int32)
 
-  alias PCLUSTER_REG_READ_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32)
+  alias PCLUSTER_REG_CREATE_READ_BATCH = Proc(Win32cr::System::Registry::HKEY, Win32cr::Networking::Clustering::HREGREADBATCH*, Int32)
 
-  alias PCLUSTER_REG_CLOSE_READ_BATCH = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**, Int32)
+  alias PCLUSTER_REG_READ_BATCH_ADD_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCH, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int32)
 
-  alias PCLUSTER_REG_CLOSE_READ_BATCH_EX = Proc(Win32cr::Networking::Clustering::HREGREADBATCH_*, UInt32, Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**, Int32)
+  alias PCLUSTER_REG_CLOSE_READ_BATCH = Proc(Win32cr::Networking::Clustering::HREGREADBATCH, Win32cr::Networking::Clustering::HREGREADBATCHREPLY*, Int32)
 
-  alias PCLUSTER_REG_READ_BATCH_REPLY_NEXT_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*, Int32)
+  alias PCLUSTER_REG_CLOSE_READ_BATCH_EX = Proc(Win32cr::Networking::Clustering::HREGREADBATCH, UInt32, Win32cr::Networking::Clustering::HREGREADBATCHREPLY*, Int32)
 
-  alias PCLUSTER_REG_CLOSE_READ_BATCH_REPLY = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, Int32)
+  alias PCLUSTER_REG_READ_BATCH_REPLY_NEXT_COMMAND = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY, Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*, Int32)
 
-  alias PCLUSTER_SET_ACCOUNT_ACCESS = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)
+  alias PCLUSTER_REG_CLOSE_READ_BATCH_REPLY = Proc(Win32cr::Networking::Clustering::HREGREADBATCHREPLY, Int32)
+
+  alias PCLUSTER_SET_ACCOUNT_ACCESS = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32)
 
   alias PCLUSTER_SETUP_PROGRESS_CALLBACK = Proc(Void*, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE_TYPE, Win32cr::Networking::Clustering::CLUSTER_SETUP_PHASE_SEVERITY, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PCLUSAPI_CREATE_CLUSTER = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_CREATE_CLUSTER = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_CREATE_CLUSTER_CNOLESS = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER_*)
+  alias PCLUSAPI_CREATE_CLUSTER_CNOLESS = Proc(Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HCLUSTER)
 
-  alias PCLUSAPI_CREATE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, UInt32)
+  alias PCLUSAPI_CREATE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, UInt32)
 
-  alias PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, UInt32)
+  alias PCLUSAPI_REPAIR_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE_*)
+  alias PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT = Proc(Win32cr::Networking::Clustering::HCLUSTER, UInt32)
 
-  alias PCLUSAPI_ADD_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE_*)
+  alias PCLUSAPI_ADD_CLUSTER_NODE = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE)
 
-  alias PCLUSAPI_DESTROY_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Foundation::BOOL, UInt32)
+  alias PCLUSAPI_ADD_CLUSTER_NODE_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Networking::Clustering::HNODE)
+
+  alias PCLUSAPI_DESTROY_CLUSTER = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, Void*, Win32cr::Foundation::BOOL, UInt32)
 
   alias PSET_RESOURCE_STATUS_ROUTINE_EX = Proc(LibC::IntPtrT, Win32cr::Networking::Clustering::RESOURCE_STATUS_EX*, UInt32)
 
@@ -490,17 +619,21 @@ module Win32cr::Networking::Clustering
 
   alias PREQUEST_DUMP_ROUTINE = Proc(LibC::IntPtrT, Win32cr::Foundation::BOOL, UInt32, UInt32)
 
+  alias PSET_RESOURCE_WPR_POLICY_ROUTINE = Proc(LibC::IntPtrT, UInt32, UInt32)
+
+  alias PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE = Proc(LibC::IntPtrT, UInt64, UInt32)
+
   alias PSTARTUP_EX_ROUTINE = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Networking::Clustering::CLRES_CALLBACK_FUNCTION_TABLE*, Win32cr::Networking::Clustering::CLRES_FUNCTION_TABLE**, UInt32)
 
-  alias PRESUTIL_START_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, LibC::IntPtrT*, UInt32)
+  alias PRESUTIL_START_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::Services::SC_HANDLE*, UInt32)
 
   alias PRESUTIL_VERIFY_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
   alias PRESUTIL_STOP_RESOURCE_SERVICE = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PRESUTIL_VERIFY_SERVICE = Proc(Win32cr::Security::SC_HANDLE, UInt32)
+  alias PRESUTIL_VERIFY_SERVICE = Proc(Win32cr::System::Services::SC_HANDLE, UInt32)
 
-  alias PRESUTIL_STOP_SERVICE = Proc(Win32cr::Security::SC_HANDLE, UInt32)
+  alias PRESUTIL_STOP_SERVICE = Proc(Win32cr::System::Services::SC_HANDLE, UInt32)
 
   alias PRESUTIL_CREATE_DIRECTORY_TREE = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
@@ -582,17 +715,17 @@ module Win32cr::Networking::Clustering
 
   alias PRESUTIL_GET_FILETIME_PROPERTY = Proc(Win32cr::Foundation::FILETIME*, Win32cr::Networking::Clustering::CLUSPROP_FILETIME*, Win32cr::Foundation::FILETIME, Win32cr::Foundation::FILETIME, Win32cr::Foundation::FILETIME, UInt8**, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_ENVIRONMENT_WITH_NET_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Void*)
+  alias PRESUTIL_GET_ENVIRONMENT_WITH_NET_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE, Void*)
 
   alias PRESUTIL_FREE_ENVIRONMENT = Proc(Void*, UInt32)
 
   alias PRESUTIL_EXPAND_ENVIRONMENT_STRINGS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR)
 
-  alias PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
+  alias PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
   alias PRESUTIL_REMOVE_RESOURCE_SERVICE_ENVIRONMENT = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
-  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::SC_HANDLE, LibC::IntPtrT*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
+  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::Services::SC_HANDLE, Win32cr::System::Services::SC_HANDLE*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
   alias PRESUTIL_FIND_SZ_PROPERTY = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, UInt32)
 
@@ -620,43 +753,43 @@ module Win32cr::Networking::Clustering
 
   alias PCLUSAPI_CLUS_WORKER_TERMINATE = Proc(Win32cr::Networking::Clustering::CLUS_WORKER*, Void)
 
-  alias LPRESOURCE_CALLBACK = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Void*, UInt32)
+  alias LPRESOURCE_CALLBACK = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, Void*, UInt32)
 
-  alias LPRESOURCE_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Void*, UInt32)
+  alias LPRESOURCE_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, Void*, UInt32)
 
-  alias LPGROUP_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HGROUP_*, Win32cr::Networking::Clustering::HGROUP_*, Void*, UInt32)
+  alias LPGROUP_CALLBACK_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HGROUP, Win32cr::Networking::Clustering::HGROUP, Void*, UInt32)
 
-  alias LPNODE_CALLBACK = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HNODE_*, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE, Void*, UInt32)
+  alias LPNODE_CALLBACK = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HNODE, Win32cr::Networking::Clustering::CLUSTER_NODE_STATE, Void*, UInt32)
 
-  alias PRESUTIL_RESOURCES_EQUAL = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
+  alias PRESUTIL_RESOURCES_EQUAL = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::BOOL)
 
-  alias PRESUTIL_RESOURCE_TYPES_EQUAL = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
+  alias PRESUTIL_RESOURCE_TYPES_EQUAL = Proc(Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::BOOL)
 
-  alias PRESUTIL_IS_RESOURCE_CLASS_EQUAL = Proc(Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::BOOL)
+  alias PRESUTIL_IS_RESOURCE_CLASS_EQUAL = Proc(Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::BOOL)
 
-  alias PRESUTIL_ENUM_RESOURCES = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, Void*, UInt32)
+  alias PRESUTIL_ENUM_RESOURCES = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, Void*, UInt32)
 
-  alias PRESUTIL_ENUM_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32)
+  alias PRESUTIL_ENUM_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENTIP_ADDRESS_PROPS = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt16*, UInt32*, UInt16*, UInt32*, UInt32)
+  alias PRESUTIL_GET_RESOURCE_DEPENDENTIP_ADDRESS_PROPS = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
-  alias PRESUTIL_FIND_DEPENDENT_DISK_RESOURCE_DRIVE_LETTER = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)
+  alias PRESUTIL_FIND_DEPENDENT_DISK_RESOURCE_DRIVE_LETTER = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
   alias PRESUTIL_TERMINATE_SERVICE_PROCESS_FROM_RES_DLL = Proc(UInt32, Win32cr::Foundation::BOOL, UInt32*, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
   alias PRESUTIL_GET_PROPERTY_FORMATS = Proc(Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, Void*, UInt32, UInt32*, UInt32*, UInt32)
 
-  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, UInt32)
+  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HRESOURCE*, Win32cr::Networking::Clustering::HRESOURCE*, Win32cr::Networking::Clustering::HRESOURCE*, UInt32)
 
-  alias PRESUTIL_GET_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE_*, UInt16*, UInt32*, UInt32)
+  alias PRESUTIL_GET_RESOURCE_NAME = Proc(Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, UInt32*, UInt32)
 
   alias PCLUSTER_IS_PATH_ON_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
@@ -668,29 +801,29 @@ module Win32cr::Networking::Clustering
 
   alias PCLUSTER_CLEAR_BACKUP_STATE_FOR_SHARED_VOLUME = Proc(Win32cr::Foundation::PWSTR, UInt32)
 
-  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::SC_HANDLE, LibC::IntPtrT*, UInt32, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
+  alias PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::Services::SC_HANDLE, Win32cr::System::Services::SC_HANDLE*, UInt32, Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, LibC::IntPtrT, UInt32)
 
-  alias PRESUTIL_ENUM_RESOURCES_EX2 = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_*, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32, UInt32)
+  alias PRESUTIL_ENUM_RESOURCES_EX2 = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HRESOURCE, Win32cr::Foundation::PWSTR, Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, Void*, UInt32, UInt32)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_EX = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_EX = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Foundation::HANDLE, Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE_*)
+  alias PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY_EX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Networking::Clustering::HRESOURCE)
 
-  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER_*, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, Win32cr::Networking::Clustering::HRESOURCE_**, UInt32, UInt32)
+  alias PRESUTIL_GET_CORE_CLUSTER_RESOURCES_EX = Proc(Win32cr::Networking::Clustering::HCLUSTER, Win32cr::Networking::Clustering::HRESOURCE*, Win32cr::Networking::Clustering::HRESOURCE*, Win32cr::Networking::Clustering::HRESOURCE*, UInt32, UInt32)
 
-  alias POPEN_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*)
+  alias POPEN_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER)
 
-  alias POPEN_CLUSTER_CRYPT_PROVIDEREX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*)
+  alias POPEN_CLUSTER_CRYPT_PROVIDEREX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Int8*, UInt32, UInt32, Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER)
 
-  alias PCLOSE_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt32)
+  alias PCLOSE_CLUSTER_CRYPT_PROVIDER = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER, UInt32)
 
-  alias PCLUSTER_ENCRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
+  alias PCLUSTER_ENCRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
 
-  alias PCLUSTER_DECRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
+  alias PCLUSTER_DECRYPT = Proc(Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER, UInt8*, UInt32, UInt8**, UInt32*, UInt32)
 
   alias PFREE_CLUSTER_CRYPT = Proc(Void*, UInt32)
 
@@ -730,7 +863,13 @@ module Win32cr::Networking::Clustering
   NINETEEN_H2_UPGRADE_VERSION = 2_u32
   MN_UPGRADE_VERSION = 3_u32
   FE_UPGRADE_VERSION = 4_u32
+  FE_22H2_UPGRADE_VERSION = 5_u32
   CA_UPGRADE_VERSION = 1_u32
+  NI_UPGRADE_VERSION = 2_u32
+  CU_UPGRADE_VERSION = 3_u32
+  ZN_UPGRADE_VERSION = 4_u32
+  GA_UPGRADE_VERSION = 5_u32
+  GE_UPGRADE_VERSION = 6_u32
   HCI_UPGRADE_BIT = 32768_u32
   CLUSREG_NAME_MIXED_MODE = "MixedMode"
   CLUSAPI_VERSION_SERVER2008 = 1536_u32
@@ -739,7 +878,11 @@ module Win32cr::Networking::Clustering
   CLUSAPI_VERSION_WINDOWSBLUE = 1794_u32
   CLUSAPI_VERSION_WINTHRESHOLD = 1795_u32
   CLUSAPI_VERSION_RS3 = 2560_u32
-  CLUSAPI_VERSION = 2560_u32
+  CLUSAPI_VERSION_NI = 2572_u32
+  CLUSAPI_VERSION_CU = 3075_u32
+  CLUSAPI_VERSION_ZN = 3076_u32
+  CLUSAPI_VERSION_GA = 3077_u32
+  CLUSAPI_VERSION = 3077_u32
   CREATE_CLUSTER_VERSION = 1536_u32
   CREATE_CLUSTER_MAJOR_VERSION_MASK = 4294967040_u32
   MAX_CLUSTERNAME_LENGTH = 63_u32
@@ -779,6 +922,10 @@ module Win32cr::Networking::Clustering
   CLUSAPI_NODE_PAUSE_REMAIN_ON_PAUSED_NODE_ON_MOVE_ERROR = 1_u32
   CLUSAPI_NODE_AVOID_PLACEMENT = 2_u32
   CLUSAPI_NODE_PAUSE_RETRY_DRAIN_ON_FAILURE = 4_u32
+  CLUSAPI_NODE_RESUME_FAILBACK_STORAGE = 1_u32
+  CLUSAPI_NODE_RESUME_FAILBACK_VMS = 2_u32
+  CLUSAPI_NODE_RESUME_FAILBACK_PINNED_VMS_ONLY = 4_u32
+  CLUSAPI_NODE_RESUME_FAILBACK_VMS_FORCEFULLY = 8_u32
   CLUSGRP_STATUS_LOCKED_MODE = 1_u64
   CLUSGRP_STATUS_PREEMPTED = 2_u64
   CLUSGRP_STATUS_WAITING_IN_QUEUE_FOR_MOVE = 4_u64
@@ -934,6 +1081,7 @@ module Win32cr::Networking::Clustering
   CLUS_RESTYPE_NAME_CONTAINER = "Container"
   CLUS_RES_NAME_SCALEOUT_MASTER = "Scaleout Master"
   CLUS_RES_NAME_SCALEOUT_WORKER = "Scaleout Worker"
+  CLUS_RESTYPE_NAME_KEY_VALUE_STORE = "Key Value Store"
   CLUSREG_NAME_CLUS_DESC = "Description"
   CLUSREG_NAME_CLUS_SD = "Security Descriptor"
   CLUSREG_NAME_CLUS_DEFAULT_NETWORK_ROLE = "DefaultNetworkRole"
@@ -990,6 +1138,9 @@ module Win32cr::Networking::Clustering
   CLUSREG_NAME_GROUP_DEPENDENCY_TIMEOUT = "GroupDependencyTimeout"
   CLUSREG_NAME_PLACEMENT_OPTIONS = "PlacementOptions"
   CLUSREG_NAME_ENABLED_EVENT_LOGS = "EnabledEventLogs"
+  CLUSREG_NAME_MAX_PARALLEL_MIGRATIONS = "MaximumParallelMigrations"
+  CLUSREG_NAME_ACCELERATED_NETWORKING_ENABLED = "AcceleratedNetworkingEnabled"
+  CLUSREG_NAME_ACCELERATED_NETWORKING_NODE_RESERVE = "AcceleratedNetworkingNodeReserve"
   CLUSREG_NAME_SAME_SUBNET_DELAY = "SameSubnetDelay"
   CLUSREG_NAME_CROSS_SUBNET_DELAY = "CrossSubnetDelay"
   CLUSREG_NAME_CROSS_SITE_DELAY = "CrossSiteDelay"
@@ -1017,6 +1168,11 @@ module Win32cr::Networking::Clustering
   CLUSREG_NAME_NODE_MODEL = "Model"
   CLUSREG_NAME_NODE_SERIALNUMBER = "SerialNumber"
   CLUSREG_NAME_NODE_MANUFACTURER = "Manufacturer"
+  CLUSREG_NAME_NODE_UNIQUEID = "UniqueID"
+  CLUSREG_NAME_NODE_DRAIN_ERROR_CODE = "DrainErrorCode"
+  CLUSREG_NAME_NODE_FAILBACK_STATUS = "NodeFailbackStatus"
+  CLUSREG_NAME_NODE_FAILBACK_ERROR_CODE = "FailbackErrorCode"
+  CLUSREG_NAME_NODE_HYPERTHREADING_ENABLED = "HyperthreadingEnabled"
   CLUSREG_NAME_GRP_NAME = "Name"
   CLUSREG_NAME_GRP_TYPE = "GroupType"
   CLUSREG_NAME_GRP_DESC = "Description"
@@ -1115,6 +1271,7 @@ module Win32cr::Networking::Clustering
   CLUSREG_NAME_AFFINITYRULE_TYPE = "RuleType"
   CLUSREG_NAME_AFFINITYRULE_GROUPS = "Groups"
   CLUSREG_NAME_AFFINITYRULE_ENABLED = "Enabled"
+  CLUSREG_NAME_AFFINITYRULE_SOFTANTIAFFINITY = "SoftAntiAffinity"
   CLUSREG_NAME_START_MEMORY = "StartMemory"
   CLUSREG_NAME_VIRTUAL_NUMA_COUNT = "VirtualNumaCount"
   CLUSREG_NAME_DDA_DEVICE_ALLOCATIONS = "DdaDeviceAllocations"
@@ -1214,6 +1371,8 @@ module Win32cr::Networking::Clustering
   CLUSREG_NAME_FILESHR_IS_DFS_ROOT = "IsDfsRoot"
   CLUSREG_NAME_FILESHR_SHARE_FLAGS = "ShareFlags"
   CLUSREG_NAME_FILESHR_CA_TIMEOUT = "CATimeout"
+  CLUSREG_NAME_FILESHR_QOS_FLOWSCOPE = "QosFlowScope"
+  CLUSREG_NAME_FILESHR_QOS_POLICYID = "QosPolicyId"
   CLUSREG_NAME_DHCP_DATABASE_PATH = "DatabasePath"
   CLUSREG_NAME_DHCP_BACKUP_PATH = "BackupPath"
   CLUSREG_NAME_LOG_FILE_PATH = "LogFilePath"
@@ -1248,6 +1407,7 @@ module Win32cr::Networking::Clustering
   CLUSREG_NAME_CLOUDWITNESS_ACCOUNT_NAME = "AccountName"
   CLUSREG_NAME_CLOUDWITNESS_ENDPOINT_INFO = "EndpointInfo"
   CLUSREG_NAME_CLOUDWITNESS_CONTAINER_NAME = "ContainerName"
+  CLUSREG_NAME_CLOUDWITNESS_MANAGED_IDENTITY = "IsManagedIdentity"
   CLOUD_WITNESS_CONTAINER_NAME = "msft-cloud-witness"
   CLUS_NAME_RES_TYPE_SOURCE_RESID = "SourceResourceId"
   CLUS_NAME_RES_TYPE_TARGET_RESID = "TargetResourceId"
@@ -1262,6 +1422,9 @@ module Win32cr::Networking::Clustering
   CLUS_NAME_RES_TYPE_MINIMUM_LOG_SIZE = "MinimumLogSizeInBytes"
   CLUS_NAME_RES_TYPE_UNIT_LOG_SIZE_CHANGE = "UnitOfLogSizeChangeInBytes"
   CLUS_NAME_RES_TYPE_LOG_MULTIPLE = "LogSizeMultiple"
+  CLUSREG_NAME_KEYVALUESTORE_NAME = "KeyValueStores"
+  CLUSREG_NAME_KEYVALUESTORE_MANAGERNAME = "ManagerName"
+  CLUSREG_NAME_KEYVALUESTORE_MANAGERPATH = "ManagerPath"
   SR_REPLICATED_PARTITION_DISALLOW_MULTINODE_IO = 1_u32
   CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX2_FLAG_ADD_VOLUME_INFO = 1_u32
   CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX2_FLAG_FILTER_BY_POOL = 2_u32
@@ -1306,6 +1469,8 @@ module Win32cr::Networking::Clustering
   RESUTIL_PROPITEM_SIGNED = 4_u32
   RESUTIL_PROPITEM_IN_MEMORY = 8_u32
   LOCKED_MODE_FLAGS_DONT_REMOVE_FROM_MOVE_QUEUE = 1_u32
+  CLUSRES_DISABLE_WPR_WATCHDOG_FOR_ONLINE_CALLS = 1_u32
+  CLUSRES_DISABLE_WPR_WATCHDOG_FOR_OFFLINE_CALLS = 2_u32
   CLUSTER_HEALTH_FAULT_PROPERTY_NAME = "ClusterHealth"
   CLUSTER_HEALTH_FAULT_ARGS = 7_u32
   CLUSTER_HEALTH_FAULT_ID = 0_u32
@@ -1475,6 +1640,10 @@ module Win32cr::Networking::Clustering
     ClusGroupTypeCrossClusterOrchestrator = 121_i32
     ClusGroupTypeInfrastructureFileServer = 122_i32
     ClusGroupTypeCoreSddc = 123_i32
+    ClusGroupTypeUserManager = 124_i32
+    ClusGroupTypeKeyValueStoreManager = 125_i32
+    ClusGroupTypeHcsVirtualMachine = 126_i32
+    ClusGroupTypeMetaVirtualMachine = 127_i32
     ClusGroupTypeUnknown = 9999_i32
   end
   enum CLUSTER_MGMT_POINT_TYPE
@@ -1507,6 +1676,11 @@ module Win32cr::Networking::Clustering
     CLUS_AFFINITY_RULE_DIFFERENT_NODE = 4_i32
     CLUS_AFFINITY_RULE_MIN = 0_i32
     CLUS_AFFINITY_RULE_MAX = 4_i32
+  end
+  enum CLUS_ADAPTER_EXCLUSION_TYPE
+    CLUS_ADAPTER_EXCLUSION_TYPE_IPPREFIX = 0_i32
+    CLUS_ADAPTER_EXCLUSION_TYPE_DESCRIPTION = 1_i32
+    CLUS_ADAPTER_EXCLUSION_TYPE_FRIENDLYNAME = 2_i32
   end
   enum CLUSTER_QUORUM_VALUE
     CLUSTER_QUORUM_MAINTAINED = 0_i32
@@ -1690,6 +1864,7 @@ module Win32cr::Networking::Clustering
     CLUSTER_OBJECT_TYPE_SHARED_VOLUME = 10_i32
     CLUSTER_OBJECT_TYPE_GROUPSET = 13_i32
     CLUSTER_OBJECT_TYPE_AFFINITYRULE = 16_i32
+    CLUSTER_OBJECT_TYPE_FAULTDOMAIN = 17_i32
   end
   enum CLUSTERSET_OBJECT_TYPE
     CLUSTERSET_OBJECT_TYPE_NONE = 0_i32
@@ -1704,6 +1879,7 @@ module Win32cr::Networking::Clustering
     CLUSTER_ENUM_GROUP = 8_i32
     CLUSTER_ENUM_NETWORK = 16_i32
     CLUSTER_ENUM_NETINTERFACE = 32_i32
+    CLUSTER_ENUM_CAPACITY_NODE = 268435456_i32
     CLUSTER_ENUM_SHARED_VOLUME_GROUP = 536870912_i32
     CLUSTER_ENUM_SHARED_VOLUME_RESOURCE = 1073741824_i32
     CLUSTER_ENUM_INTERNAL_NETWORK = -2147483648_i32
@@ -1746,6 +1922,13 @@ module Win32cr::Networking::Clustering
     NodeStatusDrainFailed = 16_i32
     NodeStatusAvoidPlacement = 32_i32
     NodeStatusMax = 51_i32
+  end
+  enum CLUSTER_NODE_FAILBACK_STATUS
+    NodeFailbackStatusNotInitiated = 0_i32
+    NodeFailbackStatusInProgress = 1_i32
+    NodeFailbackStatusCompleted = 2_i32
+    NodeFailbackStatusFailed = 3_i32
+    ClusterNodeFailbackStatusCount = 4_i32
   end
   enum CLUSTER_GROUP_ENUM
     CLUSTER_GROUP_ENUM_CONTAINS = 1_i32
@@ -1915,6 +2098,8 @@ module Win32cr::Networking::Clustering
     CLCTL_VALIDATE_COMMON_PROPERTIES = 97_i32
     CLCTL_GET_COMMON_PROPERTY_FMTS = 101_i32
     CLCTL_GET_COMMON_RESOURCE_PROPERTY_FMTS = 105_i32
+    CLCTL_CHECK_VOTER_EVICT_WITNESS = 109_i32
+    CLCTL_CHECK_VOTER_DOWN_WITNESS = 113_i32
     CLCTL_ENUM_PRIVATE_PROPERTIES = 121_i32
     CLCTL_GET_RO_PRIVATE_PROPERTIES = 125_i32
     CLCTL_GET_PRIVATE_PROPERTIES = 129_i32
@@ -2013,6 +2198,7 @@ module Win32cr::Networking::Clustering
     CTCTL_GET_ROUTESTATUS_EXTENDED = 785_i32
     CTCTL_GET_FAULT_DOMAIN_STATE = 789_i32
     CLCTL_NETNAME_SET_PWD_INFOEX = 794_i32
+    CLCTL_GET_NODE_NETWORK_CONNECTIVITY = 797_i32
     CLCTL_STORAGE_GET_AVAILABLE_DISKS_EX2_INT = 8161_i32
     CLCTL_CLOUD_WITNESS_RESOURCE_TYPE_VALIDATE_CREDENTIALS = 8417_i32
     CLCTL_CLOUD_WITNESS_RESOURCE_UPDATE_TOKEN = 4202726_i32
@@ -2392,6 +2578,8 @@ module Win32cr::Networking::Clustering
     CLUSCTL_CLUSTER_GET_NODES_IN_FD = 117452257_i32
     CLUSCTL_CLUSTER_FORCE_FLUSH_DB = 121646566_i32
     CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN = 117440877_i32
+    CLUSCTL_CLUSTER_CHECK_VOTER_EVICT_WITNESS = 117440621_i32
+    CLUSCTL_CLUSTER_CHECK_VOTER_DOWN_WITNESS = 117440625_i32
   end
   enum CLUSCTL_GROUPSET_CODES
     CLUSCTL_GROUPSET_GET_COMMON_PROPERTIES = 134217817_i32
@@ -2561,6 +2749,7 @@ module Win32cr::Networking::Clustering
     ClusterSetupPhaseGettingCurrentMembership = 300_i32
     ClusterSetupPhaseAddNodeToCluster = 301_i32
     ClusterSetupPhaseNodeUp = 302_i32
+    ClusterSetupPhaseApplyNetworkATCIntents = 303_i32
     ClusterSetupPhaseMoveGroup = 400_i32
     ClusterSetupPhaseDeleteGroup = 401_i32
     ClusterSetupPhaseCleanupCOs = 402_i32
@@ -2568,6 +2757,8 @@ module Win32cr::Networking::Clustering
     ClusterSetupPhaseEvictNode = 404_i32
     ClusterSetupPhaseCleanupNode = 405_i32
     ClusterSetupPhaseCoreGroupCleanup = 406_i32
+    ClusterSetupPhaseRepairCNOAccount = 500_i32
+    ClusterSetupPhaseRepairDNSPermissions = 501_i32
     ClusterSetupPhaseFailureCleanup = 999_i32
   end
   enum CLUSTER_SETUP_PHASE_TYPE
@@ -2714,6 +2905,7 @@ module Win32cr::Networking::Clustering
     ClusterRoleVirtualMachine = 29_i32
     ClusterRoleVirtualMachineConfiguration = 30_i32
     ClusterRoleVirtualMachineReplicaBroker = 31_i32
+    ClusterRoleKeyValueStore = 32_i32
   end
   enum CLUSTER_ROLE_STATE
     ClusterRoleUnknown = -1_i32
@@ -2732,152 +2924,66 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  struct HCLUSTER_
-    def initialize()
+  struct CLUSPROP_RESOURCE_CLASS_INFO
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base2 : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @base2 : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO)
     end
   end
 
   @[Extern]
-  struct HNODE_
-    def initialize()
+  struct CLUSTER_SHARED_VOLUME_RENAME_INPUT
+    property base : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
+    property base2 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME, @base2 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME)
     end
   end
 
   @[Extern]
-  struct HRESOURCE_
-    def initialize()
+  struct CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT
+    property base : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
+    property base2 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME, @base2 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME)
     end
   end
 
   @[Extern]
-  struct HGROUP_
-    def initialize()
+  struct CLUSPROP_PARTITION_INFO
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base2 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @base2 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO)
     end
   end
 
   @[Extern]
-  struct HNETWORK_
-    def initialize()
+  struct CLUSPROP_PARTITION_INFO_EX
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base2 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @base2 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX)
     end
   end
 
   @[Extern]
-  struct HNETINTERFACE_
-    def initialize()
+  struct CLUSPROP_PARTITION_INFO_EX2
+    property base : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX
+    property base2 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX2
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX, @base2 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX2)
     end
   end
 
   @[Extern]
-  struct HCHANGE_
-    def initialize()
+  struct CLUSPROP_FTSET_INFO
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base2 : Win32cr::Networking::Clustering::CLUS_FTSET_INFO
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @base2 : Win32cr::Networking::Clustering::CLUS_FTSET_INFO)
     end
   end
 
   @[Extern]
-  struct HCLUSENUM_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HGROUPENUM_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HRESENUM_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HNETWORKENUM_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HNODEENUM_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HNETINTERFACEENUM_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HRESTYPEENUM_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HREGBATCH_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HREGBATCHPORT_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HREGBATCHNOTIFICATION_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HREGREADBATCH_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HREGREADBATCHREPLY_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HNODEENUMEX_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HCLUSENUMEX_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HGROUPENUMEX_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HRESENUMEX_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HGROUPSET_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct HGROUPSETENUM_
-    def initialize()
+  struct CLUSPROP_SCSI_ADDRESS
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base2 : Win32cr::Networking::Clustering::CLUS_SCSI_ADDRESS
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @base2 : Win32cr::Networking::Clustering::CLUS_SCSI_ADDRESS)
     end
   end
 
@@ -2972,29 +3078,29 @@ module Win32cr::Networking::Clustering
 
   @[Extern]
   struct CLUSTER_VALIDATE_PATH
-    property szPath : UInt16*
-    def initialize(@szPath : UInt16*)
+    property szPath : UInt16[1]
+    def initialize(@szPath : UInt16[1])
     end
   end
 
   @[Extern]
   struct CLUSTER_VALIDATE_DIRECTORY
-    property szPath : UInt16*
-    def initialize(@szPath : UInt16*)
+    property szPath : UInt16[1]
+    def initialize(@szPath : UInt16[1])
     end
   end
 
   @[Extern]
   struct CLUSTER_VALIDATE_NETNAME
-    property szNetworkName : UInt16*
-    def initialize(@szNetworkName : UInt16*)
+    property szNetworkName : UInt16[1]
+    def initialize(@szNetworkName : UInt16[1])
     end
   end
 
   @[Extern]
   struct CLUSTER_VALIDATE_CSV_FILENAME
-    property szFileName : UInt16*
-    def initialize(@szFileName : UInt16*)
+    property szFileName : UInt16[1]
+    def initialize(@szFileName : UInt16[1])
     end
   end
 
@@ -3026,7 +3132,10 @@ module Win32cr::Networking::Clustering
     property fEmptyCluster : Win32cr::Foundation::BOOLEAN
     property managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE
     property managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE
-    def initialize(@dwVersion : UInt32, @lpszClusterName : Win32cr::Foundation::PWSTR, @cNodes : UInt32, @ppszNodeNames : Win32cr::Foundation::PWSTR*, @cIpEntries : UInt32, @pIpEntries : Win32cr::Networking::Clustering::CLUSTER_IP_ENTRY*, @fEmptyCluster : Win32cr::Foundation::BOOLEAN, @managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE, @managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE)
+    property pszUserName : Win32cr::Foundation::PWSTR
+    property pszPassword : Win32cr::Foundation::PWSTR
+    property pszDomain : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @lpszClusterName : Win32cr::Foundation::PWSTR, @cNodes : UInt32, @ppszNodeNames : Win32cr::Foundation::PWSTR*, @cIpEntries : UInt32, @pIpEntries : Win32cr::Networking::Clustering::CLUSTER_IP_ENTRY*, @fEmptyCluster : Win32cr::Foundation::BOOLEAN, @managementPointType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_TYPE, @managementPointResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE, @pszUserName : Win32cr::Foundation::PWSTR, @pszPassword : Win32cr::Foundation::PWSTR, @pszDomain : Win32cr::Foundation::PWSTR)
     end
   end
 
@@ -3046,6 +3155,25 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
+  struct REPAIR_CLUSTER_NAME_ACCOUNT_CONFIG
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property pszUserName : Win32cr::Foundation::PWSTR
+    property pszPassword : Win32cr::Foundation::PWSTR
+    property pszDomain : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @dwFlags : UInt32, @pszUserName : Win32cr::Foundation::PWSTR, @pszPassword : Win32cr::Foundation::PWSTR, @pszDomain : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct CLUSAPI_REASON_HANDLER
+    property lpParameter : Void*
+    property pfnHandler : Win32cr::Networking::Clustering::PCLUSAPI_PFN_REASON_HANDLER
+    def initialize(@lpParameter : Void*, @pfnHandler : Win32cr::Networking::Clustering::PCLUSAPI_PFN_REASON_HANDLER)
+    end
+  end
+
+  @[Extern]
   struct NOTIFY_FILTER_AND_TYPE
     property dwObjectType : UInt32
     property filter_flags : Int64
@@ -3057,8 +3185,8 @@ module Win32cr::Networking::Clustering
   struct CLUSTER_MEMBERSHIP_INFO
     property has_quorum : Win32cr::Foundation::BOOL
     property upnodes_size : UInt32
-    property upnodes : UInt8*
-    def initialize(@has_quorum : Win32cr::Foundation::BOOL, @upnodes_size : UInt32, @upnodes : UInt8*)
+    property upnodes : UInt8[1]
+    def initialize(@has_quorum : Win32cr::Foundation::BOOL, @upnodes_size : UInt32, @upnodes : UInt8[1])
     end
   end
 
@@ -3150,6 +3278,16 @@ module Win32cr::Networking::Clustering
     end
   end
 
+  @[Extern]
+  struct NodeSriovInfo
+    property vf_total : UInt32
+    property vf_used : UInt32
+    property qp_total : UInt32
+    property qp_used : UInt32
+    def initialize(@vf_total : UInt32, @vf_used : UInt32, @qp_total : UInt32, @qp_used : UInt32)
+    end
+  end
+
   @[Extern(union: true)]
   struct CLUSPROP_SYNTAX
     property dw : UInt32
@@ -3178,83 +3316,83 @@ module Win32cr::Networking::Clustering
 
   @[Extern]
   struct CLUSPROP_BINARY
-    property __anonymous_base_clusapi_l5129_c41 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property rgb : UInt8*
-    def initialize(@__anonymous_base_clusapi_l5129_c41 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @rgb : UInt8*)
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property rgb : UInt8[1]
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @rgb : UInt8[1])
     end
   end
 
   @[Extern]
   struct CLUSPROP_WORD
-    property __anonymous_base_clusapi_l5139_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
     property w : UInt16
-    def initialize(@__anonymous_base_clusapi_l5139_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @w : UInt16)
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @w : UInt16)
     end
   end
 
   @[Extern]
   struct CLUSPROP_DWORD
-    property __anonymous_base_clusapi_l5149_c40 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
     property dw : UInt32
-    def initialize(@__anonymous_base_clusapi_l5149_c40 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @dw : UInt32)
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @dw : UInt32)
     end
   end
 
   @[Extern]
   struct CLUSPROP_LONG
-    property __anonymous_base_clusapi_l5159_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
     property l : Int32
-    def initialize(@__anonymous_base_clusapi_l5159_c39 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @l : Int32)
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @l : Int32)
     end
   end
 
   @[Extern]
   struct CLUSPROP_SZ
-    property __anonymous_base_clusapi_l5169_c37 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property sz : UInt16*
-    def initialize(@__anonymous_base_clusapi_l5169_c37 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @sz : UInt16*)
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property sz : UInt16[1]
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @sz : UInt16[1])
     end
   end
 
   @[Extern]
   struct CLUSPROP_ULARGE_INTEGER
-    property __anonymous_base_clusapi_l5186_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property li : Win32cr::Foundation::ULARGE_INTEGER
-    def initialize(@__anonymous_base_clusapi_l5186_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @li : Win32cr::Foundation::ULARGE_INTEGER)
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property li : UInt64
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @li : UInt64)
     end
   end
 
   @[Extern]
   struct CLUSPROP_LARGE_INTEGER
-    property __anonymous_base_clusapi_l5199_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property li : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@__anonymous_base_clusapi_l5199_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @li : Win32cr::Foundation::LARGE_INTEGER)
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property li : Int64
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @li : Int64)
     end
   end
 
   @[Extern]
   struct CLUSPROP_SECURITY_DESCRIPTOR
-    property __anonymous_base_clusapi_l5211_c54 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
     property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
     struct Anonymous_e__Union_
-    property sd : Win32cr::System::SystemServices::SECURITY_DESCRIPTOR_RELATIVE
-    property rgbSecurityDescriptor : UInt8*
-    def initialize(@sd : Win32cr::System::SystemServices::SECURITY_DESCRIPTOR_RELATIVE, @rgbSecurityDescriptor : UInt8*)
+    property sd : Win32cr::Security::SECURITY_DESCRIPTOR_RELATIVE
+    property rgbSecurityDescriptor : UInt8[1]
+    def initialize(@sd : Win32cr::Security::SECURITY_DESCRIPTOR_RELATIVE, @rgbSecurityDescriptor : UInt8[1])
     end
     end
 
-    def initialize(@__anonymous_base_clusapi_l5211_c54 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @anonymous : Anonymous_e__Union_)
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @anonymous : Anonymous_e__Union_)
     end
   end
 
   @[Extern]
   struct CLUSPROP_FILETIME
-    property __anonymous_base_clusapi_l5225_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
     property ft : Win32cr::Foundation::FILETIME
-    def initialize(@__anonymous_base_clusapi_l5225_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @ft : Win32cr::Foundation::FILETIME)
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @ft : Win32cr::Foundation::FILETIME)
     end
   end
 
@@ -3266,7 +3404,7 @@ module Win32cr::Networking::Clustering
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property anonymous : Anonymous_e__Struct_
-    property li : Win32cr::Foundation::ULARGE_INTEGER
+    property li : UInt64
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
@@ -3287,7 +3425,7 @@ module Win32cr::Networking::Clustering
     end
       end
 
-    def initialize(@anonymous : Anonymous_e__Struct_, @li : Win32cr::Foundation::ULARGE_INTEGER)
+    def initialize(@anonymous : Anonymous_e__Struct_, @li : UInt64)
     end
     end
 
@@ -3297,17 +3435,9 @@ module Win32cr::Networking::Clustering
 
   @[Extern]
   struct CLUSPROP_RESOURCE_CLASS
-    property __anonymous_base_clusapi_l5250_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
+    property base : Win32cr::Networking::Clustering::CLUSPROP_VALUE
     property rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS
-    def initialize(@__anonymous_base_clusapi_l5250_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS)
-    end
-  end
-
-  @[Extern]
-  struct CLUSPROP_RESOURCE_CLASS_INFO
-    property __anonymous_base_clusapi_l5261_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property __anonymous_base_clusapi_l5262_c14 : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO
-    def initialize(@__anonymous_base_clusapi_l5261_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5262_c14 : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO)
+    def initialize(@base : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @rc : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CLASS)
     end
   end
 
@@ -3325,8 +3455,8 @@ module Win32cr::Networking::Clustering
     property dwSize : UInt32
     property dwNodeBitMask : UInt32
     property dwMaxNumberofNodes : UInt32
-    property multiszNodeList : UInt16*
-    def initialize(@dwSize : UInt32, @dwNodeBitMask : UInt32, @dwMaxNumberofNodes : UInt32, @multiszNodeList : UInt16*)
+    property multiszNodeList : UInt16[1]
+    def initialize(@dwSize : UInt32, @dwNodeBitMask : UInt32, @dwMaxNumberofNodes : UInt32, @multiszNodeList : UInt16[1])
     end
   end
 
@@ -3352,12 +3482,12 @@ module Win32cr::Networking::Clustering
     property rgdwMaximumComponentLength : UInt32
     property dwFileSystemFlags : UInt32
     property szFileSystem : UInt16[32]
-    property total_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER
-    property free_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER
+    property total_size_in_bytes : UInt64
+    property free_size_in_bytes : UInt64
     property device_number : UInt32
     property partition_number : UInt32
     property volume_guid : LibC::GUID
-    def initialize(@dwFlags : UInt32, @szDeviceName : UInt16[260], @szVolumeLabel : UInt16[260], @dwSerialNumber : UInt32, @rgdwMaximumComponentLength : UInt32, @dwFileSystemFlags : UInt32, @szFileSystem : UInt16[32], @total_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER, @free_size_in_bytes : Win32cr::Foundation::ULARGE_INTEGER, @device_number : UInt32, @partition_number : UInt32, @volume_guid : LibC::GUID)
+    def initialize(@dwFlags : UInt32, @szDeviceName : UInt16[260], @szVolumeLabel : UInt16[260], @dwSerialNumber : UInt32, @rgdwMaximumComponentLength : UInt32, @dwFileSystemFlags : UInt32, @szFileSystem : UInt16[32], @total_size_in_bytes : UInt64, @free_size_in_bytes : UInt64, @device_number : UInt32, @partition_number : UInt32, @volume_guid : LibC::GUID)
     end
   end
 
@@ -3372,22 +3502,22 @@ module Win32cr::Networking::Clustering
 
   @[Extern]
   struct CLUS_CSV_VOLUME_INFO
-    property volume_offset : Win32cr::Foundation::ULARGE_INTEGER
+    property volume_offset : UInt64
     property partition_number : UInt32
     property fault_state : Win32cr::Networking::Clustering::CLUSTER_CSV_VOLUME_FAULT_STATE
     property backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE
     property szVolumeFriendlyName : UInt16[260]
     property szVolumeName : UInt16[50]
-    def initialize(@volume_offset : Win32cr::Foundation::ULARGE_INTEGER, @partition_number : UInt32, @fault_state : Win32cr::Networking::Clustering::CLUSTER_CSV_VOLUME_FAULT_STATE, @backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE, @szVolumeFriendlyName : UInt16[260], @szVolumeName : UInt16[50])
+    def initialize(@volume_offset : UInt64, @partition_number : UInt32, @fault_state : Win32cr::Networking::Clustering::CLUSTER_CSV_VOLUME_FAULT_STATE, @backup_state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_BACKUP_STATE, @szVolumeFriendlyName : UInt16[260], @szVolumeName : UInt16[50])
     end
   end
 
   @[Extern]
   struct CLUS_CSV_VOLUME_NAME
-    property volume_offset : Win32cr::Foundation::LARGE_INTEGER
+    property volume_offset : Int64
     property szVolumeName : UInt16[260]
     property szRootPath : UInt16[263]
-    def initialize(@volume_offset : Win32cr::Foundation::LARGE_INTEGER, @szVolumeName : UInt16[260], @szRootPath : UInt16[263])
+    def initialize(@volume_offset : Int64, @szVolumeName : UInt16[260], @szRootPath : UInt16[263])
     end
   end
 
@@ -3448,28 +3578,12 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  struct CLUSTER_SHARED_VOLUME_RENAME_INPUT
-    property __anonymous_base_clusapi_l5464_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
-    property __anonymous_base_clusapi_l5465_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME
-    def initialize(@__anonymous_base_clusapi_l5464_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME, @__anonymous_base_clusapi_l5465_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME)
-    end
-  end
-
-  @[Extern]
-  struct CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT
-    property __anonymous_base_clusapi_l5475_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
-    property __anonymous_base_clusapi_l5476_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME
-    def initialize(@__anonymous_base_clusapi_l5475_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME, @__anonymous_base_clusapi_l5476_c14 : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME)
-    end
-  end
-
-  @[Extern]
   struct CLUS_CHKDSK_INFO
     property partition_number : UInt32
     property chkdsk_state : UInt32
     property file_id_count : UInt32
-    property file_id_list : UInt64*
-    def initialize(@partition_number : UInt32, @chkdsk_state : UInt32, @file_id_count : UInt32, @file_id_list : UInt64*)
+    property file_id_list : UInt64[1]
+    def initialize(@partition_number : UInt32, @chkdsk_state : UInt32, @file_id_count : UInt32, @file_id_list : UInt64[1])
     end
   end
 
@@ -3491,42 +3605,10 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  struct CLUSPROP_PARTITION_INFO
-    property __anonymous_base_clusapi_l5507_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property __anonymous_base_clusapi_l5508_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO
-    def initialize(@__anonymous_base_clusapi_l5507_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5508_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO)
-    end
-  end
-
-  @[Extern]
-  struct CLUSPROP_PARTITION_INFO_EX
-    property __anonymous_base_clusapi_l5519_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property __anonymous_base_clusapi_l5520_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX
-    def initialize(@__anonymous_base_clusapi_l5519_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5520_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX)
-    end
-  end
-
-  @[Extern]
-  struct CLUSPROP_PARTITION_INFO_EX2
-    property __anonymous_base_clusapi_l5533_c14 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX
-    property __anonymous_base_clusapi_l5534_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX2
-    def initialize(@__anonymous_base_clusapi_l5533_c14 : Win32cr::Networking::Clustering::CLUSPROP_PARTITION_INFO_EX, @__anonymous_base_clusapi_l5534_c14 : Win32cr::Networking::Clustering::CLUS_PARTITION_INFO_EX2)
-    end
-  end
-
-  @[Extern]
   struct CLUS_FTSET_INFO
     property dwRootSignature : UInt32
     property dwFtType : UInt32
     def initialize(@dwRootSignature : UInt32, @dwFtType : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct CLUSPROP_FTSET_INFO
-    property __anonymous_base_clusapi_l5555_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property __anonymous_base_clusapi_l5556_c14 : Win32cr::Networking::Clustering::CLUS_FTSET_INFO
-    def initialize(@__anonymous_base_clusapi_l5555_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5556_c14 : Win32cr::Networking::Clustering::CLUS_FTSET_INFO)
     end
   end
 
@@ -3556,14 +3638,6 @@ module Win32cr::Networking::Clustering
     end
 
     def initialize(@anonymous : Anonymous_e__Union_)
-    end
-  end
-
-  @[Extern]
-  struct CLUSPROP_SCSI_ADDRESS
-    property __anonymous_base_clusapi_l5583_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE
-    property __anonymous_base_clusapi_l5584_c14 : Win32cr::Networking::Clustering::CLUS_SCSI_ADDRESS
-    def initialize(@__anonymous_base_clusapi_l5583_c14 : Win32cr::Networking::Clustering::CLUSPROP_VALUE, @__anonymous_base_clusapi_l5584_c14 : Win32cr::Networking::Clustering::CLUS_SCSI_ADDRESS)
     end
   end
 
@@ -3616,8 +3690,8 @@ module Win32cr::Networking::Clustering
   struct CLUS_NETNAME_IP_INFO_ENTRY
     property node_id : UInt32
     property address_size : UInt32
-    property address : UInt8*
-    def initialize(@node_id : UInt32, @address_size : UInt32, @address : UInt8*)
+    property address : UInt8[1]
+    def initialize(@node_id : UInt32, @address_size : UInt32, @address : UInt8[1])
     end
   end
 
@@ -3625,8 +3699,8 @@ module Win32cr::Networking::Clustering
   struct CLUS_NETNAME_IP_INFO_FOR_MULTICHANNEL
     property szName : UInt16[64]
     property num_entries : UInt32
-    property ip_info : Win32cr::Networking::Clustering::CLUS_NETNAME_IP_INFO_ENTRY*
-    def initialize(@szName : UInt16[64], @num_entries : UInt32, @ip_info : Win32cr::Networking::Clustering::CLUS_NETNAME_IP_INFO_ENTRY*)
+    property ip_info : Win32cr::Networking::Clustering::CLUS_NETNAME_IP_INFO_ENTRY[1]
+    def initialize(@szName : UInt16[64], @num_entries : UInt32, @ip_info : Win32cr::Networking::Clustering::CLUS_NETNAME_IP_INFO_ENTRY[1])
     end
   end
 
@@ -3659,8 +3733,8 @@ module Win32cr::Networking::Clustering
   struct CLUS_SET_MAINTENANCE_MODE_INPUT
     property in_maintenance : Win32cr::Foundation::BOOL
     property extra_parameter_size : UInt32
-    property extra_parameter : UInt8*
-    def initialize(@in_maintenance : Win32cr::Foundation::BOOL, @extra_parameter_size : UInt32, @extra_parameter : UInt8*)
+    property extra_parameter : UInt8[1]
+    def initialize(@in_maintenance : Win32cr::Foundation::BOOL, @extra_parameter_size : UInt32, @extra_parameter : UInt8[1])
     end
   end
 
@@ -3691,8 +3765,8 @@ module Win32cr::Networking::Clustering
   struct CLUS_PROVIDER_STATE_CHANGE_INFO
     property dwSize : UInt32
     property resourceState : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
-    property szProviderId : UInt16*
-    def initialize(@dwSize : UInt32, @resourceState : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE, @szProviderId : UInt16*)
+    property szProviderId : UInt16[1]
+    def initialize(@dwSize : UInt32, @resourceState : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE, @szProviderId : UInt16[1])
     end
   end
 
@@ -3729,8 +3803,8 @@ module Win32cr::Networking::Clustering
   @[Extern]
   struct FILESHARE_CHANGE_LIST
     property num_entries : UInt32
-    property change_entry : Win32cr::Networking::Clustering::FILESHARE_CHANGE*
-    def initialize(@num_entries : UInt32, @change_entry : Win32cr::Networking::Clustering::FILESHARE_CHANGE*)
+    property change_entry : Win32cr::Networking::Clustering::FILESHARE_CHANGE[1]
+    def initialize(@num_entries : UInt32, @change_entry : Win32cr::Networking::Clustering::FILESHARE_CHANGE[1])
     end
   end
 
@@ -3788,8 +3862,8 @@ module Win32cr::Networking::Clustering
   @[Extern]
   struct SR_RESOURCE_TYPE_REPLICATED_PARTITION_ARRAY
     property count : UInt32
-    property partition_array : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO*
-    def initialize(@count : UInt32, @partition_array : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO*)
+    property partition_array : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO[1]
+    def initialize(@count : UInt32, @partition_array : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO[1])
     end
   end
 
@@ -3830,8 +3904,8 @@ module Win32cr::Networking::Clustering
   @[Extern]
   struct SR_RESOURCE_TYPE_ELIGIBLE_DISKS_RESULT
     property count : UInt16
-    property disk_info : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_DISK_INFO*
-    def initialize(@count : UInt16, @disk_info : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_DISK_INFO*)
+    property disk_info : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_DISK_INFO[1]
+    def initialize(@count : UInt16, @disk_info : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_DISK_INFO[1])
     end
   end
 
@@ -3848,8 +3922,8 @@ module Win32cr::Networking::Clustering
   @[Extern]
   struct SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT
     property count : UInt16
-    property replicated_disks : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_DISK*
-    def initialize(@count : UInt16, @replicated_disks : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_DISK*)
+    property replicated_disks : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_DISK[1]
+    def initialize(@count : UInt16, @replicated_disks : Win32cr::Networking::Clustering::SR_RESOURCE_TYPE_REPLICATED_DISK[1])
     end
   end
 
@@ -3864,10 +3938,11 @@ module Win32cr::Networking::Clustering
     property minimum_partners_in_sync : UInt32
     property enable_write_consistency : Win32cr::Foundation::BOOLEAN
     property enable_encryption : Win32cr::Foundation::BOOLEAN
+    property enable_compression : Win32cr::Foundation::BOOLEAN
     property certificate_thumbprint : UInt16[260]
     property volume_name_count : UInt32
     property volume_names : UInt16[260]
-    def initialize(@replication_group_name : UInt16[260], @description : UInt16[260], @log_path : UInt16[260], @max_log_size_in_bytes : UInt64, @log_type : UInt16, @replication_mode : UInt32, @minimum_partners_in_sync : UInt32, @enable_write_consistency : Win32cr::Foundation::BOOLEAN, @enable_encryption : Win32cr::Foundation::BOOLEAN, @certificate_thumbprint : UInt16[260], @volume_name_count : UInt32, @volume_names : UInt16[260])
+    def initialize(@replication_group_name : UInt16[260], @description : UInt16[260], @log_path : UInt16[260], @max_log_size_in_bytes : UInt64, @log_type : UInt16, @replication_mode : UInt32, @minimum_partners_in_sync : UInt32, @enable_write_consistency : Win32cr::Foundation::BOOLEAN, @enable_encryption : Win32cr::Foundation::BOOLEAN, @enable_compression : Win32cr::Foundation::BOOLEAN, @certificate_thumbprint : UInt16[260], @volume_name_count : UInt32, @volume_names : UInt16[260])
     end
   end
 
@@ -4032,19 +4107,19 @@ module Win32cr::Networking::Clustering
 
   @[Extern]
   struct RESUTIL_LARGEINT_DATA
-    property default : Win32cr::Foundation::LARGE_INTEGER
-    property minimum : Win32cr::Foundation::LARGE_INTEGER
-    property maximum : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@default : Win32cr::Foundation::LARGE_INTEGER, @minimum : Win32cr::Foundation::LARGE_INTEGER, @maximum : Win32cr::Foundation::LARGE_INTEGER)
+    property default : Int64
+    property minimum : Int64
+    property maximum : Int64
+    def initialize(@default : Int64, @minimum : Int64, @maximum : Int64)
     end
   end
 
   @[Extern]
   struct RESUTIL_ULARGEINT_DATA
-    property default : Win32cr::Foundation::ULARGE_INTEGER
-    property minimum : Win32cr::Foundation::ULARGE_INTEGER
-    property maximum : Win32cr::Foundation::ULARGE_INTEGER
-    def initialize(@default : Win32cr::Foundation::ULARGE_INTEGER, @minimum : Win32cr::Foundation::ULARGE_INTEGER, @maximum : Win32cr::Foundation::ULARGE_INTEGER)
+    property default : UInt64
+    property minimum : UInt64
+    property maximum : UInt64
+    def initialize(@default : UInt64, @minimum : UInt64, @maximum : UInt64)
     end
   end
 
@@ -4102,17 +4177,19 @@ module Win32cr::Networking::Clustering
     property set_internal_state : Win32cr::Networking::Clustering::PSET_INTERNAL_STATE
     property set_resource_locked_mode_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE
     property request_dump : Win32cr::Networking::Clustering::PREQUEST_DUMP_ROUTINE
-    def initialize(@log_event : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, @set_resource_status_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_STATUS_ROUTINE_EX, @set_resource_locked_mode : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_ROUTINE, @signal_failure : Win32cr::Networking::Clustering::PSIGNAL_FAILURE_ROUTINE, @set_resource_in_memory_node_local_properties : Win32cr::Networking::Clustering::PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE, @end_control_call : Win32cr::Networking::Clustering::PEND_CONTROL_CALL, @end_type_control_call : Win32cr::Networking::Clustering::PEND_TYPE_CONTROL_CALL, @extend_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_CONTROL_CALL, @extend_type_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_TYPE_CONTROL_CALL, @raise_res_type_notification : Win32cr::Networking::Clustering::PRAISE_RES_TYPE_NOTIFICATION, @change_resource_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RESOURCE_PROCESS_FOR_DUMPS, @change_res_type_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS, @set_internal_state : Win32cr::Networking::Clustering::PSET_INTERNAL_STATE, @set_resource_locked_mode_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE, @request_dump : Win32cr::Networking::Clustering::PREQUEST_DUMP_ROUTINE)
+    property set_resource_wpr_policy : Win32cr::Networking::Clustering::PSET_RESOURCE_WPR_POLICY_ROUTINE
+    property arm_wpr_watchdog_for_current_resource_call : Win32cr::Networking::Clustering::PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE
+    def initialize(@log_event : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, @set_resource_status_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_STATUS_ROUTINE_EX, @set_resource_locked_mode : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_ROUTINE, @signal_failure : Win32cr::Networking::Clustering::PSIGNAL_FAILURE_ROUTINE, @set_resource_in_memory_node_local_properties : Win32cr::Networking::Clustering::PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE, @end_control_call : Win32cr::Networking::Clustering::PEND_CONTROL_CALL, @end_type_control_call : Win32cr::Networking::Clustering::PEND_TYPE_CONTROL_CALL, @extend_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_CONTROL_CALL, @extend_type_control_call : Win32cr::Networking::Clustering::PEXTEND_RES_TYPE_CONTROL_CALL, @raise_res_type_notification : Win32cr::Networking::Clustering::PRAISE_RES_TYPE_NOTIFICATION, @change_resource_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RESOURCE_PROCESS_FOR_DUMPS, @change_res_type_process_for_dumps : Win32cr::Networking::Clustering::PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS, @set_internal_state : Win32cr::Networking::Clustering::PSET_INTERNAL_STATE, @set_resource_locked_mode_ex : Win32cr::Networking::Clustering::PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE, @request_dump : Win32cr::Networking::Clustering::PREQUEST_DUMP_ROUTINE, @set_resource_wpr_policy : Win32cr::Networking::Clustering::PSET_RESOURCE_WPR_POLICY_ROUTINE, @arm_wpr_watchdog_for_current_resource_call : Win32cr::Networking::Clustering::PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE)
     end
   end
 
   @[Extern]
   struct MONITOR_STATE
-    property last_update : Win32cr::Foundation::LARGE_INTEGER
+    property last_update : Int64
     property state : Win32cr::Networking::Clustering::RESOURCE_MONITOR_STATE
     property active_resource : Win32cr::Foundation::HANDLE
     property resmon_stop : Win32cr::Foundation::BOOL
-    def initialize(@last_update : Win32cr::Foundation::LARGE_INTEGER, @state : Win32cr::Networking::Clustering::RESOURCE_MONITOR_STATE, @active_resource : Win32cr::Foundation::HANDLE, @resmon_stop : Win32cr::Foundation::BOOL)
+    def initialize(@last_update : Int64, @state : Win32cr::Networking::Clustering::RESOURCE_MONITOR_STATE, @active_resource : Win32cr::Foundation::HANDLE, @resmon_stop : Win32cr::Foundation::BOOL)
     end
   end
 
@@ -4157,12 +4234,6 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  struct HCLUSCRYPTPROVIDER_
-    def initialize()
-    end
-  end
-
-  @[Extern]
   struct PaxosTagCStruct
     property __padding__paxos_tag_vtable : UInt64
     property __padding__next_epoch_vtable : UInt64
@@ -4199,7 +4270,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IGetClusterUIInfoVtbl,
+
+  record IGetClusterUIInfoVtable,
     query_interface : Proc(IGetClusterUIInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterUIInfo*, UInt32),
     release : Proc(IGetClusterUIInfo*, UInt32),
@@ -4210,7 +4282,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IGetClusterUIInfo, lpVtbl : IGetClusterUIInfoVtbl* do
+  record IGetClusterUIInfo, lpVtbl : IGetClusterUIInfoVtable* do
     GUID = LibC::GUID.new(0x97dede50_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterUIInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4237,17 +4309,18 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IGetClusterDataInfoVtbl,
+
+  record IGetClusterDataInfoVtable,
     query_interface : Proc(IGetClusterDataInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterDataInfo*, UInt32),
     release : Proc(IGetClusterDataInfo*, UInt32),
     get_cluster_name : Proc(IGetClusterDataInfo*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
-    get_cluster_handle : Proc(IGetClusterDataInfo*, Win32cr::Networking::Clustering::HCLUSTER_*),
+    get_cluster_handle : Proc(IGetClusterDataInfo*, Win32cr::Networking::Clustering::HCLUSTER),
     get_object_count : Proc(IGetClusterDataInfo*, Int32)
 
 
   @[Extern]
-  record IGetClusterDataInfo, lpVtbl : IGetClusterDataInfoVtbl* do
+  record IGetClusterDataInfo, lpVtbl : IGetClusterDataInfoVtable* do
     GUID = LibC::GUID.new(0x97dede51_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterDataInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4261,7 +4334,7 @@ module Win32cr::Networking::Clustering
     def get_cluster_name(this : IGetClusterDataInfo*, lpszName : Win32cr::Foundation::BSTR, pcchName : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_cluster_name.call(this, lpszName, pcchName)
     end
-    def get_cluster_handle(this : IGetClusterDataInfo*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    def get_cluster_handle(this : IGetClusterDataInfo*) : Win32cr::Networking::Clustering::HCLUSTER
       @lpVtbl.try &.value.get_cluster_handle.call(this)
     end
     def get_object_count(this : IGetClusterDataInfo*) : Int32
@@ -4271,7 +4344,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IGetClusterObjectInfoVtbl,
+
+  record IGetClusterObjectInfoVtable,
     query_interface : Proc(IGetClusterObjectInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterObjectInfo*, UInt32),
     release : Proc(IGetClusterObjectInfo*, UInt32),
@@ -4280,7 +4354,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IGetClusterObjectInfo, lpVtbl : IGetClusterObjectInfoVtbl* do
+  record IGetClusterObjectInfo, lpVtbl : IGetClusterObjectInfoVtable* do
     GUID = LibC::GUID.new(0x97dede52_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterObjectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4301,15 +4375,16 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IGetClusterNodeInfoVtbl,
+
+  record IGetClusterNodeInfoVtable,
     query_interface : Proc(IGetClusterNodeInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterNodeInfo*, UInt32),
     release : Proc(IGetClusterNodeInfo*, UInt32),
-    get_node_handle : Proc(IGetClusterNodeInfo*, Int32, Win32cr::Networking::Clustering::HNODE_*)
+    get_node_handle : Proc(IGetClusterNodeInfo*, Int32, Win32cr::Networking::Clustering::HNODE)
 
 
   @[Extern]
-  record IGetClusterNodeInfo, lpVtbl : IGetClusterNodeInfoVtbl* do
+  record IGetClusterNodeInfo, lpVtbl : IGetClusterNodeInfoVtable* do
     GUID = LibC::GUID.new(0x97dede53_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterNodeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4320,22 +4395,23 @@ module Win32cr::Networking::Clustering
     def release(this : IGetClusterNodeInfo*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_node_handle(this : IGetClusterNodeInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HNODE_*
+    def get_node_handle(this : IGetClusterNodeInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HNODE
       @lpVtbl.try &.value.get_node_handle.call(this, lObjIndex)
     end
 
   end
 
   @[Extern]
-  record IGetClusterGroupInfoVtbl,
+
+  record IGetClusterGroupInfoVtable,
     query_interface : Proc(IGetClusterGroupInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterGroupInfo*, UInt32),
     release : Proc(IGetClusterGroupInfo*, UInt32),
-    get_group_handle : Proc(IGetClusterGroupInfo*, Int32, Win32cr::Networking::Clustering::HGROUP_*)
+    get_group_handle : Proc(IGetClusterGroupInfo*, Int32, Win32cr::Networking::Clustering::HGROUP)
 
 
   @[Extern]
-  record IGetClusterGroupInfo, lpVtbl : IGetClusterGroupInfoVtbl* do
+  record IGetClusterGroupInfo, lpVtbl : IGetClusterGroupInfoVtable* do
     GUID = LibC::GUID.new(0x97dede54_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterGroupInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4346,24 +4422,25 @@ module Win32cr::Networking::Clustering
     def release(this : IGetClusterGroupInfo*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_group_handle(this : IGetClusterGroupInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HGROUP_*
+    def get_group_handle(this : IGetClusterGroupInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HGROUP
       @lpVtbl.try &.value.get_group_handle.call(this, lObjIndex)
     end
 
   end
 
   @[Extern]
-  record IGetClusterResourceInfoVtbl,
+
+  record IGetClusterResourceInfoVtable,
     query_interface : Proc(IGetClusterResourceInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterResourceInfo*, UInt32),
     release : Proc(IGetClusterResourceInfo*, UInt32),
-    get_resource_handle : Proc(IGetClusterResourceInfo*, Int32, Win32cr::Networking::Clustering::HRESOURCE_*),
+    get_resource_handle : Proc(IGetClusterResourceInfo*, Int32, Win32cr::Networking::Clustering::HRESOURCE),
     get_resource_type_name : Proc(IGetClusterResourceInfo*, Int32, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     get_resource_network_name : Proc(IGetClusterResourceInfo*, Int32, Win32cr::Foundation::BSTR, UInt32*, Win32cr::Foundation::BOOL)
 
 
   @[Extern]
-  record IGetClusterResourceInfo, lpVtbl : IGetClusterResourceInfoVtbl* do
+  record IGetClusterResourceInfo, lpVtbl : IGetClusterResourceInfoVtable* do
     GUID = LibC::GUID.new(0x97dede55_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterResourceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4374,7 +4451,7 @@ module Win32cr::Networking::Clustering
     def release(this : IGetClusterResourceInfo*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_resource_handle(this : IGetClusterResourceInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    def get_resource_handle(this : IGetClusterResourceInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HRESOURCE
       @lpVtbl.try &.value.get_resource_handle.call(this, lObjIndex)
     end
     def get_resource_type_name(this : IGetClusterResourceInfo*, lObjIndex : Int32, lpszResTypeName : Win32cr::Foundation::BSTR, pcchResTypeName : Int32*) : Win32cr::Foundation::HRESULT
@@ -4387,15 +4464,16 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IGetClusterNetworkInfoVtbl,
+
+  record IGetClusterNetworkInfoVtable,
     query_interface : Proc(IGetClusterNetworkInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterNetworkInfo*, UInt32),
     release : Proc(IGetClusterNetworkInfo*, UInt32),
-    get_network_handle : Proc(IGetClusterNetworkInfo*, Int32, Win32cr::Networking::Clustering::HNETWORK_*)
+    get_network_handle : Proc(IGetClusterNetworkInfo*, Int32, Win32cr::Networking::Clustering::HNETWORK)
 
 
   @[Extern]
-  record IGetClusterNetworkInfo, lpVtbl : IGetClusterNetworkInfoVtbl* do
+  record IGetClusterNetworkInfo, lpVtbl : IGetClusterNetworkInfoVtable* do
     GUID = LibC::GUID.new(0x97dede56_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterNetworkInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4406,22 +4484,23 @@ module Win32cr::Networking::Clustering
     def release(this : IGetClusterNetworkInfo*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_network_handle(this : IGetClusterNetworkInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HNETWORK_*
+    def get_network_handle(this : IGetClusterNetworkInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HNETWORK
       @lpVtbl.try &.value.get_network_handle.call(this, lObjIndex)
     end
 
   end
 
   @[Extern]
-  record IGetClusterNetInterfaceInfoVtbl,
+
+  record IGetClusterNetInterfaceInfoVtable,
     query_interface : Proc(IGetClusterNetInterfaceInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetClusterNetInterfaceInfo*, UInt32),
     release : Proc(IGetClusterNetInterfaceInfo*, UInt32),
-    get_net_interface_handle : Proc(IGetClusterNetInterfaceInfo*, Int32, Win32cr::Networking::Clustering::HNETINTERFACE_*)
+    get_net_interface_handle : Proc(IGetClusterNetInterfaceInfo*, Int32, Win32cr::Networking::Clustering::HNETINTERFACE)
 
 
   @[Extern]
-  record IGetClusterNetInterfaceInfo, lpVtbl : IGetClusterNetInterfaceInfoVtbl* do
+  record IGetClusterNetInterfaceInfo, lpVtbl : IGetClusterNetInterfaceInfoVtable* do
     GUID = LibC::GUID.new(0x97dede57_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IGetClusterNetInterfaceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4432,14 +4511,15 @@ module Win32cr::Networking::Clustering
     def release(this : IGetClusterNetInterfaceInfo*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_net_interface_handle(this : IGetClusterNetInterfaceInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HNETINTERFACE_*
+    def get_net_interface_handle(this : IGetClusterNetInterfaceInfo*, lObjIndex : Int32) : Win32cr::Networking::Clustering::HNETINTERFACE
       @lpVtbl.try &.value.get_net_interface_handle.call(this, lObjIndex)
     end
 
   end
 
   @[Extern]
-  record IWCPropertySheetCallbackVtbl,
+
+  record IWCPropertySheetCallbackVtable,
     query_interface : Proc(IWCPropertySheetCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCPropertySheetCallback*, UInt32),
     release : Proc(IWCPropertySheetCallback*, UInt32),
@@ -4447,7 +4527,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWCPropertySheetCallback, lpVtbl : IWCPropertySheetCallbackVtbl* do
+  record IWCPropertySheetCallback, lpVtbl : IWCPropertySheetCallbackVtable* do
     GUID = LibC::GUID.new(0x97dede60_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCPropertySheetCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4465,7 +4545,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWEExtendPropertySheetVtbl,
+
+  record IWEExtendPropertySheetVtable,
     query_interface : Proc(IWEExtendPropertySheet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWEExtendPropertySheet*, UInt32),
     release : Proc(IWEExtendPropertySheet*, UInt32),
@@ -4473,7 +4554,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWEExtendPropertySheet, lpVtbl : IWEExtendPropertySheetVtbl* do
+  record IWEExtendPropertySheet, lpVtbl : IWEExtendPropertySheetVtable* do
     GUID = LibC::GUID.new(0x97dede61_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendPropertySheet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4491,7 +4572,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWCWizardCallbackVtbl,
+
+  record IWCWizardCallbackVtable,
     query_interface : Proc(IWCWizardCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCWizardCallback*, UInt32),
     release : Proc(IWCWizardCallback*, UInt32),
@@ -4500,7 +4582,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWCWizardCallback, lpVtbl : IWCWizardCallbackVtbl* do
+  record IWCWizardCallback, lpVtbl : IWCWizardCallbackVtable* do
     GUID = LibC::GUID.new(0x97dede62_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCWizardCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4521,7 +4603,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWEExtendWizardVtbl,
+
+  record IWEExtendWizardVtable,
     query_interface : Proc(IWEExtendWizard*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWEExtendWizard*, UInt32),
     release : Proc(IWEExtendWizard*, UInt32),
@@ -4529,7 +4612,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWEExtendWizard, lpVtbl : IWEExtendWizardVtbl* do
+  record IWEExtendWizard, lpVtbl : IWEExtendWizardVtable* do
     GUID = LibC::GUID.new(0x97dede63_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendWizard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4547,7 +4630,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWCContextMenuCallbackVtbl,
+
+  record IWCContextMenuCallbackVtable,
     query_interface : Proc(IWCContextMenuCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCContextMenuCallback*, UInt32),
     release : Proc(IWCContextMenuCallback*, UInt32),
@@ -4555,7 +4639,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWCContextMenuCallback, lpVtbl : IWCContextMenuCallbackVtbl* do
+  record IWCContextMenuCallback, lpVtbl : IWCContextMenuCallbackVtable* do
     GUID = LibC::GUID.new(0x97dede64_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCContextMenuCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4573,7 +4657,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWEExtendContextMenuVtbl,
+
+  record IWEExtendContextMenuVtable,
     query_interface : Proc(IWEExtendContextMenu*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWEExtendContextMenu*, UInt32),
     release : Proc(IWEExtendContextMenu*, UInt32),
@@ -4581,7 +4666,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWEExtendContextMenu, lpVtbl : IWEExtendContextMenuVtbl* do
+  record IWEExtendContextMenu, lpVtbl : IWEExtendContextMenuVtable* do
     GUID = LibC::GUID.new(0x97dede65_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendContextMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4599,7 +4684,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWEInvokeCommandVtbl,
+
+  record IWEInvokeCommandVtable,
     query_interface : Proc(IWEInvokeCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWEInvokeCommand*, UInt32),
     release : Proc(IWEInvokeCommand*, UInt32),
@@ -4607,7 +4693,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWEInvokeCommand, lpVtbl : IWEInvokeCommandVtbl* do
+  record IWEInvokeCommand, lpVtbl : IWEInvokeCommandVtable* do
     GUID = LibC::GUID.new(0x97dede66_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEInvokeCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4625,7 +4711,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWCWizard97CallbackVtbl,
+
+  record IWCWizard97CallbackVtable,
     query_interface : Proc(IWCWizard97Callback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCWizard97Callback*, UInt32),
     release : Proc(IWCWizard97Callback*, UInt32),
@@ -4634,7 +4721,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWCWizard97Callback, lpVtbl : IWCWizard97CallbackVtbl* do
+  record IWCWizard97Callback, lpVtbl : IWCWizard97CallbackVtable* do
     GUID = LibC::GUID.new(0x97dede67_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWCWizard97Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4655,7 +4742,8 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record IWEExtendWizard97Vtbl,
+
+  record IWEExtendWizard97Vtable,
     query_interface : Proc(IWEExtendWizard97*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWEExtendWizard97*, UInt32),
     release : Proc(IWEExtendWizard97*, UInt32),
@@ -4663,7 +4751,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record IWEExtendWizard97, lpVtbl : IWEExtendWizard97Vtbl* do
+  record IWEExtendWizard97, lpVtbl : IWEExtendWizard97Vtable* do
     GUID = LibC::GUID.new(0x97dede68_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWEExtendWizard97*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4681,21 +4769,22 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusApplicationVtbl,
+
+  record ISClusApplicationVtable,
     query_interface : Proc(ISClusApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusApplication*, UInt32),
     release : Proc(ISClusApplication*, UInt32),
     get_type_info_count : Proc(ISClusApplication*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusApplication*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusApplication*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusApplication*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusApplication*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DomainNames : Proc(ISClusApplication*, Void**, Win32cr::Foundation::HRESULT),
     get_ClusterNames : Proc(ISClusApplication*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     open_cluster : Proc(ISClusApplication*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusApplication, lpVtbl : ISClusApplicationVtbl* do
+  record ISClusApplication, lpVtbl : ISClusApplicationVtable* do
     GUID = LibC::GUID.new(0xf2e606e6_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4715,8 +4804,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusApplication*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DomainNames(this : ISClusApplication*, ppDomains : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DomainNames.call(this, ppDomains)
@@ -4731,22 +4820,23 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISDomainNamesVtbl,
+
+  record ISDomainNamesVtable,
     query_interface : Proc(ISDomainNames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISDomainNames*, UInt32),
     release : Proc(ISDomainNames*, UInt32),
     get_type_info_count : Proc(ISDomainNames*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISDomainNames*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISDomainNames*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISDomainNames*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISDomainNames*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISDomainNames*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISDomainNames*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISDomainNames*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISDomainNames*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISDomainNames*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISDomainNames, lpVtbl : ISDomainNamesVtbl* do
+  record ISDomainNames, lpVtbl : ISDomainNamesVtable* do
     GUID = LibC::GUID.new(0xf2e606e2_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISDomainNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4766,8 +4856,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISDomainNames*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISDomainNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISDomainNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISDomainNames*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -4778,30 +4868,31 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISDomainNames*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISDomainNames*, varIndex : Win32cr::System::Com::VARIANT, pbstrDomainName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISDomainNames*, varIndex : Win32cr::System::Variant::VARIANT, pbstrDomainName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, pbstrDomainName)
     end
 
   end
 
   @[Extern]
-  record ISClusterNamesVtbl,
+
+  record ISClusterNamesVtable,
     query_interface : Proc(ISClusterNames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusterNames*, UInt32),
     release : Proc(ISClusterNames*, UInt32),
     get_type_info_count : Proc(ISClusterNames*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusterNames*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusterNames*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusterNames*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusterNames*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusterNames*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusterNames*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusterNames*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusterNames*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusterNames*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DomainName : Proc(ISClusterNames*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusterNames, lpVtbl : ISClusterNamesVtbl* do
+  record ISClusterNames, lpVtbl : ISClusterNamesVtable* do
     GUID = LibC::GUID.new(0xf2e606ec_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusterNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4821,8 +4912,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusterNames*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusterNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusterNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusterNames*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -4833,7 +4924,7 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusterNames*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusterNames*, varIndex : Win32cr::System::Com::VARIANT, pbstrClusterName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusterNames*, varIndex : Win32cr::System::Variant::VARIANT, pbstrClusterName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, pbstrClusterName)
     end
     def get_DomainName(this : ISClusterNames*, pbstrDomainName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4843,19 +4934,20 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusRefObjectVtbl,
+
+  record ISClusRefObjectVtable,
     query_interface : Proc(ISClusRefObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusRefObject*, UInt32),
     release : Proc(ISClusRefObject*, UInt32),
     get_type_info_count : Proc(ISClusRefObject*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusRefObject*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusRefObject*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusRefObject*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusRefObject*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Handle : Proc(ISClusRefObject*, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusRefObject, lpVtbl : ISClusRefObjectVtbl* do
+  record ISClusRefObject, lpVtbl : ISClusRefObjectVtable* do
     GUID = LibC::GUID.new(0xf2e60702_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusRefObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4875,8 +4967,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusRefObject*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusRefObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusRefObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Handle(this : ISClusRefObject*, phandle : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Handle.call(this, phandle)
@@ -4885,14 +4977,15 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusVersionVtbl,
+
+  record ISClusVersionVtable,
     query_interface : Proc(ISClusVersion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusVersion*, UInt32),
     release : Proc(ISClusVersion*, UInt32),
     get_type_info_count : Proc(ISClusVersion*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusVersion*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusVersion*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusVersion*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusVersion*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ISClusVersion*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MajorVersion : Proc(ISClusVersion*, Int32*, Win32cr::Foundation::HRESULT),
     get_MinorVersion : Proc(ISClusVersion*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4902,11 +4995,11 @@ module Win32cr::Networking::Clustering
     get_ClusterHighestVersion : Proc(ISClusVersion*, Int32*, Win32cr::Foundation::HRESULT),
     get_ClusterLowestVersion : Proc(ISClusVersion*, Int32*, Win32cr::Foundation::HRESULT),
     get_Flags : Proc(ISClusVersion*, Int32*, Win32cr::Foundation::HRESULT),
-    get_MixedVersion : Proc(ISClusVersion*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_MixedVersion : Proc(ISClusVersion*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusVersion, lpVtbl : ISClusVersionVtbl* do
+  record ISClusVersion, lpVtbl : ISClusVersionVtable* do
     GUID = LibC::GUID.new(0xf2e60716_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusVersion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4926,8 +5019,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusVersion*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusVersion*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusVersion*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ISClusVersion*, pbstrClusterName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrClusterName)
@@ -4956,21 +5049,22 @@ module Win32cr::Networking::Clustering
     def get_Flags(this : ISClusVersion*, pnFlags : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Flags.call(this, pnFlags)
     end
-    def get_MixedVersion(this : ISClusVersion*, pvarMixedVersion : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_MixedVersion(this : ISClusVersion*, pvarMixedVersion : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MixedVersion.call(this, pvarMixedVersion)
     end
 
   end
 
   @[Extern]
-  record ISClusterVtbl,
+
+  record ISClusterVtable,
     query_interface : Proc(ISCluster*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCluster*, UInt32),
     release : Proc(ISCluster*, UInt32),
     get_type_info_count : Proc(ISCluster*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISCluster*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISCluster*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISCluster*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISCluster*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CommonProperties : Proc(ISCluster*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateProperties : Proc(ISCluster*, Void**, Win32cr::Foundation::HRESULT),
     get_CommonROProperties : Proc(ISCluster*, Void**, Win32cr::Foundation::HRESULT),
@@ -4995,7 +5089,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISCluster, lpVtbl : ISClusterVtbl* do
+  record ISCluster, lpVtbl : ISClusterVtable* do
     GUID = LibC::GUID.new(0xf2e606e4_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISCluster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5015,8 +5109,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISCluster*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISCluster*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISCluster*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CommonProperties(this : ISCluster*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CommonProperties.call(this, ppProperties)
@@ -5085,14 +5179,15 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusNodeVtbl,
+
+  record ISClusNodeVtable,
     query_interface : Proc(ISClusNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNode*, UInt32),
     release : Proc(ISClusNode*, UInt32),
     get_type_info_count : Proc(ISClusNode*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNode*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNode*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNode*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNode*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CommonProperties : Proc(ISClusNode*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateProperties : Proc(ISClusNode*, Void**, Win32cr::Foundation::HRESULT),
     get_CommonROProperties : Proc(ISClusNode*, Void**, Win32cr::Foundation::HRESULT),
@@ -5110,7 +5205,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusNode, lpVtbl : ISClusNodeVtbl* do
+  record ISClusNode, lpVtbl : ISClusNodeVtable* do
     GUID = LibC::GUID.new(0xf2e606f8_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5130,8 +5225,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNode*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNode*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNode*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CommonProperties(this : ISClusNode*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CommonProperties.call(this, ppProperties)
@@ -5179,22 +5274,23 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusNodesVtbl,
+
+  record ISClusNodesVtable,
     query_interface : Proc(ISClusNodes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNodes*, UInt32),
     release : Proc(ISClusNodes*, UInt32),
     get_type_info_count : Proc(ISClusNodes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNodes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNodes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNodes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNodes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusNodes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusNodes*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusNodes*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusNodes*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusNodes*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusNodes, lpVtbl : ISClusNodesVtbl* do
+  record ISClusNodes, lpVtbl : ISClusNodesVtable* do
     GUID = LibC::GUID.new(0xf2e606fa_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5214,8 +5310,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNodes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusNodes*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -5226,21 +5322,22 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusNodes*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusNodes*, varIndex : Win32cr::System::Com::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusNodes*, varIndex : Win32cr::System::Variant::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppNode)
     end
 
   end
 
   @[Extern]
-  record ISClusNetworkVtbl,
+
+  record ISClusNetworkVtable,
     query_interface : Proc(ISClusNetwork*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNetwork*, UInt32),
     release : Proc(ISClusNetwork*, UInt32),
     get_type_info_count : Proc(ISClusNetwork*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNetwork*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNetwork*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNetwork*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNetwork*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CommonProperties : Proc(ISClusNetwork*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateProperties : Proc(ISClusNetwork*, Void**, Win32cr::Foundation::HRESULT),
     get_CommonROProperties : Proc(ISClusNetwork*, Void**, Win32cr::Foundation::HRESULT),
@@ -5255,7 +5352,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusNetwork, lpVtbl : ISClusNetworkVtbl* do
+  record ISClusNetwork, lpVtbl : ISClusNetworkVtable* do
     GUID = LibC::GUID.new(0xf2e606f2_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5275,8 +5372,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNetwork*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CommonProperties(this : ISClusNetwork*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CommonProperties.call(this, ppProperties)
@@ -5315,22 +5412,23 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusNetworksVtbl,
+
+  record ISClusNetworksVtable,
     query_interface : Proc(ISClusNetworks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNetworks*, UInt32),
     release : Proc(ISClusNetworks*, UInt32),
     get_type_info_count : Proc(ISClusNetworks*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNetworks*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNetworks*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNetworks*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNetworks*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusNetworks*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusNetworks*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusNetworks*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusNetworks*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusNetworks*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusNetworks, lpVtbl : ISClusNetworksVtbl* do
+  record ISClusNetworks, lpVtbl : ISClusNetworksVtable* do
     GUID = LibC::GUID.new(0xf2e606f4_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetworks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5350,8 +5448,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNetworks*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNetworks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNetworks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusNetworks*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -5362,21 +5460,22 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusNetworks*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusNetworks*, varIndex : Win32cr::System::Com::VARIANT, ppClusNetwork : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusNetworks*, varIndex : Win32cr::System::Variant::VARIANT, ppClusNetwork : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusNetwork)
     end
 
   end
 
   @[Extern]
-  record ISClusNetInterfaceVtbl,
+
+  record ISClusNetInterfaceVtable,
     query_interface : Proc(ISClusNetInterface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNetInterface*, UInt32),
     release : Proc(ISClusNetInterface*, UInt32),
     get_type_info_count : Proc(ISClusNetInterface*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNetInterface*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNetInterface*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNetInterface*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNetInterface*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CommonProperties : Proc(ISClusNetInterface*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateProperties : Proc(ISClusNetInterface*, Void**, Win32cr::Foundation::HRESULT),
     get_CommonROProperties : Proc(ISClusNetInterface*, Void**, Win32cr::Foundation::HRESULT),
@@ -5388,7 +5487,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusNetInterface, lpVtbl : ISClusNetInterfaceVtbl* do
+  record ISClusNetInterface, lpVtbl : ISClusNetInterfaceVtable* do
     GUID = LibC::GUID.new(0xf2e606ee_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5408,8 +5507,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNetInterface*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNetInterface*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNetInterface*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CommonProperties(this : ISClusNetInterface*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CommonProperties.call(this, ppProperties)
@@ -5439,22 +5538,23 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusNetInterfacesVtbl,
+
+  record ISClusNetInterfacesVtable,
     query_interface : Proc(ISClusNetInterfaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNetInterfaces*, UInt32),
     release : Proc(ISClusNetInterfaces*, UInt32),
     get_type_info_count : Proc(ISClusNetInterfaces*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNetInterfaces*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNetInterfaces*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNetInterfaces*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNetInterfaces*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusNetInterfaces*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusNetInterfaces*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusNetInterfaces*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusNetInterfaces*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusNetInterfaces*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusNetInterfaces, lpVtbl : ISClusNetInterfacesVtbl* do
+  record ISClusNetInterfaces, lpVtbl : ISClusNetInterfacesVtable* do
     GUID = LibC::GUID.new(0xf2e606f0_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5474,8 +5574,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNetInterfaces*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNetInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNetInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusNetInterfaces*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -5486,29 +5586,30 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusNetInterfaces*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusNetInterfaces*, varIndex : Win32cr::System::Com::VARIANT, ppClusNetInterface : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusNetInterfaces*, varIndex : Win32cr::System::Variant::VARIANT, ppClusNetInterface : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusNetInterface)
     end
 
   end
 
   @[Extern]
-  record ISClusNodeNetInterfacesVtbl,
+
+  record ISClusNodeNetInterfacesVtable,
     query_interface : Proc(ISClusNodeNetInterfaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNodeNetInterfaces*, UInt32),
     release : Proc(ISClusNodeNetInterfaces*, UInt32),
     get_type_info_count : Proc(ISClusNodeNetInterfaces*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNodeNetInterfaces*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNodeNetInterfaces*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNodeNetInterfaces*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNodeNetInterfaces*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusNodeNetInterfaces*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusNodeNetInterfaces*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusNodeNetInterfaces*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusNodeNetInterfaces*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusNodeNetInterfaces*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusNodeNetInterfaces, lpVtbl : ISClusNodeNetInterfacesVtbl* do
+  record ISClusNodeNetInterfaces, lpVtbl : ISClusNodeNetInterfacesVtable* do
     GUID = LibC::GUID.new(0xf2e606fc_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNodeNetInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5528,8 +5629,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNodeNetInterfaces*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNodeNetInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNodeNetInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusNodeNetInterfaces*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -5540,29 +5641,30 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusNodeNetInterfaces*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusNodeNetInterfaces*, varIndex : Win32cr::System::Com::VARIANT, ppClusNetInterface : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusNodeNetInterfaces*, varIndex : Win32cr::System::Variant::VARIANT, ppClusNetInterface : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusNetInterface)
     end
 
   end
 
   @[Extern]
-  record ISClusNetworkNetInterfacesVtbl,
+
+  record ISClusNetworkNetInterfacesVtable,
     query_interface : Proc(ISClusNetworkNetInterfaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusNetworkNetInterfaces*, UInt32),
     release : Proc(ISClusNetworkNetInterfaces*, UInt32),
     get_type_info_count : Proc(ISClusNetworkNetInterfaces*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusNetworkNetInterfaces*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusNetworkNetInterfaces*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusNetworkNetInterfaces*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusNetworkNetInterfaces*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusNetworkNetInterfaces*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusNetworkNetInterfaces*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusNetworkNetInterfaces*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusNetworkNetInterfaces*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusNetworkNetInterfaces*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusNetworkNetInterfaces, lpVtbl : ISClusNetworkNetInterfacesVtbl* do
+  record ISClusNetworkNetInterfaces, lpVtbl : ISClusNetworkNetInterfacesVtable* do
     GUID = LibC::GUID.new(0xf2e606f6_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusNetworkNetInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5582,8 +5684,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusNetworkNetInterfaces*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusNetworkNetInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusNetworkNetInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusNetworkNetInterfaces*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -5594,21 +5696,22 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusNetworkNetInterfaces*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusNetworkNetInterfaces*, varIndex : Win32cr::System::Com::VARIANT, ppClusNetInterface : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusNetworkNetInterfaces*, varIndex : Win32cr::System::Variant::VARIANT, ppClusNetInterface : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusNetInterface)
     end
 
   end
 
   @[Extern]
-  record ISClusResGroupVtbl,
+
+  record ISClusResGroupVtable,
     query_interface : Proc(ISClusResGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResGroup*, UInt32),
     release : Proc(ISClusResGroup*, UInt32),
     get_type_info_count : Proc(ISClusResGroup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResGroup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResGroup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResGroup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResGroup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CommonProperties : Proc(ISClusResGroup*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateProperties : Proc(ISClusResGroup*, Void**, Win32cr::Foundation::HRESULT),
     get_CommonROProperties : Proc(ISClusResGroup*, Void**, Win32cr::Foundation::HRESULT),
@@ -5621,14 +5724,14 @@ module Win32cr::Networking::Clustering
     get_Resources : Proc(ISClusResGroup*, Void**, Win32cr::Foundation::HRESULT),
     get_PreferredOwnerNodes : Proc(ISClusResGroup*, Void**, Win32cr::Foundation::HRESULT),
     delete : Proc(ISClusResGroup*, Win32cr::Foundation::HRESULT),
-    online : Proc(ISClusResGroup*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    move : Proc(ISClusResGroup*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    offline : Proc(ISClusResGroup*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    online : Proc(ISClusResGroup*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    move : Proc(ISClusResGroup*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    offline : Proc(ISClusResGroup*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Cluster : Proc(ISClusResGroup*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResGroup, lpVtbl : ISClusResGroupVtbl* do
+  record ISClusResGroup, lpVtbl : ISClusResGroupVtable* do
     GUID = LibC::GUID.new(0xf2e60706_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5648,8 +5751,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResGroup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CommonProperties(this : ISClusResGroup*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CommonProperties.call(this, ppProperties)
@@ -5687,13 +5790,13 @@ module Win32cr::Networking::Clustering
     def delete(this : ISClusResGroup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def online(this : ISClusResGroup*, varTimeout : Win32cr::System::Com::VARIANT, varNode : Win32cr::System::Com::VARIANT, pvarPending : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def online(this : ISClusResGroup*, varTimeout : Win32cr::System::Variant::VARIANT, varNode : Win32cr::System::Variant::VARIANT, pvarPending : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.online.call(this, varTimeout, varNode, pvarPending)
     end
-    def move(this : ISClusResGroup*, varTimeout : Win32cr::System::Com::VARIANT, varNode : Win32cr::System::Com::VARIANT, pvarPending : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def move(this : ISClusResGroup*, varTimeout : Win32cr::System::Variant::VARIANT, varNode : Win32cr::System::Variant::VARIANT, pvarPending : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move.call(this, varTimeout, varNode, pvarPending)
     end
-    def offline(this : ISClusResGroup*, varTimeout : Win32cr::System::Com::VARIANT, pvarPending : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def offline(this : ISClusResGroup*, varTimeout : Win32cr::System::Variant::VARIANT, pvarPending : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.offline.call(this, varTimeout, pvarPending)
     end
     def get_Cluster(this : ISClusResGroup*, ppCluster : Void**) : Win32cr::Foundation::HRESULT
@@ -5703,24 +5806,25 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusResGroupsVtbl,
+
+  record ISClusResGroupsVtable,
     query_interface : Proc(ISClusResGroups*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResGroups*, UInt32),
     release : Proc(ISClusResGroups*, UInt32),
     get_type_info_count : Proc(ISClusResGroups*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResGroups*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResGroups*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResGroups*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResGroups*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResGroups*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResGroups*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResGroups*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResGroups*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResGroups*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_item : Proc(ISClusResGroups*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    delete_item : Proc(ISClusResGroups*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    delete_item : Proc(ISClusResGroups*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResGroups, lpVtbl : ISClusResGroupsVtbl* do
+  record ISClusResGroups, lpVtbl : ISClusResGroupsVtable* do
     GUID = LibC::GUID.new(0xf2e60708_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5740,8 +5844,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResGroups*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResGroups*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResGroups*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResGroups*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -5752,27 +5856,28 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResGroups*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResGroups*, varIndex : Win32cr::System::Com::VARIANT, ppClusResGroup : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResGroups*, varIndex : Win32cr::System::Variant::VARIANT, ppClusResGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusResGroup)
     end
     def create_item(this : ISClusResGroups*, bstrResourceGroupName : Win32cr::Foundation::BSTR, ppResourceGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrResourceGroupName, ppResourceGroup)
     end
-    def delete_item(this : ISClusResGroups*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_item(this : ISClusResGroups*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusResourceVtbl,
+
+  record ISClusResourceVtable,
     query_interface : Proc(ISClusResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResource*, UInt32),
     release : Proc(ISClusResource*, UInt32),
     get_type_info_count : Proc(ISClusResource*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResource*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResource*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResource*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResource*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CommonProperties : Proc(ISClusResource*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateProperties : Proc(ISClusResource*, Void**, Win32cr::Foundation::HRESULT),
     get_CommonROProperties : Proc(ISClusResource*, Void**, Win32cr::Foundation::HRESULT),
@@ -5785,12 +5890,12 @@ module Win32cr::Networking::Clustering
     become_quorum_resource : Proc(ISClusResource*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     delete : Proc(ISClusResource*, Win32cr::Foundation::HRESULT),
     fail : Proc(ISClusResource*, Win32cr::Foundation::HRESULT),
-    online : Proc(ISClusResource*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    offline : Proc(ISClusResource*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    online : Proc(ISClusResource*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    offline : Proc(ISClusResource*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     change_resource_group : Proc(ISClusResource*, Void*, Win32cr::Foundation::HRESULT),
     add_resource_node : Proc(ISClusResource*, Void*, Win32cr::Foundation::HRESULT),
     remove_resource_node : Proc(ISClusResource*, Void*, Win32cr::Foundation::HRESULT),
-    can_resource_be_dependent : Proc(ISClusResource*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    can_resource_be_dependent : Proc(ISClusResource*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_PossibleOwnerNodes : Proc(ISClusResource*, Void**, Win32cr::Foundation::HRESULT),
     get_Dependencies : Proc(ISClusResource*, Void**, Win32cr::Foundation::HRESULT),
     get_Dependents : Proc(ISClusResource*, Void**, Win32cr::Foundation::HRESULT),
@@ -5808,7 +5913,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusResource, lpVtbl : ISClusResourceVtbl* do
+  record ISClusResource, lpVtbl : ISClusResourceVtable* do
     GUID = LibC::GUID.new(0xf2e6070a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5828,8 +5933,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResource*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResource*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResource*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CommonProperties(this : ISClusResource*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CommonProperties.call(this, ppProperties)
@@ -5867,10 +5972,10 @@ module Win32cr::Networking::Clustering
     def fail(this : ISClusResource*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.fail.call(this)
     end
-    def online(this : ISClusResource*, nTimeout : Int32, pvarPending : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def online(this : ISClusResource*, nTimeout : Int32, pvarPending : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.online.call(this, nTimeout, pvarPending)
     end
-    def offline(this : ISClusResource*, nTimeout : Int32, pvarPending : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def offline(this : ISClusResource*, nTimeout : Int32, pvarPending : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.offline.call(this, nTimeout, pvarPending)
     end
     def change_resource_group(this : ISClusResource*, pResourceGroup : Void*) : Win32cr::Foundation::HRESULT
@@ -5882,7 +5987,7 @@ module Win32cr::Networking::Clustering
     def remove_resource_node(this : ISClusResource*, pNode : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_resource_node.call(this, pNode)
     end
-    def can_resource_be_dependent(this : ISClusResource*, pResource : Void*, pvarDependent : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def can_resource_be_dependent(this : ISClusResource*, pResource : Void*, pvarDependent : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_resource_be_dependent.call(this, pResource, pvarDependent)
     end
     def get_PossibleOwnerNodes(this : ISClusResource*, ppOwnerNodes : Void**) : Win32cr::Foundation::HRESULT
@@ -5931,26 +6036,27 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusResDependenciesVtbl,
+
+  record ISClusResDependenciesVtable,
     query_interface : Proc(ISClusResDependencies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResDependencies*, UInt32),
     release : Proc(ISClusResDependencies*, UInt32),
     get_type_info_count : Proc(ISClusResDependencies*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResDependencies*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResDependencies*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResDependencies*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResDependencies*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResDependencies*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResDependencies*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResDependencies*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResDependencies*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResDependencies*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_item : Proc(ISClusResDependencies*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, Void**, Win32cr::Foundation::HRESULT),
-    delete_item : Proc(ISClusResDependencies*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_item : Proc(ISClusResDependencies*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     add_item : Proc(ISClusResDependencies*, Void*, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusResDependencies*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    remove_item : Proc(ISClusResDependencies*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResDependencies, lpVtbl : ISClusResDependenciesVtbl* do
+  record ISClusResDependencies, lpVtbl : ISClusResDependenciesVtable* do
     GUID = LibC::GUID.new(0xf2e60704_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResDependencies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5970,8 +6076,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResDependencies*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResDependencies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResDependencies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResDependencies*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -5982,43 +6088,44 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResDependencies*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResDependencies*, varIndex : Win32cr::System::Com::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResDependencies*, varIndex : Win32cr::System::Variant::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusResource)
     end
     def create_item(this : ISClusResDependencies*, bstrResourceName : Win32cr::Foundation::BSTR, bstrResourceType : Win32cr::Foundation::BSTR, dwFlags : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrResourceName, bstrResourceType, dwFlags, ppClusterResource)
     end
-    def delete_item(this : ISClusResDependencies*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_item(this : ISClusResDependencies*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_item.call(this, varIndex)
     end
     def add_item(this : ISClusResDependencies*, pResource : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_item.call(this, pResource)
     end
-    def remove_item(this : ISClusResDependencies*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusResDependencies*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusResGroupResourcesVtbl,
+
+  record ISClusResGroupResourcesVtable,
     query_interface : Proc(ISClusResGroupResources*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResGroupResources*, UInt32),
     release : Proc(ISClusResGroupResources*, UInt32),
     get_type_info_count : Proc(ISClusResGroupResources*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResGroupResources*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResGroupResources*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResGroupResources*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResGroupResources*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResGroupResources*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResGroupResources*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResGroupResources*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResGroupResources*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResGroupResources*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_item : Proc(ISClusResGroupResources*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, Void**, Win32cr::Foundation::HRESULT),
-    delete_item : Proc(ISClusResGroupResources*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    delete_item : Proc(ISClusResGroupResources*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResGroupResources, lpVtbl : ISClusResGroupResourcesVtbl* do
+  record ISClusResGroupResources, lpVtbl : ISClusResGroupResourcesVtable* do
     GUID = LibC::GUID.new(0xf2e606ea_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroupResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6038,8 +6145,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResGroupResources*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResGroupResources*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResGroupResources*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResGroupResources*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6050,37 +6157,38 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResGroupResources*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResGroupResources*, varIndex : Win32cr::System::Com::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResGroupResources*, varIndex : Win32cr::System::Variant::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusResource)
     end
     def create_item(this : ISClusResGroupResources*, bstrResourceName : Win32cr::Foundation::BSTR, bstrResourceType : Win32cr::Foundation::BSTR, dwFlags : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrResourceName, bstrResourceType, dwFlags, ppClusterResource)
     end
-    def delete_item(this : ISClusResGroupResources*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_item(this : ISClusResGroupResources*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusResTypeResourcesVtbl,
+
+  record ISClusResTypeResourcesVtable,
     query_interface : Proc(ISClusResTypeResources*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResTypeResources*, UInt32),
     release : Proc(ISClusResTypeResources*, UInt32),
     get_type_info_count : Proc(ISClusResTypeResources*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResTypeResources*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResTypeResources*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResTypeResources*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResTypeResources*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResTypeResources*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResTypeResources*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResTypeResources*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResTypeResources*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResTypeResources*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_item : Proc(ISClusResTypeResources*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, Void**, Win32cr::Foundation::HRESULT),
-    delete_item : Proc(ISClusResTypeResources*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    delete_item : Proc(ISClusResTypeResources*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResTypeResources, lpVtbl : ISClusResTypeResourcesVtbl* do
+  record ISClusResTypeResources, lpVtbl : ISClusResTypeResourcesVtable* do
     GUID = LibC::GUID.new(0xf2e60714_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResTypeResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6100,8 +6208,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResTypeResources*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResTypeResources*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResTypeResources*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResTypeResources*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6112,37 +6220,38 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResTypeResources*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResTypeResources*, varIndex : Win32cr::System::Com::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResTypeResources*, varIndex : Win32cr::System::Variant::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusResource)
     end
     def create_item(this : ISClusResTypeResources*, bstrResourceName : Win32cr::Foundation::BSTR, bstrGroupName : Win32cr::Foundation::BSTR, dwFlags : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrResourceName, bstrGroupName, dwFlags, ppClusterResource)
     end
-    def delete_item(this : ISClusResTypeResources*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_item(this : ISClusResTypeResources*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusResourcesVtbl,
+
+  record ISClusResourcesVtable,
     query_interface : Proc(ISClusResources*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResources*, UInt32),
     release : Proc(ISClusResources*, UInt32),
     get_type_info_count : Proc(ISClusResources*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResources*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResources*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResources*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResources*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResources*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResources*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResources*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResources*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResources*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_item : Proc(ISClusResources*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, Void**, Win32cr::Foundation::HRESULT),
-    delete_item : Proc(ISClusResources*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    delete_item : Proc(ISClusResources*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResources, lpVtbl : ISClusResourcesVtbl* do
+  record ISClusResources, lpVtbl : ISClusResourcesVtable* do
     GUID = LibC::GUID.new(0xf2e6070c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6162,8 +6271,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResources*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResources*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResources*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResources*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6174,40 +6283,41 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResources*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResources*, varIndex : Win32cr::System::Com::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResources*, varIndex : Win32cr::System::Variant::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusResource)
     end
     def create_item(this : ISClusResources*, bstrResourceName : Win32cr::Foundation::BSTR, bstrResourceType : Win32cr::Foundation::BSTR, bstrGroupName : Win32cr::Foundation::BSTR, dwFlags : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrResourceName, bstrResourceType, bstrGroupName, dwFlags, ppClusterResource)
     end
-    def delete_item(this : ISClusResources*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_item(this : ISClusResources*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusResGroupPreferredOwnerNodesVtbl,
+
+  record ISClusResGroupPreferredOwnerNodesVtable,
     query_interface : Proc(ISClusResGroupPreferredOwnerNodes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResGroupPreferredOwnerNodes*, UInt32),
     release : Proc(ISClusResGroupPreferredOwnerNodes*, UInt32),
     get_type_info_count : Proc(ISClusResGroupPreferredOwnerNodes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResGroupPreferredOwnerNodes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResGroupPreferredOwnerNodes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResGroupPreferredOwnerNodes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResGroupPreferredOwnerNodes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResGroupPreferredOwnerNodes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResGroupPreferredOwnerNodes*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     insert_item : Proc(ISClusResGroupPreferredOwnerNodes*, Void*, Int32, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Modified : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    remove_item : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Modified : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     save_changes : Proc(ISClusResGroupPreferredOwnerNodes*, Win32cr::Foundation::HRESULT),
     add_item : Proc(ISClusResGroupPreferredOwnerNodes*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResGroupPreferredOwnerNodes, lpVtbl : ISClusResGroupPreferredOwnerNodesVtbl* do
+  record ISClusResGroupPreferredOwnerNodes, lpVtbl : ISClusResGroupPreferredOwnerNodesVtable* do
     GUID = LibC::GUID.new(0xf2e606e8_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResGroupPreferredOwnerNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6227,8 +6337,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResGroupPreferredOwnerNodes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResGroupPreferredOwnerNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResGroupPreferredOwnerNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResGroupPreferredOwnerNodes*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6239,16 +6349,16 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResGroupPreferredOwnerNodes*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResGroupPreferredOwnerNodes*, varIndex : Win32cr::System::Com::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResGroupPreferredOwnerNodes*, varIndex : Win32cr::System::Variant::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppNode)
     end
     def insert_item(this : ISClusResGroupPreferredOwnerNodes*, pNode : Void*, nPosition : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insert_item.call(this, pNode, nPosition)
     end
-    def remove_item(this : ISClusResGroupPreferredOwnerNodes*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusResGroupPreferredOwnerNodes*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
-    def get_Modified(this : ISClusResGroupPreferredOwnerNodes*, pvarModified : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Modified(this : ISClusResGroupPreferredOwnerNodes*, pvarModified : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Modified.call(this, pvarModified)
     end
     def save_changes(this : ISClusResGroupPreferredOwnerNodes*) : Win32cr::Foundation::HRESULT
@@ -6261,25 +6371,26 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusResPossibleOwnerNodesVtbl,
+
+  record ISClusResPossibleOwnerNodesVtable,
     query_interface : Proc(ISClusResPossibleOwnerNodes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResPossibleOwnerNodes*, UInt32),
     release : Proc(ISClusResPossibleOwnerNodes*, UInt32),
     get_type_info_count : Proc(ISClusResPossibleOwnerNodes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResPossibleOwnerNodes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResPossibleOwnerNodes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResPossibleOwnerNodes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResPossibleOwnerNodes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResPossibleOwnerNodes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResPossibleOwnerNodes*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResPossibleOwnerNodes*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResPossibleOwnerNodes*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResPossibleOwnerNodes*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     add_item : Proc(ISClusResPossibleOwnerNodes*, Void*, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusResPossibleOwnerNodes*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Modified : Proc(ISClusResPossibleOwnerNodes*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    remove_item : Proc(ISClusResPossibleOwnerNodes*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Modified : Proc(ISClusResPossibleOwnerNodes*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResPossibleOwnerNodes, lpVtbl : ISClusResPossibleOwnerNodesVtbl* do
+  record ISClusResPossibleOwnerNodes, lpVtbl : ISClusResPossibleOwnerNodesVtable* do
     GUID = LibC::GUID.new(0xf2e6070e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResPossibleOwnerNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6299,8 +6410,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResPossibleOwnerNodes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResPossibleOwnerNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResPossibleOwnerNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResPossibleOwnerNodes*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6311,38 +6422,39 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResPossibleOwnerNodes*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResPossibleOwnerNodes*, varIndex : Win32cr::System::Com::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResPossibleOwnerNodes*, varIndex : Win32cr::System::Variant::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppNode)
     end
     def add_item(this : ISClusResPossibleOwnerNodes*, pNode : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_item.call(this, pNode)
     end
-    def remove_item(this : ISClusResPossibleOwnerNodes*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusResPossibleOwnerNodes*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
-    def get_Modified(this : ISClusResPossibleOwnerNodes*, pvarModified : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Modified(this : ISClusResPossibleOwnerNodes*, pvarModified : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Modified.call(this, pvarModified)
     end
 
   end
 
   @[Extern]
-  record ISClusResTypePossibleOwnerNodesVtbl,
+
+  record ISClusResTypePossibleOwnerNodesVtable,
     query_interface : Proc(ISClusResTypePossibleOwnerNodes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResTypePossibleOwnerNodes*, UInt32),
     release : Proc(ISClusResTypePossibleOwnerNodes*, UInt32),
     get_type_info_count : Proc(ISClusResTypePossibleOwnerNodes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResTypePossibleOwnerNodes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResTypePossibleOwnerNodes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResTypePossibleOwnerNodes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResTypePossibleOwnerNodes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResTypePossibleOwnerNodes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResTypePossibleOwnerNodes*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResTypePossibleOwnerNodes*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResTypePossibleOwnerNodes*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusResTypePossibleOwnerNodes*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResTypePossibleOwnerNodes, lpVtbl : ISClusResTypePossibleOwnerNodesVtbl* do
+  record ISClusResTypePossibleOwnerNodes, lpVtbl : ISClusResTypePossibleOwnerNodesVtable* do
     GUID = LibC::GUID.new(0xf2e60718_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResTypePossibleOwnerNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6362,8 +6474,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResTypePossibleOwnerNodes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResTypePossibleOwnerNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResTypePossibleOwnerNodes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResTypePossibleOwnerNodes*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6374,21 +6486,22 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResTypePossibleOwnerNodes*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResTypePossibleOwnerNodes*, varIndex : Win32cr::System::Com::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResTypePossibleOwnerNodes*, varIndex : Win32cr::System::Variant::VARIANT, ppNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppNode)
     end
 
   end
 
   @[Extern]
-  record ISClusResTypeVtbl,
+
+  record ISClusResTypeVtable,
     query_interface : Proc(ISClusResType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResType*, UInt32),
     release : Proc(ISClusResType*, UInt32),
     get_type_info_count : Proc(ISClusResType*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResType*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResType*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResType*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResType*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CommonProperties : Proc(ISClusResType*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateProperties : Proc(ISClusResType*, Void**, Win32cr::Foundation::HRESULT),
     get_CommonROProperties : Proc(ISClusResType*, Void**, Win32cr::Foundation::HRESULT),
@@ -6402,7 +6515,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusResType, lpVtbl : ISClusResTypeVtbl* do
+  record ISClusResType, lpVtbl : ISClusResTypeVtable* do
     GUID = LibC::GUID.new(0xf2e60710_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6422,8 +6535,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResType*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CommonProperties(this : ISClusResType*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CommonProperties.call(this, ppProperties)
@@ -6459,24 +6572,25 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusResTypesVtbl,
+
+  record ISClusResTypesVtable,
     query_interface : Proc(ISClusResTypes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResTypes*, UInt32),
     release : Proc(ISClusResTypes*, UInt32),
     get_type_info_count : Proc(ISClusResTypes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResTypes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResTypes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResTypes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResTypes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResTypes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResTypes*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResTypes*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResTypes*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResTypes*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_item : Proc(ISClusResTypes*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
-    delete_item : Proc(ISClusResTypes*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    delete_item : Proc(ISClusResTypes*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResTypes, lpVtbl : ISClusResTypesVtbl* do
+  record ISClusResTypes, lpVtbl : ISClusResTypesVtable* do
     GUID = LibC::GUID.new(0xf2e60712_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResTypes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6496,8 +6610,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResTypes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResTypes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResTypes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResTypes*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6508,46 +6622,47 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResTypes*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResTypes*, varIndex : Win32cr::System::Com::VARIANT, ppClusResType : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResTypes*, varIndex : Win32cr::System::Variant::VARIANT, ppClusResType : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusResType)
     end
     def create_item(this : ISClusResTypes*, bstrResourceTypeName : Win32cr::Foundation::BSTR, bstrDisplayName : Win32cr::Foundation::BSTR, bstrResourceTypeDll : Win32cr::Foundation::BSTR, dwLooksAlivePollInterval : Int32, dwIsAlivePollInterval : Int32, ppResourceType : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrResourceTypeName, bstrDisplayName, bstrResourceTypeDll, dwLooksAlivePollInterval, dwIsAlivePollInterval, ppResourceType)
     end
-    def delete_item(this : ISClusResTypes*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_item(this : ISClusResTypes*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusPropertyVtbl,
+
+  record ISClusPropertyVtable,
     query_interface : Proc(ISClusProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusProperty*, UInt32),
     release : Proc(ISClusProperty*, UInt32),
     get_type_info_count : Proc(ISClusProperty*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusProperty*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ISClusProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Length : Proc(ISClusProperty*, Int32*, Win32cr::Foundation::HRESULT),
     get_ValueCount : Proc(ISClusProperty*, Int32*, Win32cr::Foundation::HRESULT),
     get_Values : Proc(ISClusProperty*, Void**, Win32cr::Foundation::HRESULT),
-    get_Value : Proc(ISClusProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Value : Proc(ISClusProperty*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Value : Proc(ISClusProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Value : Proc(ISClusProperty*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Type : Proc(ISClusProperty*, Win32cr::Networking::Clustering::CLUSTER_PROPERTY_TYPE*, Win32cr::Foundation::HRESULT),
     put_Type : Proc(ISClusProperty*, Win32cr::Networking::Clustering::CLUSTER_PROPERTY_TYPE, Win32cr::Foundation::HRESULT),
     get_Format : Proc(ISClusProperty*, Win32cr::Networking::Clustering::CLUSTER_PROPERTY_FORMAT*, Win32cr::Foundation::HRESULT),
     put_Format : Proc(ISClusProperty*, Win32cr::Networking::Clustering::CLUSTER_PROPERTY_FORMAT, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(ISClusProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Private : Proc(ISClusProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Common : Proc(ISClusProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Modified : Proc(ISClusProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(ISClusProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Private : Proc(ISClusProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Common : Proc(ISClusProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Modified : Proc(ISClusProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     use_default_value : Proc(ISClusProperty*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusProperty, lpVtbl : ISClusPropertyVtbl* do
+  record ISClusProperty, lpVtbl : ISClusPropertyVtable* do
     GUID = LibC::GUID.new(0xf2e606fe_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6567,8 +6682,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ISClusProperty*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -6582,10 +6697,10 @@ module Win32cr::Networking::Clustering
     def get_Values(this : ISClusProperty*, ppClusterPropertyValues : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Values.call(this, ppClusterPropertyValues)
     end
-    def get_Value(this : ISClusProperty*, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Value(this : ISClusProperty*, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Value.call(this, pvarValue)
     end
-    def put_Value(this : ISClusProperty*, varValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Value(this : ISClusProperty*, varValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Value.call(this, varValue)
     end
     def get_Type(this : ISClusProperty*, pType : Win32cr::Networking::Clustering::CLUSTER_PROPERTY_TYPE*) : Win32cr::Foundation::HRESULT
@@ -6600,16 +6715,16 @@ module Win32cr::Networking::Clustering
     def put_Format(this : ISClusProperty*, format : Win32cr::Networking::Clustering::CLUSTER_PROPERTY_FORMAT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Format.call(this, format)
     end
-    def get_ReadOnly(this : ISClusProperty*, pvarReadOnly : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : ISClusProperty*, pvarReadOnly : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, pvarReadOnly)
     end
-    def get_Private(this : ISClusProperty*, pvarPrivate : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Private(this : ISClusProperty*, pvarPrivate : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Private.call(this, pvarPrivate)
     end
-    def get_Common(this : ISClusProperty*, pvarCommon : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Common(this : ISClusProperty*, pvarCommon : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Common.call(this, pvarCommon)
     end
-    def get_Modified(this : ISClusProperty*, pvarModified : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Modified(this : ISClusProperty*, pvarModified : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Modified.call(this, pvarModified)
     end
     def use_default_value(this : ISClusProperty*) : Win32cr::Foundation::HRESULT
@@ -6619,16 +6734,17 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusPropertyValueVtbl,
+
+  record ISClusPropertyValueVtable,
     query_interface : Proc(ISClusPropertyValue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusPropertyValue*, UInt32),
     release : Proc(ISClusPropertyValue*, UInt32),
     get_type_info_count : Proc(ISClusPropertyValue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusPropertyValue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusPropertyValue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusPropertyValue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Value : Proc(ISClusPropertyValue*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Value : Proc(ISClusPropertyValue*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusPropertyValue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Value : Proc(ISClusPropertyValue*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Value : Proc(ISClusPropertyValue*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Type : Proc(ISClusPropertyValue*, Win32cr::Networking::Clustering::CLUSTER_PROPERTY_TYPE*, Win32cr::Foundation::HRESULT),
     put_Type : Proc(ISClusPropertyValue*, Win32cr::Networking::Clustering::CLUSTER_PROPERTY_TYPE, Win32cr::Foundation::HRESULT),
     get_Format : Proc(ISClusPropertyValue*, Win32cr::Networking::Clustering::CLUSTER_PROPERTY_FORMAT*, Win32cr::Foundation::HRESULT),
@@ -6639,7 +6755,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusPropertyValue, lpVtbl : ISClusPropertyValueVtbl* do
+  record ISClusPropertyValue, lpVtbl : ISClusPropertyValueVtable* do
     GUID = LibC::GUID.new(0xf2e6071a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPropertyValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6659,13 +6775,13 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusPropertyValue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusPropertyValue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusPropertyValue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Value(this : ISClusPropertyValue*, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Value(this : ISClusPropertyValue*, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Value.call(this, pvarValue)
     end
-    def put_Value(this : ISClusPropertyValue*, varValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Value(this : ISClusPropertyValue*, varValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Value.call(this, varValue)
     end
     def get_Type(this : ISClusPropertyValue*, pType : Win32cr::Networking::Clustering::CLUSTER_PROPERTY_TYPE*) : Win32cr::Foundation::HRESULT
@@ -6693,23 +6809,24 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusPropertyValuesVtbl,
+
+  record ISClusPropertyValuesVtable,
     query_interface : Proc(ISClusPropertyValues*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusPropertyValues*, UInt32),
     release : Proc(ISClusPropertyValues*, UInt32),
     get_type_info_count : Proc(ISClusPropertyValues*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusPropertyValues*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusPropertyValues*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusPropertyValues*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusPropertyValues*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusPropertyValues*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusPropertyValues*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusPropertyValues*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_item : Proc(ISClusPropertyValues*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusPropertyValues*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusPropertyValues*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_item : Proc(ISClusPropertyValues*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    remove_item : Proc(ISClusPropertyValues*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusPropertyValues, lpVtbl : ISClusPropertyValuesVtbl* do
+  record ISClusPropertyValues, lpVtbl : ISClusPropertyValuesVtable* do
     GUID = LibC::GUID.new(0xf2e6071c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPropertyValues*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6729,8 +6846,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusPropertyValues*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusPropertyValues*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusPropertyValues*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusPropertyValues*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6738,42 +6855,43 @@ module Win32cr::Networking::Clustering
     def get__NewEnum(this : ISClusPropertyValues*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
     end
-    def get_Item(this : ISClusPropertyValues*, varIndex : Win32cr::System::Com::VARIANT, ppPropertyValue : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusPropertyValues*, varIndex : Win32cr::System::Variant::VARIANT, ppPropertyValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppPropertyValue)
     end
-    def create_item(this : ISClusPropertyValues*, bstrName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Com::VARIANT, ppPropertyValue : Void**) : Win32cr::Foundation::HRESULT
+    def create_item(this : ISClusPropertyValues*, bstrName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Variant::VARIANT, ppPropertyValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrName, varValue, ppPropertyValue)
     end
-    def remove_item(this : ISClusPropertyValues*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusPropertyValues*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusPropertiesVtbl,
+
+  record ISClusPropertiesVtable,
     query_interface : Proc(ISClusProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusProperties*, UInt32),
     release : Proc(ISClusProperties*, UInt32),
     get_type_info_count : Proc(ISClusProperties*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusProperties*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusProperties*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusProperties*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusProperties*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusProperties*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusProperties*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusProperties*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusProperties*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_item : Proc(ISClusProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    use_default_value : Proc(ISClusProperties*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    save_changes : Proc(ISClusProperties*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(ISClusProperties*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Private : Proc(ISClusProperties*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Common : Proc(ISClusProperties*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Modified : Proc(ISClusProperties*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusProperties*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_item : Proc(ISClusProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    use_default_value : Proc(ISClusProperties*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    save_changes : Proc(ISClusProperties*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(ISClusProperties*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Private : Proc(ISClusProperties*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Common : Proc(ISClusProperties*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Modified : Proc(ISClusProperties*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusProperties, lpVtbl : ISClusPropertiesVtbl* do
+  record ISClusProperties, lpVtbl : ISClusPropertiesVtable* do
     GUID = LibC::GUID.new(0xf2e60700_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6793,8 +6911,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusProperties*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusProperties*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6805,51 +6923,52 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusProperties*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusProperties*, varIndex : Win32cr::System::Com::VARIANT, ppClusProperty : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusProperties*, varIndex : Win32cr::System::Variant::VARIANT, ppClusProperty : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusProperty)
     end
-    def create_item(this : ISClusProperties*, bstrName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Com::VARIANT, pProperty : Void**) : Win32cr::Foundation::HRESULT
+    def create_item(this : ISClusProperties*, bstrName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Variant::VARIANT, pProperty : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrName, varValue, pProperty)
     end
-    def use_default_value(this : ISClusProperties*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def use_default_value(this : ISClusProperties*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.use_default_value.call(this, varIndex)
     end
-    def save_changes(this : ISClusProperties*, pvarStatusCode : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def save_changes(this : ISClusProperties*, pvarStatusCode : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save_changes.call(this, pvarStatusCode)
     end
-    def get_ReadOnly(this : ISClusProperties*, pvarReadOnly : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : ISClusProperties*, pvarReadOnly : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, pvarReadOnly)
     end
-    def get_Private(this : ISClusProperties*, pvarPrivate : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Private(this : ISClusProperties*, pvarPrivate : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Private.call(this, pvarPrivate)
     end
-    def get_Common(this : ISClusProperties*, pvarCommon : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Common(this : ISClusProperties*, pvarCommon : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Common.call(this, pvarCommon)
     end
-    def get_Modified(this : ISClusProperties*, pvarModified : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Modified(this : ISClusProperties*, pvarModified : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Modified.call(this, pvarModified)
     end
 
   end
 
   @[Extern]
-  record ISClusPropertyValueDataVtbl,
+
+  record ISClusPropertyValueDataVtable,
     query_interface : Proc(ISClusPropertyValueData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusPropertyValueData*, UInt32),
     release : Proc(ISClusPropertyValueData*, UInt32),
     get_type_info_count : Proc(ISClusPropertyValueData*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusPropertyValueData*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusPropertyValueData*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusPropertyValueData*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusPropertyValueData*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusPropertyValueData*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusPropertyValueData*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusPropertyValueData*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    create_item : Proc(ISClusPropertyValueData*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusPropertyValueData*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusPropertyValueData*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    create_item : Proc(ISClusPropertyValueData*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    remove_item : Proc(ISClusPropertyValueData*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusPropertyValueData, lpVtbl : ISClusPropertyValueDataVtbl* do
+  record ISClusPropertyValueData, lpVtbl : ISClusPropertyValueDataVtable* do
     GUID = LibC::GUID.new(0xf2e6071e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPropertyValueData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6869,8 +6988,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusPropertyValueData*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusPropertyValueData*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusPropertyValueData*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusPropertyValueData*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -6878,27 +6997,28 @@ module Win32cr::Networking::Clustering
     def get__NewEnum(this : ISClusPropertyValueData*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
     end
-    def get_Item(this : ISClusPropertyValueData*, varIndex : Win32cr::System::Com::VARIANT, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusPropertyValueData*, varIndex : Win32cr::System::Variant::VARIANT, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, pvarValue)
     end
-    def create_item(this : ISClusPropertyValueData*, varValue : Win32cr::System::Com::VARIANT, pvarData : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def create_item(this : ISClusPropertyValueData*, varValue : Win32cr::System::Variant::VARIANT, pvarData : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, varValue, pvarData)
     end
-    def remove_item(this : ISClusPropertyValueData*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusPropertyValueData*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusPartitionVtbl,
+
+  record ISClusPartitionVtable,
     query_interface : Proc(ISClusPartition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusPartition*, UInt32),
     release : Proc(ISClusPartition*, UInt32),
     get_type_info_count : Proc(ISClusPartition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusPartition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusPartition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusPartition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusPartition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Flags : Proc(ISClusPartition*, Int32*, Win32cr::Foundation::HRESULT),
     get_DeviceName : Proc(ISClusPartition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_VolumeLabel : Proc(ISClusPartition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -6909,7 +7029,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusPartition, lpVtbl : ISClusPartitionVtbl* do
+  record ISClusPartition, lpVtbl : ISClusPartitionVtable* do
     GUID = LibC::GUID.new(0xf2e60720_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPartition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6929,8 +7049,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusPartition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusPartition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusPartition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Flags(this : ISClusPartition*, plFlags : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Flags.call(this, plFlags)
@@ -6957,14 +7077,15 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusPartitionExVtbl,
+
+  record ISClusPartitionExVtable,
     query_interface : Proc(ISClusPartitionEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusPartitionEx*, UInt32),
     release : Proc(ISClusPartitionEx*, UInt32),
     get_type_info_count : Proc(ISClusPartitionEx*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusPartitionEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusPartitionEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusPartitionEx*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusPartitionEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Flags : Proc(ISClusPartitionEx*, Int32*, Win32cr::Foundation::HRESULT),
     get_DeviceName : Proc(ISClusPartitionEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_VolumeLabel : Proc(ISClusPartitionEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -6980,7 +7101,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusPartitionEx, lpVtbl : ISClusPartitionExVtbl* do
+  record ISClusPartitionEx, lpVtbl : ISClusPartitionExVtable* do
     GUID = LibC::GUID.new(0x8802d4fe_u32, 0xb32e_u16, 0x4ad1_u16, StaticArray[0x9d_u8, 0xbd_u8, 0x64_u8, 0xf1_u8, 0x8e_u8, 0x11_u8, 0x66_u8, 0xce_u8])
     def query_interface(this : ISClusPartitionEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7000,8 +7121,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusPartitionEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusPartitionEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusPartitionEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Flags(this : ISClusPartitionEx*, plFlags : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Flags.call(this, plFlags)
@@ -7043,21 +7164,22 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusPartitionsVtbl,
+
+  record ISClusPartitionsVtable,
     query_interface : Proc(ISClusPartitions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusPartitions*, UInt32),
     release : Proc(ISClusPartitions*, UInt32),
     get_type_info_count : Proc(ISClusPartitions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusPartitions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusPartitions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusPartitions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusPartitions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusPartitions*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusPartitions*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusPartitions*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusPartitions*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusPartitions, lpVtbl : ISClusPartitionsVtbl* do
+  record ISClusPartitions, lpVtbl : ISClusPartitionsVtable* do
     GUID = LibC::GUID.new(0xf2e60722_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusPartitions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7077,8 +7199,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusPartitions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusPartitions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusPartitions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusPartitions*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -7086,21 +7208,22 @@ module Win32cr::Networking::Clustering
     def get__NewEnum(this : ISClusPartitions*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
     end
-    def get_Item(this : ISClusPartitions*, varIndex : Win32cr::System::Com::VARIANT, ppPartition : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusPartitions*, varIndex : Win32cr::System::Variant::VARIANT, ppPartition : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppPartition)
     end
 
   end
 
   @[Extern]
-  record ISClusDiskVtbl,
+
+  record ISClusDiskVtable,
     query_interface : Proc(ISClusDisk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusDisk*, UInt32),
     release : Proc(ISClusDisk*, UInt32),
     get_type_info_count : Proc(ISClusDisk*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusDisk*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusDisk*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusDisk*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusDisk*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Signature : Proc(ISClusDisk*, Int32*, Win32cr::Foundation::HRESULT),
     get_ScsiAddress : Proc(ISClusDisk*, Void**, Win32cr::Foundation::HRESULT),
     get_DiskNumber : Proc(ISClusDisk*, Int32*, Win32cr::Foundation::HRESULT),
@@ -7108,7 +7231,7 @@ module Win32cr::Networking::Clustering
 
 
   @[Extern]
-  record ISClusDisk, lpVtbl : ISClusDiskVtbl* do
+  record ISClusDisk, lpVtbl : ISClusDiskVtable* do
     GUID = LibC::GUID.new(0xf2e60724_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusDisk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7128,8 +7251,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusDisk*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusDisk*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusDisk*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Signature(this : ISClusDisk*, plSignature : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Signature.call(this, plSignature)
@@ -7147,21 +7270,22 @@ module Win32cr::Networking::Clustering
   end
 
   @[Extern]
-  record ISClusDisksVtbl,
+
+  record ISClusDisksVtable,
     query_interface : Proc(ISClusDisks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusDisks*, UInt32),
     release : Proc(ISClusDisks*, UInt32),
     get_type_info_count : Proc(ISClusDisks*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusDisks*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusDisks*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusDisks*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusDisks*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusDisks*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusDisks*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusDisks*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    get_Item : Proc(ISClusDisks*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusDisks, lpVtbl : ISClusDisksVtbl* do
+  record ISClusDisks, lpVtbl : ISClusDisksVtable* do
     GUID = LibC::GUID.new(0xf2e60726_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusDisks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7181,8 +7305,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusDisks*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusDisks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusDisks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusDisks*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -7190,29 +7314,30 @@ module Win32cr::Networking::Clustering
     def get__NewEnum(this : ISClusDisks*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
     end
-    def get_Item(this : ISClusDisks*, varIndex : Win32cr::System::Com::VARIANT, ppDisk : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusDisks*, varIndex : Win32cr::System::Variant::VARIANT, ppDisk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppDisk)
     end
 
   end
 
   @[Extern]
-  record ISClusScsiAddressVtbl,
+
+  record ISClusScsiAddressVtable,
     query_interface : Proc(ISClusScsiAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusScsiAddress*, UInt32),
     release : Proc(ISClusScsiAddress*, UInt32),
     get_type_info_count : Proc(ISClusScsiAddress*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusScsiAddress*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusScsiAddress*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusScsiAddress*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_PortNumber : Proc(ISClusScsiAddress*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PathId : Proc(ISClusScsiAddress*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_TargetId : Proc(ISClusScsiAddress*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Lun : Proc(ISClusScsiAddress*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ISClusScsiAddress*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_PortNumber : Proc(ISClusScsiAddress*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PathId : Proc(ISClusScsiAddress*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_TargetId : Proc(ISClusScsiAddress*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Lun : Proc(ISClusScsiAddress*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusScsiAddress, lpVtbl : ISClusScsiAddressVtbl* do
+  record ISClusScsiAddress, lpVtbl : ISClusScsiAddressVtable* do
     GUID = LibC::GUID.new(0xf2e60728_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusScsiAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7232,43 +7357,44 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusScsiAddress*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusScsiAddress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusScsiAddress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_PortNumber(this : ISClusScsiAddress*, pvarPortNumber : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PortNumber(this : ISClusScsiAddress*, pvarPortNumber : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PortNumber.call(this, pvarPortNumber)
     end
-    def get_PathId(this : ISClusScsiAddress*, pvarPathId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PathId(this : ISClusScsiAddress*, pvarPathId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PathId.call(this, pvarPathId)
     end
-    def get_TargetId(this : ISClusScsiAddress*, pvarTargetId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_TargetId(this : ISClusScsiAddress*, pvarTargetId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TargetId.call(this, pvarTargetId)
     end
-    def get_Lun(this : ISClusScsiAddress*, pvarLun : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Lun(this : ISClusScsiAddress*, pvarLun : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Lun.call(this, pvarLun)
     end
 
   end
 
   @[Extern]
-  record ISClusRegistryKeysVtbl,
+
+  record ISClusRegistryKeysVtable,
     query_interface : Proc(ISClusRegistryKeys*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusRegistryKeys*, UInt32),
     release : Proc(ISClusRegistryKeys*, UInt32),
     get_type_info_count : Proc(ISClusRegistryKeys*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusRegistryKeys*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusRegistryKeys*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusRegistryKeys*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusRegistryKeys*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusRegistryKeys*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusRegistryKeys*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusRegistryKeys*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusRegistryKeys*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusRegistryKeys*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     add_item : Proc(ISClusRegistryKeys*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusRegistryKeys*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    remove_item : Proc(ISClusRegistryKeys*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusRegistryKeys, lpVtbl : ISClusRegistryKeysVtbl* do
+  record ISClusRegistryKeys, lpVtbl : ISClusRegistryKeysVtable* do
     GUID = LibC::GUID.new(0xf2e6072a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusRegistryKeys*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7288,8 +7414,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusRegistryKeys*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusRegistryKeys*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusRegistryKeys*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusRegistryKeys*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -7300,37 +7426,38 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusRegistryKeys*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusRegistryKeys*, varIndex : Win32cr::System::Com::VARIANT, pbstrRegistryKey : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusRegistryKeys*, varIndex : Win32cr::System::Variant::VARIANT, pbstrRegistryKey : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, pbstrRegistryKey)
     end
     def add_item(this : ISClusRegistryKeys*, bstrRegistryKey : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_item.call(this, bstrRegistryKey)
     end
-    def remove_item(this : ISClusRegistryKeys*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusRegistryKeys*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusCryptoKeysVtbl,
+
+  record ISClusCryptoKeysVtable,
     query_interface : Proc(ISClusCryptoKeys*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusCryptoKeys*, UInt32),
     release : Proc(ISClusCryptoKeys*, UInt32),
     get_type_info_count : Proc(ISClusCryptoKeys*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusCryptoKeys*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusCryptoKeys*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusCryptoKeys*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusCryptoKeys*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusCryptoKeys*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusCryptoKeys*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusCryptoKeys*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusCryptoKeys*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusCryptoKeys*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     add_item : Proc(ISClusCryptoKeys*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusCryptoKeys*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    remove_item : Proc(ISClusCryptoKeys*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusCryptoKeys, lpVtbl : ISClusCryptoKeysVtbl* do
+  record ISClusCryptoKeys, lpVtbl : ISClusCryptoKeysVtable* do
     GUID = LibC::GUID.new(0xf2e6072c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusCryptoKeys*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7350,8 +7477,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusCryptoKeys*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusCryptoKeys*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusCryptoKeys*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusCryptoKeys*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -7362,39 +7489,40 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusCryptoKeys*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusCryptoKeys*, varIndex : Win32cr::System::Com::VARIANT, pbstrCyrptoKey : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusCryptoKeys*, varIndex : Win32cr::System::Variant::VARIANT, pbstrCyrptoKey : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, pbstrCyrptoKey)
     end
     def add_item(this : ISClusCryptoKeys*, bstrCryptoKey : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_item.call(this, bstrCryptoKey)
     end
-    def remove_item(this : ISClusCryptoKeys*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusCryptoKeys*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
 
   end
 
   @[Extern]
-  record ISClusResDependentsVtbl,
+
+  record ISClusResDependentsVtable,
     query_interface : Proc(ISClusResDependents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISClusResDependents*, UInt32),
     release : Proc(ISClusResDependents*, UInt32),
     get_type_info_count : Proc(ISClusResDependents*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISClusResDependents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISClusResDependents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISClusResDependents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISClusResDependents*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISClusResDependents*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISClusResDependents*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(ISClusResDependents*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ISClusResDependents*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ISClusResDependents*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_item : Proc(ISClusResDependents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, Void**, Win32cr::Foundation::HRESULT),
-    delete_item : Proc(ISClusResDependents*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_item : Proc(ISClusResDependents*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     add_item : Proc(ISClusResDependents*, Void*, Win32cr::Foundation::HRESULT),
-    remove_item : Proc(ISClusResDependents*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    remove_item : Proc(ISClusResDependents*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISClusResDependents, lpVtbl : ISClusResDependentsVtbl* do
+  record ISClusResDependents, lpVtbl : ISClusResDependentsVtable* do
     GUID = LibC::GUID.new(0xf2e6072e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : ISClusResDependents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7414,8 +7542,8 @@ module Win32cr::Networking::Clustering
     def get_i_ds_of_names(this : ISClusResDependents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISClusResDependents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISClusResDependents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISClusResDependents*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, plCount)
@@ -7426,1845 +7554,2992 @@ module Win32cr::Networking::Clustering
     def refresh(this : ISClusResDependents*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh.call(this)
     end
-    def get_Item(this : ISClusResDependents*, varIndex : Win32cr::System::Com::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ISClusResDependents*, varIndex : Win32cr::System::Variant::VARIANT, ppClusResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, varIndex, ppClusResource)
     end
     def create_item(this : ISClusResDependents*, bstrResourceName : Win32cr::Foundation::BSTR, bstrResourceType : Win32cr::Foundation::BSTR, dwFlags : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_item.call(this, bstrResourceName, bstrResourceType, dwFlags, ppClusterResource)
     end
-    def delete_item(this : ISClusResDependents*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_item(this : ISClusResDependents*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_item.call(this, varIndex)
     end
     def add_item(this : ISClusResDependents*, pResource : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_item.call(this, pResource)
     end
-    def remove_item(this : ISClusResDependents*, varIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove_item(this : ISClusResDependents*, varIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_item.call(this, varIndex)
     end
 
   end
 
+  def clusapiSetReasonHandler(lpHandler : Win32cr::Networking::Clustering::CLUSAPI_REASON_HANDLER*) : Win32cr::Networking::Clustering::CLUSAPI_REASON_HANDLER*
+    {% if !flag?(:docs) %}
+    C.ClusapiSetReasonHandler(lpHandler)
+    {% end %}
+  end
+
   def getNodeClusterState(lpszNodeName : Win32cr::Foundation::PWSTR, pdwClusterState : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetNodeClusterState(lpszNodeName, pdwClusterState)
+    {% end %}
   end
 
-  def openCluster(lpszClusterName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def openCluster(lpszClusterName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.OpenCluster(lpszClusterName)
+    {% end %}
   end
 
-  def openClusterEx(lpszClusterName : Win32cr::Foundation::PWSTR, desired_access : UInt32, granted_access : UInt32*) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def openClusterEx(lpszClusterName : Win32cr::Foundation::PWSTR, desired_access : UInt32, granted_access : UInt32*) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.OpenClusterEx(lpszClusterName, desired_access, granted_access)
+    {% end %}
   end
 
-  def closeCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Foundation::BOOL
+  def closeCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseCluster(hCluster)
+    {% end %}
   end
 
-  def setClusterName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNewClusterName : Win32cr::Foundation::PWSTR) : UInt32
+  def setClusterName(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNewClusterName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterName(hCluster, lpszNewClusterName)
+    {% end %}
   end
 
-  def getClusterInformation(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterName : UInt16*, lpcchClusterName : UInt32*, lpClusterInfo : Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*) : UInt32
+  def setClusterNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNewClusterName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetClusterNameEx(hCluster, lpszNewClusterName, lpszReason)
+    {% end %}
+  end
+
+  def getClusterInformation(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszClusterName : Win32cr::Foundation::PWSTR, lpcchClusterName : UInt32*, lpClusterInfo : Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterInformation(hCluster, lpszClusterName, lpcchClusterName, lpClusterInfo)
+    {% end %}
   end
 
-  def getClusterQuorumResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : UInt16*, lpcchResourceName : UInt32*, lpszDeviceName : UInt16*, lpcchDeviceName : UInt32*, lpdwMaxQuorumLogSize : UInt32*) : UInt32
+  def getClusterQuorumResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceName : Win32cr::Foundation::PWSTR, lpcchResourceName : UInt32*, lpszDeviceName : Win32cr::Foundation::PWSTR, lpcchDeviceName : UInt32*, lpdwMaxQuorumLogSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterQuorumResource(hCluster, lpszResourceName, lpcchResourceName, lpszDeviceName, lpcchDeviceName, lpdwMaxQuorumLogSize)
+    {% end %}
   end
 
-  def setClusterQuorumResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuoLogSize : UInt32) : UInt32
+  def setClusterQuorumResource(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuoLogSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterQuorumResource(hResource, lpszDeviceName, dwMaxQuoLogSize)
+    {% end %}
   end
 
-  def backupClusterDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszPathName : Win32cr::Foundation::PWSTR) : UInt32
+  def setClusterQuorumResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuorumLogSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetClusterQuorumResourceEx(hResource, lpszDeviceName, dwMaxQuorumLogSize, lpszReason)
+    {% end %}
+  end
+
+  def backupClusterDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszPathName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.BackupClusterDatabase(hCluster, lpszPathName)
+    {% end %}
   end
 
   def restoreClusterDatabase(lpszPathName : Win32cr::Foundation::PWSTR, bForce : Win32cr::Foundation::BOOL, lpszQuorumDriveLetter : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RestoreClusterDatabase(lpszPathName, bForce, lpszQuorumDriveLetter)
+    {% end %}
   end
 
-  def setClusterNetworkPriorityOrder(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, network_count : UInt32, network_list : Win32cr::Networking::Clustering::HNETWORK_**) : UInt32
+  def setClusterNetworkPriorityOrder(hCluster : Win32cr::Networking::Clustering::HCLUSTER, network_count : UInt32, network_list : Win32cr::Networking::Clustering::HNETWORK*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterNetworkPriorityOrder(hCluster, network_count, network_list)
+    {% end %}
   end
 
   def setClusterServiceAccountPassword(lpszClusterName : Win32cr::Foundation::PWSTR, lpszNewPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpReturnStatusBuffer : Win32cr::Networking::Clustering::CLUSTER_SET_PASSWORD_STATUS*, lpcbReturnStatusBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterServiceAccountPassword(lpszClusterName, lpszNewPassword, dwFlags, lpReturnStatusBuffer, lpcbReturnStatusBufferSize)
+    {% end %}
   end
 
-  def clusterControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterControl(hCluster, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def clusterUpgradeFunctionalLevel(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, perform : Win32cr::Foundation::BOOL, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+  def clusterControlEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterControlEx(hCluster, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def clusterUpgradeFunctionalLevel(hCluster : Win32cr::Networking::Clustering::HCLUSTER, perform : Win32cr::Foundation::BOOL, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterUpgradeFunctionalLevel(hCluster, perform, pfnProgressCallback, pvCallbackArg)
+    {% end %}
   end
 
-  def createClusterNotifyPortV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, filters : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, dwFilterCount : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
+  def createClusterNotifyPortV2(hChange : Win32cr::Networking::Clustering::HCHANGE, hCluster : Win32cr::Networking::Clustering::HCLUSTER, filters : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, dwFilterCount : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE
+    {% if !flag?(:docs) %}
     C.CreateClusterNotifyPortV2(hChange, hCluster, filters, dwFilterCount, dwNotifyKey)
+    {% end %}
   end
 
-  def registerClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, filter : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+  def registerClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE, filter : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterClusterNotifyV2(hChange, filter, hObject, dwNotifyKey)
+    {% end %}
   end
 
-  def getNotifyEventHandle(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lphTargetEvent : Win32cr::Foundation::HANDLE*) : UInt32
+  def getNotifyEventHandle(hChange : Win32cr::Networking::Clustering::HCHANGE, lphTargetEvent : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetNotifyEventHandle(hChange, lphTargetEvent)
+    {% end %}
   end
 
-  def getClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, pFilterAndType : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, buffer : UInt8*, lpbBufferSize : UInt32*, lpszObjectId : UInt16*, lpcchObjectId : UInt32*, lpszParentId : UInt16*, lpcchParentId : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, lpszType : UInt16*, lpcchType : UInt32*, dwMilliseconds : UInt32) : UInt32
+  def getClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE, lpdwNotifyKey : LibC::UIntPtrT*, pFilterAndType : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, buffer : UInt8*, lpbBufferSize : UInt32*, lpszObjectId : Win32cr::Foundation::PWSTR, lpcchObjectId : UInt32*, lpszParentId : Win32cr::Foundation::PWSTR, lpcchParentId : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, lpszType : Win32cr::Foundation::PWSTR, lpcchType : UInt32*, dwMilliseconds : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterNotifyV2(hChange, lpdwNotifyKey, pFilterAndType, buffer, lpbBufferSize, lpszObjectId, lpcchObjectId, lpszParentId, lpcchParentId, lpszName, lpcchName, lpszType, lpcchType, dwMilliseconds)
+    {% end %}
   end
 
-  def createClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwFilter : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
+  def createClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE, hCluster : Win32cr::Networking::Clustering::HCLUSTER, dwFilter : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE
+    {% if !flag?(:docs) %}
     C.CreateClusterNotifyPort(hChange, hCluster, dwFilter, dwNotifyKey)
+    {% end %}
   end
 
-  def registerClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, dwFilterType : UInt32, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+  def registerClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE, dwFilterType : UInt32, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterClusterNotify(hChange, dwFilterType, hObject, dwNotifyKey)
+    {% end %}
   end
 
-  def getClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, lpdwFilterType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, dwMilliseconds : UInt32) : UInt32
+  def getClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE, lpdwNotifyKey : LibC::UIntPtrT*, lpdwFilterType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, dwMilliseconds : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterNotify(hChange, lpdwNotifyKey, lpdwFilterType, lpszName, lpcchName, dwMilliseconds)
+    {% end %}
   end
 
-  def closeClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*) : Win32cr::Foundation::BOOL
+  def closeClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseClusterNotifyPort(hChange)
+    {% end %}
   end
 
-  def clusterOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32) : Win32cr::Networking::Clustering::HCLUSENUM_*
+  def clusterOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, dwType : UInt32) : Win32cr::Networking::Clustering::HCLUSENUM
+    {% if !flag?(:docs) %}
     C.ClusterOpenEnum(hCluster, dwType)
+    {% end %}
   end
 
-  def clusterGetEnumCount(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
+  def clusterGetEnumCount(hEnum : Win32cr::Networking::Clustering::HCLUSENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGetEnumCount(hEnum)
+    {% end %}
   end
 
-  def clusterEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterEnum(hEnum, dwIndex, lpdwType, lpszName, lpcchName)
+    {% end %}
   end
 
-  def clusterCloseEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
+  def clusterCloseEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterCloseEnum(hEnum)
+    {% end %}
   end
 
-  def clusterOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HCLUSENUMEX_*
+  def clusterOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HCLUSENUMEX
+    {% if !flag?(:docs) %}
     C.ClusterOpenEnumEx(hCluster, dwType, pOptions)
+    {% end %}
   end
 
-  def clusterGetEnumCountEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
+  def clusterGetEnumCountEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGetEnumCountEx(hClusterEnum)
+    {% end %}
   end
 
-  def clusterEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+  def clusterEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterEnumEx(hClusterEnum, dwIndex, pItem, cbItem)
+    {% end %}
   end
 
-  def clusterCloseEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
+  def clusterCloseEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterCloseEnumEx(hClusterEnum)
+    {% end %}
   end
 
-  def createClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, groupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
+  def createClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER, groupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET
+    {% if !flag?(:docs) %}
     C.CreateClusterGroupSet(hCluster, groupSetName)
+    {% end %}
   end
 
-  def openClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
+  def openClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET
+    {% if !flag?(:docs) %}
     C.OpenClusterGroupSet(hCluster, lpszGroupSetName)
+    {% end %}
   end
 
-  def closeClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : Win32cr::Foundation::BOOL
+  def closeClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseClusterGroupSet(hGroupSet)
+    {% end %}
   end
 
-  def deleteClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+  def deleteClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteClusterGroupSet(hGroupSet)
+    {% end %}
   end
 
-  def clusterAddGroupToGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def deleteClusterGroupSetEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.DeleteClusterGroupSetEx(hGroupSet, lpszReason)
+    {% end %}
+  end
+
+  def clusterAddGroupToGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterAddGroupToGroupSet(hGroupSet, hGroup)
+    {% end %}
   end
 
-  def clusterAddGroupToGroupSetWithDomains(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, faultDomain : UInt32, updateDomain : UInt32) : UInt32
+  def clusterAddGroupToGroupSetWithDomains(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hGroup : Win32cr::Networking::Clustering::HGROUP, faultDomain : UInt32, updateDomain : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterAddGroupToGroupSetWithDomains(hGroupSet, hGroup, faultDomain, updateDomain)
+    {% end %}
   end
 
-  def clusterRemoveGroupFromGroupSet(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def clusterAddGroupToGroupSetWithDomainsEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hGroup : Win32cr::Networking::Clustering::HGROUP, faultDomain : UInt32, updateDomain : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet, hGroup, faultDomain, updateDomain, lpszReason)
+    {% end %}
+  end
+
+  def clusterRemoveGroupFromGroupSet(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterRemoveGroupFromGroupSet(hGroup)
+    {% end %}
   end
 
-  def clusterGroupSetControl(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterRemoveGroupFromGroupSetEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterRemoveGroupFromGroupSetEx(hGroup, lpszReason)
+    {% end %}
+  end
+
+  def clusterGroupSetControl(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupSetControl(hGroupSet, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def addClusterGroupDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def clusterGroupSetControlEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterGroupSetControlEx(hGroupSet, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def addClusterGroupDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.AddClusterGroupDependency(hDependentGroup, hProviderGroup)
+    {% end %}
   end
 
-  def setGroupDependencyExpression(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+  def addClusterGroupDependencyEx(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.AddClusterGroupDependencyEx(hDependentGroup, hProviderGroup, lpszReason)
+    {% end %}
+  end
+
+  def setGroupDependencyExpression(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetGroupDependencyExpression(hGroup, lpszDependencyExpression)
+    {% end %}
   end
 
-  def removeClusterGroupDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def setGroupDependencyExpressionEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszDependencyExpression : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetGroupDependencyExpressionEx(hGroup, lpszDependencyExpression, lpszReason)
+    {% end %}
+  end
+
+  def removeClusterGroupDependency(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveClusterGroupDependency(hGroup, hDependsOn)
+    {% end %}
   end
 
-  def addClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+  def removeClusterGroupDependencyEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.RemoveClusterGroupDependencyEx(hGroup, hDependsOn, lpszReason)
+    {% end %}
+  end
+
+  def addClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
+    {% if !flag?(:docs) %}
     C.AddClusterGroupSetDependency(hDependentGroupSet, hProviderGroupSet)
+    {% end %}
   end
 
-  def setClusterGroupSetDependencyExpression(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpszDependencyExprssion : Win32cr::Foundation::PWSTR) : UInt32
+  def addClusterGroupSetDependencyEx(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.AddClusterGroupSetDependencyEx(hDependentGroupSet, hProviderGroupSet, lpszReason)
+    {% end %}
+  end
+
+  def setClusterGroupSetDependencyExpression(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszDependencyExprssion : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterGroupSetDependencyExpression(hGroupSet, lpszDependencyExprssion)
+    {% end %}
   end
 
-  def removeClusterGroupSetDependency(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+  def setClusterGroupSetDependencyExpressionEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszDependencyExpression : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetClusterGroupSetDependencyExpressionEx(hGroupSet, lpszDependencyExpression, lpszReason)
+    {% end %}
+  end
+
+  def removeClusterGroupSetDependency(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveClusterGroupSetDependency(hGroupSet, hDependsOn)
+    {% end %}
   end
 
-  def addClusterGroupToGroupSetDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+  def removeClusterGroupSetDependencyEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.RemoveClusterGroupSetDependencyEx(hGroupSet, hDependsOn, lpszReason)
+    {% end %}
+  end
+
+  def addClusterGroupToGroupSetDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
+    {% if !flag?(:docs) %}
     C.AddClusterGroupToGroupSetDependency(hDependentGroup, hProviderGroupSet)
+    {% end %}
   end
 
-  def removeClusterGroupToGroupSetDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+  def addClusterGroupToGroupSetDependencyEx(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.AddClusterGroupToGroupSetDependencyEx(hDependentGroup, hProviderGroupSet, lpszReason)
+    {% end %}
+  end
+
+  def removeClusterGroupToGroupSetDependency(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveClusterGroupToGroupSetDependency(hGroup, hDependsOn)
+    {% end %}
   end
 
-  def clusterGroupSetOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUPSETENUM_*
+  def removeClusterGroupToGroupSetDependencyEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.RemoveClusterGroupToGroupSetDependencyEx(hGroup, hDependsOn, lpszReason)
+    {% end %}
+  end
+
+  def clusterGroupSetOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER) : Win32cr::Networking::Clustering::HGROUPSETENUM
+    {% if !flag?(:docs) %}
     C.ClusterGroupSetOpenEnum(hCluster)
+    {% end %}
   end
 
-  def clusterGroupSetGetEnumCount(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
+  def clusterGroupSetGetEnumCount(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupSetGetEnumCount(hGroupSetEnum)
+    {% end %}
   end
 
-  def clusterGroupSetEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterGroupSetEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM, dwIndex : UInt32, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupSetEnum(hGroupSetEnum, dwIndex, lpszName, lpcchName)
+    {% end %}
   end
 
-  def clusterGroupSetCloseEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
+  def clusterGroupSetCloseEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupSetCloseEnum(hGroupSetEnum)
+    {% end %}
   end
 
-  def addCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+  def addCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddCrossClusterGroupSetDependency(hDependentGroupSet, lpRemoteClusterName, lpRemoteGroupSetName)
+    {% end %}
   end
 
-  def removeCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+  def removeCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveCrossClusterGroupSetDependency(hDependentGroupSet, lpRemoteClusterName, lpRemoteGroupSetName)
+    {% end %}
   end
 
-  def createClusterAvailabilitySet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpAvailabilitySetName : Win32cr::Foundation::PWSTR, pAvailabilitySetConfig : Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*) : Win32cr::Networking::Clustering::HGROUPSET_*
+  def createClusterAvailabilitySet(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpAvailabilitySetName : Win32cr::Foundation::PWSTR, pAvailabilitySetConfig : Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*) : Win32cr::Networking::Clustering::HGROUPSET
+    {% if !flag?(:docs) %}
     C.CreateClusterAvailabilitySet(hCluster, lpAvailabilitySetName, pAvailabilitySetConfig)
+    {% end %}
   end
 
-  def clusterNodeReplacement(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeNameCurrent : Win32cr::Foundation::PWSTR, lpszNodeNameNew : Win32cr::Foundation::PWSTR) : UInt32
+  def clusterNodeReplacement(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeNameCurrent : Win32cr::Foundation::PWSTR, lpszNodeNameNew : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeReplacement(hCluster, lpszNodeNameCurrent, lpszNodeNameNew)
+    {% end %}
   end
 
-  def clusterCreateAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, ruleType : Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE) : UInt32
+  def clusterCreateAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR, ruleType : Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterCreateAffinityRule(hCluster, ruleName, ruleType)
+    {% end %}
   end
 
-  def clusterRemoveAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR) : UInt32
+  def clusterRemoveAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterRemoveAffinityRule(hCluster, ruleName)
+    {% end %}
   end
 
-  def clusterAddGroupToAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def clusterAddGroupToAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterAddGroupToAffinityRule(hCluster, ruleName, hGroup)
+    {% end %}
   end
 
-  def clusterRemoveGroupFromAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def clusterRemoveGroupFromAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterRemoveGroupFromAffinityRule(hCluster, ruleName, hGroup)
+    {% end %}
   end
 
-  def clusterAffinityRuleControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, affinityRuleName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterAffinityRuleControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER, affinityRuleName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterAffinityRuleControl(hCluster, affinityRuleName, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def openClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNODE_*
+  def openClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNODE
+    {% if !flag?(:docs) %}
     C.OpenClusterNode(hCluster, lpszNodeName)
+    {% end %}
   end
 
-  def openClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNODE_*
+  def openClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNODE
+    {% if !flag?(:docs) %}
     C.OpenClusterNodeEx(hCluster, lpszNodeName, dwDesiredAccess, lpdwGrantedAccess)
+    {% end %}
   end
 
-  def openClusterNodeById(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, nodeId : UInt32) : Win32cr::Networking::Clustering::HNODE_*
+  def openClusterNodeById(hCluster : Win32cr::Networking::Clustering::HCLUSTER, nodeId : UInt32) : Win32cr::Networking::Clustering::HNODE
+    {% if !flag?(:docs) %}
     C.OpenClusterNodeById(hCluster, nodeId)
+    {% end %}
   end
 
-  def closeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Foundation::BOOL
+  def closeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseClusterNode(hNode)
+    {% end %}
   end
 
-  def getClusterNodeState(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::CLUSTER_NODE_STATE
+  def getClusterNodeState(hNode : Win32cr::Networking::Clustering::HNODE) : Win32cr::Networking::Clustering::CLUSTER_NODE_STATE
+    {% if !flag?(:docs) %}
     C.GetClusterNodeState(hNode)
+    {% end %}
   end
 
-  def getClusterNodeId(hNode : Win32cr::Networking::Clustering::HNODE_*, lpszNodeId : UInt16*, lpcchName : UInt32*) : UInt32
+  def getClusterNodeId(hNode : Win32cr::Networking::Clustering::HNODE, lpszNodeId : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterNodeId(hNode, lpszNodeId, lpcchName)
+    {% end %}
   end
 
-  def getClusterFromNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def getClusterFromNode(hNode : Win32cr::Networking::Clustering::HNODE) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.GetClusterFromNode(hNode)
+    {% end %}
   end
 
-  def pauseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def pauseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.PauseClusterNode(hNode)
+    {% end %}
   end
 
-  def resumeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def resumeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.ResumeClusterNode(hNode)
+    {% end %}
   end
 
-  def evictClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def evictClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.EvictClusterNode(hNode)
+    {% end %}
   end
 
-  def clusterNetInterfaceOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*
+  def clusterNetInterfaceOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACEENUM
+    {% if !flag?(:docs) %}
     C.ClusterNetInterfaceOpenEnum(hCluster, lpszNodeName, lpszNetworkName)
+    {% end %}
   end
 
-  def clusterNetInterfaceEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterNetInterfaceEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM, dwIndex : UInt32, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNetInterfaceEnum(hNetInterfaceEnum, dwIndex, lpszName, lpcchName)
+    {% end %}
   end
 
-  def clusterNetInterfaceCloseEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*) : UInt32
+  def clusterNetInterfaceCloseEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNetInterfaceCloseEnum(hNetInterfaceEnum)
+    {% end %}
   end
 
-  def clusterNodeOpenEnum(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNODEENUM_*
+  def clusterNodeOpenEnum(hNode : Win32cr::Networking::Clustering::HNODE, dwType : UInt32) : Win32cr::Networking::Clustering::HNODEENUM
+    {% if !flag?(:docs) %}
     C.ClusterNodeOpenEnum(hNode, dwType)
+    {% end %}
   end
 
-  def clusterNodeOpenEnumEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HNODEENUMEX_*
+  def clusterNodeOpenEnumEx(hNode : Win32cr::Networking::Clustering::HNODE, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HNODEENUMEX
+    {% if !flag?(:docs) %}
     C.ClusterNodeOpenEnumEx(hNode, dwType, pOptions)
+    {% end %}
   end
 
-  def clusterNodeGetEnumCountEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
+  def clusterNodeGetEnumCountEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeGetEnumCountEx(hNodeEnum)
+    {% end %}
   end
 
-  def clusterNodeEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+  def clusterNodeEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeEnumEx(hNodeEnum, dwIndex, pItem, cbItem)
+    {% end %}
   end
 
-  def clusterNodeCloseEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
+  def clusterNodeCloseEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeCloseEnumEx(hNodeEnum)
+    {% end %}
   end
 
-  def clusterNodeGetEnumCount(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
+  def clusterNodeGetEnumCount(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeGetEnumCount(hNodeEnum)
+    {% end %}
   end
 
-  def clusterNodeCloseEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
+  def clusterNodeCloseEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeCloseEnum(hNodeEnum)
+    {% end %}
   end
 
-  def clusterNodeEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterNodeEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeEnum(hNodeEnum, dwIndex, lpdwType, lpszName, lpcchName)
+    {% end %}
   end
 
-  def evictClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwTimeOut : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*) : UInt32
+  def evictClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE, dwTimeOut : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*) : UInt32
+    {% if !flag?(:docs) %}
     C.EvictClusterNodeEx(hNode, dwTimeOut, phrCleanupStatus)
+    {% end %}
   end
 
-  def getClusterResourceTypeKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszTypeName : Win32cr::Foundation::PWSTR, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+  def evictClusterNodeEx2(hNode : Win32cr::Networking::Clustering::HNODE, dwTimeout : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.EvictClusterNodeEx2(hNode, dwTimeout, phrCleanupStatus, lpszReason)
+    {% end %}
+  end
+
+  def getClusterResourceTypeKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszTypeName : Win32cr::Foundation::PWSTR, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    {% if !flag?(:docs) %}
     C.GetClusterResourceTypeKey(hCluster, lpszTypeName, samDesired)
+    {% end %}
   end
 
-  def createClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
+  def createClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP
+    {% if !flag?(:docs) %}
     C.CreateClusterGroup(hCluster, lpszGroupName)
+    {% end %}
   end
 
-  def openClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
+  def openClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP
+    {% if !flag?(:docs) %}
     C.OpenClusterGroup(hCluster, lpszGroupName)
+    {% end %}
   end
 
-  def openClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HGROUP_*
+  def openClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HGROUP
+    {% if !flag?(:docs) %}
     C.OpenClusterGroupEx(hCluster, lpszGroupName, dwDesiredAccess, lpdwGrantedAccess)
+    {% end %}
   end
 
-  def pauseClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def pauseClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.PauseClusterNodeEx(hNode, bDrainNode, dwPauseFlags, hNodeDrainTarget)
+    {% end %}
   end
 
-  def resumeClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32) : UInt32
+  def pauseClusterNodeEx2(hNode : Win32cr::Networking::Clustering::HNODE, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.PauseClusterNodeEx2(hNode, bDrainNode, dwPauseFlags, hNodeDrainTarget, lpszReason)
+    {% end %}
+  end
+
+  def resumeClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResumeClusterNodeEx(hNode, eResumeFailbackType, dwResumeFlagsReserved)
+    {% end %}
   end
 
-  def createClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, pGroupInfo : Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*) : Win32cr::Networking::Clustering::HGROUP_*
+  def resumeClusterNodeEx2(hNode : Win32cr::Networking::Clustering::HNODE, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ResumeClusterNodeEx2(hNode, eResumeFailbackType, dwResumeFlagsReserved, lpszReason)
+    {% end %}
+  end
+
+  def createClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR, pGroupInfo : Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*) : Win32cr::Networking::Clustering::HGROUP
+    {% if !flag?(:docs) %}
     C.CreateClusterGroupEx(hCluster, lpszGroupName, pGroupInfo)
+    {% end %}
   end
 
-  def clusterGroupOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HGROUPENUMEX_*
+  def clusterGroupOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HGROUPENUMEX
+    {% if !flag?(:docs) %}
     C.ClusterGroupOpenEnumEx(hCluster, lpszProperties, cbProperties, lpszRoProperties, cbRoProperties, dwFlags)
+    {% end %}
   end
 
-  def clusterGroupGetEnumCountEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
+  def clusterGroupGetEnumCountEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupGetEnumCountEx(hGroupEnumEx)
+    {% end %}
   end
 
-  def clusterGroupEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+  def clusterGroupEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupEnumEx(hGroupEnumEx, dwIndex, pItem, cbItem)
+    {% end %}
   end
 
-  def clusterGroupCloseEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
+  def clusterGroupCloseEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupCloseEnumEx(hGroupEnumEx)
+    {% end %}
   end
 
-  def clusterResourceOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESENUMEX_*
+  def clusterResourceOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESENUMEX
+    {% if !flag?(:docs) %}
     C.ClusterResourceOpenEnumEx(hCluster, lpszProperties, cbProperties, lpszRoProperties, cbRoProperties, dwFlags)
+    {% end %}
   end
 
-  def clusterResourceGetEnumCountEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
+  def clusterResourceGetEnumCountEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceGetEnumCountEx(hResourceEnumEx)
+    {% end %}
   end
 
-  def clusterResourceEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+  def clusterResourceEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceEnumEx(hResourceEnumEx, dwIndex, pItem, cbItem)
+    {% end %}
   end
 
-  def clusterResourceCloseEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
+  def clusterResourceCloseEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceCloseEnumEx(hResourceEnumEx)
+    {% end %}
   end
 
-  def onlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+  def onlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.OnlineClusterGroupEx(hGroup, hDestinationNode, dwOnlineFlags, lpInBuffer, cbInBufferSize)
+    {% end %}
   end
 
-  def offlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+  def offlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.OfflineClusterGroupEx(hGroup, dwOfflineFlags, lpInBuffer, cbInBufferSize)
+    {% end %}
   end
 
-  def onlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+  def onlineClusterGroupEx2(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.OnlineClusterGroupEx2(hGroup, hDestinationNode, dwOnlineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+    {% end %}
+  end
+
+  def offlineClusterGroupEx2(hGroup : Win32cr::Networking::Clustering::HGROUP, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.OfflineClusterGroupEx2(hGroup, dwOfflineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+    {% end %}
+  end
+
+  def onlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.OnlineClusterResourceEx(hResource, dwOnlineFlags, lpInBuffer, cbInBufferSize)
+    {% end %}
   end
 
-  def offlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+  def onlineClusterResourceEx2(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.OnlineClusterResourceEx2(hResource, dwOnlineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+    {% end %}
+  end
+
+  def offlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.OfflineClusterResourceEx(hResource, dwOfflineFlags, lpInBuffer, cbInBufferSize)
+    {% end %}
   end
 
-  def moveClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+  def offlineClusterResourceEx2(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.OfflineClusterResourceEx2(hResource, dwOfflineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+    {% end %}
+  end
+
+  def moveClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MoveClusterGroupEx(hGroup, hDestinationNode, dwMoveFlags, lpInBuffer, cbInBufferSize)
+    {% end %}
   end
 
-  def cancelClusterGroupOperation(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwCancelFlags_RESERVED : UInt32) : UInt32
+  def moveClusterGroupEx2(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.MoveClusterGroupEx2(hGroup, hDestinationNode, dwMoveFlags, lpInBuffer, cbInBufferSize, lpszReason)
+    {% end %}
+  end
+
+  def cancelClusterGroupOperation(hGroup : Win32cr::Networking::Clustering::HGROUP, dwCancelFlags_RESERVED : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CancelClusterGroupOperation(hGroup, dwCancelFlags_RESERVED)
+    {% end %}
   end
 
-  def restartClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwFlags : UInt32) : UInt32
+  def restartClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RestartClusterResource(hResource, dwFlags)
+    {% end %}
   end
 
-  def closeClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Foundation::BOOL
+  def restartClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwFlags : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.RestartClusterResourceEx(hResource, dwFlags, lpszReason)
+    {% end %}
+  end
+
+  def closeClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseClusterGroup(hGroup)
+    {% end %}
   end
 
-  def getClusterFromGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def getClusterFromGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.GetClusterFromGroup(hGroup)
+    {% end %}
   end
 
-  def getClusterGroupState(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE
+  def getClusterGroupState(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszNodeName : Win32cr::Foundation::PWSTR, lpcchNodeName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE
+    {% if !flag?(:docs) %}
     C.GetClusterGroupState(hGroup, lpszNodeName, lpcchNodeName)
+    {% end %}
   end
 
-  def setClusterGroupName(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszGroupName : Win32cr::Foundation::PWSTR) : UInt32
+  def setClusterGroupName(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszGroupName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterGroupName(hGroup, lpszGroupName)
+    {% end %}
   end
 
-  def setClusterGroupNodeList(hGroup : Win32cr::Networking::Clustering::HGROUP_*, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE_**) : UInt32
+  def setClusterGroupNodeList(hGroup : Win32cr::Networking::Clustering::HGROUP, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterGroupNodeList(hGroup, node_count, node_list)
+    {% end %}
   end
 
-  def onlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def setClusterGroupNameEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszGroupName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetClusterGroupNameEx(hGroup, lpszGroupName, lpszReason)
+    {% end %}
+  end
+
+  def setClusterGroupNodeListEx(hGroup : Win32cr::Networking::Clustering::HGROUP, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetClusterGroupNodeListEx(hGroup, node_count, node_list, lpszReason)
+    {% end %}
+  end
+
+  def onlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.OnlineClusterGroup(hGroup, hDestinationNode)
+    {% end %}
   end
 
-  def moveClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def moveClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.MoveClusterGroup(hGroup, hDestinationNode)
+    {% end %}
   end
 
-  def offlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def offlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.OfflineClusterGroup(hGroup)
+    {% end %}
   end
 
-  def deleteClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def deleteClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteClusterGroup(hGroup)
+    {% end %}
   end
 
-  def destroyClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def destroyClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.DestroyClusterGroup(hGroup)
+    {% end %}
   end
 
-  def clusterGroupOpenEnum(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwType : UInt32) : Win32cr::Networking::Clustering::HGROUPENUM_*
+  def deleteClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.DeleteClusterGroupEx(hGroup, lpszReason)
+    {% end %}
+  end
+
+  def destroyClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.DestroyClusterGroupEx(hGroup, lpszReason)
+    {% end %}
+  end
+
+  def clusterGroupOpenEnum(hGroup : Win32cr::Networking::Clustering::HGROUP, dwType : UInt32) : Win32cr::Networking::Clustering::HGROUPENUM
+    {% if !flag?(:docs) %}
     C.ClusterGroupOpenEnum(hGroup, dwType)
+    {% end %}
   end
 
-  def clusterGroupGetEnumCount(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
+  def clusterGroupGetEnumCount(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupGetEnumCount(hGroupEnum)
+    {% end %}
   end
 
-  def clusterGroupEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszResourceName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterGroupEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszResourceName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupEnum(hGroupEnum, dwIndex, lpdwType, lpszResourceName, lpcchName)
+    {% end %}
   end
 
-  def clusterGroupCloseEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
+  def clusterGroupCloseEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupCloseEnum(hGroupEnum)
+    {% end %}
   end
 
-  def createClusterResource(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def createClusterResource(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.CreateClusterResource(hGroup, lpszResourceName, lpszResourceType, dwFlags)
+    {% end %}
   end
 
-  def openClusterResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def createClusterResourceEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
+    C.CreateClusterResourceEx(hGroup, lpszResourceName, lpszResourceType, dwFlags, lpszReason)
+    {% end %}
+  end
+
+  def openClusterResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.OpenClusterResource(hCluster, lpszResourceName)
+    {% end %}
   end
 
-  def openClusterResourceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def openClusterResourceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.OpenClusterResourceEx(hCluster, lpszResourceName, dwDesiredAccess, lpdwGrantedAccess)
+    {% end %}
   end
 
-  def closeClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+  def closeClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseClusterResource(hResource)
+    {% end %}
   end
 
-  def getClusterFromResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def getClusterFromResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.GetClusterFromResource(hResource)
+    {% end %}
   end
 
-  def deleteClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def deleteClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteClusterResource(hResource)
+    {% end %}
   end
 
-  def getClusterResourceState(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*, lpszGroupName : UInt16*, lpcchGroupName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+  def deleteClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.DeleteClusterResourceEx(hResource, lpszReason)
+    {% end %}
+  end
+
+  def getClusterResourceState(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszNodeName : Win32cr::Foundation::PWSTR, lpcchNodeName : UInt32*, lpszGroupName : Win32cr::Foundation::PWSTR, lpcchGroupName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    {% if !flag?(:docs) %}
     C.GetClusterResourceState(hResource, lpszNodeName, lpcchNodeName, lpszGroupName, lpcchGroupName)
+    {% end %}
   end
 
-  def setClusterResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResourceName : Win32cr::Foundation::PWSTR) : UInt32
+  def setClusterResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszResourceName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterResourceName(hResource, lpszResourceName)
+    {% end %}
   end
 
-  def failClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def setClusterResourceNameEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszResourceName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetClusterResourceNameEx(hResource, lpszResourceName, lpszReason)
+    {% end %}
+  end
+
+  def failClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.FailClusterResource(hResource)
+    {% end %}
   end
 
-  def onlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def failClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.FailClusterResourceEx(hResource, lpszReason)
+    {% end %}
+  end
+
+  def onlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.OnlineClusterResource(hResource)
+    {% end %}
   end
 
-  def offlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def offlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.OfflineClusterResource(hResource)
+    {% end %}
   end
 
-  def changeClusterResourceGroup(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+  def changeClusterResourceGroup(hResource : Win32cr::Networking::Clustering::HRESOURCE, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+    {% if !flag?(:docs) %}
     C.ChangeClusterResourceGroup(hResource, hGroup)
+    {% end %}
   end
 
-  def changeClusterResourceGroupEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, flags : UInt64) : UInt32
+  def changeClusterResourceGroupEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hGroup : Win32cr::Networking::Clustering::HGROUP, flags : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.ChangeClusterResourceGroupEx(hResource, hGroup, flags)
+    {% end %}
   end
 
-  def addClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def changeClusterResourceGroupEx2(hResource : Win32cr::Networking::Clustering::HRESOURCE, hGroup : Win32cr::Networking::Clustering::HGROUP, flags : UInt64, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ChangeClusterResourceGroupEx2(hResource, hGroup, flags, lpszReason)
+    {% end %}
+  end
+
+  def addClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.AddClusterResourceNode(hResource, hNode)
+    {% end %}
   end
 
-  def removeClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+  def removeClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveClusterResourceNode(hResource, hNode)
+    {% end %}
   end
 
-  def addClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def addClusterResourceNodeEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.AddClusterResourceNodeEx(hResource, hNode, lpszReason)
+    {% end %}
+  end
+
+  def removeClusterResourceNodeEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.RemoveClusterResourceNodeEx(hResource, hNode, lpszReason)
+    {% end %}
+  end
+
+  def addClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.AddClusterResourceDependency(hResource, hDependsOn)
+    {% end %}
   end
 
-  def removeClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def removeClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveClusterResourceDependency(hResource, hDependsOn)
+    {% end %}
   end
 
-  def setClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+  def addClusterResourceDependencyEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.AddClusterResourceDependencyEx(hResource, hDependsOn, lpszReason)
+    {% end %}
+  end
+
+  def removeClusterResourceDependencyEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.RemoveClusterResourceDependencyEx(hResource, hDependsOn, lpszReason)
+    {% end %}
+  end
+
+  def setClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterResourceDependencyExpression(hResource, lpszDependencyExpression)
+    {% end %}
   end
 
-  def getClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : UInt16*, lpcchDependencyExpression : UInt32*) : UInt32
+  def getClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDependencyExpression : Win32cr::Foundation::PWSTR, lpcchDependencyExpression : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterResourceDependencyExpression(hResource, lpszDependencyExpression, lpcchDependencyExpression)
+    {% end %}
   end
 
-  def addResourceToClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def addResourceToClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.AddResourceToClusterSharedVolumes(hResource)
+    {% end %}
   end
 
-  def removeResourceFromClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+  def removeResourceFromClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveResourceFromClusterSharedVolumes(hResource)
+    {% end %}
   end
 
   def isFileOnClusterSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR, pbFileIsOnSharedVolume : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.IsFileOnClusterSharedVolume(lpszPathName, pbFileIsOnSharedVolume)
+    {% end %}
   end
 
   def clusterSharedVolumeSetSnapshotState(guidSnapshotSet : LibC::GUID, lpszVolumeName : Win32cr::Foundation::PWSTR, state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterSharedVolumeSetSnapshotState(guidSnapshotSet, lpszVolumeName, state)
+    {% end %}
   end
 
-  def canResourceBeDependent(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hResourceDependent : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+  def canResourceBeDependent(hResource : Win32cr::Networking::Clustering::HRESOURCE, hResourceDependent : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CanResourceBeDependent(hResource, hResourceDependent)
+    {% end %}
   end
 
-  def clusterResourceControl(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterResourceControl(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceControl(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def clusterResourceControlAsUser(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterResourceControlAsUser(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceControlAsUser(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def clusterResourceTypeControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterResourceTypeControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceTypeControl(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def clusterResourceTypeControlAsUser(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterResourceTypeControlAsUser(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceTypeControlAsUser(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def clusterGroupControl(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterGroupControl(hGroup : Win32cr::Networking::Clustering::HGROUP, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterGroupControl(hGroup, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def clusterNodeControl(hNode : Win32cr::Networking::Clustering::HNODE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterResourceControlEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterResourceControlEx(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def clusterResourceControlAsUserEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterResourceControlAsUserEx(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def clusterResourceTypeControlEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterResourceTypeControlEx(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def clusterResourceTypeControlAsUserEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterResourceTypeControlAsUserEx(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def clusterGroupControlEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterGroupControlEx(hGroup, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def clusterNodeControl(hNode : Win32cr::Networking::Clustering::HNODE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNodeControl(hNode, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def getClusterResourceNetworkName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+  def clusterNodeControlEx(hNode : Win32cr::Networking::Clustering::HNODE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterNodeControlEx(hNode, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def getClusterResourceNetworkName(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetClusterResourceNetworkName(hResource, lpBuffer, nSize)
+    {% end %}
   end
 
-  def clusterResourceOpenEnum(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HRESENUM_*
+  def clusterResourceOpenEnum(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwType : UInt32) : Win32cr::Networking::Clustering::HRESENUM
+    {% if !flag?(:docs) %}
     C.ClusterResourceOpenEnum(hResource, dwType)
+    {% end %}
   end
 
-  def clusterResourceGetEnumCount(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
+  def clusterResourceGetEnumCount(hResEnum : Win32cr::Networking::Clustering::HRESENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceGetEnumCount(hResEnum)
+    {% end %}
   end
 
-  def clusterResourceEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterResourceEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceEnum(hResEnum, dwIndex, lpdwType, lpszName, lpcchName)
+    {% end %}
   end
 
-  def clusterResourceCloseEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
+  def clusterResourceCloseEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceCloseEnum(hResEnum)
+    {% end %}
   end
 
-  def createClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32) : UInt32
+  def createClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CreateClusterResourceType(hCluster, lpszResourceTypeName, lpszDisplayName, lpszResourceTypeDll, dwLooksAlivePollInterval, dwIsAlivePollInterval)
+    {% end %}
   end
 
-  def deleteClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR) : UInt32
+  def deleteClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteClusterResourceType(hCluster, lpszResourceTypeName)
+    {% end %}
   end
 
-  def clusterResourceTypeOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, dwType : UInt32) : Win32cr::Networking::Clustering::HRESTYPEENUM_*
+  def createClusterResourceTypeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.CreateClusterResourceTypeEx(hCluster, lpszResourceTypeName, lpszDisplayName, lpszResourceTypeDll, dwLooksAlivePollInterval, dwIsAlivePollInterval, lpszReason)
+    {% end %}
+  end
+
+  def deleteClusterResourceTypeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszTypeName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.DeleteClusterResourceTypeEx(hCluster, lpszTypeName, lpszReason)
+    {% end %}
+  end
+
+  def clusterResourceTypeOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, dwType : UInt32) : Win32cr::Networking::Clustering::HRESTYPEENUM
+    {% if !flag?(:docs) %}
     C.ClusterResourceTypeOpenEnum(hCluster, lpszResourceTypeName, dwType)
+    {% end %}
   end
 
-  def clusterResourceTypeGetEnumCount(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
+  def clusterResourceTypeGetEnumCount(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceTypeGetEnumCount(hResTypeEnum)
+    {% end %}
   end
 
-  def clusterResourceTypeEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterResourceTypeEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceTypeEnum(hResTypeEnum, dwIndex, lpdwType, lpszName, lpcchName)
+    {% end %}
   end
 
-  def clusterResourceTypeCloseEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
+  def clusterResourceTypeCloseEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterResourceTypeCloseEnum(hResTypeEnum)
+    {% end %}
   end
 
-  def openClusterNetwork(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETWORK_*
+  def openClusterNetwork(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETWORK
+    {% if !flag?(:docs) %}
     C.OpenClusterNetwork(hCluster, lpszNetworkName)
+    {% end %}
   end
 
-  def openClusterNetworkEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETWORK_*
+  def openClusterNetworkEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNetworkName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETWORK
+    {% if !flag?(:docs) %}
     C.OpenClusterNetworkEx(hCluster, lpszNetworkName, dwDesiredAccess, lpdwGrantedAccess)
+    {% end %}
   end
 
-  def closeClusterNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Foundation::BOOL
+  def closeClusterNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseClusterNetwork(hNetwork)
+    {% end %}
   end
 
-  def getClusterFromNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def getClusterFromNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.GetClusterFromNetwork(hNetwork)
+    {% end %}
   end
 
-  def clusterNetworkOpenEnum(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNETWORKENUM_*
+  def clusterNetworkOpenEnum(hNetwork : Win32cr::Networking::Clustering::HNETWORK, dwType : UInt32) : Win32cr::Networking::Clustering::HNETWORKENUM
+    {% if !flag?(:docs) %}
     C.ClusterNetworkOpenEnum(hNetwork, dwType)
+    {% end %}
   end
 
-  def clusterNetworkGetEnumCount(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
+  def clusterNetworkGetEnumCount(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNetworkGetEnumCount(hNetworkEnum)
+    {% end %}
   end
 
-  def clusterNetworkEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+  def clusterNetworkEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNetworkEnum(hNetworkEnum, dwIndex, lpdwType, lpszName, lpcchName)
+    {% end %}
   end
 
-  def clusterNetworkCloseEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
+  def clusterNetworkCloseEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNetworkCloseEnum(hNetworkEnum)
+    {% end %}
   end
 
-  def getClusterNetworkState(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE
+  def getClusterNetworkState(hNetwork : Win32cr::Networking::Clustering::HNETWORK) : Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE
+    {% if !flag?(:docs) %}
     C.GetClusterNetworkState(hNetwork)
+    {% end %}
   end
 
-  def setClusterNetworkName(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszName : Win32cr::Foundation::PWSTR) : UInt32
+  def setClusterNetworkName(hNetwork : Win32cr::Networking::Clustering::HNETWORK, lpszName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClusterNetworkName(hNetwork, lpszName)
+    {% end %}
   end
 
-  def getClusterNetworkId(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszNetworkId : UInt16*, lpcchName : UInt32*) : UInt32
+  def setClusterNetworkNameEx(hNetwork : Win32cr::Networking::Clustering::HNETWORK, lpszName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.SetClusterNetworkNameEx(hNetwork, lpszName, lpszReason)
+    {% end %}
+  end
+
+  def getClusterNetworkId(hNetwork : Win32cr::Networking::Clustering::HNETWORK, lpszNetworkId : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterNetworkId(hNetwork, lpszNetworkId, lpcchName)
+    {% end %}
   end
 
-  def clusterNetworkControl(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterNetworkControl(hNetwork : Win32cr::Networking::Clustering::HNETWORK, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNetworkControl(hNetwork, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def openClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACE_*
+  def clusterNetworkControlEx(hNetwork : Win32cr::Networking::Clustering::HNETWORK, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterNetworkControlEx(hNetwork, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def openClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszInterfaceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACE
+    {% if !flag?(:docs) %}
     C.OpenClusterNetInterface(hCluster, lpszInterfaceName)
+    {% end %}
   end
 
-  def openClusterNetInterfaceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETINTERFACE_*
+  def openClusterNetInterfaceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszInterfaceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETINTERFACE
+    {% if !flag?(:docs) %}
     C.OpenClusterNetInterfaceEx(hCluster, lpszInterfaceName, dwDesiredAccess, lpdwGrantedAccess)
+    {% end %}
   end
 
-  def getClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR, lpszInterfaceName : UInt16*, lpcchInterfaceName : UInt32*) : UInt32
+  def getClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR, lpszInterfaceName : Win32cr::Foundation::PWSTR, lpcchInterfaceName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClusterNetInterface(hCluster, lpszNodeName, lpszNetworkName, lpszInterfaceName, lpcchInterfaceName)
+    {% end %}
   end
 
-  def closeClusterNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Foundation::BOOL
+  def closeClusterNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseClusterNetInterface(hNetInterface)
+    {% end %}
   end
 
-  def getClusterFromNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def getClusterFromNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.GetClusterFromNetInterface(hNetInterface)
+    {% end %}
   end
 
-  def getClusterNetInterfaceState(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE
+  def getClusterNetInterfaceState(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE) : Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE
+    {% if !flag?(:docs) %}
     C.GetClusterNetInterfaceState(hNetInterface)
+    {% end %}
   end
 
-  def clusterNetInterfaceControl(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+  def clusterNetInterfaceControl(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterNetInterfaceControl(hNetInterface, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
-  def getClusterKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+  def clusterNetInterfaceControlEx(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterNetInterfaceControlEx(hNetInterface, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+    {% end %}
+  end
+
+  def getClusterKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    {% if !flag?(:docs) %}
     C.GetClusterKey(hCluster, samDesired)
+    {% end %}
   end
 
-  def getClusterGroupKey(hGroup : Win32cr::Networking::Clustering::HGROUP_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+  def getClusterGroupKey(hGroup : Win32cr::Networking::Clustering::HGROUP, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    {% if !flag?(:docs) %}
     C.GetClusterGroupKey(hGroup, samDesired)
+    {% end %}
   end
 
-  def getClusterResourceKey(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+  def getClusterResourceKey(hResource : Win32cr::Networking::Clustering::HRESOURCE, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    {% if !flag?(:docs) %}
     C.GetClusterResourceKey(hResource, samDesired)
+    {% end %}
   end
 
-  def getClusterNodeKey(hNode : Win32cr::Networking::Clustering::HNODE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+  def getClusterNodeKey(hNode : Win32cr::Networking::Clustering::HNODE, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    {% if !flag?(:docs) %}
     C.GetClusterNodeKey(hNode, samDesired)
+    {% end %}
   end
 
-  def getClusterNetworkKey(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+  def getClusterNetworkKey(hNetwork : Win32cr::Networking::Clustering::HNETWORK, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    {% if !flag?(:docs) %}
     C.GetClusterNetworkKey(hNetwork, samDesired)
+    {% end %}
   end
 
-  def getClusterNetInterfaceKey(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+  def getClusterNetInterfaceKey(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    {% if !flag?(:docs) %}
     C.GetClusterNetInterfaceKey(hNetInterface, samDesired)
+    {% end %}
   end
 
   def clusterRegCreateKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, dwOptions : UInt32, samDesired : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCreateKey(hKey, lpszSubKey, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
+    {% end %}
+  end
+
+  def clusterRegCreateKeyEx(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, dwOptions : UInt32, samDesired : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
+    C.ClusterRegCreateKeyEx(hKey, lpSubKey, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition, lpszReason)
+    {% end %}
   end
 
   def clusterRegOpenKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegOpenKey(hKey, lpszSubKey, samDesired, phkResult)
+    {% end %}
   end
 
   def clusterRegDeleteKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegDeleteKey(hKey, lpszSubKey)
+    {% end %}
+  end
+
+  def clusterRegDeleteKeyEx(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
+    C.ClusterRegDeleteKeyEx(hKey, lpSubKey, lpszReason)
+    {% end %}
   end
 
   def clusterRegCloseKey(hKey : Win32cr::System::Registry::HKEY) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCloseKey(hKey)
+    {% end %}
   end
 
-  def clusterRegEnumKey(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
+  def clusterRegEnumKey(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegEnumKey(hKey, dwIndex, lpszName, lpcchName, lpftLastWriteTime)
+    {% end %}
   end
 
   def clusterRegSetValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : UInt8*, cbData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterRegSetValue(hKey, lpszValueName, dwType, lpData, cbData)
+    {% end %}
   end
 
   def clusterRegDeleteValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterRegDeleteValue(hKey, lpszValueName)
+    {% end %}
+  end
+
+  def clusterRegSetValueEx(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : UInt8*, cbData : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterRegSetValueEx(hKey, lpszValueName, dwType, lpData, cbData, lpszReason)
+    {% end %}
+  end
+
+  def clusterRegDeleteValueEx(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    C.ClusterRegDeleteValueEx(hKey, lpszValueName, lpszReason)
+    {% end %}
   end
 
   def clusterRegQueryValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, lpdwValueType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegQueryValue(hKey, lpszValueName, lpdwValueType, lpData, lpcbData)
+    {% end %}
   end
 
-  def clusterRegEnumValue(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszValueName : UInt16*, lpcchValueName : UInt32*, lpdwType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : UInt32
+  def clusterRegEnumValue(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszValueName : Win32cr::Foundation::PWSTR, lpcchValueName : UInt32*, lpdwType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterRegEnumValue(hKey, dwIndex, lpszValueName, lpcchValueName, lpdwType, lpData, lpcbData)
+    {% end %}
   end
 
   def clusterRegQueryInfoKey(hKey : Win32cr::System::Registry::HKEY, lpcSubKeys : UInt32*, lpcchMaxSubKeyLen : UInt32*, lpcValues : UInt32*, lpcchMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegQueryInfoKey(hKey, lpcSubKeys, lpcchMaxSubKeyLen, lpcValues, lpcchMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
+    {% end %}
   end
 
   def clusterRegGetKeySecurity(hKey : Win32cr::System::Registry::HKEY, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegGetKeySecurity(hKey, requested_information, pSecurityDescriptor, lpcbSecurityDescriptor)
+    {% end %}
   end
 
   def clusterRegSetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegSetKeySecurity(hKey, security_information, pSecurityDescriptor)
+    {% end %}
   end
 
-  def clusterRegSyncDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : UInt32) : Int32
+  def clusterRegSetKeySecurityEx(hKey : Win32cr::System::Registry::HKEY, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpszReason : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
+    C.ClusterRegSetKeySecurityEx(hKey, security_information, pSecurityDescriptor, lpszReason)
+    {% end %}
+  end
+
+  def clusterRegSyncDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER, flags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegSyncDatabase(hCluster, flags)
+    {% end %}
   end
 
-  def clusterRegCreateBatch(hKey : Win32cr::System::Registry::HKEY, pHREGBATCH : Win32cr::Networking::Clustering::HREGBATCH_**) : Int32
+  def clusterRegCreateBatch(hKey : Win32cr::System::Registry::HKEY, pHREGBATCH : Win32cr::Networking::Clustering::HREGBATCH*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCreateBatch(hKey, pHREGBATCH)
+    {% end %}
   end
 
-  def clusterRegBatchAddCommand(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, dwCommand : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, wzName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpData : Void*, cbData : UInt32) : Int32
+  def clusterRegBatchAddCommand(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH, dwCommand : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, wzName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpData : Void*, cbData : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegBatchAddCommand(hRegBatch, dwCommand, wzName, dwOptions, lpData, cbData)
+    {% end %}
   end
 
-  def clusterRegCloseBatch(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, bCommit : Win32cr::Foundation::BOOL, failedCommandNumber : Int32*) : Int32
+  def clusterRegCloseBatch(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH, bCommit : Win32cr::Foundation::BOOL, failedCommandNumber : Int32*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCloseBatch(hRegBatch, bCommit, failedCommandNumber)
+    {% end %}
   end
 
-  def clusterRegCloseBatchEx(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, flags : UInt32, failedCommandNumber : Int32*) : Int32
+  def clusterRegCloseBatchEx(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH, flags : UInt32, failedCommandNumber : Int32*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCloseBatchEx(hRegBatch, flags, failedCommandNumber)
+    {% end %}
   end
 
-  def clusterRegBatchReadCommand(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*) : Int32
+  def clusterRegBatchReadCommand(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegBatchReadCommand(hBatchNotification, pBatchCommand)
+    {% end %}
   end
 
-  def clusterRegBatchCloseNotification(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*) : Int32
+  def clusterRegBatchCloseNotification(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegBatchCloseNotification(hBatchNotification)
+    {% end %}
   end
 
-  def clusterRegCreateBatchNotifyPort(hKey : Win32cr::System::Registry::HKEY, phBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_**) : Int32
+  def clusterRegCreateBatchNotifyPort(hKey : Win32cr::System::Registry::HKEY, phBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCreateBatchNotifyPort(hKey, phBatchNotifyPort)
+    {% end %}
   end
 
-  def clusterRegCloseBatchNotifyPort(hBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_*) : Int32
+  def clusterRegCloseBatchNotifyPort(hBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCloseBatchNotifyPort(hBatchNotifyPort)
+    {% end %}
   end
 
-  def clusterRegGetBatchNotification(hBatchNotify : Win32cr::Networking::Clustering::HREGBATCHPORT_*, phBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_**) : Int32
+  def clusterRegGetBatchNotification(hBatchNotify : Win32cr::Networking::Clustering::HREGBATCHPORT, phBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegGetBatchNotification(hBatchNotify, phBatchNotification)
+    {% end %}
   end
 
-  def clusterRegCreateReadBatch(hKey : Win32cr::System::Registry::HKEY, phRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_**) : Int32
+  def clusterRegCreateReadBatch(hKey : Win32cr::System::Registry::HKEY, phRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCreateReadBatch(hKey, phRegReadBatch)
+    {% end %}
   end
 
-  def clusterRegReadBatchAddCommand(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, wzSubkeyName : Win32cr::Foundation::PWSTR, wzValueName : Win32cr::Foundation::PWSTR) : Int32
+  def clusterRegReadBatchAddCommand(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH, wzSubkeyName : Win32cr::Foundation::PWSTR, wzValueName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegReadBatchAddCommand(hRegReadBatch, wzSubkeyName, wzValueName)
+    {% end %}
   end
 
-  def clusterRegCloseReadBatch(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
+  def clusterRegCloseReadBatch(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCloseReadBatch(hRegReadBatch, phRegReadBatchReply)
+    {% end %}
   end
 
-  def clusterRegCloseReadBatchEx(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, flags : UInt32, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
+  def clusterRegCloseReadBatchEx(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH, flags : UInt32, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCloseReadBatchEx(hRegReadBatch, flags, phRegReadBatchReply)
+    {% end %}
   end
 
-  def clusterRegReadBatchReplyNextCommand(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*) : Int32
+  def clusterRegReadBatchReplyNextCommand(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply, pBatchCommand)
+    {% end %}
   end
 
-  def clusterRegCloseReadBatchReply(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*) : Int32
+  def clusterRegCloseReadBatchReply(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY) : Int32
+    {% if !flag?(:docs) %}
     C.ClusterRegCloseReadBatchReply(hRegReadBatchReply)
+    {% end %}
   end
 
-  def clusterSetAccountAccess(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, szAccountSID : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwControlType : UInt32) : UInt32
+  def clusterSetAccountAccess(hCluster : Win32cr::Networking::Clustering::HCLUSTER, szAccountSID : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwControlType : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterSetAccountAccess(hCluster, szAccountSID, dwAccess, dwControlType)
+    {% end %}
   end
 
-  def createCluster(pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HCLUSTER_*
+  def createCluster(pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HCLUSTER
+    {% if !flag?(:docs) %}
     C.CreateCluster(pConfig, pfnProgressCallback, pvCallbackArg)
+    {% end %}
   end
 
-  def createClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+  def createClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.CreateClusterNameAccount(hCluster, pConfig, pfnProgressCallback, pvCallbackArg)
+    {% end %}
   end
 
-  def removeClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, bDeleteComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+  def removeClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER, bDeleteComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveClusterNameAccount(hCluster, bDeleteComputerObjects)
+    {% end %}
+  end
+
+  def repairClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pConfig : Win32cr::Networking::Clustering::REPAIR_CLUSTER_NAME_ACCOUNT_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+    {% if !flag?(:docs) %}
+    C.RepairClusterNameAccount(hCluster, pConfig, pfnProgressCallback, pvCallbackArg)
+    {% end %}
   end
 
   def determineCNOResTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DetermineCNOResTypeFromNodelist(cNodes, ppszNodeNames, pCNOResType)
+    {% end %}
   end
 
-  def determineCNOResTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
+  def determineCNOResTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DetermineCNOResTypeFromCluster(hCluster, pCNOResType)
+    {% end %}
   end
 
   def determineClusterCloudTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DetermineClusterCloudTypeFromNodelist(cNodes, ppszNodeNames, pCloudType)
+    {% end %}
   end
 
-  def determineClusterCloudTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
+  def determineClusterCloudTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DetermineClusterCloudTypeFromCluster(hCluster, pCloudType)
+    {% end %}
   end
 
   def getNodeCloudTypeDW(ppszNodeName : Win32cr::Foundation::PWSTR, node_cloud_type : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetNodeCloudTypeDW(ppszNodeName, node_cloud_type)
+    {% end %}
   end
 
-  def registerClusterResourceTypeNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : Int64, resTypeName : Win32cr::Foundation::PWSTR, dwNotifyKey : LibC::UIntPtrT) : UInt32
+  def registerClusterResourceTypeNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE, hCluster : Win32cr::Networking::Clustering::HCLUSTER, flags : Int64, resTypeName : Win32cr::Foundation::PWSTR, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterClusterResourceTypeNotifyV2(hChange, hCluster, flags, resTypeName, dwNotifyKey)
+    {% end %}
   end
 
-  def addClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
+  def addClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE
+    {% if !flag?(:docs) %}
     C.AddClusterNode(hCluster, lpszNodeName, pfnProgressCallback, pvCallbackArg)
+    {% end %}
   end
 
-  def addClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, lpszClusterStorageNodeDescription : Win32cr::Foundation::PWSTR, lpszClusterStorageNodeLocation : Win32cr::Foundation::PWSTR) : UInt32
+  def addClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, lpszClusterStorageNodeDescription : Win32cr::Foundation::PWSTR, lpszClusterStorageNodeLocation : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddClusterStorageNode(hCluster, lpszNodeName, pfnProgressCallback, pvCallbackArg, lpszClusterStorageNodeDescription, lpszClusterStorageNodeLocation)
+    {% end %}
   end
 
-  def addClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
+  def addClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE
+    {% if !flag?(:docs) %}
     C.AddClusterNodeEx(hCluster, lpszNodeName, dwFlags, pfnProgressCallback, pvCallbackArg)
+    {% end %}
   end
 
-  def removeClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterStorageEnclosureName : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, dwFlags : UInt32) : UInt32
+  def removeClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszClusterStorageEnclosureName : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveClusterStorageNode(hCluster, lpszClusterStorageEnclosureName, dwTimeout, dwFlags)
+    {% end %}
   end
 
-  def destroyCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, fdeleteVirtualComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+  def destroyCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, fdeleteVirtualComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.DestroyCluster(hCluster, pfnProgressCallback, pvCallbackArg, fdeleteVirtualComputerObjects)
+    {% end %}
   end
 
   def initializeClusterHealthFault(clusterHealthFault : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*) : UInt32
+    {% if !flag?(:docs) %}
     C.InitializeClusterHealthFault(clusterHealthFault)
+    {% end %}
   end
 
   def initializeClusterHealthFaultArray(clusterHealthFaultArray : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*) : UInt32
+    {% if !flag?(:docs) %}
     C.InitializeClusterHealthFaultArray(clusterHealthFaultArray)
+    {% end %}
   end
 
   def freeClusterHealthFault(clusterHealthFault : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*) : UInt32
+    {% if !flag?(:docs) %}
     C.FreeClusterHealthFault(clusterHealthFault)
+    {% end %}
   end
 
   def freeClusterHealthFaultArray(clusterHealthFaultArray : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*) : UInt32
+    {% if !flag?(:docs) %}
     C.FreeClusterHealthFaultArray(clusterHealthFaultArray)
+    {% end %}
   end
 
-  def clusGetClusterHealthFaults(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, objects : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*, flags : UInt32) : UInt32
+  def clusGetClusterHealthFaults(hCluster : Win32cr::Networking::Clustering::HCLUSTER, objects : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusGetClusterHealthFaults(hCluster, objects, flags)
+    {% end %}
   end
 
-  def clusRemoveClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, id : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+  def clusRemoveClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER, id : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusRemoveClusterHealthFault(hCluster, id, flags)
+    {% end %}
   end
 
-  def clusAddClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, failure : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*, param2 : UInt32) : UInt32
+  def clusAddClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER, failure : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*, param2 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusAddClusterHealthFault(hCluster, failure, param2)
+    {% end %}
   end
 
-  def resUtilStartResourceService(pszServiceName : Win32cr::Foundation::PWSTR, phServiceHandle : LibC::IntPtrT*) : UInt32
+  def resUtilStartResourceService(pszServiceName : Win32cr::Foundation::PWSTR, phServiceHandle : Win32cr::System::Services::SC_HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilStartResourceService(pszServiceName, phServiceHandle)
+    {% end %}
   end
 
   def resUtilVerifyResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilVerifyResourceService(pszServiceName)
+    {% end %}
   end
 
   def resUtilStopResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilStopResourceService(pszServiceName)
+    {% end %}
   end
 
-  def resUtilVerifyService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
+  def resUtilVerifyService(hServiceHandle : Win32cr::System::Services::SC_HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilVerifyService(hServiceHandle)
+    {% end %}
   end
 
-  def resUtilStopService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
+  def resUtilStopService(hServiceHandle : Win32cr::System::Services::SC_HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilStopService(hServiceHandle)
+    {% end %}
   end
 
   def resUtilCreateDirectoryTree(pszPath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilCreateDirectoryTree(pszPath)
+    {% end %}
   end
 
   def resUtilIsPathValid(pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResUtilIsPathValid(pszPath)
+    {% end %}
   end
 
   def resUtilEnumProperties(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pszOutProperties : Win32cr::Foundation::PWSTR, cbOutPropertiesSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilEnumProperties(pPropertyTable, pszOutProperties, cbOutPropertiesSize, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
   def resUtilEnumPrivateProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszOutProperties : Win32cr::Foundation::PWSTR, cbOutPropertiesSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilEnumPrivateProperties(hkeyClusterKey, pszOutProperties, cbOutPropertiesSize, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
   def resUtilGetProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
   def resUtilGetAllProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetAllProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
   def resUtilGetPrivateProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pOutPropertyList : Void*, cbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetPrivateProperties(hkeyClusterKey, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
   def resUtilGetPropertySize(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTableItem : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pcbOutPropertyListSize : UInt32*, pnPropertyCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetPropertySize(hkeyClusterKey, pPropertyTableItem, pcbOutPropertyListSize, pnPropertyCount)
+    {% end %}
   end
 
   def resUtilGetProperty(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTableItem : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyItem : Void**, pcbOutPropertyItemSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetProperty(hkeyClusterKey, pPropertyTableItem, pOutPropertyItem, pcbOutPropertyItemSize)
+    {% end %}
   end
 
   def resUtilVerifyPropertyTable(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilVerifyPropertyTable(pPropertyTable, reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, pOutParams)
+    {% end %}
   end
 
   def resUtilSetPropertyTable(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetPropertyTable(hkeyClusterKey, pPropertyTable, reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, pOutParams)
+    {% end %}
   end
 
   def resUtilSetPropertyTableEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, bAllowUnknownProperties : Win32cr::Foundation::BOOL, pInPropertyList : Void*, cbInPropertyListSize : UInt32, bForceWrite : Win32cr::Foundation::BOOL, pOutParams : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetPropertyTableEx(hkeyClusterKey, pPropertyTable, reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, bForceWrite, pOutParams)
+    {% end %}
   end
 
   def resUtilSetPropertyParameterBlock(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, pInParams : UInt8*, pInPropertyList : Void*, cbInPropertyListSize : UInt32, pOutParams : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetPropertyParameterBlock(hkeyClusterKey, pPropertyTable, reserved, pInParams, pInPropertyList, cbInPropertyListSize, pOutParams)
+    {% end %}
   end
 
   def resUtilSetPropertyParameterBlockEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, reserved : Void*, pInParams : UInt8*, pInPropertyList : Void*, cbInPropertyListSize : UInt32, bForceWrite : Win32cr::Foundation::BOOL, pOutParams : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetPropertyParameterBlockEx(hkeyClusterKey, pPropertyTable, reserved, pInParams, pInPropertyList, cbInPropertyListSize, bForceWrite, pOutParams)
+    {% end %}
   end
 
   def resUtilSetUnknownProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetUnknownProperties(hkeyClusterKey, pPropertyTable, pInPropertyList, cbInPropertyListSize)
+    {% end %}
   end
 
   def resUtilGetPropertiesToParameterBlock(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutParams : UInt8*, bCheckForRequiredProperties : Win32cr::Foundation::BOOL, pszNameOfPropInError : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetPropertiesToParameterBlock(hkeyClusterKey, pPropertyTable, pOutParams, bCheckForRequiredProperties, pszNameOfPropInError)
+    {% end %}
   end
 
   def resUtilPropertyListFromParameterBlock(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, pcbOutPropertyListSize : UInt32*, pInParams : UInt8*, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilPropertyListFromParameterBlock(pPropertyTable, pOutPropertyList, pcbOutPropertyListSize, pInParams, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
   def resUtilDupParameterBlock(pOutParams : UInt8*, pInParams : UInt8*, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilDupParameterBlock(pOutParams, pInParams, pPropertyTable)
+    {% end %}
   end
 
   def resUtilFreeParameterBlock(pOutParams : UInt8*, pInParams : UInt8*, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*) : Void
+    {% if !flag?(:docs) %}
     C.ResUtilFreeParameterBlock(pOutParams, pInParams, pPropertyTable)
+    {% end %}
   end
 
   def resUtilAddUnknownProperties(hkeyClusterKey : Win32cr::System::Registry::HKEY, pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyList : Void*, pcbOutPropertyListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilAddUnknownProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, pcbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
   def resUtilSetPrivatePropertyList(hkeyClusterKey : Win32cr::System::Registry::HKEY, pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetPrivatePropertyList(hkeyClusterKey, pInPropertyList, cbInPropertyListSize)
+    {% end %}
   end
 
   def resUtilVerifyPrivatePropertyList(pInPropertyList : Void*, cbInPropertyListSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilVerifyPrivatePropertyList(pInPropertyList, cbInPropertyListSize)
+    {% end %}
   end
 
   def resUtilDupString(pszInString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.ResUtilDupString(pszInString)
+    {% end %}
   end
 
   def resUtilGetBinaryValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, ppbOutValue : UInt8**, pcbOutValueSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetBinaryValue(hkeyClusterKey, pszValueName, ppbOutValue, pcbOutValueSize)
+    {% end %}
   end
 
   def resUtilGetSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.ResUtilGetSzValue(hkeyClusterKey, pszValueName)
+    {% end %}
   end
 
   def resUtilGetDwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pdwOutValue : UInt32*, dwDefaultValue : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetDwordValue(hkeyClusterKey, pszValueName, pdwOutValue, dwDefaultValue)
+    {% end %}
   end
 
   def resUtilGetQwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pqwOutValue : UInt64*, qwDefaultValue : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetQwordValue(hkeyClusterKey, pszValueName, pqwOutValue, qwDefaultValue)
+    {% end %}
   end
 
   def resUtilSetBinaryValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pbNewValue : UInt8*, cbNewValueSize : UInt32, ppbOutValue : UInt8**, pcbOutValueSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetBinaryValue(hkeyClusterKey, pszValueName, pbNewValue, cbNewValueSize, ppbOutValue, pcbOutValueSize)
+    {% end %}
   end
 
   def resUtilSetSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, ppszOutString : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetSzValue(hkeyClusterKey, pszValueName, pszNewValue, ppszOutString)
+    {% end %}
   end
 
   def resUtilSetExpandSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, ppszOutString : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetExpandSzValue(hkeyClusterKey, pszValueName, pszNewValue, ppszOutString)
+    {% end %}
   end
 
   def resUtilSetMultiSzValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, pszNewValue : Win32cr::Foundation::PWSTR, cbNewValueSize : UInt32, ppszOutValue : Win32cr::Foundation::PWSTR*, pcbOutValueSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetMultiSzValue(hkeyClusterKey, pszValueName, pszNewValue, cbNewValueSize, ppszOutValue, pcbOutValueSize)
+    {% end %}
   end
 
   def resUtilSetDwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, dwNewValue : UInt32, pdwOutValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetDwordValue(hkeyClusterKey, pszValueName, dwNewValue, pdwOutValue)
+    {% end %}
   end
 
   def resUtilSetQwordValue(hkeyClusterKey : Win32cr::System::Registry::HKEY, pszValueName : Win32cr::Foundation::PWSTR, qwNewValue : UInt64, pqwOutValue : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetQwordValue(hkeyClusterKey, pszValueName, qwNewValue, pqwOutValue)
+    {% end %}
   end
 
   def resUtilSetValueEx(hkeyClusterKey : Win32cr::System::Registry::HKEY, valueName : Win32cr::Foundation::PWSTR, valueType : UInt32, valueData : UInt8*, valueSize : UInt32, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetValueEx(hkeyClusterKey, valueName, valueType, valueData, valueSize, flags)
+    {% end %}
   end
 
   def resUtilGetBinaryProperty(ppbOutValue : UInt8**, pcbOutValueSize : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_BINARY*, pbOldValue : UInt8*, cbOldValueSize : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetBinaryProperty(ppbOutValue, pcbOutValueSize, pValueStruct, pbOldValue, cbOldValueSize, ppPropertyList, pcbPropertyListSize)
+    {% end %}
   end
 
   def resUtilGetSzProperty(ppszOutValue : Win32cr::Foundation::PWSTR*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_SZ*, pszOldValue : Win32cr::Foundation::PWSTR, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetSzProperty(ppszOutValue, pValueStruct, pszOldValue, ppPropertyList, pcbPropertyListSize)
+    {% end %}
   end
 
   def resUtilGetMultiSzProperty(ppszOutValue : Win32cr::Foundation::PWSTR*, pcbOutValueSize : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_SZ*, pszOldValue : Win32cr::Foundation::PWSTR, cbOldValueSize : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetMultiSzProperty(ppszOutValue, pcbOutValueSize, pValueStruct, pszOldValue, cbOldValueSize, ppPropertyList, pcbPropertyListSize)
+    {% end %}
   end
 
   def resUtilGetDwordProperty(pdwOutValue : UInt32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_DWORD*, dwOldValue : UInt32, dwMinimum : UInt32, dwMaximum : UInt32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetDwordProperty(pdwOutValue, pValueStruct, dwOldValue, dwMinimum, dwMaximum, ppPropertyList, pcbPropertyListSize)
+    {% end %}
   end
 
   def resUtilGetLongProperty(plOutValue : Int32*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_LONG*, lOldValue : Int32, lMinimum : Int32, lMaximum : Int32, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetLongProperty(plOutValue, pValueStruct, lOldValue, lMinimum, lMaximum, ppPropertyList, pcbPropertyListSize)
+    {% end %}
   end
 
   def resUtilGetFileTimeProperty(pftOutValue : Win32cr::Foundation::FILETIME*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_FILETIME*, ftOldValue : Win32cr::Foundation::FILETIME, ftMinimum : Win32cr::Foundation::FILETIME, ftMaximum : Win32cr::Foundation::FILETIME, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetFileTimeProperty(pftOutValue, pValueStruct, ftOldValue, ftMinimum, ftMaximum, ppPropertyList, pcbPropertyListSize)
+    {% end %}
   end
 
-  def resUtilGetEnvironmentWithNetName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Void*
+  def resUtilGetEnvironmentWithNetName(hResource : Win32cr::Networking::Clustering::HRESOURCE) : Void*
+    {% if !flag?(:docs) %}
     C.ResUtilGetEnvironmentWithNetName(hResource)
+    {% end %}
   end
 
   def resUtilFreeEnvironment(lpEnvironment : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFreeEnvironment(lpEnvironment)
+    {% end %}
   end
 
   def resUtilExpandEnvironmentStrings(pszSrc : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.ResUtilExpandEnvironmentStrings(pszSrc)
+    {% end %}
   end
 
-  def resUtilSetResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+  def resUtilSetResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetResourceServiceEnvironment(pszServiceName, hResource, pfnLogEvent, hResourceHandle)
+    {% end %}
   end
 
   def resUtilRemoveResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilRemoveResourceServiceEnvironment(pszServiceName, pfnLogEvent, hResourceHandle)
+    {% end %}
   end
 
-  def resUtilSetResourceServiceStartParameters(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+  def resUtilSetResourceServiceStartParameters(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::System::Services::SC_HANDLE, phService : Win32cr::System::Services::SC_HANDLE*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetResourceServiceStartParameters(pszServiceName, schSCMHandle, phService, pfnLogEvent, hResourceHandle)
+    {% end %}
   end
 
   def resUtilFindSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+    {% end %}
   end
 
   def resUtilFindExpandSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindExpandSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+    {% end %}
   end
 
   def resUtilFindExpandedSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindExpandedSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+    {% end %}
   end
 
   def resUtilFindDwordProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pdwPropertyValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindDwordProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pdwPropertyValue)
+    {% end %}
   end
 
   def resUtilFindBinaryProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pbPropertyValue : UInt8**, pcbPropertyValueSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindBinaryProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pbPropertyValue, pcbPropertyValueSize)
+    {% end %}
   end
 
   def resUtilFindMultiSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*, pcbPropertyValueSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindMultiSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue, pcbPropertyValueSize)
+    {% end %}
   end
 
   def resUtilFindLongProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, plPropertyValue : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindLongProperty(pPropertyList, cbPropertyListSize, pszPropertyName, plPropertyValue)
+    {% end %}
   end
 
   def resUtilFindULargeIntegerProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, plPropertyValue : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindULargeIntegerProperty(pPropertyList, cbPropertyListSize, pszPropertyName, plPropertyValue)
+    {% end %}
   end
 
   def resUtilFindFileTimeProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pftPropertyValue : Win32cr::Foundation::FILETIME*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindFileTimeProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pftPropertyValue)
+    {% end %}
   end
 
   def clusWorkerCreate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*, lpStartAddress : Win32cr::Networking::Clustering::PWORKER_START_ROUTINE, lpParameter : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusWorkerCreate(lpWorker, lpStartAddress, lpParameter)
+    {% end %}
   end
 
   def clusWorkerCheckTerminate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClusWorkerCheckTerminate(lpWorker)
+    {% end %}
   end
 
   def clusWorkerTerminate(lpWorker : Win32cr::Networking::Clustering::CLUS_WORKER*) : Void
+    {% if !flag?(:docs) %}
     C.ClusWorkerTerminate(lpWorker)
+    {% end %}
   end
 
   def clusWorkerTerminateEx(clus_worker : Win32cr::Networking::Clustering::CLUS_WORKER*, timeout_in_milliseconds : UInt32, wait_only : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusWorkerTerminateEx(clus_worker, timeout_in_milliseconds, wait_only)
+    {% end %}
   end
 
   def clusWorkersTerminate(clus_workers : Win32cr::Networking::Clustering::CLUS_WORKER**, clus_workers_count : LibC::UIntPtrT, timeout_in_milliseconds : UInt32, wait_only : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusWorkersTerminate(clus_workers, clus_workers_count, timeout_in_milliseconds, wait_only)
+    {% end %}
   end
 
-  def resUtilResourcesEqual(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+  def resUtilResourcesEqual(hSelf : Win32cr::Networking::Clustering::HRESOURCE, hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResUtilResourcesEqual(hSelf, hResource)
+    {% end %}
   end
 
-  def resUtilResourceTypesEqual(lpszResourceTypeName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+  def resUtilResourceTypesEqual(lpszResourceTypeName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResUtilResourceTypesEqual(lpszResourceTypeName, hResource)
+    {% end %}
   end
 
-  def resUtilIsResourceClassEqual(prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+  def resUtilIsResourceClassEqual(prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResUtilIsResourceClassEqual(prci, hResource)
+    {% end %}
   end
 
-  def resUtilEnumResources(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, pParameter : Void*) : UInt32
+  def resUtilEnumResources(hSelf : Win32cr::Networking::Clustering::HRESOURCE, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, pParameter : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilEnumResources(hSelf, lpszResTypeName, pResCallBack, pParameter)
+    {% end %}
   end
 
-  def resUtilEnumResourcesEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+  def resUtilEnumResourcesEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HRESOURCE, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilEnumResourcesEx(hCluster, hSelf, lpszResTypeName, pResCallBack, pParameter)
+    {% end %}
   end
 
-  def resUtilGetResourceDependency(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceDependency(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceDependency(hSelf, lpszResourceType)
+    {% end %}
   end
 
-  def resUtilGetResourceDependencyByName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceDependencyByName(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceDependencyByName(hCluster, hSelf, lpszResourceType, bRecurse)
+    {% end %}
   end
 
-  def resUtilGetResourceDependencyByClass(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceDependencyByClass(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceDependencyByClass(hCluster, hSelf, prci, bRecurse)
+    {% end %}
   end
 
-  def resUtilGetResourceNameDependency(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceNameDependency(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceNameDependency(lpszResourceName, lpszResourceType)
+    {% end %}
   end
 
-  def resUtilGetResourceDependentIPAddressProps(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszAddress : UInt16*, pcchAddress : UInt32*, pszSubnetMask : UInt16*, pcchSubnetMask : UInt32*, pszNetwork : UInt16*, pcchNetwork : UInt32*) : UInt32
+  def resUtilGetResourceDependentIPAddressProps(hResource : Win32cr::Networking::Clustering::HRESOURCE, pszAddress : Win32cr::Foundation::PWSTR, pcchAddress : UInt32*, pszSubnetMask : Win32cr::Foundation::PWSTR, pcchSubnetMask : UInt32*, pszNetwork : Win32cr::Foundation::PWSTR, pcchNetwork : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceDependentIPAddressProps(hResource, pszAddress, pcchAddress, pszSubnetMask, pcchSubnetMask, pszNetwork, pcchNetwork)
+    {% end %}
   end
 
-  def resUtilFindDependentDiskResourceDriveLetter(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszDriveLetter : UInt16*, pcchDriveLetter : UInt32*) : UInt32
+  def resUtilFindDependentDiskResourceDriveLetter(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hResource : Win32cr::Networking::Clustering::HRESOURCE, pszDriveLetter : Win32cr::Foundation::PWSTR, pcchDriveLetter : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilFindDependentDiskResourceDriveLetter(hCluster, hResource, pszDriveLetter, pcchDriveLetter)
+    {% end %}
   end
 
   def resUtilTerminateServiceProcessFromResDll(dwServicePid : UInt32, bOffline : Win32cr::Foundation::BOOL, pdwResourceState : UInt32*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilTerminateServiceProcessFromResDll(dwServicePid, bOffline, pdwResourceState, pfnLogEvent, hResourceHandle)
+    {% end %}
   end
 
   def resUtilGetPropertyFormats(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyFormatList : Void*, cbPropertyFormatListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetPropertyFormats(pPropertyTable, pOutPropertyFormatList, cbPropertyFormatListSize, pcbBytesReturned, pcbRequired)
+    {% end %}
   end
 
-  def resUtilGetCoreClusterResources(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterIPAddressResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResource : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
+  def resUtilGetCoreClusterResources(hCluster : Win32cr::Networking::Clustering::HCLUSTER, phClusterNameResource : Win32cr::Networking::Clustering::HRESOURCE*, phClusterIPAddressResource : Win32cr::Networking::Clustering::HRESOURCE*, phClusterQuorumResource : Win32cr::Networking::Clustering::HRESOURCE*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetCoreClusterResources(hCluster, phClusterNameResource, phClusterIPAddressResource, phClusterQuorumResource)
+    {% end %}
   end
 
-  def resUtilGetResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszResourceName : UInt16*, pcchResourceNameInOut : UInt32*) : UInt32
+  def resUtilGetResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE, pszResourceName : Win32cr::Foundation::PWSTR, pcchResourceNameInOut : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceName(hResource, pszResourceName, pcchResourceNameInOut)
+    {% end %}
   end
 
-  def resUtilGetClusterRoleState(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, eClusterRole : Win32cr::Networking::Clustering::CLUSTER_ROLE) : Win32cr::Networking::Clustering::CLUSTER_ROLE_STATE
+  def resUtilGetClusterRoleState(hCluster : Win32cr::Networking::Clustering::HCLUSTER, eClusterRole : Win32cr::Networking::Clustering::CLUSTER_ROLE) : Win32cr::Networking::Clustering::CLUSTER_ROLE_STATE
+    {% if !flag?(:docs) %}
     C.ResUtilGetClusterRoleState(hCluster, eClusterRole)
+    {% end %}
   end
 
   def clusterIsPathOnSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClusterIsPathOnSharedVolume(lpszPathName)
+    {% end %}
   end
 
   def clusterGetVolumePathName(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClusterGetVolumePathName(lpszFileName, lpszVolumePathName, cchBufferLength)
+    {% end %}
   end
 
   def clusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint, lpszVolumeName, cchBufferLength)
+    {% end %}
   end
 
   def clusterPrepareSharedVolumeForBackup(lpszFileName : Win32cr::Foundation::PWSTR, lpszVolumePathName : Win32cr::Foundation::PWSTR, lpcchVolumePathName : UInt32*, lpszVolumeName : Win32cr::Foundation::PWSTR, lpcchVolumeName : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterPrepareSharedVolumeForBackup(lpszFileName, lpszVolumePathName, lpcchVolumePathName, lpszVolumeName, lpcchVolumeName)
+    {% end %}
   end
 
   def clusterClearBackupStateForSharedVolume(lpszVolumePathName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterClearBackupStateForSharedVolume(lpszVolumePathName)
+    {% end %}
   end
 
-  def resUtilSetResourceServiceStartParametersEx(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, dwDesiredAccess : UInt32, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+  def resUtilSetResourceServiceStartParametersEx(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::System::Services::SC_HANDLE, phService : Win32cr::System::Services::SC_HANDLE*, dwDesiredAccess : UInt32, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilSetResourceServiceStartParametersEx(pszServiceName, schSCMHandle, phService, dwDesiredAccess, pfnLogEvent, hResourceHandle)
+    {% end %}
   end
 
-  def resUtilEnumResourcesEx2(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*, dwDesiredAccess : UInt32) : UInt32
+  def resUtilEnumResourcesEx2(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HRESOURCE, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*, dwDesiredAccess : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilEnumResourcesEx2(hCluster, hSelf, lpszResTypeName, pResCallBack, pParameter, dwDesiredAccess)
+    {% end %}
   end
 
-  def resUtilGetResourceDependencyEx(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceDependencyEx(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceDependencyEx(hSelf, lpszResourceType, dwDesiredAccess)
+    {% end %}
   end
 
-  def resUtilGetResourceDependencyByNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceDependencyByNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceDependencyByNameEx(hCluster, hSelf, lpszResourceType, bRecurse, dwDesiredAccess)
+    {% end %}
   end
 
-  def resUtilGetResourceDependencyByClassEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceDependencyByClassEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceDependencyByClassEx(hCluster, hSelf, prci, bRecurse, dwDesiredAccess)
+    {% end %}
   end
 
-  def resUtilGetResourceNameDependencyEx(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+  def resUtilGetResourceNameDependencyEx(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
+    {% if !flag?(:docs) %}
     C.ResUtilGetResourceNameDependencyEx(lpszResourceName, lpszResourceType, dwDesiredAccess)
+    {% end %}
   end
 
-  def resUtilGetCoreClusterResourcesEx(hClusterIn : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, dwDesiredAccess : UInt32) : UInt32
+  def resUtilGetCoreClusterResourcesEx(hClusterIn : Win32cr::Networking::Clustering::HCLUSTER, phClusterNameResourceOut : Win32cr::Networking::Clustering::HRESOURCE*, phClusterQuorumResourceOut : Win32cr::Networking::Clustering::HRESOURCE*, dwDesiredAccess : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetCoreClusterResourcesEx(hClusterIn, phClusterNameResourceOut, phClusterQuorumResourceOut, dwDesiredAccess)
+    {% end %}
   end
 
-  def openClusterCryptProvider(lpszResource : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
+  def openClusterCryptProvider(lpszResource : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER
+    {% if !flag?(:docs) %}
     C.OpenClusterCryptProvider(lpszResource, lpszProvider, dwType, dwFlags)
+    {% end %}
   end
 
-  def openClusterCryptProviderEx(lpszResource : Win32cr::Foundation::PWSTR, lpszKeyname : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
+  def openClusterCryptProviderEx(lpszResource : Win32cr::Foundation::PWSTR, lpszKeyname : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER
+    {% if !flag?(:docs) %}
     C.OpenClusterCryptProviderEx(lpszResource, lpszKeyname, lpszProvider, dwType, dwFlags)
+    {% end %}
   end
 
-  def closeClusterCryptProvider(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*) : UInt32
+  def closeClusterCryptProvider(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER) : UInt32
+    {% if !flag?(:docs) %}
     C.CloseClusterCryptProvider(hClusCryptProvider)
+    {% end %}
   end
 
-  def clusterEncrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pData : UInt8*, cbData : UInt32, ppData : UInt8**, pcbData : UInt32*) : UInt32
+  def clusterEncrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER, pData : UInt8*, cbData : UInt32, ppData : UInt8**, pcbData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterEncrypt(hClusCryptProvider, pData, cbData, ppData, pcbData)
+    {% end %}
   end
 
-  def clusterDecrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pCryptInput : UInt8*, cbCryptInput : UInt32, ppCryptOutput : UInt8**, pcbCryptOutput : UInt32*) : UInt32
+  def clusterDecrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER, pCryptInput : UInt8*, cbCryptInput : UInt32, ppCryptOutput : UInt8**, pcbCryptOutput : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ClusterDecrypt(hClusCryptProvider, pCryptInput, cbCryptInput, ppCryptOutput, pcbCryptOutput)
+    {% end %}
   end
 
   def freeClusterCrypt(pCryptInfo : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.FreeClusterCrypt(pCryptInfo)
+    {% end %}
   end
 
   def resUtilVerifyShutdownSafe(flags : UInt32, reason : UInt32, pResult : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilVerifyShutdownSafe(flags, reason, pResult)
+    {% end %}
   end
 
   def resUtilPaxosComparer(left : Win32cr::Networking::Clustering::PaxosTagCStruct*, right : Win32cr::Networking::Clustering::PaxosTagCStruct*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResUtilPaxosComparer(left, right)
+    {% end %}
   end
 
   def resUtilLeftPaxosIsLessThanRight(left : Win32cr::Networking::Clustering::PaxosTagCStruct*, right : Win32cr::Networking::Clustering::PaxosTagCStruct*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResUtilLeftPaxosIsLessThanRight(left, right)
+    {% end %}
   end
 
   def resUtilsDeleteKeyTree(key : Win32cr::System::Registry::HKEY, keyName : Win32cr::Foundation::PWSTR, treatNoKeyAsError : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilsDeleteKeyTree(key, keyName, treatNoKeyAsError)
+    {% end %}
   end
 
-  def resUtilGroupsEqual(hSelf : Win32cr::Networking::Clustering::HGROUP_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, pEqual : Win32cr::Foundation::BOOL*) : UInt32
+  def resUtilGroupsEqual(hSelf : Win32cr::Networking::Clustering::HGROUP, hGroup : Win32cr::Networking::Clustering::HGROUP, pEqual : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGroupsEqual(hSelf, hGroup, pEqual)
+    {% end %}
   end
 
-  def resUtilEnumGroups(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+  def resUtilEnumGroups(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HGROUP, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilEnumGroups(hCluster, hSelf, pResCallBack, pParameter)
+    {% end %}
   end
 
-  def resUtilEnumGroupsEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+  def resUtilEnumGroupsEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HGROUP, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilEnumGroupsEx(hCluster, hSelf, groupType, pResCallBack, pParameter)
+    {% end %}
   end
 
-  def resUtilDupGroup(group : Win32cr::Networking::Clustering::HGROUP_*, copy : Win32cr::Networking::Clustering::HGROUP_**) : UInt32
+  def resUtilDupGroup(group : Win32cr::Networking::Clustering::HGROUP, copy : Win32cr::Networking::Clustering::HGROUP*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilDupGroup(group, copy)
+    {% end %}
   end
 
-  def resUtilGetClusterGroupType(hGroup : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE*) : UInt32
+  def resUtilGetClusterGroupType(hGroup : Win32cr::Networking::Clustering::HGROUP, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetClusterGroupType(hGroup, groupType)
+    {% end %}
   end
 
-  def resUtilGetCoreGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUP_*
+  def resUtilGetCoreGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER) : Win32cr::Networking::Clustering::HGROUP
+    {% if !flag?(:docs) %}
     C.ResUtilGetCoreGroup(hCluster)
+    {% end %}
   end
 
-  def resUtilResourceDepEnum(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, enumType : UInt32, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+  def resUtilResourceDepEnum(hSelf : Win32cr::Networking::Clustering::HRESOURCE, enumType : UInt32, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilResourceDepEnum(hSelf, enumType, pResCallBack, pParameter)
+    {% end %}
   end
 
-  def resUtilDupResource(group : Win32cr::Networking::Clustering::HRESOURCE_*, copy : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
+  def resUtilDupResource(group : Win32cr::Networking::Clustering::HRESOURCE, copy : Win32cr::Networking::Clustering::HRESOURCE*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilDupResource(group, copy)
+    {% end %}
   end
 
-  def resUtilGetClusterId(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, guid : LibC::GUID*) : UInt32
+  def resUtilGetClusterId(hCluster : Win32cr::Networking::Clustering::HCLUSTER, guid : LibC::GUID*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilGetClusterId(hCluster, guid)
+    {% end %}
   end
 
-  def resUtilNodeEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pNodeCallBack : Win32cr::Networking::Clustering::LPNODE_CALLBACK, pParameter : Void*) : UInt32
+  def resUtilNodeEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pNodeCallBack : Win32cr::Networking::Clustering::LPNODE_CALLBACK, pParameter : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ResUtilNodeEnum(hCluster, pNodeCallBack, pParameter)
+    {% end %}
   end
 
   def registerAppInstance(process_handle : Win32cr::Foundation::HANDLE, app_instance_id : LibC::GUID*, children_inherit_app_instance : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterAppInstance(process_handle, app_instance_id, children_inherit_app_instance)
+    {% end %}
   end
 
   def registerAppInstanceVersion(app_instance_id : LibC::GUID*, instance_version_high : UInt64, instance_version_low : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterAppInstanceVersion(app_instance_id, instance_version_high, instance_version_low)
+    {% end %}
   end
 
   def queryAppInstanceVersion(app_instance_id : LibC::GUID*, instance_version_high : UInt64*, instance_version_low : UInt64*, version_status : Win32cr::Foundation::NTSTATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.QueryAppInstanceVersion(app_instance_id, instance_version_high, instance_version_low, version_status)
+    {% end %}
   end
 
   def resetAllAppInstanceVersions : UInt32
+    {% if !flag?(:docs) %}
     C.ResetAllAppInstanceVersions
+    {% end %}
   end
 
   def setAppInstanceCsvFlags(process_handle : Win32cr::Foundation::HANDLE, mask : UInt32, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetAppInstanceCsvFlags(process_handle, mask, flags)
+    {% end %}
   end
 
   @[Link("clusapi")]
   @[Link("resutils")]
   @[Link("ntlanman")]
+  {% if !flag?(:docs) %}
   lib C
+    # :nodoc:
+    fun ClusapiSetReasonHandler(lpHandler : Win32cr::Networking::Clustering::CLUSAPI_REASON_HANDLER*) : Win32cr::Networking::Clustering::CLUSAPI_REASON_HANDLER*
+
     # :nodoc:
     fun GetNodeClusterState(lpszNodeName : Win32cr::Foundation::PWSTR, pdwClusterState : UInt32*) : UInt32
 
     # :nodoc:
-    fun OpenCluster(lpszClusterName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun OpenCluster(lpszClusterName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HCLUSTER
 
     # :nodoc:
-    fun OpenClusterEx(lpszClusterName : Win32cr::Foundation::PWSTR, desired_access : UInt32, granted_access : UInt32*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun OpenClusterEx(lpszClusterName : Win32cr::Foundation::PWSTR, desired_access : UInt32, granted_access : UInt32*) : Win32cr::Networking::Clustering::HCLUSTER
 
     # :nodoc:
-    fun CloseCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Foundation::BOOL
+    fun CloseCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun SetClusterName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNewClusterName : Win32cr::Foundation::PWSTR) : UInt32
+    fun SetClusterName(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNewClusterName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterInformation(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterName : UInt16*, lpcchClusterName : UInt32*, lpClusterInfo : Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*) : UInt32
+    fun SetClusterNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNewClusterName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterQuorumResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : UInt16*, lpcchResourceName : UInt32*, lpszDeviceName : UInt16*, lpcchDeviceName : UInt32*, lpdwMaxQuorumLogSize : UInt32*) : UInt32
+    fun GetClusterInformation(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszClusterName : Win32cr::Foundation::PWSTR, lpcchClusterName : UInt32*, lpClusterInfo : Win32cr::Networking::Clustering::CLUSTERVERSIONINFO*) : UInt32
 
     # :nodoc:
-    fun SetClusterQuorumResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuoLogSize : UInt32) : UInt32
+    fun GetClusterQuorumResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceName : Win32cr::Foundation::PWSTR, lpcchResourceName : UInt32*, lpszDeviceName : Win32cr::Foundation::PWSTR, lpcchDeviceName : UInt32*, lpdwMaxQuorumLogSize : UInt32*) : UInt32
 
     # :nodoc:
-    fun BackupClusterDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszPathName : Win32cr::Foundation::PWSTR) : UInt32
+    fun SetClusterQuorumResource(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuoLogSize : UInt32) : UInt32
+
+    # :nodoc:
+    fun SetClusterQuorumResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDeviceName : Win32cr::Foundation::PWSTR, dwMaxQuorumLogSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun BackupClusterDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszPathName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
     fun RestoreClusterDatabase(lpszPathName : Win32cr::Foundation::PWSTR, bForce : Win32cr::Foundation::BOOL, lpszQuorumDriveLetter : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun SetClusterNetworkPriorityOrder(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, network_count : UInt32, network_list : Win32cr::Networking::Clustering::HNETWORK_**) : UInt32
+    fun SetClusterNetworkPriorityOrder(hCluster : Win32cr::Networking::Clustering::HCLUSTER, network_count : UInt32, network_list : Win32cr::Networking::Clustering::HNETWORK*) : UInt32
 
     # :nodoc:
     fun SetClusterServiceAccountPassword(lpszClusterName : Win32cr::Foundation::PWSTR, lpszNewPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpReturnStatusBuffer : Win32cr::Networking::Clustering::CLUSTER_SET_PASSWORD_STATUS*, lpcbReturnStatusBufferSize : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterUpgradeFunctionalLevel(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, perform : Win32cr::Foundation::BOOL, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+    fun ClusterControlEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun CreateClusterNotifyPortV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, filters : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, dwFilterCount : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
+    fun ClusterUpgradeFunctionalLevel(hCluster : Win32cr::Networking::Clustering::HCLUSTER, perform : Win32cr::Foundation::BOOL, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
 
     # :nodoc:
-    fun RegisterClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, filter : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    fun CreateClusterNotifyPortV2(hChange : Win32cr::Networking::Clustering::HCHANGE, hCluster : Win32cr::Networking::Clustering::HCLUSTER, filters : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, dwFilterCount : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE
 
     # :nodoc:
-    fun GetNotifyEventHandle(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lphTargetEvent : Win32cr::Foundation::HANDLE*) : UInt32
+    fun RegisterClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE, filter : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
 
     # :nodoc:
-    fun GetClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, pFilterAndType : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, buffer : UInt8*, lpbBufferSize : UInt32*, lpszObjectId : UInt16*, lpcchObjectId : UInt32*, lpszParentId : UInt16*, lpcchParentId : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, lpszType : UInt16*, lpcchType : UInt32*, dwMilliseconds : UInt32) : UInt32
+    fun GetNotifyEventHandle(hChange : Win32cr::Networking::Clustering::HCHANGE, lphTargetEvent : Win32cr::Foundation::HANDLE*) : UInt32
 
     # :nodoc:
-    fun CreateClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwFilter : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE_*
+    fun GetClusterNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE, lpdwNotifyKey : LibC::UIntPtrT*, pFilterAndType : Win32cr::Networking::Clustering::NOTIFY_FILTER_AND_TYPE*, buffer : UInt8*, lpbBufferSize : UInt32*, lpszObjectId : Win32cr::Foundation::PWSTR, lpcchObjectId : UInt32*, lpszParentId : Win32cr::Foundation::PWSTR, lpcchParentId : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, lpszType : Win32cr::Foundation::PWSTR, lpcchType : UInt32*, dwMilliseconds : UInt32) : UInt32
 
     # :nodoc:
-    fun RegisterClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, dwFilterType : UInt32, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    fun CreateClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE, hCluster : Win32cr::Networking::Clustering::HCLUSTER, dwFilter : UInt32, dwNotifyKey : LibC::UIntPtrT) : Win32cr::Networking::Clustering::HCHANGE
 
     # :nodoc:
-    fun GetClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE_*, lpdwNotifyKey : LibC::UIntPtrT*, lpdwFilterType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*, dwMilliseconds : UInt32) : UInt32
+    fun RegisterClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE, dwFilterType : UInt32, hObject : Win32cr::Foundation::HANDLE, dwNotifyKey : LibC::UIntPtrT) : UInt32
 
     # :nodoc:
-    fun CloseClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE_*) : Win32cr::Foundation::BOOL
+    fun GetClusterNotify(hChange : Win32cr::Networking::Clustering::HCHANGE, lpdwNotifyKey : LibC::UIntPtrT*, lpdwFilterType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, dwMilliseconds : UInt32) : UInt32
 
     # :nodoc:
-    fun ClusterOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32) : Win32cr::Networking::Clustering::HCLUSENUM_*
+    fun CloseClusterNotifyPort(hChange : Win32cr::Networking::Clustering::HCHANGE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClusterGetEnumCount(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
+    fun ClusterOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, dwType : UInt32) : Win32cr::Networking::Clustering::HCLUSENUM
 
     # :nodoc:
-    fun ClusterEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun ClusterGetEnumCount(hEnum : Win32cr::Networking::Clustering::HCLUSENUM) : UInt32
 
     # :nodoc:
-    fun ClusterCloseEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM_*) : UInt32
+    fun ClusterEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HCLUSENUMEX_*
+    fun ClusterCloseEnum(hEnum : Win32cr::Networking::Clustering::HCLUSENUM) : UInt32
 
     # :nodoc:
-    fun ClusterGetEnumCountEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
+    fun ClusterOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HCLUSENUMEX
 
     # :nodoc:
-    fun ClusterEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    fun ClusterGetEnumCountEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX) : UInt32
 
     # :nodoc:
-    fun ClusterCloseEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX_*) : UInt32
+    fun ClusterEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
     # :nodoc:
-    fun CreateClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, groupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
+    fun ClusterCloseEnumEx(hClusterEnum : Win32cr::Networking::Clustering::HCLUSENUMEX) : UInt32
 
     # :nodoc:
-    fun OpenClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET_*
+    fun CreateClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER, groupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET
 
     # :nodoc:
-    fun CloseClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : Win32cr::Foundation::BOOL
+    fun OpenClusterGroupSet(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupSetName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUPSET
 
     # :nodoc:
-    fun DeleteClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    fun CloseClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClusterAddGroupToGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun DeleteClusterGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
 
     # :nodoc:
-    fun ClusterAddGroupToGroupSetWithDomains(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, faultDomain : UInt32, updateDomain : UInt32) : UInt32
+    fun DeleteClusterGroupSetEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterRemoveGroupFromGroupSet(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun ClusterAddGroupToGroupSet(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun ClusterGroupSetControl(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterAddGroupToGroupSetWithDomains(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hGroup : Win32cr::Networking::Clustering::HGROUP, faultDomain : UInt32, updateDomain : UInt32) : UInt32
 
     # :nodoc:
-    fun AddClusterGroupDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hGroup : Win32cr::Networking::Clustering::HGROUP, faultDomain : UInt32, updateDomain : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun SetGroupDependencyExpression(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+    fun ClusterRemoveGroupFromGroupSet(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun RemoveClusterGroupDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun ClusterRemoveGroupFromGroupSetEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun AddClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    fun ClusterGroupSetControl(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun SetClusterGroupSetDependencyExpression(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpszDependencyExprssion : Win32cr::Foundation::PWSTR) : UInt32
+    fun ClusterGroupSetControlEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun RemoveClusterGroupSetDependency(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    fun AddClusterGroupDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun AddClusterGroupToGroupSetDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP_*, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    fun AddClusterGroupDependencyEx(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun RemoveClusterGroupToGroupSetDependency(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET_*) : UInt32
+    fun SetGroupDependencyExpression(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterGroupSetOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUPSETENUM_*
+    fun SetGroupDependencyExpressionEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszDependencyExpression : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterGroupSetGetEnumCount(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
+    fun RemoveClusterGroupDependency(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun ClusterGroupSetEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun RemoveClusterGroupDependencyEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterGroupSetCloseEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM_*) : UInt32
+    fun AddClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
 
     # :nodoc:
-    fun AddCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+    fun AddClusterGroupSetDependencyEx(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun RemoveCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET_*, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
+    fun SetClusterGroupSetDependencyExpression(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszDependencyExprssion : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun CreateClusterAvailabilitySet(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpAvailabilitySetName : Win32cr::Foundation::PWSTR, pAvailabilitySetConfig : Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*) : Win32cr::Networking::Clustering::HGROUPSET_*
+    fun SetClusterGroupSetDependencyExpressionEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszDependencyExpression : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterNodeReplacement(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeNameCurrent : Win32cr::Foundation::PWSTR, lpszNodeNameNew : Win32cr::Foundation::PWSTR) : UInt32
+    fun RemoveClusterGroupSetDependency(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
 
     # :nodoc:
-    fun ClusterCreateAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, ruleType : Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE) : UInt32
+    fun RemoveClusterGroupSetDependencyEx(hGroupSet : Win32cr::Networking::Clustering::HGROUPSET, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterRemoveAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR) : UInt32
+    fun AddClusterGroupToGroupSetDependency(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
 
     # :nodoc:
-    fun ClusterAddGroupToAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun AddClusterGroupToGroupSetDependencyEx(hDependentGroup : Win32cr::Networking::Clustering::HGROUP, hProviderGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterRemoveGroupFromAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun RemoveClusterGroupToGroupSetDependency(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET) : UInt32
 
     # :nodoc:
-    fun ClusterAffinityRuleControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, affinityRuleName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun RemoveClusterGroupToGroupSetDependencyEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDependsOn : Win32cr::Networking::Clustering::HGROUPSET, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun OpenClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNODE_*
+    fun ClusterGroupSetOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER) : Win32cr::Networking::Clustering::HGROUPSETENUM
 
     # :nodoc:
-    fun OpenClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNODE_*
+    fun ClusterGroupSetGetEnumCount(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM) : UInt32
 
     # :nodoc:
-    fun OpenClusterNodeById(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, nodeId : UInt32) : Win32cr::Networking::Clustering::HNODE_*
+    fun ClusterGroupSetEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM, dwIndex : UInt32, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun CloseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Foundation::BOOL
+    fun ClusterGroupSetCloseEnum(hGroupSetEnum : Win32cr::Networking::Clustering::HGROUPSETENUM) : UInt32
 
     # :nodoc:
-    fun GetClusterNodeState(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::CLUSTER_NODE_STATE
+    fun AddCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterNodeId(hNode : Win32cr::Networking::Clustering::HNODE_*, lpszNodeId : UInt16*, lpcchName : UInt32*) : UInt32
+    fun RemoveCrossClusterGroupSetDependency(hDependentGroupSet : Win32cr::Networking::Clustering::HGROUPSET, lpRemoteClusterName : Win32cr::Foundation::PWSTR, lpRemoteGroupSetName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterFromNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun CreateClusterAvailabilitySet(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpAvailabilitySetName : Win32cr::Foundation::PWSTR, pAvailabilitySetConfig : Win32cr::Networking::Clustering::CLUSTER_AVAILABILITY_SET_CONFIG*) : Win32cr::Networking::Clustering::HGROUPSET
 
     # :nodoc:
-    fun PauseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun ClusterNodeReplacement(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeNameCurrent : Win32cr::Foundation::PWSTR, lpszNodeNameNew : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ResumeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun ClusterCreateAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR, ruleType : Win32cr::Networking::Clustering::CLUS_AFFINITY_RULE_TYPE) : UInt32
 
     # :nodoc:
-    fun EvictClusterNode(hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun ClusterRemoveAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterNetInterfaceOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*
+    fun ClusterAddGroupToAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun ClusterNetInterfaceEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun ClusterRemoveGroupFromAffinityRule(hCluster : Win32cr::Networking::Clustering::HCLUSTER, ruleName : Win32cr::Foundation::PWSTR, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun ClusterNetInterfaceCloseEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM_*) : UInt32
+    fun ClusterAffinityRuleControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER, affinityRuleName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterNodeOpenEnum(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNODEENUM_*
+    fun OpenClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNODE
 
     # :nodoc:
-    fun ClusterNodeOpenEnumEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HNODEENUMEX_*
+    fun OpenClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNODE
 
     # :nodoc:
-    fun ClusterNodeGetEnumCountEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
+    fun OpenClusterNodeById(hCluster : Win32cr::Networking::Clustering::HCLUSTER, nodeId : UInt32) : Win32cr::Networking::Clustering::HNODE
 
     # :nodoc:
-    fun ClusterNodeEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    fun CloseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClusterNodeCloseEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX_*) : UInt32
+    fun GetClusterNodeState(hNode : Win32cr::Networking::Clustering::HNODE) : Win32cr::Networking::Clustering::CLUSTER_NODE_STATE
 
     # :nodoc:
-    fun ClusterNodeGetEnumCount(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
+    fun GetClusterNodeId(hNode : Win32cr::Networking::Clustering::HNODE, lpszNodeId : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterNodeCloseEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*) : UInt32
+    fun GetClusterFromNode(hNode : Win32cr::Networking::Clustering::HNODE) : Win32cr::Networking::Clustering::HCLUSTER
 
     # :nodoc:
-    fun ClusterNodeEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun PauseClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
 
     # :nodoc:
-    fun EvictClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, dwTimeOut : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*) : UInt32
+    fun ResumeClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
 
     # :nodoc:
-    fun GetClusterResourceTypeKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszTypeName : Win32cr::Foundation::PWSTR, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    fun EvictClusterNode(hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
 
     # :nodoc:
-    fun CreateClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
+    fun ClusterNetInterfaceOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACEENUM
 
     # :nodoc:
-    fun OpenClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP_*
+    fun ClusterNetInterfaceEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM, dwIndex : UInt32, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun OpenClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HGROUP_*
+    fun ClusterNetInterfaceCloseEnum(hNetInterfaceEnum : Win32cr::Networking::Clustering::HNETINTERFACEENUM) : UInt32
 
     # :nodoc:
-    fun PauseClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun ClusterNodeOpenEnum(hNode : Win32cr::Networking::Clustering::HNODE, dwType : UInt32) : Win32cr::Networking::Clustering::HNODEENUM
 
     # :nodoc:
-    fun ResumeClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE_*, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32) : UInt32
+    fun ClusterNodeOpenEnumEx(hNode : Win32cr::Networking::Clustering::HNODE, dwType : UInt32, pOptions : Void*) : Win32cr::Networking::Clustering::HNODEENUMEX
 
     # :nodoc:
-    fun CreateClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszGroupName : Win32cr::Foundation::PWSTR, pGroupInfo : Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*) : Win32cr::Networking::Clustering::HGROUP_*
+    fun ClusterNodeGetEnumCountEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX) : UInt32
 
     # :nodoc:
-    fun ClusterGroupOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HGROUPENUMEX_*
+    fun ClusterNodeEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterGroupGetEnumCountEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
+    fun ClusterNodeCloseEnumEx(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUMEX) : UInt32
 
     # :nodoc:
-    fun ClusterGroupEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    fun ClusterNodeGetEnumCount(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM) : UInt32
 
     # :nodoc:
-    fun ClusterGroupCloseEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX_*) : UInt32
+    fun ClusterNodeCloseEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM) : UInt32
 
     # :nodoc:
-    fun ClusterResourceOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESENUMEX_*
+    fun ClusterNodeEnum(hNodeEnum : Win32cr::Networking::Clustering::HNODEENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterResourceGetEnumCountEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
+    fun EvictClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE, dwTimeOut : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*) : UInt32
 
     # :nodoc:
-    fun ClusterResourceEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, cbItem : UInt32*) : UInt32
+    fun EvictClusterNodeEx2(hNode : Win32cr::Networking::Clustering::HNODE, dwTimeout : UInt32, phrCleanupStatus : Win32cr::Foundation::HRESULT*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterResourceCloseEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX_*) : UInt32
+    fun GetClusterResourceTypeKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszTypeName : Win32cr::Foundation::PWSTR, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
     # :nodoc:
-    fun OnlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    fun CreateClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP
 
     # :nodoc:
-    fun OfflineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    fun OpenClusterGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HGROUP
 
     # :nodoc:
-    fun OnlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    fun OpenClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HGROUP
 
     # :nodoc:
-    fun OfflineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    fun PauseClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE) : UInt32
 
     # :nodoc:
-    fun MoveClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
+    fun PauseClusterNodeEx2(hNode : Win32cr::Networking::Clustering::HNODE, bDrainNode : Win32cr::Foundation::BOOL, dwPauseFlags : UInt32, hNodeDrainTarget : Win32cr::Networking::Clustering::HNODE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun CancelClusterGroupOperation(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwCancelFlags_RESERVED : UInt32) : UInt32
+    fun ResumeClusterNodeEx(hNode : Win32cr::Networking::Clustering::HNODE, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32) : UInt32
 
     # :nodoc:
-    fun RestartClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwFlags : UInt32) : UInt32
+    fun ResumeClusterNodeEx2(hNode : Win32cr::Networking::Clustering::HNODE, eResumeFailbackType : Win32cr::Networking::Clustering::CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun CloseClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Foundation::BOOL
+    fun CreateClusterGroupEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszGroupName : Win32cr::Foundation::PWSTR, pGroupInfo : Win32cr::Networking::Clustering::CLUSTER_CREATE_GROUP_INFO*) : Win32cr::Networking::Clustering::HGROUP
 
     # :nodoc:
-    fun GetClusterFromGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun ClusterGroupOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HGROUPENUMEX
 
     # :nodoc:
-    fun GetClusterGroupState(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE
+    fun ClusterGroupGetEnumCountEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX) : UInt32
 
     # :nodoc:
-    fun SetClusterGroupName(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszGroupName : Win32cr::Foundation::PWSTR) : UInt32
+    fun ClusterGroupEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_GROUP_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
     # :nodoc:
-    fun SetClusterGroupNodeList(hGroup : Win32cr::Networking::Clustering::HGROUP_*, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE_**) : UInt32
+    fun ClusterGroupCloseEnumEx(hGroupEnumEx : Win32cr::Networking::Clustering::HGROUPENUMEX) : UInt32
 
     # :nodoc:
-    fun OnlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun ClusterResourceOpenEnumEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszProperties : Win32cr::Foundation::PWSTR, cbProperties : UInt32, lpszRoProperties : Win32cr::Foundation::PWSTR, cbRoProperties : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESENUMEX
 
     # :nodoc:
-    fun MoveClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hDestinationNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun ClusterResourceGetEnumCountEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX) : UInt32
 
     # :nodoc:
-    fun OfflineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun ClusterResourceEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX, dwIndex : UInt32, pItem : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_ENUM_ITEM*, cbItem : UInt32*) : UInt32
 
     # :nodoc:
-    fun DeleteClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun ClusterResourceCloseEnumEx(hResourceEnumEx : Win32cr::Networking::Clustering::HRESENUMEX) : UInt32
 
     # :nodoc:
-    fun DestroyClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun OnlineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
     # :nodoc:
-    fun ClusterGroupOpenEnum(hGroup : Win32cr::Networking::Clustering::HGROUP_*, dwType : UInt32) : Win32cr::Networking::Clustering::HGROUPENUM_*
+    fun OfflineClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
     # :nodoc:
-    fun ClusterGroupGetEnumCount(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
+    fun OnlineClusterGroupEx2(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterGroupEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszResourceName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun OfflineClusterGroupEx2(hGroup : Win32cr::Networking::Clustering::HGROUP, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterGroupCloseEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM_*) : UInt32
+    fun OnlineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
     # :nodoc:
-    fun CreateClusterResource(hGroup : Win32cr::Networking::Clustering::HGROUP_*, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun OnlineClusterResourceEx2(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOnlineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun OpenClusterResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun OfflineClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
     # :nodoc:
-    fun OpenClusterResourceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun OfflineClusterResourceEx2(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwOfflineFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun CloseClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    fun MoveClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetClusterFromResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun MoveClusterGroupEx2(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE, dwMoveFlags : UInt32, lpInBuffer : UInt8*, cbInBufferSize : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun DeleteClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun CancelClusterGroupOperation(hGroup : Win32cr::Networking::Clustering::HGROUP, dwCancelFlags_RESERVED : UInt32) : UInt32
 
     # :nodoc:
-    fun GetClusterResourceState(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszNodeName : UInt16*, lpcchNodeName : UInt32*, lpszGroupName : UInt16*, lpcchGroupName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+    fun RestartClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwFlags : UInt32) : UInt32
 
     # :nodoc:
-    fun SetClusterResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResourceName : Win32cr::Foundation::PWSTR) : UInt32
+    fun RestartClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwFlags : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun FailClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun CloseClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun OnlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun GetClusterFromGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : Win32cr::Networking::Clustering::HCLUSTER
 
     # :nodoc:
-    fun OfflineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun GetClusterGroupState(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszNodeName : Win32cr::Foundation::PWSTR, lpcchNodeName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_GROUP_STATE
 
     # :nodoc:
-    fun ChangeClusterResourceGroup(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*) : UInt32
+    fun SetClusterGroupName(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszGroupName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ChangeClusterResourceGroupEx(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, flags : UInt64) : UInt32
+    fun SetClusterGroupNodeList(hGroup : Win32cr::Networking::Clustering::HGROUP, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE*) : UInt32
 
     # :nodoc:
-    fun AddClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun SetClusterGroupNameEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszGroupName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun RemoveClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hNode : Win32cr::Networking::Clustering::HNODE_*) : UInt32
+    fun SetClusterGroupNodeListEx(hGroup : Win32cr::Networking::Clustering::HGROUP, node_count : UInt32, node_list : Win32cr::Networking::Clustering::HNODE*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun AddClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun OnlineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE) : UInt32
 
     # :nodoc:
-    fun RemoveClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun MoveClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP, hDestinationNode : Win32cr::Networking::Clustering::HNODE) : UInt32
 
     # :nodoc:
-    fun SetClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+    fun OfflineClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun GetClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpszDependencyExpression : UInt16*, lpcchDependencyExpression : UInt32*) : UInt32
+    fun DeleteClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun AddResourceToClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun DestroyClusterGroup(hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
 
     # :nodoc:
-    fun RemoveResourceFromClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : UInt32
+    fun DeleteClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun DestroyClusterGroupEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun ClusterGroupOpenEnum(hGroup : Win32cr::Networking::Clustering::HGROUP, dwType : UInt32) : Win32cr::Networking::Clustering::HGROUPENUM
+
+    # :nodoc:
+    fun ClusterGroupGetEnumCount(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM) : UInt32
+
+    # :nodoc:
+    fun ClusterGroupEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszResourceName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
+
+    # :nodoc:
+    fun ClusterGroupCloseEnum(hGroupEnum : Win32cr::Networking::Clustering::HGROUPENUM) : UInt32
+
+    # :nodoc:
+    fun CreateClusterResource(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
+
+    # :nodoc:
+    fun CreateClusterResourceEx(hGroup : Win32cr::Networking::Clustering::HGROUP, lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
+
+    # :nodoc:
+    fun OpenClusterResource(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
+
+    # :nodoc:
+    fun OpenClusterResourceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HRESOURCE
+
+    # :nodoc:
+    fun CloseClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetClusterFromResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Networking::Clustering::HCLUSTER
+
+    # :nodoc:
+    fun DeleteClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+
+    # :nodoc:
+    fun DeleteClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun GetClusterResourceState(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszNodeName : Win32cr::Foundation::PWSTR, lpcchNodeName : UInt32*, lpszGroupName : Win32cr::Foundation::PWSTR, lpcchGroupName : UInt32*) : Win32cr::Networking::Clustering::CLUSTER_RESOURCE_STATE
+
+    # :nodoc:
+    fun SetClusterResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszResourceName : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun SetClusterResourceNameEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszResourceName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun FailClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+
+    # :nodoc:
+    fun FailClusterResourceEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun OnlineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+
+    # :nodoc:
+    fun OfflineClusterResource(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+
+    # :nodoc:
+    fun ChangeClusterResourceGroup(hResource : Win32cr::Networking::Clustering::HRESOURCE, hGroup : Win32cr::Networking::Clustering::HGROUP) : UInt32
+
+    # :nodoc:
+    fun ChangeClusterResourceGroupEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hGroup : Win32cr::Networking::Clustering::HGROUP, flags : UInt64) : UInt32
+
+    # :nodoc:
+    fun ChangeClusterResourceGroupEx2(hResource : Win32cr::Networking::Clustering::HRESOURCE, hGroup : Win32cr::Networking::Clustering::HGROUP, flags : UInt64, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun AddClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+
+    # :nodoc:
+    fun RemoveClusterResourceNode(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE) : UInt32
+
+    # :nodoc:
+    fun AddClusterResourceNodeEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun RemoveClusterResourceNodeEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hNode : Win32cr::Networking::Clustering::HNODE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun AddClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+
+    # :nodoc:
+    fun RemoveClusterResourceDependency(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+
+    # :nodoc:
+    fun AddClusterResourceDependencyEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun RemoveClusterResourceDependencyEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hDependsOn : Win32cr::Networking::Clustering::HRESOURCE, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun SetClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDependencyExpression : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun GetClusterResourceDependencyExpression(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpszDependencyExpression : Win32cr::Foundation::PWSTR, lpcchDependencyExpression : UInt32*) : UInt32
+
+    # :nodoc:
+    fun AddResourceToClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
+
+    # :nodoc:
+    fun RemoveResourceFromClusterSharedVolumes(hResource : Win32cr::Networking::Clustering::HRESOURCE) : UInt32
 
     # :nodoc:
     fun IsFileOnClusterSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR, pbFileIsOnSharedVolume : Win32cr::Foundation::BOOL*) : UInt32
@@ -9273,136 +10548,172 @@ module Win32cr::Networking::Clustering
     fun ClusterSharedVolumeSetSnapshotState(guidSnapshotSet : LibC::GUID, lpszVolumeName : Win32cr::Foundation::PWSTR, state : Win32cr::Networking::Clustering::CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) : UInt32
 
     # :nodoc:
-    fun CanResourceBeDependent(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hResourceDependent : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    fun CanResourceBeDependent(hResource : Win32cr::Networking::Clustering::HRESOURCE, hResourceDependent : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClusterResourceControl(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterResourceControl(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterResourceControlAsUser(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterResourceControlAsUser(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterResourceTypeControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterResourceTypeControl(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterResourceTypeControlAsUser(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterResourceTypeControlAsUser(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterGroupControl(hGroup : Win32cr::Networking::Clustering::HGROUP_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterGroupControl(hGroup : Win32cr::Networking::Clustering::HGROUP, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterNodeControl(hNode : Win32cr::Networking::Clustering::HNODE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun ClusterResourceControlEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterResourceNetworkName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    fun ClusterResourceControlAsUserEx(hResource : Win32cr::Networking::Clustering::HRESOURCE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterResourceOpenEnum(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, dwType : UInt32) : Win32cr::Networking::Clustering::HRESENUM_*
+    fun ClusterResourceTypeControlEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterResourceGetEnumCount(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
+    fun ClusterResourceTypeControlAsUserEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterResourceEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun ClusterGroupControlEx(hGroup : Win32cr::Networking::Clustering::HGROUP, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterResourceCloseEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM_*) : UInt32
+    fun ClusterNodeControl(hNode : Win32cr::Networking::Clustering::HNODE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun CreateClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32) : UInt32
+    fun ClusterNodeControlEx(hNode : Win32cr::Networking::Clustering::HNODE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun DeleteClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR) : UInt32
+    fun GetClusterResourceNetworkName(hResource : Win32cr::Networking::Clustering::HRESOURCE, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClusterResourceTypeOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszResourceTypeName : Win32cr::Foundation::PWSTR, dwType : UInt32) : Win32cr::Networking::Clustering::HRESTYPEENUM_*
+    fun ClusterResourceOpenEnum(hResource : Win32cr::Networking::Clustering::HRESOURCE, dwType : UInt32) : Win32cr::Networking::Clustering::HRESENUM
 
     # :nodoc:
-    fun ClusterResourceTypeGetEnumCount(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
+    fun ClusterResourceGetEnumCount(hResEnum : Win32cr::Networking::Clustering::HRESENUM) : UInt32
 
     # :nodoc:
-    fun ClusterResourceTypeEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun ClusterResourceEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterResourceTypeCloseEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM_*) : UInt32
+    fun ClusterResourceCloseEnum(hResEnum : Win32cr::Networking::Clustering::HRESENUM) : UInt32
 
     # :nodoc:
-    fun OpenClusterNetwork(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETWORK_*
+    fun CreateClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32) : UInt32
 
     # :nodoc:
-    fun OpenClusterNetworkEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNetworkName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETWORK_*
+    fun DeleteClusterResourceType(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun CloseClusterNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Foundation::BOOL
+    fun CreateClusterResourceTypeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, lpszDisplayName : Win32cr::Foundation::PWSTR, lpszResourceTypeDll : Win32cr::Foundation::PWSTR, dwLooksAlivePollInterval : UInt32, dwIsAlivePollInterval : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterFromNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun DeleteClusterResourceTypeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszTypeName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterNetworkOpenEnum(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, dwType : UInt32) : Win32cr::Networking::Clustering::HNETWORKENUM_*
+    fun ClusterResourceTypeOpenEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszResourceTypeName : Win32cr::Foundation::PWSTR, dwType : UInt32) : Win32cr::Networking::Clustering::HRESTYPEENUM
 
     # :nodoc:
-    fun ClusterNetworkGetEnumCount(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
+    fun ClusterResourceTypeGetEnumCount(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM) : UInt32
 
     # :nodoc:
-    fun ClusterNetworkEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*, dwIndex : UInt32, lpdwType : UInt32*, lpszName : UInt16*, lpcchName : UInt32*) : UInt32
+    fun ClusterResourceTypeEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterNetworkCloseEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM_*) : UInt32
+    fun ClusterResourceTypeCloseEnum(hResTypeEnum : Win32cr::Networking::Clustering::HRESTYPEENUM) : UInt32
 
     # :nodoc:
-    fun GetClusterNetworkState(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*) : Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE
+    fun OpenClusterNetwork(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNetworkName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETWORK
 
     # :nodoc:
-    fun SetClusterNetworkName(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszName : Win32cr::Foundation::PWSTR) : UInt32
+    fun OpenClusterNetworkEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNetworkName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETWORK
 
     # :nodoc:
-    fun GetClusterNetworkId(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, lpszNetworkId : UInt16*, lpcchName : UInt32*) : UInt32
+    fun CloseClusterNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ClusterNetworkControl(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun GetClusterFromNetwork(hNetwork : Win32cr::Networking::Clustering::HNETWORK) : Win32cr::Networking::Clustering::HCLUSTER
 
     # :nodoc:
-    fun OpenClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACE_*
+    fun ClusterNetworkOpenEnum(hNetwork : Win32cr::Networking::Clustering::HNETWORK, dwType : UInt32) : Win32cr::Networking::Clustering::HNETWORKENUM
 
     # :nodoc:
-    fun OpenClusterNetInterfaceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszInterfaceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETINTERFACE_*
+    fun ClusterNetworkGetEnumCount(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM) : UInt32
 
     # :nodoc:
-    fun GetClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR, lpszInterfaceName : UInt16*, lpcchInterfaceName : UInt32*) : UInt32
+    fun ClusterNetworkEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM, dwIndex : UInt32, lpdwType : UInt32*, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun CloseClusterNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Foundation::BOOL
+    fun ClusterNetworkCloseEnum(hNetworkEnum : Win32cr::Networking::Clustering::HNETWORKENUM) : UInt32
 
     # :nodoc:
-    fun GetClusterFromNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun GetClusterNetworkState(hNetwork : Win32cr::Networking::Clustering::HNETWORK) : Win32cr::Networking::Clustering::CLUSTER_NETWORK_STATE
 
     # :nodoc:
-    fun GetClusterNetInterfaceState(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*) : Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE
+    fun SetClusterNetworkName(hNetwork : Win32cr::Networking::Clustering::HNETWORK, lpszName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ClusterNetInterfaceControl(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, hHostNode : Win32cr::Networking::Clustering::HNODE_*, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+    fun SetClusterNetworkNameEx(hNetwork : Win32cr::Networking::Clustering::HNETWORK, lpszName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    fun GetClusterNetworkId(hNetwork : Win32cr::Networking::Clustering::HNETWORK, lpszNetworkId : Win32cr::Foundation::PWSTR, lpcchName : UInt32*) : UInt32
 
     # :nodoc:
-    fun GetClusterGroupKey(hGroup : Win32cr::Networking::Clustering::HGROUP_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    fun ClusterNetworkControl(hNetwork : Win32cr::Networking::Clustering::HNETWORK, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
 
     # :nodoc:
-    fun GetClusterResourceKey(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    fun ClusterNetworkControlEx(hNetwork : Win32cr::Networking::Clustering::HNETWORK, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun GetClusterNodeKey(hNode : Win32cr::Networking::Clustering::HNODE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    fun OpenClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszInterfaceName : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HNETINTERFACE
 
     # :nodoc:
-    fun GetClusterNetworkKey(hNetwork : Win32cr::Networking::Clustering::HNETWORK_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    fun OpenClusterNetInterfaceEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszInterfaceName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, lpdwGrantedAccess : UInt32*) : Win32cr::Networking::Clustering::HNETINTERFACE
 
     # :nodoc:
-    fun GetClusterNetInterfaceKey(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE_*, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+    fun GetClusterNetInterface(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, lpszNetworkName : Win32cr::Foundation::PWSTR, lpszInterfaceName : Win32cr::Foundation::PWSTR, lpcchInterfaceName : UInt32*) : UInt32
+
+    # :nodoc:
+    fun CloseClusterNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetClusterFromNetInterface(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE) : Win32cr::Networking::Clustering::HCLUSTER
+
+    # :nodoc:
+    fun GetClusterNetInterfaceState(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE) : Win32cr::Networking::Clustering::CLUSTER_NETINTERFACE_STATE
+
+    # :nodoc:
+    fun ClusterNetInterfaceControl(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*) : UInt32
+
+    # :nodoc:
+    fun ClusterNetInterfaceControlEx(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE, hHostNode : Win32cr::Networking::Clustering::HNODE, dwControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun GetClusterKey(hCluster : Win32cr::Networking::Clustering::HCLUSTER, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+
+    # :nodoc:
+    fun GetClusterGroupKey(hGroup : Win32cr::Networking::Clustering::HGROUP, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+
+    # :nodoc:
+    fun GetClusterResourceKey(hResource : Win32cr::Networking::Clustering::HRESOURCE, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+
+    # :nodoc:
+    fun GetClusterNodeKey(hNode : Win32cr::Networking::Clustering::HNODE, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+
+    # :nodoc:
+    fun GetClusterNetworkKey(hNetwork : Win32cr::Networking::Clustering::HNETWORK, samDesired : UInt32) : Win32cr::System::Registry::HKEY
+
+    # :nodoc:
+    fun GetClusterNetInterfaceKey(hNetInterface : Win32cr::Networking::Clustering::HNETINTERFACE, samDesired : UInt32) : Win32cr::System::Registry::HKEY
 
     # :nodoc:
     fun ClusterRegCreateKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, dwOptions : UInt32, samDesired : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : UInt32*) : Int32
+
+    # :nodoc:
+    fun ClusterRegCreateKeyEx(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, dwOptions : UInt32, samDesired : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, phkResult : Win32cr::System::Registry::HKEY*, lpdwDisposition : UInt32*, lpszReason : Win32cr::Foundation::PWSTR) : Int32
 
     # :nodoc:
     fun ClusterRegOpenKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR, samDesired : UInt32, phkResult : Win32cr::System::Registry::HKEY*) : Int32
@@ -9411,10 +10722,13 @@ module Win32cr::Networking::Clustering
     fun ClusterRegDeleteKey(hKey : Win32cr::System::Registry::HKEY, lpszSubKey : Win32cr::Foundation::PWSTR) : Int32
 
     # :nodoc:
+    fun ClusterRegDeleteKeyEx(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : Int32
+
+    # :nodoc:
     fun ClusterRegCloseKey(hKey : Win32cr::System::Registry::HKEY) : Int32
 
     # :nodoc:
-    fun ClusterRegEnumKey(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszName : UInt16*, lpcchName : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
+    fun ClusterRegEnumKey(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
 
     # :nodoc:
     fun ClusterRegSetValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : UInt8*, cbData : UInt32) : UInt32
@@ -9423,10 +10737,16 @@ module Win32cr::Networking::Clustering
     fun ClusterRegDeleteValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
+    fun ClusterRegSetValueEx(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, dwType : UInt32, lpData : UInt8*, cbData : UInt32, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
+    fun ClusterRegDeleteValueEx(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, lpszReason : Win32cr::Foundation::PWSTR) : UInt32
+
+    # :nodoc:
     fun ClusterRegQueryValue(hKey : Win32cr::System::Registry::HKEY, lpszValueName : Win32cr::Foundation::PWSTR, lpdwValueType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Int32
 
     # :nodoc:
-    fun ClusterRegEnumValue(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszValueName : UInt16*, lpcchValueName : UInt32*, lpdwType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : UInt32
+    fun ClusterRegEnumValue(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpszValueName : Win32cr::Foundation::PWSTR, lpcchValueName : UInt32*, lpdwType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : UInt32
 
     # :nodoc:
     fun ClusterRegQueryInfoKey(hKey : Win32cr::System::Registry::HKEY, lpcSubKeys : UInt32*, lpcchMaxSubKeyLen : UInt32*, lpcValues : UInt32*, lpcchMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Int32
@@ -9438,97 +10758,103 @@ module Win32cr::Networking::Clustering
     fun ClusterRegSetKeySecurity(hKey : Win32cr::System::Registry::HKEY, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Int32
 
     # :nodoc:
-    fun ClusterRegSyncDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : UInt32) : Int32
+    fun ClusterRegSetKeySecurityEx(hKey : Win32cr::System::Registry::HKEY, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpszReason : Win32cr::Foundation::PWSTR) : Int32
 
     # :nodoc:
-    fun ClusterRegCreateBatch(hKey : Win32cr::System::Registry::HKEY, pHREGBATCH : Win32cr::Networking::Clustering::HREGBATCH_**) : Int32
+    fun ClusterRegSyncDatabase(hCluster : Win32cr::Networking::Clustering::HCLUSTER, flags : UInt32) : Int32
 
     # :nodoc:
-    fun ClusterRegBatchAddCommand(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, dwCommand : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, wzName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpData : Void*, cbData : UInt32) : Int32
+    fun ClusterRegCreateBatch(hKey : Win32cr::System::Registry::HKEY, pHREGBATCH : Win32cr::Networking::Clustering::HREGBATCH*) : Int32
 
     # :nodoc:
-    fun ClusterRegCloseBatch(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, bCommit : Win32cr::Foundation::BOOL, failedCommandNumber : Int32*) : Int32
+    fun ClusterRegBatchAddCommand(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH, dwCommand : Win32cr::Networking::Clustering::CLUSTER_REG_COMMAND, wzName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpData : Void*, cbData : UInt32) : Int32
 
     # :nodoc:
-    fun ClusterRegCloseBatchEx(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH_*, flags : UInt32, failedCommandNumber : Int32*) : Int32
+    fun ClusterRegCloseBatch(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH, bCommit : Win32cr::Foundation::BOOL, failedCommandNumber : Int32*) : Int32
 
     # :nodoc:
-    fun ClusterRegBatchReadCommand(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*) : Int32
+    fun ClusterRegCloseBatchEx(hRegBatch : Win32cr::Networking::Clustering::HREGBATCH, flags : UInt32, failedCommandNumber : Int32*) : Int32
 
     # :nodoc:
-    fun ClusterRegBatchCloseNotification(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_*) : Int32
+    fun ClusterRegBatchReadCommand(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_BATCH_COMMAND*) : Int32
 
     # :nodoc:
-    fun ClusterRegCreateBatchNotifyPort(hKey : Win32cr::System::Registry::HKEY, phBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_**) : Int32
+    fun ClusterRegBatchCloseNotification(hBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION) : Int32
 
     # :nodoc:
-    fun ClusterRegCloseBatchNotifyPort(hBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT_*) : Int32
+    fun ClusterRegCreateBatchNotifyPort(hKey : Win32cr::System::Registry::HKEY, phBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT*) : Int32
 
     # :nodoc:
-    fun ClusterRegGetBatchNotification(hBatchNotify : Win32cr::Networking::Clustering::HREGBATCHPORT_*, phBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION_**) : Int32
+    fun ClusterRegCloseBatchNotifyPort(hBatchNotifyPort : Win32cr::Networking::Clustering::HREGBATCHPORT) : Int32
 
     # :nodoc:
-    fun ClusterRegCreateReadBatch(hKey : Win32cr::System::Registry::HKEY, phRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_**) : Int32
+    fun ClusterRegGetBatchNotification(hBatchNotify : Win32cr::Networking::Clustering::HREGBATCHPORT, phBatchNotification : Win32cr::Networking::Clustering::HREGBATCHNOTIFICATION*) : Int32
 
     # :nodoc:
-    fun ClusterRegReadBatchAddCommand(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, wzSubkeyName : Win32cr::Foundation::PWSTR, wzValueName : Win32cr::Foundation::PWSTR) : Int32
+    fun ClusterRegCreateReadBatch(hKey : Win32cr::System::Registry::HKEY, phRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH*) : Int32
 
     # :nodoc:
-    fun ClusterRegCloseReadBatch(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
+    fun ClusterRegReadBatchAddCommand(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH, wzSubkeyName : Win32cr::Foundation::PWSTR, wzValueName : Win32cr::Foundation::PWSTR) : Int32
 
     # :nodoc:
-    fun ClusterRegCloseReadBatchEx(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH_*, flags : UInt32, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_**) : Int32
+    fun ClusterRegCloseReadBatch(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY*) : Int32
 
     # :nodoc:
-    fun ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*) : Int32
+    fun ClusterRegCloseReadBatchEx(hRegReadBatch : Win32cr::Networking::Clustering::HREGREADBATCH, flags : UInt32, phRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY*) : Int32
 
     # :nodoc:
-    fun ClusterRegCloseReadBatchReply(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY_*) : Int32
+    fun ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY, pBatchCommand : Win32cr::Networking::Clustering::CLUSTER_READ_BATCH_COMMAND*) : Int32
 
     # :nodoc:
-    fun ClusterSetAccountAccess(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, szAccountSID : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwControlType : UInt32) : UInt32
+    fun ClusterRegCloseReadBatchReply(hRegReadBatchReply : Win32cr::Networking::Clustering::HREGREADBATCHREPLY) : Int32
 
     # :nodoc:
-    fun CreateCluster(pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HCLUSTER_*
+    fun ClusterSetAccountAccess(hCluster : Win32cr::Networking::Clustering::HCLUSTER, szAccountSID : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwControlType : UInt32) : UInt32
 
     # :nodoc:
-    fun CreateClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+    fun CreateCluster(pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HCLUSTER
 
     # :nodoc:
-    fun RemoveClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, bDeleteComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+    fun CreateClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pConfig : Win32cr::Networking::Clustering::CREATE_CLUSTER_NAME_ACCOUNT*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
+
+    # :nodoc:
+    fun RemoveClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER, bDeleteComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+
+    # :nodoc:
+    fun RepairClusterNameAccount(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pConfig : Win32cr::Networking::Clustering::REPAIR_CLUSTER_NAME_ACCOUNT_CONFIG*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : UInt32
 
     # :nodoc:
     fun DetermineCNOResTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
 
     # :nodoc:
-    fun DetermineCNOResTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
+    fun DetermineCNOResTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pCNOResType : Win32cr::Networking::Clustering::CLUSTER_MGMT_POINT_RESTYPE*) : UInt32
 
     # :nodoc:
     fun DetermineClusterCloudTypeFromNodelist(cNodes : UInt32, ppszNodeNames : Win32cr::Foundation::PWSTR*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
 
     # :nodoc:
-    fun DetermineClusterCloudTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
+    fun DetermineClusterCloudTypeFromCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pCloudType : Win32cr::Networking::Clustering::CLUSTER_CLOUD_TYPE*) : UInt32
 
     # :nodoc:
     fun GetNodeCloudTypeDW(ppszNodeName : Win32cr::Foundation::PWSTR, node_cloud_type : UInt32*) : UInt32
 
     # :nodoc:
-    fun RegisterClusterResourceTypeNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE_*, hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, flags : Int64, resTypeName : Win32cr::Foundation::PWSTR, dwNotifyKey : LibC::UIntPtrT) : UInt32
+    fun RegisterClusterResourceTypeNotifyV2(hChange : Win32cr::Networking::Clustering::HCHANGE, hCluster : Win32cr::Networking::Clustering::HCLUSTER, flags : Int64, resTypeName : Win32cr::Foundation::PWSTR, dwNotifyKey : LibC::UIntPtrT) : UInt32
 
     # :nodoc:
-    fun AddClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
+    fun AddClusterNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE
 
     # :nodoc:
-    fun AddClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, lpszClusterStorageNodeDescription : Win32cr::Foundation::PWSTR, lpszClusterStorageNodeLocation : Win32cr::Foundation::PWSTR) : UInt32
+    fun AddClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, lpszClusterStorageNodeDescription : Win32cr::Foundation::PWSTR, lpszClusterStorageNodeLocation : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun AddClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszNodeName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE_*
+    fun AddClusterNodeEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszNodeName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*) : Win32cr::Networking::Clustering::HNODE
 
     # :nodoc:
-    fun RemoveClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, lpszClusterStorageEnclosureName : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, dwFlags : UInt32) : UInt32
+    fun RemoveClusterStorageNode(hCluster : Win32cr::Networking::Clustering::HCLUSTER, lpszClusterStorageEnclosureName : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, dwFlags : UInt32) : UInt32
 
     # :nodoc:
-    fun DestroyCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, fdeleteVirtualComputerObjects : Win32cr::Foundation::BOOL) : UInt32
+    fun DestroyCluster(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pfnProgressCallback : Win32cr::Networking::Clustering::PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg : Void*, fdeleteVirtualComputerObjects : Win32cr::Foundation::BOOL) : UInt32
 
     # :nodoc:
     fun InitializeClusterHealthFault(clusterHealthFault : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*) : UInt32
@@ -9543,16 +10869,16 @@ module Win32cr::Networking::Clustering
     fun FreeClusterHealthFaultArray(clusterHealthFaultArray : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*) : UInt32
 
     # :nodoc:
-    fun ClusGetClusterHealthFaults(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, objects : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*, flags : UInt32) : UInt32
+    fun ClusGetClusterHealthFaults(hCluster : Win32cr::Networking::Clustering::HCLUSTER, objects : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT_ARRAY*, flags : UInt32) : UInt32
 
     # :nodoc:
-    fun ClusRemoveClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, id : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    fun ClusRemoveClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER, id : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
 
     # :nodoc:
-    fun ClusAddClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, failure : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*, param2 : UInt32) : UInt32
+    fun ClusAddClusterHealthFault(hCluster : Win32cr::Networking::Clustering::HCLUSTER, failure : Win32cr::Networking::Clustering::CLUSTER_HEALTH_FAULT*, param2 : UInt32) : UInt32
 
     # :nodoc:
-    fun ResUtilStartResourceService(pszServiceName : Win32cr::Foundation::PWSTR, phServiceHandle : LibC::IntPtrT*) : UInt32
+    fun ResUtilStartResourceService(pszServiceName : Win32cr::Foundation::PWSTR, phServiceHandle : Win32cr::System::Services::SC_HANDLE*) : UInt32
 
     # :nodoc:
     fun ResUtilVerifyResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
@@ -9561,10 +10887,10 @@ module Win32cr::Networking::Clustering
     fun ResUtilStopResourceService(pszServiceName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ResUtilVerifyService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
+    fun ResUtilVerifyService(hServiceHandle : Win32cr::System::Services::SC_HANDLE) : UInt32
 
     # :nodoc:
-    fun ResUtilStopService(hServiceHandle : Win32cr::Security::SC_HANDLE) : UInt32
+    fun ResUtilStopService(hServiceHandle : Win32cr::System::Services::SC_HANDLE) : UInt32
 
     # :nodoc:
     fun ResUtilCreateDirectoryTree(pszPath : Win32cr::Foundation::PWSTR) : UInt32
@@ -9687,7 +11013,7 @@ module Win32cr::Networking::Clustering
     fun ResUtilGetFileTimeProperty(pftOutValue : Win32cr::Foundation::FILETIME*, pValueStruct : Win32cr::Networking::Clustering::CLUSPROP_FILETIME*, ftOldValue : Win32cr::Foundation::FILETIME, ftMinimum : Win32cr::Foundation::FILETIME, ftMaximum : Win32cr::Foundation::FILETIME, ppPropertyList : UInt8**, pcbPropertyListSize : UInt32*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetEnvironmentWithNetName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Void*
+    fun ResUtilGetEnvironmentWithNetName(hResource : Win32cr::Networking::Clustering::HRESOURCE) : Void*
 
     # :nodoc:
     fun ResUtilFreeEnvironment(lpEnvironment : Void*) : UInt32
@@ -9696,13 +11022,13 @@ module Win32cr::Networking::Clustering
     fun ResUtilExpandEnvironmentStrings(pszSrc : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
 
     # :nodoc:
-    fun ResUtilSetResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    fun ResUtilSetResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
     # :nodoc:
     fun ResUtilRemoveResourceServiceEnvironment(pszServiceName : Win32cr::Foundation::PWSTR, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
     # :nodoc:
-    fun ResUtilSetResourceServiceStartParameters(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    fun ResUtilSetResourceServiceStartParameters(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::System::Services::SC_HANDLE, phService : Win32cr::System::Services::SC_HANDLE*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
     # :nodoc:
     fun ResUtilFindSzProperty(pPropertyList : Void*, cbPropertyListSize : UInt32, pszPropertyName : Win32cr::Foundation::PWSTR, pszPropertyValue : Win32cr::Foundation::PWSTR*) : UInt32
@@ -9747,37 +11073,37 @@ module Win32cr::Networking::Clustering
     fun ClusWorkersTerminate(clus_workers : Win32cr::Networking::Clustering::CLUS_WORKER**, clus_workers_count : LibC::UIntPtrT, timeout_in_milliseconds : UInt32, wait_only : Win32cr::Foundation::BOOL) : UInt32
 
     # :nodoc:
-    fun ResUtilResourcesEqual(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    fun ResUtilResourcesEqual(hSelf : Win32cr::Networking::Clustering::HRESOURCE, hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ResUtilResourceTypesEqual(lpszResourceTypeName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    fun ResUtilResourceTypesEqual(lpszResourceTypeName : Win32cr::Foundation::PWSTR, hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ResUtilIsResourceClassEqual(prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*) : Win32cr::Foundation::BOOL
+    fun ResUtilIsResourceClassEqual(prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, hResource : Win32cr::Networking::Clustering::HRESOURCE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ResUtilEnumResources(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, pParameter : Void*) : UInt32
+    fun ResUtilEnumResources(hSelf : Win32cr::Networking::Clustering::HRESOURCE, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK, pParameter : Void*) : UInt32
 
     # :nodoc:
-    fun ResUtilEnumResourcesEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+    fun ResUtilEnumResourcesEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HRESOURCE, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetResourceDependency(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceDependency(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetResourceDependencyByName(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceDependencyByName(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetResourceDependencyByClass(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceDependencyByClass(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetResourceNameDependency(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceNameDependency(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetResourceDependentIPAddressProps(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszAddress : UInt16*, pcchAddress : UInt32*, pszSubnetMask : UInt16*, pcchSubnetMask : UInt32*, pszNetwork : UInt16*, pcchNetwork : UInt32*) : UInt32
+    fun ResUtilGetResourceDependentIPAddressProps(hResource : Win32cr::Networking::Clustering::HRESOURCE, pszAddress : Win32cr::Foundation::PWSTR, pcchAddress : UInt32*, pszSubnetMask : Win32cr::Foundation::PWSTR, pcchSubnetMask : UInt32*, pszNetwork : Win32cr::Foundation::PWSTR, pcchNetwork : UInt32*) : UInt32
 
     # :nodoc:
-    fun ResUtilFindDependentDiskResourceDriveLetter(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszDriveLetter : UInt16*, pcchDriveLetter : UInt32*) : UInt32
+    fun ResUtilFindDependentDiskResourceDriveLetter(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hResource : Win32cr::Networking::Clustering::HRESOURCE, pszDriveLetter : Win32cr::Foundation::PWSTR, pcchDriveLetter : UInt32*) : UInt32
 
     # :nodoc:
     fun ResUtilTerminateServiceProcessFromResDll(dwServicePid : UInt32, bOffline : Win32cr::Foundation::BOOL, pdwResourceState : UInt32*, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
@@ -9786,13 +11112,13 @@ module Win32cr::Networking::Clustering
     fun ResUtilGetPropertyFormats(pPropertyTable : Win32cr::Networking::Clustering::RESUTIL_PROPERTY_ITEM*, pOutPropertyFormatList : Void*, cbPropertyFormatListSize : UInt32, pcbBytesReturned : UInt32*, pcbRequired : UInt32*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetCoreClusterResources(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterIPAddressResource : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResource : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
+    fun ResUtilGetCoreClusterResources(hCluster : Win32cr::Networking::Clustering::HCLUSTER, phClusterNameResource : Win32cr::Networking::Clustering::HRESOURCE*, phClusterIPAddressResource : Win32cr::Networking::Clustering::HRESOURCE*, phClusterQuorumResource : Win32cr::Networking::Clustering::HRESOURCE*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE_*, pszResourceName : UInt16*, pcchResourceNameInOut : UInt32*) : UInt32
+    fun ResUtilGetResourceName(hResource : Win32cr::Networking::Clustering::HRESOURCE, pszResourceName : Win32cr::Foundation::PWSTR, pcchResourceNameInOut : UInt32*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetClusterRoleState(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, eClusterRole : Win32cr::Networking::Clustering::CLUSTER_ROLE) : Win32cr::Networking::Clustering::CLUSTER_ROLE_STATE
+    fun ResUtilGetClusterRoleState(hCluster : Win32cr::Networking::Clustering::HCLUSTER, eClusterRole : Win32cr::Networking::Clustering::CLUSTER_ROLE) : Win32cr::Networking::Clustering::CLUSTER_ROLE_STATE
 
     # :nodoc:
     fun ClusterIsPathOnSharedVolume(lpszPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
@@ -9810,40 +11136,40 @@ module Win32cr::Networking::Clustering
     fun ClusterClearBackupStateForSharedVolume(lpszVolumePathName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun ResUtilSetResourceServiceStartParametersEx(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::Security::SC_HANDLE, phService : LibC::IntPtrT*, dwDesiredAccess : UInt32, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
+    fun ResUtilSetResourceServiceStartParametersEx(pszServiceName : Win32cr::Foundation::PWSTR, schSCMHandle : Win32cr::System::Services::SC_HANDLE, phService : Win32cr::System::Services::SC_HANDLE*, dwDesiredAccess : UInt32, pfnLogEvent : Win32cr::Networking::Clustering::PLOG_EVENT_ROUTINE, hResourceHandle : LibC::IntPtrT) : UInt32
 
     # :nodoc:
-    fun ResUtilEnumResourcesEx2(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*, dwDesiredAccess : UInt32) : UInt32
+    fun ResUtilEnumResourcesEx2(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HRESOURCE, lpszResTypeName : Win32cr::Foundation::PWSTR, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*, dwDesiredAccess : UInt32) : UInt32
 
     # :nodoc:
-    fun ResUtilGetResourceDependencyEx(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceDependencyEx(hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetResourceDependencyByNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceDependencyByNameEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, lpszResourceType : Win32cr::Foundation::PWSTR, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetResourceDependencyByClassEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceDependencyByClassEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Foundation::HANDLE, prci : Win32cr::Networking::Clustering::CLUS_RESOURCE_CLASS_INFO*, bRecurse : Win32cr::Foundation::BOOL, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetResourceNameDependencyEx(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE_*
+    fun ResUtilGetResourceNameDependencyEx(lpszResourceName : Win32cr::Foundation::PWSTR, lpszResourceType : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Networking::Clustering::HRESOURCE
 
     # :nodoc:
-    fun ResUtilGetCoreClusterResourcesEx(hClusterIn : Win32cr::Networking::Clustering::HCLUSTER_*, phClusterNameResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, phClusterQuorumResourceOut : Win32cr::Networking::Clustering::HRESOURCE_**, dwDesiredAccess : UInt32) : UInt32
+    fun ResUtilGetCoreClusterResourcesEx(hClusterIn : Win32cr::Networking::Clustering::HCLUSTER, phClusterNameResourceOut : Win32cr::Networking::Clustering::HRESOURCE*, phClusterQuorumResourceOut : Win32cr::Networking::Clustering::HRESOURCE*, dwDesiredAccess : UInt32) : UInt32
 
     # :nodoc:
-    fun OpenClusterCryptProvider(lpszResource : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
+    fun OpenClusterCryptProvider(lpszResource : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER
 
     # :nodoc:
-    fun OpenClusterCryptProviderEx(lpszResource : Win32cr::Foundation::PWSTR, lpszKeyname : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*
+    fun OpenClusterCryptProviderEx(lpszResource : Win32cr::Foundation::PWSTR, lpszKeyname : Win32cr::Foundation::PWSTR, lpszProvider : Int8*, dwType : UInt32, dwFlags : UInt32) : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER
 
     # :nodoc:
-    fun CloseClusterCryptProvider(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*) : UInt32
+    fun CloseClusterCryptProvider(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER) : UInt32
 
     # :nodoc:
-    fun ClusterEncrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pData : UInt8*, cbData : UInt32, ppData : UInt8**, pcbData : UInt32*) : UInt32
+    fun ClusterEncrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER, pData : UInt8*, cbData : UInt32, ppData : UInt8**, pcbData : UInt32*) : UInt32
 
     # :nodoc:
-    fun ClusterDecrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER_*, pCryptInput : UInt8*, cbCryptInput : UInt32, ppCryptOutput : UInt8**, pcbCryptOutput : UInt32*) : UInt32
+    fun ClusterDecrypt(hClusCryptProvider : Win32cr::Networking::Clustering::HCLUSCRYPTPROVIDER, pCryptInput : UInt8*, cbCryptInput : UInt32, ppCryptOutput : UInt8**, pcbCryptOutput : UInt32*) : UInt32
 
     # :nodoc:
     fun FreeClusterCrypt(pCryptInfo : Void*) : UInt32
@@ -9861,34 +11187,34 @@ module Win32cr::Networking::Clustering
     fun ResUtilsDeleteKeyTree(key : Win32cr::System::Registry::HKEY, keyName : Win32cr::Foundation::PWSTR, treatNoKeyAsError : Win32cr::Foundation::BOOL) : UInt32
 
     # :nodoc:
-    fun ResUtilGroupsEqual(hSelf : Win32cr::Networking::Clustering::HGROUP_*, hGroup : Win32cr::Networking::Clustering::HGROUP_*, pEqual : Win32cr::Foundation::BOOL*) : UInt32
+    fun ResUtilGroupsEqual(hSelf : Win32cr::Networking::Clustering::HGROUP, hGroup : Win32cr::Networking::Clustering::HGROUP, pEqual : Win32cr::Foundation::BOOL*) : UInt32
 
     # :nodoc:
-    fun ResUtilEnumGroups(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+    fun ResUtilEnumGroups(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HGROUP, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
 
     # :nodoc:
-    fun ResUtilEnumGroupsEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, hSelf : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
+    fun ResUtilEnumGroupsEx(hCluster : Win32cr::Networking::Clustering::HCLUSTER, hSelf : Win32cr::Networking::Clustering::HGROUP, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE, pResCallBack : Win32cr::Networking::Clustering::LPGROUP_CALLBACK_EX, pParameter : Void*) : UInt32
 
     # :nodoc:
-    fun ResUtilDupGroup(group : Win32cr::Networking::Clustering::HGROUP_*, copy : Win32cr::Networking::Clustering::HGROUP_**) : UInt32
+    fun ResUtilDupGroup(group : Win32cr::Networking::Clustering::HGROUP, copy : Win32cr::Networking::Clustering::HGROUP*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetClusterGroupType(hGroup : Win32cr::Networking::Clustering::HGROUP_*, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE*) : UInt32
+    fun ResUtilGetClusterGroupType(hGroup : Win32cr::Networking::Clustering::HGROUP, groupType : Win32cr::Networking::Clustering::CLUSGROUP_TYPE*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetCoreGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*) : Win32cr::Networking::Clustering::HGROUP_*
+    fun ResUtilGetCoreGroup(hCluster : Win32cr::Networking::Clustering::HCLUSTER) : Win32cr::Networking::Clustering::HGROUP
 
     # :nodoc:
-    fun ResUtilResourceDepEnum(hSelf : Win32cr::Networking::Clustering::HRESOURCE_*, enumType : UInt32, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
+    fun ResUtilResourceDepEnum(hSelf : Win32cr::Networking::Clustering::HRESOURCE, enumType : UInt32, pResCallBack : Win32cr::Networking::Clustering::LPRESOURCE_CALLBACK_EX, pParameter : Void*) : UInt32
 
     # :nodoc:
-    fun ResUtilDupResource(group : Win32cr::Networking::Clustering::HRESOURCE_*, copy : Win32cr::Networking::Clustering::HRESOURCE_**) : UInt32
+    fun ResUtilDupResource(group : Win32cr::Networking::Clustering::HRESOURCE, copy : Win32cr::Networking::Clustering::HRESOURCE*) : UInt32
 
     # :nodoc:
-    fun ResUtilGetClusterId(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, guid : LibC::GUID*) : UInt32
+    fun ResUtilGetClusterId(hCluster : Win32cr::Networking::Clustering::HCLUSTER, guid : LibC::GUID*) : UInt32
 
     # :nodoc:
-    fun ResUtilNodeEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER_*, pNodeCallBack : Win32cr::Networking::Clustering::LPNODE_CALLBACK, pParameter : Void*) : UInt32
+    fun ResUtilNodeEnum(hCluster : Win32cr::Networking::Clustering::HCLUSTER, pNodeCallBack : Win32cr::Networking::Clustering::LPNODE_CALLBACK, pParameter : Void*) : UInt32
 
     # :nodoc:
     fun RegisterAppInstance(process_handle : Win32cr::Foundation::HANDLE, app_instance_id : LibC::GUID*, children_inherit_app_instance : Win32cr::Foundation::BOOL) : UInt32
@@ -9906,4 +11232,5 @@ module Win32cr::Networking::Clustering
     fun SetAppInstanceCsvFlags(process_handle : Win32cr::Foundation::HANDLE, mask : UInt32, flags : UInt32) : UInt32
 
   end
+  {% end %}
 end

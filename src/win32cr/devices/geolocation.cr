@@ -1,6 +1,5 @@
 require "./../system/com.cr"
 require "./../foundation.cr"
-require "./../ui/shell/properties_system.cr"
 require "./../system/com/structured_storage.cr"
 require "./sensors.cr"
 
@@ -73,7 +72,7 @@ module Win32cr::Devices::Geolocation
   GNSS_GEOFENCESUPPORT_SUPPORTED = 1_u32
   GNSS_GEOFENCESUPPORT_CIRCLE = 2_u32
   LOCATION_API_VERSION = 1_u32
-  GUID_DEVINTERFACE_GNSS = "3336e5e4-018a-4669-84c5-bd05f3bd368b"
+  GUID_DEVINTERFACE_GNSS = LibC::GUID.new(0x3336e5e4_u32, 0x18a_u16, 0x4669_u16, StaticArray[0x84_u8, 0xc5_u8, 0xbd_u8, 0x5_u8, 0xf3_u8, 0xbd_u8, 0x36_u8, 0x8b_u8])
 
   CLSID_Location = LibC::GUID.new(0xe5b8e079_u32, 0xee6d_u16, 0x4e33_u16, StaticArray[0xa4_u8, 0x38_u8, 0xc8_u8, 0x7f_u8, 0x2e_u8, 0x95_u8, 0x92_u8, 0x54_u8])
 
@@ -244,8 +243,8 @@ module Win32cr::Devices::Geolocation
     property reserved : UInt32
     property command_data_size : UInt32
     property unused : UInt8[512]
-    property command_data : UInt8*
-    def initialize(@size : UInt32, @version : UInt32, @command_type : Win32cr::Devices::Geolocation::GNSS_DRIVERCOMMAND_TYPE, @reserved : UInt32, @command_data_size : UInt32, @unused : UInt8[512], @command_data : UInt8*)
+    property command_data : UInt8[1]
+    def initialize(@size : UInt32, @version : UInt32, @command_type : Win32cr::Devices::Geolocation::GNSS_DRIVERCOMMAND_TYPE, @reserved : UInt32, @command_data_size : UInt32, @unused : UInt8[512], @command_data : UInt8[1])
     end
   end
 
@@ -710,8 +709,8 @@ module Win32cr::Devices::Geolocation
     property breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA
     property geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA
     property driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA
-    property custom_data : UInt8*
-    def initialize(@fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA, @agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM, @ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM, @error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO, @nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA, @geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA, @breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA, @geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA, @driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA, @custom_data : UInt8*)
+    property custom_data : UInt8[1]
+    def initialize(@fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA, @agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM, @ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM, @error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO, @nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA, @geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA, @breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA, @geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA, @driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA, @custom_data : UInt8[1])
     end
     end
 
@@ -741,8 +740,8 @@ module Win32cr::Devices::Geolocation
     property breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA
     property geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA
     property driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA
-    property custom_data : UInt8*
-    def initialize(@fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA, @fix_data2 : Win32cr::Devices::Geolocation::GNSS_FIXDATA_2, @agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM, @ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM, @error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO, @nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA, @geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA, @breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA, @geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA, @driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA, @custom_data : UInt8*)
+    property custom_data : UInt8[1]
+    def initialize(@fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA, @fix_data2 : Win32cr::Devices::Geolocation::GNSS_FIXDATA_2, @agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM, @ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM, @error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO, @nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA, @geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA, @breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA, @geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA, @driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA, @custom_data : UInt8[1])
     end
     end
 
@@ -779,8 +778,8 @@ module Win32cr::Devices::Geolocation
     property blob_version : UInt32
     property agnss_format : UInt32
     property blob_size : UInt32
-    property blob_data : UInt8*
-    def initialize(@size : UInt32, @version : UInt32, @blob_oui : UInt32, @blob_version : UInt32, @agnss_format : UInt32, @blob_size : UInt32, @blob_data : UInt8*)
+    property blob_data : UInt8[1]
+    def initialize(@size : UInt32, @version : UInt32, @blob_oui : UInt32, @blob_version : UInt32, @agnss_format : UInt32, @blob_size : UInt32, @blob_data : UInt8[1])
     end
   end
 
@@ -828,8 +827,8 @@ module Win32cr::Devices::Geolocation
     property supl_cert_name : Win32cr::Foundation::CHAR[260]
     property cert_size : UInt32
     property unused : UInt8[512]
-    property cert_data : UInt8*
-    def initialize(@size : UInt32, @version : UInt32, @cert_action : Win32cr::Devices::Geolocation::GNSS_SUPL_CERT_ACTION, @supl_cert_name : Win32cr::Foundation::CHAR[260], @cert_size : UInt32, @unused : UInt8[512], @cert_data : UInt8*)
+    property cert_data : UInt8[1]
+    def initialize(@size : UInt32, @version : UInt32, @cert_action : Win32cr::Devices::Geolocation::GNSS_SUPL_CERT_ACTION, @supl_cert_name : Win32cr::Foundation::CHAR[260], @cert_size : UInt32, @unused : UInt8[512], @cert_data : UInt8[1])
     end
   end
 
@@ -874,8 +873,8 @@ module Win32cr::Devices::Geolocation
     property test_type : UInt32
     property unused : UInt8[512]
     property in_buf_len : UInt32
-    property in_buffer : UInt8*
-    def initialize(@size : UInt32, @version : UInt32, @test_type : UInt32, @unused : UInt8[512], @in_buf_len : UInt32, @in_buffer : UInt8*)
+    property in_buffer : UInt8[1]
+    def initialize(@size : UInt32, @version : UInt32, @test_type : UInt32, @unused : UInt8[512], @in_buf_len : UInt32, @in_buffer : UInt8[1])
     end
   end
 
@@ -888,8 +887,8 @@ module Win32cr::Devices::Geolocation
     property pin_failed_bit_mask : UInt32
     property unused : UInt8[512]
     property out_buf_len : UInt32
-    property out_buffer : UInt8*
-    def initialize(@size : UInt32, @version : UInt32, @test_result_status : Win32cr::Foundation::NTSTATUS, @result : UInt32, @pin_failed_bit_mask : UInt32, @unused : UInt8[512], @out_buf_len : UInt32, @out_buffer : UInt8*)
+    property out_buffer : UInt8[1]
+    def initialize(@size : UInt32, @version : UInt32, @test_result_status : Win32cr::Foundation::NTSTATUS, @result : UInt32, @pin_failed_bit_mask : UInt32, @unused : UInt8[512], @out_buf_len : UInt32, @out_buffer : UInt8[1])
     end
   end
 
@@ -906,17 +905,18 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationReportVtbl,
+
+  record ILocationReportVtable,
     query_interface : Proc(ILocationReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationReport*, UInt32),
     release : Proc(ILocationReport*, UInt32),
     get_sensor_id : Proc(ILocationReport*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_timestamp : Proc(ILocationReport*, Win32cr::Foundation::SYSTEMTIME*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(ILocationReport*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT)
+    get_value : Proc(ILocationReport*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ILocationReport, lpVtbl : ILocationReportVtbl* do
+  record ILocationReport, lpVtbl : ILocationReportVtable* do
     GUID = LibC::GUID.new(0xc8b7f7ee_u32, 0x75d0_u16, 0x4db9_u16, StaticArray[0xb6_u8, 0x2d_u8, 0x7a_u8, 0xf_u8, 0x36_u8, 0x9c_u8, 0xa4_u8, 0x56_u8])
     def query_interface(this : ILocationReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -933,20 +933,21 @@ module Win32cr::Devices::Geolocation
     def get_timestamp(this : ILocationReport*, pCreationTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_timestamp.call(this, pCreationTime)
     end
-    def get_value(this : ILocationReport*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : ILocationReport*, pKey : Win32cr::Foundation::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, pKey, pValue)
     end
 
   end
 
   @[Extern]
-  record ILatLongReportVtbl,
+
+  record ILatLongReportVtable,
     query_interface : Proc(ILatLongReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILatLongReport*, UInt32),
     release : Proc(ILatLongReport*, UInt32),
     get_sensor_id : Proc(ILatLongReport*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_timestamp : Proc(ILatLongReport*, Win32cr::Foundation::SYSTEMTIME*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(ILatLongReport*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ILatLongReport*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
     get_latitude : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
     get_longitude : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
     get_error_radius : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
@@ -955,7 +956,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILatLongReport, lpVtbl : ILatLongReportVtbl* do
+  record ILatLongReport, lpVtbl : ILatLongReportVtable* do
     GUID = LibC::GUID.new(0x7fed806d_u32, 0xef8_u16, 0x4f07_u16, StaticArray[0x80_u8, 0xac_u8, 0x36_u8, 0xa0_u8, 0xbe_u8, 0xae_u8, 0x31_u8, 0x34_u8])
     def query_interface(this : ILatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -972,7 +973,7 @@ module Win32cr::Devices::Geolocation
     def get_timestamp(this : ILatLongReport*, pCreationTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_timestamp.call(this, pCreationTime)
     end
-    def get_value(this : ILatLongReport*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : ILatLongReport*, pKey : Win32cr::Foundation::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, pKey, pValue)
     end
     def get_latitude(this : ILatLongReport*, pLatitude : Float64*) : Win32cr::Foundation::HRESULT
@@ -994,13 +995,14 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ICivicAddressReportVtbl,
+
+  record ICivicAddressReportVtable,
     query_interface : Proc(ICivicAddressReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICivicAddressReport*, UInt32),
     release : Proc(ICivicAddressReport*, UInt32),
     get_sensor_id : Proc(ICivicAddressReport*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_timestamp : Proc(ICivicAddressReport*, Win32cr::Foundation::SYSTEMTIME*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(ICivicAddressReport*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ICivicAddressReport*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
     get_address_line1 : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_address_line2 : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_city : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1011,7 +1013,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ICivicAddressReport, lpVtbl : ICivicAddressReportVtbl* do
+  record ICivicAddressReport, lpVtbl : ICivicAddressReportVtable* do
     GUID = LibC::GUID.new(0xc0b19f70_u32, 0x4adf_u16, 0x445d_u16, StaticArray[0x87_u8, 0xf2_u8, 0xca_u8, 0xd8_u8, 0xfd_u8, 0x71_u8, 0x17_u8, 0x92_u8])
     def query_interface(this : ICivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1028,7 +1030,7 @@ module Win32cr::Devices::Geolocation
     def get_timestamp(this : ICivicAddressReport*, pCreationTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_timestamp.call(this, pCreationTime)
     end
-    def get_value(this : ICivicAddressReport*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : ICivicAddressReport*, pKey : Win32cr::Foundation::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, pKey, pValue)
     end
     def get_address_line1(this : ICivicAddressReport*, pbstrAddress1 : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1056,7 +1058,8 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationVtbl,
+
+  record ILocationVtable,
     query_interface : Proc(ILocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocation*, UInt32),
     release : Proc(ILocation*, UInt32),
@@ -1072,7 +1075,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocation, lpVtbl : ILocationVtbl* do
+  record ILocation, lpVtbl : ILocationVtable* do
     GUID = LibC::GUID.new(0xab2ece69_u32, 0x56d9_u16, 0x4f28_u16, StaticArray[0xb5_u8, 0x25_u8, 0xde_u8, 0x1b_u8, 0xe_u8, 0xe4_u8, 0x42_u8, 0x37_u8])
     def query_interface(this : ILocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1114,7 +1117,8 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationPowerVtbl,
+
+  record ILocationPowerVtable,
     query_interface : Proc(ILocationPower*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationPower*, UInt32),
     release : Proc(ILocationPower*, UInt32),
@@ -1123,7 +1127,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocationPower, lpVtbl : ILocationPowerVtbl* do
+  record ILocationPower, lpVtbl : ILocationPowerVtable* do
     GUID = LibC::GUID.new(0x193e7729_u32, 0xab6b_u16, 0x4b12_u16, StaticArray[0x86_u8, 0x17_u8, 0x75_u8, 0x96_u8, 0xe1_u8, 0xbb_u8, 0x19_u8, 0x1c_u8])
     def query_interface(this : ILocationPower*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1144,7 +1148,8 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record IDefaultLocationVtbl,
+
+  record IDefaultLocationVtable,
     query_interface : Proc(IDefaultLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDefaultLocation*, UInt32),
     release : Proc(IDefaultLocation*, UInt32),
@@ -1153,7 +1158,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record IDefaultLocation, lpVtbl : IDefaultLocationVtbl* do
+  record IDefaultLocation, lpVtbl : IDefaultLocationVtable* do
     GUID = LibC::GUID.new(0xa65af77e_u32, 0x969a_u16, 0x4a2e_u16, StaticArray[0x8a_u8, 0xca_u8, 0x33_u8, 0xbb_u8, 0x7c_u8, 0xbb_u8, 0x12_u8, 0x35_u8])
     def query_interface(this : IDefaultLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1174,7 +1179,8 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationEventsVtbl,
+
+  record ILocationEventsVtable,
     query_interface : Proc(ILocationEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationEvents*, UInt32),
     release : Proc(ILocationEvents*, UInt32),
@@ -1183,7 +1189,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocationEvents, lpVtbl : ILocationEventsVtbl* do
+  record ILocationEvents, lpVtbl : ILocationEventsVtable* do
     GUID = LibC::GUID.new(0xcae02bbf_u32, 0x798b_u16, 0x4508_u16, StaticArray[0xa2_u8, 0x7_u8, 0x35_u8, 0xa7_u8, 0x90_u8, 0x6d_u8, 0xc7_u8, 0x3d_u8])
     def query_interface(this : ILocationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1204,14 +1210,15 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record IDispLatLongReportVtbl,
+
+  record IDispLatLongReportVtable,
     query_interface : Proc(IDispLatLongReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDispLatLongReport*, UInt32),
     release : Proc(IDispLatLongReport*, UInt32),
     get_type_info_count : Proc(IDispLatLongReport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDispLatLongReport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDispLatLongReport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDispLatLongReport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IDispLatLongReport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Latitude : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
     get_Longitude : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
     get_ErrorRadius : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
@@ -1221,7 +1228,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record IDispLatLongReport, lpVtbl : IDispLatLongReportVtbl* do
+  record IDispLatLongReport, lpVtbl : IDispLatLongReportVtable* do
     GUID = LibC::GUID.new(0x8ae32723_u32, 0x389b_u16, 0x4a11_u16, StaticArray[0x99_u8, 0x57_u8, 0x5b_u8, 0xdd_u8, 0x48_u8, 0xfc_u8, 0x96_u8, 0x17_u8])
     def query_interface(this : IDispLatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1241,8 +1248,8 @@ module Win32cr::Devices::Geolocation
     def get_i_ds_of_names(this : IDispLatLongReport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDispLatLongReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDispLatLongReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Latitude(this : IDispLatLongReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Latitude.call(this, pVal)
@@ -1266,14 +1273,15 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record IDispCivicAddressReportVtbl,
+
+  record IDispCivicAddressReportVtable,
     query_interface : Proc(IDispCivicAddressReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDispCivicAddressReport*, UInt32),
     release : Proc(IDispCivicAddressReport*, UInt32),
     get_type_info_count : Proc(IDispCivicAddressReport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDispCivicAddressReport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDispCivicAddressReport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDispCivicAddressReport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IDispCivicAddressReport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_AddressLine1 : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_AddressLine2 : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_City : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1285,7 +1293,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record IDispCivicAddressReport, lpVtbl : IDispCivicAddressReportVtbl* do
+  record IDispCivicAddressReport, lpVtbl : IDispCivicAddressReportVtable* do
     GUID = LibC::GUID.new(0x16ff1a34_u32, 0x9e30_u16, 0x42c3_u16, StaticArray[0xb4_u8, 0x4d_u8, 0xe2_u8, 0x25_u8, 0x13_u8, 0xb5_u8, 0x76_u8, 0x7a_u8])
     def query_interface(this : IDispCivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1305,8 +1313,8 @@ module Win32cr::Devices::Geolocation
     def get_i_ds_of_names(this : IDispCivicAddressReport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDispCivicAddressReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDispCivicAddressReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_AddressLine1(this : IDispCivicAddressReport*, pAddress1 : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AddressLine1.call(this, pAddress1)
@@ -1336,14 +1344,15 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationReportFactoryVtbl,
+
+  record ILocationReportFactoryVtable,
     query_interface : Proc(ILocationReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationReportFactory*, UInt32),
     release : Proc(ILocationReportFactory*, UInt32),
     get_type_info_count : Proc(ILocationReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ILocationReportFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ILocationReportFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ILocationReportFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ILocationReportFactory*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     listen_for_reports : Proc(ILocationReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
     stop_listening_for_reports : Proc(ILocationReportFactory*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(ILocationReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -1355,7 +1364,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocationReportFactory, lpVtbl : ILocationReportFactoryVtbl* do
+  record ILocationReportFactory, lpVtbl : ILocationReportFactoryVtable* do
     GUID = LibC::GUID.new(0x2daec322_u32, 0x90b2_u16, 0x47e4_u16, StaticArray[0xbb_u8, 0x8_u8, 0xd_u8, 0xa8_u8, 0x41_u8, 0x93_u8, 0x5a_u8, 0x6b_u8])
     def query_interface(this : ILocationReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1375,8 +1384,8 @@ module Win32cr::Devices::Geolocation
     def get_i_ds_of_names(this : ILocationReportFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ILocationReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ILocationReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def listen_for_reports(this : ILocationReportFactory*, requestedReportInterval : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.listen_for_reports.call(this, requestedReportInterval)
@@ -1406,14 +1415,15 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILatLongReportFactoryVtbl,
+
+  record ILatLongReportFactoryVtable,
     query_interface : Proc(ILatLongReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILatLongReportFactory*, UInt32),
     release : Proc(ILatLongReportFactory*, UInt32),
     get_type_info_count : Proc(ILatLongReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ILatLongReportFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ILatLongReportFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ILatLongReportFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ILatLongReportFactory*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     listen_for_reports : Proc(ILatLongReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
     stop_listening_for_reports : Proc(ILatLongReportFactory*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(ILatLongReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -1426,7 +1436,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILatLongReportFactory, lpVtbl : ILatLongReportFactoryVtbl* do
+  record ILatLongReportFactory, lpVtbl : ILatLongReportFactoryVtable* do
     GUID = LibC::GUID.new(0x3f0804cb_u32, 0xb114_u16, 0x447d_u16, StaticArray[0x83_u8, 0xdd_u8, 0x39_u8, 0x1_u8, 0x74_u8, 0xeb_u8, 0xb0_u8, 0x82_u8])
     def query_interface(this : ILatLongReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1446,8 +1456,8 @@ module Win32cr::Devices::Geolocation
     def get_i_ds_of_names(this : ILatLongReportFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ILatLongReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ILatLongReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def listen_for_reports(this : ILatLongReportFactory*, requestedReportInterval : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.listen_for_reports.call(this, requestedReportInterval)
@@ -1480,14 +1490,15 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ICivicAddressReportFactoryVtbl,
+
+  record ICivicAddressReportFactoryVtable,
     query_interface : Proc(ICivicAddressReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICivicAddressReportFactory*, UInt32),
     release : Proc(ICivicAddressReportFactory*, UInt32),
     get_type_info_count : Proc(ICivicAddressReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICivicAddressReportFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICivicAddressReportFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICivicAddressReportFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICivicAddressReportFactory*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     listen_for_reports : Proc(ICivicAddressReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
     stop_listening_for_reports : Proc(ICivicAddressReportFactory*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(ICivicAddressReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -1500,7 +1511,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ICivicAddressReportFactory, lpVtbl : ICivicAddressReportFactoryVtbl* do
+  record ICivicAddressReportFactory, lpVtbl : ICivicAddressReportFactoryVtable* do
     GUID = LibC::GUID.new(0xbf773b93_u32, 0xc64f_u16, 0x4bee_u16, StaticArray[0xbe_u8, 0xb2_u8, 0x67_u8, 0xc0_u8, 0xb8_u8, 0xdf_u8, 0x66_u8, 0xe0_u8])
     def query_interface(this : ICivicAddressReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1520,8 +1531,8 @@ module Win32cr::Devices::Geolocation
     def get_i_ds_of_names(this : ICivicAddressReportFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICivicAddressReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICivicAddressReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def listen_for_reports(this : ICivicAddressReportFactory*, requestedReportInterval : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.listen_for_reports.call(this, requestedReportInterval)
@@ -1554,18 +1565,19 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILatLongReportFactoryEvents_Vtbl,
+
+  record ILatLongReportFactoryEvents_Vtable,
     query_interface : Proc(ILatLongReportFactoryEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILatLongReportFactoryEvents_*, UInt32),
     release : Proc(ILatLongReportFactoryEvents_*, UInt32),
     get_type_info_count : Proc(ILatLongReportFactoryEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ILatLongReportFactoryEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ILatLongReportFactoryEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ILatLongReportFactoryEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ILatLongReportFactoryEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ILatLongReportFactoryEvents_, lpVtbl : ILatLongReportFactoryEvents_Vtbl* do
+  record ILatLongReportFactoryEvents_, lpVtbl : ILatLongReportFactoryEvents_Vtable* do
     GUID = LibC::GUID.new(0x16ee6cb7_u32, 0xab3c_u16, 0x424b_u16, StaticArray[0x84_u8, 0x9f_u8, 0x26_u8, 0x9b_u8, 0xe5_u8, 0x51_u8, 0xfc_u8, 0xbc_u8])
     def query_interface(this : ILatLongReportFactoryEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1585,25 +1597,26 @@ module Win32cr::Devices::Geolocation
     def get_i_ds_of_names(this : ILatLongReportFactoryEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ILatLongReportFactoryEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ILatLongReportFactoryEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record ICivicAddressReportFactoryEvents_Vtbl,
+
+  record ICivicAddressReportFactoryEvents_Vtable,
     query_interface : Proc(ICivicAddressReportFactoryEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICivicAddressReportFactoryEvents_*, UInt32),
     release : Proc(ICivicAddressReportFactoryEvents_*, UInt32),
     get_type_info_count : Proc(ICivicAddressReportFactoryEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICivicAddressReportFactoryEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICivicAddressReportFactoryEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICivicAddressReportFactoryEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ICivicAddressReportFactoryEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICivicAddressReportFactoryEvents_, lpVtbl : ICivicAddressReportFactoryEvents_Vtbl* do
+  record ICivicAddressReportFactoryEvents_, lpVtbl : ICivicAddressReportFactoryEvents_Vtable* do
     GUID = LibC::GUID.new(0xc96039ff_u32, 0x72ec_u16, 0x4617_u16, StaticArray[0x89_u8, 0xbd_u8, 0x84_u8, 0xd8_u8, 0x8b_u8, 0xed_u8, 0xc7_u8, 0x22_u8])
     def query_interface(this : ICivicAddressReportFactoryEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1623,8 +1636,8 @@ module Win32cr::Devices::Geolocation
     def get_i_ds_of_names(this : ICivicAddressReportFactoryEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICivicAddressReportFactoryEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICivicAddressReportFactoryEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end

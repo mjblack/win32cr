@@ -49,14 +49,15 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWscProductVtbl,
+
+  record IWscProductVtable,
     query_interface : Proc(IWscProduct*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWscProduct*, UInt32),
     release : Proc(IWscProduct*, UInt32),
     get_type_info_count : Proc(IWscProduct*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWscProduct*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWscProduct*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWscProduct*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWscProduct*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ProductName : Proc(IWscProduct*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ProductState : Proc(IWscProduct*, Win32cr::System::SecurityCenter::WSC_SECURITY_PRODUCT_STATE*, Win32cr::Foundation::HRESULT),
     get_SignatureStatus : Proc(IWscProduct*, Win32cr::System::SecurityCenter::WSC_SECURITY_SIGNATURE_STATUS*, Win32cr::Foundation::HRESULT),
@@ -67,7 +68,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWscProduct, lpVtbl : IWscProductVtbl* do
+  record IWscProduct, lpVtbl : IWscProductVtable* do
     GUID = LibC::GUID.new(0x8c38232e_u32, 0x3a45_u16, 0x4a27_u16, StaticArray[0x92_u8, 0xb0_u8, 0x1a_u8, 0x16_u8, 0xa9_u8, 0x75_u8, 0xf6_u8, 0x69_u8])
     def query_interface(this : IWscProduct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -87,8 +88,8 @@ module Win32cr::System::SecurityCenter
     def get_i_ds_of_names(this : IWscProduct*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWscProduct*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWscProduct*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ProductName(this : IWscProduct*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProductName.call(this, pVal)
@@ -115,14 +116,15 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWscProduct2Vtbl,
+
+  record IWscProduct2Vtable,
     query_interface : Proc(IWscProduct2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWscProduct2*, UInt32),
     release : Proc(IWscProduct2*, UInt32),
     get_type_info_count : Proc(IWscProduct2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWscProduct2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWscProduct2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWscProduct2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWscProduct2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ProductName : Proc(IWscProduct2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ProductState : Proc(IWscProduct2*, Win32cr::System::SecurityCenter::WSC_SECURITY_PRODUCT_STATE*, Win32cr::Foundation::HRESULT),
     get_SignatureStatus : Proc(IWscProduct2*, Win32cr::System::SecurityCenter::WSC_SECURITY_SIGNATURE_STATUS*, Win32cr::Foundation::HRESULT),
@@ -139,7 +141,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWscProduct2, lpVtbl : IWscProduct2Vtbl* do
+  record IWscProduct2, lpVtbl : IWscProduct2Vtable* do
     GUID = LibC::GUID.new(0xf896ca54_u32, 0xfe09_u16, 0x4403_u16, StaticArray[0x86_u8, 0xd4_u8, 0x23_u8, 0xcb_u8, 0x48_u8, 0x8d_u8, 0x81_u8, 0xd8_u8])
     def query_interface(this : IWscProduct2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -159,8 +161,8 @@ module Win32cr::System::SecurityCenter
     def get_i_ds_of_names(this : IWscProduct2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWscProduct2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWscProduct2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ProductName(this : IWscProduct2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProductName.call(this, pVal)
@@ -205,14 +207,15 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWscProduct3Vtbl,
+
+  record IWscProduct3Vtable,
     query_interface : Proc(IWscProduct3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWscProduct3*, UInt32),
     release : Proc(IWscProduct3*, UInt32),
     get_type_info_count : Proc(IWscProduct3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWscProduct3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWscProduct3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWscProduct3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWscProduct3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ProductName : Proc(IWscProduct3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ProductState : Proc(IWscProduct3*, Win32cr::System::SecurityCenter::WSC_SECURITY_PRODUCT_STATE*, Win32cr::Foundation::HRESULT),
     get_SignatureStatus : Proc(IWscProduct3*, Win32cr::System::SecurityCenter::WSC_SECURITY_SIGNATURE_STATUS*, Win32cr::Foundation::HRESULT),
@@ -230,7 +233,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWscProduct3, lpVtbl : IWscProduct3Vtbl* do
+  record IWscProduct3, lpVtbl : IWscProduct3Vtable* do
     GUID = LibC::GUID.new(0x55536524_u32, 0xd1d1_u16, 0x4726_u16, StaticArray[0x8c_u8, 0x7c_u8, 0x4_u8, 0x99_u8, 0x6a_u8, 0x19_u8, 0x4_u8, 0xe7_u8])
     def query_interface(this : IWscProduct3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -250,8 +253,8 @@ module Win32cr::System::SecurityCenter
     def get_i_ds_of_names(this : IWscProduct3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWscProduct3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWscProduct3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ProductName(this : IWscProduct3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProductName.call(this, pVal)
@@ -299,21 +302,22 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWSCProductListVtbl,
+
+  record IWSCProductListVtable,
     query_interface : Proc(IWSCProductList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSCProductList*, UInt32),
     release : Proc(IWSCProductList*, UInt32),
     get_type_info_count : Proc(IWSCProductList*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSCProductList*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSCProductList*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSCProductList*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSCProductList*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IWSCProductList*, Win32cr::System::SecurityCenter::WSC_SECURITY_PROVIDER, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IWSCProductList*, Int32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IWSCProductList*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWSCProductList, lpVtbl : IWSCProductListVtbl* do
+  record IWSCProductList, lpVtbl : IWSCProductListVtable* do
     GUID = LibC::GUID.new(0x722a338c_u32, 0x6e8e_u16, 0x4e72_u16, StaticArray[0xac_u8, 0x27_u8, 0x14_u8, 0x17_u8, 0xfb_u8, 0xc_u8, 0x81_u8, 0xc2_u8])
     def query_interface(this : IWSCProductList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -333,8 +337,8 @@ module Win32cr::System::SecurityCenter
     def get_i_ds_of_names(this : IWSCProductList*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSCProductList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSCProductList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IWSCProductList*, provider : Win32cr::System::SecurityCenter::WSC_SECURITY_PROVIDER) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, provider)
@@ -349,19 +353,20 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWSCDefaultProductVtbl,
+
+  record IWSCDefaultProductVtable,
     query_interface : Proc(IWSCDefaultProduct*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSCDefaultProduct*, UInt32),
     release : Proc(IWSCDefaultProduct*, UInt32),
     get_type_info_count : Proc(IWSCDefaultProduct*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSCDefaultProduct*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSCDefaultProduct*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSCDefaultProduct*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSCDefaultProduct*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     set_default_product : Proc(IWSCDefaultProduct*, Win32cr::System::SecurityCenter::SECURITY_PRODUCT_TYPE, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWSCDefaultProduct, lpVtbl : IWSCDefaultProductVtbl* do
+  record IWSCDefaultProduct, lpVtbl : IWSCDefaultProductVtable* do
     GUID = LibC::GUID.new(0x476d69c_u32, 0xf21a_u16, 0x11e5_u16, StaticArray[0x9c_u8, 0xe9_u8, 0x5e_u8, 0x55_u8, 0x17_u8, 0x50_u8, 0x7c_u8, 0x66_u8])
     def query_interface(this : IWSCDefaultProduct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -381,8 +386,8 @@ module Win32cr::System::SecurityCenter
     def get_i_ds_of_names(this : IWSCDefaultProduct*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSCDefaultProduct*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSCDefaultProduct*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def set_default_product(this : IWSCDefaultProduct*, eType : Win32cr::System::SecurityCenter::SECURITY_PRODUCT_TYPE, pGuid : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_default_product.call(this, eType, pGuid)
@@ -391,30 +396,43 @@ module Win32cr::System::SecurityCenter
   end
 
   def wscRegisterForChanges(reserved : Void*, phCallbackRegistration : Win32cr::Foundation::HANDLE*, lpCallbackAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscRegisterForChanges(reserved, phCallbackRegistration, lpCallbackAddress, pContext)
+    {% end %}
   end
 
   def wscUnRegisterChanges(hRegistrationHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscUnRegisterChanges(hRegistrationHandle)
+    {% end %}
   end
 
   def wscRegisterForUserNotifications : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscRegisterForUserNotifications
+    {% end %}
   end
 
   def wscGetSecurityProviderHealth(providers : UInt32, pHealth : Win32cr::System::SecurityCenter::WSC_SECURITY_PROVIDER_HEALTH*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscGetSecurityProviderHealth(providers, pHealth)
+    {% end %}
   end
 
   def wscQueryAntiMalwareUri : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscQueryAntiMalwareUri
+    {% end %}
   end
 
   def wscGetAntiMalwareUri(ppszUri : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscGetAntiMalwareUri(ppszUri)
+    {% end %}
   end
 
   @[Link("wscapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WscRegisterForChanges(reserved : Void*, phCallbackRegistration : Win32cr::Foundation::HANDLE*, lpCallbackAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pContext : Void*) : Win32cr::Foundation::HRESULT
@@ -435,4 +453,5 @@ module Win32cr::System::SecurityCenter
     fun WscGetAntiMalwareUri(ppszUri : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -9,7 +9,7 @@ module Win32cr::System::Contacts
   CGD_DATE_PROPERTY = 2_u32
   CGD_BINARY_PROPERTY = 4_u32
   CGD_ARRAY_NODE = 8_u32
-  CLSID_ContactAggregationManager = "96c8ad95-c199-44de-b34e-ac33c442df39"
+  CLSID_ContactAggregationManager = LibC::GUID.new(0x96c8ad95_u32, 0xc199_u16, 0x44de_u16, StaticArray[0xb3_u8, 0x4e_u8, 0xac_u8, 0x33_u8, 0xc4_u8, 0x42_u8, 0xdf_u8, 0x39_u8])
   CONTACTPROP_PUB_NOTES = "Notes"
   CONTACTPROP_PUB_MAILER = "Mailer"
   CONTACTPROP_PUB_PROGID = "ProgID"
@@ -132,7 +132,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactManagerVtbl,
+
+  record IContactManagerVtable,
     query_interface : Proc(IContactManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactManager*, UInt32),
     release : Proc(IContactManager*, UInt32),
@@ -145,7 +146,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactManager, lpVtbl : IContactManagerVtbl* do
+  record IContactManager, lpVtbl : IContactManagerVtable* do
     GUID = LibC::GUID.new(0xad553d98_u32, 0xdeb1_u16, 0x474a_u16, StaticArray[0x8e_u8, 0x17_u8, 0xfc_u8, 0xc_u8, 0x20_u8, 0x75_u8, 0xb7_u8, 0x38_u8])
     def query_interface(this : IContactManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -178,7 +179,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactCollectionVtbl,
+
+  record IContactCollectionVtable,
     query_interface : Proc(IContactCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactCollection*, UInt32),
     release : Proc(IContactCollection*, UInt32),
@@ -188,7 +190,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactCollection, lpVtbl : IContactCollectionVtbl* do
+  record IContactCollection, lpVtbl : IContactCollectionVtable* do
     GUID = LibC::GUID.new(0xb6afa338_u32, 0xd779_u16, 0x11d9_u16, StaticArray[0x8b_u8, 0xde_u8, 0xf6_u8, 0x6b_u8, 0xad_u8, 0x1e_u8, 0x3f_u8, 0x3a_u8])
     def query_interface(this : IContactCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -212,19 +214,20 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactPropertiesVtbl,
+
+  record IContactPropertiesVtable,
     query_interface : Proc(IContactProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactProperties*, UInt32),
     release : Proc(IContactProperties*, UInt32),
-    get_string : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_string : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     get_date : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::FILETIME*, Win32cr::Foundation::HRESULT),
-    get_binary : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, UInt16*, UInt32, UInt32*, Void**, Win32cr::Foundation::HRESULT),
-    get_labels : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_binary : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Void**, Win32cr::Foundation::HRESULT),
+    get_labels : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     set_string : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     set_date : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::FILETIME, Win32cr::Foundation::HRESULT),
     set_binary : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::HRESULT),
     set_labels : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
-    create_array_node : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    create_array_node : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     delete_property : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     delete_array_node : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     delete_labels : Proc(IContactProperties*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
@@ -232,7 +235,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactProperties, lpVtbl : IContactPropertiesVtbl* do
+  record IContactProperties, lpVtbl : IContactPropertiesVtable* do
     GUID = LibC::GUID.new(0x70dd27dd_u32, 0x5cbd_u16, 0x46e8_u16, StaticArray[0xbe_u8, 0xf0_u8, 0x23_u8, 0xb6_u8, 0xb3_u8, 0x46_u8, 0x28_u8, 0x8f_u8])
     def query_interface(this : IContactProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -243,16 +246,16 @@ module Win32cr::System::Contacts
     def release(this : IContactProperties*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_string(this : IContactProperties*, pszPropertyName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszValue : UInt16*, cchValue : UInt32, pdwcchPropertyValueRequired : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_string(this : IContactProperties*, pszPropertyName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszValue : Win32cr::Foundation::PWSTR, cchValue : UInt32, pdwcchPropertyValueRequired : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string.call(this, pszPropertyName, dwFlags, pszValue, cchValue, pdwcchPropertyValueRequired)
     end
     def get_date(this : IContactProperties*, pszPropertyName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pftDateTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_date.call(this, pszPropertyName, dwFlags, pftDateTime)
     end
-    def get_binary(this : IContactProperties*, pszPropertyName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszContentType : UInt16*, cchContentType : UInt32, pdwcchContentTypeRequired : UInt32*, ppStream : Void**) : Win32cr::Foundation::HRESULT
+    def get_binary(this : IContactProperties*, pszPropertyName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszContentType : Win32cr::Foundation::PWSTR, cchContentType : UInt32, pdwcchContentTypeRequired : UInt32*, ppStream : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_binary.call(this, pszPropertyName, dwFlags, pszContentType, cchContentType, pdwcchContentTypeRequired, ppStream)
     end
-    def get_labels(this : IContactProperties*, pszArrayElementName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszLabels : UInt16*, cchLabels : UInt32, pdwcchLabelsRequired : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_labels(this : IContactProperties*, pszArrayElementName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszLabels : Win32cr::Foundation::PWSTR, cchLabels : UInt32, pdwcchLabelsRequired : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_labels.call(this, pszArrayElementName, dwFlags, pszLabels, cchLabels, pdwcchLabelsRequired)
     end
     def set_string(this : IContactProperties*, pszPropertyName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -267,7 +270,7 @@ module Win32cr::System::Contacts
     def set_labels(this : IContactProperties*, pszArrayElementName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwLabelCount : UInt32, ppszLabels : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_labels.call(this, pszArrayElementName, dwFlags, dwLabelCount, ppszLabels)
     end
-    def create_array_node(this : IContactProperties*, pszArrayName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, fAppend : Win32cr::Foundation::BOOL, pszNewArrayElementName : UInt16*, cchNewArrayElementName : UInt32, pdwcchNewArrayElementNameRequired : UInt32*) : Win32cr::Foundation::HRESULT
+    def create_array_node(this : IContactProperties*, pszArrayName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, fAppend : Win32cr::Foundation::BOOL, pszNewArrayElementName : Win32cr::Foundation::PWSTR, cchNewArrayElementName : UInt32, pdwcchNewArrayElementNameRequired : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_array_node.call(this, pszArrayName, dwFlags, fAppend, pszNewArrayElementName, cchNewArrayElementName, pdwcchNewArrayElementNameRequired)
     end
     def delete_property(this : IContactProperties*, pszPropertyName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
@@ -286,17 +289,18 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactVtbl,
+
+  record IContactVtable,
     query_interface : Proc(IContact*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContact*, UInt32),
     release : Proc(IContact*, UInt32),
-    get_contact_id : Proc(IContact*, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_path : Proc(IContact*, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_contact_id : Proc(IContact*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_path : Proc(IContact*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     commit_changes : Proc(IContact*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IContact, lpVtbl : IContactVtbl* do
+  record IContact, lpVtbl : IContactVtable* do
     GUID = LibC::GUID.new(0xf941b671_u32, 0xbda7_u16, 0x4f77_u16, StaticArray[0x88_u8, 0x4a_u8, 0xf4_u8, 0x64_u8, 0x62_u8, 0xf2_u8, 0x26_u8, 0xa7_u8])
     def query_interface(this : IContact*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -307,10 +311,10 @@ module Win32cr::System::Contacts
     def release(this : IContact*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_contact_id(this : IContact*, pszContactID : UInt16*, cchContactID : UInt32, pdwcchContactIDRequired : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_contact_id(this : IContact*, pszContactID : Win32cr::Foundation::PWSTR, cchContactID : UInt32, pdwcchContactIDRequired : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_contact_id.call(this, pszContactID, cchContactID, pdwcchContactIDRequired)
     end
-    def get_path(this : IContact*, pszPath : UInt16*, cchPath : UInt32, pdwcchPathRequired : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_path(this : IContact*, pszPath : Win32cr::Foundation::PWSTR, cchPath : UInt32, pdwcchPathRequired : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_path.call(this, pszPath, cchPath, pdwcchPathRequired)
     end
     def commit_changes(this : IContact*, dwCommitFlags : UInt32) : Win32cr::Foundation::HRESULT
@@ -320,21 +324,22 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactPropertyCollectionVtbl,
+
+  record IContactPropertyCollectionVtable,
     query_interface : Proc(IContactPropertyCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactPropertyCollection*, UInt32),
     release : Proc(IContactPropertyCollection*, UInt32),
     reset : Proc(IContactPropertyCollection*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IContactPropertyCollection*, Win32cr::Foundation::HRESULT),
-    get_property_name : Proc(IContactPropertyCollection*, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_property_name : Proc(IContactPropertyCollection*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     get_property_type : Proc(IContactPropertyCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_property_version : Proc(IContactPropertyCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_property_modification_date : Proc(IContactPropertyCollection*, Win32cr::Foundation::FILETIME*, Win32cr::Foundation::HRESULT),
-    get_property_array_element_id : Proc(IContactPropertyCollection*, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
+    get_property_array_element_id : Proc(IContactPropertyCollection*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IContactPropertyCollection, lpVtbl : IContactPropertyCollectionVtbl* do
+  record IContactPropertyCollection, lpVtbl : IContactPropertyCollectionVtable* do
     GUID = LibC::GUID.new(0xffd3adf8_u32, 0xfa64_u16, 0x4328_u16, StaticArray[0xb1_u8, 0xb6_u8, 0x2e_u8, 0xd_u8, 0xb5_u8, 0x9_u8, 0xcb_u8, 0x3c_u8])
     def query_interface(this : IContactPropertyCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -351,7 +356,7 @@ module Win32cr::System::Contacts
     def next__(this : IContactPropertyCollection*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.next__.call(this)
     end
-    def get_property_name(this : IContactPropertyCollection*, pszPropertyName : UInt16*, cchPropertyName : UInt32, pdwcchPropertyNameRequired : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_property_name(this : IContactPropertyCollection*, pszPropertyName : Win32cr::Foundation::PWSTR, cchPropertyName : UInt32, pdwcchPropertyNameRequired : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property_name.call(this, pszPropertyName, cchPropertyName, pdwcchPropertyNameRequired)
     end
     def get_property_type(this : IContactPropertyCollection*, pdwType : UInt32*) : Win32cr::Foundation::HRESULT
@@ -363,14 +368,15 @@ module Win32cr::System::Contacts
     def get_property_modification_date(this : IContactPropertyCollection*, pftModificationDate : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property_modification_date.call(this, pftModificationDate)
     end
-    def get_property_array_element_id(this : IContactPropertyCollection*, pszArrayElementID : UInt16*, cchArrayElementID : UInt32, pdwcchArrayElementIDRequired : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_property_array_element_id(this : IContactPropertyCollection*, pszArrayElementID : Win32cr::Foundation::PWSTR, cchArrayElementID : UInt32, pdwcchArrayElementIDRequired : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property_array_element_id.call(this, pszArrayElementID, cchArrayElementID, pdwcchArrayElementIDRequired)
     end
 
   end
 
   @[Extern]
-  record IContactAggregationManagerVtbl,
+
+  record IContactAggregationManagerVtable,
     query_interface : Proc(IContactAggregationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationManager*, UInt32),
     release : Proc(IContactAggregationManager*, UInt32),
@@ -392,7 +398,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationManager, lpVtbl : IContactAggregationManagerVtbl* do
+  record IContactAggregationManager, lpVtbl : IContactAggregationManagerVtable* do
     GUID = LibC::GUID.new(0x1d865989_u32, 0x4b1f_u16, 0x4b60_u16, StaticArray[0x8f_u8, 0x34_u8, 0xc2_u8, 0xad_u8, 0x46_u8, 0x8b_u8, 0x2b_u8, 0x50_u8])
     def query_interface(this : IContactAggregationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -452,7 +458,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationContactVtbl,
+
+  record IContactAggregationContactVtable,
     query_interface : Proc(IContactAggregationContact*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationContact*, UInt32),
     release : Proc(IContactAggregationContact*, UInt32),
@@ -477,7 +484,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationContact, lpVtbl : IContactAggregationContactVtbl* do
+  record IContactAggregationContact, lpVtbl : IContactAggregationContactVtable* do
     GUID = LibC::GUID.new(0x1eb22e86_u32, 0x4c86_u16, 0x41f0_u16, StaticArray[0x9f_u8, 0x9f_u8, 0xc2_u8, 0x51_u8, 0xe9_u8, 0xfd_u8, 0xa6_u8, 0xc3_u8])
     def query_interface(this : IContactAggregationContact*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -546,7 +553,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationContactCollectionVtbl,
+
+  record IContactAggregationContactCollectionVtable,
     query_interface : Proc(IContactAggregationContactCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationContactCollection*, UInt32),
     release : Proc(IContactAggregationContactCollection*, UInt32),
@@ -558,7 +566,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationContactCollection, lpVtbl : IContactAggregationContactCollectionVtbl* do
+  record IContactAggregationContactCollection, lpVtbl : IContactAggregationContactCollectionVtable* do
     GUID = LibC::GUID.new(0x826e66fa_u32, 0x81de_u16, 0x43ca_u16, StaticArray[0xa6_u8, 0xfb_u8, 0x8c_u8, 0x78_u8, 0x5c_u8, 0xd9_u8, 0x96_u8, 0xc6_u8])
     def query_interface(this : IContactAggregationContactCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -588,7 +596,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationAggregateVtbl,
+
+  record IContactAggregationAggregateVtable,
     query_interface : Proc(IContactAggregationAggregate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationAggregate*, UInt32),
     release : Proc(IContactAggregationAggregate*, UInt32),
@@ -604,7 +613,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationAggregate, lpVtbl : IContactAggregationAggregateVtbl* do
+  record IContactAggregationAggregate, lpVtbl : IContactAggregationAggregateVtable* do
     GUID = LibC::GUID.new(0x7ed1c814_u32, 0xcd30_u16, 0x43c8_u16, StaticArray[0x9b_u8, 0x8d_u8, 0x2e_u8, 0x48_u8, 0x9e_u8, 0x53_u8, 0xd5_u8, 0x4b_u8])
     def query_interface(this : IContactAggregationAggregate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -646,7 +655,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationAggregateCollectionVtbl,
+
+  record IContactAggregationAggregateCollectionVtable,
     query_interface : Proc(IContactAggregationAggregateCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationAggregateCollection*, UInt32),
     release : Proc(IContactAggregationAggregateCollection*, UInt32),
@@ -657,7 +667,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationAggregateCollection, lpVtbl : IContactAggregationAggregateCollectionVtbl* do
+  record IContactAggregationAggregateCollection, lpVtbl : IContactAggregationAggregateCollectionVtable* do
     GUID = LibC::GUID.new(0x2359f3a6_u32, 0x3a68_u16, 0x40af_u16, StaticArray[0x98_u8, 0xdb_u8, 0xf_u8, 0x9e_u8, 0xb1_u8, 0x43_u8, 0xc3_u8, 0xbb_u8])
     def query_interface(this : IContactAggregationAggregateCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -684,7 +694,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationGroupVtbl,
+
+  record IContactAggregationGroupVtable,
     query_interface : Proc(IContactAggregationGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationGroup*, UInt32),
     release : Proc(IContactAggregationGroup*, UInt32),
@@ -701,7 +712,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationGroup, lpVtbl : IContactAggregationGroupVtbl* do
+  record IContactAggregationGroup, lpVtbl : IContactAggregationGroupVtable* do
     GUID = LibC::GUID.new(0xc93c545f_u32, 0x1284_u16, 0x499b_u16, StaticArray[0x96_u8, 0xaf_u8, 0x7_u8, 0x37_u8, 0x2a_u8, 0xf4_u8, 0x73_u8, 0xe0_u8])
     def query_interface(this : IContactAggregationGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -746,7 +757,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationGroupCollectionVtbl,
+
+  record IContactAggregationGroupCollectionVtable,
     query_interface : Proc(IContactAggregationGroupCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationGroupCollection*, UInt32),
     release : Proc(IContactAggregationGroupCollection*, UInt32),
@@ -757,7 +769,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationGroupCollection, lpVtbl : IContactAggregationGroupCollectionVtbl* do
+  record IContactAggregationGroupCollection, lpVtbl : IContactAggregationGroupCollectionVtable* do
     GUID = LibC::GUID.new(0x20a19a9c_u32, 0xd2f3_u16, 0x4b83_u16, StaticArray[0x91_u8, 0x43_u8, 0xbe_u8, 0xff_u8, 0xd2_u8, 0xcc_u8, 0x22_u8, 0x6d_u8])
     def query_interface(this : IContactAggregationGroupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -784,7 +796,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationLinkVtbl,
+
+  record IContactAggregationLinkVtable,
     query_interface : Proc(IContactAggregationLink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationLink*, UInt32),
     release : Proc(IContactAggregationLink*, UInt32),
@@ -808,7 +821,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationLink, lpVtbl : IContactAggregationLinkVtbl* do
+  record IContactAggregationLink, lpVtbl : IContactAggregationLinkVtable* do
     GUID = LibC::GUID.new(0xb6813323_u32, 0xa183_u16, 0x4654_u16, StaticArray[0x86_u8, 0x27_u8, 0x79_u8, 0xb3_u8, 0xd_u8, 0xe3_u8, 0xa0_u8, 0xec_u8])
     def query_interface(this : IContactAggregationLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -874,7 +887,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationLinkCollectionVtbl,
+
+  record IContactAggregationLinkCollectionVtable,
     query_interface : Proc(IContactAggregationLinkCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationLinkCollection*, UInt32),
     release : Proc(IContactAggregationLinkCollection*, UInt32),
@@ -885,7 +899,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationLinkCollection, lpVtbl : IContactAggregationLinkCollectionVtbl* do
+  record IContactAggregationLinkCollection, lpVtbl : IContactAggregationLinkCollectionVtable* do
     GUID = LibC::GUID.new(0xf8bc0e93_u32, 0xfb55_u16, 0x4f28_u16, StaticArray[0xb9_u8, 0xfa_u8, 0xb1_u8, 0xc2_u8, 0x74_u8, 0x15_u8, 0x32_u8, 0x92_u8])
     def query_interface(this : IContactAggregationLinkCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -912,7 +926,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationServerPersonVtbl,
+
+  record IContactAggregationServerPersonVtable,
     query_interface : Proc(IContactAggregationServerPerson*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationServerPerson*, UInt32),
     release : Proc(IContactAggregationServerPerson*, UInt32),
@@ -942,7 +957,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationServerPerson, lpVtbl : IContactAggregationServerPersonVtbl* do
+  record IContactAggregationServerPerson, lpVtbl : IContactAggregationServerPersonVtable* do
     GUID = LibC::GUID.new(0x7fdc3d4b_u32, 0x1b82_u16, 0x4334_u16, StaticArray[0x85_u8, 0xc5_u8, 0x25_u8, 0x18_u8, 0x4e_u8, 0xe5_u8, 0xa5_u8, 0xf2_u8])
     def query_interface(this : IContactAggregationServerPerson*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1026,7 +1041,8 @@ module Win32cr::System::Contacts
   end
 
   @[Extern]
-  record IContactAggregationServerPersonCollectionVtbl,
+
+  record IContactAggregationServerPersonCollectionVtable,
     query_interface : Proc(IContactAggregationServerPersonCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContactAggregationServerPersonCollection*, UInt32),
     release : Proc(IContactAggregationServerPersonCollection*, UInt32),
@@ -1039,7 +1055,7 @@ module Win32cr::System::Contacts
 
 
   @[Extern]
-  record IContactAggregationServerPersonCollection, lpVtbl : IContactAggregationServerPersonCollectionVtbl* do
+  record IContactAggregationServerPersonCollection, lpVtbl : IContactAggregationServerPersonCollectionVtable* do
     GUID = LibC::GUID.new(0x4f730a4a_u32, 0x6604_u16, 0x47b6_u16, StaticArray[0xa9_u8, 0x87_u8, 0x66_u8, 0x9e_u8, 0xcf_u8, 0x1e_u8, 0x57_u8, 0x51_u8])
     def query_interface(this : IContactAggregationServerPersonCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

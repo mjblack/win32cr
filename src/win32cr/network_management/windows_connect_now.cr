@@ -1,5 +1,5 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/com.cr"
 
 module Win32cr::NetworkManagement::WindowsConnectNow
   extend self
@@ -87,11 +87,11 @@ module Win32cr::NetworkManagement::WindowsConnectNow
   WCN_FLAG_DISCOVERY_VE = 1_u32
   WCN_FLAG_AUTHENTICATED_VE = 2_u32
   WCN_FLAG_ENCRYPTED_VE = 4_u32
-  SID_WcnProvider = "c100beca-d33a-4a4b-bf23-bbef4663d017"
-  PKEY_WCN_DeviceType_Category = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 16_u32)
-  PKEY_WCN_DeviceType_SubCategoryOUI = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 17_u32)
-  PKEY_WCN_DeviceType_SubCategory = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 18_u32)
-  PKEY_WCN_SSID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 32_u32)
+  SID_WcnProvider = LibC::GUID.new(0xc100beca_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
+  PKEY_WCN_DeviceType_Category = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 16_u32)
+  PKEY_WCN_DeviceType_SubCategoryOUI = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 17_u32)
+  PKEY_WCN_DeviceType_SubCategory = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 18_u32)
+  PKEY_WCN_SSID = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 32_u32)
 
   CLSID_WCNDeviceObject = LibC::GUID.new(0xc100bea7_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
 
@@ -352,7 +352,8 @@ module Win32cr::NetworkManagement::WindowsConnectNow
   end
 
   @[Extern]
-  record IWCNDeviceVtbl,
+
+  record IWCNDeviceVtable,
     query_interface : Proc(IWCNDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCNDevice*, UInt32),
     release : Proc(IWCNDevice*, UInt32),
@@ -360,8 +361,8 @@ module Win32cr::NetworkManagement::WindowsConnectNow
     connect : Proc(IWCNDevice*, Void*, Win32cr::Foundation::HRESULT),
     get_attribute : Proc(IWCNDevice*, Win32cr::NetworkManagement::WindowsConnectNow::WCN_ATTRIBUTE_TYPE, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
     get_integer_attribute : Proc(IWCNDevice*, Win32cr::NetworkManagement::WindowsConnectNow::WCN_ATTRIBUTE_TYPE, UInt32*, Win32cr::Foundation::HRESULT),
-    get_string_attribute : Proc(IWCNDevice*, Win32cr::NetworkManagement::WindowsConnectNow::WCN_ATTRIBUTE_TYPE, UInt32, UInt16*, Win32cr::Foundation::HRESULT),
-    get_network_profile : Proc(IWCNDevice*, UInt32, UInt16*, Win32cr::Foundation::HRESULT),
+    get_string_attribute : Proc(IWCNDevice*, Win32cr::NetworkManagement::WindowsConnectNow::WCN_ATTRIBUTE_TYPE, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_network_profile : Proc(IWCNDevice*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     set_network_profile : Proc(IWCNDevice*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_vendor_extension : Proc(IWCNDevice*, Win32cr::NetworkManagement::WindowsConnectNow::WCN_VENDOR_EXTENSION_SPEC*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
     set_vendor_extension : Proc(IWCNDevice*, Win32cr::NetworkManagement::WindowsConnectNow::WCN_VENDOR_EXTENSION_SPEC*, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
@@ -370,7 +371,7 @@ module Win32cr::NetworkManagement::WindowsConnectNow
 
 
   @[Extern]
-  record IWCNDevice, lpVtbl : IWCNDeviceVtbl* do
+  record IWCNDevice, lpVtbl : IWCNDeviceVtable* do
     GUID = LibC::GUID.new(0xc100be9c_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
     def query_interface(this : IWCNDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -393,10 +394,10 @@ module Win32cr::NetworkManagement::WindowsConnectNow
     def get_integer_attribute(this : IWCNDevice*, attribute_type : Win32cr::NetworkManagement::WindowsConnectNow::WCN_ATTRIBUTE_TYPE, puInteger : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_integer_attribute.call(this, attribute_type, puInteger)
     end
-    def get_string_attribute(this : IWCNDevice*, attribute_type : Win32cr::NetworkManagement::WindowsConnectNow::WCN_ATTRIBUTE_TYPE, cchMaxString : UInt32, wszString : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_string_attribute(this : IWCNDevice*, attribute_type : Win32cr::NetworkManagement::WindowsConnectNow::WCN_ATTRIBUTE_TYPE, cchMaxString : UInt32, wszString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_attribute.call(this, attribute_type, cchMaxString, wszString)
     end
-    def get_network_profile(this : IWCNDevice*, cchMaxStringLength : UInt32, wszProfile : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_network_profile(this : IWCNDevice*, cchMaxStringLength : UInt32, wszProfile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_network_profile.call(this, cchMaxStringLength, wszProfile)
     end
     def set_network_profile(this : IWCNDevice*, pszProfileXml : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -418,7 +419,8 @@ module Win32cr::NetworkManagement::WindowsConnectNow
   end
 
   @[Extern]
-  record IWCNConnectNotifyVtbl,
+
+  record IWCNConnectNotifyVtable,
     query_interface : Proc(IWCNConnectNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCNConnectNotify*, UInt32),
     release : Proc(IWCNConnectNotify*, UInt32),
@@ -427,7 +429,7 @@ module Win32cr::NetworkManagement::WindowsConnectNow
 
 
   @[Extern]
-  record IWCNConnectNotify, lpVtbl : IWCNConnectNotifyVtbl* do
+  record IWCNConnectNotify, lpVtbl : IWCNConnectNotifyVtable* do
     GUID = LibC::GUID.new(0xc100be9f_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
     def query_interface(this : IWCNConnectNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

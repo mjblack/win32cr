@@ -110,19 +110,19 @@ module Win32cr::Security::Authorization::UI
 
   @[Extern]
   struct SID_INFO
-    property pSid : Win32cr::Foundation::PSID
+    property pSid : Win32cr::Security::PSID
     property pwzCommonName : Win32cr::Foundation::PWSTR
     property pwzClass : Win32cr::Foundation::PWSTR
     property pwzUPN : Win32cr::Foundation::PWSTR
-    def initialize(@pSid : Win32cr::Foundation::PSID, @pwzCommonName : Win32cr::Foundation::PWSTR, @pwzClass : Win32cr::Foundation::PWSTR, @pwzUPN : Win32cr::Foundation::PWSTR)
+    def initialize(@pSid : Win32cr::Security::PSID, @pwzCommonName : Win32cr::Foundation::PWSTR, @pwzClass : Win32cr::Foundation::PWSTR, @pwzUPN : Win32cr::Foundation::PWSTR)
     end
   end
 
   @[Extern]
   struct SID_INFO_LIST
     property cItems : UInt32
-    property aSidInfo : Win32cr::Security::Authorization::UI::SID_INFO*
-    def initialize(@cItems : UInt32, @aSidInfo : Win32cr::Security::Authorization::UI::SID_INFO*)
+    property aSidInfo : Win32cr::Security::Authorization::UI::SID_INFO[1]
+    def initialize(@cItems : UInt32, @aSidInfo : Win32cr::Security::Authorization::UI::SID_INFO[1])
     end
   end
 
@@ -150,7 +150,8 @@ module Win32cr::Security::Authorization::UI
   end
 
   @[Extern]
-  record ISecurityInformationVtbl,
+
+  record ISecurityInformationVtable,
     query_interface : Proc(ISecurityInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISecurityInformation*, UInt32),
     release : Proc(ISecurityInformation*, UInt32),
@@ -164,7 +165,7 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  record ISecurityInformation, lpVtbl : ISecurityInformationVtbl* do
+  record ISecurityInformation, lpVtbl : ISecurityInformationVtable* do
     GUID = LibC::GUID.new(0x965fc360_u32, 0x16ff_u16, 0x11d0_u16, StaticArray[0x91_u8, 0xcb_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x23_u8])
     def query_interface(this : ISecurityInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -200,16 +201,17 @@ module Win32cr::Security::Authorization::UI
   end
 
   @[Extern]
-  record ISecurityInformation2Vtbl,
+
+  record ISecurityInformation2Vtable,
     query_interface : Proc(ISecurityInformation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISecurityInformation2*, UInt32),
     release : Proc(ISecurityInformation2*, UInt32),
     is_dacl_canonical : Proc(ISecurityInformation2*, Win32cr::Security::ACL*, Win32cr::Foundation::BOOL),
-    lookup_sids : Proc(ISecurityInformation2*, UInt32, Win32cr::Foundation::PSID*, Void**, Win32cr::Foundation::HRESULT)
+    lookup_sids : Proc(ISecurityInformation2*, UInt32, Win32cr::Security::PSID*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISecurityInformation2, lpVtbl : ISecurityInformation2Vtbl* do
+  record ISecurityInformation2, lpVtbl : ISecurityInformation2Vtable* do
     GUID = LibC::GUID.new(0xc3ccfdb4_u32, 0x6f88_u16, 0x11d2_u16, StaticArray[0xa3_u8, 0xce_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb1_u8, 0x78_u8, 0x2a_u8])
     def query_interface(this : ISecurityInformation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -223,22 +225,23 @@ module Win32cr::Security::Authorization::UI
     def is_dacl_canonical(this : ISecurityInformation2*, pDacl : Win32cr::Security::ACL*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_dacl_canonical.call(this, pDacl)
     end
-    def lookup_sids(this : ISecurityInformation2*, cSids : UInt32, rgpSids : Win32cr::Foundation::PSID*, ppdo : Void**) : Win32cr::Foundation::HRESULT
+    def lookup_sids(this : ISecurityInformation2*, cSids : UInt32, rgpSids : Win32cr::Security::PSID*, ppdo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lookup_sids.call(this, cSids, rgpSids, ppdo)
     end
 
   end
 
   @[Extern]
-  record IEffectivePermissionVtbl,
+
+  record IEffectivePermissionVtable,
     query_interface : Proc(IEffectivePermission*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEffectivePermission*, UInt32),
     release : Proc(IEffectivePermission*, UInt32),
-    get_effective_permission : Proc(IEffectivePermission*, LibC::GUID*, Win32cr::Foundation::PSID, Win32cr::Foundation::PWSTR, Win32cr::Security::PSECURITY_DESCRIPTOR, Win32cr::Security::OBJECT_TYPE_LIST**, UInt32*, UInt32**, UInt32*, Win32cr::Foundation::HRESULT)
+    get_effective_permission : Proc(IEffectivePermission*, LibC::GUID*, Win32cr::Security::PSID, Win32cr::Foundation::PWSTR, Win32cr::Security::PSECURITY_DESCRIPTOR, Win32cr::Security::OBJECT_TYPE_LIST**, UInt32*, UInt32**, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEffectivePermission, lpVtbl : IEffectivePermissionVtbl* do
+  record IEffectivePermission, lpVtbl : IEffectivePermissionVtable* do
     GUID = LibC::GUID.new(0x3853dc76_u32, 0x9f35_u16, 0x407c_u16, StaticArray[0x88_u8, 0xa1_u8, 0xd1_u8, 0x93_u8, 0x44_u8, 0x36_u8, 0x5f_u8, 0xbc_u8])
     def query_interface(this : IEffectivePermission*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -249,14 +252,15 @@ module Win32cr::Security::Authorization::UI
     def release(this : IEffectivePermission*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_effective_permission(this : IEffectivePermission*, pguidObjectType : LibC::GUID*, pUserSid : Win32cr::Foundation::PSID, pszServerName : Win32cr::Foundation::PWSTR, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR, ppObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST**, pcObjectTypeListLength : UInt32*, ppGrantedAccessList : UInt32**, pcGrantedAccessListLength : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_effective_permission(this : IEffectivePermission*, pguidObjectType : LibC::GUID*, pUserSid : Win32cr::Security::PSID, pszServerName : Win32cr::Foundation::PWSTR, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR, ppObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST**, pcObjectTypeListLength : UInt32*, ppGrantedAccessList : UInt32**, pcGrantedAccessListLength : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_effective_permission.call(this, pguidObjectType, pUserSid, pszServerName, pSD, ppObjectTypeList, pcObjectTypeListLength, ppGrantedAccessList, pcGrantedAccessListLength)
     end
 
   end
 
   @[Extern]
-  record ISecurityObjectTypeInfoVtbl,
+
+  record ISecurityObjectTypeInfoVtable,
     query_interface : Proc(ISecurityObjectTypeInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISecurityObjectTypeInfo*, UInt32),
     release : Proc(ISecurityObjectTypeInfo*, UInt32),
@@ -264,7 +268,7 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  record ISecurityObjectTypeInfo, lpVtbl : ISecurityObjectTypeInfoVtbl* do
+  record ISecurityObjectTypeInfo, lpVtbl : ISecurityObjectTypeInfoVtable* do
     GUID = LibC::GUID.new(0xfc3066eb_u32, 0x79ef_u16, 0x444b_u16, StaticArray[0x91_u8, 0x11_u8, 0xd1_u8, 0x8a_u8, 0x75_u8, 0xeb_u8, 0xf2_u8, 0xfa_u8])
     def query_interface(this : ISecurityObjectTypeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -282,7 +286,8 @@ module Win32cr::Security::Authorization::UI
   end
 
   @[Extern]
-  record ISecurityInformation3Vtbl,
+
+  record ISecurityInformation3Vtable,
     query_interface : Proc(ISecurityInformation3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISecurityInformation3*, UInt32),
     release : Proc(ISecurityInformation3*, UInt32),
@@ -291,7 +296,7 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  record ISecurityInformation3, lpVtbl : ISecurityInformation3Vtbl* do
+  record ISecurityInformation3, lpVtbl : ISecurityInformation3Vtable* do
     GUID = LibC::GUID.new(0xe2cdc9cc_u32, 0x31bd_u16, 0x4f8f_u16, StaticArray[0x8c_u8, 0x8b_u8, 0xb6_u8, 0x41_u8, 0xaf_u8, 0x51_u8, 0x6a_u8, 0x1a_u8])
     def query_interface(this : ISecurityInformation3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -312,7 +317,8 @@ module Win32cr::Security::Authorization::UI
   end
 
   @[Extern]
-  record ISecurityInformation4Vtbl,
+
+  record ISecurityInformation4Vtable,
     query_interface : Proc(ISecurityInformation4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISecurityInformation4*, UInt32),
     release : Proc(ISecurityInformation4*, UInt32),
@@ -320,7 +326,7 @@ module Win32cr::Security::Authorization::UI
 
 
   @[Extern]
-  record ISecurityInformation4, lpVtbl : ISecurityInformation4Vtbl* do
+  record ISecurityInformation4, lpVtbl : ISecurityInformation4Vtable* do
     GUID = LibC::GUID.new(0xea961070_u32, 0xcd14_u16, 0x4621_u16, StaticArray[0xac_u8, 0xe4_u8, 0xf6_u8, 0x3c_u8, 0x3_u8, 0xe5_u8, 0x83_u8, 0xe4_u8])
     def query_interface(this : ISecurityInformation4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -338,15 +344,16 @@ module Win32cr::Security::Authorization::UI
   end
 
   @[Extern]
-  record IEffectivePermission2Vtbl,
+
+  record IEffectivePermission2Vtable,
     query_interface : Proc(IEffectivePermission2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEffectivePermission2*, UInt32),
     release : Proc(IEffectivePermission2*, UInt32),
-    compute_effective_permission_with_secondary_security : Proc(IEffectivePermission2*, Win32cr::Foundation::PSID, Win32cr::Foundation::PSID, Win32cr::Foundation::PWSTR, Win32cr::Security::Authorization::UI::SECURITY_OBJECT*, UInt32, Win32cr::Security::TOKEN_GROUPS*, Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, Win32cr::Security::TOKEN_GROUPS*, Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, Win32cr::Security::Authorization::UI::EFFPERM_RESULT_LIST*, Win32cr::Foundation::HRESULT)
+    compute_effective_permission_with_secondary_security : Proc(IEffectivePermission2*, Win32cr::Security::PSID, Win32cr::Security::PSID, Win32cr::Foundation::PWSTR, Win32cr::Security::Authorization::UI::SECURITY_OBJECT*, UInt32, Win32cr::Security::TOKEN_GROUPS*, Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, Win32cr::Security::TOKEN_GROUPS*, Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, Win32cr::Security::Authorization::UI::EFFPERM_RESULT_LIST*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEffectivePermission2, lpVtbl : IEffectivePermission2Vtbl* do
+  record IEffectivePermission2, lpVtbl : IEffectivePermission2Vtable* do
     GUID = LibC::GUID.new(0x941fabca_u32, 0xdd47_u16, 0x4fca_u16, StaticArray[0x90_u8, 0xbb_u8, 0xb0_u8, 0xe1_u8, 0x2_u8, 0x55_u8, 0xf2_u8, 0xd_u8])
     def query_interface(this : IEffectivePermission2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -357,25 +364,32 @@ module Win32cr::Security::Authorization::UI
     def release(this : IEffectivePermission2*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def compute_effective_permission_with_secondary_security(this : IEffectivePermission2*, pSid : Win32cr::Foundation::PSID, pDeviceSid : Win32cr::Foundation::PSID, pszServerName : Win32cr::Foundation::PWSTR, pSecurityObjects : Win32cr::Security::Authorization::UI::SECURITY_OBJECT*, dwSecurityObjectCount : UInt32, pUserGroups : Win32cr::Security::TOKEN_GROUPS*, pAuthzUserGroupsOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pDeviceGroups : Win32cr::Security::TOKEN_GROUPS*, pAuthzDeviceGroupsOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pAuthzUserClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, pAuthzUserClaimsOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pAuthzDeviceClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, pAuthzDeviceClaimsOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pEffpermResultLists : Win32cr::Security::Authorization::UI::EFFPERM_RESULT_LIST*) : Win32cr::Foundation::HRESULT
+    def compute_effective_permission_with_secondary_security(this : IEffectivePermission2*, pSid : Win32cr::Security::PSID, pDeviceSid : Win32cr::Security::PSID, pszServerName : Win32cr::Foundation::PWSTR, pSecurityObjects : Win32cr::Security::Authorization::UI::SECURITY_OBJECT*, dwSecurityObjectCount : UInt32, pUserGroups : Win32cr::Security::TOKEN_GROUPS*, pAuthzUserGroupsOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pDeviceGroups : Win32cr::Security::TOKEN_GROUPS*, pAuthzDeviceGroupsOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pAuthzUserClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, pAuthzUserClaimsOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pAuthzDeviceClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, pAuthzDeviceClaimsOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pEffpermResultLists : Win32cr::Security::Authorization::UI::EFFPERM_RESULT_LIST*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.compute_effective_permission_with_secondary_security.call(this, pSid, pDeviceSid, pszServerName, pSecurityObjects, dwSecurityObjectCount, pUserGroups, pAuthzUserGroupsOperations, pDeviceGroups, pAuthzDeviceGroupsOperations, pAuthzUserClaims, pAuthzUserClaimsOperations, pAuthzDeviceClaims, pAuthzDeviceClaimsOperations, pEffpermResultLists)
     end
 
   end
 
   def createSecurityPage(psi : Void*) : Win32cr::UI::Controls::HPROPSHEETPAGE
+    {% if !flag?(:docs) %}
     C.CreateSecurityPage(psi)
+    {% end %}
   end
 
   def editSecurity(hwndOwner : Win32cr::Foundation::HWND, psi : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EditSecurity(hwndOwner, psi)
+    {% end %}
   end
 
   def editSecurityAdvanced(hwndOwner : Win32cr::Foundation::HWND, psi : Void*, uSIPage : Win32cr::Security::Authorization::UI::SI_PAGE_TYPE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditSecurityAdvanced(hwndOwner, psi, uSIPage)
+    {% end %}
   end
 
   @[Link("aclui")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateSecurityPage(psi : Void*) : Win32cr::UI::Controls::HPROPSHEETPAGE
@@ -387,4 +401,5 @@ module Win32cr::Security::Authorization::UI
     fun EditSecurityAdvanced(hwndOwner : Win32cr::Foundation::HWND, psi : Void*, uSIPage : Win32cr::Security::Authorization::UI::SI_PAGE_TYPE) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

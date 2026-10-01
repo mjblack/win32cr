@@ -1,7 +1,7 @@
 
 module Win32cr::System::MixedReality
   extend self
-  PERCEPTIONFIELD_StateStream_TimeStamps = "aa886119-f32f-49bf-92ca-f9ddf784d297"
+  PERCEPTIONFIELD_StateStream_TimeStamps = LibC::GUID.new(0xaa886119_u32, 0xf32f_u16, 0x49bf_u16, StaticArray[0x92_u8, 0xca_u8, 0xf9_u8, 0xdd_u8, 0xf7_u8, 0x84_u8, 0xd2_u8, 0x97_u8])
 
 
   @[Extern]

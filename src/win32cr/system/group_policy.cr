@@ -1,5 +1,6 @@
 require "./com.cr"
 require "./../foundation.cr"
+require "./variant.cr"
 require "./ole.cr"
 require "./registry.cr"
 require "./wmi.cr"
@@ -9,7 +10,6 @@ require "./../ui/shell.cr"
 
 module Win32cr::System::GroupPolicy
   extend self
-  alias CriticalPolicySectionHandle = LibC::IntPtrT
   alias PFNSTATUSMESSAGECALLBACK = Proc(Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, UInt32)
 
   alias PFNPROCESSGROUPPOLICY = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::System::Registry::HKEY, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*, LibC::UIntPtrT, Win32cr::Foundation::BOOL*, Win32cr::System::GroupPolicy::PFNSTATUSMESSAGECALLBACK, UInt32)
@@ -68,6 +68,10 @@ module Win32cr::System::GroupPolicy
   GPO_INFO_FLAG_FORCED_REFRESH = 1024_u32
   GPO_INFO_FLAG_SAFEMODE_BOOT = 2048_u32
   GPO_INFO_FLAG_ASYNC_FOREGROUND = 4096_u32
+  REGISTRY_EXTENSION_GUID = LibC::GUID.new(0x35378eac_u32, 0x683f_u16, 0x11d2_u16, StaticArray[0xa8_u8, 0x9a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xcf_u8, 0xa2_u8])
+  GROUP_POLICY_TRIGGER_EVENT_PROVIDER_GUID = LibC::GUID.new(0xbd2f4252_u32, 0x5e1e_u16, 0x49fc_u16, StaticArray[0x9a_u8, 0x30_u8, 0xf3_u8, 0x97_u8, 0x8a_u8, 0xd8_u8, 0x9e_u8, 0xe2_u8])
+  MACHINE_POLICY_PRESENT_TRIGGER_GUID = LibC::GUID.new(0x659fcae6_u32, 0x5bdb_u16, 0x4da9_u16, StaticArray[0xb1_u8, 0xff_u8, 0xca_u8, 0x2a_u8, 0x17_u8, 0x8d_u8, 0x46_u8, 0xe0_u8])
+  USER_POLICY_PRESENT_TRIGGER_GUID = LibC::GUID.new(0x54fb46c8_u32, 0xf089_u16, 0x464c_u16, StaticArray[0xb1_u8, 0xfd_u8, 0x59_u8, 0xd1_u8, 0xb6_u8, 0x2c_u8, 0x3b_u8, 0x50_u8])
   FLAG_NO_GPO_FILTER = 2147483648_u32
   FLAG_NO_CSE_INVOKE = 1073741824_u32
   FLAG_ASSUME_SLOW_LINK = 536870912_u32
@@ -95,24 +99,18 @@ module Win32cr::System::GroupPolicy
   MANAGED_APPTYPE_WINDOWSINSTALLER = 1_u32
   MANAGED_APPTYPE_SETUPEXE = 2_u32
   MANAGED_APPTYPE_UNSUPPORTED = 3_u32
-  CLSID_GPESnapIn = "8fc0b734-a0e1-11d1-a7d3-0000f87571e3"
-  NODEID_Machine = "8fc0b737-a0e1-11d1-a7d3-0000f87571e3"
-  NODEID_MachineSWSettings = "8fc0b73a-a0e1-11d1-a7d3-0000f87571e3"
-  NODEID_User = "8fc0b738-a0e1-11d1-a7d3-0000f87571e3"
-  NODEID_UserSWSettings = "8fc0b73c-a0e1-11d1-a7d3-0000f87571e3"
-  CLSID_GroupPolicyObject = "ea502722-a23d-11d1-a7d3-0000f87571e3"
-  CLSID_RSOPSnapIn = "6dc3804b-7212-458d-adb0-9a07e2ae1fa2"
-  NODEID_RSOPMachine = "bd4c1a2e-0b7a-4a62-a6b0-c0577539c97e"
-  NODEID_RSOPMachineSWSettings = "6a76273e-eb8e-45db-94c5-25663a5f2c1a"
-  NODEID_RSOPUser = "ab87364f-0cec-4cd8-9bf8-898f34628fb8"
-  NODEID_RSOPUserSWSettings = "e52c5ce3-fd27-4402-84de-d9a5f2858910"
-  GPO_SECTION_ROOT = 0_u32
-  GPO_SECTION_USER = 1_u32
-  GPO_SECTION_MACHINE = 2_u32
-  GPO_OPEN_LOAD_REGISTRY = 1_u32
-  GPO_OPEN_READ_ONLY = 2_u32
-  GPO_OPTION_DISABLE_USER = 1_u32
-  GPO_OPTION_DISABLE_MACHINE = 2_u32
+  CLSID_GPESnapIn = LibC::GUID.new(0x8fc0b734_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
+  NODEID_Machine = LibC::GUID.new(0x8fc0b737_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
+  NODEID_MachineSWSettings = LibC::GUID.new(0x8fc0b73a_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
+  NODEID_User = LibC::GUID.new(0x8fc0b738_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
+  NODEID_UserSWSettings = LibC::GUID.new(0x8fc0b73c_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
+  CLSID_GroupPolicyObject = LibC::GUID.new(0xea502722_u32, 0xa23d_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
+  ADMXCOMMENTS_EXTENSION_GUID = LibC::GUID.new(0x6c5a2a86_u32, 0x9eb3_u16, 0x42b9_u16, StaticArray[0xaa_u8, 0x83_u8, 0xa7_u8, 0x37_u8, 0x1b_u8, 0xa0_u8, 0x11_u8, 0xb9_u8])
+  CLSID_RSOPSnapIn = LibC::GUID.new(0x6dc3804b_u32, 0x7212_u16, 0x458d_u16, StaticArray[0xad_u8, 0xb0_u8, 0x9a_u8, 0x7_u8, 0xe2_u8, 0xae_u8, 0x1f_u8, 0xa2_u8])
+  NODEID_RSOPMachine = LibC::GUID.new(0xbd4c1a2e_u32, 0xb7a_u16, 0x4a62_u16, StaticArray[0xa6_u8, 0xb0_u8, 0xc0_u8, 0x57_u8, 0x75_u8, 0x39_u8, 0xc9_u8, 0x7e_u8])
+  NODEID_RSOPMachineSWSettings = LibC::GUID.new(0x6a76273e_u32, 0xeb8e_u16, 0x45db_u16, StaticArray[0x94_u8, 0xc5_u8, 0x25_u8, 0x66_u8, 0x3a_u8, 0x5f_u8, 0x2c_u8, 0x1a_u8])
+  NODEID_RSOPUser = LibC::GUID.new(0xab87364f_u32, 0xcec_u16, 0x4cd8_u16, StaticArray[0x9b_u8, 0xf8_u8, 0x89_u8, 0x8f_u8, 0x34_u8, 0x62_u8, 0x8f_u8, 0xb8_u8])
+  NODEID_RSOPUserSWSettings = LibC::GUID.new(0xe52c5ce3_u32, 0xfd27_u16, 0x4402_u16, StaticArray[0x84_u8, 0xde_u8, 0xd9_u8, 0xa5_u8, 0xf2_u8, 0x85_u8, 0x89_u8, 0x10_u8])
   RSOP_INFO_FLAG_DIAGNOSTIC_MODE = 1_u32
   GPO_BROWSE_DISABLENEW = 1_u32
   GPO_BROWSE_NOCOMPUTERS = 2_u32
@@ -190,6 +188,20 @@ module Win32cr::System::GroupPolicy
 
   CLSID_GPMStarterGPOCollection = LibC::GUID.new(0x82f8aa8b_u32, 0x49ba_u16, 0x43b2_u16, StaticArray[0x95_u8, 0x6e_u8, 0x33_u8, 0x97_u8, 0xf9_u8, 0xb9_u8, 0x4c_u8, 0x3a_u8])
 
+  enum GPO_OPEN_FLAGS : UInt32
+    GPO_OPEN_LOAD_REGISTRY = 1_u32
+    GPO_OPEN_READ_ONLY = 2_u32
+  end
+  @[Flags]
+  enum GPO_OPTIONS : UInt32
+    GPO_OPTION_DISABLE_USER = 1_u32
+    GPO_OPTION_DISABLE_MACHINE = 2_u32
+  end
+  enum GPO_SECTION : UInt32
+    GPO_SECTION_ROOT = 0_u32
+    GPO_SECTION_USER = 1_u32
+    GPO_SECTION_MACHINE = 2_u32
+  end
   enum GPMRSOPMode
     Rsopunknown = 0_i32
     Rsopplanning = 1_i32
@@ -470,19 +482,20 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMVtbl,
+
+  record IGPMVtable,
     query_interface : Proc(IGPM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPM*, UInt32),
     release : Proc(IGPM*, UInt32),
     get_type_info_count : Proc(IGPM*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPM*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPM*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPM*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPM*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_domain : Proc(IGPM*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_backup_dir : Proc(IGPM*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_sites_container : Proc(IGPM*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_rsop : Proc(IGPM*, Win32cr::System::GroupPolicy::GPMRSOPMode, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
-    create_permission : Proc(IGPM*, Win32cr::Foundation::BSTR, Win32cr::System::GroupPolicy::GPMPermissionType, Int16, Void**, Win32cr::Foundation::HRESULT),
+    create_permission : Proc(IGPM*, Win32cr::Foundation::BSTR, Win32cr::System::GroupPolicy::GPMPermissionType, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_search_criteria : Proc(IGPM*, Void**, Win32cr::Foundation::HRESULT),
     create_trustee : Proc(IGPM*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_client_side_extensions : Proc(IGPM*, Void**, Win32cr::Foundation::HRESULT),
@@ -493,7 +506,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPM, lpVtbl : IGPMVtbl* do
+  record IGPM, lpVtbl : IGPMVtable* do
     GUID = LibC::GUID.new(0xf5fae809_u32, 0x3bd6_u16, 0x4da9_u16, StaticArray[0xa6_u8, 0x5e_u8, 0x17_u8, 0x66_u8, 0x5b_u8, 0x41_u8, 0xd7_u8, 0x63_u8])
     def query_interface(this : IGPM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -513,8 +526,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPM*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPM*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPM*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_domain(this : IGPM*, bstrDomain : Win32cr::Foundation::BSTR, bstrDomainController : Win32cr::Foundation::BSTR, lDCFlags : Int32, pIGPMDomain : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_domain.call(this, bstrDomain, bstrDomainController, lDCFlags, pIGPMDomain)
@@ -528,7 +541,7 @@ module Win32cr::System::GroupPolicy
     def get_rsop(this : IGPM*, gpmRSoPMode : Win32cr::System::GroupPolicy::GPMRSOPMode, bstrNamespace : Win32cr::Foundation::BSTR, lFlags : Int32, ppIGPMRSOP : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_rsop.call(this, gpmRSoPMode, bstrNamespace, lFlags, ppIGPMRSOP)
     end
-    def create_permission(this : IGPM*, bstrTrustee : Win32cr::Foundation::BSTR, perm : Win32cr::System::GroupPolicy::GPMPermissionType, bInheritable : Int16, ppPerm : Void**) : Win32cr::Foundation::HRESULT
+    def create_permission(this : IGPM*, bstrTrustee : Win32cr::Foundation::BSTR, perm : Win32cr::System::GroupPolicy::GPMPermissionType, bInheritable : Win32cr::Foundation::VARIANT_BOOL, ppPerm : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_permission.call(this, bstrTrustee, perm, bInheritable, ppPerm)
     end
     def create_search_criteria(this : IGPM*, ppIGPMSearchCriteria : Void**) : Win32cr::Foundation::HRESULT
@@ -556,20 +569,21 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMDomainVtbl,
+
+  record IGPMDomainVtable,
     query_interface : Proc(IGPMDomain*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMDomain*, UInt32),
     release : Proc(IGPMDomain*, UInt32),
     get_type_info_count : Proc(IGPMDomain*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMDomain*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMDomain*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMDomain*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMDomain*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DomainController : Proc(IGPMDomain*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Domain : Proc(IGPMDomain*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     create_gpo : Proc(IGPMDomain*, Void**, Win32cr::Foundation::HRESULT),
     get_gpo : Proc(IGPMDomain*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_gp_os : Proc(IGPMDomain*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    restore_gpo : Proc(IGPMDomain*, Void*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    restore_gpo : Proc(IGPMDomain*, Void*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_som : Proc(IGPMDomain*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_so_ms : Proc(IGPMDomain*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_wmi_filter : Proc(IGPMDomain*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -577,7 +591,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMDomain, lpVtbl : IGPMDomainVtbl* do
+  record IGPMDomain, lpVtbl : IGPMDomainVtable* do
     GUID = LibC::GUID.new(0x6b21cc14_u32, 0x5a00_u16, 0x4f44_u16, StaticArray[0xa7_u8, 0x38_u8, 0xfe_u8, 0xec_u8, 0x8a_u8, 0x94_u8, 0xc7_u8, 0xe3_u8])
     def query_interface(this : IGPMDomain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -597,8 +611,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMDomain*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMDomain*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMDomain*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DomainController(this : IGPMDomain*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DomainController.call(this, pVal)
@@ -615,7 +629,7 @@ module Win32cr::System::GroupPolicy
     def search_gp_os(this : IGPMDomain*, pIGPMSearchCriteria : Void*, ppIGPMGPOCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search_gp_os.call(this, pIGPMSearchCriteria, ppIGPMGPOCollection)
     end
-    def restore_gpo(this : IGPMDomain*, pIGPMBackup : Void*, lDCFlags : Int32, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def restore_gpo(this : IGPMDomain*, pIGPMBackup : Void*, lDCFlags : Int32, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore_gpo.call(this, pIGPMBackup, lDCFlags, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def get_som(this : IGPMDomain*, bstrPath : Win32cr::Foundation::BSTR, ppSOM : Void**) : Win32cr::Foundation::HRESULT
@@ -634,21 +648,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupDirVtbl,
+
+  record IGPMBackupDirVtable,
     query_interface : Proc(IGPMBackupDir*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackupDir*, UInt32),
     release : Proc(IGPMBackupDir*, UInt32),
     get_type_info_count : Proc(IGPMBackupDir*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMBackupDir*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMBackupDir*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMBackupDir*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMBackupDir*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_BackupDirectory : Proc(IGPMBackupDir*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_backup : Proc(IGPMBackupDir*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_backups : Proc(IGPMBackupDir*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMBackupDir, lpVtbl : IGPMBackupDirVtbl* do
+  record IGPMBackupDir, lpVtbl : IGPMBackupDirVtable* do
     GUID = LibC::GUID.new(0xb1568bed_u32, 0xa93_u16, 0x4acc_u16, StaticArray[0x81_u8, 0xf_u8, 0xaf_u8, 0xe7_u8, 0x8_u8, 0x10_u8, 0x19_u8, 0xb9_u8])
     def query_interface(this : IGPMBackupDir*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -668,8 +683,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMBackupDir*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMBackupDir*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMBackupDir*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_BackupDirectory(this : IGPMBackupDir*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BackupDirectory.call(this, pVal)
@@ -684,14 +699,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSitesContainerVtbl,
+
+  record IGPMSitesContainerVtable,
     query_interface : Proc(IGPMSitesContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSitesContainer*, UInt32),
     release : Proc(IGPMSitesContainer*, UInt32),
     get_type_info_count : Proc(IGPMSitesContainer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMSitesContainer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMSitesContainer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMSitesContainer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMSitesContainer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DomainController : Proc(IGPMSitesContainer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Domain : Proc(IGPMSitesContainer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Forest : Proc(IGPMSitesContainer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -700,7 +716,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSitesContainer, lpVtbl : IGPMSitesContainerVtbl* do
+  record IGPMSitesContainer, lpVtbl : IGPMSitesContainerVtable* do
     GUID = LibC::GUID.new(0x4725a899_u32, 0x2782_u16, 0x4d27_u16, StaticArray[0xa6_u8, 0xbb_u8, 0xd4_u8, 0x99_u8, 0x24_u8, 0x6f_u8, 0xfd_u8, 0x72_u8])
     def query_interface(this : IGPMSitesContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -720,8 +736,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMSitesContainer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMSitesContainer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMSitesContainer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DomainController(this : IGPMSitesContainer*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DomainController.call(this, pVal)
@@ -742,19 +758,20 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSearchCriteriaVtbl,
+
+  record IGPMSearchCriteriaVtable,
     query_interface : Proc(IGPMSearchCriteria*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSearchCriteria*, UInt32),
     release : Proc(IGPMSearchCriteria*, UInt32),
     get_type_info_count : Proc(IGPMSearchCriteria*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMSearchCriteria*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMSearchCriteria*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMSearchCriteria*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    add : Proc(IGPMSearchCriteria*, Win32cr::System::GroupPolicy::GPMSearchProperty, Win32cr::System::GroupPolicy::GPMSearchOperation, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IGPMSearchCriteria*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    add : Proc(IGPMSearchCriteria*, Win32cr::System::GroupPolicy::GPMSearchProperty, Win32cr::System::GroupPolicy::GPMSearchOperation, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMSearchCriteria, lpVtbl : IGPMSearchCriteriaVtbl* do
+  record IGPMSearchCriteria, lpVtbl : IGPMSearchCriteriaVtable* do
     GUID = LibC::GUID.new(0xd6f11c42_u32, 0x829b_u16, 0x48d4_u16, StaticArray[0x83_u8, 0xf5_u8, 0x36_u8, 0x15_u8, 0xb6_u8, 0x7d_u8, 0xfc_u8, 0x22_u8])
     def query_interface(this : IGPMSearchCriteria*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -774,24 +791,25 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMSearchCriteria*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMSearchCriteria*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMSearchCriteria*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def add(this : IGPMSearchCriteria*, searchProperty : Win32cr::System::GroupPolicy::GPMSearchProperty, searchOperation : Win32cr::System::GroupPolicy::GPMSearchOperation, varValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add(this : IGPMSearchCriteria*, searchProperty : Win32cr::System::GroupPolicy::GPMSearchProperty, searchOperation : Win32cr::System::GroupPolicy::GPMSearchOperation, varValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, searchProperty, searchOperation, varValue)
     end
 
   end
 
   @[Extern]
-  record IGPMTrusteeVtbl,
+
+  record IGPMTrusteeVtable,
     query_interface : Proc(IGPMTrustee*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMTrustee*, UInt32),
     release : Proc(IGPMTrustee*, UInt32),
     get_type_info_count : Proc(IGPMTrustee*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMTrustee*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMTrustee*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMTrustee*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMTrustee*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_TrusteeSid : Proc(IGPMTrustee*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TrusteeName : Proc(IGPMTrustee*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TrusteeDomain : Proc(IGPMTrustee*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -800,7 +818,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMTrustee, lpVtbl : IGPMTrusteeVtbl* do
+  record IGPMTrustee, lpVtbl : IGPMTrusteeVtable* do
     GUID = LibC::GUID.new(0x3b466da8_u32, 0xc1a4_u16, 0x4b2a_u16, StaticArray[0x99_u8, 0x9a_u8, 0xbe_u8, 0xfc_u8, 0xdd_u8, 0x56_u8, 0xce_u8, 0xfb_u8])
     def query_interface(this : IGPMTrustee*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -820,8 +838,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMTrustee*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMTrustee*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMTrustee*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_TrusteeSid(this : IGPMTrustee*, bstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TrusteeSid.call(this, bstrVal)
@@ -842,23 +860,24 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMPermissionVtbl,
+
+  record IGPMPermissionVtable,
     query_interface : Proc(IGPMPermission*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMPermission*, UInt32),
     release : Proc(IGPMPermission*, UInt32),
     get_type_info_count : Proc(IGPMPermission*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMPermission*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMPermission*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMPermission*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Inherited : Proc(IGPMPermission*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Inheritable : Proc(IGPMPermission*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Denied : Proc(IGPMPermission*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMPermission*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Inherited : Proc(IGPMPermission*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Inheritable : Proc(IGPMPermission*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Denied : Proc(IGPMPermission*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Permission : Proc(IGPMPermission*, Win32cr::System::GroupPolicy::GPMPermissionType*, Win32cr::Foundation::HRESULT),
     get_Trustee : Proc(IGPMPermission*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMPermission, lpVtbl : IGPMPermissionVtbl* do
+  record IGPMPermission, lpVtbl : IGPMPermissionVtable* do
     GUID = LibC::GUID.new(0x35ebca40_u32, 0xe1a1_u16, 0x4a02_u16, StaticArray[0x89_u8, 0x5_u8, 0xd7_u8, 0x94_u8, 0x16_u8, 0xfb_u8, 0x46_u8, 0x4a_u8])
     def query_interface(this : IGPMPermission*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -878,16 +897,16 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMPermission*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMPermission*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMPermission*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Inherited(this : IGPMPermission*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Inherited(this : IGPMPermission*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Inherited.call(this, pVal)
     end
-    def get_Inheritable(this : IGPMPermission*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Inheritable(this : IGPMPermission*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Inheritable.call(this, pVal)
     end
-    def get_Denied(this : IGPMPermission*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Denied(this : IGPMPermission*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Denied.call(this, pVal)
     end
     def get_Permission(this : IGPMPermission*, pVal : Win32cr::System::GroupPolicy::GPMPermissionType*) : Win32cr::Foundation::HRESULT
@@ -900,16 +919,17 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSecurityInfoVtbl,
+
+  record IGPMSecurityInfoVtable,
     query_interface : Proc(IGPMSecurityInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSecurityInfo*, UInt32),
     release : Proc(IGPMSecurityInfo*, UInt32),
     get_type_info_count : Proc(IGPMSecurityInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMSecurityInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMSecurityInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMSecurityInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMSecurityInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMSecurityInfo*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMSecurityInfo*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMSecurityInfo*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMSecurityInfo*, Void**, Win32cr::Foundation::HRESULT),
     add : Proc(IGPMSecurityInfo*, Void*, Win32cr::Foundation::HRESULT),
     remove : Proc(IGPMSecurityInfo*, Void*, Win32cr::Foundation::HRESULT),
@@ -917,7 +937,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSecurityInfo, lpVtbl : IGPMSecurityInfoVtbl* do
+  record IGPMSecurityInfo, lpVtbl : IGPMSecurityInfoVtable* do
     GUID = LibC::GUID.new(0xb6c31ed4_u32, 0x1c93_u16, 0x4d3e_u16, StaticArray[0xae_u8, 0x84_u8, 0xeb_u8, 0x6d_u8, 0x61_u8, 0x16_u8, 0x1b_u8, 0x60_u8])
     def query_interface(this : IGPMSecurityInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -937,13 +957,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMSecurityInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMSecurityInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMSecurityInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMSecurityInfo*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMSecurityInfo*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMSecurityInfo*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMSecurityInfo*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -962,14 +982,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupVtbl,
+
+  record IGPMBackupVtable,
     query_interface : Proc(IGPMBackup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackup*, UInt32),
     release : Proc(IGPMBackup*, UInt32),
     get_type_info_count : Proc(IGPMBackup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMBackup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMBackup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMBackup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMBackup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ID : Proc(IGPMBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_GPOID : Proc(IGPMBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_GPODomain : Proc(IGPMBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -978,12 +999,12 @@ module Win32cr::System::GroupPolicy
     get_Comment : Proc(IGPMBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_BackupDir : Proc(IGPMBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     delete : Proc(IGPMBackup*, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMBackup*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMBackup*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     generate_report_to_file : Proc(IGPMBackup*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMBackup, lpVtbl : IGPMBackupVtbl* do
+  record IGPMBackup, lpVtbl : IGPMBackupVtable* do
     GUID = LibC::GUID.new(0xd8a16a35_u32, 0x3b0d_u16, 0x416b_u16, StaticArray[0x8d_u8, 0x2_u8, 0x4d_u8, 0xf6_u8, 0xf9_u8, 0x5a_u8, 0x71_u8, 0x19_u8])
     def query_interface(this : IGPMBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1003,8 +1024,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMBackup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMBackup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMBackup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ID(this : IGPMBackup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ID.call(this, pVal)
@@ -1030,7 +1051,7 @@ module Win32cr::System::GroupPolicy
     def delete(this : IGPMBackup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def generate_report(this : IGPMBackup*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMBackup*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def generate_report_to_file(this : IGPMBackup*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, bstrTargetFilePath : Win32cr::Foundation::BSTR, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
@@ -1040,21 +1061,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupCollectionVtbl,
+
+  record IGPMBackupCollectionVtable,
     query_interface : Proc(IGPMBackupCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackupCollection*, UInt32),
     release : Proc(IGPMBackupCollection*, UInt32),
     get_type_info_count : Proc(IGPMBackupCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMBackupCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMBackupCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMBackupCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMBackupCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMBackupCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMBackupCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMBackupCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMBackupCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMBackupCollection, lpVtbl : IGPMBackupCollectionVtbl* do
+  record IGPMBackupCollection, lpVtbl : IGPMBackupCollectionVtable* do
     GUID = LibC::GUID.new(0xc786fc0f_u32, 0x26d8_u16, 0x4bab_u16, StaticArray[0xa7_u8, 0x45_u8, 0x39_u8, 0xca_u8, 0x7e_u8, 0x80_u8, 0xc_u8, 0xac_u8])
     def query_interface(this : IGPMBackupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1074,13 +1096,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMBackupCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMBackupCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMBackupCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMBackupCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMBackupCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMBackupCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMBackupCollection*, ppIGPMBackup : Void**) : Win32cr::Foundation::HRESULT
@@ -1090,16 +1112,17 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSOMVtbl,
+
+  record IGPMSOMVtable,
     query_interface : Proc(IGPMSOM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSOM*, UInt32),
     release : Proc(IGPMSOM*, UInt32),
     get_type_info_count : Proc(IGPMSOM*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMSOM*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMSOM*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMSOM*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_GPOInheritanceBlocked : Proc(IGPMSOM*, Int16*, Win32cr::Foundation::HRESULT),
-    put_GPOInheritanceBlocked : Proc(IGPMSOM*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMSOM*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_GPOInheritanceBlocked : Proc(IGPMSOM*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_GPOInheritanceBlocked : Proc(IGPMSOM*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IGPMSOM*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IGPMSOM*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     create_gpo_link : Proc(IGPMSOM*, Int32, Void*, Void**, Win32cr::Foundation::HRESULT),
@@ -1111,7 +1134,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSOM, lpVtbl : IGPMSOMVtbl* do
+  record IGPMSOM, lpVtbl : IGPMSOMVtable* do
     GUID = LibC::GUID.new(0xc0a7f09e_u32, 0x5a1_u16, 0x4f0c_u16, StaticArray[0x81_u8, 0x58_u8, 0x9e_u8, 0x5c_u8, 0x33_u8, 0x68_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IGPMSOM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1131,13 +1154,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMSOM*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMSOM*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMSOM*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_GPOInheritanceBlocked(this : IGPMSOM*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_GPOInheritanceBlocked(this : IGPMSOM*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_GPOInheritanceBlocked.call(this, pVal)
     end
-    def put_GPOInheritanceBlocked(this : IGPMSOM*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_GPOInheritanceBlocked(this : IGPMSOM*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_GPOInheritanceBlocked.call(this, newVal)
     end
     def get_Name(this : IGPMSOM*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1168,21 +1191,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSOMCollectionVtbl,
+
+  record IGPMSOMCollectionVtable,
     query_interface : Proc(IGPMSOMCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSOMCollection*, UInt32),
     release : Proc(IGPMSOMCollection*, UInt32),
     get_type_info_count : Proc(IGPMSOMCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMSOMCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMSOMCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMSOMCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMSOMCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMSOMCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMSOMCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMSOMCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMSOMCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMSOMCollection, lpVtbl : IGPMSOMCollectionVtbl* do
+  record IGPMSOMCollection, lpVtbl : IGPMSOMCollectionVtable* do
     GUID = LibC::GUID.new(0xadc1688e_u32, 0xe4_u16, 0x4495_u16, StaticArray[0xab_u8, 0xba_u8, 0xbe_u8, 0xd2_u8, 0x0_u8, 0xdf_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : IGPMSOMCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1202,13 +1226,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMSOMCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMSOMCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMSOMCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMSOMCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMSOMCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMSOMCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMSOMCollection*, ppIGPMSOM : Void**) : Win32cr::Foundation::HRESULT
@@ -1218,26 +1242,27 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMWMIFilterVtbl,
+
+  record IGPMWMIFilterVtable,
     query_interface : Proc(IGPMWMIFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMWMIFilter*, UInt32),
     release : Proc(IGPMWMIFilter*, UInt32),
     get_type_info_count : Proc(IGPMWMIFilter*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMWMIFilter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMWMIFilter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMWMIFilter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMWMIFilter*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IGPMWMIFilter*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IGPMWMIFilter*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IGPMWMIFilter*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IGPMWMIFilter*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IGPMWMIFilter*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_query_list : Proc(IGPMWMIFilter*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_query_list : Proc(IGPMWMIFilter*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_security_info : Proc(IGPMWMIFilter*, Void**, Win32cr::Foundation::HRESULT),
     set_security_info : Proc(IGPMWMIFilter*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMWMIFilter, lpVtbl : IGPMWMIFilterVtbl* do
+  record IGPMWMIFilter, lpVtbl : IGPMWMIFilterVtable* do
     GUID = LibC::GUID.new(0xef2ff9b4_u32, 0x3c27_u16, 0x459a_u16, StaticArray[0xb9_u8, 0x79_u8, 0x3_u8, 0x83_u8, 0x5_u8, 0xce_u8, 0xc7_u8, 0x5d_u8])
     def query_interface(this : IGPMWMIFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1257,8 +1282,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMWMIFilter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMWMIFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMWMIFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Path(this : IGPMWMIFilter*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Path.call(this, pVal)
@@ -1275,7 +1300,7 @@ module Win32cr::System::GroupPolicy
     def get_Description(this : IGPMWMIFilter*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, pVal)
     end
-    def get_query_list(this : IGPMWMIFilter*, pQryList : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_query_list(this : IGPMWMIFilter*, pQryList : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_query_list.call(this, pQryList)
     end
     def get_security_info(this : IGPMWMIFilter*, ppSecurityInfo : Void**) : Win32cr::Foundation::HRESULT
@@ -1288,21 +1313,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMWMIFilterCollectionVtbl,
+
+  record IGPMWMIFilterCollectionVtable,
     query_interface : Proc(IGPMWMIFilterCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMWMIFilterCollection*, UInt32),
     release : Proc(IGPMWMIFilterCollection*, UInt32),
     get_type_info_count : Proc(IGPMWMIFilterCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMWMIFilterCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMWMIFilterCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMWMIFilterCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMWMIFilterCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMWMIFilterCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMWMIFilterCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMWMIFilterCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMWMIFilterCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMWMIFilterCollection, lpVtbl : IGPMWMIFilterCollectionVtbl* do
+  record IGPMWMIFilterCollection, lpVtbl : IGPMWMIFilterCollectionVtable* do
     GUID = LibC::GUID.new(0x5782d582_u32, 0x1a36_u16, 0x4661_u16, StaticArray[0x8a_u8, 0x94_u8, 0xc3_u8, 0xc3_u8, 0x25_u8, 0x51_u8, 0x94_u8, 0x5b_u8])
     def query_interface(this : IGPMWMIFilterCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1322,13 +1348,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMWMIFilterCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMWMIFilterCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMWMIFilterCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMWMIFilterCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMWMIFilterCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMWMIFilterCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMWMIFilterCollection*, pVal : Void**) : Win32cr::Foundation::HRESULT
@@ -1338,14 +1364,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMRSOPVtbl,
+
+  record IGPMRSOPVtable,
     query_interface : Proc(IGPMRSOP*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMRSOP*, UInt32),
     release : Proc(IGPMRSOP*, UInt32),
     get_type_info_count : Proc(IGPMRSOP*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMRSOP*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMRSOP*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMRSOP*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMRSOP*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Mode : Proc(IGPMRSOP*, Win32cr::System::GroupPolicy::GPMRSOPMode*, Win32cr::Foundation::HRESULT),
     get_Namespace : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_LoggingComputer : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1364,27 +1391,27 @@ module Win32cr::System::GroupPolicy
     get_PlanningUser : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_PlanningUserSOM : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PlanningUserSOM : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put_PlanningUserWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PlanningUserWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_PlanningUserSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PlanningUserSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_PlanningUserWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PlanningUserWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_PlanningUserSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PlanningUserSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_PlanningComputer : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PlanningComputer : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_PlanningComputerSOM : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PlanningComputerSOM : Proc(IGPMRSOP*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put_PlanningComputerWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PlanningComputerWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_PlanningComputerSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PlanningComputerSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    logging_enumerate_users : Proc(IGPMRSOP*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_PlanningComputerWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PlanningComputerWMIFilters : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_PlanningComputerSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PlanningComputerSecurityGroups : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    logging_enumerate_users : Proc(IGPMRSOP*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     create_query_results : Proc(IGPMRSOP*, Win32cr::Foundation::HRESULT),
     release_query_results : Proc(IGPMRSOP*, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMRSOP*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMRSOP*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     generate_report_to_file : Proc(IGPMRSOP*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMRSOP, lpVtbl : IGPMRSOPVtbl* do
+  record IGPMRSOP, lpVtbl : IGPMRSOPVtable* do
     GUID = LibC::GUID.new(0x49ed785a_u32, 0x3237_u16, 0x4ff2_u16, StaticArray[0xb1_u8, 0xf0_u8, 0xfd_u8, 0xf5_u8, 0xa8_u8, 0xd5_u8, 0xa1_u8, 0xee_u8])
     def query_interface(this : IGPMRSOP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1404,8 +1431,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMRSOP*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMRSOP*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMRSOP*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Mode(this : IGPMRSOP*, pVal : Win32cr::System::GroupPolicy::GPMRSOPMode*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Mode.call(this, pVal)
@@ -1461,16 +1488,16 @@ module Win32cr::System::GroupPolicy
     def get_PlanningUserSOM(this : IGPMRSOP*, bstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PlanningUserSOM.call(this, bstrVal)
     end
-    def put_PlanningUserWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_PlanningUserWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PlanningUserWMIFilters.call(this, varVal)
     end
-    def get_PlanningUserWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PlanningUserWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PlanningUserWMIFilters.call(this, varVal)
     end
-    def put_PlanningUserSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_PlanningUserSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PlanningUserSecurityGroups.call(this, varVal)
     end
-    def get_PlanningUserSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PlanningUserSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PlanningUserSecurityGroups.call(this, varVal)
     end
     def put_PlanningComputer(this : IGPMRSOP*, bstrVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1485,19 +1512,19 @@ module Win32cr::System::GroupPolicy
     def get_PlanningComputerSOM(this : IGPMRSOP*, bstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PlanningComputerSOM.call(this, bstrVal)
     end
-    def put_PlanningComputerWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_PlanningComputerWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PlanningComputerWMIFilters.call(this, varVal)
     end
-    def get_PlanningComputerWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PlanningComputerWMIFilters(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PlanningComputerWMIFilters.call(this, varVal)
     end
-    def put_PlanningComputerSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_PlanningComputerSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PlanningComputerSecurityGroups.call(this, varVal)
     end
-    def get_PlanningComputerSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PlanningComputerSecurityGroups(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PlanningComputerSecurityGroups.call(this, varVal)
     end
-    def logging_enumerate_users(this : IGPMRSOP*, varVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def logging_enumerate_users(this : IGPMRSOP*, varVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.logging_enumerate_users.call(this, varVal)
     end
     def create_query_results(this : IGPMRSOP*) : Win32cr::Foundation::HRESULT
@@ -1506,7 +1533,7 @@ module Win32cr::System::GroupPolicy
     def release_query_results(this : IGPMRSOP*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.release_query_results.call(this)
     end
-    def generate_report(this : IGPMRSOP*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMRSOP*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def generate_report_to_file(this : IGPMRSOP*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, bstrTargetFilePath : Win32cr::Foundation::BSTR, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
@@ -1516,14 +1543,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOVtbl,
+
+  record IGPMGPOVtable,
     query_interface : Proc(IGPMGPO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPO*, UInt32),
     release : Proc(IGPMGPO*, UInt32),
     get_type_info_count : Proc(IGPMGPO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMGPO*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMGPO*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMGPO*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMGPO*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IGPMGPO*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_DisplayName : Proc(IGPMGPO*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IGPMGPO*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1537,26 +1565,26 @@ module Win32cr::System::GroupPolicy
     get_ComputerSysvolVersionNumber : Proc(IGPMGPO*, Int32*, Win32cr::Foundation::HRESULT),
     get_wmi_filter : Proc(IGPMGPO*, Void**, Win32cr::Foundation::HRESULT),
     set_wmi_filter : Proc(IGPMGPO*, Void*, Win32cr::Foundation::HRESULT),
-    set_user_enabled : Proc(IGPMGPO*, Int16, Win32cr::Foundation::HRESULT),
-    set_computer_enabled : Proc(IGPMGPO*, Int16, Win32cr::Foundation::HRESULT),
-    is_user_enabled : Proc(IGPMGPO*, Int16*, Win32cr::Foundation::HRESULT),
-    is_computer_enabled : Proc(IGPMGPO*, Int16*, Win32cr::Foundation::HRESULT),
+    set_user_enabled : Proc(IGPMGPO*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_computer_enabled : Proc(IGPMGPO*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    is_user_enabled : Proc(IGPMGPO*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_computer_enabled : Proc(IGPMGPO*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_security_info : Proc(IGPMGPO*, Void**, Win32cr::Foundation::HRESULT),
     set_security_info : Proc(IGPMGPO*, Void*, Win32cr::Foundation::HRESULT),
     delete : Proc(IGPMGPO*, Win32cr::Foundation::HRESULT),
-    backup : Proc(IGPMGPO*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    import : Proc(IGPMGPO*, Int32, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMGPO*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    backup : Proc(IGPMGPO*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    import : Proc(IGPMGPO*, Int32, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMGPO*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     generate_report_to_file : Proc(IGPMGPO*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    copy_to : Proc(IGPMGPO*, Int32, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IGPMGPO*, Int32, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     set_security_descriptor : Proc(IGPMGPO*, Int32, Void*, Win32cr::Foundation::HRESULT),
     get_security_descriptor : Proc(IGPMGPO*, Int32, Void**, Win32cr::Foundation::HRESULT),
-    is_acl_consistent : Proc(IGPMGPO*, Int16*, Win32cr::Foundation::HRESULT),
+    is_acl_consistent : Proc(IGPMGPO*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     make_acl_consistent : Proc(IGPMGPO*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMGPO, lpVtbl : IGPMGPOVtbl* do
+  record IGPMGPO, lpVtbl : IGPMGPOVtable* do
     GUID = LibC::GUID.new(0x58cc4352_u32, 0x1ca3_u16, 0x48e5_u16, StaticArray[0x98_u8, 0x64_u8, 0x1d_u8, 0xa4_u8, 0xd6_u8, 0xe0_u8, 0xd6_u8, 0xf_u8])
     def query_interface(this : IGPMGPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1576,8 +1604,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMGPO*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMGPO*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMGPO*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DisplayName(this : IGPMGPO*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisplayName.call(this, pVal)
@@ -1618,16 +1646,16 @@ module Win32cr::System::GroupPolicy
     def set_wmi_filter(this : IGPMGPO*, pIGPMWMIFilter : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_wmi_filter.call(this, pIGPMWMIFilter)
     end
-    def set_user_enabled(this : IGPMGPO*, vbEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def set_user_enabled(this : IGPMGPO*, vbEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_user_enabled.call(this, vbEnabled)
     end
-    def set_computer_enabled(this : IGPMGPO*, vbEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def set_computer_enabled(this : IGPMGPO*, vbEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_computer_enabled.call(this, vbEnabled)
     end
-    def is_user_enabled(this : IGPMGPO*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_user_enabled(this : IGPMGPO*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_user_enabled.call(this, pvbEnabled)
     end
-    def is_computer_enabled(this : IGPMGPO*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_computer_enabled(this : IGPMGPO*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_computer_enabled.call(this, pvbEnabled)
     end
     def get_security_info(this : IGPMGPO*, ppSecurityInfo : Void**) : Win32cr::Foundation::HRESULT
@@ -1639,19 +1667,19 @@ module Win32cr::System::GroupPolicy
     def delete(this : IGPMGPO*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def backup(this : IGPMGPO*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def backup(this : IGPMGPO*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.backup.call(this, bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def import(this : IGPMGPO*, lFlags : Int32, pIGPMBackup : Void*, pvarMigrationTable : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def import(this : IGPMGPO*, lFlags : Int32, pIGPMBackup : Void*, pvarMigrationTable : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import.call(this, lFlags, pIGPMBackup, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def generate_report(this : IGPMGPO*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMGPO*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def generate_report_to_file(this : IGPMGPO*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, bstrTargetFilePath : Win32cr::Foundation::BSTR, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report_to_file.call(this, gpmReportType, bstrTargetFilePath, ppIGPMResult)
     end
-    def copy_to(this : IGPMGPO*, lFlags : Int32, pIGPMDomain : Void*, pvarNewDisplayName : Win32cr::System::Com::VARIANT*, pvarMigrationTable : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def copy_to(this : IGPMGPO*, lFlags : Int32, pIGPMDomain : Void*, pvarNewDisplayName : Win32cr::System::Variant::VARIANT*, pvarMigrationTable : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to.call(this, lFlags, pIGPMDomain, pvarNewDisplayName, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def set_security_descriptor(this : IGPMGPO*, lFlags : Int32, pSD : Void*) : Win32cr::Foundation::HRESULT
@@ -1660,7 +1688,7 @@ module Win32cr::System::GroupPolicy
     def get_security_descriptor(this : IGPMGPO*, lFlags : Int32, ppSD : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_security_descriptor.call(this, lFlags, ppSD)
     end
-    def is_acl_consistent(this : IGPMGPO*, pvbConsistent : Int16*) : Win32cr::Foundation::HRESULT
+    def is_acl_consistent(this : IGPMGPO*, pvbConsistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_acl_consistent.call(this, pvbConsistent)
     end
     def make_acl_consistent(this : IGPMGPO*) : Win32cr::Foundation::HRESULT
@@ -1670,21 +1698,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOCollectionVtbl,
+
+  record IGPMGPOCollectionVtable,
     query_interface : Proc(IGPMGPOCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPOCollection*, UInt32),
     release : Proc(IGPMGPOCollection*, UInt32),
     get_type_info_count : Proc(IGPMGPOCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMGPOCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMGPOCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMGPOCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMGPOCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMGPOCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMGPOCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMGPOCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMGPOCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMGPOCollection, lpVtbl : IGPMGPOCollectionVtbl* do
+  record IGPMGPOCollection, lpVtbl : IGPMGPOCollectionVtable* do
     GUID = LibC::GUID.new(0xf0f0d5cf_u32, 0x70ca_u16, 0x4c39_u16, StaticArray[0x9e_u8, 0x29_u8, 0xb6_u8, 0x42_u8, 0xf8_u8, 0x72_u8, 0x6c_u8, 0x1_u8])
     def query_interface(this : IGPMGPOCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1704,13 +1733,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMGPOCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMGPOCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMGPOCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMGPOCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMGPOCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMGPOCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMGPOCollection*, ppIGPMGPOs : Void**) : Win32cr::Foundation::HRESULT
@@ -1720,27 +1749,28 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOLinkVtbl,
+
+  record IGPMGPOLinkVtable,
     query_interface : Proc(IGPMGPOLink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPOLink*, UInt32),
     release : Proc(IGPMGPOLink*, UInt32),
     get_type_info_count : Proc(IGPMGPOLink*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMGPOLink*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMGPOLink*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMGPOLink*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMGPOLink*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_GPOID : Proc(IGPMGPOLink*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_GPODomain : Proc(IGPMGPOLink*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IGPMGPOLink*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IGPMGPOLink*, Int16, Win32cr::Foundation::HRESULT),
-    get_Enforced : Proc(IGPMGPOLink*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enforced : Proc(IGPMGPOLink*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IGPMGPOLink*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IGPMGPOLink*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Enforced : Proc(IGPMGPOLink*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enforced : Proc(IGPMGPOLink*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SOMLinkOrder : Proc(IGPMGPOLink*, Int32*, Win32cr::Foundation::HRESULT),
     get_SOM : Proc(IGPMGPOLink*, Void**, Win32cr::Foundation::HRESULT),
     delete : Proc(IGPMGPOLink*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMGPOLink, lpVtbl : IGPMGPOLinkVtbl* do
+  record IGPMGPOLink, lpVtbl : IGPMGPOLinkVtable* do
     GUID = LibC::GUID.new(0x434b99bd_u32, 0x5de7_u16, 0x478a_u16, StaticArray[0x80_u8, 0x9c_u8, 0xc2_u8, 0x51_u8, 0x72_u8, 0x1d_u8, 0xf7_u8, 0xc_u8])
     def query_interface(this : IGPMGPOLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1760,8 +1790,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMGPOLink*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMGPOLink*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMGPOLink*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_GPOID(this : IGPMGPOLink*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_GPOID.call(this, pVal)
@@ -1769,16 +1799,16 @@ module Win32cr::System::GroupPolicy
     def get_GPODomain(this : IGPMGPOLink*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_GPODomain.call(this, pVal)
     end
-    def get_Enabled(this : IGPMGPOLink*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IGPMGPOLink*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pVal)
     end
-    def put_Enabled(this : IGPMGPOLink*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IGPMGPOLink*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, newVal)
     end
-    def get_Enforced(this : IGPMGPOLink*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enforced(this : IGPMGPOLink*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enforced.call(this, pVal)
     end
-    def put_Enforced(this : IGPMGPOLink*, newVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enforced(this : IGPMGPOLink*, newVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enforced.call(this, newVal)
     end
     def get_SOMLinkOrder(this : IGPMGPOLink*, lVal : Int32*) : Win32cr::Foundation::HRESULT
@@ -1794,21 +1824,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOLinksCollectionVtbl,
+
+  record IGPMGPOLinksCollectionVtable,
     query_interface : Proc(IGPMGPOLinksCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPOLinksCollection*, UInt32),
     release : Proc(IGPMGPOLinksCollection*, UInt32),
     get_type_info_count : Proc(IGPMGPOLinksCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMGPOLinksCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMGPOLinksCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMGPOLinksCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMGPOLinksCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMGPOLinksCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMGPOLinksCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMGPOLinksCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMGPOLinksCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMGPOLinksCollection, lpVtbl : IGPMGPOLinksCollectionVtbl* do
+  record IGPMGPOLinksCollection, lpVtbl : IGPMGPOLinksCollectionVtable* do
     GUID = LibC::GUID.new(0x189d7b68_u32, 0x16bd_u16, 0x4d0d_u16, StaticArray[0xa2_u8, 0xec_u8, 0x2e_u8, 0x6a_u8, 0xa2_u8, 0x28_u8, 0x8c_u8, 0x7f_u8])
     def query_interface(this : IGPMGPOLinksCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1828,13 +1859,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMGPOLinksCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMGPOLinksCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMGPOLinksCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMGPOLinksCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMGPOLinksCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMGPOLinksCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMGPOLinksCollection*, ppIGPMLinks : Void**) : Win32cr::Foundation::HRESULT
@@ -1844,21 +1875,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMCSECollectionVtbl,
+
+  record IGPMCSECollectionVtable,
     query_interface : Proc(IGPMCSECollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMCSECollection*, UInt32),
     release : Proc(IGPMCSECollection*, UInt32),
     get_type_info_count : Proc(IGPMCSECollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMCSECollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMCSECollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMCSECollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMCSECollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMCSECollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMCSECollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMCSECollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMCSECollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMCSECollection, lpVtbl : IGPMCSECollectionVtbl* do
+  record IGPMCSECollection, lpVtbl : IGPMCSECollectionVtable* do
     GUID = LibC::GUID.new(0x2e52a97d_u32, 0xa4a_u16, 0x4a6f_u16, StaticArray[0x85_u8, 0xdb_u8, 0x20_u8, 0x16_u8, 0x22_u8, 0x45_u8, 0x5d_u8, 0xa0_u8])
     def query_interface(this : IGPMCSECollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1878,13 +1910,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMCSECollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMCSECollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMCSECollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMCSECollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMCSECollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMCSECollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMCSECollection*, ppIGPMCSEs : Void**) : Win32cr::Foundation::HRESULT
@@ -1894,22 +1926,23 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMClientSideExtensionVtbl,
+
+  record IGPMClientSideExtensionVtable,
     query_interface : Proc(IGPMClientSideExtension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMClientSideExtension*, UInt32),
     release : Proc(IGPMClientSideExtension*, UInt32),
     get_type_info_count : Proc(IGPMClientSideExtension*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMClientSideExtension*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMClientSideExtension*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMClientSideExtension*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMClientSideExtension*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ID : Proc(IGPMClientSideExtension*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IGPMClientSideExtension*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    is_user_enabled : Proc(IGPMClientSideExtension*, Int16*, Win32cr::Foundation::HRESULT),
-    is_computer_enabled : Proc(IGPMClientSideExtension*, Int16*, Win32cr::Foundation::HRESULT)
+    is_user_enabled : Proc(IGPMClientSideExtension*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_computer_enabled : Proc(IGPMClientSideExtension*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMClientSideExtension, lpVtbl : IGPMClientSideExtensionVtbl* do
+  record IGPMClientSideExtension, lpVtbl : IGPMClientSideExtensionVtable* do
     GUID = LibC::GUID.new(0x69da7488_u32, 0xb8db_u16, 0x415e_u16, StaticArray[0x92_u8, 0x66_u8, 0x90_u8, 0x1b_u8, 0xe4_u8, 0xd4_u8, 0x99_u8, 0x28_u8])
     def query_interface(this : IGPMClientSideExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1929,8 +1962,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMClientSideExtension*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMClientSideExtension*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMClientSideExtension*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ID(this : IGPMClientSideExtension*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ID.call(this, pVal)
@@ -1938,29 +1971,30 @@ module Win32cr::System::GroupPolicy
     def get_DisplayName(this : IGPMClientSideExtension*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisplayName.call(this, pVal)
     end
-    def is_user_enabled(this : IGPMClientSideExtension*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_user_enabled(this : IGPMClientSideExtension*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_user_enabled.call(this, pvbEnabled)
     end
-    def is_computer_enabled(this : IGPMClientSideExtension*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_computer_enabled(this : IGPMClientSideExtension*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_computer_enabled.call(this, pvbEnabled)
     end
 
   end
 
   @[Extern]
-  record IGPMAsyncCancelVtbl,
+
+  record IGPMAsyncCancelVtable,
     query_interface : Proc(IGPMAsyncCancel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMAsyncCancel*, UInt32),
     release : Proc(IGPMAsyncCancel*, UInt32),
     get_type_info_count : Proc(IGPMAsyncCancel*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMAsyncCancel*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMAsyncCancel*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMAsyncCancel*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMAsyncCancel*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     cancel : Proc(IGPMAsyncCancel*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMAsyncCancel, lpVtbl : IGPMAsyncCancelVtbl* do
+  record IGPMAsyncCancel, lpVtbl : IGPMAsyncCancelVtable* do
     GUID = LibC::GUID.new(0xddc67754_u32, 0xbe67_u16, 0x4541_u16, StaticArray[0x81_u8, 0x66_u8, 0xf4_u8, 0x81_u8, 0x66_u8, 0x86_u8, 0x8c_u8, 0x9c_u8])
     def query_interface(this : IGPMAsyncCancel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1980,8 +2014,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMAsyncCancel*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMAsyncCancel*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMAsyncCancel*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def cancel(this : IGPMAsyncCancel*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cancel.call(this)
@@ -1990,19 +2024,20 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMAsyncProgressVtbl,
+
+  record IGPMAsyncProgressVtable,
     query_interface : Proc(IGPMAsyncProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMAsyncProgress*, UInt32),
     release : Proc(IGPMAsyncProgress*, UInt32),
     get_type_info_count : Proc(IGPMAsyncProgress*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMAsyncProgress*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMAsyncProgress*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMAsyncProgress*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    status : Proc(IGPMAsyncProgress*, Int32, Int32, Win32cr::Foundation::HRESULT, Win32cr::System::Com::VARIANT*, Void*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IGPMAsyncProgress*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    status : Proc(IGPMAsyncProgress*, Int32, Int32, Win32cr::Foundation::HRESULT, Win32cr::System::Variant::VARIANT*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMAsyncProgress, lpVtbl : IGPMAsyncProgressVtbl* do
+  record IGPMAsyncProgress, lpVtbl : IGPMAsyncProgressVtable* do
     GUID = LibC::GUID.new(0x6aac29f8_u32, 0x5948_u16, 0x4324_u16, StaticArray[0xbf_u8, 0x70_u8, 0x42_u8, 0x38_u8, 0x18_u8, 0x94_u8, 0x2d_u8, 0xbc_u8])
     def query_interface(this : IGPMAsyncProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2022,31 +2057,32 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMAsyncProgress*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMAsyncProgress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMAsyncProgress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def status(this : IGPMAsyncProgress*, lProgressNumerator : Int32, lProgressDenominator : Int32, hrStatus : Win32cr::Foundation::HRESULT, pResult : Win32cr::System::Com::VARIANT*, ppIGPMStatusMsgCollection : Void*) : Win32cr::Foundation::HRESULT
+    def status(this : IGPMAsyncProgress*, lProgressNumerator : Int32, lProgressDenominator : Int32, hrStatus : Win32cr::Foundation::HRESULT, pResult : Win32cr::System::Variant::VARIANT*, ppIGPMStatusMsgCollection : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.status.call(this, lProgressNumerator, lProgressDenominator, hrStatus, pResult, ppIGPMStatusMsgCollection)
     end
 
   end
 
   @[Extern]
-  record IGPMStatusMsgCollectionVtbl,
+
+  record IGPMStatusMsgCollectionVtable,
     query_interface : Proc(IGPMStatusMsgCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStatusMsgCollection*, UInt32),
     release : Proc(IGPMStatusMsgCollection*, UInt32),
     get_type_info_count : Proc(IGPMStatusMsgCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMStatusMsgCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMStatusMsgCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMStatusMsgCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMStatusMsgCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMStatusMsgCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMStatusMsgCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMStatusMsgCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMStatusMsgCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMStatusMsgCollection, lpVtbl : IGPMStatusMsgCollectionVtbl* do
+  record IGPMStatusMsgCollection, lpVtbl : IGPMStatusMsgCollectionVtable* do
     GUID = LibC::GUID.new(0x9b6e1af0_u32, 0x1a92_u16, 0x40f3_u16, StaticArray[0xa5_u8, 0x9d_u8, 0xf3_u8, 0x6a_u8, 0xc1_u8, 0xf7_u8, 0x28_u8, 0xb7_u8])
     def query_interface(this : IGPMStatusMsgCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2066,13 +2102,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMStatusMsgCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMStatusMsgCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMStatusMsgCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMStatusMsgCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMStatusMsgCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMStatusMsgCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMStatusMsgCollection*, pVal : Void**) : Win32cr::Foundation::HRESULT
@@ -2082,14 +2118,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStatusMessageVtbl,
+
+  record IGPMStatusMessageVtable,
     query_interface : Proc(IGPMStatusMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStatusMessage*, UInt32),
     release : Proc(IGPMStatusMessage*, UInt32),
     get_type_info_count : Proc(IGPMStatusMessage*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMStatusMessage*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMStatusMessage*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMStatusMessage*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMStatusMessage*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ObjectPath : Proc(IGPMStatusMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     error_code : Proc(IGPMStatusMessage*, Win32cr::Foundation::HRESULT),
     get_ExtensionName : Proc(IGPMStatusMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2099,7 +2136,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMStatusMessage, lpVtbl : IGPMStatusMessageVtbl* do
+  record IGPMStatusMessage, lpVtbl : IGPMStatusMessageVtable* do
     GUID = LibC::GUID.new(0x8496c22f_u32, 0xf3de_u16, 0x4a1f_u16, StaticArray[0x8f_u8, 0x58_u8, 0x60_u8, 0x3c_u8, 0xaa_u8, 0xa9_u8, 0x3d_u8, 0x7b_u8])
     def query_interface(this : IGPMStatusMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2119,8 +2156,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMStatusMessage*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMStatusMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMStatusMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ObjectPath(this : IGPMStatusMessage*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ObjectPath.call(this, pVal)
@@ -2144,14 +2181,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMConstantsVtbl,
+
+  record IGPMConstantsVtable,
     query_interface : Proc(IGPMConstants*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMConstants*, UInt32),
     release : Proc(IGPMConstants*, UInt32),
     get_type_info_count : Proc(IGPMConstants*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMConstants*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMConstants*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMConstants*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMConstants*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_PermGPOApply : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMPermissionType*, Win32cr::Foundation::HRESULT),
     get_PermGPORead : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMPermissionType*, Win32cr::Foundation::HRESULT),
     get_PermGPOEdit : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMPermissionType*, Win32cr::Foundation::HRESULT),
@@ -2186,7 +2224,7 @@ module Win32cr::System::GroupPolicy
     get_SOMSite : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMSOMType*, Win32cr::Foundation::HRESULT),
     get_SOMDomain : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMSOMType*, Win32cr::Foundation::HRESULT),
     get_SOMOU : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMSOMType*, Win32cr::Foundation::HRESULT),
-    get_SecurityFlags : Proc(IGPMConstants*, Int16, Int16, Int16, Int16, Int32*, Win32cr::Foundation::HRESULT),
+    get_SecurityFlags : Proc(IGPMConstants*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Int32*, Win32cr::Foundation::HRESULT),
     get_DoNotValidateDC : Proc(IGPMConstants*, Int32*, Win32cr::Foundation::HRESULT),
     get_ReportHTML : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMReportType*, Win32cr::Foundation::HRESULT),
     get_ReportXML : Proc(IGPMConstants*, Win32cr::System::GroupPolicy::GPMReportType*, Win32cr::Foundation::HRESULT),
@@ -2209,13 +2247,13 @@ module Win32cr::System::GroupPolicy
     get_RsopLoggingNoComputer : Proc(IGPMConstants*, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopLoggingNoUser : Proc(IGPMConstants*, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopPlanningAssumeSlowLink : Proc(IGPMConstants*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RsopPlanningLoopbackOption : Proc(IGPMConstants*, Int16, Int32*, Win32cr::Foundation::HRESULT),
+    get_RsopPlanningLoopbackOption : Proc(IGPMConstants*, Win32cr::Foundation::VARIANT_BOOL, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopPlanningAssumeUserWQLFilterTrue : Proc(IGPMConstants*, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopPlanningAssumeCompWQLFilterTrue : Proc(IGPMConstants*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMConstants, lpVtbl : IGPMConstantsVtbl* do
+  record IGPMConstants, lpVtbl : IGPMConstantsVtable* do
     GUID = LibC::GUID.new(0x50ef73e6_u32, 0xd35c_u16, 0x4c8d_u16, StaticArray[0xbe_u8, 0x63_u8, 0x7e_u8, 0xa5_u8, 0xd2_u8, 0xaa_u8, 0xc5_u8, 0xc4_u8])
     def query_interface(this : IGPMConstants*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2235,8 +2273,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMConstants*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMConstants*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMConstants*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_PermGPOApply(this : IGPMConstants*, pVal : Win32cr::System::GroupPolicy::GPMPermissionType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PermGPOApply.call(this, pVal)
@@ -2340,7 +2378,7 @@ module Win32cr::System::GroupPolicy
     def get_SOMOU(this : IGPMConstants*, pVal : Win32cr::System::GroupPolicy::GPMSOMType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SOMOU.call(this, pVal)
     end
-    def get_SecurityFlags(this : IGPMConstants*, vbOwner : Int16, vbGroup : Int16, vbDACL : Int16, vbSACL : Int16, pVal : Int32*) : Win32cr::Foundation::HRESULT
+    def get_SecurityFlags(this : IGPMConstants*, vbOwner : Win32cr::Foundation::VARIANT_BOOL, vbGroup : Win32cr::Foundation::VARIANT_BOOL, vbDACL : Win32cr::Foundation::VARIANT_BOOL, vbSACL : Win32cr::Foundation::VARIANT_BOOL, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SecurityFlags.call(this, vbOwner, vbGroup, vbDACL, vbSACL, pVal)
     end
     def get_DoNotValidateDC(this : IGPMConstants*, pVal : Int32*) : Win32cr::Foundation::HRESULT
@@ -2409,7 +2447,7 @@ module Win32cr::System::GroupPolicy
     def get_RsopPlanningAssumeSlowLink(this : IGPMConstants*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RsopPlanningAssumeSlowLink.call(this, pVal)
     end
-    def get_RsopPlanningLoopbackOption(this : IGPMConstants*, vbMerge : Int16, pVal : Int32*) : Win32cr::Foundation::HRESULT
+    def get_RsopPlanningLoopbackOption(this : IGPMConstants*, vbMerge : Win32cr::Foundation::VARIANT_BOOL, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RsopPlanningLoopbackOption.call(this, vbMerge, pVal)
     end
     def get_RsopPlanningAssumeUserWQLFilterTrue(this : IGPMConstants*, pVal : Int32*) : Win32cr::Foundation::HRESULT
@@ -2422,21 +2460,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMResultVtbl,
+
+  record IGPMResultVtable,
     query_interface : Proc(IGPMResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMResult*, UInt32),
     release : Proc(IGPMResult*, UInt32),
     get_type_info_count : Proc(IGPMResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IGPMResult*, Void**, Win32cr::Foundation::HRESULT),
-    get_Result : Proc(IGPMResult*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Result : Proc(IGPMResult*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     overall_status : Proc(IGPMResult*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMResult, lpVtbl : IGPMResultVtbl* do
+  record IGPMResult, lpVtbl : IGPMResultVtable* do
     GUID = LibC::GUID.new(0x86dff7e9_u32, 0xf76f_u16, 0x42ab_u16, StaticArray[0x95_u8, 0x70_u8, 0xce_u8, 0xbc_u8, 0x6b_u8, 0xe8_u8, 0xa5_u8, 0x2d_u8])
     def query_interface(this : IGPMResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2456,13 +2495,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Status(this : IGPMResult*, ppIGPMStatusMsgCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Status.call(this, ppIGPMStatusMsgCollection)
     end
-    def get_Result(this : IGPMResult*, pvarResult : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Result(this : IGPMResult*, pvarResult : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Result.call(this, pvarResult)
     end
     def overall_status(this : IGPMResult*) : Win32cr::Foundation::HRESULT
@@ -2472,21 +2511,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMMapEntryCollectionVtbl,
+
+  record IGPMMapEntryCollectionVtable,
     query_interface : Proc(IGPMMapEntryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMMapEntryCollection*, UInt32),
     release : Proc(IGPMMapEntryCollection*, UInt32),
     get_type_info_count : Proc(IGPMMapEntryCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMMapEntryCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMMapEntryCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMMapEntryCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMMapEntryCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMMapEntryCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMMapEntryCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMMapEntryCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMMapEntryCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMMapEntryCollection, lpVtbl : IGPMMapEntryCollectionVtbl* do
+  record IGPMMapEntryCollection, lpVtbl : IGPMMapEntryCollectionVtable* do
     GUID = LibC::GUID.new(0xbb0bf49b_u32, 0xe53f_u16, 0x443f_u16, StaticArray[0xb8_u8, 0x7_u8, 0x8b_u8, 0xe2_u8, 0x2b_u8, 0xfb_u8, 0x6d_u8, 0x42_u8])
     def query_interface(this : IGPMMapEntryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2506,13 +2546,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMMapEntryCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMMapEntryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMMapEntryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMMapEntryCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMMapEntryCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMMapEntryCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMMapEntryCollection*, pVal : Void**) : Win32cr::Foundation::HRESULT
@@ -2522,14 +2562,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMMapEntryVtbl,
+
+  record IGPMMapEntryVtable,
     query_interface : Proc(IGPMMapEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMMapEntry*, UInt32),
     release : Proc(IGPMMapEntry*, UInt32),
     get_type_info_count : Proc(IGPMMapEntry*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMMapEntry*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMMapEntry*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMMapEntry*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMMapEntry*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Source : Proc(IGPMMapEntry*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Destination : Proc(IGPMMapEntry*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DestinationOption : Proc(IGPMMapEntry*, Win32cr::System::GroupPolicy::GPMDestinationOption*, Win32cr::Foundation::HRESULT),
@@ -2537,7 +2578,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMMapEntry, lpVtbl : IGPMMapEntryVtbl* do
+  record IGPMMapEntry, lpVtbl : IGPMMapEntryVtable* do
     GUID = LibC::GUID.new(0x8e79ad06_u32, 0x2381_u16, 0x4444_u16, StaticArray[0xbe_u8, 0x4c_u8, 0xff_u8, 0x69_u8, 0x3e_u8, 0x6e_u8, 0x6f_u8, 0x2b_u8])
     def query_interface(this : IGPMMapEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2557,8 +2598,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMMapEntry*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMMapEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMMapEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Source(this : IGPMMapEntry*, pbstrSource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Source.call(this, pbstrSource)
@@ -2576,26 +2617,27 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMMigrationTableVtbl,
+
+  record IGPMMigrationTableVtable,
     query_interface : Proc(IGPMMigrationTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMMigrationTable*, UInt32),
     release : Proc(IGPMMigrationTable*, UInt32),
     get_type_info_count : Proc(IGPMMigrationTable*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMMigrationTable*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMMigrationTable*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMMigrationTable*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMMigrationTable*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     save : Proc(IGPMMigrationTable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add : Proc(IGPMMigrationTable*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_entry : Proc(IGPMMigrationTable*, Win32cr::Foundation::BSTR, Win32cr::System::GroupPolicy::GPMEntryType, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(IGPMMigrationTable*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_entry : Proc(IGPMMigrationTable*, Win32cr::Foundation::BSTR, Win32cr::System::GroupPolicy::GPMEntryType, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_entry : Proc(IGPMMigrationTable*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     delete_entry : Proc(IGPMMigrationTable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    update_destination : Proc(IGPMMigrationTable*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    update_destination : Proc(IGPMMigrationTable*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     validate : Proc(IGPMMigrationTable*, Void**, Win32cr::Foundation::HRESULT),
     get_entries : Proc(IGPMMigrationTable*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMMigrationTable, lpVtbl : IGPMMigrationTableVtbl* do
+  record IGPMMigrationTable, lpVtbl : IGPMMigrationTableVtable* do
     GUID = LibC::GUID.new(0x48f823b1_u32, 0xefaf_u16, 0x470b_u16, StaticArray[0xb6_u8, 0xed_u8, 0x40_u8, 0xd1_u8, 0x4e_u8, 0xe1_u8, 0xa4_u8, 0xec_u8])
     def query_interface(this : IGPMMigrationTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2615,16 +2657,16 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMMigrationTable*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMMigrationTable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMMigrationTable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def save(this : IGPMMigrationTable*, bstrMigrationTablePath : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, bstrMigrationTablePath)
     end
-    def add(this : IGPMMigrationTable*, lFlags : Int32, var : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add(this : IGPMMigrationTable*, lFlags : Int32, var : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, lFlags, var)
     end
-    def add_entry(this : IGPMMigrationTable*, bstrSource : Win32cr::Foundation::BSTR, gpmEntryType : Win32cr::System::GroupPolicy::GPMEntryType, pvarDestination : Win32cr::System::Com::VARIANT*, ppEntry : Void**) : Win32cr::Foundation::HRESULT
+    def add_entry(this : IGPMMigrationTable*, bstrSource : Win32cr::Foundation::BSTR, gpmEntryType : Win32cr::System::GroupPolicy::GPMEntryType, pvarDestination : Win32cr::System::Variant::VARIANT*, ppEntry : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_entry.call(this, bstrSource, gpmEntryType, pvarDestination, ppEntry)
     end
     def get_entry(this : IGPMMigrationTable*, bstrSource : Win32cr::Foundation::BSTR, ppEntry : Void**) : Win32cr::Foundation::HRESULT
@@ -2633,7 +2675,7 @@ module Win32cr::System::GroupPolicy
     def delete_entry(this : IGPMMigrationTable*, bstrSource : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_entry.call(this, bstrSource)
     end
-    def update_destination(this : IGPMMigrationTable*, bstrSource : Win32cr::Foundation::BSTR, pvarDestination : Win32cr::System::Com::VARIANT*, ppEntry : Void**) : Win32cr::Foundation::HRESULT
+    def update_destination(this : IGPMMigrationTable*, bstrSource : Win32cr::Foundation::BSTR, pvarDestination : Win32cr::System::Variant::VARIANT*, ppEntry : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.update_destination.call(this, bstrSource, pvarDestination, ppEntry)
     end
     def validate(this : IGPMMigrationTable*, ppResult : Void**) : Win32cr::Foundation::HRESULT
@@ -2646,22 +2688,23 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupDirExVtbl,
+
+  record IGPMBackupDirExVtable,
     query_interface : Proc(IGPMBackupDirEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackupDirEx*, UInt32),
     release : Proc(IGPMBackupDirEx*, UInt32),
     get_type_info_count : Proc(IGPMBackupDirEx*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMBackupDirEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMBackupDirEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMBackupDirEx*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMBackupDirEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_BackupDir : Proc(IGPMBackupDirEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_BackupType : Proc(IGPMBackupDirEx*, Win32cr::System::GroupPolicy::GPMBackupType*, Win32cr::Foundation::HRESULT),
-    get_backup : Proc(IGPMBackupDirEx*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    search_backups : Proc(IGPMBackupDirEx*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_backup : Proc(IGPMBackupDirEx*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    search_backups : Proc(IGPMBackupDirEx*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMBackupDirEx, lpVtbl : IGPMBackupDirExVtbl* do
+  record IGPMBackupDirEx, lpVtbl : IGPMBackupDirExVtable* do
     GUID = LibC::GUID.new(0xf8dc55ed_u32, 0x3ba0_u16, 0x4864_u16, StaticArray[0xaa_u8, 0xd4_u8, 0xd3_u8, 0x65_u8, 0x18_u8, 0x9e_u8, 0xe1_u8, 0xd5_u8])
     def query_interface(this : IGPMBackupDirEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2681,8 +2724,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMBackupDirEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMBackupDirEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMBackupDirEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_BackupDir(this : IGPMBackupDirEx*, pbstrBackupDir : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BackupDir.call(this, pbstrBackupDir)
@@ -2690,31 +2733,32 @@ module Win32cr::System::GroupPolicy
     def get_BackupType(this : IGPMBackupDirEx*, pgpmBackupType : Win32cr::System::GroupPolicy::GPMBackupType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BackupType.call(this, pgpmBackupType)
     end
-    def get_backup(this : IGPMBackupDirEx*, bstrID : Win32cr::Foundation::BSTR, pvarBackup : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_backup(this : IGPMBackupDirEx*, bstrID : Win32cr::Foundation::BSTR, pvarBackup : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_backup.call(this, bstrID, pvarBackup)
     end
-    def search_backups(this : IGPMBackupDirEx*, pIGPMSearchCriteria : Void*, pvarBackupCollection : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def search_backups(this : IGPMBackupDirEx*, pIGPMSearchCriteria : Void*, pvarBackupCollection : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search_backups.call(this, pIGPMSearchCriteria, pvarBackupCollection)
     end
 
   end
 
   @[Extern]
-  record IGPMStarterGPOBackupCollectionVtbl,
+
+  record IGPMStarterGPOBackupCollectionVtable,
     query_interface : Proc(IGPMStarterGPOBackupCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPOBackupCollection*, UInt32),
     release : Proc(IGPMStarterGPOBackupCollection*, UInt32),
     get_type_info_count : Proc(IGPMStarterGPOBackupCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMStarterGPOBackupCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMStarterGPOBackupCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMStarterGPOBackupCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMStarterGPOBackupCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMStarterGPOBackupCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMStarterGPOBackupCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMStarterGPOBackupCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMStarterGPOBackupCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMStarterGPOBackupCollection, lpVtbl : IGPMStarterGPOBackupCollectionVtbl* do
+  record IGPMStarterGPOBackupCollection, lpVtbl : IGPMStarterGPOBackupCollectionVtable* do
     GUID = LibC::GUID.new(0xc998031d_u32, 0xadd0_u16, 0x4bb5_u16, StaticArray[0x8d_u8, 0xea_u8, 0x29_u8, 0x85_u8, 0x5_u8, 0xd8_u8, 0x42_u8, 0x3b_u8])
     def query_interface(this : IGPMStarterGPOBackupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2734,13 +2778,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMStarterGPOBackupCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMStarterGPOBackupCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMStarterGPOBackupCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMStarterGPOBackupCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMStarterGPOBackupCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMStarterGPOBackupCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMStarterGPOBackupCollection*, ppIGPMTmplBackup : Void**) : Win32cr::Foundation::HRESULT
@@ -2750,14 +2794,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStarterGPOBackupVtbl,
+
+  record IGPMStarterGPOBackupVtable,
     query_interface : Proc(IGPMStarterGPOBackup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPOBackup*, UInt32),
     release : Proc(IGPMStarterGPOBackup*, UInt32),
     get_type_info_count : Proc(IGPMStarterGPOBackup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMStarterGPOBackup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMStarterGPOBackup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMStarterGPOBackup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMStarterGPOBackup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_BackupDir : Proc(IGPMStarterGPOBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Comment : Proc(IGPMStarterGPOBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IGPMStarterGPOBackup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2767,12 +2812,12 @@ module Win32cr::System::GroupPolicy
     get_Timestamp : Proc(IGPMStarterGPOBackup*, Float64*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IGPMStarterGPOBackup*, Win32cr::System::GroupPolicy::GPMStarterGPOType*, Win32cr::Foundation::HRESULT),
     delete : Proc(IGPMStarterGPOBackup*, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMStarterGPOBackup*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMStarterGPOBackup*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     generate_report_to_file : Proc(IGPMStarterGPOBackup*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMStarterGPOBackup, lpVtbl : IGPMStarterGPOBackupVtbl* do
+  record IGPMStarterGPOBackup, lpVtbl : IGPMStarterGPOBackupVtable* do
     GUID = LibC::GUID.new(0x51d98eda_u32, 0xa87e_u16, 0x43dd_u16, StaticArray[0xb8_u8, 0xa_u8, 0xb_u8, 0x66_u8, 0xef_u8, 0x19_u8, 0x38_u8, 0xd6_u8])
     def query_interface(this : IGPMStarterGPOBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2792,8 +2837,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMStarterGPOBackup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMStarterGPOBackup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMStarterGPOBackup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_BackupDir(this : IGPMStarterGPOBackup*, pbstrBackupDir : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BackupDir.call(this, pbstrBackupDir)
@@ -2822,7 +2867,7 @@ module Win32cr::System::GroupPolicy
     def delete(this : IGPMStarterGPOBackup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def generate_report(this : IGPMStarterGPOBackup*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMStarterGPOBackup*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def generate_report_to_file(this : IGPMStarterGPOBackup*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, bstrTargetFilePath : Win32cr::Foundation::BSTR, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
@@ -2832,19 +2877,20 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPM2Vtbl,
+
+  record IGPM2Vtable,
     query_interface : Proc(IGPM2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPM2*, UInt32),
     release : Proc(IGPM2*, UInt32),
     get_type_info_count : Proc(IGPM2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPM2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPM2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPM2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPM2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_domain : Proc(IGPM2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_backup_dir : Proc(IGPM2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_sites_container : Proc(IGPM2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_rsop : Proc(IGPM2*, Win32cr::System::GroupPolicy::GPMRSOPMode, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
-    create_permission : Proc(IGPM2*, Win32cr::Foundation::BSTR, Win32cr::System::GroupPolicy::GPMPermissionType, Int16, Void**, Win32cr::Foundation::HRESULT),
+    create_permission : Proc(IGPM2*, Win32cr::Foundation::BSTR, Win32cr::System::GroupPolicy::GPMPermissionType, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     create_search_criteria : Proc(IGPM2*, Void**, Win32cr::Foundation::HRESULT),
     create_trustee : Proc(IGPM2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_client_side_extensions : Proc(IGPM2*, Void**, Win32cr::Foundation::HRESULT),
@@ -2857,7 +2903,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPM2, lpVtbl : IGPM2Vtbl* do
+  record IGPM2, lpVtbl : IGPM2Vtable* do
     GUID = LibC::GUID.new(0x238f8a_u32, 0x3d86_u16, 0x41ac_u16, StaticArray[0x8f_u8, 0x5e_u8, 0x6_u8, 0xa6_u8, 0x63_u8, 0x8a_u8, 0x63_u8, 0x4a_u8])
     def query_interface(this : IGPM2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2877,8 +2923,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPM2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPM2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPM2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_domain(this : IGPM2*, bstrDomain : Win32cr::Foundation::BSTR, bstrDomainController : Win32cr::Foundation::BSTR, lDCFlags : Int32, pIGPMDomain : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_domain.call(this, bstrDomain, bstrDomainController, lDCFlags, pIGPMDomain)
@@ -2892,7 +2938,7 @@ module Win32cr::System::GroupPolicy
     def get_rsop(this : IGPM2*, gpmRSoPMode : Win32cr::System::GroupPolicy::GPMRSOPMode, bstrNamespace : Win32cr::Foundation::BSTR, lFlags : Int32, ppIGPMRSOP : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_rsop.call(this, gpmRSoPMode, bstrNamespace, lFlags, ppIGPMRSOP)
     end
-    def create_permission(this : IGPM2*, bstrTrustee : Win32cr::Foundation::BSTR, perm : Win32cr::System::GroupPolicy::GPMPermissionType, bInheritable : Int16, ppPerm : Void**) : Win32cr::Foundation::HRESULT
+    def create_permission(this : IGPM2*, bstrTrustee : Win32cr::Foundation::BSTR, perm : Win32cr::System::GroupPolicy::GPMPermissionType, bInheritable : Win32cr::Foundation::VARIANT_BOOL, ppPerm : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_permission.call(this, bstrTrustee, perm, bInheritable, ppPerm)
     end
     def create_search_criteria(this : IGPM2*, ppIGPMSearchCriteria : Void**) : Win32cr::Foundation::HRESULT
@@ -2926,14 +2972,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStarterGPOVtbl,
+
+  record IGPMStarterGPOVtable,
     query_interface : Proc(IGPMStarterGPO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPO*, UInt32),
     release : Proc(IGPMStarterGPO*, UInt32),
     get_type_info_count : Proc(IGPMStarterGPO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMStarterGPO*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMStarterGPO*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMStarterGPO*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMStarterGPO*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_DisplayName : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2948,17 +2995,17 @@ module Win32cr::System::GroupPolicy
     get_UserVersion : Proc(IGPMStarterGPO*, UInt16*, Win32cr::Foundation::HRESULT),
     get_StarterGPOVersion : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     delete : Proc(IGPMStarterGPO*, Win32cr::Foundation::HRESULT),
-    save : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR, Int16, Int16, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    backup : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    copy_to : Proc(IGPMStarterGPO*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMStarterGPO*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    save : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    backup : Proc(IGPMStarterGPO*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IGPMStarterGPO*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMStarterGPO*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     generate_report_to_file : Proc(IGPMStarterGPO*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_security_info : Proc(IGPMStarterGPO*, Void**, Win32cr::Foundation::HRESULT),
     set_security_info : Proc(IGPMStarterGPO*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMStarterGPO, lpVtbl : IGPMStarterGPOVtbl* do
+  record IGPMStarterGPO, lpVtbl : IGPMStarterGPOVtable* do
     GUID = LibC::GUID.new(0xdfc3f61b_u32, 0x8880_u16, 0x4490_u16, StaticArray[0x93_u8, 0x37_u8, 0xd2_u8, 0x9c_u8, 0x7b_u8, 0xa8_u8, 0xc2_u8, 0xf0_u8])
     def query_interface(this : IGPMStarterGPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2978,8 +3025,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMStarterGPO*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMStarterGPO*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMStarterGPO*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DisplayName(this : IGPMStarterGPO*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisplayName.call(this, pVal)
@@ -3023,16 +3070,16 @@ module Win32cr::System::GroupPolicy
     def delete(this : IGPMStarterGPO*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def save(this : IGPMStarterGPO*, bstrSaveFile : Win32cr::Foundation::BSTR, bOverwrite : Int16, bSaveAsSystem : Int16, bstrLanguage : Win32cr::System::Com::VARIANT*, bstrAuthor : Win32cr::System::Com::VARIANT*, bstrProduct : Win32cr::System::Com::VARIANT*, bstrUniqueID : Win32cr::System::Com::VARIANT*, bstrVersion : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def save(this : IGPMStarterGPO*, bstrSaveFile : Win32cr::Foundation::BSTR, bOverwrite : Win32cr::Foundation::VARIANT_BOOL, bSaveAsSystem : Win32cr::Foundation::VARIANT_BOOL, bstrLanguage : Win32cr::System::Variant::VARIANT*, bstrAuthor : Win32cr::System::Variant::VARIANT*, bstrProduct : Win32cr::System::Variant::VARIANT*, bstrUniqueID : Win32cr::System::Variant::VARIANT*, bstrVersion : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, bstrSaveFile, bOverwrite, bSaveAsSystem, bstrLanguage, bstrAuthor, bstrProduct, bstrUniqueID, bstrVersion, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def backup(this : IGPMStarterGPO*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def backup(this : IGPMStarterGPO*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.backup.call(this, bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def copy_to(this : IGPMStarterGPO*, pvarNewDisplayName : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def copy_to(this : IGPMStarterGPO*, pvarNewDisplayName : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to.call(this, pvarNewDisplayName, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def generate_report(this : IGPMStarterGPO*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMStarterGPO*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def generate_report_to_file(this : IGPMStarterGPO*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, bstrTargetFilePath : Win32cr::Foundation::BSTR, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
@@ -3048,21 +3095,22 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStarterGPOCollectionVtbl,
+
+  record IGPMStarterGPOCollectionVtable,
     query_interface : Proc(IGPMStarterGPOCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPOCollection*, UInt32),
     release : Proc(IGPMStarterGPOCollection*, UInt32),
     get_type_info_count : Proc(IGPMStarterGPOCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMStarterGPOCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMStarterGPOCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMStarterGPOCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMStarterGPOCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IGPMStarterGPOCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IGPMStarterGPOCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IGPMStarterGPOCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IGPMStarterGPOCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMStarterGPOCollection, lpVtbl : IGPMStarterGPOCollectionVtbl* do
+  record IGPMStarterGPOCollection, lpVtbl : IGPMStarterGPOCollectionVtable* do
     GUID = LibC::GUID.new(0x2e522729_u32, 0x2219_u16, 0x44ad_u16, StaticArray[0x93_u8, 0x3a_u8, 0x64_u8, 0xdf_u8, 0xd6_u8, 0x50_u8, 0xc4_u8, 0x23_u8])
     def query_interface(this : IGPMStarterGPOCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3082,13 +3130,13 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMStarterGPOCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMStarterGPOCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMStarterGPOCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IGPMStarterGPOCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_Item(this : IGPMStarterGPOCollection*, lIndex : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IGPMStarterGPOCollection*, lIndex : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, lIndex, pVal)
     end
     def get__NewEnum(this : IGPMStarterGPOCollection*, ppIGPMTemplates : Void**) : Win32cr::Foundation::HRESULT
@@ -3098,20 +3146,21 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMDomain2Vtbl,
+
+  record IGPMDomain2Vtable,
     query_interface : Proc(IGPMDomain2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMDomain2*, UInt32),
     release : Proc(IGPMDomain2*, UInt32),
     get_type_info_count : Proc(IGPMDomain2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMDomain2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMDomain2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMDomain2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMDomain2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DomainController : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Domain : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     create_gpo : Proc(IGPMDomain2*, Void**, Win32cr::Foundation::HRESULT),
     get_gpo : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_gp_os : Proc(IGPMDomain2*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    restore_gpo : Proc(IGPMDomain2*, Void*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    restore_gpo : Proc(IGPMDomain2*, Void*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_som : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_so_ms : Proc(IGPMDomain2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_wmi_filter : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -3120,12 +3169,12 @@ module Win32cr::System::GroupPolicy
     create_gpo_from_starter_gpo : Proc(IGPMDomain2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_starter_gpo : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_starter_gp_os : Proc(IGPMDomain2*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    load_starter_gpo : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR, Int16, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    restore_starter_gpo : Proc(IGPMDomain2*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    load_starter_gpo : Proc(IGPMDomain2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    restore_starter_gpo : Proc(IGPMDomain2*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMDomain2, lpVtbl : IGPMDomain2Vtbl* do
+  record IGPMDomain2, lpVtbl : IGPMDomain2Vtable* do
     GUID = LibC::GUID.new(0x7ca6bb8b_u32, 0xf1eb_u16, 0x490a_u16, StaticArray[0x93_u8, 0x8d_u8, 0x3c_u8, 0x4e_u8, 0x51_u8, 0xc7_u8, 0x68_u8, 0xe6_u8])
     def query_interface(this : IGPMDomain2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3145,8 +3194,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMDomain2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMDomain2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMDomain2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DomainController(this : IGPMDomain2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DomainController.call(this, pVal)
@@ -3163,7 +3212,7 @@ module Win32cr::System::GroupPolicy
     def search_gp_os(this : IGPMDomain2*, pIGPMSearchCriteria : Void*, ppIGPMGPOCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search_gp_os.call(this, pIGPMSearchCriteria, ppIGPMGPOCollection)
     end
-    def restore_gpo(this : IGPMDomain2*, pIGPMBackup : Void*, lDCFlags : Int32, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def restore_gpo(this : IGPMDomain2*, pIGPMBackup : Void*, lDCFlags : Int32, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore_gpo.call(this, pIGPMBackup, lDCFlags, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def get_som(this : IGPMDomain2*, bstrPath : Win32cr::Foundation::BSTR, ppSOM : Void**) : Win32cr::Foundation::HRESULT
@@ -3190,24 +3239,25 @@ module Win32cr::System::GroupPolicy
     def search_starter_gp_os(this : IGPMDomain2*, pIGPMSearchCriteria : Void*, ppIGPMTemplateCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search_starter_gp_os.call(this, pIGPMSearchCriteria, ppIGPMTemplateCollection)
     end
-    def load_starter_gpo(this : IGPMDomain2*, bstrLoadFile : Win32cr::Foundation::BSTR, bOverwrite : Int16, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def load_starter_gpo(this : IGPMDomain2*, bstrLoadFile : Win32cr::Foundation::BSTR, bOverwrite : Win32cr::Foundation::VARIANT_BOOL, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.load_starter_gpo.call(this, bstrLoadFile, bOverwrite, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def restore_starter_gpo(this : IGPMDomain2*, pIGPMTmplBackup : Void*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def restore_starter_gpo(this : IGPMDomain2*, pIGPMTmplBackup : Void*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore_starter_gpo.call(this, pIGPMTmplBackup, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
 
   end
 
   @[Extern]
-  record IGPMConstants2Vtbl,
+
+  record IGPMConstants2Vtable,
     query_interface : Proc(IGPMConstants2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMConstants2*, UInt32),
     release : Proc(IGPMConstants2*, UInt32),
     get_type_info_count : Proc(IGPMConstants2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMConstants2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMConstants2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMConstants2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMConstants2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_PermGPOApply : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMPermissionType*, Win32cr::Foundation::HRESULT),
     get_PermGPORead : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMPermissionType*, Win32cr::Foundation::HRESULT),
     get_PermGPOEdit : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMPermissionType*, Win32cr::Foundation::HRESULT),
@@ -3242,7 +3292,7 @@ module Win32cr::System::GroupPolicy
     get_SOMSite : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMSOMType*, Win32cr::Foundation::HRESULT),
     get_SOMDomain : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMSOMType*, Win32cr::Foundation::HRESULT),
     get_SOMOU : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMSOMType*, Win32cr::Foundation::HRESULT),
-    get_SecurityFlags : Proc(IGPMConstants2*, Int16, Int16, Int16, Int16, Int32*, Win32cr::Foundation::HRESULT),
+    get_SecurityFlags : Proc(IGPMConstants2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Int32*, Win32cr::Foundation::HRESULT),
     get_DoNotValidateDC : Proc(IGPMConstants2*, Int32*, Win32cr::Foundation::HRESULT),
     get_ReportHTML : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMReportType*, Win32cr::Foundation::HRESULT),
     get_ReportXML : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMReportType*, Win32cr::Foundation::HRESULT),
@@ -3265,7 +3315,7 @@ module Win32cr::System::GroupPolicy
     get_RsopLoggingNoComputer : Proc(IGPMConstants2*, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopLoggingNoUser : Proc(IGPMConstants2*, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopPlanningAssumeSlowLink : Proc(IGPMConstants2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RsopPlanningLoopbackOption : Proc(IGPMConstants2*, Int16, Int32*, Win32cr::Foundation::HRESULT),
+    get_RsopPlanningLoopbackOption : Proc(IGPMConstants2*, Win32cr::Foundation::VARIANT_BOOL, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopPlanningAssumeUserWQLFilterTrue : Proc(IGPMConstants2*, Int32*, Win32cr::Foundation::HRESULT),
     get_RsopPlanningAssumeCompWQLFilterTrue : Proc(IGPMConstants2*, Int32*, Win32cr::Foundation::HRESULT),
     get_BackupTypeGPO : Proc(IGPMConstants2*, Win32cr::System::GroupPolicy::GPMBackupType*, Win32cr::Foundation::HRESULT),
@@ -3286,7 +3336,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMConstants2, lpVtbl : IGPMConstants2Vtbl* do
+  record IGPMConstants2, lpVtbl : IGPMConstants2Vtable* do
     GUID = LibC::GUID.new(0x5ae21b0_u32, 0xac09_u16, 0x4032_u16, StaticArray[0xa2_u8, 0x6f_u8, 0x9e_u8, 0x7d_u8, 0xa7_u8, 0x86_u8, 0xdc_u8, 0x19_u8])
     def query_interface(this : IGPMConstants2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3306,8 +3356,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMConstants2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMConstants2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMConstants2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_PermGPOApply(this : IGPMConstants2*, pVal : Win32cr::System::GroupPolicy::GPMPermissionType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PermGPOApply.call(this, pVal)
@@ -3411,7 +3461,7 @@ module Win32cr::System::GroupPolicy
     def get_SOMOU(this : IGPMConstants2*, pVal : Win32cr::System::GroupPolicy::GPMSOMType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SOMOU.call(this, pVal)
     end
-    def get_SecurityFlags(this : IGPMConstants2*, vbOwner : Int16, vbGroup : Int16, vbDACL : Int16, vbSACL : Int16, pVal : Int32*) : Win32cr::Foundation::HRESULT
+    def get_SecurityFlags(this : IGPMConstants2*, vbOwner : Win32cr::Foundation::VARIANT_BOOL, vbGroup : Win32cr::Foundation::VARIANT_BOOL, vbDACL : Win32cr::Foundation::VARIANT_BOOL, vbSACL : Win32cr::Foundation::VARIANT_BOOL, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SecurityFlags.call(this, vbOwner, vbGroup, vbDACL, vbSACL, pVal)
     end
     def get_DoNotValidateDC(this : IGPMConstants2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
@@ -3480,7 +3530,7 @@ module Win32cr::System::GroupPolicy
     def get_RsopPlanningAssumeSlowLink(this : IGPMConstants2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RsopPlanningAssumeSlowLink.call(this, pVal)
     end
-    def get_RsopPlanningLoopbackOption(this : IGPMConstants2*, vbMerge : Int16, pVal : Int32*) : Win32cr::Foundation::HRESULT
+    def get_RsopPlanningLoopbackOption(this : IGPMConstants2*, vbMerge : Win32cr::Foundation::VARIANT_BOOL, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RsopPlanningLoopbackOption.call(this, vbMerge, pVal)
     end
     def get_RsopPlanningAssumeUserWQLFilterTrue(this : IGPMConstants2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
@@ -3538,14 +3588,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPO2Vtbl,
+
+  record IGPMGPO2Vtable,
     query_interface : Proc(IGPMGPO2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPO2*, UInt32),
     release : Proc(IGPMGPO2*, UInt32),
     get_type_info_count : Proc(IGPMGPO2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMGPO2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMGPO2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMGPO2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMGPO2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IGPMGPO2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_DisplayName : Proc(IGPMGPO2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IGPMGPO2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3559,28 +3610,28 @@ module Win32cr::System::GroupPolicy
     get_ComputerSysvolVersionNumber : Proc(IGPMGPO2*, Int32*, Win32cr::Foundation::HRESULT),
     get_wmi_filter : Proc(IGPMGPO2*, Void**, Win32cr::Foundation::HRESULT),
     set_wmi_filter : Proc(IGPMGPO2*, Void*, Win32cr::Foundation::HRESULT),
-    set_user_enabled : Proc(IGPMGPO2*, Int16, Win32cr::Foundation::HRESULT),
-    set_computer_enabled : Proc(IGPMGPO2*, Int16, Win32cr::Foundation::HRESULT),
-    is_user_enabled : Proc(IGPMGPO2*, Int16*, Win32cr::Foundation::HRESULT),
-    is_computer_enabled : Proc(IGPMGPO2*, Int16*, Win32cr::Foundation::HRESULT),
+    set_user_enabled : Proc(IGPMGPO2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_computer_enabled : Proc(IGPMGPO2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    is_user_enabled : Proc(IGPMGPO2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_computer_enabled : Proc(IGPMGPO2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_security_info : Proc(IGPMGPO2*, Void**, Win32cr::Foundation::HRESULT),
     set_security_info : Proc(IGPMGPO2*, Void*, Win32cr::Foundation::HRESULT),
     delete : Proc(IGPMGPO2*, Win32cr::Foundation::HRESULT),
-    backup : Proc(IGPMGPO2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    import : Proc(IGPMGPO2*, Int32, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMGPO2*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    backup : Proc(IGPMGPO2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    import : Proc(IGPMGPO2*, Int32, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMGPO2*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     generate_report_to_file : Proc(IGPMGPO2*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    copy_to : Proc(IGPMGPO2*, Int32, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IGPMGPO2*, Int32, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     set_security_descriptor : Proc(IGPMGPO2*, Int32, Void*, Win32cr::Foundation::HRESULT),
     get_security_descriptor : Proc(IGPMGPO2*, Int32, Void**, Win32cr::Foundation::HRESULT),
-    is_acl_consistent : Proc(IGPMGPO2*, Int16*, Win32cr::Foundation::HRESULT),
+    is_acl_consistent : Proc(IGPMGPO2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     make_acl_consistent : Proc(IGPMGPO2*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IGPMGPO2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IGPMGPO2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMGPO2, lpVtbl : IGPMGPO2Vtbl* do
+  record IGPMGPO2, lpVtbl : IGPMGPO2Vtable* do
     GUID = LibC::GUID.new(0x8a66a210_u32, 0xb78b_u16, 0x4d99_u16, StaticArray[0x88_u8, 0xe2_u8, 0xc3_u8, 0x6_u8, 0xa8_u8, 0x17_u8, 0xc9_u8, 0x25_u8])
     def query_interface(this : IGPMGPO2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3600,8 +3651,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMGPO2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMGPO2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMGPO2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DisplayName(this : IGPMGPO2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisplayName.call(this, pVal)
@@ -3642,16 +3693,16 @@ module Win32cr::System::GroupPolicy
     def set_wmi_filter(this : IGPMGPO2*, pIGPMWMIFilter : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_wmi_filter.call(this, pIGPMWMIFilter)
     end
-    def set_user_enabled(this : IGPMGPO2*, vbEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def set_user_enabled(this : IGPMGPO2*, vbEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_user_enabled.call(this, vbEnabled)
     end
-    def set_computer_enabled(this : IGPMGPO2*, vbEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def set_computer_enabled(this : IGPMGPO2*, vbEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_computer_enabled.call(this, vbEnabled)
     end
-    def is_user_enabled(this : IGPMGPO2*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_user_enabled(this : IGPMGPO2*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_user_enabled.call(this, pvbEnabled)
     end
-    def is_computer_enabled(this : IGPMGPO2*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_computer_enabled(this : IGPMGPO2*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_computer_enabled.call(this, pvbEnabled)
     end
     def get_security_info(this : IGPMGPO2*, ppSecurityInfo : Void**) : Win32cr::Foundation::HRESULT
@@ -3663,19 +3714,19 @@ module Win32cr::System::GroupPolicy
     def delete(this : IGPMGPO2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def backup(this : IGPMGPO2*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def backup(this : IGPMGPO2*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.backup.call(this, bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def import(this : IGPMGPO2*, lFlags : Int32, pIGPMBackup : Void*, pvarMigrationTable : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def import(this : IGPMGPO2*, lFlags : Int32, pIGPMBackup : Void*, pvarMigrationTable : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import.call(this, lFlags, pIGPMBackup, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def generate_report(this : IGPMGPO2*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMGPO2*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def generate_report_to_file(this : IGPMGPO2*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, bstrTargetFilePath : Win32cr::Foundation::BSTR, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report_to_file.call(this, gpmReportType, bstrTargetFilePath, ppIGPMResult)
     end
-    def copy_to(this : IGPMGPO2*, lFlags : Int32, pIGPMDomain : Void*, pvarNewDisplayName : Win32cr::System::Com::VARIANT*, pvarMigrationTable : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def copy_to(this : IGPMGPO2*, lFlags : Int32, pIGPMDomain : Void*, pvarNewDisplayName : Win32cr::System::Variant::VARIANT*, pvarMigrationTable : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to.call(this, lFlags, pIGPMDomain, pvarNewDisplayName, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def set_security_descriptor(this : IGPMGPO2*, lFlags : Int32, pSD : Void*) : Win32cr::Foundation::HRESULT
@@ -3684,7 +3735,7 @@ module Win32cr::System::GroupPolicy
     def get_security_descriptor(this : IGPMGPO2*, lFlags : Int32, ppSD : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_security_descriptor.call(this, lFlags, ppSD)
     end
-    def is_acl_consistent(this : IGPMGPO2*, pvbConsistent : Int16*) : Win32cr::Foundation::HRESULT
+    def is_acl_consistent(this : IGPMGPO2*, pvbConsistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_acl_consistent.call(this, pvbConsistent)
     end
     def make_acl_consistent(this : IGPMGPO2*) : Win32cr::Foundation::HRESULT
@@ -3700,20 +3751,21 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMDomain3Vtbl,
+
+  record IGPMDomain3Vtable,
     query_interface : Proc(IGPMDomain3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMDomain3*, UInt32),
     release : Proc(IGPMDomain3*, UInt32),
     get_type_info_count : Proc(IGPMDomain3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMDomain3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMDomain3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMDomain3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMDomain3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DomainController : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Domain : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     create_gpo : Proc(IGPMDomain3*, Void**, Win32cr::Foundation::HRESULT),
     get_gpo : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_gp_os : Proc(IGPMDomain3*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    restore_gpo : Proc(IGPMDomain3*, Void*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    restore_gpo : Proc(IGPMDomain3*, Void*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_som : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_so_ms : Proc(IGPMDomain3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_wmi_filter : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -3722,16 +3774,16 @@ module Win32cr::System::GroupPolicy
     create_gpo_from_starter_gpo : Proc(IGPMDomain3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_starter_gpo : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     search_starter_gp_os : Proc(IGPMDomain3*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    load_starter_gpo : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR, Int16, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    restore_starter_gpo : Proc(IGPMDomain3*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMDomain3*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    load_starter_gpo : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    restore_starter_gpo : Proc(IGPMDomain3*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMDomain3*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_InfrastructureDC : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_InfrastructureDC : Proc(IGPMDomain3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     put_InfrastructureFlags : Proc(IGPMDomain3*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGPMDomain3, lpVtbl : IGPMDomain3Vtbl* do
+  record IGPMDomain3, lpVtbl : IGPMDomain3Vtable* do
     GUID = LibC::GUID.new(0x77fdfe_u32, 0x88c7_u16, 0x4acf_u16, StaticArray[0xa1_u8, 0x1d_u8, 0xd1_u8, 0xa_u8, 0x7c_u8, 0x31_u8, 0xa_u8, 0x3_u8])
     def query_interface(this : IGPMDomain3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3751,8 +3803,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMDomain3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMDomain3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMDomain3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DomainController(this : IGPMDomain3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DomainController.call(this, pVal)
@@ -3769,7 +3821,7 @@ module Win32cr::System::GroupPolicy
     def search_gp_os(this : IGPMDomain3*, pIGPMSearchCriteria : Void*, ppIGPMGPOCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search_gp_os.call(this, pIGPMSearchCriteria, ppIGPMGPOCollection)
     end
-    def restore_gpo(this : IGPMDomain3*, pIGPMBackup : Void*, lDCFlags : Int32, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def restore_gpo(this : IGPMDomain3*, pIGPMBackup : Void*, lDCFlags : Int32, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore_gpo.call(this, pIGPMBackup, lDCFlags, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def get_som(this : IGPMDomain3*, bstrPath : Win32cr::Foundation::BSTR, ppSOM : Void**) : Win32cr::Foundation::HRESULT
@@ -3796,13 +3848,13 @@ module Win32cr::System::GroupPolicy
     def search_starter_gp_os(this : IGPMDomain3*, pIGPMSearchCriteria : Void*, ppIGPMTemplateCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search_starter_gp_os.call(this, pIGPMSearchCriteria, ppIGPMTemplateCollection)
     end
-    def load_starter_gpo(this : IGPMDomain3*, bstrLoadFile : Win32cr::Foundation::BSTR, bOverwrite : Int16, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def load_starter_gpo(this : IGPMDomain3*, bstrLoadFile : Win32cr::Foundation::BSTR, bOverwrite : Win32cr::Foundation::VARIANT_BOOL, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.load_starter_gpo.call(this, bstrLoadFile, bOverwrite, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def restore_starter_gpo(this : IGPMDomain3*, pIGPMTmplBackup : Void*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def restore_starter_gpo(this : IGPMDomain3*, pIGPMTmplBackup : Void*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore_starter_gpo.call(this, pIGPMTmplBackup, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def generate_report(this : IGPMDomain3*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMDomain3*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def get_InfrastructureDC(this : IGPMDomain3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3818,14 +3870,15 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPO3Vtbl,
+
+  record IGPMGPO3Vtable,
     query_interface : Proc(IGPMGPO3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPO3*, UInt32),
     release : Proc(IGPMGPO3*, UInt32),
     get_type_info_count : Proc(IGPMGPO3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IGPMGPO3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IGPMGPO3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IGPMGPO3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IGPMGPO3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IGPMGPO3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_DisplayName : Proc(IGPMGPO3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IGPMGPO3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3839,21 +3892,21 @@ module Win32cr::System::GroupPolicy
     get_ComputerSysvolVersionNumber : Proc(IGPMGPO3*, Int32*, Win32cr::Foundation::HRESULT),
     get_wmi_filter : Proc(IGPMGPO3*, Void**, Win32cr::Foundation::HRESULT),
     set_wmi_filter : Proc(IGPMGPO3*, Void*, Win32cr::Foundation::HRESULT),
-    set_user_enabled : Proc(IGPMGPO3*, Int16, Win32cr::Foundation::HRESULT),
-    set_computer_enabled : Proc(IGPMGPO3*, Int16, Win32cr::Foundation::HRESULT),
-    is_user_enabled : Proc(IGPMGPO3*, Int16*, Win32cr::Foundation::HRESULT),
-    is_computer_enabled : Proc(IGPMGPO3*, Int16*, Win32cr::Foundation::HRESULT),
+    set_user_enabled : Proc(IGPMGPO3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_computer_enabled : Proc(IGPMGPO3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    is_user_enabled : Proc(IGPMGPO3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_computer_enabled : Proc(IGPMGPO3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_security_info : Proc(IGPMGPO3*, Void**, Win32cr::Foundation::HRESULT),
     set_security_info : Proc(IGPMGPO3*, Void*, Win32cr::Foundation::HRESULT),
     delete : Proc(IGPMGPO3*, Win32cr::Foundation::HRESULT),
-    backup : Proc(IGPMGPO3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    import : Proc(IGPMGPO3*, Int32, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    generate_report : Proc(IGPMGPO3*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    backup : Proc(IGPMGPO3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    import : Proc(IGPMGPO3*, Int32, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    generate_report : Proc(IGPMGPO3*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     generate_report_to_file : Proc(IGPMGPO3*, Win32cr::System::GroupPolicy::GPMReportType, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    copy_to : Proc(IGPMGPO3*, Int32, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IGPMGPO3*, Int32, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     set_security_descriptor : Proc(IGPMGPO3*, Int32, Void*, Win32cr::Foundation::HRESULT),
     get_security_descriptor : Proc(IGPMGPO3*, Int32, Void**, Win32cr::Foundation::HRESULT),
-    is_acl_consistent : Proc(IGPMGPO3*, Int16*, Win32cr::Foundation::HRESULT),
+    is_acl_consistent : Proc(IGPMGPO3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     make_acl_consistent : Proc(IGPMGPO3*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IGPMGPO3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IGPMGPO3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3863,7 +3916,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMGPO3, lpVtbl : IGPMGPO3Vtbl* do
+  record IGPMGPO3, lpVtbl : IGPMGPO3Vtable* do
     GUID = LibC::GUID.new(0x7cf123a1_u32, 0xf94a_u16, 0x4112_u16, StaticArray[0xbf_u8, 0xae_u8, 0x6a_u8, 0xa1_u8, 0xdb_u8, 0x9c_u8, 0xb2_u8, 0x48_u8])
     def query_interface(this : IGPMGPO3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3883,8 +3936,8 @@ module Win32cr::System::GroupPolicy
     def get_i_ds_of_names(this : IGPMGPO3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IGPMGPO3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IGPMGPO3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DisplayName(this : IGPMGPO3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisplayName.call(this, pVal)
@@ -3925,16 +3978,16 @@ module Win32cr::System::GroupPolicy
     def set_wmi_filter(this : IGPMGPO3*, pIGPMWMIFilter : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_wmi_filter.call(this, pIGPMWMIFilter)
     end
-    def set_user_enabled(this : IGPMGPO3*, vbEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def set_user_enabled(this : IGPMGPO3*, vbEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_user_enabled.call(this, vbEnabled)
     end
-    def set_computer_enabled(this : IGPMGPO3*, vbEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def set_computer_enabled(this : IGPMGPO3*, vbEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_computer_enabled.call(this, vbEnabled)
     end
-    def is_user_enabled(this : IGPMGPO3*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_user_enabled(this : IGPMGPO3*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_user_enabled.call(this, pvbEnabled)
     end
-    def is_computer_enabled(this : IGPMGPO3*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_computer_enabled(this : IGPMGPO3*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_computer_enabled.call(this, pvbEnabled)
     end
     def get_security_info(this : IGPMGPO3*, ppSecurityInfo : Void**) : Win32cr::Foundation::HRESULT
@@ -3946,19 +3999,19 @@ module Win32cr::System::GroupPolicy
     def delete(this : IGPMGPO3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def backup(this : IGPMGPO3*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def backup(this : IGPMGPO3*, bstrBackupDir : Win32cr::Foundation::BSTR, bstrComment : Win32cr::Foundation::BSTR, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.backup.call(this, bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def import(this : IGPMGPO3*, lFlags : Int32, pIGPMBackup : Void*, pvarMigrationTable : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def import(this : IGPMGPO3*, lFlags : Int32, pIGPMBackup : Void*, pvarMigrationTable : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import.call(this, lFlags, pIGPMBackup, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
-    def generate_report(this : IGPMGPO3*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def generate_report(this : IGPMGPO3*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report.call(this, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def generate_report_to_file(this : IGPMGPO3*, gpmReportType : Win32cr::System::GroupPolicy::GPMReportType, bstrTargetFilePath : Win32cr::Foundation::BSTR, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_report_to_file.call(this, gpmReportType, bstrTargetFilePath, ppIGPMResult)
     end
-    def copy_to(this : IGPMGPO3*, lFlags : Int32, pIGPMDomain : Void*, pvarNewDisplayName : Win32cr::System::Com::VARIANT*, pvarMigrationTable : Win32cr::System::Com::VARIANT*, pvarGPMProgress : Win32cr::System::Com::VARIANT*, pvarGPMCancel : Win32cr::System::Com::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
+    def copy_to(this : IGPMGPO3*, lFlags : Int32, pIGPMDomain : Void*, pvarNewDisplayName : Win32cr::System::Variant::VARIANT*, pvarMigrationTable : Win32cr::System::Variant::VARIANT*, pvarGPMProgress : Win32cr::System::Variant::VARIANT*, pvarGPMCancel : Win32cr::System::Variant::VARIANT*, ppIGPMResult : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to.call(this, lFlags, pIGPMDomain, pvarNewDisplayName, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     end
     def set_security_descriptor(this : IGPMGPO3*, lFlags : Int32, pSD : Void*) : Win32cr::Foundation::HRESULT
@@ -3967,7 +4020,7 @@ module Win32cr::System::GroupPolicy
     def get_security_descriptor(this : IGPMGPO3*, lFlags : Int32, ppSD : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_security_descriptor.call(this, lFlags, ppSD)
     end
-    def is_acl_consistent(this : IGPMGPO3*, pvbConsistent : Int16*) : Win32cr::Foundation::HRESULT
+    def is_acl_consistent(this : IGPMGPO3*, pvbConsistent : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_acl_consistent.call(this, pvbConsistent)
     end
     def make_acl_consistent(this : IGPMGPO3*) : Win32cr::Foundation::HRESULT
@@ -3992,15 +4045,16 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPEInformationVtbl,
+
+  record IGPEInformationVtable,
     query_interface : Proc(IGPEInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPEInformation*, UInt32),
     release : Proc(IGPEInformation*, UInt32),
-    get_name : Proc(IGPEInformation*, UInt16*, Int32, Win32cr::Foundation::HRESULT),
-    get_display_name : Proc(IGPEInformation*, UInt16*, Int32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IGPEInformation*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_display_name : Proc(IGPEInformation*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
     get_registry_key : Proc(IGPEInformation*, UInt32, Win32cr::System::Registry::HKEY*, Win32cr::Foundation::HRESULT),
-    get_ds_path : Proc(IGPEInformation*, UInt32, UInt16*, Int32, Win32cr::Foundation::HRESULT),
-    get_file_sys_path : Proc(IGPEInformation*, UInt32, UInt16*, Int32, Win32cr::Foundation::HRESULT),
+    get_ds_path : Proc(IGPEInformation*, UInt32, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_file_sys_path : Proc(IGPEInformation*, UInt32, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
     get_options : Proc(IGPEInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IGPEInformation*, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECT_TYPE*, Win32cr::Foundation::HRESULT),
     get_hint : Proc(IGPEInformation*, Win32cr::System::GroupPolicy::GROUP_POLICY_HINT_TYPE*, Win32cr::Foundation::HRESULT),
@@ -4008,7 +4062,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPEInformation, lpVtbl : IGPEInformationVtbl* do
+  record IGPEInformation, lpVtbl : IGPEInformationVtable* do
     GUID = LibC::GUID.new(0x8fc0b735_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
     def query_interface(this : IGPEInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4019,19 +4073,19 @@ module Win32cr::System::GroupPolicy
     def release(this : IGPEInformation*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_name(this : IGPEInformation*, pszName : UInt16*, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IGPEInformation*, pszName : Win32cr::Foundation::PWSTR, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pszName, cchMaxLength)
     end
-    def get_display_name(this : IGPEInformation*, pszName : UInt16*, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
+    def get_display_name(this : IGPEInformation*, pszName : Win32cr::Foundation::PWSTR, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_display_name.call(this, pszName, cchMaxLength)
     end
     def get_registry_key(this : IGPEInformation*, dwSection : UInt32, hKey : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_registry_key.call(this, dwSection, hKey)
     end
-    def get_ds_path(this : IGPEInformation*, dwSection : UInt32, pszPath : UInt16*, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
+    def get_ds_path(this : IGPEInformation*, dwSection : UInt32, pszPath : Win32cr::Foundation::PWSTR, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ds_path.call(this, dwSection, pszPath, cchMaxPath)
     end
-    def get_file_sys_path(this : IGPEInformation*, dwSection : UInt32, pszPath : UInt16*, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
+    def get_file_sys_path(this : IGPEInformation*, dwSection : UInt32, pszPath : Win32cr::Foundation::PWSTR, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_file_sys_path.call(this, dwSection, pszPath, cchMaxPath)
     end
     def get_options(this : IGPEInformation*, dwOptions : UInt32*) : Win32cr::Foundation::HRESULT
@@ -4050,32 +4104,33 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGroupPolicyObjectVtbl,
+
+  record IGroupPolicyObjectVtable,
     query_interface : Proc(IGroupPolicyObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGroupPolicyObject*, UInt32),
     release : Proc(IGroupPolicyObject*, UInt32),
     new : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
-    open_dsgpo : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
-    open_local_machine_gpo : Proc(IGroupPolicyObject*, UInt32, Win32cr::Foundation::HRESULT),
-    open_remote_machine_gpo : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    open_dsgpo : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Win32cr::System::GroupPolicy::GPO_OPEN_FLAGS, Win32cr::Foundation::HRESULT),
+    open_local_machine_gpo : Proc(IGroupPolicyObject*, Win32cr::System::GroupPolicy::GPO_OPEN_FLAGS, Win32cr::Foundation::HRESULT),
+    open_remote_machine_gpo : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Win32cr::System::GroupPolicy::GPO_OPEN_FLAGS, Win32cr::Foundation::HRESULT),
     save : Proc(IGroupPolicyObject*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     delete : Proc(IGroupPolicyObject*, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IGroupPolicyObject*, UInt16*, Int32, Win32cr::Foundation::HRESULT),
-    get_display_name : Proc(IGroupPolicyObject*, UInt16*, Int32, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_display_name : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
     set_display_name : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_path : Proc(IGroupPolicyObject*, UInt16*, Int32, Win32cr::Foundation::HRESULT),
-    get_ds_path : Proc(IGroupPolicyObject*, UInt32, UInt16*, Int32, Win32cr::Foundation::HRESULT),
-    get_file_sys_path : Proc(IGroupPolicyObject*, UInt32, UInt16*, Int32, Win32cr::Foundation::HRESULT),
-    get_registry_key : Proc(IGroupPolicyObject*, UInt32, Win32cr::System::Registry::HKEY*, Win32cr::Foundation::HRESULT),
-    get_options : Proc(IGroupPolicyObject*, UInt32*, Win32cr::Foundation::HRESULT),
-    set_options : Proc(IGroupPolicyObject*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    get_path : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_ds_path : Proc(IGroupPolicyObject*, UInt32, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_file_sys_path : Proc(IGroupPolicyObject*, UInt32, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_registry_key : Proc(IGroupPolicyObject*, Win32cr::System::GroupPolicy::GPO_SECTION, Win32cr::System::Registry::HKEY*, Win32cr::Foundation::HRESULT),
+    get_options : Proc(IGroupPolicyObject*, Win32cr::System::GroupPolicy::GPO_OPTIONS*, Win32cr::Foundation::HRESULT),
+    set_options : Proc(IGroupPolicyObject*, Win32cr::System::GroupPolicy::GPO_OPTIONS, UInt32, Win32cr::Foundation::HRESULT),
     get_type : Proc(IGroupPolicyObject*, Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECT_TYPE*, Win32cr::Foundation::HRESULT),
-    get_machine_name : Proc(IGroupPolicyObject*, UInt16*, Int32, Win32cr::Foundation::HRESULT),
+    get_machine_name : Proc(IGroupPolicyObject*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
     get_property_sheet_pages : Proc(IGroupPolicyObject*, Win32cr::UI::Controls::HPROPSHEETPAGE**, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IGroupPolicyObject, lpVtbl : IGroupPolicyObjectVtbl* do
+  record IGroupPolicyObject, lpVtbl : IGroupPolicyObjectVtable* do
     GUID = LibC::GUID.new(0xea502723_u32, 0xa23d_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
     def query_interface(this : IGroupPolicyObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4089,13 +4144,13 @@ module Win32cr::System::GroupPolicy
     def new(this : IGroupPolicyObject*, pszDomainName : Win32cr::Foundation::PWSTR, pszDisplayName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.new.call(this, pszDomainName, pszDisplayName, dwFlags)
     end
-    def open_dsgpo(this : IGroupPolicyObject*, pszPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    def open_dsgpo(this : IGroupPolicyObject*, pszPath : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::GroupPolicy::GPO_OPEN_FLAGS) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_dsgpo.call(this, pszPath, dwFlags)
     end
-    def open_local_machine_gpo(this : IGroupPolicyObject*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    def open_local_machine_gpo(this : IGroupPolicyObject*, dwFlags : Win32cr::System::GroupPolicy::GPO_OPEN_FLAGS) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_local_machine_gpo.call(this, dwFlags)
     end
-    def open_remote_machine_gpo(this : IGroupPolicyObject*, pszComputerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    def open_remote_machine_gpo(this : IGroupPolicyObject*, pszComputerName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::GroupPolicy::GPO_OPEN_FLAGS) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_remote_machine_gpo.call(this, pszComputerName, dwFlags)
     end
     def save(this : IGroupPolicyObject*, bMachine : Win32cr::Foundation::BOOL, bAdd : Win32cr::Foundation::BOOL, pGuidExtension : LibC::GUID*, pGuid : LibC::GUID*) : Win32cr::Foundation::HRESULT
@@ -4104,37 +4159,37 @@ module Win32cr::System::GroupPolicy
     def delete(this : IGroupPolicyObject*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def get_name(this : IGroupPolicyObject*, pszName : UInt16*, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
+    def get_name(this : IGroupPolicyObject*, pszName : Win32cr::Foundation::PWSTR, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pszName, cchMaxLength)
     end
-    def get_display_name(this : IGroupPolicyObject*, pszName : UInt16*, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
+    def get_display_name(this : IGroupPolicyObject*, pszName : Win32cr::Foundation::PWSTR, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_display_name.call(this, pszName, cchMaxLength)
     end
     def set_display_name(this : IGroupPolicyObject*, pszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_display_name.call(this, pszName)
     end
-    def get_path(this : IGroupPolicyObject*, pszPath : UInt16*, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
+    def get_path(this : IGroupPolicyObject*, pszPath : Win32cr::Foundation::PWSTR, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_path.call(this, pszPath, cchMaxLength)
     end
-    def get_ds_path(this : IGroupPolicyObject*, dwSection : UInt32, pszPath : UInt16*, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
+    def get_ds_path(this : IGroupPolicyObject*, dwSection : UInt32, pszPath : Win32cr::Foundation::PWSTR, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ds_path.call(this, dwSection, pszPath, cchMaxPath)
     end
-    def get_file_sys_path(this : IGroupPolicyObject*, dwSection : UInt32, pszPath : UInt16*, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
+    def get_file_sys_path(this : IGroupPolicyObject*, dwSection : UInt32, pszPath : Win32cr::Foundation::PWSTR, cchMaxPath : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_file_sys_path.call(this, dwSection, pszPath, cchMaxPath)
     end
-    def get_registry_key(this : IGroupPolicyObject*, dwSection : UInt32, hKey : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::HRESULT
+    def get_registry_key(this : IGroupPolicyObject*, dwSection : Win32cr::System::GroupPolicy::GPO_SECTION, hKey : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_registry_key.call(this, dwSection, hKey)
     end
-    def get_options(this : IGroupPolicyObject*, dwOptions : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_options(this : IGroupPolicyObject*, dwOptions : Win32cr::System::GroupPolicy::GPO_OPTIONS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_options.call(this, dwOptions)
     end
-    def set_options(this : IGroupPolicyObject*, dwOptions : UInt32, dwMask : UInt32) : Win32cr::Foundation::HRESULT
+    def set_options(this : IGroupPolicyObject*, dwOptions : Win32cr::System::GroupPolicy::GPO_OPTIONS, dwMask : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_options.call(this, dwOptions, dwMask)
     end
     def get_type(this : IGroupPolicyObject*, gpoType : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECT_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_type.call(this, gpoType)
     end
-    def get_machine_name(this : IGroupPolicyObject*, pszName : UInt16*, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
+    def get_machine_name(this : IGroupPolicyObject*, pszName : Win32cr::Foundation::PWSTR, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_machine_name.call(this, pszName, cchMaxLength)
     end
     def get_property_sheet_pages(this : IGroupPolicyObject*, hPages : Win32cr::UI::Controls::HPROPSHEETPAGE**, uPageCount : UInt32*) : Win32cr::Foundation::HRESULT
@@ -4144,17 +4199,18 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IRSOPInformationVtbl,
+
+  record IRSOPInformationVtable,
     query_interface : Proc(IRSOPInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRSOPInformation*, UInt32),
     release : Proc(IRSOPInformation*, UInt32),
-    get_namespace : Proc(IRSOPInformation*, UInt32, UInt16*, Int32, Win32cr::Foundation::HRESULT),
+    get_namespace : Proc(IRSOPInformation*, UInt32, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
     get_flags : Proc(IRSOPInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_event_log_entry_text : Proc(IRSOPInformation*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRSOPInformation, lpVtbl : IRSOPInformationVtbl* do
+  record IRSOPInformation, lpVtbl : IRSOPInformationVtable* do
     GUID = LibC::GUID.new(0x9a5a81b5_u32, 0xd9c7_u16, 0x49ef_u16, StaticArray[0x9d_u8, 0x11_u8, 0xdd_u8, 0xf5_u8, 0x9_u8, 0x68_u8, 0xc4_u8, 0x8d_u8])
     def query_interface(this : IRSOPInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4165,7 +4221,7 @@ module Win32cr::System::GroupPolicy
     def release(this : IRSOPInformation*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_namespace(this : IRSOPInformation*, dwSection : UInt32, pszName : UInt16*, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
+    def get_namespace(this : IRSOPInformation*, dwSection : UInt32, pszName : Win32cr::Foundation::PWSTR, cchMaxLength : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_namespace.call(this, dwSection, pszName, cchMaxLength)
     end
     def get_flags(this : IRSOPInformation*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
@@ -4178,136 +4234,201 @@ module Win32cr::System::GroupPolicy
   end
 
   def refreshPolicy(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RefreshPolicy(bMachine)
+    {% end %}
   end
 
   def refreshPolicyEx(bMachine : Win32cr::Foundation::BOOL, dwOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RefreshPolicyEx(bMachine, dwOptions)
+    {% end %}
   end
 
   def enterCriticalPolicySection(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.EnterCriticalPolicySection(bMachine)
+    {% end %}
   end
 
   def leaveCriticalPolicySection(hSection : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LeaveCriticalPolicySection(hSection)
+    {% end %}
   end
 
   def registerGPNotification(hEvent : Win32cr::Foundation::HANDLE, bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterGPNotification(hEvent, bMachine)
+    {% end %}
   end
 
   def unregisterGPNotification(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterGPNotification(hEvent)
+    {% end %}
   end
 
   def getGPOListA(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PSTR, lpHostName : Win32cr::Foundation::PSTR, lpComputerName : Win32cr::Foundation::PSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGPOListA(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+    {% end %}
   end
 
   def getGPOListW(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PWSTR, lpHostName : Win32cr::Foundation::PWSTR, lpComputerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGPOListW(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+    {% end %}
   end
 
   def freeGPOListA(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeGPOListA(pGPOList)
+    {% end %}
   end
 
   def freeGPOListW(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeGPOListW(pGPOList)
+    {% end %}
   end
 
-  def getAppliedGPOListA(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : UInt32
+  def getAppliedGPOListA(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PSTR, pSidUser : Win32cr::Security::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAppliedGPOListA(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+    {% end %}
   end
 
-  def getAppliedGPOListW(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PWSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : UInt32
+  def getAppliedGPOListW(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PWSTR, pSidUser : Win32cr::Security::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAppliedGPOListW(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+    {% end %}
   end
 
   def processGroupPolicyCompleted(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ProcessGroupPolicyCompleted(extensionId, pAsyncHandle, dwStatus)
+    {% end %}
   end
 
   def processGroupPolicyCompletedEx(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32, rsop_status : Win32cr::Foundation::HRESULT) : UInt32
+    {% if !flag?(:docs) %}
     C.ProcessGroupPolicyCompletedEx(extensionId, pAsyncHandle, dwStatus, rsop_status)
+    {% end %}
   end
 
-  def rsopAccessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pPrincipalSelfSid : Win32cr::Foundation::PSID, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pPrivilegeSet : Win32cr::Security::PRIVILEGE_SET*, pdwPrivilegeSetLength : UInt32*, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+  def rsopAccessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pPrincipalSelfSid : Win32cr::Security::PSID, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pPrivilegeSet : Win32cr::Security::PRIVILEGE_SET*, pdwPrivilegeSetLength : UInt32*, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopAccessCheckByType(pSecurityDescriptor, pPrincipalSelfSid, pRsopToken, dwDesiredAccessMask, pObjectTypeList, object_type_list_length, pGenericMapping, pPrivilegeSet, pdwPrivilegeSetLength, pdwGrantedAccessMask, pbAccessStatus)
+    {% end %}
   end
 
-  def rsopFileAccessCheck(pszFileName : Win32cr::Foundation::PWSTR, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+  def rsopFileAccessCheck(pszFileName : Win32cr::Foundation::PWSTR, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopFileAccessCheck(pszFileName, pRsopToken, dwDesiredAccessMask, pdwGrantedAccessMask, pbAccessStatus)
+    {% end %}
   end
 
   def rsopSetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*, nInfo : UInt32, pStatus : Win32cr::System::GroupPolicy::POLICYSETTINGSTATUSINFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopSetPolicySettingStatus(dwFlags, pServices, pSettingInstance, nInfo, pStatus)
+    {% end %}
   end
 
   def rsopResetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopResetPolicySettingStatus(dwFlags, pServices, pSettingInstance)
+    {% end %}
   end
 
   def generateGPNotification(bMachine : Win32cr::Foundation::BOOL, lpwszMgmtProduct : Win32cr::Foundation::PWSTR, dwMgmtProductOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GenerateGPNotification(bMachine, lpwszMgmtProduct, dwMgmtProductOptions)
+    {% end %}
   end
 
   def installApplication(pInstallInfo : Win32cr::System::GroupPolicy::INSTALLDATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.InstallApplication(pInstallInfo)
+    {% end %}
   end
 
   def uninstallApplication(product_code : Win32cr::Foundation::PWSTR, dwStatus : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UninstallApplication(product_code, dwStatus)
+    {% end %}
   end
 
-  def commandLineFromMsiDescriptor(descriptor : Win32cr::Foundation::PWSTR, command_line : UInt16*, command_line_length : UInt32*) : UInt32
+  def commandLineFromMsiDescriptor(descriptor : Win32cr::Foundation::PWSTR, command_line : Win32cr::Foundation::PWSTR, command_line_length : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.CommandLineFromMsiDescriptor(descriptor, command_line, command_line_length)
+    {% end %}
   end
 
   def getManagedApplications(pCategory : LibC::GUID*, dwQueryFlags : UInt32, dwInfoLevel : UInt32, pdwApps : UInt32*, prgManagedApps : Win32cr::System::GroupPolicy::MANAGEDAPPLICATION**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetManagedApplications(pCategory, dwQueryFlags, dwInfoLevel, pdwApps, prgManagedApps)
+    {% end %}
   end
 
   def getLocalManagedApplications(bUserApps : Win32cr::Foundation::BOOL, pdwApps : UInt32*, prgLocalApps : Win32cr::System::GroupPolicy::LOCALMANAGEDAPPLICATION**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetLocalManagedApplications(bUserApps, pdwApps, prgLocalApps)
+    {% end %}
   end
 
   def getLocalManagedApplicationData(product_code : Win32cr::Foundation::PWSTR, display_name : Win32cr::Foundation::PWSTR*, support_url : Win32cr::Foundation::PWSTR*) : Void
+    {% if !flag?(:docs) %}
     C.GetLocalManagedApplicationData(product_code, display_name, support_url)
+    {% end %}
   end
 
   def getManagedApplicationCategories(dwReserved : UInt32, pAppCategory : Win32cr::UI::Shell::APPCATEGORYINFOLIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetManagedApplicationCategories(dwReserved, pAppCategory)
+    {% end %}
   end
 
   def createGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR, fHighPriority : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateGPOLink(lpGPO, lpContainer, fHighPriority)
+    {% end %}
   end
 
   def deleteGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteGPOLink(lpGPO, lpContainer)
+    {% end %}
   end
 
   def deleteAllGPOLinks(lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteAllGPOLinks(lpContainer)
+    {% end %}
   end
 
   def browseForGPO(lpBrowseInfo : Win32cr::System::GroupPolicy::GPOBROWSEINFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BrowseForGPO(lpBrowseInfo)
+    {% end %}
   end
 
   def importRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ImportRSoPData(lpNameSpace, lpFileName)
+    {% end %}
   end
 
   def exportRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExportRSoPData(lpNameSpace, lpFileName)
+    {% end %}
   end
 
   @[Link("userenv")]
   @[Link("advapi32")]
   @[Link("gpedit")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RefreshPolicy(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -4340,10 +4461,10 @@ module Win32cr::System::GroupPolicy
     fun FreeGPOListW(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetAppliedGPOListA(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : UInt32
+    fun GetAppliedGPOListA(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PSTR, pSidUser : Win32cr::Security::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : UInt32
 
     # :nodoc:
-    fun GetAppliedGPOListW(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PWSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : UInt32
+    fun GetAppliedGPOListW(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PWSTR, pSidUser : Win32cr::Security::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : UInt32
 
     # :nodoc:
     fun ProcessGroupPolicyCompleted(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32) : UInt32
@@ -4352,10 +4473,10 @@ module Win32cr::System::GroupPolicy
     fun ProcessGroupPolicyCompletedEx(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32, rsop_status : Win32cr::Foundation::HRESULT) : UInt32
 
     # :nodoc:
-    fun RsopAccessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pPrincipalSelfSid : Win32cr::Foundation::PSID, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pPrivilegeSet : Win32cr::Security::PRIVILEGE_SET*, pdwPrivilegeSetLength : UInt32*, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+    fun RsopAccessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pPrincipalSelfSid : Win32cr::Security::PSID, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pPrivilegeSet : Win32cr::Security::PRIVILEGE_SET*, pdwPrivilegeSetLength : UInt32*, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun RsopFileAccessCheck(pszFileName : Win32cr::Foundation::PWSTR, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+    fun RsopFileAccessCheck(pszFileName : Win32cr::Foundation::PWSTR, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun RsopSetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*, nInfo : UInt32, pStatus : Win32cr::System::GroupPolicy::POLICYSETTINGSTATUSINFO*) : Win32cr::Foundation::HRESULT
@@ -4373,7 +4494,7 @@ module Win32cr::System::GroupPolicy
     fun UninstallApplication(product_code : Win32cr::Foundation::PWSTR, dwStatus : UInt32) : UInt32
 
     # :nodoc:
-    fun CommandLineFromMsiDescriptor(descriptor : Win32cr::Foundation::PWSTR, command_line : UInt16*, command_line_length : UInt32*) : UInt32
+    fun CommandLineFromMsiDescriptor(descriptor : Win32cr::Foundation::PWSTR, command_line : Win32cr::Foundation::PWSTR, command_line_length : UInt32*) : UInt32
 
     # :nodoc:
     fun GetManagedApplications(pCategory : LibC::GUID*, dwQueryFlags : UInt32, dwInfoLevel : UInt32, pdwApps : UInt32*, prgManagedApps : Win32cr::System::GroupPolicy::MANAGEDAPPLICATION**) : UInt32
@@ -4406,4 +4527,5 @@ module Win32cr::System::GroupPolicy
     fun ExportRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

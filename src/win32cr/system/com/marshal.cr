@@ -12,7 +12,8 @@ module Win32cr::System::Com::Marshal
   end
 
   @[Extern]
-  record IMarshalVtbl,
+
+  record IMarshalVtable,
     query_interface : Proc(IMarshal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarshal*, UInt32),
     release : Proc(IMarshal*, UInt32),
@@ -25,7 +26,7 @@ module Win32cr::System::Com::Marshal
 
 
   @[Extern]
-  record IMarshal, lpVtbl : IMarshalVtbl* do
+  record IMarshal, lpVtbl : IMarshalVtable* do
     GUID = LibC::GUID.new(0x3_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IMarshal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58,7 +59,8 @@ module Win32cr::System::Com::Marshal
   end
 
   @[Extern]
-  record IMarshal2Vtbl,
+
+  record IMarshal2Vtable,
     query_interface : Proc(IMarshal2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarshal2*, UInt32),
     release : Proc(IMarshal2*, UInt32),
@@ -71,7 +73,7 @@ module Win32cr::System::Com::Marshal
 
 
   @[Extern]
-  record IMarshal2, lpVtbl : IMarshal2Vtbl* do
+  record IMarshal2, lpVtbl : IMarshal2Vtable* do
     GUID = LibC::GUID.new(0x1cf_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IMarshal2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -104,26 +106,27 @@ module Win32cr::System::Com::Marshal
   end
 
   @[Extern]
-  record IMarshalingStreamVtbl,
+
+  record IMarshalingStreamVtable,
     query_interface : Proc(IMarshalingStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarshalingStream*, UInt32),
     release : Proc(IMarshalingStream*, UInt32),
     read : Proc(IMarshalingStream*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     write : Proc(IMarshalingStream*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    seek : Proc(IMarshalingStream*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
-    set_size : Proc(IMarshalingStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
-    copy_to : Proc(IMarshalingStream*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    seek : Proc(IMarshalingStream*, Int64, Win32cr::System::Com::STREAM_SEEK, UInt64*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(IMarshalingStream*, UInt64, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IMarshalingStream*, Void*, UInt64, UInt64*, UInt64*, Win32cr::Foundation::HRESULT),
     commit : Proc(IMarshalingStream*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
     revert : Proc(IMarshalingStream*, Win32cr::Foundation::HRESULT),
-    lock_region : Proc(IMarshalingStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
-    unlock_region : Proc(IMarshalingStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
-    stat : Proc(IMarshalingStream*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(IMarshalingStream*, UInt64, UInt64, Win32cr::System::Com::LOCKTYPE, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(IMarshalingStream*, UInt64, UInt64, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(IMarshalingStream*, Win32cr::System::Com::STATSTG*, Win32cr::System::Com::STATFLAG, Win32cr::Foundation::HRESULT),
     clone : Proc(IMarshalingStream*, Void**, Win32cr::Foundation::HRESULT),
     get_marshaling_context_attribute : Proc(IMarshalingStream*, Win32cr::System::Com::CO_MARSHALING_CONTEXT_ATTRIBUTES, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMarshalingStream, lpVtbl : IMarshalingStreamVtbl* do
+  record IMarshalingStream, lpVtbl : IMarshalingStreamVtable* do
     GUID = LibC::GUID.new(0xd8f2f5e6_u32, 0x6102_u16, 0x4863_u16, StaticArray[0x9f_u8, 0x26_u8, 0x38_u8, 0x9a_u8, 0x46_u8, 0x76_u8, 0xef_u8, 0xde_u8])
     def query_interface(this : IMarshalingStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -140,13 +143,13 @@ module Win32cr::System::Com::Marshal
     def write(this : IMarshalingStream*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
     end
-    def seek(this : IMarshalingStream*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    def seek(this : IMarshalingStream*, dlibMove : Int64, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : UInt64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
     end
-    def set_size(this : IMarshalingStream*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+    def set_size(this : IMarshalingStream*, libNewSize : UInt64) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_size.call(this, libNewSize)
     end
-    def copy_to(this : IMarshalingStream*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    def copy_to(this : IMarshalingStream*, pstm : Void*, cb : UInt64, pcbRead : UInt64*, pcbWritten : UInt64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
     end
     def commit(this : IMarshalingStream*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
@@ -155,13 +158,13 @@ module Win32cr::System::Com::Marshal
     def revert(this : IMarshalingStream*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.revert.call(this)
     end
-    def lock_region(this : IMarshalingStream*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+    def lock_region(this : IMarshalingStream*, libOffset : UInt64, cb : UInt64, dwLockType : Win32cr::System::Com::LOCKTYPE) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
     end
-    def unlock_region(this : IMarshalingStream*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+    def unlock_region(this : IMarshalingStream*, libOffset : UInt64, cb : UInt64, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
     end
-    def stat(this : IMarshalingStream*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+    def stat(this : IMarshalingStream*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : Win32cr::System::Com::STATFLAG) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
     end
     def clone(this : IMarshalingStream*, ppstm : Void**) : Win32cr::Foundation::HRESULT
@@ -174,491 +177,686 @@ module Win32cr::System::Com::Marshal
   end
 
   def bSTRUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::BSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.BSTR_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def bSTRUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::BSTR*) : UInt8*
+    {% if !flag?(:docs) %}
     C.BSTR_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def bSTRUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::BSTR*) : UInt8*
+    {% if !flag?(:docs) %}
     C.BSTR_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def bSTRUserFree(param0 : UInt32*, param1 : Win32cr::Foundation::BSTR*) : Void
+    {% if !flag?(:docs) %}
     C.BSTR_UserFree(param0, param1)
+    {% end %}
   end
 
   def hWNDUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::HWND*) : UInt32
+    {% if !flag?(:docs) %}
     C.HWND_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hWNDUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HWND*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HWND_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hWNDUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HWND*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HWND_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hWNDUserFree(param0 : UInt32*, param1 : Win32cr::Foundation::HWND*) : Void
+    {% if !flag?(:docs) %}
     C.HWND_UserFree(param0, param1)
-  end
-
-  def vARIANTUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::VARIANT*) : UInt32
-    C.VARIANT_UserSize(param0, param1, param2)
-  end
-
-  def vARIANTUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-    C.VARIANT_UserMarshal(param0, param1, param2)
-  end
-
-  def vARIANTUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-    C.VARIANT_UserUnmarshal(param0, param1, param2)
-  end
-
-  def vARIANTUserFree(param0 : UInt32*, param1 : Win32cr::System::Com::VARIANT*) : Void
-    C.VARIANT_UserFree(param0, param1)
+    {% end %}
   end
 
   def bSTRUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::BSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.BSTR_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def bSTRUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::BSTR*) : UInt8*
+    {% if !flag?(:docs) %}
     C.BSTR_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def bSTRUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::BSTR*) : UInt8*
+    {% if !flag?(:docs) %}
     C.BSTR_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def bSTRUserFree64(param0 : UInt32*, param1 : Win32cr::Foundation::BSTR*) : Void
+    {% if !flag?(:docs) %}
     C.BSTR_UserFree64(param0, param1)
+    {% end %}
   end
 
   def hWNDUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::HWND*) : UInt32
+    {% if !flag?(:docs) %}
     C.HWND_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hWNDUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HWND*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HWND_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hWNDUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HWND*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HWND_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hWNDUserFree64(param0 : UInt32*, param1 : Win32cr::Foundation::HWND*) : Void
+    {% if !flag?(:docs) %}
     C.HWND_UserFree64(param0, param1)
-  end
-
-  def vARIANTUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::VARIANT*) : UInt32
-    C.VARIANT_UserSize64(param0, param1, param2)
-  end
-
-  def vARIANTUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-    C.VARIANT_UserMarshal64(param0, param1, param2)
-  end
-
-  def vARIANTUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-    C.VARIANT_UserUnmarshal64(param0, param1, param2)
-  end
-
-  def vARIANTUserFree64(param0 : UInt32*, param1 : Win32cr::System::Com::VARIANT*) : Void
-    C.VARIANT_UserFree64(param0, param1)
+    {% end %}
   end
 
   def cLIPFORMATUserSize(param0 : UInt32*, param1 : UInt32, param2 : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def cLIPFORMATUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt16*) : UInt8*
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def cLIPFORMATUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt16*) : UInt8*
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def cLIPFORMATUserFree(param0 : UInt32*, param1 : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserFree(param0, param1)
+    {% end %}
   end
 
   def hBITMAPUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Graphics::Gdi::HBITMAP*) : UInt32
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hBITMAPUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HBITMAP*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hBITMAPUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HBITMAP*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hBITMAPUserFree(param0 : UInt32*, param1 : Win32cr::Graphics::Gdi::HBITMAP*) : Void
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserFree(param0, param1)
+    {% end %}
   end
 
   def hDCUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Graphics::Gdi::HDC*) : UInt32
+    {% if !flag?(:docs) %}
     C.HDC_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hDCUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HDC*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HDC_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hDCUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HDC*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HDC_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hDCUserFree(param0 : UInt32*, param1 : Win32cr::Graphics::Gdi::HDC*) : Void
+    {% if !flag?(:docs) %}
     C.HDC_UserFree(param0, param1)
+    {% end %}
   end
 
   def hICONUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HICON*) : UInt32
+    {% if !flag?(:docs) %}
     C.HICON_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hICONUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HICON*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HICON_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hICONUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HICON*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HICON_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hICONUserFree(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HICON*) : Void
+    {% if !flag?(:docs) %}
     C.HICON_UserFree(param0, param1)
+    {% end %}
   end
 
   def sNBUserSize(param0 : UInt32*, param1 : UInt32, param2 : UInt16***) : UInt32
+    {% if !flag?(:docs) %}
     C.SNB_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def sNBUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt16***) : UInt8*
+    {% if !flag?(:docs) %}
     C.SNB_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def sNBUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt16***) : UInt8*
+    {% if !flag?(:docs) %}
     C.SNB_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def sNBUserFree(param0 : UInt32*, param1 : UInt16***) : Void
+    {% if !flag?(:docs) %}
     C.SNB_UserFree(param0, param1)
+    {% end %}
   end
 
   def sTGMEDIUMUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::STGMEDIUM*) : UInt32
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def sTGMEDIUMUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::STGMEDIUM*) : UInt8*
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def sTGMEDIUMUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::STGMEDIUM*) : UInt8*
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def sTGMEDIUMUserFree(param0 : UInt32*, param1 : Win32cr::System::Com::STGMEDIUM*) : Void
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserFree(param0, param1)
+    {% end %}
   end
 
   def cLIPFORMATUserSize64(param0 : UInt32*, param1 : UInt32, param2 : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def cLIPFORMATUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt16*) : UInt8*
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def cLIPFORMATUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt16*) : UInt8*
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def cLIPFORMATUserFree64(param0 : UInt32*, param1 : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.CLIPFORMAT_UserFree64(param0, param1)
+    {% end %}
   end
 
   def hBITMAPUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Graphics::Gdi::HBITMAP*) : UInt32
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hBITMAPUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HBITMAP*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hBITMAPUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HBITMAP*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hBITMAPUserFree64(param0 : UInt32*, param1 : Win32cr::Graphics::Gdi::HBITMAP*) : Void
+    {% if !flag?(:docs) %}
     C.HBITMAP_UserFree64(param0, param1)
+    {% end %}
   end
 
   def hDCUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Graphics::Gdi::HDC*) : UInt32
+    {% if !flag?(:docs) %}
     C.HDC_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hDCUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HDC*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HDC_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hDCUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HDC*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HDC_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hDCUserFree64(param0 : UInt32*, param1 : Win32cr::Graphics::Gdi::HDC*) : Void
+    {% if !flag?(:docs) %}
     C.HDC_UserFree64(param0, param1)
+    {% end %}
   end
 
   def hICONUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HICON*) : UInt32
+    {% if !flag?(:docs) %}
     C.HICON_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hICONUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HICON*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HICON_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hICONUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HICON*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HICON_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hICONUserFree64(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HICON*) : Void
+    {% if !flag?(:docs) %}
     C.HICON_UserFree64(param0, param1)
+    {% end %}
   end
 
   def sNBUserSize64(param0 : UInt32*, param1 : UInt32, param2 : UInt16***) : UInt32
+    {% if !flag?(:docs) %}
     C.SNB_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def sNBUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt16***) : UInt8*
+    {% if !flag?(:docs) %}
     C.SNB_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def sNBUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt16***) : UInt8*
+    {% if !flag?(:docs) %}
     C.SNB_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def sNBUserFree64(param0 : UInt32*, param1 : UInt16***) : Void
+    {% if !flag?(:docs) %}
     C.SNB_UserFree64(param0, param1)
+    {% end %}
   end
 
   def sTGMEDIUMUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::STGMEDIUM*) : UInt32
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def sTGMEDIUMUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::STGMEDIUM*) : UInt8*
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def sTGMEDIUMUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::STGMEDIUM*) : UInt8*
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def sTGMEDIUMUserFree64(param0 : UInt32*, param1 : Win32cr::System::Com::STGMEDIUM*) : Void
+    {% if !flag?(:docs) %}
     C.STGMEDIUM_UserFree64(param0, param1)
+    {% end %}
   end
 
   def coGetMarshalSizeMax(pulSize : UInt32*, riid : LibC::GUID*, pUnk : Void*, dwDestContext : UInt32, pvDestContext : Void*, mshlflags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetMarshalSizeMax(pulSize, riid, pUnk, dwDestContext, pvDestContext, mshlflags)
+    {% end %}
   end
 
   def coMarshalInterface(pStm : Void*, riid : LibC::GUID*, pUnk : Void*, dwDestContext : UInt32, pvDestContext : Void*, mshlflags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoMarshalInterface(pStm, riid, pUnk, dwDestContext, pvDestContext, mshlflags)
+    {% end %}
   end
 
   def coUnmarshalInterface(pStm : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoUnmarshalInterface(pStm, riid, ppv)
+    {% end %}
   end
 
   def coMarshalHresult(pstm : Void*, hresult : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoMarshalHresult(pstm, hresult)
+    {% end %}
   end
 
   def coUnmarshalHresult(pstm : Void*, phresult : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoUnmarshalHresult(pstm, phresult)
+    {% end %}
   end
 
   def coReleaseMarshalData(pStm : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoReleaseMarshalData(pStm)
+    {% end %}
   end
 
   def coGetStandardMarshal(riid : LibC::GUID*, pUnk : Void*, dwDestContext : UInt32, pvDestContext : Void*, mshlflags : UInt32, ppMarshal : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetStandardMarshal(riid, pUnk, dwDestContext, pvDestContext, mshlflags, ppMarshal)
+    {% end %}
   end
 
   def coGetStdMarshalEx(pUnkOuter : Void*, smexflags : UInt32, ppUnkInner : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetStdMarshalEx(pUnkOuter, smexflags, ppUnkInner)
+    {% end %}
   end
 
   def coMarshalInterThreadInterfaceInStream(riid : LibC::GUID*, pUnk : Void*, ppStm : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoMarshalInterThreadInterfaceInStream(riid, pUnk, ppStm)
+    {% end %}
   end
 
   def lPSAFEARRAYUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::SAFEARRAY**) : UInt32
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def lPSAFEARRAYUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::SAFEARRAY**) : UInt8*
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def lPSAFEARRAYUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::SAFEARRAY**) : UInt8*
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def lPSAFEARRAYUserFree(param0 : UInt32*, param1 : Win32cr::System::Com::SAFEARRAY**) : Void
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserFree(param0, param1)
+    {% end %}
   end
 
   def lPSAFEARRAYUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::SAFEARRAY**) : UInt32
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def lPSAFEARRAYUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::SAFEARRAY**) : UInt8*
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def lPSAFEARRAYUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::SAFEARRAY**) : UInt8*
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def lPSAFEARRAYUserFree64(param0 : UInt32*, param1 : Win32cr::System::Com::SAFEARRAY**) : Void
+    {% if !flag?(:docs) %}
     C.LPSAFEARRAY_UserFree64(param0, param1)
+    {% end %}
   end
 
   def hACCELUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : UInt32
+    {% if !flag?(:docs) %}
     C.HACCEL_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hACCELUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HACCEL_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hACCELUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HACCEL_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hACCELUserFree(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : Void
+    {% if !flag?(:docs) %}
     C.HACCEL_UserFree(param0, param1)
+    {% end %}
   end
 
-  def hGLOBALUserSize(param0 : UInt32*, param1 : UInt32, param2 : LibC::IntPtrT*) : UInt32
+  def hGLOBALUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::HGLOBAL*) : UInt32
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserSize(param0, param1, param2)
+    {% end %}
   end
 
-  def hGLOBALUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+  def hGLOBALUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
-  def hGLOBALUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+  def hGLOBALUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
-  def hGLOBALUserFree(param0 : UInt32*, param1 : LibC::IntPtrT*) : Void
+  def hGLOBALUserFree(param0 : UInt32*, param1 : Win32cr::Foundation::HGLOBAL*) : Void
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserFree(param0, param1)
+    {% end %}
   end
 
   def hMENUUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt32
+    {% if !flag?(:docs) %}
     C.HMENU_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hMENUUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HMENU_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hMENUUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HMENU_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hMENUUserFree(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HMENU*) : Void
+    {% if !flag?(:docs) %}
     C.HMENU_UserFree(param0, param1)
+    {% end %}
   end
 
   def hACCELUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : UInt32
+    {% if !flag?(:docs) %}
     C.HACCEL_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hACCELUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HACCEL_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hACCELUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HACCEL_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hACCELUserFree64(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : Void
+    {% if !flag?(:docs) %}
     C.HACCEL_UserFree64(param0, param1)
+    {% end %}
   end
 
-  def hGLOBALUserSize64(param0 : UInt32*, param1 : UInt32, param2 : LibC::IntPtrT*) : UInt32
+  def hGLOBALUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::HGLOBAL*) : UInt32
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
-  def hGLOBALUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+  def hGLOBALUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
-  def hGLOBALUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+  def hGLOBALUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
-  def hGLOBALUserFree64(param0 : UInt32*, param1 : LibC::IntPtrT*) : Void
+  def hGLOBALUserFree64(param0 : UInt32*, param1 : Win32cr::Foundation::HGLOBAL*) : Void
+    {% if !flag?(:docs) %}
     C.HGLOBAL_UserFree64(param0, param1)
+    {% end %}
   end
 
   def hMENUUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt32
+    {% if !flag?(:docs) %}
     C.HMENU_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hMENUUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HMENU_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hMENUUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HMENU_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hMENUUserFree64(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HMENU*) : Void
+    {% if !flag?(:docs) %}
     C.HMENU_UserFree64(param0, param1)
+    {% end %}
   end
 
   def hPALETTEUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Graphics::Gdi::HPALETTE*) : UInt32
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hPALETTEUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HPALETTE*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hPALETTEUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HPALETTE*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hPALETTEUserFree(param0 : UInt32*, param1 : Win32cr::Graphics::Gdi::HPALETTE*) : Void
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserFree(param0, param1)
+    {% end %}
   end
 
   def hPALETTEUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Graphics::Gdi::HPALETTE*) : UInt32
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hPALETTEUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HPALETTE*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hPALETTEUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Graphics::Gdi::HPALETTE*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hPALETTEUserFree64(param0 : UInt32*, param1 : Win32cr::Graphics::Gdi::HPALETTE*) : Void
+    {% if !flag?(:docs) %}
     C.HPALETTE_UserFree64(param0, param1)
+    {% end %}
   end
 
   @[Link("oleaut32")]
   @[Link("ole32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun BSTR_UserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::BSTR*) : UInt32
@@ -685,18 +883,6 @@ module Win32cr::System::Com::Marshal
     fun HWND_UserFree(param0 : UInt32*, param1 : Win32cr::Foundation::HWND*) : Void
 
     # :nodoc:
-    fun VARIANT_UserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::VARIANT*) : UInt32
-
-    # :nodoc:
-    fun VARIANT_UserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-
-    # :nodoc:
-    fun VARIANT_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-
-    # :nodoc:
-    fun VARIANT_UserFree(param0 : UInt32*, param1 : Win32cr::System::Com::VARIANT*) : Void
-
-    # :nodoc:
     fun BSTR_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::BSTR*) : UInt32
 
     # :nodoc:
@@ -719,18 +905,6 @@ module Win32cr::System::Com::Marshal
 
     # :nodoc:
     fun HWND_UserFree64(param0 : UInt32*, param1 : Win32cr::Foundation::HWND*) : Void
-
-    # :nodoc:
-    fun VARIANT_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::Com::VARIANT*) : UInt32
-
-    # :nodoc:
-    fun VARIANT_UserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-
-    # :nodoc:
-    fun VARIANT_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::Com::VARIANT*) : UInt8*
-
-    # :nodoc:
-    fun VARIANT_UserFree64(param0 : UInt32*, param1 : Win32cr::System::Com::VARIANT*) : Void
 
     # :nodoc:
     fun CLIPFORMAT_UserSize(param0 : UInt32*, param1 : UInt32, param2 : UInt16*) : UInt32
@@ -940,16 +1114,16 @@ module Win32cr::System::Com::Marshal
     fun HACCEL_UserFree(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : Void
 
     # :nodoc:
-    fun HGLOBAL_UserSize(param0 : UInt32*, param1 : UInt32, param2 : LibC::IntPtrT*) : UInt32
+    fun HGLOBAL_UserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::HGLOBAL*) : UInt32
 
     # :nodoc:
-    fun HGLOBAL_UserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+    fun HGLOBAL_UserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
 
     # :nodoc:
-    fun HGLOBAL_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+    fun HGLOBAL_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
 
     # :nodoc:
-    fun HGLOBAL_UserFree(param0 : UInt32*, param1 : LibC::IntPtrT*) : Void
+    fun HGLOBAL_UserFree(param0 : UInt32*, param1 : Win32cr::Foundation::HGLOBAL*) : Void
 
     # :nodoc:
     fun HMENU_UserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt32
@@ -976,16 +1150,16 @@ module Win32cr::System::Com::Marshal
     fun HACCEL_UserFree64(param0 : UInt32*, param1 : Win32cr::UI::WindowsAndMessaging::HACCEL*) : Void
 
     # :nodoc:
-    fun HGLOBAL_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : LibC::IntPtrT*) : UInt32
+    fun HGLOBAL_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::Foundation::HGLOBAL*) : UInt32
 
     # :nodoc:
-    fun HGLOBAL_UserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+    fun HGLOBAL_UserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
 
     # :nodoc:
-    fun HGLOBAL_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : LibC::IntPtrT*) : UInt8*
+    fun HGLOBAL_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::Foundation::HGLOBAL*) : UInt8*
 
     # :nodoc:
-    fun HGLOBAL_UserFree64(param0 : UInt32*, param1 : LibC::IntPtrT*) : Void
+    fun HGLOBAL_UserFree64(param0 : UInt32*, param1 : Win32cr::Foundation::HGLOBAL*) : Void
 
     # :nodoc:
     fun HMENU_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::UI::WindowsAndMessaging::HMENU*) : UInt32
@@ -1024,4 +1198,5 @@ module Win32cr::System::Com::Marshal
     fun HPALETTE_UserFree64(param0 : UInt32*, param1 : Win32cr::Graphics::Gdi::HPALETTE*) : Void
 
   end
+  {% end %}
 end

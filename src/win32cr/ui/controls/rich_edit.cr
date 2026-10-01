@@ -1,12 +1,14 @@
 require "./../../foundation.cr"
-require "./../../graphics/gdi.cr"
 require "./../../system/com.cr"
 require "./../controls.cr"
+require "./../../graphics/gdi.cr"
 require "./../../system/ole.cr"
 require "./../windows_and_messaging.cr"
-require "./../../globalization.cr"
+require "./../input/ime.cr"
+require "./../../system/variant.cr"
 require "./../../graphics/direct2_d.cr"
 require "./../../system/com/structured_storage.cr"
+require "./../../system/system_services.cr"
 
 module Win32cr::UI::Controls::RichEdit
   extend self
@@ -184,6 +186,8 @@ module Win32cr::UI::Controls::RichEdit
   EM_GETIMEPROPERTY = 1268_u32
   EM_GETQUERYRTFOBJ = 1293_u32
   EM_SETQUERYRTFOBJ = 1294_u32
+  EM_SETQUERYCONVERTOLELINKCALLBACK = 1427_u32
+  EM_SETDISABLEOLELINKCONVERSION = 1428_u32
   EPR_0 = 0_u32
   EPR_270 = 1_u32
   EPR_180 = 2_u32
@@ -373,37 +377,6 @@ module Win32cr::UI::Controls::RichEdit
   MAX_TAB_STOPS = 32_u32
   Ldefaulttab = 720_u32
   MAX_TABLE_CELLS = 63_u32
-  PFM_SPACEBEFORE = 64_u32
-  PFM_SPACEAFTER = 128_u32
-  PFM_LINESPACING = 256_u32
-  PFM_STYLE = 1024_u32
-  PFM_BORDER = 2048_u32
-  PFM_SHADING = 4096_u32
-  PFM_NUMBERINGSTYLE = 8192_u32
-  PFM_NUMBERINGTAB = 16384_u32
-  PFM_NUMBERINGSTART = 32768_u32
-  PFM_KEEP = 131072_u32
-  PFM_KEEPNEXT = 262144_u32
-  PFM_PAGEBREAKBEFORE = 524288_u32
-  PFM_NOLINENUMBER = 1048576_u32
-  PFM_NOWIDOWCONTROL = 2097152_u32
-  PFM_DONOTHYPHEN = 4194304_u32
-  PFM_SIDEBYSIDE = 8388608_u32
-  PFM_COLLAPSED = 16777216_u32
-  PFM_OUTLINELEVEL = 33554432_u32
-  PFM_BOX = 67108864_u32
-  PFM_RESERVED2 = 134217728_u32
-  PFM_TABLEROWDELIMITER = 268435456_u32
-  PFM_TEXTWRAPPINGBREAK = 536870912_u32
-  PFM_TABLE = 1073741824_u32
-  PFN_BULLET = 1_u32
-  PFN_ARABIC = 2_u32
-  PFN_LCLETTER = 3_u32
-  PFN_UCLETTER = 4_u32
-  PFN_LCROMAN = 5_u32
-  PFN_UCROMAN = 6_u32
-  PFA_JUSTIFY = 4_u32
-  PFA_FULL_INTERWORD = 4_u32
   GCMF_GRIPPER = 1_u32
   GCMF_SPELLING = 2_u32
   GCMF_TOUCHMENU = 16384_u32
@@ -432,14 +405,7 @@ module Win32cr::UI::Controls::RichEdit
   BOE_FORCERECALC = 32_u32
   BOE_LEGACYBIDICLASS = 64_u32
   BOE_UNICODEBIDI = 128_u32
-  FR_MATCHDIAC = 536870912_u32
-  FR_MATCHKASHIDA = 1073741824_u32
-  FR_MATCHALEFHAMZA = 2147483648_u32
   RICHEDIT60_CLASS = "RICHEDIT60W"
-  PFA_FULL_NEWSPAPER = 5_u32
-  PFA_FULL_INTERLETTER = 6_u32
-  PFA_FULL_SCALED = 7_u32
-  PFA_FULL_GLYPHS = 8_u32
   AURL_ENABLEEA = 1_u32
   GCM_TOUCHMENU = 16384_u32
   GCM_MOUSEMENU = 8192_u32
@@ -477,11 +443,6 @@ module Win32cr::UI::Controls::RichEdit
   TXES_ISDIALOG = 1_u32
   REO_NULL = 0_i32
   REO_READWRITEMASK = 2047_i32
-  RECO_PASTE = 0_i32
-  RECO_DROP = 1_i32
-  RECO_COPY = 2_i32
-  RECO_CUT = 3_i32
-  RECO_DRAG = 4_i32
 
   @[Flags]
   enum CFM_MASK : UInt32
@@ -559,14 +520,40 @@ module Win32cr::UI::Controls::RichEdit
   end
   @[Flags]
   enum PARAFORMAT_MASK : UInt32
-    PFM_ALIGNMENT = 8_u32
-    PFM_NUMBERING = 32_u32
-    PFM_OFFSET = 4_u32
-    PFM_OFFSETINDENT = 2147483648_u32
-    PFM_RIGHTINDENT = 2_u32
-    PFM_RTLPARA = 65536_u32
     PFM_STARTINDENT = 1_u32
+    PFM_RIGHTINDENT = 2_u32
+    PFM_OFFSET = 4_u32
+    PFM_ALIGNMENT = 8_u32
     PFM_TABSTOPS = 16_u32
+    PFM_NUMBERING = 32_u32
+    PFM_OFFSETINDENT = 2147483648_u32
+    PFM_SPACEBEFORE = 64_u32
+    PFM_SPACEAFTER = 128_u32
+    PFM_LINESPACING = 256_u32
+    PFM_STYLE = 1024_u32
+    PFM_BORDER = 2048_u32
+    PFM_SHADING = 4096_u32
+    PFM_NUMBERINGSTYLE = 8192_u32
+    PFM_NUMBERINGTAB = 16384_u32
+    PFM_NUMBERINGSTART = 32768_u32
+    PFM_RTLPARA = 65536_u32
+    PFM_KEEP = 131072_u32
+    PFM_KEEPNEXT = 262144_u32
+    PFM_PAGEBREAKBEFORE = 524288_u32
+    PFM_NOLINENUMBER = 1048576_u32
+    PFM_NOWIDOWCONTROL = 2097152_u32
+    PFM_DONOTHYPHEN = 4194304_u32
+    PFM_SIDEBYSIDE = 8388608_u32
+    PFM_COLLAPSED = 16777216_u32
+    PFM_OUTLINELEVEL = 33554432_u32
+    PFM_BOX = 67108864_u32
+    PFM_RESERVED2 = 134217728_u32
+    PFM_TABLEROWDELIMITER = 268435456_u32
+    PFM_TEXTWRAPPINGBREAK = 536870912_u32
+    PFM_TABLE = 1073741824_u32
+    PFM_ALL = 2147549247_u32
+    PFM_EFFECTS = 1358888960_u32
+    PFM_ALL2 = 3506437631_u32
   end
   @[Flags]
   enum RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE : UInt16
@@ -664,9 +651,24 @@ module Win32cr::UI::Controls::RichEdit
     PFNS_NEWNUMBER = 32768_u16
   end
   enum PARAFORMAT_ALIGNMENT : UInt16
-    PFA_CENTER = 3_u16
     PFA_LEFT = 1_u16
     PFA_RIGHT = 2_u16
+    PFA_CENTER = 3_u16
+    PFA_JUSTIFY = 4_u16
+    PFA_FULL_INTERWORD = 4_u16
+    PFA_FULL_NEWSPAPER = 5_u16
+    PFA_FULL_INTERLETTER = 6_u16
+    PFA_FULL_SCALED = 7_u16
+    PFA_FULL_GLYPHS = 8_u16
+  end
+  @[Flags]
+  enum PARAFORMAT_NUMBERING : UInt16
+    PFN_BULLET = 1_u16
+    PFN_ARABIC = 2_u16
+    PFN_LCLETTER = 3_u16
+    PFN_UCLETTER = 4_u16
+    PFN_LCROMAN = 5_u16
+    PFN_UCROMAN = 6_u16
   end
   enum TEXTMODE
     TM_PLAINTEXT = 1_i32
@@ -1369,6 +1371,308 @@ module Win32cr::UI::Controls::RichEdit
     MOPENA = 12_i32
   end
 
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct RICHEDIT_IMAGE_PARAMETERS
+    property xWidth : Int32
+    property yHeight : Int32
+    property ascent : Int32
+    property type__ : Int32
+    property pwszAlternateText : Win32cr::Foundation::PWSTR
+    property pIStream : Void*
+    def initialize(@xWidth : Int32, @yHeight : Int32, @ascent : Int32, @type__ : Int32, @pwszAlternateText : Win32cr::Foundation::PWSTR, @pIStream : Void*)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENDCOMPOSITIONNOTIFY
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property dwCode : Win32cr::UI::Controls::RichEdit::ENDCOMPOSITIONNOTIFY_CODE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @dwCode : Win32cr::UI::Controls::RichEdit::ENDCOMPOSITIONNOTIFY_CODE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct TEXTRANGEA
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct TEXTRANGEW
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PWSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct EDITSTREAM
+    property dwCookie : LibC::UIntPtrT
+    property dwError : UInt32
+    property pfnCallback : Win32cr::UI::Controls::RichEdit::EDITSTREAMCALLBACK
+    def initialize(@dwCookie : LibC::UIntPtrT, @dwError : UInt32, @pfnCallback : Win32cr::UI::Controls::RichEdit::EDITSTREAMCALLBACK)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct FINDTEXTA
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct FINDTEXTW
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PWSTR
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct FINDTEXTEXA
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PSTR
+    property chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR, @chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct FINDTEXTEXW
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property lpstrText : Win32cr::Foundation::PWSTR
+    property chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR, @chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct FORMATRANGE
+    property hdc : Win32cr::Graphics::Gdi::HDC
+    property hdcTarget : Win32cr::Graphics::Gdi::HDC
+    property rc : Win32cr::Foundation::RECT
+    property rcPage : Win32cr::Foundation::RECT
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@hdc : Win32cr::Graphics::Gdi::HDC, @hdcTarget : Win32cr::Graphics::Gdi::HDC, @rc : Win32cr::Foundation::RECT, @rcPage : Win32cr::Foundation::RECT, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct MSGFILTER
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property msg : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct REQRESIZE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SELCHANGE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct CLIPBOARDFORMAT
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cf : UInt16
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cf : UInt16)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct GETCONTEXTMENUEX
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property dwFlags : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property pvReserved : Void*
+    def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @dwFlags : UInt32, @pt : Win32cr::Foundation::POINT, @pvReserved : Void*)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENDROPFILES
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property hDrop : Win32cr::Foundation::HANDLE
+    property cp : Int32
+    property fProtected : Win32cr::Foundation::BOOL
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @hDrop : Win32cr::Foundation::HANDLE, @cp : Int32, @fProtected : Win32cr::Foundation::BOOL)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENPROTECTED
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property msg : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENSAVECLIPBOARD
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cObjectCount : Int32
+    property cch : Int32
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cObjectCount : Int32, @cch : Int32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENOLEOPFAILED
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property iob : Int32
+    property lOper : Int32
+    property hr : Win32cr::Foundation::HRESULT
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @iob : Int32, @lOper : Int32, @hr : Win32cr::Foundation::HRESULT)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct OBJECTPOSITIONS
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cObjectCount : Int32
+    property pcpPositions : Int32*
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cObjectCount : Int32, @pcpPositions : Int32*)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENLINK
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property msg : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENLOWFIRTF
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property szControl : Win32cr::Foundation::PSTR
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @szControl : Win32cr::Foundation::PSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ENCORRECTTEXT
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
+    property seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct PUNCTUATION
+    property iSize : UInt32
+    property szPunctuation : Win32cr::Foundation::PSTR
+    def initialize(@iSize : UInt32, @szPunctuation : Win32cr::Foundation::PSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct REPASTESPECIAL
+    property dwAspect : Win32cr::System::Com::DVASPECT
+    property dwParam : LibC::UIntPtrT
+    def initialize(@dwAspect : Win32cr::System::Com::DVASPECT, @dwParam : LibC::UIntPtrT)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct GETTEXTEX
+    property cb : UInt32
+    property flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS
+    property codepage : UInt32
+    property lpDefaultChar : Win32cr::Foundation::PSTR
+    property lpUsedDefChar : Win32cr::Foundation::BOOL*
+    def initialize(@cb : UInt32, @flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS, @codepage : UInt32, @lpDefaultChar : Win32cr::Foundation::PSTR, @lpUsedDefChar : Win32cr::Foundation::BOOL*)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct HYPHENATEINFO
+    property cbSize : Int16
+    property dxHyphenateZone : Int16
+    property pfnHyphenate : LibC::IntPtrT
+    def initialize(@cbSize : Int16, @dxHyphenateZone : Int16, @pfnHyphenate : LibC::IntPtrT)
+    end
+  end
+  {% end %}
+
   @[Extern]
   struct IMECOMPTEXT
     property cb : Int32
@@ -1403,28 +1707,31 @@ module Win32cr::UI::Controls::RichEdit
     property dyBrdrTop : Int16
     property dxBrdrRight : Int16
     property dyBrdrBottom : Int16
-    property crBrdrLeft : UInt32
-    property crBrdrTop : UInt32
-    property crBrdrRight : UInt32
-    property crBrdrBottom : UInt32
-    property crBackPat : UInt32
-    property crForePat : UInt32
-    def initialize(@dxWidth : Int32, @_bitfield : UInt16, @wShading : UInt16, @dxBrdrLeft : Int16, @dyBrdrTop : Int16, @dxBrdrRight : Int16, @dyBrdrBottom : Int16, @crBrdrLeft : UInt32, @crBrdrTop : UInt32, @crBrdrRight : UInt32, @crBrdrBottom : UInt32, @crBackPat : UInt32, @crForePat : UInt32)
+    property crBrdrLeft : Win32cr::Foundation::COLORREF
+    property crBrdrTop : Win32cr::Foundation::COLORREF
+    property crBrdrRight : Win32cr::Foundation::COLORREF
+    property crBrdrBottom : Win32cr::Foundation::COLORREF
+    property crBackPat : Win32cr::Foundation::COLORREF
+    property crForePat : Win32cr::Foundation::COLORREF
+    def initialize(@dxWidth : Int32, @_bitfield : UInt16, @wShading : UInt16, @dxBrdrLeft : Int16, @dyBrdrTop : Int16, @dxBrdrRight : Int16, @dyBrdrBottom : Int16, @crBrdrLeft : Win32cr::Foundation::COLORREF, @crBrdrTop : Win32cr::Foundation::COLORREF, @crBrdrRight : Win32cr::Foundation::COLORREF, @crBrdrBottom : Win32cr::Foundation::COLORREF, @crBackPat : Win32cr::Foundation::COLORREF, @crForePat : Win32cr::Foundation::COLORREF)
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct RICHEDIT_IMAGE_PARAMETERS
     property xWidth : Int32
     property yHeight : Int32
     property ascent : Int32
-    property type__ : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS
+    property type__ : Int32
     property pwszAlternateText : Win32cr::Foundation::PWSTR
     property pIStream : Void*
-    def initialize(@xWidth : Int32, @yHeight : Int32, @ascent : Int32, @type__ : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS, @pwszAlternateText : Win32cr::Foundation::PWSTR, @pIStream : Void*)
+    def initialize(@xWidth : Int32, @yHeight : Int32, @ascent : Int32, @type__ : Int32, @pwszAlternateText : Win32cr::Foundation::PWSTR, @pIStream : Void*)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENDCOMPOSITIONNOTIFY
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1432,6 +1739,7 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @dwCode : Win32cr::UI::Controls::RichEdit::ENDCOMPOSITIONNOTIFY_CODE)
     end
   end
+  {% end %}
 
   @[Extern]
   struct CHARFORMATA
@@ -1440,11 +1748,11 @@ module Win32cr::UI::Controls::RichEdit
     property dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS
     property yHeight : Int32
     property yOffset : Int32
-    property crTextColor : UInt32
-    property bCharSet : UInt8
+    property crTextColor : Win32cr::Foundation::COLORREF
+    property bCharSet : Win32cr::Graphics::Gdi::FONT_CHARSET
     property bPitchAndFamily : UInt8
     property szFaceName : Win32cr::Foundation::CHAR[32]
-    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK, @dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS, @yHeight : Int32, @yOffset : Int32, @crTextColor : UInt32, @bCharSet : UInt8, @bPitchAndFamily : UInt8, @szFaceName : Win32cr::Foundation::CHAR[32])
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK, @dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS, @yHeight : Int32, @yOffset : Int32, @crTextColor : Win32cr::Foundation::COLORREF, @bCharSet : Win32cr::Graphics::Gdi::FONT_CHARSET, @bPitchAndFamily : UInt8, @szFaceName : Win32cr::Foundation::CHAR[32])
     end
   end
 
@@ -1455,20 +1763,20 @@ module Win32cr::UI::Controls::RichEdit
     property dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS
     property yHeight : Int32
     property yOffset : Int32
-    property crTextColor : UInt32
-    property bCharSet : UInt8
+    property crTextColor : Win32cr::Foundation::COLORREF
+    property bCharSet : Win32cr::Graphics::Gdi::FONT_CHARSET
     property bPitchAndFamily : UInt8
     property szFaceName : UInt16[32]
-    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK, @dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS, @yHeight : Int32, @yOffset : Int32, @crTextColor : UInt32, @bCharSet : UInt8, @bPitchAndFamily : UInt8, @szFaceName : UInt16[32])
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::CFM_MASK, @dwEffects : Win32cr::UI::Controls::RichEdit::CFE_EFFECTS, @yHeight : Int32, @yOffset : Int32, @crTextColor : Win32cr::Foundation::COLORREF, @bCharSet : Win32cr::Graphics::Gdi::FONT_CHARSET, @bPitchAndFamily : UInt8, @szFaceName : UInt16[32])
     end
   end
 
   @[Extern]
   struct CHARFORMAT2W
-    property __anonymous_base_richedit_l711_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATW
+    property base : Win32cr::UI::Controls::RichEdit::CHARFORMATW
     property wWeight : UInt16
     property sSpacing : Int16
-    property crBackColor : UInt32
+    property crBackColor : Win32cr::Foundation::COLORREF
     property lcid : UInt32
     property anonymous : Anonymous_e__Union_
     property sStyle : Int16
@@ -1487,16 +1795,16 @@ module Win32cr::UI::Controls::RichEdit
     end
     end
 
-    def initialize(@__anonymous_base_richedit_l711_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATW, @wWeight : UInt16, @sSpacing : Int16, @crBackColor : UInt32, @lcid : UInt32, @anonymous : Anonymous_e__Union_, @sStyle : Int16, @wKerning : UInt16, @bUnderlineType : UInt8, @bAnimation : UInt8, @bRevAuthor : UInt8, @bUnderlineColor : UInt8)
+    def initialize(@base : Win32cr::UI::Controls::RichEdit::CHARFORMATW, @wWeight : UInt16, @sSpacing : Int16, @crBackColor : Win32cr::Foundation::COLORREF, @lcid : UInt32, @anonymous : Anonymous_e__Union_, @sStyle : Int16, @wKerning : UInt16, @bUnderlineType : UInt8, @bAnimation : UInt8, @bRevAuthor : UInt8, @bUnderlineColor : UInt8)
     end
   end
 
   @[Extern]
   struct CHARFORMAT2A
-    property __anonymous_base_richedit_l736_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATA
+    property base : Win32cr::UI::Controls::RichEdit::CHARFORMATA
     property wWeight : UInt16
     property sSpacing : Int16
-    property crBackColor : UInt32
+    property crBackColor : Win32cr::Foundation::COLORREF
     property lcid : UInt32
     property anonymous : Anonymous_e__Union_
     property sStyle : Int16
@@ -1515,7 +1823,7 @@ module Win32cr::UI::Controls::RichEdit
     end
     end
 
-    def initialize(@__anonymous_base_richedit_l736_c23 : Win32cr::UI::Controls::RichEdit::CHARFORMATA, @wWeight : UInt16, @sSpacing : Int16, @crBackColor : UInt32, @lcid : UInt32, @anonymous : Anonymous_e__Union_, @sStyle : Int16, @wKerning : UInt16, @bUnderlineType : UInt8, @bAnimation : UInt8, @bRevAuthor : UInt8, @bUnderlineColor : UInt8)
+    def initialize(@base : Win32cr::UI::Controls::RichEdit::CHARFORMATA, @wWeight : UInt16, @sSpacing : Int16, @crBackColor : Win32cr::Foundation::COLORREF, @lcid : UInt32, @anonymous : Anonymous_e__Union_, @sStyle : Int16, @wKerning : UInt16, @bUnderlineType : UInt8, @bAnimation : UInt8, @bRevAuthor : UInt8, @bUnderlineColor : UInt8)
     end
   end
 
@@ -1527,6 +1835,7 @@ module Win32cr::UI::Controls::RichEdit
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct TEXTRANGEA
     property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
@@ -1534,7 +1843,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct TEXTRANGEW
     property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
@@ -1542,7 +1853,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct EDITSTREAM
     property dwCookie : LibC::UIntPtrT
@@ -1551,7 +1864,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@dwCookie : LibC::UIntPtrT, @dwError : UInt32, @pfnCallback : Win32cr::UI::Controls::RichEdit::EDITSTREAMCALLBACK)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct FINDTEXTA
     property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
@@ -1559,7 +1874,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct FINDTEXTW
     property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
@@ -1567,7 +1884,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct FINDTEXTEXA
     property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
@@ -1576,7 +1895,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PSTR, @chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct FINDTEXTEXW
     property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
@@ -1585,7 +1906,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @lpstrText : Win32cr::Foundation::PWSTR, @chrgText : Win32cr::UI::Controls::RichEdit::CHARRANGE)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct FORMATRANGE
     property hdc : Win32cr::Graphics::Gdi::HDC
@@ -1596,12 +1919,13 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@hdc : Win32cr::Graphics::Gdi::HDC, @hdcTarget : Win32cr::Graphics::Gdi::HDC, @rc : Win32cr::Foundation::RECT, @rcPage : Win32cr::Foundation::RECT, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
     end
   end
+  {% end %}
 
   @[Extern]
   struct PARAFORMAT
     property cbSize : UInt32
     property dwMask : Win32cr::UI::Controls::RichEdit::PARAFORMAT_MASK
-    property wNumbering : UInt16
+    property wNumbering : Win32cr::UI::Controls::RichEdit::PARAFORMAT_NUMBERING
     property anonymous : Anonymous_e__Union_
     property dxStartIndent : Int32
     property dxRightIndent : Int32
@@ -1619,13 +1943,13 @@ module Win32cr::UI::Controls::RichEdit
     end
     end
 
-    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::PARAFORMAT_MASK, @wNumbering : UInt16, @anonymous : Anonymous_e__Union_, @dxStartIndent : Int32, @dxRightIndent : Int32, @dxOffset : Int32, @wAlignment : Win32cr::UI::Controls::RichEdit::PARAFORMAT_ALIGNMENT, @cTabCount : Int16, @rgxTabs : UInt32[32])
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::RichEdit::PARAFORMAT_MASK, @wNumbering : Win32cr::UI::Controls::RichEdit::PARAFORMAT_NUMBERING, @anonymous : Anonymous_e__Union_, @dxStartIndent : Int32, @dxRightIndent : Int32, @dxOffset : Int32, @wAlignment : Win32cr::UI::Controls::RichEdit::PARAFORMAT_ALIGNMENT, @cTabCount : Int16, @rgxTabs : UInt32[32])
     end
   end
 
   @[Extern]
   struct PARAFORMAT2
-    property __anonymous_base_richedit_l1149_c22 : Win32cr::UI::Controls::RichEdit::PARAFORMAT
+    property base : Win32cr::UI::Controls::RichEdit::PARAFORMAT
     property dySpaceBefore : Int32
     property dySpaceAfter : Int32
     property dyLineSpacing : Int32
@@ -1640,10 +1964,11 @@ module Win32cr::UI::Controls::RichEdit
     property wBorderSpace : UInt16
     property wBorderWidth : UInt16
     property wBorders : Win32cr::UI::Controls::RichEdit::PARAFORMAT_BORDERS
-    def initialize(@__anonymous_base_richedit_l1149_c22 : Win32cr::UI::Controls::RichEdit::PARAFORMAT, @dySpaceBefore : Int32, @dySpaceAfter : Int32, @dyLineSpacing : Int32, @sStyle : Int16, @bLineSpacingRule : UInt8, @bOutlineLevel : UInt8, @wShadingWeight : UInt16, @wShadingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_SHADING_STYLE, @wNumberingStart : UInt16, @wNumberingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_NUMBERING_STYLE, @wNumberingTab : UInt16, @wBorderSpace : UInt16, @wBorderWidth : UInt16, @wBorders : Win32cr::UI::Controls::RichEdit::PARAFORMAT_BORDERS)
+    def initialize(@base : Win32cr::UI::Controls::RichEdit::PARAFORMAT, @dySpaceBefore : Int32, @dySpaceAfter : Int32, @dyLineSpacing : Int32, @sStyle : Int16, @bLineSpacingRule : UInt8, @bOutlineLevel : UInt8, @wShadingWeight : UInt16, @wShadingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_SHADING_STYLE, @wNumberingStart : UInt16, @wNumberingStyle : Win32cr::UI::Controls::RichEdit::PARAFORMAT_NUMBERING_STYLE, @wNumberingTab : UInt16, @wBorderSpace : UInt16, @wBorderWidth : UInt16, @wBorders : Win32cr::UI::Controls::RichEdit::PARAFORMAT_BORDERS)
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct MSGFILTER
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1653,7 +1978,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct REQRESIZE
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1661,7 +1988,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @rc : Win32cr::Foundation::RECT)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct SELCHANGE
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1670,15 +1999,17 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE)
     end
   end
+  {% end %}
 
   @[Extern]
-  struct Grouptypingchange_
+  struct GROUPTYPINGCHANGE
     property nmhdr : Win32cr::UI::Controls::NMHDR
     property fGroupTyping : Win32cr::Foundation::BOOL
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @fGroupTyping : Win32cr::Foundation::BOOL)
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct CLIPBOARDFORMAT
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1686,7 +2017,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cf : UInt16)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct GETCONTEXTMENUEX
     property chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE
@@ -1696,7 +2029,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @dwFlags : UInt32, @pt : Win32cr::Foundation::POINT, @pvReserved : Void*)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENDROPFILES
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1706,7 +2041,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @hDrop : Win32cr::Foundation::HANDLE, @cp : Int32, @fProtected : Win32cr::Foundation::BOOL)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENPROTECTED
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1717,7 +2054,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENSAVECLIPBOARD
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1726,7 +2065,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cObjectCount : Int32, @cch : Int32)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENOLEOPFAILED
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1736,7 +2077,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @iob : Int32, @lOper : Int32, @hr : Win32cr::Foundation::HRESULT)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct OBJECTPOSITIONS
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1745,7 +2088,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cObjectCount : Int32, @pcpPositions : Int32*)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENLINK
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1756,7 +2101,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @msg : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENLOWFIRTF
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1764,7 +2111,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @szControl : Win32cr::Foundation::PSTR)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct ENCORRECTTEXT
     property nmhdr : Win32cr::UI::Controls::NMHDR
@@ -1773,7 +2122,9 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @chrg : Win32cr::UI::Controls::RichEdit::CHARRANGE, @seltyp : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE)
     end
   end
+  {% end %}
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct PUNCTUATION
     property iSize : UInt32
@@ -1781,16 +2132,18 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@iSize : UInt32, @szPunctuation : Win32cr::Foundation::PSTR)
     end
   end
+  {% end %}
 
   @[Extern]
   struct COMPCOLOR
-    property crText : UInt32
-    property crBackground : UInt32
+    property crText : Win32cr::Foundation::COLORREF
+    property crBackground : Win32cr::Foundation::COLORREF
     property dwEffects : UInt32
-    def initialize(@crText : UInt32, @crBackground : UInt32, @dwEffects : UInt32)
+    def initialize(@crText : Win32cr::Foundation::COLORREF, @crBackground : Win32cr::Foundation::COLORREF, @dwEffects : UInt32)
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct REPASTESPECIAL
     property dwAspect : Win32cr::System::Com::DVASPECT
@@ -1798,6 +2151,7 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@dwAspect : Win32cr::System::Com::DVASPECT, @dwParam : LibC::UIntPtrT)
     end
   end
+  {% end %}
 
   @[Extern]
   struct SETTEXTEX
@@ -1807,16 +2161,18 @@ module Win32cr::UI::Controls::RichEdit
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct GETTEXTEX
     property cb : UInt32
     property flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS
     property codepage : UInt32
     property lpDefaultChar : Win32cr::Foundation::PSTR
-    property lpUsedDefChar : Int32*
-    def initialize(@cb : UInt32, @flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS, @codepage : UInt32, @lpDefaultChar : Win32cr::Foundation::PSTR, @lpUsedDefChar : Int32*)
+    property lpUsedDefChar : Win32cr::Foundation::BOOL*
+    def initialize(@cb : UInt32, @flags : Win32cr::UI::Controls::RichEdit::GETTEXTEX_FLAGS, @codepage : UInt32, @lpDefaultChar : Win32cr::Foundation::PSTR, @lpUsedDefChar : Win32cr::Foundation::BOOL*)
     end
   end
+  {% end %}
 
   @[Extern]
   struct GETTEXTLENGTHEX
@@ -1836,7 +2192,7 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  struct Hyphresult
+  struct HYPHRESULT
     property khyph : Win32cr::UI::Controls::RichEdit::KHYPH
     property ichHyph : Int32
     property chHyph : UInt16
@@ -1844,6 +2200,7 @@ module Win32cr::UI::Controls::RichEdit
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct HYPHENATEINFO
     property cbSize : Int16
@@ -1852,6 +2209,7 @@ module Win32cr::UI::Controls::RichEdit
     def initialize(@cbSize : Int16, @dxHyphenateZone : Int16, @pfnHyphenate : LibC::IntPtrT)
     end
   end
+  {% end %}
 
   @[Extern]
   struct CHANGENOTIFY
@@ -1886,7 +2244,8 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextServicesVtbl,
+
+  record ITextServicesVtable,
     query_interface : Proc(ITextServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextServices*, UInt32),
     release : Proc(ITextServices*, UInt32),
@@ -1911,7 +2270,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextServices, lpVtbl : ITextServicesVtbl* do
+  record ITextServices, lpVtbl : ITextServicesVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITextServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1980,14 +2339,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextHostVtbl,
+
+  record ITextHostVtable,
     query_interface : Proc(ITextHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextHost*, UInt32),
     release : Proc(ITextHost*, UInt32),
     tx_get_dc : Proc(ITextHost*, Win32cr::Graphics::Gdi::HDC),
     tx_release_dc : Proc(ITextHost*, Win32cr::Graphics::Gdi::HDC, Int32),
     tx_show_scroll_bar : Proc(ITextHost*, Int32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL),
-    tx_enable_scroll_bar : Proc(ITextHost*, Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, Win32cr::UI::Controls::ENABLE_SCROLL_BAR_ARROWS, Win32cr::Foundation::BOOL),
+    tx_enable_scroll_bar : Proc(ITextHost*, Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, Int32, Win32cr::Foundation::BOOL),
     tx_set_scroll_range : Proc(ITextHost*, Int32, Int32, Int32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL),
     tx_set_scroll_pos : Proc(ITextHost*, Int32, Int32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL),
     tx_invalidate_rect : Proc(ITextHost*, Win32cr::Foundation::RECT*, Win32cr::Foundation::BOOL, Void),
@@ -1997,7 +2357,7 @@ module Win32cr::UI::Controls::RichEdit
     tx_set_caret_pos : Proc(ITextHost*, Int32, Int32, Win32cr::Foundation::BOOL),
     tx_set_timer : Proc(ITextHost*, UInt32, UInt32, Win32cr::Foundation::BOOL),
     tx_kill_timer : Proc(ITextHost*, UInt32, Void),
-    tx_scroll_window_ex : Proc(ITextHost*, Int32, Int32, Win32cr::Foundation::RECT*, Win32cr::Foundation::RECT*, Win32cr::Graphics::Gdi::HRGN, Win32cr::Foundation::RECT*, Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD, Void),
+    tx_scroll_window_ex : Proc(ITextHost*, Int32, Int32, Win32cr::Foundation::RECT*, Win32cr::Foundation::RECT*, Win32cr::Graphics::Gdi::HRGN, Win32cr::Foundation::RECT*, Win32cr::UI::WindowsAndMessaging::SCROLL_WINDOW_FLAGS, Void),
     tx_set_capture : Proc(ITextHost*, Win32cr::Foundation::BOOL, Void),
     tx_set_focus : Proc(ITextHost*, Void),
     tx_set_cursor : Proc(ITextHost*, Win32cr::UI::WindowsAndMessaging::HCURSOR, Win32cr::Foundation::BOOL, Void),
@@ -2009,7 +2369,7 @@ module Win32cr::UI::Controls::RichEdit
     tx_get_view_inset : Proc(ITextHost*, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
     tx_get_char_format : Proc(ITextHost*, Win32cr::UI::Controls::RichEdit::CHARFORMATW**, Win32cr::Foundation::HRESULT),
     tx_get_para_format : Proc(ITextHost*, Win32cr::UI::Controls::RichEdit::PARAFORMAT**, Win32cr::Foundation::HRESULT),
-    tx_get_sys_color : Proc(ITextHost*, Int32, UInt32),
+    tx_get_sys_color : Proc(ITextHost*, Win32cr::Graphics::Gdi::SYS_COLOR_INDEX, Win32cr::Foundation::COLORREF),
     tx_get_back_style : Proc(ITextHost*, Win32cr::UI::Controls::RichEdit::TXTBACKSTYLE*, Win32cr::Foundation::HRESULT),
     tx_get_max_length : Proc(ITextHost*, UInt32*, Win32cr::Foundation::HRESULT),
     tx_get_scroll_bars : Proc(ITextHost*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -2020,13 +2380,13 @@ module Win32cr::UI::Controls::RichEdit
     on_tx_para_format_change : Proc(ITextHost*, Win32cr::UI::Controls::RichEdit::PARAFORMAT*, Win32cr::Foundation::HRESULT),
     tx_get_property_bits : Proc(ITextHost*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     tx_notify : Proc(ITextHost*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    tx_imm_get_context : Proc(ITextHost*, Win32cr::Globalization::HIMC),
-    tx_imm_release_context : Proc(ITextHost*, Win32cr::Globalization::HIMC, Void),
+    tx_imm_get_context : Proc(ITextHost*, Win32cr::UI::Input::Ime::HIMC),
+    tx_imm_release_context : Proc(ITextHost*, Win32cr::UI::Input::Ime::HIMC, Void),
     tx_get_selection_bar_width : Proc(ITextHost*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITextHost, lpVtbl : ITextHostVtbl* do
+  record ITextHost, lpVtbl : ITextHostVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITextHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2046,7 +2406,7 @@ module Win32cr::UI::Controls::RichEdit
     def tx_show_scroll_bar(this : ITextHost*, fnBar : Int32, fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.tx_show_scroll_bar.call(this, fnBar, fShow)
     end
-    def tx_enable_scroll_bar(this : ITextHost*, fuSBFlags : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, fuArrowflags : Win32cr::UI::Controls::ENABLE_SCROLL_BAR_ARROWS) : Win32cr::Foundation::BOOL
+    def tx_enable_scroll_bar(this : ITextHost*, fuSBFlags : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, fuArrowflags : Int32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.tx_enable_scroll_bar.call(this, fuSBFlags, fuArrowflags)
     end
     def tx_set_scroll_range(this : ITextHost*, fnBar : Int32, nMinPos : Int32, nMaxPos : Int32, fRedraw : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -2076,7 +2436,7 @@ module Win32cr::UI::Controls::RichEdit
     def tx_kill_timer(this : ITextHost*, idTimer : UInt32) : Void
       @lpVtbl.try &.value.tx_kill_timer.call(this, idTimer)
     end
-    def tx_scroll_window_ex(this : ITextHost*, dx : Int32, dy : Int32, lprcScroll : Win32cr::Foundation::RECT*, lprcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, lprcUpdate : Win32cr::Foundation::RECT*, fuScroll : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Void
+    def tx_scroll_window_ex(this : ITextHost*, dx : Int32, dy : Int32, lprcScroll : Win32cr::Foundation::RECT*, lprcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, lprcUpdate : Win32cr::Foundation::RECT*, fuScroll : Win32cr::UI::WindowsAndMessaging::SCROLL_WINDOW_FLAGS) : Void
       @lpVtbl.try &.value.tx_scroll_window_ex.call(this, dx, dy, lprcScroll, lprcClip, hrgnUpdate, lprcUpdate, fuScroll)
     end
     def tx_set_capture(this : ITextHost*, fCapture : Win32cr::Foundation::BOOL) : Void
@@ -2112,7 +2472,7 @@ module Win32cr::UI::Controls::RichEdit
     def tx_get_para_format(this : ITextHost*, ppPF : Win32cr::UI::Controls::RichEdit::PARAFORMAT**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.tx_get_para_format.call(this, ppPF)
     end
-    def tx_get_sys_color(this : ITextHost*, nIndex : Int32) : UInt32
+    def tx_get_sys_color(this : ITextHost*, nIndex : Win32cr::Graphics::Gdi::SYS_COLOR_INDEX) : Win32cr::Foundation::COLORREF
       @lpVtbl.try &.value.tx_get_sys_color.call(this, nIndex)
     end
     def tx_get_back_style(this : ITextHost*, pstyle : Win32cr::UI::Controls::RichEdit::TXTBACKSTYLE*) : Win32cr::Foundation::HRESULT
@@ -2145,10 +2505,10 @@ module Win32cr::UI::Controls::RichEdit
     def tx_notify(this : ITextHost*, iNotify : UInt32, pv : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.tx_notify.call(this, iNotify, pv)
     end
-    def tx_imm_get_context(this : ITextHost*) : Win32cr::Globalization::HIMC
+    def tx_imm_get_context(this : ITextHost*) : Win32cr::UI::Input::Ime::HIMC
       @lpVtbl.try &.value.tx_imm_get_context.call(this)
     end
-    def tx_imm_release_context(this : ITextHost*, himc : Win32cr::Globalization::HIMC) : Void
+    def tx_imm_release_context(this : ITextHost*, himc : Win32cr::UI::Input::Ime::HIMC) : Void
       @lpVtbl.try &.value.tx_imm_release_context.call(this, himc)
     end
     def tx_get_selection_bar_width(this : ITextHost*, lSelBarWidth : Int32*) : Win32cr::Foundation::HRESULT
@@ -2158,15 +2518,16 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record IRicheditUiaOverridesVtbl,
+
+  record IRicheditUiaOverridesVtable,
     query_interface : Proc(IRicheditUiaOverrides*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRicheditUiaOverrides*, UInt32),
     release : Proc(IRicheditUiaOverrides*, UInt32),
-    get_property_override_value : Proc(IRicheditUiaOverrides*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_property_override_value : Proc(IRicheditUiaOverrides*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRicheditUiaOverrides, lpVtbl : IRicheditUiaOverridesVtbl* do
+  record IRicheditUiaOverrides, lpVtbl : IRicheditUiaOverridesVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IRicheditUiaOverrides*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2177,21 +2538,22 @@ module Win32cr::UI::Controls::RichEdit
     def release(this : IRicheditUiaOverrides*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_property_override_value(this : IRicheditUiaOverrides*, propertyId : Int32, pRetValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property_override_value(this : IRicheditUiaOverrides*, propertyId : Int32, pRetValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property_override_value.call(this, propertyId, pRetValue)
     end
 
   end
 
   @[Extern]
-  record ITextHost2Vtbl,
+
+  record ITextHost2Vtable,
     query_interface : Proc(ITextHost2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextHost2*, UInt32),
     release : Proc(ITextHost2*, UInt32),
     tx_get_dc : Proc(ITextHost2*, Win32cr::Graphics::Gdi::HDC),
     tx_release_dc : Proc(ITextHost2*, Win32cr::Graphics::Gdi::HDC, Int32),
     tx_show_scroll_bar : Proc(ITextHost2*, Int32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL),
-    tx_enable_scroll_bar : Proc(ITextHost2*, Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, Win32cr::UI::Controls::ENABLE_SCROLL_BAR_ARROWS, Win32cr::Foundation::BOOL),
+    tx_enable_scroll_bar : Proc(ITextHost2*, Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, Int32, Win32cr::Foundation::BOOL),
     tx_set_scroll_range : Proc(ITextHost2*, Int32, Int32, Int32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL),
     tx_set_scroll_pos : Proc(ITextHost2*, Int32, Int32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL),
     tx_invalidate_rect : Proc(ITextHost2*, Win32cr::Foundation::RECT*, Win32cr::Foundation::BOOL, Void),
@@ -2201,7 +2563,7 @@ module Win32cr::UI::Controls::RichEdit
     tx_set_caret_pos : Proc(ITextHost2*, Int32, Int32, Win32cr::Foundation::BOOL),
     tx_set_timer : Proc(ITextHost2*, UInt32, UInt32, Win32cr::Foundation::BOOL),
     tx_kill_timer : Proc(ITextHost2*, UInt32, Void),
-    tx_scroll_window_ex : Proc(ITextHost2*, Int32, Int32, Win32cr::Foundation::RECT*, Win32cr::Foundation::RECT*, Win32cr::Graphics::Gdi::HRGN, Win32cr::Foundation::RECT*, Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD, Void),
+    tx_scroll_window_ex : Proc(ITextHost2*, Int32, Int32, Win32cr::Foundation::RECT*, Win32cr::Foundation::RECT*, Win32cr::Graphics::Gdi::HRGN, Win32cr::Foundation::RECT*, Win32cr::UI::WindowsAndMessaging::SCROLL_WINDOW_FLAGS, Void),
     tx_set_capture : Proc(ITextHost2*, Win32cr::Foundation::BOOL, Void),
     tx_set_focus : Proc(ITextHost2*, Void),
     tx_set_cursor : Proc(ITextHost2*, Win32cr::UI::WindowsAndMessaging::HCURSOR, Win32cr::Foundation::BOOL, Void),
@@ -2213,7 +2575,7 @@ module Win32cr::UI::Controls::RichEdit
     tx_get_view_inset : Proc(ITextHost2*, Win32cr::Foundation::RECT*, Win32cr::Foundation::HRESULT),
     tx_get_char_format : Proc(ITextHost2*, Win32cr::UI::Controls::RichEdit::CHARFORMATW**, Win32cr::Foundation::HRESULT),
     tx_get_para_format : Proc(ITextHost2*, Win32cr::UI::Controls::RichEdit::PARAFORMAT**, Win32cr::Foundation::HRESULT),
-    tx_get_sys_color : Proc(ITextHost2*, Int32, UInt32),
+    tx_get_sys_color : Proc(ITextHost2*, Win32cr::Graphics::Gdi::SYS_COLOR_INDEX, Win32cr::Foundation::COLORREF),
     tx_get_back_style : Proc(ITextHost2*, Win32cr::UI::Controls::RichEdit::TXTBACKSTYLE*, Win32cr::Foundation::HRESULT),
     tx_get_max_length : Proc(ITextHost2*, UInt32*, Win32cr::Foundation::HRESULT),
     tx_get_scroll_bars : Proc(ITextHost2*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -2224,8 +2586,8 @@ module Win32cr::UI::Controls::RichEdit
     on_tx_para_format_change : Proc(ITextHost2*, Win32cr::UI::Controls::RichEdit::PARAFORMAT*, Win32cr::Foundation::HRESULT),
     tx_get_property_bits : Proc(ITextHost2*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     tx_notify : Proc(ITextHost2*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    tx_imm_get_context : Proc(ITextHost2*, Win32cr::Globalization::HIMC),
-    tx_imm_release_context : Proc(ITextHost2*, Win32cr::Globalization::HIMC, Void),
+    tx_imm_get_context : Proc(ITextHost2*, Win32cr::UI::Input::Ime::HIMC),
+    tx_imm_release_context : Proc(ITextHost2*, Win32cr::UI::Input::Ime::HIMC, Void),
     tx_get_selection_bar_width : Proc(ITextHost2*, Int32*, Win32cr::Foundation::HRESULT),
     tx_is_double_click_pending : Proc(ITextHost2*, Win32cr::Foundation::BOOL),
     tx_get_window : Proc(ITextHost2*, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
@@ -2242,7 +2604,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextHost2, lpVtbl : ITextHost2Vtbl* do
+  record ITextHost2, lpVtbl : ITextHost2Vtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITextHost2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2262,7 +2624,7 @@ module Win32cr::UI::Controls::RichEdit
     def tx_show_scroll_bar(this : ITextHost2*, fnBar : Int32, fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.tx_show_scroll_bar.call(this, fnBar, fShow)
     end
-    def tx_enable_scroll_bar(this : ITextHost2*, fuSBFlags : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, fuArrowflags : Win32cr::UI::Controls::ENABLE_SCROLL_BAR_ARROWS) : Win32cr::Foundation::BOOL
+    def tx_enable_scroll_bar(this : ITextHost2*, fuSBFlags : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, fuArrowflags : Int32) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.tx_enable_scroll_bar.call(this, fuSBFlags, fuArrowflags)
     end
     def tx_set_scroll_range(this : ITextHost2*, fnBar : Int32, nMinPos : Int32, nMaxPos : Int32, fRedraw : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -2292,7 +2654,7 @@ module Win32cr::UI::Controls::RichEdit
     def tx_kill_timer(this : ITextHost2*, idTimer : UInt32) : Void
       @lpVtbl.try &.value.tx_kill_timer.call(this, idTimer)
     end
-    def tx_scroll_window_ex(this : ITextHost2*, dx : Int32, dy : Int32, lprcScroll : Win32cr::Foundation::RECT*, lprcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, lprcUpdate : Win32cr::Foundation::RECT*, fuScroll : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Void
+    def tx_scroll_window_ex(this : ITextHost2*, dx : Int32, dy : Int32, lprcScroll : Win32cr::Foundation::RECT*, lprcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, lprcUpdate : Win32cr::Foundation::RECT*, fuScroll : Win32cr::UI::WindowsAndMessaging::SCROLL_WINDOW_FLAGS) : Void
       @lpVtbl.try &.value.tx_scroll_window_ex.call(this, dx, dy, lprcScroll, lprcClip, hrgnUpdate, lprcUpdate, fuScroll)
     end
     def tx_set_capture(this : ITextHost2*, fCapture : Win32cr::Foundation::BOOL) : Void
@@ -2328,7 +2690,7 @@ module Win32cr::UI::Controls::RichEdit
     def tx_get_para_format(this : ITextHost2*, ppPF : Win32cr::UI::Controls::RichEdit::PARAFORMAT**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.tx_get_para_format.call(this, ppPF)
     end
-    def tx_get_sys_color(this : ITextHost2*, nIndex : Int32) : UInt32
+    def tx_get_sys_color(this : ITextHost2*, nIndex : Win32cr::Graphics::Gdi::SYS_COLOR_INDEX) : Win32cr::Foundation::COLORREF
       @lpVtbl.try &.value.tx_get_sys_color.call(this, nIndex)
     end
     def tx_get_back_style(this : ITextHost2*, pstyle : Win32cr::UI::Controls::RichEdit::TXTBACKSTYLE*) : Win32cr::Foundation::HRESULT
@@ -2361,10 +2723,10 @@ module Win32cr::UI::Controls::RichEdit
     def tx_notify(this : ITextHost2*, iNotify : UInt32, pv : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.tx_notify.call(this, iNotify, pv)
     end
-    def tx_imm_get_context(this : ITextHost2*) : Win32cr::Globalization::HIMC
+    def tx_imm_get_context(this : ITextHost2*) : Win32cr::UI::Input::Ime::HIMC
       @lpVtbl.try &.value.tx_imm_get_context.call(this)
     end
-    def tx_imm_release_context(this : ITextHost2*, himc : Win32cr::Globalization::HIMC) : Void
+    def tx_imm_release_context(this : ITextHost2*, himc : Win32cr::UI::Input::Ime::HIMC) : Void
       @lpVtbl.try &.value.tx_imm_release_context.call(this, himc)
     end
     def tx_get_selection_bar_width(this : ITextHost2*, lSelBarWidth : Int32*) : Win32cr::Foundation::HRESULT
@@ -2410,7 +2772,8 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextServices2Vtbl,
+
+  record ITextServices2Vtable,
     query_interface : Proc(ITextServices2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextServices2*, UInt32),
     release : Proc(ITextServices2*, UInt32),
@@ -2437,7 +2800,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextServices2, lpVtbl : ITextServices2Vtbl* do
+  record ITextServices2, lpVtbl : ITextServices2Vtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITextServices2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2512,7 +2875,8 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record IRichEditOleVtbl,
+
+  record IRichEditOleVtable,
     query_interface : Proc(IRichEditOle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRichEditOle*, UInt32),
     release : Proc(IRichEditOle*, UInt32),
@@ -2531,11 +2895,11 @@ module Win32cr::UI::Controls::RichEdit
     in_place_deactivate : Proc(IRichEditOle*, Win32cr::Foundation::HRESULT),
     context_sensitive_help : Proc(IRichEditOle*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_clipboard_data : Proc(IRichEditOle*, Win32cr::UI::Controls::RichEdit::CHARRANGE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    import_data_object : Proc(IRichEditOle*, Void*, UInt16, LibC::IntPtrT, Win32cr::Foundation::HRESULT)
+    import_data_object : Proc(IRichEditOle*, Void*, UInt16, Win32cr::Foundation::HGLOBAL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRichEditOle, lpVtbl : IRichEditOleVtbl* do
+  record IRichEditOle, lpVtbl : IRichEditOleVtable* do
     GUID = LibC::GUID.new(0x20d00_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRichEditOle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2591,31 +2955,32 @@ module Win32cr::UI::Controls::RichEdit
     def get_clipboard_data(this : IRichEditOle*, lpchrg : Win32cr::UI::Controls::RichEdit::CHARRANGE*, reco : UInt32, lplpdataobj : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_clipboard_data.call(this, lpchrg, reco, lplpdataobj)
     end
-    def import_data_object(this : IRichEditOle*, lpdataobj : Void*, cf : UInt16, hMetaPict : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    def import_data_object(this : IRichEditOle*, lpdataobj : Void*, cf : UInt16, hMetaPict : Win32cr::Foundation::HGLOBAL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.import_data_object.call(this, lpdataobj, cf, hMetaPict)
     end
 
   end
 
   @[Extern]
-  record IRichEditOleCallbackVtbl,
+
+  record IRichEditOleCallbackVtable,
     query_interface : Proc(IRichEditOleCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRichEditOleCallback*, UInt32),
     release : Proc(IRichEditOleCallback*, UInt32),
     get_new_storage : Proc(IRichEditOleCallback*, Void**, Win32cr::Foundation::HRESULT),
-    get_in_place_context : Proc(IRichEditOleCallback*, Void**, Void**, Win32cr::System::Ole::OIFI*, Win32cr::Foundation::HRESULT),
+    get_in_place_context : Proc(IRichEditOleCallback*, Void**, Void**, Win32cr::System::Ole::OLEINPLACEFRAMEINFO*, Win32cr::Foundation::HRESULT),
     show_container_ui : Proc(IRichEditOleCallback*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     query_insert_object : Proc(IRichEditOleCallback*, LibC::GUID*, Void*, Int32, Win32cr::Foundation::HRESULT),
     delete_object : Proc(IRichEditOleCallback*, Void*, Win32cr::Foundation::HRESULT),
-    query_accept_data : Proc(IRichEditOleCallback*, Void*, UInt16*, UInt32, Win32cr::Foundation::BOOL, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
+    query_accept_data : Proc(IRichEditOleCallback*, Void*, UInt16*, Win32cr::System::SystemServices::RECO_FLAGS, Win32cr::Foundation::BOOL, Win32cr::Foundation::HGLOBAL, Win32cr::Foundation::HRESULT),
     context_sensitive_help : Proc(IRichEditOleCallback*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_clipboard_data : Proc(IRichEditOleCallback*, Win32cr::UI::Controls::RichEdit::CHARRANGE*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_drag_drop_effect : Proc(IRichEditOleCallback*, Win32cr::Foundation::BOOL, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_drag_drop_effect : Proc(IRichEditOleCallback*, Win32cr::Foundation::BOOL, Win32cr::System::SystemServices::MODIFIERKEYS_FLAGS, Win32cr::System::Ole::DROPEFFECT*, Win32cr::Foundation::HRESULT),
     get_context_menu : Proc(IRichEditOleCallback*, Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, Void*, Win32cr::UI::Controls::RichEdit::CHARRANGE*, Win32cr::UI::WindowsAndMessaging::HMENU*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRichEditOleCallback, lpVtbl : IRichEditOleCallbackVtbl* do
+  record IRichEditOleCallback, lpVtbl : IRichEditOleCallbackVtable* do
     GUID = LibC::GUID.new(0x20d03_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRichEditOleCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2629,7 +2994,7 @@ module Win32cr::UI::Controls::RichEdit
     def get_new_storage(this : IRichEditOleCallback*, lplpstg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_new_storage.call(this, lplpstg)
     end
-    def get_in_place_context(this : IRichEditOleCallback*, lplpFrame : Void**, lplpDoc : Void**, lpFrameInfo : Win32cr::System::Ole::OIFI*) : Win32cr::Foundation::HRESULT
+    def get_in_place_context(this : IRichEditOleCallback*, lplpFrame : Void**, lplpDoc : Void**, lpFrameInfo : Win32cr::System::Ole::OLEINPLACEFRAMEINFO*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_in_place_context.call(this, lplpFrame, lplpDoc, lpFrameInfo)
     end
     def show_container_ui(this : IRichEditOleCallback*, fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -2641,7 +3006,7 @@ module Win32cr::UI::Controls::RichEdit
     def delete_object(this : IRichEditOleCallback*, lpoleobj : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_object.call(this, lpoleobj)
     end
-    def query_accept_data(this : IRichEditOleCallback*, lpdataobj : Void*, lpcfFormat : UInt16*, reco : UInt32, fReally : Win32cr::Foundation::BOOL, hMetaPict : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    def query_accept_data(this : IRichEditOleCallback*, lpdataobj : Void*, lpcfFormat : UInt16*, reco : Win32cr::System::SystemServices::RECO_FLAGS, fReally : Win32cr::Foundation::BOOL, hMetaPict : Win32cr::Foundation::HGLOBAL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_accept_data.call(this, lpdataobj, lpcfFormat, reco, fReally, hMetaPict)
     end
     def context_sensitive_help(this : IRichEditOleCallback*, fEnterMode : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -2650,7 +3015,7 @@ module Win32cr::UI::Controls::RichEdit
     def get_clipboard_data(this : IRichEditOleCallback*, lpchrg : Win32cr::UI::Controls::RichEdit::CHARRANGE*, reco : UInt32, lplpdataobj : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_clipboard_data.call(this, lpchrg, reco, lplpdataobj)
     end
-    def get_drag_drop_effect(this : IRichEditOleCallback*, fDrag : Win32cr::Foundation::BOOL, grfKeyState : UInt32, pdwEffect : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_drag_drop_effect(this : IRichEditOleCallback*, fDrag : Win32cr::Foundation::BOOL, grfKeyState : Win32cr::System::SystemServices::MODIFIERKEYS_FLAGS, pdwEffect : Win32cr::System::Ole::DROPEFFECT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_drag_drop_effect.call(this, fDrag, grfKeyState, pdwEffect)
     end
     def get_context_menu(this : IRichEditOleCallback*, seltype : Win32cr::UI::Controls::RichEdit::RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, lpoleobj : Void*, lpchrg : Win32cr::UI::Controls::RichEdit::CHARRANGE*, lphmenu : Win32cr::UI::WindowsAndMessaging::HMENU*) : Win32cr::Foundation::HRESULT
@@ -2660,14 +3025,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextDocumentVtbl,
+
+  record ITextDocumentVtable,
     query_interface : Proc(ITextDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextDocument*, UInt32),
     release : Proc(ITextDocument*, UInt32),
     get_type_info_count : Proc(ITextDocument*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextDocument*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextDocument*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextDocument*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextDocument*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ITextDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_selection : Proc(ITextDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_story_count : Proc(ITextDocument*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2677,8 +3043,8 @@ module Win32cr::UI::Controls::RichEdit
     get_default_tab_stop : Proc(ITextDocument*, Float32*, Win32cr::Foundation::HRESULT),
     set_default_tab_stop : Proc(ITextDocument*, Float32, Win32cr::Foundation::HRESULT),
     new : Proc(ITextDocument*, Win32cr::Foundation::HRESULT),
-    open : Proc(ITextDocument*, Win32cr::System::Com::VARIANT*, Int32, Int32, Win32cr::Foundation::HRESULT),
-    save : Proc(ITextDocument*, Win32cr::System::Com::VARIANT*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    open : Proc(ITextDocument*, Win32cr::System::Variant::VARIANT*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
+    save : Proc(ITextDocument*, Win32cr::System::Variant::VARIANT*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
     freeze : Proc(ITextDocument*, Int32*, Win32cr::Foundation::HRESULT),
     unfreeze : Proc(ITextDocument*, Int32*, Win32cr::Foundation::HRESULT),
     begin_edit_collection : Proc(ITextDocument*, Win32cr::Foundation::HRESULT),
@@ -2690,7 +3056,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextDocument, lpVtbl : ITextDocumentVtbl* do
+  record ITextDocument, lpVtbl : ITextDocumentVtable* do
     GUID = LibC::GUID.new(0x8cc497c0_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2710,8 +3076,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextDocument*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ITextDocument*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pName)
@@ -2740,10 +3106,10 @@ module Win32cr::UI::Controls::RichEdit
     def new(this : ITextDocument*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.new.call(this)
     end
-    def open(this : ITextDocument*, pVar : Win32cr::System::Com::VARIANT*, flags : Int32, code_page : Int32) : Win32cr::Foundation::HRESULT
+    def open(this : ITextDocument*, pVar : Win32cr::System::Variant::VARIANT*, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, code_page : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, pVar, flags, code_page)
     end
-    def save(this : ITextDocument*, pVar : Win32cr::System::Com::VARIANT*, flags : Int32, code_page : Int32) : Win32cr::Foundation::HRESULT
+    def save(this : ITextDocument*, pVar : Win32cr::System::Variant::VARIANT*, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, code_page : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, pVar, flags, code_page)
     end
     def freeze(this : ITextDocument*, pCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -2774,14 +3140,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextRangeVtbl,
+
+  record ITextRangeVtable,
     query_interface : Proc(ITextRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextRange*, UInt32),
     release : Proc(ITextRange*, UInt32),
     get_type_info_count : Proc(ITextRange*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextRange*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextRange*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextRange*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextRange*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_text : Proc(ITextRange*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_text : Proc(ITextRange*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_char : Proc(ITextRange*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2813,30 +3180,30 @@ module Win32cr::UI::Controls::RichEdit
     move : Proc(ITextRange*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_start : Proc(ITextRange*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_end : Proc(ITextRange*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_while : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_while : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_while : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_until : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_until : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_until : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text : Proc(ITextRange*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_start : Proc(ITextRange*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_end : Proc(ITextRange*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_while : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_while : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_while : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_until : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_until : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_until : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    find_text : Proc(ITextRange*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_start : Proc(ITextRange*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_end : Proc(ITextRange*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
     delete : Proc(ITextRange*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    cut : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    copy : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    paste : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
-    can_paste : Proc(ITextRange*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    cut : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    copy : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    paste : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
+    can_paste : Proc(ITextRange*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
     can_edit : Proc(ITextRange*, Int32*, Win32cr::Foundation::HRESULT),
-    change_case : Proc(ITextRange*, Int32, Win32cr::Foundation::HRESULT),
-    get_point : Proc(ITextRange*, Int32, Int32*, Int32*, Win32cr::Foundation::HRESULT),
-    set_point : Proc(ITextRange*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    change_case : Proc(ITextRange*, Win32cr::UI::Controls::RichEdit::Tomconstants, Win32cr::Foundation::HRESULT),
+    get_point : Proc(ITextRange*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Int32*, Win32cr::Foundation::HRESULT),
+    set_point : Proc(ITextRange*, Int32, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
     scroll_into_view : Proc(ITextRange*, Int32, Win32cr::Foundation::HRESULT),
     get_embedded_object : Proc(ITextRange*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITextRange, lpVtbl : ITextRangeVtbl* do
+  record ITextRange, lpVtbl : ITextRangeVtable* do
     GUID = LibC::GUID.new(0x8cc497c2_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2856,8 +3223,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextRange*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextRange*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextRange*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_text(this : ITextRange*, pbstr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_text.call(this, pbstr)
@@ -2952,58 +3319,58 @@ module Win32cr::UI::Controls::RichEdit
     def move_end(this : ITextRange*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end.call(this, unit, count, pDelta)
     end
-    def move_while(this : ITextRange*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_while(this : ITextRange*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_while.call(this, cset, count, pDelta)
     end
-    def move_start_while(this : ITextRange*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_while(this : ITextRange*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_while.call(this, cset, count, pDelta)
     end
-    def move_end_while(this : ITextRange*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_while(this : ITextRange*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_while.call(this, cset, count, pDelta)
     end
-    def move_until(this : ITextRange*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_until(this : ITextRange*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_until.call(this, cset, count, pDelta)
     end
-    def move_start_until(this : ITextRange*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_until(this : ITextRange*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_until.call(this, cset, count, pDelta)
     end
-    def move_end_until(this : ITextRange*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_until(this : ITextRange*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_until.call(this, cset, count, pDelta)
     end
-    def find_text(this : ITextRange*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text(this : ITextRange*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text.call(this, bstr, count, flags, pLength)
     end
-    def find_text_start(this : ITextRange*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_start(this : ITextRange*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_start.call(this, bstr, count, flags, pLength)
     end
-    def find_text_end(this : ITextRange*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_end(this : ITextRange*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_end.call(this, bstr, count, flags, pLength)
     end
     def delete(this : ITextRange*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, unit, count, pDelta)
     end
-    def cut(this : ITextRange*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def cut(this : ITextRange*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cut.call(this, pVar)
     end
-    def copy(this : ITextRange*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def copy(this : ITextRange*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy.call(this, pVar)
     end
-    def paste(this : ITextRange*, pVar : Win32cr::System::Com::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
+    def paste(this : ITextRange*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.paste.call(this, pVar, format)
     end
-    def can_paste(this : ITextRange*, pVar : Win32cr::System::Com::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
+    def can_paste(this : ITextRange*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_paste.call(this, pVar, format, pValue)
     end
     def can_edit(this : ITextRange*, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_edit.call(this, pValue)
     end
-    def change_case(this : ITextRange*, type__ : Int32) : Win32cr::Foundation::HRESULT
+    def change_case(this : ITextRange*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.change_case.call(this, type__)
     end
-    def get_point(this : ITextRange*, type__ : Int32, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
+    def get_point(this : ITextRange*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_point.call(this, type__, px, py)
     end
-    def set_point(this : ITextRange*, x : Int32, y : Int32, type__ : Int32, extend__ : Int32) : Win32cr::Foundation::HRESULT
+    def set_point(this : ITextRange*, x : Int32, y : Int32, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, extend__ : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_point.call(this, x, y, type__, extend__)
     end
     def scroll_into_view(this : ITextRange*, value : Int32) : Win32cr::Foundation::HRESULT
@@ -3016,14 +3383,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextSelectionVtbl,
+
+  record ITextSelectionVtable,
     query_interface : Proc(ITextSelection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextSelection*, UInt32),
     release : Proc(ITextSelection*, UInt32),
     get_type_info_count : Proc(ITextSelection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextSelection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextSelection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextSelection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextSelection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_text : Proc(ITextSelection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_text : Proc(ITextSelection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_char : Proc(ITextSelection*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3055,24 +3423,24 @@ module Win32cr::UI::Controls::RichEdit
     move : Proc(ITextSelection*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_start : Proc(ITextSelection*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_end : Proc(ITextSelection*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_while : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_while : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_while : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_until : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_until : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_until : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text : Proc(ITextSelection*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_start : Proc(ITextSelection*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_end : Proc(ITextSelection*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_while : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_while : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_while : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_until : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_until : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_until : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    find_text : Proc(ITextSelection*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_start : Proc(ITextSelection*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_end : Proc(ITextSelection*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
     delete : Proc(ITextSelection*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    cut : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    copy : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    paste : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
-    can_paste : Proc(ITextSelection*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    cut : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    copy : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    paste : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
+    can_paste : Proc(ITextSelection*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
     can_edit : Proc(ITextSelection*, Int32*, Win32cr::Foundation::HRESULT),
-    change_case : Proc(ITextSelection*, Int32, Win32cr::Foundation::HRESULT),
-    get_point : Proc(ITextSelection*, Int32, Int32*, Int32*, Win32cr::Foundation::HRESULT),
-    set_point : Proc(ITextSelection*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    change_case : Proc(ITextSelection*, Win32cr::UI::Controls::RichEdit::Tomconstants, Win32cr::Foundation::HRESULT),
+    get_point : Proc(ITextSelection*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Int32*, Win32cr::Foundation::HRESULT),
+    set_point : Proc(ITextSelection*, Int32, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
     scroll_into_view : Proc(ITextSelection*, Int32, Win32cr::Foundation::HRESULT),
     get_embedded_object : Proc(ITextSelection*, Void**, Win32cr::Foundation::HRESULT),
     get_flags : Proc(ITextSelection*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3088,7 +3456,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextSelection, lpVtbl : ITextSelectionVtbl* do
+  record ITextSelection, lpVtbl : ITextSelectionVtable* do
     GUID = LibC::GUID.new(0x8cc497c1_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3108,8 +3476,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextSelection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextSelection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextSelection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_text(this : ITextSelection*, pbstr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_text.call(this, pbstr)
@@ -3204,58 +3572,58 @@ module Win32cr::UI::Controls::RichEdit
     def move_end(this : ITextSelection*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end.call(this, unit, count, pDelta)
     end
-    def move_while(this : ITextSelection*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_while(this : ITextSelection*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_while.call(this, cset, count, pDelta)
     end
-    def move_start_while(this : ITextSelection*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_while(this : ITextSelection*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_while.call(this, cset, count, pDelta)
     end
-    def move_end_while(this : ITextSelection*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_while(this : ITextSelection*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_while.call(this, cset, count, pDelta)
     end
-    def move_until(this : ITextSelection*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_until(this : ITextSelection*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_until.call(this, cset, count, pDelta)
     end
-    def move_start_until(this : ITextSelection*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_until(this : ITextSelection*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_until.call(this, cset, count, pDelta)
     end
-    def move_end_until(this : ITextSelection*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_until(this : ITextSelection*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_until.call(this, cset, count, pDelta)
     end
-    def find_text(this : ITextSelection*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text(this : ITextSelection*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text.call(this, bstr, count, flags, pLength)
     end
-    def find_text_start(this : ITextSelection*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_start(this : ITextSelection*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_start.call(this, bstr, count, flags, pLength)
     end
-    def find_text_end(this : ITextSelection*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_end(this : ITextSelection*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_end.call(this, bstr, count, flags, pLength)
     end
     def delete(this : ITextSelection*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, unit, count, pDelta)
     end
-    def cut(this : ITextSelection*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def cut(this : ITextSelection*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cut.call(this, pVar)
     end
-    def copy(this : ITextSelection*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def copy(this : ITextSelection*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy.call(this, pVar)
     end
-    def paste(this : ITextSelection*, pVar : Win32cr::System::Com::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
+    def paste(this : ITextSelection*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.paste.call(this, pVar, format)
     end
-    def can_paste(this : ITextSelection*, pVar : Win32cr::System::Com::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
+    def can_paste(this : ITextSelection*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_paste.call(this, pVar, format, pValue)
     end
     def can_edit(this : ITextSelection*, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_edit.call(this, pValue)
     end
-    def change_case(this : ITextSelection*, type__ : Int32) : Win32cr::Foundation::HRESULT
+    def change_case(this : ITextSelection*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.change_case.call(this, type__)
     end
-    def get_point(this : ITextSelection*, type__ : Int32, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
+    def get_point(this : ITextSelection*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_point.call(this, type__, px, py)
     end
-    def set_point(this : ITextSelection*, x : Int32, y : Int32, type__ : Int32, extend__ : Int32) : Win32cr::Foundation::HRESULT
+    def set_point(this : ITextSelection*, x : Int32, y : Int32, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, extend__ : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_point.call(this, x, y, type__, extend__)
     end
     def scroll_into_view(this : ITextSelection*, value : Int32) : Win32cr::Foundation::HRESULT
@@ -3298,14 +3666,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextFontVtbl,
+
+  record ITextFontVtable,
     query_interface : Proc(ITextFont*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextFont*, UInt32),
     release : Proc(ITextFont*, UInt32),
     get_type_info_count : Proc(ITextFont*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextFont*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextFont*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextFont*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextFont*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_duplicate : Proc(ITextFont*, Void**, Win32cr::Foundation::HRESULT),
     set_duplicate : Proc(ITextFont*, Void*, Win32cr::Foundation::HRESULT),
     can_change : Proc(ITextFont*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3364,7 +3733,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextFont, lpVtbl : ITextFontVtbl* do
+  record ITextFont, lpVtbl : ITextFontVtable* do
     GUID = LibC::GUID.new(0x8cc497c3_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextFont*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3384,8 +3753,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextFont*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextFont*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextFont*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_duplicate(this : ITextFont*, ppFont : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_duplicate.call(this, ppFont)
@@ -3556,14 +3925,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextParaVtbl,
+
+  record ITextParaVtable,
     query_interface : Proc(ITextPara*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextPara*, UInt32),
     release : Proc(ITextPara*, UInt32),
     get_type_info_count : Proc(ITextPara*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextPara*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextPara*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextPara*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextPara*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_duplicate : Proc(ITextPara*, Void**, Win32cr::Foundation::HRESULT),
     set_duplicate : Proc(ITextPara*, Void*, Win32cr::Foundation::HRESULT),
     can_change : Proc(ITextPara*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3615,7 +3985,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextPara, lpVtbl : ITextParaVtbl* do
+  record ITextPara, lpVtbl : ITextParaVtable* do
     GUID = LibC::GUID.new(0x8cc497c4_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextPara*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3635,8 +4005,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextPara*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextPara*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextPara*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_duplicate(this : ITextPara*, ppPara : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_duplicate.call(this, ppPara)
@@ -3786,21 +4156,22 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextStoryRangesVtbl,
+
+  record ITextStoryRangesVtable,
     query_interface : Proc(ITextStoryRanges*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoryRanges*, UInt32),
     release : Proc(ITextStoryRanges*, UInt32),
     get_type_info_count : Proc(ITextStoryRanges*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextStoryRanges*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextStoryRanges*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextStoryRanges*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextStoryRanges*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     _new_enum : Proc(ITextStoryRanges*, Void**, Win32cr::Foundation::HRESULT),
     item : Proc(ITextStoryRanges*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_count : Proc(ITextStoryRanges*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITextStoryRanges, lpVtbl : ITextStoryRangesVtbl* do
+  record ITextStoryRanges, lpVtbl : ITextStoryRangesVtable* do
     GUID = LibC::GUID.new(0x8cc497c5_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
     def query_interface(this : ITextStoryRanges*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3820,8 +4191,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextStoryRanges*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextStoryRanges*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextStoryRanges*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def _new_enum(this : ITextStoryRanges*, ppunkEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value._new_enum.call(this, ppunkEnum)
@@ -3836,14 +4207,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextDocument2Vtbl,
+
+  record ITextDocument2Vtable,
     query_interface : Proc(ITextDocument2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextDocument2*, UInt32),
     release : Proc(ITextDocument2*, UInt32),
     get_type_info_count : Proc(ITextDocument2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextDocument2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextDocument2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextDocument2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextDocument2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ITextDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_selection : Proc(ITextDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_story_count : Proc(ITextDocument2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3853,8 +4225,8 @@ module Win32cr::UI::Controls::RichEdit
     get_default_tab_stop : Proc(ITextDocument2*, Float32*, Win32cr::Foundation::HRESULT),
     set_default_tab_stop : Proc(ITextDocument2*, Float32, Win32cr::Foundation::HRESULT),
     new : Proc(ITextDocument2*, Win32cr::Foundation::HRESULT),
-    open : Proc(ITextDocument2*, Win32cr::System::Com::VARIANT*, Int32, Int32, Win32cr::Foundation::HRESULT),
-    save : Proc(ITextDocument2*, Win32cr::System::Com::VARIANT*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    open : Proc(ITextDocument2*, Win32cr::System::Variant::VARIANT*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
+    save : Proc(ITextDocument2*, Win32cr::System::Variant::VARIANT*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
     freeze : Proc(ITextDocument2*, Int32*, Win32cr::Foundation::HRESULT),
     unfreeze : Proc(ITextDocument2*, Int32*, Win32cr::Foundation::HRESULT),
     begin_edit_collection : Proc(ITextDocument2*, Win32cr::Foundation::HRESULT),
@@ -3910,7 +4282,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextDocument2, lpVtbl : ITextDocument2Vtbl* do
+  record ITextDocument2, lpVtbl : ITextDocument2Vtable* do
     GUID = LibC::GUID.new(0xc241f5e0_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3930,8 +4302,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextDocument2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ITextDocument2*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pName)
@@ -3960,10 +4332,10 @@ module Win32cr::UI::Controls::RichEdit
     def new(this : ITextDocument2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.new.call(this)
     end
-    def open(this : ITextDocument2*, pVar : Win32cr::System::Com::VARIANT*, flags : Int32, code_page : Int32) : Win32cr::Foundation::HRESULT
+    def open(this : ITextDocument2*, pVar : Win32cr::System::Variant::VARIANT*, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, code_page : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, pVar, flags, code_page)
     end
-    def save(this : ITextDocument2*, pVar : Win32cr::System::Com::VARIANT*, flags : Int32, code_page : Int32) : Win32cr::Foundation::HRESULT
+    def save(this : ITextDocument2*, pVar : Win32cr::System::Variant::VARIANT*, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, code_page : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, pVar, flags, code_page)
     end
     def freeze(this : ITextDocument2*, pCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -4126,14 +4498,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextRange2Vtbl,
+
+  record ITextRange2Vtable,
     query_interface : Proc(ITextRange2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextRange2*, UInt32),
     release : Proc(ITextRange2*, UInt32),
     get_type_info_count : Proc(ITextRange2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextRange2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextRange2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextRange2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextRange2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_text : Proc(ITextRange2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_text : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_char : Proc(ITextRange2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4165,24 +4538,24 @@ module Win32cr::UI::Controls::RichEdit
     move : Proc(ITextRange2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_start : Proc(ITextRange2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_end : Proc(ITextRange2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_while : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_while : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_while : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_until : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_until : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_until : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_start : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_end : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_while : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_while : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_while : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_until : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_until : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_until : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    find_text : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_start : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_end : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
     delete : Proc(ITextRange2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    cut : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    copy : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    paste : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
-    can_paste : Proc(ITextRange2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    cut : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    copy : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    paste : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
+    can_paste : Proc(ITextRange2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
     can_edit : Proc(ITextRange2*, Int32*, Win32cr::Foundation::HRESULT),
-    change_case : Proc(ITextRange2*, Int32, Win32cr::Foundation::HRESULT),
-    get_point : Proc(ITextRange2*, Int32, Int32*, Int32*, Win32cr::Foundation::HRESULT),
-    set_point : Proc(ITextRange2*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    change_case : Proc(ITextRange2*, Win32cr::UI::Controls::RichEdit::Tomconstants, Win32cr::Foundation::HRESULT),
+    get_point : Proc(ITextRange2*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Int32*, Win32cr::Foundation::HRESULT),
+    set_point : Proc(ITextRange2*, Int32, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
     scroll_into_view : Proc(ITextRange2*, Int32, Win32cr::Foundation::HRESULT),
     get_embedded_object : Proc(ITextRange2*, Void**, Win32cr::Foundation::HRESULT),
     get_flags : Proc(ITextRange2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4234,11 +4607,11 @@ module Win32cr::UI::Controls::RichEdit
     unicode_to_hex : Proc(ITextRange2*, Win32cr::Foundation::HRESULT),
     set_inline_object : Proc(ITextRange2*, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
     get_math_function_type : Proc(ITextRange2*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
-    insert_image : Proc(ITextRange2*, Int32, Int32, Int32, Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT)
+    insert_image : Proc(ITextRange2*, Int32, Int32, Int32, Int32, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITextRange2, lpVtbl : ITextRange2Vtbl* do
+  record ITextRange2, lpVtbl : ITextRange2Vtable* do
     GUID = LibC::GUID.new(0xc241f5e2_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextRange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4258,8 +4631,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextRange2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextRange2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextRange2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_text(this : ITextRange2*, pbstr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_text.call(this, pbstr)
@@ -4354,58 +4727,58 @@ module Win32cr::UI::Controls::RichEdit
     def move_end(this : ITextRange2*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end.call(this, unit, count, pDelta)
     end
-    def move_while(this : ITextRange2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_while(this : ITextRange2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_while.call(this, cset, count, pDelta)
     end
-    def move_start_while(this : ITextRange2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_while(this : ITextRange2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_while.call(this, cset, count, pDelta)
     end
-    def move_end_while(this : ITextRange2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_while(this : ITextRange2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_while.call(this, cset, count, pDelta)
     end
-    def move_until(this : ITextRange2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_until(this : ITextRange2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_until.call(this, cset, count, pDelta)
     end
-    def move_start_until(this : ITextRange2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_until(this : ITextRange2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_until.call(this, cset, count, pDelta)
     end
-    def move_end_until(this : ITextRange2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_until(this : ITextRange2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_until.call(this, cset, count, pDelta)
     end
-    def find_text(this : ITextRange2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text(this : ITextRange2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text.call(this, bstr, count, flags, pLength)
     end
-    def find_text_start(this : ITextRange2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_start(this : ITextRange2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_start.call(this, bstr, count, flags, pLength)
     end
-    def find_text_end(this : ITextRange2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_end(this : ITextRange2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_end.call(this, bstr, count, flags, pLength)
     end
     def delete(this : ITextRange2*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, unit, count, pDelta)
     end
-    def cut(this : ITextRange2*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def cut(this : ITextRange2*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cut.call(this, pVar)
     end
-    def copy(this : ITextRange2*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def copy(this : ITextRange2*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy.call(this, pVar)
     end
-    def paste(this : ITextRange2*, pVar : Win32cr::System::Com::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
+    def paste(this : ITextRange2*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.paste.call(this, pVar, format)
     end
-    def can_paste(this : ITextRange2*, pVar : Win32cr::System::Com::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
+    def can_paste(this : ITextRange2*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_paste.call(this, pVar, format, pValue)
     end
     def can_edit(this : ITextRange2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_edit.call(this, pValue)
     end
-    def change_case(this : ITextRange2*, type__ : Int32) : Win32cr::Foundation::HRESULT
+    def change_case(this : ITextRange2*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.change_case.call(this, type__)
     end
-    def get_point(this : ITextRange2*, type__ : Int32, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
+    def get_point(this : ITextRange2*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_point.call(this, type__, px, py)
     end
-    def set_point(this : ITextRange2*, x : Int32, y : Int32, type__ : Int32, extend__ : Int32) : Win32cr::Foundation::HRESULT
+    def set_point(this : ITextRange2*, x : Int32, y : Int32, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, extend__ : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_point.call(this, x, y, type__, extend__)
     end
     def scroll_into_view(this : ITextRange2*, value : Int32) : Win32cr::Foundation::HRESULT
@@ -4561,21 +4934,22 @@ module Win32cr::UI::Controls::RichEdit
     def get_math_function_type(this : ITextRange2*, bstr : Win32cr::Foundation::BSTR, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_math_function_type.call(this, bstr, pValue)
     end
-    def insert_image(this : ITextRange2*, width : Int32, height : Int32, ascent : Int32, type__ : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS, bstrAltText : Win32cr::Foundation::BSTR, pStream : Void*) : Win32cr::Foundation::HRESULT
+    def insert_image(this : ITextRange2*, width : Int32, height : Int32, ascent : Int32, type__ : Int32, bstrAltText : Win32cr::Foundation::BSTR, pStream : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insert_image.call(this, width, height, ascent, type__, bstrAltText, pStream)
     end
 
   end
 
   @[Extern]
-  record ITextSelection2Vtbl,
+
+  record ITextSelection2Vtable,
     query_interface : Proc(ITextSelection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextSelection2*, UInt32),
     release : Proc(ITextSelection2*, UInt32),
     get_type_info_count : Proc(ITextSelection2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextSelection2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextSelection2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextSelection2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextSelection2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_text : Proc(ITextSelection2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_text : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_char : Proc(ITextSelection2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4607,24 +4981,24 @@ module Win32cr::UI::Controls::RichEdit
     move : Proc(ITextSelection2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_start : Proc(ITextSelection2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     move_end : Proc(ITextSelection2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_while : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_while : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_while : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_until : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_start_until : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    move_end_until : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_start : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    find_text_end : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_while : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_while : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_while : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_until : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_start_until : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    move_end_until : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    find_text : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_start : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
+    find_text_end : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Win32cr::Foundation::HRESULT),
     delete : Proc(ITextSelection2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
-    cut : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    copy : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    paste : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
-    can_paste : Proc(ITextSelection2*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    cut : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    copy : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    paste : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
+    can_paste : Proc(ITextSelection2*, Win32cr::System::Variant::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
     can_edit : Proc(ITextSelection2*, Int32*, Win32cr::Foundation::HRESULT),
-    change_case : Proc(ITextSelection2*, Int32, Win32cr::Foundation::HRESULT),
-    get_point : Proc(ITextSelection2*, Int32, Int32*, Int32*, Win32cr::Foundation::HRESULT),
-    set_point : Proc(ITextSelection2*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    change_case : Proc(ITextSelection2*, Win32cr::UI::Controls::RichEdit::Tomconstants, Win32cr::Foundation::HRESULT),
+    get_point : Proc(ITextSelection2*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32*, Int32*, Win32cr::Foundation::HRESULT),
+    set_point : Proc(ITextSelection2*, Int32, Int32, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
     scroll_into_view : Proc(ITextSelection2*, Int32, Win32cr::Foundation::HRESULT),
     get_embedded_object : Proc(ITextSelection2*, Void**, Win32cr::Foundation::HRESULT),
     get_flags : Proc(ITextSelection2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4676,11 +5050,11 @@ module Win32cr::UI::Controls::RichEdit
     unicode_to_hex : Proc(ITextSelection2*, Win32cr::Foundation::HRESULT),
     set_inline_object : Proc(ITextSelection2*, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
     get_math_function_type : Proc(ITextSelection2*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
-    insert_image : Proc(ITextSelection2*, Int32, Int32, Int32, Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT)
+    insert_image : Proc(ITextSelection2*, Int32, Int32, Int32, Int32, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITextSelection2, lpVtbl : ITextSelection2Vtbl* do
+  record ITextSelection2, lpVtbl : ITextSelection2Vtable* do
     GUID = LibC::GUID.new(0xc241f5e1_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextSelection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4700,8 +5074,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextSelection2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextSelection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextSelection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_text(this : ITextSelection2*, pbstr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_text.call(this, pbstr)
@@ -4796,58 +5170,58 @@ module Win32cr::UI::Controls::RichEdit
     def move_end(this : ITextSelection2*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end.call(this, unit, count, pDelta)
     end
-    def move_while(this : ITextSelection2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_while(this : ITextSelection2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_while.call(this, cset, count, pDelta)
     end
-    def move_start_while(this : ITextSelection2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_while(this : ITextSelection2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_while.call(this, cset, count, pDelta)
     end
-    def move_end_while(this : ITextSelection2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_while(this : ITextSelection2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_while.call(this, cset, count, pDelta)
     end
-    def move_until(this : ITextSelection2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_until(this : ITextSelection2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_until.call(this, cset, count, pDelta)
     end
-    def move_start_until(this : ITextSelection2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_start_until(this : ITextSelection2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_start_until.call(this, cset, count, pDelta)
     end
-    def move_end_until(this : ITextSelection2*, cset : Win32cr::System::Com::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
+    def move_end_until(this : ITextSelection2*, cset : Win32cr::System::Variant::VARIANT*, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.move_end_until.call(this, cset, count, pDelta)
     end
-    def find_text(this : ITextSelection2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text(this : ITextSelection2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text.call(this, bstr, count, flags, pLength)
     end
-    def find_text_start(this : ITextSelection2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_start(this : ITextSelection2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_start.call(this, bstr, count, flags, pLength)
     end
-    def find_text_end(this : ITextSelection2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Int32, pLength : Int32*) : Win32cr::Foundation::HRESULT
+    def find_text_end(this : ITextSelection2*, bstr : Win32cr::Foundation::BSTR, count : Int32, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, pLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.find_text_end.call(this, bstr, count, flags, pLength)
     end
     def delete(this : ITextSelection2*, unit : Int32, count : Int32, pDelta : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, unit, count, pDelta)
     end
-    def cut(this : ITextSelection2*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def cut(this : ITextSelection2*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cut.call(this, pVar)
     end
-    def copy(this : ITextSelection2*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def copy(this : ITextSelection2*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy.call(this, pVar)
     end
-    def paste(this : ITextSelection2*, pVar : Win32cr::System::Com::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
+    def paste(this : ITextSelection2*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.paste.call(this, pVar, format)
     end
-    def can_paste(this : ITextSelection2*, pVar : Win32cr::System::Com::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
+    def can_paste(this : ITextSelection2*, pVar : Win32cr::System::Variant::VARIANT*, format : Int32, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_paste.call(this, pVar, format, pValue)
     end
     def can_edit(this : ITextSelection2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_edit.call(this, pValue)
     end
-    def change_case(this : ITextSelection2*, type__ : Int32) : Win32cr::Foundation::HRESULT
+    def change_case(this : ITextSelection2*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.change_case.call(this, type__)
     end
-    def get_point(this : ITextSelection2*, type__ : Int32, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
+    def get_point(this : ITextSelection2*, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, px : Int32*, py : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_point.call(this, type__, px, py)
     end
-    def set_point(this : ITextSelection2*, x : Int32, y : Int32, type__ : Int32, extend__ : Int32) : Win32cr::Foundation::HRESULT
+    def set_point(this : ITextSelection2*, x : Int32, y : Int32, type__ : Win32cr::UI::Controls::RichEdit::Tomconstants, extend__ : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_point.call(this, x, y, type__, extend__)
     end
     def scroll_into_view(this : ITextSelection2*, value : Int32) : Win32cr::Foundation::HRESULT
@@ -5003,21 +5377,22 @@ module Win32cr::UI::Controls::RichEdit
     def get_math_function_type(this : ITextSelection2*, bstr : Win32cr::Foundation::BSTR, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_math_function_type.call(this, bstr, pValue)
     end
-    def insert_image(this : ITextSelection2*, width : Int32, height : Int32, ascent : Int32, type__ : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS, bstrAltText : Win32cr::Foundation::BSTR, pStream : Void*) : Win32cr::Foundation::HRESULT
+    def insert_image(this : ITextSelection2*, width : Int32, height : Int32, ascent : Int32, type__ : Int32, bstrAltText : Win32cr::Foundation::BSTR, pStream : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insert_image.call(this, width, height, ascent, type__, bstrAltText, pStream)
     end
 
   end
 
   @[Extern]
-  record ITextFont2Vtbl,
+
+  record ITextFont2Vtable,
     query_interface : Proc(ITextFont2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextFont2*, UInt32),
     release : Proc(ITextFont2*, UInt32),
     get_type_info_count : Proc(ITextFont2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextFont2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextFont2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextFont2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextFont2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_duplicate : Proc(ITextFont2*, Void**, Win32cr::Foundation::HRESULT),
     set_duplicate : Proc(ITextFont2*, Void*, Win32cr::Foundation::HRESULT),
     can_change : Proc(ITextFont2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5122,7 +5497,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextFont2, lpVtbl : ITextFont2Vtbl* do
+  record ITextFont2, lpVtbl : ITextFont2Vtable* do
     GUID = LibC::GUID.new(0xc241f5e3_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextFont2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5142,8 +5517,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextFont2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextFont2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextFont2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_duplicate(this : ITextFont2*, ppFont : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_duplicate.call(this, ppFont)
@@ -5452,14 +5827,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextPara2Vtbl,
+
+  record ITextPara2Vtable,
     query_interface : Proc(ITextPara2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextPara2*, UInt32),
     release : Proc(ITextPara2*, UInt32),
     get_type_info_count : Proc(ITextPara2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextPara2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextPara2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextPara2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextPara2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_duplicate : Proc(ITextPara2*, Void**, Win32cr::Foundation::HRESULT),
     set_duplicate : Proc(ITextPara2*, Void*, Win32cr::Foundation::HRESULT),
     can_change : Proc(ITextPara2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5527,7 +5903,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextPara2, lpVtbl : ITextPara2Vtbl* do
+  record ITextPara2, lpVtbl : ITextPara2Vtable* do
     GUID = LibC::GUID.new(0xc241f5e4_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextPara2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5547,8 +5923,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextPara2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextPara2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextPara2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_duplicate(this : ITextPara2*, ppPara : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_duplicate.call(this, ppPara)
@@ -5746,14 +6122,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextStoryRanges2Vtbl,
+
+  record ITextStoryRanges2Vtable,
     query_interface : Proc(ITextStoryRanges2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoryRanges2*, UInt32),
     release : Proc(ITextStoryRanges2*, UInt32),
     get_type_info_count : Proc(ITextStoryRanges2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextStoryRanges2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextStoryRanges2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextStoryRanges2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextStoryRanges2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     _new_enum : Proc(ITextStoryRanges2*, Void**, Win32cr::Foundation::HRESULT),
     item : Proc(ITextStoryRanges2*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_count : Proc(ITextStoryRanges2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5761,7 +6138,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextStoryRanges2, lpVtbl : ITextStoryRanges2Vtbl* do
+  record ITextStoryRanges2, lpVtbl : ITextStoryRanges2Vtable* do
     GUID = LibC::GUID.new(0xc241f5e5_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextStoryRanges2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5781,8 +6158,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextStoryRanges2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextStoryRanges2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextStoryRanges2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def _new_enum(this : ITextStoryRanges2*, ppunkEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value._new_enum.call(this, ppunkEnum)
@@ -5800,7 +6177,8 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextStoryVtbl,
+
+  record ITextStoryVtable,
     query_interface : Proc(ITextStory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStory*, UInt32),
     release : Proc(ITextStory*, UInt32),
@@ -5819,7 +6197,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextStory, lpVtbl : ITextStoryVtbl* do
+  record ITextStory, lpVtbl : ITextStoryVtable* do
     GUID = LibC::GUID.new(0xc241f5f3_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextStory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5870,14 +6248,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextStringsVtbl,
+
+  record ITextStringsVtable,
     query_interface : Proc(ITextStrings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStrings*, UInt32),
     release : Proc(ITextStrings*, UInt32),
     get_type_info_count : Proc(ITextStrings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextStrings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextStrings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextStrings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextStrings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     item : Proc(ITextStrings*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_count : Proc(ITextStrings*, Int32*, Win32cr::Foundation::HRESULT),
     add : Proc(ITextStrings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -5898,7 +6277,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextStrings, lpVtbl : ITextStringsVtbl* do
+  record ITextStrings, lpVtbl : ITextStringsVtable* do
     GUID = LibC::GUID.new(0xc241f5e7_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5918,8 +6297,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextStrings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextStrings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextStrings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def item(this : ITextStrings*, index : Int32, ppRange : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, index, ppRange)
@@ -5976,14 +6355,15 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextRowVtbl,
+
+  record ITextRowVtable,
     query_interface : Proc(ITextRow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextRow*, UInt32),
     release : Proc(ITextRow*, UInt32),
     get_type_info_count : Proc(ITextRow*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextRow*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextRow*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextRow*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextRow*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_alignment : Proc(ITextRow*, Int32*, Win32cr::Foundation::HRESULT),
     set_alignment : Proc(ITextRow*, Int32, Win32cr::Foundation::HRESULT),
     get_cell_count : Proc(ITextRow*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6033,7 +6413,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextRow, lpVtbl : ITextRowVtbl* do
+  record ITextRow, lpVtbl : ITextRowVtable* do
     GUID = LibC::GUID.new(0xc241f5ef_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6053,8 +6433,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextRow*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextRow*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextRow*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_alignment(this : ITextRow*, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_alignment.call(this, pValue)
@@ -6198,18 +6578,19 @@ module Win32cr::UI::Controls::RichEdit
   end
 
   @[Extern]
-  record ITextDisplaysVtbl,
+
+  record ITextDisplaysVtable,
     query_interface : Proc(ITextDisplays*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextDisplays*, UInt32),
     release : Proc(ITextDisplays*, UInt32),
     get_type_info_count : Proc(ITextDisplays*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextDisplays*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextDisplays*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextDisplays*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ITextDisplays*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITextDisplays, lpVtbl : ITextDisplaysVtbl* do
+  record ITextDisplays, lpVtbl : ITextDisplaysVtable* do
     GUID = LibC::GUID.new(0xc241f5f2_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
     def query_interface(this : ITextDisplays*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6229,21 +6610,22 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextDisplays*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextDisplays*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextDisplays*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record ITextDocument2OldVtbl,
+
+  record ITextDocument2OldVtable,
     query_interface : Proc(ITextDocument2Old*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextDocument2Old*, UInt32),
     release : Proc(ITextDocument2Old*, UInt32),
     get_type_info_count : Proc(ITextDocument2Old*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITextDocument2Old*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITextDocument2Old*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITextDocument2Old*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITextDocument2Old*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ITextDocument2Old*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_selection : Proc(ITextDocument2Old*, Void**, Win32cr::Foundation::HRESULT),
     get_story_count : Proc(ITextDocument2Old*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6253,8 +6635,8 @@ module Win32cr::UI::Controls::RichEdit
     get_default_tab_stop : Proc(ITextDocument2Old*, Float32*, Win32cr::Foundation::HRESULT),
     set_default_tab_stop : Proc(ITextDocument2Old*, Float32, Win32cr::Foundation::HRESULT),
     new : Proc(ITextDocument2Old*, Win32cr::Foundation::HRESULT),
-    open : Proc(ITextDocument2Old*, Win32cr::System::Com::VARIANT*, Int32, Int32, Win32cr::Foundation::HRESULT),
-    save : Proc(ITextDocument2Old*, Win32cr::System::Com::VARIANT*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    open : Proc(ITextDocument2Old*, Win32cr::System::Variant::VARIANT*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
+    save : Proc(ITextDocument2Old*, Win32cr::System::Variant::VARIANT*, Win32cr::UI::Controls::RichEdit::Tomconstants, Int32, Win32cr::Foundation::HRESULT),
     freeze : Proc(ITextDocument2Old*, Int32*, Win32cr::Foundation::HRESULT),
     unfreeze : Proc(ITextDocument2Old*, Int32*, Win32cr::Foundation::HRESULT),
     begin_edit_collection : Proc(ITextDocument2Old*, Win32cr::Foundation::HRESULT),
@@ -6264,8 +6646,8 @@ module Win32cr::UI::Controls::RichEdit
     range : Proc(ITextDocument2Old*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     range_from_point : Proc(ITextDocument2Old*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     attach_msg_filter : Proc(ITextDocument2Old*, Void*, Win32cr::Foundation::HRESULT),
-    set_effect_color : Proc(ITextDocument2Old*, Int32, UInt32, Win32cr::Foundation::HRESULT),
-    get_effect_color : Proc(ITextDocument2Old*, Int32, UInt32*, Win32cr::Foundation::HRESULT),
+    set_effect_color : Proc(ITextDocument2Old*, Int32, Win32cr::Foundation::COLORREF, Win32cr::Foundation::HRESULT),
+    get_effect_color : Proc(ITextDocument2Old*, Int32, Win32cr::Foundation::COLORREF*, Win32cr::Foundation::HRESULT),
     get_caret_type : Proc(ITextDocument2Old*, Int32*, Win32cr::Foundation::HRESULT),
     set_caret_type : Proc(ITextDocument2Old*, Int32, Win32cr::Foundation::HRESULT),
     get_imm_context : Proc(ITextDocument2Old*, Int64*, Win32cr::Foundation::HRESULT),
@@ -6290,7 +6672,7 @@ module Win32cr::UI::Controls::RichEdit
 
 
   @[Extern]
-  record ITextDocument2Old, lpVtbl : ITextDocument2OldVtbl* do
+  record ITextDocument2Old, lpVtbl : ITextDocument2OldVtable* do
     GUID = LibC::GUID.new(0x1c25500_u32, 0x4268_u16, 0x11d1_u16, StaticArray[0x88_u8, 0x3a_u8, 0x3c_u8, 0x8b_u8, 0x0_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITextDocument2Old*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6310,8 +6692,8 @@ module Win32cr::UI::Controls::RichEdit
     def get_i_ds_of_names(this : ITextDocument2Old*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITextDocument2Old*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITextDocument2Old*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ITextDocument2Old*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pName)
@@ -6340,10 +6722,10 @@ module Win32cr::UI::Controls::RichEdit
     def new(this : ITextDocument2Old*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.new.call(this)
     end
-    def open(this : ITextDocument2Old*, pVar : Win32cr::System::Com::VARIANT*, flags : Int32, code_page : Int32) : Win32cr::Foundation::HRESULT
+    def open(this : ITextDocument2Old*, pVar : Win32cr::System::Variant::VARIANT*, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, code_page : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, pVar, flags, code_page)
     end
-    def save(this : ITextDocument2Old*, pVar : Win32cr::System::Com::VARIANT*, flags : Int32, code_page : Int32) : Win32cr::Foundation::HRESULT
+    def save(this : ITextDocument2Old*, pVar : Win32cr::System::Variant::VARIANT*, flags : Win32cr::UI::Controls::RichEdit::Tomconstants, code_page : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, pVar, flags, code_page)
     end
     def freeze(this : ITextDocument2Old*, pCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -6373,10 +6755,10 @@ module Win32cr::UI::Controls::RichEdit
     def attach_msg_filter(this : ITextDocument2Old*, pFilter : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.attach_msg_filter.call(this, pFilter)
     end
-    def set_effect_color(this : ITextDocument2Old*, index : Int32, cr : UInt32) : Win32cr::Foundation::HRESULT
+    def set_effect_color(this : ITextDocument2Old*, index : Int32, cr : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_effect_color.call(this, index, cr)
     end
-    def get_effect_color(this : ITextDocument2Old*, index : Int32, pcr : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_effect_color(this : ITextDocument2Old*, index : Int32, pcr : Win32cr::Foundation::COLORREF*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_effect_color.call(this, index, pcr)
     end
     def get_caret_type(this : ITextDocument2Old*, pCaretType : Int32*) : Win32cr::Foundation::HRESULT

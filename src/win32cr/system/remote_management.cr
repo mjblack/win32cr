@@ -1,9 +1,15 @@
 require "./../foundation.cr"
 require "./com.cr"
+require "./variant.cr"
 
 module Win32cr::System::RemoteManagement
   extend self
-  alias WSMAN_SHELL_COMPLETION_FUNCTION = Proc(Void*, UInt32, Win32cr::System::RemoteManagement::WSMAN_ERROR*, Win32cr::System::RemoteManagement::WSMAN_SHELL*, Win32cr::System::RemoteManagement::WSMAN_COMMAND*, Win32cr::System::RemoteManagement::WSMAN_OPERATION*, Win32cr::System::RemoteManagement::WSMAN_RESPONSE_DATA*, Void)
+  alias WSMAN_API_HANDLE = LibC::IntPtrT
+  alias WSMAN_COMMAND_HANDLE = LibC::IntPtrT
+  alias WSMAN_OPERATION_HANDLE = LibC::IntPtrT
+  alias WSMAN_SESSION_HANDLE = LibC::IntPtrT
+  alias WSMAN_SHELL_HANDLE = LibC::IntPtrT
+  alias WSMAN_SHELL_COMPLETION_FUNCTION = Proc(Void*, UInt32, Win32cr::System::RemoteManagement::WSMAN_ERROR*, Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE, Win32cr::System::RemoteManagement::WSMAN_RESPONSE_DATA*, Void)
 
   alias WSMAN_PLUGIN_RELEASE_SHELL_CONTEXT = Proc(Void*, Void)
 
@@ -579,6 +585,7 @@ module Win32cr::System::RemoteManagement
   ERROR_WSMAN_VIRTUALACCOUNT_NOTSUPPORTED_DOWNLEVEL = 2150859260_u32
   ERROR_WSMAN_RUNASUSER_MANAGEDACCOUNT_LOGON_FAILED = 2150859261_u32
   ERROR_WSMAN_CERTMAPPING_CREDENTIAL_MANAGEMENT_FAILIED = 2150859262_u32
+  ERROR_WSMAN_EVENTING_PUSH_SUBSCRIPTION_NOACTIVATE_EVENTSOURCE = 2150859263_u32
 
   CLSID_WSMan = LibC::GUID.new(0xbced617b_u32, 0xec03_u16, 0x420b_u16, StaticArray[0x85_u8, 0x8_u8, 0x97_u8, 0x7d_u8, 0xc7_u8, 0xa6_u8, 0x86_u8, 0xbd_u8])
 
@@ -850,40 +857,10 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  struct WSMAN_API
-    def initialize()
-    end
-  end
-
-  @[Extern]
   struct WSMAN_PROXY_INFO
     property accessType : UInt32
     property authenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS
     def initialize(@accessType : UInt32, @authenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS)
-    end
-  end
-
-  @[Extern]
-  struct WSMAN_SESSION
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct WSMAN_OPERATION
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct WSMAN_SHELL
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct WSMAN_COMMAND
-    def initialize()
     end
   end
 
@@ -924,9 +901,9 @@ module Win32cr::System::RemoteManagement
 
   @[Extern]
   struct WSMAN_SHELL_STARTUP_INFO_V11
-    property __anonymous_base_wsman_l665_c48 : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V10
+    property base : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V10
     property name : Win32cr::Foundation::PWSTR
-    def initialize(@__anonymous_base_wsman_l665_c48 : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V10, @name : Win32cr::Foundation::PWSTR)
+    def initialize(@base : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V10, @name : Win32cr::Foundation::PWSTR)
     end
   end
 
@@ -1013,10 +990,10 @@ module Win32cr::System::RemoteManagement
     property locale : Win32cr::Foundation::PWSTR
     property resourceUri : Win32cr::Foundation::PWSTR
     property operationInfo : Win32cr::System::RemoteManagement::WSMAN_OPERATION_INFO*
-    property shutdownNotification : Int32
+    property shutdownNotification : Win32cr::Foundation::BOOL
     property shutdownNotificationHandle : Win32cr::Foundation::HANDLE
     property dataLocale : Win32cr::Foundation::PWSTR
-    def initialize(@senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, @locale : Win32cr::Foundation::PWSTR, @resourceUri : Win32cr::Foundation::PWSTR, @operationInfo : Win32cr::System::RemoteManagement::WSMAN_OPERATION_INFO*, @shutdownNotification : Int32, @shutdownNotificationHandle : Win32cr::Foundation::HANDLE, @dataLocale : Win32cr::Foundation::PWSTR)
+    def initialize(@senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, @locale : Win32cr::Foundation::PWSTR, @resourceUri : Win32cr::Foundation::PWSTR, @operationInfo : Win32cr::System::RemoteManagement::WSMAN_OPERATION_INFO*, @shutdownNotification : Win32cr::Foundation::BOOL, @shutdownNotificationHandle : Win32cr::Foundation::HANDLE, @dataLocale : Win32cr::Foundation::PWSTR)
     end
   end
 
@@ -1031,14 +1008,15 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManVtbl,
+
+  record IWSManVtable,
     query_interface : Proc(IWSMan*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSMan*, UInt32),
     release : Proc(IWSMan*, UInt32),
     get_type_info_count : Proc(IWSMan*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSMan*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSMan*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSMan*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSMan*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_session : Proc(IWSMan*, Win32cr::Foundation::BSTR, Int32, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_connection_options : Proc(IWSMan*, Void**, Win32cr::Foundation::HRESULT),
     get_CommandLine : Proc(IWSMan*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1046,7 +1024,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSMan, lpVtbl : IWSManVtbl* do
+  record IWSMan, lpVtbl : IWSManVtable* do
     GUID = LibC::GUID.new(0x190d8637_u32, 0x5cd3_u16, 0x496d_u16, StaticArray[0xad_u8, 0x24_u8, 0x69_u8, 0x63_u8, 0x6b_u8, 0xb5_u8, 0xa3_u8, 0xb5_u8])
     def query_interface(this : IWSMan*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1066,8 +1044,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSMan*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSMan*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSMan*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_session(this : IWSMan*, connection : Win32cr::Foundation::BSTR, flags : Int32, connectionOptions : Void*, session : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_session.call(this, connection, flags, connectionOptions, session)
@@ -1085,14 +1063,15 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManExVtbl,
+
+  record IWSManExVtable,
     query_interface : Proc(IWSManEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManEx*, UInt32),
     release : Proc(IWSManEx*, UInt32),
     get_type_info_count : Proc(IWSManEx*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManEx*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_session : Proc(IWSManEx*, Win32cr::Foundation::BSTR, Int32, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_connection_options : Proc(IWSManEx*, Void**, Win32cr::Foundation::HRESULT),
     get_CommandLine : Proc(IWSManEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1120,7 +1099,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSManEx, lpVtbl : IWSManExVtbl* do
+  record IWSManEx, lpVtbl : IWSManExVtable* do
     GUID = LibC::GUID.new(0x2d53bdaa_u32, 0x798e_u16, 0x49e6_u16, StaticArray[0xa1_u8, 0xaa_u8, 0x74_u8, 0xd0_u8, 0x12_u8, 0x56_u8, 0xf4_u8, 0x11_u8])
     def query_interface(this : IWSManEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1140,8 +1119,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_session(this : IWSManEx*, connection : Win32cr::Foundation::BSTR, flags : Int32, connectionOptions : Void*, session : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_session.call(this, connection, flags, connectionOptions, session)
@@ -1219,14 +1198,15 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManEx2Vtbl,
+
+  record IWSManEx2Vtable,
     query_interface : Proc(IWSManEx2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManEx2*, UInt32),
     release : Proc(IWSManEx2*, UInt32),
     get_type_info_count : Proc(IWSManEx2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManEx2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManEx2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManEx2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManEx2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_session : Proc(IWSManEx2*, Win32cr::Foundation::BSTR, Int32, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_connection_options : Proc(IWSManEx2*, Void**, Win32cr::Foundation::HRESULT),
     get_CommandLine : Proc(IWSManEx2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1255,7 +1235,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSManEx2, lpVtbl : IWSManEx2Vtbl* do
+  record IWSManEx2, lpVtbl : IWSManEx2Vtable* do
     GUID = LibC::GUID.new(0x1d1b5ae0_u32, 0x42d9_u16, 0x4021_u16, StaticArray[0x82_u8, 0x61_u8, 0x39_u8, 0x87_u8, 0x61_u8, 0x95_u8, 0x12_u8, 0xe9_u8])
     def query_interface(this : IWSManEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1275,8 +1255,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManEx2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManEx2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManEx2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_session(this : IWSManEx2*, connection : Win32cr::Foundation::BSTR, flags : Int32, connectionOptions : Void*, session : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_session.call(this, connection, flags, connectionOptions, session)
@@ -1357,14 +1337,15 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManEx3Vtbl,
+
+  record IWSManEx3Vtable,
     query_interface : Proc(IWSManEx3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManEx3*, UInt32),
     release : Proc(IWSManEx3*, UInt32),
     get_type_info_count : Proc(IWSManEx3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManEx3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManEx3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManEx3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManEx3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_session : Proc(IWSManEx3*, Win32cr::Foundation::BSTR, Int32, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_connection_options : Proc(IWSManEx3*, Void**, Win32cr::Foundation::HRESULT),
     get_CommandLine : Proc(IWSManEx3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1400,7 +1381,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSManEx3, lpVtbl : IWSManEx3Vtbl* do
+  record IWSManEx3, lpVtbl : IWSManEx3Vtable* do
     GUID = LibC::GUID.new(0x6400e966_u32, 0x11d_u16, 0x4eac_u16, StaticArray[0x84_u8, 0x74_u8, 0x4_u8, 0x9e_u8, 0x8_u8, 0x48_u8, 0xaf_u8, 0xad_u8])
     def query_interface(this : IWSManEx3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1420,8 +1401,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManEx3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManEx3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManEx3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_session(this : IWSManEx3*, connection : Win32cr::Foundation::BSTR, flags : Int32, connectionOptions : Void*, session : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_session.call(this, connection, flags, connectionOptions, session)
@@ -1523,21 +1504,22 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManConnectionOptionsVtbl,
+
+  record IWSManConnectionOptionsVtable,
     query_interface : Proc(IWSManConnectionOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManConnectionOptions*, UInt32),
     release : Proc(IWSManConnectionOptions*, UInt32),
     get_type_info_count : Proc(IWSManConnectionOptions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManConnectionOptions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManConnectionOptions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManConnectionOptions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManConnectionOptions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_UserName : Proc(IWSManConnectionOptions*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UserName : Proc(IWSManConnectionOptions*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     put_Password : Proc(IWSManConnectionOptions*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWSManConnectionOptions, lpVtbl : IWSManConnectionOptionsVtbl* do
+  record IWSManConnectionOptions, lpVtbl : IWSManConnectionOptionsVtable* do
     GUID = LibC::GUID.new(0xf704e861_u32, 0x9e52_u16, 0x464f_u16, StaticArray[0xb7_u8, 0x86_u8, 0xda_u8, 0x5e_u8, 0xb2_u8, 0x32_u8, 0xf_u8, 0xdd_u8])
     def query_interface(this : IWSManConnectionOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1557,8 +1539,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManConnectionOptions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManConnectionOptions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManConnectionOptions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_UserName(this : IWSManConnectionOptions*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UserName.call(this, name)
@@ -1573,14 +1555,15 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManConnectionOptionsExVtbl,
+
+  record IWSManConnectionOptionsExVtable,
     query_interface : Proc(IWSManConnectionOptionsEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManConnectionOptionsEx*, UInt32),
     release : Proc(IWSManConnectionOptionsEx*, UInt32),
     get_type_info_count : Proc(IWSManConnectionOptionsEx*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManConnectionOptionsEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManConnectionOptionsEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManConnectionOptionsEx*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManConnectionOptionsEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_UserName : Proc(IWSManConnectionOptionsEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UserName : Proc(IWSManConnectionOptionsEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     put_Password : Proc(IWSManConnectionOptionsEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1589,7 +1572,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSManConnectionOptionsEx, lpVtbl : IWSManConnectionOptionsExVtbl* do
+  record IWSManConnectionOptionsEx, lpVtbl : IWSManConnectionOptionsExVtable* do
     GUID = LibC::GUID.new(0xef43edf7_u32, 0x2a48_u16, 0x4d93_u16, StaticArray[0x95_u8, 0x26_u8, 0x8b_u8, 0xd6_u8, 0xab_u8, 0x6d_u8, 0x4a_u8, 0x6b_u8])
     def query_interface(this : IWSManConnectionOptionsEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1609,8 +1592,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManConnectionOptionsEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManConnectionOptionsEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManConnectionOptionsEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_UserName(this : IWSManConnectionOptionsEx*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UserName.call(this, name)
@@ -1631,14 +1614,15 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManConnectionOptionsEx2Vtbl,
+
+  record IWSManConnectionOptionsEx2Vtable,
     query_interface : Proc(IWSManConnectionOptionsEx2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManConnectionOptionsEx2*, UInt32),
     release : Proc(IWSManConnectionOptionsEx2*, UInt32),
     get_type_info_count : Proc(IWSManConnectionOptionsEx2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManConnectionOptionsEx2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManConnectionOptionsEx2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManConnectionOptionsEx2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManConnectionOptionsEx2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_UserName : Proc(IWSManConnectionOptionsEx2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UserName : Proc(IWSManConnectionOptionsEx2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     put_Password : Proc(IWSManConnectionOptionsEx2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1655,7 +1639,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSManConnectionOptionsEx2, lpVtbl : IWSManConnectionOptionsEx2Vtbl* do
+  record IWSManConnectionOptionsEx2, lpVtbl : IWSManConnectionOptionsEx2Vtable* do
     GUID = LibC::GUID.new(0xf500c9ec_u32, 0x24ee_u16, 0x48ab_u16, StaticArray[0xb3_u8, 0x8d_u8, 0xfc_u8, 0x9a_u8, 0x16_u8, 0x4c_u8, 0x65_u8, 0x8e_u8])
     def query_interface(this : IWSManConnectionOptionsEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1675,8 +1659,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManConnectionOptionsEx2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManConnectionOptionsEx2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManConnectionOptionsEx2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_UserName(this : IWSManConnectionOptionsEx2*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UserName.call(this, name)
@@ -1721,20 +1705,21 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManSessionVtbl,
+
+  record IWSManSessionVtable,
     query_interface : Proc(IWSManSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManSession*, UInt32),
     release : Proc(IWSManSession*, UInt32),
     get_type_info_count : Proc(IWSManSession*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManSession*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManSession*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManSession*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get : Proc(IWSManSession*, Win32cr::System::Com::VARIANT, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put : Proc(IWSManSession*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    create : Proc(IWSManSession*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    delete : Proc(IWSManSession*, Win32cr::System::Com::VARIANT, Int32, Win32cr::Foundation::HRESULT),
-    invoke_2 : Proc(IWSManSession*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    enumerate : Proc(IWSManSession*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IWSManSession*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get : Proc(IWSManSession*, Win32cr::System::Variant::VARIANT, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put : Proc(IWSManSession*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    create : Proc(IWSManSession*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    delete : Proc(IWSManSession*, Win32cr::System::Variant::VARIANT, Int32, Win32cr::Foundation::HRESULT),
+    invoke_2 : Proc(IWSManSession*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    enumerate : Proc(IWSManSession*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
     identify : Proc(IWSManSession*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Error : Proc(IWSManSession*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_BatchItems : Proc(IWSManSession*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1744,7 +1729,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSManSession, lpVtbl : IWSManSessionVtbl* do
+  record IWSManSession, lpVtbl : IWSManSessionVtable* do
     GUID = LibC::GUID.new(0xfc84fc58_u32, 0x1286_u16, 0x40c4_u16, StaticArray[0x9d_u8, 0xa0_u8, 0xc8_u8, 0xef_u8, 0x6e_u8, 0xc2_u8, 0x41_u8, 0xe0_u8])
     def query_interface(this : IWSManSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1764,25 +1749,25 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManSession*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+    def invoke_1(this : IWSManSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get(this : IWSManSession*, resourceUri : Win32cr::System::Com::VARIANT, flags : Int32, resource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get(this : IWSManSession*, resourceUri : Win32cr::System::Variant::VARIANT, flags : Int32, resource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get.call(this, resourceUri, flags, resource)
     end
-    def put(this : IWSManSession*, resourceUri : Win32cr::System::Com::VARIANT, resource : Win32cr::Foundation::BSTR, flags : Int32, resultResource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def put(this : IWSManSession*, resourceUri : Win32cr::System::Variant::VARIANT, resource : Win32cr::Foundation::BSTR, flags : Int32, resultResource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put.call(this, resourceUri, resource, flags, resultResource)
     end
-    def create(this : IWSManSession*, resourceUri : Win32cr::System::Com::VARIANT, resource : Win32cr::Foundation::BSTR, flags : Int32, newUri : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def create(this : IWSManSession*, resourceUri : Win32cr::System::Variant::VARIANT, resource : Win32cr::Foundation::BSTR, flags : Int32, newUri : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create.call(this, resourceUri, resource, flags, newUri)
     end
-    def delete(this : IWSManSession*, resourceUri : Win32cr::System::Com::VARIANT, flags : Int32) : Win32cr::Foundation::HRESULT
+    def delete(this : IWSManSession*, resourceUri : Win32cr::System::Variant::VARIANT, flags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, resourceUri, flags)
     end
-    def invoke_2(this : IWSManSession*, actionUri : Win32cr::Foundation::BSTR, resourceUri : Win32cr::System::Com::VARIANT, parameters : Win32cr::Foundation::BSTR, flags : Int32, result : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def invoke_2(this : IWSManSession*, actionUri : Win32cr::Foundation::BSTR, resourceUri : Win32cr::System::Variant::VARIANT, parameters : Win32cr::Foundation::BSTR, flags : Int32, result : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invoke_2.call(this, actionUri, resourceUri, parameters, flags, result)
     end
-    def enumerate(this : IWSManSession*, resourceUri : Win32cr::System::Com::VARIANT, filter : Win32cr::Foundation::BSTR, dialect : Win32cr::Foundation::BSTR, flags : Int32, resultSet : Void**) : Win32cr::Foundation::HRESULT
+    def enumerate(this : IWSManSession*, resourceUri : Win32cr::System::Variant::VARIANT, filter : Win32cr::Foundation::BSTR, dialect : Win32cr::Foundation::BSTR, flags : Int32, resultSet : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate.call(this, resourceUri, filter, dialect, flags, resultSet)
     end
     def identify(this : IWSManSession*, flags : Int32, result : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1807,21 +1792,22 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManEnumeratorVtbl,
+
+  record IWSManEnumeratorVtable,
     query_interface : Proc(IWSManEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManEnumerator*, UInt32),
     release : Proc(IWSManEnumerator*, UInt32),
     get_type_info_count : Proc(IWSManEnumerator*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManEnumerator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManEnumerator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManEnumerator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManEnumerator*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     read_item : Proc(IWSManEnumerator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AtEndOfStream : Proc(IWSManEnumerator*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AtEndOfStream : Proc(IWSManEnumerator*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Error : Proc(IWSManEnumerator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWSManEnumerator, lpVtbl : IWSManEnumeratorVtbl* do
+  record IWSManEnumerator, lpVtbl : IWSManEnumeratorVtable* do
     GUID = LibC::GUID.new(0xf3457ca9_u32, 0xabb9_u16, 0x4fa5_u16, StaticArray[0xb8_u8, 0x50_u8, 0x90_u8, 0xe8_u8, 0xca_u8, 0x30_u8, 0xe_u8, 0x7f_u8])
     def query_interface(this : IWSManEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1841,13 +1827,13 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManEnumerator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManEnumerator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManEnumerator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def read_item(this : IWSManEnumerator*, resource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.read_item.call(this, resource)
     end
-    def get_AtEndOfStream(this : IWSManEnumerator*, eos : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AtEndOfStream(this : IWSManEnumerator*, eos : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AtEndOfStream.call(this, eos)
     end
     def get_Error(this : IWSManEnumerator*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1857,23 +1843,24 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManResourceLocatorVtbl,
+
+  record IWSManResourceLocatorVtable,
     query_interface : Proc(IWSManResourceLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManResourceLocator*, UInt32),
     release : Proc(IWSManResourceLocator*, UInt32),
     get_type_info_count : Proc(IWSManResourceLocator*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManResourceLocator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManResourceLocator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManResourceLocator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWSManResourceLocator*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_ResourceURI : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ResourceURI : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    add_selector : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    add_selector : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     clear_selectors : Proc(IWSManResourceLocator*, Win32cr::Foundation::HRESULT),
     get_FragmentPath : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_FragmentPath : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_FragmentDialect : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_FragmentDialect : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add_option : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    add_option : Proc(IWSManResourceLocator*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     put_MustUnderstandOptions : Proc(IWSManResourceLocator*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_MustUnderstandOptions : Proc(IWSManResourceLocator*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     clear_options : Proc(IWSManResourceLocator*, Win32cr::Foundation::HRESULT),
@@ -1881,7 +1868,7 @@ module Win32cr::System::RemoteManagement
 
 
   @[Extern]
-  record IWSManResourceLocator, lpVtbl : IWSManResourceLocatorVtbl* do
+  record IWSManResourceLocator, lpVtbl : IWSManResourceLocatorVtable* do
     GUID = LibC::GUID.new(0xa7a1ba28_u32, 0xde41_u16, 0x466a_u16, StaticArray[0xad_u8, 0xa_u8, 0xc4_u8, 0x5_u8, 0x9e_u8, 0xad_u8, 0x74_u8, 0x28_u8])
     def query_interface(this : IWSManResourceLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1901,8 +1888,8 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManResourceLocator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManResourceLocator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManResourceLocator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_ResourceURI(this : IWSManResourceLocator*, uri : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ResourceURI.call(this, uri)
@@ -1910,7 +1897,7 @@ module Win32cr::System::RemoteManagement
     def get_ResourceURI(this : IWSManResourceLocator*, uri : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ResourceURI.call(this, uri)
     end
-    def add_selector(this : IWSManResourceLocator*, resourceSelName : Win32cr::Foundation::BSTR, selValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_selector(this : IWSManResourceLocator*, resourceSelName : Win32cr::Foundation::BSTR, selValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_selector.call(this, resourceSelName, selValue)
     end
     def clear_selectors(this : IWSManResourceLocator*) : Win32cr::Foundation::HRESULT
@@ -1928,7 +1915,7 @@ module Win32cr::System::RemoteManagement
     def put_FragmentDialect(this : IWSManResourceLocator*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_FragmentDialect.call(this, text)
     end
-    def add_option(this : IWSManResourceLocator*, option_name : Win32cr::Foundation::BSTR, option_value : Win32cr::System::Com::VARIANT, mustComply : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    def add_option(this : IWSManResourceLocator*, option_name : Win32cr::Foundation::BSTR, option_value : Win32cr::System::Variant::VARIANT, mustComply : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_option.call(this, option_name, option_value, mustComply)
     end
     def put_MustUnderstandOptions(this : IWSManResourceLocator*, mustUnderstand : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -1947,14 +1934,15 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManResourceLocatorInternalVtbl,
+
+  record IWSManResourceLocatorInternalVtable,
     query_interface : Proc(IWSManResourceLocatorInternal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManResourceLocatorInternal*, UInt32),
     release : Proc(IWSManResourceLocatorInternal*, UInt32)
 
 
   @[Extern]
-  record IWSManResourceLocatorInternal, lpVtbl : IWSManResourceLocatorInternalVtbl* do
+  record IWSManResourceLocatorInternal, lpVtbl : IWSManResourceLocatorInternalVtable* do
     GUID = LibC::GUID.new(0xeffaead7_u32, 0x7ec8_u16, 0x4716_u16, StaticArray[0xb9_u8, 0xbe_u8, 0xf2_u8, 0xe7_u8, 0xe9_u8, 0xfb_u8, 0x4a_u8, 0xdb_u8])
     def query_interface(this : IWSManResourceLocatorInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1969,19 +1957,20 @@ module Win32cr::System::RemoteManagement
   end
 
   @[Extern]
-  record IWSManInternalVtbl,
+
+  record IWSManInternalVtable,
     query_interface : Proc(IWSManInternal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSManInternal*, UInt32),
     release : Proc(IWSManInternal*, UInt32),
     get_type_info_count : Proc(IWSManInternal*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWSManInternal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWSManInternal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWSManInternal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    config_sddl : Proc(IWSManInternal*, Void*, Win32cr::System::Com::VARIANT, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IWSManInternal*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    config_sddl : Proc(IWSManInternal*, Void*, Win32cr::System::Variant::VARIANT, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWSManInternal, lpVtbl : IWSManInternalVtbl* do
+  record IWSManInternal, lpVtbl : IWSManInternalVtable* do
     GUID = LibC::GUID.new(0x4ae2b1d_u32, 0x9954_u16, 0x4d99_u16, StaticArray[0x94_u8, 0xa9_u8, 0xa9_u8, 0x61_u8, 0xe7_u8, 0x2c_u8, 0x3a_u8, 0x13_u8])
     def query_interface(this : IWSManInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2001,217 +1990,284 @@ module Win32cr::System::RemoteManagement
     def get_i_ds_of_names(this : IWSManInternal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWSManInternal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWSManInternal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def config_sddl(this : IWSManInternal*, session : Void*, resourceUri : Win32cr::System::Com::VARIANT, flags : Int32, resource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def config_sddl(this : IWSManInternal*, session : Void*, resourceUri : Win32cr::System::Variant::VARIANT, flags : Int32, resource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.config_sddl.call(this, session, resourceUri, flags, resource)
     end
 
   end
 
-  def wSManInitialize(flags : UInt32, apiHandle : Win32cr::System::RemoteManagement::WSMAN_API**) : UInt32
+  def wSManInitialize(flags : UInt32, apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManInitialize(flags, apiHandle)
+    {% end %}
   end
 
-  def wSManDeinitialize(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32) : UInt32
+  def wSManDeinitialize(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManDeinitialize(apiHandle, flags)
+    {% end %}
   end
 
-  def wSManGetErrorMessage(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32, languageCode : Win32cr::Foundation::PWSTR, errorCode : UInt32, messageLength : UInt32, message : UInt16*, messageLengthUsed : UInt32*) : UInt32
+  def wSManGetErrorMessage(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE, flags : UInt32, languageCode : Win32cr::Foundation::PWSTR, errorCode : UInt32, messageLength : UInt32, message : Win32cr::Foundation::PWSTR, messageLengthUsed : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManGetErrorMessage(apiHandle, flags, languageCode, errorCode, messageLength, message, messageLengthUsed)
+    {% end %}
   end
 
-  def wSManCreateSession(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, connection : Win32cr::Foundation::PWSTR, flags : UInt32, serverAuthenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS*, proxyInfo : Win32cr::System::RemoteManagement::WSMAN_PROXY_INFO*, session : Win32cr::System::RemoteManagement::WSMAN_SESSION**) : UInt32
+  def wSManCreateSession(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE, connection : Win32cr::Foundation::PWSTR, flags : UInt32, serverAuthenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS*, proxyInfo : Win32cr::System::RemoteManagement::WSMAN_PROXY_INFO*, session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManCreateSession(apiHandle, connection, flags, serverAuthenticationCredentials, proxyInfo, session)
+    {% end %}
   end
 
-  def wSManCloseSession(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32) : UInt32
+  def wSManCloseSession(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManCloseSession(session, flags)
+    {% end %}
   end
 
-  def wSManSetSessionOption(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+  def wSManSetSessionOption(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, option : Win32cr::System::RemoteManagement::WSManSessionOption, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManSetSessionOption(session, option, data)
+    {% end %}
   end
 
-  def wSManGetSessionOptionAsDword(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, value : UInt32*) : UInt32
+  def wSManGetSessionOptionAsDword(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, option : Win32cr::System::RemoteManagement::WSManSessionOption, value : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManGetSessionOptionAsDword(session, option, value)
+    {% end %}
   end
 
-  def wSManGetSessionOptionAsString(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, stringLength : UInt32, string : UInt16*, stringLengthUsed : UInt32*) : UInt32
+  def wSManGetSessionOptionAsString(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, option : Win32cr::System::RemoteManagement::WSManSessionOption, stringLength : UInt32, string : Win32cr::Foundation::PWSTR, stringLengthUsed : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManGetSessionOptionAsString(session, option, stringLength, string, stringLengthUsed)
+    {% end %}
   end
 
-  def wSManCloseOperation(operationHandle : Win32cr::System::RemoteManagement::WSMAN_OPERATION*, flags : UInt32) : UInt32
+  def wSManCloseOperation(operationHandle : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManCloseOperation(operationHandle, flags)
+    {% end %}
   end
 
-  def wSManCreateShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+  def wSManCreateShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManCreateShell(session, flags, resourceUri, startupInfo, options, createXml, async, shell)
+    {% end %}
   end
 
-  def wSManRunShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+  def wSManRunShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManRunShellCommand(shell, flags, commandLine, args, options, async, command)
+    {% end %}
   end
 
-  def wSManSignalShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, code : Win32cr::Foundation::PWSTR, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, signalOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+  def wSManSignalShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, code : Win32cr::Foundation::PWSTR, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, signalOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManSignalShell(shell, command, flags, code, async, signalOperation)
+    {% end %}
   end
 
-  def wSManReceiveShellOutput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, desiredStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, receiveOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+  def wSManReceiveShellOutput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, desiredStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, receiveOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManReceiveShellOutput(shell, command, flags, desiredStreamSet, async, receiveOperation)
+    {% end %}
   end
 
-  def wSManSendShellInput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, streamId : Win32cr::Foundation::PWSTR, streamData : Win32cr::System::RemoteManagement::WSMAN_DATA*, endOfStream : Win32cr::Foundation::BOOL, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, sendOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+  def wSManSendShellInput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, streamId : Win32cr::Foundation::PWSTR, streamData : Win32cr::System::RemoteManagement::WSMAN_DATA*, endOfStream : Win32cr::Foundation::BOOL, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, sendOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManSendShellInput(shell, command, flags, streamId, streamData, endOfStream, async, sendOperation)
+    {% end %}
   end
 
-  def wSManCloseCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+  def wSManCloseCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    {% if !flag?(:docs) %}
     C.WSManCloseCommand(commandHandle, flags, async)
+    {% end %}
   end
 
-  def wSManCloseShell(shellHandle : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+  def wSManCloseShell(shellHandle : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    {% if !flag?(:docs) %}
     C.WSManCloseShell(shellHandle, flags, async)
+    {% end %}
   end
 
-  def wSManCreateShellEx(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellId : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+  def wSManCreateShellEx(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellId : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManCreateShellEx(session, flags, resourceUri, shellId, startupInfo, options, createXml, async, shell)
+    {% end %}
   end
 
-  def wSManRunShellCommandEx(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandId : Win32cr::Foundation::PWSTR, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+  def wSManRunShellCommandEx(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, commandId : Win32cr::Foundation::PWSTR, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManRunShellCommandEx(shell, flags, commandId, commandLine, args, options, async, command)
+    {% end %}
   end
 
-  def wSManDisconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, disconnectInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_DISCONNECT_INFO*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+  def wSManDisconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, disconnectInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_DISCONNECT_INFO*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    {% if !flag?(:docs) %}
     C.WSManDisconnectShell(shell, flags, disconnectInfo, async)
+    {% end %}
   end
 
-  def wSManReconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+  def wSManReconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    {% if !flag?(:docs) %}
     C.WSManReconnectShell(shell, flags, async)
+    {% end %}
   end
 
-  def wSManReconnectShellCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+  def wSManReconnectShellCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    {% if !flag?(:docs) %}
     C.WSManReconnectShellCommand(commandHandle, flags, async)
+    {% end %}
   end
 
-  def wSManConnectShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+  def wSManConnectShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManConnectShell(session, flags, resourceUri, shellID, options, connectXml, async, shell)
+    {% end %}
   end
 
-  def wSManConnectShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+  def wSManConnectShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, commandID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE*) : Void
+    {% if !flag?(:docs) %}
     C.WSManConnectShellCommand(shell, flags, commandID, options, connectXml, async, command)
+    {% end %}
   end
 
   def wSManPluginReportContext(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, context : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginReportContext(requestDetails, flags, context)
+    {% end %}
   end
 
   def wSManPluginReceiveResult(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, stream : Win32cr::Foundation::PWSTR, streamResult : Win32cr::System::RemoteManagement::WSMAN_DATA*, commandState : Win32cr::Foundation::PWSTR, exitCode : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginReceiveResult(requestDetails, flags, stream, streamResult, commandState, exitCode)
+    {% end %}
   end
 
   def wSManPluginOperationComplete(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, errorCode : UInt32, extendedInformation : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginOperationComplete(requestDetails, flags, errorCode, extendedInformation)
+    {% end %}
   end
 
   def wSManPluginGetOperationParameters(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginGetOperationParameters(requestDetails, flags, data)
+    {% end %}
   end
 
   def wSManPluginGetConfiguration(pluginContext : Void*, flags : UInt32, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginGetConfiguration(pluginContext, flags, data)
+    {% end %}
   end
 
   def wSManPluginReportCompletion(pluginContext : Void*, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginReportCompletion(pluginContext, flags)
+    {% end %}
   end
 
   def wSManPluginFreeRequestDetails(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginFreeRequestDetails(requestDetails)
+    {% end %}
   end
 
   def wSManPluginAuthzUserComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, userAuthorizationContext : Void*, impersonationToken : Win32cr::Foundation::HANDLE, userIsAdministrator : Win32cr::Foundation::BOOL, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginAuthzUserComplete(senderDetails, flags, userAuthorizationContext, impersonationToken, userIsAdministrator, errorCode, extendedErrorInformation)
+    {% end %}
   end
 
   def wSManPluginAuthzOperationComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, userAuthorizationContext : Void*, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginAuthzOperationComplete(senderDetails, flags, userAuthorizationContext, errorCode, extendedErrorInformation)
+    {% end %}
   end
 
   def wSManPluginAuthzQueryQuotaComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, quota : Win32cr::System::RemoteManagement::WSMAN_AUTHZ_QUOTA*, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.WSManPluginAuthzQueryQuotaComplete(senderDetails, flags, quota, errorCode, extendedErrorInformation)
+    {% end %}
   end
 
   @[Link("wsmsvc")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun WSManInitialize(flags : UInt32, apiHandle : Win32cr::System::RemoteManagement::WSMAN_API**) : UInt32
+    fun WSManInitialize(flags : UInt32, apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE*) : UInt32
 
     # :nodoc:
-    fun WSManDeinitialize(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32) : UInt32
+    fun WSManDeinitialize(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE, flags : UInt32) : UInt32
 
     # :nodoc:
-    fun WSManGetErrorMessage(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, flags : UInt32, languageCode : Win32cr::Foundation::PWSTR, errorCode : UInt32, messageLength : UInt32, message : UInt16*, messageLengthUsed : UInt32*) : UInt32
+    fun WSManGetErrorMessage(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE, flags : UInt32, languageCode : Win32cr::Foundation::PWSTR, errorCode : UInt32, messageLength : UInt32, message : Win32cr::Foundation::PWSTR, messageLengthUsed : UInt32*) : UInt32
 
     # :nodoc:
-    fun WSManCreateSession(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API*, connection : Win32cr::Foundation::PWSTR, flags : UInt32, serverAuthenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS*, proxyInfo : Win32cr::System::RemoteManagement::WSMAN_PROXY_INFO*, session : Win32cr::System::RemoteManagement::WSMAN_SESSION**) : UInt32
+    fun WSManCreateSession(apiHandle : Win32cr::System::RemoteManagement::WSMAN_API_HANDLE, connection : Win32cr::Foundation::PWSTR, flags : UInt32, serverAuthenticationCredentials : Win32cr::System::RemoteManagement::WSMAN_AUTHENTICATION_CREDENTIALS*, proxyInfo : Win32cr::System::RemoteManagement::WSMAN_PROXY_INFO*, session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE*) : UInt32
 
     # :nodoc:
-    fun WSManCloseSession(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32) : UInt32
+    fun WSManCloseSession(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32) : UInt32
 
     # :nodoc:
-    fun WSManSetSessionOption(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
+    fun WSManSetSessionOption(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, option : Win32cr::System::RemoteManagement::WSManSessionOption, data : Win32cr::System::RemoteManagement::WSMAN_DATA*) : UInt32
 
     # :nodoc:
-    fun WSManGetSessionOptionAsDword(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, value : UInt32*) : UInt32
+    fun WSManGetSessionOptionAsDword(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, option : Win32cr::System::RemoteManagement::WSManSessionOption, value : UInt32*) : UInt32
 
     # :nodoc:
-    fun WSManGetSessionOptionAsString(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, option : Win32cr::System::RemoteManagement::WSManSessionOption, stringLength : UInt32, string : UInt16*, stringLengthUsed : UInt32*) : UInt32
+    fun WSManGetSessionOptionAsString(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, option : Win32cr::System::RemoteManagement::WSManSessionOption, stringLength : UInt32, string : Win32cr::Foundation::PWSTR, stringLengthUsed : UInt32*) : UInt32
 
     # :nodoc:
-    fun WSManCloseOperation(operationHandle : Win32cr::System::RemoteManagement::WSMAN_OPERATION*, flags : UInt32) : UInt32
+    fun WSManCloseOperation(operationHandle : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE, flags : UInt32) : UInt32
 
     # :nodoc:
-    fun WSManCreateShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+    fun WSManCreateShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManRunShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+    fun WSManRunShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManSignalShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, code : Win32cr::Foundation::PWSTR, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, signalOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+    fun WSManSignalShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, code : Win32cr::Foundation::PWSTR, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, signalOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManReceiveShellOutput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, desiredStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, receiveOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+    fun WSManReceiveShellOutput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, desiredStreamSet : Win32cr::System::RemoteManagement::WSMAN_STREAM_ID_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, receiveOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManSendShellInput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, streamId : Win32cr::Foundation::PWSTR, streamData : Win32cr::System::RemoteManagement::WSMAN_DATA*, endOfStream : Win32cr::Foundation::BOOL, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, sendOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION**) : Void
+    fun WSManSendShellInput(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, streamId : Win32cr::Foundation::PWSTR, streamData : Win32cr::System::RemoteManagement::WSMAN_DATA*, endOfStream : Win32cr::Foundation::BOOL, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, sendOperation : Win32cr::System::RemoteManagement::WSMAN_OPERATION_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManCloseCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    fun WSManCloseCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
     # :nodoc:
-    fun WSManCloseShell(shellHandle : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    fun WSManCloseShell(shellHandle : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
     # :nodoc:
-    fun WSManCreateShellEx(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellId : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+    fun WSManCreateShellEx(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellId : Win32cr::Foundation::PWSTR, startupInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_STARTUP_INFO_V11*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, createXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManRunShellCommandEx(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandId : Win32cr::Foundation::PWSTR, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+    fun WSManRunShellCommandEx(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, commandId : Win32cr::Foundation::PWSTR, commandLine : Win32cr::Foundation::PWSTR, args : Win32cr::System::RemoteManagement::WSMAN_COMMAND_ARG_SET*, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManDisconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, disconnectInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_DISCONNECT_INFO*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    fun WSManDisconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, disconnectInfo : Win32cr::System::RemoteManagement::WSMAN_SHELL_DISCONNECT_INFO*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
     # :nodoc:
-    fun WSManReconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    fun WSManReconnectShell(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
     # :nodoc:
-    fun WSManReconnectShellCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND*, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
+    fun WSManReconnectShellCommand(commandHandle : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE, flags : UInt32, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*) : Void
 
     # :nodoc:
-    fun WSManConnectShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION*, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL**) : Void
+    fun WSManConnectShell(session : Win32cr::System::RemoteManagement::WSMAN_SESSION_HANDLE, flags : UInt32, resourceUri : Win32cr::Foundation::PWSTR, shellID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE*) : Void
 
     # :nodoc:
-    fun WSManConnectShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL*, flags : UInt32, commandID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND**) : Void
+    fun WSManConnectShellCommand(shell : Win32cr::System::RemoteManagement::WSMAN_SHELL_HANDLE, flags : UInt32, commandID : Win32cr::Foundation::PWSTR, options : Win32cr::System::RemoteManagement::WSMAN_OPTION_SET*, connectXml : Win32cr::System::RemoteManagement::WSMAN_DATA*, async : Win32cr::System::RemoteManagement::WSMAN_SHELL_ASYNC*, command : Win32cr::System::RemoteManagement::WSMAN_COMMAND_HANDLE*) : Void
 
     # :nodoc:
     fun WSManPluginReportContext(requestDetails : Win32cr::System::RemoteManagement::WSMAN_PLUGIN_REQUEST*, flags : UInt32, context : Void*) : UInt32
@@ -2244,4 +2300,5 @@ module Win32cr::System::RemoteManagement
     fun WSManPluginAuthzQueryQuotaComplete(senderDetails : Win32cr::System::RemoteManagement::WSMAN_SENDER_DETAILS*, flags : UInt32, quota : Win32cr::System::RemoteManagement::WSMAN_AUTHZ_QUOTA*, errorCode : UInt32, extendedErrorInformation : Win32cr::Foundation::PWSTR) : UInt32
 
   end
+  {% end %}
 end

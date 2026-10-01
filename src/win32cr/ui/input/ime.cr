@@ -1,13 +1,14 @@
 require "./../../foundation.cr"
 require "./../../graphics/gdi.cr"
-require "./../../globalization.cr"
 require "./../../system/com.cr"
 require "./../windows_and_messaging.cr"
-require "./../text_services.cr"
+require "./keyboard_and_mouse.cr"
 
 module Win32cr::UI::Input::Ime
   extend self
-  alias IMCENUMPROC = Proc(Win32cr::Globalization::HIMC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
+  alias HIMC = Void*
+  alias HIMCC = Void*
+  alias IMCENUMPROC = Proc(Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
   alias REGISTERWORDENUMPROCA = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Int32)
 
@@ -21,11 +22,281 @@ module Win32cr::UI::Input::Ime
 
   alias Fpcreateifedictionaryinstancetype = Proc(Void**, Win32cr::Foundation::HRESULT)
 
+  CATID_MSIME_IImePadApplet_VER7 = LibC::GUID.new(0x4a0f8e31_u32, 0xc3ee_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
+  CATID_MSIME_IImePadApplet_VER80 = LibC::GUID.new(0x56f7a792_u32, 0xfef1_u16, 0x11d3_u16, StaticArray[0x84_u8, 0x63_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x7a_u8, 0x6_u8, 0xe5_u8])
+  CATID_MSIME_IImePadApplet_VER81 = LibC::GUID.new(0x656520b0_u32, 0xbb88_u16, 0x11d4_u16, StaticArray[0x84_u8, 0xc0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x7a_u8, 0x6_u8, 0xe5_u8])
+  CATID_MSIME_IImePadApplet900 = LibC::GUID.new(0xfaae51bf_u32, 0x5e5b_u16, 0x4a1d_u16, StaticArray[0x8d_u8, 0xe1_u8, 0x17_u8, 0xc1_u8, 0xd9_u8, 0xe1_u8, 0x72_u8, 0x8d_u8])
+  CATID_MSIME_IImePadApplet1000 = LibC::GUID.new(0xe081e1d6_u32, 0x2389_u16, 0x43cb_u16, StaticArray[0xb6_u8, 0x6f_u8, 0x60_u8, 0x9f_u8, 0x82_u8, 0x3d_u8, 0x9f_u8, 0x9c_u8])
+  CATID_MSIME_IImePadApplet1200 = LibC::GUID.new(0xa47fb5fc_u32, 0x7d15_u16, 0x4223_u16, StaticArray[0xa7_u8, 0x89_u8, 0xb7_u8, 0x81_u8, 0xbf_u8, 0x9a_u8, 0xe6_u8, 0x67_u8])
+  CATID_MSIME_IImePadApplet = LibC::GUID.new(0x7566cad1_u32, 0x4ec9_u16, 0x4478_u16, StaticArray[0x9f_u8, 0xe9_u8, 0x8e_u8, 0xd7_u8, 0x66_u8, 0x61_u8, 0x9e_u8, 0xdf_u8])
+  FEID_NONE = 0_u32
+  FEID_CHINESE_TRADITIONAL = 1_u32
+  FEID_CHINESE_SIMPLIFIED = 2_u32
+  FEID_CHINESE_HONGKONG = 3_u32
+  FEID_CHINESE_SINGAPORE = 4_u32
+  FEID_JAPANESE = 5_u32
+  FEID_KOREAN = 6_u32
+  FEID_KOREAN_JOHAB = 7_u32
+  INFOMASK_NONE = 0_u32
+  INFOMASK_QUERY_CAND = 1_u32
+  INFOMASK_APPLY_CAND = 2_u32
+  INFOMASK_APPLY_CAND_EX = 4_u32
+  INFOMASK_STRING_FIX = 65536_u32
+  INFOMASK_HIDE_CAND = 131072_u32
+  INFOMASK_BLOCK_CAND = 262144_u32
+  IMEFAREASTINFO_TYPE_DEFAULT = 0_u32
+  IMEFAREASTINFO_TYPE_READING = 1_u32
+  IMEFAREASTINFO_TYPE_COMMENT = 2_u32
+  IMEFAREASTINFO_TYPE_COSTTIME = 3_u32
+  CHARINFO_APPLETID_MASK = 4278190080_u32
+  CHARINFO_FEID_MASK = 15728640_u32
+  CHARINFO_CHARID_MASK = 65535_u32
+  MAX_APPLETTITLE = 64_u32
+  MAX_FONTFACE = 32_u32
+  IPACFG_NONE = 0_i32
+  IPACFG_PROPERTY = 1_i32
+  IPACFG_HELP = 2_i32
+  IPACFG_TITLE = 65536_i32
+  IPACFG_TITLEFONTFACE = 131072_i32
+  IPACFG_CATEGORY = 262144_i32
+  IPACFG_LANG = 16_i32
+  IPACID_NONE = 0_u32
+  IPACID_SOFTKEY = 1_u32
+  IPACID_HANDWRITING = 2_u32
+  IPACID_STROKESEARCH = 3_u32
+  IPACID_RADICALSEARCH = 4_u32
+  IPACID_SYMBOLSEARCH = 5_u32
+  IPACID_VOICE = 6_u32
+  IPACID_EPWING = 7_u32
+  IPACID_OCR = 8_u32
+  IPACID_CHARLIST = 9_u32
+  IPACID_USER = 256_u32
+  IMEPADREQ_FIRST = 4096_u32
+  IMEPADREQ_INSERTSTRINGCANDIDATE = 4098_u32
+  IMEPADREQ_INSERTITEMCANDIDATE = 4099_u32
+  IMEPADREQ_SENDKEYCONTROL = 4101_u32
+  IMEPADREQ_GETSELECTEDSTRING = 4103_u32
+  IMEPADREQ_SETAPPLETDATA = 4105_u32
+  IMEPADREQ_GETAPPLETDATA = 4106_u32
+  IMEPADREQ_SETTITLEFONT = 4107_u32
+  IMEPADREQ_GETCOMPOSITIONSTRINGID = 4109_u32
+  IMEPADREQ_INSERTSTRINGCANDIDATEINFO = 4110_u32
+  IMEPADREQ_CHANGESTRINGCANDIDATEINFO = 4111_u32
+  IMEPADREQ_INSERTSTRINGINFO = 4114_u32
+  IMEPADREQ_CHANGESTRINGINFO = 4115_u32
+  IMEPADREQ_GETCURRENTUILANGID = 4120_u32
+  IMEPADCTRL_CONVERTALL = 1_u32
+  IMEPADCTRL_DETERMINALL = 2_u32
+  IMEPADCTRL_DETERMINCHAR = 3_u32
+  IMEPADCTRL_CLEARALL = 4_u32
+  IMEPADCTRL_CARETSET = 5_u32
+  IMEPADCTRL_CARETLEFT = 6_u32
+  IMEPADCTRL_CARETRIGHT = 7_u32
+  IMEPADCTRL_CARETTOP = 8_u32
+  IMEPADCTRL_CARETBOTTOM = 9_u32
+  IMEPADCTRL_CARETBACKSPACE = 10_u32
+  IMEPADCTRL_CARETDELETE = 11_u32
+  IMEPADCTRL_PHRASEDELETE = 12_u32
+  IMEPADCTRL_INSERTSPACE = 13_u32
+  IMEPADCTRL_INSERTFULLSPACE = 14_u32
+  IMEPADCTRL_INSERTHALFSPACE = 15_u32
+  IMEPADCTRL_ONIME = 16_u32
+  IMEPADCTRL_OFFIME = 17_u32
+  IMEPADCTRL_ONPRECONVERSION = 18_u32
+  IMEPADCTRL_OFFPRECONVERSION = 19_u32
+  IMEPADCTRL_PHONETICCANDIDATE = 20_u32
+  IMEKEYCTRLMASK_ALT = 1_u32
+  IMEKEYCTRLMASK_CTRL = 2_u32
+  IMEKEYCTRLMASK_SHIFT = 4_u32
+  IMEKEYCTRL_UP = 1_u32
+  IMEKEYCTRL_DOWN = 0_u32
+  IMEPN_FIRST = 256_u32
+  IMEPN_ACTIVATE = 257_u32
+  IMEPN_INACTIVATE = 258_u32
+  IMEPN_SHOW = 260_u32
+  IMEPN_HIDE = 261_u32
+  IMEPN_SIZECHANGING = 262_u32
+  IMEPN_SIZECHANGED = 263_u32
+  IMEPN_CONFIG = 264_u32
+  IMEPN_HELP = 265_u32
+  IMEPN_QUERYCAND = 266_u32
+  IMEPN_APPLYCAND = 267_u32
+  IMEPN_APPLYCANDEX = 268_u32
+  IMEPN_SETTINGCHANGED = 269_u32
+  IMEPN_USER = 356_u32
+  IPAWS_ENABLED = 1_i32
+  IPAWS_SIZINGNOTIFY = 4_i32
+  IPAWS_VERTICALFIXED = 256_i32
+  IPAWS_HORIZONTALFIXED = 512_i32
+  IPAWS_SIZEFIXED = 768_i32
+  IPAWS_MAXWIDTHFIXED = 4096_i32
+  IPAWS_MAXHEIGHTFIXED = 8192_i32
+  IPAWS_MAXSIZEFIXED = 12288_i32
+  IPAWS_MINWIDTHFIXED = 65536_i32
+  IPAWS_MINHEIGHTFIXED = 131072_i32
+  IPAWS_MINSIZEFIXED = 196608_i32
+  STYLE_DESCRIPTION_SIZE = 32_u32
+  IMEMENUITEM_STRING_SIZE = 80_u32
+  IMC_GETCANDIDATEPOS = 7_u32
+  IMC_SETCANDIDATEPOS = 8_u32
+  IMC_GETCOMPOSITIONFONT = 9_u32
+  IMC_SETCOMPOSITIONFONT = 10_u32
+  IMC_GETCOMPOSITIONWINDOW = 11_u32
+  IMC_SETCOMPOSITIONWINDOW = 12_u32
+  IMC_GETSTATUSWINDOWPOS = 15_u32
+  IMC_SETSTATUSWINDOWPOS = 16_u32
+  IMC_CLOSESTATUSWINDOW = 33_u32
+  IMC_OPENSTATUSWINDOW = 34_u32
+  NI_FINALIZECONVERSIONRESULT = 20_u32
+  ISC_SHOWUICANDIDATEWINDOW = 1_u32
+  ISC_SHOWUICOMPOSITIONWINDOW = 2147483648_u32
+  ISC_SHOWUIGUIDELINE = 1073741824_u32
+  ISC_SHOWUIALLCANDIDATEWINDOW = 15_u32
+  ISC_SHOWUIALL = 3221225487_u32
+  MOD_LEFT = 32768_u32
+  MOD_RIGHT = 16384_u32
+  MOD_ON_KEYUP = 2048_u32
+  MOD_IGNORE_ALL_MODIFIER = 1024_u32
+  IME_HOTKEY_DSWITCH_FIRST = 256_u32
+  IME_HOTKEY_DSWITCH_LAST = 287_u32
+  IME_HOTKEY_PRIVATE_FIRST = 512_u32
+  IME_HOTKEY_PRIVATE_LAST = 543_u32
+  CS_INSERTCHAR = 8192_u32
+  CS_NOMOVECARET = 16384_u32
+  IMEVER_0310 = 196618_u32
+  IMEVER_0400 = 262144_u32
+  IME_PROP_AT_CARET = 65536_u32
+  IME_PROP_SPECIAL_UI = 131072_u32
+  IME_PROP_CANDLIST_START_FROM_1 = 262144_u32
+  IME_PROP_UNICODE = 524288_u32
+  IME_PROP_COMPLETE_ON_UNSELECT = 1048576_u32
+  UI_CAP_2700 = 1_u32
+  UI_CAP_ROT90 = 2_u32
+  UI_CAP_ROTANY = 4_u32
+  SCS_CAP_COMPSTR = 1_u32
+  SCS_CAP_MAKEREAD = 2_u32
+  SCS_CAP_SETRECONVERTSTRING = 4_u32
+  SELECT_CAP_CONVERSION = 1_u32
+  SELECT_CAP_SENTENCE = 2_u32
+  GL_LEVEL_NOGUIDELINE = 0_u32
+  GL_LEVEL_FATAL = 1_u32
+  GL_LEVEL_ERROR = 2_u32
+  GL_LEVEL_WARNING = 3_u32
+  GL_LEVEL_INFORMATION = 4_u32
+  GL_ID_UNKNOWN = 0_u32
+  GL_ID_NOMODULE = 1_u32
+  GL_ID_NODICTIONARY = 16_u32
+  GL_ID_CANNOTSAVE = 17_u32
+  GL_ID_NOCONVERT = 32_u32
+  GL_ID_TYPINGERROR = 33_u32
+  GL_ID_TOOMANYSTROKE = 34_u32
+  GL_ID_READINGCONFLICT = 35_u32
+  GL_ID_INPUTREADING = 36_u32
+  GL_ID_INPUTRADICAL = 37_u32
+  GL_ID_INPUTCODE = 38_u32
+  GL_ID_INPUTSYMBOL = 39_u32
+  GL_ID_CHOOSECANDIDATE = 40_u32
+  GL_ID_REVERSECONVERSION = 41_u32
+  GL_ID_PRIVATE_FIRST = 32768_u32
+  GL_ID_PRIVATE_LAST = 65535_u32
+  ATTR_INPUT = 0_u32
+  ATTR_TARGET_CONVERTED = 1_u32
+  ATTR_CONVERTED = 2_u32
+  ATTR_TARGET_NOTCONVERTED = 3_u32
+  ATTR_INPUT_ERROR = 4_u32
+  ATTR_FIXEDCONVERTED = 5_u32
+  CFS_DEFAULT = 0_u32
+  CFS_RECT = 1_u32
+  CFS_POINT = 2_u32
+  CFS_FORCE_POSITION = 32_u32
+  CFS_CANDIDATEPOS = 64_u32
+  CFS_EXCLUDE = 128_u32
+  IME_CAND_UNKNOWN = 0_u32
+  IME_CAND_READ = 1_u32
+  IME_CAND_CODE = 2_u32
+  IME_CAND_MEANING = 3_u32
+  IME_CAND_RADICAL = 4_u32
+  IME_CAND_STROKE = 5_u32
+  IMN_CLOSESTATUSWINDOW = 1_u32
+  IMN_OPENSTATUSWINDOW = 2_u32
+  IMN_CHANGECANDIDATE = 3_u32
+  IMN_CLOSECANDIDATE = 4_u32
+  IMN_OPENCANDIDATE = 5_u32
+  IMN_SETCONVERSIONMODE = 6_u32
+  IMN_SETSENTENCEMODE = 7_u32
+  IMN_SETOPENSTATUS = 8_u32
+  IMN_SETCANDIDATEPOS = 9_u32
+  IMN_SETCOMPOSITIONFONT = 10_u32
+  IMN_SETCOMPOSITIONWINDOW = 11_u32
+  IMN_SETSTATUSWINDOWPOS = 12_u32
+  IMN_GUIDELINE = 13_u32
+  IMN_PRIVATE = 14_u32
+  IMR_COMPOSITIONWINDOW = 1_u32
+  IMR_CANDIDATEWINDOW = 2_u32
+  IMR_COMPOSITIONFONT = 3_u32
+  IMR_RECONVERTSTRING = 4_u32
+  IMR_CONFIRMRECONVERTSTRING = 5_u32
+  IMR_QUERYCHARPOSITION = 6_u32
+  IMR_DOCUMENTFEED = 7_u32
+  IMM_ERROR_NODATA = -1_i32
+  IMM_ERROR_GENERAL = -2_i32
+  IME_CONFIG_GENERAL = 1_u32
+  IME_CONFIG_REGISTERWORD = 2_u32
+  IME_CONFIG_SELECTDICTIONARY = 3_u32
+  IME_REGWORD_STYLE_EUDC = 1_u32
+  IME_REGWORD_STYLE_USER_FIRST = 2147483648_u32
+  IME_REGWORD_STYLE_USER_LAST = 4294967295_u32
+  IACE_CHILDREN = 1_u32
+  IACE_DEFAULT = 16_u32
+  IACE_IGNORENOCONTEXT = 32_u32
+  IGIMIF_RIGHTMENU = 1_u32
+  IGIMII_CMODE = 1_u32
+  IGIMII_SMODE = 2_u32
+  IGIMII_CONFIGURE = 4_u32
+  IGIMII_TOOLS = 8_u32
+  IGIMII_HELP = 16_u32
+  IGIMII_OTHER = 32_u32
+  IGIMII_INPUTTOOLS = 64_u32
+  IMFT_RADIOCHECK = 1_u32
+  IMFT_SEPARATOR = 2_u32
+  IMFT_SUBMENU = 4_u32
+  SOFTKEYBOARD_TYPE_T1 = 1_u32
+  SOFTKEYBOARD_TYPE_C1 = 2_u32
+  IMMGWL_IMC = 0_u32
+  IMMGWLP_IMC = 0_u32
+  IMC_SETCONVERSIONMODE = 2_u32
+  IMC_SETSENTENCEMODE = 4_u32
+  IMC_SETOPENSTATUS = 6_u32
+  IMC_GETSOFTKBDFONT = 17_u32
+  IMC_SETSOFTKBDFONT = 18_u32
+  IMC_GETSOFTKBDPOS = 19_u32
+  IMC_SETSOFTKBDPOS = 20_u32
+  IMC_GETSOFTKBDSUBTYPE = 21_u32
+  IMC_SETSOFTKBDSUBTYPE = 22_u32
+  IMC_SETSOFTKBDDATA = 24_u32
+  NI_CONTEXTUPDATED = 3_u32
+  IME_SYSINFO_WINLOGON = 1_u32
+  INIT_STATUSWNDPOS = 1_u32
+  INIT_CONVERSION = 2_u32
+  INIT_SENTENCE = 4_u32
+  INIT_LOGFONT = 8_u32
+  INIT_COMPFORM = 16_u32
+  INIT_SOFTKBDPOS = 32_u32
+  IME_PROP_END_UNLOAD = 1_u32
+  IME_PROP_KBD_CHAR_FIRST = 2_u32
+  IME_PROP_IGNORE_UPKEYS = 4_u32
+  IME_PROP_NEED_ALTKEY = 8_u32
+  IME_PROP_NO_KEYS_ON_CLOSE = 16_u32
+  IME_PROP_ACCEPT_WIDE_VKEY = 32_u32
+  UI_CAP_SOFTKBD = 65536_u32
+  IMN_SOFTKBDDESTROYED = 17_u32
+  IME_UI_CLASS_NAME_SIZE = 16_u32
+  IME_ESC_STRING_BUFFER_SIZE = 80_u32
   Szimejapan = "MSIME.Japan"
   Szimekorea = "MSIME.Korea"
   Szimechina = "MSIME.China"
   Szimetaiwan = "MSIME.Taiwan"
-  CLSID_VERSION_DEPENDENT_MSIME_JAPANESE = "6a91029e-aa49-471b-aee7-7d332785660d"
+  CLSID_VERSION_DEPENDENT_MSIME_JAPANESE = LibC::GUID.new(0x6a91029e_u32, 0xaa49_u16, 0x471b_u16, StaticArray[0xae_u8, 0xe7_u8, 0x7d_u8, 0x33_u8, 0x27_u8, 0x85_u8, 0x66_u8, 0xd_u8])
   IFEC_S_ALREADY_DEFAULT = 291840_i32
   FELANG_REQ_CONV = 65536_u32
   FELANG_REQ_RECONV = 131072_u32
@@ -348,333 +619,8 @@ module Win32cr::UI::Input::Ime
   RECONVOPT_NONE = 0_u32
   RECONVOPT_USECANCELNOTIFY = 1_u32
   GCSEX_CANCELRECONVERT = 268435456_u32
-  STYLE_DESCRIPTION_SIZE = 32_u32
-  IMEMENUITEM_STRING_SIZE = 80_u32
-  IMC_GETCANDIDATEPOS = 7_u32
-  IMC_SETCANDIDATEPOS = 8_u32
-  IMC_GETCOMPOSITIONFONT = 9_u32
-  IMC_SETCOMPOSITIONFONT = 10_u32
-  IMC_GETCOMPOSITIONWINDOW = 11_u32
-  IMC_SETCOMPOSITIONWINDOW = 12_u32
-  IMC_GETSTATUSWINDOWPOS = 15_u32
-  IMC_SETSTATUSWINDOWPOS = 16_u32
-  IMC_CLOSESTATUSWINDOW = 33_u32
-  IMC_OPENSTATUSWINDOW = 34_u32
-  NI_FINALIZECONVERSIONRESULT = 20_u32
-  ISC_SHOWUICANDIDATEWINDOW = 1_u32
-  ISC_SHOWUICOMPOSITIONWINDOW = 2147483648_u32
-  ISC_SHOWUIGUIDELINE = 1073741824_u32
-  ISC_SHOWUIALLCANDIDATEWINDOW = 15_u32
-  ISC_SHOWUIALL = 3221225487_u32
-  MOD_LEFT = 32768_u32
-  MOD_RIGHT = 16384_u32
-  MOD_ON_KEYUP = 2048_u32
-  MOD_IGNORE_ALL_MODIFIER = 1024_u32
-  IME_CHOTKEY_IME_NONIME_TOGGLE = 16_u32
-  IME_CHOTKEY_SHAPE_TOGGLE = 17_u32
-  IME_CHOTKEY_SYMBOL_TOGGLE = 18_u32
-  IME_JHOTKEY_CLOSE_OPEN = 48_u32
-  IME_KHOTKEY_SHAPE_TOGGLE = 80_u32
-  IME_KHOTKEY_HANJACONVERT = 81_u32
-  IME_KHOTKEY_ENGLISH = 82_u32
-  IME_THOTKEY_IME_NONIME_TOGGLE = 112_u32
-  IME_THOTKEY_SHAPE_TOGGLE = 113_u32
-  IME_THOTKEY_SYMBOL_TOGGLE = 114_u32
-  IME_HOTKEY_DSWITCH_FIRST = 256_u32
-  IME_HOTKEY_DSWITCH_LAST = 287_u32
-  IME_HOTKEY_PRIVATE_FIRST = 512_u32
-  IME_ITHOTKEY_RESEND_RESULTSTR = 512_u32
-  IME_ITHOTKEY_PREVIOUS_COMPOSITION = 513_u32
-  IME_ITHOTKEY_UISTYLE_TOGGLE = 514_u32
-  IME_ITHOTKEY_RECONVERTSTRING = 515_u32
-  IME_HOTKEY_PRIVATE_LAST = 543_u32
-  GCS_COMPREADSTR = 1_u32
-  GCS_COMPREADATTR = 2_u32
-  GCS_COMPREADCLAUSE = 4_u32
-  GCS_COMPSTR = 8_u32
-  GCS_COMPATTR = 16_u32
-  GCS_COMPCLAUSE = 32_u32
-  GCS_CURSORPOS = 128_u32
-  GCS_DELTASTART = 256_u32
-  GCS_RESULTREADSTR = 512_u32
-  GCS_RESULTREADCLAUSE = 1024_u32
-  GCS_RESULTSTR = 2048_u32
-  GCS_RESULTCLAUSE = 4096_u32
-  CS_INSERTCHAR = 8192_u32
-  CS_NOMOVECARET = 16384_u32
-  IMEVER_0310 = 196618_u32
-  IMEVER_0400 = 262144_u32
-  IME_PROP_AT_CARET = 65536_u32
-  IME_PROP_SPECIAL_UI = 131072_u32
-  IME_PROP_CANDLIST_START_FROM_1 = 262144_u32
-  IME_PROP_UNICODE = 524288_u32
-  IME_PROP_COMPLETE_ON_UNSELECT = 1048576_u32
-  UI_CAP_2700 = 1_u32
-  UI_CAP_ROT90 = 2_u32
-  UI_CAP_ROTANY = 4_u32
-  SCS_CAP_COMPSTR = 1_u32
-  SCS_CAP_MAKEREAD = 2_u32
-  SCS_CAP_SETRECONVERTSTRING = 4_u32
-  SELECT_CAP_CONVERSION = 1_u32
-  SELECT_CAP_SENTENCE = 2_u32
-  GL_LEVEL_NOGUIDELINE = 0_u32
-  GL_LEVEL_FATAL = 1_u32
-  GL_LEVEL_ERROR = 2_u32
-  GL_LEVEL_WARNING = 3_u32
-  GL_LEVEL_INFORMATION = 4_u32
-  GL_ID_UNKNOWN = 0_u32
-  GL_ID_NOMODULE = 1_u32
-  GL_ID_NODICTIONARY = 16_u32
-  GL_ID_CANNOTSAVE = 17_u32
-  GL_ID_NOCONVERT = 32_u32
-  GL_ID_TYPINGERROR = 33_u32
-  GL_ID_TOOMANYSTROKE = 34_u32
-  GL_ID_READINGCONFLICT = 35_u32
-  GL_ID_INPUTREADING = 36_u32
-  GL_ID_INPUTRADICAL = 37_u32
-  GL_ID_INPUTCODE = 38_u32
-  GL_ID_INPUTSYMBOL = 39_u32
-  GL_ID_CHOOSECANDIDATE = 40_u32
-  GL_ID_REVERSECONVERSION = 41_u32
-  GL_ID_PRIVATE_FIRST = 32768_u32
-  GL_ID_PRIVATE_LAST = 65535_u32
-  ATTR_INPUT = 0_u32
-  ATTR_TARGET_CONVERTED = 1_u32
-  ATTR_CONVERTED = 2_u32
-  ATTR_TARGET_NOTCONVERTED = 3_u32
-  ATTR_INPUT_ERROR = 4_u32
-  ATTR_FIXEDCONVERTED = 5_u32
-  CFS_DEFAULT = 0_u32
-  CFS_RECT = 1_u32
-  CFS_POINT = 2_u32
-  CFS_FORCE_POSITION = 32_u32
-  CFS_CANDIDATEPOS = 64_u32
-  CFS_EXCLUDE = 128_u32
-  IME_CMODE_SOFTKBD = 128_u32
-  IME_CMODE_NOCONVERSION = 256_u32
-  IME_CMODE_EUDC = 512_u32
-  IME_CMODE_SYMBOL = 1024_u32
-  IME_CMODE_FIXED = 2048_u32
-  IME_CMODE_RESERVED = 4026531840_u32
-  IME_SMODE_NONE = 0_u32
-  IME_SMODE_PLAURALCLAUSE = 1_u32
-  IME_SMODE_SINGLECONVERT = 2_u32
-  IME_SMODE_AUTOMATIC = 4_u32
-  IME_SMODE_PHRASEPREDICT = 8_u32
-  IME_SMODE_CONVERSATION = 16_u32
-  IME_SMODE_RESERVED = 61440_u32
-  IME_CAND_UNKNOWN = 0_u32
-  IME_CAND_READ = 1_u32
-  IME_CAND_CODE = 2_u32
-  IME_CAND_MEANING = 3_u32
-  IME_CAND_RADICAL = 4_u32
-  IME_CAND_STROKE = 5_u32
-  IMN_CLOSESTATUSWINDOW = 1_u32
-  IMN_OPENSTATUSWINDOW = 2_u32
-  IMN_CHANGECANDIDATE = 3_u32
-  IMN_CLOSECANDIDATE = 4_u32
-  IMN_OPENCANDIDATE = 5_u32
-  IMN_SETCONVERSIONMODE = 6_u32
-  IMN_SETSENTENCEMODE = 7_u32
-  IMN_SETOPENSTATUS = 8_u32
-  IMN_SETCANDIDATEPOS = 9_u32
-  IMN_SETCOMPOSITIONFONT = 10_u32
-  IMN_SETCOMPOSITIONWINDOW = 11_u32
-  IMN_SETSTATUSWINDOWPOS = 12_u32
-  IMN_GUIDELINE = 13_u32
-  IMN_PRIVATE = 14_u32
-  IMR_COMPOSITIONWINDOW = 1_u32
-  IMR_CANDIDATEWINDOW = 2_u32
-  IMR_COMPOSITIONFONT = 3_u32
-  IMR_RECONVERTSTRING = 4_u32
-  IMR_CONFIRMRECONVERTSTRING = 5_u32
-  IMR_QUERYCHARPOSITION = 6_u32
-  IMR_DOCUMENTFEED = 7_u32
-  IMM_ERROR_NODATA = -1_i32
-  IMM_ERROR_GENERAL = -2_i32
-  IME_CONFIG_GENERAL = 1_u32
-  IME_CONFIG_REGISTERWORD = 2_u32
-  IME_CONFIG_SELECTDICTIONARY = 3_u32
-  IME_ESC_QUERY_SUPPORT = 3_u32
-  IME_ESC_RESERVED_FIRST = 4_u32
-  IME_ESC_RESERVED_LAST = 2047_u32
-  IME_ESC_PRIVATE_FIRST = 2048_u32
-  IME_ESC_PRIVATE_LAST = 4095_u32
-  IME_ESC_SEQUENCE_TO_INTERNAL = 4097_u32
-  IME_ESC_GET_EUDC_DICTIONARY = 4099_u32
-  IME_ESC_SET_EUDC_DICTIONARY = 4100_u32
-  IME_ESC_MAX_KEY = 4101_u32
-  IME_ESC_IME_NAME = 4102_u32
-  IME_ESC_SYNC_HOTKEY = 4103_u32
-  IME_ESC_HANJA_MODE = 4104_u32
-  IME_ESC_AUTOMATA = 4105_u32
-  IME_ESC_PRIVATE_HOTKEY = 4106_u32
-  IME_ESC_GETHELPFILENAME = 4107_u32
-  IME_REGWORD_STYLE_EUDC = 1_u32
-  IME_REGWORD_STYLE_USER_FIRST = 2147483648_u32
-  IME_REGWORD_STYLE_USER_LAST = 4294967295_u32
-  IACE_CHILDREN = 1_u32
-  IACE_DEFAULT = 16_u32
-  IACE_IGNORENOCONTEXT = 32_u32
-  IGIMIF_RIGHTMENU = 1_u32
-  IGIMII_CMODE = 1_u32
-  IGIMII_SMODE = 2_u32
-  IGIMII_CONFIGURE = 4_u32
-  IGIMII_TOOLS = 8_u32
-  IGIMII_HELP = 16_u32
-  IGIMII_OTHER = 32_u32
-  IGIMII_INPUTTOOLS = 64_u32
-  IMFT_RADIOCHECK = 1_u32
-  IMFT_SEPARATOR = 2_u32
-  IMFT_SUBMENU = 4_u32
-  SOFTKEYBOARD_TYPE_T1 = 1_u32
-  SOFTKEYBOARD_TYPE_C1 = 2_u32
-  IMMGWL_IMC = 0_u32
-  IMMGWLP_IMC = 0_u32
-  IMC_SETCONVERSIONMODE = 2_u32
-  IMC_SETSENTENCEMODE = 4_u32
-  IMC_SETOPENSTATUS = 6_u32
-  IMC_GETSOFTKBDFONT = 17_u32
-  IMC_SETSOFTKBDFONT = 18_u32
-  IMC_GETSOFTKBDPOS = 19_u32
-  IMC_SETSOFTKBDPOS = 20_u32
-  IMC_GETSOFTKBDSUBTYPE = 21_u32
-  IMC_SETSOFTKBDSUBTYPE = 22_u32
-  IMC_SETSOFTKBDDATA = 24_u32
-  NI_CONTEXTUPDATED = 3_u32
-  IME_SYSINFO_WINLOGON = 1_u32
-  IME_SYSINFO_WOW16 = 2_u32
-  INIT_STATUSWNDPOS = 1_u32
-  INIT_CONVERSION = 2_u32
-  INIT_SENTENCE = 4_u32
-  INIT_LOGFONT = 8_u32
-  INIT_COMPFORM = 16_u32
-  INIT_SOFTKBDPOS = 32_u32
-  IME_PROP_END_UNLOAD = 1_u32
-  IME_PROP_KBD_CHAR_FIRST = 2_u32
-  IME_PROP_IGNORE_UPKEYS = 4_u32
-  IME_PROP_NEED_ALTKEY = 8_u32
-  IME_PROP_NO_KEYS_ON_CLOSE = 16_u32
-  IME_PROP_ACCEPT_WIDE_VKEY = 32_u32
-  UI_CAP_SOFTKBD = 65536_u32
-  IMN_SOFTKBDDESTROYED = 17_u32
-  IME_UI_CLASS_NAME_SIZE = 16_u32
-  IME_ESC_STRING_BUFFER_SIZE = 80_u32
-  CATID_MSIME_IImePadApplet_VER7 = "4a0f8e31-c3ee-11d1-afef-00805f0c8b6d"
-  CATID_MSIME_IImePadApplet_VER80 = "56f7a792-fef1-11d3-8463-00c04f7a06e5"
-  CATID_MSIME_IImePadApplet_VER81 = "656520b0-bb88-11d4-84c0-00c04f7a06e5"
-  CATID_MSIME_IImePadApplet900 = "faae51bf-5e5b-4a1d-8de1-17c1d9e1728d"
-  CATID_MSIME_IImePadApplet1000 = "e081e1d6-2389-43cb-b66f-609f823d9f9c"
-  CATID_MSIME_IImePadApplet1200 = "a47fb5fc-7d15-4223-a789-b781bf9ae667"
-  CATID_MSIME_IImePadApplet = "7566cad1-4ec9-4478-9fe9-8ed766619edf"
-  FEID_NONE = 0_u32
-  FEID_CHINESE_TRADITIONAL = 1_u32
-  FEID_CHINESE_SIMPLIFIED = 2_u32
-  FEID_CHINESE_HONGKONG = 3_u32
-  FEID_CHINESE_SINGAPORE = 4_u32
-  FEID_JAPANESE = 5_u32
-  FEID_KOREAN = 6_u32
-  FEID_KOREAN_JOHAB = 7_u32
-  INFOMASK_NONE = 0_u32
-  INFOMASK_QUERY_CAND = 1_u32
-  INFOMASK_APPLY_CAND = 2_u32
-  INFOMASK_APPLY_CAND_EX = 4_u32
-  INFOMASK_STRING_FIX = 65536_u32
-  INFOMASK_HIDE_CAND = 131072_u32
-  INFOMASK_BLOCK_CAND = 262144_u32
-  IMEFAREASTINFO_TYPE_DEFAULT = 0_u32
-  IMEFAREASTINFO_TYPE_READING = 1_u32
-  IMEFAREASTINFO_TYPE_COMMENT = 2_u32
-  IMEFAREASTINFO_TYPE_COSTTIME = 3_u32
-  CHARINFO_APPLETID_MASK = 4278190080_u32
-  CHARINFO_FEID_MASK = 15728640_u32
-  CHARINFO_CHARID_MASK = 65535_u32
-  MAX_APPLETTITLE = 64_u32
-  MAX_FONTFACE = 32_u32
-  IPACFG_NONE = 0_i32
-  IPACFG_PROPERTY = 1_i32
-  IPACFG_HELP = 2_i32
-  IPACFG_TITLE = 65536_i32
-  IPACFG_TITLEFONTFACE = 131072_i32
-  IPACFG_CATEGORY = 262144_i32
-  IPACFG_LANG = 16_i32
-  IPACID_NONE = 0_u32
-  IPACID_SOFTKEY = 1_u32
-  IPACID_HANDWRITING = 2_u32
-  IPACID_STROKESEARCH = 3_u32
-  IPACID_RADICALSEARCH = 4_u32
-  IPACID_SYMBOLSEARCH = 5_u32
-  IPACID_VOICE = 6_u32
-  IPACID_EPWING = 7_u32
-  IPACID_OCR = 8_u32
-  IPACID_CHARLIST = 9_u32
-  IPACID_USER = 256_u32
-  IMEPADREQ_FIRST = 4096_u32
-  IMEPADREQ_INSERTSTRINGCANDIDATE = 4098_u32
-  IMEPADREQ_INSERTITEMCANDIDATE = 4099_u32
-  IMEPADREQ_SENDKEYCONTROL = 4101_u32
-  IMEPADREQ_GETSELECTEDSTRING = 4103_u32
-  IMEPADREQ_SETAPPLETDATA = 4105_u32
-  IMEPADREQ_GETAPPLETDATA = 4106_u32
-  IMEPADREQ_SETTITLEFONT = 4107_u32
-  IMEPADREQ_GETCOMPOSITIONSTRINGID = 4109_u32
-  IMEPADREQ_INSERTSTRINGCANDIDATEINFO = 4110_u32
-  IMEPADREQ_CHANGESTRINGCANDIDATEINFO = 4111_u32
-  IMEPADREQ_INSERTSTRINGINFO = 4114_u32
-  IMEPADREQ_CHANGESTRINGINFO = 4115_u32
-  IMEPADREQ_GETCURRENTUILANGID = 4120_u32
-  IMEPADCTRL_CONVERTALL = 1_u32
-  IMEPADCTRL_DETERMINALL = 2_u32
-  IMEPADCTRL_DETERMINCHAR = 3_u32
-  IMEPADCTRL_CLEARALL = 4_u32
-  IMEPADCTRL_CARETSET = 5_u32
-  IMEPADCTRL_CARETLEFT = 6_u32
-  IMEPADCTRL_CARETRIGHT = 7_u32
-  IMEPADCTRL_CARETTOP = 8_u32
-  IMEPADCTRL_CARETBOTTOM = 9_u32
-  IMEPADCTRL_CARETBACKSPACE = 10_u32
-  IMEPADCTRL_CARETDELETE = 11_u32
-  IMEPADCTRL_PHRASEDELETE = 12_u32
-  IMEPADCTRL_INSERTSPACE = 13_u32
-  IMEPADCTRL_INSERTFULLSPACE = 14_u32
-  IMEPADCTRL_INSERTHALFSPACE = 15_u32
-  IMEPADCTRL_ONIME = 16_u32
-  IMEPADCTRL_OFFIME = 17_u32
-  IMEPADCTRL_ONPRECONVERSION = 18_u32
-  IMEPADCTRL_OFFPRECONVERSION = 19_u32
-  IMEPADCTRL_PHONETICCANDIDATE = 20_u32
-  IMEKEYCTRLMASK_ALT = 1_u32
-  IMEKEYCTRLMASK_CTRL = 2_u32
-  IMEKEYCTRLMASK_SHIFT = 4_u32
-  IMEKEYCTRL_UP = 1_u32
-  IMEKEYCTRL_DOWN = 0_u32
-  IMEPN_FIRST = 256_u32
-  IMEPN_ACTIVATE = 257_u32
-  IMEPN_INACTIVATE = 258_u32
-  IMEPN_SHOW = 260_u32
-  IMEPN_HIDE = 261_u32
-  IMEPN_SIZECHANGING = 262_u32
-  IMEPN_SIZECHANGED = 263_u32
-  IMEPN_CONFIG = 264_u32
-  IMEPN_HELP = 265_u32
-  IMEPN_QUERYCAND = 266_u32
-  IMEPN_APPLYCAND = 267_u32
-  IMEPN_APPLYCANDEX = 268_u32
-  IMEPN_SETTINGCHANGED = 269_u32
-  IMEPN_USER = 356_u32
-  IPAWS_ENABLED = 1_i32
-  IPAWS_SIZINGNOTIFY = 4_i32
-  IPAWS_VERTICALFIXED = 256_i32
-  IPAWS_HORIZONTALFIXED = 512_i32
-  IPAWS_SIZEFIXED = 768_i32
-  IPAWS_MAXWIDTHFIXED = 4096_i32
-  IPAWS_MAXHEIGHTFIXED = 8192_i32
-  IPAWS_MAXSIZEFIXED = 12288_i32
-  IPAWS_MINWIDTHFIXED = 65536_i32
-  IPAWS_MINHEIGHTFIXED = 131072_i32
-  IPAWS_MINSIZEFIXED = 196608_i32
-  CLSID_ImePlugInDictDictionaryList_CHS = "7bf0129b-5bef-4de4-9b0b-5edb66ac2fa6"
-  CLSID_ImePlugInDictDictionaryList_JPN = "4fe2776b-b0f9-4396-b5fc-e9d4cf1ec195"
+  CLSID_ImePlugInDictDictionaryList_CHS = LibC::GUID.new(0x7bf0129b_u32, 0x5bef_u16, 0x4de4_u16, StaticArray[0x9b_u8, 0xb_u8, 0x5e_u8, 0xdb_u8, 0x66_u8, 0xac_u8, 0x2f_u8, 0xa6_u8])
+  CLSID_ImePlugInDictDictionaryList_JPN = LibC::GUID.new(0x4fe2776b_u32, 0xb0f9_u16, 0x4396_u16, StaticArray[0xb5_u8, 0xfc_u8, 0xe9_u8, 0xd4_u8, 0xcf_u8, 0x1e_u8, 0xc1_u8, 0x95_u8])
 
   CLSID_CActiveIMM = LibC::GUID.new(0x4955dd33_u32, 0xb159_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
 
@@ -732,6 +678,86 @@ module Win32cr::UI::Input::Ime
     IMEPADREQ_GETCONVERSIONSTATUS = 4126_u32
     IMEPADREQ_GETVERSION = 4127_u32
     IMEPADREQ_GETCURRENTIMEINFO = 4128_u32
+  end
+  @[Flags]
+  enum IME_CONVERSION_MODE : UInt32
+    IME_CMODE_ALPHANUMERIC = 0_u32
+    IME_CMODE_NATIVE = 1_u32
+    IME_CMODE_CHINESE = 1_u32
+    IME_CMODE_HANGUL = 1_u32
+    IME_CMODE_JAPANESE = 1_u32
+    IME_CMODE_KATAKANA = 2_u32
+    IME_CMODE_LANGUAGE = 3_u32
+    IME_CMODE_FULLSHAPE = 8_u32
+    IME_CMODE_ROMAN = 16_u32
+    IME_CMODE_CHARCODE = 32_u32
+    IME_CMODE_HANJACONVERT = 64_u32
+    IME_CMODE_NATIVESYMBOL = 128_u32
+    IME_CMODE_HANGEUL = 1_u32
+    IME_CMODE_SOFTKBD = 128_u32
+    IME_CMODE_NOCONVERSION = 256_u32
+    IME_CMODE_EUDC = 512_u32
+    IME_CMODE_SYMBOL = 1024_u32
+    IME_CMODE_FIXED = 2048_u32
+    IME_CMODE_RESERVED = 4026531840_u32
+  end
+  @[Flags]
+  enum IME_SENTENCE_MODE : UInt32
+    IME_SMODE_NONE = 0_u32
+    IME_SMODE_PLAURALCLAUSE = 1_u32
+    IME_SMODE_SINGLECONVERT = 2_u32
+    IME_SMODE_AUTOMATIC = 4_u32
+    IME_SMODE_PHRASEPREDICT = 8_u32
+    IME_SMODE_CONVERSATION = 16_u32
+    IME_SMODE_RESERVED = 61440_u32
+  end
+  @[Flags]
+  enum IME_COMPOSITION_STRING : UInt32
+    GCS_COMPREADSTR = 1_u32
+    GCS_COMPREADATTR = 2_u32
+    GCS_COMPREADCLAUSE = 4_u32
+    GCS_COMPSTR = 8_u32
+    GCS_COMPATTR = 16_u32
+    GCS_COMPCLAUSE = 32_u32
+    GCS_CURSORPOS = 128_u32
+    GCS_DELTASTART = 256_u32
+    GCS_RESULTREADSTR = 512_u32
+    GCS_RESULTREADCLAUSE = 1024_u32
+    GCS_RESULTSTR = 2048_u32
+    GCS_RESULTCLAUSE = 4096_u32
+  end
+  enum IME_ESCAPE : UInt32
+    IME_ESC_QUERY_SUPPORT = 3_u32
+    IME_ESC_RESERVED_FIRST = 4_u32
+    IME_ESC_RESERVED_LAST = 2047_u32
+    IME_ESC_PRIVATE_FIRST = 2048_u32
+    IME_ESC_PRIVATE_LAST = 4095_u32
+    IME_ESC_SEQUENCE_TO_INTERNAL = 4097_u32
+    IME_ESC_GET_EUDC_DICTIONARY = 4099_u32
+    IME_ESC_SET_EUDC_DICTIONARY = 4100_u32
+    IME_ESC_MAX_KEY = 4101_u32
+    IME_ESC_IME_NAME = 4102_u32
+    IME_ESC_SYNC_HOTKEY = 4103_u32
+    IME_ESC_HANJA_MODE = 4104_u32
+    IME_ESC_AUTOMATA = 4105_u32
+    IME_ESC_PRIVATE_HOTKEY = 4106_u32
+    IME_ESC_GETHELPFILENAME = 4107_u32
+  end
+  enum IME_HOTKEY_IDENTIFIER : UInt32
+    IME_CHOTKEY_IME_NONIME_TOGGLE = 16_u32
+    IME_CHOTKEY_SHAPE_TOGGLE = 17_u32
+    IME_CHOTKEY_SYMBOL_TOGGLE = 18_u32
+    IME_JHOTKEY_CLOSE_OPEN = 48_u32
+    IME_KHOTKEY_SHAPE_TOGGLE = 80_u32
+    IME_KHOTKEY_HANJACONVERT = 81_u32
+    IME_KHOTKEY_ENGLISH = 82_u32
+    IME_THOTKEY_IME_NONIME_TOGGLE = 112_u32
+    IME_THOTKEY_SHAPE_TOGGLE = 113_u32
+    IME_THOTKEY_SYMBOL_TOGGLE = 114_u32
+    IME_ITHOTKEY_RESEND_RESULTSTR = 512_u32
+    IME_ITHOTKEY_PREVIOUS_COMPOSITION = 513_u32
+    IME_ITHOTKEY_UISTYLE_TOGGLE = 514_u32
+    IME_ITHOTKEY_RECONVERTSTRING = 515_u32
   end
   enum IMEREG
     IFED_REG_HEAD = 0_i32
@@ -829,8 +855,8 @@ module Win32cr::UI::Input::Ime
     property dwSelection : UInt32
     property dwPageStart : UInt32
     property dwPageSize : UInt32
-    property dwOffset : UInt32*
-    def initialize(@dwSize : UInt32, @dwStyle : UInt32, @dwCount : UInt32, @dwSelection : UInt32, @dwPageStart : UInt32, @dwPageSize : UInt32, @dwOffset : UInt32*)
+    property dwOffset : UInt32[1]
+    def initialize(@dwSize : UInt32, @dwStyle : UInt32, @dwCount : UInt32, @dwSelection : UInt32, @dwPageStart : UInt32, @dwPageSize : UInt32, @dwOffset : UInt32[1])
     end
   end
 
@@ -942,22 +968,22 @@ module Win32cr::UI::Input::Ime
     property _bitfield : UInt16
     property pReserved : Void*
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property cchRead : UInt16
-    property cchComp : UInt16
-    def initialize(@cchRead : UInt16, @cchComp : UInt16)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property wReadPos : UInt16
     property wCompPos : UInt16
     def initialize(@wReadPos : UInt16, @wCompPos : UInt16)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property cchRead : UInt16
+    property cchComp : UInt16
+    def initialize(@cchRead : UInt16, @cchComp : UInt16)
     end
     end
 
@@ -979,7 +1005,17 @@ module Win32cr::UI::Input::Ime
     property pWDD : Win32cr::UI::Input::Ime::WDD*
     property cWDD : Int32
     property pPrivate : Void*
-    property blk_buff : UInt16*
+    property blk_buff : UInt16[1]
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property pwchRead : Win32cr::Foundation::PWSTR
+    property pwchComp : Win32cr::Foundation::PWSTR
+    def initialize(@pwchRead : Win32cr::Foundation::PWSTR, @pwchComp : Win32cr::Foundation::PWSTR)
+    end
+    end
+
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
@@ -1000,17 +1036,7 @@ module Win32cr::UI::Input::Ime
     end
     end
 
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property pwchRead : Win32cr::Foundation::PWSTR
-    property pwchComp : Win32cr::Foundation::PWSTR
-    def initialize(@pwchRead : Win32cr::Foundation::PWSTR, @pwchComp : Win32cr::Foundation::PWSTR)
-    end
-    end
-
-    def initialize(@dwSize : UInt32, @pwchOutput : Win32cr::Foundation::PWSTR, @cchOutput : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pchInputPos : UInt16*, @pchOutputIdxWDD : UInt16*, @anonymous3 : Anonymous3_e__Union_, @paMonoRubyPos : UInt16*, @pWDD : Win32cr::UI::Input::Ime::WDD*, @cWDD : Int32, @pPrivate : Void*, @blk_buff : UInt16*)
+    def initialize(@dwSize : UInt32, @pwchOutput : Win32cr::Foundation::PWSTR, @cchOutput : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pchInputPos : UInt16*, @pchOutputIdxWDD : UInt16*, @anonymous3 : Anonymous3_e__Union_, @paMonoRubyPos : UInt16*, @pWDD : Win32cr::UI::Input::Ime::WDD*, @cWDD : Int32, @pPrivate : Void*, @blk_buff : UInt16[1])
     end
   end
 
@@ -1117,41 +1143,41 @@ module Win32cr::UI::Input::Ime
   @[Extern]
   struct IMEKMS
     property cbSize : Int32
-    property hIMC : Win32cr::Globalization::HIMC
+    property hIMC : Win32cr::UI::Input::Ime::HIMC
     property cKeyList : UInt32
     property pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*
-    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @cKeyList : UInt32, @pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*)
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::UI::Input::Ime::HIMC, @cKeyList : UInt32, @pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*)
     end
   end
 
   @[Extern]
   struct IMEKMSNTFY
     property cbSize : Int32
-    property hIMC : Win32cr::Globalization::HIMC
+    property hIMC : Win32cr::UI::Input::Ime::HIMC
     property fSelect : Win32cr::Foundation::BOOL
-    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @fSelect : Win32cr::Foundation::BOOL)
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::UI::Input::Ime::HIMC, @fSelect : Win32cr::Foundation::BOOL)
     end
   end
 
   @[Extern]
   struct IMEKMSKMP
     property cbSize : Int32
-    property hIMC : Win32cr::Globalization::HIMC
+    property hIMC : Win32cr::UI::Input::Ime::HIMC
     property idLang : UInt16
     property wVKStart : UInt16
     property wVKEnd : UInt16
     property cKeyList : Int32
     property pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*
-    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @idLang : UInt16, @wVKStart : UInt16, @wVKEnd : UInt16, @cKeyList : Int32, @pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*)
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::UI::Input::Ime::HIMC, @idLang : UInt16, @wVKStart : UInt16, @wVKEnd : UInt16, @cKeyList : Int32, @pKeyList : Win32cr::UI::Input::Ime::IMEKMSKEY*)
     end
   end
 
   @[Extern]
   struct IMEKMSINVK
     property cbSize : Int32
-    property hIMC : Win32cr::Globalization::HIMC
+    property hIMC : Win32cr::UI::Input::Ime::HIMC
     property dwControl : UInt32
-    def initialize(@cbSize : Int32, @hIMC : Win32cr::Globalization::HIMC, @dwControl : UInt32)
+    def initialize(@cbSize : Int32, @hIMC : Win32cr::UI::Input::Ime::HIMC, @dwControl : UInt32)
     end
   end
 
@@ -1221,8 +1247,8 @@ module Win32cr::UI::Input::Ime
   @[Extern]
   struct TRANSMSGLIST
     property uMsgCount : UInt32
-    property trans_msg : Win32cr::UI::Input::Ime::TRANSMSG*
-    def initialize(@uMsgCount : UInt32, @trans_msg : Win32cr::UI::Input::Ime::TRANSMSG*)
+    property trans_msg : Win32cr::UI::Input::Ime::TRANSMSG[1]
+    def initialize(@uMsgCount : UInt32, @trans_msg : Win32cr::UI::Input::Ime::TRANSMSG[1])
     end
   end
 
@@ -1248,12 +1274,12 @@ module Win32cr::UI::Input::Ime
     property lfFont : Lffont_e__union_
     property cfCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM
     property cfCandForm : Win32cr::UI::Input::Ime::CANDIDATEFORM[4]
-    property hCompStr : Win32cr::Globalization::HIMCC
-    property hCandInfo : Win32cr::Globalization::HIMCC
-    property hGuideLine : Win32cr::Globalization::HIMCC
-    property hPrivate : Win32cr::Globalization::HIMCC
+    property hCompStr : Win32cr::UI::Input::Ime::HIMCC
+    property hCandInfo : Win32cr::UI::Input::Ime::HIMCC
+    property hGuideLine : Win32cr::UI::Input::Ime::HIMCC
+    property hPrivate : Win32cr::UI::Input::Ime::HIMCC
     property dwNumMsgBuf : UInt32
-    property hMsgBuf : Win32cr::Globalization::HIMCC
+    property hMsgBuf : Win32cr::UI::Input::Ime::HIMCC
     property fdwInit : UInt32
     property dwReserve : UInt32[3]
 
@@ -1266,7 +1292,7 @@ module Win32cr::UI::Input::Ime
     end
     end
 
-    def initialize(@hWnd : Win32cr::Foundation::HWND, @fOpen : Win32cr::Foundation::BOOL, @ptStatusWndPos : Win32cr::Foundation::POINT, @ptSoftKbdPos : Win32cr::Foundation::POINT, @fdwConversion : UInt32, @fdwSentence : UInt32, @lfFont : Lffont_e__union_, @cfCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM, @cfCandForm : Win32cr::UI::Input::Ime::CANDIDATEFORM[4], @hCompStr : Win32cr::Globalization::HIMCC, @hCandInfo : Win32cr::Globalization::HIMCC, @hGuideLine : Win32cr::Globalization::HIMCC, @hPrivate : Win32cr::Globalization::HIMCC, @dwNumMsgBuf : UInt32, @hMsgBuf : Win32cr::Globalization::HIMCC, @fdwInit : UInt32, @dwReserve : UInt32[3])
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @fOpen : Win32cr::Foundation::BOOL, @ptStatusWndPos : Win32cr::Foundation::POINT, @ptSoftKbdPos : Win32cr::Foundation::POINT, @fdwConversion : UInt32, @fdwSentence : UInt32, @lfFont : Lffont_e__union_, @cfCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM, @cfCandForm : Win32cr::UI::Input::Ime::CANDIDATEFORM[4], @hCompStr : Win32cr::UI::Input::Ime::HIMCC, @hCandInfo : Win32cr::UI::Input::Ime::HIMCC, @hGuideLine : Win32cr::UI::Input::Ime::HIMCC, @hPrivate : Win32cr::UI::Input::Ime::HIMCC, @dwNumMsgBuf : UInt32, @hMsgBuf : Win32cr::UI::Input::Ime::HIMCC, @fdwInit : UInt32, @dwReserve : UInt32[3])
     end
   end
 
@@ -1302,8 +1328,8 @@ module Win32cr::UI::Input::Ime
   @[Extern]
   struct IMESTRINGCANDIDATE
     property uCount : UInt32
-    property lpwstr : Win32cr::Foundation::PWSTR*
-    def initialize(@uCount : UInt32, @lpwstr : Win32cr::Foundation::PWSTR*)
+    property lpwstr : Win32cr::Foundation::PWSTR[1]
+    def initialize(@uCount : UInt32, @lpwstr : Win32cr::Foundation::PWSTR[1])
     end
   end
 
@@ -1319,13 +1345,13 @@ module Win32cr::UI::Input::Ime
   @[Extern]
   struct IMEITEMCANDIDATE
     property uCount : UInt32
-    property imeItem : Win32cr::UI::Input::Ime::IMEITEM*
-    def initialize(@uCount : UInt32, @imeItem : Win32cr::UI::Input::Ime::IMEITEM*)
+    property imeItem : Win32cr::UI::Input::Ime::IMEITEM[1]
+    def initialize(@uCount : UInt32, @imeItem : Win32cr::UI::Input::Ime::IMEITEM[1])
     end
   end
 
   @[Extern]
-  struct Tabimestringinfo
+  struct IMESTRINGINFO
     property dwFarEastId : UInt32
     property lpwstr : Win32cr::Foundation::PWSTR
     def initialize(@dwFarEastId : UInt32, @lpwstr : Win32cr::Foundation::PWSTR)
@@ -1333,23 +1359,23 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  struct Tabimefareastinfo
+  struct IMEFAREASTINFO
     property dwSize : UInt32
     property dwType : UInt32
-    property dwData : UInt32*
-    def initialize(@dwSize : UInt32, @dwType : UInt32, @dwData : UInt32*)
+    property dwData : UInt32[1]
+    def initialize(@dwSize : UInt32, @dwType : UInt32, @dwData : UInt32[1])
     end
   end
 
   @[Extern]
   struct IMESTRINGCANDIDATEINFO
     property dwFarEastId : UInt32
-    property lpFarEastInfo : Win32cr::UI::Input::Ime::Tabimefareastinfo*
+    property lpFarEastInfo : Win32cr::UI::Input::Ime::IMEFAREASTINFO*
     property fInfoMask : UInt32
     property iSelIndex : Int32
     property uCount : UInt32
-    property lpwstr : Win32cr::Foundation::PWSTR*
-    def initialize(@dwFarEastId : UInt32, @lpFarEastInfo : Win32cr::UI::Input::Ime::Tabimefareastinfo*, @fInfoMask : UInt32, @iSelIndex : Int32, @uCount : UInt32, @lpwstr : Win32cr::Foundation::PWSTR*)
+    property lpwstr : Win32cr::Foundation::PWSTR[1]
+    def initialize(@dwFarEastId : UInt32, @lpFarEastInfo : Win32cr::UI::Input::Ime::IMEFAREASTINFO*, @fInfoMask : UInt32, @iSelIndex : Int32, @uCount : UInt32, @lpwstr : Win32cr::Foundation::PWSTR[1])
     end
   end
 
@@ -1415,7 +1441,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFEClassFactoryVtbl,
+
+  record IFEClassFactoryVtable,
     query_interface : Proc(IFEClassFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFEClassFactory*, UInt32),
     release : Proc(IFEClassFactory*, UInt32),
@@ -1424,7 +1451,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IFEClassFactory, lpVtbl : IFEClassFactoryVtbl* do
+  record IFEClassFactory, lpVtbl : IFEClassFactoryVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IFEClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1445,18 +1472,19 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFECommonVtbl,
+
+  record IFECommonVtable,
     query_interface : Proc(IFECommon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFECommon*, UInt32),
     release : Proc(IFECommon*, UInt32),
-    is_default_ime : Proc(IFECommon*, UInt8*, Int32, Win32cr::Foundation::HRESULT),
+    is_default_ime : Proc(IFECommon*, Win32cr::Foundation::PSTR, Int32, Win32cr::Foundation::HRESULT),
     set_default_ime : Proc(IFECommon*, Win32cr::Foundation::HRESULT),
     invoke_word_reg_dialog : Proc(IFECommon*, Win32cr::UI::Input::Ime::IMEDLG*, Win32cr::Foundation::HRESULT),
     invoke_dict_tool_dialog : Proc(IFECommon*, Win32cr::UI::Input::Ime::IMEDLG*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFECommon, lpVtbl : IFECommonVtbl* do
+  record IFECommon, lpVtbl : IFECommonVtable* do
     GUID = LibC::GUID.new(0x19f7151_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFECommon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1467,7 +1495,7 @@ module Win32cr::UI::Input::Ime
     def release(this : IFECommon*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def is_default_ime(this : IFECommon*, szName : UInt8*, cszName : Int32) : Win32cr::Foundation::HRESULT
+    def is_default_ime(this : IFECommon*, szName : Win32cr::Foundation::PSTR, cszName : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_default_ime.call(this, szName, cszName)
     end
     def set_default_ime(this : IFECommon*) : Win32cr::Foundation::HRESULT
@@ -1483,7 +1511,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFELanguageVtbl,
+
+  record IFELanguageVtable,
     query_interface : Proc(IFELanguage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFELanguage*, UInt32),
     release : Proc(IFELanguage*, UInt32),
@@ -1496,7 +1525,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IFELanguage, lpVtbl : IFELanguageVtbl* do
+  record IFELanguage, lpVtbl : IFELanguageVtable* do
     GUID = LibC::GUID.new(0x19f7152_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFELanguage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1529,13 +1558,14 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFEDictionaryVtbl,
+
+  record IFEDictionaryVtable,
     query_interface : Proc(IFEDictionary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFEDictionary*, UInt32),
     release : Proc(IFEDictionary*, UInt32),
-    open : Proc(IFEDictionary*, UInt8*, Win32cr::UI::Input::Ime::IMESHF*, Win32cr::Foundation::HRESULT),
+    open : Proc(IFEDictionary*, Win32cr::Foundation::PSTR, Win32cr::UI::Input::Ime::IMESHF*, Win32cr::Foundation::HRESULT),
     close : Proc(IFEDictionary*, Win32cr::Foundation::HRESULT),
-    get_header : Proc(IFEDictionary*, UInt8*, Win32cr::UI::Input::Ime::IMESHF*, Win32cr::UI::Input::Ime::IMEFMT*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_header : Proc(IFEDictionary*, Win32cr::Foundation::PSTR, Win32cr::UI::Input::Ime::IMESHF*, Win32cr::UI::Input::Ime::IMEFMT*, UInt32*, Win32cr::Foundation::HRESULT),
     display_property : Proc(IFEDictionary*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
     get_pos_table : Proc(IFEDictionary*, Win32cr::UI::Input::Ime::POSTBL**, Int32*, Win32cr::Foundation::HRESULT),
     get_words : Proc(IFEDictionary*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, UInt8*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
@@ -1553,7 +1583,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IFEDictionary, lpVtbl : IFEDictionaryVtbl* do
+  record IFEDictionary, lpVtbl : IFEDictionaryVtable* do
     GUID = LibC::GUID.new(0x19f7153_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFEDictionary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1564,13 +1594,13 @@ module Win32cr::UI::Input::Ime
     def release(this : IFEDictionary*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def open(this : IFEDictionary*, pchDictPath : UInt8*, pshf : Win32cr::UI::Input::Ime::IMESHF*) : Win32cr::Foundation::HRESULT
+    def open(this : IFEDictionary*, pchDictPath : Win32cr::Foundation::PSTR, pshf : Win32cr::UI::Input::Ime::IMESHF*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, pchDictPath, pshf)
     end
     def close(this : IFEDictionary*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
-    def get_header(this : IFEDictionary*, pchDictPath : UInt8*, pshf : Win32cr::UI::Input::Ime::IMESHF*, pjfmt : Win32cr::UI::Input::Ime::IMEFMT*, pulType : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_header(this : IFEDictionary*, pchDictPath : Win32cr::Foundation::PSTR, pshf : Win32cr::UI::Input::Ime::IMESHF*, pjfmt : Win32cr::UI::Input::Ime::IMEFMT*, pulType : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_header.call(this, pchDictPath, pshf, pjfmt, pulType)
     end
     def display_property(this : IFEDictionary*, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
@@ -1619,7 +1649,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImeSpecifyAppletsVtbl,
+
+  record IImeSpecifyAppletsVtable,
     query_interface : Proc(IImeSpecifyApplets*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImeSpecifyApplets*, UInt32),
     release : Proc(IImeSpecifyApplets*, UInt32),
@@ -1627,7 +1658,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImeSpecifyApplets, lpVtbl : IImeSpecifyAppletsVtbl* do
+  record IImeSpecifyApplets, lpVtbl : IImeSpecifyAppletsVtable* do
     GUID = LibC::GUID.new(0x5d8e643c_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImeSpecifyApplets*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1645,7 +1676,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImePadAppletVtbl,
+
+  record IImePadAppletVtable,
     query_interface : Proc(IImePadApplet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImePadApplet*, UInt32),
     release : Proc(IImePadApplet*, UInt32),
@@ -1657,7 +1689,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImePadApplet, lpVtbl : IImePadAppletVtbl* do
+  record IImePadApplet, lpVtbl : IImePadAppletVtable* do
     GUID = LibC::GUID.new(0x5d8e643b_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImePadApplet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1687,7 +1719,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImePadVtbl,
+
+  record IImePadVtable,
     query_interface : Proc(IImePad*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImePad*, UInt32),
     release : Proc(IImePad*, UInt32),
@@ -1695,7 +1728,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImePad, lpVtbl : IImePadVtbl* do
+  record IImePad, lpVtbl : IImePadVtable* do
     GUID = LibC::GUID.new(0x5d8e643a_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImePad*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1713,7 +1746,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImePlugInDictDictionaryListVtbl,
+
+  record IImePlugInDictDictionaryListVtable,
     query_interface : Proc(IImePlugInDictDictionaryList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImePlugInDictDictionaryList*, UInt32),
     release : Proc(IImePlugInDictDictionaryList*, UInt32),
@@ -1722,7 +1756,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImePlugInDictDictionaryList, lpVtbl : IImePlugInDictDictionaryListVtbl* do
+  record IImePlugInDictDictionaryList, lpVtbl : IImePlugInDictDictionaryListVtable* do
     GUID = LibC::GUID.new(0x98752974_u32, 0xb0a6_u16, 0x489b_u16, StaticArray[0x8f_u8, 0x6f_u8, 0xbf_u8, 0xf3_u8, 0x76_u8, 0x9c_u8, 0x8e_u8, 0xeb_u8])
     def query_interface(this : IImePlugInDictDictionaryList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1743,7 +1777,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IEnumRegisterWordAVtbl,
+
+  record IEnumRegisterWordAVtable,
     query_interface : Proc(IEnumRegisterWordA*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRegisterWordA*, UInt32),
     release : Proc(IEnumRegisterWordA*, UInt32),
@@ -1754,7 +1789,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IEnumRegisterWordA, lpVtbl : IEnumRegisterWordAVtbl* do
+  record IEnumRegisterWordA, lpVtbl : IEnumRegisterWordAVtable* do
     GUID = LibC::GUID.new(0x8c03412_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IEnumRegisterWordA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1781,7 +1816,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IEnumRegisterWordWVtbl,
+
+  record IEnumRegisterWordWVtable,
     query_interface : Proc(IEnumRegisterWordW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRegisterWordW*, UInt32),
     release : Proc(IEnumRegisterWordW*, UInt32),
@@ -1792,7 +1828,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IEnumRegisterWordW, lpVtbl : IEnumRegisterWordWVtbl* do
+  record IEnumRegisterWordW, lpVtbl : IEnumRegisterWordWVtable* do
     GUID = LibC::GUID.new(0x4955dd31_u32, 0xb159_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IEnumRegisterWordW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1819,18 +1855,19 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IEnumInputContextVtbl,
+
+  record IEnumInputContextVtable,
     query_interface : Proc(IEnumInputContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumInputContext*, UInt32),
     release : Proc(IEnumInputContext*, UInt32),
     clone : Proc(IEnumInputContext*, Void**, Win32cr::Foundation::HRESULT),
-    next__ : Proc(IEnumInputContext*, UInt32, Win32cr::Globalization::HIMC*, UInt32*, Win32cr::Foundation::HRESULT),
+    next__ : Proc(IEnumInputContext*, UInt32, Win32cr::UI::Input::Ime::HIMC*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(IEnumInputContext*, Win32cr::Foundation::HRESULT),
     skip : Proc(IEnumInputContext*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEnumInputContext, lpVtbl : IEnumInputContextVtbl* do
+  record IEnumInputContext, lpVtbl : IEnumInputContextVtable* do
     GUID = LibC::GUID.new(0x9b5eab0_u32, 0xf997_u16, 0x11d1_u16, StaticArray[0x93_u8, 0xd4_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IEnumInputContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1844,7 +1881,7 @@ module Win32cr::UI::Input::Ime
     def clone(this : IEnumInputContext*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clone.call(this, ppEnum)
     end
-    def next__(this : IEnumInputContext*, ulCount : UInt32, rgInputContext : Win32cr::Globalization::HIMC*, pcFetched : UInt32*) : Win32cr::Foundation::HRESULT
+    def next__(this : IEnumInputContext*, ulCount : UInt32, rgInputContext : Win32cr::UI::Input::Ime::HIMC*, pcFetched : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.next__.call(this, ulCount, rgInputContext, pcFetched)
     end
     def reset(this : IEnumInputContext*) : Win32cr::Foundation::HRESULT
@@ -1857,7 +1894,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMRegistrarVtbl,
+
+  record IActiveIMMRegistrarVtable,
     query_interface : Proc(IActiveIMMRegistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMRegistrar*, UInt32),
     release : Proc(IActiveIMMRegistrar*, UInt32),
@@ -1866,7 +1904,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIMMRegistrar, lpVtbl : IActiveIMMRegistrarVtbl* do
+  record IActiveIMMRegistrar, lpVtbl : IActiveIMMRegistrarVtable* do
     GUID = LibC::GUID.new(0xb3458082_u32, 0xbd00_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x9b_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1887,7 +1925,8 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMMessagePumpOwnerVtbl,
+
+  record IActiveIMMMessagePumpOwnerVtable,
     query_interface : Proc(IActiveIMMMessagePumpOwner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMMessagePumpOwner*, UInt32),
     release : Proc(IActiveIMMMessagePumpOwner*, UInt32),
@@ -1899,7 +1938,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIMMMessagePumpOwner, lpVtbl : IActiveIMMMessagePumpOwnerVtbl* do
+  record IActiveIMMMessagePumpOwner, lpVtbl : IActiveIMMMessagePumpOwnerVtable* do
     GUID = LibC::GUID.new(0xb5cf2cfa_u32, 0x8aeb_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x64_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMMessagePumpOwner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1929,82 +1968,83 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMAppVtbl,
+
+  record IActiveIMMAppVtable,
     query_interface : Proc(IActiveIMMApp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMApp*, UInt32),
     release : Proc(IActiveIMMApp*, UInt32),
-    associate_context : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC, Win32cr::Globalization::HIMC*, Win32cr::Foundation::HRESULT),
-    configure_imea : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDA*, Win32cr::Foundation::HRESULT),
-    configure_imew : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
-    create_context : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC*, Win32cr::Foundation::HRESULT),
-    destroy_context : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    enum_register_word_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
-    enum_register_word_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
-    escape_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
-    escape_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_count_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_count_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_window : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
-    get_composition_font_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
-    get_composition_font_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
-    get_composition_string_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
-    get_composition_string_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
-    get_composition_window : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
-    get_context : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC*, Win32cr::Foundation::HRESULT),
-    get_conversion_list_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_conversion_list_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_conversion_status : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    associate_context : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::HIMC*, Win32cr::Foundation::HRESULT),
+    configure_imea : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDA*, Win32cr::Foundation::HRESULT),
+    configure_imew : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
+    create_context : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC*, Win32cr::Foundation::HRESULT),
+    destroy_context : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    enum_register_word_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
+    enum_register_word_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
+    escape_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    escape_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_count_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_count_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_window : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
+    get_composition_font_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
+    get_composition_font_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
+    get_composition_string_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
+    get_composition_string_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
+    get_composition_window : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
+    get_context : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC*, Win32cr::Foundation::HRESULT),
+    get_conversion_list_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_conversion_list_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_conversion_status : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_default_ime_wnd : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
-    get_description_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_description_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_guide_line_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_guide_line_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_ime_file_name_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_ime_file_name_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_open_status : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_register_word_style_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFA*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_register_word_style_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFW*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_status_window_pos : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
+    get_description_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_description_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_guide_line_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_guide_line_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_file_name_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_file_name_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_open_status : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_register_word_style_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFA*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_register_word_style_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFW*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_status_window_pos : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
     get_virtual_key : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, UInt32*, Win32cr::Foundation::HRESULT),
-    install_imea : Proc(IActiveIMMApp*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::UI::TextServices::HKL*, Win32cr::Foundation::HRESULT),
-    install_imew : Proc(IActiveIMMApp*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::UI::TextServices::HKL*, Win32cr::Foundation::HRESULT),
-    is_ime : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HRESULT),
+    install_imea : Proc(IActiveIMMApp*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::UI::Input::KeyboardAndMouse::HKL*, Win32cr::Foundation::HRESULT),
+    install_imew : Proc(IActiveIMMApp*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::UI::Input::KeyboardAndMouse::HKL*, Win32cr::Foundation::HRESULT),
+    is_ime : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HRESULT),
     is_ui_message_a : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
     is_ui_message_w : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
-    notify_ime : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    register_word_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
-    register_word_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    release_context : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    set_candidate_window : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
-    set_composition_font_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
-    set_composition_font_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
-    set_composition_string_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    set_composition_string_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    set_composition_window : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
-    set_conversion_status : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    set_open_status : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    set_status_window_pos : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
+    notify_ime : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    register_word_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
+    register_word_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    release_context : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    set_candidate_window : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
+    set_composition_font_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
+    set_composition_font_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
+    set_composition_string_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    set_composition_string_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    set_composition_window : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
+    set_conversion_status : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    set_open_status : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    set_status_window_pos : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
     simulate_hot_key : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::HRESULT),
-    unregister_word_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
-    unregister_word_w : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    unregister_word_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
+    unregister_word_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     activate : Proc(IActiveIMMApp*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     deactivate : Proc(IActiveIMMApp*, Win32cr::Foundation::HRESULT),
     on_def_window_proc : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
     filter_client_windows : Proc(IActiveIMMApp*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
-    get_code_page_a : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt32*, Win32cr::Foundation::HRESULT),
-    get_lang_id : Proc(IActiveIMMApp*, Win32cr::UI::TextServices::HKL, UInt16*, Win32cr::Foundation::HRESULT),
-    associate_context_ex : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC, UInt32, Win32cr::Foundation::HRESULT),
+    get_code_page_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32*, Win32cr::Foundation::HRESULT),
+    get_lang_id : Proc(IActiveIMMApp*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt16*, Win32cr::Foundation::HRESULT),
+    associate_context_ex : Proc(IActiveIMMApp*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC, UInt32, Win32cr::Foundation::HRESULT),
     disable_ime : Proc(IActiveIMMApp*, UInt32, Win32cr::Foundation::HRESULT),
-    get_ime_menu_items_a : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_ime_menu_items_w : Proc(IActiveIMMApp*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_menu_items_a : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_menu_items_w : Proc(IActiveIMMApp*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     enum_input_context : Proc(IActiveIMMApp*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IActiveIMMApp, lpVtbl : IActiveIMMAppVtbl* do
+  record IActiveIMMApp, lpVtbl : IActiveIMMAppVtable* do
     GUID = LibC::GUID.new(0x8c0e040_u32, 0x62d1_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x26_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2015,121 +2055,121 @@ module Win32cr::UI::Input::Ime
     def release(this : IActiveIMMApp*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def associate_context(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, hIME : Win32cr::Globalization::HIMC, phPrev : Win32cr::Globalization::HIMC*) : Win32cr::Foundation::HRESULT
+    def associate_context(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, hIME : Win32cr::UI::Input::Ime::HIMC, phPrev : Win32cr::UI::Input::Ime::HIMC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.associate_context.call(this, hWnd, hIME, phPrev)
     end
-    def configure_imea(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDA*) : Win32cr::Foundation::HRESULT
+    def configure_imea(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDA*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.configure_imea.call(this, hKL, hWnd, dwMode, pData)
     end
-    def configure_imew(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
+    def configure_imew(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.configure_imew.call(this, hKL, hWnd, dwMode, pData)
     end
-    def create_context(this : IActiveIMMApp*, phIMC : Win32cr::Globalization::HIMC*) : Win32cr::Foundation::HRESULT
+    def create_context(this : IActiveIMMApp*, phIMC : Win32cr::UI::Input::Ime::HIMC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_context.call(this, phIMC)
     end
-    def destroy_context(this : IActiveIMMApp*, hIME : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def destroy_context(this : IActiveIMMApp*, hIME : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.destroy_context.call(this, hIME)
     end
-    def enum_register_word_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
+    def enum_register_word_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_register_word_a.call(this, hKL, szReading, dwStyle, szRegister, pData, pEnum)
     end
-    def enum_register_word_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
+    def enum_register_word_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_register_word_w.call(this, hKL, szReading, dwStyle, szRegister, pData, pEnum)
     end
-    def escape_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def escape_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.escape_a.call(this, hKL, hIMC, uEscape, pData, plResult)
     end
-    def escape_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def escape_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.escape_w.call(this, hKL, hIMC, uEscape, pData, plResult)
     end
-    def get_candidate_list_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_a.call(this, hIMC, dwIndex, uBufLen, pCandList, puCopied)
     end
-    def get_candidate_list_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_w.call(this, hIMC, dwIndex, uBufLen, pCandList, puCopied)
     end
-    def get_candidate_list_count_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_count_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_count_a.call(this, hIMC, pdwListSize, pdwBufLen)
     end
-    def get_candidate_list_count_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_count_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_count_w.call(this, hIMC, pdwListSize, pdwBufLen)
     end
-    def get_candidate_window(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
+    def get_candidate_window(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_window.call(this, hIMC, dwIndex, pCandidate)
     end
-    def get_composition_font_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
+    def get_composition_font_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_font_a.call(this, hIMC, plf)
     end
-    def get_composition_font_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
+    def get_composition_font_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_font_w.call(this, hIMC, plf)
     end
-    def get_composition_string_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
+    def get_composition_string_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_string_a.call(this, hIMC, dwIndex, dwBufLen, plCopied, pBuf)
     end
-    def get_composition_string_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
+    def get_composition_string_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_string_w.call(this, hIMC, dwIndex, dwBufLen, plCopied, pBuf)
     end
-    def get_composition_window(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
+    def get_composition_window(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_window.call(this, hIMC, pCompForm)
     end
-    def get_context(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, phIMC : Win32cr::Globalization::HIMC*) : Win32cr::Foundation::HRESULT
+    def get_context(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, phIMC : Win32cr::UI::Input::Ime::HIMC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_context.call(this, hWnd, phIMC)
     end
-    def get_conversion_list_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, pSrc : Win32cr::Foundation::PSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_conversion_list_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, pSrc : Win32cr::Foundation::PSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_conversion_list_a.call(this, hKL, hIMC, pSrc, uBufLen, uFlag, pDst, puCopied)
     end
-    def get_conversion_list_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, pSrc : Win32cr::Foundation::PWSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_conversion_list_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, pSrc : Win32cr::Foundation::PWSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_conversion_list_w.call(this, hKL, hIMC, pSrc, uBufLen, uFlag, pDst, puCopied)
     end
-    def get_conversion_status(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pfdwConversion : UInt32*, pfdwSentence : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_conversion_status(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pfdwConversion : UInt32*, pfdwSentence : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_conversion_status.call(this, hIMC, pfdwConversion, pfdwSentence)
     end
     def get_default_ime_wnd(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, phDefWnd : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_default_ime_wnd.call(this, hWnd, phDefWnd)
     end
-    def get_description_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_description_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_description_a.call(this, hKL, uBufLen, szDescription, puCopied)
     end
-    def get_description_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_description_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_description_w.call(this, hKL, uBufLen, szDescription, puCopied)
     end
-    def get_guide_line_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_guide_line_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_guide_line_a.call(this, hIMC, dwIndex, dwBufLen, pBuf, pdwResult)
     end
-    def get_guide_line_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PWSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_guide_line_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PWSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_guide_line_w.call(this, hIMC, dwIndex, dwBufLen, pBuf, pdwResult)
     end
-    def get_ime_file_name_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_file_name_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_file_name_a.call(this, hKL, uBufLen, szFileName, puCopied)
     end
-    def get_ime_file_name_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_file_name_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_file_name_w.call(this, hKL, uBufLen, szFileName, puCopied)
     end
-    def get_open_status(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def get_open_status(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_open_status.call(this, hIMC)
     end
-    def get_property(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, fdwIndex : UInt32, pdwProperty : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, fdwIndex : UInt32, pdwProperty : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, hKL, fdwIndex, pdwProperty)
     end
-    def get_register_word_style_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_register_word_style_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_register_word_style_a.call(this, hKL, nItem, pStyleBuf, puCopied)
     end
-    def get_register_word_style_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_register_word_style_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_register_word_style_w.call(this, hKL, nItem, pStyleBuf, puCopied)
     end
-    def get_status_window_pos(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
+    def get_status_window_pos(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_status_window_pos.call(this, hIMC, pptPos)
     end
     def get_virtual_key(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, puVirtualKey : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_virtual_key.call(this, hWnd, puVirtualKey)
     end
-    def install_imea(this : IActiveIMMApp*, szIMEFileName : Win32cr::Foundation::PSTR, szLayoutText : Win32cr::Foundation::PSTR, phKL : Win32cr::UI::TextServices::HKL*) : Win32cr::Foundation::HRESULT
+    def install_imea(this : IActiveIMMApp*, szIMEFileName : Win32cr::Foundation::PSTR, szLayoutText : Win32cr::Foundation::PSTR, phKL : Win32cr::UI::Input::KeyboardAndMouse::HKL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install_imea.call(this, szIMEFileName, szLayoutText, phKL)
     end
-    def install_imew(this : IActiveIMMApp*, szIMEFileName : Win32cr::Foundation::PWSTR, szLayoutText : Win32cr::Foundation::PWSTR, phKL : Win32cr::UI::TextServices::HKL*) : Win32cr::Foundation::HRESULT
+    def install_imew(this : IActiveIMMApp*, szIMEFileName : Win32cr::Foundation::PWSTR, szLayoutText : Win32cr::Foundation::PWSTR, phKL : Win32cr::UI::Input::KeyboardAndMouse::HKL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install_imew.call(this, szIMEFileName, szLayoutText, phKL)
     end
-    def is_ime(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::HRESULT
+    def is_ime(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_ime.call(this, hKL)
     end
     def is_ui_message_a(this : IActiveIMMApp*, hWndIME : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
@@ -2138,52 +2178,52 @@ module Win32cr::UI::Input::Ime
     def is_ui_message_w(this : IActiveIMMApp*, hWndIME : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_ui_message_w.call(this, hWndIME, msg, wParam, lParam)
     end
-    def notify_ime(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+    def notify_ime(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.notify_ime.call(this, hIMC, dwAction, dwIndex, dwValue)
     end
-    def register_word_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    def register_word_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_word_a.call(this, hKL, szReading, dwStyle, szRegister)
     end
-    def register_word_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    def register_word_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_word_w.call(this, hKL, szReading, dwStyle, szRegister)
     end
-    def release_context(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def release_context(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.release_context.call(this, hWnd, hIMC)
     end
-    def set_candidate_window(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
+    def set_candidate_window(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_candidate_window.call(this, hIMC, pCandidate)
     end
-    def set_composition_font_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
+    def set_composition_font_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_font_a.call(this, hIMC, plf)
     end
-    def set_composition_font_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
+    def set_composition_font_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_font_w.call(this, hIMC, plf)
     end
-    def set_composition_string_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
+    def set_composition_string_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_string_a.call(this, hIMC, dwIndex, pComp, dwCompLen, pRead, dwReadLen)
     end
-    def set_composition_string_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
+    def set_composition_string_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_string_w.call(this, hIMC, dwIndex, pComp, dwCompLen, pRead, dwReadLen)
     end
-    def set_composition_window(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
+    def set_composition_window(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_window.call(this, hIMC, pCompForm)
     end
-    def set_conversion_status(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, fdwConversion : UInt32, fdwSentence : UInt32) : Win32cr::Foundation::HRESULT
+    def set_conversion_status(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, fdwConversion : UInt32, fdwSentence : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_conversion_status.call(this, hIMC, fdwConversion, fdwSentence)
     end
-    def set_open_status(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, fOpen : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    def set_open_status(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, fOpen : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_open_status.call(this, hIMC, fOpen)
     end
-    def set_status_window_pos(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
+    def set_status_window_pos(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_status_window_pos.call(this, hIMC, pptPos)
     end
     def simulate_hot_key(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, dwHotKeyID : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.simulate_hot_key.call(this, hWnd, dwHotKeyID)
     end
-    def unregister_word_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    def unregister_word_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_word_a.call(this, hKL, szReading, dwStyle, szUnregister)
     end
-    def unregister_word_w(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    def unregister_word_w(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_word_w.call(this, hKL, szReading, dwStyle, szUnregister)
     end
     def activate(this : IActiveIMMApp*, fRestoreLayout : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -2198,22 +2238,22 @@ module Win32cr::UI::Input::Ime
     def filter_client_windows(this : IActiveIMMApp*, aaClassList : UInt16*, uSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.filter_client_windows.call(this, aaClassList, uSize)
     end
-    def get_code_page_a(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, uCodePage : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_code_page_a(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uCodePage : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_code_page_a.call(this, hKL, uCodePage)
     end
-    def get_lang_id(this : IActiveIMMApp*, hKL : Win32cr::UI::TextServices::HKL, plid : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_lang_id(this : IActiveIMMApp*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, plid : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_lang_id.call(this, hKL, plid)
     end
-    def associate_context_ex(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::Globalization::HIMC, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    def associate_context_ex(this : IActiveIMMApp*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::UI::Input::Ime::HIMC, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.associate_context_ex.call(this, hWnd, hIMC, dwFlags)
     end
     def disable_ime(this : IActiveIMMApp*, idThread : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disable_ime.call(this, idThread)
     end
-    def get_ime_menu_items_a(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_menu_items_a(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_menu_items_a.call(this, hIMC, dwFlags, dwType, pImeParentMenu, pImeMenu, dwSize, pdwResult)
     end
-    def get_ime_menu_items_w(this : IActiveIMMApp*, hIMC : Win32cr::Globalization::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_menu_items_w(this : IActiveIMMApp*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_menu_items_w.call(this, hIMC, dwFlags, dwType, pImeParentMenu, pImeMenu, dwSize, pdwResult)
     end
     def enum_input_context(this : IActiveIMMApp*, idThread : UInt32, ppEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -2223,102 +2263,103 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMIMEVtbl,
+
+  record IActiveIMMIMEVtable,
     query_interface : Proc(IActiveIMMIME*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMIME*, UInt32),
     release : Proc(IActiveIMMIME*, UInt32),
-    associate_context : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC, Win32cr::Globalization::HIMC*, Win32cr::Foundation::HRESULT),
-    configure_imea : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDA*, Win32cr::Foundation::HRESULT),
-    configure_imew : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
-    create_context : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC*, Win32cr::Foundation::HRESULT),
-    destroy_context : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    enum_register_word_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
-    enum_register_word_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
-    escape_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
-    escape_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_count_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_list_count_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_candidate_window : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
-    get_composition_font_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
-    get_composition_font_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
-    get_composition_string_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
-    get_composition_string_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
-    get_composition_window : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
-    get_context : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC*, Win32cr::Foundation::HRESULT),
-    get_conversion_list_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_conversion_list_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Globalization::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_conversion_status : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    associate_context : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::HIMC*, Win32cr::Foundation::HRESULT),
+    configure_imea : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDA*, Win32cr::Foundation::HRESULT),
+    configure_imew : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
+    create_context : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC*, Win32cr::Foundation::HRESULT),
+    destroy_context : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    enum_register_word_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
+    enum_register_word_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
+    escape_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    escape_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_count_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_list_count_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_candidate_window : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
+    get_composition_font_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
+    get_composition_font_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
+    get_composition_string_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
+    get_composition_string_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Int32*, Void*, Win32cr::Foundation::HRESULT),
+    get_composition_window : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
+    get_context : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC*, Win32cr::Foundation::HRESULT),
+    get_conversion_list_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_conversion_list_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_conversion_status : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     get_default_ime_wnd : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
-    get_description_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_description_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_guide_line_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_guide_line_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_ime_file_name_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_ime_file_name_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    get_open_status : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_register_word_style_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFA*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_register_word_style_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFW*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_status_window_pos : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
+    get_description_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_description_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_guide_line_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_guide_line_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_file_name_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_file_name_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    get_open_status : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_register_word_style_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFA*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_register_word_style_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32, Win32cr::UI::Input::Ime::STYLEBUFW*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_status_window_pos : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
     get_virtual_key : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, UInt32*, Win32cr::Foundation::HRESULT),
-    install_imea : Proc(IActiveIMMIME*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::UI::TextServices::HKL*, Win32cr::Foundation::HRESULT),
-    install_imew : Proc(IActiveIMMIME*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::UI::TextServices::HKL*, Win32cr::Foundation::HRESULT),
-    is_ime : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HRESULT),
+    install_imea : Proc(IActiveIMMIME*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::UI::Input::KeyboardAndMouse::HKL*, Win32cr::Foundation::HRESULT),
+    install_imew : Proc(IActiveIMMIME*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::UI::Input::KeyboardAndMouse::HKL*, Win32cr::Foundation::HRESULT),
+    is_ime : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HRESULT),
     is_ui_message_a : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
     is_ui_message_w : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
-    notify_ime : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    register_word_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
-    register_word_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    release_context : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    set_candidate_window : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
-    set_composition_font_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
-    set_composition_font_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
-    set_composition_string_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    set_composition_string_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    set_composition_window : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
-    set_conversion_status : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    set_open_status : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    set_status_window_pos : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
+    notify_ime : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    register_word_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
+    register_word_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    release_context : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    set_candidate_window : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::CANDIDATEFORM*, Win32cr::Foundation::HRESULT),
+    set_composition_font_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Foundation::HRESULT),
+    set_composition_font_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Foundation::HRESULT),
+    set_composition_string_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    set_composition_string_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    set_composition_window : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::COMPOSITIONFORM*, Win32cr::Foundation::HRESULT),
+    set_conversion_status : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    set_open_status : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    set_status_window_pos : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::POINT*, Win32cr::Foundation::HRESULT),
     simulate_hot_key : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::HRESULT),
-    unregister_word_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
-    unregister_word_w : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    generate_message : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    lock_imc : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::UI::Input::Ime::INPUTCONTEXT**, Win32cr::Foundation::HRESULT),
-    unlock_imc : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::HRESULT),
-    get_imc_lock_count : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32*, Win32cr::Foundation::HRESULT),
-    create_imcc : Proc(IActiveIMMIME*, UInt32, Win32cr::Globalization::HIMCC*, Win32cr::Foundation::HRESULT),
-    destroy_imcc : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMCC, Win32cr::Foundation::HRESULT),
-    lock_imcc : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMCC, Void**, Win32cr::Foundation::HRESULT),
-    unlock_imcc : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMCC, Win32cr::Foundation::HRESULT),
-    re_size_imcc : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMCC, UInt32, Win32cr::Globalization::HIMCC*, Win32cr::Foundation::HRESULT),
-    get_imcc_size : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMCC, UInt32*, Win32cr::Foundation::HRESULT),
-    get_imcc_lock_count : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMCC, UInt32*, Win32cr::Foundation::HRESULT),
-    get_hot_key : Proc(IActiveIMMIME*, UInt32, UInt32*, UInt32*, Win32cr::UI::TextServices::HKL*, Win32cr::Foundation::HRESULT),
-    set_hot_key : Proc(IActiveIMMIME*, UInt32, UInt32, UInt32, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HRESULT),
+    unregister_word_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT),
+    unregister_word_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    generate_message : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    lock_imc : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::UI::Input::Ime::INPUTCONTEXT**, Win32cr::Foundation::HRESULT),
+    unlock_imc : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::HRESULT),
+    get_imc_lock_count : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32*, Win32cr::Foundation::HRESULT),
+    create_imcc : Proc(IActiveIMMIME*, UInt32, Win32cr::UI::Input::Ime::HIMCC*, Win32cr::Foundation::HRESULT),
+    destroy_imcc : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMCC, Win32cr::Foundation::HRESULT),
+    lock_imcc : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMCC, Void**, Win32cr::Foundation::HRESULT),
+    unlock_imcc : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMCC, Win32cr::Foundation::HRESULT),
+    re_size_imcc : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMCC, UInt32, Win32cr::UI::Input::Ime::HIMCC*, Win32cr::Foundation::HRESULT),
+    get_imcc_size : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMCC, UInt32*, Win32cr::Foundation::HRESULT),
+    get_imcc_lock_count : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMCC, UInt32*, Win32cr::Foundation::HRESULT),
+    get_hot_key : Proc(IActiveIMMIME*, UInt32, UInt32*, UInt32*, Win32cr::UI::Input::KeyboardAndMouse::HKL*, Win32cr::Foundation::HRESULT),
+    set_hot_key : Proc(IActiveIMMIME*, UInt32, UInt32, UInt32, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HRESULT),
     create_soft_keyboard : Proc(IActiveIMMIME*, UInt32, Win32cr::Foundation::HWND, Int32, Int32, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
     destroy_soft_keyboard : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
     show_soft_keyboard : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::HRESULT),
-    get_code_page_a : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt32*, Win32cr::Foundation::HRESULT),
-    get_lang_id : Proc(IActiveIMMIME*, Win32cr::UI::TextServices::HKL, UInt16*, Win32cr::Foundation::HRESULT),
+    get_code_page_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt32*, Win32cr::Foundation::HRESULT),
+    get_lang_id : Proc(IActiveIMMIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, UInt16*, Win32cr::Foundation::HRESULT),
     keybd_event : Proc(IActiveIMMIME*, UInt16, UInt8, UInt8, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     lock_modal : Proc(IActiveIMMIME*, Win32cr::Foundation::HRESULT),
     unlock_modal : Proc(IActiveIMMIME*, Win32cr::Foundation::HRESULT),
-    associate_context_ex : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::Globalization::HIMC, UInt32, Win32cr::Foundation::HRESULT),
+    associate_context_ex : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, Win32cr::UI::Input::Ime::HIMC, UInt32, Win32cr::Foundation::HRESULT),
     disable_ime : Proc(IActiveIMMIME*, UInt32, Win32cr::Foundation::HRESULT),
-    get_ime_menu_items_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_ime_menu_items_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_menu_items_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ime_menu_items_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     enum_input_context : Proc(IActiveIMMIME*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    request_message_a : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
-    request_message_w : Proc(IActiveIMMIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    request_message_a : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    request_message_w : Proc(IActiveIMMIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
     send_imca : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
     send_imcw : Proc(IActiveIMMIME*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
     is_sleeping : Proc(IActiveIMMIME*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IActiveIMMIME, lpVtbl : IActiveIMMIMEVtbl* do
+  record IActiveIMMIME, lpVtbl : IActiveIMMIMEVtable* do
     GUID = LibC::GUID.new(0x8c03411_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IActiveIMMIME*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2329,121 +2370,121 @@ module Win32cr::UI::Input::Ime
     def release(this : IActiveIMMIME*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def associate_context(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, hIME : Win32cr::Globalization::HIMC, phPrev : Win32cr::Globalization::HIMC*) : Win32cr::Foundation::HRESULT
+    def associate_context(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, hIME : Win32cr::UI::Input::Ime::HIMC, phPrev : Win32cr::UI::Input::Ime::HIMC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.associate_context.call(this, hWnd, hIME, phPrev)
     end
-    def configure_imea(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDA*) : Win32cr::Foundation::HRESULT
+    def configure_imea(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDA*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.configure_imea.call(this, hKL, hWnd, dwMode, pData)
     end
-    def configure_imew(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
+    def configure_imew(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pData : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.configure_imew.call(this, hKL, hWnd, dwMode, pData)
     end
-    def create_context(this : IActiveIMMIME*, phIMC : Win32cr::Globalization::HIMC*) : Win32cr::Foundation::HRESULT
+    def create_context(this : IActiveIMMIME*, phIMC : Win32cr::UI::Input::Ime::HIMC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_context.call(this, phIMC)
     end
-    def destroy_context(this : IActiveIMMIME*, hIME : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def destroy_context(this : IActiveIMMIME*, hIME : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.destroy_context.call(this, hIME)
     end
-    def enum_register_word_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
+    def enum_register_word_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_register_word_a.call(this, hKL, szReading, dwStyle, szRegister, pData, pEnum)
     end
-    def enum_register_word_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
+    def enum_register_word_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR, pData : Void*, pEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_register_word_w.call(this, hKL, szReading, dwStyle, szRegister, pData, pEnum)
     end
-    def escape_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def escape_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.escape_a.call(this, hKL, hIMC, uEscape, pData, plResult)
     end
-    def escape_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def escape_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.escape_w.call(this, hKL, hIMC, uEscape, pData, plResult)
     end
-    def get_candidate_list_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_a.call(this, hIMC, dwIndex, uBufLen, pCandList, puCopied)
     end
-    def get_candidate_list_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, uBufLen : UInt32, pCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_w.call(this, hIMC, dwIndex, uBufLen, pCandList, puCopied)
     end
-    def get_candidate_list_count_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_count_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_count_a.call(this, hIMC, pdwListSize, pdwBufLen)
     end
-    def get_candidate_list_count_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_candidate_list_count_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pdwListSize : UInt32*, pdwBufLen : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_list_count_w.call(this, hIMC, pdwListSize, pdwBufLen)
     end
-    def get_candidate_window(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
+    def get_candidate_window(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_candidate_window.call(this, hIMC, dwIndex, pCandidate)
     end
-    def get_composition_font_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
+    def get_composition_font_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_font_a.call(this, hIMC, plf)
     end
-    def get_composition_font_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
+    def get_composition_font_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_font_w.call(this, hIMC, plf)
     end
-    def get_composition_string_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
+    def get_composition_string_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_string_a.call(this, hIMC, dwIndex, dwBufLen, plCopied, pBuf)
     end
-    def get_composition_string_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
+    def get_composition_string_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, plCopied : Int32*, pBuf : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_string_w.call(this, hIMC, dwIndex, dwBufLen, plCopied, pBuf)
     end
-    def get_composition_window(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
+    def get_composition_window(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_composition_window.call(this, hIMC, pCompForm)
     end
-    def get_context(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, phIMC : Win32cr::Globalization::HIMC*) : Win32cr::Foundation::HRESULT
+    def get_context(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, phIMC : Win32cr::UI::Input::Ime::HIMC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_context.call(this, hWnd, phIMC)
     end
-    def get_conversion_list_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, pSrc : Win32cr::Foundation::PSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_conversion_list_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, pSrc : Win32cr::Foundation::PSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_conversion_list_a.call(this, hKL, hIMC, pSrc, uBufLen, uFlag, pDst, puCopied)
     end
-    def get_conversion_list_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, hIMC : Win32cr::Globalization::HIMC, pSrc : Win32cr::Foundation::PWSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_conversion_list_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hIMC : Win32cr::UI::Input::Ime::HIMC, pSrc : Win32cr::Foundation::PWSTR, uBufLen : UInt32, uFlag : UInt32, pDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_conversion_list_w.call(this, hKL, hIMC, pSrc, uBufLen, uFlag, pDst, puCopied)
     end
-    def get_conversion_status(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pfdwConversion : UInt32*, pfdwSentence : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_conversion_status(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pfdwConversion : UInt32*, pfdwSentence : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_conversion_status.call(this, hIMC, pfdwConversion, pfdwSentence)
     end
     def get_default_ime_wnd(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, phDefWnd : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_default_ime_wnd.call(this, hWnd, phDefWnd)
     end
-    def get_description_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_description_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_description_a.call(this, hKL, uBufLen, szDescription, puCopied)
     end
-    def get_description_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_description_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szDescription : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_description_w.call(this, hKL, uBufLen, szDescription, puCopied)
     end
-    def get_guide_line_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_guide_line_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_guide_line_a.call(this, hIMC, dwIndex, dwBufLen, pBuf, pdwResult)
     end
-    def get_guide_line_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PWSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_guide_line_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, dwBufLen : UInt32, pBuf : Win32cr::Foundation::PWSTR, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_guide_line_w.call(this, hIMC, dwIndex, dwBufLen, pBuf, pdwResult)
     end
-    def get_ime_file_name_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_file_name_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_file_name_a.call(this, hKL, uBufLen, szFileName, puCopied)
     end
-    def get_ime_file_name_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_file_name_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uBufLen : UInt32, szFileName : Win32cr::Foundation::PWSTR, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_file_name_w.call(this, hKL, uBufLen, szFileName, puCopied)
     end
-    def get_open_status(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def get_open_status(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_open_status.call(this, hIMC)
     end
-    def get_property(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, fdwIndex : UInt32, pdwProperty : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, fdwIndex : UInt32, pdwProperty : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, hKL, fdwIndex, pdwProperty)
     end
-    def get_register_word_style_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_register_word_style_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_register_word_style_a.call(this, hKL, nItem, pStyleBuf, puCopied)
     end
-    def get_register_word_style_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_register_word_style_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, pStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_register_word_style_w.call(this, hKL, nItem, pStyleBuf, puCopied)
     end
-    def get_status_window_pos(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
+    def get_status_window_pos(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_status_window_pos.call(this, hIMC, pptPos)
     end
     def get_virtual_key(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, puVirtualKey : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_virtual_key.call(this, hWnd, puVirtualKey)
     end
-    def install_imea(this : IActiveIMMIME*, szIMEFileName : Win32cr::Foundation::PSTR, szLayoutText : Win32cr::Foundation::PSTR, phKL : Win32cr::UI::TextServices::HKL*) : Win32cr::Foundation::HRESULT
+    def install_imea(this : IActiveIMMIME*, szIMEFileName : Win32cr::Foundation::PSTR, szLayoutText : Win32cr::Foundation::PSTR, phKL : Win32cr::UI::Input::KeyboardAndMouse::HKL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install_imea.call(this, szIMEFileName, szLayoutText, phKL)
     end
-    def install_imew(this : IActiveIMMIME*, szIMEFileName : Win32cr::Foundation::PWSTR, szLayoutText : Win32cr::Foundation::PWSTR, phKL : Win32cr::UI::TextServices::HKL*) : Win32cr::Foundation::HRESULT
+    def install_imew(this : IActiveIMMIME*, szIMEFileName : Win32cr::Foundation::PWSTR, szLayoutText : Win32cr::Foundation::PWSTR, phKL : Win32cr::UI::Input::KeyboardAndMouse::HKL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install_imew.call(this, szIMEFileName, szLayoutText, phKL)
     end
-    def is_ime(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::HRESULT
+    def is_ime(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_ime.call(this, hKL)
     end
     def is_ui_message_a(this : IActiveIMMIME*, hWndIME : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
@@ -2452,91 +2493,91 @@ module Win32cr::UI::Input::Ime
     def is_ui_message_w(this : IActiveIMMIME*, hWndIME : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_ui_message_w.call(this, hWndIME, msg, wParam, lParam)
     end
-    def notify_ime(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+    def notify_ime(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.notify_ime.call(this, hIMC, dwAction, dwIndex, dwValue)
     end
-    def register_word_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    def register_word_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_word_a.call(this, hKL, szReading, dwStyle, szRegister)
     end
-    def register_word_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    def register_word_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_word_w.call(this, hKL, szReading, dwStyle, szRegister)
     end
-    def release_context(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def release_context(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.release_context.call(this, hWnd, hIMC)
     end
-    def set_candidate_window(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
+    def set_candidate_window(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_candidate_window.call(this, hIMC, pCandidate)
     end
-    def set_composition_font_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
+    def set_composition_font_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_font_a.call(this, hIMC, plf)
     end
-    def set_composition_font_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
+    def set_composition_font_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, plf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_font_w.call(this, hIMC, plf)
     end
-    def set_composition_string_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
+    def set_composition_string_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_string_a.call(this, hIMC, dwIndex, pComp, dwCompLen, pRead, dwReadLen)
     end
-    def set_composition_string_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
+    def set_composition_string_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_string_w.call(this, hIMC, dwIndex, pComp, dwCompLen, pRead, dwReadLen)
     end
-    def set_composition_window(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
+    def set_composition_window(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_window.call(this, hIMC, pCompForm)
     end
-    def set_conversion_status(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, fdwConversion : UInt32, fdwSentence : UInt32) : Win32cr::Foundation::HRESULT
+    def set_conversion_status(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, fdwConversion : UInt32, fdwSentence : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_conversion_status.call(this, hIMC, fdwConversion, fdwSentence)
     end
-    def set_open_status(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, fOpen : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    def set_open_status(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, fOpen : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_open_status.call(this, hIMC, fOpen)
     end
-    def set_status_window_pos(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
+    def set_status_window_pos(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_status_window_pos.call(this, hIMC, pptPos)
     end
     def simulate_hot_key(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, dwHotKeyID : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.simulate_hot_key.call(this, hWnd, dwHotKeyID)
     end
-    def unregister_word_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    def unregister_word_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_word_a.call(this, hKL, szReading, dwStyle, szUnregister)
     end
-    def unregister_word_w(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    def unregister_word_w(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_word_w.call(this, hKL, szReading, dwStyle, szUnregister)
     end
-    def generate_message(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def generate_message(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.generate_message.call(this, hIMC)
     end
-    def lock_imc(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, ppIMC : Win32cr::UI::Input::Ime::INPUTCONTEXT**) : Win32cr::Foundation::HRESULT
+    def lock_imc(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, ppIMC : Win32cr::UI::Input::Ime::INPUTCONTEXT**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lock_imc.call(this, hIMC, ppIMC)
     end
-    def unlock_imc(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC) : Win32cr::Foundation::HRESULT
+    def unlock_imc(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unlock_imc.call(this, hIMC)
     end
-    def get_imc_lock_count(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, pdwLockCount : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_imc_lock_count(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, pdwLockCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_imc_lock_count.call(this, hIMC, pdwLockCount)
     end
-    def create_imcc(this : IActiveIMMIME*, dwSize : UInt32, phIMCC : Win32cr::Globalization::HIMCC*) : Win32cr::Foundation::HRESULT
+    def create_imcc(this : IActiveIMMIME*, dwSize : UInt32, phIMCC : Win32cr::UI::Input::Ime::HIMCC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_imcc.call(this, dwSize, phIMCC)
     end
-    def destroy_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::Globalization::HIMCC) : Win32cr::Foundation::HRESULT
+    def destroy_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::UI::Input::Ime::HIMCC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.destroy_imcc.call(this, hIMCC)
     end
-    def lock_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::Globalization::HIMCC, ppv : Void**) : Win32cr::Foundation::HRESULT
+    def lock_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::UI::Input::Ime::HIMCC, ppv : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lock_imcc.call(this, hIMCC, ppv)
     end
-    def unlock_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::Globalization::HIMCC) : Win32cr::Foundation::HRESULT
+    def unlock_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::UI::Input::Ime::HIMCC) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unlock_imcc.call(this, hIMCC)
     end
-    def re_size_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::Globalization::HIMCC, dwSize : UInt32, phIMCC : Win32cr::Globalization::HIMCC*) : Win32cr::Foundation::HRESULT
+    def re_size_imcc(this : IActiveIMMIME*, hIMCC : Win32cr::UI::Input::Ime::HIMCC, dwSize : UInt32, phIMCC : Win32cr::UI::Input::Ime::HIMCC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.re_size_imcc.call(this, hIMCC, dwSize, phIMCC)
     end
-    def get_imcc_size(this : IActiveIMMIME*, hIMCC : Win32cr::Globalization::HIMCC, pdwSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_imcc_size(this : IActiveIMMIME*, hIMCC : Win32cr::UI::Input::Ime::HIMCC, pdwSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_imcc_size.call(this, hIMCC, pdwSize)
     end
-    def get_imcc_lock_count(this : IActiveIMMIME*, hIMCC : Win32cr::Globalization::HIMCC, pdwLockCount : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_imcc_lock_count(this : IActiveIMMIME*, hIMCC : Win32cr::UI::Input::Ime::HIMCC, pdwLockCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_imcc_lock_count.call(this, hIMCC, pdwLockCount)
     end
-    def get_hot_key(this : IActiveIMMIME*, dwHotKeyID : UInt32, puModifiers : UInt32*, puVKey : UInt32*, phKL : Win32cr::UI::TextServices::HKL*) : Win32cr::Foundation::HRESULT
+    def get_hot_key(this : IActiveIMMIME*, dwHotKeyID : UInt32, puModifiers : UInt32*, puVKey : UInt32*, phKL : Win32cr::UI::Input::KeyboardAndMouse::HKL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hot_key.call(this, dwHotKeyID, puModifiers, puVKey, phKL)
     end
-    def set_hot_key(this : IActiveIMMIME*, dwHotKeyID : UInt32, uModifiers : UInt32, uVKey : UInt32, hKL : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::HRESULT
+    def set_hot_key(this : IActiveIMMIME*, dwHotKeyID : UInt32, uModifiers : UInt32, uVKey : UInt32, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_hot_key.call(this, dwHotKeyID, uModifiers, uVKey, hKL)
     end
     def create_soft_keyboard(this : IActiveIMMIME*, uType : UInt32, hOwner : Win32cr::Foundation::HWND, x : Int32, y : Int32, phSoftKbdWnd : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
@@ -2548,10 +2589,10 @@ module Win32cr::UI::Input::Ime
     def show_soft_keyboard(this : IActiveIMMIME*, hSoftKbdWnd : Win32cr::Foundation::HWND, nCmdShow : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.show_soft_keyboard.call(this, hSoftKbdWnd, nCmdShow)
     end
-    def get_code_page_a(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, uCodePage : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_code_page_a(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, uCodePage : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_code_page_a.call(this, hKL, uCodePage)
     end
-    def get_lang_id(this : IActiveIMMIME*, hKL : Win32cr::UI::TextServices::HKL, plid : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_lang_id(this : IActiveIMMIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, plid : UInt16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_lang_id.call(this, hKL, plid)
     end
     def keybd_event(this : IActiveIMMIME*, lgidIME : UInt16, bVk : UInt8, bScan : UInt8, dwFlags : UInt32, dwExtraInfo : UInt32) : Win32cr::Foundation::HRESULT
@@ -2563,25 +2604,25 @@ module Win32cr::UI::Input::Ime
     def unlock_modal(this : IActiveIMMIME*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unlock_modal.call(this)
     end
-    def associate_context_ex(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::Globalization::HIMC, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    def associate_context_ex(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, hIMC : Win32cr::UI::Input::Ime::HIMC, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.associate_context_ex.call(this, hWnd, hIMC, dwFlags)
     end
     def disable_ime(this : IActiveIMMIME*, idThread : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disable_ime.call(this, idThread)
     end
-    def get_ime_menu_items_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_menu_items_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_menu_items_a.call(this, hIMC, dwFlags, dwType, pImeParentMenu, pImeMenu, dwSize, pdwResult)
     end
-    def get_ime_menu_items_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_ime_menu_items_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwFlags : UInt32, dwType : UInt32, pImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, pImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32, pdwResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ime_menu_items_w.call(this, hIMC, dwFlags, dwType, pImeParentMenu, pImeMenu, dwSize, pdwResult)
     end
     def enum_input_context(this : IActiveIMMIME*, idThread : UInt32, ppEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_input_context.call(this, idThread, ppEnum)
     end
-    def request_message_a(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def request_message_a(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.request_message_a.call(this, hIMC, wParam, lParam, plResult)
     end
-    def request_message_w(this : IActiveIMMIME*, hIMC : Win32cr::Globalization::HIMC, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def request_message_w(this : IActiveIMMIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.request_message_w.call(this, hIMC, wParam, lParam, plResult)
     end
     def send_imca(this : IActiveIMMIME*, hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
@@ -2597,21 +2638,22 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMEVtbl,
+
+  record IActiveIMEVtable,
     query_interface : Proc(IActiveIME*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIME*, UInt32),
     release : Proc(IActiveIME*, UInt32),
     inquire : Proc(IActiveIME*, UInt32, Win32cr::UI::Input::Ime::IMEINFO*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    conversion_list : Proc(IActiveIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    configure : Proc(IActiveIME*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
+    conversion_list : Proc(IActiveIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    configure : Proc(IActiveIME*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
     destroy : Proc(IActiveIME*, UInt32, Win32cr::Foundation::HRESULT),
-    escape : Proc(IActiveIME*, Win32cr::Globalization::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
-    set_active_context : Proc(IActiveIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    process_key : Proc(IActiveIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
-    notify : Proc(IActiveIME*, Win32cr::Globalization::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    select__ : Proc(IActiveIME*, Win32cr::Globalization::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    set_composition_string : Proc(IActiveIME*, Win32cr::Globalization::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    to_ascii_ex : Proc(IActiveIME*, UInt32, UInt32, UInt8*, UInt32, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    escape : Proc(IActiveIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    set_active_context : Proc(IActiveIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    process_key : Proc(IActiveIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    notify : Proc(IActiveIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    select__ : Proc(IActiveIME*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    set_composition_string : Proc(IActiveIME*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    to_ascii_ex : Proc(IActiveIME*, UInt32, UInt32, UInt8*, UInt32, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     register_word : Proc(IActiveIME*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     unregister_word : Proc(IActiveIME*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_register_word_style : Proc(IActiveIME*, UInt32, Win32cr::UI::Input::Ime::STYLEBUFW*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -2621,7 +2663,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIME, lpVtbl : IActiveIMEVtbl* do
+  record IActiveIME, lpVtbl : IActiveIMEVtable* do
     GUID = LibC::GUID.new(0x6fe20962_u32, 0xd077_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xe7_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IActiveIME*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2635,34 +2677,34 @@ module Win32cr::UI::Input::Ime
     def inquire(this : IActiveIME*, dwSystemInfoFlags : UInt32, pIMEInfo : Win32cr::UI::Input::Ime::IMEINFO*, szWndClass : Win32cr::Foundation::PWSTR, pdwPrivate : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.inquire.call(this, dwSystemInfoFlags, pIMEInfo, szWndClass, pdwPrivate)
     end
-    def conversion_list(this : IActiveIME*, hIMC : Win32cr::Globalization::HIMC, szSource : Win32cr::Foundation::PWSTR, uFlag : UInt32, uBufLen : UInt32, pDest : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def conversion_list(this : IActiveIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, szSource : Win32cr::Foundation::PWSTR, uFlag : UInt32, uBufLen : UInt32, pDest : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.conversion_list.call(this, hIMC, szSource, uFlag, uBufLen, pDest, puCopied)
     end
-    def configure(this : IActiveIME*, hKL : Win32cr::UI::TextServices::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pRegisterWord : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
+    def configure(this : IActiveIME*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pRegisterWord : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.configure.call(this, hKL, hWnd, dwMode, pRegisterWord)
     end
     def destroy(this : IActiveIME*, uReserved : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.destroy.call(this, uReserved)
     end
-    def escape(this : IActiveIME*, hIMC : Win32cr::Globalization::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def escape(this : IActiveIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.escape.call(this, hIMC, uEscape, pData, plResult)
     end
-    def set_active_context(this : IActiveIME*, hIMC : Win32cr::Globalization::HIMC, fFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    def set_active_context(this : IActiveIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, fFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_active_context.call(this, hIMC, fFlag)
     end
-    def process_key(this : IActiveIME*, hIMC : Win32cr::Globalization::HIMC, uVirKey : UInt32, lParam : UInt32, pbKeyState : UInt8*) : Win32cr::Foundation::HRESULT
+    def process_key(this : IActiveIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, uVirKey : UInt32, lParam : UInt32, pbKeyState : UInt8*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.process_key.call(this, hIMC, uVirKey, lParam, pbKeyState)
     end
-    def notify(this : IActiveIME*, hIMC : Win32cr::Globalization::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+    def notify(this : IActiveIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.notify.call(this, hIMC, dwAction, dwIndex, dwValue)
     end
-    def select__(this : IActiveIME*, hIMC : Win32cr::Globalization::HIMC, fSelect : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    def select__(this : IActiveIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, fSelect : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.select__.call(this, hIMC, fSelect)
     end
-    def set_composition_string(this : IActiveIME*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
+    def set_composition_string(this : IActiveIME*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_string.call(this, hIMC, dwIndex, pComp, dwCompLen, pRead, dwReadLen)
     end
-    def to_ascii_ex(this : IActiveIME*, uVirKey : UInt32, uScanCode : UInt32, pbKeyState : UInt8*, fuState : UInt32, hIMC : Win32cr::Globalization::HIMC, pdwTransBuf : UInt32*, puSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def to_ascii_ex(this : IActiveIME*, uVirKey : UInt32, uScanCode : UInt32, pbKeyState : UInt8*, fuState : UInt32, hIMC : Win32cr::UI::Input::Ime::HIMC, pdwTransBuf : UInt32*, puSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.to_ascii_ex.call(this, uVirKey, uScanCode, pbKeyState, fuState, hIMC, pdwTransBuf, puSize)
     end
     def register_word(this : IActiveIME*, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -2687,21 +2729,22 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIME2Vtbl,
+
+  record IActiveIME2Vtable,
     query_interface : Proc(IActiveIME2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIME2*, UInt32),
     release : Proc(IActiveIME2*, UInt32),
     inquire : Proc(IActiveIME2*, UInt32, Win32cr::UI::Input::Ime::IMEINFO*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
-    conversion_list : Proc(IActiveIME2*, Win32cr::Globalization::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
-    configure : Proc(IActiveIME2*, Win32cr::UI::TextServices::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
+    conversion_list : Proc(IActiveIME2*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::UI::Input::Ime::CANDIDATELIST*, UInt32*, Win32cr::Foundation::HRESULT),
+    configure : Proc(IActiveIME2*, Win32cr::UI::Input::KeyboardAndMouse::HKL, Win32cr::Foundation::HWND, UInt32, Win32cr::UI::Input::Ime::REGISTERWORDW*, Win32cr::Foundation::HRESULT),
     destroy : Proc(IActiveIME2*, UInt32, Win32cr::Foundation::HRESULT),
-    escape : Proc(IActiveIME2*, Win32cr::Globalization::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
-    set_active_context : Proc(IActiveIME2*, Win32cr::Globalization::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    process_key : Proc(IActiveIME2*, Win32cr::Globalization::HIMC, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
-    notify : Proc(IActiveIME2*, Win32cr::Globalization::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    select__ : Proc(IActiveIME2*, Win32cr::Globalization::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    set_composition_string : Proc(IActiveIME2*, Win32cr::Globalization::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    to_ascii_ex : Proc(IActiveIME2*, UInt32, UInt32, UInt8*, UInt32, Win32cr::Globalization::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    escape : Proc(IActiveIME2*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, Win32cr::Foundation::LRESULT*, Win32cr::Foundation::HRESULT),
+    set_active_context : Proc(IActiveIME2*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    process_key : Proc(IActiveIME2*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    notify : Proc(IActiveIME2*, Win32cr::UI::Input::Ime::HIMC, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    select__ : Proc(IActiveIME2*, Win32cr::UI::Input::Ime::HIMC, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    set_composition_string : Proc(IActiveIME2*, Win32cr::UI::Input::Ime::HIMC, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    to_ascii_ex : Proc(IActiveIME2*, UInt32, UInt32, UInt8*, UInt32, Win32cr::UI::Input::Ime::HIMC, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     register_word : Proc(IActiveIME2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     unregister_word : Proc(IActiveIME2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_register_word_style : Proc(IActiveIME2*, UInt32, Win32cr::UI::Input::Ime::STYLEBUFW*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -2713,7 +2756,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIME2, lpVtbl : IActiveIME2Vtbl* do
+  record IActiveIME2, lpVtbl : IActiveIME2Vtable* do
     GUID = LibC::GUID.new(0xe1c4bf0e_u32, 0x2d53_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe1_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIME2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2727,34 +2770,34 @@ module Win32cr::UI::Input::Ime
     def inquire(this : IActiveIME2*, dwSystemInfoFlags : UInt32, pIMEInfo : Win32cr::UI::Input::Ime::IMEINFO*, szWndClass : Win32cr::Foundation::PWSTR, pdwPrivate : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.inquire.call(this, dwSystemInfoFlags, pIMEInfo, szWndClass, pdwPrivate)
     end
-    def conversion_list(this : IActiveIME2*, hIMC : Win32cr::Globalization::HIMC, szSource : Win32cr::Foundation::PWSTR, uFlag : UInt32, uBufLen : UInt32, pDest : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
+    def conversion_list(this : IActiveIME2*, hIMC : Win32cr::UI::Input::Ime::HIMC, szSource : Win32cr::Foundation::PWSTR, uFlag : UInt32, uBufLen : UInt32, pDest : Win32cr::UI::Input::Ime::CANDIDATELIST*, puCopied : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.conversion_list.call(this, hIMC, szSource, uFlag, uBufLen, pDest, puCopied)
     end
-    def configure(this : IActiveIME2*, hKL : Win32cr::UI::TextServices::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pRegisterWord : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
+    def configure(this : IActiveIME2*, hKL : Win32cr::UI::Input::KeyboardAndMouse::HKL, hWnd : Win32cr::Foundation::HWND, dwMode : UInt32, pRegisterWord : Win32cr::UI::Input::Ime::REGISTERWORDW*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.configure.call(this, hKL, hWnd, dwMode, pRegisterWord)
     end
     def destroy(this : IActiveIME2*, uReserved : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.destroy.call(this, uReserved)
     end
-    def escape(this : IActiveIME2*, hIMC : Win32cr::Globalization::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
+    def escape(this : IActiveIME2*, hIMC : Win32cr::UI::Input::Ime::HIMC, uEscape : UInt32, pData : Void*, plResult : Win32cr::Foundation::LRESULT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.escape.call(this, hIMC, uEscape, pData, plResult)
     end
-    def set_active_context(this : IActiveIME2*, hIMC : Win32cr::Globalization::HIMC, fFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    def set_active_context(this : IActiveIME2*, hIMC : Win32cr::UI::Input::Ime::HIMC, fFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_active_context.call(this, hIMC, fFlag)
     end
-    def process_key(this : IActiveIME2*, hIMC : Win32cr::Globalization::HIMC, uVirKey : UInt32, lParam : UInt32, pbKeyState : UInt8*) : Win32cr::Foundation::HRESULT
+    def process_key(this : IActiveIME2*, hIMC : Win32cr::UI::Input::Ime::HIMC, uVirKey : UInt32, lParam : UInt32, pbKeyState : UInt8*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.process_key.call(this, hIMC, uVirKey, lParam, pbKeyState)
     end
-    def notify(this : IActiveIME2*, hIMC : Win32cr::Globalization::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+    def notify(this : IActiveIME2*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwAction : UInt32, dwIndex : UInt32, dwValue : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.notify.call(this, hIMC, dwAction, dwIndex, dwValue)
     end
-    def select__(this : IActiveIME2*, hIMC : Win32cr::Globalization::HIMC, fSelect : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    def select__(this : IActiveIME2*, hIMC : Win32cr::UI::Input::Ime::HIMC, fSelect : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.select__.call(this, hIMC, fSelect)
     end
-    def set_composition_string(this : IActiveIME2*, hIMC : Win32cr::Globalization::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
+    def set_composition_string(this : IActiveIME2*, hIMC : Win32cr::UI::Input::Ime::HIMC, dwIndex : UInt32, pComp : Void*, dwCompLen : UInt32, pRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_composition_string.call(this, hIMC, dwIndex, pComp, dwCompLen, pRead, dwReadLen)
     end
-    def to_ascii_ex(this : IActiveIME2*, uVirKey : UInt32, uScanCode : UInt32, pbKeyState : UInt8*, fuState : UInt32, hIMC : Win32cr::Globalization::HIMC, pdwTransBuf : UInt32*, puSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def to_ascii_ex(this : IActiveIME2*, uVirKey : UInt32, uScanCode : UInt32, pbKeyState : UInt8*, fuState : UInt32, hIMC : Win32cr::UI::Input::Ime::HIMC, pdwTransBuf : UInt32*, puSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.to_ascii_ex.call(this, uVirKey, uScanCode, pbKeyState, fuState, hIMC, pdwTransBuf, puSize)
     end
     def register_word(this : IActiveIME2*, szReading : Win32cr::Foundation::PWSTR, dwStyle : UInt32, szString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -2784,476 +2827,641 @@ module Win32cr::UI::Input::Ime
 
   end
 
-  def immInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::TextServices::HKL
+  def immInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::Input::KeyboardAndMouse::HKL
+    {% if !flag?(:docs) %}
     C.ImmInstallIMEA(lpszIMEFileName, lpszLayoutText)
+    {% end %}
   end
 
-  def immInstallIMEW(lpszIMEFileName : Win32cr::Foundation::PWSTR, lpszLayoutText : Win32cr::Foundation::PWSTR) : Win32cr::UI::TextServices::HKL
+  def immInstallIMEW(lpszIMEFileName : Win32cr::Foundation::PWSTR, lpszLayoutText : Win32cr::Foundation::PWSTR) : Win32cr::UI::Input::KeyboardAndMouse::HKL
+    {% if !flag?(:docs) %}
     C.ImmInstallIMEW(lpszIMEFileName, lpszLayoutText)
+    {% end %}
   end
 
   def immGetDefaultIMEWnd(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ImmGetDefaultIMEWnd(param0)
+    {% end %}
   end
 
-  def immGetDescriptionA(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt8*, uBufLen : UInt32) : UInt32
+  def immGetDescriptionA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszDescription : Win32cr::Foundation::PSTR, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetDescriptionA(param0, lpszDescription, uBufLen)
+    {% end %}
   end
 
-  def immGetDescriptionW(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt16*, uBufLen : UInt32) : UInt32
+  def immGetDescriptionW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszDescription : Win32cr::Foundation::PWSTR, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetDescriptionW(param0, lpszDescription, uBufLen)
+    {% end %}
   end
 
-  def immGetIMEFileNameA(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt8*, uBufLen : UInt32) : UInt32
+  def immGetIMEFileNameA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszFileName : Win32cr::Foundation::PSTR, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMEFileNameA(param0, lpszFileName, uBufLen)
+    {% end %}
   end
 
-  def immGetIMEFileNameW(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt16*, uBufLen : UInt32) : UInt32
+  def immGetIMEFileNameW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszFileName : Win32cr::Foundation::PWSTR, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMEFileNameW(param0, lpszFileName, uBufLen)
+    {% end %}
   end
 
-  def immGetProperty(param0 : Win32cr::UI::TextServices::HKL, param1 : UInt32) : UInt32
+  def immGetProperty(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetProperty(param0, param1)
+    {% end %}
   end
 
-  def immIsIME(param0 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+  def immIsIME(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmIsIME(param0)
+    {% end %}
   end
 
-  def immSimulateHotKey(param0 : Win32cr::Foundation::HWND, param1 : UInt32) : Win32cr::Foundation::BOOL
+  def immSimulateHotKey(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::IME_HOTKEY_IDENTIFIER) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSimulateHotKey(param0, param1)
+    {% end %}
   end
 
-  def immCreateContext : Win32cr::Globalization::HIMC
+  def immCreateContext : Win32cr::UI::Input::Ime::HIMC
+    {% if !flag?(:docs) %}
     C.ImmCreateContext
+    {% end %}
   end
 
-  def immDestroyContext(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+  def immDestroyContext(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDestroyContext(param0)
+    {% end %}
   end
 
-  def immGetContext(param0 : Win32cr::Foundation::HWND) : Win32cr::Globalization::HIMC
+  def immGetContext(param0 : Win32cr::Foundation::HWND) : Win32cr::UI::Input::Ime::HIMC
+    {% if !flag?(:docs) %}
     C.ImmGetContext(param0)
+    {% end %}
   end
 
-  def immReleaseContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+  def immReleaseContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmReleaseContext(param0, param1)
+    {% end %}
   end
 
-  def immAssociateContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Globalization::HIMC
+  def immAssociateContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::UI::Input::Ime::HIMC
+    {% if !flag?(:docs) %}
     C.ImmAssociateContext(param0, param1)
+    {% end %}
   end
 
-  def immAssociateContextEx(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC, param2 : UInt32) : Win32cr::Foundation::BOOL
+  def immAssociateContextEx(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::HIMC, param2 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmAssociateContextEx(param0, param1, param2)
+    {% end %}
   end
 
-  def immGetCompositionStringA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+  def immGetCompositionStringA(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::UI::Input::Ime::IME_COMPOSITION_STRING, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionStringA(param0, param1, lpBuf, dwBufLen)
+    {% end %}
   end
 
-  def immGetCompositionStringW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+  def immGetCompositionStringW(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::UI::Input::Ime::IME_COMPOSITION_STRING, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionStringW(param0, param1, lpBuf, dwBufLen)
+    {% end %}
   end
 
-  def immSetCompositionStringA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+  def immSetCompositionStringA(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionStringA(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+    {% end %}
   end
 
-  def immSetCompositionStringW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+  def immSetCompositionStringW(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionStringW(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+    {% end %}
   end
 
-  def immGetCandidateListCountA(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+  def immGetCandidateListCountA(param0 : Win32cr::UI::Input::Ime::HIMC, lpdwListCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListCountA(param0, lpdwListCount)
+    {% end %}
   end
 
-  def immGetCandidateListCountW(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+  def immGetCandidateListCountW(param0 : Win32cr::UI::Input::Ime::HIMC, lpdwListCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListCountW(param0, lpdwListCount)
+    {% end %}
   end
 
-  def immGetCandidateListA(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+  def immGetCandidateListA(param0 : Win32cr::UI::Input::Ime::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListA(param0, deIndex, lpCandList, dwBufLen)
+    {% end %}
   end
 
-  def immGetCandidateListW(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+  def immGetCandidateListW(param0 : Win32cr::UI::Input::Ime::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListW(param0, deIndex, lpCandList, dwBufLen)
+    {% end %}
   end
 
-  def immGetGuideLineA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PSTR, dwBufLen : UInt32) : UInt32
+  def immGetGuideLineA(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PSTR, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetGuideLineA(param0, dwIndex, lpBuf, dwBufLen)
+    {% end %}
   end
 
-  def immGetGuideLineW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PWSTR, dwBufLen : UInt32) : UInt32
+  def immGetGuideLineW(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PWSTR, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetGuideLineW(param0, dwIndex, lpBuf, dwBufLen)
+    {% end %}
   end
 
-  def immGetConversionStatus(param0 : Win32cr::Globalization::HIMC, lpfdwConversion : UInt32*, lpfdwSentence : UInt32*) : Win32cr::Foundation::BOOL
+  def immGetConversionStatus(param0 : Win32cr::UI::Input::Ime::HIMC, lpfdwConversion : Win32cr::UI::Input::Ime::IME_CONVERSION_MODE*, lpfdwSentence : Win32cr::UI::Input::Ime::IME_SENTENCE_MODE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetConversionStatus(param0, lpfdwConversion, lpfdwSentence)
+    {% end %}
   end
 
-  def immSetConversionStatus(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32) : Win32cr::Foundation::BOOL
+  def immSetConversionStatus(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::UI::Input::Ime::IME_CONVERSION_MODE, param2 : Win32cr::UI::Input::Ime::IME_SENTENCE_MODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetConversionStatus(param0, param1, param2)
+    {% end %}
   end
 
-  def immGetOpenStatus(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+  def immGetOpenStatus(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetOpenStatus(param0)
+    {% end %}
   end
 
-  def immSetOpenStatus(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+  def immSetOpenStatus(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetOpenStatus(param0, param1)
+    {% end %}
   end
 
-  def immGetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+  def immGetCompositionFontA(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionFontA(param0, lplf)
+    {% end %}
   end
 
-  def immGetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+  def immGetCompositionFontW(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionFontW(param0, lplf)
+    {% end %}
   end
 
-  def immSetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+  def immSetCompositionFontA(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionFontA(param0, lplf)
+    {% end %}
   end
 
-  def immSetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+  def immSetCompositionFontW(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionFontW(param0, lplf)
+    {% end %}
   end
 
-  def immConfigureIMEA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+  def immConfigureIMEA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmConfigureIMEA(param0, param1, param2, param3)
+    {% end %}
   end
 
-  def immConfigureIMEW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+  def immConfigureIMEW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmConfigureIMEW(param0, param1, param2, param3)
+    {% end %}
   end
 
-  def immEscapeA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+  def immEscapeA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, param2 : Win32cr::UI::Input::Ime::IME_ESCAPE, param3 : Void*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmEscapeA(param0, param1, param2, param3)
+    {% end %}
   end
 
-  def immEscapeW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+  def immEscapeW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, param2 : Win32cr::UI::Input::Ime::IME_ESCAPE, param3 : Void*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmEscapeW(param0, param1, param2, param3)
+    {% end %}
   end
 
-  def immGetConversionListA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+  def immGetConversionListA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetConversionListA(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+    {% end %}
   end
 
-  def immGetConversionListW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+  def immGetConversionListW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetConversionListW(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+    {% end %}
   end
 
-  def immNotifyIME(param0 : Win32cr::Globalization::HIMC, dwAction : Win32cr::UI::Input::Ime::NOTIFY_IME_ACTION, dwIndex : Win32cr::UI::Input::Ime::NOTIFY_IME_INDEX, dwValue : UInt32) : Win32cr::Foundation::BOOL
+  def immNotifyIME(param0 : Win32cr::UI::Input::Ime::HIMC, dwAction : Win32cr::UI::Input::Ime::NOTIFY_IME_ACTION, dwIndex : Win32cr::UI::Input::Ime::NOTIFY_IME_INDEX, dwValue : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmNotifyIME(param0, dwAction, dwIndex, dwValue)
+    {% end %}
   end
 
-  def immGetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+  def immGetStatusWindowPos(param0 : Win32cr::UI::Input::Ime::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetStatusWindowPos(param0, lpptPos)
+    {% end %}
   end
 
-  def immSetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+  def immSetStatusWindowPos(param0 : Win32cr::UI::Input::Ime::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetStatusWindowPos(param0, lpptPos)
+    {% end %}
   end
 
-  def immGetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+  def immGetCompositionWindow(param0 : Win32cr::UI::Input::Ime::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionWindow(param0, lpCompForm)
+    {% end %}
   end
 
-  def immSetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+  def immSetCompositionWindow(param0 : Win32cr::UI::Input::Ime::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionWindow(param0, lpCompForm)
+    {% end %}
   end
 
-  def immGetCandidateWindow(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+  def immGetCandidateWindow(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : UInt32, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateWindow(param0, param1, lpCandidate)
+    {% end %}
   end
 
-  def immSetCandidateWindow(param0 : Win32cr::Globalization::HIMC, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+  def immSetCandidateWindow(param0 : Win32cr::UI::Input::Ime::HIMC, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCandidateWindow(param0, lpCandidate)
+    {% end %}
   end
 
   def immIsUIMessageA(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmIsUIMessageA(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immIsUIMessageW(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmIsUIMessageW(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immGetVirtualKey(param0 : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetVirtualKey(param0)
+    {% end %}
   end
 
-  def immRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+  def immRegisterWordA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmRegisterWordA(param0, lpszReading, param2, lpszRegister)
+    {% end %}
   end
 
-  def immRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+  def immRegisterWordW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmRegisterWordW(param0, lpszReading, param2, lpszRegister)
+    {% end %}
   end
 
-  def immUnregisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+  def immUnregisterWordA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnregisterWordA(param0, lpszReading, param2, lpszUnregister)
+    {% end %}
   end
 
-  def immUnregisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+  def immUnregisterWordW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnregisterWordW(param0, lpszReading, param2, lpszUnregister)
+    {% end %}
   end
 
-  def immGetRegisterWordStyleA(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*) : UInt32
+  def immGetRegisterWordStyleA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetRegisterWordStyleA(param0, nItem, lpStyleBuf)
+    {% end %}
   end
 
-  def immGetRegisterWordStyleW(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*) : UInt32
+  def immGetRegisterWordStyleW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetRegisterWordStyleW(param0, nItem, lpStyleBuf)
+    {% end %}
   end
 
-  def immEnumRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCA, lpszReading : Win32cr::Foundation::PSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PSTR, param5 : Void*) : UInt32
+  def immEnumRegisterWordA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCA, lpszReading : Win32cr::Foundation::PSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PSTR, param5 : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmEnumRegisterWordA(param0, param1, lpszReading, param3, lpszRegister, param5)
+    {% end %}
   end
 
-  def immEnumRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCW, lpszReading : Win32cr::Foundation::PWSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR, param5 : Void*) : UInt32
+  def immEnumRegisterWordW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCW, lpszReading : Win32cr::Foundation::PWSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR, param5 : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmEnumRegisterWordW(param0, param1, lpszReading, param3, lpszRegister, param5)
+    {% end %}
   end
 
   def immDisableIME(param0 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDisableIME(param0)
+    {% end %}
   end
 
   def immEnumInputContext(idThread : UInt32, lpfn : Win32cr::UI::Input::Ime::IMCENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmEnumInputContext(idThread, lpfn, lParam)
+    {% end %}
   end
 
-  def immGetImeMenuItemsA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32) : UInt32
+  def immGetImeMenuItemsA(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetImeMenuItemsA(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+    {% end %}
   end
 
-  def immGetImeMenuItemsW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32) : UInt32
+  def immGetImeMenuItemsW(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetImeMenuItemsW(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+    {% end %}
   end
 
   def immDisableTextFrameService(idThread : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDisableTextFrameService(idThread)
+    {% end %}
   end
 
   def immDisableLegacyIME : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDisableLegacyIME
+    {% end %}
   end
 
-  def immGetHotKey(param0 : UInt32, lpuModifiers : UInt32*, lpuVKey : UInt32*, phKL : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+  def immGetHotKey(param0 : UInt32, lpuModifiers : UInt32*, lpuVKey : UInt32*, phKL : Win32cr::UI::Input::KeyboardAndMouse::HKL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetHotKey(param0, lpuModifiers, lpuVKey, phKL)
+    {% end %}
   end
 
-  def immSetHotKey(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+  def immSetHotKey(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : Win32cr::UI::Input::KeyboardAndMouse::HKL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetHotKey(param0, param1, param2, param3)
+    {% end %}
   end
 
-  def immGenerateMessage(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+  def immGenerateMessage(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGenerateMessage(param0)
+    {% end %}
   end
 
-  def immRequestMessageA(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+  def immRequestMessageA(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmRequestMessageA(param0, param1, param2)
+    {% end %}
   end
 
-  def immRequestMessageW(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+  def immRequestMessageW(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmRequestMessageW(param0, param1, param2)
+    {% end %}
   end
 
   def immCreateSoftKeyboard(param0 : UInt32, param1 : Win32cr::Foundation::HWND, param2 : Int32, param3 : Int32) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ImmCreateSoftKeyboard(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immDestroySoftKeyboard(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDestroySoftKeyboard(param0)
+    {% end %}
   end
 
   def immShowSoftKeyboard(param0 : Win32cr::Foundation::HWND, param1 : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmShowSoftKeyboard(param0, param1)
+    {% end %}
   end
 
-  def immLockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::UI::Input::Ime::INPUTCONTEXT*
+  def immLockIMC(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::UI::Input::Ime::INPUTCONTEXT*
+    {% if !flag?(:docs) %}
     C.ImmLockIMC(param0)
+    {% end %}
   end
 
-  def immUnlockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+  def immUnlockIMC(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnlockIMC(param0)
+    {% end %}
   end
 
-  def immGetIMCLockCount(param0 : Win32cr::Globalization::HIMC) : UInt32
+  def immGetIMCLockCount(param0 : Win32cr::UI::Input::Ime::HIMC) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMCLockCount(param0)
+    {% end %}
   end
 
-  def immCreateIMCC(param0 : UInt32) : Win32cr::Globalization::HIMCC
+  def immCreateIMCC(param0 : UInt32) : Win32cr::UI::Input::Ime::HIMCC
+    {% if !flag?(:docs) %}
     C.ImmCreateIMCC(param0)
+    {% end %}
   end
 
-  def immDestroyIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Globalization::HIMCC
+  def immDestroyIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC) : Win32cr::UI::Input::Ime::HIMCC
+    {% if !flag?(:docs) %}
     C.ImmDestroyIMCC(param0)
+    {% end %}
   end
 
-  def immLockIMCC(param0 : Win32cr::Globalization::HIMCC) : Void*
+  def immLockIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC) : Void*
+    {% if !flag?(:docs) %}
     C.ImmLockIMCC(param0)
+    {% end %}
   end
 
-  def immUnlockIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Foundation::BOOL
+  def immUnlockIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnlockIMCC(param0)
+    {% end %}
   end
 
-  def immGetIMCCLockCount(param0 : Win32cr::Globalization::HIMCC) : UInt32
+  def immGetIMCCLockCount(param0 : Win32cr::UI::Input::Ime::HIMCC) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMCCLockCount(param0)
+    {% end %}
   end
 
-  def immReSizeIMCC(param0 : Win32cr::Globalization::HIMCC, param1 : UInt32) : Win32cr::Globalization::HIMCC
+  def immReSizeIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC, param1 : UInt32) : Win32cr::UI::Input::Ime::HIMCC
+    {% if !flag?(:docs) %}
     C.ImmReSizeIMCC(param0, param1)
+    {% end %}
   end
 
-  def immGetIMCCSize(param0 : Win32cr::Globalization::HIMCC) : UInt32
+  def immGetIMCCSize(param0 : Win32cr::UI::Input::Ime::HIMCC) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMCCSize(param0)
+    {% end %}
   end
 
   @[Link("imm32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun ImmInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::TextServices::HKL
+    fun ImmInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::Input::KeyboardAndMouse::HKL
 
     # :nodoc:
-    fun ImmInstallIMEW(lpszIMEFileName : Win32cr::Foundation::PWSTR, lpszLayoutText : Win32cr::Foundation::PWSTR) : Win32cr::UI::TextServices::HKL
+    fun ImmInstallIMEW(lpszIMEFileName : Win32cr::Foundation::PWSTR, lpszLayoutText : Win32cr::Foundation::PWSTR) : Win32cr::UI::Input::KeyboardAndMouse::HKL
 
     # :nodoc:
     fun ImmGetDefaultIMEWnd(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
 
     # :nodoc:
-    fun ImmGetDescriptionA(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt8*, uBufLen : UInt32) : UInt32
+    fun ImmGetDescriptionA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszDescription : Win32cr::Foundation::PSTR, uBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetDescriptionW(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt16*, uBufLen : UInt32) : UInt32
+    fun ImmGetDescriptionW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszDescription : Win32cr::Foundation::PWSTR, uBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetIMEFileNameA(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt8*, uBufLen : UInt32) : UInt32
+    fun ImmGetIMEFileNameA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszFileName : Win32cr::Foundation::PSTR, uBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetIMEFileNameW(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt16*, uBufLen : UInt32) : UInt32
+    fun ImmGetIMEFileNameW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszFileName : Win32cr::Foundation::PWSTR, uBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetProperty(param0 : Win32cr::UI::TextServices::HKL, param1 : UInt32) : UInt32
+    fun ImmGetProperty(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmIsIME(param0 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    fun ImmIsIME(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSimulateHotKey(param0 : Win32cr::Foundation::HWND, param1 : UInt32) : Win32cr::Foundation::BOOL
+    fun ImmSimulateHotKey(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::IME_HOTKEY_IDENTIFIER) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmCreateContext : Win32cr::Globalization::HIMC
+    fun ImmCreateContext : Win32cr::UI::Input::Ime::HIMC
 
     # :nodoc:
-    fun ImmDestroyContext(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    fun ImmDestroyContext(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetContext(param0 : Win32cr::Foundation::HWND) : Win32cr::Globalization::HIMC
+    fun ImmGetContext(param0 : Win32cr::Foundation::HWND) : Win32cr::UI::Input::Ime::HIMC
 
     # :nodoc:
-    fun ImmReleaseContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    fun ImmReleaseContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmAssociateContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Globalization::HIMC
+    fun ImmAssociateContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::UI::Input::Ime::HIMC
 
     # :nodoc:
-    fun ImmAssociateContextEx(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC, param2 : UInt32) : Win32cr::Foundation::BOOL
+    fun ImmAssociateContextEx(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::UI::Input::Ime::HIMC, param2 : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetCompositionStringA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    fun ImmGetCompositionStringA(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::UI::Input::Ime::IME_COMPOSITION_STRING, lpBuf : Void*, dwBufLen : UInt32) : Int32
 
     # :nodoc:
-    fun ImmGetCompositionStringW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    fun ImmGetCompositionStringW(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::UI::Input::Ime::IME_COMPOSITION_STRING, lpBuf : Void*, dwBufLen : UInt32) : Int32
 
     # :nodoc:
-    fun ImmSetCompositionStringA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    fun ImmSetCompositionStringA(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetCompositionStringW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    fun ImmSetCompositionStringW(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetCandidateListCountA(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+    fun ImmGetCandidateListCountA(param0 : Win32cr::UI::Input::Ime::HIMC, lpdwListCount : UInt32*) : UInt32
 
     # :nodoc:
-    fun ImmGetCandidateListCountW(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+    fun ImmGetCandidateListCountW(param0 : Win32cr::UI::Input::Ime::HIMC, lpdwListCount : UInt32*) : UInt32
 
     # :nodoc:
-    fun ImmGetCandidateListA(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    fun ImmGetCandidateListA(param0 : Win32cr::UI::Input::Ime::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetCandidateListW(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    fun ImmGetCandidateListW(param0 : Win32cr::UI::Input::Ime::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetGuideLineA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PSTR, dwBufLen : UInt32) : UInt32
+    fun ImmGetGuideLineA(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PSTR, dwBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetGuideLineW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PWSTR, dwBufLen : UInt32) : UInt32
+    fun ImmGetGuideLineW(param0 : Win32cr::UI::Input::Ime::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PWSTR, dwBufLen : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetConversionStatus(param0 : Win32cr::Globalization::HIMC, lpfdwConversion : UInt32*, lpfdwSentence : UInt32*) : Win32cr::Foundation::BOOL
+    fun ImmGetConversionStatus(param0 : Win32cr::UI::Input::Ime::HIMC, lpfdwConversion : Win32cr::UI::Input::Ime::IME_CONVERSION_MODE*, lpfdwSentence : Win32cr::UI::Input::Ime::IME_SENTENCE_MODE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetConversionStatus(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32) : Win32cr::Foundation::BOOL
+    fun ImmSetConversionStatus(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::UI::Input::Ime::IME_CONVERSION_MODE, param2 : Win32cr::UI::Input::Ime::IME_SENTENCE_MODE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetOpenStatus(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    fun ImmGetOpenStatus(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetOpenStatus(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    fun ImmSetOpenStatus(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    fun ImmGetCompositionFontA(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    fun ImmGetCompositionFontW(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    fun ImmSetCompositionFontA(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    fun ImmSetCompositionFontW(param0 : Win32cr::UI::Input::Ime::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmConfigureIMEA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    fun ImmConfigureIMEA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmConfigureIMEW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    fun ImmConfigureIMEW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmEscapeA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+    fun ImmEscapeA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, param2 : Win32cr::UI::Input::Ime::IME_ESCAPE, param3 : Void*) : Win32cr::Foundation::LRESULT
 
     # :nodoc:
-    fun ImmEscapeW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+    fun ImmEscapeW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, param2 : Win32cr::UI::Input::Ime::IME_ESCAPE, param3 : Void*) : Win32cr::Foundation::LRESULT
 
     # :nodoc:
-    fun ImmGetConversionListA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    fun ImmGetConversionListA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
 
     # :nodoc:
-    fun ImmGetConversionListW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    fun ImmGetConversionListW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::HIMC, lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
 
     # :nodoc:
-    fun ImmNotifyIME(param0 : Win32cr::Globalization::HIMC, dwAction : Win32cr::UI::Input::Ime::NOTIFY_IME_ACTION, dwIndex : Win32cr::UI::Input::Ime::NOTIFY_IME_INDEX, dwValue : UInt32) : Win32cr::Foundation::BOOL
+    fun ImmNotifyIME(param0 : Win32cr::UI::Input::Ime::HIMC, dwAction : Win32cr::UI::Input::Ime::NOTIFY_IME_ACTION, dwIndex : Win32cr::UI::Input::Ime::NOTIFY_IME_INDEX, dwValue : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    fun ImmGetStatusWindowPos(param0 : Win32cr::UI::Input::Ime::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    fun ImmSetStatusWindowPos(param0 : Win32cr::UI::Input::Ime::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    fun ImmGetCompositionWindow(param0 : Win32cr::UI::Input::Ime::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    fun ImmSetCompositionWindow(param0 : Win32cr::UI::Input::Ime::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetCandidateWindow(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    fun ImmGetCandidateWindow(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : UInt32, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetCandidateWindow(param0 : Win32cr::Globalization::HIMC, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    fun ImmSetCandidateWindow(param0 : Win32cr::UI::Input::Ime::HIMC, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun ImmIsUIMessageA(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
@@ -3265,28 +3473,28 @@ module Win32cr::UI::Input::Ime
     fun ImmGetVirtualKey(param0 : Win32cr::Foundation::HWND) : UInt32
 
     # :nodoc:
-    fun ImmRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    fun ImmRegisterWordA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    fun ImmRegisterWordW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmUnregisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    fun ImmUnregisterWordA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmUnregisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    fun ImmUnregisterWordW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetRegisterWordStyleA(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*) : UInt32
+    fun ImmGetRegisterWordStyleA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*) : UInt32
 
     # :nodoc:
-    fun ImmGetRegisterWordStyleW(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*) : UInt32
+    fun ImmGetRegisterWordStyleW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*) : UInt32
 
     # :nodoc:
-    fun ImmEnumRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCA, lpszReading : Win32cr::Foundation::PSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PSTR, param5 : Void*) : UInt32
+    fun ImmEnumRegisterWordA(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCA, lpszReading : Win32cr::Foundation::PSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PSTR, param5 : Void*) : UInt32
 
     # :nodoc:
-    fun ImmEnumRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCW, lpszReading : Win32cr::Foundation::PWSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR, param5 : Void*) : UInt32
+    fun ImmEnumRegisterWordW(param0 : Win32cr::UI::Input::KeyboardAndMouse::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCW, lpszReading : Win32cr::Foundation::PWSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR, param5 : Void*) : UInt32
 
     # :nodoc:
     fun ImmDisableIME(param0 : UInt32) : Win32cr::Foundation::BOOL
@@ -3295,10 +3503,10 @@ module Win32cr::UI::Input::Ime
     fun ImmEnumInputContext(idThread : UInt32, lpfn : Win32cr::UI::Input::Ime::IMCENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetImeMenuItemsA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32) : UInt32
+    fun ImmGetImeMenuItemsA(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32) : UInt32
 
     # :nodoc:
-    fun ImmGetImeMenuItemsW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32) : UInt32
+    fun ImmGetImeMenuItemsW(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32) : UInt32
 
     # :nodoc:
     fun ImmDisableTextFrameService(idThread : UInt32) : Win32cr::Foundation::BOOL
@@ -3307,19 +3515,19 @@ module Win32cr::UI::Input::Ime
     fun ImmDisableLegacyIME : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetHotKey(param0 : UInt32, lpuModifiers : UInt32*, lpuVKey : UInt32*, phKL : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    fun ImmGetHotKey(param0 : UInt32, lpuModifiers : UInt32*, lpuVKey : UInt32*, phKL : Win32cr::UI::Input::KeyboardAndMouse::HKL*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmSetHotKey(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    fun ImmSetHotKey(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : Win32cr::UI::Input::KeyboardAndMouse::HKL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGenerateMessage(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    fun ImmGenerateMessage(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmRequestMessageA(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    fun ImmRequestMessageA(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
     # :nodoc:
-    fun ImmRequestMessageW(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    fun ImmRequestMessageW(param0 : Win32cr::UI::Input::Ime::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
     # :nodoc:
     fun ImmCreateSoftKeyboard(param0 : UInt32, param1 : Win32cr::Foundation::HWND, param2 : Int32, param3 : Int32) : Win32cr::Foundation::HWND
@@ -3331,34 +3539,35 @@ module Win32cr::UI::Input::Ime
     fun ImmShowSoftKeyboard(param0 : Win32cr::Foundation::HWND, param1 : Int32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmLockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::UI::Input::Ime::INPUTCONTEXT*
+    fun ImmLockIMC(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::UI::Input::Ime::INPUTCONTEXT*
 
     # :nodoc:
-    fun ImmUnlockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    fun ImmUnlockIMC(param0 : Win32cr::UI::Input::Ime::HIMC) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetIMCLockCount(param0 : Win32cr::Globalization::HIMC) : UInt32
+    fun ImmGetIMCLockCount(param0 : Win32cr::UI::Input::Ime::HIMC) : UInt32
 
     # :nodoc:
-    fun ImmCreateIMCC(param0 : UInt32) : Win32cr::Globalization::HIMCC
+    fun ImmCreateIMCC(param0 : UInt32) : Win32cr::UI::Input::Ime::HIMCC
 
     # :nodoc:
-    fun ImmDestroyIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Globalization::HIMCC
+    fun ImmDestroyIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC) : Win32cr::UI::Input::Ime::HIMCC
 
     # :nodoc:
-    fun ImmLockIMCC(param0 : Win32cr::Globalization::HIMCC) : Void*
+    fun ImmLockIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC) : Void*
 
     # :nodoc:
-    fun ImmUnlockIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Foundation::BOOL
+    fun ImmUnlockIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ImmGetIMCCLockCount(param0 : Win32cr::Globalization::HIMCC) : UInt32
+    fun ImmGetIMCCLockCount(param0 : Win32cr::UI::Input::Ime::HIMCC) : UInt32
 
     # :nodoc:
-    fun ImmReSizeIMCC(param0 : Win32cr::Globalization::HIMCC, param1 : UInt32) : Win32cr::Globalization::HIMCC
+    fun ImmReSizeIMCC(param0 : Win32cr::UI::Input::Ime::HIMCC, param1 : UInt32) : Win32cr::UI::Input::Ime::HIMCC
 
     # :nodoc:
-    fun ImmGetIMCCSize(param0 : Win32cr::Globalization::HIMCC) : UInt32
+    fun ImmGetIMCCSize(param0 : Win32cr::UI::Input::Ime::HIMCC) : UInt32
 
   end
+  {% end %}
 end

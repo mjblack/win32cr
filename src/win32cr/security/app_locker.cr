@@ -1,4 +1,5 @@
 require "./../foundation.cr"
+require "./cryptography.cr"
 require "./../security.cr"
 
 module Win32cr::Security::AppLocker
@@ -96,12 +97,12 @@ module Win32cr::Security::AppLocker
     property url_zone_id : UInt32
     property image_hash : UInt8[64]
     property dwImageHashSize : UInt32
-    property image_size : Win32cr::Foundation::LARGE_INTEGER
-    property hash_algorithm : UInt32
+    property image_size : Int64
+    property hash_algorithm : Win32cr::Security::Cryptography::ALG_ID
     property pByteBlock : UInt8*
     property hWndParent : Win32cr::Foundation::HWND
     property dwWVTUIChoice : UInt32
-    def initialize(@cbSize : UInt32, @dwCheckFlags : UInt32, @image_path : Win32cr::Foundation::PWSTR, @hImageFileHandle : Win32cr::Foundation::HANDLE, @url_zone_id : UInt32, @image_hash : UInt8[64], @dwImageHashSize : UInt32, @image_size : Win32cr::Foundation::LARGE_INTEGER, @hash_algorithm : UInt32, @pByteBlock : UInt8*, @hWndParent : Win32cr::Foundation::HWND, @dwWVTUIChoice : UInt32)
+    def initialize(@cbSize : UInt32, @dwCheckFlags : UInt32, @image_path : Win32cr::Foundation::PWSTR, @hImageFileHandle : Win32cr::Foundation::HANDLE, @url_zone_id : UInt32, @image_hash : UInt8[64], @dwImageHashSize : UInt32, @image_size : Int64, @hash_algorithm : Win32cr::Security::Cryptography::ALG_ID, @pByteBlock : UInt8*, @hWndParent : Win32cr::Foundation::HWND, @dwWVTUIChoice : UInt32)
     end
   end
 
@@ -114,8 +115,8 @@ module Win32cr::Security::AppLocker
     property url_zone_id : UInt32
     property image_hash : UInt8[64]
     property dwImageHashSize : UInt32
-    property image_size : Win32cr::Foundation::LARGE_INTEGER
-    property hash_algorithm : UInt32
+    property image_size : Int64
+    property hash_algorithm : Win32cr::Security::Cryptography::ALG_ID
     property pByteBlock : UInt8*
     property hWndParent : Win32cr::Foundation::HWND
     property dwWVTUIChoice : UInt32
@@ -124,7 +125,7 @@ module Win32cr::Security::AppLocker
     property package_name : Win32cr::Foundation::PWSTR
     property package_version : UInt64
     property package_is_framework : Win32cr::Foundation::BOOL
-    def initialize(@cbSize : UInt32, @dwCheckFlags : UInt32, @image_path : Win32cr::Foundation::PWSTR, @hImageFileHandle : Win32cr::Foundation::HANDLE, @url_zone_id : UInt32, @image_hash : UInt8[64], @dwImageHashSize : UInt32, @image_size : Win32cr::Foundation::LARGE_INTEGER, @hash_algorithm : UInt32, @pByteBlock : UInt8*, @hWndParent : Win32cr::Foundation::HWND, @dwWVTUIChoice : UInt32, @package_moniker : Win32cr::Foundation::PWSTR, @package_publisher : Win32cr::Foundation::PWSTR, @package_name : Win32cr::Foundation::PWSTR, @package_version : UInt64, @package_is_framework : Win32cr::Foundation::BOOL)
+    def initialize(@cbSize : UInt32, @dwCheckFlags : UInt32, @image_path : Win32cr::Foundation::PWSTR, @hImageFileHandle : Win32cr::Foundation::HANDLE, @url_zone_id : UInt32, @image_hash : UInt8[64], @dwImageHashSize : UInt32, @image_size : Int64, @hash_algorithm : Win32cr::Security::Cryptography::ALG_ID, @pByteBlock : UInt8*, @hWndParent : Win32cr::Foundation::HWND, @dwWVTUIChoice : UInt32, @package_moniker : Win32cr::Foundation::PWSTR, @package_publisher : Win32cr::Foundation::PWSTR, @package_name : Win32cr::Foundation::PWSTR, @package_version : UInt64, @package_is_framework : Win32cr::Foundation::BOOL)
     end
   end
 
@@ -155,10 +156,10 @@ module Win32cr::Security::AppLocker
     property friendly_name : UInt16[256]
     property hash_size : UInt32
     property image_hash : UInt8[64]
-    property hash_algorithm : UInt32
-    property image_size : Win32cr::Foundation::LARGE_INTEGER
+    property hash_algorithm : Win32cr::Security::Cryptography::ALG_ID
+    property image_size : Int64
     property dwSaferFlags : UInt32
-    def initialize(@header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER, @description : UInt16[256], @friendly_name : UInt16[256], @hash_size : UInt32, @image_hash : UInt8[64], @hash_algorithm : UInt32, @image_size : Win32cr::Foundation::LARGE_INTEGER, @dwSaferFlags : UInt32)
+    def initialize(@header : Win32cr::Security::AppLocker::SAFER_IDENTIFICATION_HEADER, @description : UInt16[256], @friendly_name : UInt16[256], @hash_size : UInt32, @image_hash : UInt8[64], @hash_algorithm : Win32cr::Security::Cryptography::ALG_ID, @image_size : Int64, @dwSaferFlags : UInt32)
     end
   end
 
@@ -167,8 +168,8 @@ module Win32cr::Security::AppLocker
     property hashIdentification : Win32cr::Security::AppLocker::SAFER_HASH_IDENTIFICATION
     property hash_size : UInt32
     property image_hash : UInt8[64]
-    property hash_algorithm : UInt32
-    def initialize(@hashIdentification : Win32cr::Security::AppLocker::SAFER_HASH_IDENTIFICATION, @hash_size : UInt32, @image_hash : UInt8[64], @hash_algorithm : UInt32)
+    property hash_algorithm : Win32cr::Security::Cryptography::ALG_ID
+    def initialize(@hashIdentification : Win32cr::Security::AppLocker::SAFER_HASH_IDENTIFICATION, @hash_size : UInt32, @image_hash : UInt8[64], @hash_algorithm : Win32cr::Security::Cryptography::ALG_ID)
     end
   end
 
@@ -182,46 +183,67 @@ module Win32cr::Security::AppLocker
   end
 
   def saferGetPolicyInformation(dwScopeId : UInt32, safer_policy_info_class : Win32cr::Security::AppLocker::SAFER_POLICY_INFO_CLASS, info_buffer_size : UInt32, info_buffer : Void*, info_buffer_ret_size : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferGetPolicyInformation(dwScopeId, safer_policy_info_class, info_buffer_size, info_buffer, info_buffer_ret_size, lpReserved)
+    {% end %}
   end
 
   def saferSetPolicyInformation(dwScopeId : UInt32, safer_policy_info_class : Win32cr::Security::AppLocker::SAFER_POLICY_INFO_CLASS, info_buffer_size : UInt32, info_buffer : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferSetPolicyInformation(dwScopeId, safer_policy_info_class, info_buffer_size, info_buffer, lpReserved)
+    {% end %}
   end
 
   def saferCreateLevel(dwScopeId : UInt32, dwLevelId : UInt32, open_flags : UInt32, pLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferCreateLevel(dwScopeId, dwLevelId, open_flags, pLevelHandle, lpReserved)
+    {% end %}
   end
 
   def saferCloseLevel(hLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferCloseLevel(hLevelHandle)
+    {% end %}
   end
 
   def saferIdentifyLevel(dwNumProperties : UInt32, pCodeProperties : Win32cr::Security::AppLocker::SAFER_CODE_PROPERTIES_V2*, pLevelHandle : Win32cr::Security::SAFER_LEVEL_HANDLE*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferIdentifyLevel(dwNumProperties, pCodeProperties, pLevelHandle, lpReserved)
+    {% end %}
   end
 
   def saferComputeTokenFromLevel(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, in_access_token : Win32cr::Foundation::HANDLE, out_access_token : Win32cr::Foundation::HANDLE*, dwFlags : Win32cr::Security::AppLocker::SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferComputeTokenFromLevel(level_handle, in_access_token, out_access_token, dwFlags, lpReserved)
+    {% end %}
   end
 
   def saferGetLevelInformation(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, dwInfoType : Win32cr::Security::AppLocker::SAFER_OBJECT_INFO_CLASS, lpQueryBuffer : Void*, dwInBufferSize : UInt32, lpdwOutBufferSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferGetLevelInformation(level_handle, dwInfoType, lpQueryBuffer, dwInBufferSize, lpdwOutBufferSize)
+    {% end %}
   end
 
   def saferSetLevelInformation(level_handle : Win32cr::Security::SAFER_LEVEL_HANDLE, dwInfoType : Win32cr::Security::AppLocker::SAFER_OBJECT_INFO_CLASS, lpQueryBuffer : Void*, dwInBufferSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferSetLevelInformation(level_handle, dwInfoType, lpQueryBuffer, dwInBufferSize)
+    {% end %}
   end
 
   def saferRecordEventLogEntry(hLevel : Win32cr::Security::SAFER_LEVEL_HANDLE, szTargetPath : Win32cr::Foundation::PWSTR, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferRecordEventLogEntry(hLevel, szTargetPath, lpReserved)
+    {% end %}
   end
 
   def saferiIsExecutableFileType(szFullPathname : Win32cr::Foundation::PWSTR, bFromShellExecute : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SaferiIsExecutableFileType(szFullPathname, bFromShellExecute)
+    {% end %}
   end
 
   @[Link("advapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SaferGetPolicyInformation(dwScopeId : UInt32, safer_policy_info_class : Win32cr::Security::AppLocker::SAFER_POLICY_INFO_CLASS, info_buffer_size : UInt32, info_buffer : Void*, info_buffer_ret_size : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
@@ -254,4 +276,5 @@ module Win32cr::Security::AppLocker
     fun SaferiIsExecutableFileType(szFullPathname : Win32cr::Foundation::PWSTR, bFromShellExecute : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

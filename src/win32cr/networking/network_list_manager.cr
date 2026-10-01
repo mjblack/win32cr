@@ -58,6 +58,11 @@ module Win32cr::Networking::NetworkListManager
     NLM_DOMAIN_TYPE_DOMAIN_NETWORK = 1_i32
     NLM_DOMAIN_TYPE_DOMAIN_AUTHENTICATED = 2_i32
   end
+  enum NLM_DOMAIN_AUTHENTICATION_KIND
+    NLM_DOMAIN_AUTHENTICATION_KIND_NONE = 0_i32
+    NLM_DOMAIN_AUTHENTICATION_KIND_LDAP = 1_i32
+    NLM_DOMAIN_AUTHENTICATION_KIND_TLS = 2_i32
+  end
   enum NLM_ENUM_NETWORK
     NLM_ENUM_NETWORK_CONNECTED = 1_i32
     NLM_ENUM_NETWORK_DISCONNECTED = 2_i32
@@ -119,27 +124,28 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkListManagerVtbl,
+
+  record INetworkListManagerVtable,
     query_interface : Proc(INetworkListManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkListManager*, UInt32),
     release : Proc(INetworkListManager*, UInt32),
     get_type_info_count : Proc(INetworkListManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(INetworkListManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(INetworkListManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(INetworkListManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(INetworkListManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_networks : Proc(INetworkListManager*, Win32cr::Networking::NetworkListManager::NLM_ENUM_NETWORK, Void**, Win32cr::Foundation::HRESULT),
     get_network : Proc(INetworkListManager*, LibC::GUID, Void**, Win32cr::Foundation::HRESULT),
     get_network_connections : Proc(INetworkListManager*, Void**, Win32cr::Foundation::HRESULT),
     get_network_connection : Proc(INetworkListManager*, LibC::GUID, Void**, Win32cr::Foundation::HRESULT),
-    get_IsConnectedToInternet : Proc(INetworkListManager*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsConnected : Proc(INetworkListManager*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsConnectedToInternet : Proc(INetworkListManager*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsConnected : Proc(INetworkListManager*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_connectivity : Proc(INetworkListManager*, Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*, Win32cr::Foundation::HRESULT),
     set_simulated_profile_info : Proc(INetworkListManager*, Win32cr::Networking::NetworkListManager::NLM_SIMULATED_PROFILE_INFO*, Win32cr::Foundation::HRESULT),
     clear_simulated_profile_info : Proc(INetworkListManager*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record INetworkListManager, lpVtbl : INetworkListManagerVtbl* do
+  record INetworkListManager, lpVtbl : INetworkListManagerVtable* do
     GUID = LibC::GUID.new(0xdcb00000_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkListManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -159,8 +165,8 @@ module Win32cr::Networking::NetworkListManager
     def get_i_ds_of_names(this : INetworkListManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : INetworkListManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : INetworkListManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_networks(this : INetworkListManager*, flags : Win32cr::Networking::NetworkListManager::NLM_ENUM_NETWORK, ppEnumNetwork : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_networks.call(this, flags, ppEnumNetwork)
@@ -174,10 +180,10 @@ module Win32cr::Networking::NetworkListManager
     def get_network_connection(this : INetworkListManager*, gdNetworkConnectionId : LibC::GUID, ppNetworkConnection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_network_connection.call(this, gdNetworkConnectionId, ppNetworkConnection)
     end
-    def get_IsConnectedToInternet(this : INetworkListManager*, pbIsConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsConnectedToInternet(this : INetworkListManager*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsConnectedToInternet.call(this, pbIsConnected)
     end
-    def get_IsConnected(this : INetworkListManager*, pbIsConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsConnected(this : INetworkListManager*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsConnected.call(this, pbIsConnected)
     end
     def get_connectivity(this : INetworkListManager*, pConnectivity : Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*) : Win32cr::Foundation::HRESULT
@@ -193,7 +199,8 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkListManagerEventsVtbl,
+
+  record INetworkListManagerEventsVtable,
     query_interface : Proc(INetworkListManagerEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkListManagerEvents*, UInt32),
     release : Proc(INetworkListManagerEvents*, UInt32),
@@ -201,7 +208,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkListManagerEvents, lpVtbl : INetworkListManagerEventsVtbl* do
+  record INetworkListManagerEvents, lpVtbl : INetworkListManagerEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00001_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkListManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -219,14 +226,15 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkVtbl,
+
+  record INetworkVtable,
     query_interface : Proc(INetwork*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetwork*, UInt32),
     release : Proc(INetwork*, UInt32),
     get_type_info_count : Proc(INetwork*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(INetwork*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(INetwork*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(INetwork*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(INetwork*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(INetwork*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_name : Proc(INetwork*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_description : Proc(INetwork*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -235,15 +243,15 @@ module Win32cr::Networking::NetworkListManager
     get_domain_type : Proc(INetwork*, Win32cr::Networking::NetworkListManager::NLM_DOMAIN_TYPE*, Win32cr::Foundation::HRESULT),
     get_network_connections : Proc(INetwork*, Void**, Win32cr::Foundation::HRESULT),
     get_time_created_and_connected : Proc(INetwork*, UInt32*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_IsConnectedToInternet : Proc(INetwork*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsConnected : Proc(INetwork*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsConnectedToInternet : Proc(INetwork*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsConnected : Proc(INetwork*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_connectivity : Proc(INetwork*, Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*, Win32cr::Foundation::HRESULT),
     get_category : Proc(INetwork*, Win32cr::Networking::NetworkListManager::NLM_NETWORK_CATEGORY*, Win32cr::Foundation::HRESULT),
     set_category : Proc(INetwork*, Win32cr::Networking::NetworkListManager::NLM_NETWORK_CATEGORY, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record INetwork, lpVtbl : INetworkVtbl* do
+  record INetwork, lpVtbl : INetworkVtable* do
     GUID = LibC::GUID.new(0xdcb00002_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -263,8 +271,8 @@ module Win32cr::Networking::NetworkListManager
     def get_i_ds_of_names(this : INetwork*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : INetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : INetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : INetwork*, pszNetworkName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, pszNetworkName)
@@ -290,10 +298,10 @@ module Win32cr::Networking::NetworkListManager
     def get_time_created_and_connected(this : INetwork*, pdwLowDateTimeCreated : UInt32*, pdwHighDateTimeCreated : UInt32*, pdwLowDateTimeConnected : UInt32*, pdwHighDateTimeConnected : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_time_created_and_connected.call(this, pdwLowDateTimeCreated, pdwHighDateTimeCreated, pdwLowDateTimeConnected, pdwHighDateTimeConnected)
     end
-    def get_IsConnectedToInternet(this : INetwork*, pbIsConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsConnectedToInternet(this : INetwork*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsConnectedToInternet.call(this, pbIsConnected)
     end
-    def get_IsConnected(this : INetwork*, pbIsConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsConnected(this : INetwork*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsConnected.call(this, pbIsConnected)
     end
     def get_connectivity(this : INetwork*, pConnectivity : Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*) : Win32cr::Foundation::HRESULT
@@ -309,14 +317,110 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record IEnumNetworksVtbl,
+
+  record INetwork2Vtable,
+    query_interface : Proc(INetwork2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(INetwork2*, UInt32),
+    release : Proc(INetwork2*, UInt32),
+    get_type_info_count : Proc(INetwork2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(INetwork2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(INetwork2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(INetwork2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_name : Proc(INetwork2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_name : Proc(INetwork2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_description : Proc(INetwork2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_description : Proc(INetwork2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_network_id : Proc(INetwork2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_domain_type : Proc(INetwork2*, Win32cr::Networking::NetworkListManager::NLM_DOMAIN_TYPE*, Win32cr::Foundation::HRESULT),
+    get_network_connections : Proc(INetwork2*, Void**, Win32cr::Foundation::HRESULT),
+    get_time_created_and_connected : Proc(INetwork2*, UInt32*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_IsConnectedToInternet : Proc(INetwork2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsConnected : Proc(INetwork2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_connectivity : Proc(INetwork2*, Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*, Win32cr::Foundation::HRESULT),
+    get_category : Proc(INetwork2*, Win32cr::Networking::NetworkListManager::NLM_NETWORK_CATEGORY*, Win32cr::Foundation::HRESULT),
+    set_category : Proc(INetwork2*, Win32cr::Networking::NetworkListManager::NLM_NETWORK_CATEGORY, Win32cr::Foundation::HRESULT),
+    is_domain_authenticated_by : Proc(INetwork2*, Win32cr::Networking::NetworkListManager::NLM_DOMAIN_AUTHENTICATION_KIND, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record INetwork2, lpVtbl : INetwork2Vtable* do
+    GUID = LibC::GUID.new(0xb5550abb_u32, 0x3391_u16, 0x4310_u16, StaticArray[0x80_u8, 0x4f_u8, 0x25_u8, 0xdc_u8, 0xc3_u8, 0x25_u8, 0xed_u8, 0x81_u8])
+    def query_interface(this : INetwork2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : INetwork2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : INetwork2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : INetwork2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : INetwork2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : INetwork2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke(this : INetwork2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_name(this : INetwork2*, pszNetworkName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_name.call(this, pszNetworkName)
+    end
+    def set_name(this : INetwork2*, szNetworkNewName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_name.call(this, szNetworkNewName)
+    end
+    def get_description(this : INetwork2*, pszDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_description.call(this, pszDescription)
+    end
+    def set_description(this : INetwork2*, szDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_description.call(this, szDescription)
+    end
+    def get_network_id(this : INetwork2*, pgdGuidNetworkId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_network_id.call(this, pgdGuidNetworkId)
+    end
+    def get_domain_type(this : INetwork2*, pNetworkType : Win32cr::Networking::NetworkListManager::NLM_DOMAIN_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_domain_type.call(this, pNetworkType)
+    end
+    def get_network_connections(this : INetwork2*, ppEnumNetworkConnection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_network_connections.call(this, ppEnumNetworkConnection)
+    end
+    def get_time_created_and_connected(this : INetwork2*, pdwLowDateTimeCreated : UInt32*, pdwHighDateTimeCreated : UInt32*, pdwLowDateTimeConnected : UInt32*, pdwHighDateTimeConnected : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_time_created_and_connected.call(this, pdwLowDateTimeCreated, pdwHighDateTimeCreated, pdwLowDateTimeConnected, pdwHighDateTimeConnected)
+    end
+    def get_IsConnectedToInternet(this : INetwork2*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsConnectedToInternet.call(this, pbIsConnected)
+    end
+    def get_IsConnected(this : INetwork2*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsConnected.call(this, pbIsConnected)
+    end
+    def get_connectivity(this : INetwork2*, pConnectivity : Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connectivity.call(this, pConnectivity)
+    end
+    def get_category(this : INetwork2*, pCategory : Win32cr::Networking::NetworkListManager::NLM_NETWORK_CATEGORY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_category.call(this, pCategory)
+    end
+    def set_category(this : INetwork2*, new_category : Win32cr::Networking::NetworkListManager::NLM_NETWORK_CATEGORY) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_category.call(this, new_category)
+    end
+    def is_domain_authenticated_by(this : INetwork2*, domainAuthenticationKind : Win32cr::Networking::NetworkListManager::NLM_DOMAIN_AUTHENTICATION_KIND, pValue : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_domain_authenticated_by.call(this, domainAuthenticationKind, pValue)
+    end
+
+  end
+
+  @[Extern]
+
+  record IEnumNetworksVtable,
     query_interface : Proc(IEnumNetworks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumNetworks*, UInt32),
     release : Proc(IEnumNetworks*, UInt32),
     get_type_info_count : Proc(IEnumNetworks*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEnumNetworks*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEnumNetworks*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEnumNetworks*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEnumNetworks*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IEnumNetworks*, Void**, Win32cr::Foundation::HRESULT),
     next__ : Proc(IEnumNetworks*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
     skip : Proc(IEnumNetworks*, UInt32, Win32cr::Foundation::HRESULT),
@@ -325,7 +429,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record IEnumNetworks, lpVtbl : IEnumNetworksVtbl* do
+  record IEnumNetworks, lpVtbl : IEnumNetworksVtable* do
     GUID = LibC::GUID.new(0xdcb00003_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IEnumNetworks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -345,8 +449,8 @@ module Win32cr::Networking::NetworkListManager
     def get_i_ds_of_names(this : IEnumNetworks*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEnumNetworks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEnumNetworks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IEnumNetworks*, ppEnumVar : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppEnumVar)
@@ -367,7 +471,8 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkEventsVtbl,
+
+  record INetworkEventsVtable,
     query_interface : Proc(INetworkEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkEvents*, UInt32),
     release : Proc(INetworkEvents*, UInt32),
@@ -378,7 +483,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkEvents, lpVtbl : INetworkEventsVtbl* do
+  record INetworkEvents, lpVtbl : INetworkEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00004_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -405,17 +510,18 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionVtbl,
+
+  record INetworkConnectionVtable,
     query_interface : Proc(INetworkConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnection*, UInt32),
     release : Proc(INetworkConnection*, UInt32),
     get_type_info_count : Proc(INetworkConnection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(INetworkConnection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(INetworkConnection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(INetworkConnection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(INetworkConnection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_network : Proc(INetworkConnection*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsConnectedToInternet : Proc(INetworkConnection*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsConnected : Proc(INetworkConnection*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsConnectedToInternet : Proc(INetworkConnection*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsConnected : Proc(INetworkConnection*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_connectivity : Proc(INetworkConnection*, Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*, Win32cr::Foundation::HRESULT),
     get_connection_id : Proc(INetworkConnection*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_adapter_id : Proc(INetworkConnection*, LibC::GUID*, Win32cr::Foundation::HRESULT),
@@ -423,7 +529,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnection, lpVtbl : INetworkConnectionVtbl* do
+  record INetworkConnection, lpVtbl : INetworkConnectionVtable* do
     GUID = LibC::GUID.new(0xdcb00005_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -443,16 +549,16 @@ module Win32cr::Networking::NetworkListManager
     def get_i_ds_of_names(this : INetworkConnection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : INetworkConnection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : INetworkConnection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_network(this : INetworkConnection*, ppNetwork : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_network.call(this, ppNetwork)
     end
-    def get_IsConnectedToInternet(this : INetworkConnection*, pbIsConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsConnectedToInternet(this : INetworkConnection*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsConnectedToInternet.call(this, pbIsConnected)
     end
-    def get_IsConnected(this : INetworkConnection*, pbIsConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsConnected(this : INetworkConnection*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsConnected.call(this, pbIsConnected)
     end
     def get_connectivity(this : INetworkConnection*, pConnectivity : Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*) : Win32cr::Foundation::HRESULT
@@ -471,14 +577,86 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record IEnumNetworkConnectionsVtbl,
+
+  record INetworkConnection2Vtable,
+    query_interface : Proc(INetworkConnection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(INetworkConnection2*, UInt32),
+    release : Proc(INetworkConnection2*, UInt32),
+    get_type_info_count : Proc(INetworkConnection2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(INetworkConnection2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(INetworkConnection2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(INetworkConnection2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_network : Proc(INetworkConnection2*, Void**, Win32cr::Foundation::HRESULT),
+    get_IsConnectedToInternet : Proc(INetworkConnection2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsConnected : Proc(INetworkConnection2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_connectivity : Proc(INetworkConnection2*, Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*, Win32cr::Foundation::HRESULT),
+    get_connection_id : Proc(INetworkConnection2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_adapter_id : Proc(INetworkConnection2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_domain_type : Proc(INetworkConnection2*, Win32cr::Networking::NetworkListManager::NLM_DOMAIN_TYPE*, Win32cr::Foundation::HRESULT),
+    is_domain_authenticated_by : Proc(INetworkConnection2*, Win32cr::Networking::NetworkListManager::NLM_DOMAIN_AUTHENTICATION_KIND, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record INetworkConnection2, lpVtbl : INetworkConnection2Vtable* do
+    GUID = LibC::GUID.new(0xe676ed_u32, 0x5a35_u16, 0x4738_u16, StaticArray[0x92_u8, 0xeb_u8, 0x85_u8, 0x81_u8, 0x73_u8, 0x8d_u8, 0xf_u8, 0xa_u8])
+    def query_interface(this : INetworkConnection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : INetworkConnection2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : INetworkConnection2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : INetworkConnection2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : INetworkConnection2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : INetworkConnection2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke(this : INetworkConnection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_network(this : INetworkConnection2*, ppNetwork : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_network.call(this, ppNetwork)
+    end
+    def get_IsConnectedToInternet(this : INetworkConnection2*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsConnectedToInternet.call(this, pbIsConnected)
+    end
+    def get_IsConnected(this : INetworkConnection2*, pbIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsConnected.call(this, pbIsConnected)
+    end
+    def get_connectivity(this : INetworkConnection2*, pConnectivity : Win32cr::Networking::NetworkListManager::NLM_CONNECTIVITY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connectivity.call(this, pConnectivity)
+    end
+    def get_connection_id(this : INetworkConnection2*, pgdConnectionId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connection_id.call(this, pgdConnectionId)
+    end
+    def get_adapter_id(this : INetworkConnection2*, pgdAdapterId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_adapter_id.call(this, pgdAdapterId)
+    end
+    def get_domain_type(this : INetworkConnection2*, pDomainType : Win32cr::Networking::NetworkListManager::NLM_DOMAIN_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_domain_type.call(this, pDomainType)
+    end
+    def is_domain_authenticated_by(this : INetworkConnection2*, domainAuthenticationKind : Win32cr::Networking::NetworkListManager::NLM_DOMAIN_AUTHENTICATION_KIND, pValue : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_domain_authenticated_by.call(this, domainAuthenticationKind, pValue)
+    end
+
+  end
+
+  @[Extern]
+
+  record IEnumNetworkConnectionsVtable,
     query_interface : Proc(IEnumNetworkConnections*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumNetworkConnections*, UInt32),
     release : Proc(IEnumNetworkConnections*, UInt32),
     get_type_info_count : Proc(IEnumNetworkConnections*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEnumNetworkConnections*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEnumNetworkConnections*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEnumNetworkConnections*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEnumNetworkConnections*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IEnumNetworkConnections*, Void**, Win32cr::Foundation::HRESULT),
     next__ : Proc(IEnumNetworkConnections*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
     skip : Proc(IEnumNetworkConnections*, UInt32, Win32cr::Foundation::HRESULT),
@@ -487,7 +665,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record IEnumNetworkConnections, lpVtbl : IEnumNetworkConnectionsVtbl* do
+  record IEnumNetworkConnections, lpVtbl : IEnumNetworkConnectionsVtable* do
     GUID = LibC::GUID.new(0xdcb00006_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IEnumNetworkConnections*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -507,8 +685,8 @@ module Win32cr::Networking::NetworkListManager
     def get_i_ds_of_names(this : IEnumNetworkConnections*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEnumNetworkConnections*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEnumNetworkConnections*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IEnumNetworkConnections*, ppEnumVar : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppEnumVar)
@@ -529,7 +707,8 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionEventsVtbl,
+
+  record INetworkConnectionEventsVtable,
     query_interface : Proc(INetworkConnectionEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnectionEvents*, UInt32),
     release : Proc(INetworkConnectionEvents*, UInt32),
@@ -538,7 +717,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnectionEvents, lpVtbl : INetworkConnectionEventsVtbl* do
+  record INetworkConnectionEvents, lpVtbl : INetworkConnectionEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00007_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -559,17 +738,18 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkCostManagerVtbl,
+
+  record INetworkCostManagerVtable,
     query_interface : Proc(INetworkCostManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkCostManager*, UInt32),
     release : Proc(INetworkCostManager*, UInt32),
     get_cost : Proc(INetworkCostManager*, UInt32*, Win32cr::Networking::NetworkListManager::NLM_SOCKADDR*, Win32cr::Foundation::HRESULT),
     get_data_plan_status : Proc(INetworkCostManager*, Win32cr::Networking::NetworkListManager::NLM_DATAPLAN_STATUS*, Win32cr::Networking::NetworkListManager::NLM_SOCKADDR*, Win32cr::Foundation::HRESULT),
-    set_destination_addresses : Proc(INetworkCostManager*, UInt32, Win32cr::Networking::NetworkListManager::NLM_SOCKADDR*, Int16, Win32cr::Foundation::HRESULT)
+    set_destination_addresses : Proc(INetworkCostManager*, UInt32, Win32cr::Networking::NetworkListManager::NLM_SOCKADDR*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record INetworkCostManager, lpVtbl : INetworkCostManagerVtbl* do
+  record INetworkCostManager, lpVtbl : INetworkCostManagerVtable* do
     GUID = LibC::GUID.new(0xdcb00008_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkCostManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -586,14 +766,15 @@ module Win32cr::Networking::NetworkListManager
     def get_data_plan_status(this : INetworkCostManager*, pDataPlanStatus : Win32cr::Networking::NetworkListManager::NLM_DATAPLAN_STATUS*, pDestIPAddr : Win32cr::Networking::NetworkListManager::NLM_SOCKADDR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_data_plan_status.call(this, pDataPlanStatus, pDestIPAddr)
     end
-    def set_destination_addresses(this : INetworkCostManager*, length : UInt32, pDestIPAddrList : Win32cr::Networking::NetworkListManager::NLM_SOCKADDR*, bAppend : Int16) : Win32cr::Foundation::HRESULT
+    def set_destination_addresses(this : INetworkCostManager*, length : UInt32, pDestIPAddrList : Win32cr::Networking::NetworkListManager::NLM_SOCKADDR*, bAppend : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_destination_addresses.call(this, length, pDestIPAddrList, bAppend)
     end
 
   end
 
   @[Extern]
-  record INetworkCostManagerEventsVtbl,
+
+  record INetworkCostManagerEventsVtable,
     query_interface : Proc(INetworkCostManagerEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkCostManagerEvents*, UInt32),
     release : Proc(INetworkCostManagerEvents*, UInt32),
@@ -602,7 +783,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkCostManagerEvents, lpVtbl : INetworkCostManagerEventsVtbl* do
+  record INetworkCostManagerEvents, lpVtbl : INetworkCostManagerEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00009_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkCostManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -623,7 +804,8 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionCostVtbl,
+
+  record INetworkConnectionCostVtable,
     query_interface : Proc(INetworkConnectionCost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnectionCost*, UInt32),
     release : Proc(INetworkConnectionCost*, UInt32),
@@ -632,7 +814,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnectionCost, lpVtbl : INetworkConnectionCostVtbl* do
+  record INetworkConnectionCost, lpVtbl : INetworkConnectionCostVtable* do
     GUID = LibC::GUID.new(0xdcb0000a_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionCost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -653,7 +835,8 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionCostEventsVtbl,
+
+  record INetworkConnectionCostEventsVtable,
     query_interface : Proc(INetworkConnectionCostEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnectionCostEvents*, UInt32),
     release : Proc(INetworkConnectionCostEvents*, UInt32),
@@ -662,7 +845,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnectionCostEvents, lpVtbl : INetworkConnectionCostEventsVtbl* do
+  record INetworkConnectionCostEvents, lpVtbl : INetworkConnectionCostEventsVtable* do
     GUID = LibC::GUID.new(0xdcb0000b_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionCostEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

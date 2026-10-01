@@ -25,14 +25,6 @@ module Win32cr::Security::Cryptography::Sip
   MSSIP_FLAGS_PROHIBIT_RESIZE_ON_CREATE = 65536_u32
   MSSIP_FLAGS_USE_CATALOG = 131072_u32
   MSSIP_FLAGS_MULTI_HASH = 262144_u32
-  SPC_INC_PE_RESOURCES_FLAG = 128_u32
-  SPC_INC_PE_DEBUG_INFO_FLAG = 64_u32
-  SPC_INC_PE_IMPORT_ADDR_TABLE_FLAG = 32_u32
-  SPC_EXC_PE_PAGE_HASHES_FLAG = 16_u32
-  SPC_INC_PE_PAGE_HASHES_FLAG = 256_u32
-  SPC_DIGEST_GENERATE_FLAG = 512_u32
-  SPC_DIGEST_SIGN_FLAG = 1024_u32
-  SPC_DIGEST_SIGN_EX_FLAG = 16384_u32
   SPC_RELAXED_PE_MARKER_CHECK = 2048_u32
   SPC_MARKER_CHECK_SKIP_SIP_INDIRECT_DATA_FLAG = 1_u32
   SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS = 1_u32
@@ -40,6 +32,7 @@ module Win32cr::Security::Cryptography::Sip
   MSSIP_ADDINFO_FLAT = 1_u32
   MSSIP_ADDINFO_CATMEMBER = 2_u32
   MSSIP_ADDINFO_BLOB = 3_u32
+  MSSIP_ADDINFO_DETACHEDSIG = 4_u32
   MSSIP_ADDINFO_NONMSSIP = 500_u32
   SIP_CAP_SET_VERSION_2 = 2_u32
   SIP_CAP_SET_VERSION_3 = 3_u32
@@ -75,7 +68,8 @@ module Win32cr::Security::Cryptography::Sip
     property psFlat : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_FLAT*
     property psCatMember : Win32cr::Security::Cryptography::Catalog::MS_ADDINFO_CATALOGMEMBER*
     property psBlob : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_BLOB*
-    def initialize(@psFlat : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_FLAT*, @psCatMember : Win32cr::Security::Cryptography::Catalog::MS_ADDINFO_CATALOGMEMBER*, @psBlob : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_BLOB*)
+    property psDetachedSig : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_DETACHEDSIG*
+    def initialize(@psFlat : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_FLAT*, @psCatMember : Win32cr::Security::Cryptography::Catalog::MS_ADDINFO_CATALOGMEMBER*, @psBlob : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_BLOB*, @psDetachedSig : Win32cr::Security::Cryptography::Sip::MS_ADDINFO_DETACHEDSIG*)
     end
     end
 
@@ -99,6 +93,16 @@ module Win32cr::Security::Cryptography::Sip
     property cbMemSignedMsg : UInt32
     property pbMemSignedMsg : UInt8*
     def initialize(@cbStruct : UInt32, @cbMemObject : UInt32, @pbMemObject : UInt8*, @cbMemSignedMsg : UInt32, @pbMemSignedMsg : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct MS_ADDINFO_DETACHEDSIG
+    property cbStruct : UInt32
+    property hSignatureFile : Win32cr::Foundation::HANDLE
+    property cbSignatureObject : UInt32
+    property pbSignatureObject : UInt8*
+    def initialize(@cbStruct : UInt32, @hSignatureFile : Win32cr::Foundation::HANDLE, @cbSignatureObject : UInt32, @pbSignatureObject : UInt8*)
     end
   end
 
@@ -136,8 +140,8 @@ module Win32cr::Security::Cryptography::Sip
   struct SIP_INDIRECT_DATA
     property data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE
     property digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property digest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE, @digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @digest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property digest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE, @digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @digest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -173,55 +177,80 @@ module Win32cr::Security::Cryptography::Sip
   end
 
   def cryptSIPGetSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pdwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE*, dwIndex : UInt32, pcbSignedDataMsg : UInt32*, pbSignedDataMsg : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPGetSignedDataMsg(pSubjectInfo, pdwEncodingType, dwIndex, pcbSignedDataMsg, pbSignedDataMsg)
+    {% end %}
   end
 
   def cryptSIPPutSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, dwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pdwIndex : UInt32*, cbSignedDataMsg : UInt32, pbSignedDataMsg : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPPutSignedDataMsg(pSubjectInfo, dwEncodingType, pdwIndex, cbSignedDataMsg, pbSignedDataMsg)
+    {% end %}
   end
 
   def cryptSIPCreateIndirectData(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pcbIndirectData : UInt32*, pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPCreateIndirectData(pSubjectInfo, pcbIndirectData, pIndirectData)
+    {% end %}
   end
 
   def cryptSIPVerifyIndirectData(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPVerifyIndirectData(pSubjectInfo, pIndirectData)
+    {% end %}
   end
 
   def cryptSIPRemoveSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, dwIndex : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRemoveSignedDataMsg(pSubjectInfo, dwIndex)
+    {% end %}
   end
 
   def cryptSIPLoad(pgSubject : LibC::GUID*, dwFlags : UInt32, pSipDispatch : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPLoad(pgSubject, dwFlags, pSipDispatch)
+    {% end %}
   end
 
   def cryptSIPRetrieveSubjectGuid(file_name : Win32cr::Foundation::PWSTR, hFileIn : Win32cr::Foundation::HANDLE, pgSubject : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRetrieveSubjectGuid(file_name, hFileIn, pgSubject)
+    {% end %}
   end
 
   def cryptSIPRetrieveSubjectGuidForCatalogFile(file_name : Win32cr::Foundation::PWSTR, hFileIn : Win32cr::Foundation::HANDLE, pgSubject : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRetrieveSubjectGuidForCatalogFile(file_name, hFileIn, pgSubject)
+    {% end %}
   end
 
   def cryptSIPAddProvider(psNewProv : Win32cr::Security::Cryptography::Sip::SIP_ADD_NEWPROVIDER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPAddProvider(psNewProv)
+    {% end %}
   end
 
   def cryptSIPRemoveProvider(pgProv : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRemoveProvider(pgProv)
+    {% end %}
   end
 
   def cryptSIPGetCaps(pSubjInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pCaps : Win32cr::Security::Cryptography::Sip::SIP_CAP_SET_V3*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPGetCaps(pSubjInfo, pCaps)
+    {% end %}
   end
 
   def cryptSIPGetSealedDigest(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pSig : UInt8*, dwSig : UInt32, pbDigest : UInt8*, pcbDigest : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPGetSealedDigest(pSubjectInfo, pSig, dwSig, pbDigest, pcbDigest)
+    {% end %}
   end
 
   @[Link("wintrust")]
   @[Link("crypt32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CryptSIPGetSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pdwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE*, dwIndex : UInt32, pcbSignedDataMsg : UInt32*, pbSignedDataMsg : UInt8*) : Win32cr::Foundation::BOOL
@@ -260,4 +289,5 @@ module Win32cr::Security::Cryptography::Sip
     fun CryptSIPGetSealedDigest(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pSig : UInt8*, dwSig : UInt32, pbDigest : UInt8*, pcbDigest : UInt32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

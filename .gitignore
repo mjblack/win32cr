@@ -7,3 +7,5 @@
 winmd.log
 /json/
 /shard.lock
+# Pinned Windows.Win32.winmd fetched by build.ps1 / CI
+/winmd/

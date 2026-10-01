@@ -1,5 +1,5 @@
-require "./../foundation.cr"
 require "./dxgi/common.cr"
+require "./../foundation.cr"
 require "./../system/com.cr"
 require "./direct2_d/common.cr"
 require "./direct3_d.cr"
@@ -53,12 +53,12 @@ module Win32cr::Graphics::DirectComposition
 
   @[Extern]
   struct DCOMPOSITION_FRAME_STATISTICS
-    property lastFrameTime : Win32cr::Foundation::LARGE_INTEGER
+    property lastFrameTime : Int64
     property currentCompositionRate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
-    property currentTime : Win32cr::Foundation::LARGE_INTEGER
-    property timeFrequency : Win32cr::Foundation::LARGE_INTEGER
-    property nextEstimatedFrameTime : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@lastFrameTime : Win32cr::Foundation::LARGE_INTEGER, @currentCompositionRate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @currentTime : Win32cr::Foundation::LARGE_INTEGER, @timeFrequency : Win32cr::Foundation::LARGE_INTEGER, @nextEstimatedFrameTime : Win32cr::Foundation::LARGE_INTEGER)
+    property currentTime : Int64
+    property timeFrequency : Int64
+    property nextEstimatedFrameTime : Int64
+    def initialize(@lastFrameTime : Int64, @currentCompositionRate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @currentTime : Int64, @timeFrequency : Int64, @nextEstimatedFrameTime : Int64)
     end
   end
 
@@ -113,12 +113,13 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionAnimationVtbl,
+
+  record IDCompositionAnimationVtable,
     query_interface : Proc(IDCompositionAnimation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionAnimation*, UInt32),
     release : Proc(IDCompositionAnimation*, UInt32),
     reset : Proc(IDCompositionAnimation*, Win32cr::Foundation::HRESULT),
-    set_absolute_begin_time : Proc(IDCompositionAnimation*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    set_absolute_begin_time : Proc(IDCompositionAnimation*, Int64, Win32cr::Foundation::HRESULT),
     add_cubic : Proc(IDCompositionAnimation*, Float64, Float32, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
     add_sinusoidal : Proc(IDCompositionAnimation*, Float64, Float32, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
     add_repeat : Proc(IDCompositionAnimation*, Float64, Float64, Win32cr::Foundation::HRESULT),
@@ -126,7 +127,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionAnimation, lpVtbl : IDCompositionAnimationVtbl* do
+  record IDCompositionAnimation, lpVtbl : IDCompositionAnimationVtable* do
     GUID = LibC::GUID.new(0xcbfd91d9_u32, 0x51b2_u16, 0x45e4_u16, StaticArray[0xb3_u8, 0xde_u8, 0xd1_u8, 0x9c_u8, 0xcf_u8, 0xb8_u8, 0x63_u8, 0xc5_u8])
     def query_interface(this : IDCompositionAnimation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -140,7 +141,7 @@ module Win32cr::Graphics::DirectComposition
     def reset(this : IDCompositionAnimation*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
     end
-    def set_absolute_begin_time(this : IDCompositionAnimation*, beginTime : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
+    def set_absolute_begin_time(this : IDCompositionAnimation*, beginTime : Int64) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_absolute_begin_time.call(this, beginTime)
     end
     def add_cubic(this : IDCompositionAnimation*, beginOffset : Float64, constantCoefficient : Float32, linearCoefficient : Float32, quadraticCoefficient : Float32, cubicCoefficient : Float32) : Win32cr::Foundation::HRESULT
@@ -159,7 +160,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionDeviceVtbl,
+
+  record IDCompositionDeviceVtable,
     query_interface : Proc(IDCompositionDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionDevice*, UInt32),
     release : Proc(IDCompositionDevice*, UInt32),
@@ -190,7 +192,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionDevice, lpVtbl : IDCompositionDeviceVtbl* do
+  record IDCompositionDevice, lpVtbl : IDCompositionDeviceVtable* do
     GUID = LibC::GUID.new(0xc37ea93a_u32, 0xe7aa_u16, 0x450d_u16, StaticArray[0xb1_u8, 0x6f_u8, 0x97_u8, 0x46_u8, 0xcb_u8, 0x4_u8, 0x7_u8, 0xf3_u8])
     def query_interface(this : IDCompositionDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -277,7 +279,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionTargetVtbl,
+
+  record IDCompositionTargetVtable,
     query_interface : Proc(IDCompositionTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionTarget*, UInt32),
     release : Proc(IDCompositionTarget*, UInt32),
@@ -285,7 +288,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionTarget, lpVtbl : IDCompositionTargetVtbl* do
+  record IDCompositionTarget, lpVtbl : IDCompositionTargetVtable* do
     GUID = LibC::GUID.new(0xeacdd04c_u32, 0x117e_u16, 0x4e17_u16, StaticArray[0x88_u8, 0xf4_u8, 0xd1_u8, 0xb1_u8, 0x2b_u8, 0xe_u8, 0x3d_u8, 0x89_u8])
     def query_interface(this : IDCompositionTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -303,7 +306,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionVisualVtbl,
+
+  record IDCompositionVisualVtable,
     query_interface : Proc(IDCompositionVisual*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionVisual*, UInt32),
     release : Proc(IDCompositionVisual*, UInt32),
@@ -312,7 +316,7 @@ module Win32cr::Graphics::DirectComposition
     set_offset_y_1 : Proc(IDCompositionVisual*, Void*, Win32cr::Foundation::HRESULT),
     set_offset_y_2 : Proc(IDCompositionVisual*, Float32, Win32cr::Foundation::HRESULT),
     set_transform_1 : Proc(IDCompositionVisual*, Void*, Win32cr::Foundation::HRESULT),
-    set_transform_2_1 : Proc(IDCompositionVisual*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
+    set_transform_2 : Proc(IDCompositionVisual*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
     set_transform_parent : Proc(IDCompositionVisual*, Void*, Win32cr::Foundation::HRESULT),
     set_effect : Proc(IDCompositionVisual*, Void*, Win32cr::Foundation::HRESULT),
     set_bitmap_interpolation_mode : Proc(IDCompositionVisual*, Win32cr::Graphics::DirectComposition::DCOMPOSITION_BITMAP_INTERPOLATION_MODE, Win32cr::Foundation::HRESULT),
@@ -327,7 +331,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionVisual, lpVtbl : IDCompositionVisualVtbl* do
+  record IDCompositionVisual, lpVtbl : IDCompositionVisualVtable* do
     GUID = LibC::GUID.new(0x4d93059d_u32, 0x97b_u16, 0x4651_u16, StaticArray[0x9a_u8, 0x60_u8, 0xf0_u8, 0xf2_u8, 0x51_u8, 0x16_u8, 0xe2_u8, 0xf3_u8])
     def query_interface(this : IDCompositionVisual*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -353,8 +357,8 @@ module Win32cr::Graphics::DirectComposition
     def set_transform_1(this : IDCompositionVisual*, transform : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_transform_1.call(this, transform)
     end
-    def set_transform_2_1(this : IDCompositionVisual*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_transform_2_1.call(this, matrix)
+    def set_transform_2(this : IDCompositionVisual*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_transform_2.call(this, matrix)
     end
     def set_transform_parent(this : IDCompositionVisual*, visual : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_transform_parent.call(this, visual)
@@ -393,14 +397,15 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionEffectVtbl,
+
+  record IDCompositionEffectVtable,
     query_interface : Proc(IDCompositionEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionEffect*, UInt32),
     release : Proc(IDCompositionEffect*, UInt32)
 
 
   @[Extern]
-  record IDCompositionEffect, lpVtbl : IDCompositionEffectVtbl* do
+  record IDCompositionEffect, lpVtbl : IDCompositionEffectVtable* do
     GUID = LibC::GUID.new(0xec81b08f_u32, 0xbfcb_u16, 0x4e8d_u16, StaticArray[0xb1_u8, 0x93_u8, 0xa9_u8, 0x15_u8, 0x58_u8, 0x79_u8, 0x99_u8, 0xe8_u8])
     def query_interface(this : IDCompositionEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -415,14 +420,15 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionTransform3DVtbl,
+
+  record IDCompositionTransform3DVtable,
     query_interface : Proc(IDCompositionTransform3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionTransform3D*, UInt32),
     release : Proc(IDCompositionTransform3D*, UInt32)
 
 
   @[Extern]
-  record IDCompositionTransform3D, lpVtbl : IDCompositionTransform3DVtbl* do
+  record IDCompositionTransform3D, lpVtbl : IDCompositionTransform3DVtable* do
     GUID = LibC::GUID.new(0x71185722_u32, 0x246b_u16, 0x41f2_u16, StaticArray[0xaa_u8, 0xd1_u8, 0x4_u8, 0x43_u8, 0xf7_u8, 0xf4_u8, 0xbf_u8, 0xc2_u8])
     def query_interface(this : IDCompositionTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -437,14 +443,15 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionTransformVtbl,
+
+  record IDCompositionTransformVtable,
     query_interface : Proc(IDCompositionTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionTransform*, UInt32),
     release : Proc(IDCompositionTransform*, UInt32)
 
 
   @[Extern]
-  record IDCompositionTransform, lpVtbl : IDCompositionTransformVtbl* do
+  record IDCompositionTransform, lpVtbl : IDCompositionTransformVtable* do
     GUID = LibC::GUID.new(0xfd55faa7_u32, 0x37e0_u16, 0x4c20_u16, StaticArray[0x95_u8, 0xd2_u8, 0x9b_u8, 0xe4_u8, 0x5b_u8, 0xc3_u8, 0x3f_u8, 0x55_u8])
     def query_interface(this : IDCompositionTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -459,7 +466,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionTranslateTransformVtbl,
+
+  record IDCompositionTranslateTransformVtable,
     query_interface : Proc(IDCompositionTranslateTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionTranslateTransform*, UInt32),
     release : Proc(IDCompositionTranslateTransform*, UInt32),
@@ -470,7 +478,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionTranslateTransform, lpVtbl : IDCompositionTranslateTransformVtbl* do
+  record IDCompositionTranslateTransform, lpVtbl : IDCompositionTranslateTransformVtable* do
     GUID = LibC::GUID.new(0x6791122_u32, 0xc6f0_u16, 0x417d_u16, StaticArray[0x83_u8, 0x23_u8, 0x26_u8, 0x9e_u8, 0x98_u8, 0x7f_u8, 0x59_u8, 0x54_u8])
     def query_interface(this : IDCompositionTranslateTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -497,7 +505,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionScaleTransformVtbl,
+
+  record IDCompositionScaleTransformVtable,
     query_interface : Proc(IDCompositionScaleTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionScaleTransform*, UInt32),
     release : Proc(IDCompositionScaleTransform*, UInt32),
@@ -512,7 +521,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionScaleTransform, lpVtbl : IDCompositionScaleTransformVtbl* do
+  record IDCompositionScaleTransform, lpVtbl : IDCompositionScaleTransformVtable* do
     GUID = LibC::GUID.new(0x71fde914_u32, 0x40ef_u16, 0x45ef_u16, StaticArray[0xbd_u8, 0x51_u8, 0x68_u8, 0xb0_u8, 0x37_u8, 0xc3_u8, 0x39_u8, 0xf9_u8])
     def query_interface(this : IDCompositionScaleTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -551,7 +560,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionRotateTransformVtbl,
+
+  record IDCompositionRotateTransformVtable,
     query_interface : Proc(IDCompositionRotateTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionRotateTransform*, UInt32),
     release : Proc(IDCompositionRotateTransform*, UInt32),
@@ -564,7 +574,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionRotateTransform, lpVtbl : IDCompositionRotateTransformVtbl* do
+  record IDCompositionRotateTransform, lpVtbl : IDCompositionRotateTransformVtable* do
     GUID = LibC::GUID.new(0x641ed83c_u32, 0xae96_u16, 0x46c5_u16, StaticArray[0x90_u8, 0xdc_u8, 0x32_u8, 0x77_u8, 0x4c_u8, 0xc5_u8, 0xc6_u8, 0xd5_u8])
     def query_interface(this : IDCompositionRotateTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -597,7 +607,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionSkewTransformVtbl,
+
+  record IDCompositionSkewTransformVtable,
     query_interface : Proc(IDCompositionSkewTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionSkewTransform*, UInt32),
     release : Proc(IDCompositionSkewTransform*, UInt32),
@@ -612,7 +623,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionSkewTransform, lpVtbl : IDCompositionSkewTransformVtbl* do
+  record IDCompositionSkewTransform, lpVtbl : IDCompositionSkewTransformVtable* do
     GUID = LibC::GUID.new(0xe57aa735_u32, 0xdcdb_u16, 0x4c72_u16, StaticArray[0x9c_u8, 0x61_u8, 0x5_u8, 0x91_u8, 0xf5_u8, 0x88_u8, 0x89_u8, 0xee_u8])
     def query_interface(this : IDCompositionSkewTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -651,7 +662,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionMatrixTransformVtbl,
+
+  record IDCompositionMatrixTransformVtable,
     query_interface : Proc(IDCompositionMatrixTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionMatrixTransform*, UInt32),
     release : Proc(IDCompositionMatrixTransform*, UInt32),
@@ -661,7 +673,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionMatrixTransform, lpVtbl : IDCompositionMatrixTransformVtbl* do
+  record IDCompositionMatrixTransform, lpVtbl : IDCompositionMatrixTransformVtable* do
     GUID = LibC::GUID.new(0x16cdff07_u32, 0xc503_u16, 0x419c_u16, StaticArray[0x83_u8, 0xf2_u8, 0x9_u8, 0x65_u8, 0xc7_u8, 0xaf_u8, 0x1f_u8, 0xa6_u8])
     def query_interface(this : IDCompositionMatrixTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -685,7 +697,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionEffectGroupVtbl,
+
+  record IDCompositionEffectGroupVtable,
     query_interface : Proc(IDCompositionEffectGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionEffectGroup*, UInt32),
     release : Proc(IDCompositionEffectGroup*, UInt32),
@@ -695,7 +708,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionEffectGroup, lpVtbl : IDCompositionEffectGroupVtbl* do
+  record IDCompositionEffectGroup, lpVtbl : IDCompositionEffectGroupVtable* do
     GUID = LibC::GUID.new(0xa7929a74_u32, 0xe6b2_u16, 0x4bd6_u16, StaticArray[0x8b_u8, 0x95_u8, 0x40_u8, 0x40_u8, 0x11_u8, 0x9c_u8, 0xa3_u8, 0x4d_u8])
     def query_interface(this : IDCompositionEffectGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -719,7 +732,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionTranslateTransform3DVtbl,
+
+  record IDCompositionTranslateTransform3DVtable,
     query_interface : Proc(IDCompositionTranslateTransform3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionTranslateTransform3D*, UInt32),
     release : Proc(IDCompositionTranslateTransform3D*, UInt32),
@@ -732,7 +746,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionTranslateTransform3D, lpVtbl : IDCompositionTranslateTransform3DVtbl* do
+  record IDCompositionTranslateTransform3D, lpVtbl : IDCompositionTranslateTransform3DVtable* do
     GUID = LibC::GUID.new(0x91636d4b_u32, 0x9ba1_u16, 0x4532_u16, StaticArray[0xaa_u8, 0xf7_u8, 0xe3_u8, 0x34_u8, 0x49_u8, 0x94_u8, 0xd7_u8, 0x88_u8])
     def query_interface(this : IDCompositionTranslateTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -765,7 +779,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionScaleTransform3DVtbl,
+
+  record IDCompositionScaleTransform3DVtable,
     query_interface : Proc(IDCompositionScaleTransform3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionScaleTransform3D*, UInt32),
     release : Proc(IDCompositionScaleTransform3D*, UInt32),
@@ -784,7 +799,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionScaleTransform3D, lpVtbl : IDCompositionScaleTransform3DVtbl* do
+  record IDCompositionScaleTransform3D, lpVtbl : IDCompositionScaleTransform3DVtable* do
     GUID = LibC::GUID.new(0x2a9e9ead_u32, 0x364b_u16, 0x4b15_u16, StaticArray[0xa7_u8, 0xc4_u8, 0xa1_u8, 0x99_u8, 0x7f_u8, 0x78_u8, 0xb3_u8, 0x89_u8])
     def query_interface(this : IDCompositionScaleTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -835,7 +850,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionRotateTransform3DVtbl,
+
+  record IDCompositionRotateTransform3DVtable,
     query_interface : Proc(IDCompositionRotateTransform3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionRotateTransform3D*, UInt32),
     release : Proc(IDCompositionRotateTransform3D*, UInt32),
@@ -856,7 +872,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionRotateTransform3D, lpVtbl : IDCompositionRotateTransform3DVtbl* do
+  record IDCompositionRotateTransform3D, lpVtbl : IDCompositionRotateTransform3DVtable* do
     GUID = LibC::GUID.new(0xd8f5b23f_u32, 0xd429_u16, 0x4a91_u16, StaticArray[0xb5_u8, 0x5a_u8, 0xd2_u8, 0xf4_u8, 0x5f_u8, 0xd7_u8, 0x5b_u8, 0x18_u8])
     def query_interface(this : IDCompositionRotateTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -913,7 +929,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionMatrixTransform3DVtbl,
+
+  record IDCompositionMatrixTransform3DVtable,
     query_interface : Proc(IDCompositionMatrixTransform3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionMatrixTransform3D*, UInt32),
     release : Proc(IDCompositionMatrixTransform3D*, UInt32),
@@ -923,7 +940,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionMatrixTransform3D, lpVtbl : IDCompositionMatrixTransform3DVtbl* do
+  record IDCompositionMatrixTransform3D, lpVtbl : IDCompositionMatrixTransform3DVtable* do
     GUID = LibC::GUID.new(0x4b3363f0_u32, 0x643b_u16, 0x41b7_u16, StaticArray[0xb6_u8, 0xe0_u8, 0xcc_u8, 0xf2_u8, 0x2d_u8, 0x34_u8, 0x46_u8, 0x7c_u8])
     def query_interface(this : IDCompositionMatrixTransform3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -947,14 +964,15 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionClipVtbl,
+
+  record IDCompositionClipVtable,
     query_interface : Proc(IDCompositionClip*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionClip*, UInt32),
     release : Proc(IDCompositionClip*, UInt32)
 
 
   @[Extern]
-  record IDCompositionClip, lpVtbl : IDCompositionClipVtbl* do
+  record IDCompositionClip, lpVtbl : IDCompositionClipVtable* do
     GUID = LibC::GUID.new(0x64ac3703_u32, 0x9d3f_u16, 0x45ec_u16, StaticArray[0xa1_u8, 0x9_u8, 0x7c_u8, 0xac_u8, 0xe_u8, 0x7a_u8, 0x13_u8, 0xa7_u8])
     def query_interface(this : IDCompositionClip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -969,7 +987,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionRectangleClipVtbl,
+
+  record IDCompositionRectangleClipVtable,
     query_interface : Proc(IDCompositionRectangleClip*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionRectangleClip*, UInt32),
     release : Proc(IDCompositionRectangleClip*, UInt32),
@@ -1000,7 +1019,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionRectangleClip, lpVtbl : IDCompositionRectangleClipVtbl* do
+  record IDCompositionRectangleClip, lpVtbl : IDCompositionRectangleClipVtable* do
     GUID = LibC::GUID.new(0x9842ad7d_u32, 0xd9cf_u16, 0x4908_u16, StaticArray[0xae_u8, 0xd7_u8, 0x48_u8, 0xb5_u8, 0x1d_u8, 0xa5_u8, 0xe7_u8, 0xc2_u8])
     def query_interface(this : IDCompositionRectangleClip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1087,7 +1106,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionSurfaceVtbl,
+
+  record IDCompositionSurfaceVtable,
     query_interface : Proc(IDCompositionSurface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionSurface*, UInt32),
     release : Proc(IDCompositionSurface*, UInt32),
@@ -1099,7 +1119,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionSurface, lpVtbl : IDCompositionSurfaceVtbl* do
+  record IDCompositionSurface, lpVtbl : IDCompositionSurfaceVtable* do
     GUID = LibC::GUID.new(0xbb8a4953_u32, 0x2c99_u16, 0x4f5a_u16, StaticArray[0x96_u8, 0xf5_u8, 0x48_u8, 0x19_u8, 0x2_u8, 0x7f_u8, 0xa3_u8, 0xac_u8])
     def query_interface(this : IDCompositionSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1129,7 +1149,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionVirtualSurfaceVtbl,
+
+  record IDCompositionVirtualSurfaceVtable,
     query_interface : Proc(IDCompositionVirtualSurface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionVirtualSurface*, UInt32),
     release : Proc(IDCompositionVirtualSurface*, UInt32),
@@ -1143,7 +1164,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionVirtualSurface, lpVtbl : IDCompositionVirtualSurfaceVtbl* do
+  record IDCompositionVirtualSurface, lpVtbl : IDCompositionVirtualSurfaceVtable* do
     GUID = LibC::GUID.new(0xae471c51_u32, 0x5f53_u16, 0x4a24_u16, StaticArray[0x8d_u8, 0x3e_u8, 0xd0_u8, 0xc3_u8, 0x9c_u8, 0x30_u8, 0xb3_u8, 0xf0_u8])
     def query_interface(this : IDCompositionVirtualSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1179,7 +1200,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionDevice2Vtbl,
+
+  record IDCompositionDevice2Vtable,
     query_interface : Proc(IDCompositionDevice2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionDevice2*, UInt32),
     release : Proc(IDCompositionDevice2*, UInt32),
@@ -1207,7 +1229,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionDevice2, lpVtbl : IDCompositionDevice2Vtbl* do
+  record IDCompositionDevice2, lpVtbl : IDCompositionDevice2Vtable* do
     GUID = LibC::GUID.new(0x75f6468d_u32, 0x1b8e_u16, 0x447c_u16, StaticArray[0x9b_u8, 0xc6_u8, 0x75_u8, 0xfe_u8, 0xa8_u8, 0xb_u8, 0x5b_u8, 0x25_u8])
     def query_interface(this : IDCompositionDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1285,7 +1307,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionDesktopDeviceVtbl,
+
+  record IDCompositionDesktopDeviceVtable,
     query_interface : Proc(IDCompositionDesktopDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionDesktopDevice*, UInt32),
     release : Proc(IDCompositionDesktopDevice*, UInt32),
@@ -1316,7 +1339,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionDesktopDevice, lpVtbl : IDCompositionDesktopDeviceVtbl* do
+  record IDCompositionDesktopDevice, lpVtbl : IDCompositionDesktopDeviceVtable* do
     GUID = LibC::GUID.new(0x5f4633fe_u32, 0x1e08_u16, 0x4cb8_u16, StaticArray[0x8c_u8, 0x75_u8, 0xce_u8, 0x24_u8, 0x33_u8, 0x3f_u8, 0x56_u8, 0x2_u8])
     def query_interface(this : IDCompositionDesktopDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1403,7 +1426,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionDeviceDebugVtbl,
+
+  record IDCompositionDeviceDebugVtable,
     query_interface : Proc(IDCompositionDeviceDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionDeviceDebug*, UInt32),
     release : Proc(IDCompositionDeviceDebug*, UInt32),
@@ -1412,7 +1436,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionDeviceDebug, lpVtbl : IDCompositionDeviceDebugVtbl* do
+  record IDCompositionDeviceDebug, lpVtbl : IDCompositionDeviceDebugVtable* do
     GUID = LibC::GUID.new(0xa1a3c64a_u32, 0x224f_u16, 0x4a81_u16, StaticArray[0x97_u8, 0x73_u8, 0x4f_u8, 0x3_u8, 0xa8_u8, 0x9d_u8, 0x3c_u8, 0x6c_u8])
     def query_interface(this : IDCompositionDeviceDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1433,7 +1457,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionSurfaceFactoryVtbl,
+
+  record IDCompositionSurfaceFactoryVtable,
     query_interface : Proc(IDCompositionSurfaceFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionSurfaceFactory*, UInt32),
     release : Proc(IDCompositionSurfaceFactory*, UInt32),
@@ -1442,7 +1467,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionSurfaceFactory, lpVtbl : IDCompositionSurfaceFactoryVtbl* do
+  record IDCompositionSurfaceFactory, lpVtbl : IDCompositionSurfaceFactoryVtable* do
     GUID = LibC::GUID.new(0xe334bc12_u32, 0x3937_u16, 0x4e02_u16, StaticArray[0x85_u8, 0xeb_u8, 0xfc_u8, 0xf4_u8, 0xeb_u8, 0x30_u8, 0xd2_u8, 0xc8_u8])
     def query_interface(this : IDCompositionSurfaceFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1463,7 +1488,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionVisual2Vtbl,
+
+  record IDCompositionVisual2Vtable,
     query_interface : Proc(IDCompositionVisual2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionVisual2*, UInt32),
     release : Proc(IDCompositionVisual2*, UInt32),
@@ -1472,7 +1498,7 @@ module Win32cr::Graphics::DirectComposition
     set_offset_y_1 : Proc(IDCompositionVisual2*, Void*, Win32cr::Foundation::HRESULT),
     set_offset_y_2 : Proc(IDCompositionVisual2*, Float32, Win32cr::Foundation::HRESULT),
     set_transform_1 : Proc(IDCompositionVisual2*, Void*, Win32cr::Foundation::HRESULT),
-    set_transform_2_1 : Proc(IDCompositionVisual2*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
+    set_transform_2 : Proc(IDCompositionVisual2*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
     set_transform_parent : Proc(IDCompositionVisual2*, Void*, Win32cr::Foundation::HRESULT),
     set_effect : Proc(IDCompositionVisual2*, Void*, Win32cr::Foundation::HRESULT),
     set_bitmap_interpolation_mode : Proc(IDCompositionVisual2*, Win32cr::Graphics::DirectComposition::DCOMPOSITION_BITMAP_INTERPOLATION_MODE, Win32cr::Foundation::HRESULT),
@@ -1489,7 +1515,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionVisual2, lpVtbl : IDCompositionVisual2Vtbl* do
+  record IDCompositionVisual2, lpVtbl : IDCompositionVisual2Vtable* do
     GUID = LibC::GUID.new(0xe8de1639_u32, 0x4331_u16, 0x4b26_u16, StaticArray[0xbc_u8, 0x5f_u8, 0x6a_u8, 0x32_u8, 0x1d_u8, 0x34_u8, 0x7a_u8, 0x85_u8])
     def query_interface(this : IDCompositionVisual2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1515,8 +1541,8 @@ module Win32cr::Graphics::DirectComposition
     def set_transform_1(this : IDCompositionVisual2*, transform : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_transform_1.call(this, transform)
     end
-    def set_transform_2_1(this : IDCompositionVisual2*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_transform_2_1.call(this, matrix)
+    def set_transform_2(this : IDCompositionVisual2*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_transform_2.call(this, matrix)
     end
     def set_transform_parent(this : IDCompositionVisual2*, visual : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_transform_parent.call(this, visual)
@@ -1561,7 +1587,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionVisualDebugVtbl,
+
+  record IDCompositionVisualDebugVtable,
     query_interface : Proc(IDCompositionVisualDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionVisualDebug*, UInt32),
     release : Proc(IDCompositionVisualDebug*, UInt32),
@@ -1570,7 +1597,7 @@ module Win32cr::Graphics::DirectComposition
     set_offset_y_1 : Proc(IDCompositionVisualDebug*, Void*, Win32cr::Foundation::HRESULT),
     set_offset_y_2 : Proc(IDCompositionVisualDebug*, Float32, Win32cr::Foundation::HRESULT),
     set_transform_1 : Proc(IDCompositionVisualDebug*, Void*, Win32cr::Foundation::HRESULT),
-    set_transform_2_1 : Proc(IDCompositionVisualDebug*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
+    set_transform_2 : Proc(IDCompositionVisualDebug*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
     set_transform_parent : Proc(IDCompositionVisualDebug*, Void*, Win32cr::Foundation::HRESULT),
     set_effect : Proc(IDCompositionVisualDebug*, Void*, Win32cr::Foundation::HRESULT),
     set_bitmap_interpolation_mode : Proc(IDCompositionVisualDebug*, Win32cr::Graphics::DirectComposition::DCOMPOSITION_BITMAP_INTERPOLATION_MODE, Win32cr::Foundation::HRESULT),
@@ -1591,7 +1618,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionVisualDebug, lpVtbl : IDCompositionVisualDebugVtbl* do
+  record IDCompositionVisualDebug, lpVtbl : IDCompositionVisualDebugVtable* do
     GUID = LibC::GUID.new(0xfed2b808_u32, 0x5eb4_u16, 0x43a0_u16, StaticArray[0xae_u8, 0xa3_u8, 0x35_u8, 0xf6_u8, 0x52_u8, 0x80_u8, 0xf9_u8, 0x1b_u8])
     def query_interface(this : IDCompositionVisualDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1617,8 +1644,8 @@ module Win32cr::Graphics::DirectComposition
     def set_transform_1(this : IDCompositionVisualDebug*, transform : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_transform_1.call(this, transform)
     end
-    def set_transform_2_1(this : IDCompositionVisualDebug*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_transform_2_1.call(this, matrix)
+    def set_transform_2(this : IDCompositionVisualDebug*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_transform_2.call(this, matrix)
     end
     def set_transform_parent(this : IDCompositionVisualDebug*, visual : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_transform_parent.call(this, visual)
@@ -1675,7 +1702,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionVisual3Vtbl,
+
+  record IDCompositionVisual3Vtable,
     query_interface : Proc(IDCompositionVisual3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionVisual3*, UInt32),
     release : Proc(IDCompositionVisual3*, UInt32),
@@ -1683,8 +1711,8 @@ module Win32cr::Graphics::DirectComposition
     set_offset_x_2 : Proc(IDCompositionVisual3*, Float32, Win32cr::Foundation::HRESULT),
     set_offset_y_1 : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
     set_offset_y_2 : Proc(IDCompositionVisual3*, Float32, Win32cr::Foundation::HRESULT),
-    set_transform_1_1 : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
-    set_transform_2_1 : Proc(IDCompositionVisual3*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
+    set_transform_1 : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
+    set_transform_2 : Proc(IDCompositionVisual3*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
     set_transform_parent : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
     set_effect : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
     set_bitmap_interpolation_mode : Proc(IDCompositionVisual3*, Win32cr::Graphics::DirectComposition::DCOMPOSITION_BITMAP_INTERPOLATION_MODE, Win32cr::Foundation::HRESULT),
@@ -1707,13 +1735,13 @@ module Win32cr::Graphics::DirectComposition
     set_offset_z_2 : Proc(IDCompositionVisual3*, Float32, Win32cr::Foundation::HRESULT),
     set_opacity_1 : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
     set_opacity_2 : Proc(IDCompositionVisual3*, Float32, Win32cr::Foundation::HRESULT),
-    set_transform_1_2 : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
-    set_transform_2_2 : Proc(IDCompositionVisual3*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X4_F*, Win32cr::Foundation::HRESULT),
+    set_transform_3 : Proc(IDCompositionVisual3*, Void*, Win32cr::Foundation::HRESULT),
+    set_transform_4 : Proc(IDCompositionVisual3*, Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X4_F*, Win32cr::Foundation::HRESULT),
     set_visible : Proc(IDCompositionVisual3*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDCompositionVisual3, lpVtbl : IDCompositionVisual3Vtbl* do
+  record IDCompositionVisual3, lpVtbl : IDCompositionVisual3Vtable* do
     GUID = LibC::GUID.new(0x2775f462_u32, 0xb6c1_u16, 0x4015_u16, StaticArray[0xb0_u8, 0xbe_u8, 0xb3_u8, 0xe7_u8, 0xd6_u8, 0xa4_u8, 0x97_u8, 0x6d_u8])
     def query_interface(this : IDCompositionVisual3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1736,11 +1764,11 @@ module Win32cr::Graphics::DirectComposition
     def set_offset_y_2(this : IDCompositionVisual3*, offsetY : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_offset_y_2.call(this, offsetY)
     end
-    def set_transform_1_1(this : IDCompositionVisual3*, transform : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_transform_1_1.call(this, transform)
+    def set_transform_1(this : IDCompositionVisual3*, transform : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_transform_1.call(this, transform)
     end
-    def set_transform_2_1(this : IDCompositionVisual3*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_transform_2_1.call(this, matrix)
+    def set_transform_2(this : IDCompositionVisual3*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_transform_2.call(this, matrix)
     end
     def set_transform_parent(this : IDCompositionVisual3*, visual : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_transform_parent.call(this, visual)
@@ -1808,11 +1836,11 @@ module Win32cr::Graphics::DirectComposition
     def set_opacity_2(this : IDCompositionVisual3*, opacity : Float32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_opacity_2.call(this, opacity)
     end
-    def set_transform_1_2(this : IDCompositionVisual3*, transform : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_transform_1_2.call(this, transform)
+    def set_transform_3(this : IDCompositionVisual3*, transform : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_transform_3.call(this, transform)
     end
-    def set_transform_2_2(this : IDCompositionVisual3*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X4_F*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_transform_2_2.call(this, matrix)
+    def set_transform_4(this : IDCompositionVisual3*, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X4_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_transform_4.call(this, matrix)
     end
     def set_visible(this : IDCompositionVisual3*, visible : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_visible.call(this, visible)
@@ -1821,7 +1849,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionDevice3Vtbl,
+
+  record IDCompositionDevice3Vtable,
     query_interface : Proc(IDCompositionDevice3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionDevice3*, UInt32),
     release : Proc(IDCompositionDevice3*, UInt32),
@@ -1862,7 +1891,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionDevice3, lpVtbl : IDCompositionDevice3Vtbl* do
+  record IDCompositionDevice3, lpVtbl : IDCompositionDevice3Vtable* do
     GUID = LibC::GUID.new(0x987cb06_u32, 0xf916_u16, 0x48bf_u16, StaticArray[0x8d_u8, 0x35_u8, 0xce_u8, 0x76_u8, 0x41_u8, 0x78_u8, 0x1b_u8, 0xd9_u8])
     def query_interface(this : IDCompositionDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1979,7 +2008,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionFilterEffectVtbl,
+
+  record IDCompositionFilterEffectVtable,
     query_interface : Proc(IDCompositionFilterEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionFilterEffect*, UInt32),
     release : Proc(IDCompositionFilterEffect*, UInt32),
@@ -1987,7 +2017,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionFilterEffect, lpVtbl : IDCompositionFilterEffectVtbl* do
+  record IDCompositionFilterEffect, lpVtbl : IDCompositionFilterEffectVtable* do
     GUID = LibC::GUID.new(0x30c421d5_u32, 0x8cb2_u16, 0x4e9f_u16, StaticArray[0xb1_u8, 0x33_u8, 0x37_u8, 0xbe_u8, 0x27_u8, 0xd_u8, 0x4a_u8, 0xc2_u8])
     def query_interface(this : IDCompositionFilterEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2005,7 +2035,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionGaussianBlurEffectVtbl,
+
+  record IDCompositionGaussianBlurEffectVtable,
     query_interface : Proc(IDCompositionGaussianBlurEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionGaussianBlurEffect*, UInt32),
     release : Proc(IDCompositionGaussianBlurEffect*, UInt32),
@@ -2016,7 +2047,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionGaussianBlurEffect, lpVtbl : IDCompositionGaussianBlurEffectVtbl* do
+  record IDCompositionGaussianBlurEffect, lpVtbl : IDCompositionGaussianBlurEffectVtable* do
     GUID = LibC::GUID.new(0x45d4d0b7_u32, 0x1bd4_u16, 0x454e_u16, StaticArray[0x88_u8, 0x94_u8, 0x2b_u8, 0xfa_u8, 0x68_u8, 0x44_u8, 0x30_u8, 0x33_u8])
     def query_interface(this : IDCompositionGaussianBlurEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2043,7 +2074,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionBrightnessEffectVtbl,
+
+  record IDCompositionBrightnessEffectVtable,
     query_interface : Proc(IDCompositionBrightnessEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionBrightnessEffect*, UInt32),
     release : Proc(IDCompositionBrightnessEffect*, UInt32),
@@ -2061,7 +2093,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionBrightnessEffect, lpVtbl : IDCompositionBrightnessEffectVtbl* do
+  record IDCompositionBrightnessEffect, lpVtbl : IDCompositionBrightnessEffectVtable* do
     GUID = LibC::GUID.new(0x6027496e_u32, 0xcb3a_u16, 0x49ab_u16, StaticArray[0x93_u8, 0x4f_u8, 0xd7_u8, 0x98_u8, 0xda_u8, 0x4f_u8, 0x7d_u8, 0xa6_u8])
     def query_interface(this : IDCompositionBrightnessEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2109,7 +2141,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionColorMatrixEffectVtbl,
+
+  record IDCompositionColorMatrixEffectVtable,
     query_interface : Proc(IDCompositionColorMatrixEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionColorMatrixEffect*, UInt32),
     release : Proc(IDCompositionColorMatrixEffect*, UInt32),
@@ -2122,7 +2155,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionColorMatrixEffect, lpVtbl : IDCompositionColorMatrixEffectVtbl* do
+  record IDCompositionColorMatrixEffect, lpVtbl : IDCompositionColorMatrixEffectVtable* do
     GUID = LibC::GUID.new(0xc1170a22_u32, 0x3ce2_u16, 0x4966_u16, StaticArray[0x90_u8, 0xd4_u8, 0x55_u8, 0x40_u8, 0x8b_u8, 0xfc_u8, 0x84_u8, 0xc4_u8])
     def query_interface(this : IDCompositionColorMatrixEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2155,7 +2188,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionShadowEffectVtbl,
+
+  record IDCompositionShadowEffectVtable,
     query_interface : Proc(IDCompositionShadowEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionShadowEffect*, UInt32),
     release : Proc(IDCompositionShadowEffect*, UInt32),
@@ -2174,7 +2208,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionShadowEffect, lpVtbl : IDCompositionShadowEffectVtbl* do
+  record IDCompositionShadowEffect, lpVtbl : IDCompositionShadowEffectVtable* do
     GUID = LibC::GUID.new(0x4ad18ac0_u32, 0xcfd2_u16, 0x4c2f_u16, StaticArray[0xbb_u8, 0x62_u8, 0x96_u8, 0xe5_u8, 0x4f_u8, 0xdb_u8, 0x68_u8, 0x79_u8])
     def query_interface(this : IDCompositionShadowEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2225,7 +2259,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionHueRotationEffectVtbl,
+
+  record IDCompositionHueRotationEffectVtable,
     query_interface : Proc(IDCompositionHueRotationEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionHueRotationEffect*, UInt32),
     release : Proc(IDCompositionHueRotationEffect*, UInt32),
@@ -2235,7 +2270,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionHueRotationEffect, lpVtbl : IDCompositionHueRotationEffectVtbl* do
+  record IDCompositionHueRotationEffect, lpVtbl : IDCompositionHueRotationEffectVtable* do
     GUID = LibC::GUID.new(0x6db9f920_u32, 0x770_u16, 0x4781_u16, StaticArray[0xb0_u8, 0xc6_u8, 0x38_u8, 0x19_u8, 0x12_u8, 0xf9_u8, 0xd1_u8, 0x67_u8])
     def query_interface(this : IDCompositionHueRotationEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2259,7 +2294,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionSaturationEffectVtbl,
+
+  record IDCompositionSaturationEffectVtable,
     query_interface : Proc(IDCompositionSaturationEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionSaturationEffect*, UInt32),
     release : Proc(IDCompositionSaturationEffect*, UInt32),
@@ -2269,7 +2305,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionSaturationEffect, lpVtbl : IDCompositionSaturationEffectVtbl* do
+  record IDCompositionSaturationEffect, lpVtbl : IDCompositionSaturationEffectVtable* do
     GUID = LibC::GUID.new(0xa08debda_u32, 0x3258_u16, 0x4fa4_u16, StaticArray[0x9f_u8, 0x16_u8, 0x91_u8, 0x74_u8, 0xd3_u8, 0xfe_u8, 0x93_u8, 0xb1_u8])
     def query_interface(this : IDCompositionSaturationEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2293,7 +2329,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionTurbulenceEffectVtbl,
+
+  record IDCompositionTurbulenceEffectVtable,
     query_interface : Proc(IDCompositionTurbulenceEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionTurbulenceEffect*, UInt32),
     release : Proc(IDCompositionTurbulenceEffect*, UInt32),
@@ -2308,7 +2345,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionTurbulenceEffect, lpVtbl : IDCompositionTurbulenceEffectVtbl* do
+  record IDCompositionTurbulenceEffect, lpVtbl : IDCompositionTurbulenceEffectVtable* do
     GUID = LibC::GUID.new(0xa6a55bda_u32, 0xc09c_u16, 0x49f3_u16, StaticArray[0x91_u8, 0x93_u8, 0xa4_u8, 0x19_u8, 0x22_u8, 0xc8_u8, 0x97_u8, 0x15_u8])
     def query_interface(this : IDCompositionTurbulenceEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2347,7 +2384,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionLinearTransferEffectVtbl,
+
+  record IDCompositionLinearTransferEffectVtable,
     query_interface : Proc(IDCompositionLinearTransferEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionLinearTransferEffect*, UInt32),
     release : Proc(IDCompositionLinearTransferEffect*, UInt32),
@@ -2376,7 +2414,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionLinearTransferEffect, lpVtbl : IDCompositionLinearTransferEffectVtbl* do
+  record IDCompositionLinearTransferEffect, lpVtbl : IDCompositionLinearTransferEffectVtable* do
     GUID = LibC::GUID.new(0x4305ee5b_u32, 0xc4a0_u16, 0x4c88_u16, StaticArray[0x93_u8, 0x85_u8, 0x67_u8, 0x12_u8, 0x4e_u8, 0x1_u8, 0x76_u8, 0x83_u8])
     def query_interface(this : IDCompositionLinearTransferEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2457,7 +2495,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionTableTransferEffectVtbl,
+
+  record IDCompositionTableTransferEffectVtable,
     query_interface : Proc(IDCompositionTableTransferEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionTableTransferEffect*, UInt32),
     release : Proc(IDCompositionTableTransferEffect*, UInt32),
@@ -2482,7 +2521,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionTableTransferEffect, lpVtbl : IDCompositionTableTransferEffectVtbl* do
+  record IDCompositionTableTransferEffect, lpVtbl : IDCompositionTableTransferEffectVtable* do
     GUID = LibC::GUID.new(0x9b7e82e2_u32, 0x69c5_u16, 0x4eb4_u16, StaticArray[0xa5_u8, 0xf5_u8, 0xa7_u8, 0x3_u8, 0x3f_u8, 0x51_u8, 0x32_u8, 0xcd_u8])
     def query_interface(this : IDCompositionTableTransferEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2551,7 +2590,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionCompositeEffectVtbl,
+
+  record IDCompositionCompositeEffectVtable,
     query_interface : Proc(IDCompositionCompositeEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionCompositeEffect*, UInt32),
     release : Proc(IDCompositionCompositeEffect*, UInt32),
@@ -2560,7 +2600,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionCompositeEffect, lpVtbl : IDCompositionCompositeEffectVtbl* do
+  record IDCompositionCompositeEffect, lpVtbl : IDCompositionCompositeEffectVtable* do
     GUID = LibC::GUID.new(0x576616c0_u32, 0xa231_u16, 0x494d_u16, StaticArray[0xa3_u8, 0x8d_u8, 0x0_u8, 0xfd_u8, 0x5e_u8, 0xc4_u8, 0xdb_u8, 0x46_u8])
     def query_interface(this : IDCompositionCompositeEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2581,7 +2621,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionBlendEffectVtbl,
+
+  record IDCompositionBlendEffectVtable,
     query_interface : Proc(IDCompositionBlendEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionBlendEffect*, UInt32),
     release : Proc(IDCompositionBlendEffect*, UInt32),
@@ -2590,7 +2631,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionBlendEffect, lpVtbl : IDCompositionBlendEffectVtbl* do
+  record IDCompositionBlendEffect, lpVtbl : IDCompositionBlendEffectVtable* do
     GUID = LibC::GUID.new(0x33ecdc0a_u32, 0x578a_u16, 0x4a11_u16, StaticArray[0x9c_u8, 0x14_u8, 0xc_u8, 0xb9_u8, 0x5_u8, 0x17_u8, 0xf9_u8, 0xc5_u8])
     def query_interface(this : IDCompositionBlendEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2611,7 +2652,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionArithmeticCompositeEffectVtbl,
+
+  record IDCompositionArithmeticCompositeEffectVtable,
     query_interface : Proc(IDCompositionArithmeticCompositeEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionArithmeticCompositeEffect*, UInt32),
     release : Proc(IDCompositionArithmeticCompositeEffect*, UInt32),
@@ -2629,7 +2671,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionArithmeticCompositeEffect, lpVtbl : IDCompositionArithmeticCompositeEffectVtbl* do
+  record IDCompositionArithmeticCompositeEffect, lpVtbl : IDCompositionArithmeticCompositeEffectVtable* do
     GUID = LibC::GUID.new(0x3b67dfa8_u32, 0xe3dd_u16, 0x4e61_u16, StaticArray[0xb6_u8, 0x40_u8, 0x46_u8, 0xc2_u8, 0xf3_u8, 0xd7_u8, 0x39_u8, 0xdc_u8])
     def query_interface(this : IDCompositionArithmeticCompositeEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2677,7 +2719,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionAffineTransform2DEffectVtbl,
+
+  record IDCompositionAffineTransform2DEffectVtable,
     query_interface : Proc(IDCompositionAffineTransform2DEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionAffineTransform2DEffect*, UInt32),
     release : Proc(IDCompositionAffineTransform2DEffect*, UInt32),
@@ -2692,7 +2735,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionAffineTransform2DEffect, lpVtbl : IDCompositionAffineTransform2DEffectVtbl* do
+  record IDCompositionAffineTransform2DEffect, lpVtbl : IDCompositionAffineTransform2DEffectVtable* do
     GUID = LibC::GUID.new(0xb74b9e8_u32, 0xcdd6_u16, 0x492f_u16, StaticArray[0xbb_u8, 0xbc_u8, 0x5e_u8, 0xd3_u8, 0x21_u8, 0x57_u8, 0x2_u8, 0x6d_u8])
     def query_interface(this : IDCompositionAffineTransform2DEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2731,7 +2774,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionDelegatedInkTrailVtbl,
+
+  record IDCompositionDelegatedInkTrailVtable,
     query_interface : Proc(IDCompositionDelegatedInkTrail*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionDelegatedInkTrail*, UInt32),
     release : Proc(IDCompositionDelegatedInkTrail*, UInt32),
@@ -2742,7 +2786,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionDelegatedInkTrail, lpVtbl : IDCompositionDelegatedInkTrailVtbl* do
+  record IDCompositionDelegatedInkTrail, lpVtbl : IDCompositionDelegatedInkTrailVtable* do
     GUID = LibC::GUID.new(0xc2448e9b_u32, 0x547d_u16, 0x4057_u16, StaticArray[0x8c_u8, 0xf5_u8, 0x81_u8, 0x44_u8, 0xed_u8, 0xe1_u8, 0xc2_u8, 0xda_u8])
     def query_interface(this : IDCompositionDelegatedInkTrail*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2769,7 +2813,8 @@ module Win32cr::Graphics::DirectComposition
   end
 
   @[Extern]
-  record IDCompositionInkTrailDeviceVtbl,
+
+  record IDCompositionInkTrailDeviceVtable,
     query_interface : Proc(IDCompositionInkTrailDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCompositionInkTrailDevice*, UInt32),
     release : Proc(IDCompositionInkTrailDevice*, UInt32),
@@ -2778,7 +2823,7 @@ module Win32cr::Graphics::DirectComposition
 
 
   @[Extern]
-  record IDCompositionInkTrailDevice, lpVtbl : IDCompositionInkTrailDeviceVtbl* do
+  record IDCompositionInkTrailDevice, lpVtbl : IDCompositionInkTrailDeviceVtable* do
     GUID = LibC::GUID.new(0xdf0c7cec_u32, 0xcdeb_u16, 0x4d4a_u16, StaticArray[0xb9_u8, 0x1c_u8, 0x72_u8, 0x1b_u8, 0xf2_u8, 0x2f_u8, 0x4e_u8, 0x6c_u8])
     def query_interface(this : IDCompositionInkTrailDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2798,51 +2843,482 @@ module Win32cr::Graphics::DirectComposition
 
   end
 
+  @[Extern]
+
+  record IDCompositionTextureVtable,
+    query_interface : Proc(IDCompositionTexture*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDCompositionTexture*, UInt32),
+    release : Proc(IDCompositionTexture*, UInt32),
+    set_source_rect : Proc(IDCompositionTexture*, Win32cr::Graphics::Direct2D::Common::D2D_RECT_U*, Win32cr::Foundation::HRESULT),
+    set_color_space : Proc(IDCompositionTexture*, Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, Win32cr::Foundation::HRESULT),
+    set_alpha_mode : Proc(IDCompositionTexture*, Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, Win32cr::Foundation::HRESULT),
+    get_available_fence : Proc(IDCompositionTexture*, UInt64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDCompositionTexture, lpVtbl : IDCompositionTextureVtable* do
+    GUID = LibC::GUID.new(0x929bb1aa_u32, 0x725f_u16, 0x433b_u16, StaticArray[0xab_u8, 0xd7_u8, 0x27_u8, 0x30_u8, 0x75_u8, 0xa8_u8, 0x35_u8, 0xf2_u8])
+    def query_interface(this : IDCompositionTexture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDCompositionTexture*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDCompositionTexture*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_source_rect(this : IDCompositionTexture*, sourceRect : Win32cr::Graphics::Direct2D::Common::D2D_RECT_U*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_source_rect.call(this, sourceRect)
+    end
+    def set_color_space(this : IDCompositionTexture*, colorSpace : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_color_space.call(this, colorSpace)
+    end
+    def set_alpha_mode(this : IDCompositionTexture*, alphaMode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_alpha_mode.call(this, alphaMode)
+    end
+    def get_available_fence(this : IDCompositionTexture*, fenceValue : UInt64*, iid : LibC::GUID*, availableFence : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_available_fence.call(this, fenceValue, iid, availableFence)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDCompositionDevice4Vtable,
+    query_interface : Proc(IDCompositionDevice4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDCompositionDevice4*, UInt32),
+    release : Proc(IDCompositionDevice4*, UInt32),
+    commit : Proc(IDCompositionDevice4*, Win32cr::Foundation::HRESULT),
+    wait_for_commit_completion : Proc(IDCompositionDevice4*, Win32cr::Foundation::HRESULT),
+    get_frame_statistics : Proc(IDCompositionDevice4*, Win32cr::Graphics::DirectComposition::DCOMPOSITION_FRAME_STATISTICS*, Win32cr::Foundation::HRESULT),
+    create_visual : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_surface_factory : Proc(IDCompositionDevice4*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_surface : Proc(IDCompositionDevice4*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_virtual_surface : Proc(IDCompositionDevice4*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_translate_transform : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_scale_transform : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_rotate_transform : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_skew_transform : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_matrix_transform : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_transform_group : Proc(IDCompositionDevice4*, Void**, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_translate_transform3_d : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_scale_transform3_d : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_rotate_transform3_d : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_matrix_transform3_d : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_transform3_d_group : Proc(IDCompositionDevice4*, Void**, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_effect_group : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_rectangle_clip : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_animation : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_gaussian_blur_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_brightness_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_color_matrix_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_shadow_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_hue_rotation_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_saturation_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_turbulence_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_linear_transfer_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_table_transfer_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_composite_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_blend_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_arithmetic_composite_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    create_affine_transform2_d_effect : Proc(IDCompositionDevice4*, Void**, Win32cr::Foundation::HRESULT),
+    check_composition_texture_support : Proc(IDCompositionDevice4*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_composition_texture : Proc(IDCompositionDevice4*, Void*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDCompositionDevice4, lpVtbl : IDCompositionDevice4Vtable* do
+    GUID = LibC::GUID.new(0x85fc5cca_u32, 0x2da6_u16, 0x494c_u16, StaticArray[0x86_u8, 0xb6_u8, 0x4a_u8, 0x77_u8, 0x5c_u8, 0x4_u8, 0x9b_u8, 0x8a_u8])
+    def query_interface(this : IDCompositionDevice4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDCompositionDevice4*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDCompositionDevice4*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def commit(this : IDCompositionDevice4*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+    def wait_for_commit_completion(this : IDCompositionDevice4*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_commit_completion.call(this)
+    end
+    def get_frame_statistics(this : IDCompositionDevice4*, statistics : Win32cr::Graphics::DirectComposition::DCOMPOSITION_FRAME_STATISTICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame_statistics.call(this, statistics)
+    end
+    def create_visual(this : IDCompositionDevice4*, visual : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_visual.call(this, visual)
+    end
+    def create_surface_factory(this : IDCompositionDevice4*, renderingDevice : Void*, surfaceFactory : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_surface_factory.call(this, renderingDevice, surfaceFactory)
+    end
+    def create_surface(this : IDCompositionDevice4*, width : UInt32, height : UInt32, pixelFormat : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, alphaMode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, surface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_surface.call(this, width, height, pixelFormat, alphaMode, surface)
+    end
+    def create_virtual_surface(this : IDCompositionDevice4*, initialWidth : UInt32, initialHeight : UInt32, pixelFormat : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, alphaMode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, virtualSurface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_virtual_surface.call(this, initialWidth, initialHeight, pixelFormat, alphaMode, virtualSurface)
+    end
+    def create_translate_transform(this : IDCompositionDevice4*, translateTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_translate_transform.call(this, translateTransform)
+    end
+    def create_scale_transform(this : IDCompositionDevice4*, scaleTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_scale_transform.call(this, scaleTransform)
+    end
+    def create_rotate_transform(this : IDCompositionDevice4*, rotateTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_rotate_transform.call(this, rotateTransform)
+    end
+    def create_skew_transform(this : IDCompositionDevice4*, skewTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_skew_transform.call(this, skewTransform)
+    end
+    def create_matrix_transform(this : IDCompositionDevice4*, matrixTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_matrix_transform.call(this, matrixTransform)
+    end
+    def create_transform_group(this : IDCompositionDevice4*, transforms : Void**, elements : UInt32, transformGroup : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_transform_group.call(this, transforms, elements, transformGroup)
+    end
+    def create_translate_transform3_d(this : IDCompositionDevice4*, translateTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_translate_transform3_d.call(this, translateTransform3D)
+    end
+    def create_scale_transform3_d(this : IDCompositionDevice4*, scaleTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_scale_transform3_d.call(this, scaleTransform3D)
+    end
+    def create_rotate_transform3_d(this : IDCompositionDevice4*, rotateTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_rotate_transform3_d.call(this, rotateTransform3D)
+    end
+    def create_matrix_transform3_d(this : IDCompositionDevice4*, matrixTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_matrix_transform3_d.call(this, matrixTransform3D)
+    end
+    def create_transform3_d_group(this : IDCompositionDevice4*, transforms3D : Void**, elements : UInt32, transform3DGroup : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_transform3_d_group.call(this, transforms3D, elements, transform3DGroup)
+    end
+    def create_effect_group(this : IDCompositionDevice4*, effectGroup : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_effect_group.call(this, effectGroup)
+    end
+    def create_rectangle_clip(this : IDCompositionDevice4*, clip : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_rectangle_clip.call(this, clip)
+    end
+    def create_animation(this : IDCompositionDevice4*, animation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_animation.call(this, animation)
+    end
+    def create_gaussian_blur_effect(this : IDCompositionDevice4*, gaussianBlurEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_gaussian_blur_effect.call(this, gaussianBlurEffect)
+    end
+    def create_brightness_effect(this : IDCompositionDevice4*, brightnessEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_brightness_effect.call(this, brightnessEffect)
+    end
+    def create_color_matrix_effect(this : IDCompositionDevice4*, colorMatrixEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_color_matrix_effect.call(this, colorMatrixEffect)
+    end
+    def create_shadow_effect(this : IDCompositionDevice4*, shadowEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_shadow_effect.call(this, shadowEffect)
+    end
+    def create_hue_rotation_effect(this : IDCompositionDevice4*, hueRotationEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_hue_rotation_effect.call(this, hueRotationEffect)
+    end
+    def create_saturation_effect(this : IDCompositionDevice4*, saturationEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_saturation_effect.call(this, saturationEffect)
+    end
+    def create_turbulence_effect(this : IDCompositionDevice4*, turbulenceEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_turbulence_effect.call(this, turbulenceEffect)
+    end
+    def create_linear_transfer_effect(this : IDCompositionDevice4*, linearTransferEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_linear_transfer_effect.call(this, linearTransferEffect)
+    end
+    def create_table_transfer_effect(this : IDCompositionDevice4*, tableTransferEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_table_transfer_effect.call(this, tableTransferEffect)
+    end
+    def create_composite_effect(this : IDCompositionDevice4*, compositeEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_composite_effect.call(this, compositeEffect)
+    end
+    def create_blend_effect(this : IDCompositionDevice4*, blendEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_blend_effect.call(this, blendEffect)
+    end
+    def create_arithmetic_composite_effect(this : IDCompositionDevice4*, arithmeticCompositeEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_arithmetic_composite_effect.call(this, arithmeticCompositeEffect)
+    end
+    def create_affine_transform2_d_effect(this : IDCompositionDevice4*, affineTransform2dEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_affine_transform2_d_effect.call(this, affineTransform2dEffect)
+    end
+    def check_composition_texture_support(this : IDCompositionDevice4*, renderingDevice : Void*, supportsCompositionTextures : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.check_composition_texture_support.call(this, renderingDevice, supportsCompositionTextures)
+    end
+    def create_composition_texture(this : IDCompositionDevice4*, d3dTexture : Void*, compositionTexture : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_composition_texture.call(this, d3dTexture, compositionTexture)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDCompositionDynamicTextureVtable,
+    query_interface : Proc(IDCompositionDynamicTexture*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDCompositionDynamicTexture*, UInt32),
+    release : Proc(IDCompositionDynamicTexture*, UInt32),
+    set_texture_1 : Proc(IDCompositionDynamicTexture*, Void*, Win32cr::Foundation::RECT*, LibC::UIntPtrT, Win32cr::Foundation::HRESULT),
+    set_texture_2 : Proc(IDCompositionDynamicTexture*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDCompositionDynamicTexture, lpVtbl : IDCompositionDynamicTextureVtable* do
+    GUID = LibC::GUID.new(0xa1de1d3f_u32, 0x6405_u16, 0x447f_u16, StaticArray[0x8e_u8, 0x95_u8, 0x13_u8, 0x83_u8, 0xa3_u8, 0x4b_u8, 0x2_u8, 0x77_u8])
+    def query_interface(this : IDCompositionDynamicTexture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDCompositionDynamicTexture*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDCompositionDynamicTexture*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_texture_1(this : IDCompositionDynamicTexture*, pTexture : Void*, pRects : Win32cr::Foundation::RECT*, rectCount : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_texture_1.call(this, pTexture, pRects, rectCount)
+    end
+    def set_texture_2(this : IDCompositionDynamicTexture*, pTexture : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_texture_2.call(this, pTexture)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDCompositionDevice5Vtable,
+    query_interface : Proc(IDCompositionDevice5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDCompositionDevice5*, UInt32),
+    release : Proc(IDCompositionDevice5*, UInt32),
+    commit : Proc(IDCompositionDevice5*, Win32cr::Foundation::HRESULT),
+    wait_for_commit_completion : Proc(IDCompositionDevice5*, Win32cr::Foundation::HRESULT),
+    get_frame_statistics : Proc(IDCompositionDevice5*, Win32cr::Graphics::DirectComposition::DCOMPOSITION_FRAME_STATISTICS*, Win32cr::Foundation::HRESULT),
+    create_visual : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_surface_factory : Proc(IDCompositionDevice5*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_surface : Proc(IDCompositionDevice5*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_virtual_surface : Proc(IDCompositionDevice5*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, Void**, Win32cr::Foundation::HRESULT),
+    create_translate_transform : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_scale_transform : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_rotate_transform : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_skew_transform : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_matrix_transform : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_transform_group : Proc(IDCompositionDevice5*, Void**, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_translate_transform3_d : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_scale_transform3_d : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_rotate_transform3_d : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_matrix_transform3_d : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_transform3_d_group : Proc(IDCompositionDevice5*, Void**, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_effect_group : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_rectangle_clip : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_animation : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_gaussian_blur_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_brightness_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_color_matrix_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_shadow_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_hue_rotation_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_saturation_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_turbulence_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_linear_transfer_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_table_transfer_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_composite_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_blend_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_arithmetic_composite_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    create_affine_transform2_d_effect : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT),
+    check_composition_texture_support : Proc(IDCompositionDevice5*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_composition_texture : Proc(IDCompositionDevice5*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_dynamic_texture : Proc(IDCompositionDevice5*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDCompositionDevice5, lpVtbl : IDCompositionDevice5Vtable* do
+    GUID = LibC::GUID.new(0x2c6bebfe_u32, 0xa603_u16, 0x472f_u16, StaticArray[0xaf_u8, 0x34_u8, 0xd2_u8, 0x44_u8, 0x33_u8, 0x56_u8, 0xe6_u8, 0x1b_u8])
+    def query_interface(this : IDCompositionDevice5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDCompositionDevice5*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDCompositionDevice5*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def commit(this : IDCompositionDevice5*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+    def wait_for_commit_completion(this : IDCompositionDevice5*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_commit_completion.call(this)
+    end
+    def get_frame_statistics(this : IDCompositionDevice5*, statistics : Win32cr::Graphics::DirectComposition::DCOMPOSITION_FRAME_STATISTICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame_statistics.call(this, statistics)
+    end
+    def create_visual(this : IDCompositionDevice5*, visual : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_visual.call(this, visual)
+    end
+    def create_surface_factory(this : IDCompositionDevice5*, renderingDevice : Void*, surfaceFactory : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_surface_factory.call(this, renderingDevice, surfaceFactory)
+    end
+    def create_surface(this : IDCompositionDevice5*, width : UInt32, height : UInt32, pixelFormat : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, alphaMode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, surface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_surface.call(this, width, height, pixelFormat, alphaMode, surface)
+    end
+    def create_virtual_surface(this : IDCompositionDevice5*, initialWidth : UInt32, initialHeight : UInt32, pixelFormat : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, alphaMode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, virtualSurface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_virtual_surface.call(this, initialWidth, initialHeight, pixelFormat, alphaMode, virtualSurface)
+    end
+    def create_translate_transform(this : IDCompositionDevice5*, translateTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_translate_transform.call(this, translateTransform)
+    end
+    def create_scale_transform(this : IDCompositionDevice5*, scaleTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_scale_transform.call(this, scaleTransform)
+    end
+    def create_rotate_transform(this : IDCompositionDevice5*, rotateTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_rotate_transform.call(this, rotateTransform)
+    end
+    def create_skew_transform(this : IDCompositionDevice5*, skewTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_skew_transform.call(this, skewTransform)
+    end
+    def create_matrix_transform(this : IDCompositionDevice5*, matrixTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_matrix_transform.call(this, matrixTransform)
+    end
+    def create_transform_group(this : IDCompositionDevice5*, transforms : Void**, elements : UInt32, transformGroup : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_transform_group.call(this, transforms, elements, transformGroup)
+    end
+    def create_translate_transform3_d(this : IDCompositionDevice5*, translateTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_translate_transform3_d.call(this, translateTransform3D)
+    end
+    def create_scale_transform3_d(this : IDCompositionDevice5*, scaleTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_scale_transform3_d.call(this, scaleTransform3D)
+    end
+    def create_rotate_transform3_d(this : IDCompositionDevice5*, rotateTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_rotate_transform3_d.call(this, rotateTransform3D)
+    end
+    def create_matrix_transform3_d(this : IDCompositionDevice5*, matrixTransform3D : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_matrix_transform3_d.call(this, matrixTransform3D)
+    end
+    def create_transform3_d_group(this : IDCompositionDevice5*, transforms3D : Void**, elements : UInt32, transform3DGroup : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_transform3_d_group.call(this, transforms3D, elements, transform3DGroup)
+    end
+    def create_effect_group(this : IDCompositionDevice5*, effectGroup : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_effect_group.call(this, effectGroup)
+    end
+    def create_rectangle_clip(this : IDCompositionDevice5*, clip : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_rectangle_clip.call(this, clip)
+    end
+    def create_animation(this : IDCompositionDevice5*, animation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_animation.call(this, animation)
+    end
+    def create_gaussian_blur_effect(this : IDCompositionDevice5*, gaussianBlurEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_gaussian_blur_effect.call(this, gaussianBlurEffect)
+    end
+    def create_brightness_effect(this : IDCompositionDevice5*, brightnessEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_brightness_effect.call(this, brightnessEffect)
+    end
+    def create_color_matrix_effect(this : IDCompositionDevice5*, colorMatrixEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_color_matrix_effect.call(this, colorMatrixEffect)
+    end
+    def create_shadow_effect(this : IDCompositionDevice5*, shadowEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_shadow_effect.call(this, shadowEffect)
+    end
+    def create_hue_rotation_effect(this : IDCompositionDevice5*, hueRotationEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_hue_rotation_effect.call(this, hueRotationEffect)
+    end
+    def create_saturation_effect(this : IDCompositionDevice5*, saturationEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_saturation_effect.call(this, saturationEffect)
+    end
+    def create_turbulence_effect(this : IDCompositionDevice5*, turbulenceEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_turbulence_effect.call(this, turbulenceEffect)
+    end
+    def create_linear_transfer_effect(this : IDCompositionDevice5*, linearTransferEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_linear_transfer_effect.call(this, linearTransferEffect)
+    end
+    def create_table_transfer_effect(this : IDCompositionDevice5*, tableTransferEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_table_transfer_effect.call(this, tableTransferEffect)
+    end
+    def create_composite_effect(this : IDCompositionDevice5*, compositeEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_composite_effect.call(this, compositeEffect)
+    end
+    def create_blend_effect(this : IDCompositionDevice5*, blendEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_blend_effect.call(this, blendEffect)
+    end
+    def create_arithmetic_composite_effect(this : IDCompositionDevice5*, arithmeticCompositeEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_arithmetic_composite_effect.call(this, arithmeticCompositeEffect)
+    end
+    def create_affine_transform2_d_effect(this : IDCompositionDevice5*, affineTransform2dEffect : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_affine_transform2_d_effect.call(this, affineTransform2dEffect)
+    end
+    def check_composition_texture_support(this : IDCompositionDevice5*, renderingDevice : Void*, supportsCompositionTextures : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.check_composition_texture_support.call(this, renderingDevice, supportsCompositionTextures)
+    end
+    def create_composition_texture(this : IDCompositionDevice5*, d3dTexture : Void*, compositionTexture : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_composition_texture.call(this, d3dTexture, compositionTexture)
+    end
+    def create_dynamic_texture(this : IDCompositionDevice5*, compositionDynamicTexture : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_dynamic_texture.call(this, compositionDynamicTexture)
+    end
+
+  end
+
   def dCompositionCreateDevice(dxgiDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionCreateDevice(dxgiDevice, iid, dcompositionDevice)
+    {% end %}
   end
 
   def dCompositionCreateDevice2(renderingDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionCreateDevice2(renderingDevice, iid, dcompositionDevice)
+    {% end %}
   end
 
   def dCompositionCreateDevice3(renderingDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionCreateDevice3(renderingDevice, iid, dcompositionDevice)
+    {% end %}
   end
 
   def dCompositionCreateSurfaceHandle(desiredAccess : UInt32, securityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, surfaceHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionCreateSurfaceHandle(desiredAccess, securityAttributes, surfaceHandle)
+    {% end %}
   end
 
   def dCompositionAttachMouseWheelToHwnd(visual : Void*, hwnd : Win32cr::Foundation::HWND, enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionAttachMouseWheelToHwnd(visual, hwnd, enable)
+    {% end %}
   end
 
   def dCompositionAttachMouseDragToHwnd(visual : Void*, hwnd : Win32cr::Foundation::HWND, enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionAttachMouseDragToHwnd(visual, hwnd, enable)
+    {% end %}
   end
 
   def dCompositionGetFrameId(frameIdType : Win32cr::Graphics::DirectComposition::COMPOSITION_FRAME_ID_TYPE, frameId : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionGetFrameId(frameIdType, frameId)
+    {% end %}
   end
 
   def dCompositionGetStatistics(frameId : UInt64, frameStats : Win32cr::Graphics::DirectComposition::COMPOSITION_FRAME_STATS*, targetIdCount : UInt32, targetIds : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_ID*, actualTargetIdCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionGetStatistics(frameId, frameStats, targetIdCount, targetIds, actualTargetIdCount)
+    {% end %}
   end
 
   def dCompositionGetTargetStatistics(frameId : UInt64, targetId : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_ID*, targetStats : Win32cr::Graphics::DirectComposition::COMPOSITION_TARGET_STATS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionGetTargetStatistics(frameId, targetId, targetStats)
+    {% end %}
   end
 
   def dCompositionBoostCompositorClock(enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DCompositionBoostCompositorClock(enable)
+    {% end %}
   end
 
   def dCompositionWaitForCompositorClock(count : UInt32, handles : Win32cr::Foundation::HANDLE*, timeoutInMs : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DCompositionWaitForCompositorClock(count, handles, timeoutInMs)
+    {% end %}
   end
 
   @[Link("dcomp")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DCompositionCreateDevice(dxgiDevice : Void*, iid : LibC::GUID*, dcompositionDevice : Void**) : Win32cr::Foundation::HRESULT
@@ -2878,4 +3354,5 @@ module Win32cr::Graphics::DirectComposition
     fun DCompositionWaitForCompositorClock(count : UInt32, handles : Win32cr::Foundation::HANDLE*, timeoutInMs : UInt32) : UInt32
 
   end
+  {% end %}
 end

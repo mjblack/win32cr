@@ -12,6 +12,7 @@ module Win32cr::System::Time
   TSF_Authenticated = 2_u32
   TSF_IPv6 = 4_u32
   TSF_SignatureAuthenticated = 8_u32
+  TIME_ZONE_ID_INVALID = 4294967295_u32
 
 
   @[Extern]
@@ -43,19 +44,27 @@ module Win32cr::System::Time
   end
 
   def systemTimeToTzSpecificLocalTime(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SystemTimeToTzSpecificLocalTime(lpTimeZoneInformation, lpUniversalTime, lpLocalTime)
+    {% end %}
   end
 
   def tzSpecificLocalTimeToSystemTime(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TzSpecificLocalTimeToSystemTime(lpTimeZoneInformation, lpLocalTime, lpUniversalTime)
+    {% end %}
   end
 
   def fileTimeToSystemTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FileTimeToSystemTime(lpFileTime, lpSystemTime)
+    {% end %}
   end
 
   def systemTimeToFileTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SystemTimeToFileTime(lpSystemTime, lpFileTime)
+    {% end %}
   end
 
   #def getTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : UInt32
@@ -67,7 +76,9 @@ module Win32cr::System::Time
   #end
 
   def setDynamicTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDynamicTimeZoneInformation(lpTimeZoneInformation)
+    {% end %}
   end
 
   #def getDynamicTimeZoneInformation(pTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
@@ -75,35 +86,50 @@ module Win32cr::System::Time
   #end
 
   def getTimeZoneInformationForYear(wYear : UInt16, pdtzi : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, ptzi : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTimeZoneInformationForYear(wYear, pdtzi, ptzi)
+    {% end %}
   end
 
   def enumDynamicTimeZoneInformation(dwIndex : UInt32, lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.EnumDynamicTimeZoneInformation(dwIndex, lpTimeZoneInformation)
+    {% end %}
   end
 
   def getDynamicTimeZoneInformationEffectiveYears(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, first_year : UInt32*, last_year : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDynamicTimeZoneInformationEffectiveYears(lpTimeZoneInformation, first_year, last_year)
+    {% end %}
   end
 
   def systemTimeToTzSpecificLocalTimeEx(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SystemTimeToTzSpecificLocalTimeEx(lpTimeZoneInformation, lpUniversalTime, lpLocalTime)
+    {% end %}
   end
 
   def tzSpecificLocalTimeToSystemTimeEx(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TzSpecificLocalTimeToSystemTimeEx(lpTimeZoneInformation, lpLocalTime, lpUniversalTime)
+    {% end %}
   end
 
   def localFileTimeToLocalSystemTime(timeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, localFileTime : Win32cr::Foundation::FILETIME*, localSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LocalFileTimeToLocalSystemTime(timeZoneInformation, localFileTime, localSystemTime)
+    {% end %}
   end
 
   def localSystemTimeToLocalFileTime(timeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, localSystemTime : Win32cr::Foundation::SYSTEMTIME*, localFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LocalSystemTimeToLocalFileTime(timeZoneInformation, localSystemTime, localFileTime)
+    {% end %}
   end
 
   @[Link("kernel32")]
   @[Link("advapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SystemTimeToTzSpecificLocalTime(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
@@ -154,4 +180,5 @@ module Win32cr::System::Time
     fun LocalSystemTimeToLocalFileTime(timeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, localSystemTime : Win32cr::Foundation::SYSTEMTIME*, localFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

@@ -11,9 +11,11 @@ module Win32cr::UI::Magnification
   MS_SHOWMAGNIFIEDCURSOR = 1_i32
   MS_CLIPAROUNDCURSOR = 2_i32
   MS_INVERTCOLORS = 4_i32
-  MW_FILTERMODE_EXCLUDE = 0_u32
-  MW_FILTERMODE_INCLUDE = 1_u32
 
+  enum MW_FILTERMODE : UInt32
+    MW_FILTERMODE_EXCLUDE = 0_u32
+    MW_FILTERMODE_INCLUDE = 1_u32
+  end
 
   @[Extern]
   struct MAGTRANSFORM
@@ -42,82 +44,121 @@ module Win32cr::UI::Magnification
   end
 
   def magInitialize : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagInitialize
+    {% end %}
   end
 
   def magUninitialize : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagUninitialize
+    {% end %}
   end
 
   def magSetWindowSource(hwnd : Win32cr::Foundation::HWND, rect : Win32cr::Foundation::RECT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetWindowSource(hwnd, rect)
+    {% end %}
   end
 
   def magGetWindowSource(hwnd : Win32cr::Foundation::HWND, pRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagGetWindowSource(hwnd, pRect)
+    {% end %}
   end
 
   def magSetWindowTransform(hwnd : Win32cr::Foundation::HWND, pTransform : Win32cr::UI::Magnification::MAGTRANSFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetWindowTransform(hwnd, pTransform)
+    {% end %}
   end
 
   def magGetWindowTransform(hwnd : Win32cr::Foundation::HWND, pTransform : Win32cr::UI::Magnification::MAGTRANSFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagGetWindowTransform(hwnd, pTransform)
+    {% end %}
   end
 
-  def magSetWindowFilterList(hwnd : Win32cr::Foundation::HWND, dwFilterMode : UInt32, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Win32cr::Foundation::BOOL
+  def magSetWindowFilterList(hwnd : Win32cr::Foundation::HWND, dwFilterMode : Win32cr::UI::Magnification::MW_FILTERMODE, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetWindowFilterList(hwnd, dwFilterMode, count, pHWND)
+    {% end %}
   end
 
-  def magGetWindowFilterList(hwnd : Win32cr::Foundation::HWND, pdwFilterMode : UInt32*, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Int32
+  def magGetWindowFilterList(hwnd : Win32cr::Foundation::HWND, pdwFilterMode : Win32cr::UI::Magnification::MW_FILTERMODE*, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Int32
+    {% if !flag?(:docs) %}
     C.MagGetWindowFilterList(hwnd, pdwFilterMode, count, pHWND)
+    {% end %}
   end
 
   def magSetImageScalingCallback(hwnd : Win32cr::Foundation::HWND, callback : Win32cr::UI::Magnification::MagImageScalingCallback) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetImageScalingCallback(hwnd, callback)
+    {% end %}
   end
 
   def magGetImageScalingCallback(hwnd : Win32cr::Foundation::HWND) : Win32cr::UI::Magnification::MagImageScalingCallback
+    {% if !flag?(:docs) %}
     C.MagGetImageScalingCallback(hwnd)
+    {% end %}
   end
 
   def magSetColorEffect(hwnd : Win32cr::Foundation::HWND, pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetColorEffect(hwnd, pEffect)
+    {% end %}
   end
 
   def magGetColorEffect(hwnd : Win32cr::Foundation::HWND, pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagGetColorEffect(hwnd, pEffect)
+    {% end %}
   end
 
   def magSetFullscreenTransform(magLevel : Float32, xOffset : Int32, yOffset : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetFullscreenTransform(magLevel, xOffset, yOffset)
+    {% end %}
   end
 
   def magGetFullscreenTransform(pMagLevel : Float32*, pxOffset : Int32*, pyOffset : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagGetFullscreenTransform(pMagLevel, pxOffset, pyOffset)
+    {% end %}
   end
 
   def magSetFullscreenColorEffect(pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetFullscreenColorEffect(pEffect)
+    {% end %}
   end
 
   def magGetFullscreenColorEffect(pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagGetFullscreenColorEffect(pEffect)
+    {% end %}
   end
 
   def magSetInputTransform(fEnabled : Win32cr::Foundation::BOOL, pRectSource : Win32cr::Foundation::RECT*, pRectDest : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagSetInputTransform(fEnabled, pRectSource, pRectDest)
+    {% end %}
   end
 
   def magGetInputTransform(pfEnabled : Win32cr::Foundation::BOOL*, pRectSource : Win32cr::Foundation::RECT*, pRectDest : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagGetInputTransform(pfEnabled, pRectSource, pRectDest)
+    {% end %}
   end
 
   def magShowSystemCursor(fShowCursor : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MagShowSystemCursor(fShowCursor)
+    {% end %}
   end
 
   @[Link("magnification")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun MagInitialize : Win32cr::Foundation::BOOL
@@ -138,10 +179,10 @@ module Win32cr::UI::Magnification
     fun MagGetWindowTransform(hwnd : Win32cr::Foundation::HWND, pTransform : Win32cr::UI::Magnification::MAGTRANSFORM*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun MagSetWindowFilterList(hwnd : Win32cr::Foundation::HWND, dwFilterMode : UInt32, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Win32cr::Foundation::BOOL
+    fun MagSetWindowFilterList(hwnd : Win32cr::Foundation::HWND, dwFilterMode : Win32cr::UI::Magnification::MW_FILTERMODE, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun MagGetWindowFilterList(hwnd : Win32cr::Foundation::HWND, pdwFilterMode : UInt32*, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Int32
+    fun MagGetWindowFilterList(hwnd : Win32cr::Foundation::HWND, pdwFilterMode : Win32cr::UI::Magnification::MW_FILTERMODE*, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Int32
 
     # :nodoc:
     fun MagSetImageScalingCallback(hwnd : Win32cr::Foundation::HWND, callback : Win32cr::UI::Magnification::MagImageScalingCallback) : Win32cr::Foundation::BOOL
@@ -177,4 +218,5 @@ module Win32cr::UI::Magnification
     fun MagShowSystemCursor(fShowCursor : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

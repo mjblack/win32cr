@@ -1,8 +1,19 @@
 require "./../../foundation.cr"
 require "./../../system/com.cr"
+require "./../../data/xml/ms_xml.cr"
+require "./../../security.cr"
 
 module Win32cr::Storage::Packaging::Appx
   extend self
+  alias PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE = Void*
+  alias PACKAGEDEPENDENCY_CONTEXT = Void*
+  PACKAGE_FULL_NAME_MIN_LENGTH = 30_u32
+  PACKAGE_FULL_NAME_MAX_LENGTH = 127_u32
+  PACKAGE_FAMILY_NAME_MIN_LENGTH = 17_u32
+  PACKAGE_FAMILY_NAME_MAX_LENGTH = 64_u32
+  PACKAGE_GRAPH_MAX_SIZE = 641_u32
+  APPLICATION_USER_MODEL_ID_MIN_LENGTH = 20_u32
+  APPLICATION_USER_MODEL_ID_MAX_LENGTH = 130_u32
   PACKAGE_PROPERTY_FRAMEWORK = 1_u32
   PACKAGE_PROPERTY_RESOURCE = 2_u32
   PACKAGE_PROPERTY_BUNDLE = 4_u32
@@ -25,12 +36,35 @@ module Win32cr::Storage::Packaging::Appx
   PACKAGE_FILTER_HOSTRUNTIME = 2097152_u32
   PACKAGE_FILTER_ALL_LOADED = 0_u32
   PACKAGE_DEPENDENCY_RANK_DEFAULT = 0_u32
+  PACKAGE_ARCHITECTURE_MIN_LENGTH = 3_u32
+  PACKAGE_ARCHITECTURE_MAX_LENGTH = 7_u32
+  PACKAGE_VERSION_MIN_LENGTH = 7_u32
+  PACKAGE_VERSION_MAX_LENGTH = 23_u32
+  PACKAGE_NAME_MIN_LENGTH = 3_u32
+  PACKAGE_NAME_MAX_LENGTH = 50_u32
+  PACKAGE_PUBLISHER_MIN_LENGTH = 3_u32
+  PACKAGE_PUBLISHER_MAX_LENGTH = 8192_u32
+  PACKAGE_PUBLISHERID_MIN_LENGTH = 13_u32
+  PACKAGE_PUBLISHERID_MAX_LENGTH = 13_u32
+  PACKAGE_RESOURCEID_MIN_LENGTH = 0_u32
+  PACKAGE_RESOURCEID_MAX_LENGTH = 30_u32
+  PACKAGE_MIN_DEPENDENCIES = 0_u32
+  PACKAGE_MAX_DEPENDENCIES = 128_u32
+  PACKAGE_FAMILY_MIN_RESOURCE_PACKAGES = 0_u32
+  PACKAGE_FAMILY_MAX_RESOURCE_PACKAGES = 512_u32
+  PACKAGE_GRAPH_MIN_SIZE = 1_u32
+  PACKAGE_APPLICATIONS_MIN_COUNT = 0_u32
+  PACKAGE_APPLICATIONS_MAX_COUNT = 100_u32
+  PACKAGE_RELATIVE_APPLICATION_ID_MIN_LENGTH = 2_u32
+  PACKAGE_RELATIVE_APPLICATION_ID_MAX_LENGTH = 65_u32
 
   CLSID_AppxFactory = LibC::GUID.new(0x5842a140_u32, 0xff9f_u16, 0x4166_u16, StaticArray[0x8f_u8, 0x5c_u8, 0x62_u8, 0xf5_u8, 0xb7_u8, 0xb0_u8, 0xc7_u8, 0x81_u8])
 
   CLSID_AppxBundleFactory = LibC::GUID.new(0x378e0446_u32, 0x5384_u16, 0x43b7_u16, StaticArray[0x88_u8, 0x77_u8, 0xe7_u8, 0xdb_u8, 0xdd_u8, 0x88_u8, 0x34_u8, 0x46_u8])
 
   CLSID_AppxPackagingDiagnosticEventSinkManager = LibC::GUID.new(0x50ca0a46_u32, 0x1588_u16, 0x4161_u16, StaticArray[0x8e_u8, 0xd2_u8, 0xef_u8, 0x9e_u8, 0x46_u8, 0x9c_u8, 0xed_u8, 0x5d_u8])
+
+  CLSID_AppxPackagingServiceProvider = LibC::GUID.new(0xfb1b3839_u32, 0x9da_u16, 0x404f_u16, StaticArray[0xb0_u8, 0x2_u8, 0x9c_u8, 0xbb_u8, 0x8d_u8, 0xa5_u8, 0xca_u8, 0x4f_u8])
 
   CLSID_AppxEncryptionFactory = LibC::GUID.new(0xdc664fdd_u32, 0xd868_u16, 0x46ee_u16, StaticArray[0x87_u8, 0x80_u8, 0x8d_u8, 0x19_u8, 0x6c_u8, 0xb7_u8, 0x39_u8, 0xf7_u8])
 
@@ -58,19 +92,19 @@ module Win32cr::Storage::Packaging::Appx
     APPX_BUNDLE_FOOTPRINT_FILE_TYPE_LAST = 2_i32
   end
   @[Flags]
-  enum APPX_CAPABILITIES : UInt32
-    APPX_CAPABILITY_INTERNET_CLIENT = 1_u32
-    APPX_CAPABILITY_INTERNET_CLIENT_SERVER = 2_u32
-    APPX_CAPABILITY_PRIVATE_NETWORK_CLIENT_SERVER = 4_u32
-    APPX_CAPABILITY_DOCUMENTS_LIBRARY = 8_u32
-    APPX_CAPABILITY_PICTURES_LIBRARY = 16_u32
-    APPX_CAPABILITY_VIDEOS_LIBRARY = 32_u32
-    APPX_CAPABILITY_MUSIC_LIBRARY = 64_u32
-    APPX_CAPABILITY_ENTERPRISE_AUTHENTICATION = 128_u32
-    APPX_CAPABILITY_SHARED_USER_CERTIFICATES = 256_u32
-    APPX_CAPABILITY_REMOVABLE_STORAGE = 512_u32
-    APPX_CAPABILITY_APPOINTMENTS = 1024_u32
-    APPX_CAPABILITY_CONTACTS = 2048_u32
+  enum APPX_CAPABILITIES
+    APPX_CAPABILITY_INTERNET_CLIENT = 1_i32
+    APPX_CAPABILITY_INTERNET_CLIENT_SERVER = 2_i32
+    APPX_CAPABILITY_PRIVATE_NETWORK_CLIENT_SERVER = 4_i32
+    APPX_CAPABILITY_DOCUMENTS_LIBRARY = 8_i32
+    APPX_CAPABILITY_PICTURES_LIBRARY = 16_i32
+    APPX_CAPABILITY_VIDEOS_LIBRARY = 32_i32
+    APPX_CAPABILITY_MUSIC_LIBRARY = 64_i32
+    APPX_CAPABILITY_ENTERPRISE_AUTHENTICATION = 128_i32
+    APPX_CAPABILITY_SHARED_USER_CERTIFICATES = 256_i32
+    APPX_CAPABILITY_REMOVABLE_STORAGE = 512_i32
+    APPX_CAPABILITY_APPOINTMENTS = 1024_i32
+    APPX_CAPABILITY_CONTACTS = 2048_i32
   end
   enum APPX_PACKAGE_ARCHITECTURE
     APPX_PACKAGE_ARCHITECTURE_X86 = 0_i32
@@ -113,19 +147,19 @@ module Win32cr::Storage::Packaging::Appx
     APPX_PACKAGING_CONTEXT_CHANGE_TYPE_END = 3_i32
   end
   @[Flags]
-  enum APPX_ENCRYPTED_PACKAGE_OPTIONS : UInt32
-    APPX_ENCRYPTED_PACKAGE_OPTION_NONE = 0_u32
-    APPX_ENCRYPTED_PACKAGE_OPTION_DIFFUSION = 1_u32
-    APPX_ENCRYPTED_PACKAGE_OPTION_PAGE_HASHING = 2_u32
+  enum APPX_ENCRYPTED_PACKAGE_OPTIONS
+    APPX_ENCRYPTED_PACKAGE_OPTION_NONE = 0_i32
+    APPX_ENCRYPTED_PACKAGE_OPTION_DIFFUSION = 1_i32
+    APPX_ENCRYPTED_PACKAGE_OPTION_PAGE_HASHING = 2_i32
   end
   enum APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION
     APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION_APPEND_DELTA = 0_i32
   end
   @[Flags]
-  enum APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS : UInt32
-    APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_NONE = 0_u32
-    APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_SKIP_VALIDATION = 1_u32
-    APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_LOCALIZED = 2_u32
+  enum APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS
+    APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_NONE = 0_i32
+    APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_SKIP_VALIDATION = 1_i32
+    APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_LOCALIZED = 2_i32
   end
   enum PackagePathType
     PackagePathType_Install = 0_i32
@@ -144,6 +178,7 @@ module Win32cr::Storage::Packaging::Appx
     PackageOrigin_DeveloperSigned = 5_i32
     PackageOrigin_LineOfBusiness = 6_i32
   end
+  @[Flags]
   enum CreatePackageDependencyOptions
     CreatePackageDependencyOptions_None = 0_i32
     CreatePackageDependencyOptions_DoNotVerifyDependencyResolution = 1_i32
@@ -154,10 +189,18 @@ module Win32cr::Storage::Packaging::Appx
     PackageDependencyLifetimeKind_FilePath = 1_i32
     PackageDependencyLifetimeKind_RegistryKey = 2_i32
   end
+  @[Flags]
   enum AddPackageDependencyOptions
     AddPackageDependencyOptions_None = 0_i32
     AddPackageDependencyOptions_PrependIfRankCollision = 1_i32
   end
+  @[Flags]
+  enum AddPackageDependencyOptions2
+    AddPackageDependencyOptions2_None = 0_i32
+    AddPackageDependencyOptions2_PrependIfRankCollision = 1_i32
+    AddPackageDependencyOptions2_SpecifiedPackageFamilyOnly = 2_i32
+  end
+  @[Flags]
   enum PackageDependencyProcessorArchitectures
     PackageDependencyProcessorArchitectures_None = 0_i32
     PackageDependencyProcessorArchitectures_Neutral = 1_i32
@@ -203,6 +246,38 @@ module Win32cr::Storage::Packaging::Appx
     AppPolicyCreateFileAccess_Full = 0_i32
     AppPolicyCreateFileAccess_Limited = 1_i32
   end
+  enum PackageInfo3Type
+    PackageInfo3Type_PackageInfoGeneration = 16_i32
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct PACKAGE_ID
+    property reserved : UInt32
+    property processorArchitecture : UInt32
+    property version : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION
+    property name : Win32cr::Foundation::PWSTR
+    property publisher : Win32cr::Foundation::PWSTR
+    property resourceId : Win32cr::Foundation::PWSTR
+    property publisherId : Win32cr::Foundation::PWSTR
+    def initialize(@reserved : UInt32, @processorArchitecture : UInt32, @version : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, @name : Win32cr::Foundation::PWSTR, @publisher : Win32cr::Foundation::PWSTR, @resourceId : Win32cr::Foundation::PWSTR, @publisherId : Win32cr::Foundation::PWSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct PACKAGE_INFO
+    property reserved : UInt32
+    property flags : UInt32
+    property path : Win32cr::Foundation::PWSTR
+    property packageFullName : Win32cr::Foundation::PWSTR
+    property packageFamilyName : Win32cr::Foundation::PWSTR
+    property packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID
+    def initialize(@reserved : UInt32, @flags : UInt32, @path : Win32cr::Foundation::PWSTR, @packageFullName : Win32cr::Foundation::PWSTR, @packageFamilyName : Win32cr::Foundation::PWSTR, @packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID)
+    end
+  end
+  {% end %}
 
   @[Extern]
   struct APPX_PACKAGE_SETTINGS
@@ -289,6 +364,7 @@ module Win32cr::Storage::Packaging::Appx
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct PACKAGE_ID
     property reserved : UInt32
@@ -301,6 +377,7 @@ module Win32cr::Storage::Packaging::Appx
     def initialize(@reserved : UInt32, @processorArchitecture : UInt32, @version : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, @name : Win32cr::Foundation::PWSTR, @publisher : Win32cr::Foundation::PWSTR, @resourceId : Win32cr::Foundation::PWSTR, @publisherId : Win32cr::Foundation::PWSTR)
     end
   end
+  {% end %}
 
   @[Extern]
   struct PACKAGE_INFO_REFERENCE_
@@ -309,6 +386,7 @@ module Win32cr::Storage::Packaging::Appx
     end
   end
 
+  {% if flag?(:i386) %}
   @[Extern]
   struct PACKAGE_INFO
     property reserved : UInt32
@@ -320,23 +398,20 @@ module Win32cr::Storage::Packaging::Appx
     def initialize(@reserved : UInt32, @flags : UInt32, @path : Win32cr::Foundation::PWSTR, @packageFullName : Win32cr::Foundation::PWSTR, @packageFamilyName : Win32cr::Foundation::PWSTR, @packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID)
     end
   end
+  {% end %}
 
   @[Extern]
-  struct PACKAGEDEPENDENCY_CONTEXT__
-    property unused : Int32
-    def initialize(@unused : Int32)
+  struct FindPackageDependencyCriteria
+    property user : Win32cr::Security::PSID
+    property scope_is_system : Win32cr::Foundation::BOOL
+    property package_family_name : Win32cr::Foundation::PWSTR
+    def initialize(@user : Win32cr::Security::PSID, @scope_is_system : Win32cr::Foundation::BOOL, @package_family_name : Win32cr::Foundation::PWSTR)
     end
   end
 
   @[Extern]
-  struct PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
 
-  @[Extern]
-  record IAppxFactoryVtbl,
+  record IAppxFactoryVtable,
     query_interface : Proc(IAppxFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxFactory*, UInt32),
     release : Proc(IAppxFactory*, UInt32),
@@ -348,7 +423,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxFactory, lpVtbl : IAppxFactoryVtbl* do
+  record IAppxFactory, lpVtbl : IAppxFactoryVtable* do
     GUID = LibC::GUID.new(0xbeb94909_u32, 0xe451_u16, 0x438b_u16, StaticArray[0xb5_u8, 0xa7_u8, 0xd7_u8, 0x9e_u8, 0x76_u8, 0x7b_u8, 0x75_u8, 0xd8_u8])
     def query_interface(this : IAppxFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -378,7 +453,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxFactory2Vtbl,
+
+  record IAppxFactory2Vtable,
     query_interface : Proc(IAppxFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxFactory2*, UInt32),
     release : Proc(IAppxFactory2*, UInt32),
@@ -388,7 +464,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxFactory2, lpVtbl : IAppxFactory2Vtbl* do
+  record IAppxFactory2, lpVtbl : IAppxFactory2Vtable* do
     GUID = LibC::GUID.new(0xf1346df2_u32, 0xc282_u16, 0x4e22_u16, StaticArray[0xb9_u8, 0x18_u8, 0x74_u8, 0x3a_u8, 0x92_u8, 0x9a_u8, 0x8d_u8, 0x55_u8])
     def query_interface(this : IAppxFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -412,7 +488,70 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxPackageReaderVtbl,
+
+  record IAppxFactory3Vtable,
+    query_interface : Proc(IAppxFactory3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxFactory3*, UInt32),
+    release : Proc(IAppxFactory3*, UInt32),
+    create_package_reader2 : Proc(IAppxFactory3*, Void*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_manifest_reader2 : Proc(IAppxFactory3*, Void*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_app_installer_reader : Proc(IAppxFactory3*, Void*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxFactory3, lpVtbl : IAppxFactory3Vtable* do
+    GUID = LibC::GUID.new(0x776b2c05_u32, 0xe21d_u16, 0x4e24_u16, StaticArray[0xba_u8, 0x1a_u8, 0xcd_u8, 0x52_u8, 0x9a_u8, 0x8b_u8, 0xfd_u8, 0xbb_u8])
+    def query_interface(this : IAppxFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxFactory3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxFactory3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_package_reader2(this : IAppxFactory3*, inputStream : Void*, expectedDigest : Win32cr::Foundation::PWSTR, packageReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_package_reader2.call(this, inputStream, expectedDigest, packageReader)
+    end
+    def create_manifest_reader2(this : IAppxFactory3*, inputStream : Void*, expectedDigest : Win32cr::Foundation::PWSTR, manifestReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_manifest_reader2.call(this, inputStream, expectedDigest, manifestReader)
+    end
+    def create_app_installer_reader(this : IAppxFactory3*, inputStream : Void*, expectedDigest : Win32cr::Foundation::PWSTR, appInstallerReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_app_installer_reader.call(this, inputStream, expectedDigest, appInstallerReader)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxFactory4Vtable,
+    query_interface : Proc(IAppxFactory4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxFactory4*, UInt32),
+    release : Proc(IAppxFactory4*, UInt32),
+    create_package_reader_from_source_uri : Proc(IAppxFactory4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxFactory4, lpVtbl : IAppxFactory4Vtable* do
+    GUID = LibC::GUID.new(0x92e50000_u32, 0x6934_u16, 0x4c8d_u16, StaticArray[0xb4_u8, 0x72_u8, 0x22_u8, 0x9d_u8, 0x43_u8, 0x1d_u8, 0xad_u8, 0xdf_u8])
+    def query_interface(this : IAppxFactory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxFactory4*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxFactory4*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_package_reader_from_source_uri(this : IAppxFactory4*, uri : Win32cr::Foundation::PWSTR, expectedDigest : Win32cr::Foundation::PWSTR, packageReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_package_reader_from_source_uri.call(this, uri, expectedDigest, packageReader)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxPackageReaderVtable,
     query_interface : Proc(IAppxPackageReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxPackageReader*, UInt32),
     release : Proc(IAppxPackageReader*, UInt32),
@@ -424,7 +563,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxPackageReader, lpVtbl : IAppxPackageReaderVtbl* do
+  record IAppxPackageReader, lpVtbl : IAppxPackageReaderVtable* do
     GUID = LibC::GUID.new(0xb5c49650_u32, 0x99bc_u16, 0x481c_u16, StaticArray[0x9a_u8, 0x34_u8, 0x3d_u8, 0x53_u8, 0xa4_u8, 0x10_u8, 0x67_u8, 0x8_u8])
     def query_interface(this : IAppxPackageReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -454,7 +593,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxPackageWriterVtbl,
+
+  record IAppxPackageWriterVtable,
     query_interface : Proc(IAppxPackageWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxPackageWriter*, UInt32),
     release : Proc(IAppxPackageWriter*, UInt32),
@@ -463,7 +603,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxPackageWriter, lpVtbl : IAppxPackageWriterVtbl* do
+  record IAppxPackageWriter, lpVtbl : IAppxPackageWriterVtable* do
     GUID = LibC::GUID.new(0x9099e33b_u32, 0x246f_u16, 0x41e4_u16, StaticArray[0x88_u8, 0x1a_u8, 0x0_u8, 0x8e_u8, 0xb6_u8, 0x13_u8, 0xf8_u8, 0x58_u8])
     def query_interface(this : IAppxPackageWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -484,7 +624,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxPackageWriter2Vtbl,
+
+  record IAppxPackageWriter2Vtable,
     query_interface : Proc(IAppxPackageWriter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxPackageWriter2*, UInt32),
     release : Proc(IAppxPackageWriter2*, UInt32),
@@ -492,7 +633,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxPackageWriter2, lpVtbl : IAppxPackageWriter2Vtbl* do
+  record IAppxPackageWriter2, lpVtbl : IAppxPackageWriter2Vtable* do
     GUID = LibC::GUID.new(0x2cf5c4fd_u32, 0xe54c_u16, 0x4ea5_u16, StaticArray[0xba_u8, 0x4e_u8, 0xf8_u8, 0xc4_u8, 0xb1_u8, 0x5_u8, 0xa8_u8, 0xc8_u8])
     def query_interface(this : IAppxPackageWriter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -510,7 +651,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxPackageWriter3Vtbl,
+
+  record IAppxPackageWriter3Vtable,
     query_interface : Proc(IAppxPackageWriter3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxPackageWriter3*, UInt32),
     release : Proc(IAppxPackageWriter3*, UInt32),
@@ -518,7 +660,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxPackageWriter3, lpVtbl : IAppxPackageWriter3Vtbl* do
+  record IAppxPackageWriter3, lpVtbl : IAppxPackageWriter3Vtable* do
     GUID = LibC::GUID.new(0xa83aacd3_u32, 0x41c0_u16, 0x4501_u16, StaticArray[0xb8_u8, 0xa3_u8, 0x74_u8, 0x16_u8, 0x4f_u8, 0x50_u8, 0xb2_u8, 0xfd_u8])
     def query_interface(this : IAppxPackageWriter3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -536,7 +678,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxFileVtbl,
+
+  record IAppxFileVtable,
     query_interface : Proc(IAppxFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxFile*, UInt32),
     release : Proc(IAppxFile*, UInt32),
@@ -548,7 +691,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxFile, lpVtbl : IAppxFileVtbl* do
+  record IAppxFile, lpVtbl : IAppxFileVtable* do
     GUID = LibC::GUID.new(0x91df827b_u32, 0x94fd_u16, 0x468f_u16, StaticArray[0x82_u8, 0x7b_u8, 0x57_u8, 0xf4_u8, 0x1b_u8, 0x2f_u8, 0x6f_u8, 0x2e_u8])
     def query_interface(this : IAppxFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -578,7 +721,55 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxFilesEnumeratorVtbl,
+
+  record IAppxFile2Vtable,
+    query_interface : Proc(IAppxFile2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxFile2*, UInt32),
+    release : Proc(IAppxFile2*, UInt32),
+    get_compression_option : Proc(IAppxFile2*, Win32cr::Storage::Packaging::Appx::APPX_COMPRESSION_OPTION*, Win32cr::Foundation::HRESULT),
+    get_content_type : Proc(IAppxFile2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IAppxFile2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_size : Proc(IAppxFile2*, UInt64*, Win32cr::Foundation::HRESULT),
+    get_stream : Proc(IAppxFile2*, Void**, Win32cr::Foundation::HRESULT),
+    get_block_size : Proc(IAppxFile2*, UInt64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxFile2, lpVtbl : IAppxFile2Vtable* do
+    GUID = LibC::GUID.new(0xc830b3c_u32, 0x40e9_u16, 0x11ee_u16, StaticArray[0xbe_u8, 0x56_u8, 0x2_u8, 0x42_u8, 0xac_u8, 0x12_u8, 0x0_u8, 0x2_u8])
+    def query_interface(this : IAppxFile2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxFile2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxFile2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_compression_option(this : IAppxFile2*, compressionOption : Win32cr::Storage::Packaging::Appx::APPX_COMPRESSION_OPTION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_compression_option.call(this, compressionOption)
+    end
+    def get_content_type(this : IAppxFile2*, contentType : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_content_type.call(this, contentType)
+    end
+    def get_name(this : IAppxFile2*, fileName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_name.call(this, fileName)
+    end
+    def get_size(this : IAppxFile2*, size : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, size)
+    end
+    def get_stream(this : IAppxFile2*, stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_stream.call(this, stream)
+    end
+    def get_block_size(this : IAppxFile2*, blockSize : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_block_size.call(this, blockSize)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxFilesEnumeratorVtable,
     query_interface : Proc(IAppxFilesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxFilesEnumerator*, UInt32),
     release : Proc(IAppxFilesEnumerator*, UInt32),
@@ -588,7 +779,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxFilesEnumerator, lpVtbl : IAppxFilesEnumeratorVtbl* do
+  record IAppxFilesEnumerator, lpVtbl : IAppxFilesEnumeratorVtable* do
     GUID = LibC::GUID.new(0xf007eeaf_u32, 0x9831_u16, 0x411c_u16, StaticArray[0x98_u8, 0x47_u8, 0x91_u8, 0x7c_u8, 0xdc_u8, 0x62_u8, 0xd1_u8, 0xfe_u8])
     def query_interface(this : IAppxFilesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -612,7 +803,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBlockMapReaderVtbl,
+
+  record IAppxBlockMapReaderVtable,
     query_interface : Proc(IAppxBlockMapReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBlockMapReader*, UInt32),
     release : Proc(IAppxBlockMapReader*, UInt32),
@@ -623,7 +815,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBlockMapReader, lpVtbl : IAppxBlockMapReaderVtbl* do
+  record IAppxBlockMapReader, lpVtbl : IAppxBlockMapReaderVtable* do
     GUID = LibC::GUID.new(0x5efec991_u32, 0xbca3_u16, 0x42d1_u16, StaticArray[0x9e_u8, 0xc2_u8, 0xe9_u8, 0x2d_u8, 0x60_u8, 0x9e_u8, 0xc2_u8, 0x2a_u8])
     def query_interface(this : IAppxBlockMapReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -650,7 +842,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBlockMapFileVtbl,
+
+  record IAppxBlockMapFileVtable,
     query_interface : Proc(IAppxBlockMapFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBlockMapFile*, UInt32),
     release : Proc(IAppxBlockMapFile*, UInt32),
@@ -662,7 +855,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBlockMapFile, lpVtbl : IAppxBlockMapFileVtbl* do
+  record IAppxBlockMapFile, lpVtbl : IAppxBlockMapFileVtable* do
     GUID = LibC::GUID.new(0x277672ac_u32, 0x4f63_u16, 0x42c1_u16, StaticArray[0x8a_u8, 0xbc_u8, 0xbe_u8, 0xae_u8, 0x36_u8, 0x0_u8, 0xeb_u8, 0x59_u8])
     def query_interface(this : IAppxBlockMapFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -692,7 +885,55 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBlockMapFilesEnumeratorVtbl,
+
+  record IAppxBlockMapFile2Vtable,
+    query_interface : Proc(IAppxBlockMapFile2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxBlockMapFile2*, UInt32),
+    release : Proc(IAppxBlockMapFile2*, UInt32),
+    get_blocks : Proc(IAppxBlockMapFile2*, Void**, Win32cr::Foundation::HRESULT),
+    get_local_file_header_size : Proc(IAppxBlockMapFile2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IAppxBlockMapFile2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_uncompressed_size : Proc(IAppxBlockMapFile2*, UInt64*, Win32cr::Foundation::HRESULT),
+    validate_file_hash : Proc(IAppxBlockMapFile2*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_block_size : Proc(IAppxBlockMapFile2*, UInt64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxBlockMapFile2, lpVtbl : IAppxBlockMapFile2Vtable* do
+    GUID = LibC::GUID.new(0x54785f78_u32, 0x40e9_u16, 0x11ee_u16, StaticArray[0xbe_u8, 0x56_u8, 0x2_u8, 0x42_u8, 0xac_u8, 0x12_u8, 0x0_u8, 0x2_u8])
+    def query_interface(this : IAppxBlockMapFile2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxBlockMapFile2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxBlockMapFile2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_blocks(this : IAppxBlockMapFile2*, blocks : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_blocks.call(this, blocks)
+    end
+    def get_local_file_header_size(this : IAppxBlockMapFile2*, lfhSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_local_file_header_size.call(this, lfhSize)
+    end
+    def get_name(this : IAppxBlockMapFile2*, name : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_name.call(this, name)
+    end
+    def get_uncompressed_size(this : IAppxBlockMapFile2*, size : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_uncompressed_size.call(this, size)
+    end
+    def validate_file_hash(this : IAppxBlockMapFile2*, fileStream : Void*, isValid : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.validate_file_hash.call(this, fileStream, isValid)
+    end
+    def get_block_size(this : IAppxBlockMapFile2*, blockSize : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_block_size.call(this, blockSize)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxBlockMapFilesEnumeratorVtable,
     query_interface : Proc(IAppxBlockMapFilesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBlockMapFilesEnumerator*, UInt32),
     release : Proc(IAppxBlockMapFilesEnumerator*, UInt32),
@@ -702,7 +943,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBlockMapFilesEnumerator, lpVtbl : IAppxBlockMapFilesEnumeratorVtbl* do
+  record IAppxBlockMapFilesEnumerator, lpVtbl : IAppxBlockMapFilesEnumeratorVtable* do
     GUID = LibC::GUID.new(0x2b856a2_u32, 0x4262_u16, 0x4070_u16, StaticArray[0xba_u8, 0xcb_u8, 0x1a_u8, 0x8c_u8, 0xbb_u8, 0xc4_u8, 0x23_u8, 0x5_u8])
     def query_interface(this : IAppxBlockMapFilesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -726,7 +967,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBlockMapBlockVtbl,
+
+  record IAppxBlockMapBlockVtable,
     query_interface : Proc(IAppxBlockMapBlock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBlockMapBlock*, UInt32),
     release : Proc(IAppxBlockMapBlock*, UInt32),
@@ -735,7 +977,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBlockMapBlock, lpVtbl : IAppxBlockMapBlockVtbl* do
+  record IAppxBlockMapBlock, lpVtbl : IAppxBlockMapBlockVtable* do
     GUID = LibC::GUID.new(0x75cf3930_u32, 0x3244_u16, 0x4fe0_u16, StaticArray[0xa8_u8, 0xc8_u8, 0xe0_u8, 0xbc_u8, 0xb2_u8, 0x70_u8, 0xb8_u8, 0x89_u8])
     def query_interface(this : IAppxBlockMapBlock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -756,7 +998,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBlockMapBlocksEnumeratorVtbl,
+
+  record IAppxBlockMapBlocksEnumeratorVtable,
     query_interface : Proc(IAppxBlockMapBlocksEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBlockMapBlocksEnumerator*, UInt32),
     release : Proc(IAppxBlockMapBlocksEnumerator*, UInt32),
@@ -766,7 +1009,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBlockMapBlocksEnumerator, lpVtbl : IAppxBlockMapBlocksEnumeratorVtbl* do
+  record IAppxBlockMapBlocksEnumerator, lpVtbl : IAppxBlockMapBlocksEnumeratorVtable* do
     GUID = LibC::GUID.new(0x6b429b5b_u32, 0x36ef_u16, 0x479e_u16, StaticArray[0xb9_u8, 0xeb_u8, 0xc_u8, 0x14_u8, 0x82_u8, 0xb4_u8, 0x9e_u8, 0x16_u8])
     def query_interface(this : IAppxBlockMapBlocksEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -790,7 +1033,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestReaderVtbl,
+
+  record IAppxManifestReaderVtable,
     query_interface : Proc(IAppxManifestReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestReader*, UInt32),
     release : Proc(IAppxManifestReader*, UInt32),
@@ -806,7 +1050,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestReader, lpVtbl : IAppxManifestReaderVtbl* do
+  record IAppxManifestReader, lpVtbl : IAppxManifestReaderVtable* do
     GUID = LibC::GUID.new(0x4e1bd148_u32, 0x55a0_u16, 0x4480_u16, StaticArray[0xa3_u8, 0xd1_u8, 0x15_u8, 0x54_u8, 0x47_u8, 0x10_u8, 0x63_u8, 0x7c_u8])
     def query_interface(this : IAppxManifestReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -848,7 +1092,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestReader2Vtbl,
+
+  record IAppxManifestReader2Vtable,
     query_interface : Proc(IAppxManifestReader2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestReader2*, UInt32),
     release : Proc(IAppxManifestReader2*, UInt32),
@@ -865,7 +1110,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestReader2, lpVtbl : IAppxManifestReader2Vtbl* do
+  record IAppxManifestReader2, lpVtbl : IAppxManifestReader2Vtable* do
     GUID = LibC::GUID.new(0xd06f67bc_u32, 0xb31d_u16, 0x4eba_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x63_u8, 0x8e_u8, 0x73_u8, 0xe7_u8, 0x7b_u8, 0x4d_u8])
     def query_interface(this : IAppxManifestReader2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -910,7 +1155,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestReader3Vtbl,
+
+  record IAppxManifestReader3Vtable,
     query_interface : Proc(IAppxManifestReader3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestReader3*, UInt32),
     release : Proc(IAppxManifestReader3*, UInt32),
@@ -929,7 +1175,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestReader3, lpVtbl : IAppxManifestReader3Vtbl* do
+  record IAppxManifestReader3, lpVtbl : IAppxManifestReader3Vtable* do
     GUID = LibC::GUID.new(0xc43825ab_u32, 0x69b7_u16, 0x400a_u16, StaticArray[0x97_u8, 0x9_u8, 0xcc_u8, 0x37_u8, 0xf5_u8, 0xa7_u8, 0x2d_u8, 0x24_u8])
     def query_interface(this : IAppxManifestReader3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -980,7 +1226,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestReader4Vtbl,
+
+  record IAppxManifestReader4Vtable,
     query_interface : Proc(IAppxManifestReader4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestReader4*, UInt32),
     release : Proc(IAppxManifestReader4*, UInt32),
@@ -1000,7 +1247,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestReader4, lpVtbl : IAppxManifestReader4Vtbl* do
+  record IAppxManifestReader4, lpVtbl : IAppxManifestReader4Vtable* do
     GUID = LibC::GUID.new(0x4579bb7c_u32, 0x741d_u16, 0x4161_u16, StaticArray[0xb5_u8, 0xa1_u8, 0x47_u8, 0xbd_u8, 0x3b_u8, 0x78_u8, 0xad_u8, 0x9b_u8])
     def query_interface(this : IAppxManifestReader4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1054,7 +1301,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestReader5Vtbl,
+
+  record IAppxManifestReader5Vtable,
     query_interface : Proc(IAppxManifestReader5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestReader5*, UInt32),
     release : Proc(IAppxManifestReader5*, UInt32),
@@ -1062,7 +1310,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestReader5, lpVtbl : IAppxManifestReader5Vtbl* do
+  record IAppxManifestReader5, lpVtbl : IAppxManifestReader5Vtable* do
     GUID = LibC::GUID.new(0x8d7ae132_u32, 0xa690_u16, 0x4c00_u16, StaticArray[0xb7_u8, 0x5a_u8, 0x6a_u8, 0xae_u8, 0x1f_u8, 0xea_u8, 0xac_u8, 0x80_u8])
     def query_interface(this : IAppxManifestReader5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1080,7 +1328,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestReader6Vtbl,
+
+  record IAppxManifestReader6Vtable,
     query_interface : Proc(IAppxManifestReader6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestReader6*, UInt32),
     release : Proc(IAppxManifestReader6*, UInt32),
@@ -1088,7 +1337,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestReader6, lpVtbl : IAppxManifestReader6Vtbl* do
+  record IAppxManifestReader6, lpVtbl : IAppxManifestReader6Vtable* do
     GUID = LibC::GUID.new(0x34deaca4_u32, 0xd3c0_u16, 0x4e3e_u16, StaticArray[0xb3_u8, 0x12_u8, 0xe4_u8, 0x26_u8, 0x25_u8, 0xe3_u8, 0x80_u8, 0x7e_u8])
     def query_interface(this : IAppxManifestReader6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1106,7 +1355,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestReader7Vtbl,
+
+  record IAppxManifestReader7Vtable,
     query_interface : Proc(IAppxManifestReader7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestReader7*, UInt32),
     release : Proc(IAppxManifestReader7*, UInt32),
@@ -1116,7 +1366,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestReader7, lpVtbl : IAppxManifestReader7Vtbl* do
+  record IAppxManifestReader7, lpVtbl : IAppxManifestReader7Vtable* do
     GUID = LibC::GUID.new(0x8efe6f27_u32, 0xce0_u16, 0x4988_u16, StaticArray[0xb3_u8, 0x2d_u8, 0x73_u8, 0x8e_u8, 0xb6_u8, 0x3d_u8, 0xb3_u8, 0xb7_u8])
     def query_interface(this : IAppxManifestReader7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1140,7 +1390,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestDriverDependenciesEnumeratorVtbl,
+
+  record IAppxManifestDriverDependenciesEnumeratorVtable,
     query_interface : Proc(IAppxManifestDriverDependenciesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestDriverDependenciesEnumerator*, UInt32),
     release : Proc(IAppxManifestDriverDependenciesEnumerator*, UInt32),
@@ -1150,7 +1401,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestDriverDependenciesEnumerator, lpVtbl : IAppxManifestDriverDependenciesEnumeratorVtbl* do
+  record IAppxManifestDriverDependenciesEnumerator, lpVtbl : IAppxManifestDriverDependenciesEnumeratorVtable* do
     GUID = LibC::GUID.new(0xfe039db2_u32, 0x467f_u16, 0x4755_u16, StaticArray[0x84_u8, 0x4_u8, 0x8f_u8, 0x5e_u8, 0xb6_u8, 0x86_u8, 0x5b_u8, 0x33_u8])
     def query_interface(this : IAppxManifestDriverDependenciesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1174,7 +1425,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestDriverDependencyVtbl,
+
+  record IAppxManifestDriverDependencyVtable,
     query_interface : Proc(IAppxManifestDriverDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestDriverDependency*, UInt32),
     release : Proc(IAppxManifestDriverDependency*, UInt32),
@@ -1182,7 +1434,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestDriverDependency, lpVtbl : IAppxManifestDriverDependencyVtbl* do
+  record IAppxManifestDriverDependency, lpVtbl : IAppxManifestDriverDependencyVtable* do
     GUID = LibC::GUID.new(0x1210cb94_u32, 0x5a92_u16, 0x4602_u16, StaticArray[0xbe_u8, 0x24_u8, 0x79_u8, 0xf3_u8, 0x18_u8, 0xaf_u8, 0x4a_u8, 0xf9_u8])
     def query_interface(this : IAppxManifestDriverDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1200,7 +1452,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestDriverConstraintsEnumeratorVtbl,
+
+  record IAppxManifestDriverConstraintsEnumeratorVtable,
     query_interface : Proc(IAppxManifestDriverConstraintsEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestDriverConstraintsEnumerator*, UInt32),
     release : Proc(IAppxManifestDriverConstraintsEnumerator*, UInt32),
@@ -1210,7 +1463,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestDriverConstraintsEnumerator, lpVtbl : IAppxManifestDriverConstraintsEnumeratorVtbl* do
+  record IAppxManifestDriverConstraintsEnumerator, lpVtbl : IAppxManifestDriverConstraintsEnumeratorVtable* do
     GUID = LibC::GUID.new(0xd402b2d1_u32, 0xf600_u16, 0x49e0_u16, StaticArray[0x95_u8, 0xe6_u8, 0x97_u8, 0x5d_u8, 0x8d_u8, 0xa1_u8, 0x3d_u8, 0x89_u8])
     def query_interface(this : IAppxManifestDriverConstraintsEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1234,7 +1487,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestDriverConstraintVtbl,
+
+  record IAppxManifestDriverConstraintVtable,
     query_interface : Proc(IAppxManifestDriverConstraint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestDriverConstraint*, UInt32),
     release : Proc(IAppxManifestDriverConstraint*, UInt32),
@@ -1244,7 +1498,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestDriverConstraint, lpVtbl : IAppxManifestDriverConstraintVtbl* do
+  record IAppxManifestDriverConstraint, lpVtbl : IAppxManifestDriverConstraintVtable* do
     GUID = LibC::GUID.new(0xc031bee4_u32, 0xbbcc_u16, 0x48ea_u16, StaticArray[0xa2_u8, 0x37_u8, 0xc3_u8, 0x40_u8, 0x45_u8, 0xc8_u8, 0xa_u8, 0x7_u8])
     def query_interface(this : IAppxManifestDriverConstraint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1268,7 +1522,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestOSPackageDependenciesEnumeratorVtbl,
+
+  record IAppxManifestOSPackageDependenciesEnumeratorVtable,
     query_interface : Proc(IAppxManifestOSPackageDependenciesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestOSPackageDependenciesEnumerator*, UInt32),
     release : Proc(IAppxManifestOSPackageDependenciesEnumerator*, UInt32),
@@ -1278,7 +1533,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestOSPackageDependenciesEnumerator, lpVtbl : IAppxManifestOSPackageDependenciesEnumeratorVtbl* do
+  record IAppxManifestOSPackageDependenciesEnumerator, lpVtbl : IAppxManifestOSPackageDependenciesEnumeratorVtable* do
     GUID = LibC::GUID.new(0xb84e2fc3_u32, 0xf8ec_u16, 0x4bc1_u16, StaticArray[0x8a_u8, 0xe2_u8, 0x15_u8, 0x63_u8, 0x46_u8, 0xf5_u8, 0xff_u8, 0xea_u8])
     def query_interface(this : IAppxManifestOSPackageDependenciesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1302,7 +1557,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestOSPackageDependencyVtbl,
+
+  record IAppxManifestOSPackageDependencyVtable,
     query_interface : Proc(IAppxManifestOSPackageDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestOSPackageDependency*, UInt32),
     release : Proc(IAppxManifestOSPackageDependency*, UInt32),
@@ -1311,7 +1567,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestOSPackageDependency, lpVtbl : IAppxManifestOSPackageDependencyVtbl* do
+  record IAppxManifestOSPackageDependency, lpVtbl : IAppxManifestOSPackageDependencyVtable* do
     GUID = LibC::GUID.new(0x154995ee_u32, 0x54a6_u16, 0x4f14_u16, StaticArray[0xac_u8, 0x97_u8, 0xd8_u8, 0xcf_u8, 0x5_u8, 0x19_u8, 0x64_u8, 0x4b_u8])
     def query_interface(this : IAppxManifestOSPackageDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1332,7 +1588,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestHostRuntimeDependenciesEnumeratorVtbl,
+
+  record IAppxManifestHostRuntimeDependenciesEnumeratorVtable,
     query_interface : Proc(IAppxManifestHostRuntimeDependenciesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestHostRuntimeDependenciesEnumerator*, UInt32),
     release : Proc(IAppxManifestHostRuntimeDependenciesEnumerator*, UInt32),
@@ -1342,7 +1599,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestHostRuntimeDependenciesEnumerator, lpVtbl : IAppxManifestHostRuntimeDependenciesEnumeratorVtbl* do
+  record IAppxManifestHostRuntimeDependenciesEnumerator, lpVtbl : IAppxManifestHostRuntimeDependenciesEnumeratorVtable* do
     GUID = LibC::GUID.new(0x6427a646_u32, 0x7f49_u16, 0x433e_u16, StaticArray[0xb1_u8, 0xa6_u8, 0xd_u8, 0xa3_u8, 0x9_u8, 0xf6_u8, 0x88_u8, 0x5a_u8])
     def query_interface(this : IAppxManifestHostRuntimeDependenciesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1366,7 +1623,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestHostRuntimeDependencyVtbl,
+
+  record IAppxManifestHostRuntimeDependencyVtable,
     query_interface : Proc(IAppxManifestHostRuntimeDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestHostRuntimeDependency*, UInt32),
     release : Proc(IAppxManifestHostRuntimeDependency*, UInt32),
@@ -1376,7 +1634,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestHostRuntimeDependency, lpVtbl : IAppxManifestHostRuntimeDependencyVtbl* do
+  record IAppxManifestHostRuntimeDependency, lpVtbl : IAppxManifestHostRuntimeDependencyVtable* do
     GUID = LibC::GUID.new(0x3455d234_u32, 0x8414_u16, 0x410d_u16, StaticArray[0x95_u8, 0xc7_u8, 0x7b_u8, 0x35_u8, 0x25_u8, 0x5b_u8, 0x83_u8, 0x91_u8])
     def query_interface(this : IAppxManifestHostRuntimeDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1400,7 +1658,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestHostRuntimeDependency2Vtbl,
+
+  record IAppxManifestHostRuntimeDependency2Vtable,
     query_interface : Proc(IAppxManifestHostRuntimeDependency2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestHostRuntimeDependency2*, UInt32),
     release : Proc(IAppxManifestHostRuntimeDependency2*, UInt32),
@@ -1408,7 +1667,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestHostRuntimeDependency2, lpVtbl : IAppxManifestHostRuntimeDependency2Vtbl* do
+  record IAppxManifestHostRuntimeDependency2, lpVtbl : IAppxManifestHostRuntimeDependency2Vtable* do
     GUID = LibC::GUID.new(0xc26f23a8_u32, 0xee10_u16, 0x4ad6_u16, StaticArray[0xb8_u8, 0x98_u8, 0x2b_u8, 0x4d_u8, 0x7a_u8, 0xeb_u8, 0xfe_u8, 0x6a_u8])
     def query_interface(this : IAppxManifestHostRuntimeDependency2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1426,7 +1685,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestOptionalPackageInfoVtbl,
+
+  record IAppxManifestOptionalPackageInfoVtable,
     query_interface : Proc(IAppxManifestOptionalPackageInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestOptionalPackageInfo*, UInt32),
     release : Proc(IAppxManifestOptionalPackageInfo*, UInt32),
@@ -1435,7 +1695,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestOptionalPackageInfo, lpVtbl : IAppxManifestOptionalPackageInfoVtbl* do
+  record IAppxManifestOptionalPackageInfo, lpVtbl : IAppxManifestOptionalPackageInfoVtable* do
     GUID = LibC::GUID.new(0x2634847d_u32, 0x5b5d_u16, 0x4fe5_u16, StaticArray[0xa2_u8, 0x43_u8, 0x0_u8, 0x2f_u8, 0xf9_u8, 0x5e_u8, 0xdc_u8, 0x7e_u8])
     def query_interface(this : IAppxManifestOptionalPackageInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1456,7 +1716,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestMainPackageDependenciesEnumeratorVtbl,
+
+  record IAppxManifestMainPackageDependenciesEnumeratorVtable,
     query_interface : Proc(IAppxManifestMainPackageDependenciesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestMainPackageDependenciesEnumerator*, UInt32),
     release : Proc(IAppxManifestMainPackageDependenciesEnumerator*, UInt32),
@@ -1466,7 +1727,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestMainPackageDependenciesEnumerator, lpVtbl : IAppxManifestMainPackageDependenciesEnumeratorVtbl* do
+  record IAppxManifestMainPackageDependenciesEnumerator, lpVtbl : IAppxManifestMainPackageDependenciesEnumeratorVtable* do
     GUID = LibC::GUID.new(0xa99c4f00_u32, 0x51d2_u16, 0x4f0f_u16, StaticArray[0xba_u8, 0x46_u8, 0x7e_u8, 0xd5_u8, 0x25_u8, 0x5e_u8, 0xbd_u8, 0xff_u8])
     def query_interface(this : IAppxManifestMainPackageDependenciesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1490,7 +1751,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestMainPackageDependencyVtbl,
+
+  record IAppxManifestMainPackageDependencyVtable,
     query_interface : Proc(IAppxManifestMainPackageDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestMainPackageDependency*, UInt32),
     release : Proc(IAppxManifestMainPackageDependency*, UInt32),
@@ -1500,7 +1762,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestMainPackageDependency, lpVtbl : IAppxManifestMainPackageDependencyVtbl* do
+  record IAppxManifestMainPackageDependency, lpVtbl : IAppxManifestMainPackageDependencyVtable* do
     GUID = LibC::GUID.new(0x5d0611c_u32, 0xbc29_u16, 0x46d5_u16, StaticArray[0x97_u8, 0xe2_u8, 0x84_u8, 0xb9_u8, 0xc7_u8, 0x9b_u8, 0xd8_u8, 0xae_u8])
     def query_interface(this : IAppxManifestMainPackageDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1524,7 +1786,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestPackageIdVtbl,
+
+  record IAppxManifestPackageIdVtable,
     query_interface : Proc(IAppxManifestPackageId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestPackageId*, UInt32),
     release : Proc(IAppxManifestPackageId*, UInt32),
@@ -1539,7 +1802,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestPackageId, lpVtbl : IAppxManifestPackageIdVtbl* do
+  record IAppxManifestPackageId, lpVtbl : IAppxManifestPackageIdVtable* do
     GUID = LibC::GUID.new(0x283ce2d7_u32, 0x7153_u16, 0x4a91_u16, StaticArray[0x96_u8, 0x49_u8, 0x7a_u8, 0xf_u8, 0x72_u8, 0x40_u8, 0x94_u8, 0x5f_u8])
     def query_interface(this : IAppxManifestPackageId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1578,7 +1841,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestPackageId2Vtbl,
+
+  record IAppxManifestPackageId2Vtable,
     query_interface : Proc(IAppxManifestPackageId2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestPackageId2*, UInt32),
     release : Proc(IAppxManifestPackageId2*, UInt32),
@@ -1594,7 +1858,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestPackageId2, lpVtbl : IAppxManifestPackageId2Vtbl* do
+  record IAppxManifestPackageId2, lpVtbl : IAppxManifestPackageId2Vtable* do
     GUID = LibC::GUID.new(0x2256999d_u32, 0xd617_u16, 0x42f1_u16, StaticArray[0x88_u8, 0xe_u8, 0xb_u8, 0xa4_u8, 0x54_u8, 0x23_u8, 0x19_u8, 0xd5_u8])
     def query_interface(this : IAppxManifestPackageId2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1636,7 +1900,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestPropertiesVtbl,
+
+  record IAppxManifestPropertiesVtable,
     query_interface : Proc(IAppxManifestProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestProperties*, UInt32),
     release : Proc(IAppxManifestProperties*, UInt32),
@@ -1645,7 +1910,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestProperties, lpVtbl : IAppxManifestPropertiesVtbl* do
+  record IAppxManifestProperties, lpVtbl : IAppxManifestPropertiesVtable* do
     GUID = LibC::GUID.new(0x3faf64d_u32, 0xf26f_u16, 0x4b2c_u16, StaticArray[0xaa_u8, 0xf7_u8, 0x8f_u8, 0xe7_u8, 0x78_u8, 0x9b_u8, 0x8b_u8, 0xca_u8])
     def query_interface(this : IAppxManifestProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1666,7 +1931,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestTargetDeviceFamiliesEnumeratorVtbl,
+
+  record IAppxManifestTargetDeviceFamiliesEnumeratorVtable,
     query_interface : Proc(IAppxManifestTargetDeviceFamiliesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestTargetDeviceFamiliesEnumerator*, UInt32),
     release : Proc(IAppxManifestTargetDeviceFamiliesEnumerator*, UInt32),
@@ -1676,7 +1942,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestTargetDeviceFamiliesEnumerator, lpVtbl : IAppxManifestTargetDeviceFamiliesEnumeratorVtbl* do
+  record IAppxManifestTargetDeviceFamiliesEnumerator, lpVtbl : IAppxManifestTargetDeviceFamiliesEnumeratorVtable* do
     GUID = LibC::GUID.new(0x36537f36_u32, 0x27a4_u16, 0x4788_u16, StaticArray[0x88_u8, 0xc0_u8, 0x73_u8, 0x38_u8, 0x19_u8, 0x57_u8, 0x50_u8, 0x17_u8])
     def query_interface(this : IAppxManifestTargetDeviceFamiliesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1700,7 +1966,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestTargetDeviceFamilyVtbl,
+
+  record IAppxManifestTargetDeviceFamilyVtable,
     query_interface : Proc(IAppxManifestTargetDeviceFamily*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestTargetDeviceFamily*, UInt32),
     release : Proc(IAppxManifestTargetDeviceFamily*, UInt32),
@@ -1710,7 +1977,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestTargetDeviceFamily, lpVtbl : IAppxManifestTargetDeviceFamilyVtbl* do
+  record IAppxManifestTargetDeviceFamily, lpVtbl : IAppxManifestTargetDeviceFamilyVtable* do
     GUID = LibC::GUID.new(0x9091b09b_u32, 0xc8d5_u16, 0x4f31_u16, StaticArray[0x86_u8, 0x87_u8, 0xa3_u8, 0x38_u8, 0x25_u8, 0x9f_u8, 0xae_u8, 0xfb_u8])
     def query_interface(this : IAppxManifestTargetDeviceFamily*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1734,7 +2001,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestPackageDependenciesEnumeratorVtbl,
+
+  record IAppxManifestPackageDependenciesEnumeratorVtable,
     query_interface : Proc(IAppxManifestPackageDependenciesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestPackageDependenciesEnumerator*, UInt32),
     release : Proc(IAppxManifestPackageDependenciesEnumerator*, UInt32),
@@ -1744,7 +2012,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestPackageDependenciesEnumerator, lpVtbl : IAppxManifestPackageDependenciesEnumeratorVtbl* do
+  record IAppxManifestPackageDependenciesEnumerator, lpVtbl : IAppxManifestPackageDependenciesEnumeratorVtable* do
     GUID = LibC::GUID.new(0xb43bbcf9_u32, 0x65a6_u16, 0x42dd_u16, StaticArray[0xba_u8, 0xc0_u8, 0x8c_u8, 0x67_u8, 0x41_u8, 0xe7_u8, 0xf5_u8, 0xa4_u8])
     def query_interface(this : IAppxManifestPackageDependenciesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1768,7 +2036,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestPackageDependencyVtbl,
+
+  record IAppxManifestPackageDependencyVtable,
     query_interface : Proc(IAppxManifestPackageDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestPackageDependency*, UInt32),
     release : Proc(IAppxManifestPackageDependency*, UInt32),
@@ -1778,7 +2047,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestPackageDependency, lpVtbl : IAppxManifestPackageDependencyVtbl* do
+  record IAppxManifestPackageDependency, lpVtbl : IAppxManifestPackageDependencyVtable* do
     GUID = LibC::GUID.new(0xe4946b59_u32, 0x733e_u16, 0x43f0_u16, StaticArray[0xa7_u8, 0x24_u8, 0x3b_u8, 0xde_u8, 0x4c_u8, 0x12_u8, 0x85_u8, 0xa0_u8])
     def query_interface(this : IAppxManifestPackageDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1802,7 +2071,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestPackageDependency2Vtbl,
+
+  record IAppxManifestPackageDependency2Vtable,
     query_interface : Proc(IAppxManifestPackageDependency2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestPackageDependency2*, UInt32),
     release : Proc(IAppxManifestPackageDependency2*, UInt32),
@@ -1813,7 +2083,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestPackageDependency2, lpVtbl : IAppxManifestPackageDependency2Vtbl* do
+  record IAppxManifestPackageDependency2, lpVtbl : IAppxManifestPackageDependency2Vtable* do
     GUID = LibC::GUID.new(0xdda0b713_u32, 0xf3ff_u16, 0x49d3_u16, StaticArray[0x89_u8, 0x8a_u8, 0x27_u8, 0x86_u8, 0x78_u8, 0xc_u8, 0x5d_u8, 0x98_u8])
     def query_interface(this : IAppxManifestPackageDependency2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1840,7 +2110,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestPackageDependency3Vtbl,
+
+  record IAppxManifestPackageDependency3Vtable,
     query_interface : Proc(IAppxManifestPackageDependency3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestPackageDependency3*, UInt32),
     release : Proc(IAppxManifestPackageDependency3*, UInt32),
@@ -1848,7 +2119,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestPackageDependency3, lpVtbl : IAppxManifestPackageDependency3Vtbl* do
+  record IAppxManifestPackageDependency3, lpVtbl : IAppxManifestPackageDependency3Vtable* do
     GUID = LibC::GUID.new(0x1ac56374_u32, 0x6198_u16, 0x4d6b_u16, StaticArray[0x92_u8, 0xe4_u8, 0x74_u8, 0x9d_u8, 0x5a_u8, 0xb8_u8, 0xa8_u8, 0x95_u8])
     def query_interface(this : IAppxManifestPackageDependency3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1866,7 +2137,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestResourcesEnumeratorVtbl,
+
+  record IAppxManifestResourcesEnumeratorVtable,
     query_interface : Proc(IAppxManifestResourcesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestResourcesEnumerator*, UInt32),
     release : Proc(IAppxManifestResourcesEnumerator*, UInt32),
@@ -1876,7 +2148,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestResourcesEnumerator, lpVtbl : IAppxManifestResourcesEnumeratorVtbl* do
+  record IAppxManifestResourcesEnumerator, lpVtbl : IAppxManifestResourcesEnumeratorVtable* do
     GUID = LibC::GUID.new(0xde4dfbbd_u32, 0x881a_u16, 0x48bb_u16, StaticArray[0x85_u8, 0x8c_u8, 0xd6_u8, 0xf2_u8, 0xba_u8, 0xea_u8, 0xe6_u8, 0xed_u8])
     def query_interface(this : IAppxManifestResourcesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1900,7 +2172,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestDeviceCapabilitiesEnumeratorVtbl,
+
+  record IAppxManifestDeviceCapabilitiesEnumeratorVtable,
     query_interface : Proc(IAppxManifestDeviceCapabilitiesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestDeviceCapabilitiesEnumerator*, UInt32),
     release : Proc(IAppxManifestDeviceCapabilitiesEnumerator*, UInt32),
@@ -1910,7 +2183,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestDeviceCapabilitiesEnumerator, lpVtbl : IAppxManifestDeviceCapabilitiesEnumeratorVtbl* do
+  record IAppxManifestDeviceCapabilitiesEnumerator, lpVtbl : IAppxManifestDeviceCapabilitiesEnumeratorVtable* do
     GUID = LibC::GUID.new(0x30204541_u32, 0x427b_u16, 0x4a1c_u16, StaticArray[0xba_u8, 0xcf_u8, 0x65_u8, 0x5b_u8, 0xf4_u8, 0x63_u8, 0xa5_u8, 0x40_u8])
     def query_interface(this : IAppxManifestDeviceCapabilitiesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1934,7 +2207,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestCapabilitiesEnumeratorVtbl,
+
+  record IAppxManifestCapabilitiesEnumeratorVtable,
     query_interface : Proc(IAppxManifestCapabilitiesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestCapabilitiesEnumerator*, UInt32),
     release : Proc(IAppxManifestCapabilitiesEnumerator*, UInt32),
@@ -1944,7 +2218,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestCapabilitiesEnumerator, lpVtbl : IAppxManifestCapabilitiesEnumeratorVtbl* do
+  record IAppxManifestCapabilitiesEnumerator, lpVtbl : IAppxManifestCapabilitiesEnumeratorVtable* do
     GUID = LibC::GUID.new(0x11d22258_u32, 0xf470_u16, 0x42c1_u16, StaticArray[0xb2_u8, 0x91_u8, 0x83_u8, 0x61_u8, 0xc5_u8, 0x43_u8, 0x7e_u8, 0x41_u8])
     def query_interface(this : IAppxManifestCapabilitiesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1968,7 +2242,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestApplicationsEnumeratorVtbl,
+
+  record IAppxManifestApplicationsEnumeratorVtable,
     query_interface : Proc(IAppxManifestApplicationsEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestApplicationsEnumerator*, UInt32),
     release : Proc(IAppxManifestApplicationsEnumerator*, UInt32),
@@ -1978,7 +2253,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestApplicationsEnumerator, lpVtbl : IAppxManifestApplicationsEnumeratorVtbl* do
+  record IAppxManifestApplicationsEnumerator, lpVtbl : IAppxManifestApplicationsEnumeratorVtable* do
     GUID = LibC::GUID.new(0x9eb8a55a_u32, 0xf04b_u16, 0x4d0d_u16, StaticArray[0x80_u8, 0x8d_u8, 0x68_u8, 0x61_u8, 0x85_u8, 0xd4_u8, 0x84_u8, 0x7a_u8])
     def query_interface(this : IAppxManifestApplicationsEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2002,7 +2277,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestApplicationVtbl,
+
+  record IAppxManifestApplicationVtable,
     query_interface : Proc(IAppxManifestApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestApplication*, UInt32),
     release : Proc(IAppxManifestApplication*, UInt32),
@@ -2011,7 +2287,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestApplication, lpVtbl : IAppxManifestApplicationVtbl* do
+  record IAppxManifestApplication, lpVtbl : IAppxManifestApplicationVtable* do
     GUID = LibC::GUID.new(0x5da89bf4_u32, 0x3773_u16, 0x46be_u16, StaticArray[0xb6_u8, 0x50_u8, 0x7e_u8, 0x74_u8, 0x48_u8, 0x63_u8, 0xb7_u8, 0xe8_u8])
     def query_interface(this : IAppxManifestApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2032,7 +2308,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestQualifiedResourcesEnumeratorVtbl,
+
+  record IAppxManifestQualifiedResourcesEnumeratorVtable,
     query_interface : Proc(IAppxManifestQualifiedResourcesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestQualifiedResourcesEnumerator*, UInt32),
     release : Proc(IAppxManifestQualifiedResourcesEnumerator*, UInt32),
@@ -2042,7 +2319,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestQualifiedResourcesEnumerator, lpVtbl : IAppxManifestQualifiedResourcesEnumeratorVtbl* do
+  record IAppxManifestQualifiedResourcesEnumerator, lpVtbl : IAppxManifestQualifiedResourcesEnumeratorVtable* do
     GUID = LibC::GUID.new(0x8ef6adfe_u32, 0x3762_u16, 0x4a8f_u16, StaticArray[0x93_u8, 0x73_u8, 0x2f_u8, 0xc5_u8, 0xd4_u8, 0x44_u8, 0xc8_u8, 0xd2_u8])
     def query_interface(this : IAppxManifestQualifiedResourcesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2066,7 +2343,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxManifestQualifiedResourceVtbl,
+
+  record IAppxManifestQualifiedResourceVtable,
     query_interface : Proc(IAppxManifestQualifiedResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxManifestQualifiedResource*, UInt32),
     release : Proc(IAppxManifestQualifiedResource*, UInt32),
@@ -2076,7 +2354,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxManifestQualifiedResource, lpVtbl : IAppxManifestQualifiedResourceVtbl* do
+  record IAppxManifestQualifiedResource, lpVtbl : IAppxManifestQualifiedResourceVtable* do
     GUID = LibC::GUID.new(0x3b53a497_u32, 0x3c5c_u16, 0x48d1_u16, StaticArray[0x9e_u8, 0xa3_u8, 0xbb_u8, 0x7e_u8, 0xac_u8, 0x8c_u8, 0xd7_u8, 0xd4_u8])
     def query_interface(this : IAppxManifestQualifiedResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2100,7 +2378,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleFactoryVtbl,
+
+  record IAppxBundleFactoryVtable,
     query_interface : Proc(IAppxBundleFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleFactory*, UInt32),
     release : Proc(IAppxBundleFactory*, UInt32),
@@ -2110,7 +2389,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleFactory, lpVtbl : IAppxBundleFactoryVtbl* do
+  record IAppxBundleFactory, lpVtbl : IAppxBundleFactoryVtable* do
     GUID = LibC::GUID.new(0xbba65864_u32, 0x965f_u16, 0x4a5f_u16, StaticArray[0x85_u8, 0x5f_u8, 0xf0_u8, 0x74_u8, 0xbd_u8, 0xbf_u8, 0x3a_u8, 0x7b_u8])
     def query_interface(this : IAppxBundleFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2134,7 +2413,62 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleWriterVtbl,
+
+  record IAppxBundleFactory2Vtable,
+    query_interface : Proc(IAppxBundleFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxBundleFactory2*, UInt32),
+    release : Proc(IAppxBundleFactory2*, UInt32),
+    create_bundle_reader2 : Proc(IAppxBundleFactory2*, Void*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxBundleFactory2, lpVtbl : IAppxBundleFactory2Vtable* do
+    GUID = LibC::GUID.new(0x7325b83d_u32, 0x185_u16, 0x42c4_u16, StaticArray[0x82_u8, 0xac_u8, 0xbe_u8, 0x34_u8, 0xab_u8, 0x1a_u8, 0x2a_u8, 0x8a_u8])
+    def query_interface(this : IAppxBundleFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxBundleFactory2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxBundleFactory2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_bundle_reader2(this : IAppxBundleFactory2*, inputStream : Void*, expectedDigest : Win32cr::Foundation::PWSTR, bundleReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bundle_reader2.call(this, inputStream, expectedDigest, bundleReader)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxBundleFactory3Vtable,
+    query_interface : Proc(IAppxBundleFactory3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxBundleFactory3*, UInt32),
+    release : Proc(IAppxBundleFactory3*, UInt32),
+    create_bundle_reader_from_source_uri : Proc(IAppxBundleFactory3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxBundleFactory3, lpVtbl : IAppxBundleFactory3Vtable* do
+    GUID = LibC::GUID.new(0xd11ea6b6_u32, 0x3909_u16, 0x4376_u16, StaticArray[0xb7_u8, 0xc4_u8, 0x10_u8, 0xd5_u8, 0xf_u8, 0x5c_u8, 0xf3_u8, 0xae_u8])
+    def query_interface(this : IAppxBundleFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxBundleFactory3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxBundleFactory3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_bundle_reader_from_source_uri(this : IAppxBundleFactory3*, uri : Win32cr::Foundation::PWSTR, expectedDigest : Win32cr::Foundation::PWSTR, bundleReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bundle_reader_from_source_uri.call(this, uri, expectedDigest, bundleReader)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxBundleWriterVtable,
     query_interface : Proc(IAppxBundleWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleWriter*, UInt32),
     release : Proc(IAppxBundleWriter*, UInt32),
@@ -2143,7 +2477,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleWriter, lpVtbl : IAppxBundleWriterVtbl* do
+  record IAppxBundleWriter, lpVtbl : IAppxBundleWriterVtable* do
     GUID = LibC::GUID.new(0xec446fe8_u32, 0xbfec_u16, 0x4c64_u16, StaticArray[0xab_u8, 0x4f_u8, 0x49_u8, 0xf0_u8, 0x38_u8, 0xf0_u8, 0xc6_u8, 0xd2_u8])
     def query_interface(this : IAppxBundleWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2164,7 +2498,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleWriter2Vtbl,
+
+  record IAppxBundleWriter2Vtable,
     query_interface : Proc(IAppxBundleWriter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleWriter2*, UInt32),
     release : Proc(IAppxBundleWriter2*, UInt32),
@@ -2172,7 +2507,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleWriter2, lpVtbl : IAppxBundleWriter2Vtbl* do
+  record IAppxBundleWriter2, lpVtbl : IAppxBundleWriter2Vtable* do
     GUID = LibC::GUID.new(0x6d8fe971_u32, 0x1cc_u16, 0x49a0_u16, StaticArray[0xb6_u8, 0x85_u8, 0x23_u8, 0x38_u8, 0x51_u8, 0x27_u8, 0x99_u8, 0x62_u8])
     def query_interface(this : IAppxBundleWriter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2190,7 +2525,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleWriter3Vtbl,
+
+  record IAppxBundleWriter3Vtable,
     query_interface : Proc(IAppxBundleWriter3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleWriter3*, UInt32),
     release : Proc(IAppxBundleWriter3*, UInt32),
@@ -2199,7 +2535,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleWriter3, lpVtbl : IAppxBundleWriter3Vtbl* do
+  record IAppxBundleWriter3, lpVtbl : IAppxBundleWriter3Vtable* do
     GUID = LibC::GUID.new(0xad711152_u32, 0xf969_u16, 0x4193_u16, StaticArray[0x82_u8, 0xd5_u8, 0x9d_u8, 0xdf_u8, 0x27_u8, 0x86_u8, 0xd2_u8, 0x1a_u8])
     def query_interface(this : IAppxBundleWriter3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2220,7 +2556,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleWriter4Vtbl,
+
+  record IAppxBundleWriter4Vtable,
     query_interface : Proc(IAppxBundleWriter4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleWriter4*, UInt32),
     release : Proc(IAppxBundleWriter4*, UInt32),
@@ -2230,7 +2567,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleWriter4, lpVtbl : IAppxBundleWriter4Vtbl* do
+  record IAppxBundleWriter4, lpVtbl : IAppxBundleWriter4Vtable* do
     GUID = LibC::GUID.new(0x9cd9d523_u32, 0x5009_u16, 0x4c01_u16, StaticArray[0x98_u8, 0x82_u8, 0xdc_u8, 0x2_u8, 0x9f_u8, 0xbd_u8, 0x47_u8, 0xa3_u8])
     def query_interface(this : IAppxBundleWriter4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2254,7 +2591,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleReaderVtbl,
+
+  record IAppxBundleReaderVtable,
     query_interface : Proc(IAppxBundleReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleReader*, UInt32),
     release : Proc(IAppxBundleReader*, UInt32),
@@ -2266,7 +2604,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleReader, lpVtbl : IAppxBundleReaderVtbl* do
+  record IAppxBundleReader, lpVtbl : IAppxBundleReaderVtable* do
     GUID = LibC::GUID.new(0xdd75b8c0_u32, 0xba76_u16, 0x43b0_u16, StaticArray[0xae_u8, 0xf_u8, 0x68_u8, 0x65_u8, 0x6a_u8, 0x1d_u8, 0xc5_u8, 0xc8_u8])
     def query_interface(this : IAppxBundleReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2296,7 +2634,35 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestReaderVtbl,
+
+  record IAppxBundleReader2Vtable,
+    query_interface : Proc(IAppxBundleReader2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxBundleReader2*, UInt32),
+    release : Proc(IAppxBundleReader2*, UInt32),
+    get_payload_package_reader : Proc(IAppxBundleReader2*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxBundleReader2, lpVtbl : IAppxBundleReader2Vtable* do
+    GUID = LibC::GUID.new(0x98262195_u32, 0xd63a_u16, 0x4c10_u16, StaticArray[0xb4_u8, 0xcf_u8, 0xdd_u8, 0x72_u8, 0xe0_u8, 0x61_u8, 0xba_u8, 0x87_u8])
+    def query_interface(this : IAppxBundleReader2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxBundleReader2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxBundleReader2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_payload_package_reader(this : IAppxBundleReader2*, fileName : Win32cr::Foundation::PWSTR, payloadPackageReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_payload_package_reader.call(this, fileName, payloadPackageReader)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxBundleManifestReaderVtable,
     query_interface : Proc(IAppxBundleManifestReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestReader*, UInt32),
     release : Proc(IAppxBundleManifestReader*, UInt32),
@@ -2306,7 +2672,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestReader, lpVtbl : IAppxBundleManifestReaderVtbl* do
+  record IAppxBundleManifestReader, lpVtbl : IAppxBundleManifestReaderVtable* do
     GUID = LibC::GUID.new(0xcf0ebbc1_u32, 0xcc99_u16, 0x4106_u16, StaticArray[0x91_u8, 0xeb_u8, 0xe6_u8, 0x74_u8, 0x62_u8, 0xe0_u8, 0x4f_u8, 0xb0_u8])
     def query_interface(this : IAppxBundleManifestReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2330,7 +2696,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestReader2Vtbl,
+
+  record IAppxBundleManifestReader2Vtable,
     query_interface : Proc(IAppxBundleManifestReader2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestReader2*, UInt32),
     release : Proc(IAppxBundleManifestReader2*, UInt32),
@@ -2338,7 +2705,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestReader2, lpVtbl : IAppxBundleManifestReader2Vtbl* do
+  record IAppxBundleManifestReader2, lpVtbl : IAppxBundleManifestReader2Vtable* do
     GUID = LibC::GUID.new(0x5517df70_u32, 0x33f_u16, 0x4af2_u16, StaticArray[0x82_u8, 0x13_u8, 0x87_u8, 0xd7_u8, 0x66_u8, 0x80_u8, 0x5c_u8, 0x2_u8])
     def query_interface(this : IAppxBundleManifestReader2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2356,7 +2723,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestPackageInfoEnumeratorVtbl,
+
+  record IAppxBundleManifestPackageInfoEnumeratorVtable,
     query_interface : Proc(IAppxBundleManifestPackageInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestPackageInfoEnumerator*, UInt32),
     release : Proc(IAppxBundleManifestPackageInfoEnumerator*, UInt32),
@@ -2366,7 +2734,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestPackageInfoEnumerator, lpVtbl : IAppxBundleManifestPackageInfoEnumeratorVtbl* do
+  record IAppxBundleManifestPackageInfoEnumerator, lpVtbl : IAppxBundleManifestPackageInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0xf9b856ee_u32, 0x49a6_u16, 0x4e19_u16, StaticArray[0xb2_u8, 0xb0_u8, 0x6a_u8, 0x24_u8, 0x6_u8, 0xd6_u8, 0x3a_u8, 0x32_u8])
     def query_interface(this : IAppxBundleManifestPackageInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2390,7 +2758,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestPackageInfoVtbl,
+
+  record IAppxBundleManifestPackageInfoVtable,
     query_interface : Proc(IAppxBundleManifestPackageInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestPackageInfo*, UInt32),
     release : Proc(IAppxBundleManifestPackageInfo*, UInt32),
@@ -2403,7 +2772,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestPackageInfo, lpVtbl : IAppxBundleManifestPackageInfoVtbl* do
+  record IAppxBundleManifestPackageInfo, lpVtbl : IAppxBundleManifestPackageInfoVtable* do
     GUID = LibC::GUID.new(0x54cd06c1_u32, 0x268f_u16, 0x40bb_u16, StaticArray[0x8e_u8, 0xd2_u8, 0x75_u8, 0x7a_u8, 0x9e_u8, 0xba_u8, 0xec_u8, 0x8d_u8])
     def query_interface(this : IAppxBundleManifestPackageInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2436,7 +2805,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestPackageInfo2Vtbl,
+
+  record IAppxBundleManifestPackageInfo2Vtable,
     query_interface : Proc(IAppxBundleManifestPackageInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestPackageInfo2*, UInt32),
     release : Proc(IAppxBundleManifestPackageInfo2*, UInt32),
@@ -2446,7 +2816,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestPackageInfo2, lpVtbl : IAppxBundleManifestPackageInfo2Vtbl* do
+  record IAppxBundleManifestPackageInfo2, lpVtbl : IAppxBundleManifestPackageInfo2Vtable* do
     GUID = LibC::GUID.new(0x44c2acbc_u32, 0xb2cf_u16, 0x4ccb_u16, StaticArray[0xbb_u8, 0xdb_u8, 0x9c_u8, 0x6d_u8, 0xa8_u8, 0xc3_u8, 0xbc_u8, 0x9e_u8])
     def query_interface(this : IAppxBundleManifestPackageInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2470,7 +2840,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestPackageInfo3Vtbl,
+
+  record IAppxBundleManifestPackageInfo3Vtable,
     query_interface : Proc(IAppxBundleManifestPackageInfo3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestPackageInfo3*, UInt32),
     release : Proc(IAppxBundleManifestPackageInfo3*, UInt32),
@@ -2478,7 +2849,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestPackageInfo3, lpVtbl : IAppxBundleManifestPackageInfo3Vtbl* do
+  record IAppxBundleManifestPackageInfo3, lpVtbl : IAppxBundleManifestPackageInfo3Vtable* do
     GUID = LibC::GUID.new(0x6ba74b98_u32, 0xbb74_u16, 0x4296_u16, StaticArray[0x80_u8, 0xd0_u8, 0x5f_u8, 0x42_u8, 0x56_u8, 0xa9_u8, 0x96_u8, 0x75_u8])
     def query_interface(this : IAppxBundleManifestPackageInfo3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2496,7 +2867,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestPackageInfo4Vtbl,
+
+  record IAppxBundleManifestPackageInfo4Vtable,
     query_interface : Proc(IAppxBundleManifestPackageInfo4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestPackageInfo4*, UInt32),
     release : Proc(IAppxBundleManifestPackageInfo4*, UInt32),
@@ -2504,7 +2876,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestPackageInfo4, lpVtbl : IAppxBundleManifestPackageInfo4Vtbl* do
+  record IAppxBundleManifestPackageInfo4, lpVtbl : IAppxBundleManifestPackageInfo4Vtable* do
     GUID = LibC::GUID.new(0x5da6f13d_u32, 0xa8a7_u16, 0x4532_u16, StaticArray[0x85_u8, 0x7c_u8, 0x13_u8, 0x93_u8, 0xd6_u8, 0x59_u8, 0x37_u8, 0x1d_u8])
     def query_interface(this : IAppxBundleManifestPackageInfo4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2522,7 +2894,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestOptionalBundleInfoEnumeratorVtbl,
+
+  record IAppxBundleManifestOptionalBundleInfoEnumeratorVtable,
     query_interface : Proc(IAppxBundleManifestOptionalBundleInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestOptionalBundleInfoEnumerator*, UInt32),
     release : Proc(IAppxBundleManifestOptionalBundleInfoEnumerator*, UInt32),
@@ -2532,7 +2905,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestOptionalBundleInfoEnumerator, lpVtbl : IAppxBundleManifestOptionalBundleInfoEnumeratorVtbl* do
+  record IAppxBundleManifestOptionalBundleInfoEnumerator, lpVtbl : IAppxBundleManifestOptionalBundleInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0x9a178793_u32, 0xf97e_u16, 0x46ac_u16, StaticArray[0xaa_u8, 0xca_u8, 0xdd_u8, 0x5b_u8, 0xa4_u8, 0xc1_u8, 0x77_u8, 0xc8_u8])
     def query_interface(this : IAppxBundleManifestOptionalBundleInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2556,7 +2929,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxBundleManifestOptionalBundleInfoVtbl,
+
+  record IAppxBundleManifestOptionalBundleInfoVtable,
     query_interface : Proc(IAppxBundleManifestOptionalBundleInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxBundleManifestOptionalBundleInfo*, UInt32),
     release : Proc(IAppxBundleManifestOptionalBundleInfo*, UInt32),
@@ -2566,7 +2940,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxBundleManifestOptionalBundleInfo, lpVtbl : IAppxBundleManifestOptionalBundleInfoVtbl* do
+  record IAppxBundleManifestOptionalBundleInfo, lpVtbl : IAppxBundleManifestOptionalBundleInfoVtable* do
     GUID = LibC::GUID.new(0x515bf2e8_u32, 0xbcb0_u16, 0x4d69_u16, StaticArray[0x8c_u8, 0x48_u8, 0xe3_u8, 0x83_u8, 0x14_u8, 0x7b_u8, 0x6e_u8, 0x12_u8])
     def query_interface(this : IAppxBundleManifestOptionalBundleInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2590,7 +2964,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxContentGroupFilesEnumeratorVtbl,
+
+  record IAppxContentGroupFilesEnumeratorVtable,
     query_interface : Proc(IAppxContentGroupFilesEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxContentGroupFilesEnumerator*, UInt32),
     release : Proc(IAppxContentGroupFilesEnumerator*, UInt32),
@@ -2600,7 +2975,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxContentGroupFilesEnumerator, lpVtbl : IAppxContentGroupFilesEnumeratorVtbl* do
+  record IAppxContentGroupFilesEnumerator, lpVtbl : IAppxContentGroupFilesEnumeratorVtable* do
     GUID = LibC::GUID.new(0x1a09a2fd_u32, 0x7440_u16, 0x44eb_u16, StaticArray[0x8c_u8, 0x84_u8, 0x84_u8, 0x82_u8, 0x5_u8, 0xa6_u8, 0xa1_u8, 0xcc_u8])
     def query_interface(this : IAppxContentGroupFilesEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2624,7 +2999,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxContentGroupVtbl,
+
+  record IAppxContentGroupVtable,
     query_interface : Proc(IAppxContentGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxContentGroup*, UInt32),
     release : Proc(IAppxContentGroup*, UInt32),
@@ -2633,7 +3009,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxContentGroup, lpVtbl : IAppxContentGroupVtbl* do
+  record IAppxContentGroup, lpVtbl : IAppxContentGroupVtable* do
     GUID = LibC::GUID.new(0x328f6468_u32, 0xc04f_u16, 0x4e3c_u16, StaticArray[0xb6_u8, 0xfa_u8, 0x6b_u8, 0x8d_u8, 0x27_u8, 0xf3_u8, 0x0_u8, 0x3a_u8])
     def query_interface(this : IAppxContentGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2654,7 +3030,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxContentGroupsEnumeratorVtbl,
+
+  record IAppxContentGroupsEnumeratorVtable,
     query_interface : Proc(IAppxContentGroupsEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxContentGroupsEnumerator*, UInt32),
     release : Proc(IAppxContentGroupsEnumerator*, UInt32),
@@ -2664,7 +3041,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxContentGroupsEnumerator, lpVtbl : IAppxContentGroupsEnumeratorVtbl* do
+  record IAppxContentGroupsEnumerator, lpVtbl : IAppxContentGroupsEnumeratorVtable* do
     GUID = LibC::GUID.new(0x3264e477_u32, 0x16d1_u16, 0x4d63_u16, StaticArray[0x82_u8, 0x3e_u8, 0x7d_u8, 0x29_u8, 0x84_u8, 0x69_u8, 0x66_u8, 0x34_u8])
     def query_interface(this : IAppxContentGroupsEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2688,7 +3065,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxContentGroupMapReaderVtbl,
+
+  record IAppxContentGroupMapReaderVtable,
     query_interface : Proc(IAppxContentGroupMapReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxContentGroupMapReader*, UInt32),
     release : Proc(IAppxContentGroupMapReader*, UInt32),
@@ -2697,7 +3075,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxContentGroupMapReader, lpVtbl : IAppxContentGroupMapReaderVtbl* do
+  record IAppxContentGroupMapReader, lpVtbl : IAppxContentGroupMapReaderVtable* do
     GUID = LibC::GUID.new(0x418726d8_u32, 0xdd99_u16, 0x4f5d_u16, StaticArray[0x98_u8, 0x86_u8, 0x15_u8, 0x7a_u8, 0xdd_u8, 0x20_u8, 0xde_u8, 0x1_u8])
     def query_interface(this : IAppxContentGroupMapReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2718,7 +3096,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxSourceContentGroupMapReaderVtbl,
+
+  record IAppxSourceContentGroupMapReaderVtable,
     query_interface : Proc(IAppxSourceContentGroupMapReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxSourceContentGroupMapReader*, UInt32),
     release : Proc(IAppxSourceContentGroupMapReader*, UInt32),
@@ -2727,7 +3106,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxSourceContentGroupMapReader, lpVtbl : IAppxSourceContentGroupMapReaderVtbl* do
+  record IAppxSourceContentGroupMapReader, lpVtbl : IAppxSourceContentGroupMapReaderVtable* do
     GUID = LibC::GUID.new(0xf329791d_u32, 0x540b_u16, 0x4a9f_u16, StaticArray[0xbc_u8, 0x75_u8, 0x32_u8, 0x82_u8, 0xb7_u8, 0xd7_u8, 0x31_u8, 0x93_u8])
     def query_interface(this : IAppxSourceContentGroupMapReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2748,7 +3127,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxContentGroupMapWriterVtbl,
+
+  record IAppxContentGroupMapWriterVtable,
     query_interface : Proc(IAppxContentGroupMapWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxContentGroupMapWriter*, UInt32),
     release : Proc(IAppxContentGroupMapWriter*, UInt32),
@@ -2758,7 +3138,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxContentGroupMapWriter, lpVtbl : IAppxContentGroupMapWriterVtbl* do
+  record IAppxContentGroupMapWriter, lpVtbl : IAppxContentGroupMapWriterVtable* do
     GUID = LibC::GUID.new(0xd07ab776_u32, 0xa9de_u16, 0x4798_u16, StaticArray[0x8c_u8, 0x14_u8, 0x3d_u8, 0xb3_u8, 0x1e_u8, 0x68_u8, 0x7c_u8, 0x78_u8])
     def query_interface(this : IAppxContentGroupMapWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2782,7 +3162,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxPackagingDiagnosticEventSinkVtbl,
+
+  record IAppxPackagingDiagnosticEventSinkVtable,
     query_interface : Proc(IAppxPackagingDiagnosticEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxPackagingDiagnosticEventSink*, UInt32),
     release : Proc(IAppxPackagingDiagnosticEventSink*, UInt32),
@@ -2791,7 +3172,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxPackagingDiagnosticEventSink, lpVtbl : IAppxPackagingDiagnosticEventSinkVtbl* do
+  record IAppxPackagingDiagnosticEventSink, lpVtbl : IAppxPackagingDiagnosticEventSinkVtable* do
     GUID = LibC::GUID.new(0x17239d47_u32, 0x6adb_u16, 0x45d2_u16, StaticArray[0x80_u8, 0xf6_u8, 0xf9_u8, 0xcb_u8, 0xc3_u8, 0xbf_u8, 0x5_u8, 0x9d_u8])
     def query_interface(this : IAppxPackagingDiagnosticEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2812,7 +3193,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxPackagingDiagnosticEventSinkManagerVtbl,
+
+  record IAppxPackagingDiagnosticEventSinkManagerVtable,
     query_interface : Proc(IAppxPackagingDiagnosticEventSinkManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxPackagingDiagnosticEventSinkManager*, UInt32),
     release : Proc(IAppxPackagingDiagnosticEventSinkManager*, UInt32),
@@ -2820,7 +3202,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxPackagingDiagnosticEventSinkManager, lpVtbl : IAppxPackagingDiagnosticEventSinkManagerVtbl* do
+  record IAppxPackagingDiagnosticEventSinkManager, lpVtbl : IAppxPackagingDiagnosticEventSinkManagerVtable* do
     GUID = LibC::GUID.new(0x369648fa_u32, 0xa7eb_u16, 0x4909_u16, StaticArray[0xa1_u8, 0x5d_u8, 0x69_u8, 0x54_u8, 0xa0_u8, 0x78_u8, 0xf1_u8, 0x8a_u8])
     def query_interface(this : IAppxPackagingDiagnosticEventSinkManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2838,7 +3220,62 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptionFactoryVtbl,
+
+  record IAppxAppInstallerReaderVtable,
+    query_interface : Proc(IAppxAppInstallerReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxAppInstallerReader*, UInt32),
+    release : Proc(IAppxAppInstallerReader*, UInt32),
+    get_xml_dom : Proc(IAppxAppInstallerReader*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxAppInstallerReader, lpVtbl : IAppxAppInstallerReaderVtable* do
+    GUID = LibC::GUID.new(0xf35bc38c_u32, 0x1d2f_u16, 0x43db_u16, StaticArray[0xa1_u8, 0xf4_u8, 0x58_u8, 0x64_u8, 0x30_u8, 0xd1_u8, 0xfe_u8, 0xd2_u8])
+    def query_interface(this : IAppxAppInstallerReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxAppInstallerReader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxAppInstallerReader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_xml_dom(this : IAppxAppInstallerReader*, dom : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_dom.call(this, dom)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxDigestProviderVtable,
+    query_interface : Proc(IAppxDigestProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxDigestProvider*, UInt32),
+    release : Proc(IAppxDigestProvider*, UInt32),
+    get_digest : Proc(IAppxDigestProvider*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxDigestProvider, lpVtbl : IAppxDigestProviderVtable* do
+    GUID = LibC::GUID.new(0x9fe2702b_u32, 0x7640_u16, 0x4659_u16, StaticArray[0x8e_u8, 0x6c_u8, 0x34_u8, 0x9e_u8, 0x43_u8, 0xc4_u8, 0xcd_u8, 0xbd_u8])
+    def query_interface(this : IAppxDigestProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxDigestProvider*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxDigestProvider*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_digest(this : IAppxDigestProvider*, digest : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_digest.call(this, digest)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxEncryptionFactoryVtable,
     query_interface : Proc(IAppxEncryptionFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptionFactory*, UInt32),
     release : Proc(IAppxEncryptionFactory*, UInt32),
@@ -2853,7 +3290,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptionFactory, lpVtbl : IAppxEncryptionFactoryVtbl* do
+  record IAppxEncryptionFactory, lpVtbl : IAppxEncryptionFactoryVtable* do
     GUID = LibC::GUID.new(0x80e8e04d_u32, 0x8c88_u16, 0x44ae_u16, StaticArray[0xa0_u8, 0x11_u8, 0x7c_u8, 0xad_u8, 0xf6_u8, 0xfb_u8, 0x2e_u8, 0x72_u8])
     def query_interface(this : IAppxEncryptionFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2892,7 +3329,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptionFactory2Vtbl,
+
+  record IAppxEncryptionFactory2Vtable,
     query_interface : Proc(IAppxEncryptionFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptionFactory2*, UInt32),
     release : Proc(IAppxEncryptionFactory2*, UInt32),
@@ -2900,7 +3338,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptionFactory2, lpVtbl : IAppxEncryptionFactory2Vtbl* do
+  record IAppxEncryptionFactory2, lpVtbl : IAppxEncryptionFactory2Vtable* do
     GUID = LibC::GUID.new(0xc1b11eee_u32, 0xc4ba_u16, 0x4ab2_u16, StaticArray[0xa5_u8, 0x5d_u8, 0xd0_u8, 0x15_u8, 0xfe_u8, 0x8f_u8, 0xf6_u8, 0x4f_u8])
     def query_interface(this : IAppxEncryptionFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2918,7 +3356,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptionFactory3Vtbl,
+
+  record IAppxEncryptionFactory3Vtable,
     query_interface : Proc(IAppxEncryptionFactory3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptionFactory3*, UInt32),
     release : Proc(IAppxEncryptionFactory3*, UInt32),
@@ -2929,7 +3368,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptionFactory3, lpVtbl : IAppxEncryptionFactory3Vtbl* do
+  record IAppxEncryptionFactory3, lpVtbl : IAppxEncryptionFactory3Vtable* do
     GUID = LibC::GUID.new(0x9edca37_u32, 0xcd64_u16, 0x47d6_u16, StaticArray[0xb7_u8, 0xe8_u8, 0x1c_u8, 0xb1_u8, 0x1d_u8, 0x4f_u8, 0x7e_u8, 0x5_u8])
     def query_interface(this : IAppxEncryptionFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2956,7 +3395,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptionFactory4Vtbl,
+
+  record IAppxEncryptionFactory4Vtable,
     query_interface : Proc(IAppxEncryptionFactory4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptionFactory4*, UInt32),
     release : Proc(IAppxEncryptionFactory4*, UInt32),
@@ -2964,7 +3404,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptionFactory4, lpVtbl : IAppxEncryptionFactory4Vtbl* do
+  record IAppxEncryptionFactory4, lpVtbl : IAppxEncryptionFactory4Vtable* do
     GUID = LibC::GUID.new(0xa879611f_u32, 0x12fd_u16, 0x41fe_u16, StaticArray[0x85_u8, 0xd5_u8, 0x6_u8, 0xae_u8, 0x77_u8, 0x9b_u8, 0xba_u8, 0xf5_u8])
     def query_interface(this : IAppxEncryptionFactory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2982,7 +3422,39 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptedPackageWriterVtbl,
+
+  record IAppxEncryptionFactory5Vtable,
+    query_interface : Proc(IAppxEncryptionFactory5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAppxEncryptionFactory5*, UInt32),
+    release : Proc(IAppxEncryptionFactory5*, UInt32),
+    create_encrypted_package_reader2 : Proc(IAppxEncryptionFactory5*, Void*, Win32cr::Storage::Packaging::Appx::APPX_KEY_INFO*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_encrypted_bundle_reader2 : Proc(IAppxEncryptionFactory5*, Void*, Win32cr::Storage::Packaging::Appx::APPX_KEY_INFO*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAppxEncryptionFactory5, lpVtbl : IAppxEncryptionFactory5Vtable* do
+    GUID = LibC::GUID.new(0x68d6e77a_u32, 0xf446_u16, 0x480f_u16, StaticArray[0xb0_u8, 0xf0_u8, 0xd9_u8, 0x1a_u8, 0x24_u8, 0xc6_u8, 0x7_u8, 0x46_u8])
+    def query_interface(this : IAppxEncryptionFactory5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAppxEncryptionFactory5*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAppxEncryptionFactory5*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_encrypted_package_reader2(this : IAppxEncryptionFactory5*, inputStream : Void*, keyInfo : Win32cr::Storage::Packaging::Appx::APPX_KEY_INFO*, expectedDigest : Win32cr::Foundation::PWSTR, packageReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_encrypted_package_reader2.call(this, inputStream, keyInfo, expectedDigest, packageReader)
+    end
+    def create_encrypted_bundle_reader2(this : IAppxEncryptionFactory5*, inputStream : Void*, keyInfo : Win32cr::Storage::Packaging::Appx::APPX_KEY_INFO*, expectedDigest : Win32cr::Foundation::PWSTR, bundleReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_encrypted_bundle_reader2.call(this, inputStream, keyInfo, expectedDigest, bundleReader)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAppxEncryptedPackageWriterVtable,
     query_interface : Proc(IAppxEncryptedPackageWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptedPackageWriter*, UInt32),
     release : Proc(IAppxEncryptedPackageWriter*, UInt32),
@@ -2991,7 +3463,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptedPackageWriter, lpVtbl : IAppxEncryptedPackageWriterVtbl* do
+  record IAppxEncryptedPackageWriter, lpVtbl : IAppxEncryptedPackageWriterVtable* do
     GUID = LibC::GUID.new(0xf43d0b0b_u32, 0x1379_u16, 0x40e2_u16, StaticArray[0x9b_u8, 0x29_u8, 0x68_u8, 0x2e_u8, 0xa2_u8, 0xbf_u8, 0x42_u8, 0xaf_u8])
     def query_interface(this : IAppxEncryptedPackageWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3012,7 +3484,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptedPackageWriter2Vtbl,
+
+  record IAppxEncryptedPackageWriter2Vtable,
     query_interface : Proc(IAppxEncryptedPackageWriter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptedPackageWriter2*, UInt32),
     release : Proc(IAppxEncryptedPackageWriter2*, UInt32),
@@ -3020,7 +3493,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptedPackageWriter2, lpVtbl : IAppxEncryptedPackageWriter2Vtbl* do
+  record IAppxEncryptedPackageWriter2, lpVtbl : IAppxEncryptedPackageWriter2Vtable* do
     GUID = LibC::GUID.new(0x3e475447_u32, 0x3a25_u16, 0x40b5_u16, StaticArray[0x8a_u8, 0xd2_u8, 0xf9_u8, 0x53_u8, 0xae_u8, 0x50_u8, 0xc9_u8, 0x2d_u8])
     def query_interface(this : IAppxEncryptedPackageWriter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3038,7 +3511,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptedBundleWriterVtbl,
+
+  record IAppxEncryptedBundleWriterVtable,
     query_interface : Proc(IAppxEncryptedBundleWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptedBundleWriter*, UInt32),
     release : Proc(IAppxEncryptedBundleWriter*, UInt32),
@@ -3047,7 +3521,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptedBundleWriter, lpVtbl : IAppxEncryptedBundleWriterVtbl* do
+  record IAppxEncryptedBundleWriter, lpVtbl : IAppxEncryptedBundleWriterVtable* do
     GUID = LibC::GUID.new(0x80b0902f_u32, 0x7bf0_u16, 0x4117_u16, StaticArray[0xb8_u8, 0xc6_u8, 0x42_u8, 0x79_u8, 0xef_u8, 0x81_u8, 0xee_u8, 0x77_u8])
     def query_interface(this : IAppxEncryptedBundleWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3068,7 +3542,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptedBundleWriter2Vtbl,
+
+  record IAppxEncryptedBundleWriter2Vtable,
     query_interface : Proc(IAppxEncryptedBundleWriter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptedBundleWriter2*, UInt32),
     release : Proc(IAppxEncryptedBundleWriter2*, UInt32),
@@ -3076,7 +3551,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptedBundleWriter2, lpVtbl : IAppxEncryptedBundleWriter2Vtbl* do
+  record IAppxEncryptedBundleWriter2, lpVtbl : IAppxEncryptedBundleWriter2Vtable* do
     GUID = LibC::GUID.new(0xe644be82_u32, 0xf0fa_u16, 0x42b8_u16, StaticArray[0xa9_u8, 0x56_u8, 0x8d_u8, 0x1c_u8, 0xb4_u8, 0x8e_u8, 0xe3_u8, 0x79_u8])
     def query_interface(this : IAppxEncryptedBundleWriter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3094,7 +3569,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxEncryptedBundleWriter3Vtbl,
+
+  record IAppxEncryptedBundleWriter3Vtable,
     query_interface : Proc(IAppxEncryptedBundleWriter3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxEncryptedBundleWriter3*, UInt32),
     release : Proc(IAppxEncryptedBundleWriter3*, UInt32),
@@ -3103,7 +3579,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxEncryptedBundleWriter3, lpVtbl : IAppxEncryptedBundleWriter3Vtbl* do
+  record IAppxEncryptedBundleWriter3, lpVtbl : IAppxEncryptedBundleWriter3Vtable* do
     GUID = LibC::GUID.new(0xd34deb3_u32, 0x5cae_u16, 0x4dd3_u16, StaticArray[0x97_u8, 0x7c_u8, 0x50_u8, 0x49_u8, 0x32_u8, 0xa5_u8, 0x1d_u8, 0x31_u8])
     def query_interface(this : IAppxEncryptedBundleWriter3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3124,7 +3600,8 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   @[Extern]
-  record IAppxPackageEditorVtbl,
+
+  record IAppxPackageEditorVtable,
     query_interface : Proc(IAppxPackageEditor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppxPackageEditor*, UInt32),
     release : Proc(IAppxPackageEditor*, UInt32),
@@ -3137,7 +3614,7 @@ module Win32cr::Storage::Packaging::Appx
 
 
   @[Extern]
-  record IAppxPackageEditor, lpVtbl : IAppxPackageEditorVtbl* do
+  record IAppxPackageEditor, lpVtbl : IAppxPackageEditorVtable* do
     GUID = LibC::GUID.new(0xe2adb6dc_u32, 0x5e71_u16, 0x4416_u16, StaticArray[0x86_u8, 0xb6_u8, 0x86_u8, 0xe5_u8, 0xf5_u8, 0x29_u8, 0x1a_u8, 0x6b_u8])
     def query_interface(this : IAppxPackageEditor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3170,316 +3647,491 @@ module Win32cr::Storage::Packaging::Appx
   end
 
   def getCurrentPackageId(bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentPackageId(bufferLength, buffer)
+    {% end %}
   end
 
-  def getCurrentPackageFullName(packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getCurrentPackageFullName(packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentPackageFullName(packageFullNameLength, packageFullName)
+    {% end %}
   end
 
-  def getCurrentPackageFamilyName(packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getCurrentPackageFamilyName(packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentPackageFamilyName(packageFamilyNameLength, packageFamilyName)
+    {% end %}
   end
 
-  def getCurrentPackagePath(pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getCurrentPackagePath(pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentPackagePath(pathLength, path)
+    {% end %}
   end
 
   def getPackageId(hProcess : Win32cr::Foundation::HANDLE, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageId(hProcess, bufferLength, buffer)
+    {% end %}
   end
 
-  def getPackageFullName(hProcess : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackageFullName(hProcess : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageFullName(hProcess, packageFullNameLength, packageFullName)
+    {% end %}
   end
 
-  def getPackageFullNameFromToken(token : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackageFullNameFromToken(token : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageFullNameFromToken(token, packageFullNameLength, packageFullName)
+    {% end %}
   end
 
-  def getPackageFamilyName(hProcess : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackageFamilyName(hProcess : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageFamilyName(hProcess, packageFamilyNameLength, packageFamilyName)
+    {% end %}
   end
 
-  def getPackageFamilyNameFromToken(token : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackageFamilyNameFromToken(token : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageFamilyNameFromToken(token, packageFamilyNameLength, packageFamilyName)
+    {% end %}
   end
 
-  def getPackagePath(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, reserved : UInt32, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackagePath(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, reserved : UInt32, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackagePath(packageId, reserved, pathLength, path)
+    {% end %}
   end
 
-  def getPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackagePathByFullName(packageFullName, pathLength, path)
+    {% end %}
   end
 
-  def getStagedPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getStagedPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetStagedPackagePathByFullName(packageFullName, pathLength, path)
+    {% end %}
   end
 
-  def getPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackagePathByFullName2(packageFullName, packagePathType, pathLength, path)
+    {% end %}
   end
 
-  def getStagedPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getStagedPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetStagedPackagePathByFullName2(packageFullName, packagePathType, pathLength, path)
+    {% end %}
   end
 
   def getCurrentPackageInfo2(flags : UInt32, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentPackageInfo2(flags, packagePathType, bufferLength, buffer, count)
+    {% end %}
   end
 
-  def getCurrentPackagePath2(packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getCurrentPackagePath2(packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentPackagePath2(packagePathType, pathLength, path)
+    {% end %}
   end
 
-  def getCurrentApplicationUserModelId(applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getCurrentApplicationUserModelId(applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentApplicationUserModelId(applicationUserModelIdLength, applicationUserModelId)
+    {% end %}
   end
 
-  def getApplicationUserModelId(hProcess : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getApplicationUserModelId(hProcess : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetApplicationUserModelId(hProcess, applicationUserModelIdLength, applicationUserModelId)
+    {% end %}
   end
 
-  def getApplicationUserModelIdFromToken(token : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getApplicationUserModelIdFromToken(token : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetApplicationUserModelIdFromToken(token, applicationUserModelIdLength, applicationUserModelId)
+    {% end %}
   end
 
   def verifyPackageFullName(packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.VerifyPackageFullName(packageFullName)
+    {% end %}
   end
 
   def verifyPackageFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.VerifyPackageFamilyName(packageFamilyName)
+    {% end %}
   end
 
   def verifyPackageId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.VerifyPackageId(packageId)
+    {% end %}
   end
 
   def verifyApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.VerifyApplicationUserModelId(applicationUserModelId)
+    {% end %}
   end
 
   def verifyPackageRelativeApplicationId(packageRelativeApplicationId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.VerifyPackageRelativeApplicationId(packageRelativeApplicationId)
+    {% end %}
   end
 
   def packageIdFromFullName(packageFullName : Win32cr::Foundation::PWSTR, flags : UInt32, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.PackageIdFromFullName(packageFullName, flags, bufferLength, buffer)
+    {% end %}
   end
 
-  def packageFullNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def packageFullNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.PackageFullNameFromId(packageId, packageFullNameLength, packageFullName)
+    {% end %}
   end
 
-  def packageFamilyNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def packageFamilyNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.PackageFamilyNameFromId(packageId, packageFamilyNameLength, packageFamilyName)
+    {% end %}
   end
 
-  def packageFamilyNameFromFullName(packageFullName : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def packageFamilyNameFromFullName(packageFullName : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.PackageFamilyNameFromFullName(packageFullName, packageFamilyNameLength, packageFamilyName)
+    {% end %}
   end
 
-  def packageNameAndPublisherIdFromFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR, packageNameLength : UInt32*, packageName : UInt16*, packagePublisherIdLength : UInt32*, packagePublisherId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def packageNameAndPublisherIdFromFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR, packageNameLength : UInt32*, packageName : Win32cr::Foundation::PWSTR, packagePublisherIdLength : UInt32*, packagePublisherId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.PackageNameAndPublisherIdFromFamilyName(packageFamilyName, packageNameLength, packageName, packagePublisherIdLength, packagePublisherId)
+    {% end %}
   end
 
-  def formatApplicationUserModelId(packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationId : Win32cr::Foundation::PWSTR, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def formatApplicationUserModelId(packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationId : Win32cr::Foundation::PWSTR, applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.FormatApplicationUserModelId(packageFamilyName, packageRelativeApplicationId, applicationUserModelIdLength, applicationUserModelId)
+    {% end %}
   end
 
-  def parseApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*, packageRelativeApplicationIdLength : UInt32*, packageRelativeApplicationId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def parseApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationIdLength : UInt32*, packageRelativeApplicationId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ParseApplicationUserModelId(applicationUserModelId, packageFamilyNameLength, packageFamilyName, packageRelativeApplicationIdLength, packageRelativeApplicationId)
+    {% end %}
   end
 
-  def getPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+  def getPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackagesByPackageFamily(packageFamilyName, count, packageFullNames, bufferLength, buffer)
+    {% end %}
   end
 
-  def findPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, packageFilters : UInt32, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*, packageProperties : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+  def findPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, packageFilters : UInt32, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : Win32cr::Foundation::PWSTR, packageProperties : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.FindPackagesByPackageFamily(packageFamilyName, packageFilters, count, packageFullNames, bufferLength, buffer, packageProperties)
+    {% end %}
   end
 
   def getStagedPackageOrigin(packageFullName : Win32cr::Foundation::PWSTR, origin : Win32cr::Storage::Packaging::Appx::PackageOrigin*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetStagedPackageOrigin(packageFullName, origin)
+    {% end %}
   end
 
   def getCurrentPackageInfo(flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetCurrentPackageInfo(flags, bufferLength, buffer, count)
+    {% end %}
   end
 
   def openPackageInfoByFullName(packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.OpenPackageInfoByFullName(packageFullName, reserved, packageInfoReference)
+    {% end %}
   end
 
-  def openPackageInfoByFullNameForUser(userSid : Win32cr::Foundation::PSID, packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
+  def openPackageInfoByFullNameForUser(userSid : Win32cr::Security::PSID, packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.OpenPackageInfoByFullNameForUser(userSid, packageFullName, reserved, packageInfoReference)
+    {% end %}
   end
 
   def closePackageInfo(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ClosePackageInfo(packageInfoReference)
+    {% end %}
   end
 
   def getPackageInfo(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageInfo(packageInfoReference, flags, bufferLength, buffer, count)
+    {% end %}
   end
 
   def getPackageApplicationIds(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageApplicationIds(packageInfoReference, bufferLength, buffer, count)
+    {% end %}
   end
 
   def getPackageInfo2(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*, flags : UInt32, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetPackageInfo2(packageInfoReference, flags, packagePathType, bufferLength, buffer, count)
+    {% end %}
   end
 
   def checkIsMSIXPackage(packageFullName : Win32cr::Foundation::PWSTR, isMSIXPackage : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CheckIsMSIXPackage(packageFullName, isMSIXPackage)
+    {% end %}
   end
 
-  def tryCreatePackageDependency(user : Win32cr::Foundation::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+  def tryCreatePackageDependency(user : Win32cr::Security::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TryCreatePackageDependency(user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, packageDependencyId)
+    {% end %}
+  end
+
+  def tryCreatePackageDependency2(user : Win32cr::Security::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, lifetimeExpiration : Win32cr::Foundation::FILETIME*, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.TryCreatePackageDependency2(user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, lifetimeExpiration, packageDependencyId)
+    {% end %}
   end
 
   def deletePackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeletePackageDependency(packageDependencyId)
+    {% end %}
   end
 
-  def addPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__**, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+  def addPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT*, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddPackageDependency(packageDependencyId, rank, options, packageDependencyContext, packageFullName)
+    {% end %}
   end
 
-  def removePackageDependency(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*) : Win32cr::Foundation::HRESULT
+  def addPackageDependency2(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions2, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT*, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.AddPackageDependency2(packageDependencyId, rank, options, packageDependencyContext, packageFullName)
+    {% end %}
+  end
+
+  def removePackageDependency(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RemovePackageDependency(packageDependencyContext)
+    {% end %}
   end
 
   def getResolvedPackageFullNameForPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetResolvedPackageFullNameForPackageDependency(packageDependencyId, packageFullName)
+    {% end %}
   end
 
-  def getIdForPackageDependencyContext(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+  def getResolvedPackageFullNameForPackageDependency2(packageDependencyId : Win32cr::Foundation::PWSTR, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetResolvedPackageFullNameForPackageDependency2(packageDependencyId, packageFullName)
+    {% end %}
+  end
+
+  def getIdForPackageDependencyContext(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetIdForPackageDependencyContext(packageDependencyContext, packageDependencyId)
+    {% end %}
+  end
+
+  def getPackageGraphRevisionId : UInt32
+    {% if !flag?(:docs) %}
+    C.GetPackageGraphRevisionId
+    {% end %}
+  end
+
+  def findPackageDependency(findPackageDependencyCriteria : Win32cr::Storage::Packaging::Appx::FindPackageDependencyCriteria*, packageDependencyIdsCount : UInt32*, packageDependencyIds : Win32cr::Foundation::PWSTR**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.FindPackageDependency(findPackageDependencyCriteria, packageDependencyIdsCount, packageDependencyIds)
+    {% end %}
+  end
+
+  def getPackageDependencyInformation(packageDependencyId : Win32cr::Foundation::PWSTR, user : Win32cr::Security::PSID*, packageFamilyName : Win32cr::Foundation::PWSTR*, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION*, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures*, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind*, lifetimeArtifact : Win32cr::Foundation::PWSTR*, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions*, lifetimeExpiration : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetPackageDependencyInformation(packageDependencyId, user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, lifetimeExpiration)
+    {% end %}
+  end
+
+  def getProcessesUsingPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, user : Win32cr::Security::PSID, scopeIsSystem : Win32cr::Foundation::BOOL, processIdsCount : UInt32*, processIds : UInt32**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetProcessesUsingPackageDependency(packageDependencyId, user, scopeIsSystem, processIdsCount, processIds)
+    {% end %}
   end
 
   def appPolicyGetLifecycleManagement(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyLifecycleManagement*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetLifecycleManagement(processToken, policy)
+    {% end %}
   end
 
   def appPolicyGetWindowingModel(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyWindowingModel*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetWindowingModel(processToken, policy)
+    {% end %}
   end
 
   def appPolicyGetMediaFoundationCodecLoading(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyMediaFoundationCodecLoading*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetMediaFoundationCodecLoading(processToken, policy)
+    {% end %}
   end
 
   def appPolicyGetClrCompat(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyClrCompat*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetClrCompat(processToken, policy)
+    {% end %}
   end
 
   def appPolicyGetThreadInitializationType(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyThreadInitializationType*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetThreadInitializationType(processToken, policy)
+    {% end %}
   end
 
   def appPolicyGetShowDeveloperDiagnostic(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyShowDeveloperDiagnostic*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetShowDeveloperDiagnostic(processToken, policy)
+    {% end %}
   end
 
   def appPolicyGetProcessTerminationMethod(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyProcessTerminationMethod*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetProcessTerminationMethod(processToken, policy)
+    {% end %}
   end
 
   def appPolicyGetCreateFileAccess(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyCreateFileAccess*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AppPolicyGetCreateFileAccess(processToken, policy)
+    {% end %}
   end
 
-  def createPackageVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
+  def createPackageVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreatePackageVirtualizationContext(packageFamilyName, context)
+    {% end %}
   end
 
-  def activatePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, cookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+  def activatePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, cookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ActivatePackageVirtualizationContext(context, cookie)
+    {% end %}
   end
 
-  def releasePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*) : Void
+  def releasePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.ReleasePackageVirtualizationContext(context)
+    {% end %}
   end
 
   def deactivatePackageVirtualizationContext(cookie : LibC::UIntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.DeactivatePackageVirtualizationContext(cookie)
+    {% end %}
   end
 
-  def duplicatePackageVirtualizationContext(sourceContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, destContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
+  def duplicatePackageVirtualizationContext(sourceContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, destContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DuplicatePackageVirtualizationContext(sourceContext, destContext)
+    {% end %}
   end
 
-  def getCurrentPackageVirtualizationContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*
+  def getCurrentPackageVirtualizationContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE
+    {% if !flag?(:docs) %}
     C.GetCurrentPackageVirtualizationContext
+    {% end %}
   end
 
   def getProcessesInVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, processes : Win32cr::Foundation::HANDLE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetProcessesInVirtualizationContext(packageFamilyName, count, processes)
+    {% end %}
+  end
+
+  def getCurrentPackageInfo3(flags : UInt32, packageInfoType : Win32cr::Storage::Packaging::Appx::PackageInfo3Type, bufferLength : UInt32*, buffer : Void*, count : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetCurrentPackageInfo3(flags, packageInfoType, bufferLength, buffer, count)
+    {% end %}
   end
 
   @[Link("kernel32")]
   @[Link("kernelbase")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetCurrentPackageId(bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetCurrentPackageFullName(packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetCurrentPackageFullName(packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetCurrentPackageFamilyName(packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetCurrentPackageFamilyName(packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetCurrentPackagePath(pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetCurrentPackagePath(pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun GetPackageId(hProcess : Win32cr::Foundation::HANDLE, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackageFullName(hProcess : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackageFullName(hProcess : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackageFullNameFromToken(token : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackageFullNameFromToken(token : Win32cr::Foundation::HANDLE, packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackageFamilyName(hProcess : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackageFamilyName(hProcess : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackageFamilyNameFromToken(token : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackageFamilyNameFromToken(token : Win32cr::Foundation::HANDLE, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackagePath(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, reserved : UInt32, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackagePath(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, reserved : UInt32, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetStagedPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetStagedPackagePathByFullName(packageFullName : Win32cr::Foundation::PWSTR, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetStagedPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetStagedPackagePathByFullName2(packageFullName : Win32cr::Foundation::PWSTR, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun GetCurrentPackageInfo2(flags : UInt32, packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetCurrentPackagePath2(packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetCurrentPackagePath2(packagePathType : Win32cr::Storage::Packaging::Appx::PackagePathType, pathLength : UInt32*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetCurrentApplicationUserModelId(applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetCurrentApplicationUserModelId(applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetApplicationUserModelId(hProcess : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetApplicationUserModelId(hProcess : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetApplicationUserModelIdFromToken(token : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetApplicationUserModelIdFromToken(token : Win32cr::Foundation::HANDLE, applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun VerifyPackageFullName(packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
@@ -3500,28 +4152,28 @@ module Win32cr::Storage::Packaging::Appx
     fun PackageIdFromFullName(packageFullName : Win32cr::Foundation::PWSTR, flags : UInt32, bufferLength : UInt32*, buffer : UInt8*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun PackageFullNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFullNameLength : UInt32*, packageFullName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun PackageFullNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFullNameLength : UInt32*, packageFullName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun PackageFamilyNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun PackageFamilyNameFromId(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun PackageFamilyNameFromFullName(packageFullName : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun PackageFamilyNameFromFullName(packageFullName : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun PackageNameAndPublisherIdFromFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR, packageNameLength : UInt32*, packageName : UInt16*, packagePublisherIdLength : UInt32*, packagePublisherId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun PackageNameAndPublisherIdFromFamilyName(packageFamilyName : Win32cr::Foundation::PWSTR, packageNameLength : UInt32*, packageName : Win32cr::Foundation::PWSTR, packagePublisherIdLength : UInt32*, packagePublisherId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun FormatApplicationUserModelId(packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationId : Win32cr::Foundation::PWSTR, applicationUserModelIdLength : UInt32*, applicationUserModelId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun FormatApplicationUserModelId(packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationId : Win32cr::Foundation::PWSTR, applicationUserModelIdLength : UInt32*, applicationUserModelId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun ParseApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : UInt16*, packageRelativeApplicationIdLength : UInt32*, packageRelativeApplicationId : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun ParseApplicationUserModelId(applicationUserModelId : Win32cr::Foundation::PWSTR, packageFamilyNameLength : UInt32*, packageFamilyName : Win32cr::Foundation::PWSTR, packageRelativeApplicationIdLength : UInt32*, packageRelativeApplicationId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun FindPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, packageFilters : UInt32, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : UInt16*, packageProperties : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    fun FindPackagesByPackageFamily(packageFamilyName : Win32cr::Foundation::PWSTR, packageFilters : UInt32, count : UInt32*, packageFullNames : Win32cr::Foundation::PWSTR*, bufferLength : UInt32*, buffer : Win32cr::Foundation::PWSTR, packageProperties : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun GetStagedPackageOrigin(packageFullName : Win32cr::Foundation::PWSTR, origin : Win32cr::Storage::Packaging::Appx::PackageOrigin*) : Win32cr::Foundation::WIN32_ERROR
@@ -3533,7 +4185,7 @@ module Win32cr::Storage::Packaging::Appx
     fun OpenPackageInfoByFullName(packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun OpenPackageInfoByFullNameForUser(userSid : Win32cr::Foundation::PSID, packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
+    fun OpenPackageInfoByFullNameForUser(userSid : Win32cr::Security::PSID, packageFullName : Win32cr::Foundation::PWSTR, reserved : UInt32, packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_**) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun ClosePackageInfo(packageInfoReference : Win32cr::Storage::Packaging::Appx::PACKAGE_INFO_REFERENCE_*) : Win32cr::Foundation::WIN32_ERROR
@@ -3551,22 +4203,43 @@ module Win32cr::Storage::Packaging::Appx
     fun CheckIsMSIXPackage(packageFullName : Win32cr::Foundation::PWSTR, isMSIXPackage : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun TryCreatePackageDependency(user : Win32cr::Foundation::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    fun TryCreatePackageDependency(user : Win32cr::Security::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun TryCreatePackageDependency2(user : Win32cr::Security::PSID, packageFamilyName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind, lifetimeArtifact : Win32cr::Foundation::PWSTR, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions, lifetimeExpiration : Win32cr::Foundation::FILETIME*, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun DeletePackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun AddPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__**, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    fun AddPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT*, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun RemovePackageDependency(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*) : Win32cr::Foundation::HRESULT
+    fun AddPackageDependency2(packageDependencyId : Win32cr::Foundation::PWSTR, rank : Int32, options : Win32cr::Storage::Packaging::Appx::AddPackageDependencyOptions2, packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT*, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun RemovePackageDependency(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun GetResolvedPackageFullNameForPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun GetIdForPackageDependencyContext(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT__*, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    fun GetResolvedPackageFullNameForPackageDependency2(packageDependencyId : Win32cr::Foundation::PWSTR, packageFullName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetIdForPackageDependencyContext(packageDependencyContext : Win32cr::Storage::Packaging::Appx::PACKAGEDEPENDENCY_CONTEXT, packageDependencyId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetPackageGraphRevisionId : UInt32
+
+    # :nodoc:
+    fun FindPackageDependency(findPackageDependencyCriteria : Win32cr::Storage::Packaging::Appx::FindPackageDependencyCriteria*, packageDependencyIdsCount : UInt32*, packageDependencyIds : Win32cr::Foundation::PWSTR**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetPackageDependencyInformation(packageDependencyId : Win32cr::Foundation::PWSTR, user : Win32cr::Security::PSID*, packageFamilyName : Win32cr::Foundation::PWSTR*, minVersion : Win32cr::Storage::Packaging::Appx::PACKAGE_VERSION*, packageDependencyProcessorArchitectures : Win32cr::Storage::Packaging::Appx::PackageDependencyProcessorArchitectures*, lifetimeKind : Win32cr::Storage::Packaging::Appx::PackageDependencyLifetimeKind*, lifetimeArtifact : Win32cr::Foundation::PWSTR*, options : Win32cr::Storage::Packaging::Appx::CreatePackageDependencyOptions*, lifetimeExpiration : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetProcessesUsingPackageDependency(packageDependencyId : Win32cr::Foundation::PWSTR, user : Win32cr::Security::PSID, scopeIsSystem : Win32cr::Foundation::BOOL, processIdsCount : UInt32*, processIds : UInt32**) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun AppPolicyGetLifecycleManagement(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyLifecycleManagement*) : Win32cr::Foundation::WIN32_ERROR
@@ -3593,25 +4266,29 @@ module Win32cr::Storage::Packaging::Appx
     fun AppPolicyGetCreateFileAccess(processToken : Win32cr::Foundation::HANDLE, policy : Win32cr::Storage::Packaging::Appx::AppPolicyCreateFileAccess*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun CreatePackageVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
+    fun CreatePackageVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun ActivatePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, cookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    fun ActivatePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, cookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun ReleasePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*) : Void
+    fun ReleasePackageVirtualizationContext(context : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) : Void
 
     # :nodoc:
     fun DeactivatePackageVirtualizationContext(cookie : LibC::UIntPtrT) : Void
 
     # :nodoc:
-    fun DuplicatePackageVirtualizationContext(sourceContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, destContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : Win32cr::Foundation::HRESULT
+    fun DuplicatePackageVirtualizationContext(sourceContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, destContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun GetCurrentPackageVirtualizationContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*
+    fun GetCurrentPackageVirtualizationContext : Win32cr::Storage::Packaging::Appx::PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE
 
     # :nodoc:
     fun GetProcessesInVirtualizationContext(packageFamilyName : Win32cr::Foundation::PWSTR, count : UInt32*, processes : Win32cr::Foundation::HANDLE**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
+    fun GetCurrentPackageInfo3(flags : UInt32, packageInfoType : Win32cr::Storage::Packaging::Appx::PackageInfo3Type, bufferLength : UInt32*, buffer : Void*, count : UInt32*) : Win32cr::Foundation::HRESULT
+
   end
+  {% end %}
 end

@@ -18,22 +18,31 @@ module Win32cr::System::CorrelationVector
   end
 
   def rtlInitializeCorrelationVector(correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*, version : Int32, guid : LibC::GUID*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlInitializeCorrelationVector(correlation_vector, version, guid)
+    {% end %}
   end
 
   def rtlIncrementCorrelationVector(correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlIncrementCorrelationVector(correlation_vector)
+    {% end %}
   end
 
   def rtlExtendCorrelationVector(correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlExtendCorrelationVector(correlation_vector)
+    {% end %}
   end
 
   def rtlValidateCorrelationVector(vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlValidateCorrelationVector(vector)
+    {% end %}
   end
 
   @[Link("ntdll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RtlInitializeCorrelationVector(correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*, version : Int32, guid : LibC::GUID*) : UInt32
@@ -48,4 +57,5 @@ module Win32cr::System::CorrelationVector
     fun RtlValidateCorrelationVector(vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : UInt32
 
   end
+  {% end %}
 end

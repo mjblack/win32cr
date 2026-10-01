@@ -6,12 +6,12 @@ require "./../graphics/dwm.cr"
 module Win32cr::UI::Wpf
   extend self
   MILBITMAPEFFECT_SDK_VERSION = 16777216_u32
-  CLSID_MILBitmapEffectGroup = "ac9c1a9a-7e18-4f64-ac7e-47cf7f051e95"
-  CLSID_MILBitmapEffectBlur = "a924df87-225d-4373-8f5b-b90ec85ae3de"
-  CLSID_MILBitmapEffectDropShadow = "459a3fbe-d8ac-4692-874b-7a265715aa16"
-  CLSID_MILBitmapEffectOuterGlow = "e2161bdd-7eb6-4725-9c0b-8a2a1b4f0667"
-  CLSID_MILBitmapEffectBevel = "fd361dbe-6c9b-4de0-8290-f6400c2737ed"
-  CLSID_MILBitmapEffectEmboss = "cd299846-824f-47ec-a007-12aa767f2816"
+  CLSID_MILBitmapEffectGroup = LibC::GUID.new(0xac9c1a9a_u32, 0x7e18_u16, 0x4f64_u16, StaticArray[0xac_u8, 0x7e_u8, 0x47_u8, 0xcf_u8, 0x7f_u8, 0x5_u8, 0x1e_u8, 0x95_u8])
+  CLSID_MILBitmapEffectBlur = LibC::GUID.new(0xa924df87_u32, 0x225d_u16, 0x4373_u16, StaticArray[0x8f_u8, 0x5b_u8, 0xb9_u8, 0xe_u8, 0xc8_u8, 0x5a_u8, 0xe3_u8, 0xde_u8])
+  CLSID_MILBitmapEffectDropShadow = LibC::GUID.new(0x459a3fbe_u32, 0xd8ac_u16, 0x4692_u16, StaticArray[0x87_u8, 0x4b_u8, 0x7a_u8, 0x26_u8, 0x57_u8, 0x15_u8, 0xaa_u8, 0x16_u8])
+  CLSID_MILBitmapEffectOuterGlow = LibC::GUID.new(0xe2161bdd_u32, 0x7eb6_u16, 0x4725_u16, StaticArray[0x9c_u8, 0xb_u8, 0x8a_u8, 0x2a_u8, 0x1b_u8, 0x4f_u8, 0x6_u8, 0x67_u8])
+  CLSID_MILBitmapEffectBevel = LibC::GUID.new(0xfd361dbe_u32, 0x6c9b_u16, 0x4de0_u16, StaticArray[0x82_u8, 0x90_u8, 0xf6_u8, 0x40_u8, 0xc_u8, 0x27_u8, 0x37_u8, 0xed_u8])
+  CLSID_MILBitmapEffectEmboss = LibC::GUID.new(0xcd299846_u32, 0x824f_u16, 0x47ec_u16, StaticArray[0xa0_u8, 0x7_u8, 0x12_u8, 0xaa_u8, 0x76_u8, 0x7f_u8, 0x28_u8, 0x16_u8])
 
 
   @[Extern]
@@ -55,7 +55,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectorInfoVtbl,
+
+  record IMILBitmapEffectConnectorInfoVtable,
     query_interface : Proc(IMILBitmapEffectConnectorInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnectorInfo*, UInt32),
     release : Proc(IMILBitmapEffectConnectorInfo*, UInt32),
@@ -66,7 +67,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectConnectorInfo, lpVtbl : IMILBitmapEffectConnectorInfoVtbl* do
+  record IMILBitmapEffectConnectorInfo, lpVtbl : IMILBitmapEffectConnectorInfoVtable* do
     GUID = LibC::GUID.new(0xf66d2e4b_u32, 0xb46b_u16, 0x42fc_u16, StaticArray[0x85_u8, 0x9e_u8, 0x3d_u8, 0xa0_u8, 0xec_u8, 0xdb_u8, 0x3c_u8, 0x43_u8])
     def query_interface(this : IMILBitmapEffectConnectorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -93,7 +94,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectionsInfoVtbl,
+
+  record IMILBitmapEffectConnectionsInfoVtable,
     query_interface : Proc(IMILBitmapEffectConnectionsInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnectionsInfo*, UInt32),
     release : Proc(IMILBitmapEffectConnectionsInfo*, UInt32),
@@ -104,7 +106,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectConnectionsInfo, lpVtbl : IMILBitmapEffectConnectionsInfoVtbl* do
+  record IMILBitmapEffectConnectionsInfo, lpVtbl : IMILBitmapEffectConnectionsInfoVtable* do
     GUID = LibC::GUID.new(0x476b538a_u32, 0xc765_u16, 0x4237_u16, StaticArray[0xba_u8, 0x4a_u8, 0xd6_u8, 0xa8_u8, 0x80_u8, 0xff_u8, 0xc_u8, 0xfc_u8])
     def query_interface(this : IMILBitmapEffectConnectionsInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -131,7 +133,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectionsVtbl,
+
+  record IMILBitmapEffectConnectionsVtable,
     query_interface : Proc(IMILBitmapEffectConnections*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnections*, UInt32),
     release : Proc(IMILBitmapEffectConnections*, UInt32),
@@ -140,7 +143,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectConnections, lpVtbl : IMILBitmapEffectConnectionsVtbl* do
+  record IMILBitmapEffectConnections, lpVtbl : IMILBitmapEffectConnectionsVtable* do
     GUID = LibC::GUID.new(0xc2b5d861_u32, 0x9b1a_u16, 0x4374_u16, StaticArray[0x89_u8, 0xb0_u8, 0xde_u8, 0xc4_u8, 0x87_u8, 0x4d_u8, 0x6a_u8, 0x81_u8])
     def query_interface(this : IMILBitmapEffectConnections*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -161,7 +164,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectVtbl,
+
+  record IMILBitmapEffectVtable,
     query_interface : Proc(IMILBitmapEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffect*, UInt32),
     release : Proc(IMILBitmapEffect*, UInt32),
@@ -171,7 +175,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffect, lpVtbl : IMILBitmapEffectVtbl* do
+  record IMILBitmapEffect, lpVtbl : IMILBitmapEffectVtable* do
     GUID = LibC::GUID.new(0x8a6ff321_u32, 0xc944_u16, 0x4a1b_u16, StaticArray[0x99_u8, 0x44_u8, 0x99_u8, 0x54_u8, 0xaf_u8, 0x30_u8, 0x12_u8, 0x58_u8])
     def query_interface(this : IMILBitmapEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -195,21 +199,22 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectImplVtbl,
+
+  record IMILBitmapEffectImplVtable,
     query_interface : Proc(IMILBitmapEffectImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectImpl*, UInt32),
     release : Proc(IMILBitmapEffectImpl*, UInt32),
-    is_in_place_modification_allowed : Proc(IMILBitmapEffectImpl*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    is_in_place_modification_allowed : Proc(IMILBitmapEffectImpl*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     set_parent_effect : Proc(IMILBitmapEffectImpl*, Void*, Win32cr::Foundation::HRESULT),
     get_input_source : Proc(IMILBitmapEffectImpl*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_input_source_bounds : Proc(IMILBitmapEffectImpl*, UInt32, Win32cr::UI::Wpf::MilRectD*, Win32cr::Foundation::HRESULT),
-    get_input_bitmap_source : Proc(IMILBitmapEffectImpl*, UInt32, Void*, Int16*, Void**, Win32cr::Foundation::HRESULT),
-    get_output_bitmap_source : Proc(IMILBitmapEffectImpl*, UInt32, Void*, Int16*, Void**, Win32cr::Foundation::HRESULT),
+    get_input_bitmap_source : Proc(IMILBitmapEffectImpl*, UInt32, Void*, Win32cr::Foundation::VARIANT_BOOL*, Void**, Win32cr::Foundation::HRESULT),
+    get_output_bitmap_source : Proc(IMILBitmapEffectImpl*, UInt32, Void*, Win32cr::Foundation::VARIANT_BOOL*, Void**, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IMILBitmapEffectImpl*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMILBitmapEffectImpl, lpVtbl : IMILBitmapEffectImplVtbl* do
+  record IMILBitmapEffectImpl, lpVtbl : IMILBitmapEffectImplVtable* do
     GUID = LibC::GUID.new(0xcc2468f2_u32, 0x9936_u16, 0x47be_u16, StaticArray[0xb4_u8, 0xaf_u8, 0x6_u8, 0xb5_u8, 0xdf_u8, 0x5d_u8, 0xbc_u8, 0xbb_u8])
     def query_interface(this : IMILBitmapEffectImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -220,7 +225,7 @@ module Win32cr::UI::Wpf
     def release(this : IMILBitmapEffectImpl*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def is_in_place_modification_allowed(this : IMILBitmapEffectImpl*, pOutputConnector : Void*, pfModifyInPlace : Int16*) : Win32cr::Foundation::HRESULT
+    def is_in_place_modification_allowed(this : IMILBitmapEffectImpl*, pOutputConnector : Void*, pfModifyInPlace : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_in_place_modification_allowed.call(this, pOutputConnector, pfModifyInPlace)
     end
     def set_parent_effect(this : IMILBitmapEffectImpl*, pParentEffect : Void*) : Win32cr::Foundation::HRESULT
@@ -232,10 +237,10 @@ module Win32cr::UI::Wpf
     def get_input_source_bounds(this : IMILBitmapEffectImpl*, uiIndex : UInt32, pRect : Win32cr::UI::Wpf::MilRectD*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_input_source_bounds.call(this, uiIndex, pRect)
     end
-    def get_input_bitmap_source(this : IMILBitmapEffectImpl*, uiIndex : UInt32, pRenderContext : Void*, pfModifyInPlace : Int16*, ppBitmapSource : Void**) : Win32cr::Foundation::HRESULT
+    def get_input_bitmap_source(this : IMILBitmapEffectImpl*, uiIndex : UInt32, pRenderContext : Void*, pfModifyInPlace : Win32cr::Foundation::VARIANT_BOOL*, ppBitmapSource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_input_bitmap_source.call(this, uiIndex, pRenderContext, pfModifyInPlace, ppBitmapSource)
     end
-    def get_output_bitmap_source(this : IMILBitmapEffectImpl*, uiIndex : UInt32, pRenderContext : Void*, pfModifyInPlace : Int16*, ppBitmapSource : Void**) : Win32cr::Foundation::HRESULT
+    def get_output_bitmap_source(this : IMILBitmapEffectImpl*, uiIndex : UInt32, pRenderContext : Void*, pfModifyInPlace : Win32cr::Foundation::VARIANT_BOOL*, ppBitmapSource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_output_bitmap_source.call(this, uiIndex, pRenderContext, pfModifyInPlace, ppBitmapSource)
     end
     def initialize__(this : IMILBitmapEffectImpl*, pInner : Void*) : Win32cr::Foundation::HRESULT
@@ -245,7 +250,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectGroupVtbl,
+
+  record IMILBitmapEffectGroupVtable,
     query_interface : Proc(IMILBitmapEffectGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectGroup*, UInt32),
     release : Proc(IMILBitmapEffectGroup*, UInt32),
@@ -255,7 +261,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectGroup, lpVtbl : IMILBitmapEffectGroupVtbl* do
+  record IMILBitmapEffectGroup, lpVtbl : IMILBitmapEffectGroupVtable* do
     GUID = LibC::GUID.new(0x2f952360_u32, 0x698a_u16, 0x4ac6_u16, StaticArray[0x81_u8, 0xa1_u8, 0xbc_u8, 0xfd_u8, 0xf0_u8, 0x8e_u8, 0xb8_u8, 0xe8_u8])
     def query_interface(this : IMILBitmapEffectGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -279,7 +285,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectGroupImplVtbl,
+
+  record IMILBitmapEffectGroupImplVtable,
     query_interface : Proc(IMILBitmapEffectGroupImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectGroupImpl*, UInt32),
     release : Proc(IMILBitmapEffectGroupImpl*, UInt32),
@@ -289,7 +296,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectGroupImpl, lpVtbl : IMILBitmapEffectGroupImplVtbl* do
+  record IMILBitmapEffectGroupImpl, lpVtbl : IMILBitmapEffectGroupImplVtable* do
     GUID = LibC::GUID.new(0x78fed518_u32, 0x1cfc_u16, 0x4807_u16, StaticArray[0x8b_u8, 0x85_u8, 0x6b_u8, 0x6e_u8, 0x51_u8, 0x39_u8, 0x8f_u8, 0x62_u8])
     def query_interface(this : IMILBitmapEffectGroupImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -313,13 +320,14 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectRenderContextVtbl,
+
+  record IMILBitmapEffectRenderContextVtable,
     query_interface : Proc(IMILBitmapEffectRenderContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectRenderContext*, UInt32),
     release : Proc(IMILBitmapEffectRenderContext*, UInt32),
     set_output_pixel_format : Proc(IMILBitmapEffectRenderContext*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_output_pixel_format : Proc(IMILBitmapEffectRenderContext*, LibC::GUID*, Win32cr::Foundation::HRESULT),
-    set_use_software_renderer : Proc(IMILBitmapEffectRenderContext*, Int16, Win32cr::Foundation::HRESULT),
+    set_use_software_renderer : Proc(IMILBitmapEffectRenderContext*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     set_initial_transform : Proc(IMILBitmapEffectRenderContext*, Win32cr::UI::Wpf::MILMatrixF*, Win32cr::Foundation::HRESULT),
     get_final_transform : Proc(IMILBitmapEffectRenderContext*, Win32cr::UI::Wpf::MILMatrixF*, Win32cr::Foundation::HRESULT),
     set_output_dpi : Proc(IMILBitmapEffectRenderContext*, Float64, Float64, Win32cr::Foundation::HRESULT),
@@ -328,7 +336,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectRenderContext, lpVtbl : IMILBitmapEffectRenderContextVtbl* do
+  record IMILBitmapEffectRenderContext, lpVtbl : IMILBitmapEffectRenderContextVtable* do
     GUID = LibC::GUID.new(0x12a2ec7e_u32, 0x2d33_u16, 0x44b2_u16, StaticArray[0xb3_u8, 0x34_u8, 0x1a_u8, 0xbb_u8, 0x78_u8, 0x46_u8, 0xe3_u8, 0x90_u8])
     def query_interface(this : IMILBitmapEffectRenderContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -345,7 +353,7 @@ module Win32cr::UI::Wpf
     def get_output_pixel_format(this : IMILBitmapEffectRenderContext*, pFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_output_pixel_format.call(this, pFormat)
     end
-    def set_use_software_renderer(this : IMILBitmapEffectRenderContext*, fSoftware : Int16) : Win32cr::Foundation::HRESULT
+    def set_use_software_renderer(this : IMILBitmapEffectRenderContext*, fSoftware : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_use_software_renderer.call(this, fSoftware)
     end
     def set_initial_transform(this : IMILBitmapEffectRenderContext*, pMatrix : Win32cr::UI::Wpf::MILMatrixF*) : Win32cr::Foundation::HRESULT
@@ -367,11 +375,12 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectRenderContextImplVtbl,
+
+  record IMILBitmapEffectRenderContextImplVtable,
     query_interface : Proc(IMILBitmapEffectRenderContextImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectRenderContextImpl*, UInt32),
     release : Proc(IMILBitmapEffectRenderContextImpl*, UInt32),
-    get_use_software_renderer : Proc(IMILBitmapEffectRenderContextImpl*, Int16*, Win32cr::Foundation::HRESULT),
+    get_use_software_renderer : Proc(IMILBitmapEffectRenderContextImpl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_transform : Proc(IMILBitmapEffectRenderContextImpl*, Win32cr::UI::Wpf::MILMatrixF*, Win32cr::Foundation::HRESULT),
     update_transform : Proc(IMILBitmapEffectRenderContextImpl*, Win32cr::UI::Wpf::MILMatrixF*, Win32cr::Foundation::HRESULT),
     get_output_bounds : Proc(IMILBitmapEffectRenderContextImpl*, Win32cr::UI::Wpf::MilRectD*, Win32cr::Foundation::HRESULT),
@@ -379,7 +388,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectRenderContextImpl, lpVtbl : IMILBitmapEffectRenderContextImplVtbl* do
+  record IMILBitmapEffectRenderContextImpl, lpVtbl : IMILBitmapEffectRenderContextImplVtable* do
     GUID = LibC::GUID.new(0x4d25accb_u32, 0x797d_u16, 0x4fd2_u16, StaticArray[0xb1_u8, 0x28_u8, 0xdf_u8, 0xfe_u8, 0xff_u8, 0x84_u8, 0xfc_u8, 0xc3_u8])
     def query_interface(this : IMILBitmapEffectRenderContextImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -390,7 +399,7 @@ module Win32cr::UI::Wpf
     def release(this : IMILBitmapEffectRenderContextImpl*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_use_software_renderer(this : IMILBitmapEffectRenderContextImpl*, pfSoftware : Int16*) : Win32cr::Foundation::HRESULT
+    def get_use_software_renderer(this : IMILBitmapEffectRenderContextImpl*, pfSoftware : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_use_software_renderer.call(this, pfSoftware)
     end
     def get_transform(this : IMILBitmapEffectRenderContextImpl*, pMatrix : Win32cr::UI::Wpf::MILMatrixF*) : Win32cr::Foundation::HRESULT
@@ -409,7 +418,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectFactoryVtbl,
+
+  record IMILBitmapEffectFactoryVtable,
     query_interface : Proc(IMILBitmapEffectFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectFactory*, UInt32),
     release : Proc(IMILBitmapEffectFactory*, UInt32),
@@ -419,7 +429,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectFactory, lpVtbl : IMILBitmapEffectFactoryVtbl* do
+  record IMILBitmapEffectFactory, lpVtbl : IMILBitmapEffectFactoryVtable* do
     GUID = LibC::GUID.new(0x33a9df34_u32, 0xa403_u16, 0x4ec7_u16, StaticArray[0xb0_u8, 0x7e_u8, 0xbc_u8, 0x6_u8, 0x82_u8, 0x37_u8, 0x8_u8, 0x45_u8])
     def query_interface(this : IMILBitmapEffectFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -443,20 +453,21 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectPrimitiveVtbl,
+
+  record IMILBitmapEffectPrimitiveVtable,
     query_interface : Proc(IMILBitmapEffectPrimitive*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectPrimitive*, UInt32),
     release : Proc(IMILBitmapEffectPrimitive*, UInt32),
-    get_output : Proc(IMILBitmapEffectPrimitive*, UInt32, Void*, Int16*, Void**, Win32cr::Foundation::HRESULT),
-    transform_point : Proc(IMILBitmapEffectPrimitive*, UInt32, Win32cr::UI::Wpf::MilPoint2D*, Int16, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    transform_rect : Proc(IMILBitmapEffectPrimitive*, UInt32, Win32cr::UI::Wpf::MilRectD*, Int16, Void*, Win32cr::Foundation::HRESULT),
-    has_affine_transform : Proc(IMILBitmapEffectPrimitive*, UInt32, Int16*, Win32cr::Foundation::HRESULT),
-    has_inverse_transform : Proc(IMILBitmapEffectPrimitive*, UInt32, Int16*, Win32cr::Foundation::HRESULT),
+    get_output : Proc(IMILBitmapEffectPrimitive*, UInt32, Void*, Win32cr::Foundation::VARIANT_BOOL*, Void**, Win32cr::Foundation::HRESULT),
+    transform_point : Proc(IMILBitmapEffectPrimitive*, UInt32, Win32cr::UI::Wpf::MilPoint2D*, Win32cr::Foundation::VARIANT_BOOL, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    transform_rect : Proc(IMILBitmapEffectPrimitive*, UInt32, Win32cr::UI::Wpf::MilRectD*, Win32cr::Foundation::VARIANT_BOOL, Void*, Win32cr::Foundation::HRESULT),
+    has_affine_transform : Proc(IMILBitmapEffectPrimitive*, UInt32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    has_inverse_transform : Proc(IMILBitmapEffectPrimitive*, UInt32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_affine_matrix : Proc(IMILBitmapEffectPrimitive*, UInt32, Win32cr::Graphics::Dwm::MilMatrix3x2D*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMILBitmapEffectPrimitive, lpVtbl : IMILBitmapEffectPrimitiveVtbl* do
+  record IMILBitmapEffectPrimitive, lpVtbl : IMILBitmapEffectPrimitiveVtable* do
     GUID = LibC::GUID.new(0x67e31025_u32, 0x3091_u16, 0x4dfc_u16, StaticArray[0x98_u8, 0xd6_u8, 0xdd_u8, 0x49_u8, 0x45_u8, 0x51_u8, 0x46_u8, 0x1d_u8])
     def query_interface(this : IMILBitmapEffectPrimitive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -467,19 +478,19 @@ module Win32cr::UI::Wpf
     def release(this : IMILBitmapEffectPrimitive*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_output(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, pContext : Void*, pfModifyInPlace : Int16*, ppBitmapSource : Void**) : Win32cr::Foundation::HRESULT
+    def get_output(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, pContext : Void*, pfModifyInPlace : Win32cr::Foundation::VARIANT_BOOL*, ppBitmapSource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_output.call(this, uiIndex, pContext, pfModifyInPlace, ppBitmapSource)
     end
-    def transform_point(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, p : Win32cr::UI::Wpf::MilPoint2D*, fForwardTransform : Int16, pContext : Void*, pfPointTransformed : Int16*) : Win32cr::Foundation::HRESULT
+    def transform_point(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, p : Win32cr::UI::Wpf::MilPoint2D*, fForwardTransform : Win32cr::Foundation::VARIANT_BOOL, pContext : Void*, pfPointTransformed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transform_point.call(this, uiIndex, p, fForwardTransform, pContext, pfPointTransformed)
     end
-    def transform_rect(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, p : Win32cr::UI::Wpf::MilRectD*, fForwardTransform : Int16, pContext : Void*) : Win32cr::Foundation::HRESULT
+    def transform_rect(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, p : Win32cr::UI::Wpf::MilRectD*, fForwardTransform : Win32cr::Foundation::VARIANT_BOOL, pContext : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transform_rect.call(this, uiIndex, p, fForwardTransform, pContext)
     end
-    def has_affine_transform(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, pfAffine : Int16*) : Win32cr::Foundation::HRESULT
+    def has_affine_transform(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, pfAffine : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.has_affine_transform.call(this, uiIndex, pfAffine)
     end
-    def has_inverse_transform(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, pfHasInverse : Int16*) : Win32cr::Foundation::HRESULT
+    def has_inverse_transform(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, pfHasInverse : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.has_inverse_transform.call(this, uiIndex, pfHasInverse)
     end
     def get_affine_matrix(this : IMILBitmapEffectPrimitive*, uiIndex : UInt32, pMatrix : Win32cr::Graphics::Dwm::MilMatrix3x2D*) : Win32cr::Foundation::HRESULT
@@ -489,16 +500,17 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectPrimitiveImplVtbl,
+
+  record IMILBitmapEffectPrimitiveImplVtable,
     query_interface : Proc(IMILBitmapEffectPrimitiveImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32),
     release : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32),
-    is_dirty : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32, Int16*, Win32cr::Foundation::HRESULT),
-    is_volatile : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32, Int16*, Win32cr::Foundation::HRESULT)
+    is_dirty : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_volatile : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMILBitmapEffectPrimitiveImpl, lpVtbl : IMILBitmapEffectPrimitiveImplVtbl* do
+  record IMILBitmapEffectPrimitiveImpl, lpVtbl : IMILBitmapEffectPrimitiveImplVtable* do
     GUID = LibC::GUID.new(0xce41e00b_u32, 0xefa6_u16, 0x44e7_u16, StaticArray[0xb0_u8, 0x7_u8, 0xdd_u8, 0x4_u8, 0x2e_u8, 0x3a_u8, 0xe1_u8, 0x26_u8])
     def query_interface(this : IMILBitmapEffectPrimitiveImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -509,17 +521,18 @@ module Win32cr::UI::Wpf
     def release(this : IMILBitmapEffectPrimitiveImpl*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def is_dirty(this : IMILBitmapEffectPrimitiveImpl*, uiOutputIndex : UInt32, pfDirty : Int16*) : Win32cr::Foundation::HRESULT
+    def is_dirty(this : IMILBitmapEffectPrimitiveImpl*, uiOutputIndex : UInt32, pfDirty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_dirty.call(this, uiOutputIndex, pfDirty)
     end
-    def is_volatile(this : IMILBitmapEffectPrimitiveImpl*, uiOutputIndex : UInt32, pfVolatile : Int16*) : Win32cr::Foundation::HRESULT
+    def is_volatile(this : IMILBitmapEffectPrimitiveImpl*, uiOutputIndex : UInt32, pfVolatile : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_volatile.call(this, uiOutputIndex, pfVolatile)
     end
 
   end
 
   @[Extern]
-  record IMILBitmapEffectsVtbl,
+
+  record IMILBitmapEffectsVtable,
     query_interface : Proc(IMILBitmapEffects*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffects*, UInt32),
     release : Proc(IMILBitmapEffects*, UInt32),
@@ -530,7 +543,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffects, lpVtbl : IMILBitmapEffectsVtbl* do
+  record IMILBitmapEffects, lpVtbl : IMILBitmapEffectsVtable* do
     GUID = LibC::GUID.new(0x51ac3dce_u32, 0x67c5_u16, 0x448b_u16, StaticArray[0x91_u8, 0x80_u8, 0xad_u8, 0x3e_u8, 0xab_u8, 0xdd_u8, 0xd5_u8, 0xdd_u8])
     def query_interface(this : IMILBitmapEffects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -557,7 +570,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectorVtbl,
+
+  record IMILBitmapEffectConnectorVtable,
     query_interface : Proc(IMILBitmapEffectConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnector*, UInt32),
     release : Proc(IMILBitmapEffectConnector*, UInt32),
@@ -565,12 +579,12 @@ module Win32cr::UI::Wpf
     get_optimal_format : Proc(IMILBitmapEffectConnector*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_number_formats : Proc(IMILBitmapEffectConnector*, UInt32*, Win32cr::Foundation::HRESULT),
     get_format : Proc(IMILBitmapEffectConnector*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
-    is_connected : Proc(IMILBitmapEffectConnector*, Int16*, Win32cr::Foundation::HRESULT),
+    is_connected : Proc(IMILBitmapEffectConnector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_bitmap_effect : Proc(IMILBitmapEffectConnector*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMILBitmapEffectConnector, lpVtbl : IMILBitmapEffectConnectorVtbl* do
+  record IMILBitmapEffectConnector, lpVtbl : IMILBitmapEffectConnectorVtable* do
     GUID = LibC::GUID.new(0xf59567b3_u32, 0x76c1_u16, 0x4d47_u16, StaticArray[0xba_u8, 0x1e_u8, 0x79_u8, 0xf9_u8, 0x55_u8, 0xe3_u8, 0x50_u8, 0xef_u8])
     def query_interface(this : IMILBitmapEffectConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -593,7 +607,7 @@ module Win32cr::UI::Wpf
     def get_format(this : IMILBitmapEffectConnector*, ulIndex : UInt32, pFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_format.call(this, ulIndex, pFormat)
     end
-    def is_connected(this : IMILBitmapEffectConnector*, pfConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def is_connected(this : IMILBitmapEffectConnector*, pfConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_connected.call(this, pfConnected)
     end
     def get_bitmap_effect(this : IMILBitmapEffectConnector*, ppEffect : Void**) : Win32cr::Foundation::HRESULT
@@ -603,7 +617,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectInputConnectorVtbl,
+
+  record IMILBitmapEffectInputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectInputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectInputConnector*, UInt32),
     release : Proc(IMILBitmapEffectInputConnector*, UInt32),
@@ -611,14 +626,14 @@ module Win32cr::UI::Wpf
     get_optimal_format : Proc(IMILBitmapEffectInputConnector*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_number_formats : Proc(IMILBitmapEffectInputConnector*, UInt32*, Win32cr::Foundation::HRESULT),
     get_format : Proc(IMILBitmapEffectInputConnector*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
-    is_connected : Proc(IMILBitmapEffectInputConnector*, Int16*, Win32cr::Foundation::HRESULT),
+    is_connected : Proc(IMILBitmapEffectInputConnector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_bitmap_effect : Proc(IMILBitmapEffectInputConnector*, Void**, Win32cr::Foundation::HRESULT),
     connect_to : Proc(IMILBitmapEffectInputConnector*, Void*, Win32cr::Foundation::HRESULT),
     get_connection : Proc(IMILBitmapEffectInputConnector*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMILBitmapEffectInputConnector, lpVtbl : IMILBitmapEffectInputConnectorVtbl* do
+  record IMILBitmapEffectInputConnector, lpVtbl : IMILBitmapEffectInputConnectorVtable* do
     GUID = LibC::GUID.new(0xa9b4ecaa_u32, 0x7a3c_u16, 0x45e7_u16, StaticArray[0x85_u8, 0x73_u8, 0xf4_u8, 0xb8_u8, 0x1b_u8, 0x60_u8, 0xdd_u8, 0x6c_u8])
     def query_interface(this : IMILBitmapEffectInputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -641,7 +656,7 @@ module Win32cr::UI::Wpf
     def get_format(this : IMILBitmapEffectInputConnector*, ulIndex : UInt32, pFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_format.call(this, ulIndex, pFormat)
     end
-    def is_connected(this : IMILBitmapEffectInputConnector*, pfConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def is_connected(this : IMILBitmapEffectInputConnector*, pfConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_connected.call(this, pfConnected)
     end
     def get_bitmap_effect(this : IMILBitmapEffectInputConnector*, ppEffect : Void**) : Win32cr::Foundation::HRESULT
@@ -657,7 +672,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectOutputConnectorVtbl,
+
+  record IMILBitmapEffectOutputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectOutputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectOutputConnector*, UInt32),
     release : Proc(IMILBitmapEffectOutputConnector*, UInt32),
@@ -665,14 +681,14 @@ module Win32cr::UI::Wpf
     get_optimal_format : Proc(IMILBitmapEffectOutputConnector*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_number_formats : Proc(IMILBitmapEffectOutputConnector*, UInt32*, Win32cr::Foundation::HRESULT),
     get_format : Proc(IMILBitmapEffectOutputConnector*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
-    is_connected : Proc(IMILBitmapEffectOutputConnector*, Int16*, Win32cr::Foundation::HRESULT),
+    is_connected : Proc(IMILBitmapEffectOutputConnector*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_bitmap_effect : Proc(IMILBitmapEffectOutputConnector*, Void**, Win32cr::Foundation::HRESULT),
     get_number_connections : Proc(IMILBitmapEffectOutputConnector*, UInt32*, Win32cr::Foundation::HRESULT),
     get_connection : Proc(IMILBitmapEffectOutputConnector*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMILBitmapEffectOutputConnector, lpVtbl : IMILBitmapEffectOutputConnectorVtbl* do
+  record IMILBitmapEffectOutputConnector, lpVtbl : IMILBitmapEffectOutputConnectorVtable* do
     GUID = LibC::GUID.new(0x92957aad_u32, 0x841b_u16, 0x4866_u16, StaticArray[0x82_u8, 0xec_u8, 0x87_u8, 0x52_u8, 0x46_u8, 0x8b_u8, 0x7_u8, 0xfd_u8])
     def query_interface(this : IMILBitmapEffectOutputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -695,7 +711,7 @@ module Win32cr::UI::Wpf
     def get_format(this : IMILBitmapEffectOutputConnector*, ulIndex : UInt32, pFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_format.call(this, ulIndex, pFormat)
     end
-    def is_connected(this : IMILBitmapEffectOutputConnector*, pfConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def is_connected(this : IMILBitmapEffectOutputConnector*, pfConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_connected.call(this, pfConnected)
     end
     def get_bitmap_effect(this : IMILBitmapEffectOutputConnector*, ppEffect : Void**) : Win32cr::Foundation::HRESULT
@@ -711,7 +727,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectOutputConnectorImplVtbl,
+
+  record IMILBitmapEffectOutputConnectorImplVtable,
     query_interface : Proc(IMILBitmapEffectOutputConnectorImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectOutputConnectorImpl*, UInt32),
     release : Proc(IMILBitmapEffectOutputConnectorImpl*, UInt32),
@@ -720,7 +737,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectOutputConnectorImpl, lpVtbl : IMILBitmapEffectOutputConnectorImplVtbl* do
+  record IMILBitmapEffectOutputConnectorImpl, lpVtbl : IMILBitmapEffectOutputConnectorImplVtable* do
     GUID = LibC::GUID.new(0x21fae777_u32, 0x8b39_u16, 0x4bfa_u16, StaticArray[0x9f_u8, 0x2d_u8, 0xf3_u8, 0x94_u8, 0x1e_u8, 0xd3_u8, 0x69_u8, 0x13_u8])
     def query_interface(this : IMILBitmapEffectOutputConnectorImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -741,7 +758,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectInteriorInputConnectorVtbl,
+
+  record IMILBitmapEffectInteriorInputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectInteriorInputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectInteriorInputConnector*, UInt32),
     release : Proc(IMILBitmapEffectInteriorInputConnector*, UInt32),
@@ -749,7 +767,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectInteriorInputConnector, lpVtbl : IMILBitmapEffectInteriorInputConnectorVtbl* do
+  record IMILBitmapEffectInteriorInputConnector, lpVtbl : IMILBitmapEffectInteriorInputConnectorVtable* do
     GUID = LibC::GUID.new(0x20287e9e_u32, 0x86a2_u16, 0x4e15_u16, StaticArray[0x95_u8, 0x3d_u8, 0xeb_u8, 0x14_u8, 0x38_u8, 0xa5_u8, 0xb8_u8, 0x42_u8])
     def query_interface(this : IMILBitmapEffectInteriorInputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -767,7 +785,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectInteriorOutputConnectorVtbl,
+
+  record IMILBitmapEffectInteriorOutputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectInteriorOutputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectInteriorOutputConnector*, UInt32),
     release : Proc(IMILBitmapEffectInteriorOutputConnector*, UInt32),
@@ -775,7 +794,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectInteriorOutputConnector, lpVtbl : IMILBitmapEffectInteriorOutputConnectorVtbl* do
+  record IMILBitmapEffectInteriorOutputConnector, lpVtbl : IMILBitmapEffectInteriorOutputConnectorVtable* do
     GUID = LibC::GUID.new(0xbbb6dc_u32, 0xacc9_u16, 0x4bfc_u16, StaticArray[0xb3_u8, 0x44_u8, 0x8b_u8, 0xee_u8, 0x38_u8, 0x3d_u8, 0xfe_u8, 0xfa_u8])
     def query_interface(this : IMILBitmapEffectInteriorOutputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -793,7 +812,8 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectEventsVtbl,
+
+  record IMILBitmapEffectEventsVtable,
     query_interface : Proc(IMILBitmapEffectEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectEvents*, UInt32),
     release : Proc(IMILBitmapEffectEvents*, UInt32),
@@ -802,7 +822,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectEvents, lpVtbl : IMILBitmapEffectEventsVtbl* do
+  record IMILBitmapEffectEvents, lpVtbl : IMILBitmapEffectEventsVtable* do
     GUID = LibC::GUID.new(0x2e880dd8_u32, 0xf8ce_u16, 0x457b_u16, StaticArray[0x81_u8, 0x99_u8, 0xd6_u8, 0xb_u8, 0xb3_u8, 0xd7_u8, 0xef_u8, 0x98_u8])
     def query_interface(this : IMILBitmapEffectEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

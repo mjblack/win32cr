@@ -109,7 +109,7 @@ def winproc(hwnd : Fd::HWND, uMsg : UInt32, wParam : Fd::WPARAM, lParam : Fd::LP
       100,
       50,
       hwnd,                                                                 # Parent window
-      0_i64,                                                                # Menu
+      Pointer(Void).null,                                                   # Menu (HMENU)
       lParam.unsafe_as(Pointer(WM::CREATESTRUCTW)).value.hInstance,         # Instance handle
       Pointer(Void).null                                                    # Additional application data
     )
@@ -121,9 +121,9 @@ def winproc(hwnd : Fd::HWND, uMsg : UInt32, wParam : Fd::WPARAM, lParam : Fd::LP
   when WM::WM_SETFOCUS
     KM.setFocus(AppData.hwndEdit.not_nil!)
   when WM::WM_SIZE
-    WM.moveWindow(AppData.hwndEdit.unsafe_as(Fd::HWND), 0, 0, loword(lParam), hiword(pointerof(lParam)), 1)
+    WM.moveWindow(AppData.hwndEdit.unsafe_as(Fd::HWND), 0, 0, loword(lParam.to_u32!), hiword(lParam.to_u32!), 1)
   when WM::WM_COMMAND
-    case loword(wParam)
+    case loword(wParam.to_u32!)
     when MNU_ITEM_FILE_QUIT
       WM.postMessageW(hwnd, WM::WM_CLOSE, 0_u64, 0_i64)
     end
@@ -196,7 +196,7 @@ hwnd = WM.createWindowExW(
   WM::CW_USEDEFAULT,
   WM::CW_USEDEFAULT,
   Pointer(Void).null,                          # Parent window
-  0_i64,                                       # Menu
+  Pointer(Void).null,                          # Menu (HMENU)
   hInstance,                                   # Instance handle
   Pointer(Void).null                           # Additional application data
 )

@@ -1,5 +1,6 @@
 require "./../foundation.cr"
 require "./../system/com.cr"
+require "./vhd.cr"
 
 module Win32cr::Storage::VirtualDiskService
   extend self
@@ -75,8 +76,8 @@ module Win32cr::Storage::VirtualDiskService
   VDS_POOL_ATTRIB_STOR_EFFCY_HINT = 67108864_i32
   VDS_POOL_ATTRIB_CUSTOM_ATTRIB = 134217728_i32
   VDS_ATTACH_VIRTUAL_DISK_FLAG_USE_FILE_ACL = 1_u32
-  CLSID_VdsLoader = "9c38ed61-d565-4728-aeee-c80952f0ecde"
-  CLSID_VdsService = "7d1933cb-86f6-4a98-8628-01be94c9a575"
+  CLSID_VdsLoader = LibC::GUID.new(0x9c38ed61_u32, 0xd565_u16, 0x4728_u16, StaticArray[0xae_u8, 0xee_u8, 0xc8_u8, 0x9_u8, 0x52_u8, 0xf0_u8, 0xec_u8, 0xde_u8])
+  CLSID_VdsService = LibC::GUID.new(0x7d1933cb_u32, 0x86f6_u16, 0x4a98_u16, StaticArray[0x86_u8, 0x28_u8, 0x1_u8, 0xbe_u8, 0x94_u8, 0xc9_u8, 0xa5_u8, 0x75_u8])
   MAX_FS_NAME_SIZE = 8_u32
   MAX_FS_FORMAT_SUPPORT_NAME_SIZE = 32_u32
   MAX_FS_ALLOWED_CLUSTER_SIZES_SIZE = 32_u32
@@ -787,6 +788,144 @@ module Win32cr::Storage::VirtualDiskService
     VDS_ILF_REQUIRE_IPSEC = 1_i32
     VDS_ILF_MULTIPATH_ENABLED = 2_i32
   end
+  enum VDS_PACK_STATUS
+    VDS_PS_UNKNOWN = 0_i32
+    VDS_PS_ONLINE = 1_i32
+    VDS_PS_OFFLINE = 4_i32
+  end
+  enum VDS_PACK_FLAG
+    VDS_PKF_FOREIGN = 1_i32
+    VDS_PKF_NOQUORUM = 2_i32
+    VDS_PKF_POLICY = 4_i32
+    VDS_PKF_CORRUPTED = 8_i32
+    VDS_PKF_ONLINE_ERROR = 16_i32
+  end
+  enum VDS_DISK_STATUS
+    VDS_DS_UNKNOWN = 0_i32
+    VDS_DS_ONLINE = 1_i32
+    VDS_DS_NOT_READY = 2_i32
+    VDS_DS_NO_MEDIA = 3_i32
+    VDS_DS_FAILED = 5_i32
+    VDS_DS_MISSING = 6_i32
+    VDS_DS_OFFLINE = 4_i32
+  end
+  enum VDS_PARTITION_STYLE
+    VDS_PST_UNKNOWN = 0_i32
+    VDS_PST_MBR = 1_i32
+    VDS_PST_GPT = 2_i32
+  end
+  enum VDS_DISK_FLAG
+    VDS_DF_AUDIO_CD = 1_i32
+    VDS_DF_HOTSPARE = 2_i32
+    VDS_DF_RESERVE_CAPABLE = 4_i32
+    VDS_DF_MASKED = 8_i32
+    VDS_DF_STYLE_CONVERTIBLE = 16_i32
+    VDS_DF_CLUSTERED = 32_i32
+    VDS_DF_READ_ONLY = 64_i32
+    VDS_DF_SYSTEM_DISK = 128_i32
+    VDS_DF_BOOT_DISK = 256_i32
+    VDS_DF_PAGEFILE_DISK = 512_i32
+    VDS_DF_HIBERNATIONFILE_DISK = 1024_i32
+    VDS_DF_CRASHDUMP_DISK = 2048_i32
+    VDS_DF_HAS_ARC_PATH = 4096_i32
+    VDS_DF_DYNAMIC = 8192_i32
+    VDS_DF_BOOT_FROM_DISK = 16384_i32
+    VDS_DF_CURRENT_READ_ONLY = 32768_i32
+    VDS_DF_REFS_NOT_SUPPORTED = 65536_i32
+  end
+  enum VDS_PARTITION_FLAG
+    VDS_PTF_SYSTEM = 1_i32
+  end
+  enum VDS_LUN_RESERVE_MODE
+    VDS_LRM_NONE = 0_i32
+    VDS_LRM_EXCLUSIVE_RW = 1_i32
+    VDS_LRM_EXCLUSIVE_RO = 2_i32
+    VDS_LRM_SHARED_RO = 3_i32
+    VDS_LRM_SHARED_RW = 4_i32
+  end
+  enum VDS_VOLUME_STATUS
+    VDS_VS_UNKNOWN = 0_i32
+    VDS_VS_ONLINE = 1_i32
+    VDS_VS_NO_MEDIA = 3_i32
+    VDS_VS_FAILED = 5_i32
+    VDS_VS_OFFLINE = 4_i32
+  end
+  enum VDS_VOLUME_TYPE
+    VDS_VT_UNKNOWN = 0_i32
+    VDS_VT_SIMPLE = 10_i32
+    VDS_VT_SPAN = 11_i32
+    VDS_VT_STRIPE = 12_i32
+    VDS_VT_MIRROR = 13_i32
+    VDS_VT_PARITY = 14_i32
+  end
+  enum VDS_VOLUME_FLAG
+    VDS_VF_SYSTEM_VOLUME = 1_i32
+    VDS_VF_BOOT_VOLUME = 2_i32
+    VDS_VF_ACTIVE = 4_i32
+    VDS_VF_READONLY = 8_i32
+    VDS_VF_HIDDEN = 16_i32
+    VDS_VF_CAN_EXTEND = 32_i32
+    VDS_VF_CAN_SHRINK = 64_i32
+    VDS_VF_PAGEFILE = 128_i32
+    VDS_VF_HIBERNATION = 256_i32
+    VDS_VF_CRASHDUMP = 512_i32
+    VDS_VF_INSTALLABLE = 1024_i32
+    VDS_VF_LBN_REMAP_ENABLED = 2048_i32
+    VDS_VF_FORMATTING = 4096_i32
+    VDS_VF_NOT_FORMATTABLE = 8192_i32
+    VDS_VF_NTFS_NOT_SUPPORTED = 16384_i32
+    VDS_VF_FAT32_NOT_SUPPORTED = 32768_i32
+    VDS_VF_FAT_NOT_SUPPORTED = 65536_i32
+    VDS_VF_NO_DEFAULT_DRIVE_LETTER = 131072_i32
+    VDS_VF_PERMANENTLY_DISMOUNTED = 262144_i32
+    VDS_VF_PERMANENT_DISMOUNT_SUPPORTED = 524288_i32
+    VDS_VF_SHADOW_COPY = 1048576_i32
+    VDS_VF_FVE_ENABLED = 2097152_i32
+    VDS_VF_DIRTY = 4194304_i32
+    VDS_VF_REFS_NOT_SUPPORTED = 8388608_i32
+    VDS_VF_BACKS_BOOT_VOLUME = 16777216_i32
+    VDS_VF_BACKED_BY_WIM_IMAGE = 33554432_i32
+  end
+  enum VDS_VOLUME_PLEX_TYPE
+    VDS_VPT_UNKNOWN = 0_i32
+    VDS_VPT_SIMPLE = 10_i32
+    VDS_VPT_SPAN = 11_i32
+    VDS_VPT_STRIPE = 12_i32
+    VDS_VPT_PARITY = 14_i32
+  end
+  enum VDS_VOLUME_PLEX_STATUS
+    VDS_VPS_UNKNOWN = 0_i32
+    VDS_VPS_ONLINE = 1_i32
+    VDS_VPS_NO_MEDIA = 3_i32
+    VDS_VPS_FAILED = 5_i32
+  end
+  enum VDS_DISK_EXTENT_TYPE
+    VDS_DET_UNKNOWN = 0_i32
+    VDS_DET_FREE = 1_i32
+    VDS_DET_DATA = 2_i32
+    VDS_DET_OEM = 3_i32
+    VDS_DET_ESP = 4_i32
+    VDS_DET_MSR = 5_i32
+    VDS_DET_LDM = 6_i32
+    VDS_DET_CLUSTER = 7_i32
+    VDS_DET_UNUSABLE = 32767_i32
+  end
+  enum VDS_DISK_OFFLINE_REASON
+    VDSDiskOfflineReasonNone = 0_i32
+    VDSDiskOfflineReasonPolicy = 1_i32
+    VDSDiskOfflineReasonRedundantPath = 2_i32
+    VDSDiskOfflineReasonSnapshot = 3_i32
+    VDSDiskOfflineReasonCollision = 4_i32
+    VDSDiskOfflineReasonResourceExhaustion = 5_i32
+    VDSDiskOfflineReasonWriteFailure = 6_i32
+    VDSDiskOfflineReasonDIScan = 7_i32
+    VDSDiskOfflineReasonLostDataPersistence = 8_i32
+  end
+  enum VDS_PARTITION_STYLE__
+    VDS_PARTITION_STYLE_MBR = 0_i32
+    VDS_PARTITION_STYLE_GPT = 1_i32
+    VDS_PARTITION_STYLE_RAW = 2_i32
+  end
   enum VDS_SUB_SYSTEM_STATUS
     VDS_SSS_UNKNOWN = 0_i32
     VDS_SSS_ONLINE = 1_i32
@@ -996,6 +1135,83 @@ module Win32cr::Storage::VirtualDiskService
     VDS_RT_RAID53 = 25_i32
     VDS_RT_RAID60 = 26_i32
     VDS_RT_RAID61 = 27_i32
+  end
+  enum VDS_VDISK_STATE
+    VDS_VST_UNKNOWN = 0_i32
+    VDS_VST_ADDED = 1_i32
+    VDS_VST_OPEN = 2_i32
+    VDS_VST_ATTACH_PENDING = 3_i32
+    VDS_VST_ATTACHED_NOT_OPEN = 4_i32
+    VDS_VST_ATTACHED = 5_i32
+    VDS_VST_DETACH_PENDING = 6_i32
+    VDS_VST_COMPACTING = 7_i32
+    VDS_VST_MERGING = 8_i32
+    VDS_VST_EXPANDING = 9_i32
+    VDS_VST_DELETED = 10_i32
+    VDS_VST_MAX = 11_i32
+  end
+  enum VDS_SERVICE_FLAG
+    VDS_SVF_SUPPORT_DYNAMIC = 1_i32
+    VDS_SVF_SUPPORT_FAULT_TOLERANT = 2_i32
+    VDS_SVF_SUPPORT_GPT = 4_i32
+    VDS_SVF_SUPPORT_DYNAMIC_1394 = 8_i32
+    VDS_SVF_CLUSTER_SERVICE_CONFIGURED = 16_i32
+    VDS_SVF_AUTO_MOUNT_OFF = 32_i32
+    VDS_SVF_OS_UNINSTALL_VALID = 64_i32
+    VDS_SVF_EFI = 128_i32
+    VDS_SVF_SUPPORT_MIRROR = 256_i32
+    VDS_SVF_SUPPORT_RAID5 = 512_i32
+    VDS_SVF_SUPPORT_REFS = 1024_i32
+  end
+  enum VDS_SAN_POLICY
+    VDS_SP_UNKNOWN = 0_i32
+    VDS_SP_ONLINE = 1_i32
+    VDS_SP_OFFLINE_SHARED = 2_i32
+    VDS_SP_OFFLINE = 3_i32
+    VDS_SP_OFFLINE_INTERNAL = 4_i32
+    VDS_SP_MAX = 5_i32
+  end
+  enum VDS_DRIVE_LETTER_FLAG
+    VDS_DLF_NON_PERSISTENT = 1_i32
+  end
+  enum VDS_FILE_SYSTEM_FLAG
+    VDS_FSF_SUPPORT_FORMAT = 1_i32
+    VDS_FSF_SUPPORT_QUICK_FORMAT = 2_i32
+    VDS_FSF_SUPPORT_COMPRESS = 4_i32
+    VDS_FSF_SUPPORT_SPECIFY_LABEL = 8_i32
+    VDS_FSF_SUPPORT_MOUNT_POINT = 16_i32
+    VDS_FSF_SUPPORT_REMOVABLE_MEDIA = 32_i32
+    VDS_FSF_SUPPORT_EXTEND = 64_i32
+    VDS_FSF_ALLOCATION_UNIT_512 = 65536_i32
+    VDS_FSF_ALLOCATION_UNIT_1K = 131072_i32
+    VDS_FSF_ALLOCATION_UNIT_2K = 262144_i32
+    VDS_FSF_ALLOCATION_UNIT_4K = 524288_i32
+    VDS_FSF_ALLOCATION_UNIT_8K = 1048576_i32
+    VDS_FSF_ALLOCATION_UNIT_16K = 2097152_i32
+    VDS_FSF_ALLOCATION_UNIT_32K = 4194304_i32
+    VDS_FSF_ALLOCATION_UNIT_64K = 8388608_i32
+    VDS_FSF_ALLOCATION_UNIT_128K = 16777216_i32
+    VDS_FSF_ALLOCATION_UNIT_256K = 33554432_i32
+  end
+  enum VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG
+    VDS_FSS_DEFAULT = 1_i32
+    VDS_FSS_PREVIOUS_REVISION = 2_i32
+    VDS_FSS_RECOMMENDED = 4_i32
+  end
+  enum VDS_FILE_SYSTEM_PROP_FLAG
+    VDS_FPF_COMPRESSED = 1_i32
+  end
+  enum VDS_FORMAT_OPTION_FLAGS
+    VDS_FSOF_NONE = 0_i32
+    VDS_FSOF_FORCE = 1_i32
+    VDS_FSOF_QUICK = 2_i32
+    VDS_FSOF_COMPRESSION = 4_i32
+    VDS_FSOF_DUPLICATE_METADATA = 8_i32
+  end
+  enum VDS_QUERY_PROVIDER_FLAG
+    VDS_QUERY_SOFTWARE_PROVIDERS = 1_i32
+    VDS_QUERY_HARDWARE_PROVIDERS = 2_i32
+    VDS_QUERY_VIRTUALDISK_PROVIDERS = 4_i32
   end
 
   @[Extern]
@@ -1229,20 +1445,21 @@ module Win32cr::Storage::VirtualDiskService
     property cpg : Cpg_
     property cvd : Cvd_
 
-      # Nested Type Cpg_
+      # Nested Type Cp_
       @[Extern]
-      struct Cpg_
-    property pPortalGroupUnk : Void*
-    def initialize(@pPortalGroupUnk : Void*)
+      struct Cp_
+    property ullOffset : UInt64
+    property volumeId : LibC::GUID
+    def initialize(@ullOffset : UInt64, @volumeId : LibC::GUID)
     end
       end
 
 
-      # Nested Type Cl_
+      # Nested Type Cv_
       @[Extern]
-      struct Cl_
-    property pLunUnk : Void*
-    def initialize(@pLunUnk : Void*)
+      struct Cv_
+    property pVolumeUnk : Void*
+    def initialize(@pVolumeUnk : Void*)
     end
       end
 
@@ -1256,30 +1473,20 @@ module Win32cr::Storage::VirtualDiskService
       end
 
 
-      # Nested Type Cp_
-      @[Extern]
-      struct Cp_
-    property ullOffset : UInt64
-    property volumeId : LibC::GUID
-    def initialize(@ullOffset : UInt64, @volumeId : LibC::GUID)
-    end
-      end
-
-
-      # Nested Type Cvd_
-      @[Extern]
-      struct Cvd_
-    property pVDiskUnk : Void*
-    def initialize(@pVDiskUnk : Void*)
-    end
-      end
-
-
       # Nested Type Sv_
       @[Extern]
       struct Sv_
     property ullReclaimedBytes : UInt64
     def initialize(@ullReclaimedBytes : UInt64)
+    end
+      end
+
+
+      # Nested Type Cl_
+      @[Extern]
+      struct Cl_
+    property pLunUnk : Void*
+    def initialize(@pLunUnk : Void*)
     end
       end
 
@@ -1293,11 +1500,20 @@ module Win32cr::Storage::VirtualDiskService
       end
 
 
-      # Nested Type Cv_
+      # Nested Type Cpg_
       @[Extern]
-      struct Cv_
-    property pVolumeUnk : Void*
-    def initialize(@pVolumeUnk : Void*)
+      struct Cpg_
+    property pPortalGroupUnk : Void*
+    def initialize(@pPortalGroupUnk : Void*)
+    end
+      end
+
+
+      # Nested Type Cvd_
+      @[Extern]
+      struct Cvd_
+    property pVDiskUnk : Void*
+    def initialize(@pVDiskUnk : Void*)
     end
       end
 
@@ -1406,22 +1622,22 @@ module Win32cr::Storage::VirtualDiskService
     property anonymous2 : Anonymous2_e__Union_
     property anonymous3 : Anonymous3_e__Union_
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property hbaPortId : LibC::GUID
-    property initiatorAdapterId : LibC::GUID
-    def initialize(@hbaPortId : LibC::GUID, @initiatorAdapterId : LibC::GUID)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property controllerPortId : LibC::GUID
     property targetPortalId : LibC::GUID
     def initialize(@controllerPortId : LibC::GUID, @targetPortalId : LibC::GUID)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property hbaPortId : LibC::GUID
+    property initiatorAdapterId : LibC::GUID
+    def initialize(@hbaPortId : LibC::GUID, @initiatorAdapterId : LibC::GUID)
     end
     end
 
@@ -1445,6 +1661,381 @@ module Win32cr::Storage::VirtualDiskService
     property bPrimaryPath : Win32cr::Foundation::BOOL
     property ulWeight : UInt32
     def initialize(@pathId : Win32cr::Storage::VirtualDiskService::VDS_PATH_ID, @bPrimaryPath : Win32cr::Foundation::BOOL, @ulWeight : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PACK_PROP
+    property id : LibC::GUID
+    property pwszName : Win32cr::Foundation::PWSTR
+    property status : Win32cr::Storage::VirtualDiskService::VDS_PACK_STATUS
+    property ulFlags : UInt32
+    def initialize(@id : LibC::GUID, @pwszName : Win32cr::Foundation::PWSTR, @status : Win32cr::Storage::VirtualDiskService::VDS_PACK_STATUS, @ulFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DISK_PROP
+    property id : LibC::GUID
+    property status : Win32cr::Storage::VirtualDiskService::VDS_DISK_STATUS
+    property reserve_mode : Win32cr::Storage::VirtualDiskService::VDS_LUN_RESERVE_MODE
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property dwDeviceType : UInt32
+    property dwMediaType : UInt32
+    property ullSize : UInt64
+    property ulBytesPerSector : UInt32
+    property ulSectorsPerTrack : UInt32
+    property ulTracksPerCylinder : UInt32
+    property ulFlags : UInt32
+    property bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE
+    property partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
+    property pwszDiskAddress : Win32cr::Foundation::PWSTR
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszAdaptorName : Win32cr::Foundation::PWSTR
+    property pwszDevicePath : Win32cr::Foundation::PWSTR
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwSignature : UInt32
+    property disk_guid : LibC::GUID
+    def initialize(@dwSignature : UInt32, @disk_guid : LibC::GUID)
+    end
+    end
+
+    def initialize(@id : LibC::GUID, @status : Win32cr::Storage::VirtualDiskService::VDS_DISK_STATUS, @reserve_mode : Win32cr::Storage::VirtualDiskService::VDS_LUN_RESERVE_MODE, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @dwDeviceType : UInt32, @dwMediaType : UInt32, @ullSize : UInt64, @ulBytesPerSector : UInt32, @ulSectorsPerTrack : UInt32, @ulTracksPerCylinder : UInt32, @ulFlags : UInt32, @bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE, @partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, @anonymous : Anonymous_e__Union_, @pwszDiskAddress : Win32cr::Foundation::PWSTR, @pwszName : Win32cr::Foundation::PWSTR, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszAdaptorName : Win32cr::Foundation::PWSTR, @pwszDevicePath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DISK_PROP2
+    property id : LibC::GUID
+    property status : Win32cr::Storage::VirtualDiskService::VDS_DISK_STATUS
+    property offline_reason : Win32cr::Storage::VirtualDiskService::VDS_DISK_OFFLINE_REASON
+    property reserve_mode : Win32cr::Storage::VirtualDiskService::VDS_LUN_RESERVE_MODE
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property dwDeviceType : UInt32
+    property dwMediaType : UInt32
+    property ullSize : UInt64
+    property ulBytesPerSector : UInt32
+    property ulSectorsPerTrack : UInt32
+    property ulTracksPerCylinder : UInt32
+    property ulFlags : UInt32
+    property bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE
+    property partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
+    property pwszDiskAddress : Win32cr::Foundation::PWSTR
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pwszAdaptorName : Win32cr::Foundation::PWSTR
+    property pwszDevicePath : Win32cr::Foundation::PWSTR
+    property pwszLocationPath : Win32cr::Foundation::PWSTR
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwSignature : UInt32
+    property disk_guid : LibC::GUID
+    def initialize(@dwSignature : UInt32, @disk_guid : LibC::GUID)
+    end
+    end
+
+    def initialize(@id : LibC::GUID, @status : Win32cr::Storage::VirtualDiskService::VDS_DISK_STATUS, @offline_reason : Win32cr::Storage::VirtualDiskService::VDS_DISK_OFFLINE_REASON, @reserve_mode : Win32cr::Storage::VirtualDiskService::VDS_LUN_RESERVE_MODE, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @dwDeviceType : UInt32, @dwMediaType : UInt32, @ullSize : UInt64, @ulBytesPerSector : UInt32, @ulSectorsPerTrack : UInt32, @ulTracksPerCylinder : UInt32, @ulFlags : UInt32, @bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE, @partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, @anonymous : Anonymous_e__Union_, @pwszDiskAddress : Win32cr::Foundation::PWSTR, @pwszName : Win32cr::Foundation::PWSTR, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pwszAdaptorName : Win32cr::Foundation::PWSTR, @pwszDevicePath : Win32cr::Foundation::PWSTR, @pwszLocationPath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct VDS_ADVANCEDDISK_PROP
+    property pwszId : Win32cr::Foundation::PWSTR
+    property pwszPathname : Win32cr::Foundation::PWSTR
+    property pwszLocation : Win32cr::Foundation::PWSTR
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property pswzIdentifier : Win32cr::Foundation::PWSTR
+    property usIdentifierFormat : UInt16
+    property ulNumber : UInt32
+    property pwszSerialNumber : Win32cr::Foundation::PWSTR
+    property pwszFirmwareVersion : Win32cr::Foundation::PWSTR
+    property pwszManufacturer : Win32cr::Foundation::PWSTR
+    property pwszModel : Win32cr::Foundation::PWSTR
+    property ullTotalSize : UInt64
+    property ullAllocatedSize : UInt64
+    property ulLogicalSectorSize : UInt32
+    property ulPhysicalSectorSize : UInt32
+    property ulPartitionCount : UInt32
+    property status : Win32cr::Storage::VirtualDiskService::VDS_DISK_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE
+    property partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
+    property ulFlags : UInt32
+    property dwDeviceType : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwSignature : UInt32
+    property disk_guid : LibC::GUID
+    def initialize(@dwSignature : UInt32, @disk_guid : LibC::GUID)
+    end
+    end
+
+    def initialize(@pwszId : Win32cr::Foundation::PWSTR, @pwszPathname : Win32cr::Foundation::PWSTR, @pwszLocation : Win32cr::Foundation::PWSTR, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @pswzIdentifier : Win32cr::Foundation::PWSTR, @usIdentifierFormat : UInt16, @ulNumber : UInt32, @pwszSerialNumber : Win32cr::Foundation::PWSTR, @pwszFirmwareVersion : Win32cr::Foundation::PWSTR, @pwszManufacturer : Win32cr::Foundation::PWSTR, @pwszModel : Win32cr::Foundation::PWSTR, @ullTotalSize : UInt64, @ullAllocatedSize : UInt64, @ulLogicalSectorSize : UInt32, @ulPhysicalSectorSize : UInt32, @ulPartitionCount : UInt32, @status : Win32cr::Storage::VirtualDiskService::VDS_DISK_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @bus_type : Win32cr::Storage::VirtualDiskService::VDS_STORAGE_BUS_TYPE, @partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, @anonymous : Anonymous_e__Union_, @ulFlags : UInt32, @dwDeviceType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_VOLUME_PROP
+    property id : LibC::GUID
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE
+    property status : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE
+    property ullSize : UInt64
+    property ulFlags : UInt32
+    property recommended_file_system_type : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE
+    property pwszName : Win32cr::Foundation::PWSTR
+    def initialize(@id : LibC::GUID, @type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE, @status : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE, @ullSize : UInt64, @ulFlags : UInt32, @recommended_file_system_type : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, @pwszName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct VDS_VOLUME_PROP2
+    property id : LibC::GUID
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE
+    property status : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE
+    property ullSize : UInt64
+    property ulFlags : UInt32
+    property recommended_file_system_type : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE
+    property cbUniqueId : UInt32
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pUniqueId : UInt8*
+    def initialize(@id : LibC::GUID, @type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE, @status : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE, @ullSize : UInt64, @ulFlags : UInt32, @recommended_file_system_type : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, @cbUniqueId : UInt32, @pwszName : Win32cr::Foundation::PWSTR, @pUniqueId : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct VDS_VOLUME_PLEX_PROP
+    property id : LibC::GUID
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PLEX_TYPE
+    property status : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PLEX_STATUS
+    property health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH
+    property transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE
+    property ullSize : UInt64
+    property ulStripeSize : UInt32
+    property ulNumberOfMembers : UInt32
+    def initialize(@id : LibC::GUID, @type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PLEX_TYPE, @status : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PLEX_STATUS, @health : Win32cr::Storage::VirtualDiskService::VDS_HEALTH, @transition_state : Win32cr::Storage::VirtualDiskService::VDS_TRANSITION_STATE, @ullSize : UInt64, @ulStripeSize : UInt32, @ulNumberOfMembers : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DISK_EXTENT
+    property diskId : LibC::GUID
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_DISK_EXTENT_TYPE
+    property ullOffset : UInt64
+    property ullSize : UInt64
+    property volumeId : LibC::GUID
+    property plexId : LibC::GUID
+    property memberIdx : UInt32
+    def initialize(@diskId : LibC::GUID, @type__ : Win32cr::Storage::VirtualDiskService::VDS_DISK_EXTENT_TYPE, @ullOffset : UInt64, @ullSize : UInt64, @volumeId : LibC::GUID, @plexId : LibC::GUID, @memberIdx : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DISK_FREE_EXTENT
+    property diskId : LibC::GUID
+    property ullOffset : UInt64
+    property ullSize : UInt64
+    def initialize(@diskId : LibC::GUID, @ullOffset : UInt64, @ullSize : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct VDS_INPUT_DISK
+    property diskId : LibC::GUID
+    property ullSize : UInt64
+    property plexId : LibC::GUID
+    property memberIdx : UInt32
+    def initialize(@diskId : LibC::GUID, @ullSize : UInt64, @plexId : LibC::GUID, @memberIdx : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PARTITION_INFO_GPT
+    property partitionType : LibC::GUID
+    property partitionId : LibC::GUID
+    property attributes : UInt64
+    property name : UInt16[36]
+    def initialize(@partitionType : LibC::GUID, @partitionId : LibC::GUID, @attributes : UInt64, @name : UInt16[36])
+    end
+  end
+
+  @[Extern]
+  struct VDS_PARTITION_INFO_MBR
+    property partitionType : UInt8
+    property bootIndicator : Win32cr::Foundation::BOOLEAN
+    property recognizedPartition : Win32cr::Foundation::BOOLEAN
+    property hiddenSectors : UInt32
+    def initialize(@partitionType : UInt8, @bootIndicator : Win32cr::Foundation::BOOLEAN, @recognizedPartition : Win32cr::Foundation::BOOLEAN, @hiddenSectors : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PARTITION_PROP
+    property partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE
+    property ulFlags : UInt32
+    property ulPartitionNumber : UInt32
+    property ullOffset : UInt64
+    property ullSize : UInt64
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_MBR
+    property gpt : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_GPT
+    def initialize(@mbr : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_MBR, @gpt : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_GPT)
+    end
+    end
+
+    def initialize(@partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, @ulFlags : UInt32, @ulPartitionNumber : UInt32, @ullOffset : UInt64, @ullSize : UInt64, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct VDS_PARTITION_INFORMATION_EX
+    property dwPartitionStyle : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE__
+    property ullStartingOffset : UInt64
+    property ullPartitionLength : UInt64
+    property dwPartitionNumber : UInt32
+    property bRewritePartition : Win32cr::Foundation::BOOLEAN
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_MBR
+    property gpt : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_GPT
+    def initialize(@mbr : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_MBR, @gpt : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_INFO_GPT)
+    end
+    end
+
+    def initialize(@dwPartitionStyle : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE__, @ullStartingOffset : UInt64, @ullPartitionLength : UInt64, @dwPartitionNumber : UInt32, @bRewritePartition : Win32cr::Foundation::BOOLEAN, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CREATE_PARTITION_PARAMETERS
+    property style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr_part_info : MbrPartInfo_e__Struct_
+    property gpt_part_info : GptPartInfo_e__Struct_
+
+      # Nested Type MbrPartInfo_e__Struct_
+      @[Extern]
+      struct MbrPartInfo_e__Struct_
+    property partitionType : UInt8
+    property bootIndicator : Win32cr::Foundation::BOOLEAN
+    def initialize(@partitionType : UInt8, @bootIndicator : Win32cr::Foundation::BOOLEAN)
+    end
+      end
+
+
+      # Nested Type GptPartInfo_e__Struct_
+      @[Extern]
+      struct GptPartInfo_e__Struct_
+    property partitionType : LibC::GUID
+    property partitionId : LibC::GUID
+    property attributes : UInt64
+    property name : UInt16[36]
+    def initialize(@partitionType : LibC::GUID, @partitionId : LibC::GUID, @attributes : UInt64, @name : UInt16[36])
+    end
+      end
+
+    def initialize(@mbr_part_info : MbrPartInfo_e__Struct_, @gpt_part_info : GptPartInfo_e__Struct_)
+    end
+    end
+
+    def initialize(@style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CHANGE_ATTRIBUTES_PARAMETERS
+    property style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr_part_info : MbrPartInfo_e__Struct_
+    property gpt_part_info : GptPartInfo_e__Struct_
+
+      # Nested Type MbrPartInfo_e__Struct_
+      @[Extern]
+      struct MbrPartInfo_e__Struct_
+    property bootIndicator : Win32cr::Foundation::BOOLEAN
+    def initialize(@bootIndicator : Win32cr::Foundation::BOOLEAN)
+    end
+      end
+
+
+      # Nested Type GptPartInfo_e__Struct_
+      @[Extern]
+      struct GptPartInfo_e__Struct_
+    property attributes : UInt64
+    def initialize(@attributes : UInt64)
+    end
+      end
+
+    def initialize(@mbr_part_info : MbrPartInfo_e__Struct_, @gpt_part_info : GptPartInfo_e__Struct_)
+    end
+    end
+
+    def initialize(@style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CHANGE_PARTITION_TYPE_PARAMETERS
+    property style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property mbr_part_info : MbrPartInfo_e__Struct_
+    property gpt_part_info : GptPartInfo_e__Struct_
+
+      # Nested Type MbrPartInfo_e__Struct_
+      @[Extern]
+      struct MbrPartInfo_e__Struct_
+    property partitionType : UInt8
+    def initialize(@partitionType : UInt8)
+    end
+      end
+
+
+      # Nested Type GptPartInfo_e__Struct_
+      @[Extern]
+      struct GptPartInfo_e__Struct_
+    property partitionType : LibC::GUID
+    def initialize(@partitionType : LibC::GUID)
+    end
+      end
+
+    def initialize(@mbr_part_info : MbrPartInfo_e__Struct_, @gpt_part_info : GptPartInfo_e__Struct_)
+    end
+    end
+
+    def initialize(@style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, @anonymous : Anonymous_e__Union_)
     end
   end
 
@@ -1746,7 +2337,218 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IEnumVdsObjectVtbl,
+  struct VDS_CREATE_VDISK_PARAMETERS
+    property unique_id : LibC::GUID
+    property maximum_size : UInt64
+    property block_size_in_bytes : UInt32
+    property sector_size_in_bytes : UInt32
+    property pParentPath : Win32cr::Foundation::PWSTR
+    property pSourcePath : Win32cr::Foundation::PWSTR
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @pParentPath : Win32cr::Foundation::PWSTR, @pSourcePath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct VDS_VDISK_PROPERTIES
+    property id : LibC::GUID
+    property state : Win32cr::Storage::VirtualDiskService::VDS_VDISK_STATE
+    property virtual_device_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property virtual_size : UInt64
+    property physical_size : UInt64
+    property pPath : Win32cr::Foundation::PWSTR
+    property pDeviceName : Win32cr::Foundation::PWSTR
+    property disk_flag : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG
+    property bIsChild : Win32cr::Foundation::BOOL
+    property pParentPath : Win32cr::Foundation::PWSTR
+    def initialize(@id : LibC::GUID, @state : Win32cr::Storage::VirtualDiskService::VDS_VDISK_STATE, @virtual_device_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @virtual_size : UInt64, @physical_size : UInt64, @pPath : Win32cr::Foundation::PWSTR, @pDeviceName : Win32cr::Foundation::PWSTR, @disk_flag : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG, @bIsChild : Win32cr::Foundation::BOOL, @pParentPath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct VDS_SERVICE_PROP
+    property pwszVersion : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    def initialize(@pwszVersion : Win32cr::Foundation::PWSTR, @ulFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VDS_REPARSE_POINT_PROP
+    property source_volume_id : LibC::GUID
+    property pwszPath : Win32cr::Foundation::PWSTR
+    def initialize(@source_volume_id : LibC::GUID, @pwszPath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct VDS_DRIVE_LETTER_PROP
+    property wcLetter : UInt16
+    property volumeId : LibC::GUID
+    property ulFlags : UInt32
+    property bUsed : Win32cr::Foundation::BOOL
+    def initialize(@wcLetter : UInt16, @volumeId : LibC::GUID, @ulFlags : UInt32, @bUsed : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct VDS_FILE_SYSTEM_TYPE_PROP
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE
+    property wszName : UInt16[8]
+    property ulFlags : UInt32
+    property ulCompressionFlags : UInt32
+    property ulMaxLableLength : UInt32
+    property pwszIllegalLabelCharSet : Win32cr::Foundation::PWSTR
+    def initialize(@type__ : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, @wszName : UInt16[8], @ulFlags : UInt32, @ulCompressionFlags : UInt32, @ulMaxLableLength : UInt32, @pwszIllegalLabelCharSet : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP
+    property ulFlags : UInt32
+    property usRevision : UInt16
+    property ulDefaultUnitAllocationSize : UInt32
+    property rgulAllowedUnitAllocationSizes : UInt32[32]
+    property wszName : UInt16[32]
+    def initialize(@ulFlags : UInt32, @usRevision : UInt16, @ulDefaultUnitAllocationSize : UInt32, @rgulAllowedUnitAllocationSizes : UInt32[32], @wszName : UInt16[32])
+    end
+  end
+
+  @[Extern]
+  struct VDS_FILE_SYSTEM_PROP
+    property type__ : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE
+    property volumeId : LibC::GUID
+    property ulFlags : UInt32
+    property ullTotalAllocationUnits : UInt64
+    property ullAvailableAllocationUnits : UInt64
+    property ulAllocationUnitSize : UInt32
+    property pwszLabel : Win32cr::Foundation::PWSTR
+    def initialize(@type__ : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, @volumeId : LibC::GUID, @ulFlags : UInt32, @ullTotalAllocationUnits : UInt64, @ullAvailableAllocationUnits : UInt64, @ulAllocationUnitSize : UInt32, @pwszLabel : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+
+  record IVdsProviderPrivateVtable,
+    query_interface : Proc(IVdsProviderPrivate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsProviderPrivate*, UInt32),
+    release : Proc(IVdsProviderPrivate*, UInt32),
+    get_object : Proc(IVdsProviderPrivate*, LibC::GUID, Win32cr::Storage::VirtualDiskService::VDS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    on_load : Proc(IVdsProviderPrivate*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::HRESULT),
+    on_unload : Proc(IVdsProviderPrivate*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsProviderPrivate, lpVtbl : IVdsProviderPrivateVtable* do
+    GUID = LibC::GUID.new(0x11f3cd41_u32, 0xb7e8_u16, 0x48ff_u16, StaticArray[0x94_u8, 0x72_u8, 0x9d_u8, 0xff_u8, 0x1_u8, 0x8a_u8, 0xa2_u8, 0x92_u8])
+    def query_interface(this : IVdsProviderPrivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsProviderPrivate*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsProviderPrivate*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_object(this : IVdsProviderPrivate*, object_id : LibC::GUID, type__ : Win32cr::Storage::VirtualDiskService::VDS_OBJECT_TYPE, ppObjectUnk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_object.call(this, object_id, type__, ppObjectUnk)
+    end
+    def on_load(this : IVdsProviderPrivate*, pwszMachineName : Win32cr::Foundation::PWSTR, pCallbackObject : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_load.call(this, pwszMachineName, pCallbackObject)
+    end
+    def on_unload(this : IVdsProviderPrivate*, bForceUnload : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_unload.call(this, bForceUnload)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsHwProviderPrivateVtable,
+    query_interface : Proc(IVdsHwProviderPrivate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsHwProviderPrivate*, UInt32),
+    release : Proc(IVdsHwProviderPrivate*, UInt32),
+    query_if_created_lun : Proc(IVdsHwProviderPrivate*, Win32cr::Foundation::PWSTR, Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsHwProviderPrivate, lpVtbl : IVdsHwProviderPrivateVtable* do
+    GUID = LibC::GUID.new(0x98f17bf3_u32, 0x9f33_u16, 0x4f12_u16, StaticArray[0x87_u8, 0x14_u8, 0x8b_u8, 0x40_u8, 0x75_u8, 0x9_u8, 0x2c_u8, 0x2e_u8])
+    def query_interface(this : IVdsHwProviderPrivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsHwProviderPrivate*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsHwProviderPrivate*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_if_created_lun(this : IVdsHwProviderPrivate*, pwszDevicePath : Win32cr::Foundation::PWSTR, pVdsLunInformation : Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*, pLunId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_if_created_lun.call(this, pwszDevicePath, pVdsLunInformation, pLunId)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsHwProviderPrivateMpioVtable,
+    query_interface : Proc(IVdsHwProviderPrivateMpio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsHwProviderPrivateMpio*, UInt32),
+    release : Proc(IVdsHwProviderPrivateMpio*, UInt32),
+    set_all_path_statuses_from_hba_port : Proc(IVdsHwProviderPrivateMpio*, Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP, Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsHwProviderPrivateMpio, lpVtbl : IVdsHwProviderPrivateMpioVtable* do
+    GUID = LibC::GUID.new(0x310a7715_u32, 0xac2b_u16, 0x4c6f_u16, StaticArray[0x98_u8, 0x27_u8, 0x3d_u8, 0x74_u8, 0x2f_u8, 0x35_u8, 0x16_u8, 0x76_u8])
+    def query_interface(this : IVdsHwProviderPrivateMpio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsHwProviderPrivateMpio*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsHwProviderPrivateMpio*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_all_path_statuses_from_hba_port(this : IVdsHwProviderPrivateMpio*, hbaPortProp : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP, status : Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_all_path_statuses_from_hba_port.call(this, hbaPortProp, status)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsAdminVtable,
+    query_interface : Proc(IVdsAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsAdmin*, UInt32),
+    release : Proc(IVdsAdmin*, UInt32),
+    register_provider : Proc(IVdsAdmin*, LibC::GUID, LibC::GUID, Win32cr::Foundation::PWSTR, Win32cr::Storage::VirtualDiskService::VDS_PROVIDER_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::GUID, Win32cr::Foundation::HRESULT),
+    unregister_provider : Proc(IVdsAdmin*, LibC::GUID, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsAdmin, lpVtbl : IVdsAdminVtable* do
+    GUID = LibC::GUID.new(0xd188e97d_u32, 0x85aa_u16, 0x4d33_u16, StaticArray[0xab_u8, 0xc6_u8, 0x26_u8, 0x29_u8, 0x9a_u8, 0x10_u8, 0xff_u8, 0xc1_u8])
+    def query_interface(this : IVdsAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsAdmin*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsAdmin*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def register_provider(this : IVdsAdmin*, providerId : LibC::GUID, providerClsid : LibC::GUID, pwszName : Win32cr::Foundation::PWSTR, type__ : Win32cr::Storage::VirtualDiskService::VDS_PROVIDER_TYPE, pwszMachineName : Win32cr::Foundation::PWSTR, pwszVersion : Win32cr::Foundation::PWSTR, guidVersionId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_provider.call(this, providerId, providerClsid, pwszName, type__, pwszMachineName, pwszVersion, guidVersionId)
+    end
+    def unregister_provider(this : IVdsAdmin*, providerId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_provider.call(this, providerId)
+    end
+
+  end
+
+  @[Extern]
+
+  record IEnumVdsObjectVtable,
     query_interface : Proc(IEnumVdsObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumVdsObject*, UInt32),
     release : Proc(IEnumVdsObject*, UInt32),
@@ -1757,7 +2559,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IEnumVdsObject, lpVtbl : IEnumVdsObjectVtbl* do
+  record IEnumVdsObject, lpVtbl : IEnumVdsObjectVtable* do
     GUID = LibC::GUID.new(0x118610b7_u32, 0x8d94_u16, 0x4030_u16, StaticArray[0xb5_u8, 0xb8_u8, 0x50_u8, 0x8_u8, 0x89_u8, 0x78_u8, 0x8e_u8, 0x4e_u8])
     def query_interface(this : IEnumVdsObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1784,7 +2586,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsAsyncVtbl,
+
+  record IVdsAsyncVtable,
     query_interface : Proc(IVdsAsync*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsAsync*, UInt32),
     release : Proc(IVdsAsync*, UInt32),
@@ -1794,7 +2597,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsAsync, lpVtbl : IVdsAsyncVtbl* do
+  record IVdsAsync, lpVtbl : IVdsAsyncVtable* do
     GUID = LibC::GUID.new(0xd5d23b6d_u32, 0x5a55_u16, 0x4492_u16, StaticArray[0x98_u8, 0x89_u8, 0x39_u8, 0x7a_u8, 0x3c_u8, 0x2d_u8, 0x2d_u8, 0xbc_u8])
     def query_interface(this : IVdsAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1818,7 +2621,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsAdviseSinkVtbl,
+
+  record IVdsAdviseSinkVtable,
     query_interface : Proc(IVdsAdviseSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsAdviseSink*, UInt32),
     release : Proc(IVdsAdviseSink*, UInt32),
@@ -1826,7 +2630,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsAdviseSink, lpVtbl : IVdsAdviseSinkVtbl* do
+  record IVdsAdviseSink, lpVtbl : IVdsAdviseSinkVtable* do
     GUID = LibC::GUID.new(0x8326cd1d_u32, 0xcf59_u16, 0x4936_u16, StaticArray[0xb7_u8, 0x86_u8, 0x5e_u8, 0xfc_u8, 0x8_u8, 0x79_u8, 0x8e_u8, 0x25_u8])
     def query_interface(this : IVdsAdviseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1844,7 +2648,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsProviderVtbl,
+
+  record IVdsProviderVtable,
     query_interface : Proc(IVdsProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsProvider*, UInt32),
     release : Proc(IVdsProvider*, UInt32),
@@ -1852,7 +2657,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsProvider, lpVtbl : IVdsProviderVtbl* do
+  record IVdsProvider, lpVtbl : IVdsProviderVtable* do
     GUID = LibC::GUID.new(0x10c5e575_u32, 0x7984_u16, 0x4e81_u16, StaticArray[0xa5_u8, 0x6b_u8, 0x43_u8, 0x1f_u8, 0x5f_u8, 0x92_u8, 0xae_u8, 0x42_u8])
     def query_interface(this : IVdsProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1870,7 +2675,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsProviderSupportVtbl,
+
+  record IVdsProviderSupportVtable,
     query_interface : Proc(IVdsProviderSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsProviderSupport*, UInt32),
     release : Proc(IVdsProviderSupport*, UInt32),
@@ -1878,7 +2684,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsProviderSupport, lpVtbl : IVdsProviderSupportVtbl* do
+  record IVdsProviderSupport, lpVtbl : IVdsProviderSupportVtable* do
     GUID = LibC::GUID.new(0x1732be13_u32, 0xe8f9_u16, 0x4a03_u16, StaticArray[0xbf_u8, 0xbc_u8, 0x5f_u8, 0x61_u8, 0x6a_u8, 0xa6_u8, 0x6c_u8, 0xe1_u8])
     def query_interface(this : IVdsProviderSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1896,41 +2702,608 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsProviderPrivateVtbl,
-    query_interface : Proc(IVdsProviderPrivate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IVdsProviderPrivate*, UInt32),
-    release : Proc(IVdsProviderPrivate*, UInt32),
-    get_object : Proc(IVdsProviderPrivate*, LibC::GUID, Win32cr::Storage::VirtualDiskService::VDS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
-    on_load : Proc(IVdsProviderPrivate*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::HRESULT),
-    on_unload : Proc(IVdsProviderPrivate*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+  record IVdsSwProviderVtable,
+    query_interface : Proc(IVdsSwProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsSwProvider*, UInt32),
+    release : Proc(IVdsSwProvider*, UInt32),
+    query_packs : Proc(IVdsSwProvider*, Void**, Win32cr::Foundation::HRESULT),
+    create_pack : Proc(IVdsSwProvider*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVdsProviderPrivate, lpVtbl : IVdsProviderPrivateVtbl* do
-    GUID = LibC::GUID.new(0x11f3cd41_u32, 0xb7e8_u16, 0x48ff_u16, StaticArray[0x94_u8, 0x72_u8, 0x9d_u8, 0xff_u8, 0x1_u8, 0x8a_u8, 0xa2_u8, 0x92_u8])
-    def query_interface(this : IVdsProviderPrivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+  record IVdsSwProvider, lpVtbl : IVdsSwProviderVtable* do
+    GUID = LibC::GUID.new(0x9aa58360_u32, 0xce33_u16, 0x4f92_u16, StaticArray[0xb6_u8, 0x58_u8, 0xed_u8, 0x24_u8, 0xb1_u8, 0x44_u8, 0x25_u8, 0xb8_u8])
+    def query_interface(this : IVdsSwProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
-    def add_ref(this : IVdsProviderPrivate*) : UInt32
+    def add_ref(this : IVdsSwProvider*) : UInt32
       @lpVtbl.try &.value.add_ref.call(this)
     end
-    def release(this : IVdsProviderPrivate*) : UInt32
+    def release(this : IVdsSwProvider*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_object(this : IVdsProviderPrivate*, object_id : LibC::GUID, type__ : Win32cr::Storage::VirtualDiskService::VDS_OBJECT_TYPE, ppObjectUnk : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_object.call(this, object_id, type__, ppObjectUnk)
+    def query_packs(this : IVdsSwProvider*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_packs.call(this, ppEnum)
     end
-    def on_load(this : IVdsProviderPrivate*, pwszMachineName : Win32cr::Foundation::PWSTR, pCallbackObject : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_load.call(this, pwszMachineName, pCallbackObject)
-    end
-    def on_unload(this : IVdsProviderPrivate*, bForceUnload : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_unload.call(this, bForceUnload)
+    def create_pack(this : IVdsSwProvider*, ppPack : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_pack.call(this, ppPack)
     end
 
   end
 
   @[Extern]
-  record IVdsHwProviderVtbl,
+
+  record IVdsPackVtable,
+    query_interface : Proc(IVdsPack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsPack*, UInt32),
+    release : Proc(IVdsPack*, UInt32),
+    get_properties : Proc(IVdsPack*, Win32cr::Storage::VirtualDiskService::VDS_PACK_PROP*, Win32cr::Foundation::HRESULT),
+    get_provider : Proc(IVdsPack*, Void**, Win32cr::Foundation::HRESULT),
+    query_volumes : Proc(IVdsPack*, Void**, Win32cr::Foundation::HRESULT),
+    query_disks : Proc(IVdsPack*, Void**, Win32cr::Foundation::HRESULT),
+    create_volume : Proc(IVdsPack*, Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE, Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, Int32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    add_disk : Proc(IVdsPack*, LibC::GUID, Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    migrate_disks : Proc(IVdsPack*, LibC::GUID*, Int32, LibC::GUID, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    replace_disk : Proc(IVdsPack*, LibC::GUID, LibC::GUID, Void**, Win32cr::Foundation::HRESULT),
+    remove_missing_disk : Proc(IVdsPack*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    recover : Proc(IVdsPack*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsPack, lpVtbl : IVdsPackVtable* do
+    GUID = LibC::GUID.new(0x3b69d7f5_u32, 0x9d94_u16, 0x4648_u16, StaticArray[0x91_u8, 0xca_u8, 0x79_u8, 0x93_u8, 0x9b_u8, 0xa2_u8, 0x63_u8, 0xbf_u8])
+    def query_interface(this : IVdsPack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsPack*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsPack*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsPack*, pPackProp : Win32cr::Storage::VirtualDiskService::VDS_PACK_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pPackProp)
+    end
+    def get_provider(this : IVdsPack*, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_provider.call(this, ppProvider)
+    end
+    def query_volumes(this : IVdsPack*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_volumes.call(this, ppEnum)
+    end
+    def query_disks(this : IVdsPack*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_disks.call(this, ppEnum)
+    end
+    def create_volume(this : IVdsPack*, type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE, pInputDiskArray : Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, lNumberOfDisks : Int32, ulStripeSize : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_volume.call(this, type__, pInputDiskArray, lNumberOfDisks, ulStripeSize, ppAsync)
+    end
+    def add_disk(this : IVdsPack*, disk_id : LibC::GUID, partition_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, bAsHotSpare : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_disk.call(this, disk_id, partition_style, bAsHotSpare)
+    end
+    def migrate_disks(this : IVdsPack*, pDiskArray : LibC::GUID*, lNumberOfDisks : Int32, target_pack : LibC::GUID, bForce : Win32cr::Foundation::BOOL, bQueryOnly : Win32cr::Foundation::BOOL, pResults : Win32cr::Foundation::HRESULT*, pbRebootNeeded : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.migrate_disks.call(this, pDiskArray, lNumberOfDisks, target_pack, bForce, bQueryOnly, pResults, pbRebootNeeded)
+    end
+    def replace_disk(this : IVdsPack*, old_disk_id : LibC::GUID, new_disk_id : LibC::GUID, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.replace_disk.call(this, old_disk_id, new_disk_id, ppAsync)
+    end
+    def remove_missing_disk(this : IVdsPack*, disk_id : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_missing_disk.call(this, disk_id)
+    end
+    def recover(this : IVdsPack*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.recover.call(this, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsPack2Vtable,
+    query_interface : Proc(IVdsPack2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsPack2*, UInt32),
+    release : Proc(IVdsPack2*, UInt32),
+    create_volume2 : Proc(IVdsPack2*, Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE, Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, Int32, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsPack2, lpVtbl : IVdsPack2Vtable* do
+    GUID = LibC::GUID.new(0x13b50bff_u32, 0x290a_u16, 0x47dd_u16, StaticArray[0x85_u8, 0x58_u8, 0xb7_u8, 0xc5_u8, 0x8d_u8, 0xb1_u8, 0xa7_u8, 0x1a_u8])
+    def query_interface(this : IVdsPack2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsPack2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsPack2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_volume2(this : IVdsPack2*, type__ : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_TYPE, pInputDiskArray : Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, lNumberOfDisks : Int32, ulStripeSize : UInt32, ulAlign : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_volume2.call(this, type__, pInputDiskArray, lNumberOfDisks, ulStripeSize, ulAlign, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsDiskVtable,
+    query_interface : Proc(IVdsDisk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsDisk*, UInt32),
+    release : Proc(IVdsDisk*, UInt32),
+    get_properties : Proc(IVdsDisk*, Win32cr::Storage::VirtualDiskService::VDS_DISK_PROP*, Win32cr::Foundation::HRESULT),
+    get_pack : Proc(IVdsDisk*, Void**, Win32cr::Foundation::HRESULT),
+    get_identification_data : Proc(IVdsDisk*, Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*, Win32cr::Foundation::HRESULT),
+    query_extents : Proc(IVdsDisk*, Win32cr::Storage::VirtualDiskService::VDS_DISK_EXTENT**, Int32*, Win32cr::Foundation::HRESULT),
+    convert_style : Proc(IVdsDisk*, Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE, Win32cr::Foundation::HRESULT),
+    set_flags : Proc(IVdsDisk*, UInt32, Win32cr::Foundation::HRESULT),
+    clear_flags : Proc(IVdsDisk*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsDisk, lpVtbl : IVdsDiskVtable* do
+    GUID = LibC::GUID.new(0x7e5c822_u32, 0xf00c_u16, 0x47a1_u16, StaticArray[0x8f_u8, 0xce_u8, 0xb2_u8, 0x44_u8, 0xda_u8, 0x56_u8, 0xfd_u8, 0x6_u8])
+    def query_interface(this : IVdsDisk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsDisk*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsDisk*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsDisk*, pDiskProperties : Win32cr::Storage::VirtualDiskService::VDS_DISK_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pDiskProperties)
+    end
+    def get_pack(this : IVdsDisk*, ppPack : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pack.call(this, ppPack)
+    end
+    def get_identification_data(this : IVdsDisk*, pLunInfo : Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_identification_data.call(this, pLunInfo)
+    end
+    def query_extents(this : IVdsDisk*, ppExtentArray : Win32cr::Storage::VirtualDiskService::VDS_DISK_EXTENT**, plNumberOfExtents : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_extents.call(this, ppExtentArray, plNumberOfExtents)
+    end
+    def convert_style(this : IVdsDisk*, new_style : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_STYLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.convert_style.call(this, new_style)
+    end
+    def set_flags(this : IVdsDisk*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_flags.call(this, ulFlags)
+    end
+    def clear_flags(this : IVdsDisk*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_flags.call(this, ulFlags)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsDisk2Vtable,
+    query_interface : Proc(IVdsDisk2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsDisk2*, UInt32),
+    release : Proc(IVdsDisk2*, UInt32),
+    set_san_mode : Proc(IVdsDisk2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsDisk2, lpVtbl : IVdsDisk2Vtable* do
+    GUID = LibC::GUID.new(0x40f73c8b_u32, 0x687d_u16, 0x4a13_u16, StaticArray[0x8d_u8, 0x96_u8, 0x3d_u8, 0x7f_u8, 0x2e_u8, 0x68_u8, 0x39_u8, 0x36_u8])
+    def query_interface(this : IVdsDisk2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsDisk2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsDisk2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_san_mode(this : IVdsDisk2*, bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_san_mode.call(this, bEnable)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsDiskOnlineVtable,
+    query_interface : Proc(IVdsDiskOnline*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsDiskOnline*, UInt32),
+    release : Proc(IVdsDiskOnline*, UInt32),
+    online : Proc(IVdsDiskOnline*, Win32cr::Foundation::HRESULT),
+    offline : Proc(IVdsDiskOnline*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsDiskOnline, lpVtbl : IVdsDiskOnlineVtable* do
+    GUID = LibC::GUID.new(0x90681b1d_u32, 0x6a7f_u16, 0x48e8_u16, StaticArray[0x90_u8, 0x61_u8, 0x31_u8, 0xb7_u8, 0xaa_u8, 0x12_u8, 0x53_u8, 0x22_u8])
+    def query_interface(this : IVdsDiskOnline*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsDiskOnline*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsDiskOnline*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def online(this : IVdsDiskOnline*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.online.call(this)
+    end
+    def offline(this : IVdsDiskOnline*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.offline.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsAdvancedDiskVtable,
+    query_interface : Proc(IVdsAdvancedDisk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsAdvancedDisk*, UInt32),
+    release : Proc(IVdsAdvancedDisk*, UInt32),
+    get_partition_properties : Proc(IVdsAdvancedDisk*, UInt64, Win32cr::Storage::VirtualDiskService::VDS_PARTITION_PROP*, Win32cr::Foundation::HRESULT),
+    query_partitions : Proc(IVdsAdvancedDisk*, Win32cr::Storage::VirtualDiskService::VDS_PARTITION_PROP**, Int32*, Win32cr::Foundation::HRESULT),
+    create_partition : Proc(IVdsAdvancedDisk*, UInt64, UInt64, Win32cr::Storage::VirtualDiskService::CREATE_PARTITION_PARAMETERS*, Void**, Win32cr::Foundation::HRESULT),
+    delete_partition : Proc(IVdsAdvancedDisk*, UInt64, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    change_attributes : Proc(IVdsAdvancedDisk*, UInt64, Win32cr::Storage::VirtualDiskService::CHANGE_ATTRIBUTES_PARAMETERS*, Win32cr::Foundation::HRESULT),
+    assign_drive_letter : Proc(IVdsAdvancedDisk*, UInt64, UInt16, Win32cr::Foundation::HRESULT),
+    delete_drive_letter : Proc(IVdsAdvancedDisk*, UInt64, UInt16, Win32cr::Foundation::HRESULT),
+    get_drive_letter : Proc(IVdsAdvancedDisk*, UInt64, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    format_partition : Proc(IVdsAdvancedDisk*, UInt64, Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    clean : Proc(IVdsAdvancedDisk*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsAdvancedDisk, lpVtbl : IVdsAdvancedDiskVtable* do
+    GUID = LibC::GUID.new(0x6e6f6b40_u32, 0x977c_u16, 0x4069_u16, StaticArray[0xbd_u8, 0xdd_u8, 0xac_u8, 0x71_u8, 0x0_u8, 0x59_u8, 0xf8_u8, 0xc0_u8])
+    def query_interface(this : IVdsAdvancedDisk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsAdvancedDisk*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsAdvancedDisk*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_partition_properties(this : IVdsAdvancedDisk*, ullOffset : UInt64, pPartitionProp : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_partition_properties.call(this, ullOffset, pPartitionProp)
+    end
+    def query_partitions(this : IVdsAdvancedDisk*, ppPartitionPropArray : Win32cr::Storage::VirtualDiskService::VDS_PARTITION_PROP**, plNumberOfPartitions : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_partitions.call(this, ppPartitionPropArray, plNumberOfPartitions)
+    end
+    def create_partition(this : IVdsAdvancedDisk*, ullOffset : UInt64, ullSize : UInt64, para : Win32cr::Storage::VirtualDiskService::CREATE_PARTITION_PARAMETERS*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_partition.call(this, ullOffset, ullSize, para, ppAsync)
+    end
+    def delete_partition(this : IVdsAdvancedDisk*, ullOffset : UInt64, bForce : Win32cr::Foundation::BOOL, bForceProtected : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_partition.call(this, ullOffset, bForce, bForceProtected)
+    end
+    def change_attributes(this : IVdsAdvancedDisk*, ullOffset : UInt64, para : Win32cr::Storage::VirtualDiskService::CHANGE_ATTRIBUTES_PARAMETERS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.change_attributes.call(this, ullOffset, para)
+    end
+    def assign_drive_letter(this : IVdsAdvancedDisk*, ullOffset : UInt64, wcLetter : UInt16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.assign_drive_letter.call(this, ullOffset, wcLetter)
+    end
+    def delete_drive_letter(this : IVdsAdvancedDisk*, ullOffset : UInt64, wcLetter : UInt16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_drive_letter.call(this, ullOffset, wcLetter)
+    end
+    def get_drive_letter(this : IVdsAdvancedDisk*, ullOffset : UInt64, pwcLetter : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_drive_letter.call(this, ullOffset, pwcLetter)
+    end
+    def format_partition(this : IVdsAdvancedDisk*, ullOffset : UInt64, type__ : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, pwszLabel : Win32cr::Foundation::PWSTR, dwUnitAllocationSize : UInt32, bForce : Win32cr::Foundation::BOOL, bQuickFormat : Win32cr::Foundation::BOOL, bEnableCompression : Win32cr::Foundation::BOOL, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.format_partition.call(this, ullOffset, type__, pwszLabel, dwUnitAllocationSize, bForce, bQuickFormat, bEnableCompression, ppAsync)
+    end
+    def clean(this : IVdsAdvancedDisk*, bForce : Win32cr::Foundation::BOOL, bForceOEM : Win32cr::Foundation::BOOL, bFullClean : Win32cr::Foundation::BOOL, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clean.call(this, bForce, bForceOEM, bFullClean, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsAdvancedDisk2Vtable,
+    query_interface : Proc(IVdsAdvancedDisk2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsAdvancedDisk2*, UInt32),
+    release : Proc(IVdsAdvancedDisk2*, UInt32),
+    change_partition_type : Proc(IVdsAdvancedDisk2*, UInt64, Win32cr::Foundation::BOOL, Win32cr::Storage::VirtualDiskService::CHANGE_PARTITION_TYPE_PARAMETERS*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsAdvancedDisk2, lpVtbl : IVdsAdvancedDisk2Vtable* do
+    GUID = LibC::GUID.new(0x9723f420_u32, 0x9355_u16, 0x42de_u16, StaticArray[0xab_u8, 0x66_u8, 0xe3_u8, 0x1b_u8, 0xb1_u8, 0x5b_u8, 0xee_u8, 0xac_u8])
+    def query_interface(this : IVdsAdvancedDisk2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsAdvancedDisk2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsAdvancedDisk2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def change_partition_type(this : IVdsAdvancedDisk2*, ullOffset : UInt64, bForce : Win32cr::Foundation::BOOL, para : Win32cr::Storage::VirtualDiskService::CHANGE_PARTITION_TYPE_PARAMETERS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.change_partition_type.call(this, ullOffset, bForce, para)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsAdvancedDisk3Vtable,
+    query_interface : Proc(IVdsAdvancedDisk3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsAdvancedDisk3*, UInt32),
+    release : Proc(IVdsAdvancedDisk3*, UInt32),
+    get_properties : Proc(IVdsAdvancedDisk3*, Win32cr::Storage::VirtualDiskService::VDS_ADVANCEDDISK_PROP*, Win32cr::Foundation::HRESULT),
+    get_unique_id : Proc(IVdsAdvancedDisk3*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsAdvancedDisk3, lpVtbl : IVdsAdvancedDisk3Vtable* do
+    GUID = LibC::GUID.new(0x3858c0d5_u32, 0xf35_u16, 0x4bf5_u16, StaticArray[0x97_u8, 0x14_u8, 0x69_u8, 0x87_u8, 0x49_u8, 0x63_u8, 0xbc_u8, 0x36_u8])
+    def query_interface(this : IVdsAdvancedDisk3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsAdvancedDisk3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsAdvancedDisk3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsAdvancedDisk3*, pAdvDiskProp : Win32cr::Storage::VirtualDiskService::VDS_ADVANCEDDISK_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pAdvDiskProp)
+    end
+    def get_unique_id(this : IVdsAdvancedDisk3*, ppwszId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_unique_id.call(this, ppwszId)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsCreatePartitionExVtable,
+    query_interface : Proc(IVdsCreatePartitionEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsCreatePartitionEx*, UInt32),
+    release : Proc(IVdsCreatePartitionEx*, UInt32),
+    create_partition_ex : Proc(IVdsCreatePartitionEx*, UInt64, UInt64, UInt32, Win32cr::Storage::VirtualDiskService::CREATE_PARTITION_PARAMETERS*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsCreatePartitionEx, lpVtbl : IVdsCreatePartitionExVtable* do
+    GUID = LibC::GUID.new(0x9882f547_u32, 0xcfc3_u16, 0x420b_u16, StaticArray[0x97_u8, 0x50_u8, 0x0_u8, 0xdf_u8, 0xbe_u8, 0xc5_u8, 0x6_u8, 0x62_u8])
+    def query_interface(this : IVdsCreatePartitionEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsCreatePartitionEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsCreatePartitionEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_partition_ex(this : IVdsCreatePartitionEx*, ullOffset : UInt64, ullSize : UInt64, ulAlign : UInt32, para : Win32cr::Storage::VirtualDiskService::CREATE_PARTITION_PARAMETERS*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_partition_ex.call(this, ullOffset, ullSize, ulAlign, para, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsRemovableVtable,
+    query_interface : Proc(IVdsRemovable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsRemovable*, UInt32),
+    release : Proc(IVdsRemovable*, UInt32),
+    query_media : Proc(IVdsRemovable*, Win32cr::Foundation::HRESULT),
+    eject : Proc(IVdsRemovable*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsRemovable, lpVtbl : IVdsRemovableVtable* do
+    GUID = LibC::GUID.new(0x316560b_u32, 0x5db4_u16, 0x4ed9_u16, StaticArray[0xbb_u8, 0xb5_u8, 0x21_u8, 0x34_u8, 0x36_u8, 0xdd_u8, 0xc0_u8, 0xd9_u8])
+    def query_interface(this : IVdsRemovable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsRemovable*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsRemovable*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_media(this : IVdsRemovable*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_media.call(this)
+    end
+    def eject(this : IVdsRemovable*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.eject.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolumeVtable,
+    query_interface : Proc(IVdsVolume*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolume*, UInt32),
+    release : Proc(IVdsVolume*, UInt32),
+    get_properties : Proc(IVdsVolume*, Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PROP*, Win32cr::Foundation::HRESULT),
+    get_pack : Proc(IVdsVolume*, Void**, Win32cr::Foundation::HRESULT),
+    query_plexes : Proc(IVdsVolume*, Void**, Win32cr::Foundation::HRESULT),
+    extend__ : Proc(IVdsVolume*, Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    shrink : Proc(IVdsVolume*, UInt64, Void**, Win32cr::Foundation::HRESULT),
+    add_plex : Proc(IVdsVolume*, LibC::GUID, Void**, Win32cr::Foundation::HRESULT),
+    break_plex : Proc(IVdsVolume*, LibC::GUID, Void**, Win32cr::Foundation::HRESULT),
+    remove_plex : Proc(IVdsVolume*, LibC::GUID, Void**, Win32cr::Foundation::HRESULT),
+    delete : Proc(IVdsVolume*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    set_flags : Proc(IVdsVolume*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    clear_flags : Proc(IVdsVolume*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolume, lpVtbl : IVdsVolumeVtable* do
+    GUID = LibC::GUID.new(0x88306bb2_u32, 0xe71f_u16, 0x478c_u16, StaticArray[0x86_u8, 0xa2_u8, 0x79_u8, 0xda_u8, 0x20_u8, 0xa_u8, 0xf_u8, 0x11_u8])
+    def query_interface(this : IVdsVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolume*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolume*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsVolume*, pVolumeProperties : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pVolumeProperties)
+    end
+    def get_pack(this : IVdsVolume*, ppPack : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pack.call(this, ppPack)
+    end
+    def query_plexes(this : IVdsVolume*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_plexes.call(this, ppEnum)
+    end
+    def extend__(this : IVdsVolume*, pInputDiskArray : Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, lNumberOfDisks : Int32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.extend__.call(this, pInputDiskArray, lNumberOfDisks, ppAsync)
+    end
+    def shrink(this : IVdsVolume*, ullNumberOfBytesToRemove : UInt64, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.shrink.call(this, ullNumberOfBytesToRemove, ppAsync)
+    end
+    def add_plex(this : IVdsVolume*, volume_id : LibC::GUID, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_plex.call(this, volume_id, ppAsync)
+    end
+    def break_plex(this : IVdsVolume*, plexId : LibC::GUID, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_plex.call(this, plexId, ppAsync)
+    end
+    def remove_plex(this : IVdsVolume*, plexId : LibC::GUID, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_plex.call(this, plexId, ppAsync)
+    end
+    def delete(this : IVdsVolume*, bForce : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete.call(this, bForce)
+    end
+    def set_flags(this : IVdsVolume*, ulFlags : UInt32, bRevertOnClose : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_flags.call(this, ulFlags, bRevertOnClose)
+    end
+    def clear_flags(this : IVdsVolume*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_flags.call(this, ulFlags)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolume2Vtable,
+    query_interface : Proc(IVdsVolume2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolume2*, UInt32),
+    release : Proc(IVdsVolume2*, UInt32),
+    get_properties2 : Proc(IVdsVolume2*, Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PROP2*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolume2, lpVtbl : IVdsVolume2Vtable* do
+    GUID = LibC::GUID.new(0x72ae6713_u32, 0xdcbb_u16, 0x4a03_u16, StaticArray[0xb3_u8, 0x6b_u8, 0x37_u8, 0x1f_u8, 0x6a_u8, 0xc6_u8, 0xb5_u8, 0x3d_u8])
+    def query_interface(this : IVdsVolume2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolume2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolume2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties2(this : IVdsVolume2*, pVolumeProperties : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PROP2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties2.call(this, pVolumeProperties)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolumeOnlineVtable,
+    query_interface : Proc(IVdsVolumeOnline*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolumeOnline*, UInt32),
+    release : Proc(IVdsVolumeOnline*, UInt32),
+    online : Proc(IVdsVolumeOnline*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolumeOnline, lpVtbl : IVdsVolumeOnlineVtable* do
+    GUID = LibC::GUID.new(0x1be2275a_u32, 0xb315_u16, 0x4f70_u16, StaticArray[0x9e_u8, 0x44_u8, 0x87_u8, 0x9b_u8, 0x3a_u8, 0x2a_u8, 0x53_u8, 0xf2_u8])
+    def query_interface(this : IVdsVolumeOnline*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolumeOnline*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolumeOnline*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def online(this : IVdsVolumeOnline*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.online.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolumePlexVtable,
+    query_interface : Proc(IVdsVolumePlex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolumePlex*, UInt32),
+    release : Proc(IVdsVolumePlex*, UInt32),
+    get_properties : Proc(IVdsVolumePlex*, Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PLEX_PROP*, Win32cr::Foundation::HRESULT),
+    get_volume : Proc(IVdsVolumePlex*, Void**, Win32cr::Foundation::HRESULT),
+    query_extents : Proc(IVdsVolumePlex*, Win32cr::Storage::VirtualDiskService::VDS_DISK_EXTENT**, Int32*, Win32cr::Foundation::HRESULT),
+    repair : Proc(IVdsVolumePlex*, Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, Int32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolumePlex, lpVtbl : IVdsVolumePlexVtable* do
+    GUID = LibC::GUID.new(0x4daa0135_u32, 0xe1d1_u16, 0x40f1_u16, StaticArray[0xaa_u8, 0xa5_u8, 0x3c_u8, 0xc1_u8, 0xe5_u8, 0x32_u8, 0x21_u8, 0xc3_u8])
+    def query_interface(this : IVdsVolumePlex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolumePlex*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolumePlex*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsVolumePlex*, pPlexProperties : Win32cr::Storage::VirtualDiskService::VDS_VOLUME_PLEX_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pPlexProperties)
+    end
+    def get_volume(this : IVdsVolumePlex*, ppVolume : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_volume.call(this, ppVolume)
+    end
+    def query_extents(this : IVdsVolumePlex*, ppExtentArray : Win32cr::Storage::VirtualDiskService::VDS_DISK_EXTENT**, plNumberOfExtents : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_extents.call(this, ppExtentArray, plNumberOfExtents)
+    end
+    def repair(this : IVdsVolumePlex*, pInputDiskArray : Win32cr::Storage::VirtualDiskService::VDS_INPUT_DISK*, lNumberOfDisks : Int32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.repair.call(this, pInputDiskArray, lNumberOfDisks, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsDisk3Vtable,
+    query_interface : Proc(IVdsDisk3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsDisk3*, UInt32),
+    release : Proc(IVdsDisk3*, UInt32),
+    get_properties2 : Proc(IVdsDisk3*, Win32cr::Storage::VirtualDiskService::VDS_DISK_PROP2*, Win32cr::Foundation::HRESULT),
+    query_free_extents : Proc(IVdsDisk3*, UInt32, Win32cr::Storage::VirtualDiskService::VDS_DISK_FREE_EXTENT**, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsDisk3, lpVtbl : IVdsDisk3Vtable* do
+    GUID = LibC::GUID.new(0x8f4b2f5d_u32, 0xec15_u16, 0x4357_u16, StaticArray[0x99_u8, 0x2f_u8, 0x47_u8, 0x3e_u8, 0xf1_u8, 0x9_u8, 0x75_u8, 0xb9_u8])
+    def query_interface(this : IVdsDisk3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsDisk3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsDisk3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties2(this : IVdsDisk3*, pDiskProperties : Win32cr::Storage::VirtualDiskService::VDS_DISK_PROP2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties2.call(this, pDiskProperties)
+    end
+    def query_free_extents(this : IVdsDisk3*, ulAlign : UInt32, ppFreeExtentArray : Win32cr::Storage::VirtualDiskService::VDS_DISK_FREE_EXTENT**, plNumberOfFreeExtents : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_free_extents.call(this, ulAlign, ppFreeExtentArray, plNumberOfFreeExtents)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsHwProviderVtable,
     query_interface : Proc(IVdsHwProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsHwProvider*, UInt32),
     release : Proc(IVdsHwProvider*, UInt32),
@@ -1940,7 +3313,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsHwProvider, lpVtbl : IVdsHwProviderVtbl* do
+  record IVdsHwProvider, lpVtbl : IVdsHwProviderVtable* do
     GUID = LibC::GUID.new(0xd99bdaae_u32, 0xb13a_u16, 0x4178_u16, StaticArray[0x9f_u8, 0xdb_u8, 0xe2_u8, 0x7f_u8, 0x16_u8, 0xb4_u8, 0x60_u8, 0x3e_u8])
     def query_interface(this : IVdsHwProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1964,7 +3337,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsHwProviderTypeVtbl,
+
+  record IVdsHwProviderTypeVtable,
     query_interface : Proc(IVdsHwProviderType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsHwProviderType*, UInt32),
     release : Proc(IVdsHwProviderType*, UInt32),
@@ -1972,7 +3346,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsHwProviderType, lpVtbl : IVdsHwProviderTypeVtbl* do
+  record IVdsHwProviderType, lpVtbl : IVdsHwProviderTypeVtable* do
     GUID = LibC::GUID.new(0x3e0f5166_u32, 0x542d_u16, 0x4fc6_u16, StaticArray[0x94_u8, 0x7a_u8, 0x1_u8, 0x21_u8, 0x74_u8, 0x24_u8, 0xb_u8, 0x7e_u8])
     def query_interface(this : IVdsHwProviderType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1990,7 +3364,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsHwProviderType2Vtbl,
+
+  record IVdsHwProviderType2Vtable,
     query_interface : Proc(IVdsHwProviderType2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsHwProviderType2*, UInt32),
     release : Proc(IVdsHwProviderType2*, UInt32),
@@ -1998,7 +3373,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsHwProviderType2, lpVtbl : IVdsHwProviderType2Vtbl* do
+  record IVdsHwProviderType2, lpVtbl : IVdsHwProviderType2Vtable* do
     GUID = LibC::GUID.new(0x8190236f_u32, 0xc4d0_u16, 0x4e81_u16, StaticArray[0x80_u8, 0x11_u8, 0xd6_u8, 0x95_u8, 0x12_u8, 0xfc_u8, 0xc9_u8, 0x84_u8])
     def query_interface(this : IVdsHwProviderType2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2016,7 +3391,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsHwProviderStoragePoolsVtbl,
+
+  record IVdsHwProviderStoragePoolsVtable,
     query_interface : Proc(IVdsHwProviderStoragePools*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsHwProviderStoragePools*, UInt32),
     release : Proc(IVdsHwProviderStoragePools*, UInt32),
@@ -2026,7 +3402,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsHwProviderStoragePools, lpVtbl : IVdsHwProviderStoragePoolsVtbl* do
+  record IVdsHwProviderStoragePools, lpVtbl : IVdsHwProviderStoragePoolsVtable* do
     GUID = LibC::GUID.new(0xd5b5937a_u32, 0xf188_u16, 0x4c79_u16, StaticArray[0xb8_u8, 0x6c_u8, 0x11_u8, 0xc9_u8, 0x20_u8, 0xad_u8, 0x11_u8, 0xb8_u8])
     def query_interface(this : IVdsHwProviderStoragePools*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2050,7 +3426,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsSubSystemVtbl,
+
+  record IVdsSubSystemVtable,
     query_interface : Proc(IVdsSubSystem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsSubSystem*, UInt32),
     release : Proc(IVdsSubSystem*, UInt32),
@@ -2069,7 +3446,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsSubSystem, lpVtbl : IVdsSubSystemVtbl* do
+  record IVdsSubSystem, lpVtbl : IVdsSubSystemVtable* do
     GUID = LibC::GUID.new(0x6fcee2d3_u32, 0x6d90_u16, 0x4f91_u16, StaticArray[0x80_u8, 0xe2_u8, 0xa5_u8, 0xc7_u8, 0xca_u8, 0xac_u8, 0xa9_u8, 0xd8_u8])
     def query_interface(this : IVdsSubSystem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2120,7 +3497,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsSubSystem2Vtbl,
+
+  record IVdsSubSystem2Vtable,
     query_interface : Proc(IVdsSubSystem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsSubSystem2*, UInt32),
     release : Proc(IVdsSubSystem2*, UInt32),
@@ -2131,7 +3509,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsSubSystem2, lpVtbl : IVdsSubSystem2Vtbl* do
+  record IVdsSubSystem2, lpVtbl : IVdsSubSystem2Vtable* do
     GUID = LibC::GUID.new(0xbe666735_u32, 0x7800_u16, 0x4a77_u16, StaticArray[0x9d_u8, 0x9c_u8, 0x40_u8, 0xf8_u8, 0x5b_u8, 0x87_u8, 0xe2_u8, 0x92_u8])
     def query_interface(this : IVdsSubSystem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2158,7 +3536,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsSubSystemNamingVtbl,
+
+  record IVdsSubSystemNamingVtable,
     query_interface : Proc(IVdsSubSystemNaming*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsSubSystemNaming*, UInt32),
     release : Proc(IVdsSubSystemNaming*, UInt32),
@@ -2166,7 +3545,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsSubSystemNaming, lpVtbl : IVdsSubSystemNamingVtbl* do
+  record IVdsSubSystemNaming, lpVtbl : IVdsSubSystemNamingVtable* do
     GUID = LibC::GUID.new(0xd70faa3_u32, 0x9cd4_u16, 0x4900_u16, StaticArray[0xaa_u8, 0x20_u8, 0x69_u8, 0x81_u8, 0xb6_u8, 0xaa_u8, 0xfc_u8, 0x75_u8])
     def query_interface(this : IVdsSubSystemNaming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2184,7 +3563,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsSubSystemIscsiVtbl,
+
+  record IVdsSubSystemIscsiVtable,
     query_interface : Proc(IVdsSubSystemIscsi*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsSubSystemIscsi*, UInt32),
     release : Proc(IVdsSubSystemIscsi*, UInt32),
@@ -2195,7 +3575,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsSubSystemIscsi, lpVtbl : IVdsSubSystemIscsiVtbl* do
+  record IVdsSubSystemIscsi, lpVtbl : IVdsSubSystemIscsiVtable* do
     GUID = LibC::GUID.new(0x27346f_u32, 0x40d0_u16, 0x4b45_u16, StaticArray[0x8c_u8, 0xec_u8, 0x59_u8, 0x6_u8, 0xdc_u8, 0x3_u8, 0x80_u8, 0xc8_u8])
     def query_interface(this : IVdsSubSystemIscsi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2222,7 +3602,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsSubSystemInterconnectVtbl,
+
+  record IVdsSubSystemInterconnectVtable,
     query_interface : Proc(IVdsSubSystemInterconnect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsSubSystemInterconnect*, UInt32),
     release : Proc(IVdsSubSystemInterconnect*, UInt32),
@@ -2230,7 +3611,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsSubSystemInterconnect, lpVtbl : IVdsSubSystemInterconnectVtbl* do
+  record IVdsSubSystemInterconnect, lpVtbl : IVdsSubSystemInterconnectVtable* do
     GUID = LibC::GUID.new(0x9e6fa560_u32, 0xc141_u16, 0x477b_u16, StaticArray[0x83_u8, 0xba_u8, 0xb_u8, 0x6c_u8, 0x38_u8, 0xf7_u8, 0xfe_u8, 0xbf_u8])
     def query_interface(this : IVdsSubSystemInterconnect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2248,7 +3629,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsControllerPortVtbl,
+
+  record IVdsControllerPortVtable,
     query_interface : Proc(IVdsControllerPort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsControllerPort*, UInt32),
     release : Proc(IVdsControllerPort*, UInt32),
@@ -2260,7 +3642,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsControllerPort, lpVtbl : IVdsControllerPortVtbl* do
+  record IVdsControllerPort, lpVtbl : IVdsControllerPortVtable* do
     GUID = LibC::GUID.new(0x18691d0d_u32, 0x4e7f_u16, 0x43e8_u16, StaticArray[0x92_u8, 0xe4_u8, 0xcf_u8, 0x44_u8, 0xbe_u8, 0xee_u8, 0xd1_u8, 0x1c_u8])
     def query_interface(this : IVdsControllerPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2290,7 +3672,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsControllerVtbl,
+
+  record IVdsControllerVtable,
     query_interface : Proc(IVdsController*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsController*, UInt32),
     release : Proc(IVdsController*, UInt32),
@@ -2305,7 +3688,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsController, lpVtbl : IVdsControllerVtbl* do
+  record IVdsController, lpVtbl : IVdsControllerVtable* do
     GUID = LibC::GUID.new(0xcb53d96e_u32, 0xdffb_u16, 0x474a_u16, StaticArray[0xa0_u8, 0x78_u8, 0x79_u8, 0xd_u8, 0x1e_u8, 0x2b_u8, 0xc0_u8, 0x82_u8])
     def query_interface(this : IVdsController*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2344,7 +3727,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsControllerControllerPortVtbl,
+
+  record IVdsControllerControllerPortVtable,
     query_interface : Proc(IVdsControllerControllerPort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsControllerControllerPort*, UInt32),
     release : Proc(IVdsControllerControllerPort*, UInt32),
@@ -2352,7 +3736,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsControllerControllerPort, lpVtbl : IVdsControllerControllerPortVtbl* do
+  record IVdsControllerControllerPort, lpVtbl : IVdsControllerControllerPortVtable* do
     GUID = LibC::GUID.new(0xca5d735f_u32, 0x6bae_u16, 0x42c0_u16, StaticArray[0xb3_u8, 0xe_u8, 0xf2_u8, 0x66_u8, 0x60_u8, 0x45_u8, 0xce_u8, 0x71_u8])
     def query_interface(this : IVdsControllerControllerPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2370,7 +3754,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsDriveVtbl,
+
+  record IVdsDriveVtable,
     query_interface : Proc(IVdsDrive*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsDrive*, UInt32),
     release : Proc(IVdsDrive*, UInt32),
@@ -2383,7 +3768,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsDrive, lpVtbl : IVdsDriveVtbl* do
+  record IVdsDrive, lpVtbl : IVdsDriveVtable* do
     GUID = LibC::GUID.new(0xff24efa4_u32, 0xaade_u16, 0x4b6b_u16, StaticArray[0x89_u8, 0x8b_u8, 0xea_u8, 0xa6_u8, 0xa2_u8, 0x8_u8, 0x87_u8, 0xc7_u8])
     def query_interface(this : IVdsDrive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2416,7 +3801,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsDrive2Vtbl,
+
+  record IVdsDrive2Vtable,
     query_interface : Proc(IVdsDrive2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsDrive2*, UInt32),
     release : Proc(IVdsDrive2*, UInt32),
@@ -2424,7 +3810,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsDrive2, lpVtbl : IVdsDrive2Vtbl* do
+  record IVdsDrive2, lpVtbl : IVdsDrive2Vtable* do
     GUID = LibC::GUID.new(0x60b5a730_u32, 0xaddf_u16, 0x4436_u16, StaticArray[0x8c_u8, 0xa7_u8, 0x57_u8, 0x69_u8, 0xe2_u8, 0xd1_u8, 0xff_u8, 0xa4_u8])
     def query_interface(this : IVdsDrive2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2442,7 +3828,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLunVtbl,
+
+  record IVdsLunVtable,
     query_interface : Proc(IVdsLun*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLun*, UInt32),
     release : Proc(IVdsLun*, UInt32),
@@ -2466,7 +3853,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLun, lpVtbl : IVdsLunVtbl* do
+  record IVdsLun, lpVtbl : IVdsLunVtable* do
     GUID = LibC::GUID.new(0x3540a9c7_u32, 0xe60f_u16, 0x4111_u16, StaticArray[0xa8_u8, 0x40_u8, 0x8b_u8, 0xba_u8, 0x6c_u8, 0x2c_u8, 0x83_u8, 0xd8_u8])
     def query_interface(this : IVdsLun*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2532,7 +3919,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLun2Vtbl,
+
+  record IVdsLun2Vtable,
     query_interface : Proc(IVdsLun2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLun2*, UInt32),
     release : Proc(IVdsLun2*, UInt32),
@@ -2541,7 +3929,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLun2, lpVtbl : IVdsLun2Vtbl* do
+  record IVdsLun2, lpVtbl : IVdsLun2Vtable* do
     GUID = LibC::GUID.new(0xe5b3a735_u32, 0x9efb_u16, 0x499a_u16, StaticArray[0x80_u8, 0x71_u8, 0x43_u8, 0x94_u8, 0xd9_u8, 0xee_u8, 0x6f_u8, 0xcb_u8])
     def query_interface(this : IVdsLun2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2562,7 +3950,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLunNamingVtbl,
+
+  record IVdsLunNamingVtable,
     query_interface : Proc(IVdsLunNaming*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLunNaming*, UInt32),
     release : Proc(IVdsLunNaming*, UInt32),
@@ -2570,7 +3959,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLunNaming, lpVtbl : IVdsLunNamingVtbl* do
+  record IVdsLunNaming, lpVtbl : IVdsLunNamingVtable* do
     GUID = LibC::GUID.new(0x907504cb_u32, 0x6b4e_u16, 0x4d88_u16, StaticArray[0xa3_u8, 0x4d_u8, 0x17_u8, 0xba_u8, 0x66_u8, 0x1f_u8, 0xbb_u8, 0x6_u8])
     def query_interface(this : IVdsLunNaming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2588,7 +3977,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLunNumberVtbl,
+
+  record IVdsLunNumberVtable,
     query_interface : Proc(IVdsLunNumber*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLunNumber*, UInt32),
     release : Proc(IVdsLunNumber*, UInt32),
@@ -2596,7 +3986,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLunNumber, lpVtbl : IVdsLunNumberVtbl* do
+  record IVdsLunNumber, lpVtbl : IVdsLunNumberVtable* do
     GUID = LibC::GUID.new(0xd3f95e46_u32, 0x54b3_u16, 0x41f9_u16, StaticArray[0xb6_u8, 0x78_u8, 0xf_u8, 0x18_u8, 0x71_u8, 0x44_u8, 0x3a_u8, 0x8_u8])
     def query_interface(this : IVdsLunNumber*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2614,7 +4004,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLunControllerPortsVtbl,
+
+  record IVdsLunControllerPortsVtable,
     query_interface : Proc(IVdsLunControllerPorts*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLunControllerPorts*, UInt32),
     release : Proc(IVdsLunControllerPorts*, UInt32),
@@ -2623,7 +4014,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLunControllerPorts, lpVtbl : IVdsLunControllerPortsVtbl* do
+  record IVdsLunControllerPorts, lpVtbl : IVdsLunControllerPortsVtable* do
     GUID = LibC::GUID.new(0x451fe266_u32, 0xda6d_u16, 0x406a_u16, StaticArray[0xbb_u8, 0x60_u8, 0x82_u8, 0xe5_u8, 0x34_u8, 0xf8_u8, 0x5a_u8, 0xeb_u8])
     def query_interface(this : IVdsLunControllerPorts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2644,7 +4035,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLunMpioVtbl,
+
+  record IVdsLunMpioVtable,
     query_interface : Proc(IVdsLunMpio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLunMpio*, UInt32),
     release : Proc(IVdsLunMpio*, UInt32),
@@ -2655,7 +4047,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLunMpio, lpVtbl : IVdsLunMpioVtbl* do
+  record IVdsLunMpio, lpVtbl : IVdsLunMpioVtable* do
     GUID = LibC::GUID.new(0x7c5fbae3_u32, 0x333a_u16, 0x48a1_u16, StaticArray[0xa9_u8, 0x82_u8, 0x33_u8, 0xc1_u8, 0x57_u8, 0x88_u8, 0xcd_u8, 0xe3_u8])
     def query_interface(this : IVdsLunMpio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2682,7 +4074,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLunIscsiVtbl,
+
+  record IVdsLunIscsiVtable,
     query_interface : Proc(IVdsLunIscsi*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLunIscsi*, UInt32),
     release : Proc(IVdsLunIscsi*, UInt32),
@@ -2691,7 +4084,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLunIscsi, lpVtbl : IVdsLunIscsiVtbl* do
+  record IVdsLunIscsi, lpVtbl : IVdsLunIscsiVtable* do
     GUID = LibC::GUID.new(0xd7c1e64_u32, 0xb59b_u16, 0x45ae_u16, StaticArray[0xb8_u8, 0x6a_u8, 0x2c_u8, 0x2c_u8, 0xc6_u8, 0xa4_u8, 0x20_u8, 0x67_u8])
     def query_interface(this : IVdsLunIscsi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2712,7 +4105,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsLunPlexVtbl,
+
+  record IVdsLunPlexVtable,
     query_interface : Proc(IVdsLunPlex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsLunPlex*, UInt32),
     release : Proc(IVdsLunPlex*, UInt32),
@@ -2724,7 +4118,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsLunPlex, lpVtbl : IVdsLunPlexVtbl* do
+  record IVdsLunPlex, lpVtbl : IVdsLunPlexVtable* do
     GUID = LibC::GUID.new(0xee1a790_u32, 0x5d2e_u16, 0x4abb_u16, StaticArray[0x8c_u8, 0x99_u8, 0xc4_u8, 0x81_u8, 0xe8_u8, 0xbe_u8, 0x21_u8, 0x38_u8])
     def query_interface(this : IVdsLunPlex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2754,7 +4148,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsIscsiPortalVtbl,
+
+  record IVdsIscsiPortalVtable,
     query_interface : Proc(IVdsIscsiPortal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsIscsiPortal*, UInt32),
     release : Proc(IVdsIscsiPortal*, UInt32),
@@ -2768,7 +4163,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsIscsiPortal, lpVtbl : IVdsIscsiPortalVtbl* do
+  record IVdsIscsiPortal, lpVtbl : IVdsIscsiPortalVtable* do
     GUID = LibC::GUID.new(0x7fa1499d_u32, 0xec85_u16, 0x4a8a_u16, StaticArray[0xa4_u8, 0x7b_u8, 0xff_u8, 0x69_u8, 0x20_u8, 0x1f_u8, 0xcd_u8, 0x34_u8])
     def query_interface(this : IVdsIscsiPortal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2804,7 +4199,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsIscsiTargetVtbl,
+
+  record IVdsIscsiTargetVtable,
     query_interface : Proc(IVdsIscsiTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsIscsiTarget*, UInt32),
     release : Proc(IVdsIscsiTarget*, UInt32),
@@ -2821,7 +4217,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsIscsiTarget, lpVtbl : IVdsIscsiTargetVtbl* do
+  record IVdsIscsiTarget, lpVtbl : IVdsIscsiTargetVtable* do
     GUID = LibC::GUID.new(0xaa8f5055_u32, 0x83e5_u16, 0x4bcc_u16, StaticArray[0xaa_u8, 0x73_u8, 0x19_u8, 0x85_u8, 0x1a_u8, 0x36_u8, 0xa8_u8, 0x49_u8])
     def query_interface(this : IVdsIscsiTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2866,7 +4262,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsIscsiPortalGroupVtbl,
+
+  record IVdsIscsiPortalGroupVtable,
     query_interface : Proc(IVdsIscsiPortalGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsIscsiPortalGroup*, UInt32),
     release : Proc(IVdsIscsiPortalGroup*, UInt32),
@@ -2879,7 +4276,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsIscsiPortalGroup, lpVtbl : IVdsIscsiPortalGroupVtbl* do
+  record IVdsIscsiPortalGroup, lpVtbl : IVdsIscsiPortalGroupVtable* do
     GUID = LibC::GUID.new(0xfef5f89d_u32, 0xa3dd_u16, 0x4b36_u16, StaticArray[0xbf_u8, 0x28_u8, 0xe7_u8, 0xdd_u8, 0xe0_u8, 0x45_u8, 0xc5_u8, 0x93_u8])
     def query_interface(this : IVdsIscsiPortalGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2912,7 +4309,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsStoragePoolVtbl,
+
+  record IVdsStoragePoolVtable,
     query_interface : Proc(IVdsStoragePool*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsStoragePool*, UInt32),
     release : Proc(IVdsStoragePool*, UInt32),
@@ -2925,7 +4323,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsStoragePool, lpVtbl : IVdsStoragePoolVtbl* do
+  record IVdsStoragePool, lpVtbl : IVdsStoragePoolVtable* do
     GUID = LibC::GUID.new(0x932ca8cf_u32, 0xeb3_u16, 0x4ba8_u16, StaticArray[0x96_u8, 0x20_u8, 0x22_u8, 0x66_u8, 0x5d_u8, 0x7f_u8, 0x84_u8, 0x50_u8])
     def query_interface(this : IVdsStoragePool*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2958,7 +4356,8 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsMaintenanceVtbl,
+
+  record IVdsMaintenanceVtable,
     query_interface : Proc(IVdsMaintenance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVdsMaintenance*, UInt32),
     release : Proc(IVdsMaintenance*, UInt32),
@@ -2968,7 +4367,7 @@ module Win32cr::Storage::VirtualDiskService
 
 
   @[Extern]
-  record IVdsMaintenance, lpVtbl : IVdsMaintenanceVtbl* do
+  record IVdsMaintenance, lpVtbl : IVdsMaintenanceVtable* do
     GUID = LibC::GUID.new(0xdaebeef3_u32, 0x8523_u16, 0x47ed_u16, StaticArray[0xa2_u8, 0xb9_u8, 0x5_u8, 0xce_u8, 0xcc_u8, 0xe2_u8, 0xa1_u8, 0xae_u8])
     def query_interface(this : IVdsMaintenance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2992,83 +4391,843 @@ module Win32cr::Storage::VirtualDiskService
   end
 
   @[Extern]
-  record IVdsHwProviderPrivateVtbl,
-    query_interface : Proc(IVdsHwProviderPrivate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IVdsHwProviderPrivate*, UInt32),
-    release : Proc(IVdsHwProviderPrivate*, UInt32),
-    query_if_created_lun : Proc(IVdsHwProviderPrivate*, Win32cr::Foundation::PWSTR, Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+  record IVdsVdProviderVtable,
+    query_interface : Proc(IVdsVdProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVdProvider*, UInt32),
+    release : Proc(IVdsVdProvider*, UInt32),
+    query_v_disks : Proc(IVdsVdProvider*, Void**, Win32cr::Foundation::HRESULT),
+    create_v_disk : Proc(IVdsVdProvider*, Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_FLAG, UInt32, UInt32, Win32cr::Storage::VirtualDiskService::VDS_CREATE_VDISK_PARAMETERS*, Void**, Win32cr::Foundation::HRESULT),
+    add_v_disk : Proc(IVdsVdProvider*, Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_disk_from_v_disk : Proc(IVdsVdProvider*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_v_disk_from_disk : Proc(IVdsVdProvider*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVdsHwProviderPrivate, lpVtbl : IVdsHwProviderPrivateVtbl* do
-    GUID = LibC::GUID.new(0x98f17bf3_u32, 0x9f33_u16, 0x4f12_u16, StaticArray[0x87_u8, 0x14_u8, 0x8b_u8, 0x40_u8, 0x75_u8, 0x9_u8, 0x2c_u8, 0x2e_u8])
-    def query_interface(this : IVdsHwProviderPrivate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+  record IVdsVdProvider, lpVtbl : IVdsVdProviderVtable* do
+    GUID = LibC::GUID.new(0xb481498c_u32, 0x8354_u16, 0x45f9_u16, StaticArray[0x84_u8, 0xa0_u8, 0xb_u8, 0xdd_u8, 0x28_u8, 0x32_u8, 0xa9_u8, 0x1f_u8])
+    def query_interface(this : IVdsVdProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
-    def add_ref(this : IVdsHwProviderPrivate*) : UInt32
+    def add_ref(this : IVdsVdProvider*) : UInt32
       @lpVtbl.try &.value.add_ref.call(this)
     end
-    def release(this : IVdsHwProviderPrivate*) : UInt32
+    def release(this : IVdsVdProvider*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def query_if_created_lun(this : IVdsHwProviderPrivate*, pwszDevicePath : Win32cr::Foundation::PWSTR, pVdsLunInformation : Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*, pLunId : LibC::GUID*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_if_created_lun.call(this, pwszDevicePath, pVdsLunInformation, pLunId)
+    def query_v_disks(this : IVdsVdProvider*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_v_disks.call(this, ppEnum)
+    end
+    def create_v_disk(this : IVdsVdProvider*, virtual_device_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, pPath : Win32cr::Foundation::PWSTR, pStringSecurityDescriptor : Win32cr::Foundation::PWSTR, flags : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, reserved : UInt32, pCreateDiskParameters : Win32cr::Storage::VirtualDiskService::VDS_CREATE_VDISK_PARAMETERS*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_v_disk.call(this, virtual_device_type, pPath, pStringSecurityDescriptor, flags, provider_specific_flags, reserved, pCreateDiskParameters, ppAsync)
+    end
+    def add_v_disk(this : IVdsVdProvider*, virtual_device_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, pPath : Win32cr::Foundation::PWSTR, ppVDisk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_v_disk.call(this, virtual_device_type, pPath, ppVDisk)
+    end
+    def get_disk_from_v_disk(this : IVdsVdProvider*, pVDisk : Void*, ppDisk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_disk_from_v_disk.call(this, pVDisk, ppDisk)
+    end
+    def get_v_disk_from_disk(this : IVdsVdProvider*, pDisk : Void*, ppVDisk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_v_disk_from_disk.call(this, pDisk, ppVDisk)
     end
 
   end
 
   @[Extern]
-  record IVdsHwProviderPrivateMpioVtbl,
-    query_interface : Proc(IVdsHwProviderPrivateMpio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IVdsHwProviderPrivateMpio*, UInt32),
-    release : Proc(IVdsHwProviderPrivateMpio*, UInt32),
-    set_all_path_statuses_from_hba_port : Proc(IVdsHwProviderPrivateMpio*, Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP, Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS, Win32cr::Foundation::HRESULT)
+
+  record IVdsVDiskVtable,
+    query_interface : Proc(IVdsVDisk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVDisk*, UInt32),
+    release : Proc(IVdsVDisk*, UInt32),
+    open : Proc(IVdsVDisk*, Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_properties : Proc(IVdsVDisk*, Win32cr::Storage::VirtualDiskService::VDS_VDISK_PROPERTIES*, Win32cr::Foundation::HRESULT),
+    get_host_volume : Proc(IVdsVDisk*, Void**, Win32cr::Foundation::HRESULT),
+    get_device_name : Proc(IVdsVDisk*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVdsHwProviderPrivateMpio, lpVtbl : IVdsHwProviderPrivateMpioVtbl* do
-    GUID = LibC::GUID.new(0x310a7715_u32, 0xac2b_u16, 0x4c6f_u16, StaticArray[0x98_u8, 0x27_u8, 0x3d_u8, 0x74_u8, 0x2f_u8, 0x35_u8, 0x16_u8, 0x76_u8])
-    def query_interface(this : IVdsHwProviderPrivateMpio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+  record IVdsVDisk, lpVtbl : IVdsVDiskVtable* do
+    GUID = LibC::GUID.new(0x1e062b84_u32, 0xe5e6_u16, 0x4b4b_u16, StaticArray[0x8a_u8, 0x25_u8, 0x67_u8, 0xb8_u8, 0x1e_u8, 0x8f_u8, 0x13_u8, 0xe8_u8])
+    def query_interface(this : IVdsVDisk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
-    def add_ref(this : IVdsHwProviderPrivateMpio*) : UInt32
+    def add_ref(this : IVdsVDisk*) : UInt32
       @lpVtbl.try &.value.add_ref.call(this)
     end
-    def release(this : IVdsHwProviderPrivateMpio*) : UInt32
+    def release(this : IVdsVDisk*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def set_all_path_statuses_from_hba_port(this : IVdsHwProviderPrivateMpio*, hbaPortProp : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP, status : Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_all_path_statuses_from_hba_port.call(this, hbaPortProp, status)
+    def open(this : IVdsVDisk*, access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, read_write_depth : UInt32, ppOpenVDisk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open.call(this, access_mask, flags, read_write_depth, ppOpenVDisk)
+    end
+    def get_properties(this : IVdsVDisk*, pDiskProperties : Win32cr::Storage::VirtualDiskService::VDS_VDISK_PROPERTIES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pDiskProperties)
+    end
+    def get_host_volume(this : IVdsVDisk*, ppVolume : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_host_volume.call(this, ppVolume)
+    end
+    def get_device_name(this : IVdsVDisk*, ppDeviceName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_name.call(this, ppDeviceName)
     end
 
   end
 
   @[Extern]
-  record IVdsAdminVtbl,
-    query_interface : Proc(IVdsAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IVdsAdmin*, UInt32),
-    release : Proc(IVdsAdmin*, UInt32),
-    register_provider : Proc(IVdsAdmin*, LibC::GUID, LibC::GUID, Win32cr::Foundation::PWSTR, Win32cr::Storage::VirtualDiskService::VDS_PROVIDER_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::GUID, Win32cr::Foundation::HRESULT),
-    unregister_provider : Proc(IVdsAdmin*, LibC::GUID, Win32cr::Foundation::HRESULT)
+
+  record IVdsOpenVDiskVtable,
+    query_interface : Proc(IVdsOpenVDisk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsOpenVDisk*, UInt32),
+    release : Proc(IVdsOpenVDisk*, UInt32),
+    attach : Proc(IVdsOpenVDisk*, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_FLAG, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    detach : Proc(IVdsOpenVDisk*, Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, UInt32, Win32cr::Foundation::HRESULT),
+    detach_and_delete : Proc(IVdsOpenVDisk*, Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, UInt32, Win32cr::Foundation::HRESULT),
+    compact : Proc(IVdsOpenVDisk*, Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_FLAG, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    merge : Proc(IVdsOpenVDisk*, Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_FLAG, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    expand : Proc(IVdsOpenVDisk*, Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_FLAG, UInt64, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVdsAdmin, lpVtbl : IVdsAdminVtbl* do
-    GUID = LibC::GUID.new(0xd188e97d_u32, 0x85aa_u16, 0x4d33_u16, StaticArray[0xab_u8, 0xc6_u8, 0x26_u8, 0x29_u8, 0x9a_u8, 0x10_u8, 0xff_u8, 0xc1_u8])
-    def query_interface(this : IVdsAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+  record IVdsOpenVDisk, lpVtbl : IVdsOpenVDiskVtable* do
+    GUID = LibC::GUID.new(0x75c8f324_u32, 0xf715_u16, 0x4fe3_u16, StaticArray[0xa2_u8, 0x8e_u8, 0xf9_u8, 0x1_u8, 0x1b_u8, 0x61_u8, 0xa4_u8, 0xa1_u8])
+    def query_interface(this : IVdsOpenVDisk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
-    def add_ref(this : IVdsAdmin*) : UInt32
+    def add_ref(this : IVdsOpenVDisk*) : UInt32
       @lpVtbl.try &.value.add_ref.call(this)
     end
-    def release(this : IVdsAdmin*) : UInt32
+    def release(this : IVdsOpenVDisk*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def register_provider(this : IVdsAdmin*, providerId : LibC::GUID, providerClsid : LibC::GUID, pwszName : Win32cr::Foundation::PWSTR, type__ : Win32cr::Storage::VirtualDiskService::VDS_PROVIDER_TYPE, pwszMachineName : Win32cr::Foundation::PWSTR, pwszVersion : Win32cr::Foundation::PWSTR, guidVersionId : LibC::GUID) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.register_provider.call(this, providerId, providerClsid, pwszName, type__, pwszMachineName, pwszVersion, guidVersionId)
+    def attach(this : IVdsOpenVDisk*, pStringSecurityDescriptor : Win32cr::Foundation::PWSTR, flags : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, timeout_in_ms : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.attach.call(this, pStringSecurityDescriptor, flags, provider_specific_flags, timeout_in_ms, ppAsync)
     end
-    def unregister_provider(this : IVdsAdmin*, providerId : LibC::GUID) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.unregister_provider.call(this, providerId)
+    def detach(this : IVdsOpenVDisk*, flags : Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.detach.call(this, flags, provider_specific_flags)
+    end
+    def detach_and_delete(this : IVdsOpenVDisk*, flags : Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.detach_and_delete.call(this, flags, provider_specific_flags)
+    end
+    def compact(this : IVdsOpenVDisk*, flags : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_FLAG, reserved : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.compact.call(this, flags, reserved, ppAsync)
+    end
+    def merge(this : IVdsOpenVDisk*, flags : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_FLAG, merge_depth : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.merge.call(this, flags, merge_depth, ppAsync)
+    end
+    def expand(this : IVdsOpenVDisk*, flags : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_FLAG, new_size : UInt64, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.expand.call(this, flags, new_size, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceLoaderVtable,
+    query_interface : Proc(IVdsServiceLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsServiceLoader*, UInt32),
+    release : Proc(IVdsServiceLoader*, UInt32),
+    load_service : Proc(IVdsServiceLoader*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsServiceLoader, lpVtbl : IVdsServiceLoaderVtable* do
+    GUID = LibC::GUID.new(0xe0393303_u32, 0x90d4_u16, 0x4a97_u16, StaticArray[0xab_u8, 0x71_u8, 0xe9_u8, 0xb6_u8, 0x71_u8, 0xee_u8, 0x27_u8, 0x29_u8])
+    def query_interface(this : IVdsServiceLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsServiceLoader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsServiceLoader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def load_service(this : IVdsServiceLoader*, pwszMachineName : Win32cr::Foundation::PWSTR, ppService : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_service.call(this, pwszMachineName, ppService)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceVtable,
+    query_interface : Proc(IVdsService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsService*, UInt32),
+    release : Proc(IVdsService*, UInt32),
+    is_service_ready : Proc(IVdsService*, Win32cr::Foundation::HRESULT),
+    wait_for_service_ready : Proc(IVdsService*, Win32cr::Foundation::HRESULT),
+    get_properties : Proc(IVdsService*, Win32cr::Storage::VirtualDiskService::VDS_SERVICE_PROP*, Win32cr::Foundation::HRESULT),
+    query_providers : Proc(IVdsService*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    query_masked_disks : Proc(IVdsService*, Void**, Win32cr::Foundation::HRESULT),
+    query_unallocated_disks : Proc(IVdsService*, Void**, Win32cr::Foundation::HRESULT),
+    get_object : Proc(IVdsService*, LibC::GUID, Win32cr::Storage::VirtualDiskService::VDS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    query_drive_letters : Proc(IVdsService*, UInt16, UInt32, Win32cr::Storage::VirtualDiskService::VDS_DRIVE_LETTER_PROP*, Win32cr::Foundation::HRESULT),
+    query_file_system_types : Proc(IVdsService*, Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE_PROP**, Int32*, Win32cr::Foundation::HRESULT),
+    reenumerate : Proc(IVdsService*, Win32cr::Foundation::HRESULT),
+    refresh : Proc(IVdsService*, Win32cr::Foundation::HRESULT),
+    cleanup_obsolete_mount_points : Proc(IVdsService*, Win32cr::Foundation::HRESULT),
+    advise : Proc(IVdsService*, Void*, UInt32*, Win32cr::Foundation::HRESULT),
+    unadvise : Proc(IVdsService*, UInt32, Win32cr::Foundation::HRESULT),
+    reboot : Proc(IVdsService*, Win32cr::Foundation::HRESULT),
+    set_flags : Proc(IVdsService*, UInt32, Win32cr::Foundation::HRESULT),
+    clear_flags : Proc(IVdsService*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsService, lpVtbl : IVdsServiceVtable* do
+    GUID = LibC::GUID.new(0x818a8ef_u32, 0x9ba9_u16, 0x40d8_u16, StaticArray[0xa6_u8, 0xf9_u8, 0xe2_u8, 0x28_u8, 0x33_u8, 0xcc_u8, 0x77_u8, 0x1e_u8])
+    def query_interface(this : IVdsService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsService*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsService*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def is_service_ready(this : IVdsService*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_service_ready.call(this)
+    end
+    def wait_for_service_ready(this : IVdsService*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_service_ready.call(this)
+    end
+    def get_properties(this : IVdsService*, pServiceProp : Win32cr::Storage::VirtualDiskService::VDS_SERVICE_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pServiceProp)
+    end
+    def query_providers(this : IVdsService*, masks : UInt32, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_providers.call(this, masks, ppEnum)
+    end
+    def query_masked_disks(this : IVdsService*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_masked_disks.call(this, ppEnum)
+    end
+    def query_unallocated_disks(this : IVdsService*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_unallocated_disks.call(this, ppEnum)
+    end
+    def get_object(this : IVdsService*, object_id : LibC::GUID, type__ : Win32cr::Storage::VirtualDiskService::VDS_OBJECT_TYPE, ppObjectUnk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_object.call(this, object_id, type__, ppObjectUnk)
+    end
+    def query_drive_letters(this : IVdsService*, wcFirstLetter : UInt16, count : UInt32, pDriveLetterPropArray : Win32cr::Storage::VirtualDiskService::VDS_DRIVE_LETTER_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_drive_letters.call(this, wcFirstLetter, count, pDriveLetterPropArray)
+    end
+    def query_file_system_types(this : IVdsService*, ppFileSystemTypeProps : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE_PROP**, plNumberOfFileSystems : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_file_system_types.call(this, ppFileSystemTypeProps, plNumberOfFileSystems)
+    end
+    def reenumerate(this : IVdsService*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reenumerate.call(this)
+    end
+    def refresh(this : IVdsService*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.refresh.call(this)
+    end
+    def cleanup_obsolete_mount_points(this : IVdsService*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cleanup_obsolete_mount_points.call(this)
+    end
+    def advise(this : IVdsService*, pSink : Void*, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.advise.call(this, pSink, pdwCookie)
+    end
+    def unadvise(this : IVdsService*, dwCookie : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unadvise.call(this, dwCookie)
+    end
+    def reboot(this : IVdsService*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reboot.call(this)
+    end
+    def set_flags(this : IVdsService*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_flags.call(this, ulFlags)
+    end
+    def clear_flags(this : IVdsService*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_flags.call(this, ulFlags)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceUninstallDiskVtable,
+    query_interface : Proc(IVdsServiceUninstallDisk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsServiceUninstallDisk*, UInt32),
+    release : Proc(IVdsServiceUninstallDisk*, UInt32),
+    get_disk_id_from_lun_info : Proc(IVdsServiceUninstallDisk*, Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    uninstall_disks : Proc(IVdsServiceUninstallDisk*, LibC::GUID*, UInt32, Win32cr::Foundation::BOOLEAN, UInt8*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsServiceUninstallDisk, lpVtbl : IVdsServiceUninstallDiskVtable* do
+    GUID = LibC::GUID.new(0xb6b22da8_u32, 0xf903_u16, 0x4be7_u16, StaticArray[0xb4_u8, 0x92_u8, 0xc0_u8, 0x9d_u8, 0x87_u8, 0x5a_u8, 0xc9_u8, 0xda_u8])
+    def query_interface(this : IVdsServiceUninstallDisk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsServiceUninstallDisk*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsServiceUninstallDisk*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_disk_id_from_lun_info(this : IVdsServiceUninstallDisk*, pLunInfo : Win32cr::Storage::VirtualDiskService::VDS_LUN_INFORMATION*, pDiskId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_disk_id_from_lun_info.call(this, pLunInfo, pDiskId)
+    end
+    def uninstall_disks(this : IVdsServiceUninstallDisk*, pDiskIdArray : LibC::GUID*, ulCount : UInt32, bForce : Win32cr::Foundation::BOOLEAN, pbReboot : UInt8*, pResults : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.uninstall_disks.call(this, pDiskIdArray, ulCount, bForce, pbReboot, pResults)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceHbaVtable,
+    query_interface : Proc(IVdsServiceHba*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsServiceHba*, UInt32),
+    release : Proc(IVdsServiceHba*, UInt32),
+    query_hba_ports : Proc(IVdsServiceHba*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsServiceHba, lpVtbl : IVdsServiceHbaVtable* do
+    GUID = LibC::GUID.new(0xac13689_u32, 0x3134_u16, 0x47c6_u16, StaticArray[0xa1_u8, 0x7c_u8, 0x46_u8, 0x69_u8, 0x21_u8, 0x68_u8, 0x1_u8, 0xbe_u8])
+    def query_interface(this : IVdsServiceHba*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsServiceHba*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsServiceHba*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_hba_ports(this : IVdsServiceHba*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_hba_ports.call(this, ppEnum)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceIscsiVtable,
+    query_interface : Proc(IVdsServiceIscsi*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsServiceIscsi*, UInt32),
+    release : Proc(IVdsServiceIscsi*, UInt32),
+    get_initiator_name : Proc(IVdsServiceIscsi*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    query_initiator_adapters : Proc(IVdsServiceIscsi*, Void**, Win32cr::Foundation::HRESULT),
+    set_ipsec_group_preshared_key : Proc(IVdsServiceIscsi*, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*, Win32cr::Foundation::HRESULT),
+    set_all_ipsec_tunnel_addresses : Proc(IVdsServiceIscsi*, Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*, Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*, Win32cr::Foundation::HRESULT),
+    set_all_ipsec_security : Proc(IVdsServiceIscsi*, LibC::GUID, UInt64, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*, Win32cr::Foundation::HRESULT),
+    set_initiator_shared_secret : Proc(IVdsServiceIscsi*, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_SHARED_SECRET*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    remember_target_shared_secret : Proc(IVdsServiceIscsi*, LibC::GUID, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_SHARED_SECRET*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsServiceIscsi, lpVtbl : IVdsServiceIscsiVtable* do
+    GUID = LibC::GUID.new(0x14fbe036_u32, 0x3ed7_u16, 0x4e10_u16, StaticArray[0x90_u8, 0xe9_u8, 0xa5_u8, 0xff_u8, 0x99_u8, 0x1a_u8, 0xff_u8, 0x1_u8])
+    def query_interface(this : IVdsServiceIscsi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsServiceIscsi*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsServiceIscsi*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_initiator_name(this : IVdsServiceIscsi*, ppwszIscsiName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_initiator_name.call(this, ppwszIscsiName)
+    end
+    def query_initiator_adapters(this : IVdsServiceIscsi*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_initiator_adapters.call(this, ppEnum)
+    end
+    def set_ipsec_group_preshared_key(this : IVdsServiceIscsi*, pIpsecKey : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ipsec_group_preshared_key.call(this, pIpsecKey)
+    end
+    def set_all_ipsec_tunnel_addresses(this : IVdsServiceIscsi*, pTunnelAddress : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*, pDestinationAddress : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_all_ipsec_tunnel_addresses.call(this, pTunnelAddress, pDestinationAddress)
+    end
+    def set_all_ipsec_security(this : IVdsServiceIscsi*, targetPortalId : LibC::GUID, ullSecurityFlags : UInt64, pIpsecKey : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_all_ipsec_security.call(this, targetPortalId, ullSecurityFlags, pIpsecKey)
+    end
+    def set_initiator_shared_secret(this : IVdsServiceIscsi*, pInitiatorSharedSecret : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_SHARED_SECRET*, targetId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_initiator_shared_secret.call(this, pInitiatorSharedSecret, targetId)
+    end
+    def remember_target_shared_secret(this : IVdsServiceIscsi*, targetId : LibC::GUID, pTargetSharedSecret : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_SHARED_SECRET*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remember_target_shared_secret.call(this, targetId, pTargetSharedSecret)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceInitializationVtable,
+    query_interface : Proc(IVdsServiceInitialization*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsServiceInitialization*, UInt32),
+    release : Proc(IVdsServiceInitialization*, UInt32),
+    initialize__ : Proc(IVdsServiceInitialization*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsServiceInitialization, lpVtbl : IVdsServiceInitializationVtable* do
+    GUID = LibC::GUID.new(0x4afc3636_u32, 0xdb01_u16, 0x4052_u16, StaticArray[0x80_u8, 0xc3_u8, 0x3_u8, 0xbb_u8, 0xcb_u8, 0x8d_u8, 0x3c_u8, 0x69_u8])
+    def query_interface(this : IVdsServiceInitialization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsServiceInitialization*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsServiceInitialization*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IVdsServiceInitialization*, pwszMachineName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pwszMachineName)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsHbaPortVtable,
+    query_interface : Proc(IVdsHbaPort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsHbaPort*, UInt32),
+    release : Proc(IVdsHbaPort*, UInt32),
+    get_properties : Proc(IVdsHbaPort*, Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP*, Win32cr::Foundation::HRESULT),
+    set_all_path_statuses : Proc(IVdsHbaPort*, Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsHbaPort, lpVtbl : IVdsHbaPortVtable* do
+    GUID = LibC::GUID.new(0x2abd757f_u32, 0x2851_u16, 0x4997_u16, StaticArray[0x9a_u8, 0x13_u8, 0x47_u8, 0xd2_u8, 0xa8_u8, 0x85_u8, 0xd6_u8, 0xca_u8])
+    def query_interface(this : IVdsHbaPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsHbaPort*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsHbaPort*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsHbaPort*, pHbaPortProp : Win32cr::Storage::VirtualDiskService::VDS_HBAPORT_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pHbaPortProp)
+    end
+    def set_all_path_statuses(this : IVdsHbaPort*, status : Win32cr::Storage::VirtualDiskService::VDS_PATH_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_all_path_statuses.call(this, status)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsIscsiInitiatorAdapterVtable,
+    query_interface : Proc(IVdsIscsiInitiatorAdapter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsIscsiInitiatorAdapter*, UInt32),
+    release : Proc(IVdsIscsiInitiatorAdapter*, UInt32),
+    get_properties : Proc(IVdsIscsiInitiatorAdapter*, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_INITIATOR_ADAPTER_PROP*, Win32cr::Foundation::HRESULT),
+    query_initiator_portals : Proc(IVdsIscsiInitiatorAdapter*, Void**, Win32cr::Foundation::HRESULT),
+    login_to_target : Proc(IVdsIscsiInitiatorAdapter*, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_LOGIN_TYPE, LibC::GUID, LibC::GUID, LibC::GUID, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_AUTH_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    logout_from_target : Proc(IVdsIscsiInitiatorAdapter*, LibC::GUID, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsIscsiInitiatorAdapter, lpVtbl : IVdsIscsiInitiatorAdapterVtable* do
+    GUID = LibC::GUID.new(0xb07fedd4_u32, 0x1682_u16, 0x4440_u16, StaticArray[0x91_u8, 0x89_u8, 0xa3_u8, 0x9b_u8, 0x55_u8, 0x19_u8, 0x4d_u8, 0xc5_u8])
+    def query_interface(this : IVdsIscsiInitiatorAdapter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsIscsiInitiatorAdapter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsIscsiInitiatorAdapter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsIscsiInitiatorAdapter*, pInitiatorAdapterProp : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_INITIATOR_ADAPTER_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pInitiatorAdapterProp)
+    end
+    def query_initiator_portals(this : IVdsIscsiInitiatorAdapter*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_initiator_portals.call(this, ppEnum)
+    end
+    def login_to_target(this : IVdsIscsiInitiatorAdapter*, loginType : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_LOGIN_TYPE, targetId : LibC::GUID, targetPortalId : LibC::GUID, initiatorPortalId : LibC::GUID, ulLoginFlags : UInt32, bHeaderDigest : Win32cr::Foundation::BOOL, bDataDigest : Win32cr::Foundation::BOOL, authType : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_AUTH_TYPE, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.login_to_target.call(this, loginType, targetId, targetPortalId, initiatorPortalId, ulLoginFlags, bHeaderDigest, bDataDigest, authType, ppAsync)
+    end
+    def logout_from_target(this : IVdsIscsiInitiatorAdapter*, targetId : LibC::GUID, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.logout_from_target.call(this, targetId, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsIscsiInitiatorPortalVtable,
+    query_interface : Proc(IVdsIscsiInitiatorPortal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsIscsiInitiatorPortal*, UInt32),
+    release : Proc(IVdsIscsiInitiatorPortal*, UInt32),
+    get_properties : Proc(IVdsIscsiInitiatorPortal*, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_INITIATOR_PORTAL_PROP*, Win32cr::Foundation::HRESULT),
+    get_initiator_adapter : Proc(IVdsIscsiInitiatorPortal*, Void**, Win32cr::Foundation::HRESULT),
+    set_ipsec_tunnel_address : Proc(IVdsIscsiInitiatorPortal*, Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*, Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*, Win32cr::Foundation::HRESULT),
+    get_ipsec_security : Proc(IVdsIscsiInitiatorPortal*, LibC::GUID, UInt64*, Win32cr::Foundation::HRESULT),
+    set_ipsec_security : Proc(IVdsIscsiInitiatorPortal*, LibC::GUID, UInt64, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsIscsiInitiatorPortal, lpVtbl : IVdsIscsiInitiatorPortalVtable* do
+    GUID = LibC::GUID.new(0x38a0a9ab_u32, 0x7cc8_u16, 0x4693_u16, StaticArray[0xac_u8, 0x7_u8, 0x1f_u8, 0x28_u8, 0xbd_u8, 0x3_u8, 0xc3_u8, 0xda_u8])
+    def query_interface(this : IVdsIscsiInitiatorPortal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsIscsiInitiatorPortal*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsIscsiInitiatorPortal*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_properties(this : IVdsIscsiInitiatorPortal*, pInitiatorPortalProp : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_INITIATOR_PORTAL_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pInitiatorPortalProp)
+    end
+    def get_initiator_adapter(this : IVdsIscsiInitiatorPortal*, ppInitiatorAdapter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_initiator_adapter.call(this, ppInitiatorAdapter)
+    end
+    def set_ipsec_tunnel_address(this : IVdsIscsiInitiatorPortal*, pTunnelAddress : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*, pDestinationAddress : Win32cr::Storage::VirtualDiskService::VDS_IPADDRESS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ipsec_tunnel_address.call(this, pTunnelAddress, pDestinationAddress)
+    end
+    def get_ipsec_security(this : IVdsIscsiInitiatorPortal*, targetPortalId : LibC::GUID, pullSecurityFlags : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ipsec_security.call(this, targetPortalId, pullSecurityFlags)
+    end
+    def set_ipsec_security(this : IVdsIscsiInitiatorPortal*, targetPortalId : LibC::GUID, ullSecurityFlags : UInt64, pIpsecKey : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ipsec_security.call(this, targetPortalId, ullSecurityFlags, pIpsecKey)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsDiskPartitionMFVtable,
+    query_interface : Proc(IVdsDiskPartitionMF*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsDiskPartitionMF*, UInt32),
+    release : Proc(IVdsDiskPartitionMF*, UInt32),
+    get_partition_file_system_properties : Proc(IVdsDiskPartitionMF*, UInt64, Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_PROP*, Win32cr::Foundation::HRESULT),
+    get_partition_file_system_type_name : Proc(IVdsDiskPartitionMF*, UInt64, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    query_partition_file_system_format_support : Proc(IVdsDiskPartitionMF*, UInt64, Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP**, Int32*, Win32cr::Foundation::HRESULT),
+    format_partition_ex : Proc(IVdsDiskPartitionMF*, UInt64, Win32cr::Foundation::PWSTR, UInt16, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsDiskPartitionMF, lpVtbl : IVdsDiskPartitionMFVtable* do
+    GUID = LibC::GUID.new(0x538684e0_u32, 0xba3d_u16, 0x4bc0_u16, StaticArray[0xac_u8, 0xa9_u8, 0x16_u8, 0x4a_u8, 0xff_u8, 0x85_u8, 0xc2_u8, 0xa9_u8])
+    def query_interface(this : IVdsDiskPartitionMF*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsDiskPartitionMF*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsDiskPartitionMF*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_partition_file_system_properties(this : IVdsDiskPartitionMF*, ullOffset : UInt64, pFileSystemProp : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_partition_file_system_properties.call(this, ullOffset, pFileSystemProp)
+    end
+    def get_partition_file_system_type_name(this : IVdsDiskPartitionMF*, ullOffset : UInt64, ppwszFileSystemTypeName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_partition_file_system_type_name.call(this, ullOffset, ppwszFileSystemTypeName)
+    end
+    def query_partition_file_system_format_support(this : IVdsDiskPartitionMF*, ullOffset : UInt64, ppFileSystemSupportProps : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP**, plNumberOfFileSystems : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_partition_file_system_format_support.call(this, ullOffset, ppFileSystemSupportProps, plNumberOfFileSystems)
+    end
+    def format_partition_ex(this : IVdsDiskPartitionMF*, ullOffset : UInt64, pwszFileSystemTypeName : Win32cr::Foundation::PWSTR, usFileSystemRevision : UInt16, ulDesiredUnitAllocationSize : UInt32, pwszLabel : Win32cr::Foundation::PWSTR, bForce : Win32cr::Foundation::BOOL, bQuickFormat : Win32cr::Foundation::BOOL, bEnableCompression : Win32cr::Foundation::BOOL, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.format_partition_ex.call(this, ullOffset, pwszFileSystemTypeName, usFileSystemRevision, ulDesiredUnitAllocationSize, pwszLabel, bForce, bQuickFormat, bEnableCompression, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolumeMFVtable,
+    query_interface : Proc(IVdsVolumeMF*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolumeMF*, UInt32),
+    release : Proc(IVdsVolumeMF*, UInt32),
+    get_file_system_properties : Proc(IVdsVolumeMF*, Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_PROP*, Win32cr::Foundation::HRESULT),
+    format : Proc(IVdsVolumeMF*, Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT),
+    add_access_path : Proc(IVdsVolumeMF*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    query_access_paths : Proc(IVdsVolumeMF*, Win32cr::Foundation::PWSTR**, Int32*, Win32cr::Foundation::HRESULT),
+    query_reparse_points : Proc(IVdsVolumeMF*, Win32cr::Storage::VirtualDiskService::VDS_REPARSE_POINT_PROP**, Int32*, Win32cr::Foundation::HRESULT),
+    delete_access_path : Proc(IVdsVolumeMF*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    mount : Proc(IVdsVolumeMF*, Win32cr::Foundation::HRESULT),
+    dismount : Proc(IVdsVolumeMF*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    set_file_system_flags : Proc(IVdsVolumeMF*, UInt32, Win32cr::Foundation::HRESULT),
+    clear_file_system_flags : Proc(IVdsVolumeMF*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolumeMF, lpVtbl : IVdsVolumeMFVtable* do
+    GUID = LibC::GUID.new(0xee2d5ded_u32, 0x6236_u16, 0x4169_u16, StaticArray[0x93_u8, 0x1d_u8, 0xb9_u8, 0x77_u8, 0x8c_u8, 0xe0_u8, 0x3d_u8, 0xc6_u8])
+    def query_interface(this : IVdsVolumeMF*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolumeMF*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolumeMF*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_file_system_properties(this : IVdsVolumeMF*, pFileSystemProp : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_system_properties.call(this, pFileSystemProp)
+    end
+    def format(this : IVdsVolumeMF*, type__ : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_TYPE, pwszLabel : Win32cr::Foundation::PWSTR, dwUnitAllocationSize : UInt32, bForce : Win32cr::Foundation::BOOL, bQuickFormat : Win32cr::Foundation::BOOL, bEnableCompression : Win32cr::Foundation::BOOL, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.format.call(this, type__, pwszLabel, dwUnitAllocationSize, bForce, bQuickFormat, bEnableCompression, ppAsync)
+    end
+    def add_access_path(this : IVdsVolumeMF*, pwszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_access_path.call(this, pwszPath)
+    end
+    def query_access_paths(this : IVdsVolumeMF*, pwszPathArray : Win32cr::Foundation::PWSTR**, plNumberOfAccessPaths : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_access_paths.call(this, pwszPathArray, plNumberOfAccessPaths)
+    end
+    def query_reparse_points(this : IVdsVolumeMF*, ppReparsePointProps : Win32cr::Storage::VirtualDiskService::VDS_REPARSE_POINT_PROP**, plNumberOfReparsePointProps : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_reparse_points.call(this, ppReparsePointProps, plNumberOfReparsePointProps)
+    end
+    def delete_access_path(this : IVdsVolumeMF*, pwszPath : Win32cr::Foundation::PWSTR, bForce : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_access_path.call(this, pwszPath, bForce)
+    end
+    def mount(this : IVdsVolumeMF*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.mount.call(this)
+    end
+    def dismount(this : IVdsVolumeMF*, bForce : Win32cr::Foundation::BOOL, bPermanent : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.dismount.call(this, bForce, bPermanent)
+    end
+    def set_file_system_flags(this : IVdsVolumeMF*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_file_system_flags.call(this, ulFlags)
+    end
+    def clear_file_system_flags(this : IVdsVolumeMF*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_file_system_flags.call(this, ulFlags)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolumeMF2Vtable,
+    query_interface : Proc(IVdsVolumeMF2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolumeMF2*, UInt32),
+    release : Proc(IVdsVolumeMF2*, UInt32),
+    get_file_system_type_name : Proc(IVdsVolumeMF2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    query_file_system_format_support : Proc(IVdsVolumeMF2*, Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP**, Int32*, Win32cr::Foundation::HRESULT),
+    format_ex : Proc(IVdsVolumeMF2*, Win32cr::Foundation::PWSTR, UInt16, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolumeMF2, lpVtbl : IVdsVolumeMF2Vtable* do
+    GUID = LibC::GUID.new(0x4dbcee9a_u32, 0x6343_u16, 0x4651_u16, StaticArray[0xb8_u8, 0x5f_u8, 0x5e_u8, 0x75_u8, 0xd7_u8, 0x4d_u8, 0x98_u8, 0x3c_u8])
+    def query_interface(this : IVdsVolumeMF2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolumeMF2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolumeMF2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_file_system_type_name(this : IVdsVolumeMF2*, ppwszFileSystemTypeName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_system_type_name.call(this, ppwszFileSystemTypeName)
+    end
+    def query_file_system_format_support(this : IVdsVolumeMF2*, ppFileSystemSupportProps : Win32cr::Storage::VirtualDiskService::VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP**, plNumberOfFileSystems : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_file_system_format_support.call(this, ppFileSystemSupportProps, plNumberOfFileSystems)
+    end
+    def format_ex(this : IVdsVolumeMF2*, pwszFileSystemTypeName : Win32cr::Foundation::PWSTR, usFileSystemRevision : UInt16, ulDesiredUnitAllocationSize : UInt32, pwszLabel : Win32cr::Foundation::PWSTR, bForce : Win32cr::Foundation::BOOL, bQuickFormat : Win32cr::Foundation::BOOL, bEnableCompression : Win32cr::Foundation::BOOL, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.format_ex.call(this, pwszFileSystemTypeName, usFileSystemRevision, ulDesiredUnitAllocationSize, pwszLabel, bForce, bQuickFormat, bEnableCompression, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolumeShrinkVtable,
+    query_interface : Proc(IVdsVolumeShrink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolumeShrink*, UInt32),
+    release : Proc(IVdsVolumeShrink*, UInt32),
+    query_max_reclaimable_bytes : Proc(IVdsVolumeShrink*, UInt64*, Win32cr::Foundation::HRESULT),
+    shrink : Proc(IVdsVolumeShrink*, UInt64, UInt64, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolumeShrink, lpVtbl : IVdsVolumeShrinkVtable* do
+    GUID = LibC::GUID.new(0xd68168c9_u32, 0x82a2_u16, 0x4f85_u16, StaticArray[0xb6_u8, 0xe9_u8, 0x74_u8, 0x70_u8, 0x7c_u8, 0x49_u8, 0xa5_u8, 0x8f_u8])
+    def query_interface(this : IVdsVolumeShrink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolumeShrink*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolumeShrink*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_max_reclaimable_bytes(this : IVdsVolumeShrink*, pullMaxNumberOfReclaimableBytes : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_max_reclaimable_bytes.call(this, pullMaxNumberOfReclaimableBytes)
+    end
+    def shrink(this : IVdsVolumeShrink*, ullDesiredNumberOfReclaimableBytes : UInt64, ullMinNumberOfReclaimableBytes : UInt64, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.shrink.call(this, ullDesiredNumberOfReclaimableBytes, ullMinNumberOfReclaimableBytes, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsSubSystemImportTargetVtable,
+    query_interface : Proc(IVdsSubSystemImportTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsSubSystemImportTarget*, UInt32),
+    release : Proc(IVdsSubSystemImportTarget*, UInt32),
+    get_import_target : Proc(IVdsSubSystemImportTarget*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_import_target : Proc(IVdsSubSystemImportTarget*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsSubSystemImportTarget, lpVtbl : IVdsSubSystemImportTargetVtable* do
+    GUID = LibC::GUID.new(0x83bfb87f_u32, 0x43fb_u16, 0x4903_u16, StaticArray[0xba_u8, 0xa6_u8, 0x12_u8, 0x7f_u8, 0x1_u8, 0x2_u8, 0x9e_u8, 0xec_u8])
+    def query_interface(this : IVdsSubSystemImportTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsSubSystemImportTarget*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsSubSystemImportTarget*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_import_target(this : IVdsSubSystemImportTarget*, ppwszIscsiName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_import_target.call(this, ppwszIscsiName)
+    end
+    def set_import_target(this : IVdsSubSystemImportTarget*, pwszIscsiName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_import_target.call(this, pwszIscsiName)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsIscsiPortalLocalVtable,
+    query_interface : Proc(IVdsIscsiPortalLocal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsIscsiPortalLocal*, UInt32),
+    release : Proc(IVdsIscsiPortalLocal*, UInt32),
+    set_ipsec_security_local : Proc(IVdsIscsiPortalLocal*, UInt64, Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsIscsiPortalLocal, lpVtbl : IVdsIscsiPortalLocalVtable* do
+    GUID = LibC::GUID.new(0xad837c28_u32, 0x52c1_u16, 0x421d_u16, StaticArray[0xbf_u8, 0x4_u8, 0xfa_u8, 0xe7_u8, 0xda_u8, 0x66_u8, 0x53_u8, 0x96_u8])
+    def query_interface(this : IVdsIscsiPortalLocal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsIscsiPortalLocal*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsIscsiPortalLocal*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_ipsec_security_local(this : IVdsIscsiPortalLocal*, ullSecurityFlags : UInt64, pIpsecKey : Win32cr::Storage::VirtualDiskService::VDS_ISCSI_IPSEC_KEY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ipsec_security_local.call(this, ullSecurityFlags, pIpsecKey)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceSANVtable,
+    query_interface : Proc(IVdsServiceSAN*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsServiceSAN*, UInt32),
+    release : Proc(IVdsServiceSAN*, UInt32),
+    get_san_policy : Proc(IVdsServiceSAN*, Win32cr::Storage::VirtualDiskService::VDS_SAN_POLICY*, Win32cr::Foundation::HRESULT),
+    set_san_policy : Proc(IVdsServiceSAN*, Win32cr::Storage::VirtualDiskService::VDS_SAN_POLICY, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsServiceSAN, lpVtbl : IVdsServiceSANVtable* do
+    GUID = LibC::GUID.new(0xfc5d23e8_u32, 0xa88b_u16, 0x41a5_u16, StaticArray[0x8d_u8, 0xe0_u8, 0x2d_u8, 0x2f_u8, 0x73_u8, 0xc5_u8, 0xa6_u8, 0x30_u8])
+    def query_interface(this : IVdsServiceSAN*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsServiceSAN*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsServiceSAN*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_san_policy(this : IVdsServiceSAN*, pSanPolicy : Win32cr::Storage::VirtualDiskService::VDS_SAN_POLICY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_san_policy.call(this, pSanPolicy)
+    end
+    def set_san_policy(this : IVdsServiceSAN*, san_policy : Win32cr::Storage::VirtualDiskService::VDS_SAN_POLICY) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_san_policy.call(this, san_policy)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsVolumeMF3Vtable,
+    query_interface : Proc(IVdsVolumeMF3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsVolumeMF3*, UInt32),
+    release : Proc(IVdsVolumeMF3*, UInt32),
+    query_volume_guid_pathnames : Proc(IVdsVolumeMF3*, Win32cr::Foundation::PWSTR**, UInt32*, Win32cr::Foundation::HRESULT),
+    format_ex2 : Proc(IVdsVolumeMF3*, Win32cr::Foundation::PWSTR, UInt16, UInt32, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    offline_volume : Proc(IVdsVolumeMF3*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsVolumeMF3, lpVtbl : IVdsVolumeMF3Vtable* do
+    GUID = LibC::GUID.new(0x6788faf9_u32, 0x214e_u16, 0x4b85_u16, StaticArray[0xba_u8, 0x59_u8, 0x26_u8, 0x69_u8, 0x53_u8, 0x61_u8, 0x6e_u8, 0x9_u8])
+    def query_interface(this : IVdsVolumeMF3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsVolumeMF3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsVolumeMF3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_volume_guid_pathnames(this : IVdsVolumeMF3*, pwszPathArray : Win32cr::Foundation::PWSTR**, pulNumberOfPaths : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_volume_guid_pathnames.call(this, pwszPathArray, pulNumberOfPaths)
+    end
+    def format_ex2(this : IVdsVolumeMF3*, pwszFileSystemTypeName : Win32cr::Foundation::PWSTR, usFileSystemRevision : UInt16, ulDesiredUnitAllocationSize : UInt32, pwszLabel : Win32cr::Foundation::PWSTR, options : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.format_ex2.call(this, pwszFileSystemTypeName, usFileSystemRevision, ulDesiredUnitAllocationSize, pwszLabel, options, ppAsync)
+    end
+    def offline_volume(this : IVdsVolumeMF3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.offline_volume.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsDiskPartitionMF2Vtable,
+    query_interface : Proc(IVdsDiskPartitionMF2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsDiskPartitionMF2*, UInt32),
+    release : Proc(IVdsDiskPartitionMF2*, UInt32),
+    format_partition_ex2 : Proc(IVdsDiskPartitionMF2*, UInt64, Win32cr::Foundation::PWSTR, UInt16, UInt32, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsDiskPartitionMF2, lpVtbl : IVdsDiskPartitionMF2Vtable* do
+    GUID = LibC::GUID.new(0x9cbe50ca_u32, 0xf2d2_u16, 0x4bf4_u16, StaticArray[0xac_u8, 0xe1_u8, 0x96_u8, 0x89_u8, 0x6b_u8, 0x72_u8, 0x96_u8, 0x25_u8])
+    def query_interface(this : IVdsDiskPartitionMF2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsDiskPartitionMF2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsDiskPartitionMF2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def format_partition_ex2(this : IVdsDiskPartitionMF2*, ullOffset : UInt64, pwszFileSystemTypeName : Win32cr::Foundation::PWSTR, usFileSystemRevision : UInt16, ulDesiredUnitAllocationSize : UInt32, pwszLabel : Win32cr::Foundation::PWSTR, options : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.format_partition_ex2.call(this, ullOffset, pwszFileSystemTypeName, usFileSystemRevision, ulDesiredUnitAllocationSize, pwszLabel, options, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVdsServiceSwVtable,
+    query_interface : Proc(IVdsServiceSw*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVdsServiceSw*, UInt32),
+    release : Proc(IVdsServiceSw*, UInt32),
+    get_disk_object : Proc(IVdsServiceSw*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVdsServiceSw, lpVtbl : IVdsServiceSwVtable* do
+    GUID = LibC::GUID.new(0x15fc031c_u32, 0x652_u16, 0x4306_u16, StaticArray[0xb2_u8, 0xc3_u8, 0xf5_u8, 0x58_u8, 0xb8_u8, 0xf8_u8, 0x37_u8, 0xe2_u8])
+    def query_interface(this : IVdsServiceSw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVdsServiceSw*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVdsServiceSw*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_disk_object(this : IVdsServiceSw*, pwszDeviceID : Win32cr::Foundation::PWSTR, ppDiskUnk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_disk_object.call(this, pwszDeviceID, ppDiskUnk)
     end
 
   end

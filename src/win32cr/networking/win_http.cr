@@ -1,16 +1,30 @@
-require "./../foundation.cr"
 require "./win_sock.cr"
+require "./../foundation.cr"
+require "./../system/com.cr"
+require "./../system/variant.cr"
 
 module Win32cr::Networking::WinHttp
   extend self
   alias WINHTTP_STATUS_CALLBACK = Proc(Void*, LibC::UIntPtrT, UInt32, Void*, UInt32, Void)
 
+  alias WINHTTP_PROXY_CHANGE_CALLBACK = Proc(UInt64, Void*, Void)
+
+  HTTPREQUEST_PROXYSETTING_DEFAULT = 0_u32
+  HTTPREQUEST_PROXYSETTING_PRECONFIG = 0_u32
+  HTTPREQUEST_PROXYSETTING_DIRECT = 1_u32
+  HTTPREQUEST_PROXYSETTING_PROXY = 2_u32
+  HTTPREQUEST_SETCREDENTIALS_FOR_SERVER = 0_u32
+  HTTPREQUEST_SETCREDENTIALS_FOR_PROXY = 1_u32
+  INTERNET_DEFAULT_PORT = 0_u16
+  INTERNET_DEFAULT_HTTP_PORT = 80_u16
+  INTERNET_DEFAULT_HTTPS_PORT = 443_u16
   WINHTTP_FLAG_ASYNC = 268435456_u32
   WINHTTP_FLAG_SECURE_DEFAULTS = 805306368_u32
+  WINHTTP_FLAG_AUTOMATIC_CHUNKING = 512_u32
   SECURITY_FLAG_IGNORE_UNKNOWN_CA = 256_u32
-  SECURITY_FLAG_IGNORE_CERT_DATE_INVALID = 8192_u32
-  SECURITY_FLAG_IGNORE_CERT_CN_INVALID = 4096_u32
   SECURITY_FLAG_IGNORE_CERT_WRONG_USAGE = 512_u32
+  SECURITY_FLAG_IGNORE_CERT_CN_INVALID = 4096_u32
+  SECURITY_FLAG_IGNORE_CERT_DATE_INVALID = 8192_u32
   WINHTTP_AUTOPROXY_AUTO_DETECT = 1_u32
   WINHTTP_AUTOPROXY_CONFIG_URL = 2_u32
   WINHTTP_AUTOPROXY_HOST_KEEPCASE = 4_u32
@@ -18,6 +32,7 @@ module Win32cr::Networking::WinHttp
   WINHTTP_AUTOPROXY_ALLOW_AUTOCONFIG = 256_u32
   WINHTTP_AUTOPROXY_ALLOW_STATIC = 512_u32
   WINHTTP_AUTOPROXY_ALLOW_CM = 1024_u32
+  WINHTTP_AUTOPROXY_USE_INTERFACE_CONFIG = 2048_u32
   WINHTTP_AUTOPROXY_RUN_INPROCESS = 65536_u32
   WINHTTP_AUTOPROXY_RUN_OUTPROCESS_ONLY = 131072_u32
   WINHTTP_AUTOPROXY_NO_DIRECTACCESS = 262144_u32
@@ -97,6 +112,7 @@ module Win32cr::Networking::WinHttp
   WINHTTP_OPTION_USE_GLOBAL_SERVER_CREDENTIALS = 101_u32
   WINHTTP_OPTION_RECEIVE_PROXY_CONNECT_RESPONSE = 103_u32
   WINHTTP_OPTION_IS_PROXY_CONNECT_RESPONSE = 104_u32
+  WINHTTP_OPTION_NETWORK_INTERFACE_AFFINITY = 105_u32
   WINHTTP_OPTION_SERVER_SPN_USED = 106_u32
   WINHTTP_OPTION_PROXY_SPN_USED = 107_u32
   WINHTTP_OPTION_SERVER_CBT = 108_u32
@@ -124,20 +140,18 @@ module Win32cr::Networking::WinHttp
   WINHTTP_OPTION_HTTP_PROTOCOL_REQUIRED = 145_u32
   WINHTTP_OPTION_REQUEST_STATS = 146_u32
   WINHTTP_OPTION_SERVER_CERT_CHAIN_CONTEXT = 147_u32
+  WINHTTP_OPTION_SERVER_CERT_CHAIN_BUILD_FLAGS = 148_u32
   WINHTTP_OPTION_CONNECTION_STATS_V1 = 150_u32
   WINHTTP_OPTION_SECURITY_INFO = 151_u32
   WINHTTP_OPTION_TCP_KEEPALIVE = 152_u32
   WINHTTP_OPTION_TCP_FAST_OPEN = 153_u32
   WINHTTP_OPTION_TLS_FALSE_START = 154_u32
   WINHTTP_OPTION_IGNORE_CERT_REVOCATION_OFFLINE = 155_u32
-  WINHTTP_OPTION_SOURCE_ADDRESS = 156_u32
-  WINHTTP_OPTION_HEAP_EXTENSION = 157_u32
   WINHTTP_OPTION_TLS_PROTOCOL_INSECURE_FALLBACK = 158_u32
   WINHTTP_OPTION_STREAM_ERROR_CODE = 159_u32
   WINHTTP_OPTION_REQUIRE_STREAM_END = 160_u32
   WINHTTP_OPTION_ENABLE_HTTP2_PLUS_CLIENT_CERT = 161_u32
   WINHTTP_OPTION_FAILED_CONNECTION_RETRIES = 162_u32
-  WINHTTP_OPTION_SET_GLOBAL_CALLBACK = 163_u32
   WINHTTP_OPTION_HTTP2_KEEPALIVE = 164_u32
   WINHTTP_OPTION_RESOLUTION_HOSTNAME = 165_u32
   WINHTTP_OPTION_SET_TOKEN_BINDING = 166_u32
@@ -148,17 +162,35 @@ module Win32cr::Networking::WinHttp
   WINHTTP_OPTION_DISABLE_CERT_CHAIN_BUILDING = 171_u32
   WINHTTP_OPTION_BACKGROUND_CONNECTIONS = 172_u32
   WINHTTP_OPTION_FIRST_AVAILABLE_CONNECTION = 173_u32
-  WINHTTP_OPTION_ENABLE_TEST_SIGNING = 174_u32
-  WINHTTP_OPTION_NTSERVICE_FLAG_TEST = 175_u32
-  WINHTTP_OPTION_DISABLE_PROXY_LINK_LOCAL_NAME_RESOLUTION = 176_u32
   WINHTTP_OPTION_TCP_PRIORITY_STATUS = 177_u32
   WINHTTP_OPTION_CONNECTION_GUID = 178_u32
   WINHTTP_OPTION_MATCH_CONNECTION_GUID = 179_u32
-  WINHTTP_OPTION_PROXY_CONFIG_INFO = 180_u32
-  WINHTTP_OPTION_AGGREGATE_PROXY_CONFIG = 181_u32
-  WINHTTP_OPTION_SELECTED_PROXY_CONFIG_INFO = 182_u32
   WINHTTP_OPTION_HTTP2_RECEIVE_WINDOW = 183_u32
-  WINHTTP_LAST_OPTION = 183_u32
+  WINHTTP_OPTION_FEATURE_SUPPORTED = 184_u32
+  WINHTTP_OPTION_QUIC_STATS = 185_u32
+  WINHTTP_OPTION_HTTP3_KEEPALIVE = 188_u32
+  WINHTTP_OPTION_HTTP3_HANDSHAKE_TIMEOUT = 189_u32
+  WINHTTP_OPTION_HTTP3_INITIAL_RTT = 190_u32
+  WINHTTP_OPTION_HTTP3_STREAM_ERROR_CODE = 191_u32
+  WINHTTP_OPTION_REQUEST_ANNOTATION = 192_u32
+  WINHTTP_OPTION_DISABLE_PROXY_AUTH_SCHEMES = 193_u32
+  WINHTTP_OPTION_REVERT_IMPERSONATION_SERVER_CERT = 194_u32
+  WINHTTP_OPTION_DISABLE_GLOBAL_POOLING = 195_u32
+  WINHTTP_OPTION_USE_SESSION_SCH_CRED = 196_u32
+  WINHTTP_OPTION_SERVER_CERT_CHAIN_BUILD_CACHE_ONLY = 199_u32
+  WINHTTP_OPTION_QUIC_STATS_V2 = 200_u32
+  WINHTTP_OPTION_QUIC_STREAM_STATS = 202_u32
+  WINHTTP_OPTION_USE_LOOKASIDE = 203_u32
+  WINHTTP_OPTION_ERROR_LOG_GUID = 204_u32
+  WINHTTP_OPTION_ENABLE_FAST_FORWARDING = 205_u32
+  WINHTTP_OPTION_FAST_FORWARDING_RESPONSE_DATA = 206_u32
+  WINHTTP_OPTION_UPGRADE_TO_PROTOCOL = 207_u32
+  WINHTTP_OPTION_CONNECTION_STATS_V2 = 208_u32
+  WINHTTP_OPTION_FAST_FORWARDING_RESPONSE_STATUS = 209_u32
+  WINHTTP_OPTION_DSCP_TAG = 210_u32
+  WINHTTP_OPTION_HTTP11_DOWNGRADE_TTL = 211_u32
+  WINHTTP_OPTION_SESSION_ERROR_LOG_GUID = 212_u32
+  WINHTTP_LAST_OPTION = 212_u32
   WINHTTP_OPTION_USERNAME = 4096_u32
   WINHTTP_OPTION_PASSWORD = 4097_u32
   WINHTTP_OPTION_PROXY_USERNAME = 4098_u32
@@ -171,10 +203,13 @@ module Win32cr::Networking::WinHttp
   WINHTTP_DECOMPRESSION_FLAG_DEFLATE = 2_u32
   WINHTTP_PROTOCOL_FLAG_HTTP2 = 1_u32
   WINHTTP_PROTOCOL_FLAG_HTTP3 = 2_u32
+  WINHTTP_OPTION_REQUEST_ANNOTATION_MAX_LENGTH = 64000_u32
   WINHTTP_AUTOLOGON_SECURITY_LEVEL_MEDIUM = 0_u32
   WINHTTP_AUTOLOGON_SECURITY_LEVEL_LOW = 1_u32
   WINHTTP_AUTOLOGON_SECURITY_LEVEL_HIGH = 2_u32
+  WINHTTP_AUTOLOGON_SECURITY_LEVEL_PROXY_ONLY = 3_u32
   WINHTTP_AUTOLOGON_SECURITY_LEVEL_DEFAULT = 0_u32
+  WINHTTP_AUTOLOGON_SECURITY_LEVEL_MAX = 3_u32
   WINHTTP_OPTION_REDIRECT_POLICY_NEVER = 0_u32
   WINHTTP_OPTION_REDIRECT_POLICY_DISALLOW_HTTPS_TO_HTTP = 1_u32
   WINHTTP_OPTION_REDIRECT_POLICY_ALWAYS = 2_u32
@@ -184,6 +219,15 @@ module Win32cr::Networking::WinHttp
   WINHTTP_ENABLE_PASSPORT_AUTH = 268435456_u32
   WINHTTP_DISABLE_PASSPORT_KEYRING = 536870912_u32
   WINHTTP_ENABLE_PASSPORT_KEYRING = 1073741824_u32
+  WINHTTP_PROXY_DISABLE_SCHEME_BASIC = 1_u32
+  WINHTTP_PROXY_DISABLE_SCHEME_DIGEST = 2_u32
+  WINHTTP_PROXY_DISABLE_SCHEME_NTLM = 4_u32
+  WINHTTP_PROXY_DISABLE_SCHEME_KERBEROS = 8_u32
+  WINHTTP_PROXY_DISABLE_SCHEME_NEGOTIATE = 16_u32
+  WINHTTP_PROXY_DISABLE_AUTH_LOCAL_SERVICE = 256_u32
+  WINHTTP_SERVER_CERT_CHAIN_CACHE_ONLY_URL_RETRIEVAL = 4_u32
+  WINHTTP_SERVER_CERT_CHAIN_DISABLE_AIA = 8192_u32
+  WINHTTP_SERVER_CERT_CHAIN_REVOCATION_CHECK_CACHE_ONLY = 2147483648_u32
   WINHTTP_DISABLE_COOKIES = 1_u32
   WINHTTP_DISABLE_REDIRECTS = 2_u32
   WINHTTP_DISABLE_AUTHENTICATION = 4_u32
@@ -196,6 +240,9 @@ module Win32cr::Networking::WinHttp
   WINHTTP_HANDLE_TYPE_SESSION = 1_u32
   WINHTTP_HANDLE_TYPE_CONNECT = 2_u32
   WINHTTP_HANDLE_TYPE_REQUEST = 3_u32
+  WINHTTP_HANDLE_TYPE_PROXY_RESOLVER = 4_u32
+  WINHTTP_HANDLE_TYPE_WEBSOCKET = 5_u32
+  WINHTTP_HANDLE_TYPE_PROTOCOL = 6_u32
   WINHTTP_AUTH_SCHEME_PASSPORT = 4_u32
   WINHTTP_AUTH_SCHEME_DIGEST = 8_u32
   WINHTTP_AUTH_TARGET_SERVER = 0_u32
@@ -243,6 +290,7 @@ module Win32cr::Networking::WinHttp
   WINHTTP_CALLBACK_STATUS_GETPROXYFORURL_COMPLETE = 16777216_u32
   WINHTTP_CALLBACK_STATUS_CLOSE_COMPLETE = 33554432_u32
   WINHTTP_CALLBACK_STATUS_SHUTDOWN_COMPLETE = 67108864_u32
+  WINHTTP_CALLBACK_STATUS_GETPROXYSETTINGS_COMPLETE = 134217728_u32
   WINHTTP_CALLBACK_STATUS_SETTINGS_WRITE_COMPLETE = 268435456_u32
   WINHTTP_CALLBACK_STATUS_SETTINGS_READ_COMPLETE = 536870912_u32
   API_RECEIVE_RESPONSE = 1_u32
@@ -251,6 +299,7 @@ module Win32cr::Networking::WinHttp
   API_WRITE_DATA = 4_u32
   API_SEND_REQUEST = 5_u32
   API_GET_PROXY_FOR_URL = 6_u32
+  API_GET_PROXY_SETTINGS = 7_u32
   WINHTTP_CALLBACK_FLAG_DETECTING_PROXY = 4096_u32
   WINHTTP_CALLBACK_FLAG_REDIRECT = 16384_u32
   WINHTTP_CALLBACK_FLAG_INTERMEDIATE_RESPONSE = 32768_u32
@@ -262,6 +311,7 @@ module Win32cr::Networking::WinHttp
   WINHTTP_CALLBACK_FLAG_WRITE_COMPLETE = 1048576_u32
   WINHTTP_CALLBACK_FLAG_REQUEST_ERROR = 2097152_u32
   WINHTTP_CALLBACK_FLAG_GETPROXYFORURL_COMPLETE = 16777216_u32
+  WINHTTP_CALLBACK_FLAG_GETPROXYSETTINGS_COMPLETE = 134217728_u32
   WINHTTP_CALLBACK_FLAG_ALL_NOTIFICATIONS = 4294967295_u32
   WINHTTP_QUERY_MIME_VERSION = 0_u32
   WINHTTP_QUERY_CONTENT_TYPE = 1_u32
@@ -395,6 +445,7 @@ module Win32cr::Networking::WinHttp
   ICU_ENCODE_SPACES_ONLY = 67108864_u32
   ICU_BROWSER_MODE = 33554432_u32
   ICU_ENCODE_PERCENT = 4096_u32
+  ICU_INCLUDE_DEFAULT_PORT = 32768_u32
   ICU_ESCAPE_AUTHORITY = 8192_u32
   WINHTTP_ADDREQ_INDEX_MASK = 65535_u32
   WINHTTP_ADDREQ_FLAGS_MASK = 4294901760_u32
@@ -462,7 +513,8 @@ module Win32cr::Networking::WinHttp
   ERROR_WINHTTP_HTTP_PROTOCOL_MISMATCH = 12190_u32
   ERROR_WINHTTP_GLOBAL_CALLBACK_FAILED = 12191_u32
   ERROR_WINHTTP_FEATURE_DISABLED = 12192_u32
-  WINHTTP_ERROR_LAST = 12192_u32
+  ERROR_WINHTTP_FAST_FORWARDING_NOT_SUPPORTED = 12193_u32
+  WINHTTP_ERROR_LAST = 12193_u32
   WINHTTP_RESET_STATE = 1_u32
   WINHTTP_RESET_SWPAD_CURRENT_NETWORK = 2_u32
   WINHTTP_RESET_SWPAD_ALL = 4_u32
@@ -473,12 +525,89 @@ module Win32cr::Networking::WinHttp
   WINHTTP_RESET_DISCARD_RESOLVERS = 262144_u32
   WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH = 123_u32
   WINHTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE = 15000_u32
+  WINHTTP_PROXY_NOTIFY_CHANGE = 1_u32
+  WINHTTP_FEATURE_DISABLE_STREAM_QUEUE = 1_u32
+  WINHTTP_FEATURE_IPV6_FAST_FALLBACK = 2_u32
+  WINHTTP_FEATURE_CONNECTION_STATS_V0 = 3_u32
+  WINHTTP_FEATURE_REQUEST_TIMES = 4_u32
+  WINHTTP_FEATURE_EXPIRE_CONNECTION = 5_u32
+  WINHTTP_FEATURE_DISABLE_SECURE_PROTOCOL_FALLBACK = 6_u32
+  WINHTTP_FEATURE_HTTP_PROTOCOL_REQUIRED = 7_u32
+  WINHTTP_FEATURE_REQUEST_STATS = 8_u32
+  WINHTTP_FEATURE_SERVER_CERT_CHAIN_CONTEXT = 9_u32
+  WINHTTP_FEATURE_CONNECTION_STATS_V1 = 12_u32
+  WINHTTP_FEATURE_SECURITY_INFO = 13_u32
+  WINHTTP_FEATURE_TCP_KEEPALIVE = 14_u32
+  WINHTTP_FEATURE_TCP_FAST_OPEN = 15_u32
+  WINHTTP_FEATURE_TLS_FALSE_START = 16_u32
+  WINHTTP_FEATURE_IGNORE_CERT_REVOCATION_OFFLINE = 17_u32
+  WINHTTP_FEATURE_TLS_PROTOCOL_INSECURE_FALLBACK = 20_u32
+  WINHTTP_FEATURE_STREAM_ERROR_CODE = 21_u32
+  WINHTTP_FEATURE_REQUIRE_STREAM_END = 22_u32
+  WINHTTP_FEATURE_ENABLE_HTTP2_PLUS_CLIENT_CERT = 23_u32
+  WINHTTP_FEATURE_FAILED_CONNECTION_RETRIES = 24_u32
+  WINHTTP_FEATURE_HTTP2_KEEPALIVE = 26_u32
+  WINHTTP_FEATURE_RESOLUTION_HOSTNAME = 27_u32
+  WINHTTP_FEATURE_SET_TOKEN_BINDING = 28_u32
+  WINHTTP_FEATURE_TOKEN_BINDING_PUBLIC_KEY = 29_u32
+  WINHTTP_FEATURE_REFERER_TOKEN_BINDING_HOSTNAME = 30_u32
+  WINHTTP_FEATURE_HTTP2_PLUS_TRANSFER_ENCODING = 31_u32
+  WINHTTP_FEATURE_RESOLVER_CACHE_CONFIG = 32_u32
+  WINHTTP_FEATURE_DISABLE_CERT_CHAIN_BUILDING = 33_u32
+  WINHTTP_FEATURE_BACKGROUND_CONNECTIONS = 34_u32
+  WINHTTP_FEATURE_FIRST_AVAILABLE_CONNECTION = 35_u32
+  WINHTTP_FEATURE_TCP_PRIORITY_STATUS = 37_u32
+  WINHTTP_FEATURE_CONNECTION_GUID = 38_u32
+  WINHTTP_FEATURE_MATCH_CONNECTION_GUID = 39_u32
+  WINHTTP_FEATURE_HTTP2_RECEIVE_WINDOW = 43_u32
+  WINHTTP_FEATURE_IS_FEATURE_SUPPORTED = 44_u32
+  WINHTTP_FEATURE_ADD_REQUEST_HEADERS_EX = 46_u32
+  WINHTTP_FEATURE_SET_PROXY_SETINGS_PER_USER = 47_u32
+  WINHTTP_FEATURE_READ_DATA_EX = 48_u32
+  WINHTTP_FEATURE_QUERY_HEADERS_EX = 49_u32
+  WINHTTP_FEATURE_QUERY_CONNECTION_GROUP = 50_u32
+  WINHTTP_FEATURE_FREE_QUERY_CONNECTION_GROUP_RESULT = 51_u32
+  WINHTTP_FEATURE_SECURITY_FLAG_IGNORE_ALL_CERT_ERRORS = 52_u32
+  WINHTTP_FEATURE_FLAG_SECURE_DEFAULTS = 53_u32
+  WINHTTP_FEATURE_EXTENDED_HEADER_FLAG_UNICODE = 54_u32
+  WINHTTP_FEATURE_QUERY_FLAG_TRAILERS = 55_u32
+  WINHTTP_FEATURE_QUERY_FLAG_WIRE_ENCODING = 56_u32
+  WINHTTP_FEATURE_RESOLVER_CACHE_CONFIG_FLAG_SOFT_LIMIT = 57_u32
+  WINHTTP_FEATURE_RESOLVER_CACHE_CONFIG_FLAG_BYPASS_CACHE = 58_u32
+  WINHTTP_FEATURE_FLAG_AUTOMATIC_CHUNKING = 59_u32
+  WINHTTP_FEATURE_QUERY_CONNECTION_GROUP_FLAG_INSECURE = 60_u32
+  WINHTTP_FEATURE_MATCH_CONNECTION_GUID_FLAG_REQUIRE_MARKED_CONNECTION = 61_u32
+  WINHTTP_FEATURE_QUERY_EX_ALL_HEADERS = 62_u32
+  WINHTTP_FEATURE_READ_DATA_EX_FLAG_FILL_BUFFER = 63_u32
+  WINHTTP_FEATURE_RESOLVER_CACHE_CONFIG_FLAG_USE_DNS_TTL = 64_u32
+  WINHTTP_FEATURE_RESOLVER_CACHE_CONFIG_FLAG_CONN_USE_TTL = 65_u32
+  WINHTTP_FEATURE_QUIC_STATS = 66_u32
+  WINHTTP_FEATURE_HTTP3_KEEPALIVE = 69_u32
+  WINHTTP_FEATURE_HTTP3_HANDSHAKE_TIMEOUT = 70_u32
+  WINHTTP_FEATURE_HTTP3_INITIAL_RTT = 71_u32
+  WINHTTP_FEATURE_HTTP3_STREAM_ERROR_CODE = 72_u32
+  WINHTTP_FEATURE_REQUEST_ANNOTATION = 73_u32
+  WINHTTP_FEATURE_DISABLE_PROXY_AUTH_SCHEMES = 74_u32
+  WINHTTP_FEATURE_REVERT_IMPERSONATION_SERVER_CERT = 75_u32
+  WINHTTP_FEATURE_DISABLE_GLOBAL_POOLING = 76_u32
+  WINHTTP_FEATURE_GET_PROXY_SETTINGS_EX = 77_u32
+  WINHTTP_FEATURE_SESSION_SCH_CRED = 78_u32
+  WINHTTP_FEATURE_QUIC_STATS_V2 = 79_u32
+  WINHTTP_FEATURE_URL_INCLUDE_DEFAULT_PORT = 80_u32
+  WINHTTP_FEATURE_QUIC_STREAM_STATS = 81_u32
+  WINHTTP_FEATURE_USE_LOOKASIDE = 82_u32
+  WINHTTP_FEATURE_ERROR_LOG_GUID = 83_u32
+  WINHTTP_FEATURE_UPGRADE_TO_PROTOCOL = 88_u32
+  WINHTTP_FEATURE_CONNECTION_STATS_V2 = 89_u32
+  WINHTTP_FEATURE_FAST_FORWARD_RESPONSE = 90_u32
+  WINHTTP_FEATURE_DISABLE_AIA_FLAG = 91_u32
+  WINHTTP_FEATURE_DSCP_TAG = 92_u32
+  WINHTTP_FEATURE_HTTP11_DOWNGRADE_TTL = 93_u32
+  WINHTTP_FEATURE_SESSION_ERROR_LOG_GUID = 94_u32
+  WINHTTP_FEATURE_GET_PROXY_SETTINGS_EX_XBOX = 95_u32
 
-  enum INTERNET_PORT : UInt32
-    INTERNET_DEFAULT_HTTP_PORT = 80_u32
-    INTERNET_DEFAULT_HTTPS_PORT = 443_u32
-    INTERNET_DEFAULT_PORT = 0_u32
-  end
+  CLSID_WinHttpRequest = LibC::GUID.new(0x2087c2f4_u32, 0x2cef_u16, 0x4953_u16, StaticArray[0xa8_u8, 0xab_u8, 0x66_u8, 0x77_u8, 0x9b_u8, 0x67_u8, 0x4_u8, 0x95_u8])
+
   @[Flags]
   enum WINHTTP_OPEN_REQUEST_FLAGS : UInt32
     WINHTTP_FLAG_BYPASS_PROXY_CACHE = 256_u32
@@ -505,11 +634,11 @@ module Win32cr::Networking::WinHttp
     WINHTTP_AUTH_SCHEME_NTLM = 2_u32
     WINHTTP_AUTH_SCHEME_NEGOTIATE = 16_u32
   end
-  enum WINHTTP_INTERNET_SCHEME : UInt32
-    WINHTTP_INTERNET_SCHEME_HTTP = 1_u32
-    WINHTTP_INTERNET_SCHEME_HTTPS = 2_u32
-    WINHTTP_INTERNET_SCHEME_FTP = 3_u32
-    WINHTTP_INTERNET_SCHEME_SOCKS = 4_u32
+  enum WINHTTP_INTERNET_SCHEME
+    WINHTTP_INTERNET_SCHEME_HTTP = 1_i32
+    WINHTTP_INTERNET_SCHEME_HTTPS = 2_i32
+    WINHTTP_INTERNET_SCHEME_FTP = 3_i32
+    WINHTTP_INTERNET_SCHEME_SOCKS = 4_i32
   end
   enum WINHTTP_REQUEST_TIME_ENTRY
     WinHttpProxyDetectionStart = 0_i32
@@ -605,6 +734,161 @@ module Win32cr::Networking::WinHttp
     WINHTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS = 1011_i32
     WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS = 1015_i32
   end
+  enum WINHTTP_PROTOCOL_OPERATION
+    WINHTTP_PROTOCOL_SEND_OPERATION = 0_i32
+    WINHTTP_PROTOCOL_RECEIVE_OPERATION = 1_i32
+  end
+  enum WINHTTP_PROXY_SETTINGS_TYPE
+    WinHttpProxySettingsTypeUnknown = 0_i32
+    WinHttpProxySettingsTypeWsl = 1_i32
+    WinHttpProxySettingsTypeWsa = 2_i32
+    WinHttpProxySettingsTypeXBox = 3_i32
+  end
+  enum WINHTTP_FAST_FORWARDING_STATE
+    WinHttpFastForwardingStateInProgress = 0_i32
+    WinHttpFastForwardingStateSucceeded = 1_i32
+    WinHttpFastForwardingStateClientSideFailed = 2_i32
+    WinHttpFastForwardingStateServerSideFailed = 3_i32
+  end
+  enum WinHttpRequestOption
+    WinHttpRequestOption_UserAgentString = 0_i32
+    WinHttpRequestOption_URL = 1_i32
+    WinHttpRequestOption_URLCodePage = 2_i32
+    WinHttpRequestOption_EscapePercentInURL = 3_i32
+    WinHttpRequestOption_SslErrorIgnoreFlags = 4_i32
+    WinHttpRequestOption_SelectCertificate = 5_i32
+    WinHttpRequestOption_EnableRedirects = 6_i32
+    WinHttpRequestOption_UrlEscapeDisable = 7_i32
+    WinHttpRequestOption_UrlEscapeDisableQuery = 8_i32
+    WinHttpRequestOption_SecureProtocols = 9_i32
+    WinHttpRequestOption_EnableTracing = 10_i32
+    WinHttpRequestOption_RevertImpersonationOverSsl = 11_i32
+    WinHttpRequestOption_EnableHttpsToHttpRedirects = 12_i32
+    WinHttpRequestOption_EnablePassportAuthentication = 13_i32
+    WinHttpRequestOption_MaxAutomaticRedirects = 14_i32
+    WinHttpRequestOption_MaxResponseHeaderSize = 15_i32
+    WinHttpRequestOption_MaxResponseDrainSize = 16_i32
+    WinHttpRequestOption_EnableHttp1_1 = 17_i32
+    WinHttpRequestOption_EnableCertificateRevocationCheck = 18_i32
+    WinHttpRequestOption_RejectUserpwd = 19_i32
+  end
+  enum WinHttpRequestAutoLogonPolicy
+    AutoLogonPolicy_Always = 0_i32
+    AutoLogonPolicy_OnlyIfBypassProxy = 1_i32
+    AutoLogonPolicy_Never = 2_i32
+  end
+  enum WinHttpRequestSslErrorFlags
+    SslErrorFlag_UnknownCA = 256_i32
+    SslErrorFlag_CertWrongUsage = 512_i32
+    SslErrorFlag_CertCNInvalid = 4096_i32
+    SslErrorFlag_CertDateInvalid = 8192_i32
+    SslErrorFlag_Ignore_All = 13056_i32
+  end
+  enum WinHttpRequestSecureProtocols
+    SecureProtocol_SSL2 = 8_i32
+    SecureProtocol_SSL3 = 32_i32
+    SecureProtocol_TLS1 = 128_i32
+    SecureProtocol_TLS1_1 = 512_i32
+    SecureProtocol_TLS1_2 = 2048_i32
+    SecureProtocol_ALL = 168_i32
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_CONNECTION_INFO
+    property cbSize : UInt32
+    property local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    def initialize(@cbSize : UInt32, @local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_REQUEST_TIMES
+    property cTimes : UInt32
+    property rgullTimes : UInt64[64]
+    def initialize(@cTimes : UInt32, @rgullTimes : UInt64[64])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_REQUEST_STATS
+    property ullFlags : UInt64
+    property ulIndex : UInt32
+    property cStats : UInt32
+    property rgullStats : UInt64[32]
+    def initialize(@ullFlags : UInt64, @ulIndex : UInt32, @cStats : UInt32, @rgullStats : UInt64[32])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_MATCH_CONNECTION_GUID
+    property connection_guid : LibC::GUID
+    property ullFlags : UInt64
+    def initialize(@connection_guid : LibC::GUID, @ullFlags : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_RESOLVER_CACHE_CONFIG
+    property ulMaxResolverCacheEntries : UInt32
+    property ulMaxCacheEntryAge : UInt32
+    property ulMinCacheEntryTtl : UInt32
+    property secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING
+    property ullConnResolutionWaitTime : UInt64
+    property ullFlags : UInt64
+    def initialize(@ulMaxResolverCacheEntries : UInt32, @ulMaxCacheEntryAge : UInt32, @ulMinCacheEntryTtl : UInt32, @secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING, @ullConnResolutionWaitTime : UInt64, @ullFlags : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_PROXY_SETTINGS_EX
+    property ullGenerationId : UInt64
+    property ullFlags : UInt64
+    property pcwszAutoconfigUrl : Win32cr::Foundation::PWSTR
+    property pcwszProxy : Win32cr::Foundation::PWSTR
+    property pcwszSecureProxy : Win32cr::Foundation::PWSTR
+    property cProxyBypasses : UInt32
+    property rgpcwszProxyBypasses : Win32cr::Foundation::PWSTR*
+    property dwInterfaceIndex : UInt32
+    property pcwszConnectionName : Win32cr::Foundation::PWSTR
+    def initialize(@ullGenerationId : UInt64, @ullFlags : UInt64, @pcwszAutoconfigUrl : Win32cr::Foundation::PWSTR, @pcwszProxy : Win32cr::Foundation::PWSTR, @pcwszSecureProxy : Win32cr::Foundation::PWSTR, @cProxyBypasses : UInt32, @rgpcwszProxyBypasses : Win32cr::Foundation::PWSTR*, @dwInterfaceIndex : UInt32, @pcwszConnectionName : Win32cr::Foundation::PWSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_PROXY_SETTINGS_PARAM
+    property ullFlags : UInt64
+    property pcwszConnectionName : Win32cr::Foundation::PWSTR
+    property pcwszProbeHost : Win32cr::Foundation::PWSTR
+    def initialize(@ullFlags : UInt64, @pcwszConnectionName : Win32cr::Foundation::PWSTR, @pcwszProbeHost : Win32cr::Foundation::PWSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct WINHTTP_FAST_FORWARDING_STATUS
+    property transfer_state : Win32cr::Networking::WinHttp::WINHTTP_FAST_FORWARDING_STATE
+    property nt_status : Int32
+    property dwError : UInt32
+    property ullBytesTransferred : UInt64
+    def initialize(@transfer_state : Win32cr::Networking::WinHttp::WINHTTP_FAST_FORWARDING_STATE, @nt_status : Int32, @dwError : UInt32, @ullBytesTransferred : UInt64)
+    end
+  end
+  {% end %}
 
   @[Extern]
   struct WINHTTP_ASYNC_RESULT
@@ -694,7 +978,7 @@ module Win32cr::Networking::WinHttp
   end
 
   @[Extern]
-  struct WinHttpProxyNetworkKey_
+  struct WINHTTP_PROXY_NETWORKING_KEY
     property pbBuffer : UInt8[128]
     def initialize(@pbBuffer : UInt8[128])
     end
@@ -717,8 +1001,8 @@ module Win32cr::Networking::WinHttp
     property dwDetectedInterfaceIpCount : UInt32
     property pdwDetectedInterfaceIp : UInt32*
     property cNetworkKeys : UInt32
-    property pNetworkKeys : Win32cr::Networking::WinHttp::WinHttpProxyNetworkKey_*
-    def initialize(@dwStructSize : UInt32, @dwFlags : UInt32, @dwCurrentSettingsVersion : UInt32, @pwszConnectionName : Win32cr::Foundation::PWSTR, @pwszProxy : Win32cr::Foundation::PWSTR, @pwszProxyBypass : Win32cr::Foundation::PWSTR, @pwszAutoconfigUrl : Win32cr::Foundation::PWSTR, @pwszAutoconfigSecondaryUrl : Win32cr::Foundation::PWSTR, @dwAutoDiscoveryFlags : UInt32, @pwszLastKnownGoodAutoConfigUrl : Win32cr::Foundation::PWSTR, @dwAutoconfigReloadDelayMins : UInt32, @ftLastKnownDetectTime : Win32cr::Foundation::FILETIME, @dwDetectedInterfaceIpCount : UInt32, @pdwDetectedInterfaceIp : UInt32*, @cNetworkKeys : UInt32, @pNetworkKeys : Win32cr::Networking::WinHttp::WinHttpProxyNetworkKey_*)
+    property pNetworkKeys : Win32cr::Networking::WinHttp::WINHTTP_PROXY_NETWORKING_KEY*
+    def initialize(@dwStructSize : UInt32, @dwFlags : UInt32, @dwCurrentSettingsVersion : UInt32, @pwszConnectionName : Win32cr::Foundation::PWSTR, @pwszProxy : Win32cr::Foundation::PWSTR, @pwszProxyBypass : Win32cr::Foundation::PWSTR, @pwszAutoconfigUrl : Win32cr::Foundation::PWSTR, @pwszAutoconfigSecondaryUrl : Win32cr::Foundation::PWSTR, @dwAutoDiscoveryFlags : UInt32, @pwszLastKnownGoodAutoConfigUrl : Win32cr::Foundation::PWSTR, @dwAutoconfigReloadDelayMins : UInt32, @ftLastKnownDetectTime : Win32cr::Foundation::FILETIME, @dwDetectedInterfaceIpCount : UInt32, @pdwDetectedInterfaceIp : UInt32*, @cNetworkKeys : UInt32, @pNetworkKeys : Win32cr::Networking::WinHttp::WINHTTP_PROXY_NETWORKING_KEY*)
     end
   end
 
@@ -736,7 +1020,7 @@ module Win32cr::Networking::WinHttp
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct WINHTTP_CONNECTION_INFO
     property cbSize : UInt32
@@ -747,7 +1031,7 @@ module Win32cr::Networking::WinHttp
   end
   {% end %}
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct WINHTTP_REQUEST_TIMES
     property cTimes : UInt32
@@ -757,7 +1041,7 @@ module Win32cr::Networking::WinHttp
   end
   {% end %}
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct WINHTTP_REQUEST_STATS
     property ullFlags : UInt64
@@ -769,7 +1053,7 @@ module Win32cr::Networking::WinHttp
   end
   {% end %}
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct WINHTTP_MATCH_CONNECTION_GUID
     property connection_guid : LibC::GUID
@@ -815,7 +1099,7 @@ module Win32cr::Networking::WinHttp
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct WINHTTP_RESOLVER_CACHE_CONFIG
     property ulMaxResolverCacheEntries : UInt32
@@ -921,283 +1205,579 @@ module Win32cr::Networking::WinHttp
     end
   end
 
-  {% if flag?(:i386) %}
   @[Extern]
-  struct WINHTTP_CONNECTION_INFO
-    property cbSize : UInt32
-    property local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
-    property remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
-    def initialize(@cbSize : UInt32, @local_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @remote_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+  struct WINHTTP_PROTOCOL_ASYNC_RESULT
+    property async_result : Win32cr::Networking::WinHttp::WINHTTP_ASYNC_RESULT
+    property operation : Win32cr::Networking::WinHttp::WINHTTP_PROTOCOL_OPERATION
+    def initialize(@async_result : Win32cr::Networking::WinHttp::WINHTTP_ASYNC_RESULT, @operation : Win32cr::Networking::WinHttp::WINHTTP_PROTOCOL_OPERATION)
     end
   end
-  {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  struct WINHTTP_REQUEST_TIMES
-    property cTimes : UInt32
-    property rgullTimes : UInt64[64]
-    def initialize(@cTimes : UInt32, @rgullTimes : UInt64[64])
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct WINHTTP_REQUEST_STATS
+  struct WINHTTP_PROXY_SETTINGS_EX
+    property ullGenerationId : UInt64
     property ullFlags : UInt64
-    property ulIndex : UInt32
-    property cStats : UInt32
-    property rgullStats : UInt64[32]
-    def initialize(@ullFlags : UInt64, @ulIndex : UInt32, @cStats : UInt32, @rgullStats : UInt64[32])
+    property pcwszAutoconfigUrl : Win32cr::Foundation::PWSTR
+    property pcwszProxy : Win32cr::Foundation::PWSTR
+    property pcwszSecureProxy : Win32cr::Foundation::PWSTR
+    property cProxyBypasses : UInt32
+    property rgpcwszProxyBypasses : Win32cr::Foundation::PWSTR*
+    property dwInterfaceIndex : UInt32
+    property pcwszConnectionName : Win32cr::Foundation::PWSTR
+    def initialize(@ullGenerationId : UInt64, @ullFlags : UInt64, @pcwszAutoconfigUrl : Win32cr::Foundation::PWSTR, @pcwszProxy : Win32cr::Foundation::PWSTR, @pcwszSecureProxy : Win32cr::Foundation::PWSTR, @cProxyBypasses : UInt32, @rgpcwszProxyBypasses : Win32cr::Foundation::PWSTR*, @dwInterfaceIndex : UInt32, @pcwszConnectionName : Win32cr::Foundation::PWSTR)
     end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  struct WINHTTP_MATCH_CONNECTION_GUID
-    property connection_guid : LibC::GUID
+  struct WINHTTP_PROXY_SETTINGS_PARAM
     property ullFlags : UInt64
-    def initialize(@connection_guid : LibC::GUID, @ullFlags : UInt64)
+    property pcwszConnectionName : Win32cr::Foundation::PWSTR
+    property pcwszProbeHost : Win32cr::Foundation::PWSTR
+    def initialize(@ullFlags : UInt64, @pcwszConnectionName : Win32cr::Foundation::PWSTR, @pcwszProbeHost : Win32cr::Foundation::PWSTR)
     end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  struct WINHTTP_RESOLVER_CACHE_CONFIG
-    property ulMaxResolverCacheEntries : UInt32
-    property ulMaxCacheEntryAge : UInt32
-    property ulMinCacheEntryTtl : UInt32
-    property secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING
-    property ullConnResolutionWaitTime : UInt64
-    property ullFlags : UInt64
-    def initialize(@ulMaxResolverCacheEntries : UInt32, @ulMaxCacheEntryAge : UInt32, @ulMinCacheEntryTtl : UInt32, @secure_dns_setting : Win32cr::Networking::WinHttp::WINHTTP_SECURE_DNS_SETTING, @ullConnResolutionWaitTime : UInt64, @ullFlags : UInt64)
+  struct WINHTTP_FAST_FORWARDING_STATUS
+    property transfer_state : Win32cr::Networking::WinHttp::WINHTTP_FAST_FORWARDING_STATE
+    property nt_status : Int32
+    property dwError : UInt32
+    property ullBytesTransferred : UInt64
+    def initialize(@transfer_state : Win32cr::Networking::WinHttp::WINHTTP_FAST_FORWARDING_STATE, @nt_status : Int32, @dwError : UInt32, @ullBytesTransferred : UInt64)
     end
   end
   {% end %}
+
+  @[Extern]
+
+  record IWinHttpRequestVtable,
+    query_interface : Proc(IWinHttpRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWinHttpRequest*, UInt32),
+    release : Proc(IWinHttpRequest*, UInt32),
+    get_type_info_count : Proc(IWinHttpRequest*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IWinHttpRequest*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IWinHttpRequest*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWinHttpRequest*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_proxy : Proc(IWinHttpRequest*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    set_credentials : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
+    open : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    set_request_header : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_response_header : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_all_response_headers : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    send : Proc(IWinHttpRequest*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(IWinHttpRequest*, Int32*, Win32cr::Foundation::HRESULT),
+    get_StatusText : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_ResponseText : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_ResponseBody : Proc(IWinHttpRequest*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ResponseStream : Proc(IWinHttpRequest*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Option : Proc(IWinHttpRequest*, Win32cr::Networking::WinHttp::WinHttpRequestOption, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Option : Proc(IWinHttpRequest*, Win32cr::Networking::WinHttp::WinHttpRequestOption, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    wait_for_response : Proc(IWinHttpRequest*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    abort : Proc(IWinHttpRequest*, Win32cr::Foundation::HRESULT),
+    set_timeouts : Proc(IWinHttpRequest*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    set_client_certificate : Proc(IWinHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_auto_logon_policy : Proc(IWinHttpRequest*, Win32cr::Networking::WinHttp::WinHttpRequestAutoLogonPolicy, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IWinHttpRequest, lpVtbl : IWinHttpRequestVtable* do
+    GUID = LibC::GUID.new(0x16fe2ec_u32, 0xb2c8_u16, 0x45f8_u16, StaticArray[0xb2_u8, 0x3b_u8, 0x39_u8, 0xe5_u8, 0x3a_u8, 0x75_u8, 0x39_u8, 0x6b_u8])
+    def query_interface(this : IWinHttpRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWinHttpRequest*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWinHttpRequest*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IWinHttpRequest*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IWinHttpRequest*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IWinHttpRequest*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke(this : IWinHttpRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def set_proxy(this : IWinHttpRequest*, proxy_setting : Int32, proxy_server : Win32cr::System::Variant::VARIANT, bypass_list : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_proxy.call(this, proxy_setting, proxy_server, bypass_list)
+    end
+    def set_credentials(this : IWinHttpRequest*, user_name : Win32cr::Foundation::BSTR, password : Win32cr::Foundation::BSTR, flags : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_credentials.call(this, user_name, password, flags)
+    end
+    def open(this : IWinHttpRequest*, method : Win32cr::Foundation::BSTR, url : Win32cr::Foundation::BSTR, async : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open.call(this, method, url, async)
+    end
+    def set_request_header(this : IWinHttpRequest*, header : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_request_header.call(this, header, value)
+    end
+    def get_response_header(this : IWinHttpRequest*, header : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_response_header.call(this, header, value)
+    end
+    def get_all_response_headers(this : IWinHttpRequest*, headers : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_all_response_headers.call(this, headers)
+    end
+    def send(this : IWinHttpRequest*, body : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.send.call(this, body)
+    end
+    def get_Status(this : IWinHttpRequest*, status : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, status)
+    end
+    def get_StatusText(this : IWinHttpRequest*, status : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StatusText.call(this, status)
+    end
+    def get_ResponseText(this : IWinHttpRequest*, body : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ResponseText.call(this, body)
+    end
+    def get_ResponseBody(this : IWinHttpRequest*, body : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ResponseBody.call(this, body)
+    end
+    def get_ResponseStream(this : IWinHttpRequest*, body : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ResponseStream.call(this, body)
+    end
+    def get_Option(this : IWinHttpRequest*, option : Win32cr::Networking::WinHttp::WinHttpRequestOption, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Option.call(this, option, value)
+    end
+    def put_Option(this : IWinHttpRequest*, option : Win32cr::Networking::WinHttp::WinHttpRequestOption, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Option.call(this, option, value)
+    end
+    def wait_for_response(this : IWinHttpRequest*, timeout : Win32cr::System::Variant::VARIANT, succeeded : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_response.call(this, timeout, succeeded)
+    end
+    def abort(this : IWinHttpRequest*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.abort.call(this)
+    end
+    def set_timeouts(this : IWinHttpRequest*, resolve_timeout : Int32, connect_timeout : Int32, send_timeout : Int32, receive_timeout : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_timeouts.call(this, resolve_timeout, connect_timeout, send_timeout, receive_timeout)
+    end
+    def set_client_certificate(this : IWinHttpRequest*, client_certificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_client_certificate.call(this, client_certificate)
+    end
+    def set_auto_logon_policy(this : IWinHttpRequest*, auto_logon_policy : Win32cr::Networking::WinHttp::WinHttpRequestAutoLogonPolicy) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_auto_logon_policy.call(this, auto_logon_policy)
+    end
+
+  end
+
+  @[Extern]
+
+  record IWinHttpRequestEventsVtable,
+    query_interface : Proc(IWinHttpRequestEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWinHttpRequestEvents*, UInt32),
+    release : Proc(IWinHttpRequestEvents*, UInt32),
+    on_response_start : Proc(IWinHttpRequestEvents*, Int32, Win32cr::Foundation::BSTR, Void),
+    on_response_data_available : Proc(IWinHttpRequestEvents*, Win32cr::System::Com::SAFEARRAY**, Void),
+    on_response_finished : Proc(IWinHttpRequestEvents*, Void),
+    on_error : Proc(IWinHttpRequestEvents*, Int32, Win32cr::Foundation::BSTR, Void)
+
+
+  @[Extern]
+  record IWinHttpRequestEvents, lpVtbl : IWinHttpRequestEventsVtable* do
+    GUID = LibC::GUID.new(0xf97f4e15_u32, 0xb787_u16, 0x4212_u16, StaticArray[0x80_u8, 0xd1_u8, 0xd3_u8, 0x80_u8, 0xcb_u8, 0xbf_u8, 0x98_u8, 0x2e_u8])
+    def query_interface(this : IWinHttpRequestEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWinHttpRequestEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWinHttpRequestEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_response_start(this : IWinHttpRequestEvents*, status : Int32, content_type : Win32cr::Foundation::BSTR) : Void
+      @lpVtbl.try &.value.on_response_start.call(this, status, content_type)
+    end
+    def on_response_data_available(this : IWinHttpRequestEvents*, data : Win32cr::System::Com::SAFEARRAY**) : Void
+      @lpVtbl.try &.value.on_response_data_available.call(this, data)
+    end
+    def on_response_finished(this : IWinHttpRequestEvents*) : Void
+      @lpVtbl.try &.value.on_response_finished.call(this)
+    end
+    def on_error(this : IWinHttpRequestEvents*, error_number : Int32, error_description : Win32cr::Foundation::BSTR) : Void
+      @lpVtbl.try &.value.on_error.call(this, error_number, error_description)
+    end
+
+  end
 
   def winHttpSetStatusCallback(hInternet : Void*, lpfnInternetCallback : Win32cr::Networking::WinHttp::WINHTTP_STATUS_CALLBACK, dwNotificationFlags : UInt32, dwReserved : LibC::UIntPtrT) : Win32cr::Networking::WinHttp::WINHTTP_STATUS_CALLBACK
+    {% if !flag?(:docs) %}
     C.WinHttpSetStatusCallback(hInternet, lpfnInternetCallback, dwNotificationFlags, dwReserved)
+    {% end %}
   end
 
-  def winHttpTimeFromSystemTime(pst : Win32cr::Foundation::SYSTEMTIME*, pwszTime : UInt16*) : Win32cr::Foundation::BOOL
+  def winHttpTimeFromSystemTime(pst : Win32cr::Foundation::SYSTEMTIME*, pwszTime : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpTimeFromSystemTime(pst, pwszTime)
+    {% end %}
   end
 
   def winHttpTimeToSystemTime(pwszTime : Win32cr::Foundation::PWSTR, pst : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpTimeToSystemTime(pwszTime, pst)
+    {% end %}
   end
 
-  def winHttpCrackUrl(pwszUrl : UInt16*, dwUrlLength : UInt32, dwFlags : UInt32, lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*) : Win32cr::Foundation::BOOL
+  def winHttpCrackUrl(pwszUrl : Win32cr::Foundation::PWSTR, dwUrlLength : UInt32, dwFlags : UInt32, lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpCrackUrl(pwszUrl, dwUrlLength, dwFlags, lpUrlComponents)
+    {% end %}
   end
 
-  def winHttpCreateUrl(lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*, dwFlags : Win32cr::Networking::WinHttp::WIN_HTTP_CREATE_URL_FLAGS, pwszUrl : UInt16*, pdwUrlLength : UInt32*) : Win32cr::Foundation::BOOL
+  def winHttpCreateUrl(lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*, dwFlags : Win32cr::Networking::WinHttp::WIN_HTTP_CREATE_URL_FLAGS, pwszUrl : Win32cr::Foundation::PWSTR, pdwUrlLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpCreateUrl(lpUrlComponents, dwFlags, pwszUrl, pdwUrlLength)
+    {% end %}
   end
 
   def winHttpCheckPlatform : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpCheckPlatform
+    {% end %}
   end
 
   def winHttpGetDefaultProxyConfiguration(pProxyInfo : Win32cr::Networking::WinHttp::WINHTTP_PROXY_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpGetDefaultProxyConfiguration(pProxyInfo)
+    {% end %}
   end
 
   def winHttpSetDefaultProxyConfiguration(pProxyInfo : Win32cr::Networking::WinHttp::WINHTTP_PROXY_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpSetDefaultProxyConfiguration(pProxyInfo)
+    {% end %}
   end
 
   def winHttpOpen(pszAgentW : Win32cr::Foundation::PWSTR, dwAccessType : Win32cr::Networking::WinHttp::WINHTTP_ACCESS_TYPE, pszProxyW : Win32cr::Foundation::PWSTR, pszProxyBypassW : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.WinHttpOpen(pszAgentW, dwAccessType, pszProxyW, pszProxyBypassW, dwFlags)
+    {% end %}
   end
 
   def winHttpCloseHandle(hInternet : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpCloseHandle(hInternet)
+    {% end %}
   end
 
-  def winHttpConnect(hSession : Void*, pswzServerName : Win32cr::Foundation::PWSTR, nServerPort : Win32cr::Networking::WinHttp::INTERNET_PORT, dwReserved : UInt32) : Void*
+  def winHttpConnect(hSession : Void*, pswzServerName : Win32cr::Foundation::PWSTR, nServerPort : UInt16, dwReserved : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.WinHttpConnect(hSession, pswzServerName, nServerPort, dwReserved)
+    {% end %}
   end
 
   def winHttpReadData(hRequest : Void*, lpBuffer : Void*, dwNumberOfBytesToRead : UInt32, lpdwNumberOfBytesRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpReadData(hRequest, lpBuffer, dwNumberOfBytesToRead, lpdwNumberOfBytesRead)
+    {% end %}
   end
 
   def winHttpReadDataEx(hRequest : Void*, lpBuffer : Void*, dwNumberOfBytesToRead : UInt32, lpdwNumberOfBytesRead : UInt32*, ullFlags : UInt64, cbProperty : UInt32, pvProperty : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpReadDataEx(hRequest, lpBuffer, dwNumberOfBytesToRead, lpdwNumberOfBytesRead, ullFlags, cbProperty, pvProperty)
+    {% end %}
   end
 
   def winHttpWriteData(hRequest : Void*, lpBuffer : Void*, dwNumberOfBytesToWrite : UInt32, lpdwNumberOfBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpWriteData(hRequest, lpBuffer, dwNumberOfBytesToWrite, lpdwNumberOfBytesWritten)
+    {% end %}
   end
 
   def winHttpQueryDataAvailable(hRequest : Void*, lpdwNumberOfBytesAvailable : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpQueryDataAvailable(hRequest, lpdwNumberOfBytesAvailable)
+    {% end %}
   end
 
   def winHttpQueryOption(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpQueryOption(hInternet, dwOption, lpBuffer, lpdwBufferLength)
+    {% end %}
   end
 
   def winHttpSetOption(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, dwBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpSetOption(hInternet, dwOption, lpBuffer, dwBufferLength)
+    {% end %}
   end
 
   def winHttpSetTimeouts(hInternet : Void*, nResolveTimeout : Int32, nConnectTimeout : Int32, nSendTimeout : Int32, nReceiveTimeout : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpSetTimeouts(hInternet, nResolveTimeout, nConnectTimeout, nSendTimeout, nReceiveTimeout)
+    {% end %}
   end
 
   def winHttpOpenRequest(hConnect : Void*, pwszVerb : Win32cr::Foundation::PWSTR, pwszObjectName : Win32cr::Foundation::PWSTR, pwszVersion : Win32cr::Foundation::PWSTR, pwszReferrer : Win32cr::Foundation::PWSTR, ppwszAcceptTypes : Win32cr::Foundation::PWSTR*, dwFlags : Win32cr::Networking::WinHttp::WINHTTP_OPEN_REQUEST_FLAGS) : Void*
+    {% if !flag?(:docs) %}
     C.WinHttpOpenRequest(hConnect, pwszVerb, pwszObjectName, pwszVersion, pwszReferrer, ppwszAcceptTypes, dwFlags)
+    {% end %}
   end
 
-  def winHttpAddRequestHeaders(hRequest : Void*, lpszHeaders : UInt16*, dwHeadersLength : UInt32, dwModifiers : UInt32) : Win32cr::Foundation::BOOL
+  def winHttpAddRequestHeaders(hRequest : Void*, lpszHeaders : Win32cr::Foundation::PWSTR, dwHeadersLength : UInt32, dwModifiers : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpAddRequestHeaders(hRequest, lpszHeaders, dwHeadersLength, dwModifiers)
+    {% end %}
   end
 
   def winHttpAddRequestHeadersEx(hRequest : Void*, dwModifiers : UInt32, ullFlags : UInt64, ullExtra : UInt64, cHeaders : UInt32, pHeaders : Win32cr::Networking::WinHttp::WINHTTP_EXTENDED_HEADER*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpAddRequestHeadersEx(hRequest, dwModifiers, ullFlags, ullExtra, cHeaders, pHeaders)
+    {% end %}
   end
 
-  def winHttpSendRequest(hRequest : Void*, lpszHeaders : UInt16*, dwHeadersLength : UInt32, lpOptional : Void*, dwOptionalLength : UInt32, dwTotalLength : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+  def winHttpSendRequest(hRequest : Void*, lpszHeaders : Win32cr::Foundation::PWSTR, dwHeadersLength : UInt32, lpOptional : Void*, dwOptionalLength : UInt32, dwTotalLength : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpSendRequest(hRequest, lpszHeaders, dwHeadersLength, lpOptional, dwOptionalLength, dwTotalLength, dwContext)
+    {% end %}
   end
 
   def winHttpSetCredentials(hRequest : Void*, auth_targets : UInt32, auth_scheme : UInt32, pwszUserName : Win32cr::Foundation::PWSTR, pwszPassword : Win32cr::Foundation::PWSTR, pAuthParams : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpSetCredentials(hRequest, auth_targets, auth_scheme, pwszUserName, pwszPassword, pAuthParams)
+    {% end %}
   end
 
   def winHttpQueryAuthSchemes(hRequest : Void*, lpdwSupportedSchemes : UInt32*, lpdwFirstScheme : UInt32*, pdwAuthTarget : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpQueryAuthSchemes(hRequest, lpdwSupportedSchemes, lpdwFirstScheme, pdwAuthTarget)
+    {% end %}
   end
 
   def winHttpReceiveResponse(hRequest : Void*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpReceiveResponse(hRequest, lpReserved)
+    {% end %}
   end
 
   def winHttpQueryHeaders(hRequest : Void*, dwInfoLevel : UInt32, pwszName : Win32cr::Foundation::PWSTR, lpBuffer : Void*, lpdwBufferLength : UInt32*, lpdwIndex : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpQueryHeaders(hRequest, dwInfoLevel, pwszName, lpBuffer, lpdwBufferLength, lpdwIndex)
+    {% end %}
   end
 
   def winHttpQueryHeadersEx(hRequest : Void*, dwInfoLevel : UInt32, ullFlags : UInt64, uiCodePage : UInt32, pdwIndex : UInt32*, pHeaderName : Win32cr::Networking::WinHttp::WINHTTP_HEADER_NAME*, pBuffer : Void*, pdwBufferLength : UInt32*, ppHeaders : Win32cr::Networking::WinHttp::WINHTTP_EXTENDED_HEADER**, pdwHeadersCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpQueryHeadersEx(hRequest, dwInfoLevel, ullFlags, uiCodePage, pdwIndex, pHeaderName, pBuffer, pdwBufferLength, ppHeaders, pdwHeadersCount)
+    {% end %}
   end
 
   def winHttpQueryConnectionGroup(hInternet : Void*, pGuidConnection : LibC::GUID*, ullFlags : UInt64, ppResult : Win32cr::Networking::WinHttp::WINHTTP_QUERY_CONNECTION_GROUP_RESULT**) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpQueryConnectionGroup(hInternet, pGuidConnection, ullFlags, ppResult)
+    {% end %}
   end
 
   def winHttpFreeQueryConnectionGroupResult(pResult : Win32cr::Networking::WinHttp::WINHTTP_QUERY_CONNECTION_GROUP_RESULT*) : Void
+    {% if !flag?(:docs) %}
     C.WinHttpFreeQueryConnectionGroupResult(pResult)
+    {% end %}
   end
 
   def winHttpDetectAutoProxyConfigUrl(dwAutoDetectFlags : UInt32, ppwstrAutoConfigUrl : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpDetectAutoProxyConfigUrl(dwAutoDetectFlags, ppwstrAutoConfigUrl)
+    {% end %}
   end
 
   def winHttpGetProxyForUrl(hSession : Void*, lpcwszUrl : Win32cr::Foundation::PWSTR, pAutoProxyOptions : Win32cr::Networking::WinHttp::WINHTTP_AUTOPROXY_OPTIONS*, pProxyInfo : Win32cr::Networking::WinHttp::WINHTTP_PROXY_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpGetProxyForUrl(hSession, lpcwszUrl, pAutoProxyOptions, pProxyInfo)
+    {% end %}
   end
 
   def winHttpCreateProxyResolver(hSession : Void*, phResolver : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpCreateProxyResolver(hSession, phResolver)
+    {% end %}
   end
 
   def winHttpGetProxyForUrlEx(hResolver : Void*, pcwszUrl : Win32cr::Foundation::PWSTR, pAutoProxyOptions : Win32cr::Networking::WinHttp::WINHTTP_AUTOPROXY_OPTIONS*, pContext : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpGetProxyForUrlEx(hResolver, pcwszUrl, pAutoProxyOptions, pContext)
+    {% end %}
   end
 
   def winHttpGetProxyForUrlEx2(hResolver : Void*, pcwszUrl : Win32cr::Foundation::PWSTR, pAutoProxyOptions : Win32cr::Networking::WinHttp::WINHTTP_AUTOPROXY_OPTIONS*, cbInterfaceSelectionContext : UInt32, pInterfaceSelectionContext : UInt8*, pContext : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpGetProxyForUrlEx2(hResolver, pcwszUrl, pAutoProxyOptions, cbInterfaceSelectionContext, pInterfaceSelectionContext, pContext)
+    {% end %}
   end
 
   def winHttpGetProxyResult(hResolver : Void*, pProxyResult : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpGetProxyResult(hResolver, pProxyResult)
+    {% end %}
   end
 
   def winHttpGetProxyResultEx(hResolver : Void*, pProxyResultEx : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_EX*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpGetProxyResultEx(hResolver, pProxyResultEx)
+    {% end %}
   end
 
   def winHttpFreeProxyResult(pProxyResult : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT*) : Void
+    {% if !flag?(:docs) %}
     C.WinHttpFreeProxyResult(pProxyResult)
+    {% end %}
   end
 
   def winHttpFreeProxyResultEx(pProxyResultEx : Win32cr::Networking::WinHttp::WINHTTP_PROXY_RESULT_EX*) : Void
+    {% if !flag?(:docs) %}
     C.WinHttpFreeProxyResultEx(pProxyResultEx)
+    {% end %}
   end
 
   def winHttpResetAutoProxy(hSession : Void*, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpResetAutoProxy(hSession, dwFlags)
+    {% end %}
   end
 
   def winHttpGetIEProxyConfigForCurrentUser(pProxyConfig : Win32cr::Networking::WinHttp::WINHTTP_CURRENT_USER_IE_PROXY_CONFIG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinHttpGetIEProxyConfigForCurrentUser(pProxyConfig)
+    {% end %}
   end
 
   def winHttpWriteProxySettings(hSession : Void*, fForceUpdate : Win32cr::Foundation::BOOL, pWinHttpProxySettings : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpWriteProxySettings(hSession, fForceUpdate, pWinHttpProxySettings)
+    {% end %}
   end
 
   def winHttpReadProxySettings(hSession : Void*, pcwszConnectionName : Win32cr::Foundation::PWSTR, fFallBackToDefaultSettings : Win32cr::Foundation::BOOL, fSetAutoDiscoverForDefaultSettings : Win32cr::Foundation::BOOL, pdwSettingsVersion : UInt32*, pfDefaultSettingsAreReturned : Win32cr::Foundation::BOOL*, pWinHttpProxySettings : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpReadProxySettings(hSession, pcwszConnectionName, fFallBackToDefaultSettings, fSetAutoDiscoverForDefaultSettings, pdwSettingsVersion, pfDefaultSettingsAreReturned, pWinHttpProxySettings)
+    {% end %}
   end
 
   def winHttpFreeProxySettings(pWinHttpProxySettings : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS*) : Void
+    {% if !flag?(:docs) %}
     C.WinHttpFreeProxySettings(pWinHttpProxySettings)
+    {% end %}
   end
 
   def winHttpGetProxySettingsVersion(hSession : Void*, pdwProxySettingsVersion : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpGetProxySettingsVersion(hSession, pdwProxySettingsVersion)
+    {% end %}
   end
 
   def winHttpSetProxySettingsPerUser(fProxySettingsPerUser : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpSetProxySettingsPerUser(fProxySettingsPerUser)
+    {% end %}
   end
 
   def winHttpWebSocketCompleteUpgrade(hRequest : Void*, pContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.WinHttpWebSocketCompleteUpgrade(hRequest, pContext)
+    {% end %}
   end
 
   def winHttpWebSocketSend(hWebSocket : Void*, eBufferType : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_BUFFER_TYPE, pvBuffer : Void*, dwBufferLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpWebSocketSend(hWebSocket, eBufferType, pvBuffer, dwBufferLength)
+    {% end %}
   end
 
   def winHttpWebSocketReceive(hWebSocket : Void*, pvBuffer : Void*, dwBufferLength : UInt32, pdwBytesRead : UInt32*, peBufferType : Win32cr::Networking::WinHttp::WINHTTP_WEB_SOCKET_BUFFER_TYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpWebSocketReceive(hWebSocket, pvBuffer, dwBufferLength, pdwBytesRead, peBufferType)
+    {% end %}
   end
 
   def winHttpWebSocketShutdown(hWebSocket : Void*, usStatus : UInt16, pvReason : Void*, dwReasonLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpWebSocketShutdown(hWebSocket, usStatus, pvReason, dwReasonLength)
+    {% end %}
   end
 
   def winHttpWebSocketClose(hWebSocket : Void*, usStatus : UInt16, pvReason : Void*, dwReasonLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpWebSocketClose(hWebSocket, usStatus, pvReason, dwReasonLength)
+    {% end %}
   end
 
   def winHttpWebSocketQueryCloseStatus(hWebSocket : Void*, pusStatus : UInt16*, pvReason : Void*, dwReasonLength : UInt32, pdwReasonLengthConsumed : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinHttpWebSocketQueryCloseStatus(hWebSocket, pusStatus, pvReason, dwReasonLength, pdwReasonLengthConsumed)
+    {% end %}
+  end
+
+  def winHttpProtocolCompleteUpgrade(hRequest : Void*, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
+    C.WinHttpProtocolCompleteUpgrade(hRequest, dwContext)
+    {% end %}
+  end
+
+  def winHttpProtocolSend(protocol_handle : Void*, flags : UInt64, pvBuffer : Void*, dwBufferLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    C.WinHttpProtocolSend(protocol_handle, flags, pvBuffer, dwBufferLength)
+    {% end %}
+  end
+
+  def winHttpProtocolReceive(protocol_handle : Void*, flags : UInt64, pvBuffer : Void*, dwBufferLength : UInt32, pdwBytesRead : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
+    C.WinHttpProtocolReceive(protocol_handle, flags, pvBuffer, dwBufferLength, pdwBytesRead)
+    {% end %}
+  end
+
+  def winHttpRegisterProxyChangeNotification(ullFlags : UInt64, pfnCallback : Win32cr::Networking::WinHttp::WINHTTP_PROXY_CHANGE_CALLBACK, pvContext : Void*, hRegistration : Void**) : UInt32
+    {% if !flag?(:docs) %}
+    C.WinHttpRegisterProxyChangeNotification(ullFlags, pfnCallback, pvContext, hRegistration)
+    {% end %}
+  end
+
+  def winHttpUnregisterProxyChangeNotification(hRegistration : Void*) : UInt32
+    {% if !flag?(:docs) %}
+    C.WinHttpUnregisterProxyChangeNotification(hRegistration)
+    {% end %}
+  end
+
+  def winHttpGetProxySettingsEx(hResolver : Void*, proxy_settings_type : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS_TYPE, pProxySettingsParam : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS_PARAM*, pContext : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
+    C.WinHttpGetProxySettingsEx(hResolver, proxy_settings_type, pProxySettingsParam, pContext)
+    {% end %}
+  end
+
+  def winHttpGetProxySettingsResultEx(hResolver : Void*, pProxySettingsEx : Void*) : UInt32
+    {% if !flag?(:docs) %}
+    C.WinHttpGetProxySettingsResultEx(hResolver, pProxySettingsEx)
+    {% end %}
+  end
+
+  def winHttpFreeProxySettingsEx(proxy_settings_type : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS_TYPE, pProxySettingsEx : Void*) : UInt32
+    {% if !flag?(:docs) %}
+    C.WinHttpFreeProxySettingsEx(proxy_settings_type, pProxySettingsEx)
+    {% end %}
   end
 
   @[Link("winhttp")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WinHttpSetStatusCallback(hInternet : Void*, lpfnInternetCallback : Win32cr::Networking::WinHttp::WINHTTP_STATUS_CALLBACK, dwNotificationFlags : UInt32, dwReserved : LibC::UIntPtrT) : Win32cr::Networking::WinHttp::WINHTTP_STATUS_CALLBACK
 
     # :nodoc:
-    fun WinHttpTimeFromSystemTime(pst : Win32cr::Foundation::SYSTEMTIME*, pwszTime : UInt16*) : Win32cr::Foundation::BOOL
+    fun WinHttpTimeFromSystemTime(pst : Win32cr::Foundation::SYSTEMTIME*, pwszTime : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun WinHttpTimeToSystemTime(pwszTime : Win32cr::Foundation::PWSTR, pst : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinHttpCrackUrl(pwszUrl : UInt16*, dwUrlLength : UInt32, dwFlags : UInt32, lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*) : Win32cr::Foundation::BOOL
+    fun WinHttpCrackUrl(pwszUrl : Win32cr::Foundation::PWSTR, dwUrlLength : UInt32, dwFlags : UInt32, lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinHttpCreateUrl(lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*, dwFlags : Win32cr::Networking::WinHttp::WIN_HTTP_CREATE_URL_FLAGS, pwszUrl : UInt16*, pdwUrlLength : UInt32*) : Win32cr::Foundation::BOOL
+    fun WinHttpCreateUrl(lpUrlComponents : Win32cr::Networking::WinHttp::URL_COMPONENTS*, dwFlags : Win32cr::Networking::WinHttp::WIN_HTTP_CREATE_URL_FLAGS, pwszUrl : Win32cr::Foundation::PWSTR, pdwUrlLength : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun WinHttpCheckPlatform : Win32cr::Foundation::BOOL
@@ -1215,7 +1795,7 @@ module Win32cr::Networking::WinHttp
     fun WinHttpCloseHandle(hInternet : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinHttpConnect(hSession : Void*, pswzServerName : Win32cr::Foundation::PWSTR, nServerPort : Win32cr::Networking::WinHttp::INTERNET_PORT, dwReserved : UInt32) : Void*
+    fun WinHttpConnect(hSession : Void*, pswzServerName : Win32cr::Foundation::PWSTR, nServerPort : UInt16, dwReserved : UInt32) : Void*
 
     # :nodoc:
     fun WinHttpReadData(hRequest : Void*, lpBuffer : Void*, dwNumberOfBytesToRead : UInt32, lpdwNumberOfBytesRead : UInt32*) : Win32cr::Foundation::BOOL
@@ -1242,13 +1822,13 @@ module Win32cr::Networking::WinHttp
     fun WinHttpOpenRequest(hConnect : Void*, pwszVerb : Win32cr::Foundation::PWSTR, pwszObjectName : Win32cr::Foundation::PWSTR, pwszVersion : Win32cr::Foundation::PWSTR, pwszReferrer : Win32cr::Foundation::PWSTR, ppwszAcceptTypes : Win32cr::Foundation::PWSTR*, dwFlags : Win32cr::Networking::WinHttp::WINHTTP_OPEN_REQUEST_FLAGS) : Void*
 
     # :nodoc:
-    fun WinHttpAddRequestHeaders(hRequest : Void*, lpszHeaders : UInt16*, dwHeadersLength : UInt32, dwModifiers : UInt32) : Win32cr::Foundation::BOOL
+    fun WinHttpAddRequestHeaders(hRequest : Void*, lpszHeaders : Win32cr::Foundation::PWSTR, dwHeadersLength : UInt32, dwModifiers : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun WinHttpAddRequestHeadersEx(hRequest : Void*, dwModifiers : UInt32, ullFlags : UInt64, ullExtra : UInt64, cHeaders : UInt32, pHeaders : Win32cr::Networking::WinHttp::WINHTTP_EXTENDED_HEADER*) : UInt32
 
     # :nodoc:
-    fun WinHttpSendRequest(hRequest : Void*, lpszHeaders : UInt16*, dwHeadersLength : UInt32, lpOptional : Void*, dwOptionalLength : UInt32, dwTotalLength : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    fun WinHttpSendRequest(hRequest : Void*, lpszHeaders : Win32cr::Foundation::PWSTR, dwHeadersLength : UInt32, lpOptional : Void*, dwOptionalLength : UInt32, dwTotalLength : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun WinHttpSetCredentials(hRequest : Void*, auth_targets : UInt32, auth_scheme : UInt32, pwszUserName : Win32cr::Foundation::PWSTR, pwszPassword : Win32cr::Foundation::PWSTR, pAuthParams : Void*) : Win32cr::Foundation::BOOL
@@ -1337,5 +1917,30 @@ module Win32cr::Networking::WinHttp
     # :nodoc:
     fun WinHttpWebSocketQueryCloseStatus(hWebSocket : Void*, pusStatus : UInt16*, pvReason : Void*, dwReasonLength : UInt32, pdwReasonLengthConsumed : UInt32*) : UInt32
 
+    # :nodoc:
+    fun WinHttpProtocolCompleteUpgrade(hRequest : Void*, dwContext : LibC::UIntPtrT) : Void*
+
+    # :nodoc:
+    fun WinHttpProtocolSend(protocol_handle : Void*, flags : UInt64, pvBuffer : Void*, dwBufferLength : UInt32) : UInt32
+
+    # :nodoc:
+    fun WinHttpProtocolReceive(protocol_handle : Void*, flags : UInt64, pvBuffer : Void*, dwBufferLength : UInt32, pdwBytesRead : UInt32*) : UInt32
+
+    # :nodoc:
+    fun WinHttpRegisterProxyChangeNotification(ullFlags : UInt64, pfnCallback : Win32cr::Networking::WinHttp::WINHTTP_PROXY_CHANGE_CALLBACK, pvContext : Void*, hRegistration : Void**) : UInt32
+
+    # :nodoc:
+    fun WinHttpUnregisterProxyChangeNotification(hRegistration : Void*) : UInt32
+
+    # :nodoc:
+    fun WinHttpGetProxySettingsEx(hResolver : Void*, proxy_settings_type : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS_TYPE, pProxySettingsParam : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS_PARAM*, pContext : LibC::UIntPtrT) : UInt32
+
+    # :nodoc:
+    fun WinHttpGetProxySettingsResultEx(hResolver : Void*, pProxySettingsEx : Void*) : UInt32
+
+    # :nodoc:
+    fun WinHttpFreeProxySettingsEx(proxy_settings_type : Win32cr::Networking::WinHttp::WINHTTP_PROXY_SETTINGS_TYPE, pProxySettingsEx : Void*) : UInt32
+
   end
+  {% end %}
 end

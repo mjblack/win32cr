@@ -19,11 +19,11 @@ module Win32cr::NetworkManagement::P2P
   NS_PNRPNAME = 38_u32
   NS_PNRPCLOUD = 39_u32
   PNRPINFO_HINT = 1_u32
-  NS_PROVIDER_PNRPNAME = "03fe89cd-766d-4976-b9c1-bb9bc42c7b4d"
-  NS_PROVIDER_PNRPCLOUD = "03fe89ce-766d-4976-b9c1-bb9bc42c7b4d"
-  SVCID_PNRPCLOUD = "c2239ce6-00c0-4fbf-bad6-18139385a49a"
-  SVCID_PNRPNAME_V1 = "c2239ce5-00c0-4fbf-bad6-18139385a49a"
-  SVCID_PNRPNAME_V2 = "c2239ce7-00c0-4fbf-bad6-18139385a49a"
+  NS_PROVIDER_PNRPNAME = LibC::GUID.new(0x3fe89cd_u32, 0x766d_u16, 0x4976_u16, StaticArray[0xb9_u8, 0xc1_u8, 0xbb_u8, 0x9b_u8, 0xc4_u8, 0x2c_u8, 0x7b_u8, 0x4d_u8])
+  NS_PROVIDER_PNRPCLOUD = LibC::GUID.new(0x3fe89ce_u32, 0x766d_u16, 0x4976_u16, StaticArray[0xb9_u8, 0xc1_u8, 0xbb_u8, 0x9b_u8, 0xc4_u8, 0x2c_u8, 0x7b_u8, 0x4d_u8])
+  SVCID_PNRPCLOUD = LibC::GUID.new(0xc2239ce6_u32, 0xc0_u16, 0x4fbf_u16, StaticArray[0xba_u8, 0xd6_u8, 0x18_u8, 0x13_u8, 0x93_u8, 0x85_u8, 0xa4_u8, 0x9a_u8])
+  SVCID_PNRPNAME_V1 = LibC::GUID.new(0xc2239ce5_u32, 0xc0_u16, 0x4fbf_u16, StaticArray[0xba_u8, 0xd6_u8, 0x18_u8, 0x13_u8, 0x93_u8, 0x85_u8, 0xa4_u8, 0x9a_u8])
+  SVCID_PNRPNAME_V2 = LibC::GUID.new(0xc2239ce7_u32, 0xc0_u16, 0x4fbf_u16, StaticArray[0xba_u8, 0xd6_u8, 0x18_u8, 0x13_u8, 0x93_u8, 0x85_u8, 0xa4_u8, 0x9a_u8])
   PNRP_MAX_ENDPOINT_ADDRESSES = 10_u32
   WSZ_SCOPE_GLOBAL = "GLOBAL"
   WSZ_SCOPE_SITELOCAL = "SITELOCAL"
@@ -50,10 +50,10 @@ module Win32cr::NetworkManagement::P2P
   PEER_E_NOT_FOUND = -2147023728_i32
   PEER_E_DISK_FULL = -2147024784_i32
   PEER_E_ALREADY_EXISTS = -2147024713_i32
-  PEER_GROUP_ROLE_ADMIN = "04387127-aa56-450a-8ce5-4f565c6790f4"
-  PEER_GROUP_ROLE_MEMBER = "f12dc4c7-0857-4ca0-93fc-b1bb19a3d8c2"
-  PEER_GROUP_ROLE_INVITING_MEMBER = "4370fd89-dc18-4cfb-8dbf-9853a8a9f905"
-  PEER_COLLAB_OBJECTID_USER_PICTURE = "dd15f41f-fc4e-4922-b035-4c06a754d01d"
+  PEER_GROUP_ROLE_ADMIN = LibC::GUID.new(0x4387127_u32, 0xaa56_u16, 0x450a_u16, StaticArray[0x8c_u8, 0xe5_u8, 0x4f_u8, 0x56_u8, 0x5c_u8, 0x67_u8, 0x90_u8, 0xf4_u8])
+  PEER_GROUP_ROLE_MEMBER = LibC::GUID.new(0xf12dc4c7_u32, 0x857_u16, 0x4ca0_u16, StaticArray[0x93_u8, 0xfc_u8, 0xb1_u8, 0xbb_u8, 0x19_u8, 0xa3_u8, 0xd8_u8, 0xc2_u8])
+  PEER_GROUP_ROLE_INVITING_MEMBER = LibC::GUID.new(0x4370fd89_u32, 0xdc18_u16, 0x4cfb_u16, StaticArray[0x8d_u8, 0xbf_u8, 0x98_u8, 0x53_u8, 0xa8_u8, 0xa9_u8, 0xf9_u8, 0x5_u8])
+  PEER_COLLAB_OBJECTID_USER_PICTURE = LibC::GUID.new(0xdd15f41f_u32, 0xfc4e_u16, 0x4922_u16, StaticArray[0xb0_u8, 0x35_u8, 0x4c_u8, 0x6_u8, 0xa7_u8, 0x54_u8, 0xd0_u8, 0x1d_u8])
   FACILITY_DRT = 98_u32
   DRT_E_TIMEOUT = -2141057023_i32
   DRT_E_INVALID_KEY_SIZE = -2141057022_i32
@@ -1021,8 +1021,8 @@ module Win32cr::NetworkManagement::P2P
   @[Extern]
   struct DRT_ADDRESS_LIST
     property address_count : UInt32
-    property address_list : Win32cr::NetworkManagement::P2P::DRT_ADDRESS*
-    def initialize(@address_count : UInt32, @address_list : Win32cr::NetworkManagement::P2P::DRT_ADDRESS*)
+    property address_list : Win32cr::NetworkManagement::P2P::DRT_ADDRESS[1]
+    def initialize(@address_count : UInt32, @address_list : Win32cr::NetworkManagement::P2P::DRT_ADDRESS[1])
     end
   end
 
@@ -1050,26 +1050,6 @@ module Win32cr::NetworkManagement::P2P
     property registrationStateChange : Registrationstatechange_e__struct_
     property statusChange : Statuschange_e__struct_
 
-      # Nested Type Statuschange_e__struct_
-      @[Extern]
-      struct Statuschange_e__struct_
-    property status : Win32cr::NetworkManagement::P2P::DRT_STATUS
-    property bootstrapAddresses : Bootstrapaddresses_e__struct_
-
-        # Nested Type Bootstrapaddresses_e__struct_
-        @[Extern]
-        struct Bootstrapaddresses_e__struct_
-    property cntAddress : UInt32
-    property pAddresses : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
-    def initialize(@cntAddress : UInt32, @pAddresses : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*)
-    end
-        end
-
-    def initialize(@status : Win32cr::NetworkManagement::P2P::DRT_STATUS, @bootstrapAddresses : Bootstrapaddresses_e__struct_)
-    end
-      end
-
-
       # Nested Type Leafsetkeychange_e__struct_
       @[Extern]
       struct Leafsetkeychange_e__struct_
@@ -1087,6 +1067,26 @@ module Win32cr::NetworkManagement::P2P
     property state : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION_STATE
     property localKey : Win32cr::NetworkManagement::P2P::DRT_DATA
     def initialize(@state : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION_STATE, @localKey : Win32cr::NetworkManagement::P2P::DRT_DATA)
+    end
+      end
+
+
+      # Nested Type Statuschange_e__struct_
+      @[Extern]
+      struct Statuschange_e__struct_
+    property status : Win32cr::NetworkManagement::P2P::DRT_STATUS
+    property bootstrapAddresses : Bootstrapaddresses_e__struct_
+
+        # Nested Type Bootstrapaddresses_e__struct_
+        @[Extern]
+        struct Bootstrapaddresses_e__struct_
+    property cntAddress : UInt32
+    property pAddresses : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
+    def initialize(@cntAddress : UInt32, @pAddresses : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*)
+    end
+        end
+
+    def initialize(@status : Win32cr::NetworkManagement::P2P::DRT_STATUS, @bootstrapAddresses : Bootstrapaddresses_e__struct_)
     end
       end
 
@@ -1141,803 +1141,1203 @@ module Win32cr::NetworkManagement::P2P
   end
 
   def peerGraphStartup(wVersionRequested : UInt16, pVersionData : Win32cr::NetworkManagement::P2P::PEER_VERSION_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphStartup(wVersionRequested, pVersionData)
+    {% end %}
   end
 
   def peerGraphShutdown : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphShutdown
+    {% end %}
   end
 
   def peerGraphFreeData(pvData : Void*) : Void
+    {% if !flag?(:docs) %}
     C.PeerGraphFreeData(pvData)
+    {% end %}
   end
 
   def peerGraphGetItemCount(hPeerEnum : Void*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphGetItemCount(hPeerEnum, pCount)
+    {% end %}
   end
 
   def peerGraphGetNextItem(hPeerEnum : Void*, pCount : UInt32*, pppvItems : Void***) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphGetNextItem(hPeerEnum, pCount, pppvItems)
+    {% end %}
   end
 
   def peerGraphEndEnumeration(hPeerEnum : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphEndEnumeration(hPeerEnum)
+    {% end %}
   end
 
   def peerGraphCreate(pGraphProperties : Win32cr::NetworkManagement::P2P::PEER_GRAPH_PROPERTIES*, pwzDatabaseName : Win32cr::Foundation::PWSTR, pSecurityInterface : Win32cr::NetworkManagement::P2P::PEER_SECURITY_INTERFACE*, phGraph : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphCreate(pGraphProperties, pwzDatabaseName, pSecurityInterface, phGraph)
+    {% end %}
   end
 
   def peerGraphOpen(pwzGraphId : Win32cr::Foundation::PWSTR, pwzPeerId : Win32cr::Foundation::PWSTR, pwzDatabaseName : Win32cr::Foundation::PWSTR, pSecurityInterface : Win32cr::NetworkManagement::P2P::PEER_SECURITY_INTERFACE*, cRecordTypeSyncPrecedence : UInt32, pRecordTypeSyncPrecedence : LibC::GUID*, phGraph : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphOpen(pwzGraphId, pwzPeerId, pwzDatabaseName, pSecurityInterface, cRecordTypeSyncPrecedence, pRecordTypeSyncPrecedence, phGraph)
+    {% end %}
   end
 
   def peerGraphListen(hGraph : Void*, dwScope : UInt32, dwScopeId : UInt32, wPort : UInt16) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphListen(hGraph, dwScope, dwScopeId, wPort)
+    {% end %}
   end
 
   def peerGraphConnect(hGraph : Void*, pwzPeerId : Win32cr::Foundation::PWSTR, pAddress : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*, pullConnectionId : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphConnect(hGraph, pwzPeerId, pAddress, pullConnectionId)
+    {% end %}
   end
 
   def peerGraphClose(hGraph : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphClose(hGraph)
+    {% end %}
   end
 
   def peerGraphDelete(pwzGraphId : Win32cr::Foundation::PWSTR, pwzPeerId : Win32cr::Foundation::PWSTR, pwzDatabaseName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphDelete(pwzGraphId, pwzPeerId, pwzDatabaseName)
+    {% end %}
   end
 
   def peerGraphGetStatus(hGraph : Void*, pdwStatus : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphGetStatus(hGraph, pdwStatus)
+    {% end %}
   end
 
   def peerGraphGetProperties(hGraph : Void*, ppGraphProperties : Win32cr::NetworkManagement::P2P::PEER_GRAPH_PROPERTIES**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphGetProperties(hGraph, ppGraphProperties)
+    {% end %}
   end
 
   def peerGraphSetProperties(hGraph : Void*, pGraphProperties : Win32cr::NetworkManagement::P2P::PEER_GRAPH_PROPERTIES*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphSetProperties(hGraph, pGraphProperties)
+    {% end %}
   end
 
   def peerGraphRegisterEvent(hGraph : Void*, hEvent : Win32cr::Foundation::HANDLE, cEventRegistrations : UInt32, pEventRegistrations : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_REGISTRATION*, phPeerEvent : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphRegisterEvent(hGraph, hEvent, cEventRegistrations, pEventRegistrations, phPeerEvent)
+    {% end %}
   end
 
   def peerGraphUnregisterEvent(hPeerEvent : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphUnregisterEvent(hPeerEvent)
+    {% end %}
   end
 
   def peerGraphGetEventData(hPeerEvent : Void*, ppEventData : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_DATA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphGetEventData(hPeerEvent, ppEventData)
+    {% end %}
   end
 
   def peerGraphGetRecord(hGraph : Void*, pRecordId : LibC::GUID*, ppRecord : Win32cr::NetworkManagement::P2P::PEER_RECORD**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphGetRecord(hGraph, pRecordId, ppRecord)
+    {% end %}
   end
 
   def peerGraphAddRecord(hGraph : Void*, pRecord : Win32cr::NetworkManagement::P2P::PEER_RECORD*, pRecordId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphAddRecord(hGraph, pRecord, pRecordId)
+    {% end %}
   end
 
   def peerGraphUpdateRecord(hGraph : Void*, pRecord : Win32cr::NetworkManagement::P2P::PEER_RECORD*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphUpdateRecord(hGraph, pRecord)
+    {% end %}
   end
 
   def peerGraphDeleteRecord(hGraph : Void*, pRecordId : LibC::GUID*, fLocal : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphDeleteRecord(hGraph, pRecordId, fLocal)
+    {% end %}
   end
 
   def peerGraphEnumRecords(hGraph : Void*, pRecordType : LibC::GUID*, pwzPeerId : Win32cr::Foundation::PWSTR, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphEnumRecords(hGraph, pRecordType, pwzPeerId, phPeerEnum)
+    {% end %}
   end
 
   def peerGraphSearchRecords(hGraph : Void*, pwzCriteria : Win32cr::Foundation::PWSTR, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphSearchRecords(hGraph, pwzCriteria, phPeerEnum)
+    {% end %}
   end
 
   def peerGraphExportDatabase(hGraph : Void*, pwzFilePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphExportDatabase(hGraph, pwzFilePath)
+    {% end %}
   end
 
   def peerGraphImportDatabase(hGraph : Void*, pwzFilePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphImportDatabase(hGraph, pwzFilePath)
+    {% end %}
   end
 
   def peerGraphValidateDeferredRecords(hGraph : Void*, cRecordIds : UInt32, pRecordIds : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphValidateDeferredRecords(hGraph, cRecordIds, pRecordIds)
+    {% end %}
   end
 
   def peerGraphOpenDirectConnection(hGraph : Void*, pwzPeerId : Win32cr::Foundation::PWSTR, pAddress : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*, pullConnectionId : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphOpenDirectConnection(hGraph, pwzPeerId, pAddress, pullConnectionId)
+    {% end %}
   end
 
   def peerGraphSendData(hGraph : Void*, ullConnectionId : UInt64, pType : LibC::GUID*, cbData : UInt32, pvData : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphSendData(hGraph, ullConnectionId, pType, cbData, pvData)
+    {% end %}
   end
 
   def peerGraphCloseDirectConnection(hGraph : Void*, ullConnectionId : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphCloseDirectConnection(hGraph, ullConnectionId)
+    {% end %}
   end
 
   def peerGraphEnumConnections(hGraph : Void*, dwFlags : UInt32, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphEnumConnections(hGraph, dwFlags, phPeerEnum)
+    {% end %}
   end
 
   def peerGraphEnumNodes(hGraph : Void*, pwzPeerId : Win32cr::Foundation::PWSTR, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphEnumNodes(hGraph, pwzPeerId, phPeerEnum)
+    {% end %}
   end
 
   def peerGraphSetPresence(hGraph : Void*, fPresent : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphSetPresence(hGraph, fPresent)
+    {% end %}
   end
 
   def peerGraphGetNodeInfo(hGraph : Void*, ullNodeId : UInt64, ppNodeInfo : Win32cr::NetworkManagement::P2P::PEER_NODE_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphGetNodeInfo(hGraph, ullNodeId, ppNodeInfo)
+    {% end %}
   end
 
   def peerGraphSetNodeAttributes(hGraph : Void*, pwzAttributes : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphSetNodeAttributes(hGraph, pwzAttributes)
+    {% end %}
   end
 
   def peerGraphPeerTimeToUniversalTime(hGraph : Void*, pftPeerTime : Win32cr::Foundation::FILETIME*, pftUniversalTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphPeerTimeToUniversalTime(hGraph, pftPeerTime, pftUniversalTime)
+    {% end %}
   end
 
   def peerGraphUniversalTimeToPeerTime(hGraph : Void*, pftUniversalTime : Win32cr::Foundation::FILETIME*, pftPeerTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGraphUniversalTimeToPeerTime(hGraph, pftUniversalTime, pftPeerTime)
+    {% end %}
   end
 
   def peerFreeData(pvData : Void*) : Void
+    {% if !flag?(:docs) %}
     C.PeerFreeData(pvData)
+    {% end %}
   end
 
   def peerGetItemCount(hPeerEnum : Void*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGetItemCount(hPeerEnum, pCount)
+    {% end %}
   end
 
   def peerGetNextItem(hPeerEnum : Void*, pCount : UInt32*, pppvItems : Void***) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGetNextItem(hPeerEnum, pCount, pppvItems)
+    {% end %}
   end
 
   def peerEndEnumeration(hPeerEnum : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerEndEnumeration(hPeerEnum)
+    {% end %}
   end
 
   def peerGroupStartup(wVersionRequested : UInt16, pVersionData : Win32cr::NetworkManagement::P2P::PEER_VERSION_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupStartup(wVersionRequested, pVersionData)
+    {% end %}
   end
 
   def peerGroupShutdown : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupShutdown
+    {% end %}
   end
 
   def peerGroupCreate(pProperties : Win32cr::NetworkManagement::P2P::PEER_GROUP_PROPERTIES*, phGroup : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupCreate(pProperties, phGroup)
+    {% end %}
   end
 
   def peerGroupOpen(pwzIdentity : Win32cr::Foundation::PWSTR, pwzGroupPeerName : Win32cr::Foundation::PWSTR, pwzCloud : Win32cr::Foundation::PWSTR, phGroup : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupOpen(pwzIdentity, pwzGroupPeerName, pwzCloud, phGroup)
+    {% end %}
   end
 
   def peerGroupJoin(pwzIdentity : Win32cr::Foundation::PWSTR, pwzInvitation : Win32cr::Foundation::PWSTR, pwzCloud : Win32cr::Foundation::PWSTR, phGroup : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupJoin(pwzIdentity, pwzInvitation, pwzCloud, phGroup)
+    {% end %}
   end
 
   def peerGroupPasswordJoin(pwzIdentity : Win32cr::Foundation::PWSTR, pwzInvitation : Win32cr::Foundation::PWSTR, pwzPassword : Win32cr::Foundation::PWSTR, pwzCloud : Win32cr::Foundation::PWSTR, phGroup : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupPasswordJoin(pwzIdentity, pwzInvitation, pwzPassword, pwzCloud, phGroup)
+    {% end %}
   end
 
   def peerGroupConnect(hGroup : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupConnect(hGroup)
+    {% end %}
   end
 
   def peerGroupConnectByAddress(hGroup : Void*, cAddresses : UInt32, pAddresses : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupConnectByAddress(hGroup, cAddresses, pAddresses)
+    {% end %}
   end
 
   def peerGroupClose(hGroup : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupClose(hGroup)
+    {% end %}
   end
 
   def peerGroupDelete(pwzIdentity : Win32cr::Foundation::PWSTR, pwzGroupPeerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupDelete(pwzIdentity, pwzGroupPeerName)
+    {% end %}
   end
 
   def peerGroupCreateInvitation(hGroup : Void*, pwzIdentityInfo : Win32cr::Foundation::PWSTR, pftExpiration : Win32cr::Foundation::FILETIME*, cRoles : UInt32, pRoles : LibC::GUID*, ppwzInvitation : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupCreateInvitation(hGroup, pwzIdentityInfo, pftExpiration, cRoles, pRoles, ppwzInvitation)
+    {% end %}
   end
 
   def peerGroupCreatePasswordInvitation(hGroup : Void*, ppwzInvitation : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupCreatePasswordInvitation(hGroup, ppwzInvitation)
+    {% end %}
   end
 
   def peerGroupParseInvitation(pwzInvitation : Win32cr::Foundation::PWSTR, ppInvitationInfo : Win32cr::NetworkManagement::P2P::PEER_INVITATION_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupParseInvitation(pwzInvitation, ppInvitationInfo)
+    {% end %}
   end
 
   def peerGroupGetStatus(hGroup : Void*, pdwStatus : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupGetStatus(hGroup, pdwStatus)
+    {% end %}
   end
 
   def peerGroupGetProperties(hGroup : Void*, ppProperties : Win32cr::NetworkManagement::P2P::PEER_GROUP_PROPERTIES**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupGetProperties(hGroup, ppProperties)
+    {% end %}
   end
 
   def peerGroupSetProperties(hGroup : Void*, pProperties : Win32cr::NetworkManagement::P2P::PEER_GROUP_PROPERTIES*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupSetProperties(hGroup, pProperties)
+    {% end %}
   end
 
   def peerGroupEnumMembers(hGroup : Void*, dwFlags : UInt32, pwzIdentity : Win32cr::Foundation::PWSTR, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupEnumMembers(hGroup, dwFlags, pwzIdentity, phPeerEnum)
+    {% end %}
   end
 
   def peerGroupOpenDirectConnection(hGroup : Void*, pwzIdentity : Win32cr::Foundation::PWSTR, pAddress : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*, pullConnectionId : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupOpenDirectConnection(hGroup, pwzIdentity, pAddress, pullConnectionId)
+    {% end %}
   end
 
   def peerGroupCloseDirectConnection(hGroup : Void*, ullConnectionId : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupCloseDirectConnection(hGroup, ullConnectionId)
+    {% end %}
   end
 
   def peerGroupEnumConnections(hGroup : Void*, dwFlags : UInt32, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupEnumConnections(hGroup, dwFlags, phPeerEnum)
+    {% end %}
   end
 
   def peerGroupSendData(hGroup : Void*, ullConnectionId : UInt64, pType : LibC::GUID*, cbData : UInt32, pvData : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupSendData(hGroup, ullConnectionId, pType, cbData, pvData)
+    {% end %}
   end
 
   def peerGroupRegisterEvent(hGroup : Void*, hEvent : Win32cr::Foundation::HANDLE, cEventRegistration : UInt32, pEventRegistrations : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_REGISTRATION*, phPeerEvent : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupRegisterEvent(hGroup, hEvent, cEventRegistration, pEventRegistrations, phPeerEvent)
+    {% end %}
   end
 
   def peerGroupUnregisterEvent(hPeerEvent : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupUnregisterEvent(hPeerEvent)
+    {% end %}
   end
 
   def peerGroupGetEventData(hPeerEvent : Void*, ppEventData : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_DATA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupGetEventData(hPeerEvent, ppEventData)
+    {% end %}
   end
 
   def peerGroupGetRecord(hGroup : Void*, pRecordId : LibC::GUID*, ppRecord : Win32cr::NetworkManagement::P2P::PEER_RECORD**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupGetRecord(hGroup, pRecordId, ppRecord)
+    {% end %}
   end
 
   def peerGroupAddRecord(hGroup : Void*, pRecord : Win32cr::NetworkManagement::P2P::PEER_RECORD*, pRecordId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupAddRecord(hGroup, pRecord, pRecordId)
+    {% end %}
   end
 
   def peerGroupUpdateRecord(hGroup : Void*, pRecord : Win32cr::NetworkManagement::P2P::PEER_RECORD*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupUpdateRecord(hGroup, pRecord)
+    {% end %}
   end
 
   def peerGroupDeleteRecord(hGroup : Void*, pRecordId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupDeleteRecord(hGroup, pRecordId)
+    {% end %}
   end
 
   def peerGroupEnumRecords(hGroup : Void*, pRecordType : LibC::GUID*, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupEnumRecords(hGroup, pRecordType, phPeerEnum)
+    {% end %}
   end
 
   def peerGroupSearchRecords(hGroup : Void*, pwzCriteria : Win32cr::Foundation::PWSTR, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupSearchRecords(hGroup, pwzCriteria, phPeerEnum)
+    {% end %}
   end
 
   def peerGroupExportDatabase(hGroup : Void*, pwzFilePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupExportDatabase(hGroup, pwzFilePath)
+    {% end %}
   end
 
   def peerGroupImportDatabase(hGroup : Void*, pwzFilePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupImportDatabase(hGroup, pwzFilePath)
+    {% end %}
   end
 
   def peerGroupIssueCredentials(hGroup : Void*, pwzSubjectIdentity : Win32cr::Foundation::PWSTR, pCredentialInfo : Win32cr::NetworkManagement::P2P::PEER_CREDENTIAL_INFO*, dwFlags : UInt32, ppwzInvitation : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupIssueCredentials(hGroup, pwzSubjectIdentity, pCredentialInfo, dwFlags, ppwzInvitation)
+    {% end %}
   end
 
   def peerGroupExportConfig(hGroup : Void*, pwzPassword : Win32cr::Foundation::PWSTR, ppwzXML : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupExportConfig(hGroup, pwzPassword, ppwzXML)
+    {% end %}
   end
 
   def peerGroupImportConfig(pwzXML : Win32cr::Foundation::PWSTR, pwzPassword : Win32cr::Foundation::PWSTR, fOverwrite : Win32cr::Foundation::BOOL, ppwzIdentity : Win32cr::Foundation::PWSTR*, ppwzGroup : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupImportConfig(pwzXML, pwzPassword, fOverwrite, ppwzIdentity, ppwzGroup)
+    {% end %}
   end
 
   def peerGroupPeerTimeToUniversalTime(hGroup : Void*, pftPeerTime : Win32cr::Foundation::FILETIME*, pftUniversalTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupPeerTimeToUniversalTime(hGroup, pftPeerTime, pftUniversalTime)
+    {% end %}
   end
 
   def peerGroupUniversalTimeToPeerTime(hGroup : Void*, pftUniversalTime : Win32cr::Foundation::FILETIME*, pftPeerTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupUniversalTimeToPeerTime(hGroup, pftUniversalTime, pftPeerTime)
+    {% end %}
   end
 
   def peerGroupResumePasswordAuthentication(hGroup : Void*, hPeerEventHandle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerGroupResumePasswordAuthentication(hGroup, hPeerEventHandle)
+    {% end %}
   end
 
   def peerIdentityCreate(pwzClassifier : Win32cr::Foundation::PWSTR, pwzFriendlyName : Win32cr::Foundation::PWSTR, hCryptProv : LibC::UIntPtrT, ppwzIdentity : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityCreate(pwzClassifier, pwzFriendlyName, hCryptProv, ppwzIdentity)
+    {% end %}
   end
 
   def peerIdentityGetFriendlyName(pwzIdentity : Win32cr::Foundation::PWSTR, ppwzFriendlyName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityGetFriendlyName(pwzIdentity, ppwzFriendlyName)
+    {% end %}
   end
 
   def peerIdentitySetFriendlyName(pwzIdentity : Win32cr::Foundation::PWSTR, pwzFriendlyName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentitySetFriendlyName(pwzIdentity, pwzFriendlyName)
+    {% end %}
   end
 
   def peerIdentityGetCryptKey(pwzIdentity : Win32cr::Foundation::PWSTR, phCryptProv : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityGetCryptKey(pwzIdentity, phCryptProv)
+    {% end %}
   end
 
   def peerIdentityDelete(pwzIdentity : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityDelete(pwzIdentity)
+    {% end %}
   end
 
   def peerEnumIdentities(phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerEnumIdentities(phPeerEnum)
+    {% end %}
   end
 
   def peerEnumGroups(pwzIdentity : Win32cr::Foundation::PWSTR, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerEnumGroups(pwzIdentity, phPeerEnum)
+    {% end %}
   end
 
   def peerCreatePeerName(pwzIdentity : Win32cr::Foundation::PWSTR, pwzClassifier : Win32cr::Foundation::PWSTR, ppwzPeerName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCreatePeerName(pwzIdentity, pwzClassifier, ppwzPeerName)
+    {% end %}
   end
 
   def peerIdentityGetXML(pwzIdentity : Win32cr::Foundation::PWSTR, ppwzIdentityXML : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityGetXML(pwzIdentity, ppwzIdentityXML)
+    {% end %}
   end
 
   def peerIdentityExport(pwzIdentity : Win32cr::Foundation::PWSTR, pwzPassword : Win32cr::Foundation::PWSTR, ppwzExportXML : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityExport(pwzIdentity, pwzPassword, ppwzExportXML)
+    {% end %}
   end
 
   def peerIdentityImport(pwzImportXML : Win32cr::Foundation::PWSTR, pwzPassword : Win32cr::Foundation::PWSTR, ppwzIdentity : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityImport(pwzImportXML, pwzPassword, ppwzIdentity)
+    {% end %}
   end
 
   def peerIdentityGetDefault(ppwzPeerName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerIdentityGetDefault(ppwzPeerName)
+    {% end %}
   end
 
   def peerCollabStartup(wVersionRequested : UInt16) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabStartup(wVersionRequested)
+    {% end %}
   end
 
   def peerCollabShutdown : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabShutdown
+    {% end %}
   end
 
   def peerCollabSignin(hwndParent : Win32cr::Foundation::HWND, dwSigninOptions : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabSignin(hwndParent, dwSigninOptions)
+    {% end %}
   end
 
   def peerCollabSignout(dwSigninOptions : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabSignout(dwSigninOptions)
+    {% end %}
   end
 
   def peerCollabGetSigninOptions(pdwSigninOptions : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetSigninOptions(pdwSigninOptions)
+    {% end %}
   end
 
   def peerCollabAsyncInviteContact(pcContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, pcInvitation : Win32cr::NetworkManagement::P2P::PEER_INVITATION*, hEvent : Win32cr::Foundation::HANDLE, phInvitation : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabAsyncInviteContact(pcContact, pcEndpoint, pcInvitation, hEvent, phInvitation)
+    {% end %}
   end
 
   def peerCollabGetInvitationResponse(hInvitation : Win32cr::Foundation::HANDLE, ppInvitationResponse : Win32cr::NetworkManagement::P2P::PEER_INVITATION_RESPONSE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetInvitationResponse(hInvitation, ppInvitationResponse)
+    {% end %}
   end
 
   def peerCollabCancelInvitation(hInvitation : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabCancelInvitation(hInvitation)
+    {% end %}
   end
 
   def peerCollabCloseHandle(hInvitation : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabCloseHandle(hInvitation)
+    {% end %}
   end
 
   def peerCollabInviteContact(pcContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, pcInvitation : Win32cr::NetworkManagement::P2P::PEER_INVITATION*, ppResponse : Win32cr::NetworkManagement::P2P::PEER_INVITATION_RESPONSE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabInviteContact(pcContact, pcEndpoint, pcInvitation, ppResponse)
+    {% end %}
   end
 
   def peerCollabAsyncInviteEndpoint(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, pcInvitation : Win32cr::NetworkManagement::P2P::PEER_INVITATION*, hEvent : Win32cr::Foundation::HANDLE, phInvitation : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabAsyncInviteEndpoint(pcEndpoint, pcInvitation, hEvent, phInvitation)
+    {% end %}
   end
 
   def peerCollabInviteEndpoint(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, pcInvitation : Win32cr::NetworkManagement::P2P::PEER_INVITATION*, ppResponse : Win32cr::NetworkManagement::P2P::PEER_INVITATION_RESPONSE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabInviteEndpoint(pcEndpoint, pcInvitation, ppResponse)
+    {% end %}
   end
 
   def peerCollabGetAppLaunchInfo(ppLaunchInfo : Win32cr::NetworkManagement::P2P::PEER_APP_LAUNCH_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetAppLaunchInfo(ppLaunchInfo)
+    {% end %}
   end
 
   def peerCollabRegisterApplication(pcApplication : Win32cr::NetworkManagement::P2P::PEER_APPLICATION_REGISTRATION_INFO*, registrationType : Win32cr::NetworkManagement::P2P::PEER_APPLICATION_REGISTRATION_TYPE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabRegisterApplication(pcApplication, registrationType)
+    {% end %}
   end
 
   def peerCollabUnregisterApplication(pApplicationId : LibC::GUID*, registrationType : Win32cr::NetworkManagement::P2P::PEER_APPLICATION_REGISTRATION_TYPE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabUnregisterApplication(pApplicationId, registrationType)
+    {% end %}
   end
 
   def peerCollabGetApplicationRegistrationInfo(pApplicationId : LibC::GUID*, registrationType : Win32cr::NetworkManagement::P2P::PEER_APPLICATION_REGISTRATION_TYPE, ppApplication : Win32cr::NetworkManagement::P2P::PEER_APPLICATION_REGISTRATION_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetApplicationRegistrationInfo(pApplicationId, registrationType, ppApplication)
+    {% end %}
   end
 
   def peerCollabEnumApplicationRegistrationInfo(registrationType : Win32cr::NetworkManagement::P2P::PEER_APPLICATION_REGISTRATION_TYPE, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabEnumApplicationRegistrationInfo(registrationType, phPeerEnum)
+    {% end %}
   end
 
   def peerCollabGetPresenceInfo(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, ppPresenceInfo : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetPresenceInfo(pcEndpoint, ppPresenceInfo)
+    {% end %}
   end
 
   def peerCollabEnumApplications(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, pApplicationId : LibC::GUID*, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabEnumApplications(pcEndpoint, pApplicationId, phPeerEnum)
+    {% end %}
   end
 
   def peerCollabEnumObjects(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, pObjectId : LibC::GUID*, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabEnumObjects(pcEndpoint, pObjectId, phPeerEnum)
+    {% end %}
   end
 
   def peerCollabEnumEndpoints(pcContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabEnumEndpoints(pcContact, phPeerEnum)
+    {% end %}
   end
 
   def peerCollabRefreshEndpointData(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabRefreshEndpointData(pcEndpoint)
+    {% end %}
   end
 
   def peerCollabDeleteEndpointData(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabDeleteEndpointData(pcEndpoint)
+    {% end %}
   end
 
   def peerCollabQueryContactData(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, ppwzContactData : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabQueryContactData(pcEndpoint, ppwzContactData)
+    {% end %}
   end
 
   def peerCollabSubscribeEndpointData(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabSubscribeEndpointData(pcEndpoint)
+    {% end %}
   end
 
   def peerCollabUnsubscribeEndpointData(pcEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabUnsubscribeEndpointData(pcEndpoint)
+    {% end %}
   end
 
   def peerCollabSetPresenceInfo(pcPresenceInfo : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabSetPresenceInfo(pcPresenceInfo)
+    {% end %}
   end
 
   def peerCollabGetEndpointName(ppwzEndpointName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetEndpointName(ppwzEndpointName)
+    {% end %}
   end
 
   def peerCollabSetEndpointName(pwzEndpointName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabSetEndpointName(pwzEndpointName)
+    {% end %}
   end
 
   def peerCollabSetObject(pcObject : Win32cr::NetworkManagement::P2P::PEER_OBJECT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabSetObject(pcObject)
+    {% end %}
   end
 
   def peerCollabDeleteObject(pObjectId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabDeleteObject(pObjectId)
+    {% end %}
   end
 
   def peerCollabRegisterEvent(hEvent : Win32cr::Foundation::HANDLE, cEventRegistration : UInt32, pEventRegistrations : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_REGISTRATION*, phPeerEvent : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabRegisterEvent(hEvent, cEventRegistration, pEventRegistrations, phPeerEvent)
+    {% end %}
   end
 
   def peerCollabGetEventData(hPeerEvent : Void*, ppEventData : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_DATA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetEventData(hPeerEvent, ppEventData)
+    {% end %}
   end
 
   def peerCollabUnregisterEvent(hPeerEvent : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabUnregisterEvent(hPeerEvent)
+    {% end %}
   end
 
   def peerCollabEnumPeopleNearMe(phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabEnumPeopleNearMe(phPeerEnum)
+    {% end %}
   end
 
   def peerCollabAddContact(pwzContactData : Win32cr::Foundation::PWSTR, ppContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabAddContact(pwzContactData, ppContact)
+    {% end %}
   end
 
   def peerCollabDeleteContact(pwzPeerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabDeleteContact(pwzPeerName)
+    {% end %}
   end
 
   def peerCollabGetContact(pwzPeerName : Win32cr::Foundation::PWSTR, ppContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabGetContact(pwzPeerName, ppContact)
+    {% end %}
   end
 
   def peerCollabUpdateContact(pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabUpdateContact(pContact)
+    {% end %}
   end
 
   def peerCollabEnumContacts(phPeerEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabEnumContacts(phPeerEnum)
+    {% end %}
   end
 
   def peerCollabExportContact(pwzPeerName : Win32cr::Foundation::PWSTR, ppwzContactData : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabExportContact(pwzPeerName, ppwzContactData)
+    {% end %}
   end
 
   def peerCollabParseContact(pwzContactData : Win32cr::Foundation::PWSTR, ppContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerCollabParseContact(pwzContactData, ppContact)
+    {% end %}
   end
 
   def peerNameToPeerHostName(pwzPeerName : Win32cr::Foundation::PWSTR, ppwzHostName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerNameToPeerHostName(pwzPeerName, ppwzHostName)
+    {% end %}
   end
 
   def peerHostNameToPeerName(pwzHostName : Win32cr::Foundation::PWSTR, ppwzPeerName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerHostNameToPeerName(pwzHostName, ppwzPeerName)
+    {% end %}
   end
 
   def peerPnrpStartup(wVersionRequested : UInt16) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpStartup(wVersionRequested)
+    {% end %}
   end
 
   def peerPnrpShutdown : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpShutdown
+    {% end %}
   end
 
   def peerPnrpRegister(pcwzPeerName : Win32cr::Foundation::PWSTR, pRegistrationInfo : Win32cr::NetworkManagement::P2P::PEER_PNRP_REGISTRATION_INFO*, phRegistration : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpRegister(pcwzPeerName, pRegistrationInfo, phRegistration)
+    {% end %}
   end
 
   def peerPnrpUpdateRegistration(hRegistration : Void*, pRegistrationInfo : Win32cr::NetworkManagement::P2P::PEER_PNRP_REGISTRATION_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpUpdateRegistration(hRegistration, pRegistrationInfo)
+    {% end %}
   end
 
   def peerPnrpUnregister(hRegistration : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpUnregister(hRegistration)
+    {% end %}
   end
 
   def peerPnrpResolve(pcwzPeerName : Win32cr::Foundation::PWSTR, pcwzCloudName : Win32cr::Foundation::PWSTR, pcEndpoints : UInt32*, ppEndpoints : Win32cr::NetworkManagement::P2P::PEER_PNRP_ENDPOINT_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpResolve(pcwzPeerName, pcwzCloudName, pcEndpoints, ppEndpoints)
+    {% end %}
   end
 
   def peerPnrpStartResolve(pcwzPeerName : Win32cr::Foundation::PWSTR, pcwzCloudName : Win32cr::Foundation::PWSTR, cMaxEndpoints : UInt32, hEvent : Win32cr::Foundation::HANDLE, phResolve : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpStartResolve(pcwzPeerName, pcwzCloudName, cMaxEndpoints, hEvent, phResolve)
+    {% end %}
   end
 
   def peerPnrpGetCloudInfo(pcNumClouds : UInt32*, ppCloudInfo : Win32cr::NetworkManagement::P2P::PEER_PNRP_CLOUD_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpGetCloudInfo(pcNumClouds, ppCloudInfo)
+    {% end %}
   end
 
   def peerPnrpGetEndpoint(hResolve : Void*, ppEndpoint : Win32cr::NetworkManagement::P2P::PEER_PNRP_ENDPOINT_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpGetEndpoint(hResolve, ppEndpoint)
+    {% end %}
   end
 
   def peerPnrpEndResolve(hResolve : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PeerPnrpEndResolve(hResolve)
+    {% end %}
   end
 
   def drtCreatePnrpBootstrapResolver(fPublish : Win32cr::Foundation::BOOL, pwzPeerName : Win32cr::Foundation::PWSTR, pwzCloudName : Win32cr::Foundation::PWSTR, pwzPublishingIdentity : Win32cr::Foundation::PWSTR, ppResolver : Win32cr::NetworkManagement::P2P::DRT_BOOTSTRAP_PROVIDER**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtCreatePnrpBootstrapResolver(fPublish, pwzPeerName, pwzCloudName, pwzPublishingIdentity, ppResolver)
+    {% end %}
   end
 
   def drtDeletePnrpBootstrapResolver(pResolver : Win32cr::NetworkManagement::P2P::DRT_BOOTSTRAP_PROVIDER*) : Void
+    {% if !flag?(:docs) %}
     C.DrtDeletePnrpBootstrapResolver(pResolver)
+    {% end %}
   end
 
   def drtCreateDnsBootstrapResolver(port : UInt16, pwszAddress : Win32cr::Foundation::PWSTR, ppModule : Win32cr::NetworkManagement::P2P::DRT_BOOTSTRAP_PROVIDER**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtCreateDnsBootstrapResolver(port, pwszAddress, ppModule)
+    {% end %}
   end
 
   def drtDeleteDnsBootstrapResolver(pResolver : Win32cr::NetworkManagement::P2P::DRT_BOOTSTRAP_PROVIDER*) : Void
+    {% if !flag?(:docs) %}
     C.DrtDeleteDnsBootstrapResolver(pResolver)
+    {% end %}
   end
 
   def drtCreateIpv6UdpTransport(scope : Win32cr::NetworkManagement::P2P::DRT_SCOPE, dwScopeId : UInt32, dwLocalityThreshold : UInt32, pwPort : UInt16*, phTransport : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtCreateIpv6UdpTransport(scope, dwScopeId, dwLocalityThreshold, pwPort, phTransport)
+    {% end %}
   end
 
   def drtDeleteIpv6UdpTransport(hTransport : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtDeleteIpv6UdpTransport(hTransport)
+    {% end %}
   end
 
   def drtCreateDerivedKeySecurityProvider(pRootCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pLocalCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, ppSecurityProvider : Win32cr::NetworkManagement::P2P::DRT_SECURITY_PROVIDER**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtCreateDerivedKeySecurityProvider(pRootCert, pLocalCert, ppSecurityProvider)
+    {% end %}
   end
 
   def drtCreateDerivedKey(pLocalCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pKey : Win32cr::NetworkManagement::P2P::DRT_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtCreateDerivedKey(pLocalCert, pKey)
+    {% end %}
   end
 
   def drtDeleteDerivedKeySecurityProvider(pSecurityProvider : Win32cr::NetworkManagement::P2P::DRT_SECURITY_PROVIDER*) : Void
+    {% if !flag?(:docs) %}
     C.DrtDeleteDerivedKeySecurityProvider(pSecurityProvider)
+    {% end %}
   end
 
   def drtCreateNullSecurityProvider(ppSecurityProvider : Win32cr::NetworkManagement::P2P::DRT_SECURITY_PROVIDER**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtCreateNullSecurityProvider(ppSecurityProvider)
+    {% end %}
   end
 
   def drtDeleteNullSecurityProvider(pSecurityProvider : Win32cr::NetworkManagement::P2P::DRT_SECURITY_PROVIDER*) : Void
+    {% if !flag?(:docs) %}
     C.DrtDeleteNullSecurityProvider(pSecurityProvider)
+    {% end %}
   end
 
   def drtOpen(pSettings : Win32cr::NetworkManagement::P2P::DRT_SETTINGS*, hEvent : Win32cr::Foundation::HANDLE, pvContext : Void*, phDrt : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtOpen(pSettings, hEvent, pvContext, phDrt)
+    {% end %}
   end
 
   def drtClose(hDrt : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DrtClose(hDrt)
+    {% end %}
   end
 
   def drtGetEventDataSize(hDrt : Void*, pulEventDataLen : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetEventDataSize(hDrt, pulEventDataLen)
+    {% end %}
   end
 
   def drtGetEventData(hDrt : Void*, ulEventDataLen : UInt32, pEventData : Win32cr::NetworkManagement::P2P::DRT_EVENT_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetEventData(hDrt, ulEventDataLen, pEventData)
+    {% end %}
   end
 
   def drtRegisterKey(hDrt : Void*, pRegistration : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION*, pvKeyContext : Void*, phKeyRegistration : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtRegisterKey(hDrt, pRegistration, pvKeyContext, phKeyRegistration)
+    {% end %}
   end
 
   def drtUpdateKey(hKeyRegistration : Void*, pAppData : Win32cr::NetworkManagement::P2P::DRT_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtUpdateKey(hKeyRegistration, pAppData)
+    {% end %}
   end
 
   def drtUnregisterKey(hKeyRegistration : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DrtUnregisterKey(hKeyRegistration)
+    {% end %}
   end
 
   def drtStartSearch(hDrt : Void*, pKey : Win32cr::NetworkManagement::P2P::DRT_DATA*, pInfo : Win32cr::NetworkManagement::P2P::DRT_SEARCH_INFO*, timeout : UInt32, hEvent : Win32cr::Foundation::HANDLE, pvContext : Void*, hSearchContext : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtStartSearch(hDrt, pKey, pInfo, timeout, hEvent, pvContext, hSearchContext)
+    {% end %}
   end
 
   def drtContinueSearch(hSearchContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtContinueSearch(hSearchContext)
+    {% end %}
   end
 
   def drtGetSearchResultSize(hSearchContext : Void*, pulSearchResultSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetSearchResultSize(hSearchContext, pulSearchResultSize)
+    {% end %}
   end
 
   def drtGetSearchResult(hSearchContext : Void*, ulSearchResultSize : UInt32, pSearchResult : Win32cr::NetworkManagement::P2P::DRT_SEARCH_RESULT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetSearchResult(hSearchContext, ulSearchResultSize, pSearchResult)
+    {% end %}
   end
 
   def drtGetSearchPathSize(hSearchContext : Void*, pulSearchPathSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetSearchPathSize(hSearchContext, pulSearchPathSize)
+    {% end %}
   end
 
   def drtGetSearchPath(hSearchContext : Void*, ulSearchPathSize : UInt32, pSearchPath : Win32cr::NetworkManagement::P2P::DRT_ADDRESS_LIST*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetSearchPath(hSearchContext, ulSearchPathSize, pSearchPath)
+    {% end %}
   end
 
   def drtEndSearch(hSearchContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtEndSearch(hSearchContext)
+    {% end %}
   end
 
   def drtGetInstanceName(hDrt : Void*, ulcbInstanceNameSize : UInt32, pwzDrtInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetInstanceName(hDrt, ulcbInstanceNameSize, pwzDrtInstanceName)
+    {% end %}
   end
 
   def drtGetInstanceNameSize(hDrt : Void*, pulcbInstanceNameSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DrtGetInstanceNameSize(hDrt, pulcbInstanceNameSize)
+    {% end %}
   end
 
   def peerDistStartup(dwVersionRequested : UInt32, phPeerDist : LibC::IntPtrT*, pdwSupportedVersion : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistStartup(dwVersionRequested, phPeerDist, pdwSupportedVersion)
+    {% end %}
   end
 
   def peerDistShutdown(hPeerDist : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistShutdown(hPeerDist)
+    {% end %}
   end
 
   def peerDistGetStatus(hPeerDist : LibC::IntPtrT, pPeerDistStatus : Win32cr::NetworkManagement::P2P::PEERDIST_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistGetStatus(hPeerDist, pPeerDistStatus)
+    {% end %}
   end
 
   def peerDistRegisterForStatusChangeNotification(hPeerDist : LibC::IntPtrT, hCompletionPort : Win32cr::Foundation::HANDLE, ulCompletionKey : LibC::UIntPtrT, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, pPeerDistStatus : Win32cr::NetworkManagement::P2P::PEERDIST_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistRegisterForStatusChangeNotification(hPeerDist, hCompletionPort, ulCompletionKey, lpOverlapped, pPeerDistStatus)
+    {% end %}
   end
 
   def peerDistUnregisterForStatusChangeNotification(hPeerDist : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistUnregisterForStatusChangeNotification(hPeerDist)
+    {% end %}
   end
 
   def peerDistServerPublishStream(hPeerDist : LibC::IntPtrT, cbContentIdentifier : UInt32, pContentIdentifier : UInt8*, cbContentLength : UInt64, pPublishOptions : Win32cr::NetworkManagement::P2P::PEERDIST_PUBLICATION_OPTIONS*, hCompletionPort : Win32cr::Foundation::HANDLE, ulCompletionKey : LibC::UIntPtrT, phStream : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerPublishStream(hPeerDist, cbContentIdentifier, pContentIdentifier, cbContentLength, pPublishOptions, hCompletionPort, ulCompletionKey, phStream)
+    {% end %}
   end
 
   def peerDistServerPublishAddToStream(hPeerDist : LibC::IntPtrT, hStream : LibC::IntPtrT, cbNumberOfBytes : UInt32, pBuffer : UInt8*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerPublishAddToStream(hPeerDist, hStream, cbNumberOfBytes, pBuffer, lpOverlapped)
+    {% end %}
   end
 
   def peerDistServerPublishCompleteStream(hPeerDist : LibC::IntPtrT, hStream : LibC::IntPtrT, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerPublishCompleteStream(hPeerDist, hStream, lpOverlapped)
+    {% end %}
   end
 
   def peerDistServerCloseStreamHandle(hPeerDist : LibC::IntPtrT, hStream : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerCloseStreamHandle(hPeerDist, hStream)
+    {% end %}
   end
 
   def peerDistServerUnpublish(hPeerDist : LibC::IntPtrT, cbContentIdentifier : UInt32, pContentIdentifier : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerUnpublish(hPeerDist, cbContentIdentifier, pContentIdentifier)
+    {% end %}
   end
 
   def peerDistServerOpenContentInformation(hPeerDist : LibC::IntPtrT, cbContentIdentifier : UInt32, pContentIdentifier : UInt8*, ullContentOffset : UInt64, cbContentLength : UInt64, hCompletionPort : Win32cr::Foundation::HANDLE, ulCompletionKey : LibC::UIntPtrT, phContentInfo : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerOpenContentInformation(hPeerDist, cbContentIdentifier, pContentIdentifier, ullContentOffset, cbContentLength, hCompletionPort, ulCompletionKey, phContentInfo)
+    {% end %}
   end
 
   def peerDistServerRetrieveContentInformation(hPeerDist : LibC::IntPtrT, hContentInfo : LibC::IntPtrT, cbMaxNumberOfBytes : UInt32, pBuffer : UInt8*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerRetrieveContentInformation(hPeerDist, hContentInfo, cbMaxNumberOfBytes, pBuffer, lpOverlapped)
+    {% end %}
   end
 
   def peerDistServerCloseContentInformation(hPeerDist : LibC::IntPtrT, hContentInfo : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerCloseContentInformation(hPeerDist, hContentInfo)
+    {% end %}
   end
 
   def peerDistServerCancelAsyncOperation(hPeerDist : LibC::IntPtrT, cbContentIdentifier : UInt32, pContentIdentifier : UInt8*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerCancelAsyncOperation(hPeerDist, cbContentIdentifier, pContentIdentifier, pOverlapped)
+    {% end %}
   end
 
   def peerDistClientOpenContent(hPeerDist : LibC::IntPtrT, pContentTag : Win32cr::NetworkManagement::P2P::PEERDIST_CONTENT_TAG*, hCompletionPort : Win32cr::Foundation::HANDLE, ulCompletionKey : LibC::UIntPtrT, phContentHandle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientOpenContent(hPeerDist, pContentTag, hCompletionPort, ulCompletionKey, phContentHandle)
+    {% end %}
   end
 
   def peerDistClientCloseContent(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientCloseContent(hPeerDist, hContentHandle)
+    {% end %}
   end
 
   def peerDistClientAddContentInformation(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, cbNumberOfBytes : UInt32, pBuffer : UInt8*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientAddContentInformation(hPeerDist, hContentHandle, cbNumberOfBytes, pBuffer, lpOverlapped)
+    {% end %}
   end
 
   def peerDistClientCompleteContentInformation(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientCompleteContentInformation(hPeerDist, hContentHandle, lpOverlapped)
+    {% end %}
   end
 
   def peerDistClientAddData(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, cbNumberOfBytes : UInt32, pBuffer : UInt8*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientAddData(hPeerDist, hContentHandle, cbNumberOfBytes, pBuffer, lpOverlapped)
+    {% end %}
   end
 
   def peerDistClientBlockRead(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, cbMaxNumberOfBytes : UInt32, pBuffer : UInt8*, dwTimeoutInMilliseconds : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientBlockRead(hPeerDist, hContentHandle, cbMaxNumberOfBytes, pBuffer, dwTimeoutInMilliseconds, lpOverlapped)
+    {% end %}
   end
 
   def peerDistClientStreamRead(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, cbMaxNumberOfBytes : UInt32, pBuffer : UInt8*, dwTimeoutInMilliseconds : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientStreamRead(hPeerDist, hContentHandle, cbMaxNumberOfBytes, pBuffer, dwTimeoutInMilliseconds, lpOverlapped)
+    {% end %}
   end
 
   def peerDistClientFlushContent(hPeerDist : LibC::IntPtrT, pContentTag : Win32cr::NetworkManagement::P2P::PEERDIST_CONTENT_TAG*, hCompletionPort : Win32cr::Foundation::HANDLE, ulCompletionKey : LibC::UIntPtrT, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientFlushContent(hPeerDist, pContentTag, hCompletionPort, ulCompletionKey, lpOverlapped)
+    {% end %}
   end
 
   def peerDistClientCancelAsyncOperation(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientCancelAsyncOperation(hPeerDist, hContentHandle, pOverlapped)
+    {% end %}
   end
 
   def peerDistGetStatusEx(hPeerDist : LibC::IntPtrT, pPeerDistStatus : Win32cr::NetworkManagement::P2P::PEERDIST_STATUS_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistGetStatusEx(hPeerDist, pPeerDistStatus)
+    {% end %}
   end
 
   def peerDistRegisterForStatusChangeNotificationEx(hPeerDist : LibC::IntPtrT, hCompletionPort : Win32cr::Foundation::HANDLE, ulCompletionKey : LibC::UIntPtrT, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, pPeerDistStatus : Win32cr::NetworkManagement::P2P::PEERDIST_STATUS_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistRegisterForStatusChangeNotificationEx(hPeerDist, hCompletionPort, ulCompletionKey, lpOverlapped, pPeerDistStatus)
+    {% end %}
   end
 
   def peerDistGetOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PeerDistGetOverlappedResult(lpOverlapped, lpNumberOfBytesTransferred, bWait)
+    {% end %}
   end
 
   def peerDistServerOpenContentInformationEx(hPeerDist : LibC::IntPtrT, cbContentIdentifier : UInt32, pContentIdentifier : UInt8*, ullContentOffset : UInt64, cbContentLength : UInt64, pRetrievalOptions : Win32cr::NetworkManagement::P2P::PEERDIST_RETRIEVAL_OPTIONS*, hCompletionPort : Win32cr::Foundation::HANDLE, ulCompletionKey : LibC::UIntPtrT, phContentInfo : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistServerOpenContentInformationEx(hPeerDist, cbContentIdentifier, pContentIdentifier, ullContentOffset, cbContentLength, pRetrievalOptions, hCompletionPort, ulCompletionKey, phContentInfo)
+    {% end %}
   end
 
   def peerDistClientGetInformationByHandle(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, peer_dist_client_info_class : Win32cr::NetworkManagement::P2P::PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS, dwBufferSize : UInt32, lpInformation : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PeerDistClientGetInformationByHandle(hPeerDist, hContentHandle, peer_dist_client_info_class, dwBufferSize, lpInformation)
+    {% end %}
   end
 
   @[Link("p2pgraph")]
@@ -1946,6 +2346,7 @@ module Win32cr::NetworkManagement::P2P
   @[Link("drttransport")]
   @[Link("drt")]
   @[Link("peerdist")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun PeerGraphStartup(wVersionRequested : UInt16, pVersionData : Win32cr::NetworkManagement::P2P::PEER_VERSION_DATA*) : Win32cr::Foundation::HRESULT
@@ -2548,4 +2949,5 @@ module Win32cr::NetworkManagement::P2P
     fun PeerDistClientGetInformationByHandle(hPeerDist : LibC::IntPtrT, hContentHandle : LibC::IntPtrT, peer_dist_client_info_class : Win32cr::NetworkManagement::P2P::PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS, dwBufferSize : UInt32, lpInformation : Void*) : UInt32
 
   end
+  {% end %}
 end

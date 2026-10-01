@@ -9,16 +9,16 @@ module Win32cr::Media::DxMediaObjects
   DMO_E_NOTACCEPTING = -2147220988_i32
   DMO_E_TYPE_NOT_ACCEPTED = -2147220987_i32
   DMO_E_NO_MORE_ITEMS = -2147220986_i32
-  DMOCATEGORY_AUDIO_DECODER = "57f2db8b-e6bb-4513-9d43-dcd2a6593125"
-  DMOCATEGORY_AUDIO_ENCODER = "33d9a761-90c8-11d0-bd43-00a0c911ce86"
-  DMOCATEGORY_VIDEO_DECODER = "4a69b442-28be-4991-969c-b500adf5d8a8"
-  DMOCATEGORY_VIDEO_ENCODER = "33d9a760-90c8-11d0-bd43-00a0c911ce86"
-  DMOCATEGORY_AUDIO_EFFECT = "f3602b3f-0592-48df-a4cd-674721e7ebeb"
-  DMOCATEGORY_VIDEO_EFFECT = "d990ee14-776c-4723-be46-3da2f56f10b9"
-  DMOCATEGORY_AUDIO_CAPTURE_EFFECT = "f665aaba-3e09-4920-aa5f-219811148f09"
-  DMOCATEGORY_ACOUSTIC_ECHO_CANCEL = "bf963d80-c559-11d0-8a2b-00a0c9255ac1"
-  DMOCATEGORY_AUDIO_NOISE_SUPPRESS = "e07f903f-62fd-4e60-8cdd-dea7236665b5"
-  DMOCATEGORY_AGC = "e88c9ba0-c557-11d0-8a2b-00a0c9255ac1"
+  DMOCATEGORY_AUDIO_DECODER = LibC::GUID.new(0x57f2db8b_u32, 0xe6bb_u16, 0x4513_u16, StaticArray[0x9d_u8, 0x43_u8, 0xdc_u8, 0xd2_u8, 0xa6_u8, 0x59_u8, 0x31_u8, 0x25_u8])
+  DMOCATEGORY_AUDIO_ENCODER = LibC::GUID.new(0x33d9a761_u32, 0x90c8_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x43_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
+  DMOCATEGORY_VIDEO_DECODER = LibC::GUID.new(0x4a69b442_u32, 0x28be_u16, 0x4991_u16, StaticArray[0x96_u8, 0x9c_u8, 0xb5_u8, 0x0_u8, 0xad_u8, 0xf5_u8, 0xd8_u8, 0xa8_u8])
+  DMOCATEGORY_VIDEO_ENCODER = LibC::GUID.new(0x33d9a760_u32, 0x90c8_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x43_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
+  DMOCATEGORY_AUDIO_EFFECT = LibC::GUID.new(0xf3602b3f_u32, 0x592_u16, 0x48df_u16, StaticArray[0xa4_u8, 0xcd_u8, 0x67_u8, 0x47_u8, 0x21_u8, 0xe7_u8, 0xeb_u8, 0xeb_u8])
+  DMOCATEGORY_VIDEO_EFFECT = LibC::GUID.new(0xd990ee14_u32, 0x776c_u16, 0x4723_u16, StaticArray[0xbe_u8, 0x46_u8, 0x3d_u8, 0xa2_u8, 0xf5_u8, 0x6f_u8, 0x10_u8, 0xb9_u8])
+  DMOCATEGORY_AUDIO_CAPTURE_EFFECT = LibC::GUID.new(0xf665aaba_u32, 0x3e09_u16, 0x4920_u16, StaticArray[0xaa_u8, 0x5f_u8, 0x21_u8, 0x98_u8, 0x11_u8, 0x14_u8, 0x8f_u8, 0x9_u8])
+  DMOCATEGORY_ACOUSTIC_ECHO_CANCEL = LibC::GUID.new(0xbf963d80_u32, 0xc559_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0x2b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0x5a_u8, 0xc1_u8])
+  DMOCATEGORY_AUDIO_NOISE_SUPPRESS = LibC::GUID.new(0xe07f903f_u32, 0x62fd_u16, 0x4e60_u16, StaticArray[0x8c_u8, 0xdd_u8, 0xde_u8, 0xa7_u8, 0x23_u8, 0x66_u8, 0x65_u8, 0xb5_u8])
+  DMOCATEGORY_AGC = LibC::GUID.new(0xe88c9ba0_u32, 0xc557_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0x2b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0x5a_u8, 0xc1_u8])
 
   enum DMO_INPUT_DATA_BUFFER_FLAGS_
     DMO_INPUT_DATA_BUFFERF_SYNCPOINT = 1_i32
@@ -107,7 +107,8 @@ module Win32cr::Media::DxMediaObjects
   end
 
   @[Extern]
-  record IMediaBufferVtbl,
+
+  record IMediaBufferVtable,
     query_interface : Proc(IMediaBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaBuffer*, UInt32),
     release : Proc(IMediaBuffer*, UInt32),
@@ -117,7 +118,7 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  record IMediaBuffer, lpVtbl : IMediaBufferVtbl* do
+  record IMediaBuffer, lpVtbl : IMediaBufferVtable* do
     GUID = LibC::GUID.new(0x59eff8b9_u32, 0x938c_u16, 0x4a26_u16, StaticArray[0x82_u8, 0xf2_u8, 0x95_u8, 0xcb_u8, 0x84_u8, 0xcd_u8, 0xc8_u8, 0x37_u8])
     def query_interface(this : IMediaBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -141,7 +142,8 @@ module Win32cr::Media::DxMediaObjects
   end
 
   @[Extern]
-  record IMediaObjectVtbl,
+
+  record IMediaObjectVtable,
     query_interface : Proc(IMediaObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaObject*, UInt32),
     release : Proc(IMediaObject*, UInt32),
@@ -169,7 +171,7 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  record IMediaObject, lpVtbl : IMediaObjectVtbl* do
+  record IMediaObject, lpVtbl : IMediaObjectVtable* do
     GUID = LibC::GUID.new(0xd8ad0f58_u32, 0x5494_u16, 0x4102_u16, StaticArray[0x97_u8, 0xc5_u8, 0xec_u8, 0x79_u8, 0x8e_u8, 0x59_u8, 0xbc_u8, 0xf4_u8])
     def query_interface(this : IMediaObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -247,7 +249,8 @@ module Win32cr::Media::DxMediaObjects
   end
 
   @[Extern]
-  record IEnumDMOVtbl,
+
+  record IEnumDMOVtable,
     query_interface : Proc(IEnumDMO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDMO*, UInt32),
     release : Proc(IEnumDMO*, UInt32),
@@ -258,7 +261,7 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  record IEnumDMO, lpVtbl : IEnumDMOVtbl* do
+  record IEnumDMO, lpVtbl : IEnumDMOVtable* do
     GUID = LibC::GUID.new(0x2c3cd98a_u32, 0x2bfa_u16, 0x4a53_u16, StaticArray[0x9c_u8, 0x27_u8, 0x52_u8, 0x49_u8, 0xba_u8, 0x64_u8, 0xba_u8, 0xf_u8])
     def query_interface(this : IEnumDMO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -285,7 +288,8 @@ module Win32cr::Media::DxMediaObjects
   end
 
   @[Extern]
-  record IMediaObjectInPlaceVtbl,
+
+  record IMediaObjectInPlaceVtable,
     query_interface : Proc(IMediaObjectInPlace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaObjectInPlace*, UInt32),
     release : Proc(IMediaObjectInPlace*, UInt32),
@@ -295,7 +299,7 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  record IMediaObjectInPlace, lpVtbl : IMediaObjectInPlaceVtbl* do
+  record IMediaObjectInPlace, lpVtbl : IMediaObjectInPlaceVtable* do
     GUID = LibC::GUID.new(0x651b9ad0_u32, 0xfc7_u16, 0x4aa9_u16, StaticArray[0x95_u8, 0x38_u8, 0xd8_u8, 0x99_u8, 0x31_u8, 0x1_u8, 0x7_u8, 0x41_u8])
     def query_interface(this : IMediaObjectInPlace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -319,7 +323,8 @@ module Win32cr::Media::DxMediaObjects
   end
 
   @[Extern]
-  record IDMOQualityControlVtbl,
+
+  record IDMOQualityControlVtable,
     query_interface : Proc(IDMOQualityControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMOQualityControl*, UInt32),
     release : Proc(IDMOQualityControl*, UInt32),
@@ -329,7 +334,7 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  record IDMOQualityControl, lpVtbl : IDMOQualityControlVtbl* do
+  record IDMOQualityControl, lpVtbl : IDMOQualityControlVtable* do
     GUID = LibC::GUID.new(0x65abea96_u32, 0xcf36_u16, 0x453f_u16, StaticArray[0xaf_u8, 0x8a_u8, 0x70_u8, 0x5e_u8, 0x98_u8, 0xf1_u8, 0x62_u8, 0x60_u8])
     def query_interface(this : IDMOQualityControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -353,7 +358,8 @@ module Win32cr::Media::DxMediaObjects
   end
 
   @[Extern]
-  record IDMOVideoOutputOptimizationsVtbl,
+
+  record IDMOVideoOutputOptimizationsVtable,
     query_interface : Proc(IDMOVideoOutputOptimizations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMOVideoOutputOptimizations*, UInt32),
     release : Proc(IDMOVideoOutputOptimizations*, UInt32),
@@ -364,7 +370,7 @@ module Win32cr::Media::DxMediaObjects
 
 
   @[Extern]
-  record IDMOVideoOutputOptimizations, lpVtbl : IDMOVideoOutputOptimizationsVtbl* do
+  record IDMOVideoOutputOptimizations, lpVtbl : IDMOVideoOutputOptimizationsVtable* do
     GUID = LibC::GUID.new(0xbe8f4f4e_u32, 0x5b16_u16, 0x4d29_u16, StaticArray[0xb3_u8, 0x50_u8, 0x7f_u8, 0x6b_u8, 0x5d_u8, 0x92_u8, 0x98_u8, 0xac_u8])
     def query_interface(this : IDMOVideoOutputOptimizations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -391,50 +397,73 @@ module Win32cr::Media::DxMediaObjects
   end
 
   def dMORegister(szName : Win32cr::Foundation::PWSTR, clsidDMO : LibC::GUID*, guidCategory : LibC::GUID*, dwFlags : UInt32, cInTypes : UInt32, pInTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, cOutTypes : UInt32, pOutTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DMORegister(szName, clsidDMO, guidCategory, dwFlags, cInTypes, pInTypes, cOutTypes, pOutTypes)
+    {% end %}
   end
 
   def dMOUnregister(clsidDMO : LibC::GUID*, guidCategory : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DMOUnregister(clsidDMO, guidCategory)
+    {% end %}
   end
 
   def dMOEnum(guidCategory : LibC::GUID*, dwFlags : UInt32, cInTypes : UInt32, pInTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, cOutTypes : UInt32, pOutTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DMOEnum(guidCategory, dwFlags, cInTypes, pInTypes, cOutTypes, pOutTypes, ppEnum)
+    {% end %}
   end
 
   def dMOGetTypes(clsidDMO : LibC::GUID*, ulInputTypesRequested : UInt32, pulInputTypesSupplied : UInt32*, pInputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, ulOutputTypesRequested : UInt32, pulOutputTypesSupplied : UInt32*, pOutputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DMOGetTypes(clsidDMO, ulInputTypesRequested, pulInputTypesSupplied, pInputTypes, ulOutputTypesRequested, pulOutputTypesSupplied, pOutputTypes)
+    {% end %}
   end
 
-  def dMOGetName(clsidDMO : LibC::GUID*, szName : UInt16*) : Win32cr::Foundation::HRESULT
+  def dMOGetName(clsidDMO : LibC::GUID*, szName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DMOGetName(clsidDMO, szName)
+    {% end %}
   end
 
   def moInitMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*, cbFormat : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MoInitMediaType(pmt, cbFormat)
+    {% end %}
   end
 
   def moFreeMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MoFreeMediaType(pmt)
+    {% end %}
   end
 
   def moCopyMediaType(pmtDest : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*, pmtSrc : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MoCopyMediaType(pmtDest, pmtSrc)
+    {% end %}
   end
 
   def moCreateMediaType(ppmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE**, cbFormat : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MoCreateMediaType(ppmt, cbFormat)
+    {% end %}
   end
 
   def moDeleteMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MoDeleteMediaType(pmt)
+    {% end %}
   end
 
   def moDuplicateMediaType(ppmtDest : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE**, pmtSrc : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MoDuplicateMediaType(ppmtDest, pmtSrc)
+    {% end %}
   end
 
   @[Link("msdmo")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DMORegister(szName : Win32cr::Foundation::PWSTR, clsidDMO : LibC::GUID*, guidCategory : LibC::GUID*, dwFlags : UInt32, cInTypes : UInt32, pInTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, cOutTypes : UInt32, pOutTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
@@ -449,7 +478,7 @@ module Win32cr::Media::DxMediaObjects
     fun DMOGetTypes(clsidDMO : LibC::GUID*, ulInputTypesRequested : UInt32, pulInputTypesSupplied : UInt32*, pInputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*, ulOutputTypesRequested : UInt32, pulOutputTypesSupplied : UInt32*, pOutputTypes : Win32cr::Media::DxMediaObjects::DMO_PARTIAL_MEDIATYPE*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun DMOGetName(clsidDMO : LibC::GUID*, szName : UInt16*) : Win32cr::Foundation::HRESULT
+    fun DMOGetName(clsidDMO : LibC::GUID*, szName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun MoInitMediaType(pmt : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*, cbFormat : UInt32) : Win32cr::Foundation::HRESULT
@@ -470,4 +499,5 @@ module Win32cr::Media::DxMediaObjects
     fun MoDuplicateMediaType(ppmtDest : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE**, pmtSrc : Win32cr::Media::DxMediaObjects::DMO_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

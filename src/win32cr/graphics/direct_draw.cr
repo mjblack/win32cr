@@ -4,6 +4,10 @@ require "./../system/com.cr"
 
 module Win32cr::Graphics::DirectDraw
   extend self
+  alias PDD_DESTROYDRIVERDATA = LibC::IntPtrT
+  alias PDD_GETVPORTAUTOFLIPSURFACEDATA = LibC::IntPtrT
+  alias PDD_SETMODEDATA = LibC::IntPtrT
+  alias LPDDFXROP = LibC::IntPtrT
   alias LPDDENUMCALLBACKA = Proc(LibC::GUID*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
   alias LPDDENUMCALLBACKW = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
@@ -180,9 +184,9 @@ module Win32cr::Graphics::DirectDraw
 
   alias PDD_CREATESURFACE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATESURFACEDATA*, UInt32)
 
-  alias PDD_DESTROYDRIVER = Proc(Win32cr::Graphics::DirectDraw::DD_DESTROYDRIVERDATA_*, UInt32)
+  alias PDD_DESTROYDRIVER = Proc(Win32cr::Graphics::DirectDraw::PDD_DESTROYDRIVERDATA, UInt32)
 
-  alias PDD_SETMODE = Proc(Win32cr::Graphics::DirectDraw::DD_SETMODEDATA_*, UInt32)
+  alias PDD_SETMODE = Proc(Win32cr::Graphics::DirectDraw::PDD_SETMODEDATA, UInt32)
 
   alias PDD_CREATEPALETTE = Proc(Win32cr::Graphics::DirectDraw::DD_CREATEPALETTEDATA*, UInt32)
 
@@ -250,7 +254,7 @@ module Win32cr::Graphics::DirectDraw
 
   alias PDD_VPORTCB_GETOUTPUTFORMATS = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTOUTPUTFORMATDATA*, UInt32)
 
-  alias PDD_VPORTCB_GETAUTOFLIPSURF = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTAUTOFLIPSURFACEDATA_*, UInt32)
+  alias PDD_VPORTCB_GETAUTOFLIPSURF = Proc(Win32cr::Graphics::DirectDraw::PDD_GETVPORTAUTOFLIPSURFACEDATA, UInt32)
 
   alias PDD_VPORTCB_GETFIELD = Proc(Win32cr::Graphics::DirectDraw::DD_GETVPORTFIELDDATA*, UInt32)
 
@@ -326,9 +330,9 @@ module Win32cr::Graphics::DirectDraw
 
   DIRECTDRAW_VERSION = 1792_u32
   FACDD_ = 2166_u32
-  CLSID_DirectDraw = "d7b70ee0-4340-11cf-b063-0020afc2cd35"
-  CLSID_DirectDraw7 = "3c305196-50db-11d3-9cfe-00c04fd930c5"
-  CLSID_DirectDrawClipper = "593817a0-7db3-11cf-a2de-00aa00b93356"
+  CLSID_DirectDraw = LibC::GUID.new(0xd7b70ee0_u32, 0x4340_u16, 0x11cf_u16, StaticArray[0xb0_u8, 0x63_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xc2_u8, 0xcd_u8, 0x35_u8])
+  CLSID_DirectDraw7 = LibC::GUID.new(0x3c305196_u32, 0x50db_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x30_u8, 0xc5_u8])
+  CLSID_DirectDrawClipper = LibC::GUID.new(0x593817a0_u32, 0x7db3_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0xde_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x33_u8, 0x56_u8])
   DDENUM_ATTACHEDSECONDARYDEVICES = 1_i32
   DDENUM_DETACHEDSECONDARYDEVICES = 2_i32
   DDENUM_NONDISPLAYDEVICES = 4_i32
@@ -762,26 +766,26 @@ module Win32cr::Graphics::DirectDraw
   DDERR_NOTINITIALIZED = -2147221008_i32
   OBJECT_ISROOT = -2147483648_i32
   DDUNSUPPORTEDMODE = 4294967295_u32
-  GUID_MiscellaneousCallbacks = "efd60cc0-49e7-11d0-889d-00aa00bbb76a"
-  GUID_VideoPortCallbacks = "efd60cc1-49e7-11d0-889d-00aa00bbb76a"
-  GUID_ColorControlCallbacks = "efd60cc2-49e7-11d0-889d-00aa00bbb76a"
-  GUID_VideoPortCaps = "efd60cc3-49e7-11d0-889d-00aa00bbb76a"
-  GUID_D3DCallbacks2 = "0ba584e1-70b6-11d0-889d-00aa00bbb76a"
-  GUID_D3DCallbacks3 = "ddf41230-ec0a-11d0-a9b6-00aa00c0993e"
-  GUID_NonLocalVidMemCaps = "86c4fa80-8d84-11d0-94e8-00c04fc34137"
-  GUID_KernelCallbacks = "80863800-6b06-11d0-9b06-00a0c903a3b8"
-  GUID_KernelCaps = "ffaa7540-7aa8-11d0-9b06-00a0c903a3b8"
-  GUID_D3DExtendedCaps = "7de41f80-9d93-11d0-89ab-00a0c9054129"
-  GUID_ZPixelFormats = "93869880-36cf-11d1-9b1b-00aa00bbb8ae"
-  GUID_DDMoreSurfaceCaps = "3b8a0466-f269-11d1-880b-00c04fd930c5"
-  GUID_DDStereoMode = "f828169c-a8e8-11d2-a1f2-00a0c983eaf6"
-  GUID_OptSurfaceKmodeInfo = "e05c8472-51d4-11d1-8cce-00a0c90629a8"
-  GUID_OptSurfaceUmodeInfo = "9d792804-5fa8-11d1-8cd0-00a0c90629a8"
-  GUID_UserModeDriverInfo = "f0b0e8e2-5f97-11d1-8cd0-00a0c90629a8"
-  GUID_UserModeDriverPassword = "97f861b6-60a1-11d1-8cd0-00a0c90629a8"
-  GUID_D3DParseUnknownCommandCallback = "2e04ffa0-98e4-11d1-8ce1-00a0c90629a8"
-  GUID_MotionCompCallbacks = "b1122b40-5da5-11d1-8fcf-00c04fc29b4e"
-  GUID_Miscellaneous2Callbacks = "406b2f00-3e5a-11d1-b640-00aa00a1f96a"
+  GUID_MiscellaneousCallbacks = LibC::GUID.new(0xefd60cc0_u32, 0x49e7_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x9d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x6a_u8])
+  GUID_VideoPortCallbacks = LibC::GUID.new(0xefd60cc1_u32, 0x49e7_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x9d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x6a_u8])
+  GUID_ColorControlCallbacks = LibC::GUID.new(0xefd60cc2_u32, 0x49e7_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x9d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x6a_u8])
+  GUID_VideoPortCaps = LibC::GUID.new(0xefd60cc3_u32, 0x49e7_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x9d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x6a_u8])
+  GUID_D3DCallbacks2 = LibC::GUID.new(0xba584e1_u32, 0x70b6_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x9d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x6a_u8])
+  GUID_D3DCallbacks3 = LibC::GUID.new(0xddf41230_u32, 0xec0a_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xb6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xc0_u8, 0x99_u8, 0x3e_u8])
+  GUID_NonLocalVidMemCaps = LibC::GUID.new(0x86c4fa80_u32, 0x8d84_u16, 0x11d0_u16, StaticArray[0x94_u8, 0xe8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x41_u8, 0x37_u8])
+  GUID_KernelCallbacks = LibC::GUID.new(0x80863800_u32, 0x6b06_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  GUID_KernelCaps = LibC::GUID.new(0xffaa7540_u32, 0x7aa8_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  GUID_D3DExtendedCaps = LibC::GUID.new(0x7de41f80_u32, 0x9d93_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xab_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x29_u8])
+  GUID_ZPixelFormats = LibC::GUID.new(0x93869880_u32, 0x36cf_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0x1b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb8_u8, 0xae_u8])
+  GUID_DDMoreSurfaceCaps = LibC::GUID.new(0x3b8a0466_u32, 0xf269_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x30_u8, 0xc5_u8])
+  GUID_DDStereoMode = LibC::GUID.new(0xf828169c_u32, 0xa8e8_u16, 0x11d2_u16, StaticArray[0xa1_u8, 0xf2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x83_u8, 0xea_u8, 0xf6_u8])
+  GUID_OptSurfaceKmodeInfo = LibC::GUID.new(0xe05c8472_u32, 0x51d4_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xce_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x29_u8, 0xa8_u8])
+  GUID_OptSurfaceUmodeInfo = LibC::GUID.new(0x9d792804_u32, 0x5fa8_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xd0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x29_u8, 0xa8_u8])
+  GUID_UserModeDriverInfo = LibC::GUID.new(0xf0b0e8e2_u32, 0x5f97_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xd0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x29_u8, 0xa8_u8])
+  GUID_UserModeDriverPassword = LibC::GUID.new(0x97f861b6_u32, 0x60a1_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xd0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x29_u8, 0xa8_u8])
+  GUID_D3DParseUnknownCommandCallback = LibC::GUID.new(0x2e04ffa0_u32, 0x98e4_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x29_u8, 0xa8_u8])
+  GUID_MotionCompCallbacks = LibC::GUID.new(0xb1122b40_u32, 0x5da5_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x9b_u8, 0x4e_u8])
+  GUID_Miscellaneous2Callbacks = LibC::GUID.new(0x406b2f00_u32, 0x3e5a_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0x40_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa1_u8, 0xf9_u8, 0x6a_u8])
   DDPF_NOVEL_TEXTURE_FORMAT = 1048576_i32
   DDPF_D3DFORMAT = 2097152_i32
   D3DFORMAT_OP_TEXTURE = 1_i32
@@ -1072,14 +1076,14 @@ module Win32cr::Graphics::DirectDraw
   DDRAWI_GETCOLOR = 1_u32
   DDRAWI_SETCOLOR = 2_u32
   DDMCQUERY_READ = 1_u32
-  GUID_D3DCaps = "7bf06991-8794-11d0-9139-080036d2ef02"
-  GUID_D3DCallbacks = "7bf06990-8794-11d0-9139-080036d2ef02"
-  GUID_DDMoreCaps = "880baf30-b030-11d0-8ea7-00609797ea5b"
-  GUID_NTCallbacks = "6fe9ecde-df89-11d1-9db0-0060082771ba"
-  GUID_GetHeapAlignment = "42e02f16-7b41-11d2-8bff-00a0c983eaf6"
-  GUID_UpdateNonLocalHeap = "42e02f17-7b41-11d2-8bff-00a0c983eaf6"
-  GUID_NTPrivateDriverCaps = "fad16a23-7b66-11d2-83d7-00c04f7ce58c"
-  GUID_VPE2Callbacks = "52882147-2d47-469a-a0d1-03455890f6c8"
+  GUID_D3DCaps = LibC::GUID.new(0x7bf06991_u32, 0x8794_u16, 0x11d0_u16, StaticArray[0x91_u8, 0x39_u8, 0x8_u8, 0x0_u8, 0x36_u8, 0xd2_u8, 0xef_u8, 0x2_u8])
+  GUID_D3DCallbacks = LibC::GUID.new(0x7bf06990_u32, 0x8794_u16, 0x11d0_u16, StaticArray[0x91_u8, 0x39_u8, 0x8_u8, 0x0_u8, 0x36_u8, 0xd2_u8, 0xef_u8, 0x2_u8])
+  GUID_DDMoreCaps = LibC::GUID.new(0x880baf30_u32, 0xb030_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xa7_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
+  GUID_NTCallbacks = LibC::GUID.new(0x6fe9ecde_u32, 0xdf89_u16, 0x11d1_u16, StaticArray[0x9d_u8, 0xb0_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x27_u8, 0x71_u8, 0xba_u8])
+  GUID_GetHeapAlignment = LibC::GUID.new(0x42e02f16_u32, 0x7b41_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0xff_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x83_u8, 0xea_u8, 0xf6_u8])
+  GUID_UpdateNonLocalHeap = LibC::GUID.new(0x42e02f17_u32, 0x7b41_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0xff_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x83_u8, 0xea_u8, 0xf6_u8])
+  GUID_NTPrivateDriverCaps = LibC::GUID.new(0xfad16a23_u32, 0x7b66_u16, 0x11d2_u16, StaticArray[0x83_u8, 0xd7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x7c_u8, 0xe5_u8, 0x8c_u8])
+  GUID_VPE2Callbacks = LibC::GUID.new(0x52882147_u32, 0x2d47_u16, 0x469a_u16, StaticArray[0xa0_u8, 0xd1_u8, 0x3_u8, 0x45_u8, 0x58_u8, 0x90_u8, 0xf6_u8, 0xc8_u8])
   DDSCAPS_COMMANDBUFFER = 1024_i32
   DDHAL_PLEASEALLOC_USERMEM = 4_i32
   DDHAL_CB32_MAPMEMORY = -2147483648_i32
@@ -1135,13 +1139,13 @@ module Win32cr::Graphics::DirectDraw
   VMEMHEAP_LINEAR = 1_i32
   VMEMHEAP_RECTANGULAR = 2_i32
   VMEMHEAP_ALIGNMENT = 4_i32
-  DDVPTYPE_E_HREFH_VREFH = "54f39980-da60-11cf-9b06-00a0c903a3b8"
-  DDVPTYPE_E_HREFH_VREFL = "92783220-da60-11cf-9b06-00a0c903a3b8"
-  DDVPTYPE_E_HREFL_VREFH = "a07a02e0-da60-11cf-9b06-00a0c903a3b8"
-  DDVPTYPE_E_HREFL_VREFL = "e09c77e0-da60-11cf-9b06-00a0c903a3b8"
-  DDVPTYPE_CCIR656 = "fca326a0-da60-11cf-9b06-00a0c903a3b8"
-  DDVPTYPE_BROOKTREE = "1352a560-da61-11cf-9b06-00a0c903a3b8"
-  DDVPTYPE_PHILIPS = "332cf160-da61-11cf-9b06-00a0c903a3b8"
+  DDVPTYPE_E_HREFH_VREFH = LibC::GUID.new(0x54f39980_u32, 0xda60_u16, 0x11cf_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  DDVPTYPE_E_HREFH_VREFL = LibC::GUID.new(0x92783220_u32, 0xda60_u16, 0x11cf_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  DDVPTYPE_E_HREFL_VREFH = LibC::GUID.new(0xa07a02e0_u32, 0xda60_u16, 0x11cf_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  DDVPTYPE_E_HREFL_VREFL = LibC::GUID.new(0xe09c77e0_u32, 0xda60_u16, 0x11cf_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  DDVPTYPE_CCIR656 = LibC::GUID.new(0xfca326a0_u32, 0xda60_u16, 0x11cf_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  DDVPTYPE_BROOKTREE = LibC::GUID.new(0x1352a560_u32, 0xda61_u16, 0x11cf_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
+  DDVPTYPE_PHILIPS = LibC::GUID.new(0x332cf160_u32, 0xda61_u16, 0x11cf_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
   DDVPD_WIDTH = 1_i32
   DDVPD_HEIGHT = 2_i32
   DDVPD_ID = 4_i32
@@ -1230,7 +1234,7 @@ module Win32cr::Graphics::DirectDraw
   DDVPCREATE_VIDEOONLY = 2_i32
   DDVPSTATUS_VBIONLY = 1_i32
   DDVPSTATUS_VIDEOONLY = 2_i32
-  GUID_DxApi = "8a79bef0-b915-11d0-9144-080036d2ef02"
+  GUID_DxApi = LibC::GUID.new(0x8a79bef0_u32, 0xb915_u16, 0x11d0_u16, StaticArray[0x91_u8, 0x44_u8, 0x8_u8, 0x0_u8, 0x36_u8, 0xd2_u8, 0xef_u8, 0x2_u8])
   MDL_MAPPED_TO_SYSTEM_VA = 1_u32
   MDL_PAGES_LOCKED = 2_u32
   MDL_SOURCE_IS_NONPAGED_POOL = 4_u32
@@ -1263,12 +1267,6 @@ module Win32cr::Graphics::DirectDraw
   DDTRANSFER_HALFLINES = 256_u32
   DXAPI_HALVERSION = 1_u32
 
-
-  @[Extern]
-  struct DDFXROP_
-    def initialize()
-    end
-  end
 
   @[Extern]
   struct DDARGB
@@ -1324,12 +1322,12 @@ module Win32cr::Graphics::DirectDraw
     property ddckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
     property ddckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
 
-    # Nested Type Anonymous4_e__Union_
+    # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    struct Anonymous4_e__Union_
-    property dwAlphaSrcConst : UInt32
-    property lpDDSAlphaSrc : Void*
-    def initialize(@dwAlphaSrcConst : UInt32, @lpDDSAlphaSrc : Void*)
+    struct Anonymous1_e__Union_
+    property dwZDestConst : UInt32
+    property lpDDSZBufferDest : Void*
+    def initialize(@dwZDestConst : UInt32, @lpDDSZBufferDest : Void*)
     end
     end
 
@@ -1344,6 +1342,26 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property dwAlphaDestConst : UInt32
+    property lpDDSAlphaDest : Void*
+    def initialize(@dwAlphaDestConst : UInt32, @lpDDSAlphaDest : Void*)
+    end
+    end
+
+
+    # Nested Type Anonymous4_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous4_e__Union_
+    property dwAlphaSrcConst : UInt32
+    property lpDDSAlphaSrc : Void*
+    def initialize(@dwAlphaSrcConst : UInt32, @lpDDSAlphaSrc : Void*)
+    end
+    end
+
+
     # Nested Type Anonymous5_e__Union_
     @[Extern(union: true)]
     struct Anonymous5_e__Union_
@@ -1352,26 +1370,6 @@ module Win32cr::Graphics::DirectDraw
     property dwFillPixel : UInt32
     property lpDDSPattern : Void*
     def initialize(@dwFillColor : UInt32, @dwFillDepth : UInt32, @dwFillPixel : UInt32, @lpDDSPattern : Void*)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property dwZDestConst : UInt32
-    property lpDDSZBufferDest : Void*
-    def initialize(@dwZDestConst : UInt32, @lpDDSZBufferDest : Void*)
-    end
-    end
-
-
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous3_e__Union_
-    property dwAlphaDestConst : UInt32
-    property lpDDSAlphaDest : Void*
-    def initialize(@dwAlphaDestConst : UInt32, @lpDDSAlphaDest : Void*)
     end
     end
 
@@ -1730,15 +1728,31 @@ module Win32cr::Graphics::DirectDraw
     property anonymous4 : Anonymous4_e__Union_
     property anonymous5 : Anonymous5_e__Union_
 
-    # Nested Type Anonymous5_e__Union_
+    # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    struct Anonymous5_e__Union_
-    property dwRGBAlphaBitMask : UInt32
-    property dwYUVAlphaBitMask : UInt32
-    property dwLuminanceAlphaBitMask : UInt32
-    property dwRGBZBitMask : UInt32
-    property dwYUVZBitMask : UInt32
-    def initialize(@dwRGBAlphaBitMask : UInt32, @dwYUVAlphaBitMask : UInt32, @dwLuminanceAlphaBitMask : UInt32, @dwRGBZBitMask : UInt32, @dwYUVZBitMask : UInt32)
+    struct Anonymous1_e__Union_
+    property dwRGBBitCount : UInt32
+    property dwYUVBitCount : UInt32
+    property dwZBufferBitDepth : UInt32
+    property dwAlphaBitDepth : UInt32
+    property dwLuminanceBitCount : UInt32
+    property dwBumpBitCount : UInt32
+    property dwPrivateFormatBitCount : UInt32
+    def initialize(@dwRGBBitCount : UInt32, @dwYUVBitCount : UInt32, @dwZBufferBitDepth : UInt32, @dwAlphaBitDepth : UInt32, @dwLuminanceBitCount : UInt32, @dwBumpBitCount : UInt32, @dwPrivateFormatBitCount : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwRBitMask : UInt32
+    property dwYBitMask : UInt32
+    property dwStencilBitDepth : UInt32
+    property dwLuminanceBitMask : UInt32
+    property dwBumpDuBitMask : UInt32
+    property dwOperations : UInt32
+    def initialize(@dwRBitMask : UInt32, @dwYBitMask : UInt32, @dwStencilBitDepth : UInt32, @dwLuminanceBitMask : UInt32, @dwBumpDuBitMask : UInt32, @dwOperations : UInt32)
     end
     end
 
@@ -1766,21 +1780,6 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property dwRGBBitCount : UInt32
-    property dwYUVBitCount : UInt32
-    property dwZBufferBitDepth : UInt32
-    property dwAlphaBitDepth : UInt32
-    property dwLuminanceBitCount : UInt32
-    property dwBumpBitCount : UInt32
-    property dwPrivateFormatBitCount : UInt32
-    def initialize(@dwRGBBitCount : UInt32, @dwYUVBitCount : UInt32, @dwZBufferBitDepth : UInt32, @dwAlphaBitDepth : UInt32, @dwLuminanceBitCount : UInt32, @dwBumpBitCount : UInt32, @dwPrivateFormatBitCount : UInt32)
-    end
-    end
-
-
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
     struct Anonymous4_e__Union_
@@ -1793,16 +1792,15 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
-    # Nested Type Anonymous2_e__Union_
+    # Nested Type Anonymous5_e__Union_
     @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property dwRBitMask : UInt32
-    property dwYBitMask : UInt32
-    property dwStencilBitDepth : UInt32
-    property dwLuminanceBitMask : UInt32
-    property dwBumpDuBitMask : UInt32
-    property dwOperations : UInt32
-    def initialize(@dwRBitMask : UInt32, @dwYBitMask : UInt32, @dwStencilBitDepth : UInt32, @dwLuminanceBitMask : UInt32, @dwBumpDuBitMask : UInt32, @dwOperations : UInt32)
+    struct Anonymous5_e__Union_
+    property dwRGBAlphaBitMask : UInt32
+    property dwYUVAlphaBitMask : UInt32
+    property dwLuminanceAlphaBitMask : UInt32
+    property dwRGBZBitMask : UInt32
+    property dwYUVZBitMask : UInt32
+    def initialize(@dwRGBAlphaBitMask : UInt32, @dwYUVAlphaBitMask : UInt32, @dwLuminanceAlphaBitMask : UInt32, @dwRGBZBitMask : UInt32, @dwYUVZBitMask : UInt32)
     end
     end
 
@@ -1825,22 +1823,22 @@ module Win32cr::Graphics::DirectDraw
     property dwDDFX : UInt32
     property dwFlags : UInt32
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property dwAlphaSrcConst : UInt32
-    property lpDDSAlphaSrc : Void*
-    def initialize(@dwAlphaSrcConst : UInt32, @lpDDSAlphaSrc : Void*)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property dwAlphaDestConst : UInt32
     property lpDDSAlphaDest : Void*
     def initialize(@dwAlphaDestConst : UInt32, @lpDDSAlphaDest : Void*)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwAlphaSrcConst : UInt32
+    property lpDDSAlphaSrc : Void*
+    def initialize(@dwAlphaSrcConst : UInt32, @lpDDSAlphaSrc : Void*)
     end
     end
 
@@ -1872,13 +1870,13 @@ module Win32cr::Graphics::DirectDraw
   struct DDDEVICEIDENTIFIER
     property szDriver : Win32cr::Foundation::CHAR[512]
     property szDescription : Win32cr::Foundation::CHAR[512]
-    property liDriverVersion : Win32cr::Foundation::LARGE_INTEGER
+    property liDriverVersion : Int64
     property dwVendorId : UInt32
     property dwDeviceId : UInt32
     property dwSubSysId : UInt32
     property dwRevision : UInt32
     property guidDeviceIdentifier : LibC::GUID
-    def initialize(@szDriver : Win32cr::Foundation::CHAR[512], @szDescription : Win32cr::Foundation::CHAR[512], @liDriverVersion : Win32cr::Foundation::LARGE_INTEGER, @dwVendorId : UInt32, @dwDeviceId : UInt32, @dwSubSysId : UInt32, @dwRevision : UInt32, @guidDeviceIdentifier : LibC::GUID)
+    def initialize(@szDriver : Win32cr::Foundation::CHAR[512], @szDescription : Win32cr::Foundation::CHAR[512], @liDriverVersion : Int64, @dwVendorId : UInt32, @dwDeviceId : UInt32, @dwSubSysId : UInt32, @dwRevision : UInt32, @guidDeviceIdentifier : LibC::GUID)
     end
   end
 
@@ -1886,14 +1884,14 @@ module Win32cr::Graphics::DirectDraw
   struct DDDEVICEIDENTIFIER2
     property szDriver : Win32cr::Foundation::CHAR[512]
     property szDescription : Win32cr::Foundation::CHAR[512]
-    property liDriverVersion : Win32cr::Foundation::LARGE_INTEGER
+    property liDriverVersion : Int64
     property dwVendorId : UInt32
     property dwDeviceId : UInt32
     property dwSubSysId : UInt32
     property dwRevision : UInt32
     property guidDeviceIdentifier : LibC::GUID
     property dwWHQLLevel : UInt32
-    def initialize(@szDriver : Win32cr::Foundation::CHAR[512], @szDescription : Win32cr::Foundation::CHAR[512], @liDriverVersion : Win32cr::Foundation::LARGE_INTEGER, @dwVendorId : UInt32, @dwDeviceId : UInt32, @dwSubSysId : UInt32, @dwRevision : UInt32, @guidDeviceIdentifier : LibC::GUID, @dwWHQLLevel : UInt32)
+    def initialize(@szDriver : Win32cr::Foundation::CHAR[512], @szDescription : Win32cr::Foundation::CHAR[512], @liDriverVersion : Int64, @dwVendorId : UInt32, @dwDeviceId : UInt32, @dwSubSysId : UInt32, @dwRevision : UInt32, @guidDeviceIdentifier : LibC::GUID, @dwWHQLLevel : UInt32)
     end
   end
 
@@ -1916,6 +1914,16 @@ module Win32cr::Graphics::DirectDraw
     property ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
     property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS
 
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
@@ -1923,16 +1931,6 @@ module Win32cr::Graphics::DirectDraw
     property dwZBufferBitDepth : UInt32
     property dwRefreshRate : UInt32
     def initialize(@dwMipMapCount : UInt32, @dwZBufferBitDepth : UInt32, @dwRefreshRate : UInt32)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property lPitch : Int32
-    property dwLinearSize : UInt32
-    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
     end
     end
 
@@ -1960,12 +1958,12 @@ module Win32cr::Graphics::DirectDraw
     property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
     property dwTextureStage : UInt32
 
-    # Nested Type Anonymous4_e__Union_
+    # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    struct Anonymous4_e__Union_
-    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
-    property dwEmptyFaceColor : UInt32
-    def initialize(@ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @dwEmptyFaceColor : UInt32)
+    struct Anonymous1_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
     end
     end
 
@@ -1991,12 +1989,12 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
-    # Nested Type Anonymous1_e__Union_
+    # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property lPitch : Int32
-    property dwLinearSize : UInt32
-    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    struct Anonymous4_e__Union_
+    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property dwEmptyFaceColor : UInt32
+    def initialize(@ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @dwEmptyFaceColor : UInt32)
     end
     end
 
@@ -2039,24 +2037,6 @@ module Win32cr::Graphics::DirectDraw
     property lColorEnable : Int32
     property dwReserved1 : UInt32
     def initialize(@dwSize : UInt32, @dwFlags : UInt32, @lBrightness : Int32, @lContrast : Int32, @lHue : Int32, @lSaturation : Int32, @lSharpness : Int32, @lGamma : Int32, @lColorEnable : Int32, @dwReserved1 : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct IDDVideoPortContainerVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawVideoPortVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawVideoPortNotifyVtbl
-    def initialize()
     end
   end
 
@@ -2161,11 +2141,11 @@ module Win32cr::Graphics::DirectDraw
 
   @[Extern]
   struct DDVIDEOPORTNOTIFY
-    property approximate_time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property approximate_time_stamp : Int64
     property lField : Int32
     property dwSurfaceIndex : UInt32
     property lDone : Int32
-    def initialize(@approximate_time_stamp : Win32cr::Foundation::LARGE_INTEGER, @lField : Int32, @dwSurfaceIndex : UInt32, @lDone : Int32)
+    def initialize(@approximate_time_stamp : Int64, @lField : Int32, @dwSurfaceIndex : UInt32, @lDone : Int32)
     end
   end
 
@@ -2291,12 +2271,12 @@ module Win32cr::Graphics::DirectDraw
     property alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT
     property ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX
     property ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX
-    property liPhysAGPBase : Win32cr::Foundation::LARGE_INTEGER
+    property liPhysAGPBase : Int64
     property hdevAGP : Win32cr::Foundation::HANDLE
     property pvPhysRsrv : Void*
     property pAgpCommitMask : UInt8*
     property dwAgpCommitMaskSize : UInt32
-    def initialize(@dwFlags : UInt32, @stride : UInt32, @freeList : Void*, @allocList : Void*, @dwTotalSize : UInt32, @fpGARTLin : LibC::UIntPtrT, @fpGARTDev : LibC::UIntPtrT, @dwCommitedSize : UInt32, @dwCoalesceCount : UInt32, @alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT, @ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @liPhysAGPBase : Win32cr::Foundation::LARGE_INTEGER, @hdevAGP : Win32cr::Foundation::HANDLE, @pvPhysRsrv : Void*, @pAgpCommitMask : UInt8*, @dwAgpCommitMaskSize : UInt32)
+    def initialize(@dwFlags : UInt32, @stride : UInt32, @freeList : Void*, @allocList : Void*, @dwTotalSize : UInt32, @fpGARTLin : LibC::UIntPtrT, @fpGARTDev : LibC::UIntPtrT, @dwCommitedSize : UInt32, @dwCoalesceCount : UInt32, @alignment : Win32cr::Graphics::DirectDraw::HEAPALIGNMENT, @ddsCapsEx : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsCapsExAlt : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @liPhysAGPBase : Int64, @hdevAGP : Win32cr::Foundation::HANDLE, @pvPhysRsrv : Void*, @pAgpCommitMask : UInt8*, @dwAgpCommitMaskSize : UInt32)
     end
   end
 
@@ -2326,96 +2306,6 @@ module Win32cr::Graphics::DirectDraw
     property mode_reserved2 : Int32
     property mode_reserved3 : Int32
     def initialize(@manufacturer : UInt16, @product : UInt16, @serial_number : UInt32, @device_identifier : LibC::GUID, @mode640x480 : Int32, @mode800x600 : Int32, @mode1024x768 : Int32, @mode1280x1024 : Int32, @mode1600x1200 : Int32, @mode_reserved1 : Int32, @mode_reserved2 : Int32, @mode_reserved3 : Int32)
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawClipperVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawPaletteVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawSurfaceVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawSurface2Vtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawSurface3Vtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawSurface4Vtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawSurface7Vtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawColorControlVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDraw2Vtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDraw4Vtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDraw7Vtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawKernelVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawSurfaceKernelVtbl
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IDirectDrawGammaControlVtbl
-    def initialize()
     end
   end
 
@@ -2680,7 +2570,7 @@ module Win32cr::Graphics::DirectDraw
   struct DDMORESURFACECAPS
     property dwSize : UInt32
     property ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX
-    property ddsExtendedHeapRestrictions : ExtendedHeapRestrictions*
+    property ddsExtendedHeapRestrictions : ExtendedHeapRestrictions[1]
 
     # Nested Type ExtendedHeapRestrictions
     @[Extern]
@@ -2691,7 +2581,7 @@ module Win32cr::Graphics::DirectDraw
     end
     end
 
-    def initialize(@dwSize : UInt32, @ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsExtendedHeapRestrictions : ExtendedHeapRestrictions*)
+    def initialize(@dwSize : UInt32, @ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsExtendedHeapRestrictions : ExtendedHeapRestrictions[1])
     end
   end
 
@@ -2853,16 +2743,6 @@ module Win32cr::Graphics::DirectDraw
     property dwReserved1 : LibC::UIntPtrT
     property ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
 
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous3_e__Union_
-    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
-    property lpDDHandle : Void*
-    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDHandle : Void*)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
@@ -2880,6 +2760,16 @@ module Win32cr::Graphics::DirectDraw
     property lpVidMemHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*
     property dwBlockSizeX : UInt32
     def initialize(@lpVidMemHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*, @dwBlockSizeX : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
+    property lpDDHandle : Void*
+    def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDHandle : Void*)
     end
     end
 
@@ -2999,22 +2889,22 @@ module Win32cr::Graphics::DirectDraw
     property lOverlayX : Int32
     property lOverlayY : Int32
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property lpDDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*
-    property lp16DDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*
-    def initialize(@lpDDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*, @lp16DDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*
     property lp16DDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*
     def initialize(@lpDDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*, @lp16DDPalette : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWPALETTE_INT*)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property lpDDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*
+    property lp16DDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*
+    def initialize(@lpDDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_LCL*, @lp16DDClipper : Win32cr::Graphics::DirectDraw::DDRAWI_DDRAWCLIPPER_INT*)
     end
     end
 
@@ -4122,24 +4012,6 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  struct DD_DESTROYDRIVERDATA_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct DD_SETMODEDATA_
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct DD_GETVPORTAUTOFLIPSURFACEDATA_
-    def initialize()
-    end
-  end
-
-  @[Extern]
   struct VIDEOMEMORY
     property dwFlags : UInt32
     property fpStart : LibC::UIntPtrT
@@ -4402,16 +4274,6 @@ module Win32cr::Graphics::DirectDraw
     property fpHeapOffset : LibC::UIntPtrT
     property hCreatorProcess : Win32cr::Foundation::HANDLE
 
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous3_e__Union_
-    property lPitch : Int32
-    property dwLinearSize : UInt32
-    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
@@ -4429,6 +4291,16 @@ module Win32cr::Graphics::DirectDraw
     property dwBlockSizeX : UInt32
     property dwUserMemSize : UInt32
     def initialize(@lpVidMemHeap : Win32cr::Graphics::DirectDraw::VIDEOMEMORY*, @dwBlockSizeX : UInt32, @dwUserMemSize : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
     end
     end
 
@@ -4460,22 +4332,22 @@ module Win32cr::Graphics::DirectDraw
     property lpAttachListFrom : Win32cr::Graphics::DirectDraw::DD_ATTACHLIST*
     property rcOverlaySrc : Win32cr::Foundation::RECT
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
-    property ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
-    def initialize(@ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
     property ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
     def initialize(@ddckCKSrcOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKSrcBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    property ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY
+    def initialize(@ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @ddckCKDestBlt : Win32cr::Graphics::DirectDraw::DDCOLORKEY)
     end
     end
 
@@ -4647,7 +4519,7 @@ module Win32cr::Graphics::DirectDraw
   struct DD_MORESURFACECAPS
     property dwSize : UInt32
     property ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX
-    property ddsExtendedHeapRestrictions : NTExtendedHeapRestrictions*
+    property ddsExtendedHeapRestrictions : NTExtendedHeapRestrictions[1]
 
     # Nested Type NTExtendedHeapRestrictions
     @[Extern]
@@ -4658,7 +4530,7 @@ module Win32cr::Graphics::DirectDraw
     end
     end
 
-    def initialize(@dwSize : UInt32, @ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsExtendedHeapRestrictions : NTExtendedHeapRestrictions*)
+    def initialize(@dwSize : UInt32, @ddsCapsMore : Win32cr::Graphics::DirectDraw::DDSCAPSEX, @ddsExtendedHeapRestrictions : NTExtendedHeapRestrictions[1])
     end
   end
 
@@ -5436,24 +5308,16 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  struct MDL
-    property mdl_next : Win32cr::Graphics::DirectDraw::MDL*
+  struct DDMDL
+    property mdl_next : Win32cr::Graphics::DirectDraw::DDMDL*
     property mdl_size : Int16
     property mdl_flags : Int16
-    property process : EPROCESS_*
+    property process : LibC::IntPtrT
     property lpMappedSystemVa : UInt32*
     property lpStartVa : UInt32*
     property byte_count : UInt32
     property byte_offset : UInt32
-
-    # Nested Type EPROCESS_
-    @[Extern]
-    struct EPROCESS_
-    def initialize()
-    end
-    end
-
-    def initialize(@mdl_next : Win32cr::Graphics::DirectDraw::MDL*, @mdl_size : Int16, @mdl_flags : Int16, @process : EPROCESS_*, @lpMappedSystemVa : UInt32*, @lpStartVa : UInt32*, @byte_count : UInt32, @byte_offset : UInt32)
+    def initialize(@mdl_next : Win32cr::Graphics::DirectDraw::DDMDL*, @mdl_size : Int16, @mdl_flags : Int16, @process : LibC::IntPtrT, @lpMappedSystemVa : UInt32*, @lpStartVa : UInt32*, @byte_count : UInt32, @byte_offset : UInt32)
     end
   end
 
@@ -5640,8 +5504,8 @@ module Win32cr::Graphics::DirectDraw
     property dwEndLine : UInt32
     property dwTransferID : LibC::UIntPtrT
     property dwTransferFlags : UInt32
-    property lpDestMDL : Win32cr::Graphics::DirectDraw::MDL*
-    def initialize(@lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @dwStartLine : UInt32, @dwEndLine : UInt32, @dwTransferID : LibC::UIntPtrT, @dwTransferFlags : UInt32, @lpDestMDL : Win32cr::Graphics::DirectDraw::MDL*)
+    property lpDestMDL : Win32cr::Graphics::DirectDraw::DDMDL*
+    def initialize(@lpSurfaceData : Win32cr::Graphics::DirectDraw::DDSURFACEDATA*, @dwStartLine : UInt32, @dwEndLine : UInt32, @dwTransferID : LibC::UIntPtrT, @dwTransferFlags : UInt32, @lpDestMDL : Win32cr::Graphics::DirectDraw::DDMDL*)
     end
   end
 
@@ -5684,7 +5548,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawVtbl,
+
+  record IDirectDrawVtable,
     query_interface : Proc(IDirectDraw*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw*, UInt32),
     release : Proc(IDirectDraw*, UInt32),
@@ -5702,7 +5567,7 @@ module Win32cr::Graphics::DirectDraw
     get_gdi_surface : Proc(IDirectDraw*, Void**, Win32cr::Foundation::HRESULT),
     get_monitor_frequency : Proc(IDirectDraw*, UInt32*, Win32cr::Foundation::HRESULT),
     get_scan_line : Proc(IDirectDraw*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_vertical_blank_status : Proc(IDirectDraw*, Int32*, Win32cr::Foundation::HRESULT),
+    get_vertical_blank_status : Proc(IDirectDraw*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IDirectDraw*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     restore_display_mode : Proc(IDirectDraw*, Win32cr::Foundation::HRESULT),
     set_cooperative_level : Proc(IDirectDraw*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::HRESULT),
@@ -5711,7 +5576,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw, lpVtbl : IDirectDrawVtbl* do
+  record IDirectDraw, lpVtbl : IDirectDrawVtable* do
     GUID = LibC::GUID.new(0x6c14db80_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDraw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5764,7 +5629,7 @@ module Win32cr::Graphics::DirectDraw
     def get_scan_line(this : IDirectDraw*, param0 : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_scan_line.call(this, param0)
     end
-    def get_vertical_blank_status(this : IDirectDraw*, param0 : Int32*) : Win32cr::Foundation::HRESULT
+    def get_vertical_blank_status(this : IDirectDraw*, param0 : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_blank_status.call(this, param0)
     end
     def initialize__(this : IDirectDraw*, param0 : LibC::GUID*) : Win32cr::Foundation::HRESULT
@@ -5786,7 +5651,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDraw2Vtbl,
+
+  record IDirectDraw2Vtable,
     query_interface : Proc(IDirectDraw2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw2*, UInt32),
     release : Proc(IDirectDraw2*, UInt32),
@@ -5804,7 +5670,7 @@ module Win32cr::Graphics::DirectDraw
     get_gdi_surface : Proc(IDirectDraw2*, Void**, Win32cr::Foundation::HRESULT),
     get_monitor_frequency : Proc(IDirectDraw2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_scan_line : Proc(IDirectDraw2*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_vertical_blank_status : Proc(IDirectDraw2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_vertical_blank_status : Proc(IDirectDraw2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IDirectDraw2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     restore_display_mode : Proc(IDirectDraw2*, Win32cr::Foundation::HRESULT),
     set_cooperative_level : Proc(IDirectDraw2*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::HRESULT),
@@ -5814,7 +5680,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw2, lpVtbl : IDirectDraw2Vtbl* do
+  record IDirectDraw2, lpVtbl : IDirectDraw2Vtable* do
     GUID = LibC::GUID.new(0xb3a6f3e0_u32, 0x2b43_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0xde_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x33_u8, 0x56_u8])
     def query_interface(this : IDirectDraw2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5867,7 +5733,7 @@ module Win32cr::Graphics::DirectDraw
     def get_scan_line(this : IDirectDraw2*, param0 : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_scan_line.call(this, param0)
     end
-    def get_vertical_blank_status(this : IDirectDraw2*, param0 : Int32*) : Win32cr::Foundation::HRESULT
+    def get_vertical_blank_status(this : IDirectDraw2*, param0 : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_blank_status.call(this, param0)
     end
     def initialize__(this : IDirectDraw2*, param0 : LibC::GUID*) : Win32cr::Foundation::HRESULT
@@ -5892,7 +5758,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDraw4Vtbl,
+
+  record IDirectDraw4Vtable,
     query_interface : Proc(IDirectDraw4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw4*, UInt32),
     release : Proc(IDirectDraw4*, UInt32),
@@ -5910,7 +5777,7 @@ module Win32cr::Graphics::DirectDraw
     get_gdi_surface : Proc(IDirectDraw4*, Void**, Win32cr::Foundation::HRESULT),
     get_monitor_frequency : Proc(IDirectDraw4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_scan_line : Proc(IDirectDraw4*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_vertical_blank_status : Proc(IDirectDraw4*, Int32*, Win32cr::Foundation::HRESULT),
+    get_vertical_blank_status : Proc(IDirectDraw4*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IDirectDraw4*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     restore_display_mode : Proc(IDirectDraw4*, Win32cr::Foundation::HRESULT),
     set_cooperative_level : Proc(IDirectDraw4*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::HRESULT),
@@ -5924,7 +5791,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw4, lpVtbl : IDirectDraw4Vtbl* do
+  record IDirectDraw4, lpVtbl : IDirectDraw4Vtable* do
     GUID = LibC::GUID.new(0x9c59509a_u32, 0x39bd_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x30_u8, 0xc5_u8])
     def query_interface(this : IDirectDraw4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5977,7 +5844,7 @@ module Win32cr::Graphics::DirectDraw
     def get_scan_line(this : IDirectDraw4*, param0 : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_scan_line.call(this, param0)
     end
-    def get_vertical_blank_status(this : IDirectDraw4*, param0 : Int32*) : Win32cr::Foundation::HRESULT
+    def get_vertical_blank_status(this : IDirectDraw4*, param0 : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_blank_status.call(this, param0)
     end
     def initialize__(this : IDirectDraw4*, param0 : LibC::GUID*) : Win32cr::Foundation::HRESULT
@@ -6014,7 +5881,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDraw7Vtbl,
+
+  record IDirectDraw7Vtable,
     query_interface : Proc(IDirectDraw7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw7*, UInt32),
     release : Proc(IDirectDraw7*, UInt32),
@@ -6032,7 +5900,7 @@ module Win32cr::Graphics::DirectDraw
     get_gdi_surface : Proc(IDirectDraw7*, Void**, Win32cr::Foundation::HRESULT),
     get_monitor_frequency : Proc(IDirectDraw7*, UInt32*, Win32cr::Foundation::HRESULT),
     get_scan_line : Proc(IDirectDraw7*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_vertical_blank_status : Proc(IDirectDraw7*, Int32*, Win32cr::Foundation::HRESULT),
+    get_vertical_blank_status : Proc(IDirectDraw7*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IDirectDraw7*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     restore_display_mode : Proc(IDirectDraw7*, Win32cr::Foundation::HRESULT),
     set_cooperative_level : Proc(IDirectDraw7*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::HRESULT),
@@ -6048,7 +5916,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw7, lpVtbl : IDirectDraw7Vtbl* do
+  record IDirectDraw7, lpVtbl : IDirectDraw7Vtable* do
     GUID = LibC::GUID.new(0x15e65ec0_u32, 0x3b9c_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDraw7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6101,7 +5969,7 @@ module Win32cr::Graphics::DirectDraw
     def get_scan_line(this : IDirectDraw7*, param0 : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_scan_line.call(this, param0)
     end
-    def get_vertical_blank_status(this : IDirectDraw7*, param0 : Int32*) : Win32cr::Foundation::HRESULT
+    def get_vertical_blank_status(this : IDirectDraw7*, param0 : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_vertical_blank_status.call(this, param0)
     end
     def initialize__(this : IDirectDraw7*, param0 : LibC::GUID*) : Win32cr::Foundation::HRESULT
@@ -6144,7 +6012,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawPaletteVtbl,
+
+  record IDirectDrawPaletteVtable,
     query_interface : Proc(IDirectDrawPalette*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawPalette*, UInt32),
     release : Proc(IDirectDrawPalette*, UInt32),
@@ -6155,7 +6024,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawPalette, lpVtbl : IDirectDrawPaletteVtbl* do
+  record IDirectDrawPalette, lpVtbl : IDirectDrawPaletteVtable* do
     GUID = LibC::GUID.new(0x6c14db84_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawPalette*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6182,7 +6051,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawClipperVtbl,
+
+  record IDirectDrawClipperVtable,
     query_interface : Proc(IDirectDrawClipper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawClipper*, UInt32),
     release : Proc(IDirectDrawClipper*, UInt32),
@@ -6195,7 +6065,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawClipper, lpVtbl : IDirectDrawClipperVtbl* do
+  record IDirectDrawClipper, lpVtbl : IDirectDrawClipperVtable* do
     GUID = LibC::GUID.new(0x6c14db85_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawClipper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6228,7 +6098,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurfaceVtbl,
+
+  record IDirectDrawSurfaceVtable,
     query_interface : Proc(IDirectDrawSurface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface*, UInt32),
     release : Proc(IDirectDrawSurface*, UInt32),
@@ -6268,7 +6139,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface, lpVtbl : IDirectDrawSurfaceVtbl* do
+  record IDirectDrawSurface, lpVtbl : IDirectDrawSurfaceVtable* do
     GUID = LibC::GUID.new(0x6c14db81_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6382,7 +6253,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface2Vtbl,
+
+  record IDirectDrawSurface2Vtable,
     query_interface : Proc(IDirectDrawSurface2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface2*, UInt32),
     release : Proc(IDirectDrawSurface2*, UInt32),
@@ -6425,7 +6297,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface2, lpVtbl : IDirectDrawSurface2Vtbl* do
+  record IDirectDrawSurface2, lpVtbl : IDirectDrawSurface2Vtable* do
     GUID = LibC::GUID.new(0x57805885_u32, 0x6eec_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x41_u8, 0xa8_u8, 0x23_u8, 0x3_u8, 0xc1_u8, 0xe_u8, 0x27_u8])
     def query_interface(this : IDirectDrawSurface2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6548,7 +6420,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface3Vtbl,
+
+  record IDirectDrawSurface3Vtable,
     query_interface : Proc(IDirectDrawSurface3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface3*, UInt32),
     release : Proc(IDirectDrawSurface3*, UInt32),
@@ -6592,7 +6465,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface3, lpVtbl : IDirectDrawSurface3Vtbl* do
+  record IDirectDrawSurface3, lpVtbl : IDirectDrawSurface3Vtable* do
     GUID = LibC::GUID.new(0xda044e00_u32, 0x69b2_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0xd5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb8_u8, 0xdf_u8, 0xbb_u8])
     def query_interface(this : IDirectDrawSurface3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6718,7 +6591,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface4Vtbl,
+
+  record IDirectDrawSurface4Vtable,
     query_interface : Proc(IDirectDrawSurface4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface4*, UInt32),
     release : Proc(IDirectDrawSurface4*, UInt32),
@@ -6767,7 +6641,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface4, lpVtbl : IDirectDrawSurface4Vtbl* do
+  record IDirectDrawSurface4, lpVtbl : IDirectDrawSurface4Vtable* do
     GUID = LibC::GUID.new(0xb2b8630_u32, 0xad35_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xa6_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDrawSurface4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6908,7 +6782,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface7Vtbl,
+
+  record IDirectDrawSurface7Vtable,
     query_interface : Proc(IDirectDrawSurface7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface7*, UInt32),
     release : Proc(IDirectDrawSurface7*, UInt32),
@@ -6961,7 +6836,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface7, lpVtbl : IDirectDrawSurface7Vtbl* do
+  record IDirectDrawSurface7, lpVtbl : IDirectDrawSurface7Vtable* do
     GUID = LibC::GUID.new(0x6675a80_u32, 0x3b9b_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDrawSurface7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7114,7 +6989,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawColorControlVtbl,
+
+  record IDirectDrawColorControlVtable,
     query_interface : Proc(IDirectDrawColorControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawColorControl*, UInt32),
     release : Proc(IDirectDrawColorControl*, UInt32),
@@ -7123,7 +6999,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawColorControl, lpVtbl : IDirectDrawColorControlVtbl* do
+  record IDirectDrawColorControl, lpVtbl : IDirectDrawColorControlVtable* do
     GUID = LibC::GUID.new(0x4b9f0ee0_u32, 0xd7e_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawColorControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7144,7 +7020,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawGammaControlVtbl,
+
+  record IDirectDrawGammaControlVtable,
     query_interface : Proc(IDirectDrawGammaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawGammaControl*, UInt32),
     release : Proc(IDirectDrawGammaControl*, UInt32),
@@ -7153,7 +7030,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawGammaControl, lpVtbl : IDirectDrawGammaControlVtbl* do
+  record IDirectDrawGammaControl, lpVtbl : IDirectDrawGammaControlVtable* do
     GUID = LibC::GUID.new(0x69c11c3e_u32, 0xb46b_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x7a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x9b_u8, 0x4e_u8])
     def query_interface(this : IDirectDrawGammaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7174,7 +7051,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDDVideoPortContainerVtbl,
+
+  record IDDVideoPortContainerVtable,
     query_interface : Proc(IDDVideoPortContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDDVideoPortContainer*, UInt32),
     release : Proc(IDDVideoPortContainer*, UInt32),
@@ -7185,7 +7063,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDDVideoPortContainer, lpVtbl : IDDVideoPortContainerVtbl* do
+  record IDDVideoPortContainer, lpVtbl : IDDVideoPortContainerVtable* do
     GUID = LibC::GUID.new(0x6c142760_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDDVideoPortContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7212,7 +7090,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawVideoPortVtbl,
+
+  record IDirectDrawVideoPortVtable,
     query_interface : Proc(IDirectDrawVideoPort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawVideoPort*, UInt32),
     release : Proc(IDirectDrawVideoPort*, UInt32),
@@ -7221,7 +7100,7 @@ module Win32cr::Graphics::DirectDraw
     get_color_controls : Proc(IDirectDrawVideoPort*, Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*, Win32cr::Foundation::HRESULT),
     get_input_formats : Proc(IDirectDrawVideoPort*, UInt32*, Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, UInt32, Win32cr::Foundation::HRESULT),
     get_output_formats : Proc(IDirectDrawVideoPort*, Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, UInt32*, Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, UInt32, Win32cr::Foundation::HRESULT),
-    get_field_polarity : Proc(IDirectDrawVideoPort*, Int32*, Win32cr::Foundation::HRESULT),
+    get_field_polarity : Proc(IDirectDrawVideoPort*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_video_line : Proc(IDirectDrawVideoPort*, UInt32*, Win32cr::Foundation::HRESULT),
     get_video_signal_status : Proc(IDirectDrawVideoPort*, UInt32*, Win32cr::Foundation::HRESULT),
     set_color_controls : Proc(IDirectDrawVideoPort*, Win32cr::Graphics::DirectDraw::DDCOLORCONTROL*, Win32cr::Foundation::HRESULT),
@@ -7233,7 +7112,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawVideoPort, lpVtbl : IDirectDrawVideoPortVtbl* do
+  record IDirectDrawVideoPort, lpVtbl : IDirectDrawVideoPortVtable* do
     GUID = LibC::GUID.new(0xb36d93e0_u32, 0x2b43_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0xde_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x33_u8, 0x56_u8])
     def query_interface(this : IDirectDrawVideoPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7259,7 +7138,7 @@ module Win32cr::Graphics::DirectDraw
     def get_output_formats(this : IDirectDrawVideoPort*, param0 : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, lpNumFormats : UInt32*, param2 : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT*, param3 : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_output_formats.call(this, param0, lpNumFormats, param2, param3)
     end
-    def get_field_polarity(this : IDirectDrawVideoPort*, param0 : Int32*) : Win32cr::Foundation::HRESULT
+    def get_field_polarity(this : IDirectDrawVideoPort*, param0 : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_field_polarity.call(this, param0)
     end
     def get_video_line(this : IDirectDrawVideoPort*, param0 : UInt32*) : Win32cr::Foundation::HRESULT
@@ -7290,7 +7169,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawVideoPortNotifyVtbl,
+
+  record IDirectDrawVideoPortNotifyVtable,
     query_interface : Proc(IDirectDrawVideoPortNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawVideoPortNotify*, UInt32),
     release : Proc(IDirectDrawVideoPortNotify*, UInt32),
@@ -7299,7 +7179,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawVideoPortNotify, lpVtbl : IDirectDrawVideoPortNotifyVtbl* do
+  record IDirectDrawVideoPortNotify, lpVtbl : IDirectDrawVideoPortNotifyVtable* do
     GUID = LibC::GUID.new(0xa655fb94_u32, 0x589_u16, 0x4e57_u16, StaticArray[0xb3_u8, 0x33_u8, 0x56_u8, 0x7a_u8, 0x89_u8, 0x46_u8, 0x8c_u8, 0x88_u8])
     def query_interface(this : IDirectDrawVideoPortNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7320,7 +7200,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawKernelVtbl,
+
+  record IDirectDrawKernelVtable,
     query_interface : Proc(IDirectDrawKernel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawKernel*, UInt32),
     release : Proc(IDirectDrawKernel*, UInt32),
@@ -7330,7 +7211,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawKernel, lpVtbl : IDirectDrawKernelVtbl* do
+  record IDirectDrawKernel, lpVtbl : IDirectDrawKernelVtable* do
     GUID = LibC::GUID.new(0x8d56c120_u32, 0x6a08_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7354,7 +7235,8 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurfaceKernelVtbl,
+
+  record IDirectDrawSurfaceKernelVtable,
     query_interface : Proc(IDirectDrawSurfaceKernel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurfaceKernel*, UInt32),
     release : Proc(IDirectDrawSurfaceKernel*, UInt32),
@@ -7363,7 +7245,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurfaceKernel, lpVtbl : IDirectDrawSurfaceKernelVtbl* do
+  record IDirectDrawSurfaceKernel, lpVtbl : IDirectDrawSurfaceKernelVtable* do
     GUID = LibC::GUID.new(0x60755da0_u32, 0x6a40_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawSurfaceKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7384,34 +7266,49 @@ module Win32cr::Graphics::DirectDraw
   end
 
   def directDrawEnumerateW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKW, lpContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateW(lpCallback, lpContext)
+    {% end %}
   end
 
   def directDrawEnumerateA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKA, lpContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateA(lpCallback, lpContext)
+    {% end %}
   end
 
   def directDrawEnumerateExW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXW, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateExW(lpCallback, lpContext, dwFlags)
+    {% end %}
   end
 
   def directDrawEnumerateExA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXA, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateExA(lpCallback, lpContext, dwFlags)
+    {% end %}
   end
 
   def directDrawCreate(lpGUID : LibC::GUID*, lplpDD : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawCreate(lpGUID, lplpDD, pUnkOuter)
+    {% end %}
   end
 
   def directDrawCreateEx(lpGuid : LibC::GUID*, lplpDD : Void**, iid : LibC::GUID*, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawCreateEx(lpGuid, lplpDD, iid, pUnkOuter)
+    {% end %}
   end
 
   def directDrawCreateClipper(dwFlags : UInt32, lplpDDClipper : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawCreateClipper(dwFlags, lplpDDClipper, pUnkOuter)
+    {% end %}
   end
 
   @[Link("ddraw")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DirectDrawEnumerateW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKW, lpContext : Void*) : Win32cr::Foundation::HRESULT
@@ -7435,4 +7332,5 @@ module Win32cr::Graphics::DirectDraw
     fun DirectDrawCreateClipper(dwFlags : UInt32, lplpDDClipper : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

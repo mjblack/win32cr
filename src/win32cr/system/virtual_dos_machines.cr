@@ -4,6 +4,18 @@ require "./diagnostics/debug.cr"
 
 module Win32cr::System::VirtualDosMachines
   extend self
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::VirtualDosMachines::VDMLDT_ENTRY*, Win32cr::Foundation::BOOL)
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)
+  {% end %}
+
   alias DEBUGEVENTPROC = Proc(Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, Void*, UInt32)
 
   alias PROCESSENUMPROC = Proc(UInt32, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
@@ -14,18 +26,18 @@ module Win32cr::System::VirtualDosMachines
 
   alias VDMPROCESSEXCEPTIONPROC = Proc(Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, Win32cr::Foundation::BOOL)
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::VirtualDosMachines::VDMLDT_ENTRY*, Win32cr::Foundation::BOOL)
+  {% if flag?(:i386) %}
+  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::Diagnostics::Debug::LDT_ENTRY*, Win32cr::Foundation::BOOL)
   {% end %}
 
   alias VDMGETPOINTERPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt16, UInt32, Win32cr::Foundation::BOOL, UInt32)
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)
+  {% if flag?(:i386) %}
+  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)
   {% end %}
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::VirtualDosMachines::VDMCONTEXT*, Win32cr::Foundation::BOOL)
+  {% if flag?(:i386) %}
+  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)
   {% end %}
 
   alias VDMKILLWOWPROC = Proc(Win32cr::Foundation::BOOL)
@@ -64,21 +76,9 @@ module Win32cr::System::VirtualDosMachines
 
   alias VDMGETSEGMENTINFOPROC = Proc(UInt16, UInt32, Win32cr::Foundation::BOOL, Win32cr::System::VirtualDosMachines::VDM_SEGINFO, Win32cr::Foundation::BOOL)
 
-  alias VDMGETSYMBOLPROC = Proc(Win32cr::Foundation::PSTR, UInt16, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, UInt8*, UInt32*, Win32cr::Foundation::BOOL)
+  alias VDMGETSYMBOLPROC = Proc(Win32cr::Foundation::PSTR, UInt16, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Foundation::BOOL)
 
   alias VDMGETADDREXPRESSIONPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16*, UInt32*, UInt16*, Win32cr::Foundation::BOOL)
-
-  {% if flag?(:i386) %}
-  alias VDMGETTHREADSELECTORENTRYPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::Diagnostics::Debug::LDT_ENTRY*, Win32cr::Foundation::BOOL)
-  {% end %}
-
-  {% if flag?(:i386) %}
-  alias VDMGETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)
-  {% end %}
-
-  {% if flag?(:i386) %}
-  alias VDMSETCONTEXTPROC = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::CONTEXT*, Win32cr::Foundation::BOOL)
-  {% end %}
 
   VDMCONTEXT_i386 = 65536_u32
   VDMCONTEXT_i486 = 65536_u32
@@ -162,6 +162,7 @@ module Win32cr::System::VirtualDosMachines
   GD_ICON = 14_u32
   GD_NAMETABLE = 15_u32
   GD_MAX_RESOURCE = 15_u32
+  WOW_SYSTEM = 1_u32
   VDMDBG_BREAK_DOSTASK = 1_u32
   VDMDBG_BREAK_WOWTASK = 2_u32
   VDMDBG_BREAK_LOADDLL = 4_u32
@@ -222,15 +223,6 @@ module Win32cr::System::VirtualDosMachines
     property bytes : Bytes_e__Struct_
     property bits : Bits_e__Struct_
 
-      # Nested Type Bits_e__Struct_
-      @[Extern]
-      struct Bits_e__Struct_
-    property _bitfield : UInt32
-    def initialize(@_bitfield : UInt32)
-    end
-      end
-
-
       # Nested Type Bytes_e__Struct_
       @[Extern]
       struct Bytes_e__Struct_
@@ -239,6 +231,15 @@ module Win32cr::System::VirtualDosMachines
     property flags2 : UInt8
     property base_hi : UInt8
     def initialize(@base_mid : UInt8, @flags1 : UInt8, @flags2 : UInt8, @base_hi : UInt8)
+    end
+      end
+
+
+      # Nested Type Bits_e__Struct_
+      @[Extern]
+      struct Bits_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
     end
       end
 

@@ -4,8 +4,8 @@ require "./../system/io.cr"
 
 module Win32cr::Storage::Vhd
   extend self
-  VIRTUAL_STORAGE_TYPE_VENDOR_UNKNOWN = "00000000-0000-0000-0000-000000000000"
-  VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT = "ec984aec-a0f9-47e9-901f-71415a66345b"
+  VIRTUAL_STORAGE_TYPE_VENDOR_UNKNOWN = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
+  VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT = LibC::GUID.new(0xec984aec_u32, 0xa0f9_u16, 0x47e9_u16, StaticArray[0x90_u8, 0x1f_u8, 0x71_u8, 0x41_u8, 0x5a_u8, 0x66_u8, 0x34_u8, 0x5b_u8])
   VIRTUAL_STORAGE_TYPE_DEVICE_UNKNOWN = 0_u32
   VIRTUAL_STORAGE_TYPE_DEVICE_ISO = 1_u32
   VIRTUAL_STORAGE_TYPE_DEVICE_VHD = 2_u32
@@ -24,33 +24,33 @@ module Win32cr::Storage::Vhd
     OPEN_VIRTUAL_DISK_VERSION_3 = 3_i32
   end
   @[Flags]
-  enum VIRTUAL_DISK_ACCESS_MASK : UInt32
-    VIRTUAL_DISK_ACCESS_NONE = 0_u32
-    VIRTUAL_DISK_ACCESS_ATTACH_RO = 65536_u32
-    VIRTUAL_DISK_ACCESS_ATTACH_RW = 131072_u32
-    VIRTUAL_DISK_ACCESS_DETACH = 262144_u32
-    VIRTUAL_DISK_ACCESS_GET_INFO = 524288_u32
-    VIRTUAL_DISK_ACCESS_CREATE = 1048576_u32
-    VIRTUAL_DISK_ACCESS_METAOPS = 2097152_u32
-    VIRTUAL_DISK_ACCESS_READ = 851968_u32
-    VIRTUAL_DISK_ACCESS_ALL = 4128768_u32
-    VIRTUAL_DISK_ACCESS_WRITABLE = 3276800_u32
+  enum VIRTUAL_DISK_ACCESS_MASK
+    VIRTUAL_DISK_ACCESS_NONE = 0_i32
+    VIRTUAL_DISK_ACCESS_ATTACH_RO = 65536_i32
+    VIRTUAL_DISK_ACCESS_ATTACH_RW = 131072_i32
+    VIRTUAL_DISK_ACCESS_DETACH = 262144_i32
+    VIRTUAL_DISK_ACCESS_GET_INFO = 524288_i32
+    VIRTUAL_DISK_ACCESS_CREATE = 1048576_i32
+    VIRTUAL_DISK_ACCESS_METAOPS = 2097152_i32
+    VIRTUAL_DISK_ACCESS_READ = 851968_i32
+    VIRTUAL_DISK_ACCESS_ALL = 4128768_i32
+    VIRTUAL_DISK_ACCESS_WRITABLE = 3276800_i32
   end
   @[Flags]
-  enum OPEN_VIRTUAL_DISK_FLAG : UInt32
-    OPEN_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    OPEN_VIRTUAL_DISK_FLAG_NO_PARENTS = 1_u32
-    OPEN_VIRTUAL_DISK_FLAG_BLANK_FILE = 2_u32
-    OPEN_VIRTUAL_DISK_FLAG_BOOT_DRIVE = 4_u32
-    OPEN_VIRTUAL_DISK_FLAG_CACHED_IO = 8_u32
-    OPEN_VIRTUAL_DISK_FLAG_CUSTOM_DIFF_CHAIN = 16_u32
-    OPEN_VIRTUAL_DISK_FLAG_PARENT_CACHED_IO = 32_u32
-    OPEN_VIRTUAL_DISK_FLAG_VHDSET_FILE_ONLY = 64_u32
-    OPEN_VIRTUAL_DISK_FLAG_IGNORE_RELATIVE_PARENT_LOCATOR = 128_u32
-    OPEN_VIRTUAL_DISK_FLAG_NO_WRITE_HARDENING = 256_u32
-    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 512_u32
-    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS = 1024_u32
-    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_ENCRYPTED_FILES = 2048_u32
+  enum OPEN_VIRTUAL_DISK_FLAG
+    OPEN_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    OPEN_VIRTUAL_DISK_FLAG_NO_PARENTS = 1_i32
+    OPEN_VIRTUAL_DISK_FLAG_BLANK_FILE = 2_i32
+    OPEN_VIRTUAL_DISK_FLAG_BOOT_DRIVE = 4_i32
+    OPEN_VIRTUAL_DISK_FLAG_CACHED_IO = 8_i32
+    OPEN_VIRTUAL_DISK_FLAG_CUSTOM_DIFF_CHAIN = 16_i32
+    OPEN_VIRTUAL_DISK_FLAG_PARENT_CACHED_IO = 32_i32
+    OPEN_VIRTUAL_DISK_FLAG_VHDSET_FILE_ONLY = 64_i32
+    OPEN_VIRTUAL_DISK_FLAG_IGNORE_RELATIVE_PARENT_LOCATOR = 128_i32
+    OPEN_VIRTUAL_DISK_FLAG_NO_WRITE_HARDENING = 256_i32
+    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 512_i32
+    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS = 1024_i32
+    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_ENCRYPTED_FILES = 2048_i32
   end
   enum CREATE_VIRTUAL_DISK_VERSION
     CREATE_VIRTUAL_DISK_VERSION_UNSPECIFIED = 0_i32
@@ -60,19 +60,19 @@ module Win32cr::Storage::Vhd
     CREATE_VIRTUAL_DISK_VERSION_4 = 4_i32
   end
   @[Flags]
-  enum CREATE_VIRTUAL_DISK_FLAG : UInt32
-    CREATE_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    CREATE_VIRTUAL_DISK_FLAG_FULL_PHYSICAL_ALLOCATION = 1_u32
-    CREATE_VIRTUAL_DISK_FLAG_PREVENT_WRITES_TO_SOURCE_DISK = 2_u32
-    CREATE_VIRTUAL_DISK_FLAG_DO_NOT_COPY_METADATA_FROM_PARENT = 4_u32
-    CREATE_VIRTUAL_DISK_FLAG_CREATE_BACKING_STORAGE = 8_u32
-    CREATE_VIRTUAL_DISK_FLAG_USE_CHANGE_TRACKING_SOURCE_LIMIT = 16_u32
-    CREATE_VIRTUAL_DISK_FLAG_PRESERVE_PARENT_CHANGE_TRACKING_STATE = 32_u32
-    CREATE_VIRTUAL_DISK_FLAG_VHD_SET_USE_ORIGINAL_BACKING_STORAGE = 64_u32
-    CREATE_VIRTUAL_DISK_FLAG_SPARSE_FILE = 128_u32
-    CREATE_VIRTUAL_DISK_FLAG_PMEM_COMPATIBLE = 256_u32
-    CREATE_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 512_u32
-    CREATE_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS = 1024_u32
+  enum CREATE_VIRTUAL_DISK_FLAG
+    CREATE_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    CREATE_VIRTUAL_DISK_FLAG_FULL_PHYSICAL_ALLOCATION = 1_i32
+    CREATE_VIRTUAL_DISK_FLAG_PREVENT_WRITES_TO_SOURCE_DISK = 2_i32
+    CREATE_VIRTUAL_DISK_FLAG_DO_NOT_COPY_METADATA_FROM_PARENT = 4_i32
+    CREATE_VIRTUAL_DISK_FLAG_CREATE_BACKING_STORAGE = 8_i32
+    CREATE_VIRTUAL_DISK_FLAG_USE_CHANGE_TRACKING_SOURCE_LIMIT = 16_i32
+    CREATE_VIRTUAL_DISK_FLAG_PRESERVE_PARENT_CHANGE_TRACKING_STATE = 32_i32
+    CREATE_VIRTUAL_DISK_FLAG_VHD_SET_USE_ORIGINAL_BACKING_STORAGE = 64_i32
+    CREATE_VIRTUAL_DISK_FLAG_SPARSE_FILE = 128_i32
+    CREATE_VIRTUAL_DISK_FLAG_PMEM_COMPATIBLE = 256_i32
+    CREATE_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 512_i32
+    CREATE_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS = 1024_i32
   end
   enum ATTACH_VIRTUAL_DISK_VERSION
     ATTACH_VIRTUAL_DISK_VERSION_UNSPECIFIED = 0_i32
@@ -80,40 +80,41 @@ module Win32cr::Storage::Vhd
     ATTACH_VIRTUAL_DISK_VERSION_2 = 2_i32
   end
   @[Flags]
-  enum ATTACH_VIRTUAL_DISK_FLAG : UInt32
-    ATTACH_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    ATTACH_VIRTUAL_DISK_FLAG_READ_ONLY = 1_u32
-    ATTACH_VIRTUAL_DISK_FLAG_NO_DRIVE_LETTER = 2_u32
-    ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME = 4_u32
-    ATTACH_VIRTUAL_DISK_FLAG_NO_LOCAL_HOST = 8_u32
-    ATTACH_VIRTUAL_DISK_FLAG_NO_SECURITY_DESCRIPTOR = 16_u32
-    ATTACH_VIRTUAL_DISK_FLAG_BYPASS_DEFAULT_ENCRYPTION_POLICY = 32_u32
-    ATTACH_VIRTUAL_DISK_FLAG_NON_PNP = 64_u32
-    ATTACH_VIRTUAL_DISK_FLAG_RESTRICTED_RANGE = 128_u32
-    ATTACH_VIRTUAL_DISK_FLAG_SINGLE_PARTITION = 256_u32
-    ATTACH_VIRTUAL_DISK_FLAG_REGISTER_VOLUME = 512_u32
+  enum ATTACH_VIRTUAL_DISK_FLAG
+    ATTACH_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    ATTACH_VIRTUAL_DISK_FLAG_READ_ONLY = 1_i32
+    ATTACH_VIRTUAL_DISK_FLAG_NO_DRIVE_LETTER = 2_i32
+    ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME = 4_i32
+    ATTACH_VIRTUAL_DISK_FLAG_NO_LOCAL_HOST = 8_i32
+    ATTACH_VIRTUAL_DISK_FLAG_NO_SECURITY_DESCRIPTOR = 16_i32
+    ATTACH_VIRTUAL_DISK_FLAG_BYPASS_DEFAULT_ENCRYPTION_POLICY = 32_i32
+    ATTACH_VIRTUAL_DISK_FLAG_NON_PNP = 64_i32
+    ATTACH_VIRTUAL_DISK_FLAG_RESTRICTED_RANGE = 128_i32
+    ATTACH_VIRTUAL_DISK_FLAG_SINGLE_PARTITION = 256_i32
+    ATTACH_VIRTUAL_DISK_FLAG_REGISTER_VOLUME = 512_i32
+    ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT = 1024_i32
   end
   @[Flags]
-  enum DETACH_VIRTUAL_DISK_FLAG : UInt32
-    DETACH_VIRTUAL_DISK_FLAG_NONE = 0_u32
+  enum DETACH_VIRTUAL_DISK_FLAG
+    DETACH_VIRTUAL_DISK_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum DEPENDENT_DISK_FLAG : UInt32
-    DEPENDENT_DISK_FLAG_NONE = 0_u32
-    DEPENDENT_DISK_FLAG_MULT_BACKING_FILES = 1_u32
-    DEPENDENT_DISK_FLAG_FULLY_ALLOCATED = 2_u32
-    DEPENDENT_DISK_FLAG_READ_ONLY = 4_u32
-    DEPENDENT_DISK_FLAG_REMOTE = 8_u32
-    DEPENDENT_DISK_FLAG_SYSTEM_VOLUME = 16_u32
-    DEPENDENT_DISK_FLAG_SYSTEM_VOLUME_PARENT = 32_u32
-    DEPENDENT_DISK_FLAG_REMOVABLE = 64_u32
-    DEPENDENT_DISK_FLAG_NO_DRIVE_LETTER = 128_u32
-    DEPENDENT_DISK_FLAG_PARENT = 256_u32
-    DEPENDENT_DISK_FLAG_NO_HOST_DISK = 512_u32
-    DEPENDENT_DISK_FLAG_PERMANENT_LIFETIME = 1024_u32
-    DEPENDENT_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 2048_u32
-    DEPENDENT_DISK_FLAG_ALWAYS_ALLOW_SPARSE = 4096_u32
-    DEPENDENT_DISK_FLAG_SUPPORT_ENCRYPTED_FILES = 8192_u32
+  enum DEPENDENT_DISK_FLAG
+    DEPENDENT_DISK_FLAG_NONE = 0_i32
+    DEPENDENT_DISK_FLAG_MULT_BACKING_FILES = 1_i32
+    DEPENDENT_DISK_FLAG_FULLY_ALLOCATED = 2_i32
+    DEPENDENT_DISK_FLAG_READ_ONLY = 4_i32
+    DEPENDENT_DISK_FLAG_REMOTE = 8_i32
+    DEPENDENT_DISK_FLAG_SYSTEM_VOLUME = 16_i32
+    DEPENDENT_DISK_FLAG_SYSTEM_VOLUME_PARENT = 32_i32
+    DEPENDENT_DISK_FLAG_REMOVABLE = 64_i32
+    DEPENDENT_DISK_FLAG_NO_DRIVE_LETTER = 128_i32
+    DEPENDENT_DISK_FLAG_PARENT = 256_i32
+    DEPENDENT_DISK_FLAG_NO_HOST_DISK = 512_i32
+    DEPENDENT_DISK_FLAG_PERMANENT_LIFETIME = 1024_i32
+    DEPENDENT_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 2048_i32
+    DEPENDENT_DISK_FLAG_ALWAYS_ALLOW_SPARSE = 4096_i32
+    DEPENDENT_DISK_FLAG_SUPPORT_ENCRYPTED_FILES = 8192_i32
   end
   enum STORAGE_DEPENDENCY_INFO_VERSION
     STORAGE_DEPENDENCY_INFO_VERSION_UNSPECIFIED = 0_i32
@@ -121,10 +122,10 @@ module Win32cr::Storage::Vhd
     STORAGE_DEPENDENCY_INFO_VERSION_2 = 2_i32
   end
   @[Flags]
-  enum GET_STORAGE_DEPENDENCY_FLAG : UInt32
-    GET_STORAGE_DEPENDENCY_FLAG_NONE = 0_u32
-    GET_STORAGE_DEPENDENCY_FLAG_HOST_VOLUMES = 1_u32
-    GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE = 2_u32
+  enum GET_STORAGE_DEPENDENCY_FLAG
+    GET_STORAGE_DEPENDENCY_FLAG_NONE = 0_i32
+    GET_STORAGE_DEPENDENCY_FLAG_HOST_VOLUMES = 1_i32
+    GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE = 2_i32
   end
   enum GET_VIRTUAL_DISK_INFO_VERSION
     GET_VIRTUAL_DISK_INFO_UNSPECIFIED = 0_i32
@@ -159,10 +160,10 @@ module Win32cr::Storage::Vhd
     COMPACT_VIRTUAL_DISK_VERSION_1 = 1_i32
   end
   @[Flags]
-  enum COMPACT_VIRTUAL_DISK_FLAG : UInt32
-    COMPACT_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    COMPACT_VIRTUAL_DISK_FLAG_NO_ZERO_SCAN = 1_u32
-    COMPACT_VIRTUAL_DISK_FLAG_NO_BLOCK_MOVES = 2_u32
+  enum COMPACT_VIRTUAL_DISK_FLAG
+    COMPACT_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    COMPACT_VIRTUAL_DISK_FLAG_NO_ZERO_SCAN = 1_i32
+    COMPACT_VIRTUAL_DISK_FLAG_NO_BLOCK_MOVES = 2_i32
   end
   enum MERGE_VIRTUAL_DISK_VERSION
     MERGE_VIRTUAL_DISK_VERSION_UNSPECIFIED = 0_i32
@@ -170,57 +171,57 @@ module Win32cr::Storage::Vhd
     MERGE_VIRTUAL_DISK_VERSION_2 = 2_i32
   end
   @[Flags]
-  enum MERGE_VIRTUAL_DISK_FLAG : UInt32
-    MERGE_VIRTUAL_DISK_FLAG_NONE = 0_u32
+  enum MERGE_VIRTUAL_DISK_FLAG
+    MERGE_VIRTUAL_DISK_FLAG_NONE = 0_i32
   end
   enum EXPAND_VIRTUAL_DISK_VERSION
     EXPAND_VIRTUAL_DISK_VERSION_UNSPECIFIED = 0_i32
     EXPAND_VIRTUAL_DISK_VERSION_1 = 1_i32
   end
   @[Flags]
-  enum EXPAND_VIRTUAL_DISK_FLAG : UInt32
-    EXPAND_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    EXPAND_VIRTUAL_DISK_FLAG_NOTIFY_CHANGE = 1_u32
+  enum EXPAND_VIRTUAL_DISK_FLAG
+    EXPAND_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    EXPAND_VIRTUAL_DISK_FLAG_NOTIFY_CHANGE = 1_i32
   end
   enum RESIZE_VIRTUAL_DISK_VERSION
     RESIZE_VIRTUAL_DISK_VERSION_UNSPECIFIED = 0_i32
     RESIZE_VIRTUAL_DISK_VERSION_1 = 1_i32
   end
   @[Flags]
-  enum RESIZE_VIRTUAL_DISK_FLAG : UInt32
-    RESIZE_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    RESIZE_VIRTUAL_DISK_FLAG_ALLOW_UNSAFE_VIRTUAL_SIZE = 1_u32
-    RESIZE_VIRTUAL_DISK_FLAG_RESIZE_TO_SMALLEST_SAFE_VIRTUAL_SIZE = 2_u32
+  enum RESIZE_VIRTUAL_DISK_FLAG
+    RESIZE_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    RESIZE_VIRTUAL_DISK_FLAG_ALLOW_UNSAFE_VIRTUAL_SIZE = 1_i32
+    RESIZE_VIRTUAL_DISK_FLAG_RESIZE_TO_SMALLEST_SAFE_VIRTUAL_SIZE = 2_i32
   end
   enum MIRROR_VIRTUAL_DISK_VERSION
     MIRROR_VIRTUAL_DISK_VERSION_UNSPECIFIED = 0_i32
     MIRROR_VIRTUAL_DISK_VERSION_1 = 1_i32
   end
   @[Flags]
-  enum MIRROR_VIRTUAL_DISK_FLAG : UInt32
-    MIRROR_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    MIRROR_VIRTUAL_DISK_FLAG_EXISTING_FILE = 1_u32
-    MIRROR_VIRTUAL_DISK_FLAG_SKIP_MIRROR_ACTIVATION = 2_u32
-    MIRROR_VIRTUAL_DISK_FLAG_ENABLE_SMB_COMPRESSION = 4_u32
-    MIRROR_VIRTUAL_DISK_FLAG_IS_LIVE_MIGRATION = 8_u32
+  enum MIRROR_VIRTUAL_DISK_FLAG
+    MIRROR_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    MIRROR_VIRTUAL_DISK_FLAG_EXISTING_FILE = 1_i32
+    MIRROR_VIRTUAL_DISK_FLAG_SKIP_MIRROR_ACTIVATION = 2_i32
+    MIRROR_VIRTUAL_DISK_FLAG_ENABLE_SMB_COMPRESSION = 4_i32
+    MIRROR_VIRTUAL_DISK_FLAG_IS_LIVE_MIGRATION = 8_i32
   end
   @[Flags]
-  enum QUERY_CHANGES_VIRTUAL_DISK_FLAG : UInt32
-    QUERY_CHANGES_VIRTUAL_DISK_FLAG_NONE = 0_u32
+  enum QUERY_CHANGES_VIRTUAL_DISK_FLAG
+    QUERY_CHANGES_VIRTUAL_DISK_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum TAKE_SNAPSHOT_VHDSET_FLAG : UInt32
-    TAKE_SNAPSHOT_VHDSET_FLAG_NONE = 0_u32
-    TAKE_SNAPSHOT_VHDSET_FLAG_WRITEABLE = 1_u32
+  enum TAKE_SNAPSHOT_VHDSET_FLAG
+    TAKE_SNAPSHOT_VHDSET_FLAG_NONE = 0_i32
+    TAKE_SNAPSHOT_VHDSET_FLAG_WRITEABLE = 1_i32
   end
   enum TAKE_SNAPSHOT_VHDSET_VERSION
     TAKE_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED = 0_i32
     TAKE_SNAPSHOT_VHDSET_VERSION_1 = 1_i32
   end
   @[Flags]
-  enum DELETE_SNAPSHOT_VHDSET_FLAG : UInt32
-    DELETE_SNAPSHOT_VHDSET_FLAG_NONE = 0_u32
-    DELETE_SNAPSHOT_VHDSET_FLAG_PERSIST_RCT = 1_u32
+  enum DELETE_SNAPSHOT_VHDSET_FLAG
+    DELETE_SNAPSHOT_VHDSET_FLAG_NONE = 0_i32
+    DELETE_SNAPSHOT_VHDSET_FLAG_PERSIST_RCT = 1_i32
   end
   enum DELETE_SNAPSHOT_VHDSET_VERSION
     DELETE_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED = 0_i32
@@ -233,22 +234,22 @@ module Win32cr::Storage::Vhd
     MODIFY_VHDSET_DEFAULT_SNAPSHOT_PATH = 3_i32
   end
   @[Flags]
-  enum MODIFY_VHDSET_FLAG : UInt32
-    MODIFY_VHDSET_FLAG_NONE = 0_u32
-    MODIFY_VHDSET_FLAG_WRITEABLE_SNAPSHOT = 1_u32
+  enum MODIFY_VHDSET_FLAG
+    MODIFY_VHDSET_FLAG_NONE = 0_i32
+    MODIFY_VHDSET_FLAG_WRITEABLE_SNAPSHOT = 1_i32
   end
   @[Flags]
-  enum APPLY_SNAPSHOT_VHDSET_FLAG : UInt32
-    APPLY_SNAPSHOT_VHDSET_FLAG_NONE = 0_u32
-    APPLY_SNAPSHOT_VHDSET_FLAG_WRITEABLE = 1_u32
+  enum APPLY_SNAPSHOT_VHDSET_FLAG
+    APPLY_SNAPSHOT_VHDSET_FLAG_NONE = 0_i32
+    APPLY_SNAPSHOT_VHDSET_FLAG_WRITEABLE = 1_i32
   end
   enum APPLY_SNAPSHOT_VHDSET_VERSION
     APPLY_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED = 0_i32
     APPLY_SNAPSHOT_VHDSET_VERSION_1 = 1_i32
   end
   @[Flags]
-  enum RAW_SCSI_VIRTUAL_DISK_FLAG : UInt32
-    RAW_SCSI_VIRTUAL_DISK_FLAG_NONE = 0_u32
+  enum RAW_SCSI_VIRTUAL_DISK_FLAG
+    RAW_SCSI_VIRTUAL_DISK_FLAG_NONE = 0_i32
   end
   enum RAW_SCSI_VIRTUAL_DISK_VERSION
     RAW_SCSI_VIRTUAL_DISK_VERSION_UNSPECIFIED = 0_i32
@@ -259,9 +260,9 @@ module Win32cr::Storage::Vhd
     FORK_VIRTUAL_DISK_VERSION_1 = 1_i32
   end
   @[Flags]
-  enum FORK_VIRTUAL_DISK_FLAG : UInt32
-    FORK_VIRTUAL_DISK_FLAG_NONE = 0_u32
-    FORK_VIRTUAL_DISK_FLAG_EXISTING_FILE = 1_u32
+  enum FORK_VIRTUAL_DISK_FLAG
+    FORK_VIRTUAL_DISK_FLAG_NONE = 0_i32
+    FORK_VIRTUAL_DISK_FLAG_EXISTING_FILE = 1_i32
   end
 
   @[Extern]
@@ -284,18 +285,6 @@ module Win32cr::Storage::Vhd
     property version2 : Version2_e__Struct_
     property version3 : Version3_e__Struct_
 
-      # Nested Type Version3_e__Struct_
-      @[Extern]
-      struct Version3_e__Struct_
-    property get_info_only : Win32cr::Foundation::BOOL
-    property read_only : Win32cr::Foundation::BOOL
-    property resiliency_guid : LibC::GUID
-    property snapshot_id : LibC::GUID
-    def initialize(@get_info_only : Win32cr::Foundation::BOOL, @read_only : Win32cr::Foundation::BOOL, @resiliency_guid : LibC::GUID, @snapshot_id : LibC::GUID)
-    end
-      end
-
-
       # Nested Type Version1_e__Struct_
       @[Extern]
       struct Version1_e__Struct_
@@ -312,6 +301,18 @@ module Win32cr::Storage::Vhd
     property read_only : Win32cr::Foundation::BOOL
     property resiliency_guid : LibC::GUID
     def initialize(@get_info_only : Win32cr::Foundation::BOOL, @read_only : Win32cr::Foundation::BOOL, @resiliency_guid : LibC::GUID)
+    end
+      end
+
+
+      # Nested Type Version3_e__Struct_
+      @[Extern]
+      struct Version3_e__Struct_
+    property get_info_only : Win32cr::Foundation::BOOL
+    property read_only : Win32cr::Foundation::BOOL
+    property resiliency_guid : LibC::GUID
+    property snapshot_id : LibC::GUID
+    def initialize(@get_info_only : Win32cr::Foundation::BOOL, @read_only : Win32cr::Foundation::BOOL, @resiliency_guid : LibC::GUID, @snapshot_id : LibC::GUID)
     end
       end
 
@@ -336,25 +337,16 @@ module Win32cr::Storage::Vhd
     property version3 : Version3_e__Struct_
     property version4 : Version4_e__Struct_
 
-      # Nested Type Version4_e__Struct_
+      # Nested Type Version1_e__Struct_
       @[Extern]
-      struct Version4_e__Struct_
+      struct Version1_e__Struct_
     property unique_id : LibC::GUID
     property maximum_size : UInt64
     property block_size_in_bytes : UInt32
     property sector_size_in_bytes : UInt32
-    property physical_sector_size_in_bytes : UInt32
     property parent_path : Win32cr::Foundation::PWSTR
     property source_path : Win32cr::Foundation::PWSTR
-    property open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG
-    property parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
-    property source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
-    property resiliency_guid : LibC::GUID
-    property source_limit_path : Win32cr::Foundation::PWSTR
-    property backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
-    property pmem_address_abstraction_type : LibC::GUID
-    property data_alignment : UInt64
-    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID, @source_limit_path : Win32cr::Foundation::PWSTR, @backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @pmem_address_abstraction_type : LibC::GUID, @data_alignment : UInt64)
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR)
     end
       end
 
@@ -399,16 +391,25 @@ module Win32cr::Storage::Vhd
       end
 
 
-      # Nested Type Version1_e__Struct_
+      # Nested Type Version4_e__Struct_
       @[Extern]
-      struct Version1_e__Struct_
+      struct Version4_e__Struct_
     property unique_id : LibC::GUID
     property maximum_size : UInt64
     property block_size_in_bytes : UInt32
     property sector_size_in_bytes : UInt32
+    property physical_sector_size_in_bytes : UInt32
     property parent_path : Win32cr::Foundation::PWSTR
     property source_path : Win32cr::Foundation::PWSTR
-    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR)
+    property open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG
+    property parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property resiliency_guid : LibC::GUID
+    property source_limit_path : Win32cr::Foundation::PWSTR
+    property backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property pmem_address_abstraction_type : LibC::GUID
+    property data_alignment : UInt64
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID, @source_limit_path : Win32cr::Foundation::PWSTR, @backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @pmem_address_abstraction_type : LibC::GUID, @data_alignment : UInt64)
     end
       end
 
@@ -431,21 +432,21 @@ module Win32cr::Storage::Vhd
     property version1 : Version1_e__Struct_
     property version2 : Version2_e__Struct_
 
+      # Nested Type Version1_e__Struct_
+      @[Extern]
+      struct Version1_e__Struct_
+    property reserved : UInt32
+    def initialize(@reserved : UInt32)
+    end
+      end
+
+
       # Nested Type Version2_e__Struct_
       @[Extern]
       struct Version2_e__Struct_
     property restricted_offset : UInt64
     property restricted_length : UInt64
     def initialize(@restricted_offset : UInt64, @restricted_length : UInt64)
-    end
-      end
-
-
-      # Nested Type Version1_e__Struct_
-      @[Extern]
-      struct Version1_e__Struct_
-    property reserved : UInt32
-    def initialize(@reserved : UInt32)
     end
       end
 
@@ -489,9 +490,9 @@ module Win32cr::Storage::Vhd
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
     struct Anonymous_e__Union_
-    property version1_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_1*
-    property version2_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_2*
-    def initialize(@version1_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_1*, @version2_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_2*)
+    property version1_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_1[1]
+    property version2_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_2[1]
+    def initialize(@version1_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_1[1], @version2_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_2[1])
     end
     end
 
@@ -523,17 +524,6 @@ module Win32cr::Storage::Vhd
     property virtual_disk_id : LibC::GUID
     property change_tracking_state : ChangeTrackingState_e__Struct_
 
-      # Nested Type PhysicalDisk_e__Struct_
-      @[Extern]
-      struct PhysicalDisk_e__Struct_
-    property logical_sector_size : UInt32
-    property physical_sector_size : UInt32
-    property is_remote : Win32cr::Foundation::BOOL
-    def initialize(@logical_sector_size : UInt32, @physical_sector_size : UInt32, @is_remote : Win32cr::Foundation::BOOL)
-    end
-      end
-
-
       # Nested Type Size_e__Struct_
       @[Extern]
       struct Size_e__Struct_
@@ -546,23 +536,34 @@ module Win32cr::Storage::Vhd
       end
 
 
+      # Nested Type ParentLocation_e__Struct_
+      @[Extern]
+      struct ParentLocation_e__Struct_
+    property parent_resolved : Win32cr::Foundation::BOOL
+    property parent_location_buffer : UInt16[1]
+    def initialize(@parent_resolved : Win32cr::Foundation::BOOL, @parent_location_buffer : UInt16[1])
+    end
+      end
+
+
+      # Nested Type PhysicalDisk_e__Struct_
+      @[Extern]
+      struct PhysicalDisk_e__Struct_
+    property logical_sector_size : UInt32
+    property physical_sector_size : UInt32
+    property is_remote : Win32cr::Foundation::BOOL
+    def initialize(@logical_sector_size : UInt32, @physical_sector_size : UInt32, @is_remote : Win32cr::Foundation::BOOL)
+    end
+      end
+
+
       # Nested Type ChangeTrackingState_e__Struct_
       @[Extern]
       struct ChangeTrackingState_e__Struct_
     property enabled : Win32cr::Foundation::BOOL
     property newer_changes : Win32cr::Foundation::BOOL
-    property most_recent_id : UInt16*
-    def initialize(@enabled : Win32cr::Foundation::BOOL, @newer_changes : Win32cr::Foundation::BOOL, @most_recent_id : UInt16*)
-    end
-      end
-
-
-      # Nested Type ParentLocation_e__Struct_
-      @[Extern]
-      struct ParentLocation_e__Struct_
-    property parent_resolved : Win32cr::Foundation::BOOL
-    property parent_location_buffer : UInt16*
-    def initialize(@parent_resolved : Win32cr::Foundation::BOOL, @parent_location_buffer : UInt16*)
+    property most_recent_id : UInt16[1]
+    def initialize(@enabled : Win32cr::Foundation::BOOL, @newer_changes : Win32cr::Foundation::BOOL, @most_recent_id : UInt16[1])
     end
       end
 
@@ -663,21 +664,21 @@ module Win32cr::Storage::Vhd
     property version1 : Version1_e__Struct_
     property version2 : Version2_e__Struct_
 
+      # Nested Type Version1_e__Struct_
+      @[Extern]
+      struct Version1_e__Struct_
+    property merge_depth : UInt32
+    def initialize(@merge_depth : UInt32)
+    end
+      end
+
+
       # Nested Type Version2_e__Struct_
       @[Extern]
       struct Version2_e__Struct_
     property merge_source_depth : UInt32
     property merge_target_depth : UInt32
     def initialize(@merge_source_depth : UInt32, @merge_target_depth : UInt32)
-    end
-      end
-
-
-      # Nested Type Version1_e__Struct_
-      @[Extern]
-      struct Version1_e__Struct_
-    property merge_depth : UInt32
-    def initialize(@merge_depth : UInt32)
     end
       end
 
@@ -973,122 +974,181 @@ module Win32cr::Storage::Vhd
   end
 
   def openVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_PARAMETERS*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.OpenVirtualDisk(virtual_storage_type, path, virtual_disk_access_mask, flags, parameters, handle)
+    {% end %}
   end
 
   def createVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CreateVirtualDisk(virtual_storage_type, path, virtual_disk_access_mask, security_descriptor, flags, provider_specific_flags, parameters, overlapped, handle)
+    {% end %}
   end
 
   def attachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AttachVirtualDisk(virtual_disk_handle, security_descriptor, flags, provider_specific_flags, parameters, overlapped)
+    {% end %}
   end
 
   def detachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.DetachVirtualDisk(virtual_disk_handle, flags, provider_specific_flags)
+    {% end %}
   end
 
   def getVirtualDiskPhysicalPath(virtual_disk_handle : Win32cr::Foundation::HANDLE, disk_path_size_in_bytes : UInt32*, disk_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskPhysicalPath(virtual_disk_handle, disk_path_size_in_bytes, disk_path)
+    {% end %}
   end
 
   def getAllAttachedVirtualDiskPhysicalPaths(paths_buffer_size_in_bytes : UInt32*, paths_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetAllAttachedVirtualDiskPhysicalPaths(paths_buffer_size_in_bytes, paths_buffer)
+    {% end %}
   end
 
   def getStorageDependencyInformation(object_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::GET_STORAGE_DEPENDENCY_FLAG, storage_dependency_info_size : UInt32, storage_dependency_info : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetStorageDependencyInformation(object_handle, flags, storage_dependency_info_size, storage_dependency_info, size_used)
+    {% end %}
   end
 
   def getVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info_size : UInt32*, virtual_disk_info : Win32cr::Storage::Vhd::GET_VIRTUAL_DISK_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskInformation(virtual_disk_handle, virtual_disk_info_size, virtual_disk_info, size_used)
+    {% end %}
   end
 
   def setVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info : Win32cr::Storage::Vhd::SET_VIRTUAL_DISK_INFO*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetVirtualDiskInformation(virtual_disk_handle, virtual_disk_info)
+    {% end %}
   end
 
   def enumerateVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, number_of_items : UInt32*, items : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.EnumerateVirtualDiskMetadata(virtual_disk_handle, number_of_items, items)
+    {% end %}
   end
 
   def getVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32*, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskMetadata(virtual_disk_handle, item, meta_data_size, meta_data)
+    {% end %}
   end
 
   def setVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetVirtualDiskMetadata(virtual_disk_handle, item, meta_data_size, meta_data)
+    {% end %}
   end
 
   def deleteVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.DeleteVirtualDiskMetadata(virtual_disk_handle, item)
+    {% end %}
   end
 
   def getVirtualDiskOperationProgress(virtual_disk_handle : Win32cr::Foundation::HANDLE, overlapped : Win32cr::System::IO::OVERLAPPED*, progress : Win32cr::Storage::Vhd::VIRTUAL_DISK_PROGRESS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskOperationProgress(virtual_disk_handle, overlapped, progress)
+    {% end %}
   end
 
   def compactVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CompactVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def mergeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.MergeVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def expandVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ExpandVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def resizeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ResizeVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def mirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.MirrorVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def breakMirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.BreakMirrorVirtualDisk(virtual_disk_handle)
+    {% end %}
   end
 
   def addVirtualDiskParent(virtual_disk_handle : Win32cr::Foundation::HANDLE, parent_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AddVirtualDiskParent(virtual_disk_handle, parent_path)
+    {% end %}
   end
 
   def queryChangesVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, change_tracking_id : Win32cr::Foundation::PWSTR, byte_offset : UInt64, byte_length : UInt64, flags : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_FLAG, ranges : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_RANGE*, range_count : UInt32*, processed_length : UInt64*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.QueryChangesVirtualDisk(virtual_disk_handle, change_tracking_id, byte_offset, byte_length, flags, ranges, range_count, processed_length)
+    {% end %}
   end
 
   def takeSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TakeSnapshotVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def deleteSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.DeleteSnapshotVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def modifyVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::MODIFY_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::MODIFY_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ModifyVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def applySnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ApplySnapshotVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def rawSCSIVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_PARAMETERS*, flags : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_FLAG, response : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_RESPONSE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.RawSCSIVirtualDisk(virtual_disk_handle, parameters, flags, response)
+    {% end %}
   end
 
   def forkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ForkVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def completeForkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CompleteForkVirtualDisk(virtual_disk_handle)
+    {% end %}
   end
 
   @[Link("virtdisk")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun OpenVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_PARAMETERS*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
@@ -1178,4 +1238,5 @@ module Win32cr::Storage::Vhd
     fun CompleteForkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
 
   end
+  {% end %}
 end

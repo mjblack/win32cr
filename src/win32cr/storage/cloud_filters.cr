@@ -5,7 +5,7 @@ require "./../system/io.cr"
 
 module Win32cr::Storage::CloudFilters
   extend self
-  alias CF_CONNECTION_KEY = LibC::IntPtrT
+  alias CF_CONNECTION_KEY = Int64
   alias CF_CALLBACK = Proc(Win32cr::Storage::CloudFilters::CF_CALLBACK_INFO*, Win32cr::Storage::CloudFilters::CF_CALLBACK_PARAMETERS*, Void)
 
   CF_REQUEST_KEY_DEFAULT = 0_u32
@@ -15,12 +15,12 @@ module Win32cr::Storage::CloudFilters
   CF_MAX_PROVIDER_VERSION_LENGTH = 255_u32
 
   @[Flags]
-  enum CF_PLACEHOLDER_CREATE_FLAGS : UInt32
-    CF_PLACEHOLDER_CREATE_FLAG_NONE = 0_u32
-    CF_PLACEHOLDER_CREATE_FLAG_DISABLE_ON_DEMAND_POPULATION = 1_u32
-    CF_PLACEHOLDER_CREATE_FLAG_MARK_IN_SYNC = 2_u32
-    CF_PLACEHOLDER_CREATE_FLAG_SUPERSEDE = 4_u32
-    CF_PLACEHOLDER_CREATE_FLAG_ALWAYS_FULL = 8_u32
+  enum CF_PLACEHOLDER_CREATE_FLAGS
+    CF_PLACEHOLDER_CREATE_FLAG_NONE = 0_i32
+    CF_PLACEHOLDER_CREATE_FLAG_DISABLE_ON_DEMAND_POPULATION = 1_i32
+    CF_PLACEHOLDER_CREATE_FLAG_MARK_IN_SYNC = 2_i32
+    CF_PLACEHOLDER_CREATE_FLAG_SUPERSEDE = 4_i32
+    CF_PLACEHOLDER_CREATE_FLAG_ALWAYS_FULL = 8_i32
   end
   @[Flags]
   enum CF_SYNC_PROVIDER_STATUS : UInt32
@@ -37,11 +37,11 @@ module Win32cr::Storage::CloudFilters
     CF_PROVIDER_STATUS_ERROR = 3221225474_u32
   end
   @[Flags]
-  enum CF_REGISTER_FLAGS : UInt32
-    CF_REGISTER_FLAG_NONE = 0_u32
-    CF_REGISTER_FLAG_UPDATE = 1_u32
-    CF_REGISTER_FLAG_DISABLE_ON_DEMAND_POPULATION_ON_ROOT = 2_u32
-    CF_REGISTER_FLAG_MARK_IN_SYNC_ON_ROOT = 4_u32
+  enum CF_REGISTER_FLAGS
+    CF_REGISTER_FLAG_NONE = 0_i32
+    CF_REGISTER_FLAG_UPDATE = 1_i32
+    CF_REGISTER_FLAG_DISABLE_ON_DEMAND_POPULATION_ON_ROOT = 2_i32
+    CF_REGISTER_FLAG_MARK_IN_SYNC_ON_ROOT = 4_i32
   end
   enum CF_HYDRATION_POLICY_PRIMARY : UInt16
     CF_HYDRATION_POLICY_PARTIAL = 0_u16
@@ -91,73 +91,73 @@ module Win32cr::Storage::CloudFilters
     CF_INSYNC_POLICY_PRESERVE_INSYNC_FOR_SYNC_ENGINE = 2147483648_u32
   end
   @[Flags]
-  enum CF_HARDLINK_POLICY : UInt32
-    CF_HARDLINK_POLICY_NONE = 0_u32
-    CF_HARDLINK_POLICY_ALLOWED = 1_u32
+  enum CF_HARDLINK_POLICY
+    CF_HARDLINK_POLICY_NONE = 0_i32
+    CF_HARDLINK_POLICY_ALLOWED = 1_i32
   end
   @[Flags]
-  enum CF_CALLBACK_CANCEL_FLAGS : UInt32
-    CF_CALLBACK_CANCEL_FLAG_NONE = 0_u32
-    CF_CALLBACK_CANCEL_FLAG_IO_TIMEOUT = 1_u32
-    CF_CALLBACK_CANCEL_FLAG_IO_ABORTED = 2_u32
+  enum CF_CALLBACK_CANCEL_FLAGS
+    CF_CALLBACK_CANCEL_FLAG_NONE = 0_i32
+    CF_CALLBACK_CANCEL_FLAG_IO_TIMEOUT = 1_i32
+    CF_CALLBACK_CANCEL_FLAG_IO_ABORTED = 2_i32
   end
   @[Flags]
-  enum CF_CALLBACK_FETCH_DATA_FLAGS : UInt32
-    CF_CALLBACK_FETCH_DATA_FLAG_NONE = 0_u32
-    CF_CALLBACK_FETCH_DATA_FLAG_RECOVERY = 1_u32
-    CF_CALLBACK_FETCH_DATA_FLAG_EXPLICIT_HYDRATION = 2_u32
+  enum CF_CALLBACK_FETCH_DATA_FLAGS
+    CF_CALLBACK_FETCH_DATA_FLAG_NONE = 0_i32
+    CF_CALLBACK_FETCH_DATA_FLAG_RECOVERY = 1_i32
+    CF_CALLBACK_FETCH_DATA_FLAG_EXPLICIT_HYDRATION = 2_i32
   end
   @[Flags]
-  enum CF_CALLBACK_VALIDATE_DATA_FLAGS : UInt32
-    CF_CALLBACK_VALIDATE_DATA_FLAG_NONE = 0_u32
-    CF_CALLBACK_VALIDATE_DATA_FLAG_EXPLICIT_HYDRATION = 2_u32
+  enum CF_CALLBACK_VALIDATE_DATA_FLAGS
+    CF_CALLBACK_VALIDATE_DATA_FLAG_NONE = 0_i32
+    CF_CALLBACK_VALIDATE_DATA_FLAG_EXPLICIT_HYDRATION = 2_i32
   end
   @[Flags]
-  enum CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS : UInt32
-    CF_CALLBACK_FETCH_PLACEHOLDERS_FLAG_NONE = 0_u32
+  enum CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS
+    CF_CALLBACK_FETCH_PLACEHOLDERS_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_CALLBACK_OPEN_COMPLETION_FLAGS : UInt32
-    CF_CALLBACK_OPEN_COMPLETION_FLAG_NONE = 0_u32
-    CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNKNOWN = 1_u32
-    CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNSUPPORTED = 2_u32
+  enum CF_CALLBACK_OPEN_COMPLETION_FLAGS
+    CF_CALLBACK_OPEN_COMPLETION_FLAG_NONE = 0_i32
+    CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNKNOWN = 1_i32
+    CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNSUPPORTED = 2_i32
   end
   @[Flags]
-  enum CF_CALLBACK_CLOSE_COMPLETION_FLAGS : UInt32
-    CF_CALLBACK_CLOSE_COMPLETION_FLAG_NONE = 0_u32
-    CF_CALLBACK_CLOSE_COMPLETION_FLAG_DELETED = 1_u32
+  enum CF_CALLBACK_CLOSE_COMPLETION_FLAGS
+    CF_CALLBACK_CLOSE_COMPLETION_FLAG_NONE = 0_i32
+    CF_CALLBACK_CLOSE_COMPLETION_FLAG_DELETED = 1_i32
   end
   @[Flags]
-  enum CF_CALLBACK_DEHYDRATE_FLAGS : UInt32
-    CF_CALLBACK_DEHYDRATE_FLAG_NONE = 0_u32
-    CF_CALLBACK_DEHYDRATE_FLAG_BACKGROUND = 1_u32
+  enum CF_CALLBACK_DEHYDRATE_FLAGS
+    CF_CALLBACK_DEHYDRATE_FLAG_NONE = 0_i32
+    CF_CALLBACK_DEHYDRATE_FLAG_BACKGROUND = 1_i32
   end
   @[Flags]
-  enum CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS : UInt32
-    CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_NONE = 0_u32
-    CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_BACKGROUND = 1_u32
-    CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_DEHYDRATED = 2_u32
+  enum CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS
+    CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_NONE = 0_i32
+    CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_BACKGROUND = 1_i32
+    CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_DEHYDRATED = 2_i32
   end
   @[Flags]
-  enum CF_CALLBACK_DELETE_FLAGS : UInt32
-    CF_CALLBACK_DELETE_FLAG_NONE = 0_u32
-    CF_CALLBACK_DELETE_FLAG_IS_DIRECTORY = 1_u32
-    CF_CALLBACK_DELETE_FLAG_IS_UNDELETE = 2_u32
+  enum CF_CALLBACK_DELETE_FLAGS
+    CF_CALLBACK_DELETE_FLAG_NONE = 0_i32
+    CF_CALLBACK_DELETE_FLAG_IS_DIRECTORY = 1_i32
+    CF_CALLBACK_DELETE_FLAG_IS_UNDELETE = 2_i32
   end
   @[Flags]
-  enum CF_CALLBACK_DELETE_COMPLETION_FLAGS : UInt32
-    CF_CALLBACK_DELETE_COMPLETION_FLAG_NONE = 0_u32
+  enum CF_CALLBACK_DELETE_COMPLETION_FLAGS
+    CF_CALLBACK_DELETE_COMPLETION_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_CALLBACK_RENAME_FLAGS : UInt32
-    CF_CALLBACK_RENAME_FLAG_NONE = 0_u32
-    CF_CALLBACK_RENAME_FLAG_IS_DIRECTORY = 1_u32
-    CF_CALLBACK_RENAME_FLAG_SOURCE_IN_SCOPE = 2_u32
-    CF_CALLBACK_RENAME_FLAG_TARGET_IN_SCOPE = 4_u32
+  enum CF_CALLBACK_RENAME_FLAGS
+    CF_CALLBACK_RENAME_FLAG_NONE = 0_i32
+    CF_CALLBACK_RENAME_FLAG_IS_DIRECTORY = 1_i32
+    CF_CALLBACK_RENAME_FLAG_SOURCE_IN_SCOPE = 2_i32
+    CF_CALLBACK_RENAME_FLAG_TARGET_IN_SCOPE = 4_i32
   end
   @[Flags]
-  enum CF_CALLBACK_RENAME_COMPLETION_FLAGS : UInt32
-    CF_CALLBACK_RENAME_COMPLETION_FLAG_NONE = 0_u32
+  enum CF_CALLBACK_RENAME_COMPLETION_FLAGS
+    CF_CALLBACK_RENAME_COMPLETION_FLAG_NONE = 0_i32
   end
   enum CF_CALLBACK_DEHYDRATION_REASON
     CF_CALLBACK_DEHYDRATION_REASON_NONE = 0_i32
@@ -183,11 +183,11 @@ module Win32cr::Storage::CloudFilters
     CF_CALLBACK_TYPE_NONE = -1_i32
   end
   @[Flags]
-  enum CF_CONNECT_FLAGS : UInt32
-    CF_CONNECT_FLAG_NONE = 0_u32
-    CF_CONNECT_FLAG_REQUIRE_PROCESS_INFO = 2_u32
-    CF_CONNECT_FLAG_REQUIRE_FULL_FILE_PATH = 4_u32
-    CF_CONNECT_FLAG_BLOCK_SELF_IMPLICIT_HYDRATION = 8_u32
+  enum CF_CONNECT_FLAGS
+    CF_CONNECT_FLAG_NONE = 0_i32
+    CF_CONNECT_FLAG_REQUIRE_PROCESS_INFO = 2_i32
+    CF_CONNECT_FLAG_REQUIRE_FULL_FILE_PATH = 4_i32
+    CF_CONNECT_FLAG_BLOCK_SELF_IMPLICIT_HYDRATION = 8_i32
   end
   enum CF_OPERATION_TYPE
     CF_OPERATION_TYPE_TRANSFER_DATA = 0_i32
@@ -200,89 +200,89 @@ module Win32cr::Storage::CloudFilters
     CF_OPERATION_TYPE_ACK_RENAME = 7_i32
   end
   @[Flags]
-  enum CF_OPERATION_TRANSFER_DATA_FLAGS : UInt32
-    CF_OPERATION_TRANSFER_DATA_FLAG_NONE = 0_u32
+  enum CF_OPERATION_TRANSFER_DATA_FLAGS
+    CF_OPERATION_TRANSFER_DATA_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_OPERATION_RETRIEVE_DATA_FLAGS : UInt32
-    CF_OPERATION_RETRIEVE_DATA_FLAG_NONE = 0_u32
+  enum CF_OPERATION_RETRIEVE_DATA_FLAGS
+    CF_OPERATION_RETRIEVE_DATA_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_OPERATION_ACK_DATA_FLAGS : UInt32
-    CF_OPERATION_ACK_DATA_FLAG_NONE = 0_u32
+  enum CF_OPERATION_ACK_DATA_FLAGS
+    CF_OPERATION_ACK_DATA_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_OPERATION_RESTART_HYDRATION_FLAGS : UInt32
-    CF_OPERATION_RESTART_HYDRATION_FLAG_NONE = 0_u32
-    CF_OPERATION_RESTART_HYDRATION_FLAG_MARK_IN_SYNC = 1_u32
+  enum CF_OPERATION_RESTART_HYDRATION_FLAGS
+    CF_OPERATION_RESTART_HYDRATION_FLAG_NONE = 0_i32
+    CF_OPERATION_RESTART_HYDRATION_FLAG_MARK_IN_SYNC = 1_i32
   end
   @[Flags]
-  enum CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS : UInt32
-    CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_NONE = 0_u32
-    CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_STOP_ON_ERROR = 1_u32
-    CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_DISABLE_ON_DEMAND_POPULATION = 2_u32
+  enum CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS
+    CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_NONE = 0_i32
+    CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_STOP_ON_ERROR = 1_i32
+    CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_DISABLE_ON_DEMAND_POPULATION = 2_i32
   end
   @[Flags]
-  enum CF_OPERATION_ACK_DEHYDRATE_FLAGS : UInt32
-    CF_OPERATION_ACK_DEHYDRATE_FLAG_NONE = 0_u32
+  enum CF_OPERATION_ACK_DEHYDRATE_FLAGS
+    CF_OPERATION_ACK_DEHYDRATE_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_OPERATION_ACK_RENAME_FLAGS : UInt32
-    CF_OPERATION_ACK_RENAME_FLAG_NONE = 0_u32
+  enum CF_OPERATION_ACK_RENAME_FLAGS
+    CF_OPERATION_ACK_RENAME_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_OPERATION_ACK_DELETE_FLAGS : UInt32
-    CF_OPERATION_ACK_DELETE_FLAG_NONE = 0_u32
+  enum CF_OPERATION_ACK_DELETE_FLAGS
+    CF_OPERATION_ACK_DELETE_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_CREATE_FLAGS : UInt32
-    CF_CREATE_FLAG_NONE = 0_u32
-    CF_CREATE_FLAG_STOP_ON_ERROR = 1_u32
+  enum CF_CREATE_FLAGS
+    CF_CREATE_FLAG_NONE = 0_i32
+    CF_CREATE_FLAG_STOP_ON_ERROR = 1_i32
   end
   @[Flags]
-  enum CF_OPEN_FILE_FLAGS : UInt32
-    CF_OPEN_FILE_FLAG_NONE = 0_u32
-    CF_OPEN_FILE_FLAG_EXCLUSIVE = 1_u32
-    CF_OPEN_FILE_FLAG_WRITE_ACCESS = 2_u32
-    CF_OPEN_FILE_FLAG_DELETE_ACCESS = 4_u32
-    CF_OPEN_FILE_FLAG_FOREGROUND = 8_u32
+  enum CF_OPEN_FILE_FLAGS
+    CF_OPEN_FILE_FLAG_NONE = 0_i32
+    CF_OPEN_FILE_FLAG_EXCLUSIVE = 1_i32
+    CF_OPEN_FILE_FLAG_WRITE_ACCESS = 2_i32
+    CF_OPEN_FILE_FLAG_DELETE_ACCESS = 4_i32
+    CF_OPEN_FILE_FLAG_FOREGROUND = 8_i32
   end
   @[Flags]
-  enum CF_CONVERT_FLAGS : UInt32
-    CF_CONVERT_FLAG_NONE = 0_u32
-    CF_CONVERT_FLAG_MARK_IN_SYNC = 1_u32
-    CF_CONVERT_FLAG_DEHYDRATE = 2_u32
-    CF_CONVERT_FLAG_ENABLE_ON_DEMAND_POPULATION = 4_u32
-    CF_CONVERT_FLAG_ALWAYS_FULL = 8_u32
-    CF_CONVERT_FLAG_FORCE_CONVERT_TO_CLOUD_FILE = 16_u32
+  enum CF_CONVERT_FLAGS
+    CF_CONVERT_FLAG_NONE = 0_i32
+    CF_CONVERT_FLAG_MARK_IN_SYNC = 1_i32
+    CF_CONVERT_FLAG_DEHYDRATE = 2_i32
+    CF_CONVERT_FLAG_ENABLE_ON_DEMAND_POPULATION = 4_i32
+    CF_CONVERT_FLAG_ALWAYS_FULL = 8_i32
+    CF_CONVERT_FLAG_FORCE_CONVERT_TO_CLOUD_FILE = 16_i32
   end
   @[Flags]
-  enum CF_UPDATE_FLAGS : UInt32
-    CF_UPDATE_FLAG_NONE = 0_u32
-    CF_UPDATE_FLAG_VERIFY_IN_SYNC = 1_u32
-    CF_UPDATE_FLAG_MARK_IN_SYNC = 2_u32
-    CF_UPDATE_FLAG_DEHYDRATE = 4_u32
-    CF_UPDATE_FLAG_ENABLE_ON_DEMAND_POPULATION = 8_u32
-    CF_UPDATE_FLAG_DISABLE_ON_DEMAND_POPULATION = 16_u32
-    CF_UPDATE_FLAG_REMOVE_FILE_IDENTITY = 32_u32
-    CF_UPDATE_FLAG_CLEAR_IN_SYNC = 64_u32
-    CF_UPDATE_FLAG_REMOVE_PROPERTY = 128_u32
-    CF_UPDATE_FLAG_PASSTHROUGH_FS_METADATA = 256_u32
-    CF_UPDATE_FLAG_ALWAYS_FULL = 512_u32
-    CF_UPDATE_FLAG_ALLOW_PARTIAL = 1024_u32
+  enum CF_UPDATE_FLAGS
+    CF_UPDATE_FLAG_NONE = 0_i32
+    CF_UPDATE_FLAG_VERIFY_IN_SYNC = 1_i32
+    CF_UPDATE_FLAG_MARK_IN_SYNC = 2_i32
+    CF_UPDATE_FLAG_DEHYDRATE = 4_i32
+    CF_UPDATE_FLAG_ENABLE_ON_DEMAND_POPULATION = 8_i32
+    CF_UPDATE_FLAG_DISABLE_ON_DEMAND_POPULATION = 16_i32
+    CF_UPDATE_FLAG_REMOVE_FILE_IDENTITY = 32_i32
+    CF_UPDATE_FLAG_CLEAR_IN_SYNC = 64_i32
+    CF_UPDATE_FLAG_REMOVE_PROPERTY = 128_i32
+    CF_UPDATE_FLAG_PASSTHROUGH_FS_METADATA = 256_i32
+    CF_UPDATE_FLAG_ALWAYS_FULL = 512_i32
+    CF_UPDATE_FLAG_ALLOW_PARTIAL = 1024_i32
   end
   @[Flags]
-  enum CF_REVERT_FLAGS : UInt32
-    CF_REVERT_FLAG_NONE = 0_u32
+  enum CF_REVERT_FLAGS
+    CF_REVERT_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_HYDRATE_FLAGS : UInt32
-    CF_HYDRATE_FLAG_NONE = 0_u32
+  enum CF_HYDRATE_FLAGS
+    CF_HYDRATE_FLAG_NONE = 0_i32
   end
   @[Flags]
-  enum CF_DEHYDRATE_FLAGS : UInt32
-    CF_DEHYDRATE_FLAG_NONE = 0_u32
-    CF_DEHYDRATE_FLAG_BACKGROUND = 1_u32
+  enum CF_DEHYDRATE_FLAGS
+    CF_DEHYDRATE_FLAG_NONE = 0_i32
+    CF_DEHYDRATE_FLAG_BACKGROUND = 1_i32
   end
   enum CF_PIN_STATE
     CF_PIN_STATE_UNSPECIFIED = 0_i32
@@ -292,19 +292,19 @@ module Win32cr::Storage::CloudFilters
     CF_PIN_STATE_INHERIT = 4_i32
   end
   @[Flags]
-  enum CF_SET_PIN_FLAGS : UInt32
-    CF_SET_PIN_FLAG_NONE = 0_u32
-    CF_SET_PIN_FLAG_RECURSE = 1_u32
-    CF_SET_PIN_FLAG_RECURSE_ONLY = 2_u32
-    CF_SET_PIN_FLAG_RECURSE_STOP_ON_ERROR = 4_u32
+  enum CF_SET_PIN_FLAGS
+    CF_SET_PIN_FLAG_NONE = 0_i32
+    CF_SET_PIN_FLAG_RECURSE = 1_i32
+    CF_SET_PIN_FLAG_RECURSE_ONLY = 2_i32
+    CF_SET_PIN_FLAG_RECURSE_STOP_ON_ERROR = 4_i32
   end
   enum CF_IN_SYNC_STATE
     CF_IN_SYNC_STATE_NOT_IN_SYNC = 0_i32
     CF_IN_SYNC_STATE_IN_SYNC = 1_i32
   end
   @[Flags]
-  enum CF_SET_IN_SYNC_FLAGS : UInt32
-    CF_SET_IN_SYNC_FLAG_NONE = 0_u32
+  enum CF_SET_IN_SYNC_FLAGS
+    CF_SET_IN_SYNC_FLAG_NONE = 0_i32
   end
   @[Flags]
   enum CF_PLACEHOLDER_STATE : UInt32
@@ -335,8 +335,8 @@ module Win32cr::Storage::CloudFilters
   @[Extern]
   struct CF_FS_METADATA
     property basic_info : Win32cr::Storage::FileSystem::FILE_BASIC_INFO
-    property file_size : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@basic_info : Win32cr::Storage::FileSystem::FILE_BASIC_INFO, @file_size : Win32cr::Foundation::LARGE_INTEGER)
+    property file_size : Int64
+    def initialize(@basic_info : Win32cr::Storage::FileSystem::FILE_BASIC_INFO, @file_size : Int64)
     end
   end
 
@@ -376,46 +376,18 @@ module Win32cr::Storage::CloudFilters
   end
 
   @[Extern]
-  struct CF_HYDRATION_POLICY_PRIMARY_USHORT
-    property us : UInt16
-    def initialize(@us : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct CF_HYDRATION_POLICY_MODIFIER_USHORT
-    property us : UInt16
-    def initialize(@us : UInt16)
-    end
-  end
-
-  @[Extern]
   struct CF_HYDRATION_POLICY
-    property primary : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_PRIMARY_USHORT
-    property modifier : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_MODIFIER_USHORT
-    def initialize(@primary : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_PRIMARY_USHORT, @modifier : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_MODIFIER_USHORT)
-    end
-  end
-
-  @[Extern]
-  struct CF_POPULATION_POLICY_PRIMARY_USHORT
-    property us : UInt16
-    def initialize(@us : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct CF_POPULATION_POLICY_MODIFIER_USHORT
-    property us : UInt16
-    def initialize(@us : UInt16)
+    property primary : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_PRIMARY
+    property modifier : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_MODIFIER
+    def initialize(@primary : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_PRIMARY, @modifier : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY_MODIFIER)
     end
   end
 
   @[Extern]
   struct CF_POPULATION_POLICY
-    property primary : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_PRIMARY_USHORT
-    property modifier : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_MODIFIER_USHORT
-    def initialize(@primary : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_PRIMARY_USHORT, @modifier : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_MODIFIER_USHORT)
+    property primary : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_PRIMARY
+    property modifier : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_MODIFIER
+    def initialize(@primary : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_PRIMARY, @modifier : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY_MODIFIER)
     end
   end
 
@@ -453,20 +425,20 @@ module Win32cr::Storage::CloudFilters
     property volume_guid_name : Win32cr::Foundation::PWSTR
     property volume_dos_name : Win32cr::Foundation::PWSTR
     property volume_serial_number : UInt32
-    property sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER
+    property sync_root_file_id : Int64
     property sync_root_identity : Void*
     property sync_root_identity_length : UInt32
-    property file_id : Win32cr::Foundation::LARGE_INTEGER
-    property file_size : Win32cr::Foundation::LARGE_INTEGER
+    property file_id : Int64
+    property file_size : Int64
     property file_identity : Void*
     property file_identity_length : UInt32
     property normalized_path : Win32cr::Foundation::PWSTR
-    property transfer_key : Win32cr::Foundation::LARGE_INTEGER
+    property transfer_key : Int64
     property priority_hint : UInt8
     property correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*
     property process_info : Win32cr::Storage::CloudFilters::CF_PROCESS_INFO*
-    property request_key : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@struct_size : UInt32, @connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, @callback_context : Void*, @volume_guid_name : Win32cr::Foundation::PWSTR, @volume_dos_name : Win32cr::Foundation::PWSTR, @volume_serial_number : UInt32, @sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER, @sync_root_identity : Void*, @sync_root_identity_length : UInt32, @file_id : Win32cr::Foundation::LARGE_INTEGER, @file_size : Win32cr::Foundation::LARGE_INTEGER, @file_identity : Void*, @file_identity_length : UInt32, @normalized_path : Win32cr::Foundation::PWSTR, @transfer_key : Win32cr::Foundation::LARGE_INTEGER, @priority_hint : UInt8, @correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*, @process_info : Win32cr::Storage::CloudFilters::CF_PROCESS_INFO*, @request_key : Win32cr::Foundation::LARGE_INTEGER)
+    property request_key : Int64
+    def initialize(@struct_size : UInt32, @connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, @callback_context : Void*, @volume_guid_name : Win32cr::Foundation::PWSTR, @volume_dos_name : Win32cr::Foundation::PWSTR, @volume_serial_number : UInt32, @sync_root_file_id : Int64, @sync_root_identity : Void*, @sync_root_identity_length : UInt32, @file_id : Int64, @file_size : Int64, @file_identity : Void*, @file_identity_length : UInt32, @normalized_path : Win32cr::Foundation::PWSTR, @transfer_key : Int64, @priority_hint : UInt8, @correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*, @process_info : Win32cr::Storage::CloudFilters::CF_PROCESS_INFO*, @request_key : Int64)
     end
   end
 
@@ -491,55 +463,6 @@ module Win32cr::Storage::CloudFilters
     property rename : Rename_e__Struct_
     property rename_completion : RenameCompletion_e__Struct_
 
-      # Nested Type Rename_e__Struct_
-      @[Extern]
-      struct Rename_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_FLAGS
-    property target_path : Win32cr::Foundation::PWSTR
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_FLAGS, @target_path : Win32cr::Foundation::PWSTR)
-    end
-      end
-
-
-      # Nested Type Delete_e__Struct_
-      @[Extern]
-      struct Delete_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_FLAGS
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_FLAGS)
-    end
-      end
-
-
-      # Nested Type Dehydrate_e__Struct_
-      @[Extern]
-      struct Dehydrate_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_FLAGS
-    property reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_FLAGS, @reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON)
-    end
-      end
-
-
-      # Nested Type OpenCompletion_e__Struct_
-      @[Extern]
-      struct OpenCompletion_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_OPEN_COMPLETION_FLAGS
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_OPEN_COMPLETION_FLAGS)
-    end
-      end
-
-
-      # Nested Type ValidateData_e__Struct_
-      @[Extern]
-      struct ValidateData_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_VALIDATE_DATA_FLAGS
-    property required_file_offset : Win32cr::Foundation::LARGE_INTEGER
-    property required_length : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_VALIDATE_DATA_FLAGS, @required_file_offset : Win32cr::Foundation::LARGE_INTEGER, @required_length : Win32cr::Foundation::LARGE_INTEGER)
-    end
-      end
-
-
       # Nested Type Cancel_e__Struct_
       @[Extern]
       struct Cancel_e__Struct_
@@ -554,9 +477,9 @@ module Win32cr::Storage::CloudFilters
           # Nested Type FetchData_e__Struct_
           @[Extern]
           struct FetchData_e__Struct_
-    property file_offset : Win32cr::Foundation::LARGE_INTEGER
-    property length : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@file_offset : Win32cr::Foundation::LARGE_INTEGER, @length : Win32cr::Foundation::LARGE_INTEGER)
+    property file_offset : Int64
+    property length : Int64
+    def initialize(@file_offset : Int64, @length : Int64)
     end
           end
 
@@ -569,22 +492,28 @@ module Win32cr::Storage::CloudFilters
       end
 
 
-      # Nested Type RenameCompletion_e__Struct_
+      # Nested Type FetchData_e__Struct_
       @[Extern]
-      struct RenameCompletion_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_COMPLETION_FLAGS
-    property source_path : Win32cr::Foundation::PWSTR
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_COMPLETION_FLAGS, @source_path : Win32cr::Foundation::PWSTR)
+      struct FetchData_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_FETCH_DATA_FLAGS
+    property required_file_offset : Int64
+    property required_length : Int64
+    property optional_file_offset : Int64
+    property optional_length : Int64
+    property last_dehydration_time : Int64
+    property last_dehydration_reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_FETCH_DATA_FLAGS, @required_file_offset : Int64, @required_length : Int64, @optional_file_offset : Int64, @optional_length : Int64, @last_dehydration_time : Int64, @last_dehydration_reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON)
     end
       end
 
 
-      # Nested Type DehydrateCompletion_e__Struct_
+      # Nested Type ValidateData_e__Struct_
       @[Extern]
-      struct DehydrateCompletion_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS
-    property reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS, @reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON)
+      struct ValidateData_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_VALIDATE_DATA_FLAGS
+    property required_file_offset : Int64
+    property required_length : Int64
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_VALIDATE_DATA_FLAGS, @required_file_offset : Int64, @required_length : Int64)
     end
       end
 
@@ -599,26 +528,11 @@ module Win32cr::Storage::CloudFilters
       end
 
 
-      # Nested Type DeleteCompletion_e__Struct_
+      # Nested Type OpenCompletion_e__Struct_
       @[Extern]
-      struct DeleteCompletion_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_COMPLETION_FLAGS
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_COMPLETION_FLAGS)
-    end
-      end
-
-
-      # Nested Type FetchData_e__Struct_
-      @[Extern]
-      struct FetchData_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_FETCH_DATA_FLAGS
-    property required_file_offset : Win32cr::Foundation::LARGE_INTEGER
-    property required_length : Win32cr::Foundation::LARGE_INTEGER
-    property optional_file_offset : Win32cr::Foundation::LARGE_INTEGER
-    property optional_length : Win32cr::Foundation::LARGE_INTEGER
-    property last_dehydration_time : Win32cr::Foundation::LARGE_INTEGER
-    property last_dehydration_reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_FETCH_DATA_FLAGS, @required_file_offset : Win32cr::Foundation::LARGE_INTEGER, @required_length : Win32cr::Foundation::LARGE_INTEGER, @optional_file_offset : Win32cr::Foundation::LARGE_INTEGER, @optional_length : Win32cr::Foundation::LARGE_INTEGER, @last_dehydration_time : Win32cr::Foundation::LARGE_INTEGER, @last_dehydration_reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON)
+      struct OpenCompletion_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_OPEN_COMPLETION_FLAGS
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_OPEN_COMPLETION_FLAGS)
     end
       end
 
@@ -628,6 +542,64 @@ module Win32cr::Storage::CloudFilters
       struct CloseCompletion_e__Struct_
     property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_CLOSE_COMPLETION_FLAGS
     def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_CLOSE_COMPLETION_FLAGS)
+    end
+      end
+
+
+      # Nested Type Dehydrate_e__Struct_
+      @[Extern]
+      struct Dehydrate_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_FLAGS
+    property reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_FLAGS, @reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON)
+    end
+      end
+
+
+      # Nested Type DehydrateCompletion_e__Struct_
+      @[Extern]
+      struct DehydrateCompletion_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS
+    property reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS, @reason : Win32cr::Storage::CloudFilters::CF_CALLBACK_DEHYDRATION_REASON)
+    end
+      end
+
+
+      # Nested Type Delete_e__Struct_
+      @[Extern]
+      struct Delete_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_FLAGS
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_FLAGS)
+    end
+      end
+
+
+      # Nested Type DeleteCompletion_e__Struct_
+      @[Extern]
+      struct DeleteCompletion_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_COMPLETION_FLAGS
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_DELETE_COMPLETION_FLAGS)
+    end
+      end
+
+
+      # Nested Type Rename_e__Struct_
+      @[Extern]
+      struct Rename_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_FLAGS
+    property target_path : Win32cr::Foundation::PWSTR
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_FLAGS, @target_path : Win32cr::Foundation::PWSTR)
+    end
+      end
+
+
+      # Nested Type RenameCompletion_e__Struct_
+      @[Extern]
+      struct RenameCompletion_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_COMPLETION_FLAGS
+    property source_path : Win32cr::Foundation::PWSTR
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_CALLBACK_RENAME_COMPLETION_FLAGS, @source_path : Win32cr::Foundation::PWSTR)
     end
       end
 
@@ -664,11 +636,11 @@ module Win32cr::Storage::CloudFilters
     property struct_size : UInt32
     property type__ : Win32cr::Storage::CloudFilters::CF_OPERATION_TYPE
     property connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY
-    property transfer_key : Win32cr::Foundation::LARGE_INTEGER
+    property transfer_key : Int64
     property correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*
     property sync_status : Win32cr::Storage::CloudFilters::CF_SYNC_STATUS*
-    property request_key : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@struct_size : UInt32, @type__ : Win32cr::Storage::CloudFilters::CF_OPERATION_TYPE, @connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, @transfer_key : Win32cr::Foundation::LARGE_INTEGER, @correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*, @sync_status : Win32cr::Storage::CloudFilters::CF_SYNC_STATUS*, @request_key : Win32cr::Foundation::LARGE_INTEGER)
+    property request_key : Int64
+    def initialize(@struct_size : UInt32, @type__ : Win32cr::Storage::CloudFilters::CF_OPERATION_TYPE, @connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, @transfer_key : Int64, @correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*, @sync_status : Win32cr::Storage::CloudFilters::CF_SYNC_STATUS*, @request_key : Int64)
     end
   end
 
@@ -689,26 +661,28 @@ module Win32cr::Storage::CloudFilters
     property ack_rename : AckRename_e__Struct_
     property ack_delete : AckDelete_e__Struct_
 
-      # Nested Type AckRename_e__Struct_
+      # Nested Type TransferData_e__Struct_
       @[Extern]
-      struct AckRename_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_RENAME_FLAGS
+      struct TransferData_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_DATA_FLAGS
     property completion_status : Win32cr::Foundation::NTSTATUS
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_RENAME_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS)
+    property buffer : Void*
+    property offset : Int64
+    property length : Int64
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_DATA_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS, @buffer : Void*, @offset : Int64, @length : Int64)
     end
       end
 
 
-      # Nested Type TransferPlaceholders_e__Struct_
+      # Nested Type RetrieveData_e__Struct_
       @[Extern]
-      struct TransferPlaceholders_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS
-    property completion_status : Win32cr::Foundation::NTSTATUS
-    property placeholder_total_count : Win32cr::Foundation::LARGE_INTEGER
-    property placeholder_array : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_CREATE_INFO*
-    property placeholder_count : UInt32
-    property entries_processed : UInt32
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS, @placeholder_total_count : Win32cr::Foundation::LARGE_INTEGER, @placeholder_array : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_CREATE_INFO*, @placeholder_count : UInt32, @entries_processed : UInt32)
+      struct RetrieveData_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_RETRIEVE_DATA_FLAGS
+    property buffer : Void*
+    property offset : Int64
+    property length : Int64
+    property returned_length : Int64
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_RETRIEVE_DATA_FLAGS, @buffer : Void*, @offset : Int64, @length : Int64, @returned_length : Int64)
     end
       end
 
@@ -718,32 +692,9 @@ module Win32cr::Storage::CloudFilters
       struct AckData_e__Struct_
     property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_DATA_FLAGS
     property completion_status : Win32cr::Foundation::NTSTATUS
-    property offset : Win32cr::Foundation::LARGE_INTEGER
-    property length : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_DATA_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS, @offset : Win32cr::Foundation::LARGE_INTEGER, @length : Win32cr::Foundation::LARGE_INTEGER)
-    end
-      end
-
-
-      # Nested Type TransferData_e__Struct_
-      @[Extern]
-      struct TransferData_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_DATA_FLAGS
-    property completion_status : Win32cr::Foundation::NTSTATUS
-    property buffer : Void*
-    property offset : Win32cr::Foundation::LARGE_INTEGER
-    property length : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_DATA_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS, @buffer : Void*, @offset : Win32cr::Foundation::LARGE_INTEGER, @length : Win32cr::Foundation::LARGE_INTEGER)
-    end
-      end
-
-
-      # Nested Type AckDelete_e__Struct_
-      @[Extern]
-      struct AckDelete_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_DELETE_FLAGS
-    property completion_status : Win32cr::Foundation::NTSTATUS
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_DELETE_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS)
+    property offset : Int64
+    property length : Int64
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_DATA_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS, @offset : Int64, @length : Int64)
     end
       end
 
@@ -760,6 +711,20 @@ module Win32cr::Storage::CloudFilters
       end
 
 
+      # Nested Type TransferPlaceholders_e__Struct_
+      @[Extern]
+      struct TransferPlaceholders_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS
+    property completion_status : Win32cr::Foundation::NTSTATUS
+    property placeholder_total_count : Int64
+    property placeholder_array : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_CREATE_INFO*
+    property placeholder_count : UInt32
+    property entries_processed : UInt32
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS, @placeholder_total_count : Int64, @placeholder_array : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_CREATE_INFO*, @placeholder_count : UInt32, @entries_processed : UInt32)
+    end
+      end
+
+
       # Nested Type AckDehydrate_e__Struct_
       @[Extern]
       struct AckDehydrate_e__Struct_
@@ -772,15 +737,22 @@ module Win32cr::Storage::CloudFilters
       end
 
 
-      # Nested Type RetrieveData_e__Struct_
+      # Nested Type AckRename_e__Struct_
       @[Extern]
-      struct RetrieveData_e__Struct_
-    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_RETRIEVE_DATA_FLAGS
-    property buffer : Void*
-    property offset : Win32cr::Foundation::LARGE_INTEGER
-    property length : Win32cr::Foundation::LARGE_INTEGER
-    property returned_length : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_RETRIEVE_DATA_FLAGS, @buffer : Void*, @offset : Win32cr::Foundation::LARGE_INTEGER, @length : Win32cr::Foundation::LARGE_INTEGER, @returned_length : Win32cr::Foundation::LARGE_INTEGER)
+      struct AckRename_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_RENAME_FLAGS
+    property completion_status : Win32cr::Foundation::NTSTATUS
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_RENAME_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS)
+    end
+      end
+
+
+      # Nested Type AckDelete_e__Struct_
+      @[Extern]
+      struct AckDelete_e__Struct_
+    property flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_DELETE_FLAGS
+    property completion_status : Win32cr::Foundation::NTSTATUS
+    def initialize(@flags : Win32cr::Storage::CloudFilters::CF_OPERATION_ACK_DELETE_FLAGS, @completion_status : Win32cr::Foundation::NTSTATUS)
     end
       end
 
@@ -794,9 +766,9 @@ module Win32cr::Storage::CloudFilters
 
   @[Extern]
   struct CF_FILE_RANGE
-    property starting_offset : Win32cr::Foundation::LARGE_INTEGER
-    property length : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@starting_offset : Win32cr::Foundation::LARGE_INTEGER, @length : Win32cr::Foundation::LARGE_INTEGER)
+    property starting_offset : Int64
+    property length : Int64
+    def initialize(@starting_offset : Int64, @length : Int64)
     end
   end
 
@@ -804,34 +776,34 @@ module Win32cr::Storage::CloudFilters
   struct CF_PLACEHOLDER_BASIC_INFO
     property pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE
     property in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE
-    property file_id : Win32cr::Foundation::LARGE_INTEGER
-    property sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER
+    property file_id : Int64
+    property sync_root_file_id : Int64
     property file_identity_length : UInt32
-    property file_identity : UInt8*
-    def initialize(@pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, @in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE, @file_id : Win32cr::Foundation::LARGE_INTEGER, @sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER, @file_identity_length : UInt32, @file_identity : UInt8*)
+    property file_identity : UInt8[1]
+    def initialize(@pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, @in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE, @file_id : Int64, @sync_root_file_id : Int64, @file_identity_length : UInt32, @file_identity : UInt8[1])
     end
   end
 
   @[Extern]
   struct CF_PLACEHOLDER_STANDARD_INFO
-    property on_disk_data_size : Win32cr::Foundation::LARGE_INTEGER
-    property validated_data_size : Win32cr::Foundation::LARGE_INTEGER
-    property modified_data_size : Win32cr::Foundation::LARGE_INTEGER
-    property properties_size : Win32cr::Foundation::LARGE_INTEGER
+    property on_disk_data_size : Int64
+    property validated_data_size : Int64
+    property modified_data_size : Int64
+    property properties_size : Int64
     property pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE
     property in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE
-    property file_id : Win32cr::Foundation::LARGE_INTEGER
-    property sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER
+    property file_id : Int64
+    property sync_root_file_id : Int64
     property file_identity_length : UInt32
-    property file_identity : UInt8*
-    def initialize(@on_disk_data_size : Win32cr::Foundation::LARGE_INTEGER, @validated_data_size : Win32cr::Foundation::LARGE_INTEGER, @modified_data_size : Win32cr::Foundation::LARGE_INTEGER, @properties_size : Win32cr::Foundation::LARGE_INTEGER, @pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, @in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE, @file_id : Win32cr::Foundation::LARGE_INTEGER, @sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER, @file_identity_length : UInt32, @file_identity : UInt8*)
+    property file_identity : UInt8[1]
+    def initialize(@on_disk_data_size : Int64, @validated_data_size : Int64, @modified_data_size : Int64, @properties_size : Int64, @pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, @in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE, @file_id : Int64, @sync_root_file_id : Int64, @file_identity_length : UInt32, @file_identity : UInt8[1])
     end
   end
 
   @[Extern]
   struct CF_SYNC_ROOT_BASIC_INFO
-    property sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER)
+    property sync_root_file_id : Int64
+    def initialize(@sync_root_file_id : Int64)
     end
   end
 
@@ -846,7 +818,7 @@ module Win32cr::Storage::CloudFilters
 
   @[Extern]
   struct CF_SYNC_ROOT_STANDARD_INFO
-    property sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER
+    property sync_root_file_id : Int64
     property hydration_policy : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY
     property population_policy : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY
     property in_sync_policy : Win32cr::Storage::CloudFilters::CF_INSYNC_POLICY
@@ -855,152 +827,229 @@ module Win32cr::Storage::CloudFilters
     property provider_name : UInt16[256]
     property provider_version : UInt16[256]
     property sync_root_identity_length : UInt32
-    property sync_root_identity : UInt8*
-    def initialize(@sync_root_file_id : Win32cr::Foundation::LARGE_INTEGER, @hydration_policy : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY, @population_policy : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY, @in_sync_policy : Win32cr::Storage::CloudFilters::CF_INSYNC_POLICY, @hard_link_policy : Win32cr::Storage::CloudFilters::CF_HARDLINK_POLICY, @provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS, @provider_name : UInt16[256], @provider_version : UInt16[256], @sync_root_identity_length : UInt32, @sync_root_identity : UInt8*)
+    property sync_root_identity : UInt8[1]
+    def initialize(@sync_root_file_id : Int64, @hydration_policy : Win32cr::Storage::CloudFilters::CF_HYDRATION_POLICY, @population_policy : Win32cr::Storage::CloudFilters::CF_POPULATION_POLICY, @in_sync_policy : Win32cr::Storage::CloudFilters::CF_INSYNC_POLICY, @hard_link_policy : Win32cr::Storage::CloudFilters::CF_HARDLINK_POLICY, @provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS, @provider_name : UInt16[256], @provider_version : UInt16[256], @sync_root_identity_length : UInt32, @sync_root_identity : UInt8[1])
     end
   end
 
   def cfGetPlatformInfo(platform_version : Win32cr::Storage::CloudFilters::CF_PLATFORM_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfGetPlatformInfo(platform_version)
+    {% end %}
   end
 
   def cfRegisterSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR, registration : Win32cr::Storage::CloudFilters::CF_SYNC_REGISTRATION*, policies : Win32cr::Storage::CloudFilters::CF_SYNC_POLICIES*, register_flags : Win32cr::Storage::CloudFilters::CF_REGISTER_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfRegisterSyncRoot(sync_root_path, registration, policies, register_flags)
+    {% end %}
   end
 
   def cfUnregisterSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfUnregisterSyncRoot(sync_root_path)
+    {% end %}
   end
 
   def cfConnectSyncRoot(sync_root_path : Win32cr::Foundation::PWSTR, callback_table : Win32cr::Storage::CloudFilters::CF_CALLBACK_REGISTRATION*, callback_context : Void*, connect_flags : Win32cr::Storage::CloudFilters::CF_CONNECT_FLAGS, connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfConnectSyncRoot(sync_root_path, callback_table, callback_context, connect_flags, connection_key)
+    {% end %}
   end
 
   def cfDisconnectSyncRoot(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfDisconnectSyncRoot(connection_key)
+    {% end %}
   end
 
-  def cfGetTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+  def cfGetTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Int64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfGetTransferKey(file_handle, transfer_key)
+    {% end %}
   end
 
-  def cfReleaseTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Void
+  def cfReleaseTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Int64*) : Void
+    {% if !flag?(:docs) %}
     C.CfReleaseTransferKey(file_handle, transfer_key)
+    {% end %}
   end
 
   def cfExecute(op_info : Win32cr::Storage::CloudFilters::CF_OPERATION_INFO*, op_params : Win32cr::Storage::CloudFilters::CF_OPERATION_PARAMETERS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfExecute(op_info, op_params)
+    {% end %}
   end
 
   def cfUpdateSyncProviderStatus(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfUpdateSyncProviderStatus(connection_key, provider_status)
+    {% end %}
   end
 
   def cfQuerySyncProviderStatus(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, provider_status : Win32cr::Storage::CloudFilters::CF_SYNC_PROVIDER_STATUS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfQuerySyncProviderStatus(connection_key, provider_status)
+    {% end %}
   end
 
   def cfReportSyncStatus(sync_root_path : Win32cr::Foundation::PWSTR, sync_status : Win32cr::Storage::CloudFilters::CF_SYNC_STATUS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfReportSyncStatus(sync_root_path, sync_status)
+    {% end %}
   end
 
   def cfCreatePlaceholders(base_directory_path : Win32cr::Foundation::PWSTR, placeholder_array : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_CREATE_INFO*, placeholder_count : UInt32, create_flags : Win32cr::Storage::CloudFilters::CF_CREATE_FLAGS, entries_processed : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfCreatePlaceholders(base_directory_path, placeholder_array, placeholder_count, create_flags, entries_processed)
+    {% end %}
   end
 
   def cfOpenFileWithOplock(file_path : Win32cr::Foundation::PWSTR, flags : Win32cr::Storage::CloudFilters::CF_OPEN_FILE_FLAGS, protected_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfOpenFileWithOplock(file_path, flags, protected_handle)
+    {% end %}
   end
 
   def cfReferenceProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.CfReferenceProtectedHandle(protected_handle)
+    {% end %}
   end
 
   def cfGetWin32HandleFromProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CfGetWin32HandleFromProtectedHandle(protected_handle)
+    {% end %}
   end
 
   def cfReleaseProtectedHandle(protected_handle : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.CfReleaseProtectedHandle(protected_handle)
+    {% end %}
   end
 
   def cfCloseHandle(file_handle : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.CfCloseHandle(file_handle)
+    {% end %}
   end
 
   def cfConvertToPlaceholder(file_handle : Win32cr::Foundation::HANDLE, file_identity : Void*, file_identity_length : UInt32, convert_flags : Win32cr::Storage::CloudFilters::CF_CONVERT_FLAGS, convert_usn : Int64*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfConvertToPlaceholder(file_handle, file_identity, file_identity_length, convert_flags, convert_usn, overlapped)
+    {% end %}
   end
 
   def cfUpdatePlaceholder(file_handle : Win32cr::Foundation::HANDLE, fs_metadata : Win32cr::Storage::CloudFilters::CF_FS_METADATA*, file_identity : Void*, file_identity_length : UInt32, dehydrate_range_array : Win32cr::Storage::CloudFilters::CF_FILE_RANGE*, dehydrate_range_count : UInt32, update_flags : Win32cr::Storage::CloudFilters::CF_UPDATE_FLAGS, update_usn : Int64*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfUpdatePlaceholder(file_handle, fs_metadata, file_identity, file_identity_length, dehydrate_range_array, dehydrate_range_count, update_flags, update_usn, overlapped)
+    {% end %}
   end
 
   def cfRevertPlaceholder(file_handle : Win32cr::Foundation::HANDLE, revert_flags : Win32cr::Storage::CloudFilters::CF_REVERT_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfRevertPlaceholder(file_handle, revert_flags, overlapped)
+    {% end %}
   end
 
-  def cfHydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, hydrate_flags : Win32cr::Storage::CloudFilters::CF_HYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+  def cfHydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Int64, length : Int64, hydrate_flags : Win32cr::Storage::CloudFilters::CF_HYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfHydratePlaceholder(file_handle, starting_offset, length, hydrate_flags, overlapped)
+    {% end %}
   end
 
-  def cfDehydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, dehydrate_flags : Win32cr::Storage::CloudFilters::CF_DEHYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+  def cfDehydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Int64, length : Int64, dehydrate_flags : Win32cr::Storage::CloudFilters::CF_DEHYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfDehydratePlaceholder(file_handle, starting_offset, length, dehydrate_flags, overlapped)
+    {% end %}
   end
 
   def cfSetPinState(file_handle : Win32cr::Foundation::HANDLE, pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, pin_flags : Win32cr::Storage::CloudFilters::CF_SET_PIN_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfSetPinState(file_handle, pin_state, pin_flags, overlapped)
+    {% end %}
   end
 
   def cfSetInSyncState(file_handle : Win32cr::Foundation::HANDLE, in_sync_state : Win32cr::Storage::CloudFilters::CF_IN_SYNC_STATE, in_sync_flags : Win32cr::Storage::CloudFilters::CF_SET_IN_SYNC_FLAGS, in_sync_usn : Int64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfSetInSyncState(file_handle, in_sync_state, in_sync_flags, in_sync_usn)
+    {% end %}
   end
 
   def cfSetCorrelationVector(file_handle : Win32cr::Foundation::HANDLE, correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfSetCorrelationVector(file_handle, correlation_vector)
+    {% end %}
   end
 
   def cfGetCorrelationVector(file_handle : Win32cr::Foundation::HANDLE, correlation_vector : Win32cr::System::CorrelationVector::CORRELATION_VECTOR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfGetCorrelationVector(file_handle, correlation_vector)
+    {% end %}
   end
 
   def cfGetPlaceholderStateFromAttributeTag(file_attributes : UInt32, reparse_tag : UInt32) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
+    {% if !flag?(:docs) %}
     C.CfGetPlaceholderStateFromAttributeTag(file_attributes, reparse_tag)
+    {% end %}
   end
 
   def cfGetPlaceholderStateFromFileInfo(info_buffer : Void*, info_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
+    {% if !flag?(:docs) %}
     C.CfGetPlaceholderStateFromFileInfo(info_buffer, info_class)
+    {% end %}
   end
 
   def cfGetPlaceholderStateFromFindData(find_data : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_STATE
+    {% if !flag?(:docs) %}
     C.CfGetPlaceholderStateFromFindData(find_data)
+    {% end %}
   end
 
   def cfGetPlaceholderInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfGetPlaceholderInfo(file_handle, info_class, info_buffer, info_buffer_length, returned_length)
+    {% end %}
   end
 
   def cfGetSyncRootInfoByPath(file_path : Win32cr::Foundation::PWSTR, info_class : Win32cr::Storage::CloudFilters::CF_SYNC_ROOT_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfGetSyncRootInfoByPath(file_path, info_class, info_buffer, info_buffer_length, returned_length)
+    {% end %}
   end
 
   def cfGetSyncRootInfoByHandle(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_SYNC_ROOT_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfGetSyncRootInfoByHandle(file_handle, info_class, info_buffer, info_buffer_length, returned_length)
+    {% end %}
   end
 
-  def cfGetPlaceholderRangeInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+  def cfGetPlaceholderRangeInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Int64, length : Int64, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfGetPlaceholderRangeInfo(file_handle, info_class, starting_offset, length, info_buffer, info_buffer_length, returned_length)
+    {% end %}
   end
 
-  def cfReportProviderProgress(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
+  def cfGetPlaceholderRangeInfoForHydration(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Int64, file_id : Int64, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Int64, range_length : Int64, info_buffer : Void*, info_buffer_size : UInt32, info_buffer_written : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.CfGetPlaceholderRangeInfoForHydration(connection_key, transfer_key, file_id, info_class, starting_offset, range_length, info_buffer, info_buffer_size, info_buffer_written)
+    {% end %}
+  end
+
+  def cfReportProviderProgress(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Int64, provider_progress_total : Int64, provider_progress_completed : Int64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfReportProviderProgress(connection_key, transfer_key, provider_progress_total, provider_progress_completed)
+    {% end %}
   end
 
-  def cfReportProviderProgress2(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, request_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER, target_session_id : UInt32) : Win32cr::Foundation::HRESULT
+  def cfReportProviderProgress2(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Int64, request_key : Int64, provider_progress_total : Int64, provider_progress_completed : Int64, target_session_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CfReportProviderProgress2(connection_key, transfer_key, request_key, provider_progress_total, provider_progress_completed, target_session_id)
+    {% end %}
   end
 
   @[Link("cldapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CfGetPlatformInfo(platform_version : Win32cr::Storage::CloudFilters::CF_PLATFORM_INFO*) : Win32cr::Foundation::HRESULT
@@ -1018,10 +1067,10 @@ module Win32cr::Storage::CloudFilters
     fun CfDisconnectSyncRoot(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CfGetTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    fun CfGetTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Int64*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CfReleaseTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Win32cr::Foundation::LARGE_INTEGER*) : Void
+    fun CfReleaseTransferKey(file_handle : Win32cr::Foundation::HANDLE, transfer_key : Int64*) : Void
 
     # :nodoc:
     fun CfExecute(op_info : Win32cr::Storage::CloudFilters::CF_OPERATION_INFO*, op_params : Win32cr::Storage::CloudFilters::CF_OPERATION_PARAMETERS*) : Win32cr::Foundation::HRESULT
@@ -1063,10 +1112,10 @@ module Win32cr::Storage::CloudFilters
     fun CfRevertPlaceholder(file_handle : Win32cr::Foundation::HANDLE, revert_flags : Win32cr::Storage::CloudFilters::CF_REVERT_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CfHydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, hydrate_flags : Win32cr::Storage::CloudFilters::CF_HYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    fun CfHydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Int64, length : Int64, hydrate_flags : Win32cr::Storage::CloudFilters::CF_HYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CfDehydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, dehydrate_flags : Win32cr::Storage::CloudFilters::CF_DEHYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    fun CfDehydratePlaceholder(file_handle : Win32cr::Foundation::HANDLE, starting_offset : Int64, length : Int64, dehydrate_flags : Win32cr::Storage::CloudFilters::CF_DEHYDRATE_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun CfSetPinState(file_handle : Win32cr::Foundation::HANDLE, pin_state : Win32cr::Storage::CloudFilters::CF_PIN_STATE, pin_flags : Win32cr::Storage::CloudFilters::CF_SET_PIN_FLAGS, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
@@ -1099,13 +1148,17 @@ module Win32cr::Storage::CloudFilters
     fun CfGetSyncRootInfoByHandle(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_SYNC_ROOT_INFO_CLASS, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CfGetPlaceholderRangeInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Win32cr::Foundation::LARGE_INTEGER, length : Win32cr::Foundation::LARGE_INTEGER, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
+    fun CfGetPlaceholderRangeInfo(file_handle : Win32cr::Foundation::HANDLE, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Int64, length : Int64, info_buffer : Void*, info_buffer_length : UInt32, returned_length : UInt32*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CfReportProviderProgress(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::HRESULT
+    fun CfGetPlaceholderRangeInfoForHydration(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Int64, file_id : Int64, info_class : Win32cr::Storage::CloudFilters::CF_PLACEHOLDER_RANGE_INFO_CLASS, starting_offset : Int64, range_length : Int64, info_buffer : Void*, info_buffer_size : UInt32, info_buffer_written : UInt32*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CfReportProviderProgress2(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Win32cr::Foundation::LARGE_INTEGER, request_key : Win32cr::Foundation::LARGE_INTEGER, provider_progress_total : Win32cr::Foundation::LARGE_INTEGER, provider_progress_completed : Win32cr::Foundation::LARGE_INTEGER, target_session_id : UInt32) : Win32cr::Foundation::HRESULT
+    fun CfReportProviderProgress(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Int64, provider_progress_total : Int64, provider_progress_completed : Int64) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun CfReportProviderProgress2(connection_key : Win32cr::Storage::CloudFilters::CF_CONNECTION_KEY, transfer_key : Int64, request_key : Int64, provider_progress_total : Int64, provider_progress_completed : Int64, target_session_id : UInt32) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -195,60 +195,60 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   RAS_EAP_FLAG_RESERVED = 1048576_u32
   RAS_EAP_FLAG_SAVE_CREDMAN = 2097152_u32
   RAS_EAP_FLAG_SERVER_VALIDATION_REQUIRED = 33554432_u32
-  GUID_EapHost_Default = "00000000-0000-0000-0000-000000000000"
-  GUID_EapHost_Cause_MethodDLLNotFound = "9612fc67-6150-4209-a85e-a8d800000001"
-  GUID_EapHost_Repair_ContactSysadmin = "9612fc67-6150-4209-a85e-a8d800000002"
-  GUID_EapHost_Cause_CertStoreInaccessible = "9612fc67-6150-4209-a85e-a8d800000004"
-  GUID_EapHost_Cause_Generic_AuthFailure = "9612fc67-6150-4209-a85e-a8d800000104"
-  GUID_EapHost_Cause_IdentityUnknown = "9612fc67-6150-4209-a85e-a8d800000204"
-  GUID_EapHost_Cause_SimNotValid = "9612fc67-6150-4209-a85e-a8d800000304"
-  GUID_EapHost_Cause_Server_CertExpired = "9612fc67-6150-4209-a85e-a8d800000005"
-  GUID_EapHost_Cause_Server_CertInvalid = "9612fc67-6150-4209-a85e-a8d800000006"
-  GUID_EapHost_Cause_Server_CertNotFound = "9612fc67-6150-4209-a85e-a8d800000007"
-  GUID_EapHost_Cause_Server_CertRevoked = "9612fc67-6150-4209-a85e-a8d800000008"
-  GUID_EapHost_Cause_Server_CertOtherError = "9612fc67-6150-4209-a85e-a8d800000108"
-  GUID_EapHost_Cause_User_CertExpired = "9612fc67-6150-4209-a85e-a8d800000009"
-  GUID_EapHost_Cause_User_CertInvalid = "9612fc67-6150-4209-a85e-a8d80000000a"
-  GUID_EapHost_Cause_User_CertNotFound = "9612fc67-6150-4209-a85e-a8d80000000b"
-  GUID_EapHost_Cause_User_CertOtherError = "9612fc67-6150-4209-a85e-a8d80000000c"
-  GUID_EapHost_Cause_User_CertRejected = "9612fc67-6150-4209-a85e-a8d80000000d"
-  GUID_EapHost_Cause_User_CertRevoked = "9612fc67-6150-4209-a85e-a8d80000000e"
-  GUID_EapHost_Cause_User_Account_OtherProblem = "9612fc67-6150-4209-a85e-a8d80000010e"
-  GUID_EapHost_Cause_User_CredsRejected = "9612fc67-6150-4209-a85e-a8d80000020e"
-  GUID_EapHost_Cause_User_Root_CertExpired = "9612fc67-6150-4209-a85e-a8d80000000f"
-  GUID_EapHost_Cause_User_Root_CertInvalid = "9612fc67-6150-4209-a85e-a8d800000010"
-  GUID_EapHost_Cause_User_Root_CertNotFound = "9612fc67-6150-4209-a85e-a8d800000011"
-  GUID_EapHost_Cause_Server_Root_CertNameRequired = "9612fc67-6150-4209-a85e-a8d800000012"
-  GUID_EapHost_Cause_Server_Root_CertNotFound = "9612fc67-6150-4209-a85e-a8d800000112"
-  GUID_EapHost_Cause_ThirdPartyMethod_Host_Reset = "9612fc67-6150-4209-a85e-a8d800000212"
-  GUID_EapHost_Cause_EapQecInaccessible = "9612fc67-6150-4209-a85e-a8d800000312"
-  GUID_EapHost_Repair_Server_ClientSelectServerCert = "9612fc67-6150-4209-a85e-a8d800000018"
-  GUID_EapHost_Repair_User_AuthFailure = "9612fc67-6150-4209-a85e-a8d800000019"
-  GUID_EapHost_Repair_User_GetNewCert = "9612fc67-6150-4209-a85e-a8d80000001a"
-  GUID_EapHost_Repair_User_SelectValidCert = "9612fc67-6150-4209-a85e-a8d80000001b"
-  GUID_EapHost_Repair_Retry_Authentication = "9612fc67-6150-4209-a85e-a8d80000011b"
-  GUID_EapHost_Cause_EapNegotiationFailed = "9612fc67-6150-4209-a85e-a8d80000001c"
-  GUID_EapHost_Cause_XmlMalformed = "9612fc67-6150-4209-a85e-a8d80000001d"
-  GUID_EapHost_Cause_MethodDoesNotSupportOperation = "9612fc67-6150-4209-a85e-a8d80000001e"
-  GUID_EapHost_Repair_ContactAdmin_AuthFailure = "9612fc67-6150-4209-a85e-a8d80000001f"
-  GUID_EapHost_Repair_ContactAdmin_IdentityUnknown = "9612fc67-6150-4209-a85e-a8d800000020"
-  GUID_EapHost_Repair_ContactAdmin_NegotiationFailed = "9612fc67-6150-4209-a85e-a8d800000021"
-  GUID_EapHost_Repair_ContactAdmin_MethodNotFound = "9612fc67-6150-4209-a85e-a8d800000022"
-  GUID_EapHost_Repair_RestartNap = "9612fc67-6150-4209-a85e-a8d800000023"
-  GUID_EapHost_Repair_ContactAdmin_CertStoreInaccessible = "9612fc67-6150-4209-a85e-a8d800000024"
-  GUID_EapHost_Repair_ContactAdmin_InvalidUserAccount = "9612fc67-6150-4209-a85e-a8d800000025"
-  GUID_EapHost_Repair_ContactAdmin_RootCertInvalid = "9612fc67-6150-4209-a85e-a8d800000026"
-  GUID_EapHost_Repair_ContactAdmin_RootCertNotFound = "9612fc67-6150-4209-a85e-a8d800000027"
-  GUID_EapHost_Repair_ContactAdmin_RootExpired = "9612fc67-6150-4209-a85e-a8d800000028"
-  GUID_EapHost_Repair_ContactAdmin_CertNameAbsent = "9612fc67-6150-4209-a85e-a8d800000029"
-  GUID_EapHost_Repair_ContactAdmin_NoSmartCardReader = "9612fc67-6150-4209-a85e-a8d80000002a"
-  GUID_EapHost_Cause_No_SmartCardReader_Found = "9612fc67-6150-4209-a85e-a8d80000002b"
-  GUID_EapHost_Repair_ContactAdmin_InvalidUserCert = "9612fc67-6150-4209-a85e-a8d80000002c"
-  GUID_EapHost_Repair_Method_Not_Support_Sso = "9612fc67-6150-4209-a85e-a8d80000002d"
-  GUID_EapHost_Repair_No_ValidSim_Found = "9612fc67-6150-4209-a85e-a8d80000002e"
-  GUID_EapHost_Help_ObtainingCerts = "f535eea3-1bdd-46ca-a2fc-a6655939b7e8"
-  GUID_EapHost_Help_Troubleshooting = "33307acf-0698-41ba-b014-ea0a2eb8d0a8"
-  GUID_EapHost_Cause_Method_Config_Does_Not_Support_Sso = "da18bd32-004f-41fa-ae08-0bc85e5845ac"
+  GUID_EapHost_Default = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
+  GUID_EapHost_Cause_MethodDLLNotFound = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1_u8])
+  GUID_EapHost_Repair_ContactSysadmin = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x2_u8])
+  GUID_EapHost_Cause_CertStoreInaccessible = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x4_u8])
+  GUID_EapHost_Cause_Generic_AuthFailure = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x1_u8, 0x4_u8])
+  GUID_EapHost_Cause_IdentityUnknown = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x2_u8, 0x4_u8])
+  GUID_EapHost_Cause_SimNotValid = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x3_u8, 0x4_u8])
+  GUID_EapHost_Cause_Server_CertExpired = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x5_u8])
+  GUID_EapHost_Cause_Server_CertInvalid = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x6_u8])
+  GUID_EapHost_Cause_Server_CertNotFound = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x7_u8])
+  GUID_EapHost_Cause_Server_CertRevoked = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x8_u8])
+  GUID_EapHost_Cause_Server_CertOtherError = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x1_u8, 0x8_u8])
+  GUID_EapHost_Cause_User_CertExpired = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x9_u8])
+  GUID_EapHost_Cause_User_CertInvalid = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0xa_u8])
+  GUID_EapHost_Cause_User_CertNotFound = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0xb_u8])
+  GUID_EapHost_Cause_User_CertOtherError = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0xc_u8])
+  GUID_EapHost_Cause_User_CertRejected = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0xd_u8])
+  GUID_EapHost_Cause_User_CertRevoked = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0xe_u8])
+  GUID_EapHost_Cause_User_Account_OtherProblem = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x1_u8, 0xe_u8])
+  GUID_EapHost_Cause_User_CredsRejected = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x2_u8, 0xe_u8])
+  GUID_EapHost_Cause_User_Root_CertExpired = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0xf_u8])
+  GUID_EapHost_Cause_User_Root_CertInvalid = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x10_u8])
+  GUID_EapHost_Cause_User_Root_CertNotFound = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x11_u8])
+  GUID_EapHost_Cause_Server_Root_CertNameRequired = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x12_u8])
+  GUID_EapHost_Cause_Server_Root_CertNotFound = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x1_u8, 0x12_u8])
+  GUID_EapHost_Cause_ThirdPartyMethod_Host_Reset = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x2_u8, 0x12_u8])
+  GUID_EapHost_Cause_EapQecInaccessible = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x3_u8, 0x12_u8])
+  GUID_EapHost_Repair_Server_ClientSelectServerCert = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x18_u8])
+  GUID_EapHost_Repair_User_AuthFailure = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x19_u8])
+  GUID_EapHost_Repair_User_GetNewCert = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1a_u8])
+  GUID_EapHost_Repair_User_SelectValidCert = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1b_u8])
+  GUID_EapHost_Repair_Retry_Authentication = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x1_u8, 0x1b_u8])
+  GUID_EapHost_Cause_EapNegotiationFailed = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1c_u8])
+  GUID_EapHost_Cause_XmlMalformed = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1d_u8])
+  GUID_EapHost_Cause_MethodDoesNotSupportOperation = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1e_u8])
+  GUID_EapHost_Repair_ContactAdmin_AuthFailure = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1f_u8])
+  GUID_EapHost_Repair_ContactAdmin_IdentityUnknown = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x20_u8])
+  GUID_EapHost_Repair_ContactAdmin_NegotiationFailed = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x21_u8])
+  GUID_EapHost_Repair_ContactAdmin_MethodNotFound = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x22_u8])
+  GUID_EapHost_Repair_RestartNap = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x23_u8])
+  GUID_EapHost_Repair_ContactAdmin_CertStoreInaccessible = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x24_u8])
+  GUID_EapHost_Repair_ContactAdmin_InvalidUserAccount = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x25_u8])
+  GUID_EapHost_Repair_ContactAdmin_RootCertInvalid = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x26_u8])
+  GUID_EapHost_Repair_ContactAdmin_RootCertNotFound = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x27_u8])
+  GUID_EapHost_Repair_ContactAdmin_RootExpired = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x28_u8])
+  GUID_EapHost_Repair_ContactAdmin_CertNameAbsent = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x29_u8])
+  GUID_EapHost_Repair_ContactAdmin_NoSmartCardReader = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x2a_u8])
+  GUID_EapHost_Cause_No_SmartCardReader_Found = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x2b_u8])
+  GUID_EapHost_Repair_ContactAdmin_InvalidUserCert = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x2c_u8])
+  GUID_EapHost_Repair_Method_Not_Support_Sso = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x2d_u8])
+  GUID_EapHost_Repair_No_ValidSim_Found = LibC::GUID.new(0x9612fc67_u32, 0x6150_u16, 0x4209_u16, StaticArray[0xa8_u8, 0x5e_u8, 0xa8_u8, 0xd8_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x2e_u8])
+  GUID_EapHost_Help_ObtainingCerts = LibC::GUID.new(0xf535eea3_u32, 0x1bdd_u16, 0x46ca_u16, StaticArray[0xa2_u8, 0xfc_u8, 0xa6_u8, 0x65_u8, 0x59_u8, 0x39_u8, 0xb7_u8, 0xe8_u8])
+  GUID_EapHost_Help_Troubleshooting = LibC::GUID.new(0x33307acf_u32, 0x698_u16, 0x41ba_u16, StaticArray[0xb0_u8, 0x14_u8, 0xea_u8, 0xa_u8, 0x2e_u8, 0xb8_u8, 0xd0_u8, 0xa8_u8])
+  GUID_EapHost_Cause_Method_Config_Does_Not_Support_Sso = LibC::GUID.new(0xda18bd32_u32, 0x4f_u16, 0x41fa_u16, StaticArray[0xae_u8, 0x8_u8, 0xb_u8, 0xc8_u8, 0x5e_u8, 0x58_u8, 0x45_u8, 0xac_u8])
 
   enum RAS_AUTH_ATTRIBUTE_TYPE
     Raatminimum = 0_i32
@@ -616,8 +616,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
     property code : UInt8
     property id : UInt8
     property length : UInt8[2]
-    property data : UInt8*
-    def initialize(@code : UInt8, @id : UInt8, @length : UInt8[2], @data : UInt8*)
+    property data : UInt8[1]
+    def initialize(@code : UInt8, @id : UInt8, @length : UInt8[2], @data : UInt8[1])
     end
   end
 
@@ -996,8 +996,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
     property code : UInt8
     property id : UInt8
     property length : UInt8[2]
-    property data : UInt8*
-    def initialize(@code : UInt8, @id : UInt8, @length : UInt8[2], @data : UInt8*)
+    property data : UInt8[1]
+    def initialize(@code : UInt8, @id : UInt8, @length : UInt8[2], @data : UInt8[1])
     end
   end
 
@@ -1076,7 +1076,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IRouterProtocolConfigVtbl,
+
+  record IRouterProtocolConfigVtable,
     query_interface : Proc(IRouterProtocolConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRouterProtocolConfig*, UInt32),
     release : Proc(IRouterProtocolConfig*, UInt32),
@@ -1085,7 +1086,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IRouterProtocolConfig, lpVtbl : IRouterProtocolConfigVtbl* do
+  record IRouterProtocolConfig, lpVtbl : IRouterProtocolConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db16_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IRouterProtocolConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1106,7 +1107,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IAuthenticationProviderConfigVtbl,
+
+  record IAuthenticationProviderConfigVtable,
     query_interface : Proc(IAuthenticationProviderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAuthenticationProviderConfig*, UInt32),
     release : Proc(IAuthenticationProviderConfig*, UInt32),
@@ -1118,7 +1120,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IAuthenticationProviderConfig, lpVtbl : IAuthenticationProviderConfigVtbl* do
+  record IAuthenticationProviderConfig, lpVtbl : IAuthenticationProviderConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db17_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IAuthenticationProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1148,7 +1150,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IAccountingProviderConfigVtbl,
+
+  record IAccountingProviderConfigVtable,
     query_interface : Proc(IAccountingProviderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccountingProviderConfig*, UInt32),
     release : Proc(IAccountingProviderConfig*, UInt32),
@@ -1160,7 +1163,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IAccountingProviderConfig, lpVtbl : IAccountingProviderConfigVtbl* do
+  record IAccountingProviderConfig, lpVtbl : IAccountingProviderConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db18_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IAccountingProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1190,7 +1193,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IEAPProviderConfigVtbl,
+
+  record IEAPProviderConfigVtable,
     query_interface : Proc(IEAPProviderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEAPProviderConfig*, UInt32),
     release : Proc(IEAPProviderConfig*, UInt32),
@@ -1202,7 +1206,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IEAPProviderConfig, lpVtbl : IEAPProviderConfigVtbl* do
+  record IEAPProviderConfig, lpVtbl : IEAPProviderConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db19_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IEAPProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1232,7 +1236,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IEAPProviderConfig2Vtbl,
+
+  record IEAPProviderConfig2Vtable,
     query_interface : Proc(IEAPProviderConfig2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEAPProviderConfig2*, UInt32),
     release : Proc(IEAPProviderConfig2*, UInt32),
@@ -1246,7 +1251,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IEAPProviderConfig2, lpVtbl : IEAPProviderConfig2Vtbl* do
+  record IEAPProviderConfig2, lpVtbl : IEAPProviderConfig2Vtable* do
     GUID = LibC::GUID.new(0xd565917a_u32, 0x85c4_u16, 0x4466_u16, StaticArray[0x85_u8, 0x6e_u8, 0x67_u8, 0x1c_u8, 0x37_u8, 0x42_u8, 0xea_u8, 0x9a_u8])
     def query_interface(this : IEAPProviderConfig2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1282,7 +1287,8 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IEAPProviderConfig3Vtbl,
+
+  record IEAPProviderConfig3Vtable,
     query_interface : Proc(IEAPProviderConfig3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEAPProviderConfig3*, UInt32),
     release : Proc(IEAPProviderConfig3*, UInt32),
@@ -1297,7 +1303,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IEAPProviderConfig3, lpVtbl : IEAPProviderConfig3Vtbl* do
+  record IEAPProviderConfig3, lpVtbl : IEAPProviderConfig3Vtable* do
     GUID = LibC::GUID.new(0xb78ecd12_u32, 0x68bb_u16, 0x4f86_u16, StaticArray[0x9b_u8, 0xf0_u8, 0x84_u8, 0x38_u8, 0xdd_u8, 0x3b_u8, 0xe9_u8, 0x82_u8])
     def query_interface(this : IEAPProviderConfig3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1336,135 +1342,200 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   def eapHostPeerGetMethods(pEapMethodInfoArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetMethods(pEapMethodInfoArray, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetMethodProperties(dwVersion : UInt32, dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, hUserImpersonationToken : Win32cr::Foundation::HANDLE, dwEapConnDataSize : UInt32, pbEapConnData : UInt8*, dwUserDataSize : UInt32, pbUserData : UInt8*, pMethodPropertyArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetMethodProperties(dwVersion, dwFlags, eapMethodType, hUserImpersonationToken, dwEapConnDataSize, pbEapConnData, dwUserDataSize, pbUserData, pMethodPropertyArray, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerInvokeConfigUI(hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwSizeOfConfigIn : UInt32, pConfigIn : UInt8*, pdwSizeOfConfigOut : UInt32*, ppConfigOut : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInvokeConfigUI(hwndParent, dwFlags, eapMethodType, dwSizeOfConfigIn, pConfigIn, pdwSizeOfConfigOut, ppConfigOut, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerQueryCredentialInputFields(hUserImpersonationToken : Win32cr::Foundation::HANDLE, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : UInt32, dwEapConnDataSize : UInt32, pbEapConnData : UInt8*, pEapConfigInputFieldArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryCredentialInputFields(hUserImpersonationToken, eapMethodType, dwFlags, dwEapConnDataSize, pbEapConnData, pEapConfigInputFieldArray, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken : Win32cr::Foundation::HANDLE, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : UInt32, dwEapConnDataSize : UInt32, pbEapConnData : UInt8*, pEapConfigInputFieldArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*, pdwUserBlobSize : UInt32*, ppbUserBlob : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken, eapMethodType, dwFlags, dwEapConnDataSize, pbEapConnData, pEapConfigInputFieldArray, pdwUserBlobSize, ppbUserBlob, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerInvokeIdentityUI(dwVersion : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : UInt32, hwndParent : Win32cr::Foundation::HWND, dwSizeofConnectionData : UInt32, pConnectionData : UInt8*, dwSizeofUserData : UInt32, pUserData : UInt8*, pdwSizeOfUserDataOut : UInt32*, ppUserDataOut : UInt8**, ppwszIdentity : Win32cr::Foundation::PWSTR*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInvokeIdentityUI(dwVersion, eapMethodType, dwFlags, hwndParent, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, pdwSizeOfUserDataOut, ppUserDataOut, ppwszIdentity, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerInvokeInteractiveUI(hwndParent : Win32cr::Foundation::HWND, dwSizeofUIContextData : UInt32, pUIContextData : UInt8*, pdwSizeOfDataFromInteractiveUI : UInt32*, ppDataFromInteractiveUI : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInvokeInteractiveUI(hwndParent, dwSizeofUIContextData, pUIContextData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerQueryInteractiveUIInputFields(dwVersion : UInt32, dwFlags : UInt32, dwSizeofUIContextData : UInt32, pUIContextData : UInt8*, pEapInteractiveUIData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_INTERACTIVE_UI_DATA*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryInteractiveUIInputFields(dwVersion, dwFlags, dwSizeofUIContextData, pUIContextData, pEapInteractiveUIData, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion : UInt32, dwFlags : UInt32, dwSizeofUIContextData : UInt32, pUIContextData : UInt8*, pEapInteractiveUIData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_INTERACTIVE_UI_DATA*, pdwSizeOfDataFromInteractiveUI : UInt32*, ppDataFromInteractiveUI : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion, dwFlags, dwSizeofUIContextData, pUIContextData, pEapInteractiveUIData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerConfigXml2Blob(dwFlags : UInt32, pConfigDoc : Void*, pdwSizeOfConfigOut : UInt32*, ppConfigOut : UInt8**, pEapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerConfigXml2Blob(dwFlags, pConfigDoc, pdwSizeOfConfigOut, ppConfigOut, pEapMethodType, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerCredentialsXml2Blob(dwFlags : UInt32, pCredentialsDoc : Void*, dwSizeOfConfigIn : UInt32, pConfigIn : UInt8*, pdwSizeOfCredentialsOut : UInt32*, ppCredentialsOut : UInt8**, pEapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerCredentialsXml2Blob(dwFlags, pCredentialsDoc, dwSizeOfConfigIn, pConfigIn, pdwSizeOfCredentialsOut, ppCredentialsOut, pEapMethodType, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerConfigBlob2Xml(dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwSizeOfConfigIn : UInt32, pConfigIn : UInt8*, ppConfigDoc : Void**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerConfigBlob2Xml(dwFlags, eapMethodType, dwSizeOfConfigIn, pConfigIn, ppConfigDoc, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerFreeMemory(pData : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeMemory(pData)
+    {% end %}
   end
 
   def eapHostPeerFreeErrorMemory(pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeErrorMemory(pEapError)
+    {% end %}
   end
 
   def eapHostPeerInitialize : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInitialize
+    {% end %}
   end
 
   def eapHostPeerUninitialize : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerUninitialize
+    {% end %}
   end
 
   def eapHostPeerBeginSession(dwFlags : UInt32, eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, pAttributeArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, hTokenImpersonateUser : Win32cr::Foundation::HANDLE, dwSizeofConnectionData : UInt32, pConnectionData : UInt8*, dwSizeofUserData : UInt32, pUserData : UInt8*, dwMaxSendPacketSize : UInt32, pConnectionId : LibC::GUID*, func : Win32cr::Security::ExtensibleAuthenticationProtocol::NotificationHandler, pContextData : Void*, pSessionId : UInt32*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerBeginSession(dwFlags, eapType, pAttributeArray, hTokenImpersonateUser, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, dwMaxSendPacketSize, pConnectionId, func, pContextData, pSessionId, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerProcessReceivedPacket(sessionHandle : UInt32, cbReceivePacket : UInt32, pReceivePacket : UInt8*, pEapOutput : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerResponseAction*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerProcessReceivedPacket(sessionHandle, cbReceivePacket, pReceivePacket, pEapOutput, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetSendPacket(sessionHandle : UInt32, pcbSendPacket : UInt32*, ppSendPacket : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetSendPacket(sessionHandle, pcbSendPacket, ppSendPacket, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetResult(sessionHandle : UInt32, reason : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerMethodResultReason, ppResult : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerMethodResult*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetResult(sessionHandle, reason, ppResult, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetUIContext(sessionHandle : UInt32, pdwSizeOfUIContextData : UInt32*, ppUIContextData : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetUIContext(sessionHandle, pdwSizeOfUIContextData, ppUIContextData, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerSetUIContext(sessionHandle : UInt32, dwSizeOfUIContextData : UInt32, pUIContextData : UInt8*, pEapOutput : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerResponseAction*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerSetUIContext(sessionHandle, dwSizeOfUIContextData, pUIContextData, pEapOutput, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetResponseAttributes(sessionHandle : UInt32, pAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetResponseAttributes(sessionHandle, pAttribs, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerSetResponseAttributes(sessionHandle : UInt32, pAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, pEapOutput : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerResponseAction*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerSetResponseAttributes(sessionHandle, pAttribs, pEapOutput, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetAuthStatus(sessionHandle : UInt32, authParam : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerAuthParams, pcbAuthData : UInt32*, ppAuthData : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetAuthStatus(sessionHandle, authParam, pcbAuthData, ppAuthData, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerEndSession(sessionHandle : UInt32, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerEndSession(sessionHandle, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds : LibC::GUID*, phCredentialImpersonationToken : LibC::IntPtrT*, sessionHandle : UInt32, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, fSaveToCredMan : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds, phCredentialImpersonationToken, sessionHandle, ppEapError, fSaveToCredMan)
+    {% end %}
   end
 
   def eapHostPeerClearConnection(pConnectionId : LibC::GUID*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerClearConnection(pConnectionId, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerFreeEapError(pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeEapError(pEapError)
+    {% end %}
   end
 
   def eapHostPeerGetIdentity(dwVersion : UInt32, dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwSizeofConnectionData : UInt32, pConnectionData : UInt8*, dwSizeofUserData : UInt32, pUserData : UInt8*, hTokenImpersonateUser : Win32cr::Foundation::HANDLE, pfInvokeUI : Win32cr::Foundation::BOOL*, pdwSizeOfUserDataOut : UInt32*, ppUserDataOut : UInt8**, ppwszIdentity : Win32cr::Foundation::PWSTR*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetIdentity(dwVersion, dwFlags, eapMethodType, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, hTokenImpersonateUser, pfInvokeUI, pdwSizeOfUserDataOut, ppUserDataOut, ppwszIdentity, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerGetEncryptedPassword(dwSizeofPassword : UInt32, szPassword : Win32cr::Foundation::PWSTR, ppszEncPassword : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetEncryptedPassword(dwSizeofPassword, szPassword, ppszEncPassword)
+    {% end %}
   end
 
   def eapHostPeerFreeRuntimeMemory(pData : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeRuntimeMemory(pData)
+    {% end %}
   end
 
   @[Link("eappcfg")]
   @[Link("eappprxy")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun EapHostPeerGetMethods(pEapMethodInfoArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
@@ -1563,4 +1634,5 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
     fun EapHostPeerFreeRuntimeMemory(pData : UInt8*) : Void
 
   end
+  {% end %}
 end

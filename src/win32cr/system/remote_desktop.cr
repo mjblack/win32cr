@@ -1,15 +1,16 @@
-require "./com.cr"
 require "./../foundation.cr"
+require "./com.cr"
 require "./../media/audio.cr"
 require "./../media/audio/apo.cr"
+require "./../security.cr"
 require "./com/structured_storage.cr"
+require "./variant.cr"
 require "./win_rt.cr"
 require "./../ui/windows_and_messaging.cr"
-require "./../security.cr"
 
 module Win32cr::System::RemoteDesktop
   extend self
-  alias HwtsVirtualChannelHandle = LibC::IntPtrT
+  alias WTS_CLOUD_AUTH_HANDLE = Void*
   alias PCHANNEL_INIT_EVENT_FN = Proc(Void*, UInt32, Void*, UInt32, Void)
 
   alias PCHANNEL_OPEN_EVENT_FN = Proc(UInt32, UInt32, Void*, UInt32, UInt32, UInt32, Void)
@@ -24,6 +25,8 @@ module Win32cr::System::RemoteDesktop
 
   alias PVIRTUALCHANNELENTRY = Proc(Win32cr::System::RemoteDesktop::CHANNEL_ENTRY_POINTS*, Win32cr::Foundation::BOOL)
 
+  WTS_CURRENT_SERVER = Win32cr::Foundation::HANDLE.new(0x0_u64)
+  WTS_CURRENT_SERVER_HANDLE = Win32cr::Foundation::HANDLE.new(0x0_u64)
   WTS_DOMAIN_LENGTH = 255_u32
   WTS_USERNAME_LENGTH = 255_u32
   WTS_PASSWORD_LENGTH = 255_u32
@@ -167,17 +170,6 @@ module Win32cr::System::RemoteDesktop
   WTS_COMMENT_LENGTH = 60_u32
   WTS_LISTENER_CREATE = 1_u32
   WTS_LISTENER_UPDATE = 16_u32
-  WTS_SECURITY_QUERY_INFORMATION = 1_u32
-  WTS_SECURITY_SET_INFORMATION = 2_u32
-  WTS_SECURITY_RESET = 4_u32
-  WTS_SECURITY_VIRTUAL_CHANNELS = 8_u32
-  WTS_SECURITY_REMOTE_CONTROL = 16_u32
-  WTS_SECURITY_LOGON = 32_u32
-  WTS_SECURITY_LOGOFF = 64_u32
-  WTS_SECURITY_MESSAGE = 128_u32
-  WTS_SECURITY_CONNECT = 256_u32
-  WTS_SECURITY_DISCONNECT = 512_u32
-  WTS_SECURITY_GUEST_ACCESS = 32_u32
   WTS_PROTOCOL_TYPE_CONSOLE = 0_u32
   WTS_PROTOCOL_TYPE_ICA = 1_u32
   WTS_PROTOCOL_TYPE_RDP = 2_u32
@@ -272,18 +264,18 @@ module Win32cr::System::RemoteDesktop
   DISPID_AX_KEYCOMBINATIONPRESSED = 761_u32
   DISPID_AX_REMOTEDESKTOPSIZECHANGED = 762_u32
   DISPID_AX_TOUCHPOINTERCURSORMOVED = 800_u32
-  RDCLIENT_BITMAP_RENDER_SERVICE = "e4cc08cb-942e-4b19-8504-bd5a89a747f5"
-  WTS_QUERY_ALLOWED_INITIAL_APP = "c77d1b30-5be1-4c6b-a0e1-bd6d2e5c9fcc"
-  WTS_QUERY_LOGON_SCREEN_SIZE = "8b8e0fe7-0804-4a0e-b279-8660b1df0049"
-  WTS_QUERY_AUDIOENUM_DLL = "9bf4fa97-c883-4c2a-80ab-5a39c9af00db"
-  WTS_QUERY_MF_FORMAT_SUPPORT = "41869ad0-6332-4dc8-95d5-db749e2f1d94"
-  WRDS_SERVICE_ID_GRAPHICS_GUID = "d2993f4d-02cf-4280-8c48-1624b44f8706"
-  PROPERTY_DYNAMIC_TIME_ZONE_INFORMATION = "0cdfd28e-d0b9-4c1f-a5eb-6d1f6c6535b9"
-  PROPERTY_TYPE_GET_FAST_RECONNECT = "6212d757-0043-4862-99c3-9f3059ac2a3b"
-  PROPERTY_TYPE_GET_FAST_RECONNECT_USER_SID = "197c427a-0135-4b6d-9c5e-e6579a0ab625"
-  PROPERTY_TYPE_ENABLE_UNIVERSAL_APPS_FOR_CUSTOM_SHELL = "ed2c3fda-338d-4d3f-81a3-e767310d908e"
-  CONNECTION_PROPERTY_IDLE_TIME_WARNING = "693f7ff5-0c4e-4d17-b8e0-1f70325e5d58"
-  CONNECTION_PROPERTY_CURSOR_BLINK_DISABLED = "4b150580-fea4-4d3c-9de4-7433a66618f7"
+  RDCLIENT_BITMAP_RENDER_SERVICE = LibC::GUID.new(0xe4cc08cb_u32, 0x942e_u16, 0x4b19_u16, StaticArray[0x85_u8, 0x4_u8, 0xbd_u8, 0x5a_u8, 0x89_u8, 0xa7_u8, 0x47_u8, 0xf5_u8])
+  WTS_QUERY_ALLOWED_INITIAL_APP = LibC::GUID.new(0xc77d1b30_u32, 0x5be1_u16, 0x4c6b_u16, StaticArray[0xa0_u8, 0xe1_u8, 0xbd_u8, 0x6d_u8, 0x2e_u8, 0x5c_u8, 0x9f_u8, 0xcc_u8])
+  WTS_QUERY_LOGON_SCREEN_SIZE = LibC::GUID.new(0x8b8e0fe7_u32, 0x804_u16, 0x4a0e_u16, StaticArray[0xb2_u8, 0x79_u8, 0x86_u8, 0x60_u8, 0xb1_u8, 0xdf_u8, 0x0_u8, 0x49_u8])
+  WTS_QUERY_AUDIOENUM_DLL = LibC::GUID.new(0x9bf4fa97_u32, 0xc883_u16, 0x4c2a_u16, StaticArray[0x80_u8, 0xab_u8, 0x5a_u8, 0x39_u8, 0xc9_u8, 0xaf_u8, 0x0_u8, 0xdb_u8])
+  WTS_QUERY_MF_FORMAT_SUPPORT = LibC::GUID.new(0x41869ad0_u32, 0x6332_u16, 0x4dc8_u16, StaticArray[0x95_u8, 0xd5_u8, 0xdb_u8, 0x74_u8, 0x9e_u8, 0x2f_u8, 0x1d_u8, 0x94_u8])
+  WRDS_SERVICE_ID_GRAPHICS_GUID = LibC::GUID.new(0xd2993f4d_u32, 0x2cf_u16, 0x4280_u16, StaticArray[0x8c_u8, 0x48_u8, 0x16_u8, 0x24_u8, 0xb4_u8, 0x4f_u8, 0x87_u8, 0x6_u8])
+  PROPERTY_DYNAMIC_TIME_ZONE_INFORMATION = LibC::GUID.new(0xcdfd28e_u32, 0xd0b9_u16, 0x4c1f_u16, StaticArray[0xa5_u8, 0xeb_u8, 0x6d_u8, 0x1f_u8, 0x6c_u8, 0x65_u8, 0x35_u8, 0xb9_u8])
+  PROPERTY_TYPE_GET_FAST_RECONNECT = LibC::GUID.new(0x6212d757_u32, 0x43_u16, 0x4862_u16, StaticArray[0x99_u8, 0xc3_u8, 0x9f_u8, 0x30_u8, 0x59_u8, 0xac_u8, 0x2a_u8, 0x3b_u8])
+  PROPERTY_TYPE_GET_FAST_RECONNECT_USER_SID = LibC::GUID.new(0x197c427a_u32, 0x135_u16, 0x4b6d_u16, StaticArray[0x9c_u8, 0x5e_u8, 0xe6_u8, 0x57_u8, 0x9a_u8, 0xa_u8, 0xb6_u8, 0x25_u8])
+  PROPERTY_TYPE_ENABLE_UNIVERSAL_APPS_FOR_CUSTOM_SHELL = LibC::GUID.new(0xed2c3fda_u32, 0x338d_u16, 0x4d3f_u16, StaticArray[0x81_u8, 0xa3_u8, 0xe7_u8, 0x67_u8, 0x31_u8, 0xd_u8, 0x90_u8, 0x8e_u8])
+  CONNECTION_PROPERTY_IDLE_TIME_WARNING = LibC::GUID.new(0x693f7ff5_u32, 0xc4e_u16, 0x4d17_u16, StaticArray[0xb8_u8, 0xe0_u8, 0x1f_u8, 0x70_u8, 0x32_u8, 0x5e_u8, 0x5d_u8, 0x58_u8])
+  CONNECTION_PROPERTY_CURSOR_BLINK_DISABLED = LibC::GUID.new(0x4b150580_u32, 0xfea4_u16, 0x4d3c_u16, StaticArray[0x9d_u8, 0xe4_u8, 0x74_u8, 0x33_u8, 0xa6_u8, 0x66_u8, 0x18_u8, 0xf7_u8])
 
   CLSID_TSUserExInterfaces = LibC::GUID.new(0x910dd01_u32, 0xdf8c_u16, 0x11d1_u16, StaticArray[0xae_u8, 0x27_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x58_u8, 0x13_u8])
 
@@ -291,6 +283,24 @@ module Win32cr::System::RemoteDesktop
 
   CLSID_Workspace = LibC::GUID.new(0x4f1dfca6_u32, 0x3aad_u16, 0x48e1_u16, StaticArray[0x84_u8, 0x6_u8, 0x4b_u8, 0xc2_u8, 0x1a_u8, 0x50_u8, 0x1d_u8, 0x7c_u8])
 
+  @[Flags]
+  enum WTS_SECURITY_FLAGS : UInt32
+    WTS_SECURITY_CURRENT_GUEST_ACCESS = 72_u32
+    WTS_SECURITY_USER_ACCESS = 329_u32
+    WTS_SECURITY_CURRENT_USER_ACCESS = 590_u32
+    WTS_SECURITY_ALL_ACCESS = 983999_u32
+    WTS_SECURITY_QUERY_INFORMATION = 1_u32
+    WTS_SECURITY_SET_INFORMATION = 2_u32
+    WTS_SECURITY_RESET = 4_u32
+    WTS_SECURITY_VIRTUAL_CHANNELS = 8_u32
+    WTS_SECURITY_REMOTE_CONTROL = 16_u32
+    WTS_SECURITY_LOGON = 32_u32
+    WTS_SECURITY_LOGOFF = 64_u32
+    WTS_SECURITY_MESSAGE = 128_u32
+    WTS_SECURITY_CONNECT = 256_u32
+    WTS_SECURITY_DISCONNECT = 512_u32
+    WTS_SECURITY_GUEST_ACCESS = 32_u32
+  end
   enum AE_POSITION_FLAGS
     POSITION_INVALID = 0_i32
     POSITION_DISCONTINUOUS = 1_i32
@@ -380,6 +390,8 @@ module Win32cr::System::RemoteDesktop
     WTSValidationInfo = 27_i32
     WTSSessionAddressV4 = 28_i32
     WTSIsRemoteSession = 29_i32
+    WTSSessionActivityId = 30_i32
+    WTSCapabilityCheck = 31_i32
   end
   enum WTS_CONFIG_CLASS
     WTSUserConfigInitialProgram = 0_i32
@@ -414,6 +426,8 @@ module Win32cr::System::RemoteDesktop
     WTSTypeProcessInfoLevel0 = 0_i32
     WTSTypeProcessInfoLevel1 = 1_i32
     WTSTypeSessionInfoLevel1 = 2_i32
+    WTSTypeCloudAuthServerNonce = 3_i32
+    WTSTypeSerializedUserCredential = 4_i32
   end
   enum WTSSBX_MACHINE_DRAIN
     WTSSBX_MACHINE_DRAIN_UNSPEC = 0_i32
@@ -761,8 +775,8 @@ module Win32cr::System::RemoteDesktop
     property session_id : UInt32
     property process_id : UInt32
     property pProcessName : Win32cr::Foundation::PWSTR
-    property pUserSid : Win32cr::Foundation::PSID
-    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PWSTR, @pUserSid : Win32cr::Foundation::PSID)
+    property pUserSid : Win32cr::Security::PSID
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PWSTR, @pUserSid : Win32cr::Security::PSID)
     end
   end
 
@@ -771,8 +785,8 @@ module Win32cr::System::RemoteDesktop
     property session_id : UInt32
     property process_id : UInt32
     property pProcessName : Win32cr::Foundation::PSTR
-    property pUserSid : Win32cr::Foundation::PSID
-    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PSTR, @pUserSid : Win32cr::Foundation::PSID)
+    property pUserSid : Win32cr::Security::PSID
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PSTR, @pUserSid : Win32cr::Security::PSID)
     end
   end
 
@@ -823,12 +837,12 @@ module Win32cr::System::RemoteDesktop
     property win_station_name : UInt16[32]
     property domain : UInt16[17]
     property user_name : UInt16[21]
-    property connect_time : Win32cr::Foundation::LARGE_INTEGER
-    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
-    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
-    property logon_time : Win32cr::Foundation::LARGE_INTEGER
-    property current_time : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32, @win_station_name : UInt16[32], @domain : UInt16[17], @user_name : UInt16[21], @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @logon_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER)
+    property connect_time : Int64
+    property disconnect_time : Int64
+    property last_input_time : Int64
+    property logon_time : Int64
+    property current_time : Int64
+    def initialize(@state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32, @win_station_name : UInt16[32], @domain : UInt16[17], @user_name : UInt16[21], @connect_time : Int64, @disconnect_time : Int64, @last_input_time : Int64, @logon_time : Int64, @current_time : Int64)
     end
   end
 
@@ -845,12 +859,12 @@ module Win32cr::System::RemoteDesktop
     property win_station_name : Win32cr::Foundation::CHAR[32]
     property domain : Win32cr::Foundation::CHAR[17]
     property user_name : Win32cr::Foundation::CHAR[21]
-    property connect_time : Win32cr::Foundation::LARGE_INTEGER
-    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
-    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
-    property logon_time : Win32cr::Foundation::LARGE_INTEGER
-    property current_time : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_by : UInt32, @win_station_name : Win32cr::Foundation::CHAR[32], @domain : Win32cr::Foundation::CHAR[17], @user_name : Win32cr::Foundation::CHAR[21], @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @logon_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER)
+    property connect_time : Int64
+    property disconnect_time : Int64
+    property last_input_time : Int64
+    property logon_time : Int64
+    property current_time : Int64
+    def initialize(@state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_id : UInt32, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_by : UInt32, @win_station_name : Win32cr::Foundation::CHAR[32], @domain : Win32cr::Foundation::CHAR[17], @user_name : Win32cr::Foundation::CHAR[21], @connect_time : Int64, @disconnect_time : Int64, @last_input_time : Int64, @logon_time : Int64, @current_time : Int64)
     end
   end
 
@@ -862,18 +876,18 @@ module Win32cr::System::RemoteDesktop
     property win_station_name : UInt16[33]
     property user_name : UInt16[21]
     property domain_name : UInt16[18]
-    property logon_time : Win32cr::Foundation::LARGE_INTEGER
-    property connect_time : Win32cr::Foundation::LARGE_INTEGER
-    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
-    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
-    property current_time : Win32cr::Foundation::LARGE_INTEGER
+    property logon_time : Int64
+    property connect_time : Int64
+    property disconnect_time : Int64
+    property last_input_time : Int64
+    property current_time : Int64
     property incoming_bytes : UInt32
     property outgoing_bytes : UInt32
     property incoming_frames : UInt32
     property outgoing_frames : UInt32
     property incoming_compressed_bytes : UInt32
     property outgoing_compressed_bytes : UInt32
-    def initialize(@session_id : UInt32, @session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_flags : Int32, @win_station_name : UInt16[33], @user_name : UInt16[21], @domain_name : UInt16[18], @logon_time : Win32cr::Foundation::LARGE_INTEGER, @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32)
+    def initialize(@session_id : UInt32, @session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_flags : Int32, @win_station_name : UInt16[33], @user_name : UInt16[21], @domain_name : UInt16[18], @logon_time : Int64, @connect_time : Int64, @disconnect_time : Int64, @last_input_time : Int64, @current_time : Int64, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32)
     end
   end
 
@@ -885,18 +899,18 @@ module Win32cr::System::RemoteDesktop
     property win_station_name : Win32cr::Foundation::CHAR[33]
     property user_name : Win32cr::Foundation::CHAR[21]
     property domain_name : Win32cr::Foundation::CHAR[18]
-    property logon_time : Win32cr::Foundation::LARGE_INTEGER
-    property connect_time : Win32cr::Foundation::LARGE_INTEGER
-    property disconnect_time : Win32cr::Foundation::LARGE_INTEGER
-    property last_input_time : Win32cr::Foundation::LARGE_INTEGER
-    property current_time : Win32cr::Foundation::LARGE_INTEGER
+    property logon_time : Int64
+    property connect_time : Int64
+    property disconnect_time : Int64
+    property last_input_time : Int64
+    property current_time : Int64
     property incoming_bytes : UInt32
     property outgoing_bytes : UInt32
     property incoming_frames : UInt32
     property outgoing_frames : UInt32
     property incoming_compressed_bytes : UInt32
     property outgoing_compressed_bytes : UInt32
-    def initialize(@session_id : UInt32, @session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_flags : Int32, @win_station_name : Win32cr::Foundation::CHAR[33], @user_name : Win32cr::Foundation::CHAR[21], @domain_name : Win32cr::Foundation::CHAR[18], @logon_time : Win32cr::Foundation::LARGE_INTEGER, @connect_time : Win32cr::Foundation::LARGE_INTEGER, @disconnect_time : Win32cr::Foundation::LARGE_INTEGER, @last_input_time : Win32cr::Foundation::LARGE_INTEGER, @current_time : Win32cr::Foundation::LARGE_INTEGER, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32)
+    def initialize(@session_id : UInt32, @session_state : Win32cr::System::RemoteDesktop::WTS_CONNECTSTATE_CLASS, @session_flags : Int32, @win_station_name : Win32cr::Foundation::CHAR[33], @user_name : Win32cr::Foundation::CHAR[21], @domain_name : Win32cr::Foundation::CHAR[18], @logon_time : Int64, @connect_time : Int64, @disconnect_time : Int64, @last_input_time : Int64, @current_time : Int64, @incoming_bytes : UInt32, @outgoing_bytes : UInt32, @incoming_frames : UInt32, @outgoing_frames : UInt32, @incoming_compressed_bytes : UInt32, @outgoing_compressed_bytes : UInt32)
     end
   end
 
@@ -981,7 +995,7 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  struct WTS_PRODUCT_INFOA_
+  struct PRODUCT_INFOA
     property company_name : Win32cr::Foundation::CHAR[256]
     property product_id : Win32cr::Foundation::CHAR[4]
     def initialize(@company_name : Win32cr::Foundation::CHAR[256], @product_id : Win32cr::Foundation::CHAR[4])
@@ -989,7 +1003,7 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  struct WTS_PRODUCT_INFOW_
+  struct PRODUCT_INFOW
     property company_name : UInt16[256]
     property product_id : UInt16[4]
     def initialize(@company_name : UInt16[256], @product_id : UInt16[4])
@@ -998,23 +1012,23 @@ module Win32cr::System::RemoteDesktop
 
   @[Extern]
   struct WTS_VALIDATION_INFORMATIONA
-    property product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOA_
+    property product_info : Win32cr::System::RemoteDesktop::PRODUCT_INFOA
     property license : UInt8[16384]
     property license_length : UInt32
     property hardware_id : UInt8[20]
     property hardware_id_length : UInt32
-    def initialize(@product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOA_, @license : UInt8[16384], @license_length : UInt32, @hardware_id : UInt8[20], @hardware_id_length : UInt32)
+    def initialize(@product_info : Win32cr::System::RemoteDesktop::PRODUCT_INFOA, @license : UInt8[16384], @license_length : UInt32, @hardware_id : UInt8[20], @hardware_id_length : UInt32)
     end
   end
 
   @[Extern]
   struct WTS_VALIDATION_INFORMATIONW
-    property product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOW_
+    property product_info : Win32cr::System::RemoteDesktop::PRODUCT_INFOW
     property license : UInt8[16384]
     property license_length : UInt32
     property hardware_id : UInt8[20]
     property hardware_id_length : UInt32
-    def initialize(@product_info : Win32cr::System::RemoteDesktop::WTS_PRODUCT_INFOW_, @license : UInt8[16384], @license_length : UInt32, @hardware_id : UInt8[20], @hardware_id_length : UInt32)
+    def initialize(@product_info : Win32cr::System::RemoteDesktop::PRODUCT_INFOW, @license : UInt8[16384], @license_length : UInt32, @hardware_id : UInt8[20], @hardware_id_length : UInt32)
     end
   end
 
@@ -1096,16 +1110,16 @@ module Win32cr::System::RemoteDesktop
     property session_id : UInt32
     property process_id : UInt32
     property pProcessName : Win32cr::Foundation::PWSTR
-    property pUserSid : Win32cr::Foundation::PSID
+    property pUserSid : Win32cr::Security::PSID
     property number_of_threads : UInt32
     property handle_count : UInt32
     property pagefile_usage : UInt32
     property peak_pagefile_usage : UInt32
     property working_set_size : UInt32
     property peak_working_set_size : UInt32
-    property user_time : Win32cr::Foundation::LARGE_INTEGER
-    property kernel_time : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PWSTR, @pUserSid : Win32cr::Foundation::PSID, @number_of_threads : UInt32, @handle_count : UInt32, @pagefile_usage : UInt32, @peak_pagefile_usage : UInt32, @working_set_size : UInt32, @peak_working_set_size : UInt32, @user_time : Win32cr::Foundation::LARGE_INTEGER, @kernel_time : Win32cr::Foundation::LARGE_INTEGER)
+    property user_time : Int64
+    property kernel_time : Int64
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PWSTR, @pUserSid : Win32cr::Security::PSID, @number_of_threads : UInt32, @handle_count : UInt32, @pagefile_usage : UInt32, @peak_pagefile_usage : UInt32, @working_set_size : UInt32, @peak_working_set_size : UInt32, @user_time : Int64, @kernel_time : Int64)
     end
   end
 
@@ -1114,16 +1128,16 @@ module Win32cr::System::RemoteDesktop
     property session_id : UInt32
     property process_id : UInt32
     property pProcessName : Win32cr::Foundation::PSTR
-    property pUserSid : Win32cr::Foundation::PSID
+    property pUserSid : Win32cr::Security::PSID
     property number_of_threads : UInt32
     property handle_count : UInt32
     property pagefile_usage : UInt32
     property peak_pagefile_usage : UInt32
     property working_set_size : UInt32
     property peak_working_set_size : UInt32
-    property user_time : Win32cr::Foundation::LARGE_INTEGER
-    property kernel_time : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PSTR, @pUserSid : Win32cr::Foundation::PSID, @number_of_threads : UInt32, @handle_count : UInt32, @pagefile_usage : UInt32, @peak_pagefile_usage : UInt32, @working_set_size : UInt32, @peak_working_set_size : UInt32, @user_time : Win32cr::Foundation::LARGE_INTEGER, @kernel_time : Win32cr::Foundation::LARGE_INTEGER)
+    property user_time : Int64
+    property kernel_time : Int64
+    def initialize(@session_id : UInt32, @process_id : UInt32, @pProcessName : Win32cr::Foundation::PSTR, @pUserSid : Win32cr::Security::PSID, @number_of_threads : UInt32, @handle_count : UInt32, @pagefile_usage : UInt32, @peak_pagefile_usage : UInt32, @working_set_size : UInt32, @peak_working_set_size : UInt32, @user_time : Int64, @kernel_time : Int64)
     end
   end
 
@@ -1198,6 +1212,14 @@ module Win32cr::System::RemoteDesktop
     property work_directory : Win32cr::Foundation::CHAR[261]
     property initial_program : Win32cr::Foundation::CHAR[261]
     def initialize(@version : UInt32, @fEnableListener : UInt32, @max_connection_count : UInt32, @fPromptForPassword : UInt32, @fInheritColorDepth : UInt32, @color_depth : UInt32, @fInheritBrokenTimeoutSettings : UInt32, @broken_timeout_settings : UInt32, @fDisablePrinterRedirection : UInt32, @fDisableDriveRedirection : UInt32, @fDisableComPortRedirection : UInt32, @fDisableLPTPortRedirection : UInt32, @fDisableClipboardRedirection : UInt32, @fDisableAudioRedirection : UInt32, @fDisablePNPRedirection : UInt32, @fDisableDefaultMainClientPrinter : UInt32, @lan_adapter : UInt32, @port_number : UInt32, @fInheritShadowSettings : UInt32, @shadow_settings : UInt32, @timeout_settings_connection : UInt32, @timeout_settings_disconnection : UInt32, @timeout_settings_idle : UInt32, @security_layer : UInt32, @min_encryption_level : UInt32, @user_authentication : UInt32, @comment : Win32cr::Foundation::CHAR[61], @logon_user_name : Win32cr::Foundation::CHAR[21], @logon_domain : Win32cr::Foundation::CHAR[18], @work_directory : Win32cr::Foundation::CHAR[261], @initial_program : Win32cr::Foundation::CHAR[261])
+    end
+  end
+
+  @[Extern]
+  struct WTS_SERIALIZED_USER_CREDENTIAL
+    property serialization_length : UInt32
+    property serialization : UInt8*
+    def initialize(@serialization_length : UInt32, @serialization : UInt8*)
     end
   end
 
@@ -1462,8 +1484,8 @@ module Win32cr::System::RemoteDesktop
   @[Extern]
   struct RFX_GFX_MSG_RDP_DATA
     property channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER
-    property rdpData : UInt8*
-    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @rdpData : UInt8*)
+    property rdpData : UInt8[1]
+    def initialize(@channelHdr : Win32cr::System::RemoteDesktop::RFX_GFX_MSG_HEADER, @rdpData : UInt8[1])
     end
   end
 
@@ -1478,6 +1500,17 @@ module Win32cr::System::RemoteDesktop
     property ipv4 : Ipv4_e__struct_
     property ipv6 : Ipv6_e__struct_
 
+      # Nested Type Ipv4_e__struct_
+      @[Extern]
+      struct Ipv4_e__struct_
+    property sin_port : UInt16
+    property in_addr : UInt32
+    property sin_zero : UInt8[8]
+    def initialize(@sin_port : UInt16, @in_addr : UInt32, @sin_zero : UInt8[8])
+    end
+      end
+
+
       # Nested Type Ipv6_e__struct_
       @[Extern]
       struct Ipv6_e__struct_
@@ -1486,17 +1519,6 @@ module Win32cr::System::RemoteDesktop
     property sin6_addr : UInt16[8]
     property sin6_scope_id : UInt32
     def initialize(@sin6_port : UInt16, @sin6_flowinfo : UInt32, @sin6_addr : UInt16[8], @sin6_scope_id : UInt32)
-    end
-      end
-
-
-      # Nested Type Ipv4_e__struct_
-      @[Extern]
-      struct Ipv4_e__struct_
-    property sin_port : UInt16
-    property in_addr : UInt32
-    property sin_zero : UInt8[8]
-    def initialize(@sin_port : UInt16, @in_addr : UInt32, @sin_zero : UInt8[8])
     end
       end
 
@@ -1729,8 +1751,8 @@ module Win32cr::System::RemoteDesktop
     property cache : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS
     property async_signal : UInt32
     property async_signal_mask : UInt32
-    property counters : Win32cr::Foundation::LARGE_INTEGER[100]
-    def initialize(@output : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS, @input : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS, @cache : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS, @async_signal : UInt32, @async_signal_mask : UInt32, @counters : Win32cr::Foundation::LARGE_INTEGER[100])
+    property counters : Int64[100]
+    def initialize(@output : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS, @input : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_COUNTERS, @cache : Win32cr::System::RemoteDesktop::WTS_CACHE_STATS, @async_signal : UInt32, @async_signal_mask : UInt32, @counters : Int64[100])
     end
   end
 
@@ -1755,22 +1777,22 @@ module Win32cr::System::RemoteDesktop
     property bVal : Bval_e__struct_
     property guidVal : LibC::GUID
 
-      # Nested Type Bval_e__struct_
-      @[Extern]
-      struct Bval_e__struct_
-    property size : UInt32
-    property pbVal : Win32cr::Foundation::PSTR
-    def initialize(@size : UInt32, @pbVal : Win32cr::Foundation::PSTR)
-    end
-      end
-
-
       # Nested Type Strval_e__struct_
       @[Extern]
       struct Strval_e__struct_
     property size : UInt32
     property pstrVal : Win32cr::Foundation::PWSTR
     def initialize(@size : UInt32, @pstrVal : Win32cr::Foundation::PWSTR)
+    end
+      end
+
+
+      # Nested Type Bval_e__struct_
+      @[Extern]
+      struct Bval_e__struct_
+    property size : UInt32
+    property pbVal : Win32cr::Foundation::PSTR
+    def initialize(@size : UInt32, @pbVal : Win32cr::Foundation::PSTR)
     end
       end
 
@@ -1966,7 +1988,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IAudioEndpointVtbl,
+
+  record IAudioEndpointVtable,
     query_interface : Proc(IAudioEndpoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioEndpoint*, UInt32),
     release : Proc(IAudioEndpoint*, UInt32),
@@ -1978,7 +2001,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IAudioEndpoint, lpVtbl : IAudioEndpointVtbl* do
+  record IAudioEndpoint, lpVtbl : IAudioEndpointVtable* do
     GUID = LibC::GUID.new(0x30a99515_u32, 0x1527_u16, 0x4451_u16, StaticArray[0xaf_u8, 0x9f_u8, 0x0_u8, 0xc5_u8, 0xf0_u8, 0x23_u8, 0x4d_u8, 0xaf_u8])
     def query_interface(this : IAudioEndpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2008,7 +2031,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IAudioEndpointRTVtbl,
+
+  record IAudioEndpointRTVtable,
     query_interface : Proc(IAudioEndpointRT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioEndpointRT*, UInt32),
     release : Proc(IAudioEndpointRT*, UInt32),
@@ -2019,7 +2043,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IAudioEndpointRT, lpVtbl : IAudioEndpointRTVtbl* do
+  record IAudioEndpointRT, lpVtbl : IAudioEndpointRTVtable* do
     GUID = LibC::GUID.new(0xdfd2005f_u32, 0xa6e5_u16, 0x4d39_u16, StaticArray[0xa2_u8, 0x65_u8, 0x93_u8, 0x9a_u8, 0xda_u8, 0x9f_u8, 0xbb_u8, 0x4d_u8])
     def query_interface(this : IAudioEndpointRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2046,7 +2070,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IAudioInputEndpointRTVtbl,
+
+  record IAudioInputEndpointRTVtable,
     query_interface : Proc(IAudioInputEndpointRT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioInputEndpointRT*, UInt32),
     release : Proc(IAudioInputEndpointRT*, UInt32),
@@ -2056,7 +2081,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IAudioInputEndpointRT, lpVtbl : IAudioInputEndpointRTVtbl* do
+  record IAudioInputEndpointRT, lpVtbl : IAudioInputEndpointRTVtable* do
     GUID = LibC::GUID.new(0x8026ab61_u32, 0x92b2_u16, 0x43c1_u16, StaticArray[0xa1_u8, 0xdf_u8, 0x5c_u8, 0x37_u8, 0xeb_u8, 0xd0_u8, 0x8d_u8, 0x82_u8])
     def query_interface(this : IAudioInputEndpointRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2080,7 +2105,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IAudioOutputEndpointRTVtbl,
+
+  record IAudioOutputEndpointRTVtable,
     query_interface : Proc(IAudioOutputEndpointRT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioOutputEndpointRT*, UInt32),
     release : Proc(IAudioOutputEndpointRT*, UInt32),
@@ -2090,7 +2116,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IAudioOutputEndpointRT, lpVtbl : IAudioOutputEndpointRTVtbl* do
+  record IAudioOutputEndpointRT, lpVtbl : IAudioOutputEndpointRTVtable* do
     GUID = LibC::GUID.new(0x8fa906e4_u32, 0xc31c_u16, 0x4e31_u16, StaticArray[0x93_u8, 0x2e_u8, 0x19_u8, 0xa6_u8, 0x63_u8, 0x85_u8, 0xe9_u8, 0xaa_u8])
     def query_interface(this : IAudioOutputEndpointRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2114,7 +2140,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IAudioDeviceEndpointVtbl,
+
+  record IAudioDeviceEndpointVtable,
     query_interface : Proc(IAudioDeviceEndpoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioDeviceEndpoint*, UInt32),
     release : Proc(IAudioDeviceEndpoint*, UInt32),
@@ -2125,7 +2152,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IAudioDeviceEndpoint, lpVtbl : IAudioDeviceEndpointVtbl* do
+  record IAudioDeviceEndpoint, lpVtbl : IAudioDeviceEndpointVtable* do
     GUID = LibC::GUID.new(0xd4952f5a_u32, 0xa0b2_u16, 0x4cc4_u16, StaticArray[0x8b_u8, 0x82_u8, 0x93_u8, 0x58_u8, 0x48_u8, 0x8d_u8, 0xd8_u8, 0xac_u8])
     def query_interface(this : IAudioDeviceEndpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2152,7 +2179,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IAudioEndpointControlVtbl,
+
+  record IAudioEndpointControlVtable,
     query_interface : Proc(IAudioEndpointControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioEndpointControl*, UInt32),
     release : Proc(IAudioEndpointControl*, UInt32),
@@ -2162,7 +2190,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IAudioEndpointControl, lpVtbl : IAudioEndpointControlVtbl* do
+  record IAudioEndpointControl, lpVtbl : IAudioEndpointControlVtable* do
     GUID = LibC::GUID.new(0xc684b72a_u32, 0x6df4_u16, 0x4774_u16, StaticArray[0xbd_u8, 0xf9_u8, 0x76_u8, 0xb7_u8, 0x75_u8, 0x9_u8, 0xb6_u8, 0x53_u8])
     def query_interface(this : IAudioEndpointControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2186,14 +2214,15 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IADsTSUserExVtbl,
+
+  record IADsTSUserExVtable,
     query_interface : Proc(IADsTSUserEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsTSUserEx*, UInt32),
     release : Proc(IADsTSUserEx*, UInt32),
     get_type_info_count : Proc(IADsTSUserEx*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IADsTSUserEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IADsTSUserEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IADsTSUserEx*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IADsTSUserEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_TerminalServicesProfilePath : Proc(IADsTSUserEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_TerminalServicesProfilePath : Proc(IADsTSUserEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TerminalServicesHomeDirectory : Proc(IADsTSUserEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2227,7 +2256,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IADsTSUserEx, lpVtbl : IADsTSUserExVtbl* do
+  record IADsTSUserEx, lpVtbl : IADsTSUserExVtable* do
     GUID = LibC::GUID.new(0xc4930e79_u32, 0x2989_u16, 0x4462_u16, StaticArray[0x8a_u8, 0x60_u8, 0x2f_u8, 0xcf_u8, 0x2f_u8, 0x29_u8, 0x55_u8, 0xef_u8])
     def query_interface(this : IADsTSUserEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2247,8 +2276,8 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IADsTSUserEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IADsTSUserEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IADsTSUserEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_TerminalServicesProfilePath(this : IADsTSUserEx*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TerminalServicesProfilePath.call(this, pVal)
@@ -2344,7 +2373,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITSGAuthorizeConnectionSinkVtbl,
+
+  record ITSGAuthorizeConnectionSinkVtable,
     query_interface : Proc(ITSGAuthorizeConnectionSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSGAuthorizeConnectionSink*, UInt32),
     release : Proc(ITSGAuthorizeConnectionSink*, UInt32),
@@ -2352,7 +2382,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITSGAuthorizeConnectionSink, lpVtbl : ITSGAuthorizeConnectionSinkVtbl* do
+  record ITSGAuthorizeConnectionSink, lpVtbl : ITSGAuthorizeConnectionSinkVtable* do
     GUID = LibC::GUID.new(0xc27ece33_u32, 0x7781_u16, 0x4318_u16, StaticArray[0x98_u8, 0xef_u8, 0x1c_u8, 0xf2_u8, 0xda_u8, 0x7b_u8, 0x70_u8, 0x5_u8])
     def query_interface(this : ITSGAuthorizeConnectionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2370,7 +2400,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITSGAuthorizeResourceSinkVtbl,
+
+  record ITSGAuthorizeResourceSinkVtable,
     query_interface : Proc(ITSGAuthorizeResourceSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSGAuthorizeResourceSink*, UInt32),
     release : Proc(ITSGAuthorizeResourceSink*, UInt32),
@@ -2378,7 +2409,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITSGAuthorizeResourceSink, lpVtbl : ITSGAuthorizeResourceSinkVtbl* do
+  record ITSGAuthorizeResourceSink, lpVtbl : ITSGAuthorizeResourceSinkVtable* do
     GUID = LibC::GUID.new(0xfeddfcd4_u32, 0xfa12_u16, 0x4435_u16, StaticArray[0xae_u8, 0x55_u8, 0x7a_u8, 0xd1_u8, 0xa9_u8, 0x77_u8, 0x9a_u8, 0xf7_u8])
     def query_interface(this : ITSGAuthorizeResourceSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2396,7 +2427,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITSGPolicyEngineVtbl,
+
+  record ITSGPolicyEngineVtable,
     query_interface : Proc(ITSGPolicyEngine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSGPolicyEngine*, UInt32),
     release : Proc(ITSGPolicyEngine*, UInt32),
@@ -2407,7 +2439,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITSGPolicyEngine, lpVtbl : ITSGPolicyEngineVtbl* do
+  record ITSGPolicyEngine, lpVtbl : ITSGPolicyEngineVtable* do
     GUID = LibC::GUID.new(0x8bc24f08_u32, 0x6223_u16, 0x42f4_u16, StaticArray[0xa5_u8, 0xb4_u8, 0x8e_u8, 0x37_u8, 0xcd_u8, 0x13_u8, 0x5b_u8, 0xbd_u8])
     def query_interface(this : ITSGPolicyEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2434,7 +2466,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITSGAccountingEngineVtbl,
+
+  record ITSGAccountingEngineVtable,
     query_interface : Proc(ITSGAccountingEngine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSGAccountingEngine*, UInt32),
     release : Proc(ITSGAccountingEngine*, UInt32),
@@ -2442,7 +2475,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITSGAccountingEngine, lpVtbl : ITSGAccountingEngineVtbl* do
+  record ITSGAccountingEngine, lpVtbl : ITSGAccountingEngineVtable* do
     GUID = LibC::GUID.new(0x4ce2a0c9_u32, 0xe874_u16, 0x4f1a_u16, StaticArray[0x86_u8, 0xf4_u8, 0x6_u8, 0xbb_u8, 0xb9_u8, 0x11_u8, 0x53_u8, 0x38_u8])
     def query_interface(this : ITSGAccountingEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2460,7 +2493,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITSGAuthenticateUserSinkVtbl,
+
+  record ITSGAuthenticateUserSinkVtable,
     query_interface : Proc(ITSGAuthenticateUserSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSGAuthenticateUserSink*, UInt32),
     release : Proc(ITSGAuthenticateUserSink*, UInt32),
@@ -2471,7 +2505,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITSGAuthenticateUserSink, lpVtbl : ITSGAuthenticateUserSinkVtbl* do
+  record ITSGAuthenticateUserSink, lpVtbl : ITSGAuthenticateUserSinkVtable* do
     GUID = LibC::GUID.new(0x2c3e2e73_u32, 0xa782_u16, 0x47f9_u16, StaticArray[0x8d_u8, 0xfb_u8, 0x77_u8, 0xee_u8, 0x1e_u8, 0xd2_u8, 0x7a_u8, 0x3_u8])
     def query_interface(this : ITSGAuthenticateUserSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2498,7 +2532,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITSGAuthenticationEngineVtbl,
+
+  record ITSGAuthenticationEngineVtable,
     query_interface : Proc(ITSGAuthenticationEngine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSGAuthenticationEngine*, UInt32),
     release : Proc(ITSGAuthenticationEngine*, UInt32),
@@ -2507,7 +2542,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITSGAuthenticationEngine, lpVtbl : ITSGAuthenticationEngineVtbl* do
+  record ITSGAuthenticationEngine, lpVtbl : ITSGAuthenticationEngineVtable* do
     GUID = LibC::GUID.new(0x9ee3e5bf_u32, 0x4ab_u16, 0x4691_u16, StaticArray[0x99_u8, 0x8c_u8, 0xd7_u8, 0xf6_u8, 0x22_u8, 0x32_u8, 0x1a_u8, 0x56_u8])
     def query_interface(this : ITSGAuthenticationEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2528,7 +2563,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSSBPluginVtbl,
+
+  record IWTSSBPluginVtable,
     query_interface : Proc(IWTSSBPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSSBPlugin*, UInt32),
     release : Proc(IWTSSBPlugin*, UInt32),
@@ -2541,7 +2577,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSSBPlugin, lpVtbl : IWTSSBPluginVtbl* do
+  record IWTSSBPlugin, lpVtbl : IWTSSBPluginVtable* do
     GUID = LibC::GUID.new(0xdc44be78_u32, 0xb18d_u16, 0x4399_u16, StaticArray[0xb2_u8, 0x10_u8, 0x64_u8, 0x1b_u8, 0xf6_u8, 0x7a_u8, 0x0_u8, 0x2c_u8])
     def query_interface(this : IWTSSBPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2574,7 +2610,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceClientExtVtbl,
+
+  record IWorkspaceClientExtVtable,
     query_interface : Proc(IWorkspaceClientExt*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceClientExt*, UInt32),
     release : Proc(IWorkspaceClientExt*, UInt32),
@@ -2584,7 +2621,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWorkspaceClientExt, lpVtbl : IWorkspaceClientExtVtbl* do
+  record IWorkspaceClientExt, lpVtbl : IWorkspaceClientExtVtable* do
     GUID = LibC::GUID.new(0x12b952f4_u32, 0x41ca_u16, 0x4f21_u16, StaticArray[0xa8_u8, 0x29_u8, 0xa6_u8, 0xd0_u8, 0x7d_u8, 0x9a_u8, 0x16_u8, 0xe5_u8])
     def query_interface(this : IWorkspaceClientExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2608,7 +2645,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceVtbl,
+
+  record IWorkspaceVtable,
     query_interface : Proc(IWorkspace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspace*, UInt32),
     release : Proc(IWorkspace*, UInt32),
@@ -2618,7 +2656,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWorkspace, lpVtbl : IWorkspaceVtbl* do
+  record IWorkspace, lpVtbl : IWorkspaceVtable* do
     GUID = LibC::GUID.new(0xb922bbb8_u32, 0x4c55_u16, 0x4fea_u16, StaticArray[0x84_u8, 0x96_u8, 0xbe_u8, 0xb0_u8, 0xb4_u8, 0x42_u8, 0x85_u8, 0xe5_u8])
     def query_interface(this : IWorkspace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2642,18 +2680,19 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspace2Vtbl,
+
+  record IWorkspace2Vtable,
     query_interface : Proc(IWorkspace2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspace2*, UInt32),
     release : Proc(IWorkspace2*, UInt32),
     get_workspace_names : Proc(IWorkspace2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     start_remote_application : Proc(IWorkspace2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
     get_process_id : Proc(IWorkspace2*, UInt32*, Win32cr::Foundation::HRESULT),
-    start_remote_application_ex : Proc(IWorkspace2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::BSTR, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT)
+    start_remote_application_ex : Proc(IWorkspace2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWorkspace2, lpVtbl : IWorkspace2Vtbl* do
+  record IWorkspace2, lpVtbl : IWorkspace2Vtable* do
     GUID = LibC::GUID.new(0x96d8d7cf_u32, 0x783e_u16, 0x4286_u16, StaticArray[0x83_u8, 0x4c_u8, 0xeb_u8, 0xc0_u8, 0xe9_u8, 0x5f_u8, 0x78_u8, 0x3c_u8])
     def query_interface(this : IWorkspace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2673,27 +2712,28 @@ module Win32cr::System::RemoteDesktop
     def get_process_id(this : IWorkspace2*, pulProcessId : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_process_id.call(this, pulProcessId)
     end
-    def start_remote_application_ex(this : IWorkspace2*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bstrRequestingAppId : Win32cr::Foundation::BSTR, bstrRequestingAppFamilyName : Win32cr::Foundation::BSTR, bLaunchIntoImmersiveClient : Int16, bstrImmersiveClientActivationContext : Win32cr::Foundation::BSTR, psaParams : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+    def start_remote_application_ex(this : IWorkspace2*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bstrRequestingAppId : Win32cr::Foundation::BSTR, bstrRequestingAppFamilyName : Win32cr::Foundation::BSTR, bLaunchIntoImmersiveClient : Win32cr::Foundation::VARIANT_BOOL, bstrImmersiveClientActivationContext : Win32cr::Foundation::BSTR, psaParams : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_remote_application_ex.call(this, bstrWorkspaceId, bstrRequestingAppId, bstrRequestingAppFamilyName, bLaunchIntoImmersiveClient, bstrImmersiveClientActivationContext, psaParams)
     end
 
   end
 
   @[Extern]
-  record IWorkspace3Vtbl,
+
+  record IWorkspace3Vtable,
     query_interface : Proc(IWorkspace3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspace3*, UInt32),
     release : Proc(IWorkspace3*, UInt32),
     get_workspace_names : Proc(IWorkspace3*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
     start_remote_application : Proc(IWorkspace3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
     get_process_id : Proc(IWorkspace3*, UInt32*, Win32cr::Foundation::HRESULT),
-    start_remote_application_ex : Proc(IWorkspace3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::BSTR, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    start_remote_application_ex : Proc(IWorkspace3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
     get_claims_token2 : Proc(IWorkspace3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, UInt32, UInt32, Win32cr::Foundation::RECT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_claims_token : Proc(IWorkspace3*, Win32cr::Foundation::BSTR, UInt64, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWorkspace3, lpVtbl : IWorkspace3Vtbl* do
+  record IWorkspace3, lpVtbl : IWorkspace3Vtable* do
     GUID = LibC::GUID.new(0x1becbe4a_u32, 0xd654_u16, 0x423b_u16, StaticArray[0xaf_u8, 0xeb_u8, 0xbe_u8, 0x8d_u8, 0x53_u8, 0x2c_u8, 0x13_u8, 0xc6_u8])
     def query_interface(this : IWorkspace3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2713,7 +2753,7 @@ module Win32cr::System::RemoteDesktop
     def get_process_id(this : IWorkspace3*, pulProcessId : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_process_id.call(this, pulProcessId)
     end
-    def start_remote_application_ex(this : IWorkspace3*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bstrRequestingAppId : Win32cr::Foundation::BSTR, bstrRequestingAppFamilyName : Win32cr::Foundation::BSTR, bLaunchIntoImmersiveClient : Int16, bstrImmersiveClientActivationContext : Win32cr::Foundation::BSTR, psaParams : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+    def start_remote_application_ex(this : IWorkspace3*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bstrRequestingAppId : Win32cr::Foundation::BSTR, bstrRequestingAppFamilyName : Win32cr::Foundation::BSTR, bLaunchIntoImmersiveClient : Win32cr::Foundation::VARIANT_BOOL, bstrImmersiveClientActivationContext : Win32cr::Foundation::BSTR, psaParams : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_remote_application_ex.call(this, bstrWorkspaceId, bstrRequestingAppId, bstrRequestingAppFamilyName, bLaunchIntoImmersiveClient, bstrImmersiveClientActivationContext, psaParams)
     end
     def get_claims_token2(this : IWorkspace3*, bstrClaimsHint : Win32cr::Foundation::BSTR, bstrUserHint : Win32cr::Foundation::BSTR, claimCookie : UInt32, hwndCredUiParent : UInt32, rectCredUiParent : Win32cr::Foundation::RECT, pbstrAccessToken : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2726,7 +2766,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceRegistrationVtbl,
+
+  record IWorkspaceRegistrationVtable,
     query_interface : Proc(IWorkspaceRegistration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceRegistration*, UInt32),
     release : Proc(IWorkspaceRegistration*, UInt32),
@@ -2735,7 +2776,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWorkspaceRegistration, lpVtbl : IWorkspaceRegistrationVtbl* do
+  record IWorkspaceRegistration, lpVtbl : IWorkspaceRegistrationVtable* do
     GUID = LibC::GUID.new(0xb922bbb8_u32, 0x4c55_u16, 0x4fea_u16, StaticArray[0x84_u8, 0x96_u8, 0xbe_u8, 0xb0_u8, 0xb4_u8, 0x42_u8, 0x85_u8, 0xe6_u8])
     def query_interface(this : IWorkspaceRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2756,7 +2797,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceRegistration2Vtbl,
+
+  record IWorkspaceRegistration2Vtable,
     query_interface : Proc(IWorkspaceRegistration2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceRegistration2*, UInt32),
     release : Proc(IWorkspaceRegistration2*, UInt32),
@@ -2767,7 +2809,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWorkspaceRegistration2, lpVtbl : IWorkspaceRegistration2Vtbl* do
+  record IWorkspaceRegistration2, lpVtbl : IWorkspaceRegistration2Vtable* do
     GUID = LibC::GUID.new(0xcf59f654_u32, 0x39bb_u16, 0x44d8_u16, StaticArray[0x94_u8, 0xd0_u8, 0x46_u8, 0x35_u8, 0x72_u8, 0x89_u8, 0x57_u8, 0xe9_u8])
     def query_interface(this : IWorkspaceRegistration2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2794,25 +2836,26 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceScriptableVtbl,
+
+  record IWorkspaceScriptableVtable,
     query_interface : Proc(IWorkspaceScriptable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceScriptable*, UInt32),
     release : Proc(IWorkspaceScriptable*, UInt32),
     get_type_info_count : Proc(IWorkspaceScriptable*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWorkspaceScriptable*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWorkspaceScriptable*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWorkspaceScriptable*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWorkspaceScriptable*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     disconnect_workspace : Proc(IWorkspaceScriptable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     start_workspace : Proc(IWorkspaceScriptable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::Foundation::HRESULT),
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable*, Win32cr::Foundation::BSTR, Int16, Int16*, Win32cr::Foundation::HRESULT),
-    is_workspace_sso_enabled : Proc(IWorkspaceScriptable*, Int16*, Win32cr::Foundation::HRESULT),
+    is_workspace_credential_specified : Proc(IWorkspaceScriptable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_workspace_sso_enabled : Proc(IWorkspaceScriptable*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     clear_workspace_credential : Proc(IWorkspaceScriptable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     on_authenticated : Proc(IWorkspaceScriptable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWorkspaceScriptable, lpVtbl : IWorkspaceScriptableVtbl* do
+  record IWorkspaceScriptable, lpVtbl : IWorkspaceScriptableVtable* do
     GUID = LibC::GUID.new(0xefea49a2_u32, 0xdda5_u16, 0x429d_u16, StaticArray[0x8f_u8, 0x42_u8, 0xb2_u8, 0x3b_u8, 0x92_u8, 0xc4_u8, 0xc3_u8, 0x47_u8])
     def query_interface(this : IWorkspaceScriptable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2832,8 +2875,8 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IWorkspaceScriptable*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWorkspaceScriptable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWorkspaceScriptable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def disconnect_workspace(this : IWorkspaceScriptable*, bstrWorkspaceId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disconnect_workspace.call(this, bstrWorkspaceId)
@@ -2841,10 +2884,10 @@ module Win32cr::System::RemoteDesktop
     def start_workspace(this : IWorkspaceScriptable*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR, bstrWorkspaceParams : Win32cr::Foundation::BSTR, lTimeout : Int32, lFlags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_workspace.call(this, bstrWorkspaceId, bstrUserName, bstrPassword, bstrWorkspaceParams, lTimeout, lFlags)
     end
-    def is_workspace_credential_specified(this : IWorkspaceScriptable*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bCountUnauthenticatedCredentials : Int16, pbCredExist : Int16*) : Win32cr::Foundation::HRESULT
+    def is_workspace_credential_specified(this : IWorkspaceScriptable*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bCountUnauthenticatedCredentials : Win32cr::Foundation::VARIANT_BOOL, pbCredExist : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_workspace_credential_specified.call(this, bstrWorkspaceId, bCountUnauthenticatedCredentials, pbCredExist)
     end
-    def is_workspace_sso_enabled(this : IWorkspaceScriptable*, pbSSOEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_workspace_sso_enabled(this : IWorkspaceScriptable*, pbSSOEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_workspace_sso_enabled.call(this, pbSSOEnabled)
     end
     def clear_workspace_credential(this : IWorkspaceScriptable*, bstrWorkspaceId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2860,18 +2903,19 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceScriptable2Vtbl,
+
+  record IWorkspaceScriptable2Vtable,
     query_interface : Proc(IWorkspaceScriptable2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceScriptable2*, UInt32),
     release : Proc(IWorkspaceScriptable2*, UInt32),
     get_type_info_count : Proc(IWorkspaceScriptable2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWorkspaceScriptable2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWorkspaceScriptable2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWorkspaceScriptable2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWorkspaceScriptable2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     disconnect_workspace : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     start_workspace : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::Foundation::HRESULT),
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::BSTR, Int16, Int16*, Win32cr::Foundation::HRESULT),
-    is_workspace_sso_enabled : Proc(IWorkspaceScriptable2*, Int16*, Win32cr::Foundation::HRESULT),
+    is_workspace_credential_specified : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_workspace_sso_enabled : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     clear_workspace_credential : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     on_authenticated : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2880,7 +2924,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWorkspaceScriptable2, lpVtbl : IWorkspaceScriptable2Vtbl* do
+  record IWorkspaceScriptable2, lpVtbl : IWorkspaceScriptable2Vtable* do
     GUID = LibC::GUID.new(0xefea49a2_u32, 0xdda5_u16, 0x429d_u16, StaticArray[0x8f_u8, 0x42_u8, 0xb3_u8, 0x3b_u8, 0xa2_u8, 0xc4_u8, 0xc3_u8, 0x48_u8])
     def query_interface(this : IWorkspaceScriptable2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2900,8 +2944,8 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IWorkspaceScriptable2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWorkspaceScriptable2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWorkspaceScriptable2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def disconnect_workspace(this : IWorkspaceScriptable2*, bstrWorkspaceId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disconnect_workspace.call(this, bstrWorkspaceId)
@@ -2909,10 +2953,10 @@ module Win32cr::System::RemoteDesktop
     def start_workspace(this : IWorkspaceScriptable2*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR, bstrWorkspaceParams : Win32cr::Foundation::BSTR, lTimeout : Int32, lFlags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_workspace.call(this, bstrWorkspaceId, bstrUserName, bstrPassword, bstrWorkspaceParams, lTimeout, lFlags)
     end
-    def is_workspace_credential_specified(this : IWorkspaceScriptable2*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bCountUnauthenticatedCredentials : Int16, pbCredExist : Int16*) : Win32cr::Foundation::HRESULT
+    def is_workspace_credential_specified(this : IWorkspaceScriptable2*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bCountUnauthenticatedCredentials : Win32cr::Foundation::VARIANT_BOOL, pbCredExist : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_workspace_credential_specified.call(this, bstrWorkspaceId, bCountUnauthenticatedCredentials, pbCredExist)
     end
-    def is_workspace_sso_enabled(this : IWorkspaceScriptable2*, pbSSOEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_workspace_sso_enabled(this : IWorkspaceScriptable2*, pbSSOEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_workspace_sso_enabled.call(this, pbSSOEnabled)
     end
     def clear_workspace_credential(this : IWorkspaceScriptable2*, bstrWorkspaceId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2934,18 +2978,19 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceScriptable3Vtbl,
+
+  record IWorkspaceScriptable3Vtable,
     query_interface : Proc(IWorkspaceScriptable3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceScriptable3*, UInt32),
     release : Proc(IWorkspaceScriptable3*, UInt32),
     get_type_info_count : Proc(IWorkspaceScriptable3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWorkspaceScriptable3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWorkspaceScriptable3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWorkspaceScriptable3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWorkspaceScriptable3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     disconnect_workspace : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     start_workspace : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::Foundation::HRESULT),
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::BSTR, Int16, Int16*, Win32cr::Foundation::HRESULT),
-    is_workspace_sso_enabled : Proc(IWorkspaceScriptable3*, Int16*, Win32cr::Foundation::HRESULT),
+    is_workspace_credential_specified : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    is_workspace_sso_enabled : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     clear_workspace_credential : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     on_authenticated : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2955,7 +3000,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWorkspaceScriptable3, lpVtbl : IWorkspaceScriptable3Vtbl* do
+  record IWorkspaceScriptable3, lpVtbl : IWorkspaceScriptable3Vtable* do
     GUID = LibC::GUID.new(0x531e6512_u32, 0x2cbf_u16, 0x4bd2_u16, StaticArray[0x80_u8, 0xa5_u8, 0xd9_u8, 0xa_u8, 0x71_u8, 0x63_u8, 0x6a_u8, 0x9a_u8])
     def query_interface(this : IWorkspaceScriptable3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2975,8 +3020,8 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IWorkspaceScriptable3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWorkspaceScriptable3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWorkspaceScriptable3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def disconnect_workspace(this : IWorkspaceScriptable3*, bstrWorkspaceId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disconnect_workspace.call(this, bstrWorkspaceId)
@@ -2984,10 +3029,10 @@ module Win32cr::System::RemoteDesktop
     def start_workspace(this : IWorkspaceScriptable3*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bstrUserName : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR, bstrWorkspaceParams : Win32cr::Foundation::BSTR, lTimeout : Int32, lFlags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_workspace.call(this, bstrWorkspaceId, bstrUserName, bstrPassword, bstrWorkspaceParams, lTimeout, lFlags)
     end
-    def is_workspace_credential_specified(this : IWorkspaceScriptable3*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bCountUnauthenticatedCredentials : Int16, pbCredExist : Int16*) : Win32cr::Foundation::HRESULT
+    def is_workspace_credential_specified(this : IWorkspaceScriptable3*, bstrWorkspaceId : Win32cr::Foundation::BSTR, bCountUnauthenticatedCredentials : Win32cr::Foundation::VARIANT_BOOL, pbCredExist : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_workspace_credential_specified.call(this, bstrWorkspaceId, bCountUnauthenticatedCredentials, pbCredExist)
     end
-    def is_workspace_sso_enabled(this : IWorkspaceScriptable3*, pbSSOEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def is_workspace_sso_enabled(this : IWorkspaceScriptable3*, pbSSOEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_workspace_sso_enabled.call(this, pbSSOEnabled)
     end
     def clear_workspace_credential(this : IWorkspaceScriptable3*, bstrWorkspaceId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3012,17 +3057,18 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceReportMessageVtbl,
+
+  record IWorkspaceReportMessageVtable,
     query_interface : Proc(IWorkspaceReportMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceReportMessage*, UInt32),
     release : Proc(IWorkspaceReportMessage*, UInt32),
     register_error_log_message : Proc(IWorkspaceReportMessage*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    is_error_message_registered : Proc(IWorkspaceReportMessage*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::BSTR, UInt32, Int16*, Win32cr::Foundation::HRESULT),
+    is_error_message_registered : Proc(IWorkspaceReportMessage*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     register_error_event : Proc(IWorkspaceReportMessage*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWorkspaceReportMessage, lpVtbl : IWorkspaceReportMessageVtbl* do
+  record IWorkspaceReportMessage, lpVtbl : IWorkspaceReportMessageVtable* do
     GUID = LibC::GUID.new(0xa7c06739_u32, 0x500f_u16, 0x4e8c_u16, StaticArray[0x99_u8, 0xa8_u8, 0x2b_u8, 0xd6_u8, 0x95_u8, 0x58_u8, 0x99_u8, 0xeb_u8])
     def query_interface(this : IWorkspaceReportMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3036,7 +3082,7 @@ module Win32cr::System::RemoteDesktop
     def register_error_log_message(this : IWorkspaceReportMessage*, bstrMessage : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_error_log_message.call(this, bstrMessage)
     end
-    def is_error_message_registered(this : IWorkspaceReportMessage*, bstrWkspId : Win32cr::Foundation::BSTR, dwErrorType : UInt32, bstrErrorMessageType : Win32cr::Foundation::BSTR, dwErrorCode : UInt32, pfErrorExist : Int16*) : Win32cr::Foundation::HRESULT
+    def is_error_message_registered(this : IWorkspaceReportMessage*, bstrWkspId : Win32cr::Foundation::BSTR, dwErrorType : UInt32, bstrErrorMessageType : Win32cr::Foundation::BSTR, dwErrorCode : UInt32, pfErrorExist : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_error_message_registered.call(this, bstrWkspId, dwErrorType, bstrErrorMessageType, dwErrorCode, pfErrorExist)
     end
     def register_error_event(this : IWorkspaceReportMessage*, bstrWkspId : Win32cr::Foundation::BSTR, dwErrorType : UInt32, bstrErrorMessageType : Win32cr::Foundation::BSTR, dwErrorCode : UInt32) : Win32cr::Foundation::HRESULT
@@ -3046,18 +3092,19 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITSWkspEvents_Vtbl,
+
+  record ITSWkspEvents_Vtable,
     query_interface : Proc(ITSWkspEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSWkspEvents_*, UInt32),
     release : Proc(ITSWkspEvents_*, UInt32),
     get_type_info_count : Proc(ITSWkspEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITSWkspEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITSWkspEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITSWkspEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ITSWkspEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITSWkspEvents_, lpVtbl : ITSWkspEvents_Vtbl* do
+  record ITSWkspEvents_, lpVtbl : ITSWkspEvents_Vtable* do
     GUID = LibC::GUID.new(0xb922bbb8_u32, 0x4c55_u16, 0x4fea_u16, StaticArray[0x84_u8, 0x96_u8, 0xbe_u8, 0xb0_u8, 0xb4_u8, 0x42_u8, 0x85_u8, 0xe9_u8])
     def query_interface(this : ITSWkspEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3077,14 +3124,15 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : ITSWkspEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITSWkspEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITSWkspEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record ITsSbPluginVtbl,
+
+  record ITsSbPluginVtable,
     query_interface : Proc(ITsSbPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbPlugin*, UInt32),
     release : Proc(ITsSbPlugin*, UInt32),
@@ -3093,7 +3141,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbPlugin, lpVtbl : ITsSbPluginVtbl* do
+  record ITsSbPlugin, lpVtbl : ITsSbPluginVtable* do
     GUID = LibC::GUID.new(0x48cd7406_u32, 0xcaab_u16, 0x465f_u16, StaticArray[0xa5_u8, 0xd6_u8, 0xba_u8, 0xa8_u8, 0x63_u8, 0xb9_u8, 0xea_u8, 0x4f_u8])
     def query_interface(this : ITsSbPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3114,7 +3162,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbResourcePluginVtbl,
+
+  record ITsSbResourcePluginVtable,
     query_interface : Proc(ITsSbResourcePlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbResourcePlugin*, UInt32),
     release : Proc(ITsSbResourcePlugin*, UInt32),
@@ -3123,7 +3172,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbResourcePlugin, lpVtbl : ITsSbResourcePluginVtbl* do
+  record ITsSbResourcePlugin, lpVtbl : ITsSbResourcePluginVtable* do
     GUID = LibC::GUID.new(0xea8db42c_u32, 0x98ed_u16, 0x4535_u16, StaticArray[0xa8_u8, 0x8b_u8, 0x2a_u8, 0x16_u8, 0x4f_u8, 0x35_u8, 0x49_u8, 0xf_u8])
     def query_interface(this : ITsSbResourcePlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3144,7 +3193,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbServiceNotificationVtbl,
+
+  record ITsSbServiceNotificationVtable,
     query_interface : Proc(ITsSbServiceNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbServiceNotification*, UInt32),
     release : Proc(ITsSbServiceNotification*, UInt32),
@@ -3153,7 +3203,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbServiceNotification, lpVtbl : ITsSbServiceNotificationVtbl* do
+  record ITsSbServiceNotification, lpVtbl : ITsSbServiceNotificationVtable* do
     GUID = LibC::GUID.new(0x86cb68ae_u32, 0x86e0_u16, 0x4f57_u16, StaticArray[0x8a_u8, 0x64_u8, 0xbb_u8, 0x74_u8, 0x6_u8, 0xbc_u8, 0x55_u8, 0x50_u8])
     def query_interface(this : ITsSbServiceNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3174,7 +3224,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbLoadBalancingVtbl,
+
+  record ITsSbLoadBalancingVtable,
     query_interface : Proc(ITsSbLoadBalancing*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbLoadBalancing*, UInt32),
     release : Proc(ITsSbLoadBalancing*, UInt32),
@@ -3184,7 +3235,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbLoadBalancing, lpVtbl : ITsSbLoadBalancingVtbl* do
+  record ITsSbLoadBalancing, lpVtbl : ITsSbLoadBalancingVtable* do
     GUID = LibC::GUID.new(0x24329274_u32, 0x9eb7_u16, 0x11dc_u16, StaticArray[0xae_u8, 0x98_u8, 0xf2_u8, 0xb4_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbLoadBalancing*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3208,7 +3259,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbPlacementVtbl,
+
+  record ITsSbPlacementVtable,
     query_interface : Proc(ITsSbPlacement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbPlacement*, UInt32),
     release : Proc(ITsSbPlacement*, UInt32),
@@ -3218,7 +3270,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbPlacement, lpVtbl : ITsSbPlacementVtbl* do
+  record ITsSbPlacement, lpVtbl : ITsSbPlacementVtable* do
     GUID = LibC::GUID.new(0xdaadee5f_u32, 0x6d32_u16, 0x480e_u16, StaticArray[0x9e_u8, 0x36_u8, 0xdd_u8, 0xab_u8, 0x23_u8, 0x29_u8, 0xf0_u8, 0x6d_u8])
     def query_interface(this : ITsSbPlacement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3242,7 +3294,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbOrchestrationVtbl,
+
+  record ITsSbOrchestrationVtable,
     query_interface : Proc(ITsSbOrchestration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbOrchestration*, UInt32),
     release : Proc(ITsSbOrchestration*, UInt32),
@@ -3252,7 +3305,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbOrchestration, lpVtbl : ITsSbOrchestrationVtbl* do
+  record ITsSbOrchestration, lpVtbl : ITsSbOrchestrationVtable* do
     GUID = LibC::GUID.new(0x64fc1172_u32, 0x9eb7_u16, 0x11dc_u16, StaticArray[0x8b_u8, 0x0_u8, 0x3a_u8, 0xba_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbOrchestration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3276,7 +3329,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbEnvironmentVtbl,
+
+  record ITsSbEnvironmentVtable,
     query_interface : Proc(ITsSbEnvironment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbEnvironment*, UInt32),
     release : Proc(ITsSbEnvironment*, UInt32),
@@ -3287,7 +3341,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbEnvironment, lpVtbl : ITsSbEnvironmentVtbl* do
+  record ITsSbEnvironment, lpVtbl : ITsSbEnvironmentVtable* do
     GUID = LibC::GUID.new(0x8c87f7f7_u32, 0xbf51_u16, 0x4a5c_u16, StaticArray[0x87_u8, 0xbf_u8, 0x8e_u8, 0x94_u8, 0xfb_u8, 0x6e_u8, 0x22_u8, 0x56_u8])
     def query_interface(this : ITsSbEnvironment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3314,7 +3368,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbLoadBalanceResultVtbl,
+
+  record ITsSbLoadBalanceResultVtable,
     query_interface : Proc(ITsSbLoadBalanceResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbLoadBalanceResult*, UInt32),
     release : Proc(ITsSbLoadBalanceResult*, UInt32),
@@ -3322,7 +3377,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbLoadBalanceResult, lpVtbl : ITsSbLoadBalanceResultVtbl* do
+  record ITsSbLoadBalanceResult, lpVtbl : ITsSbLoadBalanceResultVtable* do
     GUID = LibC::GUID.new(0x24fdb7ac_u32, 0xfea6_u16, 0x11dc_u16, StaticArray[0x96_u8, 0x72_u8, 0x9a_u8, 0x89_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbLoadBalanceResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3340,7 +3395,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbTargetVtbl,
+
+  record ITsSbTargetVtable,
     query_interface : Proc(ITsSbTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbTarget*, UInt32),
     release : Proc(ITsSbTarget*, UInt32),
@@ -3366,7 +3422,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbTarget, lpVtbl : ITsSbTargetVtbl* do
+  record ITsSbTarget, lpVtbl : ITsSbTargetVtable* do
     GUID = LibC::GUID.new(0x16616ecc_u32, 0x272d_u16, 0x411d_u16, StaticArray[0xb3_u8, 0x24_u8, 0x12_u8, 0x68_u8, 0x93_u8, 0x3_u8, 0x38_u8, 0x56_u8])
     def query_interface(this : ITsSbTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3438,7 +3494,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbSessionVtbl,
+
+  record ITsSbSessionVtable,
     query_interface : Proc(ITsSbSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbSession*, UInt32),
     release : Proc(ITsSbSession*, UInt32),
@@ -3462,7 +3519,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbSession, lpVtbl : ITsSbSessionVtbl* do
+  record ITsSbSession, lpVtbl : ITsSbSessionVtable* do
     GUID = LibC::GUID.new(0xd453aac7_u32, 0xb1d8_u16, 0x4c5e_u16, StaticArray[0xba_u8, 0x34_u8, 0x9a_u8, 0xfb_u8, 0x4c_u8, 0x8c_u8, 0x55_u8, 0x10_u8])
     def query_interface(this : ITsSbSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3528,7 +3585,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbResourceNotificationVtbl,
+
+  record ITsSbResourceNotificationVtable,
     query_interface : Proc(ITsSbResourceNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbResourceNotification*, UInt32),
     release : Proc(ITsSbResourceNotification*, UInt32),
@@ -3538,7 +3596,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbResourceNotification, lpVtbl : ITsSbResourceNotificationVtbl* do
+  record ITsSbResourceNotification, lpVtbl : ITsSbResourceNotificationVtable* do
     GUID = LibC::GUID.new(0x65d3e85a_u32, 0xc39b_u16, 0x11dc_u16, StaticArray[0xb9_u8, 0x2d_u8, 0x3c_u8, 0xd2_u8, 0x55_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbResourceNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3562,7 +3620,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbResourceNotificationExVtbl,
+
+  record ITsSbResourceNotificationExVtable,
     query_interface : Proc(ITsSbResourceNotificationEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbResourceNotificationEx*, UInt32),
     release : Proc(ITsSbResourceNotificationEx*, UInt32),
@@ -3572,7 +3631,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbResourceNotificationEx, lpVtbl : ITsSbResourceNotificationExVtbl* do
+  record ITsSbResourceNotificationEx, lpVtbl : ITsSbResourceNotificationExVtable* do
     GUID = LibC::GUID.new(0xa8a47fde_u32, 0xca91_u16, 0x44d2_u16, StaticArray[0xb8_u8, 0x97_u8, 0x3a_u8, 0xa2_u8, 0x8a_u8, 0x43_u8, 0xb2_u8, 0xb7_u8])
     def query_interface(this : ITsSbResourceNotificationEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3596,7 +3655,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbTaskInfoVtbl,
+
+  record ITsSbTaskInfoVtable,
     query_interface : Proc(ITsSbTaskInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbTaskInfo*, UInt32),
     release : Proc(ITsSbTaskInfo*, UInt32),
@@ -3612,7 +3672,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbTaskInfo, lpVtbl : ITsSbTaskInfoVtbl* do
+  record ITsSbTaskInfo, lpVtbl : ITsSbTaskInfoVtable* do
     GUID = LibC::GUID.new(0x523d1083_u32, 0x89be_u16, 0x48dd_u16, StaticArray[0x99_u8, 0xea_u8, 0x4_u8, 0xe8_u8, 0x2f_u8, 0xfa_u8, 0x72_u8, 0x65_u8])
     def query_interface(this : ITsSbTaskInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3654,7 +3714,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbTaskPluginVtbl,
+
+  record ITsSbTaskPluginVtable,
     query_interface : Proc(ITsSbTaskPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbTaskPlugin*, UInt32),
     release : Proc(ITsSbTaskPlugin*, UInt32),
@@ -3665,7 +3726,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbTaskPlugin, lpVtbl : ITsSbTaskPluginVtbl* do
+  record ITsSbTaskPlugin, lpVtbl : ITsSbTaskPluginVtable* do
     GUID = LibC::GUID.new(0xfa22ef0f_u32, 0x8705_u16, 0x41be_u16, StaticArray[0x93_u8, 0xbc_u8, 0x44_u8, 0xbd_u8, 0xbc_u8, 0xf1_u8, 0xc9_u8, 0xc4_u8])
     def query_interface(this : ITsSbTaskPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3692,16 +3753,17 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbPropertySetVtbl,
+
+  record ITsSbPropertySetVtable,
     query_interface : Proc(ITsSbPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbPropertySet*, UInt32),
     release : Proc(ITsSbPropertySet*, UInt32),
-    read : Proc(ITsSbPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
-    write : Proc(ITsSbPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    read : Proc(ITsSbPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
+    write : Proc(ITsSbPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITsSbPropertySet, lpVtbl : ITsSbPropertySetVtbl* do
+  record ITsSbPropertySet, lpVtbl : ITsSbPropertySetVtable* do
     GUID = LibC::GUID.new(0x5c025171_u32, 0xbb1e_u16, 0x4baf_u16, StaticArray[0xa2_u8, 0x12_u8, 0x6d_u8, 0x5e_u8, 0x97_u8, 0x74_u8, 0xb3_u8, 0x3b_u8])
     def query_interface(this : ITsSbPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3712,26 +3774,27 @@ module Win32cr::System::RemoteDesktop
     def release(this : ITsSbPropertySet*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def read(this : ITsSbPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
+    def read(this : ITsSbPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.read.call(this, pszPropName, pVar, pErrorLog)
     end
-    def write(this : ITsSbPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def write(this : ITsSbPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write.call(this, pszPropName, pVar)
     end
 
   end
 
   @[Extern]
-  record ITsSbPluginPropertySetVtbl,
+
+  record ITsSbPluginPropertySetVtable,
     query_interface : Proc(ITsSbPluginPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbPluginPropertySet*, UInt32),
     release : Proc(ITsSbPluginPropertySet*, UInt32),
-    read : Proc(ITsSbPluginPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
-    write : Proc(ITsSbPluginPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    read : Proc(ITsSbPluginPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
+    write : Proc(ITsSbPluginPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITsSbPluginPropertySet, lpVtbl : ITsSbPluginPropertySetVtbl* do
+  record ITsSbPluginPropertySet, lpVtbl : ITsSbPluginPropertySetVtable* do
     GUID = LibC::GUID.new(0x95006e34_u32, 0x7eff_u16, 0x4b6c_u16, StaticArray[0xbb_u8, 0x40_u8, 0x49_u8, 0xa4_u8, 0xfd_u8, 0xa7_u8, 0xce_u8, 0xa6_u8])
     def query_interface(this : ITsSbPluginPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3742,26 +3805,27 @@ module Win32cr::System::RemoteDesktop
     def release(this : ITsSbPluginPropertySet*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def read(this : ITsSbPluginPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
+    def read(this : ITsSbPluginPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.read.call(this, pszPropName, pVar, pErrorLog)
     end
-    def write(this : ITsSbPluginPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def write(this : ITsSbPluginPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write.call(this, pszPropName, pVar)
     end
 
   end
 
   @[Extern]
-  record ITsSbClientConnectionPropertySetVtbl,
+
+  record ITsSbClientConnectionPropertySetVtable,
     query_interface : Proc(ITsSbClientConnectionPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbClientConnectionPropertySet*, UInt32),
     release : Proc(ITsSbClientConnectionPropertySet*, UInt32),
-    read : Proc(ITsSbClientConnectionPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
-    write : Proc(ITsSbClientConnectionPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    read : Proc(ITsSbClientConnectionPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
+    write : Proc(ITsSbClientConnectionPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITsSbClientConnectionPropertySet, lpVtbl : ITsSbClientConnectionPropertySetVtbl* do
+  record ITsSbClientConnectionPropertySet, lpVtbl : ITsSbClientConnectionPropertySetVtable* do
     GUID = LibC::GUID.new(0xe51995b0_u32, 0x46d6_u16, 0x11dd_u16, StaticArray[0xaa_u8, 0x21_u8, 0xce_u8, 0xdc_u8, 0x55_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbClientConnectionPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3772,26 +3836,27 @@ module Win32cr::System::RemoteDesktop
     def release(this : ITsSbClientConnectionPropertySet*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def read(this : ITsSbClientConnectionPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
+    def read(this : ITsSbClientConnectionPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.read.call(this, pszPropName, pVar, pErrorLog)
     end
-    def write(this : ITsSbClientConnectionPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def write(this : ITsSbClientConnectionPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write.call(this, pszPropName, pVar)
     end
 
   end
 
   @[Extern]
-  record ITsSbTargetPropertySetVtbl,
+
+  record ITsSbTargetPropertySetVtable,
     query_interface : Proc(ITsSbTargetPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbTargetPropertySet*, UInt32),
     release : Proc(ITsSbTargetPropertySet*, UInt32),
-    read : Proc(ITsSbTargetPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
-    write : Proc(ITsSbTargetPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    read : Proc(ITsSbTargetPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
+    write : Proc(ITsSbTargetPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITsSbTargetPropertySet, lpVtbl : ITsSbTargetPropertySetVtbl* do
+  record ITsSbTargetPropertySet, lpVtbl : ITsSbTargetPropertySetVtable* do
     GUID = LibC::GUID.new(0xf7bda5d6_u32, 0x994c_u16, 0x4e11_u16, StaticArray[0xa0_u8, 0x79_u8, 0x27_u8, 0x63_u8, 0xb6_u8, 0x18_u8, 0x30_u8, 0xac_u8])
     def query_interface(this : ITsSbTargetPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3802,26 +3867,27 @@ module Win32cr::System::RemoteDesktop
     def release(this : ITsSbTargetPropertySet*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def read(this : ITsSbTargetPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
+    def read(this : ITsSbTargetPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.read.call(this, pszPropName, pVar, pErrorLog)
     end
-    def write(this : ITsSbTargetPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def write(this : ITsSbTargetPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write.call(this, pszPropName, pVar)
     end
 
   end
 
   @[Extern]
-  record ITsSbEnvironmentPropertySetVtbl,
+
+  record ITsSbEnvironmentPropertySetVtable,
     query_interface : Proc(ITsSbEnvironmentPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbEnvironmentPropertySet*, UInt32),
     release : Proc(ITsSbEnvironmentPropertySet*, UInt32),
-    read : Proc(ITsSbEnvironmentPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
-    write : Proc(ITsSbEnvironmentPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    read : Proc(ITsSbEnvironmentPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
+    write : Proc(ITsSbEnvironmentPropertySet*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITsSbEnvironmentPropertySet, lpVtbl : ITsSbEnvironmentPropertySetVtbl* do
+  record ITsSbEnvironmentPropertySet, lpVtbl : ITsSbEnvironmentPropertySetVtable* do
     GUID = LibC::GUID.new(0xd0d1bf7e_u32, 0x7acf_u16, 0x11dd_u16, StaticArray[0xa2_u8, 0x43_u8, 0xe5_u8, 0x11_u8, 0x56_u8, 0xd8_u8, 0x95_u8, 0x93_u8])
     def query_interface(this : ITsSbEnvironmentPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3832,17 +3898,18 @@ module Win32cr::System::RemoteDesktop
     def release(this : ITsSbEnvironmentPropertySet*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def read(this : ITsSbEnvironmentPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
+    def read(this : ITsSbEnvironmentPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*, pErrorLog : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.read.call(this, pszPropName, pVar, pErrorLog)
     end
-    def write(this : ITsSbEnvironmentPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def write(this : ITsSbEnvironmentPropertySet*, pszPropName : Win32cr::Foundation::PWSTR, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write.call(this, pszPropName, pVar)
     end
 
   end
 
   @[Extern]
-  record ITsSbBaseNotifySinkVtbl,
+
+  record ITsSbBaseNotifySinkVtable,
     query_interface : Proc(ITsSbBaseNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbBaseNotifySink*, UInt32),
     release : Proc(ITsSbBaseNotifySink*, UInt32),
@@ -3851,7 +3918,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbBaseNotifySink, lpVtbl : ITsSbBaseNotifySinkVtbl* do
+  record ITsSbBaseNotifySink, lpVtbl : ITsSbBaseNotifySinkVtable* do
     GUID = LibC::GUID.new(0x808a6537_u32, 0x1282_u16, 0x4989_u16, StaticArray[0x9e_u8, 0x9_u8, 0xf4_u8, 0x39_u8, 0x38_u8, 0xb7_u8, 0x17_u8, 0x22_u8])
     def query_interface(this : ITsSbBaseNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3872,7 +3939,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbPluginNotifySinkVtbl,
+
+  record ITsSbPluginNotifySinkVtable,
     query_interface : Proc(ITsSbPluginNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbPluginNotifySink*, UInt32),
     release : Proc(ITsSbPluginNotifySink*, UInt32),
@@ -3883,7 +3951,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbPluginNotifySink, lpVtbl : ITsSbPluginNotifySinkVtbl* do
+  record ITsSbPluginNotifySink, lpVtbl : ITsSbPluginNotifySinkVtable* do
     GUID = LibC::GUID.new(0x44dfe30b_u32, 0xc3be_u16, 0x40f5_u16, StaticArray[0xbf_u8, 0x82_u8, 0x7a_u8, 0x95_u8, 0xbb_u8, 0x79_u8, 0x5a_u8, 0xdf_u8])
     def query_interface(this : ITsSbPluginNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3910,7 +3978,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbLoadBalancingNotifySinkVtbl,
+
+  record ITsSbLoadBalancingNotifySinkVtable,
     query_interface : Proc(ITsSbLoadBalancingNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbLoadBalancingNotifySink*, UInt32),
     release : Proc(ITsSbLoadBalancingNotifySink*, UInt32),
@@ -3920,7 +3989,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbLoadBalancingNotifySink, lpVtbl : ITsSbLoadBalancingNotifySinkVtbl* do
+  record ITsSbLoadBalancingNotifySink, lpVtbl : ITsSbLoadBalancingNotifySinkVtable* do
     GUID = LibC::GUID.new(0x5f8a8297_u32, 0x3244_u16, 0x4e6a_u16, StaticArray[0x95_u8, 0x8a_u8, 0x27_u8, 0xc8_u8, 0x22_u8, 0xc1_u8, 0xe1_u8, 0x41_u8])
     def query_interface(this : ITsSbLoadBalancingNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3944,7 +4013,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbPlacementNotifySinkVtbl,
+
+  record ITsSbPlacementNotifySinkVtable,
     query_interface : Proc(ITsSbPlacementNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbPlacementNotifySink*, UInt32),
     release : Proc(ITsSbPlacementNotifySink*, UInt32),
@@ -3954,7 +4024,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbPlacementNotifySink, lpVtbl : ITsSbPlacementNotifySinkVtbl* do
+  record ITsSbPlacementNotifySink, lpVtbl : ITsSbPlacementNotifySinkVtable* do
     GUID = LibC::GUID.new(0x68a0c487_u32, 0x2b4f_u16, 0x46c2_u16, StaticArray[0x94_u8, 0xa1_u8, 0x6c_u8, 0xe6_u8, 0x85_u8, 0x18_u8, 0x36_u8, 0x34_u8])
     def query_interface(this : ITsSbPlacementNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3978,7 +4048,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbOrchestrationNotifySinkVtbl,
+
+  record ITsSbOrchestrationNotifySinkVtable,
     query_interface : Proc(ITsSbOrchestrationNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbOrchestrationNotifySink*, UInt32),
     release : Proc(ITsSbOrchestrationNotifySink*, UInt32),
@@ -3988,7 +4059,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbOrchestrationNotifySink, lpVtbl : ITsSbOrchestrationNotifySinkVtbl* do
+  record ITsSbOrchestrationNotifySink, lpVtbl : ITsSbOrchestrationNotifySinkVtable* do
     GUID = LibC::GUID.new(0x36c37d61_u32, 0x926b_u16, 0x442f_u16, StaticArray[0xbc_u8, 0xa5_u8, 0x11_u8, 0x8c_u8, 0x6d_u8, 0x50_u8, 0xdc_u8, 0xf2_u8])
     def query_interface(this : ITsSbOrchestrationNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4012,7 +4083,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbTaskPluginNotifySinkVtbl,
+
+  record ITsSbTaskPluginNotifySinkVtable,
     query_interface : Proc(ITsSbTaskPluginNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbTaskPluginNotifySink*, UInt32),
     release : Proc(ITsSbTaskPluginNotifySink*, UInt32),
@@ -4025,7 +4097,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbTaskPluginNotifySink, lpVtbl : ITsSbTaskPluginNotifySinkVtbl* do
+  record ITsSbTaskPluginNotifySink, lpVtbl : ITsSbTaskPluginNotifySinkVtable* do
     GUID = LibC::GUID.new(0x6aaf899e_u32, 0xc2ec_u16, 0x45ee_u16, StaticArray[0xaa_u8, 0x37_u8, 0x45_u8, 0xe6_u8, 0x8_u8, 0x95_u8, 0x26_u8, 0x1a_u8])
     def query_interface(this : ITsSbTaskPluginNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4058,7 +4130,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbClientConnectionVtbl,
+
+  record ITsSbClientConnectionVtable,
     query_interface : Proc(ITsSbClientConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbClientConnection*, UInt32),
     release : Proc(ITsSbClientConnection*, UInt32),
@@ -4067,8 +4140,8 @@ module Win32cr::System::RemoteDesktop
     get_InitialProgram : Proc(ITsSbClientConnection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_LoadBalanceResult : Proc(ITsSbClientConnection*, Void**, Win32cr::Foundation::HRESULT),
     get_FarmName : Proc(ITsSbClientConnection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put_context : Proc(ITsSbClientConnection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_context : Proc(ITsSbClientConnection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_context : Proc(ITsSbClientConnection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_context : Proc(ITsSbClientConnection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Environment : Proc(ITsSbClientConnection*, Void**, Win32cr::Foundation::HRESULT),
     get_ConnectionError : Proc(ITsSbClientConnection*, Win32cr::Foundation::HRESULT),
     get_SamUserAccount : Proc(ITsSbClientConnection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4080,7 +4153,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbClientConnection, lpVtbl : ITsSbClientConnectionVtbl* do
+  record ITsSbClientConnection, lpVtbl : ITsSbClientConnectionVtable* do
     GUID = LibC::GUID.new(0x18857499_u32, 0xad61_u16, 0x4b1b_u16, StaticArray[0xb7_u8, 0xdf_u8, 0xcb_u8, 0xcd_u8, 0x41_u8, 0xfb_u8, 0x83_u8, 0x38_u8])
     def query_interface(this : ITsSbClientConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4106,10 +4179,10 @@ module Win32cr::System::RemoteDesktop
     def get_FarmName(this : ITsSbClientConnection*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FarmName.call(this, pVal)
     end
-    def put_context(this : ITsSbClientConnection*, contextId : Win32cr::Foundation::BSTR, context : Win32cr::System::Com::VARIANT, existingContext : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def put_context(this : ITsSbClientConnection*, contextId : Win32cr::Foundation::BSTR, context : Win32cr::System::Variant::VARIANT, existingContext : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_context.call(this, contextId, context, existingContext)
     end
-    def get_context(this : ITsSbClientConnection*, contextId : Win32cr::Foundation::BSTR, context : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_context(this : ITsSbClientConnection*, contextId : Win32cr::Foundation::BSTR, context : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_context.call(this, contextId, context)
     end
     def get_Environment(this : ITsSbClientConnection*, ppEnvironment : Void**) : Win32cr::Foundation::HRESULT
@@ -4140,7 +4213,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbProviderVtbl,
+
+  record ITsSbProviderVtable,
     query_interface : Proc(ITsSbProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbProvider*, UInt32),
     release : Proc(ITsSbProvider*, UInt32),
@@ -4159,7 +4233,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbProvider, lpVtbl : ITsSbProviderVtbl* do
+  record ITsSbProvider, lpVtbl : ITsSbProviderVtable* do
     GUID = LibC::GUID.new(0x87a4098f_u32, 0x6d7b_u16, 0x44dd_u16, StaticArray[0xbc_u8, 0x17_u8, 0x8c_u8, 0xe4_u8, 0x4e_u8, 0x37_u8, 0xd_u8, 0x52_u8])
     def query_interface(this : ITsSbProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4210,7 +4284,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbResourcePluginStoreVtbl,
+
+  record ITsSbResourcePluginStoreVtable,
     query_interface : Proc(ITsSbResourcePluginStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbResourcePluginStore*, UInt32),
     release : Proc(ITsSbResourcePluginStore*, UInt32),
@@ -4226,16 +4301,16 @@ module Win32cr::System::RemoteDesktop
     save_target : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     save_environment : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     save_session : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::HRESULT),
-    set_target_property : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_environment_property : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_target_property : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_environment_property : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     set_target_state : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::System::RemoteDesktop::TARGET_STATE, Win32cr::System::RemoteDesktop::TARGET_STATE*, Win32cr::Foundation::HRESULT),
     set_session_state : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_targets : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::RemoteDesktop::TS_SB_SORT_BY, Win32cr::Foundation::BSTR, UInt32*, Void***, Win32cr::Foundation::HRESULT),
     enumerate_sessions : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::RemoteDesktop::TSSESSION_STATE*, UInt32*, Void***, Win32cr::Foundation::HRESULT),
-    get_farm_property : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_farm_property : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     delete_target : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_target_property_with_version_check : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_environment_property_with_version_check : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_target_property_with_version_check : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_environment_property_with_version_check : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     acquire_target_lock : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, UInt32, Void**, Win32cr::Foundation::HRESULT),
     release_target_lock : Proc(ITsSbResourcePluginStore*, Void*, Win32cr::Foundation::HRESULT),
     test_and_set_server_state : Proc(ITsSbResourcePluginStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::RemoteDesktop::TARGET_STATE, Win32cr::System::RemoteDesktop::TARGET_STATE, Win32cr::System::RemoteDesktop::TARGET_STATE*, Win32cr::Foundation::HRESULT),
@@ -4245,7 +4320,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbResourcePluginStore, lpVtbl : ITsSbResourcePluginStoreVtbl* do
+  record ITsSbResourcePluginStore, lpVtbl : ITsSbResourcePluginStoreVtable* do
     GUID = LibC::GUID.new(0x5c38f65f_u32, 0xbcf1_u16, 0x4036_u16, StaticArray[0xa6_u8, 0xbf_u8, 0x9e_u8, 0x3c_u8, 0xcc_u8, 0xae_u8, 0xb_u8, 0x63_u8])
     def query_interface(this : ITsSbResourcePluginStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4292,10 +4367,10 @@ module Win32cr::System::RemoteDesktop
     def save_session(this : ITsSbResourcePluginStore*, pSession : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save_session.call(this, pSession)
     end
-    def set_target_property(this : ITsSbResourcePluginStore*, target_name : Win32cr::Foundation::BSTR, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_target_property(this : ITsSbResourcePluginStore*, target_name : Win32cr::Foundation::BSTR, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_target_property.call(this, target_name, property_name, pProperty)
     end
-    def set_environment_property(this : ITsSbResourcePluginStore*, environment_name : Win32cr::Foundation::BSTR, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_environment_property(this : ITsSbResourcePluginStore*, environment_name : Win32cr::Foundation::BSTR, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_environment_property.call(this, environment_name, property_name, pProperty)
     end
     def set_target_state(this : ITsSbResourcePluginStore*, targetName : Win32cr::Foundation::BSTR, newState : Win32cr::System::RemoteDesktop::TARGET_STATE, pOldState : Win32cr::System::RemoteDesktop::TARGET_STATE*) : Win32cr::Foundation::HRESULT
@@ -4310,16 +4385,16 @@ module Win32cr::System::RemoteDesktop
     def enumerate_sessions(this : ITsSbResourcePluginStore*, targetName : Win32cr::Foundation::BSTR, userName : Win32cr::Foundation::BSTR, userDomain : Win32cr::Foundation::BSTR, poolName : Win32cr::Foundation::BSTR, initialProgram : Win32cr::Foundation::BSTR, pSessionState : Win32cr::System::RemoteDesktop::TSSESSION_STATE*, pdwCount : UInt32*, ppVal : Void***) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_sessions.call(this, targetName, userName, userDomain, poolName, initialProgram, pSessionState, pdwCount, ppVal)
     end
-    def get_farm_property(this : ITsSbResourcePluginStore*, farmName : Win32cr::Foundation::BSTR, propertyName : Win32cr::Foundation::BSTR, pVarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_farm_property(this : ITsSbResourcePluginStore*, farmName : Win32cr::Foundation::BSTR, propertyName : Win32cr::Foundation::BSTR, pVarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_farm_property.call(this, farmName, propertyName, pVarValue)
     end
     def delete_target(this : ITsSbResourcePluginStore*, targetName : Win32cr::Foundation::BSTR, hostName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_target.call(this, targetName, hostName)
     end
-    def set_target_property_with_version_check(this : ITsSbResourcePluginStore*, pTarget : Void*, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_target_property_with_version_check(this : ITsSbResourcePluginStore*, pTarget : Void*, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_target_property_with_version_check.call(this, pTarget, property_name, pProperty)
     end
-    def set_environment_property_with_version_check(this : ITsSbResourcePluginStore*, pEnvironment : Void*, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_environment_property_with_version_check(this : ITsSbResourcePluginStore*, pEnvironment : Void*, property_name : Win32cr::Foundation::BSTR, pProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_environment_property_with_version_check.call(this, pEnvironment, property_name, pProperty)
     end
     def acquire_target_lock(this : ITsSbResourcePluginStore*, targetName : Win32cr::Foundation::BSTR, dwTimeout : UInt32, ppContext : Void**) : Win32cr::Foundation::HRESULT
@@ -4344,7 +4419,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbFilterPluginStoreVtbl,
+
+  record ITsSbFilterPluginStoreVtable,
     query_interface : Proc(ITsSbFilterPluginStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbFilterPluginStore*, UInt32),
     release : Proc(ITsSbFilterPluginStore*, UInt32),
@@ -4354,7 +4430,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbFilterPluginStore, lpVtbl : ITsSbFilterPluginStoreVtbl* do
+  record ITsSbFilterPluginStore, lpVtbl : ITsSbFilterPluginStoreVtable* do
     GUID = LibC::GUID.new(0x85b44b0f_u32, 0xed78_u16, 0x413f_u16, StaticArray[0x97_u8, 0x2_u8, 0xfa_u8, 0x6d_u8, 0x3b_u8, 0x5e_u8, 0xe7_u8, 0x55_u8])
     def query_interface(this : ITsSbFilterPluginStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4378,7 +4454,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbGlobalStoreVtbl,
+
+  record ITsSbGlobalStoreVtable,
     query_interface : Proc(ITsSbGlobalStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbGlobalStore*, UInt32),
     release : Proc(ITsSbGlobalStore*, UInt32),
@@ -4388,11 +4465,11 @@ module Win32cr::System::RemoteDesktop
     enumerate_targets : Proc(ITsSbGlobalStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, UInt32*, Void***, Win32cr::Foundation::HRESULT),
     enumerate_environments_by_provider : Proc(ITsSbGlobalStore*, Win32cr::Foundation::BSTR, UInt32*, Void***, Win32cr::Foundation::HRESULT),
     enumerate_sessions : Proc(ITsSbGlobalStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::RemoteDesktop::TSSESSION_STATE*, UInt32*, Void***, Win32cr::Foundation::HRESULT),
-    get_farm_property : Proc(ITsSbGlobalStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_farm_property : Proc(ITsSbGlobalStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITsSbGlobalStore, lpVtbl : ITsSbGlobalStoreVtbl* do
+  record ITsSbGlobalStore, lpVtbl : ITsSbGlobalStoreVtable* do
     GUID = LibC::GUID.new(0x9ab60f7b_u32, 0xbd72_u16, 0x4d9f_u16, StaticArray[0x8a_u8, 0x3a_u8, 0xa0_u8, 0xea_u8, 0x55_u8, 0x74_u8, 0xe6_u8, 0x35_u8])
     def query_interface(this : ITsSbGlobalStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4421,14 +4498,15 @@ module Win32cr::System::RemoteDesktop
     def enumerate_sessions(this : ITsSbGlobalStore*, provider_name : Win32cr::Foundation::BSTR, targetName : Win32cr::Foundation::BSTR, userName : Win32cr::Foundation::BSTR, userDomain : Win32cr::Foundation::BSTR, poolName : Win32cr::Foundation::BSTR, initialProgram : Win32cr::Foundation::BSTR, pSessionState : Win32cr::System::RemoteDesktop::TSSESSION_STATE*, pdwCount : UInt32*, ppVal : Void***) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_sessions.call(this, provider_name, targetName, userName, userDomain, poolName, initialProgram, pSessionState, pdwCount, ppVal)
     end
-    def get_farm_property(this : ITsSbGlobalStore*, farmName : Win32cr::Foundation::BSTR, propertyName : Win32cr::Foundation::BSTR, pVarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_farm_property(this : ITsSbGlobalStore*, farmName : Win32cr::Foundation::BSTR, propertyName : Win32cr::Foundation::BSTR, pVarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_farm_property.call(this, farmName, propertyName, pVarValue)
     end
 
   end
 
   @[Extern]
-  record ITsSbProvisioningPluginNotifySinkVtbl,
+
+  record ITsSbProvisioningPluginNotifySinkVtable,
     query_interface : Proc(ITsSbProvisioningPluginNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbProvisioningPluginNotifySink*, UInt32),
     release : Proc(ITsSbProvisioningPluginNotifySink*, UInt32),
@@ -4441,7 +4519,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbProvisioningPluginNotifySink, lpVtbl : ITsSbProvisioningPluginNotifySinkVtbl* do
+  record ITsSbProvisioningPluginNotifySink, lpVtbl : ITsSbProvisioningPluginNotifySinkVtable* do
     GUID = LibC::GUID.new(0xaca87a8e_u32, 0x818b_u16, 0x4581_u16, StaticArray[0xa0_u8, 0x32_u8, 0x49_u8, 0xc3_u8, 0xdf_u8, 0xb9_u8, 0xc7_u8, 0x1_u8])
     def query_interface(this : ITsSbProvisioningPluginNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4474,7 +4552,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbProvisioningVtbl,
+
+  record ITsSbProvisioningVtable,
     query_interface : Proc(ITsSbProvisioning*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbProvisioning*, UInt32),
     release : Proc(ITsSbProvisioning*, UInt32),
@@ -4487,7 +4566,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbProvisioning, lpVtbl : ITsSbProvisioningVtbl* do
+  record ITsSbProvisioning, lpVtbl : ITsSbProvisioningVtable* do
     GUID = LibC::GUID.new(0x2f6f0dbb_u32, 0x9e4f_u16, 0x462b_u16, StaticArray[0x9c_u8, 0x3f_u8, 0xfc_u8, 0xcc_u8, 0x3d_u8, 0xcb_u8, 0x62_u8, 0x32_u8])
     def query_interface(this : ITsSbProvisioning*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4520,7 +4599,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ITsSbGenericNotifySinkVtbl,
+
+  record ITsSbGenericNotifySinkVtable,
     query_interface : Proc(ITsSbGenericNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITsSbGenericNotifySink*, UInt32),
     release : Proc(ITsSbGenericNotifySink*, UInt32),
@@ -4529,7 +4609,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ITsSbGenericNotifySink, lpVtbl : ITsSbGenericNotifySinkVtbl* do
+  record ITsSbGenericNotifySink, lpVtbl : ITsSbGenericNotifySinkVtable* do
     GUID = LibC::GUID.new(0x4c4c8c4f_u32, 0x300b_u16, 0x46ad_u16, StaticArray[0x91_u8, 0x64_u8, 0x84_u8, 0x68_u8, 0xa7_u8, 0xe7_u8, 0x56_u8, 0x8c_u8])
     def query_interface(this : ITsSbGenericNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4550,7 +4630,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ItsPubPluginVtbl,
+
+  record ItsPubPluginVtable,
     query_interface : Proc(ItsPubPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ItsPubPlugin*, UInt32),
     release : Proc(ItsPubPlugin*, UInt32),
@@ -4563,7 +4644,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ItsPubPlugin, lpVtbl : ItsPubPluginVtbl* do
+  record ItsPubPlugin, lpVtbl : ItsPubPluginVtable* do
     GUID = LibC::GUID.new(0x70c04b05_u32, 0xf347_u16, 0x412b_u16, StaticArray[0x82_u8, 0x2f_u8, 0x36_u8, 0xc9_u8, 0x9c_u8, 0x54_u8, 0xca_u8, 0x45_u8])
     def query_interface(this : ItsPubPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4596,7 +4677,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record ItsPubPlugin2Vtbl,
+
+  record ItsPubPlugin2Vtable,
     query_interface : Proc(ItsPubPlugin2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ItsPubPlugin2*, UInt32),
     release : Proc(ItsPubPlugin2*, UInt32),
@@ -4613,7 +4695,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record ItsPubPlugin2, lpVtbl : ItsPubPlugin2Vtbl* do
+  record ItsPubPlugin2, lpVtbl : ItsPubPlugin2Vtable* do
     GUID = LibC::GUID.new(0xfa4ce418_u32, 0xaad7_u16, 0x4ec6_u16, StaticArray[0xba_u8, 0xd1_u8, 0xa_u8, 0x32_u8, 0x1b_u8, 0xa4_u8, 0x65_u8, 0xd5_u8])
     def query_interface(this : ItsPubPlugin2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4658,23 +4740,24 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWorkspaceResTypeRegistryVtbl,
+
+  record IWorkspaceResTypeRegistryVtable,
     query_interface : Proc(IWorkspaceResTypeRegistry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWorkspaceResTypeRegistry*, UInt32),
     release : Proc(IWorkspaceResTypeRegistry*, UInt32),
     get_type_info_count : Proc(IWorkspaceResTypeRegistry*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWorkspaceResTypeRegistry*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWorkspaceResTypeRegistry*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWorkspaceResTypeRegistry*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    add_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    delete_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_registered_file_extensions : Proc(IWorkspaceResTypeRegistry*, Int16, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
-    get_resource_type_info : Proc(IWorkspaceResTypeRegistry*, Int16, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    modify_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IWorkspaceResTypeRegistry*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    add_resource_type : Proc(IWorkspaceResTypeRegistry*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    delete_resource_type : Proc(IWorkspaceResTypeRegistry*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_registered_file_extensions : Proc(IWorkspaceResTypeRegistry*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_resource_type_info : Proc(IWorkspaceResTypeRegistry*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    modify_resource_type : Proc(IWorkspaceResTypeRegistry*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWorkspaceResTypeRegistry, lpVtbl : IWorkspaceResTypeRegistryVtbl* do
+  record IWorkspaceResTypeRegistry, lpVtbl : IWorkspaceResTypeRegistryVtable* do
     GUID = LibC::GUID.new(0x1d428c79_u32, 0x6e2e_u16, 0x4351_u16, StaticArray[0xa3_u8, 0x61_u8, 0xc0_u8, 0x40_u8, 0x1a_u8, 0x3_u8, 0xa0_u8, 0xba_u8])
     def query_interface(this : IWorkspaceResTypeRegistry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4694,29 +4777,30 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IWorkspaceResTypeRegistry*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWorkspaceResTypeRegistry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWorkspaceResTypeRegistry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def add_resource_type(this : IWorkspaceResTypeRegistry*, fMachineWide : Int16, bstrFileExtension : Win32cr::Foundation::BSTR, bstrLauncher : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def add_resource_type(this : IWorkspaceResTypeRegistry*, fMachineWide : Win32cr::Foundation::VARIANT_BOOL, bstrFileExtension : Win32cr::Foundation::BSTR, bstrLauncher : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_resource_type.call(this, fMachineWide, bstrFileExtension, bstrLauncher)
     end
-    def delete_resource_type(this : IWorkspaceResTypeRegistry*, fMachineWide : Int16, bstrFileExtension : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def delete_resource_type(this : IWorkspaceResTypeRegistry*, fMachineWide : Win32cr::Foundation::VARIANT_BOOL, bstrFileExtension : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_resource_type.call(this, fMachineWide, bstrFileExtension)
     end
-    def get_registered_file_extensions(this : IWorkspaceResTypeRegistry*, fMachineWide : Int16, psaFileExtensions : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    def get_registered_file_extensions(this : IWorkspaceResTypeRegistry*, fMachineWide : Win32cr::Foundation::VARIANT_BOOL, psaFileExtensions : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_registered_file_extensions.call(this, fMachineWide, psaFileExtensions)
     end
-    def get_resource_type_info(this : IWorkspaceResTypeRegistry*, fMachineWide : Int16, bstrFileExtension : Win32cr::Foundation::BSTR, pbstrLauncher : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_resource_type_info(this : IWorkspaceResTypeRegistry*, fMachineWide : Win32cr::Foundation::VARIANT_BOOL, bstrFileExtension : Win32cr::Foundation::BSTR, pbstrLauncher : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_resource_type_info.call(this, fMachineWide, bstrFileExtension, pbstrLauncher)
     end
-    def modify_resource_type(this : IWorkspaceResTypeRegistry*, fMachineWide : Int16, bstrFileExtension : Win32cr::Foundation::BSTR, bstrLauncher : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def modify_resource_type(this : IWorkspaceResTypeRegistry*, fMachineWide : Win32cr::Foundation::VARIANT_BOOL, bstrFileExtension : Win32cr::Foundation::BSTR, bstrLauncher : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.modify_resource_type.call(this, fMachineWide, bstrFileExtension, bstrLauncher)
     end
 
   end
 
   @[Extern]
-  record IWTSPluginVtbl,
+
+  record IWTSPluginVtable,
     query_interface : Proc(IWTSPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSPlugin*, UInt32),
     release : Proc(IWTSPlugin*, UInt32),
@@ -4727,7 +4811,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSPlugin, lpVtbl : IWTSPluginVtbl* do
+  record IWTSPlugin, lpVtbl : IWTSPluginVtable* do
     GUID = LibC::GUID.new(0xa1230201_u32, 0x1439_u16, 0x4e62_u16, StaticArray[0xa4_u8, 0x14_u8, 0x19_u8, 0xd_u8, 0xa_u8, 0xc3_u8, 0xd4_u8, 0xe_u8])
     def query_interface(this : IWTSPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4754,7 +4838,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSListenerVtbl,
+
+  record IWTSListenerVtable,
     query_interface : Proc(IWTSListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSListener*, UInt32),
     release : Proc(IWTSListener*, UInt32),
@@ -4762,7 +4847,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSListener, lpVtbl : IWTSListenerVtbl* do
+  record IWTSListener, lpVtbl : IWTSListenerVtable* do
     GUID = LibC::GUID.new(0xa1230206_u32, 0x9a39_u16, 0x4d58_u16, StaticArray[0x86_u8, 0x74_u8, 0xcd_u8, 0xb4_u8, 0xdf_u8, 0xf4_u8, 0xe7_u8, 0x3b_u8])
     def query_interface(this : IWTSListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4780,7 +4865,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSListenerCallbackVtbl,
+
+  record IWTSListenerCallbackVtable,
     query_interface : Proc(IWTSListenerCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSListenerCallback*, UInt32),
     release : Proc(IWTSListenerCallback*, UInt32),
@@ -4788,7 +4874,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSListenerCallback, lpVtbl : IWTSListenerCallbackVtbl* do
+  record IWTSListenerCallback, lpVtbl : IWTSListenerCallbackVtable* do
     GUID = LibC::GUID.new(0xa1230203_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSListenerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4806,7 +4892,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSVirtualChannelCallbackVtbl,
+
+  record IWTSVirtualChannelCallbackVtable,
     query_interface : Proc(IWTSVirtualChannelCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSVirtualChannelCallback*, UInt32),
     release : Proc(IWTSVirtualChannelCallback*, UInt32),
@@ -4815,7 +4902,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSVirtualChannelCallback, lpVtbl : IWTSVirtualChannelCallbackVtbl* do
+  record IWTSVirtualChannelCallback, lpVtbl : IWTSVirtualChannelCallbackVtable* do
     GUID = LibC::GUID.new(0xa1230204_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSVirtualChannelCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4836,15 +4923,16 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSVirtualChannelManagerVtbl,
+
+  record IWTSVirtualChannelManagerVtable,
     query_interface : Proc(IWTSVirtualChannelManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSVirtualChannelManager*, UInt32),
     release : Proc(IWTSVirtualChannelManager*, UInt32),
-    create_listener : Proc(IWTSVirtualChannelManager*, UInt8*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)
+    create_listener : Proc(IWTSVirtualChannelManager*, Win32cr::Foundation::PSTR, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWTSVirtualChannelManager, lpVtbl : IWTSVirtualChannelManagerVtbl* do
+  record IWTSVirtualChannelManager, lpVtbl : IWTSVirtualChannelManagerVtable* do
     GUID = LibC::GUID.new(0xa1230205_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSVirtualChannelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4855,14 +4943,15 @@ module Win32cr::System::RemoteDesktop
     def release(this : IWTSVirtualChannelManager*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def create_listener(this : IWTSVirtualChannelManager*, pszChannelName : UInt8*, uFlags : UInt32, pListenerCallback : Void*, ppListener : Void**) : Win32cr::Foundation::HRESULT
+    def create_listener(this : IWTSVirtualChannelManager*, pszChannelName : Win32cr::Foundation::PSTR, uFlags : UInt32, pListenerCallback : Void*, ppListener : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_listener.call(this, pszChannelName, uFlags, pListenerCallback, ppListener)
     end
 
   end
 
   @[Extern]
-  record IWTSVirtualChannelVtbl,
+
+  record IWTSVirtualChannelVtable,
     query_interface : Proc(IWTSVirtualChannel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSVirtualChannel*, UInt32),
     release : Proc(IWTSVirtualChannel*, UInt32),
@@ -4871,7 +4960,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSVirtualChannel, lpVtbl : IWTSVirtualChannelVtbl* do
+  record IWTSVirtualChannel, lpVtbl : IWTSVirtualChannelVtable* do
     GUID = LibC::GUID.new(0xa1230207_u32, 0xd6a7_u16, 0x11d8_u16, StaticArray[0xb9_u8, 0xfd_u8, 0x0_u8, 0xb_u8, 0xdb_u8, 0xd1_u8, 0xf1_u8, 0x98_u8])
     def query_interface(this : IWTSVirtualChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4892,7 +4981,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSPluginServiceProviderVtbl,
+
+  record IWTSPluginServiceProviderVtable,
     query_interface : Proc(IWTSPluginServiceProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSPluginServiceProvider*, UInt32),
     release : Proc(IWTSPluginServiceProvider*, UInt32),
@@ -4900,7 +4990,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSPluginServiceProvider, lpVtbl : IWTSPluginServiceProviderVtbl* do
+  record IWTSPluginServiceProvider, lpVtbl : IWTSPluginServiceProviderVtable* do
     GUID = LibC::GUID.new(0xd3e07363_u32, 0x87c_u16, 0x476c_u16, StaticArray[0x86_u8, 0xa7_u8, 0xdb_u8, 0xb1_u8, 0x5f_u8, 0x46_u8, 0xdd_u8, 0xb4_u8])
     def query_interface(this : IWTSPluginServiceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4918,7 +5008,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSBitmapRendererVtbl,
+
+  record IWTSBitmapRendererVtable,
     query_interface : Proc(IWTSBitmapRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSBitmapRenderer*, UInt32),
     release : Proc(IWTSBitmapRenderer*, UInt32),
@@ -4928,7 +5019,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSBitmapRenderer, lpVtbl : IWTSBitmapRendererVtbl* do
+  record IWTSBitmapRenderer, lpVtbl : IWTSBitmapRendererVtable* do
     GUID = LibC::GUID.new(0x5b7acc97_u32, 0xf3c9_u16, 0x46f7_u16, StaticArray[0x8c_u8, 0x5b_u8, 0xfa_u8, 0x68_u8, 0x5d_u8, 0x34_u8, 0x41_u8, 0xb1_u8])
     def query_interface(this : IWTSBitmapRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4952,7 +5043,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSBitmapRendererCallbackVtbl,
+
+  record IWTSBitmapRendererCallbackVtable,
     query_interface : Proc(IWTSBitmapRendererCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSBitmapRendererCallback*, UInt32),
     release : Proc(IWTSBitmapRendererCallback*, UInt32),
@@ -4960,7 +5052,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSBitmapRendererCallback, lpVtbl : IWTSBitmapRendererCallbackVtbl* do
+  record IWTSBitmapRendererCallback, lpVtbl : IWTSBitmapRendererCallbackVtable* do
     GUID = LibC::GUID.new(0xd782928e_u32, 0xfe4e_u16, 0x4e77_u16, StaticArray[0xae_u8, 0x90_u8, 0x9c_u8, 0xd0_u8, 0xb3_u8, 0xe3_u8, 0xb3_u8, 0x53_u8])
     def query_interface(this : IWTSBitmapRendererCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4978,7 +5070,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSBitmapRenderServiceVtbl,
+
+  record IWTSBitmapRenderServiceVtable,
     query_interface : Proc(IWTSBitmapRenderService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSBitmapRenderService*, UInt32),
     release : Proc(IWTSBitmapRenderService*, UInt32),
@@ -4986,7 +5079,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSBitmapRenderService, lpVtbl : IWTSBitmapRenderServiceVtbl* do
+  record IWTSBitmapRenderService, lpVtbl : IWTSBitmapRenderServiceVtable* do
     GUID = LibC::GUID.new(0xea326091_u32, 0x5fe_u16, 0x40c1_u16, StaticArray[0xb4_u8, 0x9c_u8, 0x3d_u8, 0x2e_u8, 0xf4_u8, 0x62_u8, 0x6a_u8, 0xe_u8])
     def query_interface(this : IWTSBitmapRenderService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5004,7 +5097,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsGraphicsChannelEventsVtbl,
+
+  record IWRdsGraphicsChannelEventsVtable,
     query_interface : Proc(IWRdsGraphicsChannelEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsGraphicsChannelEvents*, UInt32),
     release : Proc(IWRdsGraphicsChannelEvents*, UInt32),
@@ -5016,7 +5110,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsGraphicsChannelEvents, lpVtbl : IWRdsGraphicsChannelEventsVtbl* do
+  record IWRdsGraphicsChannelEvents, lpVtbl : IWRdsGraphicsChannelEventsVtable* do
     GUID = LibC::GUID.new(0x67f2368c_u32, 0xd674_u16, 0x4fae_u16, StaticArray[0x66_u8, 0xa5_u8, 0xd2_u8, 0x6_u8, 0x28_u8, 0xa6_u8, 0x40_u8, 0xd2_u8])
     def query_interface(this : IWRdsGraphicsChannelEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5046,7 +5140,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsGraphicsChannelVtbl,
+
+  record IWRdsGraphicsChannelVtable,
     query_interface : Proc(IWRdsGraphicsChannel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsGraphicsChannel*, UInt32),
     release : Proc(IWRdsGraphicsChannel*, UInt32),
@@ -5056,7 +5151,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsGraphicsChannel, lpVtbl : IWRdsGraphicsChannelVtbl* do
+  record IWRdsGraphicsChannel, lpVtbl : IWRdsGraphicsChannelVtable* do
     GUID = LibC::GUID.new(0x684b7a0b_u32, 0xedff_u16, 0x43ad_u16, StaticArray[0xd5_u8, 0xa2_u8, 0x4a_u8, 0x8d_u8, 0x53_u8, 0x88_u8, 0xf4_u8, 0x1_u8])
     def query_interface(this : IWRdsGraphicsChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5080,7 +5175,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsGraphicsChannelManagerVtbl,
+
+  record IWRdsGraphicsChannelManagerVtable,
     query_interface : Proc(IWRdsGraphicsChannelManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsGraphicsChannelManager*, UInt32),
     release : Proc(IWRdsGraphicsChannelManager*, UInt32),
@@ -5088,7 +5184,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsGraphicsChannelManager, lpVtbl : IWRdsGraphicsChannelManagerVtbl* do
+  record IWRdsGraphicsChannelManager, lpVtbl : IWRdsGraphicsChannelManagerVtable* do
     GUID = LibC::GUID.new(0xfd57159_u32, 0xe83e_u16, 0x476a_u16, StaticArray[0xa8_u8, 0xb9_u8, 0x4a_u8, 0x79_u8, 0x76_u8, 0xe7_u8, 0x1e_u8, 0x18_u8])
     def query_interface(this : IWRdsGraphicsChannelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5106,7 +5202,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolManagerVtbl,
+
+  record IWTSProtocolManagerVtable,
     query_interface : Proc(IWTSProtocolManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolManager*, UInt32),
     release : Proc(IWTSProtocolManager*, UInt32),
@@ -5118,7 +5215,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolManager, lpVtbl : IWTSProtocolManagerVtbl* do
+  record IWTSProtocolManager, lpVtbl : IWTSProtocolManagerVtable* do
     GUID = LibC::GUID.new(0xf9eaf6cc_u32, 0xed79_u16, 0x4f01_u16, StaticArray[0x82_u8, 0x1d_u8, 0x1f_u8, 0x88_u8, 0x1b_u8, 0x9f_u8, 0x66_u8, 0xcc_u8])
     def query_interface(this : IWTSProtocolManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5148,7 +5245,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolListenerVtbl,
+
+  record IWTSProtocolListenerVtable,
     query_interface : Proc(IWTSProtocolListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolListener*, UInt32),
     release : Proc(IWTSProtocolListener*, UInt32),
@@ -5157,7 +5255,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolListener, lpVtbl : IWTSProtocolListenerVtbl* do
+  record IWTSProtocolListener, lpVtbl : IWTSProtocolListenerVtable* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x45f0_u16, 0x4394_u16, StaticArray[0x8f_u8, 0x69_u8, 0x32_u8, 0xb2_u8, 0xbc_u8, 0xe_u8, 0xf4_u8, 0xca_u8])
     def query_interface(this : IWTSProtocolListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5178,7 +5276,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolListenerCallbackVtbl,
+
+  record IWTSProtocolListenerCallbackVtable,
     query_interface : Proc(IWTSProtocolListenerCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolListenerCallback*, UInt32),
     release : Proc(IWTSProtocolListenerCallback*, UInt32),
@@ -5186,7 +5285,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolListenerCallback, lpVtbl : IWTSProtocolListenerCallbackVtbl* do
+  record IWTSProtocolListenerCallback, lpVtbl : IWTSProtocolListenerCallbackVtable* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x1a2d_u16, 0x4de2_u16, StaticArray[0x97_u8, 0xde_u8, 0x4a_u8, 0x35_u8, 0xf2_u8, 0x60_u8, 0xf0_u8, 0xb3_u8])
     def query_interface(this : IWTSProtocolListenerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5204,7 +5303,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolConnectionVtbl,
+
+  record IWTSProtocolConnectionVtable,
     query_interface : Proc(IWTSProtocolConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolConnection*, UInt32),
     release : Proc(IWTSProtocolConnection*, UInt32),
@@ -5234,7 +5334,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolConnection, lpVtbl : IWTSProtocolConnectionVtbl* do
+  record IWTSProtocolConnection, lpVtbl : IWTSProtocolConnectionVtable* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x9095_u16, 0x4648_u16, StaticArray[0x98_u8, 0xbf_u8, 0xef_u8, 0x81_u8, 0xc9_u8, 0x14_u8, 0x3_u8, 0x2d_u8])
     def query_interface(this : IWTSProtocolConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5318,7 +5418,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolConnectionCallbackVtbl,
+
+  record IWTSProtocolConnectionCallbackVtable,
     query_interface : Proc(IWTSProtocolConnectionCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolConnectionCallback*, UInt32),
     release : Proc(IWTSProtocolConnectionCallback*, UInt32),
@@ -5330,7 +5431,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolConnectionCallback, lpVtbl : IWTSProtocolConnectionCallbackVtbl* do
+  record IWTSProtocolConnectionCallback, lpVtbl : IWTSProtocolConnectionCallbackVtable* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x75eb_u16, 0x41fe_u16, StaticArray[0xb4_u8, 0xfb_u8, 0xe0_u8, 0x86_u8, 0x24_u8, 0x2a_u8, 0xfa_u8, 0xf_u8])
     def query_interface(this : IWTSProtocolConnectionCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5360,7 +5461,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolShadowConnectionVtbl,
+
+  record IWTSProtocolShadowConnectionVtable,
     query_interface : Proc(IWTSProtocolShadowConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolShadowConnection*, UInt32),
     release : Proc(IWTSProtocolShadowConnection*, UInt32),
@@ -5370,7 +5472,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolShadowConnection, lpVtbl : IWTSProtocolShadowConnectionVtbl* do
+  record IWTSProtocolShadowConnection, lpVtbl : IWTSProtocolShadowConnectionVtable* do
     GUID = LibC::GUID.new(0xee3b0c14_u32, 0x37fb_u16, 0x456b_u16, StaticArray[0xba_u8, 0xb3_u8, 0x6d_u8, 0x6c_u8, 0xd5_u8, 0x1e_u8, 0x13_u8, 0xbf_u8])
     def query_interface(this : IWTSProtocolShadowConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5394,7 +5496,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolShadowCallbackVtbl,
+
+  record IWTSProtocolShadowCallbackVtable,
     query_interface : Proc(IWTSProtocolShadowCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolShadowCallback*, UInt32),
     release : Proc(IWTSProtocolShadowCallback*, UInt32),
@@ -5403,7 +5506,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolShadowCallback, lpVtbl : IWTSProtocolShadowCallbackVtbl* do
+  record IWTSProtocolShadowCallback, lpVtbl : IWTSProtocolShadowCallbackVtable* do
     GUID = LibC::GUID.new(0x503a2504_u32, 0xaae5_u16, 0x4ab1_u16, StaticArray[0x93_u8, 0xe0_u8, 0x6d_u8, 0x1c_u8, 0x4b_u8, 0xc6_u8, 0xf7_u8, 0x1a_u8])
     def query_interface(this : IWTSProtocolShadowCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5424,7 +5527,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolLicenseConnectionVtbl,
+
+  record IWTSProtocolLicenseConnectionVtable,
     query_interface : Proc(IWTSProtocolLicenseConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolLicenseConnection*, UInt32),
     release : Proc(IWTSProtocolLicenseConnection*, UInt32),
@@ -5435,7 +5539,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolLicenseConnection, lpVtbl : IWTSProtocolLicenseConnectionVtbl* do
+  record IWTSProtocolLicenseConnection, lpVtbl : IWTSProtocolLicenseConnectionVtable* do
     GUID = LibC::GUID.new(0x23083765_u32, 0x178c_u16, 0x4079_u16, StaticArray[0x8e_u8, 0x4a_u8, 0xfe_u8, 0xa6_u8, 0x49_u8, 0x6a_u8, 0x4d_u8, 0x70_u8])
     def query_interface(this : IWTSProtocolLicenseConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5462,7 +5566,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWTSProtocolLogonErrorRedirectorVtbl,
+
+  record IWTSProtocolLogonErrorRedirectorVtable,
     query_interface : Proc(IWTSProtocolLogonErrorRedirector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWTSProtocolLogonErrorRedirector*, UInt32),
     release : Proc(IWTSProtocolLogonErrorRedirector*, UInt32),
@@ -5473,7 +5578,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWTSProtocolLogonErrorRedirector, lpVtbl : IWTSProtocolLogonErrorRedirectorVtbl* do
+  record IWTSProtocolLogonErrorRedirector, lpVtbl : IWTSProtocolLogonErrorRedirectorVtable* do
     GUID = LibC::GUID.new(0xfd9b61a7_u32, 0x2916_u16, 0x4627_u16, StaticArray[0x8d_u8, 0xee_u8, 0x43_u8, 0x28_u8, 0x71_u8, 0x1a_u8, 0xd6_u8, 0xcb_u8])
     def query_interface(this : IWTSProtocolLogonErrorRedirector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5500,7 +5605,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolSettingsVtbl,
+
+  record IWRdsProtocolSettingsVtable,
     query_interface : Proc(IWRdsProtocolSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolSettings*, UInt32),
     release : Proc(IWRdsProtocolSettings*, UInt32),
@@ -5509,7 +5615,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolSettings, lpVtbl : IWRdsProtocolSettingsVtbl* do
+  record IWRdsProtocolSettings, lpVtbl : IWRdsProtocolSettingsVtable* do
     GUID = LibC::GUID.new(0x654a5a6a_u32, 0x2550_u16, 0x47eb_u16, StaticArray[0xb6_u8, 0xf7_u8, 0xeb_u8, 0xd6_u8, 0x37_u8, 0x47_u8, 0x52_u8, 0x65_u8])
     def query_interface(this : IWRdsProtocolSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5530,7 +5636,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolManagerVtbl,
+
+  record IWRdsProtocolManagerVtable,
     query_interface : Proc(IWRdsProtocolManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolManager*, UInt32),
     release : Proc(IWRdsProtocolManager*, UInt32),
@@ -5545,7 +5652,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolManager, lpVtbl : IWRdsProtocolManagerVtbl* do
+  record IWRdsProtocolManager, lpVtbl : IWRdsProtocolManagerVtable* do
     GUID = LibC::GUID.new(0xdc796967_u32, 0x3abb_u16, 0x40cd_u16, StaticArray[0xa4_u8, 0x46_u8, 0x10_u8, 0x52_u8, 0x76_u8, 0xb5_u8, 0x89_u8, 0x50_u8])
     def query_interface(this : IWRdsProtocolManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5584,7 +5691,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolListenerVtbl,
+
+  record IWRdsProtocolListenerVtable,
     query_interface : Proc(IWRdsProtocolListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolListener*, UInt32),
     release : Proc(IWRdsProtocolListener*, UInt32),
@@ -5594,7 +5702,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolListener, lpVtbl : IWRdsProtocolListenerVtbl* do
+  record IWRdsProtocolListener, lpVtbl : IWRdsProtocolListenerVtable* do
     GUID = LibC::GUID.new(0xfcbc131b_u32, 0xc686_u16, 0x451d_u16, StaticArray[0xa7_u8, 0x73_u8, 0xe2_u8, 0x79_u8, 0xe2_u8, 0x30_u8, 0xf5_u8, 0x40_u8])
     def query_interface(this : IWRdsProtocolListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5618,7 +5726,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolListenerCallbackVtbl,
+
+  record IWRdsProtocolListenerCallbackVtable,
     query_interface : Proc(IWRdsProtocolListenerCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolListenerCallback*, UInt32),
     release : Proc(IWRdsProtocolListenerCallback*, UInt32),
@@ -5626,7 +5735,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolListenerCallback, lpVtbl : IWRdsProtocolListenerCallbackVtbl* do
+  record IWRdsProtocolListenerCallback, lpVtbl : IWRdsProtocolListenerCallbackVtable* do
     GUID = LibC::GUID.new(0x3ab27e5b_u32, 0x4449_u16, 0x4dc1_u16, StaticArray[0xb7_u8, 0x4a_u8, 0x91_u8, 0x62_u8, 0x1d_u8, 0x4f_u8, 0xe9_u8, 0x84_u8])
     def query_interface(this : IWRdsProtocolListenerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5644,7 +5753,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolConnectionVtbl,
+
+  record IWRdsProtocolConnectionVtable,
     query_interface : Proc(IWRdsProtocolConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolConnection*, UInt32),
     release : Proc(IWRdsProtocolConnection*, UInt32),
@@ -5675,7 +5785,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolConnection, lpVtbl : IWRdsProtocolConnectionVtbl* do
+  record IWRdsProtocolConnection, lpVtbl : IWRdsProtocolConnectionVtable* do
     GUID = LibC::GUID.new(0x324ed94f_u32, 0xfdaf_u16, 0x4ff6_u16, StaticArray[0x81_u8, 0xa8_u8, 0x42_u8, 0xab_u8, 0xe7_u8, 0x55_u8, 0x83_u8, 0xb_u8])
     def query_interface(this : IWRdsProtocolConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5762,7 +5872,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolConnectionCallbackVtbl,
+
+  record IWRdsProtocolConnectionCallbackVtable,
     query_interface : Proc(IWRdsProtocolConnectionCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolConnectionCallback*, UInt32),
     release : Proc(IWRdsProtocolConnectionCallback*, UInt32),
@@ -5774,7 +5885,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolConnectionCallback, lpVtbl : IWRdsProtocolConnectionCallbackVtbl* do
+  record IWRdsProtocolConnectionCallback, lpVtbl : IWRdsProtocolConnectionCallbackVtable* do
     GUID = LibC::GUID.new(0xf1d70332_u32, 0xd070_u16, 0x4ef1_u16, StaticArray[0xa0_u8, 0x88_u8, 0x78_u8, 0x31_u8, 0x35_u8, 0x36_u8, 0xc2_u8, 0xd6_u8])
     def query_interface(this : IWRdsProtocolConnectionCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5804,7 +5915,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolShadowConnectionVtbl,
+
+  record IWRdsProtocolShadowConnectionVtable,
     query_interface : Proc(IWRdsProtocolShadowConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolShadowConnection*, UInt32),
     release : Proc(IWRdsProtocolShadowConnection*, UInt32),
@@ -5814,7 +5926,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolShadowConnection, lpVtbl : IWRdsProtocolShadowConnectionVtbl* do
+  record IWRdsProtocolShadowConnection, lpVtbl : IWRdsProtocolShadowConnectionVtable* do
     GUID = LibC::GUID.new(0x9ae85ce6_u32, 0xcade_u16, 0x4548_u16, StaticArray[0x8f_u8, 0xeb_u8, 0x99_u8, 0x1_u8, 0x65_u8, 0x97_u8, 0xf6_u8, 0xa_u8])
     def query_interface(this : IWRdsProtocolShadowConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5838,7 +5950,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolShadowCallbackVtbl,
+
+  record IWRdsProtocolShadowCallbackVtable,
     query_interface : Proc(IWRdsProtocolShadowCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolShadowCallback*, UInt32),
     release : Proc(IWRdsProtocolShadowCallback*, UInt32),
@@ -5847,7 +5960,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolShadowCallback, lpVtbl : IWRdsProtocolShadowCallbackVtbl* do
+  record IWRdsProtocolShadowCallback, lpVtbl : IWRdsProtocolShadowCallbackVtable* do
     GUID = LibC::GUID.new(0xe0667ce0_u32, 0x372_u16, 0x40d6_u16, StaticArray[0xad_u8, 0xb2_u8, 0xa0_u8, 0xf3_u8, 0x32_u8, 0x26_u8, 0x74_u8, 0xd6_u8])
     def query_interface(this : IWRdsProtocolShadowCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5868,7 +5981,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolLicenseConnectionVtbl,
+
+  record IWRdsProtocolLicenseConnectionVtable,
     query_interface : Proc(IWRdsProtocolLicenseConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolLicenseConnection*, UInt32),
     release : Proc(IWRdsProtocolLicenseConnection*, UInt32),
@@ -5879,7 +5993,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolLicenseConnection, lpVtbl : IWRdsProtocolLicenseConnectionVtbl* do
+  record IWRdsProtocolLicenseConnection, lpVtbl : IWRdsProtocolLicenseConnectionVtable* do
     GUID = LibC::GUID.new(0x1d6a145f_u32, 0xd095_u16, 0x4424_u16, StaticArray[0x95_u8, 0x7a_u8, 0x40_u8, 0x7f_u8, 0xae_u8, 0x82_u8, 0x2d_u8, 0x84_u8])
     def query_interface(this : IWRdsProtocolLicenseConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5906,7 +6020,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolLogonErrorRedirectorVtbl,
+
+  record IWRdsProtocolLogonErrorRedirectorVtable,
     query_interface : Proc(IWRdsProtocolLogonErrorRedirector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolLogonErrorRedirector*, UInt32),
     release : Proc(IWRdsProtocolLogonErrorRedirector*, UInt32),
@@ -5917,7 +6032,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolLogonErrorRedirector, lpVtbl : IWRdsProtocolLogonErrorRedirectorVtbl* do
+  record IWRdsProtocolLogonErrorRedirector, lpVtbl : IWRdsProtocolLogonErrorRedirectorVtable* do
     GUID = LibC::GUID.new(0x519fe83b_u32, 0x142a_u16, 0x4120_u16, StaticArray[0xa3_u8, 0xd5_u8, 0xa4_u8, 0x5_u8, 0xd3_u8, 0x15_u8, 0x28_u8, 0x1a_u8])
     def query_interface(this : IWRdsProtocolLogonErrorRedirector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5944,18 +6059,19 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsWddmIddPropsVtbl,
+
+  record IWRdsWddmIddPropsVtable,
     query_interface : Proc(IWRdsWddmIddProps*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsWddmIddProps*, UInt32),
     release : Proc(IWRdsWddmIddProps*, UInt32),
-    get_hardware_id : Proc(IWRdsWddmIddProps*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_hardware_id : Proc(IWRdsWddmIddProps*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     on_driver_load : Proc(IWRdsWddmIddProps*, UInt32, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::HRESULT),
     on_driver_unload : Proc(IWRdsWddmIddProps*, UInt32, Win32cr::Foundation::HRESULT),
     enable_wddm_idd : Proc(IWRdsWddmIddProps*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWRdsWddmIddProps, lpVtbl : IWRdsWddmIddPropsVtbl* do
+  record IWRdsWddmIddProps, lpVtbl : IWRdsWddmIddPropsVtable* do
     GUID = LibC::GUID.new(0x1382df4d_u32, 0xa289_u16, 0x43d1_u16, StaticArray[0xa1_u8, 0x84_u8, 0x14_u8, 0x47_u8, 0x26_u8, 0xf9_u8, 0xaf_u8, 0x90_u8])
     def query_interface(this : IWRdsWddmIddProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5966,7 +6082,7 @@ module Win32cr::System::RemoteDesktop
     def release(this : IWRdsWddmIddProps*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def get_hardware_id(this : IWRdsWddmIddProps*, pDisplayDriverHardwareId : UInt16*, count : UInt32) : Win32cr::Foundation::HRESULT
+    def get_hardware_id(this : IWRdsWddmIddProps*, pDisplayDriverHardwareId : Win32cr::Foundation::PWSTR, count : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hardware_id.call(this, pDisplayDriverHardwareId, count)
     end
     def on_driver_load(this : IWRdsWddmIddProps*, session_id : UInt32, driver_handle : Win32cr::Foundation::HANDLE_PTR) : Win32cr::Foundation::HRESULT
@@ -5982,7 +6098,43 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsProtocolConnectionSettingsVtbl,
+
+  record IWRdsWddmIddProps1Vtable,
+    query_interface : Proc(IWRdsWddmIddProps1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWRdsWddmIddProps1*, UInt32),
+    release : Proc(IWRdsWddmIddProps1*, UInt32),
+    get_hardware_id : Proc(IWRdsWddmIddProps1*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    on_driver_load : Proc(IWRdsWddmIddProps1*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    on_driver_unload : Proc(IWRdsWddmIddProps1*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IWRdsWddmIddProps1, lpVtbl : IWRdsWddmIddProps1Vtable* do
+    GUID = LibC::GUID.new(0x60f71b1a_u32, 0x3682_u16, 0x4bc7_u16, StaticArray[0x99_u8, 0x7e_u8, 0x4e_u8, 0x4f_u8, 0x2_u8, 0xa0_u8, 0x81_u8, 0x48_u8])
+    def query_interface(this : IWRdsWddmIddProps1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWRdsWddmIddProps1*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWRdsWddmIddProps1*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_hardware_id(this : IWRdsWddmIddProps1*, pDisplayDriverHardwareId : Win32cr::Foundation::PWSTR, count : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_hardware_id.call(this, pDisplayDriverHardwareId, count)
+    end
+    def on_driver_load(this : IWRdsWddmIddProps1*, session_id : UInt32, device_instance : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_driver_load.call(this, session_id, device_instance)
+    end
+    def on_driver_unload(this : IWRdsWddmIddProps1*, session_id : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_driver_unload.call(this, session_id)
+    end
+
+  end
+
+  @[Extern]
+
+  record IWRdsProtocolConnectionSettingsVtable,
     query_interface : Proc(IWRdsProtocolConnectionSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsProtocolConnectionSettings*, UInt32),
     release : Proc(IWRdsProtocolConnectionSettings*, UInt32),
@@ -5991,7 +6143,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsProtocolConnectionSettings, lpVtbl : IWRdsProtocolConnectionSettingsVtbl* do
+  record IWRdsProtocolConnectionSettings, lpVtbl : IWRdsProtocolConnectionSettingsVtable* do
     GUID = LibC::GUID.new(0x83fcf5d3_u32, 0xf6f4_u16, 0xea94_u16, StaticArray[0x9c_u8, 0xd2_u8, 0x32_u8, 0xf2_u8, 0x80_u8, 0xe1_u8, 0xe5_u8, 0x10_u8])
     def query_interface(this : IWRdsProtocolConnectionSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6012,7 +6164,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IWRdsEnhancedFastReconnectArbitratorVtbl,
+
+  record IWRdsEnhancedFastReconnectArbitratorVtable,
     query_interface : Proc(IWRdsEnhancedFastReconnectArbitrator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsEnhancedFastReconnectArbitrator*, UInt32),
     release : Proc(IWRdsEnhancedFastReconnectArbitrator*, UInt32),
@@ -6020,7 +6173,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IWRdsEnhancedFastReconnectArbitrator, lpVtbl : IWRdsEnhancedFastReconnectArbitratorVtbl* do
+  record IWRdsEnhancedFastReconnectArbitrator, lpVtbl : IWRdsEnhancedFastReconnectArbitratorVtable* do
     GUID = LibC::GUID.new(0x5718ae9b_u32, 0x47f2_u16, 0x499f_u16, StaticArray[0xb6_u8, 0x34_u8, 0xd8_u8, 0x17_u8, 0x5b_u8, 0xd5_u8, 0x11_u8, 0x31_u8])
     def query_interface(this : IWRdsEnhancedFastReconnectArbitrator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6038,22 +6191,146 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IRemoteDesktopClientSettingsVtbl,
+
+  record IWRdsProtocolConnection2Vtable,
+    query_interface : Proc(IWRdsProtocolConnection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWRdsProtocolConnection2*, UInt32),
+    release : Proc(IWRdsProtocolConnection2*, UInt32),
+    get_logon_error_redirector : Proc(IWRdsProtocolConnection2*, Void**, Win32cr::Foundation::HRESULT),
+    accept_connection : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::HRESULT),
+    get_client_data : Proc(IWRdsProtocolConnection2*, Win32cr::System::RemoteDesktop::WTS_CLIENT_DATA*, Win32cr::Foundation::HRESULT),
+    get_client_monitor_data : Proc(IWRdsProtocolConnection2*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_user_credentials : Proc(IWRdsProtocolConnection2*, Win32cr::System::RemoteDesktop::WTS_USER_CREDENTIAL*, Win32cr::Foundation::HRESULT),
+    get_license_connection : Proc(IWRdsProtocolConnection2*, Void**, Win32cr::Foundation::HRESULT),
+    authenticate_client_to_session : Proc(IWRdsProtocolConnection2*, Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, Win32cr::Foundation::HRESULT),
+    notify_session_id : Proc(IWRdsProtocolConnection2*, Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::HRESULT),
+    get_input_handles : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HRESULT),
+    get_video_handle : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HRESULT),
+    connect_notify : Proc(IWRdsProtocolConnection2*, UInt32, Win32cr::Foundation::HRESULT),
+    is_user_allowed_to_logon : Proc(IWRdsProtocolConnection2*, UInt32, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    session_arbitration_enumeration : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::BOOL, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    logon_notify : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTINGS*, Win32cr::Foundation::HRESULT),
+    pre_disconnect : Proc(IWRdsProtocolConnection2*, UInt32, Win32cr::Foundation::HRESULT),
+    disconnect_notify : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::HRESULT),
+    close : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::HRESULT),
+    get_protocol_status : Proc(IWRdsProtocolConnection2*, Win32cr::System::RemoteDesktop::WTS_PROTOCOL_STATUS*, Win32cr::Foundation::HRESULT),
+    get_last_input_time : Proc(IWRdsProtocolConnection2*, UInt64*, Win32cr::Foundation::HRESULT),
+    set_error_info : Proc(IWRdsProtocolConnection2*, UInt32, Win32cr::Foundation::HRESULT),
+    create_virtual_channel : Proc(IWRdsProtocolConnection2*, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL, UInt32, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT),
+    query_property : Proc(IWRdsProtocolConnection2*, LibC::GUID, UInt32, UInt32, Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*, Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*, Win32cr::Foundation::HRESULT),
+    get_shadow_connection : Proc(IWRdsProtocolConnection2*, Void**, Win32cr::Foundation::HRESULT),
+    notify_command_process_created : Proc(IWRdsProtocolConnection2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_serialized_user_credential : Proc(IWRdsProtocolConnection2*, Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IWRdsProtocolConnection2, lpVtbl : IWRdsProtocolConnection2Vtable* do
+    GUID = LibC::GUID.new(0xc2bd9b66_u32, 0x4a76_u16, 0x4701_u16, StaticArray[0xb6_u8, 0xa3_u8, 0xbf_u8, 0xaf_u8, 0xc1_u8, 0x48_u8, 0x21_u8, 0x69_u8])
+    def query_interface(this : IWRdsProtocolConnection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWRdsProtocolConnection2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWRdsProtocolConnection2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_logon_error_redirector(this : IWRdsProtocolConnection2*, ppLogonErrorRedir : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_logon_error_redirector.call(this, ppLogonErrorRedir)
+    end
+    def accept_connection(this : IWRdsProtocolConnection2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.accept_connection.call(this)
+    end
+    def get_client_data(this : IWRdsProtocolConnection2*, pClientData : Win32cr::System::RemoteDesktop::WTS_CLIENT_DATA*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_client_data.call(this, pClientData)
+    end
+    def get_client_monitor_data(this : IWRdsProtocolConnection2*, pNumMonitors : UInt32*, pPrimaryMonitor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_client_monitor_data.call(this, pNumMonitors, pPrimaryMonitor)
+    end
+    def get_user_credentials(this : IWRdsProtocolConnection2*, pUserCreds : Win32cr::System::RemoteDesktop::WTS_USER_CREDENTIAL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_user_credentials.call(this, pUserCreds)
+    end
+    def get_license_connection(this : IWRdsProtocolConnection2*, ppLicenseConnection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_license_connection.call(this, ppLicenseConnection)
+    end
+    def authenticate_client_to_session(this : IWRdsProtocolConnection2*, session_id : Win32cr::System::RemoteDesktop::WTS_SESSION_ID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.authenticate_client_to_session.call(this, session_id)
+    end
+    def notify_session_id(this : IWRdsProtocolConnection2*, session_id : Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, session_handle : Win32cr::Foundation::HANDLE_PTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_session_id.call(this, session_id, session_handle)
+    end
+    def get_input_handles(this : IWRdsProtocolConnection2*, pKeyboardHandle : Win32cr::Foundation::HANDLE_PTR*, pMouseHandle : Win32cr::Foundation::HANDLE_PTR*, pBeepHandle : Win32cr::Foundation::HANDLE_PTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_input_handles.call(this, pKeyboardHandle, pMouseHandle, pBeepHandle)
+    end
+    def get_video_handle(this : IWRdsProtocolConnection2*, pVideoHandle : Win32cr::Foundation::HANDLE_PTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_video_handle.call(this, pVideoHandle)
+    end
+    def connect_notify(this : IWRdsProtocolConnection2*, session_id : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.connect_notify.call(this, session_id)
+    end
+    def is_user_allowed_to_logon(this : IWRdsProtocolConnection2*, session_id : UInt32, user_token : Win32cr::Foundation::HANDLE_PTR, pDomainName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_user_allowed_to_logon.call(this, session_id, user_token, pDomainName, pUserName)
+    end
+    def session_arbitration_enumeration(this : IWRdsProtocolConnection2*, hUserToken : Win32cr::Foundation::HANDLE_PTR, bSingleSessionPerUserEnabled : Win32cr::Foundation::BOOL, pSessionIdArray : UInt32*, pdwSessionIdentifierCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.session_arbitration_enumeration.call(this, hUserToken, bSingleSessionPerUserEnabled, pSessionIdArray, pdwSessionIdentifierCount)
+    end
+    def logon_notify(this : IWRdsProtocolConnection2*, hClientToken : Win32cr::Foundation::HANDLE_PTR, wszUserName : Win32cr::Foundation::PWSTR, wszDomainName : Win32cr::Foundation::PWSTR, session_id : Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, pWRdsConnectionSettings : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTINGS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.logon_notify.call(this, hClientToken, wszUserName, wszDomainName, session_id, pWRdsConnectionSettings)
+    end
+    def pre_disconnect(this : IWRdsProtocolConnection2*, disconnect_reason : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_disconnect.call(this, disconnect_reason)
+    end
+    def disconnect_notify(this : IWRdsProtocolConnection2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disconnect_notify.call(this)
+    end
+    def close(this : IWRdsProtocolConnection2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+    def get_protocol_status(this : IWRdsProtocolConnection2*, pProtocolStatus : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_STATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_protocol_status.call(this, pProtocolStatus)
+    end
+    def get_last_input_time(this : IWRdsProtocolConnection2*, pLastInputTime : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_last_input_time.call(this, pLastInputTime)
+    end
+    def set_error_info(this : IWRdsProtocolConnection2*, ulError : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_error_info.call(this, ulError)
+    end
+    def create_virtual_channel(this : IWRdsProtocolConnection2*, szEndpointName : Win32cr::Foundation::PSTR, bStatic : Win32cr::Foundation::BOOL, requested_priority : UInt32, phChannel : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_virtual_channel.call(this, szEndpointName, bStatic, requested_priority, phChannel)
+    end
+    def query_property(this : IWRdsProtocolConnection2*, query_type : LibC::GUID, ulNumEntriesIn : UInt32, ulNumEntriesOut : UInt32, pPropertyEntriesIn : Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*, pPropertyEntriesOut : Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_property.call(this, query_type, ulNumEntriesIn, ulNumEntriesOut, pPropertyEntriesIn, pPropertyEntriesOut)
+    end
+    def get_shadow_connection(this : IWRdsProtocolConnection2*, ppShadowConnection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_shadow_connection.call(this, ppShadowConnection)
+    end
+    def notify_command_process_created(this : IWRdsProtocolConnection2*, session_id : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_command_process_created.call(this, session_id)
+    end
+    def get_serialized_user_credential(this : IWRdsProtocolConnection2*, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_user_credential.call(this, userCredential)
+    end
+
+  end
+
+  @[Extern]
+
+  record IRemoteDesktopClientSettingsVtable,
     query_interface : Proc(IRemoteDesktopClientSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDesktopClientSettings*, UInt32),
     release : Proc(IRemoteDesktopClientSettings*, UInt32),
     get_type_info_count : Proc(IRemoteDesktopClientSettings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRemoteDesktopClientSettings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRemoteDesktopClientSettings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRemoteDesktopClientSettings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRemoteDesktopClientSettings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     apply_settings : Proc(IRemoteDesktopClientSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     retrieve_settings : Proc(IRemoteDesktopClientSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_rdp_property : Proc(IRemoteDesktopClientSettings*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_rdp_property : Proc(IRemoteDesktopClientSettings*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_rdp_property : Proc(IRemoteDesktopClientSettings*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_rdp_property : Proc(IRemoteDesktopClientSettings*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRemoteDesktopClientSettings, lpVtbl : IRemoteDesktopClientSettingsVtbl* do
+  record IRemoteDesktopClientSettings, lpVtbl : IRemoteDesktopClientSettingsVtable* do
     GUID = LibC::GUID.new(0x48a0f2a7_u32, 0x2713_u16, 0x431f_u16, StaticArray[0xbb_u8, 0xac_u8, 0x6f_u8, 0x45_u8, 0x58_u8, 0xe7_u8, 0xd6_u8, 0x4d_u8])
     def query_interface(this : IRemoteDesktopClientSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6073,8 +6350,8 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IRemoteDesktopClientSettings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRemoteDesktopClientSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRemoteDesktopClientSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def apply_settings(this : IRemoteDesktopClientSettings*, rdpFileContents : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.apply_settings.call(this, rdpFileContents)
@@ -6082,24 +6359,25 @@ module Win32cr::System::RemoteDesktop
     def retrieve_settings(this : IRemoteDesktopClientSettings*, rdpFileContents : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.retrieve_settings.call(this, rdpFileContents)
     end
-    def get_rdp_property(this : IRemoteDesktopClientSettings*, propertyName : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_rdp_property(this : IRemoteDesktopClientSettings*, propertyName : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_rdp_property.call(this, propertyName, value)
     end
-    def set_rdp_property(this : IRemoteDesktopClientSettings*, propertyName : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_rdp_property(this : IRemoteDesktopClientSettings*, propertyName : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_rdp_property.call(this, propertyName, value)
     end
 
   end
 
   @[Extern]
-  record IRemoteDesktopClientActionsVtbl,
+
+  record IRemoteDesktopClientActionsVtable,
     query_interface : Proc(IRemoteDesktopClientActions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDesktopClientActions*, UInt32),
     release : Proc(IRemoteDesktopClientActions*, UInt32),
     get_type_info_count : Proc(IRemoteDesktopClientActions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRemoteDesktopClientActions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRemoteDesktopClientActions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRemoteDesktopClientActions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRemoteDesktopClientActions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     suspend_screen_updates : Proc(IRemoteDesktopClientActions*, Win32cr::Foundation::HRESULT),
     resume_screen_updates : Proc(IRemoteDesktopClientActions*, Win32cr::Foundation::HRESULT),
     execute_remote_action : Proc(IRemoteDesktopClientActions*, Win32cr::System::RemoteDesktop::RemoteActionType, Win32cr::Foundation::HRESULT),
@@ -6107,7 +6385,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IRemoteDesktopClientActions, lpVtbl : IRemoteDesktopClientActionsVtbl* do
+  record IRemoteDesktopClientActions, lpVtbl : IRemoteDesktopClientActionsVtable* do
     GUID = LibC::GUID.new(0x7d54bc4e_u32, 0x1028_u16, 0x45d4_u16, StaticArray[0x8b_u8, 0xa_u8, 0xb9_u8, 0xb6_u8, 0xbf_u8, 0xfb_u8, 0xa1_u8, 0x76_u8])
     def query_interface(this : IRemoteDesktopClientActions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6127,8 +6405,8 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IRemoteDesktopClientActions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRemoteDesktopClientActions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRemoteDesktopClientActions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def suspend_screen_updates(this : IRemoteDesktopClientActions*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.suspend_screen_updates.call(this)
@@ -6146,24 +6424,25 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IRemoteDesktopClientTouchPointerVtbl,
+
+  record IRemoteDesktopClientTouchPointerVtable,
     query_interface : Proc(IRemoteDesktopClientTouchPointer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDesktopClientTouchPointer*, UInt32),
     release : Proc(IRemoteDesktopClientTouchPointer*, UInt32),
     get_type_info_count : Proc(IRemoteDesktopClientTouchPointer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRemoteDesktopClientTouchPointer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRemoteDesktopClientTouchPointer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRemoteDesktopClientTouchPointer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IRemoteDesktopClientTouchPointer*, Int16, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IRemoteDesktopClientTouchPointer*, Int16*, Win32cr::Foundation::HRESULT),
-    put_EventsEnabled : Proc(IRemoteDesktopClientTouchPointer*, Int16, Win32cr::Foundation::HRESULT),
-    get_EventsEnabled : Proc(IRemoteDesktopClientTouchPointer*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRemoteDesktopClientTouchPointer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IRemoteDesktopClientTouchPointer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IRemoteDesktopClientTouchPointer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_EventsEnabled : Proc(IRemoteDesktopClientTouchPointer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_EventsEnabled : Proc(IRemoteDesktopClientTouchPointer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_PointerSpeed : Proc(IRemoteDesktopClientTouchPointer*, UInt32, Win32cr::Foundation::HRESULT),
     get_PointerSpeed : Proc(IRemoteDesktopClientTouchPointer*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRemoteDesktopClientTouchPointer, lpVtbl : IRemoteDesktopClientTouchPointerVtbl* do
+  record IRemoteDesktopClientTouchPointer, lpVtbl : IRemoteDesktopClientTouchPointerVtable* do
     GUID = LibC::GUID.new(0x260ec22d_u32, 0x8cbc_u16, 0x44b5_u16, StaticArray[0x9e_u8, 0x88_u8, 0x2a_u8, 0x37_u8, 0xf6_u8, 0xc9_u8, 0x3a_u8, 0xe9_u8])
     def query_interface(this : IRemoteDesktopClientTouchPointer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6183,19 +6462,19 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IRemoteDesktopClientTouchPointer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRemoteDesktopClientTouchPointer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRemoteDesktopClientTouchPointer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def put_Enabled(this : IRemoteDesktopClientTouchPointer*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IRemoteDesktopClientTouchPointer*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
-    def get_Enabled(this : IRemoteDesktopClientTouchPointer*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IRemoteDesktopClientTouchPointer*, enabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, enabled)
     end
-    def put_EventsEnabled(this : IRemoteDesktopClientTouchPointer*, eventsEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_EventsEnabled(this : IRemoteDesktopClientTouchPointer*, eventsEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EventsEnabled.call(this, eventsEnabled)
     end
-    def get_EventsEnabled(this : IRemoteDesktopClientTouchPointer*, eventsEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EventsEnabled(this : IRemoteDesktopClientTouchPointer*, eventsEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventsEnabled.call(this, eventsEnabled)
     end
     def put_PointerSpeed(this : IRemoteDesktopClientTouchPointer*, pointerSpeed : UInt32) : Win32cr::Foundation::HRESULT
@@ -6208,14 +6487,15 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IRemoteDesktopClientVtbl,
+
+  record IRemoteDesktopClientVtable,
     query_interface : Proc(IRemoteDesktopClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDesktopClient*, UInt32),
     release : Proc(IRemoteDesktopClient*, UInt32),
     get_type_info_count : Proc(IRemoteDesktopClient*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRemoteDesktopClient*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRemoteDesktopClient*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRemoteDesktopClient*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRemoteDesktopClient*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     connect : Proc(IRemoteDesktopClient*, Win32cr::Foundation::HRESULT),
     disconnect : Proc(IRemoteDesktopClient*, Win32cr::Foundation::HRESULT),
     reconnect : Proc(IRemoteDesktopClient*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
@@ -6229,7 +6509,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IRemoteDesktopClient, lpVtbl : IRemoteDesktopClientVtbl* do
+  record IRemoteDesktopClient, lpVtbl : IRemoteDesktopClientVtable* do
     GUID = LibC::GUID.new(0x57d25668_u32, 0x625a_u16, 0x4905_u16, StaticArray[0xbe_u8, 0x4e_u8, 0x30_u8, 0x4c_u8, 0xaa_u8, 0x13_u8, 0xf8_u8, 0x9c_u8])
     def query_interface(this : IRemoteDesktopClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6249,8 +6529,8 @@ module Win32cr::System::RemoteDesktop
     def get_i_ds_of_names(this : IRemoteDesktopClient*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRemoteDesktopClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRemoteDesktopClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def connect(this : IRemoteDesktopClient*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this)
@@ -6286,7 +6566,8 @@ module Win32cr::System::RemoteDesktop
   end
 
   @[Extern]
-  record IRemoteSystemAdditionalInfoProviderVtbl,
+
+  record IRemoteSystemAdditionalInfoProviderVtable,
     query_interface : Proc(IRemoteSystemAdditionalInfoProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteSystemAdditionalInfoProvider*, UInt32),
     release : Proc(IRemoteSystemAdditionalInfoProvider*, UInt32),
@@ -6294,7 +6575,7 @@ module Win32cr::System::RemoteDesktop
 
 
   @[Extern]
-  record IRemoteSystemAdditionalInfoProvider, lpVtbl : IRemoteSystemAdditionalInfoProviderVtbl* do
+  record IRemoteSystemAdditionalInfoProvider, lpVtbl : IRemoteSystemAdditionalInfoProviderVtable* do
     GUID = LibC::GUID.new(0xeeaa3d5f_u32, 0xec63_u16, 0x4d27_u16, StaticArray[0xaf_u8, 0x38_u8, 0xe8_u8, 0x6b_u8, 0x1d_u8, 0x72_u8, 0x92_u8, 0xcb_u8])
     def query_interface(this : IRemoteSystemAdditionalInfoProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6312,267 +6593,440 @@ module Win32cr::System::RemoteDesktop
   end
 
   def wTSStopRemoteControlSession(logon_id : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSStopRemoteControlSession(logon_id)
+    {% end %}
   end
 
   def wTSStartRemoteControlSessionW(pTargetServerName : Win32cr::Foundation::PWSTR, target_logon_id : UInt32, hotkey_vk : UInt8, hotkey_modifiers : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSStartRemoteControlSessionW(pTargetServerName, target_logon_id, hotkey_vk, hotkey_modifiers)
+    {% end %}
   end
 
   def wTSStartRemoteControlSessionA(pTargetServerName : Win32cr::Foundation::PSTR, target_logon_id : UInt32, hotkey_vk : UInt8, hotkey_modifiers : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSStartRemoteControlSessionA(pTargetServerName, target_logon_id, hotkey_vk, hotkey_modifiers)
+    {% end %}
   end
 
   def wTSConnectSessionA(logon_id : UInt32, target_logon_id : UInt32, pPassword : Win32cr::Foundation::PSTR, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSConnectSessionA(logon_id, target_logon_id, pPassword, bWait)
+    {% end %}
   end
 
   def wTSConnectSessionW(logon_id : UInt32, target_logon_id : UInt32, pPassword : Win32cr::Foundation::PWSTR, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSConnectSessionW(logon_id, target_logon_id, pPassword, bWait)
+    {% end %}
   end
 
   def wTSEnumerateServersW(pDomainName : Win32cr::Foundation::PWSTR, reserved : UInt32, version : UInt32, ppServerInfo : Win32cr::System::RemoteDesktop::WTS_SERVER_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateServersW(pDomainName, reserved, version, ppServerInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateServersA(pDomainName : Win32cr::Foundation::PSTR, reserved : UInt32, version : UInt32, ppServerInfo : Win32cr::System::RemoteDesktop::WTS_SERVER_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateServersA(pDomainName, reserved, version, ppServerInfo, pCount)
+    {% end %}
   end
 
   def wTSOpenServerW(pServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WTSOpenServerW(pServerName)
+    {% end %}
   end
 
   def wTSOpenServerA(pServerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WTSOpenServerA(pServerName)
+    {% end %}
   end
 
   def wTSOpenServerExW(pServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WTSOpenServerExW(pServerName)
+    {% end %}
   end
 
   def wTSOpenServerExA(pServerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WTSOpenServerExA(pServerName)
+    {% end %}
   end
 
   def wTSCloseServer(hServer : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.WTSCloseServer(hServer)
+    {% end %}
   end
 
   def wTSEnumerateSessionsW(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateSessionsW(hServer, reserved, version, ppSessionInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateSessionsA(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateSessionsA(hServer, reserved, version, ppSessionInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateSessionsExW(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, filter : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFO_1W**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateSessionsExW(hServer, pLevel, filter, ppSessionInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateSessionsExA(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, filter : UInt32, ppSessionInfo : Win32cr::System::RemoteDesktop::WTS_SESSION_INFO_1A**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateSessionsExA(hServer, pLevel, filter, ppSessionInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateProcessesW(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppProcessInfo : Win32cr::System::RemoteDesktop::WTS_PROCESS_INFOW**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateProcessesW(hServer, reserved, version, ppProcessInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateProcessesA(hServer : Win32cr::Foundation::HANDLE, reserved : UInt32, version : UInt32, ppProcessInfo : Win32cr::System::RemoteDesktop::WTS_PROCESS_INFOA**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateProcessesA(hServer, reserved, version, ppProcessInfo, pCount)
+    {% end %}
   end
 
   def wTSTerminateProcess(hServer : Win32cr::Foundation::HANDLE, process_id : UInt32, exit_code : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSTerminateProcess(hServer, process_id, exit_code)
+    {% end %}
   end
 
   def wTSQuerySessionInformationW(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, wts_info_class : Win32cr::System::RemoteDesktop::WTS_INFO_CLASS, ppBuffer : Win32cr::Foundation::PWSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSQuerySessionInformationW(hServer, session_id, wts_info_class, ppBuffer, pBytesReturned)
+    {% end %}
   end
 
   def wTSQuerySessionInformationA(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, wts_info_class : Win32cr::System::RemoteDesktop::WTS_INFO_CLASS, ppBuffer : Win32cr::Foundation::PSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSQuerySessionInformationA(hServer, session_id, wts_info_class, ppBuffer, pBytesReturned)
+    {% end %}
   end
 
   def wTSQueryUserConfigW(pServerName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, ppBuffer : Win32cr::Foundation::PWSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSQueryUserConfigW(pServerName, pUserName, wts_config_class, ppBuffer, pBytesReturned)
+    {% end %}
   end
 
   def wTSQueryUserConfigA(pServerName : Win32cr::Foundation::PSTR, pUserName : Win32cr::Foundation::PSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, ppBuffer : Win32cr::Foundation::PSTR*, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSQueryUserConfigA(pServerName, pUserName, wts_config_class, ppBuffer, pBytesReturned)
+    {% end %}
   end
 
   def wTSSetUserConfigW(pServerName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, pBuffer : Win32cr::Foundation::PWSTR, data_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSSetUserConfigW(pServerName, pUserName, wts_config_class, pBuffer, data_length)
+    {% end %}
   end
 
   def wTSSetUserConfigA(pServerName : Win32cr::Foundation::PSTR, pUserName : Win32cr::Foundation::PSTR, wts_config_class : Win32cr::System::RemoteDesktop::WTS_CONFIG_CLASS, pBuffer : Win32cr::Foundation::PSTR, data_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSSetUserConfigA(pServerName, pUserName, wts_config_class, pBuffer, data_length)
+    {% end %}
   end
 
   def wTSSendMessageW(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pTitle : Win32cr::Foundation::PWSTR, title_length : UInt32, pMessage : Win32cr::Foundation::PWSTR, message_length : UInt32, style : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, timeout : UInt32, pResponse : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSSendMessageW(hServer, session_id, pTitle, title_length, pMessage, message_length, style, timeout, pResponse, bWait)
+    {% end %}
   end
 
   def wTSSendMessageA(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pTitle : Win32cr::Foundation::PSTR, title_length : UInt32, pMessage : Win32cr::Foundation::PSTR, message_length : UInt32, style : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, timeout : UInt32, pResponse : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSSendMessageA(hServer, session_id, pTitle, title_length, pMessage, message_length, style, timeout, pResponse, bWait)
+    {% end %}
   end
 
   def wTSDisconnectSession(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSDisconnectSession(hServer, session_id, bWait)
+    {% end %}
   end
 
   def wTSLogoffSession(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSLogoffSession(hServer, session_id, bWait)
+    {% end %}
   end
 
   def wTSShutdownSystem(hServer : Win32cr::Foundation::HANDLE, shutdown_flag : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSShutdownSystem(hServer, shutdown_flag)
+    {% end %}
   end
 
   def wTSWaitSystemEvent(hServer : Win32cr::Foundation::HANDLE, event_mask : UInt32, pEventFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSWaitSystemEvent(hServer, event_mask, pEventFlags)
+    {% end %}
   end
 
-  def wTSVirtualChannelOpen(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
+  def wTSVirtualChannelOpen(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelOpen(hServer, session_id, pVirtualName)
+    {% end %}
   end
 
-  def wTSVirtualChannelOpenEx(session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
+  def wTSVirtualChannelOpenEx(session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelOpenEx(session_id, pVirtualName, flags)
+    {% end %}
   end
 
   def wTSVirtualChannelClose(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelClose(hChannelHandle)
+    {% end %}
   end
 
   def wTSVirtualChannelRead(hChannelHandle : Win32cr::Foundation::HANDLE, time_out : UInt32, buffer : Win32cr::Foundation::PSTR, buffer_size : UInt32, pBytesRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelRead(hChannelHandle, time_out, buffer, buffer_size, pBytesRead)
+    {% end %}
   end
 
   def wTSVirtualChannelWrite(hChannelHandle : Win32cr::Foundation::HANDLE, buffer : Win32cr::Foundation::PSTR, length : UInt32, pBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelWrite(hChannelHandle, buffer, length, pBytesWritten)
+    {% end %}
   end
 
   def wTSVirtualChannelPurgeInput(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelPurgeInput(hChannelHandle)
+    {% end %}
   end
 
   def wTSVirtualChannelPurgeOutput(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelPurgeOutput(hChannelHandle)
+    {% end %}
   end
 
   def wTSVirtualChannelQuery(hChannelHandle : Win32cr::Foundation::HANDLE, param1 : Win32cr::System::RemoteDesktop::WTS_VIRTUAL_CLASS, ppBuffer : Void**, pBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSVirtualChannelQuery(hChannelHandle, param1, ppBuffer, pBytesReturned)
+    {% end %}
   end
 
   def wTSFreeMemory(pMemory : Void*) : Void
+    {% if !flag?(:docs) %}
     C.WTSFreeMemory(pMemory)
+    {% end %}
   end
 
   def wTSRegisterSessionNotification(hWnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSRegisterSessionNotification(hWnd, dwFlags)
+    {% end %}
   end
 
   def wTSUnRegisterSessionNotification(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSUnRegisterSessionNotification(hWnd)
+    {% end %}
   end
 
   def wTSRegisterSessionNotificationEx(hServer : Win32cr::Foundation::HANDLE, hWnd : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSRegisterSessionNotificationEx(hServer, hWnd, dwFlags)
+    {% end %}
   end
 
   def wTSUnRegisterSessionNotificationEx(hServer : Win32cr::Foundation::HANDLE, hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSUnRegisterSessionNotificationEx(hServer, hWnd)
+    {% end %}
   end
 
   def wTSQueryUserToken(session_id : UInt32, phToken : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSQueryUserToken(session_id, phToken)
+    {% end %}
   end
 
   def wTSFreeMemoryExW(wts_type_class : Win32cr::System::RemoteDesktop::WTS_TYPE_CLASS, pMemory : Void*, number_of_entries : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSFreeMemoryExW(wts_type_class, pMemory, number_of_entries)
+    {% end %}
   end
 
   def wTSFreeMemoryExA(wts_type_class : Win32cr::System::RemoteDesktop::WTS_TYPE_CLASS, pMemory : Void*, number_of_entries : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSFreeMemoryExA(wts_type_class, pMemory, number_of_entries)
+    {% end %}
   end
 
   def wTSEnumerateProcessesExW(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, session_id : UInt32, ppProcessInfo : Win32cr::Foundation::PWSTR*, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateProcessesExW(hServer, pLevel, session_id, ppProcessInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateProcessesExA(hServer : Win32cr::Foundation::HANDLE, pLevel : UInt32*, session_id : UInt32, ppProcessInfo : Win32cr::Foundation::PSTR*, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateProcessesExA(hServer, pLevel, session_id, ppProcessInfo, pCount)
+    {% end %}
   end
 
   def wTSEnumerateListenersW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListeners : UInt16**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateListenersW(hServer, pReserved, reserved, pListeners, pCount)
+    {% end %}
   end
 
   def wTSEnumerateListenersA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListeners : Int8**, pCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnumerateListenersA(hServer, pReserved, reserved, pListeners, pCount)
+    {% end %}
   end
 
   def wTSQueryListenerConfigW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSQueryListenerConfigW(hServer, pReserved, reserved, pListenerName, pBuffer)
+    {% end %}
   end
 
   def wTSQueryListenerConfigA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSQueryListenerConfigA(hServer, pReserved, reserved, pListenerName, pBuffer)
+    {% end %}
   end
 
   def wTSCreateListenerW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGW*, flag : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSCreateListenerW(hServer, pReserved, reserved, pListenerName, pBuffer, flag)
+    {% end %}
   end
 
   def wTSCreateListenerA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGA*, flag : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSCreateListenerA(hServer, pReserved, reserved, pListenerName, pBuffer, flag)
+    {% end %}
   end
 
-  def wTSSetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+  def wTSSetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSSetListenerSecurityW(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor)
+    {% end %}
   end
 
-  def wTSSetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+  def wTSSetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSSetListenerSecurityA(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor)
+    {% end %}
   end
 
-  def wTSGetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+  def wTSGetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSGetListenerSecurityW(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+    {% end %}
   end
 
-  def wTSGetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+  def wTSGetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSGetListenerSecurityA(hServer, pReserved, reserved, pListenerName, security_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+    {% end %}
+  end
+
+  def wTSCloudAuthOpen(activityId : LibC::GUID*) : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE
+    {% if !flag?(:docs) %}
+    C.WTSCloudAuthOpen(activityId)
+    {% end %}
+  end
+
+  def wTSCloudAuthClose(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE) : Void
+    {% if !flag?(:docs) %}
+    C.WTSCloudAuthClose(cloudAuthHandle)
+    {% end %}
+  end
+
+  def wTSCloudAuthGetServerNonce(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE, serverNonce : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.WTSCloudAuthGetServerNonce(cloudAuthHandle, serverNonce)
+    {% end %}
+  end
+
+  def wTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE, assertion : Win32cr::Foundation::PSTR, assertionLength : UInt32, resourceId : Win32cr::Foundation::PWSTR, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle, assertion, assertionLength, resourceId, userCredential)
+    {% end %}
+  end
+
+  def wTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL*, token : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle, userCredential, token)
+    {% end %}
+  end
+
+  def wTSCloudAuthDuplicateSerializedUserCredential(userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL*, duplicatedUserCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.WTSCloudAuthDuplicateSerializedUserCredential(userCredential, duplicatedUserCredential)
+    {% end %}
   end
 
   def wTSEnableChildSessions(bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSEnableChildSessions(bEnable)
+    {% end %}
   end
 
   def wTSIsChildSessionsEnabled(pbEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSIsChildSessionsEnabled(pbEnabled)
+    {% end %}
   end
 
   def wTSGetChildSessionId(pSessionId : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTSGetChildSessionId(pSessionId)
+    {% end %}
+  end
+
+  def wTSActiveSessionExists(pbActiveSessionExists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.WTSActiveSessionExists(pbActiveSessionExists)
+    {% end %}
   end
 
   def wTSSetRenderHint(pRenderHintID : UInt64*, hwndOwner : Win32cr::Foundation::HWND, renderHintType : UInt32, cbHintDataLength : UInt32, pHintData : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WTSSetRenderHint(pRenderHintID, hwndOwner, renderHintType, cbHintDataLength, pHintData)
+    {% end %}
   end
 
   def processIdToSessionId(dwProcessId : UInt32, pSessionId : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ProcessIdToSessionId(dwProcessId, pSessionId)
+    {% end %}
   end
 
   def wTSGetActiveConsoleSessionId : UInt32
+    {% if !flag?(:docs) %}
     C.WTSGetActiveConsoleSessionId
+    {% end %}
   end
 
   @[Link("wtsapi32")]
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WTSStopRemoteControlSession(logon_id : UInt32) : Win32cr::Foundation::BOOL
@@ -6668,10 +7122,10 @@ module Win32cr::System::RemoteDesktop
     fun WTSWaitSystemEvent(hServer : Win32cr::Foundation::HANDLE, event_mask : UInt32, pEventFlags : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WTSVirtualChannelOpen(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
+    fun WTSVirtualChannelOpen(hServer : Win32cr::Foundation::HANDLE, session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun WTSVirtualChannelOpenEx(session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::System::RemoteDesktop::HwtsVirtualChannelHandle
+    fun WTSVirtualChannelOpenEx(session_id : UInt32, pVirtualName : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
     fun WTSVirtualChannelClose(hChannelHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
@@ -6740,16 +7194,34 @@ module Win32cr::System::RemoteDesktop
     fun WTSCreateListenerA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::System::RemoteDesktop::WTSLISTENERCONFIGA*, flag : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WTSSetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    fun WTSSetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WTSSetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    fun WTSSetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WTSGetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    fun WTSGetListenerSecurityW(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PWSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WTSGetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    fun WTSGetListenerSecurityA(hServer : Win32cr::Foundation::HANDLE, pReserved : Void*, reserved : UInt32, pListenerName : Win32cr::Foundation::PSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun WTSCloudAuthOpen(activityId : LibC::GUID*) : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE
+
+    # :nodoc:
+    fun WTSCloudAuthClose(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE) : Void
+
+    # :nodoc:
+    fun WTSCloudAuthGetServerNonce(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE, serverNonce : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE, assertion : Win32cr::Foundation::PSTR, assertionLength : UInt32, resourceId : Win32cr::Foundation::PWSTR, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle : Win32cr::System::RemoteDesktop::WTS_CLOUD_AUTH_HANDLE, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL*, token : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun WTSCloudAuthDuplicateSerializedUserCredential(userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL*, duplicatedUserCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun WTSEnableChildSessions(bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -6761,6 +7233,9 @@ module Win32cr::System::RemoteDesktop
     fun WTSGetChildSessionId(pSessionId : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
+    fun WTSActiveSessionExists(pbActiveSessionExists : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
     fun WTSSetRenderHint(pRenderHintID : UInt64*, hwndOwner : Win32cr::Foundation::HWND, renderHintType : UInt32, cbHintDataLength : UInt32, pHintData : UInt8*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
@@ -6770,4 +7245,5 @@ module Win32cr::System::RemoteDesktop
     fun WTSGetActiveConsoleSessionId : UInt32
 
   end
+  {% end %}
 end

@@ -9,14 +9,14 @@ require "./../graphics/direct3_d9.cr"
 
 module Win32cr::Devices::Display
   extend self
-  alias HSEMAPHORE = LibC::IntPtrT
-  alias HSURF = LibC::IntPtrT
-  alias HFASTMUTEX = LibC::IntPtrT
-  alias HDRVOBJ = LibC::IntPtrT
-  alias HDEV = LibC::IntPtrT
-  alias HBM = LibC::IntPtrT
-  alias DHSURF = LibC::IntPtrT
-  alias DHPDEV = LibC::IntPtrT
+  alias HSEMAPHORE = Void*
+  alias HSURF = Void*
+  alias HFASTMUTEX = Void*
+  alias HDRVOBJ = Void*
+  alias HDEV = Void*
+  alias HBM = Void*
+  alias DHSURF = Void*
+  alias DHPDEV = Void*
   alias PFN = Proc(LibC::IntPtrT)
 
   alias FREEOBJPROC = Proc(Win32cr::Devices::Display::DRIVEROBJ*, Win32cr::Foundation::BOOL)
@@ -177,22 +177,6 @@ module Win32cr::Devices::Display
 
   alias PFN_DrvRenderHint = Proc(Win32cr::Devices::Display::DHPDEV, UInt32, LibC::UIntPtrT, Void*, Int32)
 
-  alias PFN_EngCreateRectRgn = Proc(Int32, Int32, Int32, Int32, Win32cr::Foundation::HANDLE)
-
-  alias PFN_EngDeleteRgn = Proc(Win32cr::Foundation::HANDLE, Void)
-
-  alias PFN_EngCombineRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32, Int32)
-
-  alias PFN_EngCopyRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)
-
-  alias PFN_EngIntersectRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)
-
-  alias PFN_EngSubtractRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)
-
-  alias PFN_EngUnionRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)
-
-  alias PFN_EngXorRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)
-
   alias PFN_DrvCreateDeviceBitmapEx = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::SIZE, UInt32, UInt32, Win32cr::Devices::Display::DHSURF, UInt32, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Graphics::Gdi::HBITMAP)
 
   alias PFN_DrvDeleteDeviceBitmapEx = Proc(Win32cr::Devices::Display::DHSURF, Void)
@@ -215,15 +199,22 @@ module Win32cr::Devices::Display
 
   alias PVIDEO_WIN32K_CALLOUT = Proc(Void*, Void)
 
-  GUID_DEVINTERFACE_DISPLAY_ADAPTER = "5b45201d-f2f2-4f3b-85bb-30ff1f953599"
-  GUID_DEVINTERFACE_MONITOR = "e6f07b5f-ee97-4a90-b076-33f57bf4eaa7"
-  GUID_DISPLAY_DEVICE_ARRIVAL = "1ca05180-a699-450a-9a0c-de4fbe3ddd89"
-  GUID_DEVINTERFACE_VIDEO_OUTPUT_ARRIVAL = "1ad9e4f0-f88d-4360-bab9-4c2d55e564cd"
-  DEVPKEY_IndirectDisplay = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 1_u32)
-  DEVPKEY_Device_TerminalLuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 2_u32)
-  DEVPKEY_Device_AdapterLuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 3_u32)
-  DEVPKEY_Device_ActivityId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 4_u32)
+  GUID_DEVINTERFACE_DISPLAY_ADAPTER = LibC::GUID.new(0x5b45201d_u32, 0xf2f2_u16, 0x4f3b_u16, StaticArray[0x85_u8, 0xbb_u8, 0x30_u8, 0xff_u8, 0x1f_u8, 0x95_u8, 0x35_u8, 0x99_u8])
+  GUID_DEVINTERFACE_MONITOR = LibC::GUID.new(0xe6f07b5f_u32, 0xee97_u16, 0x4a90_u16, StaticArray[0xb0_u8, 0x76_u8, 0x33_u8, 0xf5_u8, 0x7b_u8, 0xf4_u8, 0xea_u8, 0xa7_u8])
+  GUID_DISPLAY_DEVICE_ARRIVAL = LibC::GUID.new(0x1ca05180_u32, 0xa699_u16, 0x450a_u16, StaticArray[0x9a_u8, 0xc_u8, 0xde_u8, 0x4f_u8, 0xbe_u8, 0x3d_u8, 0xdd_u8, 0x89_u8])
+  GUID_DEVINTERFACE_VIDEO_OUTPUT_ARRIVAL = LibC::GUID.new(0x1ad9e4f0_u32, 0xf88d_u16, 0x4360_u16, StaticArray[0xba_u8, 0xb9_u8, 0x4c_u8, 0x2d_u8, 0x55_u8, 0xe5_u8, 0x64_u8, 0xcd_u8])
+  GUID_DEVINTERFACE_DISPLAYMUX = LibC::GUID.new(0x93c33929_u32, 0x3180_u16, 0x46d3_u16, StaticArray[0x8a_u8, 0xab_u8, 0x0_u8, 0x8c_u8, 0x84_u8, 0xad_u8, 0x1e_u8, 0x6e_u8])
+  DEVPKEY_IndirectDisplay = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 1_u32)
+  DEVPKEY_Device_TerminalLuid = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 2_u32)
+  DEVPKEY_Device_AdapterLuid = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 3_u32)
+  DEVPKEY_Device_ActivityId = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 4_u32)
   INDIRECT_DISPLAY_INFO_FLAGS_CREATED_IDDCX_ADAPTER = 1_u32
+  INDIRECT_DISPLAY_INFO_FLAGS_SUPPORT_FP16 = 2_u32
+  DEVPKEY_DisplayMux_InitStatus = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xfefa7434_u32, 0xe0fd_u16, 0x4b2a_u16, StaticArray[0x90_u8, 0x5a_u8, 0x7d_u8, 0x1_u8, 0x27_u8, 0xa9_u8, 0xf0_u8, 0x1c_u8]), 1_u32)
+  DEVPKEY_DisplayMux_SupportLevel = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xfefa7434_u32, 0xe0fd_u16, 0x4b2a_u16, StaticArray[0x90_u8, 0x5a_u8, 0x7d_u8, 0x1_u8, 0x27_u8, 0xa9_u8, 0xf0_u8, 0x1c_u8]), 2_u32)
+  DEVPKEY_DisplayMux_MuxTarget1 = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xfefa7434_u32, 0xe0fd_u16, 0x4b2a_u16, StaticArray[0x90_u8, 0x5a_u8, 0x7d_u8, 0x1_u8, 0x27_u8, 0xa9_u8, 0xf0_u8, 0x1c_u8]), 3_u32)
+  DEVPKEY_DisplayMux_MuxTarget2 = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xfefa7434_u32, 0xe0fd_u16, 0x4b2a_u16, StaticArray[0x90_u8, 0x5a_u8, 0x7d_u8, 0x1_u8, 0x27_u8, 0xa9_u8, 0xf0_u8, 0x1c_u8]), 4_u32)
+  DEVPKEY_DisplayMux_CurrentTarget = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xfefa7434_u32, 0xe0fd_u16, 0x4b2a_u16, StaticArray[0x90_u8, 0x5a_u8, 0x7d_u8, 0x1_u8, 0x27_u8, 0xa9_u8, 0xf0_u8, 0x1c_u8]), 5_u32)
   VIDEO_DEVICE_NAME = "DISPLAY%d"
   WVIDEO_DEVICE_NAME = "DISPLAY%d"
   IOCTL_VIDEO_DISABLE_VDM = 2293764_u32
@@ -293,9 +284,12 @@ module Win32cr::Devices::Display
   IOCTL_PANEL_SET_BRIGHTNESS_STATE = 2296848_u32
   IOCTL_PANEL_SET_BACKLIGHT_OPTIMIZATION = 2296852_u32
   IOCTL_PANEL_GET_BACKLIGHT_REDUCTION = 2296856_u32
+  IOCTL_PANEL_GET_MANUFACTURING_MODE = 2296860_u32
   IOCTL_COLORSPACE_TRANSFORM_QUERY_TARGET_CAPS = 2297856_u32
   IOCTL_COLORSPACE_TRANSFORM_SET = 2297860_u32
   IOCTL_SET_ACTIVE_COLOR_PROFILE_NAME = 2297864_u32
+  IOCTL_GET_SCALAR_MULTIPLIER_CAPS = 2297868_u32
+  IOCTL_SET_SCALAR_MULTIPLIER = 2297872_u32
   IOCTL_MIPI_DSI_QUERY_CAPS = 2298880_u32
   IOCTL_MIPI_DSI_TRANSMISSION = 2298884_u32
   IOCTL_MIPI_DSI_RESET = 2298888_u32
@@ -332,9 +326,6 @@ module Win32cr::Devices::Display
   VIDEO_COLOR_LUT_DATA_FORMAT_PRIVATEFORMAT = 2147483648_u32
   DISPLAYPOLICY_AC = 1_u32
   DISPLAYPOLICY_DC = 2_u32
-  CHAR_TYPE_SBCS = 0_u32
-  CHAR_TYPE_LEADING = 2_u32
-  CHAR_TYPE_TRAILING = 3_u32
   BITMAP_BITS_BYTE_ALIGN = 8_u32
   BITMAP_BITS_WORD_ALIGN = 16_u32
   BITMAP_ARRAY_BYTE = 3_u32
@@ -382,7 +373,8 @@ module Win32cr::Devices::Display
   HOST_DSI_OS_REJECTED_PACKET = 512_u32
   HOST_DSI_DRIVER_REJECTED_PACKET = 1024_u32
   HOST_DSI_BAD_TRANSMISSION_MODE = 4096_u32
-  GUID_MONITOR_OVERRIDE_PSEUDO_SPECIALIZED = "f196c02f-f86f-4f9a-aa15-e9cebdfe3b96"
+  GUID_MONITOR_OVERRIDE_PSEUDO_SPECIALIZED = LibC::GUID.new(0xf196c02f_u32, 0xf86f_u16, 0x4f9a_u16, StaticArray[0xaa_u8, 0x15_u8, 0xe9_u8, 0xce_u8, 0xbd_u8, 0xfe_u8, 0x3b_u8, 0x96_u8])
+  GUID_MONITOR_OVERRIDE_TEST_SPECIALIZED = LibC::GUID.new(0x457e531_u32, 0x3cb9_u16, 0x4a07_u16, StaticArray[0x83_u8, 0xc1_u8, 0xa7_u8, 0x91_u8, 0x46_u8, 0xc6_u8, 0x4d_u8, 0xb3_u8])
   FD_ERROR = 4294967295_u32
   DDI_ERROR = 4294967295_u32
   FDM_TYPE_BM_SIDE_CONST = 1_u32
@@ -439,6 +431,7 @@ module Win32cr::Devices::Display
   FM_SEL_STRIKEOUT = 16_u32
   FM_SEL_BOLD = 32_u32
   FM_SEL_REGULAR = 64_u32
+  FM_SEL_USE_TYPO_METRICS = 128_u32
   OPENGL_CMD = 4352_u32
   OPENGL_GETINFO = 4353_u32
   WNDOBJ_SETUP = 4354_u32
@@ -956,6 +949,35 @@ module Win32cr::Devices::Display
   SETCONFIGURATION_STATUS_ADDITIONAL = 1_u32
   SETCONFIGURATION_STATUS_OVERRIDDEN = 2_u32
 
+  @[Flags]
+  enum SET_DISPLAY_CONFIG_FLAGS : UInt32
+    SDC_USE_DATABASE_CURRENT = 15_u32
+    SDC_TOPOLOGY_INTERNAL = 1_u32
+    SDC_TOPOLOGY_CLONE = 2_u32
+    SDC_TOPOLOGY_EXTEND = 4_u32
+    SDC_TOPOLOGY_EXTERNAL = 8_u32
+    SDC_TOPOLOGY_SUPPLIED = 16_u32
+    SDC_USE_SUPPLIED_DISPLAY_CONFIG = 32_u32
+    SDC_VALIDATE = 64_u32
+    SDC_APPLY = 128_u32
+    SDC_NO_OPTIMIZATION = 256_u32
+    SDC_SAVE_TO_DATABASE = 512_u32
+    SDC_ALLOW_CHANGES = 1024_u32
+    SDC_PATH_PERSIST_IF_REQUIRED = 2048_u32
+    SDC_FORCE_MODE_ENUMERATION = 4096_u32
+    SDC_ALLOW_PATH_ORDER_CHANGES = 8192_u32
+    SDC_VIRTUAL_MODE_AWARE = 32768_u32
+    SDC_VIRTUAL_REFRESH_RATE_AWARE = 131072_u32
+  end
+  @[Flags]
+  enum QUERY_DISPLAY_CONFIG_FLAGS : UInt32
+    QDC_ALL_PATHS = 1_u32
+    QDC_ONLY_ACTIVE_PATHS = 2_u32
+    QDC_DATABASE_CURRENT = 4_u32
+    QDC_VIRTUAL_MODE_AWARE = 16_u32
+    QDC_INCLUDE_HMD = 32_u32
+    QDC_VIRTUAL_REFRESH_RATE_AWARE = 64_u32
+  end
   enum DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_OTHER = -1_i32
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HD15 = 0_i32
@@ -977,7 +999,6 @@ module Win32cr::Devices::Display
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_VIRTUAL = 17_i32
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_USB_TUNNEL = 18_i32
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL = -2147483648_i32
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_FORCE_UINT32 = -1_i32
   end
   enum DISPLAYCONFIG_SCANLINE_ORDERING
     DISPLAYCONFIG_SCANLINE_ORDERING_UNSPECIFIED = 0_i32
@@ -985,7 +1006,6 @@ module Win32cr::Devices::Display
     DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED = 2_i32
     DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_UPPERFIELDFIRST = 2_i32
     DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST = 3_i32
-    DISPLAYCONFIG_SCANLINE_ORDERING_FORCE_UINT32 = -1_i32
   end
   enum DISPLAYCONFIG_SCALING
     DISPLAYCONFIG_SCALING_IDENTITY = 1_i32
@@ -994,20 +1014,17 @@ module Win32cr::Devices::Display
     DISPLAYCONFIG_SCALING_ASPECTRATIOCENTEREDMAX = 4_i32
     DISPLAYCONFIG_SCALING_CUSTOM = 5_i32
     DISPLAYCONFIG_SCALING_PREFERRED = 128_i32
-    DISPLAYCONFIG_SCALING_FORCE_UINT32 = -1_i32
   end
   enum DISPLAYCONFIG_ROTATION
     DISPLAYCONFIG_ROTATION_IDENTITY = 1_i32
     DISPLAYCONFIG_ROTATION_ROTATE90 = 2_i32
     DISPLAYCONFIG_ROTATION_ROTATE180 = 3_i32
     DISPLAYCONFIG_ROTATION_ROTATE270 = 4_i32
-    DISPLAYCONFIG_ROTATION_FORCE_UINT32 = -1_i32
   end
   enum DISPLAYCONFIG_MODE_INFO_TYPE
     DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE = 1_i32
     DISPLAYCONFIG_MODE_INFO_TYPE_TARGET = 2_i32
     DISPLAYCONFIG_MODE_INFO_TYPE_DESKTOP_IMAGE = 3_i32
-    DISPLAYCONFIG_MODE_INFO_TYPE_FORCE_UINT32 = -1_i32
   end
   enum DISPLAYCONFIG_PIXELFORMAT
     DISPLAYCONFIG_PIXELFORMAT_8BPP = 1_i32
@@ -1015,14 +1032,12 @@ module Win32cr::Devices::Display
     DISPLAYCONFIG_PIXELFORMAT_24BPP = 3_i32
     DISPLAYCONFIG_PIXELFORMAT_32BPP = 4_i32
     DISPLAYCONFIG_PIXELFORMAT_NONGDI = 5_i32
-    DISPLAYCONFIG_PIXELFORMAT_FORCE_UINT32 = -1_i32
   end
   enum DISPLAYCONFIG_TOPOLOGY_ID
     DISPLAYCONFIG_TOPOLOGY_INTERNAL = 1_i32
     DISPLAYCONFIG_TOPOLOGY_CLONE = 2_i32
     DISPLAYCONFIG_TOPOLOGY_EXTEND = 4_i32
     DISPLAYCONFIG_TOPOLOGY_EXTERNAL = 8_i32
-    DISPLAYCONFIG_TOPOLOGY_FORCE_UINT32 = -1_i32
   end
   enum DISPLAYCONFIG_DEVICE_INFO_TYPE
     DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME = 1_i32
@@ -1038,7 +1053,10 @@ module Win32cr::Devices::Display
     DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL = 11_i32
     DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION = 12_i32
     DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION = 13_i32
-    DISPLAYCONFIG_DEVICE_INFO_FORCE_UINT32 = -1_i32
+    DISPLAYCONFIG_DEVICE_INFO_SET_RESERVED1 = 14_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO_2 = 15_i32
+    DISPLAYCONFIG_DEVICE_INFO_SET_HDR_STATE = 16_i32
+    DISPLAYCONFIG_DEVICE_INFO_SET_WCG_STATE = 17_i32
   end
   enum MC_VCP_CODE_TYPE
     MC_MOMENTARY = 0_i32
@@ -1107,6 +1125,7 @@ module Win32cr::Devices::Display
     VideoDisableMultiPlaneOverlay = 14_i32
     VideoDesktopDuplicationChange = 15_i32
     VideoBlackScreenDiagnostics = 16_i32
+    VideoForceCompositionRender = 17_i32
   end
   enum BlackScreenDiagnosticsCalloutParam
     BlackScreenDiagnosticsData = 1_i32
@@ -1173,7 +1192,6 @@ module Win32cr::Devices::Display
     OUTPUT_COLOR_ENCODING_YCBCR422 = 2_i32
     OUTPUT_COLOR_ENCODING_YCBCR420 = 3_i32
     OUTPUT_COLOR_ENCODING_INTENSITY = 4_i32
-    OUTPUT_COLOR_ENCODING_FORCE_UINT32 = -1_i32
   end
   enum COLORSPACE_TRANSFORM_STAGE_CONTROL
     ColorSpaceTransformStageControl_No_Change = 0_i32
@@ -1185,6 +1203,7 @@ module Win32cr::Devices::Display
     DCT_FORCE_LOW_POWER = 1_i32
     DCT_FORCE_HIGH_PERFORMANCE = 2_i32
   end
+  @[Flags]
   enum AR_STATE
     AR_ENABLED = 0_i32
     AR_DISABLED = 1_i32
@@ -1196,6 +1215,7 @@ module Win32cr::Devices::Display
     AR_DOCKED = 64_i32
     AR_LAPTOP = 128_i32
   end
+  @[Flags]
   enum ORIENTATION_PREFERENCE
     ORIENTATION_PREFERENCE_NONE = 0_i32
     ORIENTATION_PREFERENCE_LANDSCAPE = 1_i32
@@ -1567,6 +1587,90 @@ module Win32cr::Devices::Display
   end
 
   @[Extern]
+  struct DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2
+    property header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER
+    property anonymous : Anonymous_e__Union_
+    property colorEncoding : Win32cr::Graphics::Gdi::DISPLAYCONFIG_COLOR_ENCODING
+    property bitsPerColorChannel : UInt32
+    property activeColorMode : Win32cr::Graphics::Gdi::DISPLAYCONFIG_ADVANCED_COLOR_MODE
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
+    end
+
+    def initialize(@header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER, @anonymous : Anonymous_e__Union_, @colorEncoding : Win32cr::Graphics::Gdi::DISPLAYCONFIG_COLOR_ENCODING, @bitsPerColorChannel : UInt32, @activeColorMode : Win32cr::Graphics::Gdi::DISPLAYCONFIG_ADVANCED_COLOR_MODE)
+    end
+  end
+
+  @[Extern]
+  struct DISPLAYCONFIG_SET_HDR_STATE
+    property header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
+    end
+
+    def initialize(@header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct DISPLAYCONFIG_SET_WCG_STATE
+    property header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
+    end
+
+    def initialize(@header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
   struct DISPLAYCONFIG_SDR_WHITE_LEVEL
     property header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER
     property sdr_white_level : UInt32
@@ -1652,8 +1756,8 @@ module Win32cr::Devices::Display
   struct Sources
     property sourceId : UInt32
     property numTargets : Int32
-    property aTargets : UInt32*
-    def initialize(@sourceId : UInt32, @numTargets : Int32, @aTargets : UInt32*)
+    property aTargets : UInt32[1]
+    def initialize(@sourceId : UInt32, @numTargets : Int32, @aTargets : UInt32[1])
     end
   end
 
@@ -1661,16 +1765,16 @@ module Win32cr::Devices::Display
   struct Adapter
     property adapter_name : UInt16[128]
     property numSources : Int32
-    property sources : Win32cr::Devices::Display::Sources*
-    def initialize(@adapter_name : UInt16[128], @numSources : Int32, @sources : Win32cr::Devices::Display::Sources*)
+    property sources : Win32cr::Devices::Display::Sources[1]
+    def initialize(@adapter_name : UInt16[128], @numSources : Int32, @sources : Win32cr::Devices::Display::Sources[1])
     end
   end
 
   @[Extern]
   struct Adapters
     property numAdapters : Int32
-    property adapter : Win32cr::Devices::Display::Adapter*
-    def initialize(@numAdapters : Int32, @adapter : Win32cr::Devices::Display::Adapter*)
+    property adapter : Win32cr::Devices::Display::Adapter[1]
+    def initialize(@numAdapters : Int32, @adapter : Win32cr::Devices::Display::Adapter[1])
     end
   end
 
@@ -1685,8 +1789,8 @@ module Win32cr::Devices::Display
   @[Extern]
   struct DisplayModes
     property numDisplayModes : Int32
-    property displayMode : Win32cr::Devices::Display::DisplayMode*
-    def initialize(@numDisplayModes : Int32, @displayMode : Win32cr::Devices::Display::DisplayMode*)
+    property displayMode : Win32cr::Devices::Display::DisplayMode[1]
+    def initialize(@numDisplayModes : Int32, @displayMode : Win32cr::Devices::Display::DisplayMode[1])
     end
   end
 
@@ -1739,24 +1843,6 @@ module Win32cr::Devices::Display
   end
   {% end %}
 
-  @[Extern]
-  struct POINTFIX
-    property x : Int32
-    property y : Int32
-    def initialize(@x : Int32, @y : Int32)
-    end
-  end
-
-  @[Extern]
-  struct RECTFX
-    property xLeft : Int32
-    property yTop : Int32
-    property xRight : Int32
-    property yBottom : Int32
-    def initialize(@xLeft : Int32, @yTop : Int32, @xRight : Int32, @yBottom : Int32)
-    end
-  end
-
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
   struct FD_XFORM
@@ -1768,125 +1854,6 @@ module Win32cr::Devices::Display
     end
   end
   {% end %}
-
-  @[Extern]
-  struct FD_DEVICEMETRICS
-    property flRealizedType : UInt32
-    property pteBase : Win32cr::Devices::Display::POINTE
-    property pteSide : Win32cr::Devices::Display::POINTE
-    property lD : Int32
-    property fxMaxAscender : Int32
-    property fxMaxDescender : Int32
-    property ptlUnderline1 : Win32cr::Foundation::POINTL
-    property ptlStrikeOut : Win32cr::Foundation::POINTL
-    property ptlULThickness : Win32cr::Foundation::POINTL
-    property ptlSOThickness : Win32cr::Foundation::POINTL
-    property cxMax : UInt32
-    property cyMax : UInt32
-    property cjGlyphMax : UInt32
-    property fdxQuantized : Win32cr::Devices::Display::FD_XFORM
-    property lNonLinearExtLeading : Int32
-    property lNonLinearIntLeading : Int32
-    property lNonLinearMaxCharWidth : Int32
-    property lNonLinearAvgCharWidth : Int32
-    property lMinA : Int32
-    property lMinC : Int32
-    property lMinD : Int32
-    property alReserved : Int32*
-    def initialize(@flRealizedType : UInt32, @pteBase : Win32cr::Devices::Display::POINTE, @pteSide : Win32cr::Devices::Display::POINTE, @lD : Int32, @fxMaxAscender : Int32, @fxMaxDescender : Int32, @ptlUnderline1 : Win32cr::Foundation::POINTL, @ptlStrikeOut : Win32cr::Foundation::POINTL, @ptlULThickness : Win32cr::Foundation::POINTL, @ptlSOThickness : Win32cr::Foundation::POINTL, @cxMax : UInt32, @cyMax : UInt32, @cjGlyphMax : UInt32, @fdxQuantized : Win32cr::Devices::Display::FD_XFORM, @lNonLinearExtLeading : Int32, @lNonLinearIntLeading : Int32, @lNonLinearMaxCharWidth : Int32, @lNonLinearAvgCharWidth : Int32, @lMinA : Int32, @lMinC : Int32, @lMinD : Int32, @alReserved : Int32*)
-    end
-  end
-
-  @[Extern]
-  struct LIGATURE
-    property culSize : UInt32
-    property pwsz : Win32cr::Foundation::PWSTR
-    property chglyph : UInt32
-    property ahglyph : UInt32*
-    def initialize(@culSize : UInt32, @pwsz : Win32cr::Foundation::PWSTR, @chglyph : UInt32, @ahglyph : UInt32*)
-    end
-  end
-
-  @[Extern]
-  struct FD_LIGATURE
-    property culThis : UInt32
-    property ulType : UInt32
-    property cLigatures : UInt32
-    property alig : Win32cr::Devices::Display::LIGATURE*
-    def initialize(@culThis : UInt32, @ulType : UInt32, @cLigatures : UInt32, @alig : Win32cr::Devices::Display::LIGATURE*)
-    end
-  end
-
-  @[Extern]
-  struct POINTQF
-    property x : Win32cr::Foundation::LARGE_INTEGER
-    property y : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@x : Win32cr::Foundation::LARGE_INTEGER, @y : Win32cr::Foundation::LARGE_INTEGER)
-    end
-  end
-
-  @[Extern]
-  struct WCRUN
-    property wcLow : UInt16
-    property cGlyphs : UInt16
-    property phg : UInt32*
-    def initialize(@wcLow : UInt16, @cGlyphs : UInt16, @phg : UInt32*)
-    end
-  end
-
-  @[Extern]
-  struct FD_GLYPHSET
-    property cjThis : UInt32
-    property flAccel : UInt32
-    property cGlyphsSupported : UInt32
-    property cRuns : UInt32
-    property awcrun : Win32cr::Devices::Display::WCRUN*
-    def initialize(@cjThis : UInt32, @flAccel : UInt32, @cGlyphsSupported : UInt32, @cRuns : UInt32, @awcrun : Win32cr::Devices::Display::WCRUN*)
-    end
-  end
-
-  @[Extern]
-  struct FD_GLYPHATTR
-    property cjThis : UInt32
-    property cGlyphs : UInt32
-    property iMode : UInt32
-    property aGlyphAttr : UInt8*
-    def initialize(@cjThis : UInt32, @cGlyphs : UInt32, @iMode : UInt32, @aGlyphAttr : UInt8*)
-    end
-  end
-
-  @[Extern]
-  struct FD_KERNINGPAIR
-    property wcFirst : UInt16
-    property wcSecond : UInt16
-    property fwdKern : Int16
-    def initialize(@wcFirst : UInt16, @wcSecond : UInt16, @fwdKern : Int16)
-    end
-  end
-
-  @[Extern]
-  struct FONTDIFF
-    property jReserved1 : UInt8
-    property jReserved2 : UInt8
-    property jReserved3 : UInt8
-    property bWeight : UInt8
-    property usWinWeight : UInt16
-    property fsSelection : UInt16
-    property fwdAveCharWidth : Int16
-    property fwdMaxCharInc : Int16
-    property ptlCaret : Win32cr::Foundation::POINTL
-    def initialize(@jReserved1 : UInt8, @jReserved2 : UInt8, @jReserved3 : UInt8, @bWeight : UInt8, @usWinWeight : UInt16, @fsSelection : UInt16, @fwdAveCharWidth : Int16, @fwdMaxCharInc : Int16, @ptlCaret : Win32cr::Foundation::POINTL)
-    end
-  end
-
-  @[Extern]
-  struct FONTSIM
-    property dpBold : Int32
-    property dpItalic : Int32
-    property dpBoldItalic : Int32
-    def initialize(@dpBold : Int32, @dpItalic : Int32, @dpBoldItalic : Int32)
-    end
-  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
@@ -1956,6 +1923,286 @@ module Win32cr::Devices::Display
   end
   {% end %}
 
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct LINEATTRS
+    property fl : UInt32
+    property iJoin : UInt32
+    property iEndCap : UInt32
+    property elWidth : Win32cr::Devices::Display::FLOAT_LONG
+    property eMiterLimit : Float32
+    property cstyle : UInt32
+    property pstyle : Win32cr::Devices::Display::FLOAT_LONG*
+    property elStyleState : Win32cr::Devices::Display::FLOAT_LONG
+    def initialize(@fl : UInt32, @iJoin : UInt32, @iEndCap : UInt32, @elWidth : Win32cr::Devices::Display::FLOAT_LONG, @eMiterLimit : Float32, @cstyle : UInt32, @pstyle : Win32cr::Devices::Display::FLOAT_LONG*, @elStyleState : Win32cr::Devices::Display::FLOAT_LONG)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct XFORML
+    property eM11 : Float32
+    property eM12 : Float32
+    property eM21 : Float32
+    property eM22 : Float32
+    property eDx : Float32
+    property eDy : Float32
+    def initialize(@eM11 : Float32, @eM12 : Float32, @eM21 : Float32, @eM22 : Float32, @eDx : Float32, @eDy : Float32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct FLOATOBJ_XFORM
+    property eM11 : Float32
+    property eM12 : Float32
+    property eM21 : Float32
+    property eM22 : Float32
+    property eDx : Float32
+    property eDy : Float32
+    def initialize(@eM11 : Float32, @eM12 : Float32, @eM21 : Float32, @eM22 : Float32, @eDx : Float32, @eDy : Float32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct POINTE
+    property x : UInt32
+    property y : UInt32
+    def initialize(@x : UInt32, @y : UInt32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern(union: true)]
+  struct FLOAT_LONG
+    property e : UInt32
+    property l : Int32
+    def initialize(@e : UInt32, @l : Int32)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct POINTFIX
+    property x : Int32
+    property y : Int32
+    def initialize(@x : Int32, @y : Int32)
+    end
+  end
+
+  @[Extern]
+  struct RECTFX
+    property xLeft : Int32
+    property yTop : Int32
+    property xRight : Int32
+    property yBottom : Int32
+    def initialize(@xLeft : Int32, @yTop : Int32, @xRight : Int32, @yBottom : Int32)
+    end
+  end
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct FD_XFORM
+    property eXX : UInt32
+    property eXY : UInt32
+    property eYX : UInt32
+    property eYY : UInt32
+    def initialize(@eXX : UInt32, @eXY : UInt32, @eYX : UInt32, @eYY : UInt32)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct FD_DEVICEMETRICS
+    property flRealizedType : UInt32
+    property pteBase : Win32cr::Devices::Display::POINTE
+    property pteSide : Win32cr::Devices::Display::POINTE
+    property lD : Int32
+    property fxMaxAscender : Int32
+    property fxMaxDescender : Int32
+    property ptlUnderline1 : Win32cr::Foundation::POINTL
+    property ptlStrikeOut : Win32cr::Foundation::POINTL
+    property ptlULThickness : Win32cr::Foundation::POINTL
+    property ptlSOThickness : Win32cr::Foundation::POINTL
+    property cxMax : UInt32
+    property cyMax : UInt32
+    property cjGlyphMax : UInt32
+    property fdxQuantized : Win32cr::Devices::Display::FD_XFORM
+    property lNonLinearExtLeading : Int32
+    property lNonLinearIntLeading : Int32
+    property lNonLinearMaxCharWidth : Int32
+    property lNonLinearAvgCharWidth : Int32
+    property lMinA : Int32
+    property lMinC : Int32
+    property lMinD : Int32
+    property alReserved : Int32[1]
+    def initialize(@flRealizedType : UInt32, @pteBase : Win32cr::Devices::Display::POINTE, @pteSide : Win32cr::Devices::Display::POINTE, @lD : Int32, @fxMaxAscender : Int32, @fxMaxDescender : Int32, @ptlUnderline1 : Win32cr::Foundation::POINTL, @ptlStrikeOut : Win32cr::Foundation::POINTL, @ptlULThickness : Win32cr::Foundation::POINTL, @ptlSOThickness : Win32cr::Foundation::POINTL, @cxMax : UInt32, @cyMax : UInt32, @cjGlyphMax : UInt32, @fdxQuantized : Win32cr::Devices::Display::FD_XFORM, @lNonLinearExtLeading : Int32, @lNonLinearIntLeading : Int32, @lNonLinearMaxCharWidth : Int32, @lNonLinearAvgCharWidth : Int32, @lMinA : Int32, @lMinC : Int32, @lMinD : Int32, @alReserved : Int32[1])
+    end
+  end
+
+  @[Extern]
+  struct LIGATURE
+    property culSize : UInt32
+    property pwsz : Win32cr::Foundation::PWSTR
+    property chglyph : UInt32
+    property ahglyph : UInt32[1]
+    def initialize(@culSize : UInt32, @pwsz : Win32cr::Foundation::PWSTR, @chglyph : UInt32, @ahglyph : UInt32[1])
+    end
+  end
+
+  @[Extern]
+  struct FD_LIGATURE
+    property culThis : UInt32
+    property ulType : UInt32
+    property cLigatures : UInt32
+    property alig : Win32cr::Devices::Display::LIGATURE[1]
+    def initialize(@culThis : UInt32, @ulType : UInt32, @cLigatures : UInt32, @alig : Win32cr::Devices::Display::LIGATURE[1])
+    end
+  end
+
+  @[Extern]
+  struct POINTQF
+    property x : Int64
+    property y : Int64
+    def initialize(@x : Int64, @y : Int64)
+    end
+  end
+
+  @[Extern]
+  struct WCRUN
+    property wcLow : UInt16
+    property cGlyphs : UInt16
+    property phg : UInt32*
+    def initialize(@wcLow : UInt16, @cGlyphs : UInt16, @phg : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct FD_GLYPHSET
+    property cjThis : UInt32
+    property flAccel : UInt32
+    property cGlyphsSupported : UInt32
+    property cRuns : UInt32
+    property awcrun : Win32cr::Devices::Display::WCRUN[1]
+    def initialize(@cjThis : UInt32, @flAccel : UInt32, @cGlyphsSupported : UInt32, @cRuns : UInt32, @awcrun : Win32cr::Devices::Display::WCRUN[1])
+    end
+  end
+
+  @[Extern]
+  struct FD_GLYPHATTR
+    property cjThis : UInt32
+    property cGlyphs : UInt32
+    property iMode : UInt32
+    property aGlyphAttr : UInt8[1]
+    def initialize(@cjThis : UInt32, @cGlyphs : UInt32, @iMode : UInt32, @aGlyphAttr : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct FD_KERNINGPAIR
+    property wcFirst : UInt16
+    property wcSecond : UInt16
+    property fwdKern : Int16
+    def initialize(@wcFirst : UInt16, @wcSecond : UInt16, @fwdKern : Int16)
+    end
+  end
+
+  @[Extern]
+  struct FONTDIFF
+    property jReserved1 : UInt8
+    property jReserved2 : UInt8
+    property jReserved3 : UInt8
+    property bWeight : UInt8
+    property usWinWeight : UInt16
+    property fsSelection : UInt16
+    property fwdAveCharWidth : Int16
+    property fwdMaxCharInc : Int16
+    property ptlCaret : Win32cr::Foundation::POINTL
+    def initialize(@jReserved1 : UInt8, @jReserved2 : UInt8, @jReserved3 : UInt8, @bWeight : UInt8, @usWinWeight : UInt16, @fsSelection : UInt16, @fwdAveCharWidth : Int16, @fwdMaxCharInc : Int16, @ptlCaret : Win32cr::Foundation::POINTL)
+    end
+  end
+
+  @[Extern]
+  struct FONTSIM
+    property dpBold : Int32
+    property dpItalic : Int32
+    property dpBoldItalic : Int32
+    def initialize(@dpBold : Int32, @dpItalic : Int32, @dpBoldItalic : Int32)
+    end
+  end
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct IFIMETRICS
+    property cjThis : UInt32
+    property cjIfiExtra : UInt32
+    property dpwszFamilyName : Int32
+    property dpwszStyleName : Int32
+    property dpwszFaceName : Int32
+    property dpwszUniqueName : Int32
+    property dpFontSim : Int32
+    property lEmbedId : Int32
+    property lItalicAngle : Int32
+    property lCharBias : Int32
+    property dpCharSets : Int32
+    property jWinCharSet : UInt8
+    property jWinPitchAndFamily : UInt8
+    property usWinWeight : UInt16
+    property flInfo : UInt32
+    property fsSelection : UInt16
+    property fsType : UInt16
+    property fwdUnitsPerEm : Int16
+    property fwdLowestPPEm : Int16
+    property fwdWinAscender : Int16
+    property fwdWinDescender : Int16
+    property fwdMacAscender : Int16
+    property fwdMacDescender : Int16
+    property fwdMacLineGap : Int16
+    property fwdTypoAscender : Int16
+    property fwdTypoDescender : Int16
+    property fwdTypoLineGap : Int16
+    property fwdAveCharWidth : Int16
+    property fwdMaxCharInc : Int16
+    property fwdCapHeight : Int16
+    property fwdXHeight : Int16
+    property fwdSubscriptXSize : Int16
+    property fwdSubscriptYSize : Int16
+    property fwdSubscriptXOffset : Int16
+    property fwdSubscriptYOffset : Int16
+    property fwdSuperscriptXSize : Int16
+    property fwdSuperscriptYSize : Int16
+    property fwdSuperscriptXOffset : Int16
+    property fwdSuperscriptYOffset : Int16
+    property fwdUnderscoreSize : Int16
+    property fwdUnderscorePosition : Int16
+    property fwdStrikeoutSize : Int16
+    property fwdStrikeoutPosition : Int16
+    property chFirstChar : UInt8
+    property chLastChar : UInt8
+    property chDefaultChar : UInt8
+    property chBreakChar : UInt8
+    property wcFirstChar : UInt16
+    property wcLastChar : UInt16
+    property wcDefaultChar : UInt16
+    property wcBreakChar : UInt16
+    property ptlBaseline : Win32cr::Foundation::POINTL
+    property ptlAspect : Win32cr::Foundation::POINTL
+    property ptlCaret : Win32cr::Foundation::POINTL
+    property rclFontBox : Win32cr::Foundation::RECTL
+    property achVendId : UInt8[4]
+    property cKerningPairs : UInt32
+    property ulPanoseCulture : UInt32
+    property panose : Win32cr::Graphics::Gdi::PANOSE
+    def initialize(@cjThis : UInt32, @cjIfiExtra : UInt32, @dpwszFamilyName : Int32, @dpwszStyleName : Int32, @dpwszFaceName : Int32, @dpwszUniqueName : Int32, @dpFontSim : Int32, @lEmbedId : Int32, @lItalicAngle : Int32, @lCharBias : Int32, @dpCharSets : Int32, @jWinCharSet : UInt8, @jWinPitchAndFamily : UInt8, @usWinWeight : UInt16, @flInfo : UInt32, @fsSelection : UInt16, @fsType : UInt16, @fwdUnitsPerEm : Int16, @fwdLowestPPEm : Int16, @fwdWinAscender : Int16, @fwdWinDescender : Int16, @fwdMacAscender : Int16, @fwdMacDescender : Int16, @fwdMacLineGap : Int16, @fwdTypoAscender : Int16, @fwdTypoDescender : Int16, @fwdTypoLineGap : Int16, @fwdAveCharWidth : Int16, @fwdMaxCharInc : Int16, @fwdCapHeight : Int16, @fwdXHeight : Int16, @fwdSubscriptXSize : Int16, @fwdSubscriptYSize : Int16, @fwdSubscriptXOffset : Int16, @fwdSubscriptYOffset : Int16, @fwdSuperscriptXSize : Int16, @fwdSuperscriptYSize : Int16, @fwdSuperscriptXOffset : Int16, @fwdSuperscriptYOffset : Int16, @fwdUnderscoreSize : Int16, @fwdUnderscorePosition : Int16, @fwdStrikeoutSize : Int16, @fwdStrikeoutPosition : Int16, @chFirstChar : UInt8, @chLastChar : UInt8, @chDefaultChar : UInt8, @chBreakChar : UInt8, @wcFirstChar : UInt16, @wcLastChar : UInt16, @wcDefaultChar : UInt16, @wcBreakChar : UInt16, @ptlBaseline : Win32cr::Foundation::POINTL, @ptlAspect : Win32cr::Foundation::POINTL, @ptlCaret : Win32cr::Foundation::POINTL, @rclFontBox : Win32cr::Foundation::RECTL, @achVendId : UInt8[4], @cKerningPairs : UInt32, @ulPanoseCulture : UInt32, @panose : Win32cr::Graphics::Gdi::PANOSE)
+    end
+  end
+  {% end %}
+
   @[Extern]
   struct IFIEXTRA
     property ulIdentifier : UInt32
@@ -1963,8 +2210,8 @@ module Win32cr::Devices::Display
     property cig : UInt32
     property dpDesignVector : Int32
     property dpAxesInfoW : Int32
-    property aulReserved : UInt32*
-    def initialize(@ulIdentifier : UInt32, @dpFontSig : Int32, @cig : UInt32, @dpDesignVector : Int32, @dpAxesInfoW : Int32, @aulReserved : UInt32*)
+    property aulReserved : UInt32[1]
+    def initialize(@ulIdentifier : UInt32, @dpFontSig : Int32, @cig : UInt32, @dpDesignVector : Int32, @dpAxesInfoW : Int32, @aulReserved : UInt32[1])
     end
   end
 
@@ -2001,32 +2248,32 @@ module Win32cr::Devices::Display
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct LINEATTRS
     property fl : UInt32
     property iJoin : UInt32
     property iEndCap : UInt32
     property elWidth : Win32cr::Devices::Display::FLOAT_LONG
-    property eMiterLimit : Float32
+    property eMiterLimit : UInt32
     property cstyle : UInt32
     property pstyle : Win32cr::Devices::Display::FLOAT_LONG*
     property elStyleState : Win32cr::Devices::Display::FLOAT_LONG
-    def initialize(@fl : UInt32, @iJoin : UInt32, @iEndCap : UInt32, @elWidth : Win32cr::Devices::Display::FLOAT_LONG, @eMiterLimit : Float32, @cstyle : UInt32, @pstyle : Win32cr::Devices::Display::FLOAT_LONG*, @elStyleState : Win32cr::Devices::Display::FLOAT_LONG)
+    def initialize(@fl : UInt32, @iJoin : UInt32, @iEndCap : UInt32, @elWidth : Win32cr::Devices::Display::FLOAT_LONG, @eMiterLimit : UInt32, @cstyle : UInt32, @pstyle : Win32cr::Devices::Display::FLOAT_LONG*, @elStyleState : Win32cr::Devices::Display::FLOAT_LONG)
     end
   end
   {% end %}
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct XFORML
-    property eM11 : Float32
-    property eM12 : Float32
-    property eM21 : Float32
-    property eM22 : Float32
-    property eDx : Float32
-    property eDy : Float32
-    def initialize(@eM11 : Float32, @eM12 : Float32, @eM21 : Float32, @eM22 : Float32, @eDx : Float32, @eDy : Float32)
+    property eM11 : UInt32
+    property eM12 : UInt32
+    property eM21 : UInt32
+    property eM22 : UInt32
+    property eDx : UInt32
+    property eDy : UInt32
+    def initialize(@eM11 : UInt32, @eM12 : UInt32, @eM21 : UInt32, @eM22 : UInt32, @eDx : UInt32, @eDy : UInt32)
     end
   end
   {% end %}
@@ -2244,8 +2491,8 @@ module Win32cr::Devices::Display
   @[Extern]
   struct ENUMRECTS
     property c : UInt32
-    property arcl : Win32cr::Foundation::RECTL*
-    def initialize(@c : UInt32, @arcl : Win32cr::Foundation::RECTL*)
+    property arcl : Win32cr::Foundation::RECTL[1]
+    def initialize(@c : UInt32, @arcl : Win32cr::Foundation::RECTL[1])
     end
   end
 
@@ -2253,8 +2500,8 @@ module Win32cr::Devices::Display
   struct GLYPHBITS
     property ptlOrigin : Win32cr::Foundation::POINTL
     property sizlBitmap : Win32cr::Foundation::SIZE
-    property aj : UInt8*
-    def initialize(@ptlOrigin : Win32cr::Foundation::POINTL, @sizlBitmap : Win32cr::Foundation::SIZE, @aj : UInt8*)
+    property aj : UInt8[1]
+    def initialize(@ptlOrigin : Win32cr::Foundation::POINTL, @sizlBitmap : Win32cr::Foundation::SIZE, @aj : UInt8[1])
     end
   end
 
@@ -2338,8 +2585,8 @@ module Win32cr::Devices::Display
     property ptfxB : Win32cr::Devices::Display::POINTFIX
     property lStyleState : Int32
     property c : UInt32
-    property arun : Win32cr::Devices::Display::RUN*
-    def initialize(@ptfxA : Win32cr::Devices::Display::POINTFIX, @ptfxB : Win32cr::Devices::Display::POINTFIX, @lStyleState : Int32, @c : UInt32, @arun : Win32cr::Devices::Display::RUN*)
+    property arun : Win32cr::Devices::Display::RUN[1]
+    def initialize(@ptfxA : Win32cr::Devices::Display::POINTFIX, @ptfxB : Win32cr::Devices::Display::POINTFIX, @lStyleState : Int32, @c : UInt32, @arun : Win32cr::Devices::Display::RUN[1])
     end
   end
 
@@ -2400,16 +2647,26 @@ module Win32cr::Devices::Display
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct FLOATOBJ
+    property ul1 : UInt32
+    property ul2 : UInt32
+    def initialize(@ul1 : UInt32, @ul2 : UInt32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:i386) %}
   @[Extern]
   struct FLOATOBJ_XFORM
-    property eM11 : Float32
-    property eM12 : Float32
-    property eM21 : Float32
-    property eM22 : Float32
-    property eDx : Float32
-    property eDy : Float32
-    def initialize(@eM11 : Float32, @eM12 : Float32, @eM21 : Float32, @eM22 : Float32, @eDx : Float32, @eDy : Float32)
+    property eM11 : Win32cr::Devices::Display::FLOATOBJ
+    property eM12 : Win32cr::Devices::Display::FLOATOBJ
+    property eM21 : Win32cr::Devices::Display::FLOATOBJ
+    property eM22 : Win32cr::Devices::Display::FLOATOBJ
+    property eDx : Win32cr::Devices::Display::FLOATOBJ
+    property eDy : Win32cr::Devices::Display::FLOATOBJ
+    def initialize(@eM11 : Win32cr::Devices::Display::FLOATOBJ, @eM12 : Win32cr::Devices::Display::FLOATOBJ, @eM21 : Win32cr::Devices::Display::FLOATOBJ, @eM22 : Win32cr::Devices::Display::FLOATOBJ, @eDx : Win32cr::Devices::Display::FLOATOBJ, @eDy : Win32cr::Devices::Display::FLOATOBJ)
     end
   end
   {% end %}
@@ -2452,7 +2709,9 @@ module Win32cr::Devices::Display
     property flags : UInt32
     property num_monitors : UInt32
     property display_adapter_target_base : UInt32
-    def initialize(@display_adapter_luid : Win32cr::Foundation::LUID, @flags : UInt32, @num_monitors : UInt32, @display_adapter_target_base : UInt32)
+    property driver_version_major : UInt32
+    property driver_version_minor : UInt32
+    def initialize(@display_adapter_luid : Win32cr::Foundation::LUID, @flags : UInt32, @num_monitors : UInt32, @display_adapter_target_base : UInt32, @driver_version_major : UInt32, @driver_version_minor : UInt32)
     end
   end
 
@@ -2473,8 +2732,8 @@ module Win32cr::Devices::Display
   @[Extern]
   struct VIDEO_MONITOR_DESCRIPTOR
     property descriptor_size : UInt32
-    property descriptor : UInt8*
-    def initialize(@descriptor_size : UInt32, @descriptor : UInt8*)
+    property descriptor : UInt8[1]
+    def initialize(@descriptor_size : UInt32, @descriptor : UInt8[1])
     end
   end
 
@@ -2612,8 +2871,8 @@ module Win32cr::Devices::Display
     property width_in_pixels : UInt16
     property height_in_pixels : UInt16
     property font_size : UInt32
-    property font : UInt8*
-    def initialize(@width_in_pixels : UInt16, @height_in_pixels : UInt16, @font_size : UInt32, @font : UInt8*)
+    property font : UInt8[1]
+    def initialize(@width_in_pixels : UInt16, @height_in_pixels : UInt16, @font_size : UInt32, @font : UInt8[1])
     end
   end
 
@@ -2621,8 +2880,8 @@ module Win32cr::Devices::Display
   struct VIDEO_PALETTE_DATA
     property num_entries : UInt16
     property first_entry : UInt16
-    property colors : UInt16*
-    def initialize(@num_entries : UInt16, @first_entry : UInt16, @colors : UInt16*)
+    property colors : UInt16[1]
+    def initialize(@num_entries : UInt16, @first_entry : UInt16, @colors : UInt16[1])
     end
   end
 
@@ -2640,7 +2899,7 @@ module Win32cr::Devices::Display
   struct VIDEO_CLUT
     property num_entries : UInt16
     property first_entry : UInt16
-    property lookup_table : Anonymous_e__Union_*
+    property lookup_table : Anonymous_e__Union_[1]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
@@ -2651,7 +2910,7 @@ module Win32cr::Devices::Display
     end
     end
 
-    def initialize(@num_entries : UInt16, @first_entry : UInt16, @lookup_table : Anonymous_e__Union_*)
+    def initialize(@num_entries : UInt16, @first_entry : UInt16, @lookup_table : Anonymous_e__Union_[1])
     end
   end
 
@@ -2692,8 +2951,8 @@ module Win32cr::Devices::Display
     property enable : UInt32
     property column : Int16
     property row : Int16
-    property pixels : UInt8*
-    def initialize(@flags : UInt32, @width : UInt32, @height : UInt32, @width_in_bytes : UInt32, @enable : UInt32, @column : Int16, @row : Int16, @pixels : UInt8*)
+    property pixels : UInt8[1]
+    def initialize(@flags : UInt32, @width : UInt32, @height : UInt32, @width_in_bytes : UInt32, @enable : UInt32, @column : Int16, @row : Int16, @pixels : UInt8[1])
     end
   end
 
@@ -2809,8 +3068,8 @@ module Win32cr::Devices::Display
   struct VIDEO_COLOR_LUT_DATA
     property length : UInt32
     property lut_data_format : UInt32
-    property lut_data : UInt8*
-    def initialize(@length : UInt32, @lut_data_format : UInt32, @lut_data : UInt8*)
+    property lut_data : UInt8[1]
+    def initialize(@length : UInt32, @lut_data_format : UInt32, @lut_data : UInt8[1])
     end
   end
 
@@ -2844,7 +3103,7 @@ module Win32cr::Devices::Display
   struct VIDEO_BRIGHTNESS_POLICY
     property default_to_bios_policy : Win32cr::Foundation::BOOLEAN
     property level_count : UInt8
-    property level : Anonymous_e__Struct_*
+    property level : Anonymous_e__Struct_[1]
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
@@ -2855,7 +3114,7 @@ module Win32cr::Devices::Display
     end
     end
 
-    def initialize(@default_to_bios_policy : Win32cr::Foundation::BOOLEAN, @level_count : UInt8, @level : Anonymous_e__Struct_*)
+    def initialize(@default_to_bios_policy : Win32cr::Foundation::BOOLEAN, @level_count : UInt8, @level : Anonymous_e__Struct_[1])
     end
   end
 
@@ -3214,18 +3473,18 @@ module Win32cr::Devices::Display
     property anonymous2 : Anonymous2_e__Struct_
     property value : UInt32
 
-      # Nested Type Anonymous2_e__Struct_
+      # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      struct Anonymous2_e__Struct_
+      struct Anonymous1_e__Struct_
     property _bitfield : UInt32
     def initialize(@_bitfield : UInt32)
     end
       end
 
 
-      # Nested Type Anonymous1_e__Struct_
+      # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      struct Anonymous1_e__Struct_
+      struct Anonymous2_e__Struct_
     property _bitfield : UInt32
     def initialize(@_bitfield : UInt32)
     end
@@ -3271,6 +3530,15 @@ module Win32cr::Devices::Display
     end
 
     def initialize(@anonymous : Anonymous_e__Union_, @data_cap : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_DATA_CAP)
+    end
+  end
+
+  @[Extern]
+  struct COLORSPACE_SCALAR_MULTIPLIER_CAPS
+    property valid : Win32cr::Foundation::BOOLEAN
+    property numeric_range_min : Float32
+    property numeric_range_max : Float32
+    def initialize(@valid : Win32cr::Foundation::BOOLEAN, @numeric_range_min : Float32, @numeric_range_max : Float32)
     end
   end
 
@@ -3371,8 +3639,8 @@ module Win32cr::Devices::Display
 
   @[Extern]
   struct SET_ACTIVE_COLOR_PROFILE_NAME
-    property color_profile_name : UInt16*
-    def initialize(@color_profile_name : UInt16*)
+    property color_profile_name : UInt16[1]
+    def initialize(@color_profile_name : UInt16[1])
     end
   end
 
@@ -3407,6 +3675,25 @@ module Win32cr::Devices::Display
     property ecc_filler : UInt8
     property payload : UInt8[8]
 
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property data_id : UInt8
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@data_id : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
@@ -3426,25 +3713,6 @@ module Win32cr::Devices::Display
     end
     end
 
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property data_id : UInt8
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt8
-    def initialize(@_bitfield : UInt8)
-    end
-      end
-
-    def initialize(@data_id : UInt8, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
     def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @ecc_filler : UInt8, @payload : UInt8[8])
     end
   end
@@ -3459,7 +3727,7 @@ module Win32cr::Devices::Display
     property final_command_extra_payload : UInt16
     property mipi_errors : UInt16
     property host_errors : UInt16
-    property packets : Win32cr::Devices::Display::MIPI_DSI_PACKET*
+    property packets : Win32cr::Devices::Display::MIPI_DSI_PACKET[1]
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
@@ -3469,7 +3737,7 @@ module Win32cr::Devices::Display
     end
     end
 
-    def initialize(@total_buffer_size : UInt32, @packet_count : UInt8, @failed_packet : UInt8, @anonymous : Anonymous_e__Struct_, @read_word_count : UInt16, @final_command_extra_payload : UInt16, @mipi_errors : UInt16, @host_errors : UInt16, @packets : Win32cr::Devices::Display::MIPI_DSI_PACKET*)
+    def initialize(@total_buffer_size : UInt32, @packet_count : UInt8, @failed_packet : UInt8, @anonymous : Anonymous_e__Struct_, @read_word_count : UInt16, @final_command_extra_payload : UInt16, @mipi_errors : UInt16, @host_errors : UInt16, @packets : Win32cr::Devices::Display::MIPI_DSI_PACKET[1])
     end
   end
 
@@ -3500,161 +3768,9 @@ module Win32cr::Devices::Display
     end
   end
 
-  {% if flag?(:i386) %}
   @[Extern]
-  struct POINTE
-    property x : UInt32
-    property y : UInt32
-    def initialize(@x : UInt32, @y : UInt32)
-    end
-  end
-  {% end %}
 
-  {% if flag?(:i386) %}
-  @[Extern(union: true)]
-  struct FLOAT_LONG
-    property e : UInt32
-    property l : Int32
-    def initialize(@e : UInt32, @l : Int32)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct FD_XFORM
-    property eXX : UInt32
-    property eXY : UInt32
-    property eYX : UInt32
-    property eYY : UInt32
-    def initialize(@eXX : UInt32, @eXY : UInt32, @eYX : UInt32, @eYY : UInt32)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct IFIMETRICS
-    property cjThis : UInt32
-    property cjIfiExtra : UInt32
-    property dpwszFamilyName : Int32
-    property dpwszStyleName : Int32
-    property dpwszFaceName : Int32
-    property dpwszUniqueName : Int32
-    property dpFontSim : Int32
-    property lEmbedId : Int32
-    property lItalicAngle : Int32
-    property lCharBias : Int32
-    property dpCharSets : Int32
-    property jWinCharSet : UInt8
-    property jWinPitchAndFamily : UInt8
-    property usWinWeight : UInt16
-    property flInfo : UInt32
-    property fsSelection : UInt16
-    property fsType : UInt16
-    property fwdUnitsPerEm : Int16
-    property fwdLowestPPEm : Int16
-    property fwdWinAscender : Int16
-    property fwdWinDescender : Int16
-    property fwdMacAscender : Int16
-    property fwdMacDescender : Int16
-    property fwdMacLineGap : Int16
-    property fwdTypoAscender : Int16
-    property fwdTypoDescender : Int16
-    property fwdTypoLineGap : Int16
-    property fwdAveCharWidth : Int16
-    property fwdMaxCharInc : Int16
-    property fwdCapHeight : Int16
-    property fwdXHeight : Int16
-    property fwdSubscriptXSize : Int16
-    property fwdSubscriptYSize : Int16
-    property fwdSubscriptXOffset : Int16
-    property fwdSubscriptYOffset : Int16
-    property fwdSuperscriptXSize : Int16
-    property fwdSuperscriptYSize : Int16
-    property fwdSuperscriptXOffset : Int16
-    property fwdSuperscriptYOffset : Int16
-    property fwdUnderscoreSize : Int16
-    property fwdUnderscorePosition : Int16
-    property fwdStrikeoutSize : Int16
-    property fwdStrikeoutPosition : Int16
-    property chFirstChar : UInt8
-    property chLastChar : UInt8
-    property chDefaultChar : UInt8
-    property chBreakChar : UInt8
-    property wcFirstChar : UInt16
-    property wcLastChar : UInt16
-    property wcDefaultChar : UInt16
-    property wcBreakChar : UInt16
-    property ptlBaseline : Win32cr::Foundation::POINTL
-    property ptlAspect : Win32cr::Foundation::POINTL
-    property ptlCaret : Win32cr::Foundation::POINTL
-    property rclFontBox : Win32cr::Foundation::RECTL
-    property achVendId : UInt8[4]
-    property cKerningPairs : UInt32
-    property ulPanoseCulture : UInt32
-    property panose : Win32cr::Graphics::Gdi::PANOSE
-    def initialize(@cjThis : UInt32, @cjIfiExtra : UInt32, @dpwszFamilyName : Int32, @dpwszStyleName : Int32, @dpwszFaceName : Int32, @dpwszUniqueName : Int32, @dpFontSim : Int32, @lEmbedId : Int32, @lItalicAngle : Int32, @lCharBias : Int32, @dpCharSets : Int32, @jWinCharSet : UInt8, @jWinPitchAndFamily : UInt8, @usWinWeight : UInt16, @flInfo : UInt32, @fsSelection : UInt16, @fsType : UInt16, @fwdUnitsPerEm : Int16, @fwdLowestPPEm : Int16, @fwdWinAscender : Int16, @fwdWinDescender : Int16, @fwdMacAscender : Int16, @fwdMacDescender : Int16, @fwdMacLineGap : Int16, @fwdTypoAscender : Int16, @fwdTypoDescender : Int16, @fwdTypoLineGap : Int16, @fwdAveCharWidth : Int16, @fwdMaxCharInc : Int16, @fwdCapHeight : Int16, @fwdXHeight : Int16, @fwdSubscriptXSize : Int16, @fwdSubscriptYSize : Int16, @fwdSubscriptXOffset : Int16, @fwdSubscriptYOffset : Int16, @fwdSuperscriptXSize : Int16, @fwdSuperscriptYSize : Int16, @fwdSuperscriptXOffset : Int16, @fwdSuperscriptYOffset : Int16, @fwdUnderscoreSize : Int16, @fwdUnderscorePosition : Int16, @fwdStrikeoutSize : Int16, @fwdStrikeoutPosition : Int16, @chFirstChar : UInt8, @chLastChar : UInt8, @chDefaultChar : UInt8, @chBreakChar : UInt8, @wcFirstChar : UInt16, @wcLastChar : UInt16, @wcDefaultChar : UInt16, @wcBreakChar : UInt16, @ptlBaseline : Win32cr::Foundation::POINTL, @ptlAspect : Win32cr::Foundation::POINTL, @ptlCaret : Win32cr::Foundation::POINTL, @rclFontBox : Win32cr::Foundation::RECTL, @achVendId : UInt8[4], @cKerningPairs : UInt32, @ulPanoseCulture : UInt32, @panose : Win32cr::Graphics::Gdi::PANOSE)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct LINEATTRS
-    property fl : UInt32
-    property iJoin : UInt32
-    property iEndCap : UInt32
-    property elWidth : Win32cr::Devices::Display::FLOAT_LONG
-    property eMiterLimit : UInt32
-    property cstyle : UInt32
-    property pstyle : Win32cr::Devices::Display::FLOAT_LONG*
-    property elStyleState : Win32cr::Devices::Display::FLOAT_LONG
-    def initialize(@fl : UInt32, @iJoin : UInt32, @iEndCap : UInt32, @elWidth : Win32cr::Devices::Display::FLOAT_LONG, @eMiterLimit : UInt32, @cstyle : UInt32, @pstyle : Win32cr::Devices::Display::FLOAT_LONG*, @elStyleState : Win32cr::Devices::Display::FLOAT_LONG)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct XFORML
-    property eM11 : UInt32
-    property eM12 : UInt32
-    property eM21 : UInt32
-    property eM22 : UInt32
-    property eDx : UInt32
-    property eDy : UInt32
-    def initialize(@eM11 : UInt32, @eM12 : UInt32, @eM21 : UInt32, @eM22 : UInt32, @eDx : UInt32, @eDy : UInt32)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct FLOATOBJ
-    property ul1 : UInt32
-    property ul2 : UInt32
-    def initialize(@ul1 : UInt32, @ul2 : UInt32)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct FLOATOBJ_XFORM
-    property eM11 : Win32cr::Devices::Display::FLOATOBJ
-    property eM12 : Win32cr::Devices::Display::FLOATOBJ
-    property eM21 : Win32cr::Devices::Display::FLOATOBJ
-    property eM22 : Win32cr::Devices::Display::FLOATOBJ
-    property eDx : Win32cr::Devices::Display::FLOATOBJ
-    property eDy : Win32cr::Devices::Display::FLOATOBJ
-    def initialize(@eM11 : Win32cr::Devices::Display::FLOATOBJ, @eM12 : Win32cr::Devices::Display::FLOATOBJ, @eM21 : Win32cr::Devices::Display::FLOATOBJ, @eM22 : Win32cr::Devices::Display::FLOATOBJ, @eDx : Win32cr::Devices::Display::FLOATOBJ, @eDy : Win32cr::Devices::Display::FLOATOBJ)
-    end
-  end
-  {% end %}
-
-  @[Extern]
-  record ICloneViewHelperVtbl,
+  record ICloneViewHelperVtable,
     query_interface : Proc(ICloneViewHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICloneViewHelper*, UInt32),
     release : Proc(ICloneViewHelper*, UInt32),
@@ -3665,7 +3781,7 @@ module Win32cr::Devices::Display
 
 
   @[Extern]
-  record ICloneViewHelper, lpVtbl : ICloneViewHelperVtbl* do
+  record ICloneViewHelper, lpVtbl : ICloneViewHelperVtable* do
     GUID = LibC::GUID.new(0xf6a3d4c4_u32, 0x5632_u16, 0x4d83_u16, StaticArray[0xb0_u8, 0xa1_u8, 0xfb_u8, 0x88_u8, 0x71_u8, 0x2b_u8, 0x1e_u8, 0xb7_u8])
     def query_interface(this : ICloneViewHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3692,7 +3808,8 @@ module Win32cr::Devices::Display
   end
 
   @[Extern]
-  record IViewHelperVtbl,
+
+  record IViewHelperVtable,
     query_interface : Proc(IViewHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewHelper*, UInt32),
     release : Proc(IViewHelper*, UInt32),
@@ -3705,7 +3822,7 @@ module Win32cr::Devices::Display
 
 
   @[Extern]
-  record IViewHelper, lpVtbl : IViewHelperVtbl* do
+  record IViewHelper, lpVtbl : IViewHelperVtable* do
     GUID = LibC::GUID.new(0xe85ccef5_u32, 0xaaaa_u16, 0x47f0_u16, StaticArray[0xb5_u8, 0xe3_u8, 0x61_u8, 0xf7_u8, 0xae_u8, 0xcd_u8, 0xc4_u8, 0xc1_u8])
     def query_interface(this : IViewHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3737,503 +3854,742 @@ module Win32cr::Devices::Display
 
   end
 
-  def getNumberOfPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, pdwNumberOfPhysicalMonitors : UInt32*) : Int32
+  def getNumberOfPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, pdwNumberOfPhysicalMonitors : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor, pdwNumberOfPhysicalMonitors)
+    {% end %}
   end
 
   def getNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, pdwNumberOfPhysicalMonitors : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, pdwNumberOfPhysicalMonitors)
+    {% end %}
   end
 
-  def getPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+  def getPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPhysicalMonitorsFromHMONITOR(hMonitor, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+    {% end %}
   end
 
   def getPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+    {% end %}
   end
 
-  def destroyPhysicalMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+  def destroyPhysicalMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyPhysicalMonitor(hMonitor)
+    {% end %}
   end
 
-  def destroyPhysicalMonitors(dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+  def destroyPhysicalMonitors(dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyPhysicalMonitors(dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+    {% end %}
   end
 
   def getVCPFeatureAndVCPFeatureReply(hMonitor : Win32cr::Foundation::HANDLE, bVCPCode : UInt8, pvct : Win32cr::Devices::Display::MC_VCP_CODE_TYPE*, pdwCurrentValue : UInt32*, pdwMaximumValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetVCPFeatureAndVCPFeatureReply(hMonitor, bVCPCode, pvct, pdwCurrentValue, pdwMaximumValue)
+    {% end %}
   end
 
   def setVCPFeature(hMonitor : Win32cr::Foundation::HANDLE, bVCPCode : UInt8, dwNewValue : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetVCPFeature(hMonitor, bVCPCode, dwNewValue)
+    {% end %}
   end
 
   def saveCurrentSettings(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.SaveCurrentSettings(hMonitor)
+    {% end %}
   end
 
   def getCapabilitiesStringLength(hMonitor : Win32cr::Foundation::HANDLE, pdwCapabilitiesStringLengthInCharacters : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetCapabilitiesStringLength(hMonitor, pdwCapabilitiesStringLengthInCharacters)
+    {% end %}
   end
 
-  def capabilitiesRequestAndCapabilitiesReply(hMonitor : Win32cr::Foundation::HANDLE, pszASCIICapabilitiesString : UInt8*, dwCapabilitiesStringLengthInCharacters : UInt32) : Int32
+  def capabilitiesRequestAndCapabilitiesReply(hMonitor : Win32cr::Foundation::HANDLE, pszASCIICapabilitiesString : Win32cr::Foundation::PSTR, dwCapabilitiesStringLengthInCharacters : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.CapabilitiesRequestAndCapabilitiesReply(hMonitor, pszASCIICapabilitiesString, dwCapabilitiesStringLengthInCharacters)
+    {% end %}
   end
 
   def getTimingReport(hMonitor : Win32cr::Foundation::HANDLE, pmtrMonitorTimingReport : Win32cr::Devices::Display::MC_TIMING_REPORT*) : Int32
+    {% if !flag?(:docs) %}
     C.GetTimingReport(hMonitor, pmtrMonitorTimingReport)
+    {% end %}
   end
 
   def getMonitorCapabilities(hMonitor : Win32cr::Foundation::HANDLE, pdwMonitorCapabilities : UInt32*, pdwSupportedColorTemperatures : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorCapabilities(hMonitor, pdwMonitorCapabilities, pdwSupportedColorTemperatures)
+    {% end %}
   end
 
   def saveCurrentMonitorSettings(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.SaveCurrentMonitorSettings(hMonitor)
+    {% end %}
   end
 
   def getMonitorTechnologyType(hMonitor : Win32cr::Foundation::HANDLE, pdtyDisplayTechnologyType : Win32cr::Devices::Display::MC_DISPLAY_TECHNOLOGY_TYPE*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorTechnologyType(hMonitor, pdtyDisplayTechnologyType)
+    {% end %}
   end
 
   def getMonitorBrightness(hMonitor : Win32cr::Foundation::HANDLE, pdwMinimumBrightness : UInt32*, pdwCurrentBrightness : UInt32*, pdwMaximumBrightness : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorBrightness(hMonitor, pdwMinimumBrightness, pdwCurrentBrightness, pdwMaximumBrightness)
+    {% end %}
   end
 
   def getMonitorContrast(hMonitor : Win32cr::Foundation::HANDLE, pdwMinimumContrast : UInt32*, pdwCurrentContrast : UInt32*, pdwMaximumContrast : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorContrast(hMonitor, pdwMinimumContrast, pdwCurrentContrast, pdwMaximumContrast)
+    {% end %}
   end
 
   def getMonitorColorTemperature(hMonitor : Win32cr::Foundation::HANDLE, pctCurrentColorTemperature : Win32cr::Devices::Display::MC_COLOR_TEMPERATURE*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorColorTemperature(hMonitor, pctCurrentColorTemperature)
+    {% end %}
   end
 
   def getMonitorRedGreenOrBlueDrive(hMonitor : Win32cr::Foundation::HANDLE, dtDriveType : Win32cr::Devices::Display::MC_DRIVE_TYPE, pdwMinimumDrive : UInt32*, pdwCurrentDrive : UInt32*, pdwMaximumDrive : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, pdwMinimumDrive, pdwCurrentDrive, pdwMaximumDrive)
+    {% end %}
   end
 
   def getMonitorRedGreenOrBlueGain(hMonitor : Win32cr::Foundation::HANDLE, gtGainType : Win32cr::Devices::Display::MC_GAIN_TYPE, pdwMinimumGain : UInt32*, pdwCurrentGain : UInt32*, pdwMaximumGain : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, pdwMinimumGain, pdwCurrentGain, pdwMaximumGain)
+    {% end %}
   end
 
   def setMonitorBrightness(hMonitor : Win32cr::Foundation::HANDLE, dwNewBrightness : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorBrightness(hMonitor, dwNewBrightness)
+    {% end %}
   end
 
   def setMonitorContrast(hMonitor : Win32cr::Foundation::HANDLE, dwNewContrast : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorContrast(hMonitor, dwNewContrast)
+    {% end %}
   end
 
   def setMonitorColorTemperature(hMonitor : Win32cr::Foundation::HANDLE, ctCurrentColorTemperature : Win32cr::Devices::Display::MC_COLOR_TEMPERATURE) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorColorTemperature(hMonitor, ctCurrentColorTemperature)
+    {% end %}
   end
 
   def setMonitorRedGreenOrBlueDrive(hMonitor : Win32cr::Foundation::HANDLE, dtDriveType : Win32cr::Devices::Display::MC_DRIVE_TYPE, dwNewDrive : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, dwNewDrive)
+    {% end %}
   end
 
   def setMonitorRedGreenOrBlueGain(hMonitor : Win32cr::Foundation::HANDLE, gtGainType : Win32cr::Devices::Display::MC_GAIN_TYPE, dwNewGain : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain)
+    {% end %}
   end
 
   def degaussMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.DegaussMonitor(hMonitor)
+    {% end %}
   end
 
   def getMonitorDisplayAreaSize(hMonitor : Win32cr::Foundation::HANDLE, stSizeType : Win32cr::Devices::Display::MC_SIZE_TYPE, pdwMinimumWidthOrHeight : UInt32*, pdwCurrentWidthOrHeight : UInt32*, pdwMaximumWidthOrHeight : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorDisplayAreaSize(hMonitor, stSizeType, pdwMinimumWidthOrHeight, pdwCurrentWidthOrHeight, pdwMaximumWidthOrHeight)
+    {% end %}
   end
 
   def getMonitorDisplayAreaPosition(hMonitor : Win32cr::Foundation::HANDLE, ptPositionType : Win32cr::Devices::Display::MC_POSITION_TYPE, pdwMinimumPosition : UInt32*, pdwCurrentPosition : UInt32*, pdwMaximumPosition : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorDisplayAreaPosition(hMonitor, ptPositionType, pdwMinimumPosition, pdwCurrentPosition, pdwMaximumPosition)
+    {% end %}
   end
 
   def setMonitorDisplayAreaSize(hMonitor : Win32cr::Foundation::HANDLE, stSizeType : Win32cr::Devices::Display::MC_SIZE_TYPE, dwNewDisplayAreaWidthOrHeight : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorDisplayAreaSize(hMonitor, stSizeType, dwNewDisplayAreaWidthOrHeight)
+    {% end %}
   end
 
   def setMonitorDisplayAreaPosition(hMonitor : Win32cr::Foundation::HANDLE, ptPositionType : Win32cr::Devices::Display::MC_POSITION_TYPE, dwNewPosition : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorDisplayAreaPosition(hMonitor, ptPositionType, dwNewPosition)
+    {% end %}
   end
 
   def restoreMonitorFactoryColorDefaults(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.RestoreMonitorFactoryColorDefaults(hMonitor)
+    {% end %}
   end
 
   def restoreMonitorFactoryDefaults(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.RestoreMonitorFactoryDefaults(hMonitor)
+    {% end %}
   end
 
   def bRUSHOBJPvAllocRbrush(pbo : Win32cr::Devices::Display::BRUSHOBJ*, cj : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_pvAllocRbrush(pbo, cj)
+    {% end %}
   end
 
   def bRUSHOBJPvGetRbrush(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : Void*
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_pvGetRbrush(pbo)
+    {% end %}
   end
 
   def bRUSHOBJUlGetBrushColor(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : UInt32
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_ulGetBrushColor(pbo)
+    {% end %}
   end
 
   def bRUSHOBJHGetColorTransform(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_hGetColorTransform(pbo)
+    {% end %}
   end
 
   def cLIPOBJCEnumStart(pco : Win32cr::Devices::Display::CLIPOBJ*, bAll : Win32cr::Foundation::BOOL, iType : UInt32, iDirection : UInt32, cLimit : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CLIPOBJ_cEnumStart(pco, bAll, iType, iDirection, cLimit)
+    {% end %}
   end
 
   def cLIPOBJBEnum(pco : Win32cr::Devices::Display::CLIPOBJ*, cj : UInt32, pul : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CLIPOBJ_bEnum(pco, cj, pul)
+    {% end %}
   end
 
   def cLIPOBJPpoGetPath(pco : Win32cr::Devices::Display::CLIPOBJ*) : Win32cr::Devices::Display::PATHOBJ*
+    {% if !flag?(:docs) %}
     C.CLIPOBJ_ppoGetPath(pco)
+    {% end %}
   end
 
   def fONTOBJCGetAllGlyphHandles(pfo : Win32cr::Devices::Display::FONTOBJ*, phg : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.FONTOBJ_cGetAllGlyphHandles(pfo, phg)
+    {% end %}
   end
 
   def fONTOBJVGetInfo(pfo : Win32cr::Devices::Display::FONTOBJ*, cjSize : UInt32, pfi : Win32cr::Devices::Display::FONTINFO*) : Void
+    {% if !flag?(:docs) %}
     C.FONTOBJ_vGetInfo(pfo, cjSize, pfi)
+    {% end %}
   end
 
   def fONTOBJCGetGlyphs(pfo : Win32cr::Devices::Display::FONTOBJ*, iMode : UInt32, cGlyph : UInt32, phg : UInt32*, ppvGlyph : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.FONTOBJ_cGetGlyphs(pfo, iMode, cGlyph, phg, ppvGlyph)
+    {% end %}
   end
 
   def fONTOBJPxoGetXform(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::XFORMOBJ*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pxoGetXform(pfo)
+    {% end %}
   end
 
   def fONTOBJPifi(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::IFIMETRICS*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pifi(pfo)
+    {% end %}
   end
 
   def fONTOBJPfdg(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::FD_GLYPHSET*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pfdg(pfo)
+    {% end %}
   end
 
   def fONTOBJPvTrueTypeFontFile(pfo : Win32cr::Devices::Display::FONTOBJ*, pcjFile : UInt32*) : Void*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pvTrueTypeFontFile(pfo, pcjFile)
+    {% end %}
   end
 
   def fONTOBJPQueryGlyphAttrs(pfo : Win32cr::Devices::Display::FONTOBJ*, iMode : UInt32) : Win32cr::Devices::Display::FD_GLYPHATTR*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pQueryGlyphAttrs(pfo, iMode)
+    {% end %}
   end
 
   def pATHOBJVEnumStart(ppo : Win32cr::Devices::Display::PATHOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.PATHOBJ_vEnumStart(ppo)
+    {% end %}
   end
 
   def pATHOBJBEnum(ppo : Win32cr::Devices::Display::PATHOBJ*, ppd : Win32cr::Devices::Display::PATHDATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PATHOBJ_bEnum(ppo, ppd)
+    {% end %}
   end
 
   def pATHOBJVEnumStartClipLines(ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pso : Win32cr::Devices::Display::SURFOBJ*, pla : Win32cr::Devices::Display::LINEATTRS*) : Void
+    {% if !flag?(:docs) %}
     C.PATHOBJ_vEnumStartClipLines(ppo, pco, pso, pla)
+    {% end %}
   end
 
   def pATHOBJBEnumClipLines(ppo : Win32cr::Devices::Display::PATHOBJ*, cb : UInt32, pcl : Win32cr::Devices::Display::CLIPLINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PATHOBJ_bEnumClipLines(ppo, cb, pcl)
+    {% end %}
   end
 
   def pATHOBJVGetBounds(ppo : Win32cr::Devices::Display::PATHOBJ*, prectfx : Win32cr::Devices::Display::RECTFX*) : Void
+    {% if !flag?(:docs) %}
     C.PATHOBJ_vGetBounds(ppo, prectfx)
+    {% end %}
   end
 
   def sTROBJVEnumStart(pstro : Win32cr::Devices::Display::STROBJ*) : Void
+    {% if !flag?(:docs) %}
     C.STROBJ_vEnumStart(pstro)
+    {% end %}
   end
 
   def sTROBJBEnum(pstro : Win32cr::Devices::Display::STROBJ*, pc : UInt32*, ppgpos : Win32cr::Devices::Display::GLYPHPOS**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.STROBJ_bEnum(pstro, pc, ppgpos)
+    {% end %}
   end
 
   def sTROBJBEnumPositionsOnly(pstro : Win32cr::Devices::Display::STROBJ*, pc : UInt32*, ppgpos : Win32cr::Devices::Display::GLYPHPOS**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.STROBJ_bEnumPositionsOnly(pstro, pc, ppgpos)
+    {% end %}
   end
 
   def sTROBJDwGetCodePage(pstro : Win32cr::Devices::Display::STROBJ*) : UInt32
+    {% if !flag?(:docs) %}
     C.STROBJ_dwGetCodePage(pstro)
+    {% end %}
   end
 
   def sTROBJBGetAdvanceWidths(pso : Win32cr::Devices::Display::STROBJ*, iFirst : UInt32, c : UInt32, pptqD : Win32cr::Devices::Display::POINTQF*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.STROBJ_bGetAdvanceWidths(pso, iFirst, c, pptqD)
+    {% end %}
   end
 
   def xFORMOBJIGetXform(pxo : Win32cr::Devices::Display::XFORMOBJ*, pxform : Win32cr::Devices::Display::XFORML*) : UInt32
+    {% if !flag?(:docs) %}
     C.XFORMOBJ_iGetXform(pxo, pxform)
+    {% end %}
   end
 
   def xFORMOBJBApplyXform(pxo : Win32cr::Devices::Display::XFORMOBJ*, iMode : UInt32, cPoints : UInt32, pvIn : Void*, pvOut : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.XFORMOBJ_bApplyXform(pxo, iMode, cPoints, pvIn, pvOut)
+    {% end %}
   end
 
   def xLATEOBJIXlate(pxlo : Win32cr::Devices::Display::XLATEOBJ*, iColor : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_iXlate(pxlo, iColor)
+    {% end %}
   end
 
   def xLATEOBJPiVector(pxlo : Win32cr::Devices::Display::XLATEOBJ*) : UInt32*
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_piVector(pxlo)
+    {% end %}
   end
 
   def xLATEOBJCGetPalette(pxlo : Win32cr::Devices::Display::XLATEOBJ*, iPal : UInt32, cPal : UInt32, pPal : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_cGetPalette(pxlo, iPal, cPal, pPal)
+    {% end %}
   end
 
   def xLATEOBJHGetColorTransform(pxlo : Win32cr::Devices::Display::XLATEOBJ*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_hGetColorTransform(pxlo)
+    {% end %}
   end
 
   def engCreateBitmap(sizl : Win32cr::Foundation::SIZE, lWidth : Int32, iFormat : UInt32, fl : UInt32, pvBits : Void*) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.EngCreateBitmap(sizl, lWidth, iFormat, fl, pvBits)
+    {% end %}
   end
 
   def engCreateDeviceSurface(dhsurf : Win32cr::Devices::Display::DHSURF, sizl : Win32cr::Foundation::SIZE, iFormatCompat : UInt32) : Win32cr::Devices::Display::HSURF
+    {% if !flag?(:docs) %}
     C.EngCreateDeviceSurface(dhsurf, sizl, iFormatCompat)
+    {% end %}
   end
 
   def engCreateDeviceBitmap(dhsurf : Win32cr::Devices::Display::DHSURF, sizl : Win32cr::Foundation::SIZE, iFormatCompat : UInt32) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.EngCreateDeviceBitmap(dhsurf, sizl, iFormatCompat)
+    {% end %}
   end
 
   def engDeleteSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngDeleteSurface(hsurf)
+    {% end %}
   end
 
   def engLockSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Devices::Display::SURFOBJ*
+    {% if !flag?(:docs) %}
     C.EngLockSurface(hsurf)
+    {% end %}
   end
 
   def engUnlockSurface(pso : Win32cr::Devices::Display::SURFOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.EngUnlockSurface(pso)
+    {% end %}
   end
 
   def engEraseSurface(pso : Win32cr::Devices::Display::SURFOBJ*, prcl : Win32cr::Foundation::RECTL*, iColor : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngEraseSurface(pso, prcl, iColor)
+    {% end %}
   end
 
   def engAssociateSurface(hsurf : Win32cr::Devices::Display::HSURF, hdev : Win32cr::Devices::Display::HDEV, flHooks : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngAssociateSurface(hsurf, hdev, flHooks)
+    {% end %}
   end
 
   def engMarkBandingSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngMarkBandingSurface(hsurf)
+    {% end %}
   end
 
   def engCheckAbort(pso : Win32cr::Devices::Display::SURFOBJ*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngCheckAbort(pso)
+    {% end %}
   end
 
   def engDeletePath(ppo : Win32cr::Devices::Display::PATHOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.EngDeletePath(ppo)
+    {% end %}
   end
 
   def engCreatePalette(iMode : UInt32, cColors : UInt32, pulColors : UInt32*, flRed : UInt32, flGreen : UInt32, flBlue : UInt32) : Win32cr::Graphics::Gdi::HPALETTE
+    {% if !flag?(:docs) %}
     C.EngCreatePalette(iMode, cColors, pulColors, flRed, flGreen, flBlue)
+    {% end %}
   end
 
   def engDeletePalette(hpal : Win32cr::Graphics::Gdi::HPALETTE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngDeletePalette(hpal)
+    {% end %}
   end
 
   def engCreateClip : Win32cr::Devices::Display::CLIPOBJ*
+    {% if !flag?(:docs) %}
     C.EngCreateClip
+    {% end %}
   end
 
   def engDeleteClip(pco : Win32cr::Devices::Display::CLIPOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.EngDeleteClip(pco)
+    {% end %}
   end
 
   def engBitBlt(psoTrg : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclTrg : Win32cr::Foundation::RECTL*, pptlSrc : Win32cr::Foundation::POINTL*, pptlMask : Win32cr::Foundation::POINTL*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrush : Win32cr::Foundation::POINTL*, rop4 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngBitBlt(psoTrg, psoSrc, psoMask, pco, pxlo, prclTrg, pptlSrc, pptlMask, pbo, pptlBrush, rop4)
+    {% end %}
   end
 
   def engLineTo(pso : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, prclBounds : Win32cr::Foundation::RECTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngLineTo(pso, pco, pbo, x1, y1, x2, y2, prclBounds, mix)
+    {% end %}
   end
 
   def engStretchBlt(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlHTOrg : Win32cr::Foundation::POINTL*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pptlMask : Win32cr::Foundation::POINTL*, iMode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStretchBlt(psoDest, psoSrc, psoMask, pco, pxlo, pca, pptlHTOrg, prclDest, prclSrc, pptlMask, iMode)
+    {% end %}
   end
 
   def engStretchBltROP(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlHTOrg : Win32cr::Foundation::POINTL*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pptlMask : Win32cr::Foundation::POINTL*, iMode : UInt32, pbo : Win32cr::Devices::Display::BRUSHOBJ*, rop4 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStretchBltROP(psoDest, psoSrc, psoMask, pco, pxlo, pca, pptlHTOrg, prclDest, prclSrc, pptlMask, iMode, pbo, rop4)
+    {% end %}
   end
 
   def engAlphaBlend(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pBlendObj : Win32cr::Devices::Display::BLENDOBJ*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngAlphaBlend(psoDest, psoSrc, pco, pxlo, prclDest, prclSrc, pBlendObj)
+    {% end %}
   end
 
   def engGradientFill(psoDest : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nMesh : UInt32, prclExtents : Win32cr::Foundation::RECTL*, pptlDitherOrg : Win32cr::Foundation::POINTL*, ulMode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngGradientFill(psoDest, pco, pxlo, pVertex, nVertex, pMesh, nMesh, prclExtents, pptlDitherOrg, ulMode)
+    {% end %}
   end
 
   def engTransparentBlt(psoDst : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDst : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, trans_color : UInt32, bCalledFromBitBlt : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngTransparentBlt(psoDst, psoSrc, pco, pxlo, prclDst, prclSrc, trans_color, bCalledFromBitBlt)
+    {% end %}
   end
 
   def engTextOut(pso : Win32cr::Devices::Display::SURFOBJ*, pstro : Win32cr::Devices::Display::STROBJ*, pfo : Win32cr::Devices::Display::FONTOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, prclExtra : Win32cr::Foundation::RECTL*, prclOpaque : Win32cr::Foundation::RECTL*, pboFore : Win32cr::Devices::Display::BRUSHOBJ*, pboOpaque : Win32cr::Devices::Display::BRUSHOBJ*, pptlOrg : Win32cr::Foundation::POINTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngTextOut(pso, pstro, pfo, pco, prclExtra, prclOpaque, pboFore, pboOpaque, pptlOrg, mix)
+    {% end %}
   end
 
   def engStrokePath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxo : Win32cr::Devices::Display::XFORMOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, plineattrs : Win32cr::Devices::Display::LINEATTRS*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStrokePath(pso, ppo, pco, pxo, pbo, pptlBrushOrg, plineattrs, mix)
+    {% end %}
   end
 
   def engFillPath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mix : UInt32, flOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngFillPath(pso, ppo, pco, pbo, pptlBrushOrg, mix, flOptions)
+    {% end %}
   end
 
   def engStrokeAndFillPath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxo : Win32cr::Devices::Display::XFORMOBJ*, pboStroke : Win32cr::Devices::Display::BRUSHOBJ*, plineattrs : Win32cr::Devices::Display::LINEATTRS*, pboFill : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mixFill : UInt32, flOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStrokeAndFillPath(pso, ppo, pco, pxo, pboStroke, plineattrs, pboFill, pptlBrushOrg, mixFill, flOptions)
+    {% end %}
   end
 
   def engPaint(pso : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngPaint(pso, pco, pbo, pptlBrushOrg, mix)
+    {% end %}
   end
 
   def engCopyBits(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDest : Win32cr::Foundation::RECTL*, pptlSrc : Win32cr::Foundation::POINTL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngCopyBits(psoDest, psoSrc, pco, pxlo, prclDest, pptlSrc)
+    {% end %}
   end
 
   def engPlgBlt(psoTrg : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMsk : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlBrushOrg : Win32cr::Foundation::POINTL*, pptfx : Win32cr::Devices::Display::POINTFIX*, prcl : Win32cr::Foundation::RECTL*, pptl : Win32cr::Foundation::POINTL*, iMode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngPlgBlt(psoTrg, psoSrc, psoMsk, pco, pxlo, pca, pptlBrushOrg, pptfx, prcl, pptl, iMode)
+    {% end %}
   end
 
   def hTGet8BPPFormatPalette(pPaletteEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*, red_gamma : UInt16, green_gamma : UInt16, blue_gamma : UInt16) : Int32
+    {% if !flag?(:docs) %}
     C.HT_Get8BPPFormatPalette(pPaletteEntry, red_gamma, green_gamma, blue_gamma)
+    {% end %}
   end
 
   def hTGet8BPPMaskPalette(pPaletteEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*, use8_bpp_mask_pal : Win32cr::Foundation::BOOL, cmy_mask : UInt8, red_gamma : UInt16, green_gamma : UInt16, blue_gamma : UInt16) : Int32
+    {% if !flag?(:docs) %}
     C.HT_Get8BPPMaskPalette(pPaletteEntry, use8_bpp_mask_pal, cmy_mask, red_gamma, green_gamma, blue_gamma)
+    {% end %}
   end
 
   def engGetPrinterDataFileName(hdev : Win32cr::Devices::Display::HDEV) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.EngGetPrinterDataFileName(hdev)
+    {% end %}
   end
 
   def engGetDriverName(hdev : Win32cr::Devices::Display::HDEV) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.EngGetDriverName(hdev)
+    {% end %}
   end
 
   def engLoadModule(pwsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.EngLoadModule(pwsz)
+    {% end %}
   end
 
   def engFindResource(h : Win32cr::Foundation::HANDLE, iName : Int32, iType : Int32, pulSize : UInt32*) : Void*
+    {% if !flag?(:docs) %}
     C.EngFindResource(h, iName, iType, pulSize)
+    {% end %}
   end
 
   def engFreeModule(h : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.EngFreeModule(h)
+    {% end %}
   end
 
   def engCreateSemaphore : Win32cr::Devices::Display::HSEMAPHORE
+    {% if !flag?(:docs) %}
     C.EngCreateSemaphore
+    {% end %}
   end
 
   def engAcquireSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+    {% if !flag?(:docs) %}
     C.EngAcquireSemaphore(hsem)
+    {% end %}
   end
 
   def engReleaseSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+    {% if !flag?(:docs) %}
     C.EngReleaseSemaphore(hsem)
+    {% end %}
   end
 
   def engDeleteSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+    {% if !flag?(:docs) %}
     C.EngDeleteSemaphore(hsem)
+    {% end %}
   end
 
   def engMultiByteToUnicodeN(unicode_string : Win32cr::Foundation::PWSTR, max_bytes_in_unicode_string : UInt32, bytes_in_unicode_string : UInt32*, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.EngMultiByteToUnicodeN(unicode_string, max_bytes_in_unicode_string, bytes_in_unicode_string, multi_byte_string, bytes_in_multi_byte_string)
+    {% end %}
   end
 
   def engUnicodeToMultiByteN(multi_byte_string : Win32cr::Foundation::PSTR, max_bytes_in_multi_byte_string : UInt32, bytes_in_multi_byte_string : UInt32*, unicode_string : Win32cr::Foundation::PWSTR, bytes_in_unicode_string : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.EngUnicodeToMultiByteN(multi_byte_string, max_bytes_in_multi_byte_string, bytes_in_multi_byte_string, unicode_string, bytes_in_unicode_string)
+    {% end %}
   end
 
   def engQueryLocalTime(param0 : Win32cr::Devices::Display::ENG_TIME_FIELDS*) : Void
+    {% if !flag?(:docs) %}
     C.EngQueryLocalTime(param0)
+    {% end %}
   end
 
   def engComputeGlyphSet(nCodePage : Int32, nFirstChar : Int32, cChars : Int32) : Win32cr::Devices::Display::FD_GLYPHSET*
+    {% if !flag?(:docs) %}
     C.EngComputeGlyphSet(nCodePage, nFirstChar, cChars)
+    {% end %}
   end
 
   def engMultiByteToWideChar(code_page : UInt32, wide_char_string : Win32cr::Foundation::PWSTR, bytes_in_wide_char_string : Int32, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.EngMultiByteToWideChar(code_page, wide_char_string, bytes_in_wide_char_string, multi_byte_string, bytes_in_multi_byte_string)
+    {% end %}
   end
 
   def engWideCharToMultiByte(code_page : UInt32, wide_char_string : Win32cr::Foundation::PWSTR, bytes_in_wide_char_string : Int32, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.EngWideCharToMultiByte(code_page, wide_char_string, bytes_in_wide_char_string, multi_byte_string, bytes_in_multi_byte_string)
+    {% end %}
   end
 
   def engGetCurrentCodePage(oem_code_page : UInt16*, ansi_code_page : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.EngGetCurrentCodePage(oem_code_page, ansi_code_page)
+    {% end %}
   end
 
   def engQueryEMFInfo(hdev : Win32cr::Devices::Display::HDEV, pEMFInfo : Win32cr::Devices::Display::EMFINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngQueryEMFInfo(hdev, pEMFInfo)
+    {% end %}
   end
 
-  def getDisplayConfigBufferSizes(flags : UInt32, numPathArrayElements : UInt32*, numModeInfoArrayElements : UInt32*) : Int32
+  def getDisplayConfigBufferSizes(flags : Win32cr::Devices::Display::QUERY_DISPLAY_CONFIG_FLAGS, numPathArrayElements : UInt32*, numModeInfoArrayElements : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetDisplayConfigBufferSizes(flags, numPathArrayElements, numModeInfoArrayElements)
+    {% end %}
   end
 
-  def setDisplayConfig(numPathArrayElements : UInt32, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, flags : UInt32) : Int32
+  def setDisplayConfig(numPathArrayElements : UInt32, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, flags : Win32cr::Devices::Display::SET_DISPLAY_CONFIG_FLAGS) : Int32
+    {% if !flag?(:docs) %}
     C.SetDisplayConfig(numPathArrayElements, pathArray, numModeInfoArrayElements, modeInfoArray, flags)
+    {% end %}
   end
 
-  def queryDisplayConfig(flags : UInt32, numPathArrayElements : UInt32*, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32*, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, currentTopologyId : Win32cr::Devices::Display::DISPLAYCONFIG_TOPOLOGY_ID*) : Int32
+  def queryDisplayConfig(flags : Win32cr::Devices::Display::QUERY_DISPLAY_CONFIG_FLAGS, numPathArrayElements : UInt32*, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32*, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, currentTopologyId : Win32cr::Devices::Display::DISPLAYCONFIG_TOPOLOGY_ID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.QueryDisplayConfig(flags, numPathArrayElements, pathArray, numModeInfoArrayElements, modeInfoArray, currentTopologyId)
+    {% end %}
   end
 
   def displayConfigGetDeviceInfo(requestPacket : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
+    {% if !flag?(:docs) %}
     C.DisplayConfigGetDeviceInfo(requestPacket)
+    {% end %}
   end
 
   def displayConfigSetDeviceInfo(setPacket : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
+    {% if !flag?(:docs) %}
     C.DisplayConfigSetDeviceInfo(setPacket)
+    {% end %}
   end
 
   def getAutoRotationState(pState : Win32cr::Devices::Display::AR_STATE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAutoRotationState(pState)
+    {% end %}
   end
 
   def getDisplayAutoRotationPreferences(pOrientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDisplayAutoRotationPreferences(pOrientation)
+    {% end %}
   end
 
   def setDisplayAutoRotationPreferences(orientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDisplayAutoRotationPreferences(orientation)
+    {% end %}
   end
 
   @[Link("dxva2")]
   @[Link("gdi32")]
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, pdwNumberOfPhysicalMonitors : UInt32*) : Int32
+    fun GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, pdwNumberOfPhysicalMonitors : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, pdwNumberOfPhysicalMonitors : UInt32*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun GetPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+    fun GetPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun DestroyPhysicalMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    fun DestroyPhysicalMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun DestroyPhysicalMonitors(dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+    fun DestroyPhysicalMonitors(dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetVCPFeatureAndVCPFeatureReply(hMonitor : Win32cr::Foundation::HANDLE, bVCPCode : UInt8, pvct : Win32cr::Devices::Display::MC_VCP_CODE_TYPE*, pdwCurrentValue : UInt32*, pdwMaximumValue : UInt32*) : Int32
@@ -4248,7 +4604,7 @@ module Win32cr::Devices::Display
     fun GetCapabilitiesStringLength(hMonitor : Win32cr::Foundation::HANDLE, pdwCapabilitiesStringLengthInCharacters : UInt32*) : Int32
 
     # :nodoc:
-    fun CapabilitiesRequestAndCapabilitiesReply(hMonitor : Win32cr::Foundation::HANDLE, pszASCIICapabilitiesString : UInt8*, dwCapabilitiesStringLengthInCharacters : UInt32) : Int32
+    fun CapabilitiesRequestAndCapabilitiesReply(hMonitor : Win32cr::Foundation::HANDLE, pszASCIICapabilitiesString : Win32cr::Foundation::PSTR, dwCapabilitiesStringLengthInCharacters : UInt32) : Int32
 
     # :nodoc:
     fun GetTimingReport(hMonitor : Win32cr::Foundation::HANDLE, pmtrMonitorTimingReport : Win32cr::Devices::Display::MC_TIMING_REPORT*) : Int32
@@ -4551,13 +4907,13 @@ module Win32cr::Devices::Display
     fun EngQueryEMFInfo(hdev : Win32cr::Devices::Display::HDEV, pEMFInfo : Win32cr::Devices::Display::EMFINFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetDisplayConfigBufferSizes(flags : UInt32, numPathArrayElements : UInt32*, numModeInfoArrayElements : UInt32*) : Int32
+    fun GetDisplayConfigBufferSizes(flags : Win32cr::Devices::Display::QUERY_DISPLAY_CONFIG_FLAGS, numPathArrayElements : UInt32*, numModeInfoArrayElements : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun SetDisplayConfig(numPathArrayElements : UInt32, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, flags : UInt32) : Int32
+    fun SetDisplayConfig(numPathArrayElements : UInt32, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, flags : Win32cr::Devices::Display::SET_DISPLAY_CONFIG_FLAGS) : Int32
 
     # :nodoc:
-    fun QueryDisplayConfig(flags : UInt32, numPathArrayElements : UInt32*, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32*, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, currentTopologyId : Win32cr::Devices::Display::DISPLAYCONFIG_TOPOLOGY_ID*) : Int32
+    fun QueryDisplayConfig(flags : Win32cr::Devices::Display::QUERY_DISPLAY_CONFIG_FLAGS, numPathArrayElements : UInt32*, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32*, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, currentTopologyId : Win32cr::Devices::Display::DISPLAYCONFIG_TOPOLOGY_ID*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun DisplayConfigGetDeviceInfo(requestPacket : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
@@ -4575,4 +4931,5 @@ module Win32cr::Devices::Display
     fun SetDisplayAutoRotationPreferences(orientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

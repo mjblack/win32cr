@@ -4,12 +4,13 @@ require "./../../media/media_foundation.cr"
 
 module Win32cr::System::WinRT::Media
   extend self
-  CLSID_AudioFrameNativeFactory = "16a0a3b9-9f65-4102-9367-2cda3a4f372a"
-  CLSID_VideoFrameNativeFactory = "d194386a-04e3-4814-8100-b2b0ae6d78c7"
+  CLSID_AudioFrameNativeFactory = LibC::GUID.new(0x16a0a3b9_u32, 0x9f65_u16, 0x4102_u16, StaticArray[0x93_u8, 0x67_u8, 0x2c_u8, 0xda_u8, 0x3a_u8, 0x4f_u8, 0x37_u8, 0x2a_u8])
+  CLSID_VideoFrameNativeFactory = LibC::GUID.new(0xd194386a_u32, 0x4e3_u16, 0x4814_u16, StaticArray[0x81_u8, 0x0_u8, 0xb2_u8, 0xb0_u8, 0xae_u8, 0x6d_u8, 0x78_u8, 0xc7_u8])
 
 
   @[Extern]
-  record IAudioFrameNativeVtbl,
+
+  record IAudioFrameNativeVtable,
     query_interface : Proc(IAudioFrameNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioFrameNative*, UInt32),
     release : Proc(IAudioFrameNative*, UInt32),
@@ -20,7 +21,7 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  record IAudioFrameNative, lpVtbl : IAudioFrameNativeVtbl* do
+  record IAudioFrameNative, lpVtbl : IAudioFrameNativeVtable* do
     GUID = LibC::GUID.new(0x20be1e2e_u32, 0x930f_u16, 0x4746_u16, StaticArray[0x93_u8, 0x35_u8, 0x3c_u8, 0x33_u8, 0x2f_u8, 0x25_u8, 0x50_u8, 0x93_u8])
     def query_interface(this : IAudioFrameNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47,7 +48,8 @@ module Win32cr::System::WinRT::Media
   end
 
   @[Extern]
-  record IVideoFrameNativeVtbl,
+
+  record IVideoFrameNativeVtable,
     query_interface : Proc(IVideoFrameNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVideoFrameNative*, UInt32),
     release : Proc(IVideoFrameNative*, UInt32),
@@ -59,7 +61,7 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  record IVideoFrameNative, lpVtbl : IVideoFrameNativeVtbl* do
+  record IVideoFrameNative, lpVtbl : IVideoFrameNativeVtable* do
     GUID = LibC::GUID.new(0x26ba702b_u32, 0x314a_u16, 0x4620_u16, StaticArray[0xaa_u8, 0xf6_u8, 0x7a_u8, 0x51_u8, 0xaa_u8, 0x58_u8, 0xfa_u8, 0x18_u8])
     def query_interface(this : IVideoFrameNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -89,7 +91,8 @@ module Win32cr::System::WinRT::Media
   end
 
   @[Extern]
-  record IAudioFrameNativeFactoryVtbl,
+
+  record IAudioFrameNativeFactoryVtable,
     query_interface : Proc(IAudioFrameNativeFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioFrameNativeFactory*, UInt32),
     release : Proc(IAudioFrameNativeFactory*, UInt32),
@@ -100,7 +103,7 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  record IAudioFrameNativeFactory, lpVtbl : IAudioFrameNativeFactoryVtbl* do
+  record IAudioFrameNativeFactory, lpVtbl : IAudioFrameNativeFactoryVtable* do
     GUID = LibC::GUID.new(0x7bd67cf8_u32, 0xbf7d_u16, 0x43e6_u16, StaticArray[0xaf_u8, 0x8d_u8, 0xb1_u8, 0x70_u8, 0xee_u8, 0xc_u8, 0x1_u8, 0x10_u8])
     def query_interface(this : IAudioFrameNativeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -127,7 +130,8 @@ module Win32cr::System::WinRT::Media
   end
 
   @[Extern]
-  record IVideoFrameNativeFactoryVtbl,
+
+  record IVideoFrameNativeFactoryVtable,
     query_interface : Proc(IVideoFrameNativeFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVideoFrameNativeFactory*, UInt32),
     release : Proc(IVideoFrameNativeFactory*, UInt32),
@@ -138,7 +142,7 @@ module Win32cr::System::WinRT::Media
 
 
   @[Extern]
-  record IVideoFrameNativeFactory, lpVtbl : IVideoFrameNativeFactoryVtbl* do
+  record IVideoFrameNativeFactory, lpVtbl : IVideoFrameNativeFactoryVtable* do
     GUID = LibC::GUID.new(0x69e3693e_u32, 0x8e1e_u16, 0x4e63_u16, StaticArray[0xac_u8, 0x4c_u8, 0x7f_u8, 0xdc_u8, 0x21_u8, 0xd9_u8, 0x73_u8, 0x1d_u8])
     def query_interface(this : IVideoFrameNativeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

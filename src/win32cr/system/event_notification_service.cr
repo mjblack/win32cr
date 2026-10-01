@@ -8,13 +8,13 @@ module Win32cr::System::EventNotificationService
   NETWORK_ALIVE_AOL = 4_u32
   NETWORK_ALIVE_INTERNET = 8_u32
   CONNECTION_AOL = 4_u32
-  SENSGUID_PUBLISHER = "5fee1bd6-5b9b-11d1-8dd2-00aa004abd5e"
-  SENSGUID_SUBSCRIBER_LCE = "d3938ab0-5b9d-11d1-8dd2-00aa004abd5e"
-  SENSGUID_SUBSCRIBER_WININET = "d3938ab5-5b9d-11d1-8dd2-00aa004abd5e"
-  SENSGUID_EVENTCLASS_NETWORK = "d5978620-5b9f-11d1-8dd2-00aa004abd5e"
-  SENSGUID_EVENTCLASS_LOGON = "d5978630-5b9f-11d1-8dd2-00aa004abd5e"
-  SENSGUID_EVENTCLASS_ONNOW = "d5978640-5b9f-11d1-8dd2-00aa004abd5e"
-  SENSGUID_EVENTCLASS_LOGON2 = "d5978650-5b9f-11d1-8dd2-00aa004abd5e"
+  SENSGUID_PUBLISHER = LibC::GUID.new(0x5fee1bd6_u32, 0x5b9b_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
+  SENSGUID_SUBSCRIBER_LCE = LibC::GUID.new(0xd3938ab0_u32, 0x5b9d_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
+  SENSGUID_SUBSCRIBER_WININET = LibC::GUID.new(0xd3938ab5_u32, 0x5b9d_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
+  SENSGUID_EVENTCLASS_NETWORK = LibC::GUID.new(0xd5978620_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
+  SENSGUID_EVENTCLASS_LOGON = LibC::GUID.new(0xd5978630_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
+  SENSGUID_EVENTCLASS_ONNOW = LibC::GUID.new(0xd5978640_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
+  SENSGUID_EVENTCLASS_LOGON2 = LibC::GUID.new(0xd5978650_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
 
   CLSID_SENS = LibC::GUID.new(0xd597cafe_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
 
@@ -44,14 +44,15 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensNetworkVtbl,
+
+  record ISensNetworkVtable,
     query_interface : Proc(ISensNetwork*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensNetwork*, UInt32),
     release : Proc(ISensNetwork*, UInt32),
     get_type_info_count : Proc(ISensNetwork*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISensNetwork*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISensNetwork*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISensNetwork*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISensNetwork*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     connection_made : Proc(ISensNetwork*, Win32cr::Foundation::BSTR, UInt32, Win32cr::System::EventNotificationService::SENS_QOCINFO*, Win32cr::Foundation::HRESULT),
     connection_made_no_qoc_info : Proc(ISensNetwork*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT),
     connection_lost : Proc(ISensNetwork*, Win32cr::Foundation::BSTR, Win32cr::System::EventNotificationService::SENS_CONNECTION_TYPE, Win32cr::Foundation::HRESULT),
@@ -60,7 +61,7 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  record ISensNetwork, lpVtbl : ISensNetworkVtbl* do
+  record ISensNetwork, lpVtbl : ISensNetworkVtable* do
     GUID = LibC::GUID.new(0xd597bab1_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -80,8 +81,8 @@ module Win32cr::System::EventNotificationService
     def get_i_ds_of_names(this : ISensNetwork*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISensNetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISensNetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def connection_made(this : ISensNetwork*, bstrConnection : Win32cr::Foundation::BSTR, ulType : UInt32, lpQOCInfo : Win32cr::System::EventNotificationService::SENS_QOCINFO*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connection_made.call(this, bstrConnection, ulType, lpQOCInfo)
@@ -102,21 +103,22 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensOnNowVtbl,
+
+  record ISensOnNowVtable,
     query_interface : Proc(ISensOnNow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensOnNow*, UInt32),
     release : Proc(ISensOnNow*, UInt32),
     get_type_info_count : Proc(ISensOnNow*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISensOnNow*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISensOnNow*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISensOnNow*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISensOnNow*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     on_ac_power : Proc(ISensOnNow*, Win32cr::Foundation::HRESULT),
     on_battery_power : Proc(ISensOnNow*, UInt32, Win32cr::Foundation::HRESULT),
     battery_low : Proc(ISensOnNow*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISensOnNow, lpVtbl : ISensOnNowVtbl* do
+  record ISensOnNow, lpVtbl : ISensOnNowVtable* do
     GUID = LibC::GUID.new(0xd597bab2_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensOnNow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -136,8 +138,8 @@ module Win32cr::System::EventNotificationService
     def get_i_ds_of_names(this : ISensOnNow*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISensOnNow*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISensOnNow*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def on_ac_power(this : ISensOnNow*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_ac_power.call(this)
@@ -152,14 +154,15 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensLogonVtbl,
+
+  record ISensLogonVtable,
     query_interface : Proc(ISensLogon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensLogon*, UInt32),
     release : Proc(ISensLogon*, UInt32),
     get_type_info_count : Proc(ISensLogon*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISensLogon*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISensLogon*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISensLogon*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISensLogon*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     logon : Proc(ISensLogon*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     logoff : Proc(ISensLogon*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     start_shell : Proc(ISensLogon*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -170,7 +173,7 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  record ISensLogon, lpVtbl : ISensLogonVtbl* do
+  record ISensLogon, lpVtbl : ISensLogonVtable* do
     GUID = LibC::GUID.new(0xd597bab3_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensLogon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -190,8 +193,8 @@ module Win32cr::System::EventNotificationService
     def get_i_ds_of_names(this : ISensLogon*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISensLogon*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISensLogon*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def logon(this : ISensLogon*, bstrUserName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.logon.call(this, bstrUserName)
@@ -218,14 +221,15 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensLogon2Vtbl,
+
+  record ISensLogon2Vtable,
     query_interface : Proc(ISensLogon2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensLogon2*, UInt32),
     release : Proc(ISensLogon2*, UInt32),
     get_type_info_count : Proc(ISensLogon2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISensLogon2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISensLogon2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISensLogon2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISensLogon2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     logon : Proc(ISensLogon2*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT),
     logoff : Proc(ISensLogon2*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT),
     session_disconnect : Proc(ISensLogon2*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT),
@@ -234,7 +238,7 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  record ISensLogon2, lpVtbl : ISensLogon2Vtbl* do
+  record ISensLogon2, lpVtbl : ISensLogon2Vtable* do
     GUID = LibC::GUID.new(0xd597bab4_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensLogon2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -254,8 +258,8 @@ module Win32cr::System::EventNotificationService
     def get_i_ds_of_names(this : ISensLogon2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISensLogon2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISensLogon2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def logon(this : ISensLogon2*, bstrUserName : Win32cr::Foundation::BSTR, dwSessionId : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.logon.call(this, bstrUserName, dwSessionId)
@@ -276,18 +280,25 @@ module Win32cr::System::EventNotificationService
   end
 
   def isDestinationReachableA(lpszDestination : Win32cr::Foundation::PSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDestinationReachableA(lpszDestination, lpQOCInfo)
+    {% end %}
   end
 
   def isDestinationReachableW(lpszDestination : Win32cr::Foundation::PWSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDestinationReachableW(lpszDestination, lpQOCInfo)
+    {% end %}
   end
 
   def isNetworkAlive(lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsNetworkAlive(lpdwFlags)
+    {% end %}
   end
 
   @[Link("sensapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun IsDestinationReachableA(lpszDestination : Win32cr::Foundation::PSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
@@ -299,4 +310,5 @@ module Win32cr::System::EventNotificationService
     fun IsNetworkAlive(lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

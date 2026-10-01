@@ -1,5 +1,5 @@
-require "./ndis.cr"
 require "./../foundation.cr"
+require "./ndis.cr"
 require "./../security/extensible_authentication_protocol.cr"
 require "./../system/com.cr"
 require "./../system/remote_desktop.cr"
@@ -158,6 +158,8 @@ module Win32cr::NetworkManagement::WiFi
   L2_REASON_CODE_PROFILE_MISSING = 1_u32
   DOT11_BSSID_LIST_REVISION_1 = 1_u32
   DOT11_HESSID_LENGTH = 6_u32
+  RSNA_OUI_PREFIX = 11276032_u32
+  WPA_OUI_PREFIX = 15880192_u32
   DOT11_RATE_SET_MAX_LENGTH = 126_u32
   DOT11_WFD_SERVICE_NAME_MAX_LENGTH = 255_u32
   DOT11_WFD_APS2_SERVICE_TYPE_MAX_LENGTH = 21_u32
@@ -590,95 +592,71 @@ module Win32cr::NetworkManagement::WiFi
   DOT11_SSID_MAX_LENGTH = 32_u32
   DOT11_OI_MAX_LENGTH = 5_u32
   DOT11_OI_MIN_LENGTH = 3_u32
-  DevProp_PciRootBus_SecondaryInterface_PciConventional = 0_u32
-  DevProp_PciRootBus_SecondaryInterface_PciXMode1 = 1_u32
-  DevProp_PciRootBus_SecondaryInterface_PciXMode2 = 2_u32
-  DevProp_PciRootBus_SecondaryInterface_PciExpress = 3_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz = 0_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz = 1_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz = 2_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz = 3_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz = 4_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz = 5_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz = 6_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz = 7_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz = 8_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz = 9_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz = 10_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz = 11_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz = 12_u32
-  DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz = 13_u32
-  DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz = 1_u32
-  DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz = 2_u32
-  DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz = 4_u32
-  DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz = 8_u32
-  DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz = 16_u32
-  DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz = 32_u32
-  DevProp_PciRootBus_BusWidth_32Bits = 0_u32
-  DevProp_PciRootBus_BusWidth_64Bits = 1_u32
-  DevProp_PciDevice_DeviceType_PciConventional = 0_u32
-  DevProp_PciDevice_DeviceType_PciX = 1_u32
-  DevProp_PciDevice_DeviceType_PciExpressEndpoint = 2_u32
-  DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint = 3_u32
-  DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint = 4_u32
-  DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci = 5_u32
-  DevProp_PciDevice_BridgeType_PciConventional = 6_u32
-  DevProp_PciDevice_BridgeType_PciX = 7_u32
-  DevProp_PciDevice_BridgeType_PciExpressRootPort = 8_u32
-  DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort = 9_u32
-  DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort = 10_u32
-  DevProp_PciDevice_BridgeType_PciExpressToPciXBridge = 11_u32
-  DevProp_PciDevice_BridgeType_PciXToExpressBridge = 12_u32
-  DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci = 13_u32
-  DevProp_PciDevice_BridgeType_PciExpressEventCollector = 14_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz = 0_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz = 1_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode_Conventional_Pci = 0_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_66Mhz = 1_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz = 2_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ = 3_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz = 5_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz = 6_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz = 7_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz = 9_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz = 10_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz = 11_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz = 13_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz = 14_u32
-  DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz = 15_u32
-  DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes = 0_u32
-  DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes = 1_u32
-  DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes = 2_u32
-  DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes = 3_u32
-  DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes = 4_u32
-  DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes = 5_u32
-  DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps = 1_u32
-  DevProp_PciExpressDevice_LinkSpeed_Five_Gbps = 2_u32
-  DevProp_PciExpressDevice_LinkWidth_By_1 = 1_u32
-  DevProp_PciExpressDevice_LinkWidth_By_2 = 2_u32
-  DevProp_PciExpressDevice_LinkWidth_By_4 = 4_u32
-  DevProp_PciExpressDevice_LinkWidth_By_8 = 8_u32
-  DevProp_PciExpressDevice_LinkWidth_By_12 = 12_u32
-  DevProp_PciExpressDevice_LinkWidth_By_16 = 16_u32
-  DevProp_PciExpressDevice_LinkWidth_By_32 = 32_u32
-  DevProp_PciExpressDevice_Spec_Version_10 = 1_u32
-  DevProp_PciExpressDevice_Spec_Version_11 = 2_u32
-  DevProp_PciDevice_InterruptType_LineBased = 1_u32
-  DevProp_PciDevice_InterruptType_Msi = 2_u32
-  DevProp_PciDevice_InterruptType_MsiX = 4_u32
-  DevProp_PciDevice_SriovSupport_Ok = 0_u32
-  DevProp_PciDevice_SriovSupport_MissingAcs = 1_u32
-  DevProp_PciDevice_SriovSupport_MissingPfDriver = 2_u32
-  DevProp_PciDevice_SriovSupport_NoBusResource = 3_u32
-  DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace = 4_u32
-  DevProp_PciDevice_AcsSupport_Present = 0_u32
-  DevProp_PciDevice_AcsSupport_NotNeeded = 1_u32
-  DevProp_PciDevice_AcsSupport_Missing = 2_u32
-  DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported = 0_u32
-  DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported = 1_u32
-  DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported = 2_u32
-  DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported = 3_u32
-  DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced = 4_u32
+  DEVPKEY_PciRootBus_SecondaryInterface = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 1_u32)
+  DEVPKEY_PciRootBus_CurrentSpeedAndMode = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 2_u32)
+  DEVPKEY_PciRootBus_SupportedSpeedsAndModes = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 3_u32)
+  DEVPKEY_PciRootBus_DeviceIDMessagingCapable = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 4_u32)
+  DEVPKEY_PciRootBus_SecondaryBusWidth = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 5_u32)
+  DEVPKEY_PciRootBus_ExtendedConfigAvailable = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 6_u32)
+  DEVPKEY_PciRootBus_ExtendedPCIConfigOpRegionSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 7_u32)
+  DEVPKEY_PciRootBus_ASPMSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 8_u32)
+  DEVPKEY_PciRootBus_ClockPowerManagementSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 9_u32)
+  DEVPKEY_PciRootBus_PCISegmentGroupsSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 10_u32)
+  DEVPKEY_PciRootBus_MSISupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 11_u32)
+  DEVPKEY_PciRootBus_PCIExpressNativeHotPlugControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 12_u32)
+  DEVPKEY_PciRootBus_SHPCNativeHotPlugControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 13_u32)
+  DEVPKEY_PciRootBus_PCIExpressNativePMEControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 14_u32)
+  DEVPKEY_PciRootBus_PCIExpressAERControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 15_u32)
+  DEVPKEY_PciRootBus_PCIExpressCapabilityControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 16_u32)
+  DEVPKEY_PciRootBus_NativePciExpressControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 17_u32)
+  DEVPKEY_PciRootBus_SystemMsiSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 18_u32)
+  DEVPKEY_PciDevice_DeviceType = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 1_u32)
+  DEVPKEY_PciDevice_CurrentSpeedAndMode = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 2_u32)
+  DEVPKEY_PciDevice_BaseClass = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 3_u32)
+  DEVPKEY_PciDevice_SubClass = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 4_u32)
+  DEVPKEY_PciDevice_ProgIf = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 5_u32)
+  DEVPKEY_PciDevice_CurrentPayloadSize = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 6_u32)
+  DEVPKEY_PciDevice_MaxPayloadSize = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 7_u32)
+  DEVPKEY_PciDevice_MaxReadRequestSize = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 8_u32)
+  DEVPKEY_PciDevice_CurrentLinkSpeed = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 9_u32)
+  DEVPKEY_PciDevice_CurrentLinkWidth = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 10_u32)
+  DEVPKEY_PciDevice_MaxLinkSpeed = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 11_u32)
+  DEVPKEY_PciDevice_MaxLinkWidth = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 12_u32)
+  DEVPKEY_PciDevice_ExpressSpecVersion = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 13_u32)
+  DEVPKEY_PciDevice_InterruptSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 14_u32)
+  DEVPKEY_PciDevice_InterruptMessageMaximum = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 15_u32)
+  DEVPKEY_PciDevice_BarTypes = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 16_u32)
+  DEVPKEY_PciDevice_AERCapabilityPresent = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 17_u32)
+  DEVPKEY_PciDevice_FirmwareErrorHandling = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 18_u32)
+  DEVPKEY_PciDevice_Uncorrectable_Error_Mask = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 19_u32)
+  DEVPKEY_PciDevice_Uncorrectable_Error_Severity = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 20_u32)
+  DEVPKEY_PciDevice_Correctable_Error_Mask = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 21_u32)
+  DEVPKEY_PciDevice_ECRC_Errors = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 22_u32)
+  DEVPKEY_PciDevice_Error_Reporting = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 23_u32)
+  DEVPKEY_PciDevice_RootError_Reporting = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 24_u32)
+  DEVPKEY_PciDevice_S0WakeupSupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 25_u32)
+  DEVPKEY_PciDevice_SriovSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 26_u32)
+  DEVPKEY_PciDevice_Label_Id = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 27_u32)
+  DEVPKEY_PciDevice_Label_String = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 28_u32)
+  DEVPKEY_PciDevice_AcsSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 29_u32)
+  DEVPKEY_PciDevice_AriSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 30_u32)
+  DEVPKEY_PciDevice_AcsCompatibleUpHierarchy = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 31_u32)
+  DEVPKEY_PciDevice_AcsCapabilityRegister = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 32_u32)
+  DEVPKEY_PciDevice_AtsSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 33_u32)
+  DEVPKEY_PciDevice_RequiresReservedMemoryRegion = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 34_u32)
+  DEVPKEY_PciDevice_AtomicsSupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 35_u32)
+  DEVPKEY_PciDevice_SupportedLinkSubState = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 36_u32)
+  DEVPKEY_PciDevice_OnPostPath = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 37_u32)
+  DEVPKEY_PciDevice_D3ColdSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 38_u32)
+  DEVPKEY_PciDevice_VirtualChannelControlRegisters = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 39_u32)
+  DEVPKEY_PciDevice_SerialNumber = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 40_u32)
+  DEVPKEY_PciDevice_UsbDvsecPortType = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 41_u32)
+  DEVPKEY_PciDevice_UsbDvsecPortSpecificAttributes = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 42_u32)
+  DEVPKEY_PciDevice_UsbComponentRelation = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 43_u32)
+  DEVPKEY_PciDevice_UsbHostRouterName = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 44_u32)
+  DEVPKEY_PciDevice_ParentSerialNumber = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 45_u32)
+  DEVPKEY_PciDevice_SupportsDmwrOnEntireDeviceTree = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 46_u32)
+  DEVPKEY_PciDevice_IsTunneledDevice = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 47_u32)
   WLAN_API_VERSION_1_0 = 1_u32
   WLAN_API_VERSION_2_0 = 2_u32
   WLAN_API_VERSION = 2_u32
@@ -847,61 +825,52 @@ module Win32cr::NetworkManagement::WiFi
   WLAN_CONNECTION_PERSIST_DISCOVERY_PROFILE = 16_u32
   WLAN_CONNECTION_PERSIST_DISCOVERY_PROFILE_CONNECTION_MODE_AUTO = 32_u32
   WLAN_CONNECTION_PERSIST_DISCOVERY_PROFILE_OVERWRITE_EXISTING = 64_u32
-  WLAN_NOTIFICATION_SOURCE_NONE = 0_u32
-  WLAN_NOTIFICATION_SOURCE_ALL = 65535_u32
-  WLAN_NOTIFICATION_SOURCE_ACM = 8_u32
-  WLAN_NOTIFICATION_SOURCE_MSM = 16_u32
-  WLAN_NOTIFICATION_SOURCE_SECURITY = 32_u32
-  WLAN_NOTIFICATION_SOURCE_IHV = 64_u32
-  WLAN_NOTIFICATION_SOURCE_HNWK = 128_u32
-  WLAN_NOTIFICATION_SOURCE_ONEX = 4_u32
-  WLAN_NOTIFICATION_SOURCE_DEVICE_SERVICE = 2048_u32
   WFD_API_VERSION_1_0 = 1_u32
   WFD_API_VERSION = 1_u32
   WLAN_UI_API_VERSION = 1_u32
   WLAN_UI_API_INITIAL_VERSION = 1_u32
-  GUID_DEVINTERFACE_WIFIDIRECT_DEVICE = "439b20af-8955-405b-99f0-a62af0c68d43"
-  GUID_AEPSERVICE_WIFIDIRECT_DEVICE = "cc29827c-9caf-4928-99a9-18f7c2381389"
-  GUID_DEVINTERFACE_ASP_INFRA_DEVICE = "ff823995-7a72-4c80-8757-c67ee13d1a49"
-  DEVPKEY_WiFiDirect_DeviceAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 1_u32)
-  DEVPKEY_WiFiDirect_InterfaceAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 2_u32)
-  DEVPKEY_WiFiDirect_InterfaceGuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 3_u32)
-  DEVPKEY_WiFiDirect_GroupId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 4_u32)
-  DEVPKEY_WiFiDirect_IsConnected = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 5_u32)
-  DEVPKEY_WiFiDirect_IsVisible = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 6_u32)
-  DEVPKEY_WiFiDirect_IsLegacyDevice = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 7_u32)
-  DEVPKEY_WiFiDirect_MiracastVersion = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 8_u32)
-  DEVPKEY_WiFiDirect_IsMiracastLCPSupported = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 9_u32)
-  DEVPKEY_WiFiDirect_Services = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 10_u32)
-  DEVPKEY_WiFiDirect_SupportedChannelList = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 11_u32)
-  DEVPKEY_WiFiDirect_InformationElements = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 12_u32)
-  DEVPKEY_WiFiDirect_DeviceAddressCopy = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 13_u32)
-  DEVPKEY_WiFiDirect_IsRecentlyAssociated = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 14_u32)
-  DEVPKEY_WiFiDirect_Service_Aeps = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 15_u32)
-  DEVPKEY_WiFiDirect_NoMiracastAutoProject = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 16_u32)
-  DEVPKEY_InfraCast_Supported = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 17_u32)
-  DEVPKEY_InfraCast_StreamSecuritySupported = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 18_u32)
-  DEVPKEY_InfraCast_AccessPointBssid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 19_u32)
-  DEVPKEY_InfraCast_SinkHostName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 20_u32)
-  DEVPKEY_InfraCast_ChallengeAep = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 21_u32)
-  DEVPKEY_WiFiDirect_IsDMGCapable = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 22_u32)
-  DEVPKEY_InfraCast_DevnodeAep = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 23_u32)
-  DEVPKEY_WiFiDirect_FoundWsbService = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 24_u32)
-  DEVPKEY_InfraCast_HostName_ResolutionMode = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 25_u32)
-  DEVPKEY_InfraCast_SinkIpAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 26_u32)
-  DEVPKEY_WiFiDirect_TransientAssociation = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 27_u32)
-  DEVPKEY_WiFiDirect_LinkQuality = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 28_u32)
-  DEVPKEY_InfraCast_PinSupported = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 29_u32)
-  DEVPKEY_InfraCast_RtspTcpConnectionParametersSupported = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 30_u32)
-  DEVPKEY_WiFiDirect_Miracast_SessionMgmtControlPort = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 31_u32)
-  DEVPKEY_WiFiDirect_RtspTcpConnectionParametersSupported = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 32_u32)
-  DEVPKEY_WiFiDirectServices_ServiceAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 2_u32)
-  DEVPKEY_WiFiDirectServices_ServiceName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 3_u32)
-  DEVPKEY_WiFiDirectServices_ServiceInformation = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 4_u32)
-  DEVPKEY_WiFiDirectServices_AdvertisementId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 5_u32)
-  DEVPKEY_WiFiDirectServices_ServiceConfigMethods = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 6_u32)
-  DEVPKEY_WiFiDirectServices_RequestServiceInformation = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 7_u32)
-  DEVPKEY_WiFi_InterfaceGuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xef1167eb_u32, 0xcbfc_u16, 0x4341_u16, StaticArray[0xa5_u8, 0x68_u8, 0xa7_u8, 0xc9_u8, 0x1a_u8, 0x68_u8, 0x98_u8, 0x2c_u8]), 2_u32)
+  GUID_DEVINTERFACE_WIFIDIRECT_DEVICE = LibC::GUID.new(0x439b20af_u32, 0x8955_u16, 0x405b_u16, StaticArray[0x99_u8, 0xf0_u8, 0xa6_u8, 0x2a_u8, 0xf0_u8, 0xc6_u8, 0x8d_u8, 0x43_u8])
+  GUID_AEPSERVICE_WIFIDIRECT_DEVICE = LibC::GUID.new(0xcc29827c_u32, 0x9caf_u16, 0x4928_u16, StaticArray[0x99_u8, 0xa9_u8, 0x18_u8, 0xf7_u8, 0xc2_u8, 0x38_u8, 0x13_u8, 0x89_u8])
+  GUID_DEVINTERFACE_ASP_INFRA_DEVICE = LibC::GUID.new(0xff823995_u32, 0x7a72_u16, 0x4c80_u16, StaticArray[0x87_u8, 0x57_u8, 0xc6_u8, 0x7e_u8, 0xe1_u8, 0x3d_u8, 0x1a_u8, 0x49_u8])
+  DEVPKEY_WiFiDirect_DeviceAddress = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 1_u32)
+  DEVPKEY_WiFiDirect_InterfaceAddress = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 2_u32)
+  DEVPKEY_WiFiDirect_InterfaceGuid = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 3_u32)
+  DEVPKEY_WiFiDirect_GroupId = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 4_u32)
+  DEVPKEY_WiFiDirect_IsConnected = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 5_u32)
+  DEVPKEY_WiFiDirect_IsVisible = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 6_u32)
+  DEVPKEY_WiFiDirect_IsLegacyDevice = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 7_u32)
+  DEVPKEY_WiFiDirect_MiracastVersion = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 8_u32)
+  DEVPKEY_WiFiDirect_IsMiracastLCPSupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 9_u32)
+  DEVPKEY_WiFiDirect_Services = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 10_u32)
+  DEVPKEY_WiFiDirect_SupportedChannelList = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 11_u32)
+  DEVPKEY_WiFiDirect_InformationElements = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 12_u32)
+  DEVPKEY_WiFiDirect_DeviceAddressCopy = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 13_u32)
+  DEVPKEY_WiFiDirect_IsRecentlyAssociated = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 14_u32)
+  DEVPKEY_WiFiDirect_Service_Aeps = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 15_u32)
+  DEVPKEY_WiFiDirect_NoMiracastAutoProject = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 16_u32)
+  DEVPKEY_InfraCast_Supported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 17_u32)
+  DEVPKEY_InfraCast_StreamSecuritySupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 18_u32)
+  DEVPKEY_InfraCast_AccessPointBssid = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 19_u32)
+  DEVPKEY_InfraCast_SinkHostName = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 20_u32)
+  DEVPKEY_InfraCast_ChallengeAep = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 21_u32)
+  DEVPKEY_WiFiDirect_IsDMGCapable = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 22_u32)
+  DEVPKEY_InfraCast_DevnodeAep = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 23_u32)
+  DEVPKEY_WiFiDirect_FoundWsbService = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 24_u32)
+  DEVPKEY_InfraCast_HostName_ResolutionMode = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 25_u32)
+  DEVPKEY_InfraCast_SinkIpAddress = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 26_u32)
+  DEVPKEY_WiFiDirect_TransientAssociation = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 27_u32)
+  DEVPKEY_WiFiDirect_LinkQuality = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 28_u32)
+  DEVPKEY_InfraCast_PinSupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 29_u32)
+  DEVPKEY_InfraCast_RtspTcpConnectionParametersSupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 30_u32)
+  DEVPKEY_WiFiDirect_Miracast_SessionMgmtControlPort = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 31_u32)
+  DEVPKEY_WiFiDirect_RtspTcpConnectionParametersSupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x1506935d_u32, 0xe3e7_u16, 0x450f_u16, StaticArray[0x86_u8, 0x37_u8, 0x82_u8, 0x23_u8, 0x3e_u8, 0xbe_u8, 0x5f_u8, 0x6e_u8]), 32_u32)
+  DEVPKEY_WiFiDirectServices_ServiceAddress = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 2_u32)
+  DEVPKEY_WiFiDirectServices_ServiceName = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 3_u32)
+  DEVPKEY_WiFiDirectServices_ServiceInformation = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 4_u32)
+  DEVPKEY_WiFiDirectServices_AdvertisementId = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 5_u32)
+  DEVPKEY_WiFiDirectServices_ServiceConfigMethods = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 6_u32)
+  DEVPKEY_WiFiDirectServices_RequestServiceInformation = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 7_u32)
+  DEVPKEY_WiFi_InterfaceGuid = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xef1167eb_u32, 0xcbfc_u16, 0x4341_u16, StaticArray[0xa5_u8, 0x68_u8, 0xa7_u8, 0xc9_u8, 0x1a_u8, 0x68_u8, 0x98_u8, 0x2c_u8]), 2_u32)
   DOT11EXT_PSK_MAX_LENGTH = 64_u32
   WDIAG_IHV_WLAN_ID_FLAG_SECURITY_ENABLED = 1_u32
   IHV_VERSION_FUNCTION_NAME = "Dot11ExtIhvGetVersionInfo"
@@ -919,6 +888,135 @@ module Win32cr::NetworkManagement::WiFi
   enum WLAN_CONNECTION_NOTIFICATION_FLAGS : UInt32
     WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED = 1_u32
     WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE = 4_u32
+  end
+  @[Flags]
+  enum WLAN_NOTIFICATION_SOURCES : UInt32
+    WLAN_NOTIFICATION_SOURCE_NONE = 0_u32
+    WLAN_NOTIFICATION_SOURCE_ALL = 65535_u32
+    WLAN_NOTIFICATION_SOURCE_ACM = 8_u32
+    WLAN_NOTIFICATION_SOURCE_MSM = 16_u32
+    WLAN_NOTIFICATION_SOURCE_SECURITY = 32_u32
+    WLAN_NOTIFICATION_SOURCE_IHV = 64_u32
+    WLAN_NOTIFICATION_SOURCE_HNWK = 128_u32
+    WLAN_NOTIFICATION_SOURCE_ONEX = 4_u32
+    WLAN_NOTIFICATION_SOURCE_DEVICE_SERVICE = 2048_u32
+  end
+  enum DEVPROP_PCIROOTBUS_SECONDARYINTERFACE : UInt32
+    DevProp_PciRootBus_SecondaryInterface_PciConventional = 0_u32
+    DevProp_PciRootBus_SecondaryInterface_PciXMode1 = 1_u32
+    DevProp_PciRootBus_SecondaryInterface_PciXMode2 = 2_u32
+    DevProp_PciRootBus_SecondaryInterface_PciExpress = 3_u32
+  end
+  enum DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE : UInt32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz = 0_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz = 1_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz = 2_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz = 3_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz = 4_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz = 5_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz = 6_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz = 7_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz = 8_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz = 9_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz = 10_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz = 11_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz = 12_u32
+    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz = 13_u32
+  end
+  enum DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES : UInt32
+    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz = 1_u32
+    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz = 2_u32
+    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz = 4_u32
+    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz = 8_u32
+    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz = 16_u32
+    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz = 32_u32
+  end
+  enum DEVPROP_PCIROOTBUS_BUSWIDTH : UInt32
+    DevProp_PciRootBus_BusWidth_32Bits = 0_u32
+    DevProp_PciRootBus_BusWidth_64Bits = 1_u32
+  end
+  enum DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE : UInt32
+    DevProp_PciDevice_DeviceType_PciConventional = 0_u32
+    DevProp_PciDevice_DeviceType_PciX = 1_u32
+    DevProp_PciDevice_DeviceType_PciExpressEndpoint = 2_u32
+    DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint = 3_u32
+    DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint = 4_u32
+    DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci = 5_u32
+    DevProp_PciDevice_BridgeType_PciConventional = 6_u32
+    DevProp_PciDevice_BridgeType_PciX = 7_u32
+    DevProp_PciDevice_BridgeType_PciExpressRootPort = 8_u32
+    DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort = 9_u32
+    DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort = 10_u32
+    DevProp_PciDevice_BridgeType_PciExpressToPciXBridge = 11_u32
+    DevProp_PciDevice_BridgeType_PciXToExpressBridge = 12_u32
+    DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci = 13_u32
+    DevProp_PciDevice_BridgeType_PciExpressEventCollector = 14_u32
+  end
+  enum DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE : UInt32
+    DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz = 0_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz = 1_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode_Conventional_Pci = 0_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_66Mhz = 1_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz = 2_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ = 3_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz = 5_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz = 6_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz = 7_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz = 9_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz = 10_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz = 11_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz = 13_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz = 14_u32
+    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz = 15_u32
+  end
+  enum DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE : UInt32
+    DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes = 0_u32
+    DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes = 1_u32
+    DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes = 2_u32
+    DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes = 3_u32
+    DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes = 4_u32
+    DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes = 5_u32
+  end
+  enum DEVPROP_PCIEXPRESSDEVICE_LINKSPEED : UInt32
+    DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps = 1_u32
+    DevProp_PciExpressDevice_LinkSpeed_Five_Gbps = 2_u32
+  end
+  enum DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH : UInt32
+    DevProp_PciExpressDevice_LinkWidth_By_1 = 1_u32
+    DevProp_PciExpressDevice_LinkWidth_By_2 = 2_u32
+    DevProp_PciExpressDevice_LinkWidth_By_4 = 4_u32
+    DevProp_PciExpressDevice_LinkWidth_By_8 = 8_u32
+    DevProp_PciExpressDevice_LinkWidth_By_12 = 12_u32
+    DevProp_PciExpressDevice_LinkWidth_By_16 = 16_u32
+    DevProp_PciExpressDevice_LinkWidth_By_32 = 32_u32
+  end
+  enum DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION : UInt32
+    DevProp_PciExpressDevice_Spec_Version_10 = 1_u32
+    DevProp_PciExpressDevice_Spec_Version_11 = 2_u32
+  end
+  enum DEVPROP_PCIDEVICE_INTERRUPTTYPE : UInt32
+    DevProp_PciDevice_InterruptType_LineBased = 1_u32
+    DevProp_PciDevice_InterruptType_Msi = 2_u32
+    DevProp_PciDevice_InterruptType_MsiX = 4_u32
+  end
+  enum DEVPROP_PCIDEVICE_SRIOVSUPPORT : UInt32
+    DevProp_PciDevice_SriovSupport_Ok = 0_u32
+    DevProp_PciDevice_SriovSupport_MissingAcs = 1_u32
+    DevProp_PciDevice_SriovSupport_MissingPfDriver = 2_u32
+    DevProp_PciDevice_SriovSupport_NoBusResource = 3_u32
+    DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace = 4_u32
+  end
+  enum DEVPROP_PCIDEVICE_ACSSUPPORT : UInt32
+    DevProp_PciDevice_AcsSupport_Present = 0_u32
+    DevProp_PciDevice_AcsSupport_NotNeeded = 1_u32
+    DevProp_PciDevice_AcsSupport_Missing = 2_u32
+  end
+  enum DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY : UInt32
+    DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported = 0_u32
+    DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported = 1_u32
+    DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported = 2_u32
+    DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported = 3_u32
+    DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced = 4_u32
   end
   enum DOT11_BSS_TYPE
     Dot11_bss_type_infrastructure = 1_i32
@@ -973,8 +1071,69 @@ module Win32cr::NetworkManagement::WiFi
     Dot11_phy_type_vht = 8_i32
     Dot11_phy_type_dmg = 9_i32
     Dot11_phy_type_he = 10_i32
+    Dot11_phy_type_eht = 11_i32
     Dot11_phy_type_ihv_start = -2147483648_i32
     Dot11_phy_type_ihv_end = -1_i32
+  end
+  enum RSNA_AKM_SUITE
+    Rsna_akm_none = 11276032_i32
+    Rsna_akm_1x = 28053248_i32
+    Rsna_akm_psk = 44830464_i32
+    Rsna_akm_ft_1x_sha256 = 61607680_i32
+    Rsna_akm_ft_psk_sha256 = 78384896_i32
+    Rsna_akm_1x_sha256 = 95162112_i32
+    Rsna_akm_psk_sha256 = 111939328_i32
+    Rsna_akm_tdls_sha256 = 128716544_i32
+    Rsna_akm_sae_pmk256 = 145493760_i32
+    Rsna_akm_ft_sae_pmk256 = 162270976_i32
+    Rsna_akm_peerkey_sha256 = 179048192_i32
+    Rsna_akm_1x_suite_b_sha256 = 195825408_i32
+    Rsna_akm_1x_suite_b_sha384 = 212602624_i32
+    Rsna_akm_ft_1x_sha384_cmp_256 = 229379840_i32
+    Rsna_akm_fils_1x_sha256 = 246157056_i32
+    Rsna_akm_fils_1x_sha384 = 262934272_i32
+    Rsna_akm_ft_fils_1x_sha256 = 279711488_i32
+    Rsna_akm_ft_fils_sha384 = 296488704_i32
+    Rsna_akm_owe = 313265920_i32
+    Rsna_akm_ft_psk_sha384 = 330043136_i32
+    Rsna_akm_psk_sha384 = 346820352_i32
+    Rsna_akm_ft_1x_sha384 = 380374784_i32
+    Rsna_akm_1x_sha384 = 397152000_i32
+    Rsna_akm_sae_pmk384 = 413929216_i32
+    Rsna_akm_ft_sae_pmk384 = 430706432_i32
+    Rsna_akm_max = 430706432_i32
+  end
+  enum WPA_AKM_SUITE
+    Wpa_akm_none = 15880192_i32
+    Wpa_akm_1x = 32657408_i32
+    Wpa_akm_psk = 49434624_i32
+    Wpa_akm_max = 49434624_i32
+  end
+  enum RSNA_CIPHER_SUITE
+    Rsna_cipher_group = 11276032_i32
+    Rsna_cipher_wep40 = 28053248_i32
+    Rsna_cipher_tkip = 44830464_i32
+    Rsna_cipher_reserved = 61607680_i32
+    Rsna_cipher_ccmp_128 = 78384896_i32
+    Rsna_cipher_wep104 = 95162112_i32
+    Rsna_cipher_bip_cmac_128 = 111939328_i32
+    Rsna_cipher_no_group_traffic = 128716544_i32
+    Rsna_cipher_gcmp_128 = 145493760_i32
+    Rsna_cipher_gcmp_256 = 162270976_i32
+    Rsna_cipher_ccmp_256 = 179048192_i32
+    Rsna_cipher_bip_gmac_128 = 195825408_i32
+    Rsna_cipher_bip_gmac_256 = 212602624_i32
+    Rsna_cipher_bip_cmac_256 = 229379840_i32
+    Rsna_cipher_max = 229379840_i32
+  end
+  enum WPA_CIPHER_SUITE
+    Wpa_cipher_none = 15880192_i32
+    Wpa_cipher_wep40 = 32657408_i32
+    Wpa_cipher_tkip = 49434624_i32
+    Wpa_cipher_ccmp_128 = 82989056_i32
+    Wpa_cipher_wep104 = 99766272_i32
+    Wpa_cipher_bip_cmac_128 = 116543488_i32
+    Wpa_cipher_max = 116543488_i32
   end
   enum DOT11_OFFLOAD_TYPE
     Dot11_offload_type_wep = 1_i32
@@ -1258,6 +1417,8 @@ module Win32cr::NetworkManagement::WiFi
     Wlan_intf_opcode_management_frame_protection_capable = 16_i32
     Wlan_intf_opcode_secondary_sta_interfaces = 17_i32
     Wlan_intf_opcode_secondary_sta_synchronized_connections = 18_i32
+    Wlan_intf_opcode_realtime_connection_quality = 19_i32
+    Wlan_intf_opcode_qos_info = 20_i32
     Wlan_intf_opcode_autoconf_end = 268435455_i32
     Wlan_intf_opcode_msm_start = 268435712_i32
     Wlan_intf_opcode_statistics = 268435713_i32
@@ -1529,10 +1690,26 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
+  struct RSNA_AKM_CIPHER_PAIR
+    property akm : Win32cr::NetworkManagement::WiFi::RSNA_AKM_SUITE
+    property cipher : Win32cr::NetworkManagement::WiFi::RSNA_CIPHER_SUITE
+    def initialize(@akm : Win32cr::NetworkManagement::WiFi::RSNA_AKM_SUITE, @cipher : Win32cr::NetworkManagement::WiFi::RSNA_CIPHER_SUITE)
+    end
+  end
+
+  @[Extern]
   struct DOT11_RATE_SET
     property uRateSetLength : UInt32
     property ucRateSet : UInt8[126]
     def initialize(@uRateSetLength : UInt32, @ucRateSet : UInt8[126])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_AKM_CIPHER_PAIR
+    property akm : Win32cr::NetworkManagement::WiFi::RSNA_AKM_SUITE
+    property cipher : Win32cr::NetworkManagement::WiFi::RSNA_CIPHER_SUITE
+    def initialize(@akm : Win32cr::NetworkManagement::WiFi::RSNA_AKM_SUITE, @cipher : Win32cr::NetworkManagement::WiFi::RSNA_CIPHER_SUITE)
     end
   end
 
@@ -1589,8 +1766,8 @@ module Win32cr::NetworkManagement::WiFi
     property dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16]
     property usDot11RWBitMaps : UInt16[16]
     property usKeyLength : UInt16
-    property ucKey : UInt8*
-    def initialize(@uReserved : UInt32, @hOffloadContext : Win32cr::Foundation::HANDLE, @hOffload : Win32cr::Foundation::HANDLE, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @dwAlgorithm : UInt32, @bRowIsOutbound : Win32cr::Foundation::BOOLEAN, @bUseDefault : Win32cr::Foundation::BOOLEAN, @uFlags : UInt32, @ucMacAddress : UInt8[6], @uNumOfRWsOnPeer : UInt32, @uNumOfRWsOnMe : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16], @usKeyLength : UInt16, @ucKey : UInt8*)
+    property ucKey : UInt8[1]
+    def initialize(@uReserved : UInt32, @hOffloadContext : Win32cr::Foundation::HANDLE, @hOffload : Win32cr::Foundation::HANDLE, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @dwAlgorithm : UInt32, @bRowIsOutbound : Win32cr::Foundation::BOOLEAN, @bUseDefault : Win32cr::Foundation::BOOLEAN, @uFlags : UInt32, @ucMacAddress : UInt8[6], @uNumOfRWsOnPeer : UInt32, @uNumOfRWsOnMe : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16], @usKeyLength : UInt16, @ucKey : UInt8[1])
     end
   end
 
@@ -1621,8 +1798,8 @@ module Win32cr::NetworkManagement::WiFi
     property dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16]
     property usDot11RWBitMaps : UInt16[16]
     property usKeyLength : UInt16
-    property ucKey : UInt8*
-    def initialize(@uReserved : UInt32, @hOffloadContext : Win32cr::Foundation::HANDLE, @hOffload : Win32cr::Foundation::HANDLE, @dwIndex : UInt32, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @dwAlgorithm : UInt32, @uFlags : UInt32, @dot11KeyDirection : Win32cr::NetworkManagement::WiFi::DOT11_KEY_DIRECTION, @ucMacAddress : UInt8[6], @uNumOfRWsOnMe : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16], @usKeyLength : UInt16, @ucKey : UInt8*)
+    property ucKey : UInt8[1]
+    def initialize(@uReserved : UInt32, @hOffloadContext : Win32cr::Foundation::HANDLE, @hOffload : Win32cr::Foundation::HANDLE, @dwIndex : UInt32, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @dwAlgorithm : UInt32, @uFlags : UInt32, @dot11KeyDirection : Win32cr::NetworkManagement::WiFi::DOT11_KEY_DIRECTION, @ucMacAddress : UInt8[6], @uNumOfRWsOnMe : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16], @usKeyLength : UInt16, @ucKey : UInt8[1])
     end
   end
 
@@ -1672,8 +1849,8 @@ module Win32cr::NetworkManagement::WiFi
     property uNumOfPhyTypes : UInt32
     property uIEsOffset : UInt32
     property uIEsLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11BSSID : UInt8[6], @dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE, @bRestrictedScan : Win32cr::Foundation::BOOLEAN, @bUseRequestIE : Win32cr::Foundation::BOOLEAN, @uRequestIDsOffset : UInt32, @uNumOfRequestIDs : UInt32, @uPhyTypesOffset : UInt32, @uNumOfPhyTypes : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11BSSID : UInt8[6], @dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE, @bRestrictedScan : Win32cr::Foundation::BOOLEAN, @bUseRequestIE : Win32cr::Foundation::BOOLEAN, @uRequestIDsOffset : UInt32, @uNumOfRequestIDs : UInt32, @uPhyTypesOffset : UInt32, @uNumOfPhyTypes : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -1686,8 +1863,8 @@ module Win32cr::NetworkManagement::WiFi
     property uMaxChannelTime : UInt32
     property ch_description_type : Win32cr::NetworkManagement::WiFi::CH_DESCRIPTION_TYPE
     property uChannelListSize : UInt32
-    property ucChannelListBuffer : UInt8*
-    def initialize(@dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @bUseParameters : Win32cr::Foundation::BOOLEAN, @uProbeDelay : UInt32, @uMinChannelTime : UInt32, @uMaxChannelTime : UInt32, @ch_description_type : Win32cr::NetworkManagement::WiFi::CH_DESCRIPTION_TYPE, @uChannelListSize : UInt32, @ucChannelListBuffer : UInt8*)
+    property ucChannelListBuffer : UInt8[1]
+    def initialize(@dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @bUseParameters : Win32cr::Foundation::BOOLEAN, @uProbeDelay : UInt32, @uMinChannelTime : UInt32, @uMaxChannelTime : UInt32, @ch_description_type : Win32cr::NetworkManagement::WiFi::CH_DESCRIPTION_TYPE, @uChannelListSize : UInt32, @ucChannelListBuffer : UInt8[1])
     end
   end
 
@@ -1706,8 +1883,8 @@ module Win32cr::NetworkManagement::WiFi
     property uNumOfPhyTypeInfos : UInt32
     property uIEsOffset : UInt32
     property uIEsLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11BSSID : UInt8[6], @dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE, @bRestrictedScan : Win32cr::Foundation::BOOLEAN, @udot11SSIDsOffset : UInt32, @uNumOfdot11SSIDs : UInt32, @bUseRequestIE : Win32cr::Foundation::BOOLEAN, @uRequestIDsOffset : UInt32, @uNumOfRequestIDs : UInt32, @uPhyTypeInfosOffset : UInt32, @uNumOfPhyTypeInfos : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11BSSID : UInt8[6], @dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE, @bRestrictedScan : Win32cr::Foundation::BOOLEAN, @udot11SSIDsOffset : UInt32, @uNumOfdot11SSIDs : UInt32, @bUseRequestIE : Win32cr::Foundation::BOOLEAN, @uRequestIDsOffset : UInt32, @uNumOfRequestIDs : UInt32, @uPhyTypeInfosOffset : UInt32, @uNumOfPhyTypeInfos : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -1716,8 +1893,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*)
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[1])
     end
   end
 
@@ -1730,8 +1907,8 @@ module Win32cr::NetworkManagement::WiFi
     property ullTimestamp : UInt64
     property usCapabilityInformation : UInt16
     property uBufferLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@uReserved : UInt32, @dot11BSSID : UInt8[6], @dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @usCapabilityInformation : UInt16, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@uReserved : UInt32, @dot11BSSID : UInt8[6], @dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @usCapabilityInformation : UInt16, @uBufferLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -1759,8 +1936,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_UPDATE_IE
     property dot11UpdateIEOp : Win32cr::NetworkManagement::WiFi::DOT11_UPDATE_IE_OP
     property uBufferLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@dot11UpdateIEOp : Win32cr::NetworkManagement::WiFi::DOT11_UPDATE_IE_OP, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@dot11UpdateIEOp : Win32cr::NetworkManagement::WiFi::DOT11_UPDATE_IE_OP, @uBufferLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -1828,8 +2005,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_SUPPORTED_PHY_TYPES
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11PHYType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PHYType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*)
+    property dot11PHYType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PHYType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[1])
     end
   end
 
@@ -1853,8 +2030,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_REG_DOMAINS_SUPPORT_VALUE
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11RegDomainValue : Win32cr::NetworkManagement::WiFi::DOT11_REG_DOMAIN_VALUE*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11RegDomainValue : Win32cr::NetworkManagement::WiFi::DOT11_REG_DOMAIN_VALUE*)
+    property dot11RegDomainValue : Win32cr::NetworkManagement::WiFi::DOT11_REG_DOMAIN_VALUE[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11RegDomainValue : Win32cr::NetworkManagement::WiFi::DOT11_REG_DOMAIN_VALUE[1])
     end
   end
 
@@ -1870,8 +2047,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_SUPPORTED_ANTENNA_LIST
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11SupportedAntenna : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_ANTENNA*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedAntenna : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_ANTENNA*)
+    property dot11SupportedAntenna : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_ANTENNA[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedAntenna : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_ANTENNA[1])
     end
   end
 
@@ -1887,8 +2064,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_DIVERSITY_SELECTION_RX_LIST
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11DiversitySelectionRx : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SELECTION_RX*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11DiversitySelectionRx : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SELECTION_RX*)
+    property dot11DiversitySelectionRx : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SELECTION_RX[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11DiversitySelectionRx : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SELECTION_RX[1])
     end
   end
 
@@ -1922,8 +2099,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_MD_CAPABILITY_ENTRY_LIST
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11MDCapabilityEntry : Win32cr::NetworkManagement::WiFi::DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11MDCapabilityEntry : Win32cr::NetworkManagement::WiFi::DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY*)
+    property dot11MDCapabilityEntry : Win32cr::NetworkManagement::WiFi::DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11MDCapabilityEntry : Win32cr::NetworkManagement::WiFi::DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY[1])
     end
   end
 
@@ -1939,8 +2116,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_HOPPING_PATTERN_ENTRY_LIST
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11HoppingPatternEntry : Win32cr::NetworkManagement::WiFi::DOT11_HOPPING_PATTERN_ENTRY*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11HoppingPatternEntry : Win32cr::NetworkManagement::WiFi::DOT11_HOPPING_PATTERN_ENTRY*)
+    property dot11HoppingPatternEntry : Win32cr::NetworkManagement::WiFi::DOT11_HOPPING_PATTERN_ENTRY[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11HoppingPatternEntry : Win32cr::NetworkManagement::WiFi::DOT11_HOPPING_PATTERN_ENTRY[1])
     end
   end
 
@@ -1967,8 +2144,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_NIC_SPECIFIC_EXTENSION
     property uBufferLength : UInt32
     property uTotalBufferLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@uBufferLength : UInt32, @uTotalBufferLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@uBufferLength : UInt32, @uTotalBufferLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -1996,7 +2173,7 @@ module Win32cr::NetworkManagement::WiFi
     property anonymous : Anonymous_e__Union_
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11RecvSensitivity : Win32cr::NetworkManagement::WiFi::DOT11_RECV_SENSITIVITY*
+    property dot11RecvSensitivity : Win32cr::NetworkManagement::WiFi::DOT11_RECV_SENSITIVITY[1]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
@@ -2007,7 +2184,7 @@ module Win32cr::NetworkManagement::WiFi
     end
     end
 
-    def initialize(@anonymous : Anonymous_e__Union_, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11RecvSensitivity : Win32cr::NetworkManagement::WiFi::DOT11_RECV_SENSITIVITY*)
+    def initialize(@anonymous : Anonymous_e__Union_, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11RecvSensitivity : Win32cr::NetworkManagement::WiFi::DOT11_RECV_SENSITIVITY[1])
     end
   end
 
@@ -2023,11 +2200,11 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  struct DOT11_WME_AC_PARAMTERS_LIST_
+  struct DOT11_WME_AC_PARAMETERS_LIST
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11WMEACParameters : Win32cr::NetworkManagement::WiFi::DOT11_WME_AC_PARAMETERS*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11WMEACParameters : Win32cr::NetworkManagement::WiFi::DOT11_WME_AC_PARAMETERS*)
+    property dot11WMEACParameters : Win32cr::NetworkManagement::WiFi::DOT11_WME_AC_PARAMETERS[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11WMEACParameters : Win32cr::NetworkManagement::WiFi::DOT11_WME_AC_PARAMETERS[1])
     end
   end
 
@@ -2038,8 +2215,8 @@ module Win32cr::NetworkManagement::WiFi
     property uWMEInfoElemLength : UInt32
     property uWMEParamElemOffset : UInt32
     property uWMEParamElemLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@uParamElemMinBeaconIntervals : UInt32, @uWMEInfoElemOffset : UInt32, @uWMEInfoElemLength : UInt32, @uWMEParamElemOffset : UInt32, @uWMEParamElemLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@uParamElemMinBeaconIntervals : UInt32, @uWMEInfoElemOffset : UInt32, @uWMEInfoElemLength : UInt32, @uWMEParamElemOffset : UInt32, @uWMEParamElemLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -2072,8 +2249,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_SUPPORTED_OFDM_FREQUENCY_LIST
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11SupportedOFDMFrequency : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_OFDM_FREQUENCY*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedOFDMFrequency : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_OFDM_FREQUENCY*)
+    property dot11SupportedOFDMFrequency : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_OFDM_FREQUENCY[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedOFDMFrequency : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_OFDM_FREQUENCY[1])
     end
   end
 
@@ -2088,8 +2265,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_SUPPORTED_DSSS_CHANNEL_LIST
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11SupportedDSSSChannel : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DSSS_CHANNEL*
-    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedDSSSChannel : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DSSS_CHANNEL*)
+    property dot11SupportedDSSSChannel : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DSSS_CHANNEL[1]
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedDSSSChannel : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DSSS_CHANNEL[1])
     end
   end
 
@@ -2098,8 +2275,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfBytes : UInt32
     property uTotalNumOfBytes : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfBytes : UInt32, @uTotalNumOfBytes : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfBytes : UInt32, @uTotalNumOfBytes : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -2136,8 +2313,8 @@ module Win32cr::NetworkManagement::WiFi
     property ullHostTimestamp : UInt64
     property usCapabilityInformation : UInt16
     property uBufferLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@uPhyId : UInt32, @phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO, @dot11BSSID : UInt8[6], @dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @lRSSI : Int32, @uLinkQuality : UInt32, @bInRegDomain : Win32cr::Foundation::BOOLEAN, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @ullHostTimestamp : UInt64, @usCapabilityInformation : UInt16, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@uPhyId : UInt32, @phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO, @dot11BSSID : UInt8[6], @dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @lRSSI : Int32, @uLinkQuality : UInt32, @bInRegDomain : Win32cr::Foundation::BOOLEAN, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @ullHostTimestamp : UInt64, @usCapabilityInformation : UInt16, @uBufferLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -2146,8 +2323,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*)
+    property ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID[1])
     end
   end
 
@@ -2175,8 +2352,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property pmki_ds : Win32cr::NetworkManagement::WiFi::DOT11_PMKID_ENTRY*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @pmki_ds : Win32cr::NetworkManagement::WiFi::DOT11_PMKID_ENTRY*)
+    property pmki_ds : Win32cr::NetworkManagement::WiFi::DOT11_PMKID_ENTRY[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @pmki_ds : Win32cr::NetworkManagement::WiFi::DOT11_PMKID_ENTRY[1])
     end
   end
 
@@ -2232,8 +2409,8 @@ module Win32cr::NetworkManagement::WiFi
     property ullReserved : UInt64
     property mac_ucast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS
     property mac_mcast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS
-    property phy_counters : Win32cr::NetworkManagement::WiFi::DOT11_PHY_FRAME_STATISTICS*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ullFourWayHandshakeFailures : UInt64, @ullTKIPCounterMeasuresInvoked : UInt64, @ullReserved : UInt64, @mac_ucast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS, @mac_mcast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS, @phy_counters : Win32cr::NetworkManagement::WiFi::DOT11_PHY_FRAME_STATISTICS*)
+    property phy_counters : Win32cr::NetworkManagement::WiFi::DOT11_PHY_FRAME_STATISTICS[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ullFourWayHandshakeFailures : UInt64, @ullTKIPCounterMeasuresInvoked : UInt64, @ullReserved : UInt64, @mac_ucast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS, @mac_mcast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS, @phy_counters : Win32cr::NetworkManagement::WiFi::DOT11_PHY_FRAME_STATISTICS[1])
     end
   end
 
@@ -2251,8 +2428,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property privacy_exemption_entries : Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @privacy_exemption_entries : Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION*)
+    property privacy_exemption_entries : Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @privacy_exemption_entries : Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION[1])
     end
   end
 
@@ -2261,8 +2438,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM*)
+    property algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM[1])
     end
   end
 
@@ -2271,8 +2448,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property auth_cipher_pairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @auth_cipher_pairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*)
+    property auth_cipher_pairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @auth_cipher_pairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR[1])
     end
   end
 
@@ -2281,8 +2458,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM*)
+    property algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM[1])
     end
   end
 
@@ -2295,8 +2472,8 @@ module Win32cr::NetworkManagement::WiFi
     property bDelete : Win32cr::Foundation::BOOLEAN
     property bStatic : Win32cr::Foundation::BOOLEAN
     property usKeyLength : UInt16
-    property ucKey : UInt8*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uKeyIndex : UInt32, @algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @mac_addr : UInt8[6], @bDelete : Win32cr::Foundation::BOOLEAN, @bStatic : Win32cr::Foundation::BOOLEAN, @usKeyLength : UInt16, @ucKey : UInt8*)
+    property ucKey : UInt8[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uKeyIndex : UInt32, @algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @mac_addr : UInt8[6], @bDelete : Win32cr::Foundation::BOOLEAN, @bStatic : Win32cr::Foundation::BOOLEAN, @usKeyLength : UInt16, @ucKey : UInt8[1])
     end
   end
 
@@ -2305,8 +2482,8 @@ module Win32cr::NetworkManagement::WiFi
     property ucIV48Counter : UInt8[6]
     property ulTKIPKeyLength : UInt32
     property ulMICKeyLength : UInt32
-    property ucTKIPMICKeys : UInt8*
-    def initialize(@ucIV48Counter : UInt8[6], @ulTKIPKeyLength : UInt32, @ulMICKeyLength : UInt32, @ucTKIPMICKeys : UInt8*)
+    property ucTKIPMICKeys : UInt8[1]
+    def initialize(@ucIV48Counter : UInt8[6], @ulTKIPKeyLength : UInt32, @ulMICKeyLength : UInt32, @ucTKIPMICKeys : UInt8[1])
     end
   end
 
@@ -2314,8 +2491,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_KEY_ALGO_CCMP
     property ucIV48Counter : UInt8[6]
     property ulCCMPKeyLength : UInt32
-    property ucCCMPKey : UInt8*
-    def initialize(@ucIV48Counter : UInt8[6], @ulCCMPKeyLength : UInt32, @ucCCMPKey : UInt8*)
+    property ucCCMPKey : UInt8[1]
+    def initialize(@ucIV48Counter : UInt8[6], @ulCCMPKeyLength : UInt32, @ucCCMPKey : UInt8[1])
     end
   end
 
@@ -2323,8 +2500,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_KEY_ALGO_GCMP
     property ucIV48Counter : UInt8[6]
     property ulGCMPKeyLength : UInt32
-    property ucGCMPKey : UInt8*
-    def initialize(@ucIV48Counter : UInt8[6], @ulGCMPKeyLength : UInt32, @ucGCMPKey : UInt8*)
+    property ucGCMPKey : UInt8[1]
+    def initialize(@ucIV48Counter : UInt8[6], @ulGCMPKeyLength : UInt32, @ucGCMPKey : UInt8[1])
     end
   end
 
@@ -2332,8 +2509,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_KEY_ALGO_GCMP_256
     property ucIV48Counter : UInt8[6]
     property ulGCMP256KeyLength : UInt32
-    property ucGCMP256Key : UInt8*
-    def initialize(@ucIV48Counter : UInt8[6], @ulGCMP256KeyLength : UInt32, @ucGCMP256Key : UInt8*)
+    property ucGCMP256Key : UInt8[1]
+    def initialize(@ucIV48Counter : UInt8[6], @ulGCMP256KeyLength : UInt32, @ucGCMP256Key : UInt8[1])
     end
   end
 
@@ -2341,8 +2518,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_KEY_ALGO_BIP
     property ucIPN : UInt8[6]
     property ulBIPKeyLength : UInt32
-    property ucBIPKey : UInt8*
-    def initialize(@ucIPN : UInt8[6], @ulBIPKeyLength : UInt32, @ucBIPKey : UInt8*)
+    property ucBIPKey : UInt8[1]
+    def initialize(@ucIPN : UInt8[6], @ulBIPKeyLength : UInt32, @ucBIPKey : UInt8[1])
     end
   end
 
@@ -2350,8 +2527,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_KEY_ALGO_BIP_GMAC_256
     property ucIPN : UInt8[6]
     property ulBIPGmac256KeyLength : UInt32
-    property ucBIPGmac256Key : UInt8*
-    def initialize(@ucIPN : UInt8[6], @ulBIPGmac256KeyLength : UInt32, @ucBIPGmac256Key : UInt8*)
+    property ucBIPGmac256Key : UInt8[1]
+    def initialize(@ucIPN : UInt8[6], @ulBIPGmac256KeyLength : UInt32, @ucBIPGmac256Key : UInt8[1])
     end
   end
 
@@ -2363,8 +2540,8 @@ module Win32cr::NetworkManagement::WiFi
     property bDelete : Win32cr::Foundation::BOOLEAN
     property bStatic : Win32cr::Foundation::BOOLEAN
     property usKeyLength : UInt16
-    property ucKey : UInt8*
-    def initialize(@peer_mac_addr : UInt8[6], @algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @direction : Win32cr::NetworkManagement::WiFi::DOT11_DIRECTION, @bDelete : Win32cr::Foundation::BOOLEAN, @bStatic : Win32cr::Foundation::BOOLEAN, @usKeyLength : UInt16, @ucKey : UInt8*)
+    property ucKey : UInt8[1]
+    def initialize(@peer_mac_addr : UInt8[6], @algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @direction : Win32cr::NetworkManagement::WiFi::DOT11_DIRECTION, @bDelete : Win32cr::Foundation::BOOLEAN, @bStatic : Win32cr::Foundation::BOOLEAN, @usKeyLength : UInt16, @ucKey : UInt8[1])
     end
   end
 
@@ -2378,12 +2555,12 @@ module Win32cr::NetworkManagement::WiFi
     property usAssociationID : UInt16
     property dot11AssociationState : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE
     property dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE
-    property liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER
+    property liAssociationUpTime : Int64
     property ullNumOfTxPacketSuccesses : UInt64
     property ullNumOfTxPacketFailures : UInt64
     property ullNumOfRxPacketSuccesses : UInt64
     property ullNumOfRxPacketFailures : UInt64
-    def initialize(@peer_mac_address : UInt8[6], @bssid : UInt8[6], @usCapabilityInformation : UInt16, @usListenInterval : UInt16, @ucPeerSupportedRates : UInt8[255], @usAssociationID : UInt16, @dot11AssociationState : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE, @dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER, @ullNumOfTxPacketSuccesses : UInt64, @ullNumOfTxPacketFailures : UInt64, @ullNumOfRxPacketSuccesses : UInt64, @ullNumOfRxPacketFailures : UInt64)
+    def initialize(@peer_mac_address : UInt8[6], @bssid : UInt8[6], @usCapabilityInformation : UInt16, @usListenInterval : UInt16, @ucPeerSupportedRates : UInt8[255], @usAssociationID : UInt16, @dot11AssociationState : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE, @dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @liAssociationUpTime : Int64, @ullNumOfTxPacketSuccesses : UInt64, @ullNumOfTxPacketFailures : UInt64, @ullNumOfRxPacketSuccesses : UInt64, @ullNumOfRxPacketFailures : UInt64)
     end
   end
 
@@ -2392,8 +2569,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11AssocInfo : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_INFO_EX*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11AssocInfo : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_INFO_EX*)
+    property dot11AssocInfo : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_INFO_EX[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11AssocInfo : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_INFO_EX[1])
     end
   end
 
@@ -2402,8 +2579,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property dot11PhyId : UInt32*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PhyId : UInt32*)
+    property dot11PhyId : UInt32[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PhyId : UInt32[1])
     end
   end
 
@@ -2630,8 +2807,8 @@ module Win32cr::NetworkManagement::WiFi
     property usDot11RightRWBitMap : UInt16
     property usNumberOfMPDUsReceived : UInt16
     property usNumberOfFragments : UInt16
-    property pNdisPackets : Void**
-    def initialize(@uVersion : UInt32, @pvReserved : Void*, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uChCenterFrequency : UInt32, @lRSSI : Int32, @lRSSIMin : Int32, @lRSSIMax : Int32, @uRSSI : UInt32, @ucPriority : UInt8, @ucDataRate : UInt8, @ucPeerMacAddress : UInt8[6], @dwExtendedStatus : UInt32, @hWEPOffloadContext : Win32cr::Foundation::HANDLE, @hAuthOffloadContext : Win32cr::Foundation::HANDLE, @usWEPAppliedMask : UInt16, @usWPAMSDUPriority : UInt16, @dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11LeftRWBitMap : UInt16, @dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11RightRWBitMap : UInt16, @usNumberOfMPDUsReceived : UInt16, @usNumberOfFragments : UInt16, @pNdisPackets : Void**)
+    property pNdisPackets : Void*[1]
+    def initialize(@uVersion : UInt32, @pvReserved : Void*, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uChCenterFrequency : UInt32, @lRSSI : Int32, @lRSSIMin : Int32, @lRSSIMax : Int32, @uRSSI : UInt32, @ucPriority : UInt8, @ucDataRate : UInt8, @ucPeerMacAddress : UInt8[6], @dwExtendedStatus : UInt32, @hWEPOffloadContext : Win32cr::Foundation::HANDLE, @hAuthOffloadContext : Win32cr::Foundation::HANDLE, @usWEPAppliedMask : UInt16, @usWPAMSDUPriority : UInt16, @dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11LeftRWBitMap : UInt16, @dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11RightRWBitMap : UInt16, @usNumberOfMPDUsReceived : UInt16, @usNumberOfFragments : UInt16, @pNdisPackets : Void*[1])
     end
   end
 
@@ -2657,8 +2834,8 @@ module Win32cr::NetworkManagement::WiFi
     property usDot11RightRWBitMap : UInt16
     property usNumberOfMPDUsReceived : UInt16
     property usNumberOfFragments : UInt16
-    property pNdisPackets : Void**
-    def initialize(@uVersion : UInt32, @pvReserved : Void*, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uChCenterFrequency : UInt32, @lRSSI : Int32, @uRSSI : UInt32, @ucPriority : UInt8, @ucDataRate : UInt8, @ucPeerMacAddress : UInt8[6], @dwExtendedStatus : UInt32, @hWEPOffloadContext : Win32cr::Foundation::HANDLE, @hAuthOffloadContext : Win32cr::Foundation::HANDLE, @usWEPAppliedMask : UInt16, @usWPAMSDUPriority : UInt16, @dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11LeftRWBitMap : UInt16, @dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11RightRWBitMap : UInt16, @usNumberOfMPDUsReceived : UInt16, @usNumberOfFragments : UInt16, @pNdisPackets : Void**)
+    property pNdisPackets : Void*[1]
+    def initialize(@uVersion : UInt32, @pvReserved : Void*, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uChCenterFrequency : UInt32, @lRSSI : Int32, @uRSSI : UInt32, @ucPriority : UInt8, @ucDataRate : UInt8, @ucPeerMacAddress : UInt8[6], @dwExtendedStatus : UInt32, @hWEPOffloadContext : Win32cr::Foundation::HANDLE, @hAuthOffloadContext : Win32cr::Foundation::HANDLE, @usWEPAppliedMask : UInt16, @usWPAMSDUPriority : UInt16, @dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11LeftRWBitMap : UInt16, @dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11RightRWBitMap : UInt16, @usNumberOfMPDUsReceived : UInt16, @usNumberOfFragments : UInt16, @pNdisPackets : Void*[1])
     end
   end
 
@@ -2961,8 +3138,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property uChannelNumber : UInt32*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @uChannelNumber : UInt32*)
+    property uChannelNumber : UInt32[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @uChannelNumber : UInt32[1])
     end
   end
 
@@ -2971,8 +3148,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property uFrequencyValue : UInt32*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @uFrequencyValue : UInt32*)
+    property uFrequencyValue : UInt32[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @uFrequencyValue : UInt32[1])
     end
   end
 
@@ -3046,9 +3223,9 @@ module Win32cr::NetworkManagement::WiFi
     property usAssociationID : UInt16
     property association_state : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE
     property power_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE
-    property liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER
+    property liAssociationUpTime : Int64
     property statistics : Win32cr::NetworkManagement::WiFi::DOT11_PEER_STATISTICS
-    def initialize(@mac_address : UInt8[6], @usCapabilityInformation : UInt16, @auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @unicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @multicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @bWpsEnabled : Win32cr::Foundation::BOOLEAN, @usListenInterval : UInt16, @ucSupportedRates : UInt8[255], @usAssociationID : UInt16, @association_state : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE, @power_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER, @statistics : Win32cr::NetworkManagement::WiFi::DOT11_PEER_STATISTICS)
+    def initialize(@mac_address : UInt8[6], @usCapabilityInformation : UInt16, @auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @unicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @multicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @bWpsEnabled : Win32cr::Foundation::BOOLEAN, @usListenInterval : UInt16, @ucSupportedRates : UInt8[255], @usAssociationID : UInt16, @association_state : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE, @power_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @liAssociationUpTime : Int64, @statistics : Win32cr::NetworkManagement::WiFi::DOT11_PEER_STATISTICS)
     end
   end
 
@@ -3057,8 +3234,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property peer_info : Win32cr::NetworkManagement::WiFi::DOT11_PEER_INFO*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @peer_info : Win32cr::NetworkManagement::WiFi::DOT11_PEER_INFO*)
+    property peer_info : Win32cr::NetworkManagement::WiFi::DOT11_PEER_INFO[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @peer_info : Win32cr::NetworkManagement::WiFi::DOT11_PEER_INFO[1])
     end
   end
 
@@ -3099,8 +3276,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_VWIFI_ATTRIBUTES
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uTotalNumOfEntries : UInt32
-    property combinations : Win32cr::NetworkManagement::WiFi::DOT11_VWIFI_COMBINATION*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uTotalNumOfEntries : UInt32, @combinations : Win32cr::NetworkManagement::WiFi::DOT11_VWIFI_COMBINATION*)
+    property combinations : Win32cr::NetworkManagement::WiFi::DOT11_VWIFI_COMBINATION[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uTotalNumOfEntries : UInt32, @combinations : Win32cr::NetworkManagement::WiFi::DOT11_VWIFI_COMBINATION[1])
     end
   end
 
@@ -3237,8 +3414,8 @@ module Win32cr::NetworkManagement::WiFi
   @[Extern]
   struct DOT11_WFD_ADVERTISED_SERVICE_LIST
     property service_count : UInt16
-    property advertised_service : Win32cr::NetworkManagement::WiFi::DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR*
-    def initialize(@service_count : UInt16, @advertised_service : Win32cr::NetworkManagement::WiFi::DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR*)
+    property advertised_service : Win32cr::NetworkManagement::WiFi::DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR[1]
+    def initialize(@service_count : UInt16, @advertised_service : Win32cr::NetworkManagement::WiFi::DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR[1])
     end
   end
 
@@ -3492,8 +3669,8 @@ module Win32cr::NetworkManagement::WiFi
     property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
     property uNumOfEntries : UInt32
     property uTotalNumOfEntries : UInt32
-    property secondary_device_types : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @secondary_device_types : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE*)
+    property secondary_device_types : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @secondary_device_types : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE[1])
     end
   end
 
@@ -3754,8 +3931,8 @@ module Win32cr::NetworkManagement::WiFi
     property fast_scan_iterations : UInt32
     property slow_scan_period : UInt32
     property uNumOfEntries : UInt32
-    property offloadNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_NETWORK*
-    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ulFlags : UInt32, @fast_scan_period : UInt32, @fast_scan_iterations : UInt32, @slow_scan_period : UInt32, @uNumOfEntries : UInt32, @offloadNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_NETWORK*)
+    property offloadNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_NETWORK[1]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ulFlags : UInt32, @fast_scan_period : UInt32, @fast_scan_iterations : UInt32, @slow_scan_period : UInt32, @uNumOfEntries : UInt32, @offloadNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_NETWORK[1])
     end
   end
 
@@ -3771,8 +3948,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_MANUFACTURING_TEST
     property dot11ManufacturingTestType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_TEST_TYPE
     property uBufferLength : UInt32
-    property ucBuffer : UInt8*
-    def initialize(@dot11ManufacturingTestType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_TEST_TYPE, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    property ucBuffer : UInt8[1]
+    def initialize(@dot11ManufacturingTestType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_TEST_TYPE, @uBufferLength : UInt32, @ucBuffer : UInt8[1])
     end
   end
 
@@ -3783,8 +3960,8 @@ module Win32cr::NetworkManagement::WiFi
     property uPinBitMask : UInt32
     property pvContext : Void*
     property uBufferLength : UInt32
-    property ucBufferIn : UInt8*
-    def initialize(@self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE, @uTestID : UInt32, @uPinBitMask : UInt32, @pvContext : Void*, @uBufferLength : UInt32, @ucBufferIn : UInt8*)
+    property ucBufferIn : UInt8[1]
+    def initialize(@self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE, @uTestID : UInt32, @uPinBitMask : UInt32, @pvContext : Void*, @uBufferLength : UInt32, @ucBufferIn : UInt8[1])
     end
   end
 
@@ -3796,8 +3973,8 @@ module Win32cr::NetworkManagement::WiFi
     property uPinFailedBitMask : UInt32
     property pvContext : Void*
     property uBytesWrittenOut : UInt32
-    property ucBufferOut : UInt8*
-    def initialize(@self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE, @uTestID : UInt32, @bResult : Win32cr::Foundation::BOOLEAN, @uPinFailedBitMask : UInt32, @pvContext : Void*, @uBytesWrittenOut : UInt32, @ucBufferOut : UInt8*)
+    property ucBufferOut : UInt8[1]
+    def initialize(@self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE, @uTestID : UInt32, @bResult : Win32cr::Foundation::BOOLEAN, @uPinFailedBitMask : UInt32, @pvContext : Void*, @uBytesWrittenOut : UInt32, @ucBufferOut : UInt8[1])
     end
   end
 
@@ -3837,8 +4014,8 @@ module Win32cr::NetworkManagement::WiFi
     property uKey : UInt32
     property uOffset : UInt32
     property uBufferLength : UInt32
-    property ucBufferIn : UInt8*
-    def initialize(@uKey : UInt32, @uOffset : UInt32, @uBufferLength : UInt32, @ucBufferIn : UInt8*)
+    property ucBufferIn : UInt8[1]
+    def initialize(@uKey : UInt32, @uOffset : UInt32, @uBufferLength : UInt32, @ucBufferIn : UInt8[1])
     end
   end
 
@@ -3848,8 +4025,8 @@ module Win32cr::NetworkManagement::WiFi
     property uOffset : UInt32
     property uBufferLength : UInt32
     property uBytesRead : UInt32
-    property ucBufferOut : UInt8*
-    def initialize(@uKey : UInt32, @uOffset : UInt32, @uBufferLength : UInt32, @uBytesRead : UInt32, @ucBufferOut : UInt8*)
+    property ucBufferOut : UInt8[1]
+    def initialize(@uKey : UInt32, @uOffset : UInt32, @uBufferLength : UInt32, @uBytesRead : UInt32, @ucBufferOut : UInt8[1])
     end
   end
 
@@ -3873,12 +4050,12 @@ module Win32cr::NetworkManagement::WiFi
 
   @[Extern]
   struct L2_NOTIFICATION_DATA
-    property notification_source : UInt32
+    property notification_source : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_SOURCES
     property notification_code : UInt32
     property interface_guid : LibC::GUID
     property dwDataSize : UInt32
     property pData : Void*
-    def initialize(@notification_source : UInt32, @notification_code : UInt32, @interface_guid : LibC::GUID, @dwDataSize : UInt32, @pData : Void*)
+    def initialize(@notification_source : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_SOURCES, @notification_code : UInt32, @interface_guid : LibC::GUID, @dwDataSize : UInt32, @pData : Void*)
     end
   end
 
@@ -3901,8 +4078,8 @@ module Win32cr::NetworkManagement::WiFi
   @[Extern]
   struct WLAN_RAW_DATA
     property dwDataSize : UInt32
-    property data_blob : UInt8*
-    def initialize(@dwDataSize : UInt32, @data_blob : UInt8*)
+    property data_blob : UInt8[1]
+    def initialize(@dwDataSize : UInt32, @data_blob : UInt8[1])
     end
   end
 
@@ -3910,7 +4087,7 @@ module Win32cr::NetworkManagement::WiFi
   struct WLAN_RAW_DATA_LIST
     property dwTotalSize : UInt32
     property dwNumberOfItems : UInt32
-    property data_list : Anonymous_e__Struct_*
+    property data_list : Anonymous_e__Struct_[1]
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
@@ -3921,7 +4098,7 @@ module Win32cr::NetworkManagement::WiFi
     end
     end
 
-    def initialize(@dwTotalSize : UInt32, @dwNumberOfItems : UInt32, @data_list : Anonymous_e__Struct_*)
+    def initialize(@dwTotalSize : UInt32, @dwNumberOfItems : UInt32, @data_list : Anonymous_e__Struct_[1])
     end
   end
 
@@ -4004,8 +4181,8 @@ module Win32cr::NetworkManagement::WiFi
   struct WLAN_BSS_LIST
     property dwTotalSize : UInt32
     property dwNumberOfItems : UInt32
-    property wlanBssEntries : Win32cr::NetworkManagement::WiFi::WLAN_BSS_ENTRY*
-    def initialize(@dwTotalSize : UInt32, @dwNumberOfItems : UInt32, @wlanBssEntries : Win32cr::NetworkManagement::WiFi::WLAN_BSS_ENTRY*)
+    property wlanBssEntries : Win32cr::NetworkManagement::WiFi::WLAN_BSS_ENTRY[1]
+    def initialize(@dwTotalSize : UInt32, @dwNumberOfItems : UInt32, @wlanBssEntries : Win32cr::NetworkManagement::WiFi::WLAN_BSS_ENTRY[1])
     end
   end
 
@@ -4043,6 +4220,36 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
+  struct WLAN_QOS_CAPABILITIES
+    property bMSCSSupported : Win32cr::Foundation::BOOL
+    property bDSCPToUPMappingSupported : Win32cr::Foundation::BOOL
+    property bSCSSupported : Win32cr::Foundation::BOOL
+    property bDSCPPolicySupported : Win32cr::Foundation::BOOL
+    def initialize(@bMSCSSupported : Win32cr::Foundation::BOOL, @bDSCPToUPMappingSupported : Win32cr::Foundation::BOOL, @bSCSSupported : Win32cr::Foundation::BOOL, @bDSCPPolicySupported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WLAN_CONNECTION_QOS_INFO
+    property peerCapabilities : Win32cr::NetworkManagement::WiFi::WLAN_QOS_CAPABILITIES
+    property bMSCSConfigured : Win32cr::Foundation::BOOL
+    property bDSCPToUPMappingConfigured : Win32cr::Foundation::BOOL
+    property ulNumConfiguredSCSStreams : UInt32
+    property ulNumConfiguredDSCPPolicies : UInt32
+    def initialize(@peerCapabilities : Win32cr::NetworkManagement::WiFi::WLAN_QOS_CAPABILITIES, @bMSCSConfigured : Win32cr::Foundation::BOOL, @bDSCPToUPMappingConfigured : Win32cr::Foundation::BOOL, @ulNumConfiguredSCSStreams : UInt32, @ulNumConfiguredDSCPPolicies : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WLAN_QOS_INFO
+    property interfaceCapabilities : Win32cr::NetworkManagement::WiFi::WLAN_QOS_CAPABILITIES
+    property bConnected : Win32cr::Foundation::BOOL
+    property connectionQoSInfo : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_QOS_INFO
+    def initialize(@interfaceCapabilities : Win32cr::NetworkManagement::WiFi::WLAN_QOS_CAPABILITIES, @bConnected : Win32cr::Foundation::BOOL, @connectionQoSInfo : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_QOS_INFO)
+    end
+  end
+
+  @[Extern]
   struct WLAN_CONNECTION_ATTRIBUTES
     property isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE
     property wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE
@@ -4050,6 +4257,30 @@ module Win32cr::NetworkManagement::WiFi
     property wlanAssociationAttributes : Win32cr::NetworkManagement::WiFi::WLAN_ASSOCIATION_ATTRIBUTES
     property wlanSecurityAttributes : Win32cr::NetworkManagement::WiFi::WLAN_SECURITY_ATTRIBUTES
     def initialize(@isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE, @wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfileName : UInt16[256], @wlanAssociationAttributes : Win32cr::NetworkManagement::WiFi::WLAN_ASSOCIATION_ATTRIBUTES, @wlanSecurityAttributes : Win32cr::NetworkManagement::WiFi::WLAN_SECURITY_ATTRIBUTES)
+    end
+  end
+
+  @[Extern]
+  struct WLAN_REALTIME_CONNECTION_QUALITY_LINK_INFO
+    property ucLinkID : UInt8
+    property ulChannelCenterFrequencyMhz : UInt32
+    property ulBandwidth : UInt32
+    property lRssi : Int32
+    property wlanRateSet : Win32cr::NetworkManagement::WiFi::WLAN_RATE_SET
+    def initialize(@ucLinkID : UInt8, @ulChannelCenterFrequencyMhz : UInt32, @ulBandwidth : UInt32, @lRssi : Int32, @wlanRateSet : Win32cr::NetworkManagement::WiFi::WLAN_RATE_SET)
+    end
+  end
+
+  @[Extern]
+  struct WLAN_REALTIME_CONNECTION_QUALITY
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property ulLinkQuality : UInt32
+    property ulRxRate : UInt32
+    property ulTxRate : UInt32
+    property bIsMLOConnection : Win32cr::Foundation::BOOL
+    property ulNumLinks : UInt32
+    property linksInfo : Win32cr::NetworkManagement::WiFi::WLAN_REALTIME_CONNECTION_QUALITY_LINK_INFO[1]
+    def initialize(@dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @ulLinkQuality : UInt32, @ulRxRate : UInt32, @ulTxRate : UInt32, @bIsMLOConnection : Win32cr::Foundation::BOOL, @ulNumLinks : UInt32, @linksInfo : Win32cr::NetworkManagement::WiFi::WLAN_REALTIME_CONNECTION_QUALITY_LINK_INFO[1])
     end
   end
 
@@ -4085,8 +4316,8 @@ module Win32cr::NetworkManagement::WiFi
   @[Extern]
   struct WLAN_AUTH_CIPHER_PAIR_LIST
     property dwNumberOfItems : UInt32
-    property pAuthCipherPairList : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
-    def initialize(@dwNumberOfItems : UInt32, @pAuthCipherPairList : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*)
+    property pAuthCipherPairList : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR[1]
+    def initialize(@dwNumberOfItems : UInt32, @pAuthCipherPairList : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR[1])
     end
   end
 
@@ -4102,8 +4333,8 @@ module Win32cr::NetworkManagement::WiFi
   struct WLAN_PROFILE_INFO_LIST
     property dwNumberOfItems : UInt32
     property dwIndex : UInt32
-    property profile_info : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO*
-    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @profile_info : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO*)
+    property profile_info : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO[1]
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @profile_info : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO[1])
     end
   end
 
@@ -4111,8 +4342,8 @@ module Win32cr::NetworkManagement::WiFi
   struct WLAN_AVAILABLE_NETWORK_LIST
     property dwNumberOfItems : UInt32
     property dwIndex : UInt32
-    property network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK*
-    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK*)
+    property network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK[1]
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK[1])
     end
   end
 
@@ -4120,8 +4351,8 @@ module Win32cr::NetworkManagement::WiFi
   struct WLAN_AVAILABLE_NETWORK_LIST_V2
     property dwNumberOfItems : UInt32
     property dwIndex : UInt32
-    property network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_V2*
-    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_V2*)
+    property network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_V2[1]
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_V2[1])
     end
   end
 
@@ -4129,8 +4360,8 @@ module Win32cr::NetworkManagement::WiFi
   struct WLAN_INTERFACE_INFO_LIST
     property dwNumberOfItems : UInt32
     property dwIndex : UInt32
-    property interface_info : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO*
-    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @interface_info : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO*)
+    property interface_info : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO[1]
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @interface_info : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO[1])
     end
   end
 
@@ -4138,8 +4369,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_NETWORK_LIST
     property dwNumberOfItems : UInt32
     property dwIndex : UInt32
-    property network : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK*
-    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK*)
+    property network : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK[1]
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK[1])
     end
   end
 
@@ -4193,8 +4424,8 @@ module Win32cr::NetworkManagement::WiFi
     property bSecurityEnabled : Win32cr::Foundation::BOOL
     property wlanReasonCode : UInt32
     property dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_NOTIFICATION_FLAGS
-    property strProfileXml : UInt16*
-    def initialize(@wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfileName : UInt16[256], @dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @bSecurityEnabled : Win32cr::Foundation::BOOL, @wlanReasonCode : UInt32, @dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_NOTIFICATION_FLAGS, @strProfileXml : UInt16*)
+    property strProfileXml : UInt16[1]
+    def initialize(@wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfileName : UInt16[256], @dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @bSecurityEnabled : Win32cr::Foundation::BOOL, @wlanReasonCode : UInt32, @dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_NOTIFICATION_FLAGS, @strProfileXml : UInt16[1])
     end
   end
 
@@ -4203,8 +4434,8 @@ module Win32cr::NetworkManagement::WiFi
     property device_service : LibC::GUID
     property dwOpCode : UInt32
     property dwDataSize : UInt32
-    property data_blob : UInt8*
-    def initialize(@device_service : LibC::GUID, @dwOpCode : UInt32, @dwDataSize : UInt32, @data_blob : UInt8*)
+    property data_blob : UInt8[1]
+    def initialize(@device_service : LibC::GUID, @dwOpCode : UInt32, @dwDataSize : UInt32, @data_blob : UInt8[1])
     end
   end
 
@@ -4258,8 +4489,8 @@ module Win32cr::NetworkManagement::WiFi
     property mac_ucast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS
     property mac_mcast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS
     property dwNumberOfPhys : UInt32
-    property phy_counters : Win32cr::NetworkManagement::WiFi::WLAN_PHY_FRAME_STATISTICS*
-    def initialize(@ullFourWayHandshakeFailures : UInt64, @ullTKIPCounterMeasuresInvoked : UInt64, @ullReserved : UInt64, @mac_ucast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS, @mac_mcast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS, @dwNumberOfPhys : UInt32, @phy_counters : Win32cr::NetworkManagement::WiFi::WLAN_PHY_FRAME_STATISTICS*)
+    property phy_counters : Win32cr::NetworkManagement::WiFi::WLAN_PHY_FRAME_STATISTICS[1]
+    def initialize(@ullFourWayHandshakeFailures : UInt64, @ullTKIPCounterMeasuresInvoked : UInt64, @ullReserved : UInt64, @mac_ucast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS, @mac_mcast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS, @dwNumberOfPhys : UInt32, @phy_counters : Win32cr::NetworkManagement::WiFi::WLAN_PHY_FRAME_STATISTICS[1])
     end
   end
 
@@ -4267,8 +4498,8 @@ module Win32cr::NetworkManagement::WiFi
   struct WLAN_DEVICE_SERVICE_GUID_LIST
     property dwNumberOfItems : UInt32
     property dwIndex : UInt32
-    property device_service : LibC::GUID*
-    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @device_service : LibC::GUID*)
+    property device_service : LibC::GUID[1]
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @device_service : LibC::GUID[1])
     end
   end
 
@@ -4338,8 +4569,8 @@ module Win32cr::NetworkManagement::WiFi
     property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
     property ulChannelFrequency : UInt32
     property dwNumberOfPeers : UInt32
-    property peer_list : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE*
-    def initialize(@hosted_network_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE, @ip_device_id : LibC::GUID, @wlanHostedNetworkBSSID : UInt8[6], @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @ulChannelFrequency : UInt32, @dwNumberOfPeers : UInt32, @peer_list : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE*)
+    property peer_list : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE[1]
+    def initialize(@hosted_network_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE, @ip_device_id : LibC::GUID, @wlanHostedNetworkBSSID : UInt8[6], @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @ulChannelFrequency : UInt32, @dwNumberOfPeers : UInt32, @peer_list : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE[1])
     end
   end
 
@@ -4445,8 +4676,8 @@ module Win32cr::NetworkManagement::WiFi
   struct DOT11_SECURITY_PACKET_HEADER
     property peer_mac : UInt8[6]
     property usEtherType : UInt16
-    property data : UInt8*
-    def initialize(@peer_mac : UInt8[6], @usEtherType : UInt16, @data : UInt8*)
+    property data : UInt8[1]
+    def initialize(@peer_mac : UInt8[6], @usEtherType : UInt16, @data : UInt8[1])
     end
   end
 
@@ -4465,8 +4696,8 @@ module Win32cr::NetworkManagement::WiFi
   @[Extern]
   struct DOT11EXT_IHV_SSID_LIST
     property ulCount : UInt32
-    property ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
-    def initialize(@ulCount : UInt32, @ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*)
+    property ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID[1]
+    def initialize(@ulCount : UInt32, @ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID[1])
     end
   end
 
@@ -4647,7 +4878,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IDot11AdHocManagerVtbl,
+
+  record IDot11AdHocManagerVtable,
     query_interface : Proc(IDot11AdHocManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDot11AdHocManager*, UInt32),
     release : Proc(IDot11AdHocManager*, UInt32),
@@ -4659,7 +4891,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IDot11AdHocManager, lpVtbl : IDot11AdHocManagerVtbl* do
+  record IDot11AdHocManager, lpVtbl : IDot11AdHocManagerVtable* do
     GUID = LibC::GUID.new(0x8f10cc26_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4689,7 +4921,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IDot11AdHocManagerNotificationSinkVtbl,
+
+  record IDot11AdHocManagerNotificationSinkVtable,
     query_interface : Proc(IDot11AdHocManagerNotificationSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDot11AdHocManagerNotificationSink*, UInt32),
     release : Proc(IDot11AdHocManagerNotificationSink*, UInt32),
@@ -4700,7 +4933,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IDot11AdHocManagerNotificationSink, lpVtbl : IDot11AdHocManagerNotificationSinkVtbl* do
+  record IDot11AdHocManagerNotificationSink, lpVtbl : IDot11AdHocManagerNotificationSinkVtable* do
     GUID = LibC::GUID.new(0x8f10cc27_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocManagerNotificationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4727,7 +4960,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IEnumDot11AdHocNetworksVtbl,
+
+  record IEnumDot11AdHocNetworksVtable,
     query_interface : Proc(IEnumDot11AdHocNetworks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDot11AdHocNetworks*, UInt32),
     release : Proc(IEnumDot11AdHocNetworks*, UInt32),
@@ -4738,7 +4972,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IEnumDot11AdHocNetworks, lpVtbl : IEnumDot11AdHocNetworksVtbl* do
+  record IEnumDot11AdHocNetworks, lpVtbl : IEnumDot11AdHocNetworksVtable* do
     GUID = LibC::GUID.new(0x8f10cc28_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IEnumDot11AdHocNetworks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4765,7 +4999,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IDot11AdHocNetworkVtbl,
+
+  record IDot11AdHocNetworkVtable,
     query_interface : Proc(IDot11AdHocNetwork*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDot11AdHocNetwork*, UInt32),
     release : Proc(IDot11AdHocNetwork*, UInt32),
@@ -4784,7 +5019,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IDot11AdHocNetwork, lpVtbl : IDot11AdHocNetworkVtbl* do
+  record IDot11AdHocNetwork, lpVtbl : IDot11AdHocNetworkVtable* do
     GUID = LibC::GUID.new(0x8f10cc29_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4835,7 +5070,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IDot11AdHocNetworkNotificationSinkVtbl,
+
+  record IDot11AdHocNetworkNotificationSinkVtable,
     query_interface : Proc(IDot11AdHocNetworkNotificationSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDot11AdHocNetworkNotificationSink*, UInt32),
     release : Proc(IDot11AdHocNetworkNotificationSink*, UInt32),
@@ -4844,7 +5080,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IDot11AdHocNetworkNotificationSink, lpVtbl : IDot11AdHocNetworkNotificationSinkVtbl* do
+  record IDot11AdHocNetworkNotificationSink, lpVtbl : IDot11AdHocNetworkNotificationSinkVtable* do
     GUID = LibC::GUID.new(0x8f10cc2a_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocNetworkNotificationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4865,7 +5101,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IDot11AdHocInterfaceVtbl,
+
+  record IDot11AdHocInterfaceVtable,
     query_interface : Proc(IDot11AdHocInterface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDot11AdHocInterface*, UInt32),
     release : Proc(IDot11AdHocInterface*, UInt32),
@@ -4881,7 +5118,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IDot11AdHocInterface, lpVtbl : IDot11AdHocInterfaceVtbl* do
+  record IDot11AdHocInterface, lpVtbl : IDot11AdHocInterfaceVtable* do
     GUID = LibC::GUID.new(0x8f10cc2b_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4923,7 +5160,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IEnumDot11AdHocInterfacesVtbl,
+
+  record IEnumDot11AdHocInterfacesVtable,
     query_interface : Proc(IEnumDot11AdHocInterfaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDot11AdHocInterfaces*, UInt32),
     release : Proc(IEnumDot11AdHocInterfaces*, UInt32),
@@ -4934,7 +5172,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IEnumDot11AdHocInterfaces, lpVtbl : IEnumDot11AdHocInterfacesVtbl* do
+  record IEnumDot11AdHocInterfaces, lpVtbl : IEnumDot11AdHocInterfacesVtable* do
     GUID = LibC::GUID.new(0x8f10cc2c_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IEnumDot11AdHocInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4961,7 +5199,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IEnumDot11AdHocSecuritySettingsVtbl,
+
+  record IEnumDot11AdHocSecuritySettingsVtable,
     query_interface : Proc(IEnumDot11AdHocSecuritySettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDot11AdHocSecuritySettings*, UInt32),
     release : Proc(IEnumDot11AdHocSecuritySettings*, UInt32),
@@ -4972,7 +5211,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IEnumDot11AdHocSecuritySettings, lpVtbl : IEnumDot11AdHocSecuritySettingsVtbl* do
+  record IEnumDot11AdHocSecuritySettings, lpVtbl : IEnumDot11AdHocSecuritySettingsVtable* do
     GUID = LibC::GUID.new(0x8f10cc2d_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IEnumDot11AdHocSecuritySettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4999,7 +5238,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IDot11AdHocSecuritySettingsVtbl,
+
+  record IDot11AdHocSecuritySettingsVtable,
     query_interface : Proc(IDot11AdHocSecuritySettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDot11AdHocSecuritySettings*, UInt32),
     release : Proc(IDot11AdHocSecuritySettings*, UInt32),
@@ -5008,7 +5248,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IDot11AdHocSecuritySettings, lpVtbl : IDot11AdHocSecuritySettingsVtbl* do
+  record IDot11AdHocSecuritySettings, lpVtbl : IDot11AdHocSecuritySettingsVtable* do
     GUID = LibC::GUID.new(0x8f10cc2e_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocSecuritySettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5029,7 +5269,8 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record IDot11AdHocInterfaceNotificationSinkVtbl,
+
+  record IDot11AdHocInterfaceNotificationSinkVtable,
     query_interface : Proc(IDot11AdHocInterfaceNotificationSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDot11AdHocInterfaceNotificationSink*, UInt32),
     release : Proc(IDot11AdHocInterfaceNotificationSink*, UInt32),
@@ -5037,7 +5278,7 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  record IDot11AdHocInterfaceNotificationSink, lpVtbl : IDot11AdHocInterfaceNotificationSinkVtbl* do
+  record IDot11AdHocInterfaceNotificationSink, lpVtbl : IDot11AdHocInterfaceNotificationSinkVtable* do
     GUID = LibC::GUID.new(0x8f10cc2f_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocInterfaceNotificationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5055,251 +5296,374 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   def wlanOpenHandle(dwClientVersion : UInt32, pReserved : Void*, pdwNegotiatedVersion : UInt32*, phClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanOpenHandle(dwClientVersion, pReserved, pdwNegotiatedVersion, phClientHandle)
+    {% end %}
   end
 
   def wlanCloseHandle(hClientHandle : Win32cr::Foundation::HANDLE, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanCloseHandle(hClientHandle, pReserved)
+    {% end %}
   end
 
   def wlanEnumInterfaces(hClientHandle : Win32cr::Foundation::HANDLE, pReserved : Void*, ppInterfaceList : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO_LIST**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanEnumInterfaces(hClientHandle, pReserved, ppInterfaceList)
+    {% end %}
   end
 
   def wlanSetAutoConfigParameter(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_AUTOCONF_OPCODE, dwDataSize : UInt32, pData : Void*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetAutoConfigParameter(hClientHandle, op_code, dwDataSize, pData, pReserved)
+    {% end %}
   end
 
   def wlanQueryAutoConfigParameter(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_AUTOCONF_OPCODE, pReserved : Void*, pdwDataSize : UInt32*, ppData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanQueryAutoConfigParameter(hClientHandle, op_code, pReserved, pdwDataSize, ppData, pWlanOpcodeValueType)
+    {% end %}
   end
 
   def wlanGetInterfaceCapability(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*, ppCapability : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_CAPABILITY**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetInterfaceCapability(hClientHandle, pInterfaceGuid, pReserved, ppCapability)
+    {% end %}
   end
 
   def wlanSetInterface(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, op_code : Win32cr::NetworkManagement::WiFi::WLAN_INTF_OPCODE, dwDataSize : UInt32, pData : Void*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetInterface(hClientHandle, pInterfaceGuid, op_code, dwDataSize, pData, pReserved)
+    {% end %}
   end
 
   def wlanQueryInterface(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, op_code : Win32cr::NetworkManagement::WiFi::WLAN_INTF_OPCODE, pReserved : Void*, pdwDataSize : UInt32*, ppData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanQueryInterface(hClientHandle, pInterfaceGuid, op_code, pReserved, pdwDataSize, ppData, pWlanOpcodeValueType)
+    {% end %}
   end
 
   def wlanIhvControl(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, type__ : Win32cr::NetworkManagement::WiFi::WLAN_IHV_CONTROL_TYPE, dwInBufferSize : UInt32, pInBuffer : Void*, dwOutBufferSize : UInt32, pOutBuffer : Void*, pdwBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanIhvControl(hClientHandle, pInterfaceGuid, type__, dwInBufferSize, pInBuffer, dwOutBufferSize, pOutBuffer, pdwBytesReturned)
+    {% end %}
   end
 
   def wlanScan(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, pIeData : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanScan(hClientHandle, pInterfaceGuid, pDot11Ssid, pIeData, pReserved)
+    {% end %}
   end
 
   def wlanGetAvailableNetworkList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, pReserved : Void*, ppAvailableNetworkList : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_LIST**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetAvailableNetworkList(hClientHandle, pInterfaceGuid, dwFlags, pReserved, ppAvailableNetworkList)
+    {% end %}
   end
 
   def wlanGetAvailableNetworkList2(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, pReserved : Void*, ppAvailableNetworkList : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_LIST_V2**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetAvailableNetworkList2(hClientHandle, pInterfaceGuid, dwFlags, pReserved, ppAvailableNetworkList)
+    {% end %}
   end
 
   def wlanGetNetworkBssList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, bSecurityEnabled : Win32cr::Foundation::BOOL, pReserved : Void*, ppWlanBssList : Win32cr::NetworkManagement::WiFi::WLAN_BSS_LIST**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetNetworkBssList(hClientHandle, pInterfaceGuid, pDot11Ssid, dot11BssType, bSecurityEnabled, pReserved, ppWlanBssList)
+    {% end %}
   end
 
   def wlanConnect(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pConnectionParameters : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_PARAMETERS*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanConnect(hClientHandle, pInterfaceGuid, pConnectionParameters, pReserved)
+    {% end %}
   end
 
   def wlanConnect2(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pConnectionParameters : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_PARAMETERS_V2*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanConnect2(hClientHandle, pInterfaceGuid, pConnectionParameters, pReserved)
+    {% end %}
   end
 
   def wlanDisconnect(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanDisconnect(hClientHandle, pInterfaceGuid, pReserved)
+    {% end %}
   end
 
-  def wlanRegisterNotification(hClientHandle : Win32cr::Foundation::HANDLE, dwNotifSource : UInt32, bIgnoreDuplicate : Win32cr::Foundation::BOOL, funcCallback : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_CALLBACK, pCallbackContext : Void*, pReserved : Void*, pdwPrevNotifSource : UInt32*) : UInt32
+  def wlanRegisterNotification(hClientHandle : Win32cr::Foundation::HANDLE, dwNotifSource : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_SOURCES, bIgnoreDuplicate : Win32cr::Foundation::BOOL, funcCallback : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_CALLBACK, pCallbackContext : Void*, pReserved : Void*, pdwPrevNotifSource : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanRegisterNotification(hClientHandle, dwNotifSource, bIgnoreDuplicate, funcCallback, pCallbackContext, pReserved, pdwPrevNotifSource)
+    {% end %}
   end
 
   def wlanGetProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*, pstrProfileXml : Win32cr::Foundation::PWSTR*, pdwFlags : UInt32*, pdwGrantedAccess : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetProfile(hClientHandle, pInterfaceGuid, strProfileName, pReserved, pstrProfileXml, pdwFlags, pdwGrantedAccess)
+    {% end %}
   end
 
   def wlanSetProfileEapUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_SET_EAPHOST_FLAGS, dwEapUserDataSize : UInt32, pbEapUserData : UInt8*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetProfileEapUserData(hClientHandle, pInterfaceGuid, strProfileName, eapType, dwFlags, dwEapUserDataSize, pbEapUserData, pReserved)
+    {% end %}
   end
 
   def wlanSetProfileEapXmlUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_SET_EAPHOST_FLAGS, strEapXmlUserData : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetProfileEapXmlUserData(hClientHandle, pInterfaceGuid, strProfileName, dwFlags, strEapXmlUserData, pReserved)
+    {% end %}
   end
 
   def wlanSetProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwFlags : UInt32, strProfileXml : Win32cr::Foundation::PWSTR, strAllUserProfileSecurity : Win32cr::Foundation::PWSTR, bOverwrite : Win32cr::Foundation::BOOL, pReserved : Void*, pdwReasonCode : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetProfile(hClientHandle, pInterfaceGuid, dwFlags, strProfileXml, strAllUserProfileSecurity, bOverwrite, pReserved, pdwReasonCode)
+    {% end %}
   end
 
   def wlanDeleteProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanDeleteProfile(hClientHandle, pInterfaceGuid, strProfileName, pReserved)
+    {% end %}
   end
 
   def wlanRenameProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strOldProfileName : Win32cr::Foundation::PWSTR, strNewProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanRenameProfile(hClientHandle, pInterfaceGuid, strOldProfileName, strNewProfileName, pReserved)
+    {% end %}
   end
 
   def wlanGetProfileList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*, ppProfileList : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO_LIST**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetProfileList(hClientHandle, pInterfaceGuid, pReserved, ppProfileList)
+    {% end %}
   end
 
   def wlanSetProfileList(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, dwItems : UInt32, strProfileNames : Win32cr::Foundation::PWSTR*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetProfileList(hClientHandle, pInterfaceGuid, dwItems, strProfileNames, pReserved)
+    {% end %}
   end
 
   def wlanSetProfilePosition(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwPosition : UInt32, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetProfilePosition(hClientHandle, pInterfaceGuid, strProfileName, dwPosition, pReserved)
+    {% end %}
   end
 
   def wlanSetProfileCustomUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, dwDataSize : UInt32, pData : UInt8*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetProfileCustomUserData(hClientHandle, pInterfaceGuid, strProfileName, dwDataSize, pData, pReserved)
+    {% end %}
   end
 
   def wlanGetProfileCustomUserData(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*, pdwDataSize : UInt32*, ppData : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetProfileCustomUserData(hClientHandle, pInterfaceGuid, strProfileName, pReserved, pdwDataSize, ppData)
+    {% end %}
   end
 
   def wlanSetFilterList(hClientHandle : Win32cr::Foundation::HANDLE, wlanFilterListType : Win32cr::NetworkManagement::WiFi::WLAN_FILTER_LIST_TYPE, pNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK_LIST*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetFilterList(hClientHandle, wlanFilterListType, pNetworkList, pReserved)
+    {% end %}
   end
 
   def wlanGetFilterList(hClientHandle : Win32cr::Foundation::HANDLE, wlanFilterListType : Win32cr::NetworkManagement::WiFi::WLAN_FILTER_LIST_TYPE, pReserved : Void*, ppNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK_LIST**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetFilterList(hClientHandle, wlanFilterListType, pReserved, ppNetworkList)
+    {% end %}
   end
 
   def wlanSetPsdIEDataList(hClientHandle : Win32cr::Foundation::HANDLE, strFormat : Win32cr::Foundation::PWSTR, pPsdIEDataList : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA_LIST*, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetPsdIEDataList(hClientHandle, strFormat, pPsdIEDataList, pReserved)
+    {% end %}
   end
 
   def wlanSaveTemporaryProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, strAllUserProfileSecurity : Win32cr::Foundation::PWSTR, dwFlags : UInt32, bOverWrite : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSaveTemporaryProfile(hClientHandle, pInterfaceGuid, strProfileName, strAllUserProfileSecurity, dwFlags, bOverWrite, pReserved)
+    {% end %}
   end
 
   def wlanDeviceServiceCommand(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pDeviceServiceGuid : LibC::GUID*, dwOpCode : UInt32, dwInBufferSize : UInt32, pInBuffer : Void*, dwOutBufferSize : UInt32, pOutBuffer : Void*, pdwBytesReturned : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanDeviceServiceCommand(hClientHandle, pInterfaceGuid, pDeviceServiceGuid, dwOpCode, dwInBufferSize, pInBuffer, dwOutBufferSize, pOutBuffer, pdwBytesReturned)
+    {% end %}
   end
 
   def wlanGetSupportedDeviceServices(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, ppDevSvcGuidList : Win32cr::NetworkManagement::WiFi::WLAN_DEVICE_SERVICE_GUID_LIST**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetSupportedDeviceServices(hClientHandle, pInterfaceGuid, ppDevSvcGuidList)
+    {% end %}
   end
 
   def wlanRegisterDeviceServiceNotification(hClientHandle : Win32cr::Foundation::HANDLE, pDevSvcGuidList : Win32cr::NetworkManagement::WiFi::WLAN_DEVICE_SERVICE_GUID_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanRegisterDeviceServiceNotification(hClientHandle, pDevSvcGuidList)
+    {% end %}
   end
 
   def wlanExtractPsdIEDataList(hClientHandle : Win32cr::Foundation::HANDLE, dwIeDataSize : UInt32, pRawIeData : UInt8*, strFormat : Win32cr::Foundation::PWSTR, pReserved : Void*, ppPsdIEDataList : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA_LIST**) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanExtractPsdIEDataList(hClientHandle, dwIeDataSize, pRawIeData, strFormat, pReserved, ppPsdIEDataList)
+    {% end %}
   end
 
-  def wlanReasonCodeToString(dwReasonCode : UInt32, dwBufferSize : UInt32, pStringBuffer : UInt16*, pReserved : Void*) : UInt32
+  def wlanReasonCodeToString(dwReasonCode : UInt32, dwBufferSize : UInt32, pStringBuffer : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanReasonCodeToString(dwReasonCode, dwBufferSize, pStringBuffer, pReserved)
+    {% end %}
   end
 
   def wlanAllocateMemory(dwMemorySize : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.WlanAllocateMemory(dwMemorySize)
+    {% end %}
   end
 
   def wlanFreeMemory(pMemory : Void*) : Void
+    {% if !flag?(:docs) %}
     C.WlanFreeMemory(pMemory)
+    {% end %}
   end
 
   def wlanSetSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, securable_object : Win32cr::NetworkManagement::WiFi::WLAN_SECURABLE_OBJECT, strModifiedSDDL : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanSetSecuritySettings(hClientHandle, securable_object, strModifiedSDDL)
+    {% end %}
   end
 
   def wlanGetSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, securable_object : Win32cr::NetworkManagement::WiFi::WLAN_SECURABLE_OBJECT, pValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*, pstrCurrentSDDL : Win32cr::Foundation::PWSTR*, pdwGrantedAccess : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanGetSecuritySettings(hClientHandle, securable_object, pValueType, pstrCurrentSDDL, pdwGrantedAccess)
+    {% end %}
   end
 
   def wlanUIEditProfile(dwClientVersion : UInt32, wstrProfileName : Win32cr::Foundation::PWSTR, pInterfaceGuid : LibC::GUID*, hWnd : Win32cr::Foundation::HWND, wlStartPage : Win32cr::NetworkManagement::WiFi::WL_DISPLAY_PAGES, pReserved : Void*, pWlanReasonCode : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanUIEditProfile(dwClientVersion, wstrProfileName, pInterfaceGuid, hWnd, wlStartPage, pReserved, pWlanReasonCode)
+    {% end %}
   end
 
   def wlanHostedNetworkStartUsing(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkStartUsing(hClientHandle, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkStopUsing(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkStopUsing(hClientHandle, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkForceStart(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkForceStart(hClientHandle, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkForceStop(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkForceStop(hClientHandle, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkQueryProperty(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_OPCODE, pdwDataSize : UInt32*, ppvData : Void**, pWlanOpcodeValueType : Win32cr::NetworkManagement::WiFi::WLAN_OPCODE_VALUE_TYPE*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkQueryProperty(hClientHandle, op_code, pdwDataSize, ppvData, pWlanOpcodeValueType, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkSetProperty(hClientHandle : Win32cr::Foundation::HANDLE, op_code : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_OPCODE, dwDataSize : UInt32, pvData : Void*, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkSetProperty(hClientHandle, op_code, dwDataSize, pvData, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkInitSettings(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkInitSettings(hClientHandle, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkRefreshSecuritySettings(hClientHandle : Win32cr::Foundation::HANDLE, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkRefreshSecuritySettings(hClientHandle, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkQueryStatus(hClientHandle : Win32cr::Foundation::HANDLE, ppWlanHostedNetworkStatus : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATUS**, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkQueryStatus(hClientHandle, ppWlanHostedNetworkStatus, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkSetSecondaryKey(hClientHandle : Win32cr::Foundation::HANDLE, dwKeyLength : UInt32, pucKeyData : UInt8*, bIsPassPhrase : Win32cr::Foundation::BOOL, bPersistent : Win32cr::Foundation::BOOL, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkSetSecondaryKey(hClientHandle, dwKeyLength, pucKeyData, bIsPassPhrase, bPersistent, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanHostedNetworkQuerySecondaryKey(hClientHandle : Win32cr::Foundation::HANDLE, pdwKeyLength : UInt32*, ppucKeyData : UInt8**, pbIsPassPhrase : Win32cr::Foundation::BOOL*, pbPersistent : Win32cr::Foundation::BOOL*, pFailReason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON*, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanHostedNetworkQuerySecondaryKey(hClientHandle, pdwKeyLength, ppucKeyData, pbIsPassPhrase, pbPersistent, pFailReason, pvReserved)
+    {% end %}
   end
 
   def wlanRegisterVirtualStationNotification(hClientHandle : Win32cr::Foundation::HANDLE, bRegister : Win32cr::Foundation::BOOL, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WlanRegisterVirtualStationNotification(hClientHandle, bRegister, pReserved)
+    {% end %}
   end
 
   def wFDOpenHandle(dwClientVersion : UInt32, pdwNegotiatedVersion : UInt32*, phClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WFDOpenHandle(dwClientVersion, pdwNegotiatedVersion, phClientHandle)
+    {% end %}
   end
 
   def wFDCloseHandle(hClientHandle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WFDCloseHandle(hClientHandle)
+    {% end %}
   end
 
   def wFDStartOpenSession(hClientHandle : Win32cr::Foundation::HANDLE, pDeviceAddress : UInt8**, pvContext : Void*, pfnCallback : Win32cr::NetworkManagement::WiFi::WFD_OPEN_SESSION_COMPLETE_CALLBACK, phSessionHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WFDStartOpenSession(hClientHandle, pDeviceAddress, pvContext, pfnCallback, phSessionHandle)
+    {% end %}
   end
 
   def wFDCancelOpenSession(hSessionHandle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WFDCancelOpenSession(hSessionHandle)
+    {% end %}
   end
 
   def wFDOpenLegacySession(hClientHandle : Win32cr::Foundation::HANDLE, pLegacyMacAddress : UInt8**, phSessionHandle : Win32cr::Foundation::HANDLE*, pGuidSessionInterface : LibC::GUID*) : UInt32
+    {% if !flag?(:docs) %}
     C.WFDOpenLegacySession(hClientHandle, pLegacyMacAddress, phSessionHandle, pGuidSessionInterface)
+    {% end %}
   end
 
   def wFDCloseSession(hSessionHandle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WFDCloseSession(hSessionHandle)
+    {% end %}
   end
 
   def wFDUpdateDeviceVisibility(pDeviceAddress : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.WFDUpdateDeviceVisibility(pDeviceAddress)
+    {% end %}
   end
 
   @[Link("wlanapi")]
   @[Link("wlanui")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WlanOpenHandle(dwClientVersion : UInt32, pReserved : Void*, pdwNegotiatedVersion : UInt32*, phClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
@@ -5350,7 +5714,7 @@ module Win32cr::NetworkManagement::WiFi
     fun WlanDisconnect(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, pReserved : Void*) : UInt32
 
     # :nodoc:
-    fun WlanRegisterNotification(hClientHandle : Win32cr::Foundation::HANDLE, dwNotifSource : UInt32, bIgnoreDuplicate : Win32cr::Foundation::BOOL, funcCallback : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_CALLBACK, pCallbackContext : Void*, pReserved : Void*, pdwPrevNotifSource : UInt32*) : UInt32
+    fun WlanRegisterNotification(hClientHandle : Win32cr::Foundation::HANDLE, dwNotifSource : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_SOURCES, bIgnoreDuplicate : Win32cr::Foundation::BOOL, funcCallback : Win32cr::NetworkManagement::WiFi::WLAN_NOTIFICATION_CALLBACK, pCallbackContext : Void*, pReserved : Void*, pdwPrevNotifSource : UInt32*) : UInt32
 
     # :nodoc:
     fun WlanGetProfile(hClientHandle : Win32cr::Foundation::HANDLE, pInterfaceGuid : LibC::GUID*, strProfileName : Win32cr::Foundation::PWSTR, pReserved : Void*, pstrProfileXml : Win32cr::Foundation::PWSTR*, pdwFlags : UInt32*, pdwGrantedAccess : UInt32*) : UInt32
@@ -5410,7 +5774,7 @@ module Win32cr::NetworkManagement::WiFi
     fun WlanExtractPsdIEDataList(hClientHandle : Win32cr::Foundation::HANDLE, dwIeDataSize : UInt32, pRawIeData : UInt8*, strFormat : Win32cr::Foundation::PWSTR, pReserved : Void*, ppPsdIEDataList : Win32cr::NetworkManagement::WiFi::WLAN_RAW_DATA_LIST**) : UInt32
 
     # :nodoc:
-    fun WlanReasonCodeToString(dwReasonCode : UInt32, dwBufferSize : UInt32, pStringBuffer : UInt16*, pReserved : Void*) : UInt32
+    fun WlanReasonCodeToString(dwReasonCode : UInt32, dwBufferSize : UInt32, pStringBuffer : Win32cr::Foundation::PWSTR, pReserved : Void*) : UInt32
 
     # :nodoc:
     fun WlanAllocateMemory(dwMemorySize : UInt32) : Void*
@@ -5485,4 +5849,5 @@ module Win32cr::NetworkManagement::WiFi
     fun WFDUpdateDeviceVisibility(pDeviceAddress : UInt8**) : UInt32
 
   end
+  {% end %}
 end

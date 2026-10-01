@@ -1,9 +1,10 @@
-require "./com.cr"
 require "./../foundation.cr"
+require "./com.cr"
+require "./variant.cr"
 
 module Win32cr::System::UpdateAgent
   extend self
-  LIBID_WUApiLib = "b596cc9f-56e5-419e-a622-e01bb457431e"
+  LIBID_WUApiLib = LibC::GUID.new(0xb596cc9f_u32, 0x56e5_u16, 0x419e_u16, StaticArray[0xa6_u8, 0x22_u8, 0xe0_u8, 0x1b_u8, 0xb4_u8, 0x57_u8, 0x43_u8, 0x1e_u8])
   UPDATE_LOCKDOWN_WEBSITE_ACCESS = 1_u32
   WU_S_SERVICE_STOP = 2359297_i32
   WU_S_SELFUPDATE = 2359298_i32
@@ -23,6 +24,7 @@ module Win32cr::System::UpdateAgent
   WU_S_METADATA_SKIPPED_BY_ENFORCEMENTMODE = 2388225_i32
   WU_S_METADATA_IGNORED_SIGNATURE_VERIFICATION = 2388226_i32
   WU_S_SEARCH_LOAD_SHEDDING = 2392065_i32
+  WU_S_AAD_DEVICE_TICKET_NOT_NEEDED = 2392066_i32
   WU_E_NO_SERVICE = -2145124351_i32
   WU_E_MAX_CAPACITY_REACHED = -2145124350_i32
   WU_E_UNKNOWN_ID = -2145124349_i32
@@ -117,6 +119,11 @@ module Win32cr::System::UpdateAgent
   WU_E_INSTALL_JOB_RESUME_NOT_ALLOWED = -2145124252_i32
   WU_E_INSTALL_JOB_NOT_SUSPENDED = -2145124251_i32
   WU_E_INSTALL_USERCONTEXT_ACCESSDENIED = -2145124250_i32
+  WU_E_STANDBY_ACTIVITY_NOT_ALLOWED = -2145124249_i32
+  WU_E_COULD_NOT_EVALUATE_PROPERTY = -2145124248_i32
+  WU_E_SERVICE_UNEXPECTED_EXIT = -2145124247_i32
+  WU_E_ACCESS_DENIED_CALLER_IDENTITY = -2145124246_i32
+  WU_E_SERVICE_REENABLE_ACCESS_DENIED = -2145124245_i32
   WU_E_UNEXPECTED = -2145120257_i32
   WU_E_MSI_WRONG_VERSION = -2145120255_i32
   WU_E_MSI_NOT_CONFIGURED = -2145120254_i32
@@ -169,6 +176,7 @@ module Win32cr::System::UpdateAgent
   WU_E_PT_HTTP_STATUS_NOT_MAPPED = -2145107925_i32
   WU_E_PT_WINHTTP_NAME_NOT_RESOLVED = -2145107924_i32
   WU_E_PT_LOAD_SHEDDING = -2145107923_i32
+  WU_E_PT_CLIENT_ENFORCED_LOAD_SHEDDING = -2145107922_i32
   WU_E_PT_SAME_REDIR_ID = -2145103827_i32
   WU_E_PT_NO_MANAGED_RECOVER = -2145103826_i32
   WU_E_PT_ECP_SUCCEEDED_WITH_ERRORS = -2145107921_i32
@@ -200,6 +208,8 @@ module Win32cr::System::UpdateAgent
   WU_E_PT_ADDRESS_NOT_AVAILABLE = -2145123255_i32
   WU_E_PT_OTHER = -2145123254_i32
   WU_E_PT_SECURITY_SYSTEM_FAILURE = -2145123253_i32
+  WU_E_PT_DATA_BOUNDARY_RESTRICTED = -2145107712_i32
+  WU_E_PT_GENERAL_AAD_CLIENT_ERROR = -2145107711_i32
   WU_E_PT_UNEXPECTED = -2145103873_i32
   WU_E_REDIRECTOR_LOAD_XML = -2145103871_i32
   WU_E_REDIRECTOR_S_FALSE = -2145103870_i32
@@ -337,6 +347,8 @@ module Win32cr::System::UpdateAgent
   WU_E_UH_APPX_INSTALLED_PACKAGE_VOLUME_UNAVAILABLE = -2145116126_i32
   WU_E_UH_APPX_PACKAGE_FAMILY_NOT_FOUND = -2145116125_i32
   WU_E_UH_APPX_SYSTEM_VOLUME_NOT_FOUND = -2145116124_i32
+  WU_E_UH_UA_SESSION_INFO_VERSION_NOT_SUPPORTED = -2145116123_i32
+  WU_E_UH_RESERVICING_REQUIRED_BASELINE = -2145116122_i32
   WU_E_UH_UNEXPECTED = -2145112065_i32
   WU_E_DM_URLNOTAVAILABLE = -2145099775_i32
   WU_E_DM_INCORRECTFILEHASH = -2145099774_i32
@@ -366,6 +378,7 @@ module Win32cr::System::UpdateAgent
   WU_E_DM_SANDBOX_HASH_MISMATCH = -2145099748_i32
   WU_E_DM_HARDRESERVEID_CONFLICT = -2145099747_i32
   WU_E_DM_DOSVC_REQUIRED = -2145099746_i32
+  WU_E_DM_DOWNLOADTYPE_CONFLICT = -2145099745_i32
   WU_E_DM_UNEXPECTED = -2145095681_i32
   WU_E_SETUP_INVALID_INFDATA = -2145071103_i32
   WU_E_SETUP_INVALID_IDENTDATA = -2145071102_i32
@@ -470,6 +483,8 @@ module Win32cr::System::UpdateAgent
   WU_E_FILETRUST_DUALSIGNATURE_ECC = -2145078526_i32
   WU_E_TRUST_SUBJECT_NOT_TRUSTED = -2145078525_i32
   WU_E_TRUST_PROVIDER_UNKNOWN = -2145078524_i32
+  C_szupdatepropertyname_containsupdatebootstrapper = "ContainsUpdateBootstrapper"
+  C_szupdatepropertyname_doesupdaterequirereboot = "DoesUpdateRequireReboot"
 
   CLSID_StringCollection = LibC::GUID.new(0x72c97d74_u32, 0x7c3b_u16, 0x40ae_u16, StaticArray[0xb7_u8, 0x7d_u8, 0xab_u8, 0xdb_u8, 0x22_u8, 0xeb_u8, 0xa6_u8, 0xfb_u8])
 
@@ -603,6 +618,10 @@ module Win32cr::System::UpdateAgent
     Searchscopemachineandallusers = 4_i32
     Searchscopeallusers = 5_i32
   end
+  enum DownloadType
+    Downloadtypefull = 0_i32
+    Downloadtypeupdatebootstrapper = 1_i32
+  end
   enum UpdateLockdownOption
     Uloforwebsiteaccess = 1_i32
   end
@@ -616,7 +635,8 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateLockdownVtbl,
+
+  record IUpdateLockdownVtable,
     query_interface : Proc(IUpdateLockdown*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateLockdown*, UInt32),
     release : Proc(IUpdateLockdown*, UInt32),
@@ -624,7 +644,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateLockdown, lpVtbl : IUpdateLockdownVtbl* do
+  record IUpdateLockdown, lpVtbl : IUpdateLockdownVtable* do
     GUID = LibC::GUID.new(0xa976c28d_u32, 0x75a1_u16, 0x42aa_u16, StaticArray[0x94_u8, 0xae_u8, 0x8a_u8, 0xf8_u8, 0xb8_u8, 0x72_u8, 0x8_u8, 0x9a_u8])
     def query_interface(this : IUpdateLockdown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -642,19 +662,20 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IStringCollectionVtbl,
+
+  record IStringCollectionVtable,
     query_interface : Proc(IStringCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStringCollection*, UInt32),
     release : Proc(IStringCollection*, UInt32),
     get_type_info_count : Proc(IStringCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IStringCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IStringCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IStringCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IStringCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IStringCollection*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Item : Proc(IStringCollection*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IStringCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IStringCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IStringCollection*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IStringCollection*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     add : Proc(IStringCollection*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     clear : Proc(IStringCollection*, Win32cr::Foundation::HRESULT),
     copy : Proc(IStringCollection*, Void**, Win32cr::Foundation::HRESULT),
@@ -663,7 +684,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IStringCollection, lpVtbl : IStringCollectionVtbl* do
+  record IStringCollection, lpVtbl : IStringCollectionVtable* do
     GUID = LibC::GUID.new(0xeff90582_u32, 0x2ddc_u16, 0x480f_u16, StaticArray[0xa0_u8, 0x6d_u8, 0x60_u8, 0xf3_u8, 0xfb_u8, 0xc3_u8, 0x62_u8, 0xc3_u8])
     def query_interface(this : IStringCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -683,8 +704,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IStringCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IStringCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IStringCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IStringCollection*, index : Int32, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -698,7 +719,7 @@ module Win32cr::System::UpdateAgent
     def get_Count(this : IStringCollection*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, retval)
     end
-    def get_ReadOnly(this : IStringCollection*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IStringCollection*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
     def add(this : IStringCollection*, value : Win32cr::Foundation::BSTR, retval : Int32*) : Win32cr::Foundation::HRESULT
@@ -720,32 +741,33 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWebProxyVtbl,
+
+  record IWebProxyVtable,
     query_interface : Proc(IWebProxy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebProxy*, UInt32),
     release : Proc(IWebProxy*, UInt32),
     get_type_info_count : Proc(IWebProxy*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWebProxy*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWebProxy*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWebProxy*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWebProxy*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(IWebProxy*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Address : Proc(IWebProxy*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_BypassList : Proc(IWebProxy*, Void**, Win32cr::Foundation::HRESULT),
     put_BypassList : Proc(IWebProxy*, Void*, Win32cr::Foundation::HRESULT),
-    get_BypassProxyOnLocal : Proc(IWebProxy*, Int16*, Win32cr::Foundation::HRESULT),
-    put_BypassProxyOnLocal : Proc(IWebProxy*, Int16, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IWebProxy*, Int16*, Win32cr::Foundation::HRESULT),
+    get_BypassProxyOnLocal : Proc(IWebProxy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_BypassProxyOnLocal : Proc(IWebProxy*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IWebProxy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_UserName : Proc(IWebProxy*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UserName : Proc(IWebProxy*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     set_password : Proc(IWebProxy*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     prompt_for_credentials : Proc(IWebProxy*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     prompt_for_credentials_from_hwnd : Proc(IWebProxy*, Win32cr::Foundation::HWND, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_AutoDetect : Proc(IWebProxy*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoDetect : Proc(IWebProxy*, Int16, Win32cr::Foundation::HRESULT)
+    get_AutoDetect : Proc(IWebProxy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoDetect : Proc(IWebProxy*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWebProxy, lpVtbl : IWebProxyVtbl* do
+  record IWebProxy, lpVtbl : IWebProxyVtable* do
     GUID = LibC::GUID.new(0x174c81fe_u32, 0xaecd_u16, 0x4dae_u16, StaticArray[0xb8_u8, 0xa0_u8, 0x2c_u8, 0x63_u8, 0x18_u8, 0xdd_u8, 0x86_u8, 0xa8_u8])
     def query_interface(this : IWebProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -765,8 +787,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWebProxy*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWebProxy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWebProxy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Address(this : IWebProxy*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Address.call(this, retval)
@@ -780,13 +802,13 @@ module Win32cr::System::UpdateAgent
     def put_BypassList(this : IWebProxy*, value : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BypassList.call(this, value)
     end
-    def get_BypassProxyOnLocal(this : IWebProxy*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BypassProxyOnLocal(this : IWebProxy*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BypassProxyOnLocal.call(this, retval)
     end
-    def put_BypassProxyOnLocal(this : IWebProxy*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_BypassProxyOnLocal(this : IWebProxy*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BypassProxyOnLocal.call(this, value)
     end
-    def get_ReadOnly(this : IWebProxy*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IWebProxy*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
     def get_UserName(this : IWebProxy*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -804,30 +826,31 @@ module Win32cr::System::UpdateAgent
     def prompt_for_credentials_from_hwnd(this : IWebProxy*, parentWindow : Win32cr::Foundation::HWND, title : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.prompt_for_credentials_from_hwnd.call(this, parentWindow, title)
     end
-    def get_AutoDetect(this : IWebProxy*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoDetect(this : IWebProxy*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoDetect.call(this, retval)
     end
-    def put_AutoDetect(this : IWebProxy*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoDetect(this : IWebProxy*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoDetect.call(this, value)
     end
 
   end
 
   @[Extern]
-  record ISystemInformationVtbl,
+
+  record ISystemInformationVtable,
     query_interface : Proc(ISystemInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISystemInformation*, UInt32),
     release : Proc(ISystemInformation*, UInt32),
     get_type_info_count : Proc(ISystemInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISystemInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISystemInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISystemInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISystemInformation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_OemHardwareSupportLink : Proc(ISystemInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(ISystemInformation*, Int16*, Win32cr::Foundation::HRESULT)
+    get_RebootRequired : Proc(ISystemInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISystemInformation, lpVtbl : ISystemInformationVtbl* do
+  record ISystemInformation, lpVtbl : ISystemInformationVtable* do
     GUID = LibC::GUID.new(0xade87bf7_u32, 0x7b56_u16, 0x4275_u16, StaticArray[0x8f_u8, 0xab_u8, 0xb9_u8, 0xb0_u8, 0xe5_u8, 0x91_u8, 0x84_u8, 0x4b_u8])
     def query_interface(this : ISystemInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -847,32 +870,33 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : ISystemInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISystemInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISystemInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_OemHardwareSupportLink(this : ISystemInformation*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OemHardwareSupportLink.call(this, retval)
     end
-    def get_RebootRequired(this : ISystemInformation*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : ISystemInformation*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IWindowsUpdateAgentInfoVtbl,
+
+  record IWindowsUpdateAgentInfoVtable,
     query_interface : Proc(IWindowsUpdateAgentInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsUpdateAgentInfo*, UInt32),
     release : Proc(IWindowsUpdateAgentInfo*, UInt32),
     get_type_info_count : Proc(IWindowsUpdateAgentInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsUpdateAgentInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsUpdateAgentInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsUpdateAgentInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_info : Proc(IWindowsUpdateAgentInfo*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IWindowsUpdateAgentInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_info : Proc(IWindowsUpdateAgentInfo*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWindowsUpdateAgentInfo, lpVtbl : IWindowsUpdateAgentInfoVtbl* do
+  record IWindowsUpdateAgentInfo, lpVtbl : IWindowsUpdateAgentInfoVtable* do
     GUID = LibC::GUID.new(0x85713fa1_u32, 0x7796_u16, 0x4fa2_u16, StaticArray[0xbe_u8, 0x3b_u8, 0xe2_u8, 0xd6_u8, 0x12_u8, 0x4d_u8, 0xd3_u8, 0x73_u8])
     def query_interface(this : IWindowsUpdateAgentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -892,30 +916,31 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsUpdateAgentInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsUpdateAgentInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsUpdateAgentInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_info(this : IWindowsUpdateAgentInfo*, varInfoIdentifier : Win32cr::System::Com::VARIANT, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_info(this : IWindowsUpdateAgentInfo*, varInfoIdentifier : Win32cr::System::Variant::VARIANT, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_info.call(this, varInfoIdentifier, retval)
     end
 
   end
 
   @[Extern]
-  record IAutomaticUpdatesResultsVtbl,
+
+  record IAutomaticUpdatesResultsVtable,
     query_interface : Proc(IAutomaticUpdatesResults*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesResults*, UInt32),
     release : Proc(IAutomaticUpdatesResults*, UInt32),
     get_type_info_count : Proc(IAutomaticUpdatesResults*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAutomaticUpdatesResults*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAutomaticUpdatesResults*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAutomaticUpdatesResults*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_LastSearchSuccessDate : Proc(IAutomaticUpdatesResults*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_LastInstallationSuccessDate : Proc(IAutomaticUpdatesResults*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IAutomaticUpdatesResults*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_LastSearchSuccessDate : Proc(IAutomaticUpdatesResults*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_LastInstallationSuccessDate : Proc(IAutomaticUpdatesResults*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAutomaticUpdatesResults, lpVtbl : IAutomaticUpdatesResultsVtbl* do
+  record IAutomaticUpdatesResults, lpVtbl : IAutomaticUpdatesResultsVtable* do
     GUID = LibC::GUID.new(0xe7a4d634_u32, 0x7942_u16, 0x4dd9_u16, StaticArray[0xa1_u8, 0x11_u8, 0x82_u8, 0x22_u8, 0x8b_u8, 0xa3_u8, 0x39_u8, 0x1_u8])
     def query_interface(this : IAutomaticUpdatesResults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -935,31 +960,32 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IAutomaticUpdatesResults*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAutomaticUpdatesResults*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAutomaticUpdatesResults*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_LastSearchSuccessDate(this : IAutomaticUpdatesResults*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastSearchSuccessDate(this : IAutomaticUpdatesResults*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastSearchSuccessDate.call(this, retval)
     end
-    def get_LastInstallationSuccessDate(this : IAutomaticUpdatesResults*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LastInstallationSuccessDate(this : IAutomaticUpdatesResults*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LastInstallationSuccessDate.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IAutomaticUpdatesSettingsVtbl,
+
+  record IAutomaticUpdatesSettingsVtable,
     query_interface : Proc(IAutomaticUpdatesSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesSettings*, UInt32),
     release : Proc(IAutomaticUpdatesSettings*, UInt32),
     get_type_info_count : Proc(IAutomaticUpdatesSettings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAutomaticUpdatesSettings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAutomaticUpdatesSettings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAutomaticUpdatesSettings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAutomaticUpdatesSettings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_NotificationLevel : Proc(IAutomaticUpdatesSettings*, Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel*, Win32cr::Foundation::HRESULT),
     put_NotificationLevel : Proc(IAutomaticUpdatesSettings*, Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IAutomaticUpdatesSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Required : Proc(IAutomaticUpdatesSettings*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IAutomaticUpdatesSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Required : Proc(IAutomaticUpdatesSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ScheduledInstallationDay : Proc(IAutomaticUpdatesSettings*, Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay*, Win32cr::Foundation::HRESULT),
     put_ScheduledInstallationDay : Proc(IAutomaticUpdatesSettings*, Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay, Win32cr::Foundation::HRESULT),
     get_ScheduledInstallationTime : Proc(IAutomaticUpdatesSettings*, Int32*, Win32cr::Foundation::HRESULT),
@@ -969,7 +995,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IAutomaticUpdatesSettings, lpVtbl : IAutomaticUpdatesSettingsVtbl* do
+  record IAutomaticUpdatesSettings, lpVtbl : IAutomaticUpdatesSettingsVtable* do
     GUID = LibC::GUID.new(0x2ee48f22_u32, 0xaf3c_u16, 0x405f_u16, StaticArray[0x89_u8, 0x70_u8, 0xf7_u8, 0x1b_u8, 0xe1_u8, 0x2e_u8, 0xe9_u8, 0xa2_u8])
     def query_interface(this : IAutomaticUpdatesSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -989,8 +1015,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IAutomaticUpdatesSettings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAutomaticUpdatesSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAutomaticUpdatesSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_NotificationLevel(this : IAutomaticUpdatesSettings*, retval : Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NotificationLevel.call(this, retval)
@@ -998,10 +1024,10 @@ module Win32cr::System::UpdateAgent
     def put_NotificationLevel(this : IAutomaticUpdatesSettings*, value : Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NotificationLevel.call(this, value)
     end
-    def get_ReadOnly(this : IAutomaticUpdatesSettings*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IAutomaticUpdatesSettings*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
-    def get_Required(this : IAutomaticUpdatesSettings*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Required(this : IAutomaticUpdatesSettings*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Required.call(this, retval)
     end
     def get_ScheduledInstallationDay(this : IAutomaticUpdatesSettings*, retval : Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay*) : Win32cr::Foundation::HRESULT
@@ -1026,31 +1052,32 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdatesSettings2Vtbl,
+
+  record IAutomaticUpdatesSettings2Vtable,
     query_interface : Proc(IAutomaticUpdatesSettings2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesSettings2*, UInt32),
     release : Proc(IAutomaticUpdatesSettings2*, UInt32),
     get_type_info_count : Proc(IAutomaticUpdatesSettings2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAutomaticUpdatesSettings2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAutomaticUpdatesSettings2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAutomaticUpdatesSettings2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAutomaticUpdatesSettings2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_NotificationLevel : Proc(IAutomaticUpdatesSettings2*, Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel*, Win32cr::Foundation::HRESULT),
     put_NotificationLevel : Proc(IAutomaticUpdatesSettings2*, Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IAutomaticUpdatesSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Required : Proc(IAutomaticUpdatesSettings2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IAutomaticUpdatesSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Required : Proc(IAutomaticUpdatesSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ScheduledInstallationDay : Proc(IAutomaticUpdatesSettings2*, Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay*, Win32cr::Foundation::HRESULT),
     put_ScheduledInstallationDay : Proc(IAutomaticUpdatesSettings2*, Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay, Win32cr::Foundation::HRESULT),
     get_ScheduledInstallationTime : Proc(IAutomaticUpdatesSettings2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ScheduledInstallationTime : Proc(IAutomaticUpdatesSettings2*, Int32, Win32cr::Foundation::HRESULT),
     refresh : Proc(IAutomaticUpdatesSettings2*, Win32cr::Foundation::HRESULT),
     save : Proc(IAutomaticUpdatesSettings2*, Win32cr::Foundation::HRESULT),
-    get_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings2*, Int16, Win32cr::Foundation::HRESULT),
-    check_permission : Proc(IAutomaticUpdatesSettings2*, Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, Int16*, Win32cr::Foundation::HRESULT)
+    get_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    check_permission : Proc(IAutomaticUpdatesSettings2*, Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAutomaticUpdatesSettings2, lpVtbl : IAutomaticUpdatesSettings2Vtbl* do
+  record IAutomaticUpdatesSettings2, lpVtbl : IAutomaticUpdatesSettings2Vtable* do
     GUID = LibC::GUID.new(0x6abc136a_u32, 0xc3ca_u16, 0x4384_u16, StaticArray[0x81_u8, 0x71_u8, 0xcb_u8, 0x2b_u8, 0x1e_u8, 0x59_u8, 0xb8_u8, 0xdc_u8])
     def query_interface(this : IAutomaticUpdatesSettings2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1070,8 +1097,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IAutomaticUpdatesSettings2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAutomaticUpdatesSettings2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAutomaticUpdatesSettings2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_NotificationLevel(this : IAutomaticUpdatesSettings2*, retval : Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NotificationLevel.call(this, retval)
@@ -1079,10 +1106,10 @@ module Win32cr::System::UpdateAgent
     def put_NotificationLevel(this : IAutomaticUpdatesSettings2*, value : Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NotificationLevel.call(this, value)
     end
-    def get_ReadOnly(this : IAutomaticUpdatesSettings2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IAutomaticUpdatesSettings2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
-    def get_Required(this : IAutomaticUpdatesSettings2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Required(this : IAutomaticUpdatesSettings2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Required.call(this, retval)
     end
     def get_ScheduledInstallationDay(this : IAutomaticUpdatesSettings2*, retval : Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay*) : Win32cr::Foundation::HRESULT
@@ -1103,48 +1130,49 @@ module Win32cr::System::UpdateAgent
     def save(this : IAutomaticUpdatesSettings2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this)
     end
-    def get_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncludeRecommendedUpdates.call(this, retval)
     end
-    def put_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IncludeRecommendedUpdates.call(this, value)
     end
-    def check_permission(this : IAutomaticUpdatesSettings2*, userType : Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, permissionType : Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, userHasPermission : Int16*) : Win32cr::Foundation::HRESULT
+    def check_permission(this : IAutomaticUpdatesSettings2*, userType : Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, permissionType : Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, userHasPermission : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_permission.call(this, userType, permissionType, userHasPermission)
     end
 
   end
 
   @[Extern]
-  record IAutomaticUpdatesSettings3Vtbl,
+
+  record IAutomaticUpdatesSettings3Vtable,
     query_interface : Proc(IAutomaticUpdatesSettings3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesSettings3*, UInt32),
     release : Proc(IAutomaticUpdatesSettings3*, UInt32),
     get_type_info_count : Proc(IAutomaticUpdatesSettings3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAutomaticUpdatesSettings3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAutomaticUpdatesSettings3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAutomaticUpdatesSettings3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAutomaticUpdatesSettings3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_NotificationLevel : Proc(IAutomaticUpdatesSettings3*, Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel*, Win32cr::Foundation::HRESULT),
     put_NotificationLevel : Proc(IAutomaticUpdatesSettings3*, Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IAutomaticUpdatesSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Required : Proc(IAutomaticUpdatesSettings3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Required : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ScheduledInstallationDay : Proc(IAutomaticUpdatesSettings3*, Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay*, Win32cr::Foundation::HRESULT),
     put_ScheduledInstallationDay : Proc(IAutomaticUpdatesSettings3*, Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay, Win32cr::Foundation::HRESULT),
     get_ScheduledInstallationTime : Proc(IAutomaticUpdatesSettings3*, Int32*, Win32cr::Foundation::HRESULT),
     put_ScheduledInstallationTime : Proc(IAutomaticUpdatesSettings3*, Int32, Win32cr::Foundation::HRESULT),
     refresh : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::HRESULT),
     save : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::HRESULT),
-    get_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings3*, Int16, Win32cr::Foundation::HRESULT),
-    check_permission : Proc(IAutomaticUpdatesSettings3*, Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, Int16*, Win32cr::Foundation::HRESULT),
-    get_NonAdministratorsElevated : Proc(IAutomaticUpdatesSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_NonAdministratorsElevated : Proc(IAutomaticUpdatesSettings3*, Int16, Win32cr::Foundation::HRESULT),
-    get_FeaturedUpdatesEnabled : Proc(IAutomaticUpdatesSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_FeaturedUpdatesEnabled : Proc(IAutomaticUpdatesSettings3*, Int16, Win32cr::Foundation::HRESULT)
+    get_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IncludeRecommendedUpdates : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    check_permission : Proc(IAutomaticUpdatesSettings3*, Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_NonAdministratorsElevated : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_NonAdministratorsElevated : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_FeaturedUpdatesEnabled : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_FeaturedUpdatesEnabled : Proc(IAutomaticUpdatesSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAutomaticUpdatesSettings3, lpVtbl : IAutomaticUpdatesSettings3Vtbl* do
+  record IAutomaticUpdatesSettings3, lpVtbl : IAutomaticUpdatesSettings3Vtable* do
     GUID = LibC::GUID.new(0xb587f5c3_u32, 0xf57e_u16, 0x485f_u16, StaticArray[0xbb_u8, 0xf5_u8, 0xd_u8, 0x18_u8, 0x1c_u8, 0x5c_u8, 0xd0_u8, 0xdc_u8])
     def query_interface(this : IAutomaticUpdatesSettings3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1164,8 +1192,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IAutomaticUpdatesSettings3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAutomaticUpdatesSettings3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAutomaticUpdatesSettings3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_NotificationLevel(this : IAutomaticUpdatesSettings3*, retval : Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NotificationLevel.call(this, retval)
@@ -1173,10 +1201,10 @@ module Win32cr::System::UpdateAgent
     def put_NotificationLevel(this : IAutomaticUpdatesSettings3*, value : Win32cr::System::UpdateAgent::AutomaticUpdatesNotificationLevel) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NotificationLevel.call(this, value)
     end
-    def get_ReadOnly(this : IAutomaticUpdatesSettings3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IAutomaticUpdatesSettings3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
-    def get_Required(this : IAutomaticUpdatesSettings3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Required(this : IAutomaticUpdatesSettings3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Required.call(this, retval)
     end
     def get_ScheduledInstallationDay(this : IAutomaticUpdatesSettings3*, retval : Win32cr::System::UpdateAgent::AutomaticUpdatesScheduledInstallationDay*) : Win32cr::Foundation::HRESULT
@@ -1197,50 +1225,51 @@ module Win32cr::System::UpdateAgent
     def save(this : IAutomaticUpdatesSettings3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this)
     end
-    def get_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncludeRecommendedUpdates.call(this, retval)
     end
-    def put_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IncludeRecommendedUpdates(this : IAutomaticUpdatesSettings3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IncludeRecommendedUpdates.call(this, value)
     end
-    def check_permission(this : IAutomaticUpdatesSettings3*, userType : Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, permissionType : Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, userHasPermission : Int16*) : Win32cr::Foundation::HRESULT
+    def check_permission(this : IAutomaticUpdatesSettings3*, userType : Win32cr::System::UpdateAgent::AutomaticUpdatesUserType, permissionType : Win32cr::System::UpdateAgent::AutomaticUpdatesPermissionType, userHasPermission : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_permission.call(this, userType, permissionType, userHasPermission)
     end
-    def get_NonAdministratorsElevated(this : IAutomaticUpdatesSettings3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NonAdministratorsElevated(this : IAutomaticUpdatesSettings3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NonAdministratorsElevated.call(this, retval)
     end
-    def put_NonAdministratorsElevated(this : IAutomaticUpdatesSettings3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_NonAdministratorsElevated(this : IAutomaticUpdatesSettings3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NonAdministratorsElevated.call(this, value)
     end
-    def get_FeaturedUpdatesEnabled(this : IAutomaticUpdatesSettings3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_FeaturedUpdatesEnabled(this : IAutomaticUpdatesSettings3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FeaturedUpdatesEnabled.call(this, retval)
     end
-    def put_FeaturedUpdatesEnabled(this : IAutomaticUpdatesSettings3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_FeaturedUpdatesEnabled(this : IAutomaticUpdatesSettings3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_FeaturedUpdatesEnabled.call(this, value)
     end
 
   end
 
   @[Extern]
-  record IAutomaticUpdatesVtbl,
+
+  record IAutomaticUpdatesVtable,
     query_interface : Proc(IAutomaticUpdates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdates*, UInt32),
     release : Proc(IAutomaticUpdates*, UInt32),
     get_type_info_count : Proc(IAutomaticUpdates*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAutomaticUpdates*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAutomaticUpdates*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAutomaticUpdates*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAutomaticUpdates*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     detect_now : Proc(IAutomaticUpdates*, Win32cr::Foundation::HRESULT),
     pause : Proc(IAutomaticUpdates*, Win32cr::Foundation::HRESULT),
     resume : Proc(IAutomaticUpdates*, Win32cr::Foundation::HRESULT),
     show_settings_dialog : Proc(IAutomaticUpdates*, Win32cr::Foundation::HRESULT),
     get_Settings : Proc(IAutomaticUpdates*, Void**, Win32cr::Foundation::HRESULT),
-    get_ServiceEnabled : Proc(IAutomaticUpdates*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ServiceEnabled : Proc(IAutomaticUpdates*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     enable_service : Proc(IAutomaticUpdates*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAutomaticUpdates, lpVtbl : IAutomaticUpdatesVtbl* do
+  record IAutomaticUpdates, lpVtbl : IAutomaticUpdatesVtable* do
     GUID = LibC::GUID.new(0x673425bf_u32, 0xc082_u16, 0x4c7c_u16, StaticArray[0xbd_u8, 0xfd_u8, 0x56_u8, 0x94_u8, 0x64_u8, 0xb8_u8, 0xe0_u8, 0xce_u8])
     def query_interface(this : IAutomaticUpdates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1260,8 +1289,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IAutomaticUpdates*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAutomaticUpdates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAutomaticUpdates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def detect_now(this : IAutomaticUpdates*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.detect_now.call(this)
@@ -1278,7 +1307,7 @@ module Win32cr::System::UpdateAgent
     def get_Settings(this : IAutomaticUpdates*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Settings.call(this, retval)
     end
-    def get_ServiceEnabled(this : IAutomaticUpdates*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ServiceEnabled(this : IAutomaticUpdates*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ServiceEnabled.call(this, retval)
     end
     def enable_service(this : IAutomaticUpdates*) : Win32cr::Foundation::HRESULT
@@ -1288,26 +1317,27 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdates2Vtbl,
+
+  record IAutomaticUpdates2Vtable,
     query_interface : Proc(IAutomaticUpdates2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdates2*, UInt32),
     release : Proc(IAutomaticUpdates2*, UInt32),
     get_type_info_count : Proc(IAutomaticUpdates2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAutomaticUpdates2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAutomaticUpdates2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAutomaticUpdates2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAutomaticUpdates2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     detect_now : Proc(IAutomaticUpdates2*, Win32cr::Foundation::HRESULT),
     pause : Proc(IAutomaticUpdates2*, Win32cr::Foundation::HRESULT),
     resume : Proc(IAutomaticUpdates2*, Win32cr::Foundation::HRESULT),
     show_settings_dialog : Proc(IAutomaticUpdates2*, Win32cr::Foundation::HRESULT),
     get_Settings : Proc(IAutomaticUpdates2*, Void**, Win32cr::Foundation::HRESULT),
-    get_ServiceEnabled : Proc(IAutomaticUpdates2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ServiceEnabled : Proc(IAutomaticUpdates2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     enable_service : Proc(IAutomaticUpdates2*, Win32cr::Foundation::HRESULT),
     get_Results : Proc(IAutomaticUpdates2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAutomaticUpdates2, lpVtbl : IAutomaticUpdates2Vtbl* do
+  record IAutomaticUpdates2, lpVtbl : IAutomaticUpdates2Vtable* do
     GUID = LibC::GUID.new(0x4a2f5c31_u32, 0xcfd9_u16, 0x410e_u16, StaticArray[0xb7_u8, 0xfb_u8, 0x29_u8, 0xa6_u8, 0x53_u8, 0x97_u8, 0x3a_u8, 0xf_u8])
     def query_interface(this : IAutomaticUpdates2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1327,8 +1357,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IAutomaticUpdates2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAutomaticUpdates2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAutomaticUpdates2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def detect_now(this : IAutomaticUpdates2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.detect_now.call(this)
@@ -1345,7 +1375,7 @@ module Win32cr::System::UpdateAgent
     def get_Settings(this : IAutomaticUpdates2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Settings.call(this, retval)
     end
-    def get_ServiceEnabled(this : IAutomaticUpdates2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ServiceEnabled(this : IAutomaticUpdates2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ServiceEnabled.call(this, retval)
     end
     def enable_service(this : IAutomaticUpdates2*) : Win32cr::Foundation::HRESULT
@@ -1358,20 +1388,21 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateIdentityVtbl,
+
+  record IUpdateIdentityVtable,
     query_interface : Proc(IUpdateIdentity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateIdentity*, UInt32),
     release : Proc(IUpdateIdentity*, UInt32),
     get_type_info_count : Proc(IUpdateIdentity*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateIdentity*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateIdentity*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateIdentity*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateIdentity*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_RevisionNumber : Proc(IUpdateIdentity*, Int32*, Win32cr::Foundation::HRESULT),
     get_UpdateID : Proc(IUpdateIdentity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateIdentity, lpVtbl : IUpdateIdentityVtbl* do
+  record IUpdateIdentity, lpVtbl : IUpdateIdentityVtable* do
     GUID = LibC::GUID.new(0x46297823_u32, 0x9940_u16, 0x4c09_u16, StaticArray[0xae_u8, 0xd9_u8, 0xcd_u8, 0x3e_u8, 0xa6_u8, 0xd0_u8, 0x59_u8, 0x68_u8])
     def query_interface(this : IUpdateIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1391,8 +1422,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateIdentity*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateIdentity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateIdentity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_RevisionNumber(this : IUpdateIdentity*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RevisionNumber.call(this, retval)
@@ -1404,14 +1435,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IImageInformationVtbl,
+
+  record IImageInformationVtable,
     query_interface : Proc(IImageInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImageInformation*, UInt32),
     release : Proc(IImageInformation*, UInt32),
     get_type_info_count : Proc(IImageInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IImageInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IImageInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IImageInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IImageInformation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_AltText : Proc(IImageInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Height : Proc(IImageInformation*, Int32*, Win32cr::Foundation::HRESULT),
     get_Source : Proc(IImageInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1419,7 +1451,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IImageInformation, lpVtbl : IImageInformationVtbl* do
+  record IImageInformation, lpVtbl : IImageInformationVtable* do
     GUID = LibC::GUID.new(0x7c907864_u32, 0x346c_u16, 0x4aeb_u16, StaticArray[0x8f_u8, 0x3f_u8, 0x57_u8, 0xda_u8, 0x28_u8, 0x9f_u8, 0x96_u8, 0x9f_u8])
     def query_interface(this : IImageInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1439,8 +1471,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IImageInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IImageInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IImageInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_AltText(this : IImageInformation*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AltText.call(this, retval)
@@ -1458,14 +1490,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ICategoryVtbl,
+
+  record ICategoryVtable,
     query_interface : Proc(ICategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICategory*, UInt32),
     release : Proc(ICategory*, UInt32),
     get_type_info_count : Proc(ICategory*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICategory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICategory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICategory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICategory*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ICategory*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_CategoryID : Proc(ICategory*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Children : Proc(ICategory*, Void**, Win32cr::Foundation::HRESULT),
@@ -1478,7 +1511,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ICategory, lpVtbl : ICategoryVtbl* do
+  record ICategory, lpVtbl : ICategoryVtable* do
     GUID = LibC::GUID.new(0x81ddc1b8_u32, 0x9d35_u16, 0x47a6_u16, StaticArray[0xb4_u8, 0x71_u8, 0x5b_u8, 0x80_u8, 0xf5_u8, 0x19_u8, 0x22_u8, 0x3b_u8])
     def query_interface(this : ICategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1498,8 +1531,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : ICategory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICategory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICategory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ICategory*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, retval)
@@ -1532,21 +1565,22 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ICategoryCollectionVtbl,
+
+  record ICategoryCollectionVtable,
     query_interface : Proc(ICategoryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICategoryCollection*, UInt32),
     release : Proc(ICategoryCollection*, UInt32),
     get_type_info_count : Proc(ICategoryCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICategoryCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICategoryCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICategoryCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICategoryCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(ICategoryCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICategoryCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICategoryCollection*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICategoryCollection, lpVtbl : ICategoryCollectionVtbl* do
+  record ICategoryCollection, lpVtbl : ICategoryCollectionVtable* do
     GUID = LibC::GUID.new(0x3a56bfb8_u32, 0x576c_u16, 0x43f7_u16, StaticArray[0x93_u8, 0x35_u8, 0xfe_u8, 0x48_u8, 0x38_u8, 0xfd_u8, 0x7e_u8, 0x37_u8])
     def query_interface(this : ICategoryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1566,8 +1600,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : ICategoryCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICategoryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICategoryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : ICategoryCollection*, index : Int32, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -1582,22 +1616,23 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationBehaviorVtbl,
+
+  record IInstallationBehaviorVtable,
     query_interface : Proc(IInstallationBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationBehavior*, UInt32),
     release : Proc(IInstallationBehavior*, UInt32),
     get_type_info_count : Proc(IInstallationBehavior*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInstallationBehavior*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInstallationBehavior*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInstallationBehavior*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_CanRequestUserInput : Proc(IInstallationBehavior*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInstallationBehavior*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_CanRequestUserInput : Proc(IInstallationBehavior*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Impact : Proc(IInstallationBehavior*, Win32cr::System::UpdateAgent::InstallationImpact*, Win32cr::Foundation::HRESULT),
     get_RebootBehavior : Proc(IInstallationBehavior*, Win32cr::System::UpdateAgent::InstallationRebootBehavior*, Win32cr::Foundation::HRESULT),
-    get_RequiresNetworkConnectivity : Proc(IInstallationBehavior*, Int16*, Win32cr::Foundation::HRESULT)
+    get_RequiresNetworkConnectivity : Proc(IInstallationBehavior*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInstallationBehavior, lpVtbl : IInstallationBehaviorVtbl* do
+  record IInstallationBehavior, lpVtbl : IInstallationBehaviorVtable* do
     GUID = LibC::GUID.new(0xd9a59339_u32, 0xe245_u16, 0x4dbd_u16, StaticArray[0x96_u8, 0x86_u8, 0x4d_u8, 0x57_u8, 0x63_u8, 0xe3_u8, 0x96_u8, 0x24_u8])
     def query_interface(this : IInstallationBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1617,10 +1652,10 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInstallationBehavior*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInstallationBehavior*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInstallationBehavior*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_CanRequestUserInput(this : IInstallationBehavior*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequestUserInput(this : IInstallationBehavior*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequestUserInput.call(this, retval)
     end
     def get_Impact(this : IInstallationBehavior*, retval : Win32cr::System::UpdateAgent::InstallationImpact*) : Win32cr::Foundation::HRESULT
@@ -1629,26 +1664,27 @@ module Win32cr::System::UpdateAgent
     def get_RebootBehavior(this : IInstallationBehavior*, retval : Win32cr::System::UpdateAgent::InstallationRebootBehavior*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootBehavior.call(this, retval)
     end
-    def get_RequiresNetworkConnectivity(this : IInstallationBehavior*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RequiresNetworkConnectivity(this : IInstallationBehavior*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RequiresNetworkConnectivity.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IUpdateDownloadContentVtbl,
+
+  record IUpdateDownloadContentVtable,
     query_interface : Proc(IUpdateDownloadContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadContent*, UInt32),
     release : Proc(IUpdateDownloadContent*, UInt32),
     get_type_info_count : Proc(IUpdateDownloadContent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateDownloadContent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateDownloadContent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateDownloadContent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateDownloadContent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DownloadUrl : Proc(IUpdateDownloadContent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateDownloadContent, lpVtbl : IUpdateDownloadContentVtbl* do
+  record IUpdateDownloadContent, lpVtbl : IUpdateDownloadContentVtable* do
     GUID = LibC::GUID.new(0x54a2cb2d_u32, 0x9a0c_u16, 0x48b6_u16, StaticArray[0x8a_u8, 0x50_u8, 0x9a_u8, 0xbb_u8, 0x69_u8, 0xee_u8, 0x2d_u8, 0x2_u8])
     def query_interface(this : IUpdateDownloadContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1668,8 +1704,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateDownloadContent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateDownloadContent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateDownloadContent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DownloadUrl(this : IUpdateDownloadContent*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadUrl.call(this, retval)
@@ -1678,20 +1714,21 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloadContent2Vtbl,
+
+  record IUpdateDownloadContent2Vtable,
     query_interface : Proc(IUpdateDownloadContent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadContent2*, UInt32),
     release : Proc(IUpdateDownloadContent2*, UInt32),
     get_type_info_count : Proc(IUpdateDownloadContent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateDownloadContent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateDownloadContent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateDownloadContent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateDownloadContent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DownloadUrl : Proc(IUpdateDownloadContent2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsDeltaCompressedContent : Proc(IUpdateDownloadContent2*, Int16*, Win32cr::Foundation::HRESULT)
+    get_IsDeltaCompressedContent : Proc(IUpdateDownloadContent2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateDownloadContent2, lpVtbl : IUpdateDownloadContent2Vtbl* do
+  record IUpdateDownloadContent2, lpVtbl : IUpdateDownloadContent2Vtable* do
     GUID = LibC::GUID.new(0xc97ad11b_u32, 0xf257_u16, 0x420b_u16, StaticArray[0x9d_u8, 0x9f_u8, 0x37_u8, 0x7f_u8, 0x73_u8, 0x3f_u8, 0x6f_u8, 0x68_u8])
     def query_interface(this : IUpdateDownloadContent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1711,34 +1748,35 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateDownloadContent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateDownloadContent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateDownloadContent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DownloadUrl(this : IUpdateDownloadContent2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadUrl.call(this, retval)
     end
-    def get_IsDeltaCompressedContent(this : IUpdateDownloadContent2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDeltaCompressedContent(this : IUpdateDownloadContent2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDeltaCompressedContent.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IUpdateDownloadContentCollectionVtbl,
+
+  record IUpdateDownloadContentCollectionVtable,
     query_interface : Proc(IUpdateDownloadContentCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadContentCollection*, UInt32),
     release : Proc(IUpdateDownloadContentCollection*, UInt32),
     get_type_info_count : Proc(IUpdateDownloadContentCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateDownloadContentCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateDownloadContentCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateDownloadContentCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateDownloadContentCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IUpdateDownloadContentCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IUpdateDownloadContentCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IUpdateDownloadContentCollection*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateDownloadContentCollection, lpVtbl : IUpdateDownloadContentCollectionVtbl* do
+  record IUpdateDownloadContentCollection, lpVtbl : IUpdateDownloadContentCollectionVtable* do
     GUID = LibC::GUID.new(0xbc5513c8_u32, 0xb3b8_u16, 0x4bf7_u16, StaticArray[0xa4_u8, 0xd4_u8, 0x36_u8, 0x1c_u8, 0xd_u8, 0x8c_u8, 0x88_u8, 0xba_u8])
     def query_interface(this : IUpdateDownloadContentCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1758,8 +1796,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateDownloadContentCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateDownloadContentCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateDownloadContentCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IUpdateDownloadContentCollection*, index : Int32, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -1774,36 +1812,37 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateVtbl,
+
+  record IUpdateVtable,
     query_interface : Proc(IUpdate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate*, UInt32),
     release : Proc(IUpdate*, UInt32),
     get_type_info_count : Proc(IUpdate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IUpdate*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IUpdate*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IUpdate*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IUpdate*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IUpdate*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -1824,13 +1863,13 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IUpdate*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IUpdate*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IUpdate*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IUpdate*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IUpdate*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IUpdate*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdate, lpVtbl : IUpdateVtbl* do
+  record IUpdate, lpVtbl : IUpdateVtable* do
     GUID = LibC::GUID.new(0x6a92b07a_u32, 0xd821_u16, 0x4682_u16, StaticArray[0xb4_u8, 0x23_u8, 0x5c_u8, 0x80_u8, 0x50_u8, 0x22_u8, 0xcc_u8, 0x4d_u8])
     def query_interface(this : IUpdate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1850,37 +1889,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IUpdate*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IUpdate*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IUpdate*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IUpdate*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IUpdate*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1898,25 +1937,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IUpdate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IUpdate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -1979,7 +2018,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IUpdate*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IUpdate*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IUpdate*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IUpdate*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -1992,36 +2031,37 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdateVtbl,
+
+  record IWindowsDriverUpdateVtable,
     query_interface : Proc(IWindowsDriverUpdate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate*, UInt32),
     release : Proc(IWindowsDriverUpdate*, UInt32),
     get_type_info_count : Proc(IWindowsDriverUpdate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsDriverUpdate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsDriverUpdate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsDriverUpdate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWindowsDriverUpdate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IWindowsDriverUpdate*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IWindowsDriverUpdate*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IWindowsDriverUpdate*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IWindowsDriverUpdate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IWindowsDriverUpdate*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -2042,7 +2082,7 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IWindowsDriverUpdate*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IWindowsDriverUpdate*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IWindowsDriverUpdate*, Void**, Win32cr::Foundation::HRESULT),
     get_DriverClass : Proc(IWindowsDriverUpdate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2056,7 +2096,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdate, lpVtbl : IWindowsDriverUpdateVtbl* do
+  record IWindowsDriverUpdate, lpVtbl : IWindowsDriverUpdateVtable* do
     GUID = LibC::GUID.new(0xb383cd1a_u32, 0x5ce9_u16, 0x4504_u16, StaticArray[0x9f_u8, 0x63_u8, 0x76_u8, 0x4b_u8, 0x12_u8, 0x36_u8, 0xf1_u8, 0x91_u8])
     def query_interface(this : IWindowsDriverUpdate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2076,37 +2116,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsDriverUpdate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsDriverUpdate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsDriverUpdate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IWindowsDriverUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IWindowsDriverUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IWindowsDriverUpdate*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IWindowsDriverUpdate*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2124,25 +2164,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IWindowsDriverUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IWindowsDriverUpdate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IWindowsDriverUpdate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IWindowsDriverUpdate*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IWindowsDriverUpdate*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IWindowsDriverUpdate*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -2205,7 +2245,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IWindowsDriverUpdate*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IWindowsDriverUpdate*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IWindowsDriverUpdate*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IWindowsDriverUpdate*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -2242,36 +2282,37 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdate2Vtbl,
+
+  record IUpdate2Vtable,
     query_interface : Proc(IUpdate2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate2*, UInt32),
     release : Proc(IUpdate2*, UInt32),
     get_type_info_count : Proc(IUpdate2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdate2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdate2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdate2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdate2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IUpdate2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IUpdate2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IUpdate2*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IUpdate2*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IUpdate2*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -2292,17 +2333,17 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IUpdate2*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IUpdate2*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IUpdate2*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IUpdate2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IUpdate2*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IUpdate2*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdate2, lpVtbl : IUpdate2Vtbl* do
+  record IUpdate2, lpVtbl : IUpdate2Vtable* do
     GUID = LibC::GUID.new(0x144fe9b0_u32, 0xd23d_u16, 0x4a8b_u16, StaticArray[0x86_u8, 0x34_u8, 0xfb_u8, 0x44_u8, 0x57_u8, 0x53_u8, 0x3b_u8, 0x7a_u8])
     def query_interface(this : IUpdate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2322,37 +2363,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdate2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdate2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdate2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IUpdate2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IUpdate2*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IUpdate2*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IUpdate2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IUpdate2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2370,25 +2411,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IUpdate2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IUpdate2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -2451,7 +2492,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IUpdate2*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IUpdate2*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IUpdate2*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IUpdate2*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -2460,10 +2501,10 @@ module Win32cr::System::UpdateAgent
     def get_DownloadContents(this : IUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadContents.call(this, retval)
     end
-    def get_RebootRequired(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -2476,36 +2517,37 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdate3Vtbl,
+
+  record IUpdate3Vtable,
     query_interface : Proc(IUpdate3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate3*, UInt32),
     release : Proc(IUpdate3*, UInt32),
     get_type_info_count : Proc(IUpdate3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdate3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdate3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdate3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdate3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IUpdate3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IUpdate3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IUpdate3*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IUpdate3*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IUpdate3*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -2526,18 +2568,18 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IUpdate3*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IUpdate3*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IUpdate3*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IUpdate3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IUpdate3*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IUpdate3*, Void*, Win32cr::Foundation::HRESULT),
-    get_BrowseOnly : Proc(IUpdate3*, Int16*, Win32cr::Foundation::HRESULT)
+    get_BrowseOnly : Proc(IUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdate3, lpVtbl : IUpdate3Vtbl* do
+  record IUpdate3, lpVtbl : IUpdate3Vtable* do
     GUID = LibC::GUID.new(0x112eda6b_u32, 0x95b3_u16, 0x476f_u16, StaticArray[0x9d_u8, 0x90_u8, 0xae_u8, 0xe8_u8, 0x2c_u8, 0x6b_u8, 0x81_u8, 0x81_u8])
     def query_interface(this : IUpdate3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2557,37 +2599,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdate3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdate3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdate3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IUpdate3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IUpdate3*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IUpdate3*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IUpdate3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IUpdate3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2605,25 +2647,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IUpdate3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IUpdate3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -2686,7 +2728,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IUpdate3*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IUpdate3*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IUpdate3*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IUpdate3*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -2695,10 +2737,10 @@ module Win32cr::System::UpdateAgent
     def get_DownloadContents(this : IUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadContents.call(this, retval)
     end
-    def get_RebootRequired(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -2707,43 +2749,44 @@ module Win32cr::System::UpdateAgent
     def copy_to_cache(this : IUpdate3*, pFiles : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to_cache.call(this, pFiles)
     end
-    def get_BrowseOnly(this : IUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BrowseOnly(this : IUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BrowseOnly.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IUpdate4Vtbl,
+
+  record IUpdate4Vtable,
     query_interface : Proc(IUpdate4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate4*, UInt32),
     release : Proc(IUpdate4*, UInt32),
     get_type_info_count : Proc(IUpdate4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdate4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdate4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdate4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdate4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IUpdate4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IUpdate4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IUpdate4*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IUpdate4*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IUpdate4*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -2764,19 +2807,19 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IUpdate4*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IUpdate4*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IUpdate4*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IUpdate4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IUpdate4*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IUpdate4*, Void*, Win32cr::Foundation::HRESULT),
-    get_BrowseOnly : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_PerUser : Proc(IUpdate4*, Int16*, Win32cr::Foundation::HRESULT)
+    get_BrowseOnly : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_PerUser : Proc(IUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdate4, lpVtbl : IUpdate4Vtbl* do
+  record IUpdate4, lpVtbl : IUpdate4Vtable* do
     GUID = LibC::GUID.new(0x27e94b0d_u32, 0x5139_u16, 0x49a2_u16, StaticArray[0x9a_u8, 0x61_u8, 0x93_u8, 0x52_u8, 0x2d_u8, 0xc5_u8, 0x46_u8, 0x52_u8])
     def query_interface(this : IUpdate4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2796,37 +2839,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdate4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdate4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdate4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IUpdate4*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IUpdate4*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IUpdate4*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IUpdate4*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IUpdate4*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2844,25 +2887,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IUpdate4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IUpdate4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -2925,7 +2968,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IUpdate4*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IUpdate4*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IUpdate4*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IUpdate4*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -2934,10 +2977,10 @@ module Win32cr::System::UpdateAgent
     def get_DownloadContents(this : IUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadContents.call(this, retval)
     end
-    def get_RebootRequired(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -2946,46 +2989,47 @@ module Win32cr::System::UpdateAgent
     def copy_to_cache(this : IUpdate4*, pFiles : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to_cache.call(this, pFiles)
     end
-    def get_BrowseOnly(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BrowseOnly(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BrowseOnly.call(this, retval)
     end
-    def get_PerUser(this : IUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PerUser(this : IUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PerUser.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IUpdate5Vtbl,
+
+  record IUpdate5Vtable,
     query_interface : Proc(IUpdate5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate5*, UInt32),
     release : Proc(IUpdate5*, UInt32),
     get_type_info_count : Proc(IUpdate5*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdate5*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdate5*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdate5*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdate5*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IUpdate5*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IUpdate5*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IUpdate5*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IUpdate5*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IUpdate5*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -3006,21 +3050,21 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IUpdate5*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IUpdate5*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IUpdate5*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IUpdate5*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IUpdate5*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IUpdate5*, Void*, Win32cr::Foundation::HRESULT),
-    get_BrowseOnly : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_PerUser : Proc(IUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_BrowseOnly : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_PerUser : Proc(IUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_AutoSelection : Proc(IUpdate5*, Win32cr::System::UpdateAgent::AutoSelectionMode*, Win32cr::Foundation::HRESULT),
     get_AutoDownload : Proc(IUpdate5*, Win32cr::System::UpdateAgent::AutoDownloadMode*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdate5, lpVtbl : IUpdate5Vtbl* do
+  record IUpdate5, lpVtbl : IUpdate5Vtable* do
     GUID = LibC::GUID.new(0xc1c2f21a_u32, 0xd2f4_u16, 0x4902_u16, StaticArray[0xb5_u8, 0xc6_u8, 0x8a_u8, 0x8_u8, 0x1c_u8, 0x19_u8, 0xa8_u8, 0x90_u8])
     def query_interface(this : IUpdate5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3040,37 +3084,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdate5*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdate5*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdate5*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IUpdate5*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IUpdate5*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IUpdate5*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IUpdate5*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IUpdate5*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3088,25 +3132,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IUpdate5*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IUpdate5*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -3169,7 +3213,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IUpdate5*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IUpdate5*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IUpdate5*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IUpdate5*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -3178,10 +3222,10 @@ module Win32cr::System::UpdateAgent
     def get_DownloadContents(this : IUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadContents.call(this, retval)
     end
-    def get_RebootRequired(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -3190,10 +3234,10 @@ module Win32cr::System::UpdateAgent
     def copy_to_cache(this : IUpdate5*, pFiles : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to_cache.call(this, pFiles)
     end
-    def get_BrowseOnly(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BrowseOnly(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BrowseOnly.call(this, retval)
     end
-    def get_PerUser(this : IUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PerUser(this : IUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PerUser.call(this, retval)
     end
     def get_AutoSelection(this : IUpdate5*, retval : Win32cr::System::UpdateAgent::AutoSelectionMode*) : Win32cr::Foundation::HRESULT
@@ -3206,36 +3250,296 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdate2Vtbl,
+
+  record IUpdateExVtable,
+    query_interface : Proc(IUpdateEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IUpdateEx*, UInt32),
+    release : Proc(IUpdateEx*, UInt32),
+    get_type_info_count : Proc(IUpdateEx*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IUpdateEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IUpdateEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Title : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_BundledUpdates : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Categories : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IUpdateEx*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_EulaText : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_HandlerID : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Identity : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_Image : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_InstallationBehavior : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Languages : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_LastDeploymentChangeTime : Proc(IUpdateEx*, Float64*, Win32cr::Foundation::HRESULT),
+    get_MaxDownloadSize : Proc(IUpdateEx*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
+    get_MinDownloadSize : Proc(IUpdateEx*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
+    get_MoreInfoUrls : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_MsrcSeverity : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_RecommendedCpuSpeed : Proc(IUpdateEx*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RecommendedHardDiskSpace : Proc(IUpdateEx*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RecommendedMemory : Proc(IUpdateEx*, Int32*, Win32cr::Foundation::HRESULT),
+    get_ReleaseNotes : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_SecurityBulletinIDs : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_SupersededUpdateIDs : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_SupportUrl : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Type : Proc(IUpdateEx*, Win32cr::System::UpdateAgent::UpdateType*, Win32cr::Foundation::HRESULT),
+    get_UninstallationNotes : Proc(IUpdateEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_UninstallationBehavior : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_UninstallationSteps : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_KBArticleIDs : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    accept_eula : Proc(IUpdateEx*, Win32cr::Foundation::HRESULT),
+    get_DeploymentAction : Proc(IUpdateEx*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IUpdateEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DownloadPriority : Proc(IUpdateEx*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
+    get_DownloadContents : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_CveIDs : Proc(IUpdateEx*, Void**, Win32cr::Foundation::HRESULT),
+    copy_to_cache : Proc(IUpdateEx*, Void*, Win32cr::Foundation::HRESULT),
+    get_BrowseOnly : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_PerUser : Proc(IUpdateEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_AutoSelection : Proc(IUpdateEx*, Win32cr::System::UpdateAgent::AutoSelectionMode*, Win32cr::Foundation::HRESULT),
+    get_AutoDownload : Proc(IUpdateEx*, Win32cr::System::UpdateAgent::AutoDownloadMode*, Win32cr::Foundation::HRESULT),
+    get_ExtendedStaticProperty : Proc(IUpdateEx*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    evaluate_extended_dynamic_property : Proc(IUpdateEx*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IUpdateEx, lpVtbl : IUpdateExVtable* do
+    GUID = LibC::GUID.new(0x769355a3_u32, 0xc5a0_u16, 0x497c_u16, StaticArray[0xa6_u8, 0x6_u8, 0x56_u8, 0xa_u8, 0x36_u8, 0xd2_u8, 0x12_u8, 0x1c_u8])
+    def query_interface(this : IUpdateEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IUpdateEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IUpdateEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IUpdateEx*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IUpdateEx*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IUpdateEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke(this : IUpdateEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Title(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Title.call(this, retval)
+    end
+    def get_AutoSelectOnWebSites(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
+    end
+    def get_BundledUpdates(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
+    end
+    def get_CanRequireSource(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
+    end
+    def get_Categories(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Categories.call(this, retval)
+    end
+    def get_Deadline(this : IUpdateEx*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Deadline.call(this, retval)
+    end
+    def get_DeltaCompressedContentAvailable(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
+    end
+    def get_DeltaCompressedContentPreferred(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
+    end
+    def get_Description(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, retval)
+    end
+    def get_EulaAccepted(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
+    end
+    def get_EulaText(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EulaText.call(this, retval)
+    end
+    def get_HandlerID(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_HandlerID.call(this, retval)
+    end
+    def get_Identity(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Identity.call(this, retval)
+    end
+    def get_Image(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Image.call(this, retval)
+    end
+    def get_InstallationBehavior(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
+    end
+    def get_IsBeta(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsBeta.call(this, retval)
+    end
+    def get_IsDownloaded(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
+    end
+    def get_IsHidden(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsHidden.call(this, retval)
+    end
+    def put_IsHidden(this : IUpdateEx*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsHidden.call(this, value)
+    end
+    def get_IsInstalled(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
+    end
+    def get_IsMandatory(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
+    end
+    def get_IsUninstallable(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
+    end
+    def get_Languages(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Languages.call(this, retval)
+    end
+    def get_LastDeploymentChangeTime(this : IUpdateEx*, retval : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastDeploymentChangeTime.call(this, retval)
+    end
+    def get_MaxDownloadSize(this : IUpdateEx*, retval : Win32cr::Foundation::DECIMAL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MaxDownloadSize.call(this, retval)
+    end
+    def get_MinDownloadSize(this : IUpdateEx*, retval : Win32cr::Foundation::DECIMAL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MinDownloadSize.call(this, retval)
+    end
+    def get_MoreInfoUrls(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MoreInfoUrls.call(this, retval)
+    end
+    def get_MsrcSeverity(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MsrcSeverity.call(this, retval)
+    end
+    def get_RecommendedCpuSpeed(this : IUpdateEx*, retval : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecommendedCpuSpeed.call(this, retval)
+    end
+    def get_RecommendedHardDiskSpace(this : IUpdateEx*, retval : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecommendedHardDiskSpace.call(this, retval)
+    end
+    def get_RecommendedMemory(this : IUpdateEx*, retval : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecommendedMemory.call(this, retval)
+    end
+    def get_ReleaseNotes(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReleaseNotes.call(this, retval)
+    end
+    def get_SecurityBulletinIDs(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SecurityBulletinIDs.call(this, retval)
+    end
+    def get_SupersededUpdateIDs(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupersededUpdateIDs.call(this, retval)
+    end
+    def get_SupportUrl(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportUrl.call(this, retval)
+    end
+    def get_Type(this : IUpdateEx*, retval : Win32cr::System::UpdateAgent::UpdateType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Type.call(this, retval)
+    end
+    def get_UninstallationNotes(this : IUpdateEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UninstallationNotes.call(this, retval)
+    end
+    def get_UninstallationBehavior(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UninstallationBehavior.call(this, retval)
+    end
+    def get_UninstallationSteps(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UninstallationSteps.call(this, retval)
+    end
+    def get_KBArticleIDs(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_KBArticleIDs.call(this, retval)
+    end
+    def accept_eula(this : IUpdateEx*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.accept_eula.call(this)
+    end
+    def get_DeploymentAction(this : IUpdateEx*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
+    end
+    def copy_from_cache(this : IUpdateEx*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
+    end
+    def get_DownloadPriority(this : IUpdateEx*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DownloadPriority.call(this, retval)
+    end
+    def get_DownloadContents(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DownloadContents.call(this, retval)
+    end
+    def get_RebootRequired(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
+    end
+    def get_IsPresent(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsPresent.call(this, retval)
+    end
+    def get_CveIDs(this : IUpdateEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CveIDs.call(this, retval)
+    end
+    def copy_to_cache(this : IUpdateEx*, pFiles : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to_cache.call(this, pFiles)
+    end
+    def get_BrowseOnly(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BrowseOnly.call(this, retval)
+    end
+    def get_PerUser(this : IUpdateEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PerUser.call(this, retval)
+    end
+    def get_AutoSelection(this : IUpdateEx*, retval : Win32cr::System::UpdateAgent::AutoSelectionMode*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AutoSelection.call(this, retval)
+    end
+    def get_AutoDownload(this : IUpdateEx*, retval : Win32cr::System::UpdateAgent::AutoDownloadMode*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AutoDownload.call(this, retval)
+    end
+    def get_ExtendedStaticProperty(this : IUpdateEx*, propertyName : Win32cr::Foundation::BSTR, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExtendedStaticProperty.call(this, propertyName, retval)
+    end
+    def evaluate_extended_dynamic_property(this : IUpdateEx*, propertyName : Win32cr::Foundation::BSTR, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.evaluate_extended_dynamic_property.call(this, propertyName, retval)
+    end
+
+  end
+
+  @[Extern]
+
+  record IWindowsDriverUpdate2Vtable,
     query_interface : Proc(IWindowsDriverUpdate2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate2*, UInt32),
     release : Proc(IWindowsDriverUpdate2*, UInt32),
     get_type_info_count : Proc(IWindowsDriverUpdate2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsDriverUpdate2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsDriverUpdate2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsDriverUpdate2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWindowsDriverUpdate2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IWindowsDriverUpdate2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IWindowsDriverUpdate2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IWindowsDriverUpdate2*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IWindowsDriverUpdate2*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -3256,7 +3560,7 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IWindowsDriverUpdate2*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IWindowsDriverUpdate2*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     get_DriverClass : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3267,14 +3571,14 @@ module Win32cr::System::UpdateAgent
     get_DriverVerDate : Proc(IWindowsDriverUpdate2*, Float64*, Win32cr::Foundation::HRESULT),
     get_DeviceProblemNumber : Proc(IWindowsDriverUpdate2*, Int32*, Win32cr::Foundation::HRESULT),
     get_DeviceStatus : Proc(IWindowsDriverUpdate2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IWindowsDriverUpdate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IWindowsDriverUpdate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IWindowsDriverUpdate2*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IWindowsDriverUpdate2*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWindowsDriverUpdate2, lpVtbl : IWindowsDriverUpdate2Vtbl* do
+  record IWindowsDriverUpdate2, lpVtbl : IWindowsDriverUpdate2Vtable* do
     GUID = LibC::GUID.new(0x615c4269_u32, 0x7a48_u16, 0x43bd_u16, StaticArray[0x96_u8, 0xb7_u8, 0xbf_u8, 0x6c_u8, 0xa2_u8, 0x7d_u8, 0x6c_u8, 0x3e_u8])
     def query_interface(this : IWindowsDriverUpdate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3294,37 +3598,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsDriverUpdate2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsDriverUpdate2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsDriverUpdate2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IWindowsDriverUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IWindowsDriverUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IWindowsDriverUpdate2*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IWindowsDriverUpdate2*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3342,25 +3646,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IWindowsDriverUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IWindowsDriverUpdate2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IWindowsDriverUpdate2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IWindowsDriverUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -3423,7 +3727,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IWindowsDriverUpdate2*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IWindowsDriverUpdate2*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IWindowsDriverUpdate2*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IWindowsDriverUpdate2*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -3456,10 +3760,10 @@ module Win32cr::System::UpdateAgent
     def get_DeviceStatus(this : IWindowsDriverUpdate2*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeviceStatus.call(this, retval)
     end
-    def get_RebootRequired(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IWindowsDriverUpdate2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IWindowsDriverUpdate2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IWindowsDriverUpdate2*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -3472,36 +3776,37 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdate3Vtbl,
+
+  record IWindowsDriverUpdate3Vtable,
     query_interface : Proc(IWindowsDriverUpdate3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate3*, UInt32),
     release : Proc(IWindowsDriverUpdate3*, UInt32),
     get_type_info_count : Proc(IWindowsDriverUpdate3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsDriverUpdate3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsDriverUpdate3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsDriverUpdate3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWindowsDriverUpdate3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IWindowsDriverUpdate3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IWindowsDriverUpdate3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IWindowsDriverUpdate3*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IWindowsDriverUpdate3*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -3522,7 +3827,7 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IWindowsDriverUpdate3*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IWindowsDriverUpdate3*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     get_DriverClass : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3533,15 +3838,15 @@ module Win32cr::System::UpdateAgent
     get_DriverVerDate : Proc(IWindowsDriverUpdate3*, Float64*, Win32cr::Foundation::HRESULT),
     get_DeviceProblemNumber : Proc(IWindowsDriverUpdate3*, Int32*, Win32cr::Foundation::HRESULT),
     get_DeviceStatus : Proc(IWindowsDriverUpdate3*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IWindowsDriverUpdate3*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IWindowsDriverUpdate3*, Void*, Win32cr::Foundation::HRESULT),
-    get_BrowseOnly : Proc(IWindowsDriverUpdate3*, Int16*, Win32cr::Foundation::HRESULT)
+    get_BrowseOnly : Proc(IWindowsDriverUpdate3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWindowsDriverUpdate3, lpVtbl : IWindowsDriverUpdate3Vtbl* do
+  record IWindowsDriverUpdate3, lpVtbl : IWindowsDriverUpdate3Vtable* do
     GUID = LibC::GUID.new(0x49ebd502_u32, 0x4a96_u16, 0x41bd_u16, StaticArray[0x9e_u8, 0x3e_u8, 0x4c_u8, 0x50_u8, 0x57_u8, 0xf4_u8, 0x25_u8, 0xc_u8])
     def query_interface(this : IWindowsDriverUpdate3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3561,37 +3866,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsDriverUpdate3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsDriverUpdate3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsDriverUpdate3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IWindowsDriverUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IWindowsDriverUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IWindowsDriverUpdate3*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IWindowsDriverUpdate3*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3609,25 +3914,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IWindowsDriverUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IWindowsDriverUpdate3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IWindowsDriverUpdate3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IWindowsDriverUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -3690,7 +3995,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IWindowsDriverUpdate3*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IWindowsDriverUpdate3*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IWindowsDriverUpdate3*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IWindowsDriverUpdate3*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -3723,10 +4028,10 @@ module Win32cr::System::UpdateAgent
     def get_DeviceStatus(this : IWindowsDriverUpdate3*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeviceStatus.call(this, retval)
     end
-    def get_RebootRequired(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IWindowsDriverUpdate3*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -3735,21 +4040,22 @@ module Win32cr::System::UpdateAgent
     def copy_to_cache(this : IWindowsDriverUpdate3*, pFiles : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to_cache.call(this, pFiles)
     end
-    def get_BrowseOnly(this : IWindowsDriverUpdate3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BrowseOnly(this : IWindowsDriverUpdate3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BrowseOnly.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IWindowsDriverUpdateEntryVtbl,
+
+  record IWindowsDriverUpdateEntryVtable,
     query_interface : Proc(IWindowsDriverUpdateEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdateEntry*, UInt32),
     release : Proc(IWindowsDriverUpdateEntry*, UInt32),
     get_type_info_count : Proc(IWindowsDriverUpdateEntry*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsDriverUpdateEntry*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsDriverUpdateEntry*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsDriverUpdateEntry*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWindowsDriverUpdateEntry*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DriverClass : Proc(IWindowsDriverUpdateEntry*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DriverHardwareID : Proc(IWindowsDriverUpdateEntry*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DriverManufacturer : Proc(IWindowsDriverUpdateEntry*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3761,7 +4067,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdateEntry, lpVtbl : IWindowsDriverUpdateEntryVtbl* do
+  record IWindowsDriverUpdateEntry, lpVtbl : IWindowsDriverUpdateEntryVtable* do
     GUID = LibC::GUID.new(0xed8bfe40_u32, 0xa60b_u16, 0x42ea_u16, StaticArray[0x96_u8, 0x52_u8, 0x81_u8, 0x7d_u8, 0xfc_u8, 0xfa_u8, 0x23_u8, 0xec_u8])
     def query_interface(this : IWindowsDriverUpdateEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3781,8 +4087,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsDriverUpdateEntry*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsDriverUpdateEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsDriverUpdateEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DriverClass(this : IWindowsDriverUpdateEntry*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DriverClass.call(this, retval)
@@ -3812,21 +4118,22 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdateEntryCollectionVtbl,
+
+  record IWindowsDriverUpdateEntryCollectionVtable,
     query_interface : Proc(IWindowsDriverUpdateEntryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdateEntryCollection*, UInt32),
     release : Proc(IWindowsDriverUpdateEntryCollection*, UInt32),
     get_type_info_count : Proc(IWindowsDriverUpdateEntryCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsDriverUpdateEntryCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsDriverUpdateEntryCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsDriverUpdateEntryCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWindowsDriverUpdateEntryCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IWindowsDriverUpdateEntryCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IWindowsDriverUpdateEntryCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IWindowsDriverUpdateEntryCollection*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWindowsDriverUpdateEntryCollection, lpVtbl : IWindowsDriverUpdateEntryCollectionVtbl* do
+  record IWindowsDriverUpdateEntryCollection, lpVtbl : IWindowsDriverUpdateEntryCollectionVtable* do
     GUID = LibC::GUID.new(0xd521700_u32, 0xa372_u16, 0x4bef_u16, StaticArray[0x82_u8, 0x8b_u8, 0x3d_u8, 0x0_u8, 0xc1_u8, 0xa_u8, 0xde_u8, 0xbd_u8])
     def query_interface(this : IWindowsDriverUpdateEntryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3846,8 +4153,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsDriverUpdateEntryCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsDriverUpdateEntryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsDriverUpdateEntryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IWindowsDriverUpdateEntryCollection*, index : Int32, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -3862,36 +4169,37 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdate4Vtbl,
+
+  record IWindowsDriverUpdate4Vtable,
     query_interface : Proc(IWindowsDriverUpdate4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate4*, UInt32),
     release : Proc(IWindowsDriverUpdate4*, UInt32),
     get_type_info_count : Proc(IWindowsDriverUpdate4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsDriverUpdate4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsDriverUpdate4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsDriverUpdate4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWindowsDriverUpdate4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IWindowsDriverUpdate4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IWindowsDriverUpdate4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IWindowsDriverUpdate4*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IWindowsDriverUpdate4*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -3912,7 +4220,7 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IWindowsDriverUpdate4*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IWindowsDriverUpdate4*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     get_DriverClass : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3923,17 +4231,17 @@ module Win32cr::System::UpdateAgent
     get_DriverVerDate : Proc(IWindowsDriverUpdate4*, Float64*, Win32cr::Foundation::HRESULT),
     get_DeviceProblemNumber : Proc(IWindowsDriverUpdate4*, Int32*, Win32cr::Foundation::HRESULT),
     get_DeviceStatus : Proc(IWindowsDriverUpdate4*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IWindowsDriverUpdate4*, Void*, Win32cr::Foundation::HRESULT),
-    get_BrowseOnly : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_BrowseOnly : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_WindowsDriverUpdateEntries : Proc(IWindowsDriverUpdate4*, Void**, Win32cr::Foundation::HRESULT),
-    get_PerUser : Proc(IWindowsDriverUpdate4*, Int16*, Win32cr::Foundation::HRESULT)
+    get_PerUser : Proc(IWindowsDriverUpdate4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWindowsDriverUpdate4, lpVtbl : IWindowsDriverUpdate4Vtbl* do
+  record IWindowsDriverUpdate4, lpVtbl : IWindowsDriverUpdate4Vtable* do
     GUID = LibC::GUID.new(0x4c6a2b_u32, 0xc19_u16, 0x4c69_u16, StaticArray[0x9f_u8, 0x5c_u8, 0xa2_u8, 0x69_u8, 0xb2_u8, 0x56_u8, 0xd_u8, 0xb9_u8])
     def query_interface(this : IWindowsDriverUpdate4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3953,37 +4261,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsDriverUpdate4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsDriverUpdate4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsDriverUpdate4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IWindowsDriverUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IWindowsDriverUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IWindowsDriverUpdate4*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IWindowsDriverUpdate4*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4001,25 +4309,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IWindowsDriverUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IWindowsDriverUpdate4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IWindowsDriverUpdate4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IWindowsDriverUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -4082,7 +4390,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IWindowsDriverUpdate4*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IWindowsDriverUpdate4*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IWindowsDriverUpdate4*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IWindowsDriverUpdate4*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -4115,10 +4423,10 @@ module Win32cr::System::UpdateAgent
     def get_DeviceStatus(this : IWindowsDriverUpdate4*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeviceStatus.call(this, retval)
     end
-    def get_RebootRequired(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IWindowsDriverUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -4127,49 +4435,50 @@ module Win32cr::System::UpdateAgent
     def copy_to_cache(this : IWindowsDriverUpdate4*, pFiles : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to_cache.call(this, pFiles)
     end
-    def get_BrowseOnly(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BrowseOnly(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BrowseOnly.call(this, retval)
     end
     def get_WindowsDriverUpdateEntries(this : IWindowsDriverUpdate4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WindowsDriverUpdateEntries.call(this, retval)
     end
-    def get_PerUser(this : IWindowsDriverUpdate4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PerUser(this : IWindowsDriverUpdate4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PerUser.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IWindowsDriverUpdate5Vtbl,
+
+  record IWindowsDriverUpdate5Vtable,
     query_interface : Proc(IWindowsDriverUpdate5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate5*, UInt32),
     release : Proc(IWindowsDriverUpdate5*, UInt32),
     get_type_info_count : Proc(IWindowsDriverUpdate5*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWindowsDriverUpdate5*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWindowsDriverUpdate5*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWindowsDriverUpdate5*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWindowsDriverUpdate5*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AutoSelectOnWebSites : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BundledUpdates : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_CanRequireSource : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CanRequireSource : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Categories : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_Deadline : Proc(IWindowsDriverUpdate5*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Deadline : Proc(IWindowsDriverUpdate5*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentAvailable : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DeltaCompressedContentPreferred : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_EulaAccepted : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EulaAccepted : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_EulaText : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HandlerID : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Identity : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     get_Image : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     get_InstallationBehavior : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBeta : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDownloaded : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHidden : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsHidden : Proc(IWindowsDriverUpdate5*, Int16, Win32cr::Foundation::HRESULT),
-    get_IsInstalled : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsMandatory : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsUninstallable : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBeta : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsDownloaded : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IsInstalled : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsMandatory : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsUninstallable : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Languages : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     get_LastDeploymentChangeTime : Proc(IWindowsDriverUpdate5*, Float64*, Win32cr::Foundation::HRESULT),
     get_MaxDownloadSize : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
@@ -4190,7 +4499,7 @@ module Win32cr::System::UpdateAgent
     get_KBArticleIDs : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     accept_eula : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::HRESULT),
     get_DeploymentAction : Proc(IWindowsDriverUpdate5*, Win32cr::System::UpdateAgent::DeploymentAction*, Win32cr::Foundation::HRESULT),
-    copy_from_cache : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    copy_from_cache : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadPriority : Proc(IWindowsDriverUpdate5*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     get_DownloadContents : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     get_DriverClass : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4201,19 +4510,19 @@ module Win32cr::System::UpdateAgent
     get_DriverVerDate : Proc(IWindowsDriverUpdate5*, Float64*, Win32cr::Foundation::HRESULT),
     get_DeviceProblemNumber : Proc(IWindowsDriverUpdate5*, Int32*, Win32cr::Foundation::HRESULT),
     get_DeviceStatus : Proc(IWindowsDriverUpdate5*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsPresent : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsPresent : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CveIDs : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
     copy_to_cache : Proc(IWindowsDriverUpdate5*, Void*, Win32cr::Foundation::HRESULT),
-    get_BrowseOnly : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_BrowseOnly : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_WindowsDriverUpdateEntries : Proc(IWindowsDriverUpdate5*, Void**, Win32cr::Foundation::HRESULT),
-    get_PerUser : Proc(IWindowsDriverUpdate5*, Int16*, Win32cr::Foundation::HRESULT),
+    get_PerUser : Proc(IWindowsDriverUpdate5*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_AutoSelection : Proc(IWindowsDriverUpdate5*, Win32cr::System::UpdateAgent::AutoSelectionMode*, Win32cr::Foundation::HRESULT),
     get_AutoDownload : Proc(IWindowsDriverUpdate5*, Win32cr::System::UpdateAgent::AutoDownloadMode*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWindowsDriverUpdate5, lpVtbl : IWindowsDriverUpdate5Vtbl* do
+  record IWindowsDriverUpdate5, lpVtbl : IWindowsDriverUpdate5Vtable* do
     GUID = LibC::GUID.new(0x70cf5c82_u32, 0x8642_u16, 0x42bb_u16, StaticArray[0x9d_u8, 0xbc_u8, 0xc_u8, 0xfd_u8, 0x26_u8, 0x3c_u8, 0x6c_u8, 0x4f_u8])
     def query_interface(this : IWindowsDriverUpdate5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4233,37 +4542,37 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IWindowsDriverUpdate5*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWindowsDriverUpdate5*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWindowsDriverUpdate5*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Title(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Title.call(this, retval)
     end
-    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoSelectOnWebSites(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoSelectOnWebSites.call(this, retval)
     end
     def get_BundledUpdates(this : IWindowsDriverUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BundledUpdates.call(this, retval)
     end
-    def get_CanRequireSource(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRequireSource(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRequireSource.call(this, retval)
     end
     def get_Categories(this : IWindowsDriverUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Categories.call(this, retval)
     end
-    def get_Deadline(this : IWindowsDriverUpdate5*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Deadline(this : IWindowsDriverUpdate5*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, retval)
     end
-    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentAvailable(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentAvailable.call(this, retval)
     end
-    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DeltaCompressedContentPreferred(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeltaCompressedContentPreferred.call(this, retval)
     end
     def get_Description(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, retval)
     end
-    def get_EulaAccepted(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EulaAccepted(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EulaAccepted.call(this, retval)
     end
     def get_EulaText(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4281,25 +4590,25 @@ module Win32cr::System::UpdateAgent
     def get_InstallationBehavior(this : IWindowsDriverUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InstallationBehavior.call(this, retval)
     end
-    def get_IsBeta(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBeta(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBeta.call(this, retval)
     end
-    def get_IsDownloaded(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDownloaded(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDownloaded.call(this, retval)
     end
-    def get_IsHidden(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHidden(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHidden.call(this, retval)
     end
-    def put_IsHidden(this : IWindowsDriverUpdate5*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsHidden(this : IWindowsDriverUpdate5*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsHidden.call(this, value)
     end
-    def get_IsInstalled(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsInstalled(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsInstalled.call(this, retval)
     end
-    def get_IsMandatory(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsMandatory(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsMandatory.call(this, retval)
     end
-    def get_IsUninstallable(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsUninstallable(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsUninstallable.call(this, retval)
     end
     def get_Languages(this : IWindowsDriverUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -4362,7 +4671,7 @@ module Win32cr::System::UpdateAgent
     def get_DeploymentAction(this : IWindowsDriverUpdate5*, retval : Win32cr::System::UpdateAgent::DeploymentAction*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeploymentAction.call(this, retval)
     end
-    def copy_from_cache(this : IWindowsDriverUpdate5*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Int16) : Win32cr::Foundation::HRESULT
+    def copy_from_cache(this : IWindowsDriverUpdate5*, path : Win32cr::Foundation::BSTR, toExtractCabFiles : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_from_cache.call(this, path, toExtractCabFiles)
     end
     def get_DownloadPriority(this : IWindowsDriverUpdate5*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -4395,10 +4704,10 @@ module Win32cr::System::UpdateAgent
     def get_DeviceStatus(this : IWindowsDriverUpdate5*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeviceStatus.call(this, retval)
     end
-    def get_RebootRequired(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
-    def get_IsPresent(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPresent(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPresent.call(this, retval)
     end
     def get_CveIDs(this : IWindowsDriverUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -4407,13 +4716,13 @@ module Win32cr::System::UpdateAgent
     def copy_to_cache(this : IWindowsDriverUpdate5*, pFiles : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_to_cache.call(this, pFiles)
     end
-    def get_BrowseOnly(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BrowseOnly(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BrowseOnly.call(this, retval)
     end
     def get_WindowsDriverUpdateEntries(this : IWindowsDriverUpdate5*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WindowsDriverUpdateEntries.call(this, retval)
     end
-    def get_PerUser(this : IWindowsDriverUpdate5*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PerUser(this : IWindowsDriverUpdate5*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PerUser.call(this, retval)
     end
     def get_AutoSelection(this : IWindowsDriverUpdate5*, retval : Win32cr::System::UpdateAgent::AutoSelectionMode*) : Win32cr::Foundation::HRESULT
@@ -4426,19 +4735,20 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateCollectionVtbl,
+
+  record IUpdateCollectionVtable,
     query_interface : Proc(IUpdateCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateCollection*, UInt32),
     release : Proc(IUpdateCollection*, UInt32),
     get_type_info_count : Proc(IUpdateCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IUpdateCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     put_Item : Proc(IUpdateCollection*, Int32, Void*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IUpdateCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IUpdateCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IUpdateCollection*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IUpdateCollection*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     add : Proc(IUpdateCollection*, Void*, Int32*, Win32cr::Foundation::HRESULT),
     clear : Proc(IUpdateCollection*, Win32cr::Foundation::HRESULT),
     copy : Proc(IUpdateCollection*, Void**, Win32cr::Foundation::HRESULT),
@@ -4447,7 +4757,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateCollection, lpVtbl : IUpdateCollectionVtbl* do
+  record IUpdateCollection, lpVtbl : IUpdateCollectionVtable* do
     GUID = LibC::GUID.new(0x7f7438c_u32, 0x7709_u16, 0x4ca5_u16, StaticArray[0xb5_u8, 0x18_u8, 0x91_u8, 0x27_u8, 0x92_u8, 0x88_u8, 0x13_u8, 0x4e_u8])
     def query_interface(this : IUpdateCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4467,8 +4777,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IUpdateCollection*, index : Int32, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -4482,7 +4792,7 @@ module Win32cr::System::UpdateAgent
     def get_Count(this : IUpdateCollection*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, retval)
     end
-    def get_ReadOnly(this : IUpdateCollection*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IUpdateCollection*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
     def add(this : IUpdateCollection*, value : Void*, retval : Int32*) : Win32cr::Foundation::HRESULT
@@ -4504,21 +4814,22 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateExceptionVtbl,
+
+  record IUpdateExceptionVtable,
     query_interface : Proc(IUpdateException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateException*, UInt32),
     release : Proc(IUpdateException*, UInt32),
     get_type_info_count : Proc(IUpdateException*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateException*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateException*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateException*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateException*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Message : Proc(IUpdateException*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IUpdateException*, Int32*, Win32cr::Foundation::HRESULT),
     get_Context : Proc(IUpdateException*, Win32cr::System::UpdateAgent::UpdateExceptionContext*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateException, lpVtbl : IUpdateExceptionVtbl* do
+  record IUpdateException, lpVtbl : IUpdateExceptionVtable* do
     GUID = LibC::GUID.new(0xa376dd5e_u32, 0x9d4_u16, 0x427f_u16, StaticArray[0xaf_u8, 0x7c_u8, 0xfe_u8, 0xd5_u8, 0xb6_u8, 0xe1_u8, 0xc1_u8, 0xd6_u8])
     def query_interface(this : IUpdateException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4538,8 +4849,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateException*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateException*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateException*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Message(this : IUpdateException*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Message.call(this, retval)
@@ -4554,14 +4865,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInvalidProductLicenseExceptionVtbl,
+
+  record IInvalidProductLicenseExceptionVtable,
     query_interface : Proc(IInvalidProductLicenseException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInvalidProductLicenseException*, UInt32),
     release : Proc(IInvalidProductLicenseException*, UInt32),
     get_type_info_count : Proc(IInvalidProductLicenseException*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInvalidProductLicenseException*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInvalidProductLicenseException*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInvalidProductLicenseException*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInvalidProductLicenseException*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Message : Proc(IInvalidProductLicenseException*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IInvalidProductLicenseException*, Int32*, Win32cr::Foundation::HRESULT),
     get_Context : Proc(IInvalidProductLicenseException*, Win32cr::System::UpdateAgent::UpdateExceptionContext*, Win32cr::Foundation::HRESULT),
@@ -4569,7 +4881,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInvalidProductLicenseException, lpVtbl : IInvalidProductLicenseExceptionVtbl* do
+  record IInvalidProductLicenseException, lpVtbl : IInvalidProductLicenseExceptionVtable* do
     GUID = LibC::GUID.new(0xa37d00f5_u32, 0x7bb0_u16, 0x4953_u16, StaticArray[0xb4_u8, 0x14_u8, 0xf9_u8, 0xe9_u8, 0x83_u8, 0x26_u8, 0xf2_u8, 0xe8_u8])
     def query_interface(this : IInvalidProductLicenseException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4589,8 +4901,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInvalidProductLicenseException*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInvalidProductLicenseException*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInvalidProductLicenseException*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Message(this : IInvalidProductLicenseException*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Message.call(this, retval)
@@ -4608,21 +4920,22 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateExceptionCollectionVtbl,
+
+  record IUpdateExceptionCollectionVtable,
     query_interface : Proc(IUpdateExceptionCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateExceptionCollection*, UInt32),
     release : Proc(IUpdateExceptionCollection*, UInt32),
     get_type_info_count : Proc(IUpdateExceptionCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateExceptionCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateExceptionCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateExceptionCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateExceptionCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IUpdateExceptionCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IUpdateExceptionCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IUpdateExceptionCollection*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateExceptionCollection, lpVtbl : IUpdateExceptionCollectionVtbl* do
+  record IUpdateExceptionCollection, lpVtbl : IUpdateExceptionCollectionVtable* do
     GUID = LibC::GUID.new(0x503626a3_u32, 0x8e14_u16, 0x4729_u16, StaticArray[0x93_u8, 0x55_u8, 0xf_u8, 0xe6_u8, 0x64_u8, 0xbd_u8, 0x23_u8, 0x21_u8])
     def query_interface(this : IUpdateExceptionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4642,8 +4955,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateExceptionCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateExceptionCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateExceptionCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IUpdateExceptionCollection*, index : Int32, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -4658,14 +4971,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISearchResultVtbl,
+
+  record ISearchResultVtable,
     query_interface : Proc(ISearchResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchResult*, UInt32),
     release : Proc(ISearchResult*, UInt32),
     get_type_info_count : Proc(ISearchResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISearchResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISearchResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISearchResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISearchResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ResultCode : Proc(ISearchResult*, Win32cr::System::UpdateAgent::OperationResultCode*, Win32cr::Foundation::HRESULT),
     get_RootCategories : Proc(ISearchResult*, Void**, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(ISearchResult*, Void**, Win32cr::Foundation::HRESULT),
@@ -4673,7 +4987,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ISearchResult, lpVtbl : ISearchResultVtbl* do
+  record ISearchResult, lpVtbl : ISearchResultVtable* do
     GUID = LibC::GUID.new(0xd40cff62_u32, 0xe08c_u16, 0x4498_u16, StaticArray[0x94_u8, 0x1a_u8, 0x1_u8, 0xe2_u8, 0x5f_u8, 0xf_u8, 0xd3_u8, 0x3c_u8])
     def query_interface(this : ISearchResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4693,8 +5007,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : ISearchResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISearchResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISearchResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ResultCode(this : ISearchResult*, retval : Win32cr::System::UpdateAgent::OperationResultCode*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ResultCode.call(this, retval)
@@ -4712,22 +5026,23 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISearchJobVtbl,
+
+  record ISearchJobVtable,
     query_interface : Proc(ISearchJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchJob*, UInt32),
     release : Proc(ISearchJob*, UInt32),
     get_type_info_count : Proc(ISearchJob*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISearchJob*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISearchJob*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISearchJob*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_AsyncState : Proc(ISearchJob*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_IsCompleted : Proc(ISearchJob*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISearchJob*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AsyncState : Proc(ISearchJob*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_IsCompleted : Proc(ISearchJob*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     clean_up : Proc(ISearchJob*, Win32cr::Foundation::HRESULT),
     request_abort : Proc(ISearchJob*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISearchJob, lpVtbl : ISearchJobVtbl* do
+  record ISearchJob, lpVtbl : ISearchJobVtable* do
     GUID = LibC::GUID.new(0x7366ea16_u32, 0x7a1a_u16, 0x4ea2_u16, StaticArray[0xb0_u8, 0x42_u8, 0x97_u8, 0x3d_u8, 0x3e_u8, 0x9c_u8, 0xd9_u8, 0x9b_u8])
     def query_interface(this : ISearchJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4747,13 +5062,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : ISearchJob*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISearchJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISearchJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_AsyncState(this : ISearchJob*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AsyncState(this : ISearchJob*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AsyncState.call(this, retval)
     end
-    def get_IsCompleted(this : ISearchJob*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsCompleted(this : ISearchJob*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsCompleted.call(this, retval)
     end
     def clean_up(this : ISearchJob*) : Win32cr::Foundation::HRESULT
@@ -4766,18 +5081,19 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISearchCompletedCallbackArgsVtbl,
+
+  record ISearchCompletedCallbackArgsVtable,
     query_interface : Proc(ISearchCompletedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCompletedCallbackArgs*, UInt32),
     release : Proc(ISearchCompletedCallbackArgs*, UInt32),
     get_type_info_count : Proc(ISearchCompletedCallbackArgs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISearchCompletedCallbackArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISearchCompletedCallbackArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISearchCompletedCallbackArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ISearchCompletedCallbackArgs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISearchCompletedCallbackArgs, lpVtbl : ISearchCompletedCallbackArgsVtbl* do
+  record ISearchCompletedCallbackArgs, lpVtbl : ISearchCompletedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0xa700a634_u32, 0x2850_u16, 0x4c47_u16, StaticArray[0x93_u8, 0x8a_u8, 0x9e_u8, 0x4b_u8, 0x6e_u8, 0x5a_u8, 0xf9_u8, 0xa6_u8])
     def query_interface(this : ISearchCompletedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4797,14 +5113,15 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : ISearchCompletedCallbackArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISearchCompletedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISearchCompletedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record ISearchCompletedCallbackVtbl,
+
+  record ISearchCompletedCallbackVtable,
     query_interface : Proc(ISearchCompletedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCompletedCallback*, UInt32),
     release : Proc(ISearchCompletedCallback*, UInt32),
@@ -4812,7 +5129,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ISearchCompletedCallback, lpVtbl : ISearchCompletedCallbackVtbl* do
+  record ISearchCompletedCallback, lpVtbl : ISearchCompletedCallbackVtable* do
     GUID = LibC::GUID.new(0x88aee058_u32, 0xd4b0_u16, 0x4725_u16, StaticArray[0xa2_u8, 0xf1_u8, 0x81_u8, 0x4a_u8, 0x67_u8, 0xae_u8, 0x96_u8, 0x4c_u8])
     def query_interface(this : ISearchCompletedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4830,14 +5147,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateHistoryEntryVtbl,
+
+  record IUpdateHistoryEntryVtable,
     query_interface : Proc(IUpdateHistoryEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateHistoryEntry*, UInt32),
     release : Proc(IUpdateHistoryEntry*, UInt32),
     get_type_info_count : Proc(IUpdateHistoryEntry*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateHistoryEntry*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateHistoryEntry*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateHistoryEntry*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateHistoryEntry*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Operation : Proc(IUpdateHistoryEntry*, Win32cr::System::UpdateAgent::UpdateOperation*, Win32cr::Foundation::HRESULT),
     get_ResultCode : Proc(IUpdateHistoryEntry*, Win32cr::System::UpdateAgent::OperationResultCode*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IUpdateHistoryEntry*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4855,7 +5173,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateHistoryEntry, lpVtbl : IUpdateHistoryEntryVtbl* do
+  record IUpdateHistoryEntry, lpVtbl : IUpdateHistoryEntryVtable* do
     GUID = LibC::GUID.new(0xbe56a644_u32, 0xaf0e_u16, 0x4e0e_u16, StaticArray[0xa3_u8, 0x11_u8, 0xc1_u8, 0xd8_u8, 0xe6_u8, 0x95_u8, 0xcb_u8, 0xff_u8])
     def query_interface(this : IUpdateHistoryEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4875,8 +5193,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateHistoryEntry*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateHistoryEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateHistoryEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Operation(this : IUpdateHistoryEntry*, retval : Win32cr::System::UpdateAgent::UpdateOperation*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operation.call(this, retval)
@@ -4924,14 +5242,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateHistoryEntry2Vtbl,
+
+  record IUpdateHistoryEntry2Vtable,
     query_interface : Proc(IUpdateHistoryEntry2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateHistoryEntry2*, UInt32),
     release : Proc(IUpdateHistoryEntry2*, UInt32),
     get_type_info_count : Proc(IUpdateHistoryEntry2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateHistoryEntry2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateHistoryEntry2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateHistoryEntry2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateHistoryEntry2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Operation : Proc(IUpdateHistoryEntry2*, Win32cr::System::UpdateAgent::UpdateOperation*, Win32cr::Foundation::HRESULT),
     get_ResultCode : Proc(IUpdateHistoryEntry2*, Win32cr::System::UpdateAgent::OperationResultCode*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IUpdateHistoryEntry2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4950,7 +5269,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateHistoryEntry2, lpVtbl : IUpdateHistoryEntry2Vtbl* do
+  record IUpdateHistoryEntry2, lpVtbl : IUpdateHistoryEntry2Vtable* do
     GUID = LibC::GUID.new(0xc2bfb780_u32, 0x4539_u16, 0x4132_u16, StaticArray[0xab_u8, 0x8c_u8, 0xa_u8, 0x87_u8, 0x72_u8, 0x1_u8, 0x3a_u8, 0xb6_u8])
     def query_interface(this : IUpdateHistoryEntry2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4970,8 +5289,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateHistoryEntry2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateHistoryEntry2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateHistoryEntry2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Operation(this : IUpdateHistoryEntry2*, retval : Win32cr::System::UpdateAgent::UpdateOperation*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operation.call(this, retval)
@@ -5022,21 +5341,22 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateHistoryEntryCollectionVtbl,
+
+  record IUpdateHistoryEntryCollectionVtable,
     query_interface : Proc(IUpdateHistoryEntryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateHistoryEntryCollection*, UInt32),
     release : Proc(IUpdateHistoryEntryCollection*, UInt32),
     get_type_info_count : Proc(IUpdateHistoryEntryCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateHistoryEntryCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateHistoryEntryCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateHistoryEntryCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateHistoryEntryCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IUpdateHistoryEntryCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IUpdateHistoryEntryCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IUpdateHistoryEntryCollection*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateHistoryEntryCollection, lpVtbl : IUpdateHistoryEntryCollectionVtbl* do
+  record IUpdateHistoryEntryCollection, lpVtbl : IUpdateHistoryEntryCollectionVtable* do
     GUID = LibC::GUID.new(0xa7f04f3c_u32, 0xa290_u16, 0x435b_u16, StaticArray[0xaa_u8, 0xdf_u8, 0xa1_u8, 0x16_u8, 0xc3_u8, 0x35_u8, 0x7a_u8, 0x5c_u8])
     def query_interface(this : IUpdateHistoryEntryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5056,8 +5376,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateHistoryEntryCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateHistoryEntryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateHistoryEntryCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IUpdateHistoryEntryCollection*, index : Int32, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -5072,36 +5392,37 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSearcherVtbl,
+
+  record IUpdateSearcherVtable,
     query_interface : Proc(IUpdateSearcher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSearcher*, UInt32),
     release : Proc(IUpdateSearcher*, UInt32),
     get_type_info_count : Proc(IUpdateSearcher*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateSearcher*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateSearcher*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateSearcher*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher*, Int16*, Win32cr::Foundation::HRESULT),
-    put_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateSearcher*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher*, Int16, Win32cr::Foundation::HRESULT),
+    get_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ServerSelection : Proc(IUpdateSearcher*, Win32cr::System::UpdateAgent::ServerSelection*, Win32cr::Foundation::HRESULT),
     put_ServerSelection : Proc(IUpdateSearcher*, Win32cr::System::UpdateAgent::ServerSelection, Win32cr::Foundation::HRESULT),
-    begin_search : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_search : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     end_search : Proc(IUpdateSearcher*, Void*, Void**, Win32cr::Foundation::HRESULT),
     escape_string : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     query_history : Proc(IUpdateSearcher*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     search : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_Online : Proc(IUpdateSearcher*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Online : Proc(IUpdateSearcher*, Int16, Win32cr::Foundation::HRESULT),
+    get_Online : Proc(IUpdateSearcher*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Online : Proc(IUpdateSearcher*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_total_history_count : Proc(IUpdateSearcher*, Int32*, Win32cr::Foundation::HRESULT),
     get_ServiceID : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ServiceID : Proc(IUpdateSearcher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateSearcher, lpVtbl : IUpdateSearcherVtbl* do
+  record IUpdateSearcher, lpVtbl : IUpdateSearcherVtable* do
     GUID = LibC::GUID.new(0x8f45abf1_u32, 0xf9ae_u16, 0x4b95_u16, StaticArray[0xa9_u8, 0x33_u8, 0xf0_u8, 0xf6_u8, 0x6e_u8, 0x50_u8, 0x56_u8, 0xea_u8])
     def query_interface(this : IUpdateSearcher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5121,13 +5442,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateSearcher*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateSearcher*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateSearcher*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_CanAutomaticallyUpgradeService(this : IUpdateSearcher*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanAutomaticallyUpgradeService(this : IUpdateSearcher*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanAutomaticallyUpgradeService.call(this, retval)
     end
-    def put_CanAutomaticallyUpgradeService(this : IUpdateSearcher*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_CanAutomaticallyUpgradeService(this : IUpdateSearcher*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CanAutomaticallyUpgradeService.call(this, value)
     end
     def get_ClientApplicationID(this : IUpdateSearcher*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5136,10 +5457,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateSearcher*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IncludePotentiallySupersededUpdates(this : IUpdateSearcher*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IncludePotentiallySupersededUpdates(this : IUpdateSearcher*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncludePotentiallySupersededUpdates.call(this, retval)
     end
-    def put_IncludePotentiallySupersededUpdates(this : IUpdateSearcher*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IncludePotentiallySupersededUpdates(this : IUpdateSearcher*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IncludePotentiallySupersededUpdates.call(this, value)
     end
     def get_ServerSelection(this : IUpdateSearcher*, retval : Win32cr::System::UpdateAgent::ServerSelection*) : Win32cr::Foundation::HRESULT
@@ -5148,7 +5469,7 @@ module Win32cr::System::UpdateAgent
     def put_ServerSelection(this : IUpdateSearcher*, value : Win32cr::System::UpdateAgent::ServerSelection) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ServerSelection.call(this, value)
     end
-    def begin_search(this : IUpdateSearcher*, criteria : Win32cr::Foundation::BSTR, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_search(this : IUpdateSearcher*, criteria : Win32cr::Foundation::BSTR, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_search.call(this, criteria, onCompleted, state, retval)
     end
     def end_search(this : IUpdateSearcher*, searchJob : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -5163,10 +5484,10 @@ module Win32cr::System::UpdateAgent
     def search(this : IUpdateSearcher*, criteria : Win32cr::Foundation::BSTR, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search.call(this, criteria, retval)
     end
-    def get_Online(this : IUpdateSearcher*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Online(this : IUpdateSearcher*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Online.call(this, retval)
     end
-    def put_Online(this : IUpdateSearcher*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Online(this : IUpdateSearcher*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Online.call(this, value)
     end
     def get_total_history_count(this : IUpdateSearcher*, retval : Int32*) : Win32cr::Foundation::HRESULT
@@ -5182,38 +5503,39 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSearcher2Vtbl,
+
+  record IUpdateSearcher2Vtable,
     query_interface : Proc(IUpdateSearcher2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSearcher2*, UInt32),
     release : Proc(IUpdateSearcher2*, UInt32),
     get_type_info_count : Proc(IUpdateSearcher2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateSearcher2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateSearcher2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateSearcher2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher2*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateSearcher2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher2*, Int16, Win32cr::Foundation::HRESULT),
+    get_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ServerSelection : Proc(IUpdateSearcher2*, Win32cr::System::UpdateAgent::ServerSelection*, Win32cr::Foundation::HRESULT),
     put_ServerSelection : Proc(IUpdateSearcher2*, Win32cr::System::UpdateAgent::ServerSelection, Win32cr::Foundation::HRESULT),
-    begin_search : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_search : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     end_search : Proc(IUpdateSearcher2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     escape_string : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     query_history : Proc(IUpdateSearcher2*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     search : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_Online : Proc(IUpdateSearcher2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Online : Proc(IUpdateSearcher2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Online : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Online : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_total_history_count : Proc(IUpdateSearcher2*, Int32*, Win32cr::Foundation::HRESULT),
     get_ServiceID : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ServiceID : Proc(IUpdateSearcher2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IgnoreDownloadPriority : Proc(IUpdateSearcher2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IgnoreDownloadPriority : Proc(IUpdateSearcher2*, Int16, Win32cr::Foundation::HRESULT)
+    get_IgnoreDownloadPriority : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IgnoreDownloadPriority : Proc(IUpdateSearcher2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateSearcher2, lpVtbl : IUpdateSearcher2Vtbl* do
+  record IUpdateSearcher2, lpVtbl : IUpdateSearcher2Vtable* do
     GUID = LibC::GUID.new(0x4cbdcb2d_u32, 0x1589_u16, 0x4beb_u16, StaticArray[0xbd_u8, 0x1c_u8, 0x3e_u8, 0x58_u8, 0x2f_u8, 0xf0_u8, 0xad_u8, 0xd0_u8])
     def query_interface(this : IUpdateSearcher2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5233,13 +5555,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateSearcher2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateSearcher2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateSearcher2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_CanAutomaticallyUpgradeService(this : IUpdateSearcher2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanAutomaticallyUpgradeService(this : IUpdateSearcher2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanAutomaticallyUpgradeService.call(this, retval)
     end
-    def put_CanAutomaticallyUpgradeService(this : IUpdateSearcher2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_CanAutomaticallyUpgradeService(this : IUpdateSearcher2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CanAutomaticallyUpgradeService.call(this, value)
     end
     def get_ClientApplicationID(this : IUpdateSearcher2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5248,10 +5570,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateSearcher2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IncludePotentiallySupersededUpdates(this : IUpdateSearcher2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IncludePotentiallySupersededUpdates(this : IUpdateSearcher2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncludePotentiallySupersededUpdates.call(this, retval)
     end
-    def put_IncludePotentiallySupersededUpdates(this : IUpdateSearcher2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IncludePotentiallySupersededUpdates(this : IUpdateSearcher2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IncludePotentiallySupersededUpdates.call(this, value)
     end
     def get_ServerSelection(this : IUpdateSearcher2*, retval : Win32cr::System::UpdateAgent::ServerSelection*) : Win32cr::Foundation::HRESULT
@@ -5260,7 +5582,7 @@ module Win32cr::System::UpdateAgent
     def put_ServerSelection(this : IUpdateSearcher2*, value : Win32cr::System::UpdateAgent::ServerSelection) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ServerSelection.call(this, value)
     end
-    def begin_search(this : IUpdateSearcher2*, criteria : Win32cr::Foundation::BSTR, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_search(this : IUpdateSearcher2*, criteria : Win32cr::Foundation::BSTR, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_search.call(this, criteria, onCompleted, state, retval)
     end
     def end_search(this : IUpdateSearcher2*, searchJob : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -5275,10 +5597,10 @@ module Win32cr::System::UpdateAgent
     def search(this : IUpdateSearcher2*, criteria : Win32cr::Foundation::BSTR, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search.call(this, criteria, retval)
     end
-    def get_Online(this : IUpdateSearcher2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Online(this : IUpdateSearcher2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Online.call(this, retval)
     end
-    def put_Online(this : IUpdateSearcher2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Online(this : IUpdateSearcher2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Online.call(this, value)
     end
     def get_total_history_count(this : IUpdateSearcher2*, retval : Int32*) : Win32cr::Foundation::HRESULT
@@ -5290,50 +5612,51 @@ module Win32cr::System::UpdateAgent
     def put_ServiceID(this : IUpdateSearcher2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ServiceID.call(this, value)
     end
-    def get_IgnoreDownloadPriority(this : IUpdateSearcher2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IgnoreDownloadPriority(this : IUpdateSearcher2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IgnoreDownloadPriority.call(this, retval)
     end
-    def put_IgnoreDownloadPriority(this : IUpdateSearcher2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IgnoreDownloadPriority(this : IUpdateSearcher2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IgnoreDownloadPriority.call(this, value)
     end
 
   end
 
   @[Extern]
-  record IUpdateSearcher3Vtbl,
+
+  record IUpdateSearcher3Vtable,
     query_interface : Proc(IUpdateSearcher3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSearcher3*, UInt32),
     release : Proc(IUpdateSearcher3*, UInt32),
     get_type_info_count : Proc(IUpdateSearcher3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateSearcher3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateSearcher3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateSearcher3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher3*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateSearcher3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_CanAutomaticallyUpgradeService : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher3*, Int16, Win32cr::Foundation::HRESULT),
+    get_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IncludePotentiallySupersededUpdates : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ServerSelection : Proc(IUpdateSearcher3*, Win32cr::System::UpdateAgent::ServerSelection*, Win32cr::Foundation::HRESULT),
     put_ServerSelection : Proc(IUpdateSearcher3*, Win32cr::System::UpdateAgent::ServerSelection, Win32cr::Foundation::HRESULT),
-    begin_search : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_search : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     end_search : Proc(IUpdateSearcher3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     escape_string : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     query_history : Proc(IUpdateSearcher3*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     search : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_Online : Proc(IUpdateSearcher3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Online : Proc(IUpdateSearcher3*, Int16, Win32cr::Foundation::HRESULT),
+    get_Online : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Online : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_total_history_count : Proc(IUpdateSearcher3*, Int32*, Win32cr::Foundation::HRESULT),
     get_ServiceID : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ServiceID : Proc(IUpdateSearcher3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IgnoreDownloadPriority : Proc(IUpdateSearcher3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IgnoreDownloadPriority : Proc(IUpdateSearcher3*, Int16, Win32cr::Foundation::HRESULT),
+    get_IgnoreDownloadPriority : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IgnoreDownloadPriority : Proc(IUpdateSearcher3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SearchScope : Proc(IUpdateSearcher3*, Win32cr::System::UpdateAgent::SearchScope*, Win32cr::Foundation::HRESULT),
     put_SearchScope : Proc(IUpdateSearcher3*, Win32cr::System::UpdateAgent::SearchScope, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateSearcher3, lpVtbl : IUpdateSearcher3Vtbl* do
+  record IUpdateSearcher3, lpVtbl : IUpdateSearcher3Vtable* do
     GUID = LibC::GUID.new(0x4c6895d_u32, 0xeaf2_u16, 0x4034_u16, StaticArray[0x97_u8, 0xf3_u8, 0x31_u8, 0x1d_u8, 0xe9_u8, 0xbe_u8, 0x41_u8, 0x3a_u8])
     def query_interface(this : IUpdateSearcher3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5353,13 +5676,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateSearcher3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateSearcher3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateSearcher3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_CanAutomaticallyUpgradeService(this : IUpdateSearcher3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanAutomaticallyUpgradeService(this : IUpdateSearcher3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanAutomaticallyUpgradeService.call(this, retval)
     end
-    def put_CanAutomaticallyUpgradeService(this : IUpdateSearcher3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_CanAutomaticallyUpgradeService(this : IUpdateSearcher3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CanAutomaticallyUpgradeService.call(this, value)
     end
     def get_ClientApplicationID(this : IUpdateSearcher3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5368,10 +5691,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateSearcher3*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IncludePotentiallySupersededUpdates(this : IUpdateSearcher3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IncludePotentiallySupersededUpdates(this : IUpdateSearcher3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncludePotentiallySupersededUpdates.call(this, retval)
     end
-    def put_IncludePotentiallySupersededUpdates(this : IUpdateSearcher3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IncludePotentiallySupersededUpdates(this : IUpdateSearcher3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IncludePotentiallySupersededUpdates.call(this, value)
     end
     def get_ServerSelection(this : IUpdateSearcher3*, retval : Win32cr::System::UpdateAgent::ServerSelection*) : Win32cr::Foundation::HRESULT
@@ -5380,7 +5703,7 @@ module Win32cr::System::UpdateAgent
     def put_ServerSelection(this : IUpdateSearcher3*, value : Win32cr::System::UpdateAgent::ServerSelection) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ServerSelection.call(this, value)
     end
-    def begin_search(this : IUpdateSearcher3*, criteria : Win32cr::Foundation::BSTR, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_search(this : IUpdateSearcher3*, criteria : Win32cr::Foundation::BSTR, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_search.call(this, criteria, onCompleted, state, retval)
     end
     def end_search(this : IUpdateSearcher3*, searchJob : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -5395,10 +5718,10 @@ module Win32cr::System::UpdateAgent
     def search(this : IUpdateSearcher3*, criteria : Win32cr::Foundation::BSTR, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.search.call(this, criteria, retval)
     end
-    def get_Online(this : IUpdateSearcher3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Online(this : IUpdateSearcher3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Online.call(this, retval)
     end
-    def put_Online(this : IUpdateSearcher3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Online(this : IUpdateSearcher3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Online.call(this, value)
     end
     def get_total_history_count(this : IUpdateSearcher3*, retval : Int32*) : Win32cr::Foundation::HRESULT
@@ -5410,10 +5733,10 @@ module Win32cr::System::UpdateAgent
     def put_ServiceID(this : IUpdateSearcher3*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ServiceID.call(this, value)
     end
-    def get_IgnoreDownloadPriority(this : IUpdateSearcher3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IgnoreDownloadPriority(this : IUpdateSearcher3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IgnoreDownloadPriority.call(this, retval)
     end
-    def put_IgnoreDownloadPriority(this : IUpdateSearcher3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IgnoreDownloadPriority(this : IUpdateSearcher3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IgnoreDownloadPriority.call(this, value)
     end
     def get_SearchScope(this : IUpdateSearcher3*, retval : Win32cr::System::UpdateAgent::SearchScope*) : Win32cr::Foundation::HRESULT
@@ -5426,20 +5749,21 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloadResultVtbl,
+
+  record IUpdateDownloadResultVtable,
     query_interface : Proc(IUpdateDownloadResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadResult*, UInt32),
     release : Proc(IUpdateDownloadResult*, UInt32),
     get_type_info_count : Proc(IUpdateDownloadResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateDownloadResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateDownloadResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateDownloadResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateDownloadResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IUpdateDownloadResult*, Int32*, Win32cr::Foundation::HRESULT),
     get_ResultCode : Proc(IUpdateDownloadResult*, Win32cr::System::UpdateAgent::OperationResultCode*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateDownloadResult, lpVtbl : IUpdateDownloadResultVtbl* do
+  record IUpdateDownloadResult, lpVtbl : IUpdateDownloadResultVtable* do
     GUID = LibC::GUID.new(0xbf99af76_u32, 0xb575_u16, 0x42ad_u16, StaticArray[0x8a_u8, 0xa4_u8, 0x33_u8, 0xcb_u8, 0xb5_u8, 0x47_u8, 0x7a_u8, 0xf1_u8])
     def query_interface(this : IUpdateDownloadResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5459,8 +5783,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateDownloadResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateDownloadResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateDownloadResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_HResult(this : IUpdateDownloadResult*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HResult.call(this, retval)
@@ -5472,21 +5796,22 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadResultVtbl,
+
+  record IDownloadResultVtable,
     query_interface : Proc(IDownloadResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadResult*, UInt32),
     release : Proc(IDownloadResult*, UInt32),
     get_type_info_count : Proc(IDownloadResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDownloadResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDownloadResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDownloadResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IDownloadResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IDownloadResult*, Int32*, Win32cr::Foundation::HRESULT),
     get_ResultCode : Proc(IDownloadResult*, Win32cr::System::UpdateAgent::OperationResultCode*, Win32cr::Foundation::HRESULT),
     get_update_result : Proc(IDownloadResult*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDownloadResult, lpVtbl : IDownloadResultVtbl* do
+  record IDownloadResult, lpVtbl : IDownloadResultVtable* do
     GUID = LibC::GUID.new(0xdaa4fdd0_u32, 0x4727_u16, 0x4dbe_u16, StaticArray[0xa1_u8, 0xe7_u8, 0x74_u8, 0x5d_u8, 0xca_u8, 0x31_u8, 0x71_u8, 0x44_u8])
     def query_interface(this : IDownloadResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5506,8 +5831,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IDownloadResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDownloadResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDownloadResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_HResult(this : IDownloadResult*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HResult.call(this, retval)
@@ -5522,14 +5847,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadProgressVtbl,
+
+  record IDownloadProgressVtable,
     query_interface : Proc(IDownloadProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadProgress*, UInt32),
     release : Proc(IDownloadProgress*, UInt32),
     get_type_info_count : Proc(IDownloadProgress*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDownloadProgress*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDownloadProgress*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDownloadProgress*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IDownloadProgress*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CurrentUpdateBytesDownloaded : Proc(IDownloadProgress*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
     get_CurrentUpdateBytesToDownload : Proc(IDownloadProgress*, Win32cr::Foundation::DECIMAL*, Win32cr::Foundation::HRESULT),
     get_CurrentUpdateIndex : Proc(IDownloadProgress*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5542,7 +5868,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadProgress, lpVtbl : IDownloadProgressVtbl* do
+  record IDownloadProgress, lpVtbl : IDownloadProgressVtable* do
     GUID = LibC::GUID.new(0xd31a5bac_u32, 0xf719_u16, 0x4178_u16, StaticArray[0x9d_u8, 0xbb_u8, 0x5e_u8, 0x2c_u8, 0xb4_u8, 0x7f_u8, 0xd1_u8, 0x8a_u8])
     def query_interface(this : IDownloadProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5562,8 +5888,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IDownloadProgress*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDownloadProgress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDownloadProgress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CurrentUpdateBytesDownloaded(this : IDownloadProgress*, retval : Win32cr::Foundation::DECIMAL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CurrentUpdateBytesDownloaded.call(this, retval)
@@ -5596,16 +5922,17 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadJobVtbl,
+
+  record IDownloadJobVtable,
     query_interface : Proc(IDownloadJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadJob*, UInt32),
     release : Proc(IDownloadJob*, UInt32),
     get_type_info_count : Proc(IDownloadJob*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDownloadJob*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDownloadJob*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDownloadJob*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_AsyncState : Proc(IDownloadJob*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_IsCompleted : Proc(IDownloadJob*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IDownloadJob*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AsyncState : Proc(IDownloadJob*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_IsCompleted : Proc(IDownloadJob*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(IDownloadJob*, Void**, Win32cr::Foundation::HRESULT),
     clean_up : Proc(IDownloadJob*, Win32cr::Foundation::HRESULT),
     get_progress : Proc(IDownloadJob*, Void**, Win32cr::Foundation::HRESULT),
@@ -5613,7 +5940,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadJob, lpVtbl : IDownloadJobVtbl* do
+  record IDownloadJob, lpVtbl : IDownloadJobVtable* do
     GUID = LibC::GUID.new(0xc574de85_u32, 0x7358_u16, 0x43f6_u16, StaticArray[0xaa_u8, 0xe8_u8, 0x86_u8, 0x97_u8, 0xe6_u8, 0x2d_u8, 0x8b_u8, 0xa7_u8])
     def query_interface(this : IDownloadJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5633,13 +5960,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IDownloadJob*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDownloadJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDownloadJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_AsyncState(this : IDownloadJob*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AsyncState(this : IDownloadJob*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AsyncState.call(this, retval)
     end
-    def get_IsCompleted(this : IDownloadJob*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsCompleted(this : IDownloadJob*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsCompleted.call(this, retval)
     end
     def get_Updates(this : IDownloadJob*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -5658,18 +5985,19 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadCompletedCallbackArgsVtbl,
+
+  record IDownloadCompletedCallbackArgsVtable,
     query_interface : Proc(IDownloadCompletedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadCompletedCallbackArgs*, UInt32),
     release : Proc(IDownloadCompletedCallbackArgs*, UInt32),
     get_type_info_count : Proc(IDownloadCompletedCallbackArgs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDownloadCompletedCallbackArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDownloadCompletedCallbackArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDownloadCompletedCallbackArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IDownloadCompletedCallbackArgs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDownloadCompletedCallbackArgs, lpVtbl : IDownloadCompletedCallbackArgsVtbl* do
+  record IDownloadCompletedCallbackArgs, lpVtbl : IDownloadCompletedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0xfa565b23_u32, 0x498c_u16, 0x47a0_u16, StaticArray[0x97_u8, 0x9d_u8, 0xe7_u8, 0xd5_u8, 0xb1_u8, 0x81_u8, 0x33_u8, 0x60_u8])
     def query_interface(this : IDownloadCompletedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5689,14 +6017,15 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IDownloadCompletedCallbackArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDownloadCompletedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDownloadCompletedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IDownloadCompletedCallbackVtbl,
+
+  record IDownloadCompletedCallbackVtable,
     query_interface : Proc(IDownloadCompletedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadCompletedCallback*, UInt32),
     release : Proc(IDownloadCompletedCallback*, UInt32),
@@ -5704,7 +6033,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadCompletedCallback, lpVtbl : IDownloadCompletedCallbackVtbl* do
+  record IDownloadCompletedCallback, lpVtbl : IDownloadCompletedCallbackVtable* do
     GUID = LibC::GUID.new(0x77254866_u32, 0x9f5b_u16, 0x4c8e_u16, StaticArray[0xb9_u8, 0xe2_u8, 0xc7_u8, 0x7a_u8, 0x85_u8, 0x30_u8, 0xd6_u8, 0x4b_u8])
     def query_interface(this : IDownloadCompletedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5722,19 +6051,20 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadProgressChangedCallbackArgsVtbl,
+
+  record IDownloadProgressChangedCallbackArgsVtable,
     query_interface : Proc(IDownloadProgressChangedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadProgressChangedCallbackArgs*, UInt32),
     release : Proc(IDownloadProgressChangedCallbackArgs*, UInt32),
     get_type_info_count : Proc(IDownloadProgressChangedCallbackArgs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDownloadProgressChangedCallbackArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDownloadProgressChangedCallbackArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDownloadProgressChangedCallbackArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IDownloadProgressChangedCallbackArgs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Progress : Proc(IDownloadProgressChangedCallbackArgs*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDownloadProgressChangedCallbackArgs, lpVtbl : IDownloadProgressChangedCallbackArgsVtbl* do
+  record IDownloadProgressChangedCallbackArgs, lpVtbl : IDownloadProgressChangedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0x324ff2c6_u32, 0x4981_u16, 0x4b04_u16, StaticArray[0x94_u8, 0x12_u8, 0x57_u8, 0x48_u8, 0x17_u8, 0x45_u8, 0xab_u8, 0x24_u8])
     def query_interface(this : IDownloadProgressChangedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5754,8 +6084,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IDownloadProgressChangedCallbackArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDownloadProgressChangedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDownloadProgressChangedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Progress(this : IDownloadProgressChangedCallbackArgs*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Progress.call(this, retval)
@@ -5764,7 +6094,8 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadProgressChangedCallbackVtbl,
+
+  record IDownloadProgressChangedCallbackVtable,
     query_interface : Proc(IDownloadProgressChangedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadProgressChangedCallback*, UInt32),
     release : Proc(IDownloadProgressChangedCallback*, UInt32),
@@ -5772,7 +6103,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadProgressChangedCallback, lpVtbl : IDownloadProgressChangedCallbackVtbl* do
+  record IDownloadProgressChangedCallback, lpVtbl : IDownloadProgressChangedCallbackVtable* do
     GUID = LibC::GUID.new(0x8c3f1cdd_u32, 0x6173_u16, 0x4591_u16, StaticArray[0xae_u8, 0xbd_u8, 0xa5_u8, 0x6a_u8, 0x53_u8, 0xca_u8, 0x77_u8, 0xc1_u8])
     def query_interface(this : IDownloadProgressChangedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5790,29 +6121,30 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloaderVtbl,
+
+  record IUpdateDownloaderVtable,
     query_interface : Proc(IUpdateDownloader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloader*, UInt32),
     release : Proc(IUpdateDownloader*, UInt32),
     get_type_info_count : Proc(IUpdateDownloader*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateDownloader*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateDownloader*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateDownloader*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateDownloader*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateDownloader*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateDownloader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IsForced : Proc(IUpdateDownloader*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsForced : Proc(IUpdateDownloader*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsForced : Proc(IUpdateDownloader*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsForced : Proc(IUpdateDownloader*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Priority : Proc(IUpdateDownloader*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
     put_Priority : Proc(IUpdateDownloader*, Win32cr::System::UpdateAgent::DownloadPriority, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(IUpdateDownloader*, Void**, Win32cr::Foundation::HRESULT),
     put_Updates : Proc(IUpdateDownloader*, Void*, Win32cr::Foundation::HRESULT),
-    begin_download : Proc(IUpdateDownloader*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_download : Proc(IUpdateDownloader*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     download : Proc(IUpdateDownloader*, Void**, Win32cr::Foundation::HRESULT),
     end_download : Proc(IUpdateDownloader*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateDownloader, lpVtbl : IUpdateDownloaderVtbl* do
+  record IUpdateDownloader, lpVtbl : IUpdateDownloaderVtable* do
     GUID = LibC::GUID.new(0x68f1c6f9_u32, 0x7ecc_u16, 0x4666_u16, StaticArray[0xa4_u8, 0x64_u8, 0x24_u8, 0x7f_u8, 0xe1_u8, 0x24_u8, 0x96_u8, 0xc3_u8])
     def query_interface(this : IUpdateDownloader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5832,8 +6164,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateDownloader*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateDownloader*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateDownloader*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateDownloader*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -5841,10 +6173,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateDownloader*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IsForced(this : IUpdateDownloader*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsForced(this : IUpdateDownloader*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsForced.call(this, retval)
     end
-    def put_IsForced(this : IUpdateDownloader*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsForced(this : IUpdateDownloader*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsForced.call(this, value)
     end
     def get_Priority(this : IUpdateDownloader*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
@@ -5859,7 +6191,7 @@ module Win32cr::System::UpdateAgent
     def put_Updates(this : IUpdateDownloader*, value : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Updates.call(this, value)
     end
-    def begin_download(this : IUpdateDownloader*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_download(this : IUpdateDownloader*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_download.call(this, onProgressChanged, onCompleted, state, retval)
     end
     def download(this : IUpdateDownloader*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -5872,21 +6204,113 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateInstallationResultVtbl,
+
+  record IUpdateDownloaderExVtable,
+    query_interface : Proc(IUpdateDownloaderEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IUpdateDownloaderEx*, UInt32),
+    release : Proc(IUpdateDownloaderEx*, UInt32),
+    get_type_info_count : Proc(IUpdateDownloaderEx*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IUpdateDownloaderEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IUpdateDownloaderEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateDownloaderEx*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ClientApplicationID : Proc(IUpdateDownloaderEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_ClientApplicationID : Proc(IUpdateDownloaderEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_IsForced : Proc(IUpdateDownloaderEx*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsForced : Proc(IUpdateDownloaderEx*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Priority : Proc(IUpdateDownloaderEx*, Win32cr::System::UpdateAgent::DownloadPriority*, Win32cr::Foundation::HRESULT),
+    put_Priority : Proc(IUpdateDownloaderEx*, Win32cr::System::UpdateAgent::DownloadPriority, Win32cr::Foundation::HRESULT),
+    get_Updates : Proc(IUpdateDownloaderEx*, Void**, Win32cr::Foundation::HRESULT),
+    put_Updates : Proc(IUpdateDownloaderEx*, Void*, Win32cr::Foundation::HRESULT),
+    begin_download : Proc(IUpdateDownloaderEx*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    download : Proc(IUpdateDownloaderEx*, Void**, Win32cr::Foundation::HRESULT),
+    end_download : Proc(IUpdateDownloaderEx*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    begin_download2 : Proc(IUpdateDownloaderEx*, Win32cr::System::UpdateAgent::DownloadType, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    download2 : Proc(IUpdateDownloaderEx*, Win32cr::System::UpdateAgent::DownloadType, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IUpdateDownloaderEx, lpVtbl : IUpdateDownloaderExVtable* do
+    GUID = LibC::GUID.new(0x94726306_u32, 0xf12a_u16, 0x482a_u16, StaticArray[0xa7_u8, 0x74_u8, 0xfb_u8, 0x4f_u8, 0x87_u8, 0xd_u8, 0x98_u8, 0xc0_u8])
+    def query_interface(this : IUpdateDownloaderEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IUpdateDownloaderEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IUpdateDownloaderEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IUpdateDownloaderEx*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IUpdateDownloaderEx*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IUpdateDownloaderEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke(this : IUpdateDownloaderEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_ClientApplicationID(this : IUpdateDownloaderEx*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
+    end
+    def put_ClientApplicationID(this : IUpdateDownloaderEx*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
+    end
+    def get_IsForced(this : IUpdateDownloaderEx*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsForced.call(this, retval)
+    end
+    def put_IsForced(this : IUpdateDownloaderEx*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsForced.call(this, value)
+    end
+    def get_Priority(this : IUpdateDownloaderEx*, retval : Win32cr::System::UpdateAgent::DownloadPriority*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Priority.call(this, retval)
+    end
+    def put_Priority(this : IUpdateDownloaderEx*, value : Win32cr::System::UpdateAgent::DownloadPriority) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Priority.call(this, value)
+    end
+    def get_Updates(this : IUpdateDownloaderEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Updates.call(this, retval)
+    end
+    def put_Updates(this : IUpdateDownloaderEx*, value : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Updates.call(this, value)
+    end
+    def begin_download(this : IUpdateDownloaderEx*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin_download.call(this, onProgressChanged, onCompleted, state, retval)
+    end
+    def download(this : IUpdateDownloaderEx*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.download.call(this, retval)
+    end
+    def end_download(this : IUpdateDownloaderEx*, value : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end_download.call(this, value, retval)
+    end
+    def begin_download2(this : IUpdateDownloaderEx*, downloadType : Win32cr::System::UpdateAgent::DownloadType, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin_download2.call(this, downloadType, onProgressChanged, onCompleted, state, retval)
+    end
+    def download2(this : IUpdateDownloaderEx*, downloadType : Win32cr::System::UpdateAgent::DownloadType, retval : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.download2.call(this, downloadType, retval)
+    end
+
+  end
+
+  @[Extern]
+
+  record IUpdateInstallationResultVtable,
     query_interface : Proc(IUpdateInstallationResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstallationResult*, UInt32),
     release : Proc(IUpdateInstallationResult*, UInt32),
     get_type_info_count : Proc(IUpdateInstallationResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateInstallationResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateInstallationResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateInstallationResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateInstallationResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IUpdateInstallationResult*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IUpdateInstallationResult*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IUpdateInstallationResult*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ResultCode : Proc(IUpdateInstallationResult*, Win32cr::System::UpdateAgent::OperationResultCode*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateInstallationResult, lpVtbl : IUpdateInstallationResultVtbl* do
+  record IUpdateInstallationResult, lpVtbl : IUpdateInstallationResultVtable* do
     GUID = LibC::GUID.new(0xd940f0f8_u32, 0x3cbb_u16, 0x4fd0_u16, StaticArray[0x99_u8, 0x3f_u8, 0x47_u8, 0x1e_u8, 0x7f_u8, 0x23_u8, 0x28_u8, 0xad_u8])
     def query_interface(this : IUpdateInstallationResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5906,13 +6330,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateInstallationResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateInstallationResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateInstallationResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_HResult(this : IUpdateInstallationResult*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HResult.call(this, retval)
     end
-    def get_RebootRequired(this : IUpdateInstallationResult*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IUpdateInstallationResult*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
     def get_ResultCode(this : IUpdateInstallationResult*, retval : Win32cr::System::UpdateAgent::OperationResultCode*) : Win32cr::Foundation::HRESULT
@@ -5922,22 +6346,23 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationResultVtbl,
+
+  record IInstallationResultVtable,
     query_interface : Proc(IInstallationResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationResult*, UInt32),
     release : Proc(IInstallationResult*, UInt32),
     get_type_info_count : Proc(IInstallationResult*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInstallationResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInstallationResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInstallationResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInstallationResult*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_HResult : Proc(IInstallationResult*, Int32*, Win32cr::Foundation::HRESULT),
-    get_RebootRequired : Proc(IInstallationResult*, Int16*, Win32cr::Foundation::HRESULT),
+    get_RebootRequired : Proc(IInstallationResult*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ResultCode : Proc(IInstallationResult*, Win32cr::System::UpdateAgent::OperationResultCode*, Win32cr::Foundation::HRESULT),
     get_update_result : Proc(IInstallationResult*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInstallationResult, lpVtbl : IInstallationResultVtbl* do
+  record IInstallationResult, lpVtbl : IInstallationResultVtable* do
     GUID = LibC::GUID.new(0xa43c56d6_u32, 0x7451_u16, 0x48d4_u16, StaticArray[0xaf_u8, 0x96_u8, 0xb6_u8, 0xcd_u8, 0x2d_u8, 0xd_u8, 0x9b_u8, 0x7a_u8])
     def query_interface(this : IInstallationResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5957,13 +6382,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInstallationResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInstallationResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInstallationResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_HResult(this : IInstallationResult*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HResult.call(this, retval)
     end
-    def get_RebootRequired(this : IInstallationResult*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequired(this : IInstallationResult*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequired.call(this, retval)
     end
     def get_ResultCode(this : IInstallationResult*, retval : Win32cr::System::UpdateAgent::OperationResultCode*) : Win32cr::Foundation::HRESULT
@@ -5976,14 +6401,15 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationProgressVtbl,
+
+  record IInstallationProgressVtable,
     query_interface : Proc(IInstallationProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationProgress*, UInt32),
     release : Proc(IInstallationProgress*, UInt32),
     get_type_info_count : Proc(IInstallationProgress*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInstallationProgress*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInstallationProgress*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInstallationProgress*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInstallationProgress*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CurrentUpdateIndex : Proc(IInstallationProgress*, Int32*, Win32cr::Foundation::HRESULT),
     get_CurrentUpdatePercentComplete : Proc(IInstallationProgress*, Int32*, Win32cr::Foundation::HRESULT),
     get_PercentComplete : Proc(IInstallationProgress*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5991,7 +6417,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationProgress, lpVtbl : IInstallationProgressVtbl* do
+  record IInstallationProgress, lpVtbl : IInstallationProgressVtable* do
     GUID = LibC::GUID.new(0x345c8244_u32, 0x43a3_u16, 0x4e32_u16, StaticArray[0xa3_u8, 0x68_u8, 0x65_u8, 0xf0_u8, 0x73_u8, 0xb7_u8, 0x6f_u8, 0x36_u8])
     def query_interface(this : IInstallationProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6011,8 +6437,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInstallationProgress*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInstallationProgress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInstallationProgress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CurrentUpdateIndex(this : IInstallationProgress*, retval : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CurrentUpdateIndex.call(this, retval)
@@ -6030,16 +6456,17 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationJobVtbl,
+
+  record IInstallationJobVtable,
     query_interface : Proc(IInstallationJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationJob*, UInt32),
     release : Proc(IInstallationJob*, UInt32),
     get_type_info_count : Proc(IInstallationJob*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInstallationJob*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInstallationJob*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInstallationJob*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_AsyncState : Proc(IInstallationJob*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_IsCompleted : Proc(IInstallationJob*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInstallationJob*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AsyncState : Proc(IInstallationJob*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_IsCompleted : Proc(IInstallationJob*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(IInstallationJob*, Void**, Win32cr::Foundation::HRESULT),
     clean_up : Proc(IInstallationJob*, Win32cr::Foundation::HRESULT),
     get_progress : Proc(IInstallationJob*, Void**, Win32cr::Foundation::HRESULT),
@@ -6047,7 +6474,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationJob, lpVtbl : IInstallationJobVtbl* do
+  record IInstallationJob, lpVtbl : IInstallationJobVtable* do
     GUID = LibC::GUID.new(0x5c209f0b_u32, 0xbad5_u16, 0x432a_u16, StaticArray[0x95_u8, 0x56_u8, 0x46_u8, 0x99_u8, 0xbe_u8, 0xd2_u8, 0x63_u8, 0x8a_u8])
     def query_interface(this : IInstallationJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6067,13 +6494,13 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInstallationJob*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInstallationJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInstallationJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_AsyncState(this : IInstallationJob*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AsyncState(this : IInstallationJob*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AsyncState.call(this, retval)
     end
-    def get_IsCompleted(this : IInstallationJob*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsCompleted(this : IInstallationJob*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsCompleted.call(this, retval)
     end
     def get_Updates(this : IInstallationJob*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6092,18 +6519,19 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationCompletedCallbackArgsVtbl,
+
+  record IInstallationCompletedCallbackArgsVtable,
     query_interface : Proc(IInstallationCompletedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationCompletedCallbackArgs*, UInt32),
     release : Proc(IInstallationCompletedCallbackArgs*, UInt32),
     get_type_info_count : Proc(IInstallationCompletedCallbackArgs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInstallationCompletedCallbackArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInstallationCompletedCallbackArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInstallationCompletedCallbackArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IInstallationCompletedCallbackArgs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInstallationCompletedCallbackArgs, lpVtbl : IInstallationCompletedCallbackArgsVtbl* do
+  record IInstallationCompletedCallbackArgs, lpVtbl : IInstallationCompletedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0x250e2106_u32, 0x8efb_u16, 0x4705_u16, StaticArray[0x96_u8, 0x53_u8, 0xef_u8, 0x13_u8, 0xc5_u8, 0x81_u8, 0xb6_u8, 0xa1_u8])
     def query_interface(this : IInstallationCompletedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6123,14 +6551,15 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInstallationCompletedCallbackArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInstallationCompletedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInstallationCompletedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IInstallationCompletedCallbackVtbl,
+
+  record IInstallationCompletedCallbackVtable,
     query_interface : Proc(IInstallationCompletedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationCompletedCallback*, UInt32),
     release : Proc(IInstallationCompletedCallback*, UInt32),
@@ -6138,7 +6567,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationCompletedCallback, lpVtbl : IInstallationCompletedCallbackVtbl* do
+  record IInstallationCompletedCallback, lpVtbl : IInstallationCompletedCallbackVtable* do
     GUID = LibC::GUID.new(0x45f4f6f3_u32, 0xd602_u16, 0x4f98_u16, StaticArray[0x9a_u8, 0x8a_u8, 0x3e_u8, 0xfa_u8, 0x15_u8, 0x2a_u8, 0xd2_u8, 0xd3_u8])
     def query_interface(this : IInstallationCompletedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6156,19 +6585,20 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationProgressChangedCallbackArgsVtbl,
+
+  record IInstallationProgressChangedCallbackArgsVtable,
     query_interface : Proc(IInstallationProgressChangedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationProgressChangedCallbackArgs*, UInt32),
     release : Proc(IInstallationProgressChangedCallbackArgs*, UInt32),
     get_type_info_count : Proc(IInstallationProgressChangedCallbackArgs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInstallationProgressChangedCallbackArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInstallationProgressChangedCallbackArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInstallationProgressChangedCallbackArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInstallationProgressChangedCallbackArgs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Progress : Proc(IInstallationProgressChangedCallbackArgs*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInstallationProgressChangedCallbackArgs, lpVtbl : IInstallationProgressChangedCallbackArgsVtbl* do
+  record IInstallationProgressChangedCallbackArgs, lpVtbl : IInstallationProgressChangedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0xe4f14e1e_u32, 0x689d_u16, 0x4218_u16, StaticArray[0xa0_u8, 0xb9_u8, 0xbc_u8, 0x18_u8, 0x9c_u8, 0x48_u8, 0x4a_u8, 0x1_u8])
     def query_interface(this : IInstallationProgressChangedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6188,8 +6618,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInstallationProgressChangedCallbackArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInstallationProgressChangedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInstallationProgressChangedCallbackArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Progress(this : IInstallationProgressChangedCallbackArgs*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Progress.call(this, retval)
@@ -6198,7 +6628,8 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationProgressChangedCallbackVtbl,
+
+  record IInstallationProgressChangedCallbackVtable,
     query_interface : Proc(IInstallationProgressChangedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationProgressChangedCallback*, UInt32),
     release : Proc(IInstallationProgressChangedCallback*, UInt32),
@@ -6206,7 +6637,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationProgressChangedCallback, lpVtbl : IInstallationProgressChangedCallbackVtbl* do
+  record IInstallationProgressChangedCallback, lpVtbl : IInstallationProgressChangedCallbackVtable* do
     GUID = LibC::GUID.new(0xe01402d5_u32, 0xf8da_u16, 0x43ba_u16, StaticArray[0xa0_u8, 0x12_u8, 0x38_u8, 0x89_u8, 0x4b_u8, 0xd0_u8, 0x48_u8, 0xf1_u8])
     def query_interface(this : IInstallationProgressChangedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6224,39 +6655,40 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateInstallerVtbl,
+
+  record IUpdateInstallerVtable,
     query_interface : Proc(IUpdateInstaller*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller*, UInt32),
     release : Proc(IUpdateInstaller*, UInt32),
     get_type_info_count : Proc(IUpdateInstaller*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateInstaller*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateInstaller*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateInstaller*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateInstaller*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateInstaller*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateInstaller*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IsForced : Proc(IUpdateInstaller*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsForced : Proc(IUpdateInstaller*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsForced : Proc(IUpdateInstaller*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsForced : Proc(IUpdateInstaller*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentHwnd : Proc(IUpdateInstaller*, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
     put_ParentHwnd : Proc(IUpdateInstaller*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IUpdateInstaller*, Void*, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IUpdateInstaller*, Void**, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(IUpdateInstaller*, Void**, Win32cr::Foundation::HRESULT),
     put_Updates : Proc(IUpdateInstaller*, Void*, Win32cr::Foundation::HRESULT),
-    begin_install : Proc(IUpdateInstaller*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    begin_uninstall : Proc(IUpdateInstaller*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_install : Proc(IUpdateInstaller*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_uninstall : Proc(IUpdateInstaller*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     end_install : Proc(IUpdateInstaller*, Void*, Void**, Win32cr::Foundation::HRESULT),
     end_uninstall : Proc(IUpdateInstaller*, Void*, Void**, Win32cr::Foundation::HRESULT),
     install : Proc(IUpdateInstaller*, Void**, Win32cr::Foundation::HRESULT),
     run_wizard : Proc(IUpdateInstaller*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBusy : Proc(IUpdateInstaller*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBusy : Proc(IUpdateInstaller*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     uninstall : Proc(IUpdateInstaller*, Void**, Win32cr::Foundation::HRESULT),
-    get_AllowSourcePrompts : Proc(IUpdateInstaller*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowSourcePrompts : Proc(IUpdateInstaller*, Int16, Win32cr::Foundation::HRESULT),
-    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller*, Int16*, Win32cr::Foundation::HRESULT)
+    get_AllowSourcePrompts : Proc(IUpdateInstaller*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowSourcePrompts : Proc(IUpdateInstaller*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateInstaller, lpVtbl : IUpdateInstallerVtbl* do
+  record IUpdateInstaller, lpVtbl : IUpdateInstallerVtable* do
     GUID = LibC::GUID.new(0x7b929c68_u32, 0xccdc_u16, 0x4226_u16, StaticArray[0x96_u8, 0xb1_u8, 0x87_u8, 0x24_u8, 0x60_u8, 0xb_u8, 0x54_u8, 0xc2_u8])
     def query_interface(this : IUpdateInstaller*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6276,8 +6708,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateInstaller*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateInstaller*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateInstaller*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateInstaller*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -6285,10 +6717,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateInstaller*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IsForced(this : IUpdateInstaller*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsForced(this : IUpdateInstaller*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsForced.call(this, retval)
     end
-    def put_IsForced(this : IUpdateInstaller*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsForced(this : IUpdateInstaller*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsForced.call(this, value)
     end
     def get_ParentHwnd(this : IUpdateInstaller*, retval : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
@@ -6309,10 +6741,10 @@ module Win32cr::System::UpdateAgent
     def put_Updates(this : IUpdateInstaller*, value : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Updates.call(this, value)
     end
-    def begin_install(this : IUpdateInstaller*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_install(this : IUpdateInstaller*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_install.call(this, onProgressChanged, onCompleted, state, retval)
     end
-    def begin_uninstall(this : IUpdateInstaller*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_uninstall(this : IUpdateInstaller*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_uninstall.call(this, onProgressChanged, onCompleted, state, retval)
     end
     def end_install(this : IUpdateInstaller*, value : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6327,60 +6759,61 @@ module Win32cr::System::UpdateAgent
     def run_wizard(this : IUpdateInstaller*, dialogTitle : Win32cr::Foundation::BSTR, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run_wizard.call(this, dialogTitle, retval)
     end
-    def get_IsBusy(this : IUpdateInstaller*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBusy(this : IUpdateInstaller*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBusy.call(this, retval)
     end
     def uninstall(this : IUpdateInstaller*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.uninstall.call(this, retval)
     end
-    def get_AllowSourcePrompts(this : IUpdateInstaller*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowSourcePrompts(this : IUpdateInstaller*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowSourcePrompts.call(this, retval)
     end
-    def put_AllowSourcePrompts(this : IUpdateInstaller*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowSourcePrompts(this : IUpdateInstaller*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowSourcePrompts.call(this, value)
     end
-    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequiredBeforeInstallation.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IUpdateInstaller2Vtbl,
+
+  record IUpdateInstaller2Vtable,
     query_interface : Proc(IUpdateInstaller2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller2*, UInt32),
     release : Proc(IUpdateInstaller2*, UInt32),
     get_type_info_count : Proc(IUpdateInstaller2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateInstaller2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateInstaller2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateInstaller2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateInstaller2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateInstaller2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateInstaller2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IsForced : Proc(IUpdateInstaller2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsForced : Proc(IUpdateInstaller2*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsForced : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsForced : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentHwnd : Proc(IUpdateInstaller2*, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
     put_ParentHwnd : Proc(IUpdateInstaller2*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IUpdateInstaller2*, Void*, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IUpdateInstaller2*, Void**, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(IUpdateInstaller2*, Void**, Win32cr::Foundation::HRESULT),
     put_Updates : Proc(IUpdateInstaller2*, Void*, Win32cr::Foundation::HRESULT),
-    begin_install : Proc(IUpdateInstaller2*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    begin_uninstall : Proc(IUpdateInstaller2*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_install : Proc(IUpdateInstaller2*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_uninstall : Proc(IUpdateInstaller2*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     end_install : Proc(IUpdateInstaller2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     end_uninstall : Proc(IUpdateInstaller2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     install : Proc(IUpdateInstaller2*, Void**, Win32cr::Foundation::HRESULT),
     run_wizard : Proc(IUpdateInstaller2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBusy : Proc(IUpdateInstaller2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBusy : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     uninstall : Proc(IUpdateInstaller2*, Void**, Win32cr::Foundation::HRESULT),
-    get_AllowSourcePrompts : Proc(IUpdateInstaller2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowSourcePrompts : Proc(IUpdateInstaller2*, Int16, Win32cr::Foundation::HRESULT),
-    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ForceQuiet : Proc(IUpdateInstaller2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ForceQuiet : Proc(IUpdateInstaller2*, Int16, Win32cr::Foundation::HRESULT)
+    get_AllowSourcePrompts : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowSourcePrompts : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ForceQuiet : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ForceQuiet : Proc(IUpdateInstaller2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateInstaller2, lpVtbl : IUpdateInstaller2Vtbl* do
+  record IUpdateInstaller2, lpVtbl : IUpdateInstaller2Vtable* do
     GUID = LibC::GUID.new(0x3442d4fe_u32, 0x224d_u16, 0x4cee_u16, StaticArray[0x98_u8, 0xcf_u8, 0x30_u8, 0xe0_u8, 0xc4_u8, 0xd2_u8, 0x29_u8, 0xe6_u8])
     def query_interface(this : IUpdateInstaller2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6400,8 +6833,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateInstaller2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateInstaller2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateInstaller2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateInstaller2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -6409,10 +6842,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateInstaller2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IsForced(this : IUpdateInstaller2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsForced(this : IUpdateInstaller2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsForced.call(this, retval)
     end
-    def put_IsForced(this : IUpdateInstaller2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsForced(this : IUpdateInstaller2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsForced.call(this, value)
     end
     def get_ParentHwnd(this : IUpdateInstaller2*, retval : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
@@ -6433,10 +6866,10 @@ module Win32cr::System::UpdateAgent
     def put_Updates(this : IUpdateInstaller2*, value : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Updates.call(this, value)
     end
-    def begin_install(this : IUpdateInstaller2*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_install(this : IUpdateInstaller2*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_install.call(this, onProgressChanged, onCompleted, state, retval)
     end
-    def begin_uninstall(this : IUpdateInstaller2*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_uninstall(this : IUpdateInstaller2*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_uninstall.call(this, onProgressChanged, onCompleted, state, retval)
     end
     def end_install(this : IUpdateInstaller2*, value : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6451,68 +6884,69 @@ module Win32cr::System::UpdateAgent
     def run_wizard(this : IUpdateInstaller2*, dialogTitle : Win32cr::Foundation::BSTR, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run_wizard.call(this, dialogTitle, retval)
     end
-    def get_IsBusy(this : IUpdateInstaller2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBusy(this : IUpdateInstaller2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBusy.call(this, retval)
     end
     def uninstall(this : IUpdateInstaller2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.uninstall.call(this, retval)
     end
-    def get_AllowSourcePrompts(this : IUpdateInstaller2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowSourcePrompts(this : IUpdateInstaller2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowSourcePrompts.call(this, retval)
     end
-    def put_AllowSourcePrompts(this : IUpdateInstaller2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowSourcePrompts(this : IUpdateInstaller2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowSourcePrompts.call(this, value)
     end
-    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequiredBeforeInstallation.call(this, retval)
     end
-    def get_ForceQuiet(this : IUpdateInstaller2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ForceQuiet(this : IUpdateInstaller2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ForceQuiet.call(this, retval)
     end
-    def put_ForceQuiet(this : IUpdateInstaller2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_ForceQuiet(this : IUpdateInstaller2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ForceQuiet.call(this, value)
     end
 
   end
 
   @[Extern]
-  record IUpdateInstaller3Vtbl,
+
+  record IUpdateInstaller3Vtable,
     query_interface : Proc(IUpdateInstaller3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller3*, UInt32),
     release : Proc(IUpdateInstaller3*, UInt32),
     get_type_info_count : Proc(IUpdateInstaller3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateInstaller3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateInstaller3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateInstaller3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateInstaller3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateInstaller3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateInstaller3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IsForced : Proc(IUpdateInstaller3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsForced : Proc(IUpdateInstaller3*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsForced : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsForced : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentHwnd : Proc(IUpdateInstaller3*, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
     put_ParentHwnd : Proc(IUpdateInstaller3*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IUpdateInstaller3*, Void*, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IUpdateInstaller3*, Void**, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(IUpdateInstaller3*, Void**, Win32cr::Foundation::HRESULT),
     put_Updates : Proc(IUpdateInstaller3*, Void*, Win32cr::Foundation::HRESULT),
-    begin_install : Proc(IUpdateInstaller3*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    begin_uninstall : Proc(IUpdateInstaller3*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_install : Proc(IUpdateInstaller3*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_uninstall : Proc(IUpdateInstaller3*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     end_install : Proc(IUpdateInstaller3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     end_uninstall : Proc(IUpdateInstaller3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     install : Proc(IUpdateInstaller3*, Void**, Win32cr::Foundation::HRESULT),
     run_wizard : Proc(IUpdateInstaller3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBusy : Proc(IUpdateInstaller3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBusy : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     uninstall : Proc(IUpdateInstaller3*, Void**, Win32cr::Foundation::HRESULT),
-    get_AllowSourcePrompts : Proc(IUpdateInstaller3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowSourcePrompts : Proc(IUpdateInstaller3*, Int16, Win32cr::Foundation::HRESULT),
-    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ForceQuiet : Proc(IUpdateInstaller3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ForceQuiet : Proc(IUpdateInstaller3*, Int16, Win32cr::Foundation::HRESULT),
-    get_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller3*, Int16, Win32cr::Foundation::HRESULT)
+    get_AllowSourcePrompts : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowSourcePrompts : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ForceQuiet : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ForceQuiet : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateInstaller3, lpVtbl : IUpdateInstaller3Vtbl* do
+  record IUpdateInstaller3, lpVtbl : IUpdateInstaller3Vtable* do
     GUID = LibC::GUID.new(0x16d11c35_u32, 0x99a_u16, 0x48d0_u16, StaticArray[0x83_u8, 0x38_u8, 0x5f_u8, 0xae_u8, 0x64_u8, 0x4_u8, 0x7f_u8, 0x8e_u8])
     def query_interface(this : IUpdateInstaller3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6532,8 +6966,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateInstaller3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateInstaller3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateInstaller3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateInstaller3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -6541,10 +6975,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateInstaller3*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IsForced(this : IUpdateInstaller3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsForced(this : IUpdateInstaller3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsForced.call(this, retval)
     end
-    def put_IsForced(this : IUpdateInstaller3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsForced(this : IUpdateInstaller3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsForced.call(this, value)
     end
     def get_ParentHwnd(this : IUpdateInstaller3*, retval : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
@@ -6565,10 +6999,10 @@ module Win32cr::System::UpdateAgent
     def put_Updates(this : IUpdateInstaller3*, value : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Updates.call(this, value)
     end
-    def begin_install(this : IUpdateInstaller3*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_install(this : IUpdateInstaller3*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_install.call(this, onProgressChanged, onCompleted, state, retval)
     end
-    def begin_uninstall(this : IUpdateInstaller3*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_uninstall(this : IUpdateInstaller3*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_uninstall.call(this, onProgressChanged, onCompleted, state, retval)
     end
     def end_install(this : IUpdateInstaller3*, value : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6583,75 +7017,76 @@ module Win32cr::System::UpdateAgent
     def run_wizard(this : IUpdateInstaller3*, dialogTitle : Win32cr::Foundation::BSTR, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run_wizard.call(this, dialogTitle, retval)
     end
-    def get_IsBusy(this : IUpdateInstaller3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBusy(this : IUpdateInstaller3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBusy.call(this, retval)
     end
     def uninstall(this : IUpdateInstaller3*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.uninstall.call(this, retval)
     end
-    def get_AllowSourcePrompts(this : IUpdateInstaller3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowSourcePrompts(this : IUpdateInstaller3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowSourcePrompts.call(this, retval)
     end
-    def put_AllowSourcePrompts(this : IUpdateInstaller3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowSourcePrompts(this : IUpdateInstaller3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowSourcePrompts.call(this, value)
     end
-    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequiredBeforeInstallation.call(this, retval)
     end
-    def get_ForceQuiet(this : IUpdateInstaller3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ForceQuiet(this : IUpdateInstaller3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ForceQuiet.call(this, retval)
     end
-    def put_ForceQuiet(this : IUpdateInstaller3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_ForceQuiet(this : IUpdateInstaller3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ForceQuiet.call(this, value)
     end
-    def get_AttemptCloseAppsIfNecessary(this : IUpdateInstaller3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AttemptCloseAppsIfNecessary(this : IUpdateInstaller3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AttemptCloseAppsIfNecessary.call(this, retval)
     end
-    def put_AttemptCloseAppsIfNecessary(this : IUpdateInstaller3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AttemptCloseAppsIfNecessary(this : IUpdateInstaller3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttemptCloseAppsIfNecessary.call(this, value)
     end
 
   end
 
   @[Extern]
-  record IUpdateInstaller4Vtbl,
+
+  record IUpdateInstaller4Vtable,
     query_interface : Proc(IUpdateInstaller4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller4*, UInt32),
     release : Proc(IUpdateInstaller4*, UInt32),
     get_type_info_count : Proc(IUpdateInstaller4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateInstaller4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateInstaller4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateInstaller4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateInstaller4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateInstaller4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateInstaller4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IsForced : Proc(IUpdateInstaller4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsForced : Proc(IUpdateInstaller4*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsForced : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsForced : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentHwnd : Proc(IUpdateInstaller4*, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
     put_ParentHwnd : Proc(IUpdateInstaller4*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IUpdateInstaller4*, Void*, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IUpdateInstaller4*, Void**, Win32cr::Foundation::HRESULT),
     get_Updates : Proc(IUpdateInstaller4*, Void**, Win32cr::Foundation::HRESULT),
     put_Updates : Proc(IUpdateInstaller4*, Void*, Win32cr::Foundation::HRESULT),
-    begin_install : Proc(IUpdateInstaller4*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    begin_uninstall : Proc(IUpdateInstaller4*, Void*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_install : Proc(IUpdateInstaller4*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    begin_uninstall : Proc(IUpdateInstaller4*, Void*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     end_install : Proc(IUpdateInstaller4*, Void*, Void**, Win32cr::Foundation::HRESULT),
     end_uninstall : Proc(IUpdateInstaller4*, Void*, Void**, Win32cr::Foundation::HRESULT),
     install : Proc(IUpdateInstaller4*, Void**, Win32cr::Foundation::HRESULT),
     run_wizard : Proc(IUpdateInstaller4*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_IsBusy : Proc(IUpdateInstaller4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsBusy : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     uninstall : Proc(IUpdateInstaller4*, Void**, Win32cr::Foundation::HRESULT),
-    get_AllowSourcePrompts : Proc(IUpdateInstaller4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowSourcePrompts : Proc(IUpdateInstaller4*, Int16, Win32cr::Foundation::HRESULT),
-    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ForceQuiet : Proc(IUpdateInstaller4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ForceQuiet : Proc(IUpdateInstaller4*, Int16, Win32cr::Foundation::HRESULT),
-    get_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller4*, Int16, Win32cr::Foundation::HRESULT),
+    get_AllowSourcePrompts : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowSourcePrompts : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_RebootRequiredBeforeInstallation : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ForceQuiet : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ForceQuiet : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AttemptCloseAppsIfNecessary : Proc(IUpdateInstaller4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     commit : Proc(IUpdateInstaller4*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateInstaller4, lpVtbl : IUpdateInstaller4Vtbl* do
+  record IUpdateInstaller4, lpVtbl : IUpdateInstaller4Vtable* do
     GUID = LibC::GUID.new(0xef8208ea_u32, 0x2304_u16, 0x492d_u16, StaticArray[0x91_u8, 0x9_u8, 0x23_u8, 0x81_u8, 0x3b_u8, 0x9_u8, 0x58_u8, 0xe1_u8])
     def query_interface(this : IUpdateInstaller4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6671,8 +7106,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateInstaller4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateInstaller4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateInstaller4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateInstaller4*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -6680,10 +7115,10 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateInstaller4*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_IsForced(this : IUpdateInstaller4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsForced(this : IUpdateInstaller4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsForced.call(this, retval)
     end
-    def put_IsForced(this : IUpdateInstaller4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsForced(this : IUpdateInstaller4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsForced.call(this, value)
     end
     def get_ParentHwnd(this : IUpdateInstaller4*, retval : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
@@ -6704,10 +7139,10 @@ module Win32cr::System::UpdateAgent
     def put_Updates(this : IUpdateInstaller4*, value : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Updates.call(this, value)
     end
-    def begin_install(this : IUpdateInstaller4*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_install(this : IUpdateInstaller4*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_install.call(this, onProgressChanged, onCompleted, state, retval)
     end
-    def begin_uninstall(this : IUpdateInstaller4*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Com::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
+    def begin_uninstall(this : IUpdateInstaller4*, onProgressChanged : Void*, onCompleted : Void*, state : Win32cr::System::Variant::VARIANT, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_uninstall.call(this, onProgressChanged, onCompleted, state, retval)
     end
     def end_install(this : IUpdateInstaller4*, value : Void*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6722,31 +7157,31 @@ module Win32cr::System::UpdateAgent
     def run_wizard(this : IUpdateInstaller4*, dialogTitle : Win32cr::Foundation::BSTR, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run_wizard.call(this, dialogTitle, retval)
     end
-    def get_IsBusy(this : IUpdateInstaller4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsBusy(this : IUpdateInstaller4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsBusy.call(this, retval)
     end
     def uninstall(this : IUpdateInstaller4*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.uninstall.call(this, retval)
     end
-    def get_AllowSourcePrompts(this : IUpdateInstaller4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowSourcePrompts(this : IUpdateInstaller4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowSourcePrompts.call(this, retval)
     end
-    def put_AllowSourcePrompts(this : IUpdateInstaller4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowSourcePrompts(this : IUpdateInstaller4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowSourcePrompts.call(this, value)
     end
-    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RebootRequiredBeforeInstallation(this : IUpdateInstaller4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RebootRequiredBeforeInstallation.call(this, retval)
     end
-    def get_ForceQuiet(this : IUpdateInstaller4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ForceQuiet(this : IUpdateInstaller4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ForceQuiet.call(this, retval)
     end
-    def put_ForceQuiet(this : IUpdateInstaller4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_ForceQuiet(this : IUpdateInstaller4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ForceQuiet.call(this, value)
     end
-    def get_AttemptCloseAppsIfNecessary(this : IUpdateInstaller4*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AttemptCloseAppsIfNecessary(this : IUpdateInstaller4*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AttemptCloseAppsIfNecessary.call(this, retval)
     end
-    def put_AttemptCloseAppsIfNecessary(this : IUpdateInstaller4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AttemptCloseAppsIfNecessary(this : IUpdateInstaller4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttemptCloseAppsIfNecessary.call(this, value)
     end
     def commit(this : IUpdateInstaller4*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
@@ -6756,17 +7191,18 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSessionVtbl,
+
+  record IUpdateSessionVtable,
     query_interface : Proc(IUpdateSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSession*, UInt32),
     release : Proc(IUpdateSession*, UInt32),
     get_type_info_count : Proc(IUpdateSession*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateSession*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateSession*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateSession*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateSession*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateSession*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateSession*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IUpdateSession*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IUpdateSession*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_WebProxy : Proc(IUpdateSession*, Void**, Win32cr::Foundation::HRESULT),
     put_WebProxy : Proc(IUpdateSession*, Void*, Win32cr::Foundation::HRESULT),
     create_update_searcher : Proc(IUpdateSession*, Void**, Win32cr::Foundation::HRESULT),
@@ -6775,7 +7211,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSession, lpVtbl : IUpdateSessionVtbl* do
+  record IUpdateSession, lpVtbl : IUpdateSessionVtable* do
     GUID = LibC::GUID.new(0x816858a4_u32, 0x260d_u16, 0x4260_u16, StaticArray[0x93_u8, 0x3a_u8, 0x25_u8, 0x85_u8, 0xf1_u8, 0xab_u8, 0xc7_u8, 0x6b_u8])
     def query_interface(this : IUpdateSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6795,8 +7231,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateSession*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateSession*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -6804,7 +7240,7 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateSession*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_ReadOnly(this : IUpdateSession*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IUpdateSession*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
     def get_WebProxy(this : IUpdateSession*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6826,17 +7262,18 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSession2Vtbl,
+
+  record IUpdateSession2Vtable,
     query_interface : Proc(IUpdateSession2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSession2*, UInt32),
     release : Proc(IUpdateSession2*, UInt32),
     get_type_info_count : Proc(IUpdateSession2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateSession2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateSession2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateSession2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateSession2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateSession2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateSession2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IUpdateSession2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IUpdateSession2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_WebProxy : Proc(IUpdateSession2*, Void**, Win32cr::Foundation::HRESULT),
     put_WebProxy : Proc(IUpdateSession2*, Void*, Win32cr::Foundation::HRESULT),
     create_update_searcher : Proc(IUpdateSession2*, Void**, Win32cr::Foundation::HRESULT),
@@ -6847,7 +7284,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSession2, lpVtbl : IUpdateSession2Vtbl* do
+  record IUpdateSession2, lpVtbl : IUpdateSession2Vtable* do
     GUID = LibC::GUID.new(0x91caf7b0_u32, 0xeb23_u16, 0x49ed_u16, StaticArray[0x99_u8, 0x37_u8, 0xc5_u8, 0x2d_u8, 0x81_u8, 0x7f_u8, 0x46_u8, 0xf7_u8])
     def query_interface(this : IUpdateSession2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6867,8 +7304,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateSession2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateSession2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateSession2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateSession2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -6876,7 +7313,7 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateSession2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_ReadOnly(this : IUpdateSession2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IUpdateSession2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
     def get_WebProxy(this : IUpdateSession2*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6904,17 +7341,18 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSession3Vtbl,
+
+  record IUpdateSession3Vtable,
     query_interface : Proc(IUpdateSession3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSession3*, UInt32),
     release : Proc(IUpdateSession3*, UInt32),
     get_type_info_count : Proc(IUpdateSession3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateSession3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateSession3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateSession3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateSession3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateSession3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateSession3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_ReadOnly : Proc(IUpdateSession3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(IUpdateSession3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_WebProxy : Proc(IUpdateSession3*, Void**, Win32cr::Foundation::HRESULT),
     put_WebProxy : Proc(IUpdateSession3*, Void*, Win32cr::Foundation::HRESULT),
     create_update_searcher : Proc(IUpdateSession3*, Void**, Win32cr::Foundation::HRESULT),
@@ -6927,7 +7365,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSession3, lpVtbl : IUpdateSession3Vtbl* do
+  record IUpdateSession3, lpVtbl : IUpdateSession3Vtable* do
     GUID = LibC::GUID.new(0x918efd1e_u32, 0xb5d8_u16, 0x4c90_u16, StaticArray[0x85_u8, 0x40_u8, 0xae_u8, 0xb9_u8, 0xbd_u8, 0xc5_u8, 0x6f_u8, 0x9d_u8])
     def query_interface(this : IUpdateSession3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6947,8 +7385,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateSession3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateSession3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateSession3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ClientApplicationID(this : IUpdateSession3*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ClientApplicationID.call(this, retval)
@@ -6956,7 +7394,7 @@ module Win32cr::System::UpdateAgent
     def put_ClientApplicationID(this : IUpdateSession3*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClientApplicationID.call(this, value)
     end
-    def get_ReadOnly(this : IUpdateSession3*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReadOnly(this : IUpdateSession3*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReadOnly.call(this, retval)
     end
     def get_WebProxy(this : IUpdateSession3*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -6990,31 +7428,32 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceVtbl,
+
+  record IUpdateServiceVtable,
     query_interface : Proc(IUpdateService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateService*, UInt32),
     release : Proc(IUpdateService*, UInt32),
     get_type_info_count : Proc(IUpdateService*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateService*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateService*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateService*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateService*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IUpdateService*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_ContentValidationCert : Proc(IUpdateService*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ContentValidationCert : Proc(IUpdateService*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_ExpirationDate : Proc(IUpdateService*, Float64*, Win32cr::Foundation::HRESULT),
-    get_IsManaged : Proc(IUpdateService*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsRegisteredWithAU : Proc(IUpdateService*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsManaged : Proc(IUpdateService*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsRegisteredWithAU : Proc(IUpdateService*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_IssueDate : Proc(IUpdateService*, Float64*, Win32cr::Foundation::HRESULT),
-    get_OffersWindowsUpdates : Proc(IUpdateService*, Int16*, Win32cr::Foundation::HRESULT),
+    get_OffersWindowsUpdates : Proc(IUpdateService*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_RedirectUrls : Proc(IUpdateService*, Void**, Win32cr::Foundation::HRESULT),
     get_ServiceID : Proc(IUpdateService*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsScanPackageService : Proc(IUpdateService*, Int16*, Win32cr::Foundation::HRESULT),
-    get_CanRegisterWithAU : Proc(IUpdateService*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsScanPackageService : Proc(IUpdateService*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_CanRegisterWithAU : Proc(IUpdateService*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ServiceUrl : Proc(IUpdateService*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SetupPrefix : Proc(IUpdateService*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateService, lpVtbl : IUpdateServiceVtbl* do
+  record IUpdateService, lpVtbl : IUpdateServiceVtable* do
     GUID = LibC::GUID.new(0x76b3b17e_u32, 0xaed6_u16, 0x4da5_u16, StaticArray[0x85_u8, 0xf0_u8, 0x83_u8, 0x58_u8, 0x7f_u8, 0x81_u8, 0xab_u8, 0xe3_u8])
     def query_interface(this : IUpdateService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7034,28 +7473,28 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateService*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateService*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateService*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IUpdateService*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, retval)
     end
-    def get_ContentValidationCert(this : IUpdateService*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ContentValidationCert(this : IUpdateService*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ContentValidationCert.call(this, retval)
     end
     def get_ExpirationDate(this : IUpdateService*, retval : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ExpirationDate.call(this, retval)
     end
-    def get_IsManaged(this : IUpdateService*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsManaged(this : IUpdateService*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsManaged.call(this, retval)
     end
-    def get_IsRegisteredWithAU(this : IUpdateService*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsRegisteredWithAU(this : IUpdateService*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsRegisteredWithAU.call(this, retval)
     end
     def get_IssueDate(this : IUpdateService*, retval : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IssueDate.call(this, retval)
     end
-    def get_OffersWindowsUpdates(this : IUpdateService*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_OffersWindowsUpdates(this : IUpdateService*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OffersWindowsUpdates.call(this, retval)
     end
     def get_RedirectUrls(this : IUpdateService*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -7064,10 +7503,10 @@ module Win32cr::System::UpdateAgent
     def get_ServiceID(this : IUpdateService*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ServiceID.call(this, retval)
     end
-    def get_IsScanPackageService(this : IUpdateService*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsScanPackageService(this : IUpdateService*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsScanPackageService.call(this, retval)
     end
-    def get_CanRegisterWithAU(this : IUpdateService*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRegisterWithAU(this : IUpdateService*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRegisterWithAU.call(this, retval)
     end
     def get_ServiceUrl(this : IUpdateService*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -7080,32 +7519,33 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateService2Vtbl,
+
+  record IUpdateService2Vtable,
     query_interface : Proc(IUpdateService2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateService2*, UInt32),
     release : Proc(IUpdateService2*, UInt32),
     get_type_info_count : Proc(IUpdateService2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateService2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateService2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateService2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateService2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IUpdateService2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_ContentValidationCert : Proc(IUpdateService2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ContentValidationCert : Proc(IUpdateService2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_ExpirationDate : Proc(IUpdateService2*, Float64*, Win32cr::Foundation::HRESULT),
-    get_IsManaged : Proc(IUpdateService2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsRegisteredWithAU : Proc(IUpdateService2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsManaged : Proc(IUpdateService2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsRegisteredWithAU : Proc(IUpdateService2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_IssueDate : Proc(IUpdateService2*, Float64*, Win32cr::Foundation::HRESULT),
-    get_OffersWindowsUpdates : Proc(IUpdateService2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_OffersWindowsUpdates : Proc(IUpdateService2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_RedirectUrls : Proc(IUpdateService2*, Void**, Win32cr::Foundation::HRESULT),
     get_ServiceID : Proc(IUpdateService2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsScanPackageService : Proc(IUpdateService2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_CanRegisterWithAU : Proc(IUpdateService2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsScanPackageService : Proc(IUpdateService2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_CanRegisterWithAU : Proc(IUpdateService2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ServiceUrl : Proc(IUpdateService2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SetupPrefix : Proc(IUpdateService2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsDefaultAUService : Proc(IUpdateService2*, Int16*, Win32cr::Foundation::HRESULT)
+    get_IsDefaultAUService : Proc(IUpdateService2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateService2, lpVtbl : IUpdateService2Vtbl* do
+  record IUpdateService2, lpVtbl : IUpdateService2Vtable* do
     GUID = LibC::GUID.new(0x1518b460_u32, 0x6518_u16, 0x4172_u16, StaticArray[0x94_u8, 0xf_u8, 0xc7_u8, 0x58_u8, 0x83_u8, 0xb2_u8, 0x4c_u8, 0xeb_u8])
     def query_interface(this : IUpdateService2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7125,28 +7565,28 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateService2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateService2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateService2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IUpdateService2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, retval)
     end
-    def get_ContentValidationCert(this : IUpdateService2*, retval : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ContentValidationCert(this : IUpdateService2*, retval : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ContentValidationCert.call(this, retval)
     end
     def get_ExpirationDate(this : IUpdateService2*, retval : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ExpirationDate.call(this, retval)
     end
-    def get_IsManaged(this : IUpdateService2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsManaged(this : IUpdateService2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsManaged.call(this, retval)
     end
-    def get_IsRegisteredWithAU(this : IUpdateService2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsRegisteredWithAU(this : IUpdateService2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsRegisteredWithAU.call(this, retval)
     end
     def get_IssueDate(this : IUpdateService2*, retval : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IssueDate.call(this, retval)
     end
-    def get_OffersWindowsUpdates(this : IUpdateService2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_OffersWindowsUpdates(this : IUpdateService2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OffersWindowsUpdates.call(this, retval)
     end
     def get_RedirectUrls(this : IUpdateService2*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -7155,10 +7595,10 @@ module Win32cr::System::UpdateAgent
     def get_ServiceID(this : IUpdateService2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ServiceID.call(this, retval)
     end
-    def get_IsScanPackageService(this : IUpdateService2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsScanPackageService(this : IUpdateService2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsScanPackageService.call(this, retval)
     end
-    def get_CanRegisterWithAU(this : IUpdateService2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_CanRegisterWithAU(this : IUpdateService2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CanRegisterWithAU.call(this, retval)
     end
     def get_ServiceUrl(this : IUpdateService2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -7167,28 +7607,29 @@ module Win32cr::System::UpdateAgent
     def get_SetupPrefix(this : IUpdateService2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SetupPrefix.call(this, retval)
     end
-    def get_IsDefaultAUService(this : IUpdateService2*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDefaultAUService(this : IUpdateService2*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDefaultAUService.call(this, retval)
     end
 
   end
 
   @[Extern]
-  record IUpdateServiceCollectionVtbl,
+
+  record IUpdateServiceCollectionVtable,
     query_interface : Proc(IUpdateServiceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceCollection*, UInt32),
     release : Proc(IUpdateServiceCollection*, UInt32),
     get_type_info_count : Proc(IUpdateServiceCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateServiceCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateServiceCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateServiceCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateServiceCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IUpdateServiceCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IUpdateServiceCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IUpdateServiceCollection*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateServiceCollection, lpVtbl : IUpdateServiceCollectionVtbl* do
+  record IUpdateServiceCollection, lpVtbl : IUpdateServiceCollectionVtable* do
     GUID = LibC::GUID.new(0x9b0353aa_u32, 0xe52_u16, 0x44ff_u16, StaticArray[0xb8_u8, 0xb0_u8, 0x1f_u8, 0x7f_u8, 0xa0_u8, 0x43_u8, 0x7f_u8, 0x88_u8])
     def query_interface(this : IUpdateServiceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7208,8 +7649,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateServiceCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateServiceCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateServiceCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IUpdateServiceCollection*, index : Int32, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, retval)
@@ -7224,22 +7665,23 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceRegistrationVtbl,
+
+  record IUpdateServiceRegistrationVtable,
     query_interface : Proc(IUpdateServiceRegistration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceRegistration*, UInt32),
     release : Proc(IUpdateServiceRegistration*, UInt32),
     get_type_info_count : Proc(IUpdateServiceRegistration*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateServiceRegistration*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateServiceRegistration*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateServiceRegistration*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateServiceRegistration*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_RegistrationState : Proc(IUpdateServiceRegistration*, Win32cr::System::UpdateAgent::UpdateServiceRegistrationState*, Win32cr::Foundation::HRESULT),
     get_ServiceID : Proc(IUpdateServiceRegistration*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsPendingRegistrationWithAU : Proc(IUpdateServiceRegistration*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsPendingRegistrationWithAU : Proc(IUpdateServiceRegistration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Service : Proc(IUpdateServiceRegistration*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateServiceRegistration, lpVtbl : IUpdateServiceRegistrationVtbl* do
+  record IUpdateServiceRegistration, lpVtbl : IUpdateServiceRegistrationVtable* do
     GUID = LibC::GUID.new(0xdde02280_u32, 0x12b3_u16, 0x4e0b_u16, StaticArray[0x93_u8, 0x7b_u8, 0x67_u8, 0x47_u8, 0xf6_u8, 0xac_u8, 0xb2_u8, 0x86_u8])
     def query_interface(this : IUpdateServiceRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7259,8 +7701,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateServiceRegistration*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateServiceRegistration*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateServiceRegistration*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_RegistrationState(this : IUpdateServiceRegistration*, retval : Win32cr::System::UpdateAgent::UpdateServiceRegistrationState*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RegistrationState.call(this, retval)
@@ -7268,7 +7710,7 @@ module Win32cr::System::UpdateAgent
     def get_ServiceID(this : IUpdateServiceRegistration*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ServiceID.call(this, retval)
     end
-    def get_IsPendingRegistrationWithAU(this : IUpdateServiceRegistration*, retval : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsPendingRegistrationWithAU(this : IUpdateServiceRegistration*, retval : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsPendingRegistrationWithAU.call(this, retval)
     end
     def get_Service(this : IUpdateServiceRegistration*, retval : Void**) : Win32cr::Foundation::HRESULT
@@ -7278,25 +7720,26 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceManagerVtbl,
+
+  record IUpdateServiceManagerVtable,
     query_interface : Proc(IUpdateServiceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceManager*, UInt32),
     release : Proc(IUpdateServiceManager*, UInt32),
     get_type_info_count : Proc(IUpdateServiceManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateServiceManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateServiceManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateServiceManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateServiceManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Services : Proc(IUpdateServiceManager*, Void**, Win32cr::Foundation::HRESULT),
     add_service : Proc(IUpdateServiceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     register_service_with_au : Proc(IUpdateServiceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     remove_service : Proc(IUpdateServiceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     unregister_service_with_au : Proc(IUpdateServiceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     add_scan_package_service : Proc(IUpdateServiceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
-    set_option : Proc(IUpdateServiceManager*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    set_option : Proc(IUpdateServiceManager*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IUpdateServiceManager, lpVtbl : IUpdateServiceManagerVtbl* do
+  record IUpdateServiceManager, lpVtbl : IUpdateServiceManagerVtable* do
     GUID = LibC::GUID.new(0x23857e3c_u32, 0x2ba_u16, 0x44a3_u16, StaticArray[0x94_u8, 0x23_u8, 0xb1_u8, 0xc9_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x37_u8])
     def query_interface(this : IUpdateServiceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7316,8 +7759,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateServiceManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateServiceManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateServiceManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Services(this : IUpdateServiceManager*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Services.call(this, retval)
@@ -7337,28 +7780,29 @@ module Win32cr::System::UpdateAgent
     def add_scan_package_service(this : IUpdateServiceManager*, serviceName : Win32cr::Foundation::BSTR, scanFileLocation : Win32cr::Foundation::BSTR, flags : Int32, ppService : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_scan_package_service.call(this, serviceName, scanFileLocation, flags, ppService)
     end
-    def set_option(this : IUpdateServiceManager*, optionName : Win32cr::Foundation::BSTR, optionValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_option(this : IUpdateServiceManager*, optionName : Win32cr::Foundation::BSTR, optionValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_option.call(this, optionName, optionValue)
     end
 
   end
 
   @[Extern]
-  record IUpdateServiceManager2Vtbl,
+
+  record IUpdateServiceManager2Vtable,
     query_interface : Proc(IUpdateServiceManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceManager2*, UInt32),
     release : Proc(IUpdateServiceManager2*, UInt32),
     get_type_info_count : Proc(IUpdateServiceManager2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IUpdateServiceManager2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IUpdateServiceManager2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IUpdateServiceManager2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IUpdateServiceManager2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Services : Proc(IUpdateServiceManager2*, Void**, Win32cr::Foundation::HRESULT),
     add_service : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     register_service_with_au : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     remove_service : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     unregister_service_with_au : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     add_scan_package_service : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT),
-    set_option : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    set_option : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ClientApplicationID : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ClientApplicationID : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     query_service_registration : Proc(IUpdateServiceManager2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -7366,7 +7810,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateServiceManager2, lpVtbl : IUpdateServiceManager2Vtbl* do
+  record IUpdateServiceManager2, lpVtbl : IUpdateServiceManager2Vtable* do
     GUID = LibC::GUID.new(0xbb8531d_u32, 0x7e8d_u16, 0x424f_u16, StaticArray[0x98_u8, 0x6c_u8, 0xa0_u8, 0xb8_u8, 0xf6_u8, 0xa_u8, 0x3e_u8, 0x7b_u8])
     def query_interface(this : IUpdateServiceManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7386,8 +7830,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IUpdateServiceManager2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IUpdateServiceManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IUpdateServiceManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Services(this : IUpdateServiceManager2*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Services.call(this, retval)
@@ -7407,7 +7851,7 @@ module Win32cr::System::UpdateAgent
     def add_scan_package_service(this : IUpdateServiceManager2*, serviceName : Win32cr::Foundation::BSTR, scanFileLocation : Win32cr::Foundation::BSTR, flags : Int32, ppService : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_scan_package_service.call(this, serviceName, scanFileLocation, flags, ppService)
     end
-    def set_option(this : IUpdateServiceManager2*, optionName : Win32cr::Foundation::BSTR, optionValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_option(this : IUpdateServiceManager2*, optionName : Win32cr::Foundation::BSTR, optionValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_option.call(this, optionName, optionValue)
     end
     def get_ClientApplicationID(this : IUpdateServiceManager2*, retval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -7426,19 +7870,20 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationAgentVtbl,
+
+  record IInstallationAgentVtable,
     query_interface : Proc(IInstallationAgent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationAgent*, UInt32),
     release : Proc(IInstallationAgent*, UInt32),
     get_type_info_count : Proc(IInstallationAgent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IInstallationAgent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IInstallationAgent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IInstallationAgent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IInstallationAgent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     record_installation_result : Proc(IInstallationAgent*, Win32cr::Foundation::BSTR, Int32, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IInstallationAgent, lpVtbl : IInstallationAgentVtbl* do
+  record IInstallationAgent, lpVtbl : IInstallationAgentVtable* do
     GUID = LibC::GUID.new(0x925cbc18_u32, 0xa2ea_u16, 0x4648_u16, StaticArray[0xbf_u8, 0x1c_u8, 0xec_u8, 0x8b_u8, 0xad_u8, 0xcf_u8, 0xe2_u8, 0xa_u8])
     def query_interface(this : IInstallationAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7458,8 +7903,8 @@ module Win32cr::System::UpdateAgent
     def get_i_ds_of_names(this : IInstallationAgent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IInstallationAgent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IInstallationAgent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def record_installation_result(this : IInstallationAgent*, installationResultCookie : Win32cr::Foundation::BSTR, hresult : Int32, extendedReportingData : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.record_installation_result.call(this, installationResultCookie, hresult, extendedReportingData)
