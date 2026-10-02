@@ -35,18 +35,41 @@ $kinds = [ordered]@{
   "alias"    = @{ Plus = New-Object System.Collections.Generic.HashSet[string]; Minus = New-Object System.Collections.Generic.HashSet[string] }
   "record"   = @{ Plus = New-Object System.Collections.Generic.HashSet[string]; Minus = New-Object System.Collections.Generic.HashSet[string] }
   "constant" = @{ Plus = New-Object System.Collections.Generic.HashSet[string]; Minus = New-Object System.Collections.Generic.HashSet[string] }
+  "enum member" = @{ Plus = New-Object System.Collections.Generic.HashSet[string]; Minus = New-Object System.Collections.Generic.HashSet[string] }
+  "struct field" = @{ Plus = New-Object System.Collections.Generic.HashSet[string]; Minus = New-Object System.Collections.Generic.HashSet[string] }
 }
 
+# Generated layout: module-level declarations are indented two spaces, enum
+# members and struct fields four. Fields are tracked as "Struct.field" using
+# the enclosing struct from the hunk, so renames inside a struct show up even
+# though the struct's own name line does not change.
 $declaration = '^([+-])\s+(fun|struct|enum|alias|record)\s+([A-Za-z_][A-Za-z0-9_]*)'
 $constant    = '^([+-])\s{2}([A-Z][A-Za-z0-9_]*)\s*=\s'
+$enumMember  = '^([+-])\s{4}([A-Z][A-Za-z0-9_]*)\s*=\s'
+$field       = '^([+-])\s{4,}property\s+([A-Za-z_][A-Za-z0-9_]*)'
+$hunkHeader  = '^@@ .* @@\s*(?:@\[Extern.*?\]\s*)?(?:struct|union)\s+([A-Za-z_][A-Za-z0-9_]*)'
 
+$currentStruct = ""
 git diff -U0 @range -- src | ForEach-Object {
-  if ($_ -match $declaration) {
+  if ($_ -match $hunkHeader) {
+    $currentStruct = $Matches[1]
+  } elseif ($_ -match '^@@ ') {
+    $currentStruct = ""
+  } elseif ($_ -match $declaration) {
     $set = if ($Matches[1] -eq '+') { 'Plus' } else { 'Minus' }
     [void]$kinds[$Matches[2]][$set].Add($Matches[3])
+    if ($Matches[2] -eq 'struct') { $currentStruct = $Matches[3] }
   } elseif ($_ -match $constant) {
     $set = if ($Matches[1] -eq '+') { 'Plus' } else { 'Minus' }
     [void]$kinds['constant'][$set].Add($Matches[2])
+  } elseif ($_ -match $enumMember -and $Matches[2] -ne 'GUID') {
+    # `GUID = LibC::GUID.new(...)` inside a COM record is its IID, not a member.
+    $set = if ($Matches[1] -eq '+') { 'Plus' } else { 'Minus' }
+    [void]$kinds['enum member'][$set].Add($Matches[2])
+  } elseif ($_ -match $field) {
+    $set = if ($Matches[1] -eq '+') { 'Plus' } else { 'Minus' }
+    $name = if ($currentStruct) { "$currentStruct.$($Matches[2])" } else { $Matches[2] }
+    [void]$kinds['struct field'][$set].Add($name)
   }
 }
 
@@ -54,22 +77,26 @@ git diff -U0 @range -- src | ForEach-Object {
 ""
 "$($files.Count) file(s) changed, +$added / -$removed lines."
 ""
-"| Kind | Added | Removed |"
-"|---|---|---|"
+"| Kind | Added | Removed | Changed |"
+"|---|---|---|---|"
 foreach ($kind in $kinds.Keys) {
   $plus = $kinds[$kind].Plus; $minus = $kinds[$kind].Minus
   $onlyAdded = @($plus | Where-Object { -not $minus.Contains($_) })
   $onlyRemoved = @($minus | Where-Object { -not $plus.Contains($_) })
+  # Same name on both sides of the diff: the declaration itself changed
+  # (signature, value, members), or it moved between files.
+  $changed = @($plus | Where-Object { $minus.Contains($_) })
   $kinds[$kind].OnlyAdded = $onlyAdded
   $kinds[$kind].OnlyRemoved = $onlyRemoved
-  "| $kind | $($onlyAdded.Count) | $($onlyRemoved.Count) |"
+  $kinds[$kind].Changed = $changed
+  "| $kind | $($onlyAdded.Count) | $($onlyRemoved.Count) | $($changed.Count) |"
 }
 
 foreach ($kind in $kinds.Keys) {
-  foreach ($direction in @('OnlyAdded', 'OnlyRemoved')) {
+  foreach ($direction in @('OnlyAdded', 'OnlyRemoved', 'Changed')) {
     $names = @($kinds[$kind][$direction] | Sort-Object)
     if ($names.Count -eq 0) { continue }
-    $label = if ($direction -eq 'OnlyAdded') { 'Added' } else { 'Removed' }
+    $label = switch ($direction) { 'OnlyAdded' { 'Added' } 'OnlyRemoved' { 'Removed' } default { 'Changed' } }
     ""
     "<details><summary>$label $kind ($($names.Count))</summary>"
     ""
