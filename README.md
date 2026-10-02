@@ -42,6 +42,23 @@ alias WM = Win32cr::UI::WindowsAndMessaging # Simplifies code
 WM.messageBoxW(Pointer(Void).null, pwstr("Message Box Body"), pwstr("Title"), WM::MESSAGEBOX_STYLE::MB_OK)
 ```
 
+## Updating the Windows metadata
+
+The metadata version is pinned in `winmd.version`. To move to a new
+[Microsoft.Windows.SDK.Win32Metadata](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata)
+release, run the **Update Windows metadata** workflow from the Actions tab with
+the NuGet version (for example `70.0.11-preview`) and the kind of version bump.
+It regenerates the bindings, runs the specs and example builds, bumps
+`shard.yml`, commits to `master`, tags and publishes a release whose notes
+summarize the added and removed symbols. Use the dry-run option to validate a
+version without releasing. The workflow pushes with the `RELEASE_TOKEN` secret
+(a repository admin's fine-grained token with contents write access) so the
+commit passes the branch ruleset.
+
+CI fails if the committed bindings differ from a fresh regeneration for the
+pinned version, so `src/win32cr` should only change through that workflow (or
+by running `build.ps1` locally and committing the result).
+
 ## Contributing
 
 1. Fork it (<https://github.com/mjblack/win32cr/fork>)

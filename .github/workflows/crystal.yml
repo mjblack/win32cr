@@ -36,16 +36,18 @@ jobs:
       - name: WinMD version
         run: bin\winmd.exe --version
 
-      - name: Report drift from committed bindings
+      # The committed bindings must be exactly what build.ps1 produces for the
+      # pinned metadata; regenerate with the "Update Windows metadata" workflow.
+      - name: Check committed bindings are up to date
         shell: pwsh
         run: |
           $changed = git status --porcelain src
           if ($changed) {
-            Write-Host "Regenerated bindings differ from the committed ones:"
             git diff --stat src | Select-Object -Last 5
-          } else {
-            Write-Host "Regenerated bindings match the committed ones."
+            pwsh scripts/summarize_binding_changes.ps1
+            throw "Regenerated bindings differ from the committed ones"
           }
+          Write-Host "Regenerated bindings match the committed ones."
 
       - name: Run tests
         run: crystal spec --error-trace
