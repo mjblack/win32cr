@@ -13,8 +13,10 @@
 $ErrorActionPreference = "Stop"
 $winmdFile = Join-Path $PWD "winmd\Windows.Win32.winmd"
 
+# Wipe the generated tree so namespaces that disappear from the metadata do
+# not leave stale files behind. src/win32cr.cr is rewritten on every run and
+# src/macros.cr is hand-maintained, so neither needs removing.
 function PrepSrcDir {
-    if (Test-Path -Path .\src\win32cr.cr) { Remove-Item -Path src/win32cr.cr }
     if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
 }
 
