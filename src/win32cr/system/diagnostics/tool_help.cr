@@ -1,4 +1,6 @@
 require "./../../foundation.cr"
+require "c/tlhelp32"
+require "./../../libc_bridge.cr"
 
 module Win32cr::System::Diagnostics::ToolHelp
   extend self
@@ -124,9 +126,12 @@ module Win32cr::System::Diagnostics::ToolHelp
     end
   end
 
-  #def createToolhelp32Snapshot(dwFlags : Win32cr::System::Diagnostics::ToolHelp::CREATE_TOOLHELP_SNAPSHOT_FLAGS, th32ProcessID : UInt32) : Win32cr::Foundation::HANDLE
-    #C.CreateToolhelp32Snapshot(dwFlags, th32ProcessID)
-  #end
+  # Forwards to `LibC.CreateToolhelp32Snapshot`, which Crystal's standard library declares in `c/tlhelp32`.
+  def createToolhelp32Snapshot(dwFlags : Win32cr::System::Diagnostics::ToolHelp::CREATE_TOOLHELP_SNAPSHOT_FLAGS, th32ProcessID : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateToolhelp32Snapshot(Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(th32ProcessID, ::LibC::DWORD)), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def heap32ListFirst(hSnapshot : Win32cr::Foundation::HANDLE, lphl : Win32cr::System::Diagnostics::ToolHelp::HEAPLIST32*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -158,13 +163,19 @@ module Win32cr::System::Diagnostics::ToolHelp
     {% end %}
   end
 
-  #def process32FirstW(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32W*) : Win32cr::Foundation::BOOL
-    #C.Process32FirstW(hSnapshot, lppe)
-  #end
+  # Forwards to `LibC.Process32FirstW`, which Crystal's standard library declares in `c/tlhelp32`.
+  def process32FirstW(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32W*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.Process32FirstW(Win32cr::LibCBridge.arg(hSnapshot, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lppe, Pointer(::LibC::PROCESSENTRY32W))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def process32NextW(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32W*) : Win32cr::Foundation::BOOL
-    #C.Process32NextW(hSnapshot, lppe)
-  #end
+  # Forwards to `LibC.Process32NextW`, which Crystal's standard library declares in `c/tlhelp32`.
+  def process32NextW(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32W*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.Process32NextW(Win32cr::LibCBridge.arg(hSnapshot, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lppe, Pointer(::LibC::PROCESSENTRY32W))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def process32First(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -217,7 +228,7 @@ module Win32cr::System::Diagnostics::ToolHelp
   @[Link("kernel32")]
   {% if !flag?(:docs) %}
   lib C
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/tlhelp32)
     # :nodoc:
     #fun CreateToolhelp32Snapshot(dwFlags : Win32cr::System::Diagnostics::ToolHelp::CREATE_TOOLHELP_SNAPSHOT_FLAGS, th32ProcessID : UInt32) : Win32cr::Foundation::HANDLE
 
@@ -236,11 +247,11 @@ module Win32cr::System::Diagnostics::ToolHelp
     # :nodoc:
     fun Toolhelp32ReadProcessMemory(th32ProcessID : UInt32, lpBaseAddress : Void*, lpBuffer : Void*, cbRead : LibC::UIntPtrT, lpNumberOfBytesRead : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/tlhelp32)
     # :nodoc:
     #fun Process32FirstW(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32W*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/tlhelp32)
     # :nodoc:
     #fun Process32NextW(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32W*) : Win32cr::Foundation::BOOL
 

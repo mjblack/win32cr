@@ -1,4 +1,6 @@
 require "./../foundation.cr"
+require "c/libloaderapi"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::LibraryLoader
   extend self
@@ -108,9 +110,12 @@ module Win32cr::System::LibraryLoader
     {% end %}
   end
 
-  #def getModuleFileNameW(hModule : Win32cr::Foundation::HMODULE, lpFilename : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
-    #C.GetModuleFileNameW(hModule, lpFilename, nSize)
-  #end
+  # Forwards to `LibC.GetModuleFileNameW`, which Crystal's standard library declares in `c/libloaderapi`.
+  def getModuleFileNameW(hModule : Win32cr::Foundation::HMODULE, lpFilename : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetModuleFileNameW(Win32cr::LibCBridge.arg(hModule, ::LibC::HMODULE), Win32cr::LibCBridge.arg(lpFilename, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(nSize, ::LibC::DWORD)), UInt32)
+    {% end %}
+  end
 
   def getModuleHandleA(lpModuleName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HMODULE
     {% if !flag?(:docs) %}
@@ -130,13 +135,19 @@ module Win32cr::System::LibraryLoader
     {% end %}
   end
 
-  #def getModuleHandleExW(dwFlags : UInt32, lpModuleName : Win32cr::Foundation::PWSTR, phModule : Win32cr::Foundation::HMODULE*) : Win32cr::Foundation::BOOL
-    #C.GetModuleHandleExW(dwFlags, lpModuleName, phModule)
-  #end
+  # Forwards to `LibC.GetModuleHandleExW`, which Crystal's standard library declares in `c/libloaderapi`.
+  def getModuleHandleExW(dwFlags : UInt32, lpModuleName : Win32cr::Foundation::PWSTR, phModule : Win32cr::Foundation::HMODULE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetModuleHandleExW(Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpModuleName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(phModule, Pointer(::LibC::HMODULE))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def getProcAddress(hModule : Win32cr::Foundation::HMODULE, lpProcName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::FARPROC
-    #C.GetProcAddress(hModule, lpProcName)
-  #end
+  # Forwards to `LibC.GetProcAddress`, which Crystal's standard library declares in `c/libloaderapi`.
+  def getProcAddress(hModule : Win32cr::Foundation::HMODULE, lpProcName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::FARPROC
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetProcAddress(Win32cr::LibCBridge.arg(hModule, ::LibC::HMODULE), Win32cr::LibCBridge.arg(lpProcName, ::LibC::LPSTR)), Win32cr::Foundation::FARPROC)
+    {% end %}
+  end
 
   def loadLibraryExA(lpLibFileName : Win32cr::Foundation::PSTR, hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::HMODULE
     {% if !flag?(:docs) %}
@@ -144,9 +155,12 @@ module Win32cr::System::LibraryLoader
     {% end %}
   end
 
-  #def loadLibraryExW(lpLibFileName : Win32cr::Foundation::PWSTR, hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::HMODULE
-    #C.LoadLibraryExW(lpLibFileName, hFile, dwFlags)
-  #end
+  # Forwards to `LibC.LoadLibraryExW`, which Crystal's standard library declares in `c/libloaderapi`.
+  def loadLibraryExW(lpLibFileName : Win32cr::Foundation::PWSTR, hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::HMODULE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.LoadLibraryExW(Win32cr::LibCBridge.arg(lpLibFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD)), Win32cr::Foundation::HMODULE)
+    {% end %}
+  end
 
   def loadResource(hModule : Win32cr::Foundation::HMODULE, hResInfo : Win32cr::Foundation::HRSRC) : Win32cr::Foundation::HGLOBAL
     {% if !flag?(:docs) %}
@@ -382,7 +396,7 @@ module Win32cr::System::LibraryLoader
     # :nodoc:
     fun GetModuleFileNameA(hModule : Win32cr::Foundation::HMODULE, lpFilename : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/libloaderapi)
     # :nodoc:
     #fun GetModuleFileNameW(hModule : Win32cr::Foundation::HMODULE, lpFilename : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
 
@@ -395,18 +409,18 @@ module Win32cr::System::LibraryLoader
     # :nodoc:
     fun GetModuleHandleExA(dwFlags : UInt32, lpModuleName : Win32cr::Foundation::PSTR, phModule : Win32cr::Foundation::HMODULE*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/libloaderapi)
     # :nodoc:
     #fun GetModuleHandleExW(dwFlags : UInt32, lpModuleName : Win32cr::Foundation::PWSTR, phModule : Win32cr::Foundation::HMODULE*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/libloaderapi)
     # :nodoc:
     #fun GetProcAddress(hModule : Win32cr::Foundation::HMODULE, lpProcName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::FARPROC
 
     # :nodoc:
     fun LoadLibraryExA(lpLibFileName : Win32cr::Foundation::PSTR, hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::HMODULE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/libloaderapi)
     # :nodoc:
     #fun LoadLibraryExW(lpLibFileName : Win32cr::Foundation::PWSTR, hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::HMODULE
 

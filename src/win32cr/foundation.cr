@@ -1,3 +1,9 @@
+require "c/errhandlingapi"
+require "c/handleapi"
+require "c/libloaderapi"
+require "c/winbase"
+require "c/winternl"
+require "./libc_bridge.cr"
 
 module Win32cr::Foundation
   extend self
@@ -10785,13 +10791,19 @@ module Win32cr::Foundation
     {% end %}
   end
 
-  #def closeHandle(hObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
-    #C.CloseHandle(hObject)
-  #end
+  # Forwards to `LibC.CloseHandle`, which Crystal's standard library declares in `c/handleapi`.
+  def closeHandle(hObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CloseHandle(Win32cr::LibCBridge.arg(hObject, ::LibC::HANDLE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def duplicateHandle(hSourceProcessHandle : Win32cr::Foundation::HANDLE, hSourceHandle : Win32cr::Foundation::HANDLE, hTargetProcessHandle : Win32cr::Foundation::HANDLE, lpTargetHandle : Win32cr::Foundation::HANDLE*, dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, dwOptions : Win32cr::Foundation::DUPLICATE_HANDLE_OPTIONS) : Win32cr::Foundation::BOOL
-    #C.DuplicateHandle(hSourceProcessHandle, hSourceHandle, hTargetProcessHandle, lpTargetHandle, dwDesiredAccess, bInheritHandle, dwOptions)
-  #end
+  # Forwards to `LibC.DuplicateHandle`, which Crystal's standard library declares in `c/handleapi`.
+  def duplicateHandle(hSourceProcessHandle : Win32cr::Foundation::HANDLE, hSourceHandle : Win32cr::Foundation::HANDLE, hTargetProcessHandle : Win32cr::Foundation::HANDLE, lpTargetHandle : Win32cr::Foundation::HANDLE*, dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, dwOptions : Win32cr::Foundation::DUPLICATE_HANDLE_OPTIONS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.DuplicateHandle(Win32cr::LibCBridge.arg(hSourceProcessHandle, ::LibC::HANDLE), Win32cr::LibCBridge.arg(hSourceHandle, ::LibC::HANDLE), Win32cr::LibCBridge.arg(hTargetProcessHandle, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpTargetHandle, Pointer(::LibC::HANDLE)), Win32cr::LibCBridge.arg(dwDesiredAccess, ::LibC::DWORD), Win32cr::LibCBridge.arg(bInheritHandle, ::LibC::BOOL), Win32cr::LibCBridge.arg(dwOptions, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def compareObjectHandles(hFirstObjectHandle : Win32cr::Foundation::HANDLE, hSecondObjectHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -10811,17 +10823,26 @@ module Win32cr::Foundation
     {% end %}
   end
 
-  #def freeLibrary(hLibModule : Win32cr::Foundation::HMODULE) : Win32cr::Foundation::BOOL
-    #C.FreeLibrary(hLibModule)
-  #end
+  # Forwards to `LibC.FreeLibrary`, which Crystal's standard library declares in `c/libloaderapi`.
+  def freeLibrary(hLibModule : Win32cr::Foundation::HMODULE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FreeLibrary(Win32cr::LibCBridge.arg(hLibModule, ::LibC::HMODULE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def getLastError : Win32cr::Foundation::WIN32_ERROR
-    #C.GetLastError
-  #end
+  # Forwards to `LibC.GetLastError`, which Crystal's standard library declares in `c/errhandlingapi`.
+  def getLastError : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetLastError, Win32cr::Foundation::WIN32_ERROR)
+    {% end %}
+  end
 
-  #def setLastError(dwErrCode : Win32cr::Foundation::WIN32_ERROR) : Void
-    #C.SetLastError(dwErrCode)
-  #end
+  # Forwards to `LibC.SetLastError`, which Crystal's standard library declares in `c/errhandlingapi`.
+  def setLastError(dwErrCode : Win32cr::Foundation::WIN32_ERROR) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.SetLastError(Win32cr::LibCBridge.arg(dwErrCode, ::LibC::DWORD))
+    {% end %}
+  end
 
   def setLastErrorEx(dwErrCode : Win32cr::Foundation::WIN32_ERROR, dwType : UInt32) : Void
     {% if !flag?(:docs) %}
@@ -10835,13 +10856,19 @@ module Win32cr::Foundation
     {% end %}
   end
 
-  #def localFree(hMem : Win32cr::Foundation::HLOCAL) : Win32cr::Foundation::HLOCAL
-    #C.LocalFree(hMem)
-  #end
+  # Forwards to `LibC.LocalFree`, which Crystal's standard library declares in `c/winbase`.
+  def localFree(hMem : Win32cr::Foundation::HLOCAL) : Win32cr::Foundation::HLOCAL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.LocalFree(Win32cr::LibCBridge.arg(hMem, ::LibC::HLOCAL)), Win32cr::Foundation::HLOCAL)
+    {% end %}
+  end
 
-  #def rtlNtStatusToDosError(status : Win32cr::Foundation::NTSTATUS) : UInt32
-    #C.RtlNtStatusToDosError(status)
-  #end
+  # Forwards to `LibNTDLL.RtlNtStatusToDosError`, which Crystal's standard library declares in `c/winternl`.
+  def rtlNtStatusToDosError(status : Win32cr::Foundation::NTSTATUS) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibNTDLL.RtlNtStatusToDosError(Win32cr::LibCBridge.arg(status, ::LibC::ULONG)), UInt32)
+    {% end %}
+  end
 
   @[Link("oleaut32")]
   @[Link("kernel32")]
@@ -10879,11 +10906,11 @@ module Win32cr::Foundation
     # :nodoc:
     fun SysAllocStringByteLen(psz : Win32cr::Foundation::PSTR, len : UInt32) : Win32cr::Foundation::BSTR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/handleapi)
     # :nodoc:
     #fun CloseHandle(hObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/handleapi)
     # :nodoc:
     #fun DuplicateHandle(hSourceProcessHandle : Win32cr::Foundation::HANDLE, hSourceHandle : Win32cr::Foundation::HANDLE, hTargetProcessHandle : Win32cr::Foundation::HANDLE, lpTargetHandle : Win32cr::Foundation::HANDLE*, dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, dwOptions : Win32cr::Foundation::DUPLICATE_HANDLE_OPTIONS) : Win32cr::Foundation::BOOL
 
@@ -10896,15 +10923,15 @@ module Win32cr::Foundation
     # :nodoc:
     fun SetHandleInformation(hObject : Win32cr::Foundation::HANDLE, dwMask : UInt32, dwFlags : Win32cr::Foundation::HANDLE_FLAGS) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/libloaderapi)
     # :nodoc:
     #fun FreeLibrary(hLibModule : Win32cr::Foundation::HMODULE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/errhandlingapi)
     # :nodoc:
     #fun GetLastError : Win32cr::Foundation::WIN32_ERROR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/errhandlingapi)
     # :nodoc:
     #fun SetLastError(dwErrCode : Win32cr::Foundation::WIN32_ERROR) : Void
 
@@ -10914,11 +10941,11 @@ module Win32cr::Foundation
     # :nodoc:
     fun GlobalFree(hMem : Win32cr::Foundation::HGLOBAL) : Win32cr::Foundation::HGLOBAL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun LocalFree(hMem : Win32cr::Foundation::HLOCAL) : Win32cr::Foundation::HLOCAL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winternl)
     # :nodoc:
     #fun RtlNtStatusToDosError(status : Win32cr::Foundation::NTSTATUS) : UInt32
 

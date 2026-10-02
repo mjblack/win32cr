@@ -1,6 +1,9 @@
 require "./foundation.cr"
 require "./graphics/gdi.cr"
 require "./system/com.cr"
+require "c/stringapiset"
+require "c/winnls"
+require "./libc_bridge.cr"
 
 module Win32cr::Globalization
   extend self
@@ -5854,17 +5857,26 @@ module Win32cr::Globalization
     {% end %}
   end
 
-  #def multiByteToWideChar(code_page : UInt32, dwFlags : Win32cr::Globalization::MULTI_BYTE_TO_WIDE_CHAR_FLAGS, lpMultiByteStr : Win32cr::Foundation::PSTR, cbMultiByte : Int32, lpWideCharStr : Win32cr::Foundation::PWSTR, cchWideChar : Int32) : Int32
-    #C.MultiByteToWideChar(code_page, dwFlags, lpMultiByteStr, cbMultiByte, lpWideCharStr, cchWideChar)
-  #end
+  # Forwards to `LibC.MultiByteToWideChar`, which Crystal's standard library declares in `c/stringapiset`.
+  def multiByteToWideChar(code_page : UInt32, dwFlags : Win32cr::Globalization::MULTI_BYTE_TO_WIDE_CHAR_FLAGS, lpMultiByteStr : Win32cr::Foundation::PSTR, cbMultiByte : Int32, lpWideCharStr : Win32cr::Foundation::PWSTR, cchWideChar : Int32) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.MultiByteToWideChar(Win32cr::LibCBridge.arg(code_page, ::LibC::UInt), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpMultiByteStr, ::LibC::LPSTR), Win32cr::LibCBridge.arg(cbMultiByte, ::LibC::Int), Win32cr::LibCBridge.arg(lpWideCharStr, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(cchWideChar, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
-  #def wideCharToMultiByte(code_page : UInt32, dwFlags : UInt32, lpWideCharStr : Win32cr::Foundation::PWSTR, cchWideChar : Int32, lpMultiByteStr : Win32cr::Foundation::PSTR, cbMultiByte : Int32, lpDefaultChar : Win32cr::Foundation::PSTR, lpUsedDefaultChar : Win32cr::Foundation::BOOL*) : Int32
-    #C.WideCharToMultiByte(code_page, dwFlags, lpWideCharStr, cchWideChar, lpMultiByteStr, cbMultiByte, lpDefaultChar, lpUsedDefaultChar)
-  #end
+  # Forwards to `LibC.WideCharToMultiByte`, which Crystal's standard library declares in `c/stringapiset`.
+  def wideCharToMultiByte(code_page : UInt32, dwFlags : UInt32, lpWideCharStr : Win32cr::Foundation::PWSTR, cchWideChar : Int32, lpMultiByteStr : Win32cr::Foundation::PSTR, cbMultiByte : Int32, lpDefaultChar : Win32cr::Foundation::PSTR, lpUsedDefaultChar : Win32cr::Foundation::BOOL*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WideCharToMultiByte(Win32cr::LibCBridge.arg(code_page, ::LibC::UInt), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpWideCharStr, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(cchWideChar, ::LibC::Int), Win32cr::LibCBridge.arg(lpMultiByteStr, ::LibC::LPSTR), Win32cr::LibCBridge.arg(cbMultiByte, ::LibC::Int), Win32cr::LibCBridge.arg(lpDefaultChar, Pointer(::LibC::CHAR)), Win32cr::LibCBridge.arg(lpUsedDefaultChar, Pointer(::LibC::BOOL))), Int32)
+    {% end %}
+  end
 
-  #def isValidCodePage(code_page : UInt32) : Win32cr::Foundation::BOOL
-    #C.IsValidCodePage(code_page)
-  #end
+  # Forwards to `LibC.IsValidCodePage`, which Crystal's standard library declares in `c/winnls`.
+  def isValidCodePage(code_page : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.IsValidCodePage(Win32cr::LibCBridge.arg(code_page, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getACP : UInt32
     {% if !flag?(:docs) %}
@@ -13300,15 +13312,15 @@ module Win32cr::Globalization
     # :nodoc:
     fun GetStringTypeW(dwInfoType : UInt32, lpSrcStr : Win32cr::Foundation::PWSTR, cchSrc : Int32, lpCharType : UInt16*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/stringapiset)
     # :nodoc:
     #fun MultiByteToWideChar(code_page : UInt32, dwFlags : Win32cr::Globalization::MULTI_BYTE_TO_WIDE_CHAR_FLAGS, lpMultiByteStr : Win32cr::Foundation::PSTR, cbMultiByte : Int32, lpWideCharStr : Win32cr::Foundation::PWSTR, cchWideChar : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/stringapiset)
     # :nodoc:
     #fun WideCharToMultiByte(code_page : UInt32, dwFlags : UInt32, lpWideCharStr : Win32cr::Foundation::PWSTR, cchWideChar : Int32, lpMultiByteStr : Win32cr::Foundation::PSTR, cbMultiByte : Int32, lpDefaultChar : Win32cr::Foundation::PSTR, lpUsedDefaultChar : Win32cr::Foundation::BOOL*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winnls)
     # :nodoc:
     #fun IsValidCodePage(code_page : UInt32) : Win32cr::Foundation::BOOL
 
