@@ -1,4 +1,6 @@
 require "./../foundation.cr"
+require "c/processenv"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Environment
   extend self
@@ -259,9 +261,12 @@ module Win32cr::System::Environment
     {% end %}
   end
 
-  #def getEnvironmentStringsW : Win32cr::Foundation::PWSTR
-    #C.GetEnvironmentStringsW
-  #end
+  # Forwards to `LibC.GetEnvironmentStringsW`, which Crystal's standard library declares in `c/processenv`.
+  def getEnvironmentStringsW : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetEnvironmentStringsW, Win32cr::Foundation::PWSTR)
+    {% end %}
+  end
 
   def freeEnvironmentStringsA(penv : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -269,9 +274,12 @@ module Win32cr::System::Environment
     {% end %}
   end
 
-  #def freeEnvironmentStringsW(penv : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
-    #C.FreeEnvironmentStringsW(penv)
-  #end
+  # Forwards to `LibC.FreeEnvironmentStringsW`, which Crystal's standard library declares in `c/processenv`.
+  def freeEnvironmentStringsW(penv : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FreeEnvironmentStringsW(Win32cr::LibCBridge.arg(penv, ::LibC::LPWCH)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
     {% if !flag?(:docs) %}
@@ -279,9 +287,12 @@ module Win32cr::System::Environment
     {% end %}
   end
 
-  #def getEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
-    #C.GetEnvironmentVariableW(lpName, lpBuffer, nSize)
-  #end
+  # Forwards to `LibC.GetEnvironmentVariableW`, which Crystal's standard library declares in `c/processenv`.
+  def getEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetEnvironmentVariableW(Win32cr::LibCBridge.arg(lpName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpBuffer, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(nSize, ::LibC::DWORD)), UInt32)
+    {% end %}
+  end
 
   def setEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -289,9 +300,12 @@ module Win32cr::System::Environment
     {% end %}
   end
 
-  #def setEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
-    #C.SetEnvironmentVariableW(lpName, lpValue)
-  #end
+  # Forwards to `LibC.SetEnvironmentVariableW`, which Crystal's standard library declares in `c/processenv`.
+  def setEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetEnvironmentVariableW(Win32cr::LibCBridge.arg(lpName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpValue, ::LibC::LPWSTR)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def expandEnvironmentStringsA(lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
     {% if !flag?(:docs) %}
@@ -311,9 +325,12 @@ module Win32cr::System::Environment
     {% end %}
   end
 
-  #def setCurrentDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
-    #C.SetCurrentDirectoryW(lpPathName)
-  #end
+  # Forwards to `LibC.SetCurrentDirectoryW`, which Crystal's standard library declares in `c/processenv`.
+  def setCurrentDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetCurrentDirectoryW(Win32cr::LibCBridge.arg(lpPathName, ::LibC::LPWSTR)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getCurrentDirectoryA(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PSTR) : UInt32
     {% if !flag?(:docs) %}
@@ -321,9 +338,12 @@ module Win32cr::System::Environment
     {% end %}
   end
 
-  #def getCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
-    #C.GetCurrentDirectoryW(nBufferLength, lpBuffer)
-  #end
+  # Forwards to `LibC.GetCurrentDirectoryW`, which Crystal's standard library declares in `c/processenv`.
+  def getCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetCurrentDirectoryW(Win32cr::LibCBridge.arg(nBufferLength, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpBuffer, ::LibC::LPWSTR)), UInt32)
+    {% end %}
+  end
 
   def needCurrentDirectoryForExePathA(exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -492,28 +512,28 @@ module Win32cr::System::Environment
     # :nodoc:
     fun GetEnvironmentStrings : Win32cr::Foundation::PSTR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processenv)
     # :nodoc:
     #fun GetEnvironmentStringsW : Win32cr::Foundation::PWSTR
 
     # :nodoc:
     fun FreeEnvironmentStringsA(penv : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processenv)
     # :nodoc:
     #fun FreeEnvironmentStringsW(penv : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processenv)
     # :nodoc:
     #fun GetEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
 
     # :nodoc:
     fun SetEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processenv)
     # :nodoc:
     #fun SetEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
@@ -526,14 +546,14 @@ module Win32cr::System::Environment
     # :nodoc:
     fun SetCurrentDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processenv)
     # :nodoc:
     #fun SetCurrentDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetCurrentDirectoryA(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PSTR) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processenv)
     # :nodoc:
     #fun GetCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
 

@@ -1,6 +1,8 @@
 require "./../foundation.cr"
 require "./threading.cr"
 require "./../security.cr"
+require "c/jobapi2"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::JobObjects
   extend self
@@ -524,9 +526,12 @@ module Win32cr::System::JobObjects
     {% end %}
   end
 
-  #def createJobObjectW(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
-    #C.CreateJobObjectW(lpJobAttributes, lpName)
-  #end
+  # Forwards to `LibC.CreateJobObjectW`, which Crystal's standard library declares in `c/jobapi2`.
+  def createJobObjectW(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateJobObjectW(Win32cr::LibCBridge.arg(lpJobAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES)), Win32cr::LibCBridge.arg(lpName, ::LibC::LPWSTR)), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def freeMemoryJobObject(buffer : Void*) : Void
     {% if !flag?(:docs) %}
@@ -540,9 +545,12 @@ module Win32cr::System::JobObjects
     {% end %}
   end
 
-  #def assignProcessToJobObject(hJob : Win32cr::Foundation::HANDLE, hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
-    #C.AssignProcessToJobObject(hJob, hProcess)
-  #end
+  # Forwards to `LibC.AssignProcessToJobObject`, which Crystal's standard library declares in `c/jobapi2`.
+  def assignProcessToJobObject(hJob : Win32cr::Foundation::HANDLE, hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.AssignProcessToJobObject(Win32cr::LibCBridge.arg(hJob, ::LibC::HANDLE), Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def terminateJobObject(hJob : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -550,9 +558,12 @@ module Win32cr::System::JobObjects
     {% end %}
   end
 
-  #def setInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32) : Win32cr::Foundation::BOOL
-    #C.SetInformationJobObject(hJob, job_object_information_class, lpJobObjectInformation, cbJobObjectInformationLength)
-  #end
+  # Forwards to `LibC.SetInformationJobObject`, which Crystal's standard library declares in `c/jobapi2`.
+  def setInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetInformationJobObject(Win32cr::LibCBridge.arg(hJob, ::LibC::HANDLE), Win32cr::LibCBridge.arg(job_object_information_class, ::LibC::JOBOBJECTINFOCLASS), Win32cr::LibCBridge.arg(lpJobObjectInformation, Pointer(Void)), Win32cr::LibCBridge.arg(cbJobObjectInformationLength, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, io_rate_control_info : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION*) : UInt32
     {% if !flag?(:docs) %}
@@ -603,7 +614,7 @@ module Win32cr::System::JobObjects
     # :nodoc:
     fun IsProcessInJob(process_handle : Win32cr::Foundation::HANDLE, job_handle : Win32cr::Foundation::HANDLE, result : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/jobapi2)
     # :nodoc:
     #fun CreateJobObjectW(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
@@ -613,14 +624,14 @@ module Win32cr::System::JobObjects
     # :nodoc:
     fun OpenJobObjectW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/jobapi2)
     # :nodoc:
     #fun AssignProcessToJobObject(hJob : Win32cr::Foundation::HANDLE, hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun TerminateJobObject(hJob : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/jobapi2)
     # :nodoc:
     #fun SetInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32) : Win32cr::Foundation::BOOL
 

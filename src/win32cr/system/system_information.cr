@@ -1,4 +1,6 @@
 require "./../foundation.cr"
+require "c/sysinfoapi"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::SystemInformation
   extend self
@@ -927,9 +929,12 @@ module Win32cr::System::SystemInformation
     {% end %}
   end
 
-  #def getSystemTimeAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
-    #C.GetSystemTimeAsFileTime(lpSystemTimeAsFileTime)
-  #end
+  # Forwards to `LibC.GetSystemTimeAsFileTime`, which Crystal's standard library declares in `c/sysinfoapi`.
+  def getSystemTimeAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.GetSystemTimeAsFileTime(Win32cr::LibCBridge.arg(lpSystemTimeAsFileTime, Pointer(::LibC::FILETIME)))
+    {% end %}
+  end
 
   def getLocalTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Void
     {% if !flag?(:docs) %}
@@ -1027,9 +1032,12 @@ module Win32cr::System::SystemInformation
     {% end %}
   end
 
-  #def getComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
-    #C.GetComputerNameExW(name_type, lpBuffer, nSize)
-  #end
+  # Forwards to `LibC.GetComputerNameExW`, which Crystal's standard library declares in `c/sysinfoapi`.
+  def getComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetComputerNameExW(Win32cr::LibCBridge.arg(name_type, ::LibC::COMPUTER_NAME_FORMAT), Win32cr::LibCBridge.arg(lpBuffer, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(nSize, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1067,13 +1075,19 @@ module Win32cr::System::SystemInformation
     {% end %}
   end
 
-  #def getNativeSystemInfo(lpSystemInfo : Win32cr::System::SystemInformation::SYSTEM_INFO*) : Void
-    #C.GetNativeSystemInfo(lpSystemInfo)
-  #end
+  # Forwards to `LibC.GetNativeSystemInfo`, which Crystal's standard library declares in `c/sysinfoapi`.
+  def getNativeSystemInfo(lpSystemInfo : Win32cr::System::SystemInformation::SYSTEM_INFO*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.GetNativeSystemInfo(Win32cr::LibCBridge.arg(lpSystemInfo, Pointer(::LibC::SYSTEM_INFO)))
+    {% end %}
+  end
 
-  #def getSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
-    #C.GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime)
-  #end
+  # Forwards to `LibC.GetSystemTimePreciseAsFileTime`, which Crystal's standard library declares in `c/sysinfoapi`.
+  def getSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.GetSystemTimePreciseAsFileTime(Win32cr::LibCBridge.arg(lpSystemTimeAsFileTime, Pointer(::LibC::FILETIME)))
+    {% end %}
+  end
 
   def getProductInfo(dwOSMajorVersion : UInt32, dwOSMinorVersion : UInt32, dwSpMajorVersion : UInt32, dwSpMinorVersion : UInt32, pdwReturnedProductType : Win32cr::System::SystemInformation::OS_PRODUCT_TYPE*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1292,7 +1306,7 @@ module Win32cr::System::SystemInformation
     # :nodoc:
     fun GetSystemTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/sysinfoapi)
     # :nodoc:
     #fun GetSystemTimeAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
 
@@ -1344,7 +1358,7 @@ module Win32cr::System::SystemInformation
     # :nodoc:
     fun GetComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/sysinfoapi)
     # :nodoc:
     #fun GetComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
 
@@ -1366,11 +1380,11 @@ module Win32cr::System::SystemInformation
     # :nodoc:
     fun GetLogicalProcessorInformationEx(relationship_type : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP, buffer : Win32cr::System::SystemInformation::SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*, returned_length : UInt32*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/sysinfoapi)
     # :nodoc:
     #fun GetNativeSystemInfo(lpSystemInfo : Win32cr::System::SystemInformation::SYSTEM_INFO*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/sysinfoapi)
     # :nodoc:
     #fun GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
 

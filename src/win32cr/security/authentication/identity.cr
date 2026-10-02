@@ -7,6 +7,8 @@ require "./../../system/kernel.cr"
 require "./../cryptography.cr"
 require "./../../system/password_management.cr"
 require "./../../system/com.cr"
+require "c/security"
+require "./../../libc_bridge.cr"
 
 module Win32cr::Security::Authentication::Identity
   extend self
@@ -6483,9 +6485,11 @@ module Win32cr::Security::Authentication::Identity
 
   end
 
-  #def rtlGenRandom(random_buffer : Void*, random_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
-    #C.RtlGenRandom(random_buffer, random_buffer_length)
-  #end
+  def rtlGenRandom(random_buffer : Void*, random_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
+    C.RtlGenRandom(random_buffer, random_buffer_length)
+    {% end %}
+  end
 
   def rtlEncryptMemory(memory : Void*, memory_size : UInt32, option_flags : UInt32) : Win32cr::Foundation::NTSTATUS
     {% if !flag?(:docs) %}
@@ -7555,9 +7559,12 @@ module Win32cr::Security::Authentication::Identity
     {% end %}
   end
 
-  #def translateNameW(lpAccountName : Win32cr::Foundation::PWSTR, account_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, desired_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpTranslatedName : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
-    #C.TranslateNameW(lpAccountName, account_name_format, desired_name_format, lpTranslatedName, nSize)
-  #end
+  # Forwards to `LibC.TranslateNameW`, which Crystal's standard library declares in `c/security`.
+  def translateNameW(lpAccountName : Win32cr::Foundation::PWSTR, account_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, desired_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpTranslatedName : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.TranslateNameW(Win32cr::LibCBridge.arg(lpAccountName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(account_name_format, ::LibC::EXTENDED_NAME_FORMAT), Win32cr::LibCBridge.arg(desired_name_format, ::LibC::EXTENDED_NAME_FORMAT), Win32cr::LibCBridge.arg(lpTranslatedName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(nSize, Pointer(::LibC::ULong))), Win32cr::Foundation::BOOLEAN)
+    {% end %}
+  end
 
   def sLOpen(phSLC : Void**) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
@@ -7805,9 +7812,8 @@ module Win32cr::Security::Authentication::Identity
   @[Link("sas")]
   {% if !flag?(:docs) %}
   lib C
-    # Commented out due to being part of LibC
     # :nodoc:
-    #fun RtlGenRandom(random_buffer : Void*, random_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    fun RtlGenRandom(random_buffer : Void*, random_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
     # :nodoc:
     fun RtlEncryptMemory(memory : Void*, memory_size : UInt32, option_flags : UInt32) : Win32cr::Foundation::NTSTATUS
@@ -8343,7 +8349,7 @@ module Win32cr::Security::Authentication::Identity
     # :nodoc:
     fun TranslateNameA(lpAccountName : Win32cr::Foundation::PSTR, account_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, desired_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpTranslatedName : Win32cr::Foundation::PSTR, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/security)
     # :nodoc:
     #fun TranslateNameW(lpAccountName : Win32cr::Foundation::PWSTR, account_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, desired_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpTranslatedName : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
 

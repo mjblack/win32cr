@@ -4,6 +4,8 @@ require "./../security/cryptography.cr"
 require "./../system/com.cr"
 require "./../system/registry.cr"
 require "./../data/xml/ms_xml.cr"
+require "c/lm"
+require "./../libc_bridge.cr"
 
 module Win32cr::NetworkManagement::NetManagement
   extend self
@@ -6298,9 +6300,12 @@ module Win32cr::NetworkManagement::NetManagement
     {% end %}
   end
 
-  #def netUserGetInfo(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
-    #C.NetUserGetInfo(servername, username, level, bufptr)
-  #end
+  # Forwards to `LibC.NetUserGetInfo`, which Crystal's standard library declares in `c/lm`.
+  def netUserGetInfo(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.NetUserGetInfo(Win32cr::LibCBridge.arg(servername, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(username, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(level, ::LibC::DWORD), Win32cr::LibCBridge.arg(bufptr, Pointer(Pointer(::LibC::BYTE)))), UInt32)
+    {% end %}
+  end
 
   def netUserSetInfo(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
     {% if !flag?(:docs) %}
@@ -6890,9 +6895,12 @@ module Win32cr::NetworkManagement::NetManagement
     {% end %}
   end
 
-  #def netApiBufferFree(buffer : Void*) : UInt32
-    #C.NetApiBufferFree(buffer)
-  #end
+  # Forwards to `LibC.NetApiBufferFree`, which Crystal's standard library declares in `c/lm`.
+  def netApiBufferFree(buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.NetApiBufferFree(Win32cr::LibCBridge.arg(buffer, Pointer(Void))), UInt32)
+    {% end %}
+  end
 
   def netApiBufferReallocate(old_buffer : Void*, new_byte_count : UInt32, new_buffer : Void**) : UInt32
     {% if !flag?(:docs) %}
@@ -7050,9 +7058,12 @@ module Win32cr::NetworkManagement::NetManagement
     {% end %}
   end
 
-  #def netGetJoinInformation(lpServer : Win32cr::Foundation::PWSTR, lpNameBuffer : Win32cr::Foundation::PWSTR*, buffer_type : Win32cr::NetworkManagement::NetManagement::NETSETUP_JOIN_STATUS*) : UInt32
-    #C.NetGetJoinInformation(lpServer, lpNameBuffer, buffer_type)
-  #end
+  # Forwards to `LibC.NetGetJoinInformation`, which Crystal's standard library declares in `c/lm`.
+  def netGetJoinInformation(lpServer : Win32cr::Foundation::PWSTR, lpNameBuffer : Win32cr::Foundation::PWSTR*, buffer_type : Win32cr::NetworkManagement::NetManagement::NETSETUP_JOIN_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.NetGetJoinInformation(Win32cr::LibCBridge.arg(lpServer, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpNameBuffer, Pointer(::LibC::LPWSTR)), Win32cr::LibCBridge.arg(buffer_type, Pointer(::LibC::NETSETUP_JOIN_STATUS))), UInt32)
+    {% end %}
+  end
 
   def getNetScheduleAccountInformation(pwszServerName : Win32cr::Foundation::PWSTR, ccAccount : UInt32, wszAccount : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
@@ -7347,7 +7358,7 @@ module Win32cr::NetworkManagement::NetManagement
     # :nodoc:
     fun NetUserEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, filter : Win32cr::NetworkManagement::NetManagement::NET_USER_ENUM_FILTER_FLAGS, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/lm)
     # :nodoc:
     #fun NetUserGetInfo(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
 
@@ -7645,7 +7656,7 @@ module Win32cr::NetworkManagement::NetManagement
     # :nodoc:
     fun NetApiBufferAllocate(byte_count : UInt32, buffer : Void**) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/lm)
     # :nodoc:
     #fun NetApiBufferFree(buffer : Void*) : UInt32
 
@@ -7727,7 +7738,7 @@ module Win32cr::NetworkManagement::NetManagement
     # :nodoc:
     fun NetFreeAadJoinInformation(pJoinInfo : Win32cr::NetworkManagement::NetManagement::DSREG_JOIN_INFO*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/lm)
     # :nodoc:
     #fun NetGetJoinInformation(lpServer : Win32cr::Foundation::PWSTR, lpNameBuffer : Win32cr::Foundation::PWSTR*, buffer_type : Win32cr::NetworkManagement::NetManagement::NETSETUP_JOIN_STATUS*) : UInt32
 
