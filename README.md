@@ -59,6 +59,13 @@ CI fails if the committed bindings differ from a fresh regeneration for the
 pinned version, so `src/win32cr` should only change through that workflow (or
 by running `build.ps1` locally and committing the result).
 
+A weekly **Check for new Windows metadata** workflow compares the pin with the
+versions on NuGet. When newer metadata exists it opens an issue labelled
+`metadata-update`, assigned to the repository owner (GitHub emails the
+assignee), listing the new versions with links to their release notes; the
+issue closes itself once the pin is current. Run the workflow manually with
+`pretend_pinned` set to an older version to test the notification.
+
 ## Contributing
 
 1. Fork it (<https://github.com/mjblack/win32cr/fork>)

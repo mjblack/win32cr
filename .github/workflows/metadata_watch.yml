@@ -1,0 +1,126 @@
+name: Check for new Windows metadata
+
+# Weekly: compares the pinned metadata version (winmd.version) with the
+# Microsoft.Windows.SDK.Win32Metadata versions on NuGet. When newer versions
+# exist it opens one issue (label `metadata-update`) assigned to the
+# repository owner, which GitHub delivers by email, and closes it again once
+# the pin catches up. Run it manually with `pretend_pinned` to exercise the
+# notification path against an older version.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      pretend_pinned:
+        description: "Treat this as the pinned version instead of winmd.version (testing only)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PACKAGE: microsoft.windows.sdk.win32metadata
+      LABEL: metadata-update
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compare the pinned version with NuGet
+        id: compare
+        shell: pwsh
+        run: |
+          $pinned = '${{ inputs.pretend_pinned }}'
+          if (-not $pinned) {
+            $pinned = (Get-Content winmd.version | Where-Object { $_.Trim() -and -not $_.Trim().StartsWith("#") } | Select-Object -First 1).Trim()
+          }
+          $index = Invoke-RestMethod -Uri "https://api.nuget.org/v3-flatcontainer/$env:PACKAGE/index.json"
+          $versions = @($index.versions)          # NuGet lists versions in ascending order
+          $latest = $versions[-1]
+          $position = [Array]::IndexOf($versions, $pinned)
+          $newer = if ($position -lt 0) { @($latest) }
+                   elseif ($position -lt $versions.Count - 1) { @($versions[($position + 1)..($versions.Count - 1)]) }
+                   else { @() }
+          if ($position -lt 0) { Write-Host "::warning::Pinned version $pinned is not on NuGet; comparing against the latest only" }
+
+          Write-Host "Pinned: $pinned"
+          Write-Host "Latest: $latest"
+          Write-Host "Newer:  $($newer -join ', ')"
+
+          "pinned=$pinned" | Out-File $env:GITHUB_OUTPUT -Append
+          "latest=$latest" | Out-File $env:GITHUB_OUTPUT -Append
+          "has_newer=$(($newer.Count -gt 0 -and $latest -ne $pinned).ToString().ToLower())" | Out-File $env:GITHUB_OUTPUT -Append
+          "newer<<EOF`n$($newer -join "`n")`nEOF" | Out-File $env:GITHUB_OUTPUT -Append
+
+      - name: Ensure the label exists
+        if: steps.compare.outputs.has_newer == 'true'
+        run: |
+          gh label create "$LABEL" --color D93F0B --description "A newer Windows metadata package is available" --force
+
+      - name: Open an issue for the new version
+        if: steps.compare.outputs.has_newer == 'true'
+        shell: pwsh
+        env:
+          PINNED: ${{ steps.compare.outputs.pinned }}
+          LATEST: ${{ steps.compare.outputs.latest }}
+          NEWER: ${{ steps.compare.outputs.newer }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.repository }}
+        run: |
+          $title = "New Windows metadata available: $env:LATEST"
+          $existing = gh issue list --label $env:LABEL --state open --search "in:title `"$env:LATEST`"" --json number --jq '.[0].number'
+          if ($existing) {
+            Write-Host "Issue #$existing already tracks $env:LATEST; nothing to do"
+            exit 0
+          }
+
+          $lines = @(
+            "Microsoft has published Windows metadata newer than the pinned **$env:PINNED**.",
+            "",
+            "Latest: **$env:LATEST**",
+            "",
+            "Versions newer than the pin:",
+            ""
+          )
+          foreach ($v in ($env:NEWER -split "`n" | Where-Object { $_.Trim() })) {
+            $lines += "- [$v](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/$v) ([release notes](https://github.com/microsoft/win32metadata/releases/tag/v$v))"
+          }
+          $lines += @(
+            "",
+            "To update: run the **Update Windows metadata** workflow with `$env:LATEST`, first with the dry-run option to review the binding changes, then for real with the appropriate version bump.",
+            "",
+            "https://github.com/$env:REPO/actions/workflows/update_metadata.yml",
+            "",
+            "This issue was opened by the weekly metadata check and closes automatically once ``winmd.version`` moves past these versions."
+          )
+          Set-Content -Path issue_body.md -Value ($lines -join "`n") -Encoding utf8
+
+          $url = gh issue create --title $title --body-file issue_body.md --label $env:LABEL --assignee $env:OWNER
+          if ($LASTEXITCODE -ne 0) { throw "gh issue create failed" }
+          Write-Host "Opened $url"
+
+          # Older notifications are superseded by the new one.
+          $number = ($url -split '/')[-1]
+          foreach ($old in (gh issue list --label $env:LABEL --state open --json number --jq '.[].number')) {
+            if ($old -ne $number) {
+              gh issue close $old --comment "Superseded by #$number ($env:LATEST is now the latest version)."
+            }
+          }
+
+      - name: Close notifications once the pin is current
+        if: steps.compare.outputs.has_newer != 'true'
+        shell: pwsh
+        env:
+          PINNED: ${{ steps.compare.outputs.pinned }}
+        run: |
+          Write-Host "Pinned version $env:PINNED is the latest on NuGet"
+          foreach ($old in (gh issue list --label $env:LABEL --state open --json number --jq '.[].number')) {
+            gh issue close $old --comment "winmd.version is now $env:PINNED, which is the latest metadata on NuGet."
+          }
