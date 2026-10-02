@@ -1,8 +1,8 @@
 # Regenerates src/win32cr from Windows.Win32.winmd.
 #
 # 1. Builds winmd.exe from the installed winmd shard (lib/winmd) if needed.
-# 2. Fetches the Windows.Win32.winmd version pinned by that shard
-#    (lib/winmd/winmd.version) into winmd/.
+# 2. Fetches the Windows.Win32.winmd version pinned in winmd.version (this
+#    repo) into winmd/, using the fetch script shipped with the winmd shard.
 # 3. Runs `winmd generate --source-format winmd` with the override files in
 #    this directory (data_type_aliases.json, dll_exceptions.json,
 #    fun_exceptions.json, overrides.json).
@@ -32,7 +32,9 @@ function FetchWinMD {
     if (!(Test-Path .\lib\winmd\scripts\fetch-winmd.ps1)) {
         throw "winmd shard not installed; run 'shards install' first"
     }
-    & .\lib\winmd\scripts\fetch-winmd.ps1 -OutputPath $winmdFile
+    $version = (Get-Content .\winmd.version | Where-Object { $_.Trim() -and -not $_.Trim().StartsWith("#") } | Select-Object -First 1).Trim()
+    if (!$version) { throw "winmd.version is empty" }
+    & .\lib\winmd\scripts\fetch-winmd.ps1 -Version $version -OutputPath $winmdFile
 }
 
 function Run {

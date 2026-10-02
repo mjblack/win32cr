@@ -1,0 +1,147 @@
+name: Update Windows metadata
+
+# Regenerates the bindings from a given Windows.Win32.winmd version, validates
+# them, bumps the shard version, commits to master, tags and publishes a
+# release. Run it from the Actions tab when a new win32metadata package is out:
+# https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata
+#
+# Pushing to master needs to bypass the branch ruleset, so the workflow uses
+# the RELEASE_TOKEN secret (a fine-grained PAT of a repository admin with
+# "Contents: read and write") when present and falls back to GITHUB_TOKEN.
+on:
+  workflow_dispatch:
+    inputs:
+      metadata_version:
+        description: "Windows.Win32.winmd NuGet version, e.g. 70.0.11-preview"
+        required: true
+        type: string
+      bump:
+        description: "win32cr version bump"
+        required: true
+        type: choice
+        default: minor
+        options:
+          - minor
+          - patch
+          - major
+      dry_run:
+        description: "Regenerate and validate only; do not commit, tag or release"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-metadata
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
+      METADATA_VERSION: ${{ inputs.metadata_version }}
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          token: ${{ secrets.RELEASE_TOKEN || github.token }}
+
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: 1.20.2
+
+      - name: Install dependencies
+        run: shards install --skip-postinstall
+
+      - name: Pin the metadata version
+        shell: pwsh
+        run: |
+          $current = (Get-Content winmd.version | Where-Object { $_.Trim() } | Select-Object -First 1).Trim()
+          Write-Host "Current metadata: $current"
+          Write-Host "Requested metadata: $env:METADATA_VERSION"
+          "PREVIOUS_METADATA=$current" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Set-Content -Path winmd.version -Value $env:METADATA_VERSION -Encoding ascii
+
+      - name: Regenerate bindings
+        shell: pwsh
+        run: ./build.ps1
+
+      - name: Run specs
+        run: crystal spec --error-trace
+
+      - name: Compile examples
+        shell: pwsh
+        run: |
+          $failed = 0
+          foreach ($file in @("examples/com/file_open_dialog.cr", "examples/com/malloc.cr", "examples/messagebox/messagebox.cr", "examples/pipes.cr")) {
+            Write-Host "== $file"
+            crystal build --no-codegen $file
+            if ($LASTEXITCODE -ne 0) { $failed++ }
+          }
+          if ($failed -gt 0) { throw "$failed example(s) no longer compile" }
+
+      - name: Summarize changes
+        shell: pwsh
+        run: |
+          if (-not (git status --porcelain src winmd.version)) {
+            throw "Nothing changed: the bindings for $env:METADATA_VERSION are identical to the committed ones"
+          }
+          pwsh scripts/summarize_binding_changes.ps1 | Tee-Object -FilePath binding_changes.md
+          "" | Add-Content binding_changes.md
+
+      - name: Bump shard version
+        shell: pwsh
+        run: |
+          $current = (Select-String -Path shard.yml -Pattern '^version:\s*(\S+)').Matches[0].Groups[1].Value
+          $parts = $current.Split('.') | ForEach-Object { [int]$_ }
+          switch ('${{ inputs.bump }}') {
+            'major' { $parts[0]++; $parts[1] = 0; $parts[2] = 0 }
+            'minor' { $parts[1]++; $parts[2] = 0 }
+            'patch' { $parts[2]++ }
+          }
+          $next = $parts -join '.'
+          (Get-Content shard.yml) -replace "^version:\s*$([regex]::Escape($current))$", "version: $next" | Set-Content shard.yml -Encoding ascii
+          Write-Host "win32cr $current -> $next"
+          "PREVIOUS_VERSION=$current" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "NEW_VERSION=$next" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Commit and push
+        if: ${{ !inputs.dry_run }}
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add winmd.version shard.yml src
+          git commit -m "Update to Windows.Win32.winmd $env:METADATA_VERSION" -m "win32cr $env:PREVIOUS_VERSION -> $env:NEW_VERSION, generated with winmd $(bin/winmd.exe --version)."
+          git push origin HEAD:master
+
+      - name: Tag and release
+        if: ${{ !inputs.dry_run }}
+        shell: pwsh
+        run: |
+          $tag = "v$env:NEW_VERSION"
+          git tag -a $tag -m "win32cr $env:NEW_VERSION"
+          git push origin $tag
+
+          $notes = @(
+            "Bindings regenerated from Windows.Win32.winmd **$env:METADATA_VERSION** (previously $env:PREVIOUS_METADATA) with winmd $(bin/winmd.exe --version).",
+            "",
+            (Get-Content binding_changes.md -Raw),
+            "**Full Changelog**: https://github.com/${{ github.repository }}/compare/v$env:PREVIOUS_VERSION...$tag"
+          ) -join "`n"
+          Set-Content -Path release_notes.md -Value $notes -Encoding utf8
+          gh release create $tag --verify-tag --title $env:NEW_VERSION --notes-file release_notes.md
+          if ($LASTEXITCODE -ne 0) { throw "gh release create failed" }
+
+      - name: Dry run summary
+        if: ${{ inputs.dry_run }}
+        shell: pwsh
+        run: |
+          Write-Host "Dry run: would release win32cr $env:NEW_VERSION for metadata $env:METADATA_VERSION"
+          git status --short | Select-Object -First 20
