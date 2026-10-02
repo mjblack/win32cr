@@ -239,6 +239,7 @@ module Win32cr::Media::DirectShow::Tv
   STREAMBUFFER_EC_PRIMARY_AUDIO = 814_i32
   STREAMBUFFER_EC_RATE_CHANGING_FOR_SETPOSITIONS = 815_i32
   STREAMBUFFER_EC_SETPOSITIONS_EVENTS_DONE = 816_i32
+  LIBID_Mpeg2DataLib = LibC::GUID.new(0xdbaf6c1b_u32, 0xb6a4_u16, 0x4898_u16, StaticArray[0xae_u8, 0x65_u8, 0x20_u8, 0x4f_u8, 0xd_u8, 0x95_u8, 0x9_u8, 0xa1_u8])
 
   CLSID_SystemTuningSpaces = LibC::GUID.new(0xd02aac50_u32, 0x27e_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
 

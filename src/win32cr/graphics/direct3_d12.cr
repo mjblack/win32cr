@@ -16,6 +16,8 @@ module Win32cr::Graphics::Direct3D12
 
   alias PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER_FROM_SUBOBJECT_IN_LIBRARY = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::PWSTR, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
+  alias D3D12_PFN_TRIM_NOTIFICATION_CALLBACK = Proc(Win32cr::Graphics::Direct3D12::D3D12_TRIM_NOTIFICATION*, Void)
+
   alias D3D12PipelineStateFunc = Proc(Void*, UInt32, UInt32, Win32cr::Graphics::Direct3D12::D3D12_PIPELINE_STATE_STREAM_DESC*, Void*, Void)
 
   alias D3D12StateObjectFunc = Proc(Void*, UInt32, UInt32, Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_DESC*, Void*, UInt32, Void*, Void)
@@ -47,6 +49,7 @@ module Win32cr::Graphics::Direct3D12
   D3D12_8BIT_INDEX_STRIP_CUT_VALUE = 255_u32
   D3D12_APPEND_ALIGNED_ELEMENT = 4294967295_u32
   D3D12_ARRAY_AXIS_ADDRESS_RANGE_BIT_COUNT = 9_u32
+  D3D12_AS_TGSM_BYTES_MINIMUM_SUPPORT = 32768_u32
   D3D12_CLIP_OR_CULL_DISTANCE_COUNT = 8_u32
   D3D12_CLIP_OR_CULL_DISTANCE_ELEMENT_COUNT = 2_u32
   D3D12_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT = 14_u32
@@ -124,6 +127,7 @@ module Win32cr::Graphics::Direct3D12
   D3D12_CS_4_X_THREAD_GROUP_MAX_Y = 768_u32
   D3D12_CS_4_X_UAV_REGISTER_COUNT = 1_u32
   D3D12_CS_DISPATCH_MAX_THREAD_GROUPS_PER_DIMENSION = 65535_u32
+  D3D12_CS_TGSM_BYTES_MINIMUM_SUPPORT = 32768_u32
   D3D12_CS_TGSM_REGISTER_COUNT = 8192_u32
   D3D12_CS_TGSM_REGISTER_READS_PER_INST = 1_u32
   D3D12_CS_TGSM_RESOURCE_REGISTER_COMPONENTS = 1_u32
@@ -234,6 +238,9 @@ module Win32cr::Graphics::Direct3D12
   D3D12_GS_OUTPUT_REGISTER_COMPONENTS = 4_u32
   D3D12_GS_OUTPUT_REGISTER_COMPONENT_BIT_COUNT = 32_u32
   D3D12_GS_OUTPUT_REGISTER_COUNT = 32_u32
+  D3D12_GUID_TEXTURE_LAYOUT_ROW_MAJOR_HEIGHT_ALIGNMENT = 4_u32
+  D3D12_GUID_TEXTURE_LAYOUT_ROW_MAJOR_PITCH_ALIGNMENT = 256_u32
+  D3D12_GUID_TEXTURE_LAYOUT_ROW_MAJOR_PLANE_ALIGNMENT = 4096_u32
   D3D12_HS_CONTROL_POINT_PHASE_INPUT_REGISTER_COUNT = 32_u32
   D3D12_HS_CONTROL_POINT_PHASE_OUTPUT_REGISTER_COUNT = 32_u32
   D3D12_HS_CONTROL_POINT_REGISTER_COMPONENTS = 4_u32
@@ -309,13 +316,15 @@ module Win32cr::Graphics::Direct3D12
   D3D12_MIP_LOD_BIAS_MIN = -16.0
   D3D12_MIP_LOD_FRACTIONAL_BIT_COUNT = 8_u32
   D3D12_MIP_LOD_RANGE_BIT_COUNT = 8_u32
+  D3D12_MS_DISPATCH_MAX_THREAD_GROUPS_PER_GRID = 4194303_u32
+  D3D12_MS_TGSM_BYTES_MINIMUM_SUPPORT = 28672_u32
   D3D12_MULTISAMPLE_ANTIALIAS_LINE_WIDTH = 1.4
   D3D12_NONSAMPLE_FETCH_OUT_OF_RANGE_ACCESS_RESULT = 0_u32
   D3D12_OS_RESERVED_REGISTER_SPACE_VALUES_END = 4294967295_u32
   D3D12_OS_RESERVED_REGISTER_SPACE_VALUES_START = 4294967288_u32
   D3D12_PACKED_TILE = 4294967295_u32
   D3D12_PIXEL_ADDRESS_RANGE_BIT_COUNT = 15_u32
-  D3D12_PREVIEW_SDK_VERSION = 717_u32
+  D3D12_PREVIEW_SDK_VERSION = 719_u32
   D3D12_PRE_SCISSOR_PIXEL_ADDRESS_RANGE_BIT_COUNT = 16_u32
   D3D12_PS_CS_UAV_REGISTER_COMPONENTS = 1_u32
   D3D12_PS_CS_UAV_REGISTER_COUNT = 8_u32
@@ -385,7 +394,7 @@ module Win32cr::Graphics::Direct3D12
   D3D12_RESINFO_INSTRUCTION_MISSING_COMPONENT_RETVAL = 0_u32
   D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES = 4294967295_u32
   D3D12_RS_SET_SHADING_RATE_COMBINER_COUNT = 2_u32
-  D3D12_SDK_VERSION = 618_u32
+  D3D12_SDK_VERSION = 619_u32
   D3D12_SHADER_IDENTIFIER_SIZE_IN_BYTES = 32_u32
   D3D12_SHADER_MAJOR_VERSION = 5_u32
   D3D12_SHADER_MAX_INSTANCES = 65535_u32
@@ -473,6 +482,7 @@ module Win32cr::Graphics::Direct3D12
   D3D12_WHQL_DRAWINDEXED_INDEX_COUNT_2_TO_EXP = 25_u32
   D3D12_WHQL_DRAW_VERTEX_COUNT_2_TO_EXP = 25_u32
   D3D12_WORK_GRAPHS_BACKING_MEMORY_ALIGNMENT_IN_BYTES = 8_u32
+  D3D12_WORK_GRAPHS_DISPATCH_MAX_THREAD_GROUPS_PER_GRID = 16777215_u32
   D3D12_WORK_GRAPHS_MAX_NODE_DEPTH = 32_u32
   LUID_DEFINED = 1_u32
   D3D12_SHADER_COMPONENT_MAPPING_MASK = 7_u32
@@ -492,6 +502,8 @@ module Win32cr::Graphics::Direct3D12
   CLSID_D3D12DeviceFactory = LibC::GUID.new(0x114863bf_u32, 0xc386_u16, 0x4aee_u16, StaticArray[0xb3_u8, 0x9d_u8, 0x8f_u8, 0xb_u8, 0xbb_u8, 0x6_u8, 0x29_u8, 0x55_u8])
   CLSID_D3D12DSRDeviceFactory = LibC::GUID.new(0xbb6dd27e_u32, 0x94a9_u16, 0x41a6_u16, StaticArray[0x9f_u8, 0x1b_u8, 0x13_u8, 0x37_u8, 0x72_u8, 0x17_u8, 0x24_u8, 0x28_u8])
   CLSID_D3D12StateObjectFactory = LibC::GUID.new(0x54e1c9f3_u32, 0x1303_u16, 0x4112_u16, StaticArray[0xbf_u8, 0x8e_u8, 0x7b_u8, 0xf2_u8, 0xbb_u8, 0x60_u8, 0x6a_u8, 0x73_u8])
+  CLSID_D3D12RuntimeValidationControl = LibC::GUID.new(0xe5b53e74_u32, 0x3fca_u16, 0x47b4_u16, StaticArray[0x88_u8, 0xb9_u8, 0xa8_u8, 0xb4_u8, 0x1e_u8, 0xf8_u8, 0xfb_u8, 0x73_u8])
+  CLSID_D3D12ApplicationIdentity = LibC::GUID.new(0x8d8e1e8_u32, 0x75a6_u16, 0x42a7_u16, StaticArray[0xbf_u8, 0x3a_u8, 0xd0_u8, 0x5f_u8, 0xe5_u8, 0x29_u8, 0xc4_u8, 0x7c_u8])
   D3D12_SHADING_RATE_X_AXIS_SHIFT = 2_u32
   D3D12_SHADING_RATE_VALID_MASK = 3_u32
   WKPDID_D3DAutoDebugObjectNameW = LibC::GUID.new(0xd4902e36_u32, 0x757a_u16, 0x4942_u16, StaticArray[0x95_u8, 0x94_u8, 0xb6_u8, 0x76_u8, 0x9a_u8, 0xfa_u8, 0x43_u8, 0xcd_u8])
@@ -521,7 +533,6 @@ module Win32cr::Graphics::Direct3D12
   D3D_SHADER_REQUIRES_WRITEABLE_MSAA_TEXTURES = 1073741824_u32
   D3D_SHADER_REQUIRES_SAMPLE_CMP_GRADIENT_OR_BIAS = 2147483648_u32
   D3D12ExperimentalShaderModels = LibC::GUID.new(0x76f5573e_u32, 0xf13a_u16, 0x40f5_u16, StaticArray[0xb2_u8, 0x97_u8, 0x81_u8, 0xce_u8, 0x9e_u8, 0x18_u8, 0x93_u8, 0x3f_u8])
-  D3D12TiledResourceTier4 = LibC::GUID.new(0xc9c4725f_u32, 0xa81a_u16, 0x4f56_u16, StaticArray[0x8c_u8, 0x5b_u8, 0xc5_u8, 0x10_u8, 0x39_u8, 0xd6_u8, 0x94_u8, 0xfb_u8])
   D3D12GPUUploadHeapsOnUnsupportedOS = LibC::GUID.new(0x45dc51f3_u32, 0x767f_u16, 0x4588_u16, StaticArray[0xb2_u8, 0x6_u8, 0xb_u8, 0xaa_u8, 0x2b_u8, 0x16_u8, 0xfb_u8, 0xae_u8])
 
   enum D3D12_COMMAND_LIST_TYPE
@@ -668,6 +679,7 @@ module Win32cr::Graphics::Direct3D12
     D3D12_PIPELINE_STATE_FLAG_TOOL_DEBUG = 1_i32
     D3D12_PIPELINE_STATE_FLAG_DYNAMIC_DEPTH_BIAS = 4_i32
     D3D12_PIPELINE_STATE_FLAG_DYNAMIC_INDEX_BUFFER_STRIP_CUT = 8_i32
+    D3D12_PIPELINE_STATE_FLAG_DISABLE_CACHED_BLOB = 16_i32
   end
   enum D3D_ROOT_SIGNATURE_VERSION
     D3D_ROOT_SIGNATURE_VERSION_1 = 1_i32
@@ -756,6 +768,8 @@ module Win32cr::Graphics::Direct3D12
     D3D12_FEATURE_APPLICATION_SPECIFIC_DRIVER_STATE = 56_i32
     D3D12_FEATURE_BYTECODE_BYPASS_HASH_SUPPORTED = 57_i32
     D3D12_FEATURE_SHADER_CACHE_ABI_SUPPORT = 61_i32
+    D3D12_FEATURE_BARRIER_LAYOUT = 64_i32
+    D3D12_FEATURE_D3D12_OPTIONS22 = 65_i32
   end
   @[Flags]
   enum D3D12_SHADER_MIN_PRECISION_SUPPORT
@@ -875,7 +889,8 @@ module Win32cr::Graphics::Direct3D12
     D3D_SHADER_MODEL_6_7 = 103_i32
     D3D_SHADER_MODEL_6_8 = 104_i32
     D3D_SHADER_MODEL_6_9 = 105_i32
-    D3D_HIGHEST_SHADER_MODEL = 105_i32
+    D3D_SHADER_MODEL_6_10 = 106_i32
+    D3D_HIGHEST_SHADER_MODEL = 106_i32
   end
   @[Flags]
   enum D3D12_SHADER_CACHE_SUPPORT_FLAGS
@@ -1126,6 +1141,7 @@ module Win32cr::Graphics::Direct3D12
     D3D12_SRV_DIMENSION_TEXTURECUBE = 9_i32
     D3D12_SRV_DIMENSION_TEXTURECUBEARRAY = 10_i32
     D3D12_SRV_DIMENSION_RAYTRACING_ACCELERATION_STRUCTURE = 11_i32
+    D3D12_SRV_DIMENSION_BUFFER_BYTE_OFFSET = 12_i32
   end
   enum D3D12_FILTER
     D3D12_FILTER_MIN_MAG_MIP_POINT = 0_i32
@@ -1207,6 +1223,7 @@ module Win32cr::Graphics::Direct3D12
     D3D12_UAV_DIMENSION_TEXTURE2DMS = 6_i32
     D3D12_UAV_DIMENSION_TEXTURE2DMSARRAY = 7_i32
     D3D12_UAV_DIMENSION_TEXTURE3D = 8_i32
+    D3D12_UAV_DIMENSION_BUFFER_BYTE_OFFSET = 9_i32
   end
   enum D3D12_RTV_DIMENSION
     D3D12_RTV_DIMENSION_UNKNOWN = 0_i32
@@ -1505,7 +1522,7 @@ module Win32cr::Graphics::Direct3D12
     D3D12_STATE_SUBOBJECT_TYPE_DEPTH_STENCIL2 = 30_i32
     D3D12_STATE_SUBOBJECT_TYPE_GLOBAL_SERIALIZED_ROOT_SIGNATURE = 31_i32
     D3D12_STATE_SUBOBJECT_TYPE_LOCAL_SERIALIZED_ROOT_SIGNATURE = 32_i32
-    D3D12_STATE_SUBOBJECT_TYPE_COMPILER_EXISITING_COLLECTION = 33_i32
+    D3D12_STATE_SUBOBJECT_TYPE_COMPILER_EXISTING_COLLECTION = 33_i32
     D3D12_STATE_SUBOBJECT_TYPE_EXISTING_COLLECTION_BY_KEY = 36_i32
     D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID = 37_i32
   end
@@ -2012,6 +2029,17 @@ module Win32cr::Graphics::Direct3D12
     D3D12_SHADER_CACHE_CONTROL_FLAG_DISABLE = 1_i32
     D3D12_SHADER_CACHE_CONTROL_FLAG_ENABLE = 2_i32
     D3D12_SHADER_CACHE_CONTROL_FLAG_CLEAR = 4_i32
+  end
+  @[Flags]
+  enum D3D12_TRIM_NOTIFICATION_FLAGS
+    D3D12_TRIM_NOTIFICATION_FLAG_NONE = 0_i32
+    D3D12_TRIM_NOTIFICATION_FLAG_PERIODIC_TRIM = 1_i32
+    D3D12_TRIM_NOTIFICATION_FLAG_RESTART_PERIODIC_TRIM = 2_i32
+    D3D12_TRIM_NOTIFICATION_FLAG_TRIM_TO_BUDGET = 4_i32
+  end
+  enum D3D12_QUERY_HEAP_FLAGS
+    D3D12_QUERY_HEAP_FLAG_NONE = 0_i32
+    D3D12_QUERY_HEAP_FLAG_CPU_RESOLVE = 1_i32
   end
   enum D3D12_APPLICATION_SPECIFIC_DRIVER_BLOB_STATUS
     D3D12_APPLICATION_SPECIFIC_DRIVER_BLOB_UNKNOWN = 1_i32
@@ -3082,7 +3110,12 @@ module Win32cr::Graphics::Direct3D12
     D3D12_MESSAGE_ID_NON_COMMON_RESOURCE_IN_COPY_QUEUE = 1431_i32
     D3D12_MESSAGE_ID_CREATEPIPELINESTATE_MULTIPLE_ROOT_SIGNATURES_DEFINED = 1435_i32
     D3D12_MESSAGE_ID_TEXTURE_BARRIER_INVALID_FLAGS = 1436_i32
-    D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1442_i32
+    D3D12_MESSAGE_ID_STOREPIPELINE_CACHED_BLOB_DISABLED = 1442_i32
+    D3D12_MESSAGE_ID_CREATEQUERYHEAP_INVALID_FLAGS = 1443_i32
+    D3D12_MESSAGE_ID_RESOLVEQUERYDATA_INVALID_QUERYHEAP = 1444_i32
+    D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_NON_UNIFORM_RESOURCE_INDEX = 1451_i32
+    D3D12_MESSAGE_ID_DEGENERATE_SPLIT_BARRIER = 1466_i32
+    D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1467_i32
   end
   @[Flags]
   enum D3D12_MESSAGE_CALLBACK_FLAGS
@@ -3837,6 +3870,16 @@ module Win32cr::Graphics::Direct3D12
   end
 
   @[Extern]
+  struct D3D12_FEATURE_DATA_D3D12_OPTIONS22
+    property shader_execution_reordering_actually_reorders : Win32cr::Foundation::BOOL
+    property create_byte_offset_views_supported : Win32cr::Foundation::BOOL
+    property max1_d_dispatch_size : UInt32
+    property max1_d_dispatch_mesh_size : UInt32
+    def initialize(@shader_execution_reordering_actually_reorders : Win32cr::Foundation::BOOL, @create_byte_offset_views_supported : Win32cr::Foundation::BOOL, @max1_d_dispatch_size : UInt32, @max1_d_dispatch_mesh_size : UInt32)
+    end
+  end
+
+  @[Extern]
   struct D3D12_FEATURE_DATA_TIGHT_ALIGNMENT
     property support_tier : Win32cr::Graphics::Direct3D12::D3D12_TIGHT_ALIGNMENT_TIER
     def initialize(@support_tier : Win32cr::Graphics::Direct3D12::D3D12_TIGHT_ALIGNMENT_TIER)
@@ -4282,6 +4325,16 @@ module Win32cr::Graphics::Direct3D12
   end
 
   @[Extern]
+  struct D3D12_BUFFER_SRV_BYTE_OFFSET
+    property offset : UInt64
+    property size : UInt64
+    property structure_byte_stride : UInt32
+    property flags : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_SRV_FLAGS
+    def initialize(@offset : UInt64, @size : UInt64, @structure_byte_stride : UInt32, @flags : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_SRV_FLAGS)
+    end
+  end
+
+  @[Extern]
   struct D3D12_SHADER_RESOURCE_VIEW_DESC
     property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
     property view_dimension : Win32cr::Graphics::Direct3D12::D3D12_SRV_DIMENSION
@@ -4302,7 +4355,8 @@ module Win32cr::Graphics::Direct3D12
     property texture_cube : Win32cr::Graphics::Direct3D12::D3D12_TEXCUBE_SRV
     property texture_cube_array : Win32cr::Graphics::Direct3D12::D3D12_TEXCUBE_ARRAY_SRV
     property raytracing_acceleration_structure : Win32cr::Graphics::Direct3D12::D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV
-    def initialize(@buffer : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_SRV, @texture1_d : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_SRV, @texture1_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_ARRAY_SRV, @texture2_d : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_SRV, @texture2_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_ARRAY_SRV, @texture2_dms : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_SRV, @texture2_dms_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_ARRAY_SRV, @texture3_d : Win32cr::Graphics::Direct3D12::D3D12_TEX3D_SRV, @texture_cube : Win32cr::Graphics::Direct3D12::D3D12_TEXCUBE_SRV, @texture_cube_array : Win32cr::Graphics::Direct3D12::D3D12_TEXCUBE_ARRAY_SRV, @raytracing_acceleration_structure : Win32cr::Graphics::Direct3D12::D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV)
+    property buffer_byte_offset : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_SRV_BYTE_OFFSET
+    def initialize(@buffer : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_SRV, @texture1_d : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_SRV, @texture1_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_ARRAY_SRV, @texture2_d : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_SRV, @texture2_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_ARRAY_SRV, @texture2_dms : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_SRV, @texture2_dms_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_ARRAY_SRV, @texture3_d : Win32cr::Graphics::Direct3D12::D3D12_TEX3D_SRV, @texture_cube : Win32cr::Graphics::Direct3D12::D3D12_TEXCUBE_SRV, @texture_cube_array : Win32cr::Graphics::Direct3D12::D3D12_TEXCUBE_ARRAY_SRV, @raytracing_acceleration_structure : Win32cr::Graphics::Direct3D12::D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV, @buffer_byte_offset : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_SRV_BYTE_OFFSET)
     end
     end
 
@@ -4431,6 +4485,17 @@ module Win32cr::Graphics::Direct3D12
   end
 
   @[Extern]
+  struct D3D12_BUFFER_UAV_BYTE_OFFSET
+    property offset : UInt64
+    property size : UInt64
+    property structure_byte_stride : UInt32
+    property counter_offset_in_bytes : UInt64
+    property flags : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_UAV_FLAGS
+    def initialize(@offset : UInt64, @size : UInt64, @structure_byte_stride : UInt32, @counter_offset_in_bytes : UInt64, @flags : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_UAV_FLAGS)
+    end
+  end
+
+  @[Extern]
   struct D3D12_UNORDERED_ACCESS_VIEW_DESC
     property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
     property view_dimension : Win32cr::Graphics::Direct3D12::D3D12_UAV_DIMENSION
@@ -4447,7 +4512,8 @@ module Win32cr::Graphics::Direct3D12
     property texture2_dms : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_UAV
     property texture2_dms_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_ARRAY_UAV
     property texture3_d : Win32cr::Graphics::Direct3D12::D3D12_TEX3D_UAV
-    def initialize(@buffer : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_UAV, @texture1_d : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_UAV, @texture1_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_ARRAY_UAV, @texture2_d : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_UAV, @texture2_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_ARRAY_UAV, @texture2_dms : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_UAV, @texture2_dms_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_ARRAY_UAV, @texture3_d : Win32cr::Graphics::Direct3D12::D3D12_TEX3D_UAV)
+    property buffer_byte_offset : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_UAV_BYTE_OFFSET
+    def initialize(@buffer : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_UAV, @texture1_d : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_UAV, @texture1_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX1D_ARRAY_UAV, @texture2_d : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_UAV, @texture2_d_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2D_ARRAY_UAV, @texture2_dms : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_UAV, @texture2_dms_array : Win32cr::Graphics::Direct3D12::D3D12_TEX2DMS_ARRAY_UAV, @texture3_d : Win32cr::Graphics::Direct3D12::D3D12_TEX3D_UAV, @buffer_byte_offset : Win32cr::Graphics::Direct3D12::D3D12_BUFFER_UAV_BYTE_OFFSET)
     end
     end
 
@@ -6112,6 +6178,15 @@ module Win32cr::Graphics::Direct3D12
   end
 
   @[Extern]
+  struct D3D12_FEATURE_DATA_BARRIER_LAYOUT
+    property command_list_type : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
+    property layout : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT
+    property supported : Win32cr::Foundation::BOOL
+    def initialize(@command_list_type : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE, @layout : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT, @supported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
   struct D3D12_BARRIER_SUBRESOURCE_RANGE
     property index_or_first_mip_level : UInt32
     property num_mip_levels : UInt32
@@ -6178,6 +6253,24 @@ module Win32cr::Graphics::Direct3D12
     end
 
     def initialize(@type__ : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_TYPE, @num_barriers : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_TRIM_NOTIFICATION
+    property pContext : Void*
+    property flags : Win32cr::Graphics::Direct3D12::D3D12_TRIM_NOTIFICATION_FLAGS
+    property num_bytes_to_trim : UInt64
+    def initialize(@pContext : Void*, @flags : Win32cr::Graphics::Direct3D12::D3D12_TRIM_NOTIFICATION_FLAGS, @num_bytes_to_trim : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_REGISTER_TRIM_NOTIFICATION
+    property pfnCallback : Win32cr::Graphics::Direct3D12::D3D12_PFN_TRIM_NOTIFICATION_CALLBACK
+    property pContext : Void*
+    property callback_cookie : UInt32
+    def initialize(@pfnCallback : Win32cr::Graphics::Direct3D12::D3D12_PFN_TRIM_NOTIFICATION_CALLBACK, @pContext : Void*, @callback_cookie : UInt32)
     end
   end
 
@@ -6309,6 +6402,25 @@ module Win32cr::Graphics::Direct3D12
     property thread_group_count_y : UInt32
     property thread_group_count_z : UInt32
     def initialize(@thread_group_count_x : UInt32, @thread_group_count_y : UInt32, @thread_group_count_z : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_CREATE_STATE_OBJECT_STATISTICS
+    property num_created : UInt32
+    property num_psdb_cache_missed : UInt32
+    property num_total_cache_missed : UInt32
+    property num_cache_unknown : UInt32
+    def initialize(@num_created : UInt32, @num_psdb_cache_missed : UInt32, @num_total_cache_missed : UInt32, @num_cache_unknown : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct D3D12_STATE_OBJECT_STATISTICS
+    property default_psdb_registered : Win32cr::Foundation::BOOL
+    property pipeline_state_object_statistics : Win32cr::Graphics::Direct3D12::D3D12_CREATE_STATE_OBJECT_STATISTICS
+    property state_object_statistics : Win32cr::Graphics::Direct3D12::D3D12_CREATE_STATE_OBJECT_STATISTICS
+    def initialize(@default_psdb_registered : Win32cr::Foundation::BOOL, @pipeline_state_object_statistics : Win32cr::Graphics::Direct3D12::D3D12_CREATE_STATE_OBJECT_STATISTICS, @state_object_statistics : Win32cr::Graphics::Direct3D12::D3D12_CREATE_STATE_OBJECT_STATISTICS)
     end
   end
 
@@ -6694,6 +6806,57 @@ module Win32cr::Graphics::Direct3D12
     end
     def get_device(this : ID3D12RootSignature*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3D12RootSignature1Vtable,
+    query_interface : Proc(ID3D12RootSignature1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3D12RootSignature1*, UInt32),
+    release : Proc(ID3D12RootSignature1*, UInt32),
+    get_private_data : Proc(ID3D12RootSignature1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
+    set_private_data : Proc(ID3D12RootSignature1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    set_private_data_interface : Proc(ID3D12RootSignature1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    set_name : Proc(ID3D12RootSignature1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_device : Proc(ID3D12RootSignature1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_serialized_size : Proc(ID3D12RootSignature1*, LibC::UIntPtrT),
+    get_serialized_data : Proc(ID3D12RootSignature1*, Void*, LibC::UIntPtrT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3D12RootSignature1, lpVtbl : ID3D12RootSignature1Vtable* do
+    GUID = LibC::GUID.new(0xc390bd7d_u32, 0x9142_u16, 0x4a95_u16, StaticArray[0xb0_u8, 0x72_u8, 0x6d_u8, 0x34_u8, 0x39_u8, 0xad_u8, 0xe5_u8, 0xc4_u8])
+    def query_interface(this : ID3D12RootSignature1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3D12RootSignature1*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3D12RootSignature1*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_private_data(this : ID3D12RootSignature1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
+    end
+    def set_private_data(this : ID3D12RootSignature1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
+    end
+    def set_private_data_interface(this : ID3D12RootSignature1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
+    end
+    def set_name(this : ID3D12RootSignature1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_name.call(this, name)
+    end
+    def get_device(this : ID3D12RootSignature1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
+    end
+    def get_serialized_size(this : ID3D12RootSignature1*) : LibC::UIntPtrT
+      @lpVtbl.try &.value.get_serialized_size.call(this)
+    end
+    def get_serialized_data(this : ID3D12RootSignature1*, pData : Void*, size : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_data.call(this, pData, size)
     end
 
   end
@@ -14332,6 +14495,393 @@ module Win32cr::Graphics::Direct3D12
 
   @[Extern]
 
+  record ID3D12Device15Vtable,
+    query_interface : Proc(ID3D12Device15*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3D12Device15*, UInt32),
+    release : Proc(ID3D12Device15*, UInt32),
+    get_private_data : Proc(ID3D12Device15*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
+    set_private_data : Proc(ID3D12Device15*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    set_private_data_interface : Proc(ID3D12Device15*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    set_name : Proc(ID3D12Device15*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_node_count : Proc(ID3D12Device15*, UInt32),
+    create_command_queue : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_QUEUE_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_command_allocator : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_graphics_pipeline_state : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_GRAPHICS_PIPELINE_STATE_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_compute_pipeline_state : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_COMPUTE_PIPELINE_STATE_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_command_list : Proc(ID3D12Device15*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE, Void*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    check_feature_support : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_FEATURE, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    create_descriptor_heap : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_descriptor_handle_increment_size : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_TYPE, UInt32),
+    create_root_signature : Proc(ID3D12Device15*, UInt32, Void*, LibC::UIntPtrT, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_constant_buffer_view : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_CONSTANT_BUFFER_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    create_shader_resource_view : Proc(ID3D12Device15*, Void*, Win32cr::Graphics::Direct3D12::D3D12_SHADER_RESOURCE_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    create_unordered_access_view : Proc(ID3D12Device15*, Void*, Void*, Win32cr::Graphics::Direct3D12::D3D12_UNORDERED_ACCESS_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    create_render_target_view : Proc(ID3D12Device15*, Void*, Win32cr::Graphics::Direct3D12::D3D12_RENDER_TARGET_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    create_depth_stencil_view : Proc(ID3D12Device15*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DEPTH_STENCIL_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    create_sampler : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_SAMPLER_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    copy_descriptors : Proc(ID3D12Device15*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_TYPE, Void),
+    copy_descriptors_simple : Proc(ID3D12Device15*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_TYPE, Void),
+    get_resource_allocation_info : Proc(ID3D12Device15*, UInt32, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO),
+    get_custom_heap_properties : Proc(ID3D12Device15*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_HEAP_TYPE, Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES),
+    create_committed_resource : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_heap : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_placed_resource : Proc(ID3D12Device15*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_reserved_resource : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_shared_handle : Proc(ID3D12Device15*, Void*, Win32cr::Security::SECURITY_ATTRIBUTES*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT),
+    open_shared_handle : Proc(ID3D12Device15*, Win32cr::Foundation::HANDLE, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    open_shared_handle_by_name : Proc(ID3D12Device15*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT),
+    make_resident : Proc(ID3D12Device15*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    evict : Proc(ID3D12Device15*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_fence : Proc(ID3D12Device15*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_FENCE_FLAGS, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_device_removed_reason : Proc(ID3D12Device15*, Win32cr::Foundation::HRESULT),
+    get_copyable_footprints : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void),
+    create_query_heap : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_HEAP_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_stable_power_state : Proc(ID3D12Device15*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    create_command_signature : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_SIGNATURE_DESC*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_resource_tiling : Proc(ID3D12Device15*, Void*, UInt32*, Win32cr::Graphics::Direct3D12::D3D12_PACKED_MIP_INFO*, Win32cr::Graphics::Direct3D12::D3D12_TILE_SHAPE*, UInt32*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_SUBRESOURCE_TILING*, Void),
+    get_adapter_luid : Proc(ID3D12Device15*, Win32cr::Foundation::LUID),
+    create_pipeline_library : Proc(ID3D12Device15*, Void*, LibC::UIntPtrT, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_event_on_multiple_fence_completion : Proc(ID3D12Device15*, Void**, UInt64*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_MULTIPLE_FENCE_WAIT_FLAGS, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT),
+    set_residency_priority : Proc(ID3D12Device15*, UInt32, Void**, Win32cr::Graphics::Direct3D12::D3D12_RESIDENCY_PRIORITY*, Win32cr::Foundation::HRESULT),
+    create_pipeline_state : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_PIPELINE_STATE_STREAM_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    open_existing_heap_from_address : Proc(ID3D12Device15*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    open_existing_heap_from_file_mapping : Proc(ID3D12Device15*, Win32cr::Foundation::HANDLE, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    enqueue_make_resident : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_RESIDENCY_FLAGS, UInt32, Void**, Void*, UInt64, Win32cr::Foundation::HRESULT),
+    create_command_list1 : Proc(ID3D12Device15*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_FLAGS, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_protected_resource_session : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_PROTECTED_RESOURCE_SESSION_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_committed_resource1 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_heap1 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_DESC*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_reserved_resource1 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_resource_allocation_info1 : Proc(ID3D12Device15*, UInt32, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO1*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO),
+    create_lifetime_tracker : Proc(ID3D12Device15*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    remove_device : Proc(ID3D12Device15*, Void),
+    enumerate_meta_commands : Proc(ID3D12Device15*, UInt32*, Win32cr::Graphics::Direct3D12::D3D12_META_COMMAND_DESC*, Win32cr::Foundation::HRESULT),
+    enumerate_meta_command_parameters : Proc(ID3D12Device15*, LibC::GUID*, Win32cr::Graphics::Direct3D12::D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, Win32cr::Graphics::Direct3D12::D3D12_META_COMMAND_PARAMETER_DESC*, Win32cr::Foundation::HRESULT),
+    create_meta_command : Proc(ID3D12Device15*, LibC::GUID*, UInt32, Void*, LibC::UIntPtrT, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_state_object : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_raytracing_acceleration_structure_prebuild_info : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, Win32cr::Graphics::Direct3D12::D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void),
+    check_driver_matching_identifier : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_SERIALIZED_DATA_TYPE, Win32cr::Graphics::Direct3D12::D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, Win32cr::Graphics::Direct3D12::D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS),
+    set_background_processing_mode : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_BACKGROUND_PROCESSING_MODE, Win32cr::Graphics::Direct3D12::D3D12_MEASUREMENTS_ACTION, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    add_to_state_object : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_DESC*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_protected_resource_session1 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_resource_allocation_info2 : Proc(ID3D12Device15*, UInt32, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO1*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO),
+    create_committed_resource2 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_placed_resource1 : Proc(ID3D12Device15*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_sampler_feedback_unordered_access_view : Proc(ID3D12Device15*, Void*, Void*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    get_copyable_footprints1 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, UInt32, UInt32, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void),
+    create_shader_cache_session : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_SHADER_CACHE_SESSION_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    shader_cache_control : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_SHADER_CACHE_KIND_FLAGS, Win32cr::Graphics::Direct3D12::D3D12_SHADER_CACHE_CONTROL_FLAGS, Win32cr::Foundation::HRESULT),
+    create_command_queue1 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_QUEUE_DESC*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_committed_resource3 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, Void*, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_placed_resource2 : Proc(ID3D12Device15*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_reserved_resource2 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT, Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, Void*, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_sampler2 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_SAMPLER_DESC2*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Void),
+    get_resource_allocation_info3 : Proc(ID3D12Device15*, UInt32, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, UInt32*, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT**, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO1*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO),
+    open_existing_heap_from_address1 : Proc(ID3D12Device15*, Void*, LibC::UIntPtrT, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_root_signature_from_subobject_in_library : Proc(ID3D12Device15*, UInt32, Void*, LibC::UIntPtrT, Win32cr::Foundation::PWSTR, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    register_trim_notification_callback : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_REGISTER_TRIM_NOTIFICATION*, Win32cr::Foundation::HRESULT),
+    unregister_trim_notification_callback : Proc(ID3D12Device15*, UInt32, Win32cr::Foundation::HRESULT),
+    try_create_shader_resource_view : Proc(ID3D12Device15*, Void*, Win32cr::Graphics::Direct3D12::D3D12_SHADER_RESOURCE_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Foundation::HRESULT),
+    try_create_unordered_access_view : Proc(ID3D12Device15*, Void*, Void*, Win32cr::Graphics::Direct3D12::D3D12_UNORDERED_ACCESS_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Foundation::HRESULT),
+    try_create_constant_buffer_view : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_CONSTANT_BUFFER_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Foundation::HRESULT),
+    try_create_sampler2 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_SAMPLER_DESC2*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Foundation::HRESULT),
+    try_create_render_target_view : Proc(ID3D12Device15*, Void*, Win32cr::Graphics::Direct3D12::D3D12_RENDER_TARGET_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Foundation::HRESULT),
+    try_create_depth_stencil_view : Proc(ID3D12Device15*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DEPTH_STENCIL_VIEW_DESC*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Foundation::HRESULT),
+    try_create_sampler_feedback_unordered_access_view : Proc(ID3D12Device15*, Void*, Void*, Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, Win32cr::Foundation::HRESULT),
+    create_query_heap1 : Proc(ID3D12Device15*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_HEAP_DESC*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_HEAP_FLAGS, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    resolve_query_data : Proc(ID3D12Device15*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3D12Device15, lpVtbl : ID3D12Device15Vtable* do
+    GUID = LibC::GUID.new(0x76cff76f_u32, 0x1e9b_u16, 0x4450_u16, StaticArray[0x8c_u8, 0xdc_u8, 0x34_u8, 0xf1_u8, 0xaf_u8, 0x78_u8, 0x8e_u8, 0x5b_u8])
+    def query_interface(this : ID3D12Device15*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3D12Device15*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3D12Device15*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_private_data(this : ID3D12Device15*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
+    end
+    def set_private_data(this : ID3D12Device15*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
+    end
+    def set_private_data_interface(this : ID3D12Device15*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
+    end
+    def set_name(this : ID3D12Device15*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_name.call(this, name)
+    end
+    def get_node_count(this : ID3D12Device15*) : UInt32
+      @lpVtbl.try &.value.get_node_count.call(this)
+    end
+    def create_command_queue(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_QUEUE_DESC*, riid : LibC::GUID*, ppCommandQueue : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_command_queue.call(this, pDesc, riid, ppCommandQueue)
+    end
+    def create_command_allocator(this : ID3D12Device15*, type__ : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE, riid : LibC::GUID*, ppCommandAllocator : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_command_allocator.call(this, type__, riid, ppCommandAllocator)
+    end
+    def create_graphics_pipeline_state(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : LibC::GUID*, ppPipelineState : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_graphics_pipeline_state.call(this, pDesc, riid, ppPipelineState)
+    end
+    def create_compute_pipeline_state(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : LibC::GUID*, ppPipelineState : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_compute_pipeline_state.call(this, pDesc, riid, ppPipelineState)
+    end
+    def create_command_list(this : ID3D12Device15*, nodeMask : UInt32, type__ : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE, pCommandAllocator : Void*, pInitialState : Void*, riid : LibC::GUID*, ppCommandList : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_command_list.call(this, nodeMask, type__, pCommandAllocator, pInitialState, riid, ppCommandList)
+    end
+    def check_feature_support(this : ID3D12Device15*, feature : Win32cr::Graphics::Direct3D12::D3D12_FEATURE, pFeatureSupportData : Void*, feature_support_data_size : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.check_feature_support.call(this, feature, pFeatureSupportData, feature_support_data_size)
+    end
+    def create_descriptor_heap(this : ID3D12Device15*, pDescriptorHeapDesc : Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_DESC*, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_descriptor_heap.call(this, pDescriptorHeapDesc, riid, ppvHeap)
+    end
+    def get_descriptor_handle_increment_size(this : ID3D12Device15*, descriptor_heap_type : Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+      @lpVtbl.try &.value.get_descriptor_handle_increment_size.call(this, descriptor_heap_type)
+    end
+    def create_root_signature(this : ID3D12Device15*, nodeMask : UInt32, pBlobWithRootSignature : Void*, blobLengthInBytes : LibC::UIntPtrT, riid : LibC::GUID*, ppvRootSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_root_signature.call(this, nodeMask, pBlobWithRootSignature, blobLengthInBytes, riid, ppvRootSignature)
+    end
+    def create_constant_buffer_view(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_CONSTANT_BUFFER_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_constant_buffer_view.call(this, pDesc, dest_descriptor)
+    end
+    def create_shader_resource_view(this : ID3D12Device15*, pResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_SHADER_RESOURCE_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_shader_resource_view.call(this, pResource, pDesc, dest_descriptor)
+    end
+    def create_unordered_access_view(this : ID3D12Device15*, pResource : Void*, pCounterResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_UNORDERED_ACCESS_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_unordered_access_view.call(this, pResource, pCounterResource, pDesc, dest_descriptor)
+    end
+    def create_render_target_view(this : ID3D12Device15*, pResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RENDER_TARGET_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_render_target_view.call(this, pResource, pDesc, dest_descriptor)
+    end
+    def create_depth_stencil_view(this : ID3D12Device15*, pResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_DEPTH_STENCIL_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_depth_stencil_view.call(this, pResource, pDesc, dest_descriptor)
+    end
+    def create_sampler(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_SAMPLER_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_sampler.call(this, pDesc, dest_descriptor)
+    end
+    def copy_descriptors(this : ID3D12Device15*, num_dest_descriptor_ranges : UInt32, pDestDescriptorRangeStarts : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE*, pDestDescriptorRangeSizes : UInt32*, num_src_descriptor_ranges : UInt32, pSrcDescriptorRangeStarts : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE*, pSrcDescriptorRangeSizes : UInt32*, descriptor_heaps_type : Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+      @lpVtbl.try &.value.copy_descriptors.call(this, num_dest_descriptor_ranges, pDestDescriptorRangeStarts, pDestDescriptorRangeSizes, num_src_descriptor_ranges, pSrcDescriptorRangeStarts, pSrcDescriptorRangeSizes, descriptor_heaps_type)
+    end
+    def copy_descriptors_simple(this : ID3D12Device15*, num_descriptors : UInt32, dest_descriptor_range_start : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, src_descriptor_range_start : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, descriptor_heaps_type : Win32cr::Graphics::Direct3D12::D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+      @lpVtbl.try &.value.copy_descriptors_simple.call(this, num_descriptors, dest_descriptor_range_start, src_descriptor_range_start, descriptor_heaps_type)
+    end
+    def get_resource_allocation_info(this : ID3D12Device15*, visibleMask : UInt32, numResourceDescs : UInt32, pResourceDescs : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*) : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO
+      @lpVtbl.try &.value.get_resource_allocation_info.call(this, visibleMask, numResourceDescs, pResourceDescs)
+    end
+    def get_custom_heap_properties(this : ID3D12Device15*, nodeMask : UInt32, heapType : Win32cr::Graphics::Direct3D12::D3D12_HEAP_TYPE) : Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES
+      @lpVtbl.try &.value.get_custom_heap_properties.call(this, nodeMask, heapType)
+    end
+    def create_committed_resource(this : ID3D12Device15*, pHeapProperties : Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, heap_flags : Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, initial_resource_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, riidResource : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_committed_resource.call(this, pHeapProperties, heap_flags, pDesc, initial_resource_state, pOptimizedClearValue, riidResource, ppvResource)
+    end
+    def create_heap(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_HEAP_DESC*, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_heap.call(this, pDesc, riid, ppvHeap)
+    end
+    def create_placed_resource(this : ID3D12Device15*, pHeap : Void*, heap_offset : UInt64, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, initial_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, riid : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_placed_resource.call(this, pHeap, heap_offset, pDesc, initial_state, pOptimizedClearValue, riid, ppvResource)
+    end
+    def create_reserved_resource(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, initial_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, riid : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_reserved_resource.call(this, pDesc, initial_state, pOptimizedClearValue, riid, ppvResource)
+    end
+    def create_shared_handle(this : ID3D12Device15*, pObject : Void*, pAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, access : UInt32, name : Win32cr::Foundation::PWSTR, pHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_shared_handle.call(this, pObject, pAttributes, access, name, pHandle)
+    end
+    def open_shared_handle(this : ID3D12Device15*, nt_handle : Win32cr::Foundation::HANDLE, riid : LibC::GUID*, ppvObj : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_shared_handle.call(this, nt_handle, riid, ppvObj)
+    end
+    def open_shared_handle_by_name(this : ID3D12Device15*, name : Win32cr::Foundation::PWSTR, access : UInt32, pNTHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_shared_handle_by_name.call(this, name, access, pNTHandle)
+    end
+    def make_resident(this : ID3D12Device15*, num_objects : UInt32, ppObjects : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.make_resident.call(this, num_objects, ppObjects)
+    end
+    def evict(this : ID3D12Device15*, num_objects : UInt32, ppObjects : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.evict.call(this, num_objects, ppObjects)
+    end
+    def create_fence(this : ID3D12Device15*, initial_value : UInt64, flags : Win32cr::Graphics::Direct3D12::D3D12_FENCE_FLAGS, riid : LibC::GUID*, ppFence : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_fence.call(this, initial_value, flags, riid, ppFence)
+    end
+    def get_device_removed_reason(this : ID3D12Device15*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_removed_reason.call(this)
+    end
+    def get_copyable_footprints(this : ID3D12Device15*, pResourceDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, first_subresource : UInt32, num_subresources : UInt32, base_offset : UInt64, pLayouts : Win32cr::Graphics::Direct3D12::D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pNumRows : UInt32*, pRowSizeInBytes : UInt64*, pTotalBytes : UInt64*) : Void
+      @lpVtbl.try &.value.get_copyable_footprints.call(this, pResourceDesc, first_subresource, num_subresources, base_offset, pLayouts, pNumRows, pRowSizeInBytes, pTotalBytes)
+    end
+    def create_query_heap(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_QUERY_HEAP_DESC*, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_heap.call(this, pDesc, riid, ppvHeap)
+    end
+    def set_stable_power_state(this : ID3D12Device15*, enable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_stable_power_state.call(this, enable)
+    end
+    def create_command_signature(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_SIGNATURE_DESC*, pRootSignature : Void*, riid : LibC::GUID*, ppvCommandSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_command_signature.call(this, pDesc, pRootSignature, riid, ppvCommandSignature)
+    end
+    def get_resource_tiling(this : ID3D12Device15*, pTiledResource : Void*, pNumTilesForEntireResource : UInt32*, pPackedMipDesc : Win32cr::Graphics::Direct3D12::D3D12_PACKED_MIP_INFO*, pStandardTileShapeForNonPackedMips : Win32cr::Graphics::Direct3D12::D3D12_TILE_SHAPE*, pNumSubresourceTilings : UInt32*, first_subresource_tiling_to_get : UInt32, pSubresourceTilingsForNonPackedMips : Win32cr::Graphics::Direct3D12::D3D12_SUBRESOURCE_TILING*) : Void
+      @lpVtbl.try &.value.get_resource_tiling.call(this, pTiledResource, pNumTilesForEntireResource, pPackedMipDesc, pStandardTileShapeForNonPackedMips, pNumSubresourceTilings, first_subresource_tiling_to_get, pSubresourceTilingsForNonPackedMips)
+    end
+    def get_adapter_luid(this : ID3D12Device15*) : Win32cr::Foundation::LUID
+      @lpVtbl.try &.value.get_adapter_luid.call(this)
+    end
+    def create_pipeline_library(this : ID3D12Device15*, pLibraryBlob : Void*, blob_length : LibC::UIntPtrT, riid : LibC::GUID*, ppPipelineLibrary : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_pipeline_library.call(this, pLibraryBlob, blob_length, riid, ppPipelineLibrary)
+    end
+    def set_event_on_multiple_fence_completion(this : ID3D12Device15*, ppFences : Void**, pFenceValues : UInt64*, num_fences : UInt32, flags : Win32cr::Graphics::Direct3D12::D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_on_multiple_fence_completion.call(this, ppFences, pFenceValues, num_fences, flags, hEvent)
+    end
+    def set_residency_priority(this : ID3D12Device15*, num_objects : UInt32, ppObjects : Void**, pPriorities : Win32cr::Graphics::Direct3D12::D3D12_RESIDENCY_PRIORITY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_residency_priority.call(this, num_objects, ppObjects, pPriorities)
+    end
+    def create_pipeline_state(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_PIPELINE_STATE_STREAM_DESC*, riid : LibC::GUID*, ppPipelineState : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_pipeline_state.call(this, pDesc, riid, ppPipelineState)
+    end
+    def open_existing_heap_from_address(this : ID3D12Device15*, pAddress : Void*, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_existing_heap_from_address.call(this, pAddress, riid, ppvHeap)
+    end
+    def open_existing_heap_from_file_mapping(this : ID3D12Device15*, hFileMapping : Win32cr::Foundation::HANDLE, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_existing_heap_from_file_mapping.call(this, hFileMapping, riid, ppvHeap)
+    end
+    def enqueue_make_resident(this : ID3D12Device15*, flags : Win32cr::Graphics::Direct3D12::D3D12_RESIDENCY_FLAGS, num_objects : UInt32, ppObjects : Void**, pFenceToSignal : Void*, fence_value_to_signal : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enqueue_make_resident.call(this, flags, num_objects, ppObjects, pFenceToSignal, fence_value_to_signal)
+    end
+    def create_command_list1(this : ID3D12Device15*, nodeMask : UInt32, type__ : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE, flags : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_FLAGS, riid : LibC::GUID*, ppCommandList : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_command_list1.call(this, nodeMask, type__, flags, riid, ppCommandList)
+    end
+    def create_protected_resource_session(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_PROTECTED_RESOURCE_SESSION_DESC*, riid : LibC::GUID*, ppSession : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_protected_resource_session.call(this, pDesc, riid, ppSession)
+    end
+    def create_committed_resource1(this : ID3D12Device15*, pHeapProperties : Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, heap_flags : Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, initial_resource_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, pProtectedSession : Void*, riidResource : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_committed_resource1.call(this, pHeapProperties, heap_flags, pDesc, initial_resource_state, pOptimizedClearValue, pProtectedSession, riidResource, ppvResource)
+    end
+    def create_heap1(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_HEAP_DESC*, pProtectedSession : Void*, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_heap1.call(this, pDesc, pProtectedSession, riid, ppvHeap)
+    end
+    def create_reserved_resource1(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, initial_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, pProtectedSession : Void*, riid : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_reserved_resource1.call(this, pDesc, initial_state, pOptimizedClearValue, pProtectedSession, riid, ppvResource)
+    end
+    def get_resource_allocation_info1(this : ID3D12Device15*, visibleMask : UInt32, numResourceDescs : UInt32, pResourceDescs : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, pResourceAllocationInfo1 : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO1*) : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO
+      @lpVtbl.try &.value.get_resource_allocation_info1.call(this, visibleMask, numResourceDescs, pResourceDescs, pResourceAllocationInfo1)
+    end
+    def create_lifetime_tracker(this : ID3D12Device15*, pOwner : Void*, riid : LibC::GUID*, ppvTracker : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_lifetime_tracker.call(this, pOwner, riid, ppvTracker)
+    end
+    def remove_device(this : ID3D12Device15*) : Void
+      @lpVtbl.try &.value.remove_device.call(this)
+    end
+    def enumerate_meta_commands(this : ID3D12Device15*, pNumMetaCommands : UInt32*, pDescs : Win32cr::Graphics::Direct3D12::D3D12_META_COMMAND_DESC*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_meta_commands.call(this, pNumMetaCommands, pDescs)
+    end
+    def enumerate_meta_command_parameters(this : ID3D12Device15*, command_id : LibC::GUID*, stage : Win32cr::Graphics::Direct3D12::D3D12_META_COMMAND_PARAMETER_STAGE, pTotalStructureSizeInBytes : UInt32*, pParameterCount : UInt32*, pParameterDescs : Win32cr::Graphics::Direct3D12::D3D12_META_COMMAND_PARAMETER_DESC*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_meta_command_parameters.call(this, command_id, stage, pTotalStructureSizeInBytes, pParameterCount, pParameterDescs)
+    end
+    def create_meta_command(this : ID3D12Device15*, command_id : LibC::GUID*, node_mask : UInt32, pCreationParametersData : Void*, creation_parameters_data_size_in_bytes : LibC::UIntPtrT, riid : LibC::GUID*, ppMetaCommand : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_meta_command.call(this, command_id, node_mask, pCreationParametersData, creation_parameters_data_size_in_bytes, riid, ppMetaCommand)
+    end
+    def create_state_object(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_DESC*, riid : LibC::GUID*, ppStateObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_state_object.call(this, pDesc, riid, ppStateObject)
+    end
+    def get_raytracing_acceleration_structure_prebuild_info(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, pInfo : Win32cr::Graphics::Direct3D12::D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*) : Void
+      @lpVtbl.try &.value.get_raytracing_acceleration_structure_prebuild_info.call(this, pDesc, pInfo)
+    end
+    def check_driver_matching_identifier(this : ID3D12Device15*, serialized_data_type : Win32cr::Graphics::Direct3D12::D3D12_SERIALIZED_DATA_TYPE, pIdentifierToCheck : Win32cr::Graphics::Direct3D12::D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*) : Win32cr::Graphics::Direct3D12::D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS
+      @lpVtbl.try &.value.check_driver_matching_identifier.call(this, serialized_data_type, pIdentifierToCheck)
+    end
+    def set_background_processing_mode(this : ID3D12Device15*, mode : Win32cr::Graphics::Direct3D12::D3D12_BACKGROUND_PROCESSING_MODE, measurements_action : Win32cr::Graphics::Direct3D12::D3D12_MEASUREMENTS_ACTION, hEventToSignalUponCompletion : Win32cr::Foundation::HANDLE, pbFurtherMeasurementsDesired : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_background_processing_mode.call(this, mode, measurements_action, hEventToSignalUponCompletion, pbFurtherMeasurementsDesired)
+    end
+    def add_to_state_object(this : ID3D12Device15*, pAddition : Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_DESC*, pStateObjectToGrowFrom : Void*, riid : LibC::GUID*, ppNewStateObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_to_state_object.call(this, pAddition, pStateObjectToGrowFrom, riid, ppNewStateObject)
+    end
+    def create_protected_resource_session1(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, riid : LibC::GUID*, ppSession : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_protected_resource_session1.call(this, pDesc, riid, ppSession)
+    end
+    def get_resource_allocation_info2(this : ID3D12Device15*, visibleMask : UInt32, numResourceDescs : UInt32, pResourceDescs : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, pResourceAllocationInfo1 : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO1*) : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO
+      @lpVtbl.try &.value.get_resource_allocation_info2.call(this, visibleMask, numResourceDescs, pResourceDescs, pResourceAllocationInfo1)
+    end
+    def create_committed_resource2(this : ID3D12Device15*, pHeapProperties : Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, heap_flags : Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, initial_resource_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, pProtectedSession : Void*, riidResource : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_committed_resource2.call(this, pHeapProperties, heap_flags, pDesc, initial_resource_state, pOptimizedClearValue, pProtectedSession, riidResource, ppvResource)
+    end
+    def create_placed_resource1(this : ID3D12Device15*, pHeap : Void*, heap_offset : UInt64, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, initial_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, riid : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_placed_resource1.call(this, pHeap, heap_offset, pDesc, initial_state, pOptimizedClearValue, riid, ppvResource)
+    end
+    def create_sampler_feedback_unordered_access_view(this : ID3D12Device15*, pTargetedResource : Void*, pFeedbackResource : Void*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_sampler_feedback_unordered_access_view.call(this, pTargetedResource, pFeedbackResource, dest_descriptor)
+    end
+    def get_copyable_footprints1(this : ID3D12Device15*, pResourceDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, first_subresource : UInt32, num_subresources : UInt32, base_offset : UInt64, pLayouts : Win32cr::Graphics::Direct3D12::D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pNumRows : UInt32*, pRowSizeInBytes : UInt64*, pTotalBytes : UInt64*) : Void
+      @lpVtbl.try &.value.get_copyable_footprints1.call(this, pResourceDesc, first_subresource, num_subresources, base_offset, pLayouts, pNumRows, pRowSizeInBytes, pTotalBytes)
+    end
+    def create_shader_cache_session(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_SHADER_CACHE_SESSION_DESC*, riid : LibC::GUID*, ppvSession : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_shader_cache_session.call(this, pDesc, riid, ppvSession)
+    end
+    def shader_cache_control(this : ID3D12Device15*, kinds : Win32cr::Graphics::Direct3D12::D3D12_SHADER_CACHE_KIND_FLAGS, control : Win32cr::Graphics::Direct3D12::D3D12_SHADER_CACHE_CONTROL_FLAGS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.shader_cache_control.call(this, kinds, control)
+    end
+    def create_command_queue1(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_QUEUE_DESC*, creator_id : LibC::GUID*, riid : LibC::GUID*, ppCommandQueue : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_command_queue1.call(this, pDesc, creator_id, riid, ppCommandQueue)
+    end
+    def create_committed_resource3(this : ID3D12Device15*, pHeapProperties : Win32cr::Graphics::Direct3D12::D3D12_HEAP_PROPERTIES*, heap_flags : Win32cr::Graphics::Direct3D12::D3D12_HEAP_FLAGS, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, initial_layout : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, pProtectedSession : Void*, num_castable_formats : UInt32, pCastableFormats : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*, riidResource : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_committed_resource3.call(this, pHeapProperties, heap_flags, pDesc, initial_layout, pOptimizedClearValue, pProtectedSession, num_castable_formats, pCastableFormats, riidResource, ppvResource)
+    end
+    def create_placed_resource2(this : ID3D12Device15*, pHeap : Void*, heap_offset : UInt64, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, initial_layout : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, num_castable_formats : UInt32, pCastableFormats : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*, riid : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_placed_resource2.call(this, pHeap, heap_offset, pDesc, initial_layout, pOptimizedClearValue, num_castable_formats, pCastableFormats, riid, ppvResource)
+    end
+    def create_reserved_resource2(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, initial_layout : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_LAYOUT, pOptimizedClearValue : Win32cr::Graphics::Direct3D12::D3D12_CLEAR_VALUE*, pProtectedSession : Void*, num_castable_formats : UInt32, pCastableFormats : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT*, riid : LibC::GUID*, ppvResource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_reserved_resource2.call(this, pDesc, initial_layout, pOptimizedClearValue, pProtectedSession, num_castable_formats, pCastableFormats, riid, ppvResource)
+    end
+    def create_sampler2(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_SAMPLER_DESC2*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+      @lpVtbl.try &.value.create_sampler2.call(this, pDesc, dest_descriptor)
+    end
+    def get_resource_allocation_info3(this : ID3D12Device15*, visibleMask : UInt32, numResourceDescs : UInt32, pResourceDescs : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC1*, pNumCastableFormats : UInt32*, ppCastableFormats : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT**, pResourceAllocationInfo1 : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO1*) : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_ALLOCATION_INFO
+      @lpVtbl.try &.value.get_resource_allocation_info3.call(this, visibleMask, numResourceDescs, pResourceDescs, pNumCastableFormats, ppCastableFormats, pResourceAllocationInfo1)
+    end
+    def open_existing_heap_from_address1(this : ID3D12Device15*, pAddress : Void*, size : LibC::UIntPtrT, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_existing_heap_from_address1.call(this, pAddress, size, riid, ppvHeap)
+    end
+    def create_root_signature_from_subobject_in_library(this : ID3D12Device15*, nodeMask : UInt32, pLibraryBlob : Void*, blobLengthInBytes : LibC::UIntPtrT, subobjectName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppvRootSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_root_signature_from_subobject_in_library.call(this, nodeMask, pLibraryBlob, blobLengthInBytes, subobjectName, riid, ppvRootSignature)
+    end
+    def register_trim_notification_callback(this : ID3D12Device15*, pData : Win32cr::Graphics::Direct3D12::D3D12_REGISTER_TRIM_NOTIFICATION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_trim_notification_callback.call(this, pData)
+    end
+    def unregister_trim_notification_callback(this : ID3D12Device15*, callback_cookie : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_trim_notification_callback.call(this, callback_cookie)
+    end
+    def try_create_shader_resource_view(this : ID3D12Device15*, pResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_SHADER_RESOURCE_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_create_shader_resource_view.call(this, pResource, pDesc, dest_descriptor)
+    end
+    def try_create_unordered_access_view(this : ID3D12Device15*, pResource : Void*, pCounterResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_UNORDERED_ACCESS_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_create_unordered_access_view.call(this, pResource, pCounterResource, pDesc, dest_descriptor)
+    end
+    def try_create_constant_buffer_view(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_CONSTANT_BUFFER_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_create_constant_buffer_view.call(this, pDesc, dest_descriptor)
+    end
+    def try_create_sampler2(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_SAMPLER_DESC2*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_create_sampler2.call(this, pDesc, dest_descriptor)
+    end
+    def try_create_render_target_view(this : ID3D12Device15*, pResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_RENDER_TARGET_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_create_render_target_view.call(this, pResource, pDesc, dest_descriptor)
+    end
+    def try_create_depth_stencil_view(this : ID3D12Device15*, pResource : Void*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_DEPTH_STENCIL_VIEW_DESC*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_create_depth_stencil_view.call(this, pResource, pDesc, dest_descriptor)
+    end
+    def try_create_sampler_feedback_unordered_access_view(this : ID3D12Device15*, pTargetedResource : Void*, pFeedbackResource : Void*, dest_descriptor : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.try_create_sampler_feedback_unordered_access_view.call(this, pTargetedResource, pFeedbackResource, dest_descriptor)
+    end
+    def create_query_heap1(this : ID3D12Device15*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_QUERY_HEAP_DESC*, flags : Win32cr::Graphics::Direct3D12::D3D12_QUERY_HEAP_FLAGS, riid : LibC::GUID*, ppvHeap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_heap1.call(this, pDesc, flags, riid, ppvHeap)
+    end
+    def resolve_query_data(this : ID3D12Device15*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pResolvedQueryData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pResolvedQueryData)
+    end
+
+  end
+
+  @[Extern]
+
   record ID3D12StateObjectDatabaseVtable,
     query_interface : Proc(ID3D12StateObjectDatabase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D12StateObjectDatabase*, UInt32),
@@ -14521,6 +15071,37 @@ module Win32cr::Graphics::Direct3D12
     end
     def set_application_specific_driver_state(this : ID3D12Tools2*, pAdapter : Void*, pBlob : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_application_specific_driver_state.call(this, pAdapter, pBlob)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3D12RuntimeValidationControlVtable,
+    query_interface : Proc(ID3D12RuntimeValidationControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3D12RuntimeValidationControl*, UInt32),
+    release : Proc(ID3D12RuntimeValidationControl*, UInt32),
+    disable_failures_from_stricter_validation_in_app_local_runtime : Proc(ID3D12RuntimeValidationControl*, Win32cr::Foundation::BOOL, Void),
+    failures_from_stricter_validation_in_app_local_runtime_disabled : Proc(ID3D12RuntimeValidationControl*, Win32cr::Foundation::BOOL)
+
+
+  @[Extern]
+  record ID3D12RuntimeValidationControl, lpVtbl : ID3D12RuntimeValidationControlVtable* do
+    GUID = LibC::GUID.new(0xc706c811_u32, 0x3663_u16, 0x4bf1_u16, StaticArray[0x91_u8, 0xb9_u8, 0x1e_u8, 0x8a_u8, 0x7c_u8, 0x11_u8, 0x4a_u8, 0xb9_u8])
+    def query_interface(this : ID3D12RuntimeValidationControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3D12RuntimeValidationControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3D12RuntimeValidationControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def disable_failures_from_stricter_validation_in_app_local_runtime(this : ID3D12RuntimeValidationControl*, bDisable : Win32cr::Foundation::BOOL) : Void
+      @lpVtbl.try &.value.disable_failures_from_stricter_validation_in_app_local_runtime.call(this, bDisable)
+    end
+    def failures_from_stricter_validation_in_app_local_runtime_disabled(this : ID3D12RuntimeValidationControl*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.failures_from_stricter_validation_in_app_local_runtime_disabled.call(this)
     end
 
   end
@@ -15840,6 +16421,33 @@ module Win32cr::Graphics::Direct3D12
     end
     def create_state_object_database_from_file(this : ID3D12StateObjectDatabaseFactory*, pDatabaseFile : Win32cr::Foundation::PWSTR, flags : Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_DATABASE_FLAGS, riid : LibC::GUID*, ppvStateObjectDatabase : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_state_object_database_from_file.call(this, pDatabaseFile, flags, riid, ppvStateObjectDatabase)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3D12ApplicationIdentityVtable,
+    query_interface : Proc(ID3D12ApplicationIdentity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3D12ApplicationIdentity*, UInt32),
+    release : Proc(ID3D12ApplicationIdentity*, UInt32),
+    set_application_identity : Proc(ID3D12ApplicationIdentity*, Win32cr::Graphics::Direct3D12::D3D12_APPLICATION_DESC*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3D12ApplicationIdentity, lpVtbl : ID3D12ApplicationIdentityVtable* do
+    GUID = LibC::GUID.new(0x82dc6c85_u32, 0x727b_u16, 0x4a8d_u16, StaticArray[0x91_u8, 0x69_u8, 0xdb_u8, 0x6c_u8, 0xe3_u8, 0xe9_u8, 0x75_u8, 0xa0_u8])
+    def query_interface(this : ID3D12ApplicationIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3D12ApplicationIdentity*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3D12ApplicationIdentity*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_application_identity(this : ID3D12ApplicationIdentity*, pDesc : Win32cr::Graphics::Direct3D12::D3D12_APPLICATION_DESC*, app_id : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_application_identity.call(this, pDesc, app_id)
     end
 
   end
@@ -17948,6 +18556,33 @@ module Win32cr::Graphics::Direct3D12
     end
     def gbv_reserved1(this : ID3D12GBVDiagnostics*) : Void
       @lpVtbl.try &.value.gbv_reserved1.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3D12DeviceStatisticsVtable,
+    query_interface : Proc(ID3D12DeviceStatistics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3D12DeviceStatistics*, UInt32),
+    release : Proc(ID3D12DeviceStatistics*, UInt32),
+    get_state_object_statistics : Proc(ID3D12DeviceStatistics*, Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_STATISTICS*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3D12DeviceStatistics, lpVtbl : ID3D12DeviceStatisticsVtable* do
+    GUID = LibC::GUID.new(0x3d5ca1a8_u32, 0xa39e_u16, 0x4619_u16, StaticArray[0x95_u8, 0xe0_u8, 0xf9_u8, 0xb0_u8, 0xa4_u8, 0x3_u8, 0x40_u8, 0xf5_u8])
+    def query_interface(this : ID3D12DeviceStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3D12DeviceStatistics*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3D12DeviceStatistics*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_state_object_statistics(this : ID3D12DeviceStatistics*, pStatistics : Win32cr::Graphics::Direct3D12::D3D12_STATE_OBJECT_STATISTICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_state_object_statistics.call(this, pStatistics)
     end
 
   end

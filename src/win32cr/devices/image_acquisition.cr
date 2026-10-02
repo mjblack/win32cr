@@ -1251,6 +1251,7 @@ module Win32cr::Devices::ImageAcquisition
   WIA_WSD_SERIAL_NUMBER_STR = "Serial number"
   WIA_WSD_SCAN_AVAILABLE_ITEM = 38922_u32
   WIA_WSD_SCAN_AVAILABLE_ITEM_STR = "Scan Available Item"
+  LIBID_WiaDevMgr = LibC::GUID.new(0xa1f4e726_u32, 0x8cf1_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x92_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x1e_u8, 0xd8_u8, 0x11_u8])
 
   CLSID_WiaDevMgr = LibC::GUID.new(0xa1f4e726_u32, 0x8cf1_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x92_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x1e_u8, 0xd8_u8, 0x11_u8])
 

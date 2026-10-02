@@ -6,6 +6,7 @@ require "./virtual_disk_service.cr"
 
 module Win32cr::Storage::Vss
   extend self
+  VSS_SW_BOOTABLE_STATE = 1_u32
   VSS_ASSOC_NO_MAX_SPACE = -1_i32
   VSS_ASSOC_REMOVE = 0_u32
   VSS_E_BAD_STATE = -2147212543_i32
@@ -481,6 +482,27 @@ module Win32cr::Storage::Vss
     property m_volumeHasUnusedDiffArea : Win32cr::Foundation::BOOL
     property m_reserved : UInt32
     def initialize(@m_protectionLevel : Win32cr::Storage::Vss::VSS_PROTECTION_LEVEL, @m_volumeIsOfflineForProtection : Win32cr::Foundation::BOOL, @m_protectionFault : Win32cr::Storage::Vss::VSS_PROTECTION_FAULT, @m_failureStatus : Int32, @m_volumeHasUnusedDiffArea : Win32cr::Foundation::BOOL, @m_reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VSS_COMPONENTINFO
+    property type__ : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE
+    property bstrLogicalPath : Win32cr::Foundation::BSTR
+    property bstrComponentName : Win32cr::Foundation::BSTR
+    property bstrCaption : Win32cr::Foundation::BSTR
+    property pbIcon : UInt8*
+    property cbIcon : UInt32
+    property bRestoreMetadata : UInt8
+    property bNotifyOnBackupComplete : UInt8
+    property bSelectable : UInt8
+    property bSelectableForRestore : UInt8
+    property dwComponentFlags : UInt32
+    property cFileCount : UInt32
+    property cDatabases : UInt32
+    property cLogFiles : UInt32
+    property cDependencies : UInt32
+    def initialize(@type__ : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, @bstrLogicalPath : Win32cr::Foundation::BSTR, @bstrComponentName : Win32cr::Foundation::BSTR, @bstrCaption : Win32cr::Foundation::BSTR, @pbIcon : UInt8*, @cbIcon : UInt32, @bRestoreMetadata : UInt8, @bNotifyOnBackupComplete : UInt8, @bSelectable : UInt8, @bSelectableForRestore : UInt8, @dwComponentFlags : UInt32, @cFileCount : UInt32, @cDatabases : UInt32, @cLogFiles : UInt32, @cDependencies : UInt32)
     end
   end
 
@@ -1693,6 +1715,1524 @@ module Win32cr::Storage::Vss
 
   @[Extern]
 
+  record IVssWMComponentVtable,
+    query_interface : Proc(IVssWMComponent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssWMComponent*, UInt32),
+    release : Proc(IVssWMComponent*, UInt32),
+    get_component_info : Proc(IVssWMComponent*, Win32cr::Storage::Vss::VSS_COMPONENTINFO**, Win32cr::Foundation::HRESULT),
+    free_component_info : Proc(IVssWMComponent*, Win32cr::Storage::Vss::VSS_COMPONENTINFO*, Win32cr::Foundation::HRESULT),
+    get_file : Proc(IVssWMComponent*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_database_file : Proc(IVssWMComponent*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_database_log_file : Proc(IVssWMComponent*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_dependency : Proc(IVssWMComponent*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssWMComponent, lpVtbl : IVssWMComponentVtable* do
+    GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
+    def query_interface(this : IVssWMComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssWMComponent*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssWMComponent*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_info(this : IVssWMComponent*, ppInfo : Win32cr::Storage::Vss::VSS_COMPONENTINFO**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_info.call(this, ppInfo)
+    end
+    def free_component_info(this : IVssWMComponent*, pInfo : Win32cr::Storage::Vss::VSS_COMPONENTINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_component_info.call(this, pInfo)
+    end
+    def get_file(this : IVssWMComponent*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file.call(this, iFile, ppFiledesc)
+    end
+    def get_database_file(this : IVssWMComponent*, iDBFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_database_file.call(this, iDBFile, ppFiledesc)
+    end
+    def get_database_log_file(this : IVssWMComponent*, iDbLogFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_database_log_file.call(this, iDbLogFile, ppFiledesc)
+    end
+    def get_dependency(this : IVssWMComponent*, iDependency : UInt32, ppDependency : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dependency.call(this, iDependency, ppDependency)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssExamineWriterMetadataVtable,
+    query_interface : Proc(IVssExamineWriterMetadata*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssExamineWriterMetadata*, UInt32),
+    release : Proc(IVssExamineWriterMetadata*, UInt32),
+    get_identity : Proc(IVssExamineWriterMetadata*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_USAGE_TYPE*, Win32cr::Storage::Vss::VSS_SOURCE_TYPE*, Win32cr::Foundation::HRESULT),
+    get_file_counts : Proc(IVssExamineWriterMetadata*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_include_file : Proc(IVssExamineWriterMetadata*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_exclude_file : Proc(IVssExamineWriterMetadata*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_component : Proc(IVssExamineWriterMetadata*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_restore_method : Proc(IVssExamineWriterMetadata*, Win32cr::Storage::Vss::VSS_RESTOREMETHOD_ENUM*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITERRESTORE_ENUM*, Bool*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_alternate_location_mapping : Proc(IVssExamineWriterMetadata*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_backup_schema : Proc(IVssExamineWriterMetadata*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_document : Proc(IVssExamineWriterMetadata*, Void**, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssExamineWriterMetadata*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    load_from_xml : Proc(IVssExamineWriterMetadata*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssExamineWriterMetadata, lpVtbl : IVssExamineWriterMetadataVtable* do
+    GUID = LibC::GUID.new(0x902fcf7f_u32, 0xb7fd_u16, 0x42f8_u16, StaticArray[0x81_u8, 0xf1_u8, 0xb2_u8, 0xe4_u8, 0x0_u8, 0xb1_u8, 0xe5_u8, 0xbd_u8])
+    def query_interface(this : IVssExamineWriterMetadata*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssExamineWriterMetadata*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssExamineWriterMetadata*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_identity(this : IVssExamineWriterMetadata*, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriterName : Win32cr::Foundation::BSTR*, pUsage : Win32cr::Storage::Vss::VSS_USAGE_TYPE*, pSource : Win32cr::Storage::Vss::VSS_SOURCE_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_identity.call(this, pidInstance, pidWriter, pbstrWriterName, pUsage, pSource)
+    end
+    def get_file_counts(this : IVssExamineWriterMetadata*, pcIncludeFiles : UInt32*, pcExcludeFiles : UInt32*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_counts.call(this, pcIncludeFiles, pcExcludeFiles, pcComponents)
+    end
+    def get_include_file(this : IVssExamineWriterMetadata*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_include_file.call(this, iFile, ppFiledesc)
+    end
+    def get_exclude_file(this : IVssExamineWriterMetadata*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exclude_file.call(this, iFile, ppFiledesc)
+    end
+    def get_component(this : IVssExamineWriterMetadata*, iComponent : UInt32, ppComponent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component.call(this, iComponent, ppComponent)
+    end
+    def get_restore_method(this : IVssExamineWriterMetadata*, pMethod : Win32cr::Storage::Vss::VSS_RESTOREMETHOD_ENUM*, pbstrService : Win32cr::Foundation::BSTR*, pbstrUserProcedure : Win32cr::Foundation::BSTR*, pwriterRestore : Win32cr::Storage::Vss::VSS_WRITERRESTORE_ENUM*, pbRebootRequired : Bool*, pcMappings : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_restore_method.call(this, pMethod, pbstrService, pbstrUserProcedure, pwriterRestore, pbRebootRequired, pcMappings)
+    end
+    def get_alternate_location_mapping(this : IVssExamineWriterMetadata*, iMapping : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alternate_location_mapping.call(this, iMapping, ppFiledesc)
+    end
+    def get_backup_schema(this : IVssExamineWriterMetadata*, pdwSchemaMask : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_backup_schema.call(this, pdwSchemaMask)
+    end
+    def get_document(this : IVssExamineWriterMetadata*, pDoc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_document.call(this, pDoc)
+    end
+    def save_as_xml(this : IVssExamineWriterMetadata*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def load_from_xml(this : IVssExamineWriterMetadata*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_from_xml.call(this, bstrXML)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssExamineWriterMetadataExVtable,
+    query_interface : Proc(IVssExamineWriterMetadataEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssExamineWriterMetadataEx*, UInt32),
+    release : Proc(IVssExamineWriterMetadataEx*, UInt32),
+    get_identity : Proc(IVssExamineWriterMetadataEx*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_USAGE_TYPE*, Win32cr::Storage::Vss::VSS_SOURCE_TYPE*, Win32cr::Foundation::HRESULT),
+    get_file_counts : Proc(IVssExamineWriterMetadataEx*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_include_file : Proc(IVssExamineWriterMetadataEx*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_exclude_file : Proc(IVssExamineWriterMetadataEx*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_component : Proc(IVssExamineWriterMetadataEx*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_restore_method : Proc(IVssExamineWriterMetadataEx*, Win32cr::Storage::Vss::VSS_RESTOREMETHOD_ENUM*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITERRESTORE_ENUM*, Bool*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_alternate_location_mapping : Proc(IVssExamineWriterMetadataEx*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_backup_schema : Proc(IVssExamineWriterMetadataEx*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_document : Proc(IVssExamineWriterMetadataEx*, Void**, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssExamineWriterMetadataEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    load_from_xml : Proc(IVssExamineWriterMetadataEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_identity_ex : Proc(IVssExamineWriterMetadataEx*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_USAGE_TYPE*, Win32cr::Storage::Vss::VSS_SOURCE_TYPE*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssExamineWriterMetadataEx, lpVtbl : IVssExamineWriterMetadataExVtable* do
+    GUID = LibC::GUID.new(0xc0e5ec0_u32, 0xca44_u16, 0x472b_u16, StaticArray[0xb7_u8, 0x2_u8, 0xe6_u8, 0x52_u8, 0xdb_u8, 0x1c_u8, 0x4_u8, 0x51_u8])
+    def query_interface(this : IVssExamineWriterMetadataEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssExamineWriterMetadataEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssExamineWriterMetadataEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_identity(this : IVssExamineWriterMetadataEx*, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriterName : Win32cr::Foundation::BSTR*, pUsage : Win32cr::Storage::Vss::VSS_USAGE_TYPE*, pSource : Win32cr::Storage::Vss::VSS_SOURCE_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_identity.call(this, pidInstance, pidWriter, pbstrWriterName, pUsage, pSource)
+    end
+    def get_file_counts(this : IVssExamineWriterMetadataEx*, pcIncludeFiles : UInt32*, pcExcludeFiles : UInt32*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_counts.call(this, pcIncludeFiles, pcExcludeFiles, pcComponents)
+    end
+    def get_include_file(this : IVssExamineWriterMetadataEx*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_include_file.call(this, iFile, ppFiledesc)
+    end
+    def get_exclude_file(this : IVssExamineWriterMetadataEx*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exclude_file.call(this, iFile, ppFiledesc)
+    end
+    def get_component(this : IVssExamineWriterMetadataEx*, iComponent : UInt32, ppComponent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component.call(this, iComponent, ppComponent)
+    end
+    def get_restore_method(this : IVssExamineWriterMetadataEx*, pMethod : Win32cr::Storage::Vss::VSS_RESTOREMETHOD_ENUM*, pbstrService : Win32cr::Foundation::BSTR*, pbstrUserProcedure : Win32cr::Foundation::BSTR*, pwriterRestore : Win32cr::Storage::Vss::VSS_WRITERRESTORE_ENUM*, pbRebootRequired : Bool*, pcMappings : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_restore_method.call(this, pMethod, pbstrService, pbstrUserProcedure, pwriterRestore, pbRebootRequired, pcMappings)
+    end
+    def get_alternate_location_mapping(this : IVssExamineWriterMetadataEx*, iMapping : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alternate_location_mapping.call(this, iMapping, ppFiledesc)
+    end
+    def get_backup_schema(this : IVssExamineWriterMetadataEx*, pdwSchemaMask : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_backup_schema.call(this, pdwSchemaMask)
+    end
+    def get_document(this : IVssExamineWriterMetadataEx*, pDoc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_document.call(this, pDoc)
+    end
+    def save_as_xml(this : IVssExamineWriterMetadataEx*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def load_from_xml(this : IVssExamineWriterMetadataEx*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_from_xml.call(this, bstrXML)
+    end
+    def get_identity_ex(this : IVssExamineWriterMetadataEx*, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriterName : Win32cr::Foundation::BSTR*, pbstrInstanceName : Win32cr::Foundation::BSTR*, pUsage : Win32cr::Storage::Vss::VSS_USAGE_TYPE*, pSource : Win32cr::Storage::Vss::VSS_SOURCE_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_identity_ex.call(this, pidInstance, pidWriter, pbstrWriterName, pbstrInstanceName, pUsage, pSource)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssExamineWriterMetadataEx2Vtable,
+    query_interface : Proc(IVssExamineWriterMetadataEx2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssExamineWriterMetadataEx2*, UInt32),
+    release : Proc(IVssExamineWriterMetadataEx2*, UInt32),
+    get_identity : Proc(IVssExamineWriterMetadataEx2*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_USAGE_TYPE*, Win32cr::Storage::Vss::VSS_SOURCE_TYPE*, Win32cr::Foundation::HRESULT),
+    get_file_counts : Proc(IVssExamineWriterMetadataEx2*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_include_file : Proc(IVssExamineWriterMetadataEx2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_exclude_file : Proc(IVssExamineWriterMetadataEx2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_component : Proc(IVssExamineWriterMetadataEx2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_restore_method : Proc(IVssExamineWriterMetadataEx2*, Win32cr::Storage::Vss::VSS_RESTOREMETHOD_ENUM*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITERRESTORE_ENUM*, Bool*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_alternate_location_mapping : Proc(IVssExamineWriterMetadataEx2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_backup_schema : Proc(IVssExamineWriterMetadataEx2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_document : Proc(IVssExamineWriterMetadataEx2*, Void**, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssExamineWriterMetadataEx2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    load_from_xml : Proc(IVssExamineWriterMetadataEx2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_identity_ex : Proc(IVssExamineWriterMetadataEx2*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_USAGE_TYPE*, Win32cr::Storage::Vss::VSS_SOURCE_TYPE*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IVssExamineWriterMetadataEx2*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_exclude_from_snapshot_count : Proc(IVssExamineWriterMetadataEx2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_exclude_from_snapshot_file : Proc(IVssExamineWriterMetadataEx2*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssExamineWriterMetadataEx2, lpVtbl : IVssExamineWriterMetadataEx2Vtable* do
+    GUID = LibC::GUID.new(0xce115780_u32, 0xa611_u16, 0x431b_u16, StaticArray[0xb5_u8, 0x7f_u8, 0xc3_u8, 0x83_u8, 0x3_u8, 0xab_u8, 0x6a_u8, 0xee_u8])
+    def query_interface(this : IVssExamineWriterMetadataEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssExamineWriterMetadataEx2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssExamineWriterMetadataEx2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_identity(this : IVssExamineWriterMetadataEx2*, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriterName : Win32cr::Foundation::BSTR*, pUsage : Win32cr::Storage::Vss::VSS_USAGE_TYPE*, pSource : Win32cr::Storage::Vss::VSS_SOURCE_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_identity.call(this, pidInstance, pidWriter, pbstrWriterName, pUsage, pSource)
+    end
+    def get_file_counts(this : IVssExamineWriterMetadataEx2*, pcIncludeFiles : UInt32*, pcExcludeFiles : UInt32*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_counts.call(this, pcIncludeFiles, pcExcludeFiles, pcComponents)
+    end
+    def get_include_file(this : IVssExamineWriterMetadataEx2*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_include_file.call(this, iFile, ppFiledesc)
+    end
+    def get_exclude_file(this : IVssExamineWriterMetadataEx2*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exclude_file.call(this, iFile, ppFiledesc)
+    end
+    def get_component(this : IVssExamineWriterMetadataEx2*, iComponent : UInt32, ppComponent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component.call(this, iComponent, ppComponent)
+    end
+    def get_restore_method(this : IVssExamineWriterMetadataEx2*, pMethod : Win32cr::Storage::Vss::VSS_RESTOREMETHOD_ENUM*, pbstrService : Win32cr::Foundation::BSTR*, pbstrUserProcedure : Win32cr::Foundation::BSTR*, pwriterRestore : Win32cr::Storage::Vss::VSS_WRITERRESTORE_ENUM*, pbRebootRequired : Bool*, pcMappings : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_restore_method.call(this, pMethod, pbstrService, pbstrUserProcedure, pwriterRestore, pbRebootRequired, pcMappings)
+    end
+    def get_alternate_location_mapping(this : IVssExamineWriterMetadataEx2*, iMapping : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alternate_location_mapping.call(this, iMapping, ppFiledesc)
+    end
+    def get_backup_schema(this : IVssExamineWriterMetadataEx2*, pdwSchemaMask : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_backup_schema.call(this, pdwSchemaMask)
+    end
+    def get_document(this : IVssExamineWriterMetadataEx2*, pDoc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_document.call(this, pDoc)
+    end
+    def save_as_xml(this : IVssExamineWriterMetadataEx2*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def load_from_xml(this : IVssExamineWriterMetadataEx2*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_from_xml.call(this, bstrXML)
+    end
+    def get_identity_ex(this : IVssExamineWriterMetadataEx2*, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriterName : Win32cr::Foundation::BSTR*, pbstrInstanceName : Win32cr::Foundation::BSTR*, pUsage : Win32cr::Storage::Vss::VSS_USAGE_TYPE*, pSource : Win32cr::Storage::Vss::VSS_SOURCE_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_identity_ex.call(this, pidInstance, pidWriter, pbstrWriterName, pbstrInstanceName, pUsage, pSource)
+    end
+    def get_version(this : IVssExamineWriterMetadataEx2*, pdwMajorVersion : UInt32*, pdwMinorVersion : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, pdwMajorVersion, pdwMinorVersion)
+    end
+    def get_exclude_from_snapshot_count(this : IVssExamineWriterMetadataEx2*, pcExcludedFromSnapshot : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exclude_from_snapshot_count.call(this, pcExcludedFromSnapshot)
+    end
+    def get_exclude_from_snapshot_file(this : IVssExamineWriterMetadataEx2*, iFile : UInt32, ppFiledesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exclude_from_snapshot_file.call(this, iFile, ppFiledesc)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssWriterComponentsExtVtable,
+    query_interface : Proc(IVssWriterComponentsExt*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssWriterComponentsExt*, UInt32),
+    release : Proc(IVssWriterComponentsExt*, UInt32)
+
+
+  @[Extern]
+  record IVssWriterComponentsExt, lpVtbl : IVssWriterComponentsExtVtable* do
+    GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
+    def query_interface(this : IVssWriterComponentsExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssWriterComponentsExt*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssWriterComponentsExt*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssBackupComponentsVtable,
+    query_interface : Proc(IVssBackupComponents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssBackupComponents*, UInt32),
+    release : Proc(IVssBackupComponents*, UInt32),
+    get_writer_components_count : Proc(IVssBackupComponents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_components : Proc(IVssBackupComponents*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    initialize_for_backup : Proc(IVssBackupComponents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_backup_state : Proc(IVssBackupComponents*, UInt8, UInt8, Win32cr::Storage::Vss::VSS_BACKUP_TYPE, UInt8, Win32cr::Foundation::HRESULT),
+    initialize_for_restore : Proc(IVssBackupComponents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_restore_state : Proc(IVssBackupComponents*, Win32cr::Storage::Vss::VSS_RESTORE_TYPE, Win32cr::Foundation::HRESULT),
+    gather_writer_metadata : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_count : Proc(IVssBackupComponents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_metadata : Proc(IVssBackupComponents*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    free_writer_metadata : Proc(IVssBackupComponents*, Win32cr::Foundation::HRESULT),
+    add_component : Proc(IVssBackupComponents*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    prepare_for_backup : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    abort_backup : Proc(IVssBackupComponents*, Win32cr::Foundation::HRESULT),
+    gather_writer_status : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_status_count : Proc(IVssBackupComponents*, UInt32*, Win32cr::Foundation::HRESULT),
+    free_writer_status : Proc(IVssBackupComponents*, Win32cr::Foundation::HRESULT),
+    get_writer_status : Proc(IVssBackupComponents*, UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITER_STATE*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT),
+    set_backup_succeeded : Proc(IVssBackupComponents*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_backup_options : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_restore_options : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_additional_restores : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_previous_backup_stamp : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssBackupComponents*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    backup_complete : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    add_alternative_location_mapping : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    add_restore_subcomponent : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_file_restore_status : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS, Win32cr::Foundation::HRESULT),
+    add_new_target : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_ranges_file_path : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    pre_restore : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    post_restore : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    set_context : Proc(IVssBackupComponents*, Int32, Win32cr::Foundation::HRESULT),
+    start_snapshot_set : Proc(IVssBackupComponents*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    add_to_snapshot_set : Proc(IVssBackupComponents*, UInt16*, LibC::GUID, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    do_snapshot_set : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    delete_snapshots : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Foundation::BOOL, Int32*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    import_snapshots : Proc(IVssBackupComponents*, Void**, Win32cr::Foundation::HRESULT),
+    break_snapshot_set : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    get_snapshot_properties : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*, Win32cr::Foundation::HRESULT),
+    query : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    is_volume_supported : Proc(IVssBackupComponents*, LibC::GUID, UInt16*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    disable_writer_classes : Proc(IVssBackupComponents*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    enable_writer_classes : Proc(IVssBackupComponents*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    disable_writer_instances : Proc(IVssBackupComponents*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    expose_snapshot : Proc(IVssBackupComponents*, LibC::GUID, UInt16*, Int32, UInt16*, UInt16**, Win32cr::Foundation::HRESULT),
+    revert_to_snapshot : Proc(IVssBackupComponents*, LibC::GUID, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    query_revert_status : Proc(IVssBackupComponents*, UInt16*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssBackupComponents, lpVtbl : IVssBackupComponentsVtable* do
+    GUID = LibC::GUID.new(0x665c1d5f_u32, 0xc218_u16, 0x414d_u16, StaticArray[0xa0_u8, 0x5d_u8, 0x7f_u8, 0xef_u8, 0x5f_u8, 0x9d_u8, 0x5c_u8, 0x86_u8])
+    def query_interface(this : IVssBackupComponents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssBackupComponents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssBackupComponents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_writer_components_count(this : IVssBackupComponents*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components_count.call(this, pcComponents)
+    end
+    def get_writer_components(this : IVssBackupComponents*, iWriter : UInt32, ppWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components.call(this, iWriter, ppWriter)
+    end
+    def initialize_for_backup(this : IVssBackupComponents*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_backup.call(this, bstrXML)
+    end
+    def set_backup_state(this : IVssBackupComponents*, bSelectComponents : UInt8, bBackupBootableSystemState : UInt8, backupType : Win32cr::Storage::Vss::VSS_BACKUP_TYPE, bPartialFileSupport : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_state.call(this, bSelectComponents, bBackupBootableSystemState, backupType, bPartialFileSupport)
+    end
+    def initialize_for_restore(this : IVssBackupComponents*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_restore.call(this, bstrXML)
+    end
+    def set_restore_state(this : IVssBackupComponents*, restoreType : Win32cr::Storage::Vss::VSS_RESTORE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_state.call(this, restoreType)
+    end
+    def gather_writer_metadata(this : IVssBackupComponents*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_metadata.call(this, pAsync)
+    end
+    def get_writer_metadata_count(this : IVssBackupComponents*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_count.call(this, pcWriters)
+    end
+    def get_writer_metadata(this : IVssBackupComponents*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def free_writer_metadata(this : IVssBackupComponents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_metadata.call(this)
+    end
+    def add_component(this : IVssBackupComponents*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_component.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName)
+    end
+    def prepare_for_backup(this : IVssBackupComponents*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_for_backup.call(this, ppAsync)
+    end
+    def abort_backup(this : IVssBackupComponents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.abort_backup.call(this)
+    end
+    def gather_writer_status(this : IVssBackupComponents*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_status.call(this, pAsync)
+    end
+    def get_writer_status_count(this : IVssBackupComponents*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status_count.call(this, pcWriters)
+    end
+    def free_writer_status(this : IVssBackupComponents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_status.call(this)
+    end
+    def get_writer_status(this : IVssBackupComponents*, iWriter : UInt32, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriter : Win32cr::Foundation::BSTR*, pnStatus : Win32cr::Storage::Vss::VSS_WRITER_STATE*, phResultFailure : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status.call(this, iWriter, pidInstance, pidWriter, pbstrWriter, pnStatus, phResultFailure)
+    end
+    def set_backup_succeeded(this : IVssBackupComponents*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSucceded : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_succeeded.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName, bSucceded)
+    end
+    def set_backup_options(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszBackupOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszBackupOptions)
+    end
+    def set_selected_for_restore(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore)
+    end
+    def set_restore_options(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreOptions)
+    end
+    def set_additional_restores(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAdditionalRestores : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_additional_restores.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAdditionalRestores)
+    end
+    def set_previous_backup_stamp(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPreviousBackupStamp : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_previous_backup_stamp.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPreviousBackupStamp)
+    end
+    def save_as_xml(this : IVssBackupComponents*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def backup_complete(this : IVssBackupComponents*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.backup_complete.call(this, ppAsync)
+    end
+    def add_alternative_location_mapping(this : IVssBackupComponents*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFilespec : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszDestination : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_alternative_location_mapping.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszPath, wszFilespec, bRecursive, wszDestination)
+    end
+    def add_restore_subcomponent(this : IVssBackupComponents*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszSubComponentLogicalPath : Win32cr::Foundation::PWSTR, wszSubComponentName : Win32cr::Foundation::PWSTR, bRepair : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_restore_subcomponent.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszSubComponentLogicalPath, wszSubComponentName, bRepair)
+    end
+    def set_file_restore_status(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, status : Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_file_restore_status.call(this, writerId, ct, wszLogicalPath, wszComponentName, status)
+    end
+    def add_new_target(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFileName : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszAlternatePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_new_target.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPath, wszFileName, bRecursive, wszAlternatePath)
+    end
+    def set_ranges_file_path(this : IVssBackupComponents*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, iPartialFile : UInt32, wszRangesFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ranges_file_path.call(this, writerId, ct, wszLogicalPath, wszComponentName, iPartialFile, wszRangesFile)
+    end
+    def pre_restore(this : IVssBackupComponents*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_restore.call(this, ppAsync)
+    end
+    def post_restore(this : IVssBackupComponents*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.post_restore.call(this, ppAsync)
+    end
+    def set_context(this : IVssBackupComponents*, lContext : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_context.call(this, lContext)
+    end
+    def start_snapshot_set(this : IVssBackupComponents*, pSnapshotSetId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start_snapshot_set.call(this, pSnapshotSetId)
+    end
+    def add_to_snapshot_set(this : IVssBackupComponents*, pwszVolumeName : UInt16*, provider_id : LibC::GUID, pidSnapshot : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_to_snapshot_set.call(this, pwszVolumeName, provider_id, pidSnapshot)
+    end
+    def do_snapshot_set(this : IVssBackupComponents*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.do_snapshot_set.call(this, ppAsync)
+    end
+    def delete_snapshots(this : IVssBackupComponents*, source_object_id : LibC::GUID, eSourceObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, bForceDelete : Win32cr::Foundation::BOOL, plDeletedSnapshots : Int32*, pNondeletedSnapshotID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_snapshots.call(this, source_object_id, eSourceObjectType, bForceDelete, plDeletedSnapshots, pNondeletedSnapshotID)
+    end
+    def import_snapshots(this : IVssBackupComponents*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_snapshots.call(this, ppAsync)
+    end
+    def break_snapshot_set(this : IVssBackupComponents*, snapshot_set_id : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set.call(this, snapshot_set_id)
+    end
+    def get_snapshot_properties(this : IVssBackupComponents*, snapshot_id : LibC::GUID, pProp : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_snapshot_properties.call(this, snapshot_id, pProp)
+    end
+    def query(this : IVssBackupComponents*, queried_object_id : LibC::GUID, eQueriedObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, eReturnedObjectsType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, queried_object_id, eQueriedObjectType, eReturnedObjectsType, ppEnum)
+    end
+    def is_volume_supported(this : IVssBackupComponents*, provider_id : LibC::GUID, pwszVolumeName : UInt16*, pbSupportedByThisProvider : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_volume_supported.call(this, provider_id, pwszVolumeName, pbSupportedByThisProvider)
+    end
+    def disable_writer_classes(this : IVssBackupComponents*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def enable_writer_classes(this : IVssBackupComponents*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def disable_writer_instances(this : IVssBackupComponents*, rgWriterInstanceId : LibC::GUID*, cInstanceId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_instances.call(this, rgWriterInstanceId, cInstanceId)
+    end
+    def expose_snapshot(this : IVssBackupComponents*, snapshot_id : LibC::GUID, wszPathFromRoot : UInt16*, lAttributes : Int32, wszExpose : UInt16*, pwszExposed : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.expose_snapshot.call(this, snapshot_id, wszPathFromRoot, lAttributes, wszExpose, pwszExposed)
+    end
+    def revert_to_snapshot(this : IVssBackupComponents*, snapshot_id : LibC::GUID, bForceDismount : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert_to_snapshot.call(this, snapshot_id, bForceDismount)
+    end
+    def query_revert_status(this : IVssBackupComponents*, pwszVolume : UInt16*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_revert_status.call(this, pwszVolume, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssBackupComponentsExVtable,
+    query_interface : Proc(IVssBackupComponentsEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssBackupComponentsEx*, UInt32),
+    release : Proc(IVssBackupComponentsEx*, UInt32),
+    get_writer_components_count : Proc(IVssBackupComponentsEx*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_components : Proc(IVssBackupComponentsEx*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    initialize_for_backup : Proc(IVssBackupComponentsEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_backup_state : Proc(IVssBackupComponentsEx*, UInt8, UInt8, Win32cr::Storage::Vss::VSS_BACKUP_TYPE, UInt8, Win32cr::Foundation::HRESULT),
+    initialize_for_restore : Proc(IVssBackupComponentsEx*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_restore_state : Proc(IVssBackupComponentsEx*, Win32cr::Storage::Vss::VSS_RESTORE_TYPE, Win32cr::Foundation::HRESULT),
+    gather_writer_metadata : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_count : Proc(IVssBackupComponentsEx*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_metadata : Proc(IVssBackupComponentsEx*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    free_writer_metadata : Proc(IVssBackupComponentsEx*, Win32cr::Foundation::HRESULT),
+    add_component : Proc(IVssBackupComponentsEx*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    prepare_for_backup : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    abort_backup : Proc(IVssBackupComponentsEx*, Win32cr::Foundation::HRESULT),
+    gather_writer_status : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_status_count : Proc(IVssBackupComponentsEx*, UInt32*, Win32cr::Foundation::HRESULT),
+    free_writer_status : Proc(IVssBackupComponentsEx*, Win32cr::Foundation::HRESULT),
+    get_writer_status : Proc(IVssBackupComponentsEx*, UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITER_STATE*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT),
+    set_backup_succeeded : Proc(IVssBackupComponentsEx*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_backup_options : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_restore_options : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_additional_restores : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_previous_backup_stamp : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssBackupComponentsEx*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    backup_complete : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    add_alternative_location_mapping : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    add_restore_subcomponent : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_file_restore_status : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS, Win32cr::Foundation::HRESULT),
+    add_new_target : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_ranges_file_path : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    pre_restore : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    post_restore : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    set_context : Proc(IVssBackupComponentsEx*, Int32, Win32cr::Foundation::HRESULT),
+    start_snapshot_set : Proc(IVssBackupComponentsEx*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    add_to_snapshot_set : Proc(IVssBackupComponentsEx*, UInt16*, LibC::GUID, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    do_snapshot_set : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    delete_snapshots : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Foundation::BOOL, Int32*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    import_snapshots : Proc(IVssBackupComponentsEx*, Void**, Win32cr::Foundation::HRESULT),
+    break_snapshot_set : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    get_snapshot_properties : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*, Win32cr::Foundation::HRESULT),
+    query : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    is_volume_supported : Proc(IVssBackupComponentsEx*, LibC::GUID, UInt16*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    disable_writer_classes : Proc(IVssBackupComponentsEx*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    enable_writer_classes : Proc(IVssBackupComponentsEx*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    disable_writer_instances : Proc(IVssBackupComponentsEx*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    expose_snapshot : Proc(IVssBackupComponentsEx*, LibC::GUID, UInt16*, Int32, UInt16*, UInt16**, Win32cr::Foundation::HRESULT),
+    revert_to_snapshot : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    query_revert_status : Proc(IVssBackupComponentsEx*, UInt16*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_ex : Proc(IVssBackupComponentsEx*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore_ex : Proc(IVssBackupComponentsEx*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, LibC::GUID, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssBackupComponentsEx, lpVtbl : IVssBackupComponentsExVtable* do
+    GUID = LibC::GUID.new(0x963f03ad_u32, 0x9e4c_u16, 0x4a34_u16, StaticArray[0xac_u8, 0x15_u8, 0xe4_u8, 0xb6_u8, 0x17_u8, 0x4e_u8, 0x50_u8, 0x36_u8])
+    def query_interface(this : IVssBackupComponentsEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssBackupComponentsEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssBackupComponentsEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_writer_components_count(this : IVssBackupComponentsEx*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components_count.call(this, pcComponents)
+    end
+    def get_writer_components(this : IVssBackupComponentsEx*, iWriter : UInt32, ppWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components.call(this, iWriter, ppWriter)
+    end
+    def initialize_for_backup(this : IVssBackupComponentsEx*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_backup.call(this, bstrXML)
+    end
+    def set_backup_state(this : IVssBackupComponentsEx*, bSelectComponents : UInt8, bBackupBootableSystemState : UInt8, backupType : Win32cr::Storage::Vss::VSS_BACKUP_TYPE, bPartialFileSupport : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_state.call(this, bSelectComponents, bBackupBootableSystemState, backupType, bPartialFileSupport)
+    end
+    def initialize_for_restore(this : IVssBackupComponentsEx*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_restore.call(this, bstrXML)
+    end
+    def set_restore_state(this : IVssBackupComponentsEx*, restoreType : Win32cr::Storage::Vss::VSS_RESTORE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_state.call(this, restoreType)
+    end
+    def gather_writer_metadata(this : IVssBackupComponentsEx*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_metadata.call(this, pAsync)
+    end
+    def get_writer_metadata_count(this : IVssBackupComponentsEx*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_count.call(this, pcWriters)
+    end
+    def get_writer_metadata(this : IVssBackupComponentsEx*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def free_writer_metadata(this : IVssBackupComponentsEx*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_metadata.call(this)
+    end
+    def add_component(this : IVssBackupComponentsEx*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_component.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName)
+    end
+    def prepare_for_backup(this : IVssBackupComponentsEx*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_for_backup.call(this, ppAsync)
+    end
+    def abort_backup(this : IVssBackupComponentsEx*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.abort_backup.call(this)
+    end
+    def gather_writer_status(this : IVssBackupComponentsEx*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_status.call(this, pAsync)
+    end
+    def get_writer_status_count(this : IVssBackupComponentsEx*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status_count.call(this, pcWriters)
+    end
+    def free_writer_status(this : IVssBackupComponentsEx*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_status.call(this)
+    end
+    def get_writer_status(this : IVssBackupComponentsEx*, iWriter : UInt32, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriter : Win32cr::Foundation::BSTR*, pnStatus : Win32cr::Storage::Vss::VSS_WRITER_STATE*, phResultFailure : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status.call(this, iWriter, pidInstance, pidWriter, pbstrWriter, pnStatus, phResultFailure)
+    end
+    def set_backup_succeeded(this : IVssBackupComponentsEx*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSucceded : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_succeeded.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName, bSucceded)
+    end
+    def set_backup_options(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszBackupOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszBackupOptions)
+    end
+    def set_selected_for_restore(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore)
+    end
+    def set_restore_options(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreOptions)
+    end
+    def set_additional_restores(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAdditionalRestores : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_additional_restores.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAdditionalRestores)
+    end
+    def set_previous_backup_stamp(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPreviousBackupStamp : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_previous_backup_stamp.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPreviousBackupStamp)
+    end
+    def save_as_xml(this : IVssBackupComponentsEx*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def backup_complete(this : IVssBackupComponentsEx*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.backup_complete.call(this, ppAsync)
+    end
+    def add_alternative_location_mapping(this : IVssBackupComponentsEx*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFilespec : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszDestination : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_alternative_location_mapping.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszPath, wszFilespec, bRecursive, wszDestination)
+    end
+    def add_restore_subcomponent(this : IVssBackupComponentsEx*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszSubComponentLogicalPath : Win32cr::Foundation::PWSTR, wszSubComponentName : Win32cr::Foundation::PWSTR, bRepair : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_restore_subcomponent.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszSubComponentLogicalPath, wszSubComponentName, bRepair)
+    end
+    def set_file_restore_status(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, status : Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_file_restore_status.call(this, writerId, ct, wszLogicalPath, wszComponentName, status)
+    end
+    def add_new_target(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFileName : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszAlternatePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_new_target.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPath, wszFileName, bRecursive, wszAlternatePath)
+    end
+    def set_ranges_file_path(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, iPartialFile : UInt32, wszRangesFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ranges_file_path.call(this, writerId, ct, wszLogicalPath, wszComponentName, iPartialFile, wszRangesFile)
+    end
+    def pre_restore(this : IVssBackupComponentsEx*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_restore.call(this, ppAsync)
+    end
+    def post_restore(this : IVssBackupComponentsEx*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.post_restore.call(this, ppAsync)
+    end
+    def set_context(this : IVssBackupComponentsEx*, lContext : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_context.call(this, lContext)
+    end
+    def start_snapshot_set(this : IVssBackupComponentsEx*, pSnapshotSetId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start_snapshot_set.call(this, pSnapshotSetId)
+    end
+    def add_to_snapshot_set(this : IVssBackupComponentsEx*, pwszVolumeName : UInt16*, provider_id : LibC::GUID, pidSnapshot : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_to_snapshot_set.call(this, pwszVolumeName, provider_id, pidSnapshot)
+    end
+    def do_snapshot_set(this : IVssBackupComponentsEx*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.do_snapshot_set.call(this, ppAsync)
+    end
+    def delete_snapshots(this : IVssBackupComponentsEx*, source_object_id : LibC::GUID, eSourceObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, bForceDelete : Win32cr::Foundation::BOOL, plDeletedSnapshots : Int32*, pNondeletedSnapshotID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_snapshots.call(this, source_object_id, eSourceObjectType, bForceDelete, plDeletedSnapshots, pNondeletedSnapshotID)
+    end
+    def import_snapshots(this : IVssBackupComponentsEx*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_snapshots.call(this, ppAsync)
+    end
+    def break_snapshot_set(this : IVssBackupComponentsEx*, snapshot_set_id : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set.call(this, snapshot_set_id)
+    end
+    def get_snapshot_properties(this : IVssBackupComponentsEx*, snapshot_id : LibC::GUID, pProp : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_snapshot_properties.call(this, snapshot_id, pProp)
+    end
+    def query(this : IVssBackupComponentsEx*, queried_object_id : LibC::GUID, eQueriedObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, eReturnedObjectsType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, queried_object_id, eQueriedObjectType, eReturnedObjectsType, ppEnum)
+    end
+    def is_volume_supported(this : IVssBackupComponentsEx*, provider_id : LibC::GUID, pwszVolumeName : UInt16*, pbSupportedByThisProvider : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_volume_supported.call(this, provider_id, pwszVolumeName, pbSupportedByThisProvider)
+    end
+    def disable_writer_classes(this : IVssBackupComponentsEx*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def enable_writer_classes(this : IVssBackupComponentsEx*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def disable_writer_instances(this : IVssBackupComponentsEx*, rgWriterInstanceId : LibC::GUID*, cInstanceId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_instances.call(this, rgWriterInstanceId, cInstanceId)
+    end
+    def expose_snapshot(this : IVssBackupComponentsEx*, snapshot_id : LibC::GUID, wszPathFromRoot : UInt16*, lAttributes : Int32, wszExpose : UInt16*, pwszExposed : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.expose_snapshot.call(this, snapshot_id, wszPathFromRoot, lAttributes, wszExpose, pwszExposed)
+    end
+    def revert_to_snapshot(this : IVssBackupComponentsEx*, snapshot_id : LibC::GUID, bForceDismount : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert_to_snapshot.call(this, snapshot_id, bForceDismount)
+    end
+    def query_revert_status(this : IVssBackupComponentsEx*, pwszVolume : UInt16*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_revert_status.call(this, pwszVolume, ppAsync)
+    end
+    def get_writer_metadata_ex(this : IVssBackupComponentsEx*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_ex.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def set_selected_for_restore_ex(this : IVssBackupComponentsEx*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8, instanceId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore_ex.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore, instanceId)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssBackupComponentsEx2Vtable,
+    query_interface : Proc(IVssBackupComponentsEx2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssBackupComponentsEx2*, UInt32),
+    release : Proc(IVssBackupComponentsEx2*, UInt32),
+    get_writer_components_count : Proc(IVssBackupComponentsEx2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_components : Proc(IVssBackupComponentsEx2*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    initialize_for_backup : Proc(IVssBackupComponentsEx2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_backup_state : Proc(IVssBackupComponentsEx2*, UInt8, UInt8, Win32cr::Storage::Vss::VSS_BACKUP_TYPE, UInt8, Win32cr::Foundation::HRESULT),
+    initialize_for_restore : Proc(IVssBackupComponentsEx2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_restore_state : Proc(IVssBackupComponentsEx2*, Win32cr::Storage::Vss::VSS_RESTORE_TYPE, Win32cr::Foundation::HRESULT),
+    gather_writer_metadata : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_count : Proc(IVssBackupComponentsEx2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_metadata : Proc(IVssBackupComponentsEx2*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    free_writer_metadata : Proc(IVssBackupComponentsEx2*, Win32cr::Foundation::HRESULT),
+    add_component : Proc(IVssBackupComponentsEx2*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    prepare_for_backup : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    abort_backup : Proc(IVssBackupComponentsEx2*, Win32cr::Foundation::HRESULT),
+    gather_writer_status : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_status_count : Proc(IVssBackupComponentsEx2*, UInt32*, Win32cr::Foundation::HRESULT),
+    free_writer_status : Proc(IVssBackupComponentsEx2*, Win32cr::Foundation::HRESULT),
+    get_writer_status : Proc(IVssBackupComponentsEx2*, UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITER_STATE*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT),
+    set_backup_succeeded : Proc(IVssBackupComponentsEx2*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_backup_options : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_restore_options : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_additional_restores : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_previous_backup_stamp : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssBackupComponentsEx2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    backup_complete : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    add_alternative_location_mapping : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    add_restore_subcomponent : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_file_restore_status : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS, Win32cr::Foundation::HRESULT),
+    add_new_target : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_ranges_file_path : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    pre_restore : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    post_restore : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    set_context : Proc(IVssBackupComponentsEx2*, Int32, Win32cr::Foundation::HRESULT),
+    start_snapshot_set : Proc(IVssBackupComponentsEx2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    add_to_snapshot_set : Proc(IVssBackupComponentsEx2*, UInt16*, LibC::GUID, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    do_snapshot_set : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    delete_snapshots : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Foundation::BOOL, Int32*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    import_snapshots : Proc(IVssBackupComponentsEx2*, Void**, Win32cr::Foundation::HRESULT),
+    break_snapshot_set : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    get_snapshot_properties : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*, Win32cr::Foundation::HRESULT),
+    query : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    is_volume_supported : Proc(IVssBackupComponentsEx2*, LibC::GUID, UInt16*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    disable_writer_classes : Proc(IVssBackupComponentsEx2*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    enable_writer_classes : Proc(IVssBackupComponentsEx2*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    disable_writer_instances : Proc(IVssBackupComponentsEx2*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    expose_snapshot : Proc(IVssBackupComponentsEx2*, LibC::GUID, UInt16*, Int32, UInt16*, UInt16**, Win32cr::Foundation::HRESULT),
+    revert_to_snapshot : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    query_revert_status : Proc(IVssBackupComponentsEx2*, UInt16*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_ex : Proc(IVssBackupComponentsEx2*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore_ex : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, LibC::GUID, Win32cr::Foundation::HRESULT),
+    unexpose_snapshot : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    set_authoritative_restore : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_roll_forward : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_ROLLFORWARD_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_restore_name : Proc(IVssBackupComponentsEx2*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    break_snapshot_set_ex : Proc(IVssBackupComponentsEx2*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    pre_fast_recovery : Proc(IVssBackupComponentsEx2*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    fast_recovery : Proc(IVssBackupComponentsEx2*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssBackupComponentsEx2, lpVtbl : IVssBackupComponentsEx2Vtable* do
+    GUID = LibC::GUID.new(0xacfe2b3a_u32, 0x22c9_u16, 0x4ef8_u16, StaticArray[0xbd_u8, 0x3_u8, 0x2f_u8, 0x9c_u8, 0xa2_u8, 0x30_u8, 0x8_u8, 0x4e_u8])
+    def query_interface(this : IVssBackupComponentsEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssBackupComponentsEx2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssBackupComponentsEx2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_writer_components_count(this : IVssBackupComponentsEx2*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components_count.call(this, pcComponents)
+    end
+    def get_writer_components(this : IVssBackupComponentsEx2*, iWriter : UInt32, ppWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components.call(this, iWriter, ppWriter)
+    end
+    def initialize_for_backup(this : IVssBackupComponentsEx2*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_backup.call(this, bstrXML)
+    end
+    def set_backup_state(this : IVssBackupComponentsEx2*, bSelectComponents : UInt8, bBackupBootableSystemState : UInt8, backupType : Win32cr::Storage::Vss::VSS_BACKUP_TYPE, bPartialFileSupport : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_state.call(this, bSelectComponents, bBackupBootableSystemState, backupType, bPartialFileSupport)
+    end
+    def initialize_for_restore(this : IVssBackupComponentsEx2*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_restore.call(this, bstrXML)
+    end
+    def set_restore_state(this : IVssBackupComponentsEx2*, restoreType : Win32cr::Storage::Vss::VSS_RESTORE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_state.call(this, restoreType)
+    end
+    def gather_writer_metadata(this : IVssBackupComponentsEx2*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_metadata.call(this, pAsync)
+    end
+    def get_writer_metadata_count(this : IVssBackupComponentsEx2*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_count.call(this, pcWriters)
+    end
+    def get_writer_metadata(this : IVssBackupComponentsEx2*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def free_writer_metadata(this : IVssBackupComponentsEx2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_metadata.call(this)
+    end
+    def add_component(this : IVssBackupComponentsEx2*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_component.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName)
+    end
+    def prepare_for_backup(this : IVssBackupComponentsEx2*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_for_backup.call(this, ppAsync)
+    end
+    def abort_backup(this : IVssBackupComponentsEx2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.abort_backup.call(this)
+    end
+    def gather_writer_status(this : IVssBackupComponentsEx2*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_status.call(this, pAsync)
+    end
+    def get_writer_status_count(this : IVssBackupComponentsEx2*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status_count.call(this, pcWriters)
+    end
+    def free_writer_status(this : IVssBackupComponentsEx2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_status.call(this)
+    end
+    def get_writer_status(this : IVssBackupComponentsEx2*, iWriter : UInt32, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriter : Win32cr::Foundation::BSTR*, pnStatus : Win32cr::Storage::Vss::VSS_WRITER_STATE*, phResultFailure : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status.call(this, iWriter, pidInstance, pidWriter, pbstrWriter, pnStatus, phResultFailure)
+    end
+    def set_backup_succeeded(this : IVssBackupComponentsEx2*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSucceded : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_succeeded.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName, bSucceded)
+    end
+    def set_backup_options(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszBackupOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszBackupOptions)
+    end
+    def set_selected_for_restore(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore)
+    end
+    def set_restore_options(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreOptions)
+    end
+    def set_additional_restores(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAdditionalRestores : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_additional_restores.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAdditionalRestores)
+    end
+    def set_previous_backup_stamp(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPreviousBackupStamp : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_previous_backup_stamp.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPreviousBackupStamp)
+    end
+    def save_as_xml(this : IVssBackupComponentsEx2*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def backup_complete(this : IVssBackupComponentsEx2*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.backup_complete.call(this, ppAsync)
+    end
+    def add_alternative_location_mapping(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFilespec : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszDestination : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_alternative_location_mapping.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszPath, wszFilespec, bRecursive, wszDestination)
+    end
+    def add_restore_subcomponent(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszSubComponentLogicalPath : Win32cr::Foundation::PWSTR, wszSubComponentName : Win32cr::Foundation::PWSTR, bRepair : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_restore_subcomponent.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszSubComponentLogicalPath, wszSubComponentName, bRepair)
+    end
+    def set_file_restore_status(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, status : Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_file_restore_status.call(this, writerId, ct, wszLogicalPath, wszComponentName, status)
+    end
+    def add_new_target(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFileName : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszAlternatePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_new_target.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPath, wszFileName, bRecursive, wszAlternatePath)
+    end
+    def set_ranges_file_path(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, iPartialFile : UInt32, wszRangesFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ranges_file_path.call(this, writerId, ct, wszLogicalPath, wszComponentName, iPartialFile, wszRangesFile)
+    end
+    def pre_restore(this : IVssBackupComponentsEx2*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_restore.call(this, ppAsync)
+    end
+    def post_restore(this : IVssBackupComponentsEx2*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.post_restore.call(this, ppAsync)
+    end
+    def set_context(this : IVssBackupComponentsEx2*, lContext : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_context.call(this, lContext)
+    end
+    def start_snapshot_set(this : IVssBackupComponentsEx2*, pSnapshotSetId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start_snapshot_set.call(this, pSnapshotSetId)
+    end
+    def add_to_snapshot_set(this : IVssBackupComponentsEx2*, pwszVolumeName : UInt16*, provider_id : LibC::GUID, pidSnapshot : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_to_snapshot_set.call(this, pwszVolumeName, provider_id, pidSnapshot)
+    end
+    def do_snapshot_set(this : IVssBackupComponentsEx2*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.do_snapshot_set.call(this, ppAsync)
+    end
+    def delete_snapshots(this : IVssBackupComponentsEx2*, source_object_id : LibC::GUID, eSourceObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, bForceDelete : Win32cr::Foundation::BOOL, plDeletedSnapshots : Int32*, pNondeletedSnapshotID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_snapshots.call(this, source_object_id, eSourceObjectType, bForceDelete, plDeletedSnapshots, pNondeletedSnapshotID)
+    end
+    def import_snapshots(this : IVssBackupComponentsEx2*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_snapshots.call(this, ppAsync)
+    end
+    def break_snapshot_set(this : IVssBackupComponentsEx2*, snapshot_set_id : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set.call(this, snapshot_set_id)
+    end
+    def get_snapshot_properties(this : IVssBackupComponentsEx2*, snapshot_id : LibC::GUID, pProp : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_snapshot_properties.call(this, snapshot_id, pProp)
+    end
+    def query(this : IVssBackupComponentsEx2*, queried_object_id : LibC::GUID, eQueriedObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, eReturnedObjectsType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, queried_object_id, eQueriedObjectType, eReturnedObjectsType, ppEnum)
+    end
+    def is_volume_supported(this : IVssBackupComponentsEx2*, provider_id : LibC::GUID, pwszVolumeName : UInt16*, pbSupportedByThisProvider : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_volume_supported.call(this, provider_id, pwszVolumeName, pbSupportedByThisProvider)
+    end
+    def disable_writer_classes(this : IVssBackupComponentsEx2*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def enable_writer_classes(this : IVssBackupComponentsEx2*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def disable_writer_instances(this : IVssBackupComponentsEx2*, rgWriterInstanceId : LibC::GUID*, cInstanceId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_instances.call(this, rgWriterInstanceId, cInstanceId)
+    end
+    def expose_snapshot(this : IVssBackupComponentsEx2*, snapshot_id : LibC::GUID, wszPathFromRoot : UInt16*, lAttributes : Int32, wszExpose : UInt16*, pwszExposed : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.expose_snapshot.call(this, snapshot_id, wszPathFromRoot, lAttributes, wszExpose, pwszExposed)
+    end
+    def revert_to_snapshot(this : IVssBackupComponentsEx2*, snapshot_id : LibC::GUID, bForceDismount : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert_to_snapshot.call(this, snapshot_id, bForceDismount)
+    end
+    def query_revert_status(this : IVssBackupComponentsEx2*, pwszVolume : UInt16*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_revert_status.call(this, pwszVolume, ppAsync)
+    end
+    def get_writer_metadata_ex(this : IVssBackupComponentsEx2*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_ex.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def set_selected_for_restore_ex(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8, instanceId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore_ex.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore, instanceId)
+    end
+    def unexpose_snapshot(this : IVssBackupComponentsEx2*, snapshotId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unexpose_snapshot.call(this, snapshotId)
+    end
+    def set_authoritative_restore(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAuth : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_authoritative_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAuth)
+    end
+    def set_roll_forward(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, rollType : Win32cr::Storage::Vss::VSS_ROLLFORWARD_TYPE, wszRollForwardPoint : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_roll_forward.call(this, writerId, ct, wszLogicalPath, wszComponentName, rollType, wszRollForwardPoint)
+    end
+    def set_restore_name(this : IVssBackupComponentsEx2*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_name.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreName)
+    end
+    def break_snapshot_set_ex(this : IVssBackupComponentsEx2*, snapshot_set_id : LibC::GUID, dwBreakFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set_ex.call(this, snapshot_set_id, dwBreakFlags, ppAsync)
+    end
+    def pre_fast_recovery(this : IVssBackupComponentsEx2*, snapshot_set_id : LibC::GUID, dwPreFastRecoveryFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_fast_recovery.call(this, snapshot_set_id, dwPreFastRecoveryFlags, ppAsync)
+    end
+    def fast_recovery(this : IVssBackupComponentsEx2*, snapshot_set_id : LibC::GUID, dwFastRecoveryFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.fast_recovery.call(this, snapshot_set_id, dwFastRecoveryFlags, ppAsync)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssBackupComponentsEx3Vtable,
+    query_interface : Proc(IVssBackupComponentsEx3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssBackupComponentsEx3*, UInt32),
+    release : Proc(IVssBackupComponentsEx3*, UInt32),
+    get_writer_components_count : Proc(IVssBackupComponentsEx3*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_components : Proc(IVssBackupComponentsEx3*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    initialize_for_backup : Proc(IVssBackupComponentsEx3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_backup_state : Proc(IVssBackupComponentsEx3*, UInt8, UInt8, Win32cr::Storage::Vss::VSS_BACKUP_TYPE, UInt8, Win32cr::Foundation::HRESULT),
+    initialize_for_restore : Proc(IVssBackupComponentsEx3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_restore_state : Proc(IVssBackupComponentsEx3*, Win32cr::Storage::Vss::VSS_RESTORE_TYPE, Win32cr::Foundation::HRESULT),
+    gather_writer_metadata : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_count : Proc(IVssBackupComponentsEx3*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_metadata : Proc(IVssBackupComponentsEx3*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    free_writer_metadata : Proc(IVssBackupComponentsEx3*, Win32cr::Foundation::HRESULT),
+    add_component : Proc(IVssBackupComponentsEx3*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    prepare_for_backup : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    abort_backup : Proc(IVssBackupComponentsEx3*, Win32cr::Foundation::HRESULT),
+    gather_writer_status : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_status_count : Proc(IVssBackupComponentsEx3*, UInt32*, Win32cr::Foundation::HRESULT),
+    free_writer_status : Proc(IVssBackupComponentsEx3*, Win32cr::Foundation::HRESULT),
+    get_writer_status : Proc(IVssBackupComponentsEx3*, UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITER_STATE*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT),
+    set_backup_succeeded : Proc(IVssBackupComponentsEx3*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_backup_options : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_restore_options : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_additional_restores : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_previous_backup_stamp : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssBackupComponentsEx3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    backup_complete : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    add_alternative_location_mapping : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    add_restore_subcomponent : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_file_restore_status : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS, Win32cr::Foundation::HRESULT),
+    add_new_target : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_ranges_file_path : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    pre_restore : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    post_restore : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    set_context : Proc(IVssBackupComponentsEx3*, Int32, Win32cr::Foundation::HRESULT),
+    start_snapshot_set : Proc(IVssBackupComponentsEx3*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    add_to_snapshot_set : Proc(IVssBackupComponentsEx3*, UInt16*, LibC::GUID, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    do_snapshot_set : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    delete_snapshots : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Foundation::BOOL, Int32*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    import_snapshots : Proc(IVssBackupComponentsEx3*, Void**, Win32cr::Foundation::HRESULT),
+    break_snapshot_set : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    get_snapshot_properties : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*, Win32cr::Foundation::HRESULT),
+    query : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    is_volume_supported : Proc(IVssBackupComponentsEx3*, LibC::GUID, UInt16*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    disable_writer_classes : Proc(IVssBackupComponentsEx3*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    enable_writer_classes : Proc(IVssBackupComponentsEx3*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    disable_writer_instances : Proc(IVssBackupComponentsEx3*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    expose_snapshot : Proc(IVssBackupComponentsEx3*, LibC::GUID, UInt16*, Int32, UInt16*, UInt16**, Win32cr::Foundation::HRESULT),
+    revert_to_snapshot : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    query_revert_status : Proc(IVssBackupComponentsEx3*, UInt16*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_ex : Proc(IVssBackupComponentsEx3*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore_ex : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, LibC::GUID, Win32cr::Foundation::HRESULT),
+    unexpose_snapshot : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    set_authoritative_restore : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_roll_forward : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_ROLLFORWARD_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_restore_name : Proc(IVssBackupComponentsEx3*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    break_snapshot_set_ex : Proc(IVssBackupComponentsEx3*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    pre_fast_recovery : Proc(IVssBackupComponentsEx3*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    fast_recovery : Proc(IVssBackupComponentsEx3*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_status_ex : Proc(IVssBackupComponentsEx3*, UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITER_STATE*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    add_snapshot_to_recovery_set : Proc(IVssBackupComponentsEx3*, LibC::GUID, UInt32, UInt16*, Win32cr::Foundation::HRESULT),
+    recover_set : Proc(IVssBackupComponentsEx3*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_session_id : Proc(IVssBackupComponentsEx3*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssBackupComponentsEx3, lpVtbl : IVssBackupComponentsEx3Vtable* do
+    GUID = LibC::GUID.new(0xc191bfbc_u32, 0xb602_u16, 0x4675_u16, StaticArray[0x8b_u8, 0xd1_u8, 0x67_u8, 0xd6_u8, 0x42_u8, 0xf5_u8, 0x29_u8, 0xd5_u8])
+    def query_interface(this : IVssBackupComponentsEx3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssBackupComponentsEx3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssBackupComponentsEx3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_writer_components_count(this : IVssBackupComponentsEx3*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components_count.call(this, pcComponents)
+    end
+    def get_writer_components(this : IVssBackupComponentsEx3*, iWriter : UInt32, ppWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components.call(this, iWriter, ppWriter)
+    end
+    def initialize_for_backup(this : IVssBackupComponentsEx3*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_backup.call(this, bstrXML)
+    end
+    def set_backup_state(this : IVssBackupComponentsEx3*, bSelectComponents : UInt8, bBackupBootableSystemState : UInt8, backupType : Win32cr::Storage::Vss::VSS_BACKUP_TYPE, bPartialFileSupport : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_state.call(this, bSelectComponents, bBackupBootableSystemState, backupType, bPartialFileSupport)
+    end
+    def initialize_for_restore(this : IVssBackupComponentsEx3*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_restore.call(this, bstrXML)
+    end
+    def set_restore_state(this : IVssBackupComponentsEx3*, restoreType : Win32cr::Storage::Vss::VSS_RESTORE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_state.call(this, restoreType)
+    end
+    def gather_writer_metadata(this : IVssBackupComponentsEx3*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_metadata.call(this, pAsync)
+    end
+    def get_writer_metadata_count(this : IVssBackupComponentsEx3*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_count.call(this, pcWriters)
+    end
+    def get_writer_metadata(this : IVssBackupComponentsEx3*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def free_writer_metadata(this : IVssBackupComponentsEx3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_metadata.call(this)
+    end
+    def add_component(this : IVssBackupComponentsEx3*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_component.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName)
+    end
+    def prepare_for_backup(this : IVssBackupComponentsEx3*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_for_backup.call(this, ppAsync)
+    end
+    def abort_backup(this : IVssBackupComponentsEx3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.abort_backup.call(this)
+    end
+    def gather_writer_status(this : IVssBackupComponentsEx3*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_status.call(this, pAsync)
+    end
+    def get_writer_status_count(this : IVssBackupComponentsEx3*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status_count.call(this, pcWriters)
+    end
+    def free_writer_status(this : IVssBackupComponentsEx3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_status.call(this)
+    end
+    def get_writer_status(this : IVssBackupComponentsEx3*, iWriter : UInt32, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriter : Win32cr::Foundation::BSTR*, pnStatus : Win32cr::Storage::Vss::VSS_WRITER_STATE*, phResultFailure : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status.call(this, iWriter, pidInstance, pidWriter, pbstrWriter, pnStatus, phResultFailure)
+    end
+    def set_backup_succeeded(this : IVssBackupComponentsEx3*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSucceded : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_succeeded.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName, bSucceded)
+    end
+    def set_backup_options(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszBackupOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszBackupOptions)
+    end
+    def set_selected_for_restore(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore)
+    end
+    def set_restore_options(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreOptions)
+    end
+    def set_additional_restores(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAdditionalRestores : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_additional_restores.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAdditionalRestores)
+    end
+    def set_previous_backup_stamp(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPreviousBackupStamp : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_previous_backup_stamp.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPreviousBackupStamp)
+    end
+    def save_as_xml(this : IVssBackupComponentsEx3*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def backup_complete(this : IVssBackupComponentsEx3*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.backup_complete.call(this, ppAsync)
+    end
+    def add_alternative_location_mapping(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFilespec : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszDestination : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_alternative_location_mapping.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszPath, wszFilespec, bRecursive, wszDestination)
+    end
+    def add_restore_subcomponent(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszSubComponentLogicalPath : Win32cr::Foundation::PWSTR, wszSubComponentName : Win32cr::Foundation::PWSTR, bRepair : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_restore_subcomponent.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszSubComponentLogicalPath, wszSubComponentName, bRepair)
+    end
+    def set_file_restore_status(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, status : Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_file_restore_status.call(this, writerId, ct, wszLogicalPath, wszComponentName, status)
+    end
+    def add_new_target(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFileName : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszAlternatePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_new_target.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPath, wszFileName, bRecursive, wszAlternatePath)
+    end
+    def set_ranges_file_path(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, iPartialFile : UInt32, wszRangesFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ranges_file_path.call(this, writerId, ct, wszLogicalPath, wszComponentName, iPartialFile, wszRangesFile)
+    end
+    def pre_restore(this : IVssBackupComponentsEx3*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_restore.call(this, ppAsync)
+    end
+    def post_restore(this : IVssBackupComponentsEx3*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.post_restore.call(this, ppAsync)
+    end
+    def set_context(this : IVssBackupComponentsEx3*, lContext : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_context.call(this, lContext)
+    end
+    def start_snapshot_set(this : IVssBackupComponentsEx3*, pSnapshotSetId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start_snapshot_set.call(this, pSnapshotSetId)
+    end
+    def add_to_snapshot_set(this : IVssBackupComponentsEx3*, pwszVolumeName : UInt16*, provider_id : LibC::GUID, pidSnapshot : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_to_snapshot_set.call(this, pwszVolumeName, provider_id, pidSnapshot)
+    end
+    def do_snapshot_set(this : IVssBackupComponentsEx3*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.do_snapshot_set.call(this, ppAsync)
+    end
+    def delete_snapshots(this : IVssBackupComponentsEx3*, source_object_id : LibC::GUID, eSourceObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, bForceDelete : Win32cr::Foundation::BOOL, plDeletedSnapshots : Int32*, pNondeletedSnapshotID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_snapshots.call(this, source_object_id, eSourceObjectType, bForceDelete, plDeletedSnapshots, pNondeletedSnapshotID)
+    end
+    def import_snapshots(this : IVssBackupComponentsEx3*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_snapshots.call(this, ppAsync)
+    end
+    def break_snapshot_set(this : IVssBackupComponentsEx3*, snapshot_set_id : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set.call(this, snapshot_set_id)
+    end
+    def get_snapshot_properties(this : IVssBackupComponentsEx3*, snapshot_id : LibC::GUID, pProp : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_snapshot_properties.call(this, snapshot_id, pProp)
+    end
+    def query(this : IVssBackupComponentsEx3*, queried_object_id : LibC::GUID, eQueriedObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, eReturnedObjectsType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, queried_object_id, eQueriedObjectType, eReturnedObjectsType, ppEnum)
+    end
+    def is_volume_supported(this : IVssBackupComponentsEx3*, provider_id : LibC::GUID, pwszVolumeName : UInt16*, pbSupportedByThisProvider : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_volume_supported.call(this, provider_id, pwszVolumeName, pbSupportedByThisProvider)
+    end
+    def disable_writer_classes(this : IVssBackupComponentsEx3*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def enable_writer_classes(this : IVssBackupComponentsEx3*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def disable_writer_instances(this : IVssBackupComponentsEx3*, rgWriterInstanceId : LibC::GUID*, cInstanceId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_instances.call(this, rgWriterInstanceId, cInstanceId)
+    end
+    def expose_snapshot(this : IVssBackupComponentsEx3*, snapshot_id : LibC::GUID, wszPathFromRoot : UInt16*, lAttributes : Int32, wszExpose : UInt16*, pwszExposed : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.expose_snapshot.call(this, snapshot_id, wszPathFromRoot, lAttributes, wszExpose, pwszExposed)
+    end
+    def revert_to_snapshot(this : IVssBackupComponentsEx3*, snapshot_id : LibC::GUID, bForceDismount : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert_to_snapshot.call(this, snapshot_id, bForceDismount)
+    end
+    def query_revert_status(this : IVssBackupComponentsEx3*, pwszVolume : UInt16*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_revert_status.call(this, pwszVolume, ppAsync)
+    end
+    def get_writer_metadata_ex(this : IVssBackupComponentsEx3*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_ex.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def set_selected_for_restore_ex(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8, instanceId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore_ex.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore, instanceId)
+    end
+    def unexpose_snapshot(this : IVssBackupComponentsEx3*, snapshotId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unexpose_snapshot.call(this, snapshotId)
+    end
+    def set_authoritative_restore(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAuth : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_authoritative_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAuth)
+    end
+    def set_roll_forward(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, rollType : Win32cr::Storage::Vss::VSS_ROLLFORWARD_TYPE, wszRollForwardPoint : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_roll_forward.call(this, writerId, ct, wszLogicalPath, wszComponentName, rollType, wszRollForwardPoint)
+    end
+    def set_restore_name(this : IVssBackupComponentsEx3*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_name.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreName)
+    end
+    def break_snapshot_set_ex(this : IVssBackupComponentsEx3*, snapshot_set_id : LibC::GUID, dwBreakFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set_ex.call(this, snapshot_set_id, dwBreakFlags, ppAsync)
+    end
+    def pre_fast_recovery(this : IVssBackupComponentsEx3*, snapshot_set_id : LibC::GUID, dwPreFastRecoveryFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_fast_recovery.call(this, snapshot_set_id, dwPreFastRecoveryFlags, ppAsync)
+    end
+    def fast_recovery(this : IVssBackupComponentsEx3*, snapshot_set_id : LibC::GUID, dwFastRecoveryFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.fast_recovery.call(this, snapshot_set_id, dwFastRecoveryFlags, ppAsync)
+    end
+    def get_writer_status_ex(this : IVssBackupComponentsEx3*, iWriter : UInt32, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriter : Win32cr::Foundation::BSTR*, pnStatus : Win32cr::Storage::Vss::VSS_WRITER_STATE*, phrFailureWriter : Win32cr::Foundation::HRESULT*, phrApplication : Win32cr::Foundation::HRESULT*, pbstrApplicationMessage : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status_ex.call(this, iWriter, pidInstance, pidWriter, pbstrWriter, pnStatus, phrFailureWriter, phrApplication, pbstrApplicationMessage)
+    end
+    def add_snapshot_to_recovery_set(this : IVssBackupComponentsEx3*, snapshotId : LibC::GUID, dwFlags : UInt32, pwszDestinationVolume : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_snapshot_to_recovery_set.call(this, snapshotId, dwFlags, pwszDestinationVolume)
+    end
+    def recover_set(this : IVssBackupComponentsEx3*, dwFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.recover_set.call(this, dwFlags, ppAsync)
+    end
+    def get_session_id(this : IVssBackupComponentsEx3*, idSession : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_session_id.call(this, idSession)
+    end
+
+  end
+
+  @[Extern]
+
+  record IVssBackupComponentsEx4Vtable,
+    query_interface : Proc(IVssBackupComponentsEx4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IVssBackupComponentsEx4*, UInt32),
+    release : Proc(IVssBackupComponentsEx4*, UInt32),
+    get_writer_components_count : Proc(IVssBackupComponentsEx4*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_components : Proc(IVssBackupComponentsEx4*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    initialize_for_backup : Proc(IVssBackupComponentsEx4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_backup_state : Proc(IVssBackupComponentsEx4*, UInt8, UInt8, Win32cr::Storage::Vss::VSS_BACKUP_TYPE, UInt8, Win32cr::Foundation::HRESULT),
+    initialize_for_restore : Proc(IVssBackupComponentsEx4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_restore_state : Proc(IVssBackupComponentsEx4*, Win32cr::Storage::Vss::VSS_RESTORE_TYPE, Win32cr::Foundation::HRESULT),
+    gather_writer_metadata : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_count : Proc(IVssBackupComponentsEx4*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_writer_metadata : Proc(IVssBackupComponentsEx4*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    free_writer_metadata : Proc(IVssBackupComponentsEx4*, Win32cr::Foundation::HRESULT),
+    add_component : Proc(IVssBackupComponentsEx4*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    prepare_for_backup : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    abort_backup : Proc(IVssBackupComponentsEx4*, Win32cr::Foundation::HRESULT),
+    gather_writer_status : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_status_count : Proc(IVssBackupComponentsEx4*, UInt32*, Win32cr::Foundation::HRESULT),
+    free_writer_status : Proc(IVssBackupComponentsEx4*, Win32cr::Foundation::HRESULT),
+    get_writer_status : Proc(IVssBackupComponentsEx4*, UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITER_STATE*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT),
+    set_backup_succeeded : Proc(IVssBackupComponentsEx4*, LibC::GUID, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_backup_options : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_restore_options : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_additional_restores : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_previous_backup_stamp : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    save_as_xml : Proc(IVssBackupComponentsEx4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    backup_complete : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    add_alternative_location_mapping : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    add_restore_subcomponent : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_file_restore_status : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS, Win32cr::Foundation::HRESULT),
+    add_new_target : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_ranges_file_path : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    pre_restore : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    post_restore : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    set_context : Proc(IVssBackupComponentsEx4*, Int32, Win32cr::Foundation::HRESULT),
+    start_snapshot_set : Proc(IVssBackupComponentsEx4*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    add_to_snapshot_set : Proc(IVssBackupComponentsEx4*, UInt16*, LibC::GUID, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    do_snapshot_set : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    delete_snapshots : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Foundation::BOOL, Int32*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    import_snapshots : Proc(IVssBackupComponentsEx4*, Void**, Win32cr::Foundation::HRESULT),
+    break_snapshot_set : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    get_snapshot_properties : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*, Win32cr::Foundation::HRESULT),
+    query : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Win32cr::Storage::Vss::VSS_OBJECT_TYPE, Void**, Win32cr::Foundation::HRESULT),
+    is_volume_supported : Proc(IVssBackupComponentsEx4*, LibC::GUID, UInt16*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    disable_writer_classes : Proc(IVssBackupComponentsEx4*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    enable_writer_classes : Proc(IVssBackupComponentsEx4*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    disable_writer_instances : Proc(IVssBackupComponentsEx4*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    expose_snapshot : Proc(IVssBackupComponentsEx4*, LibC::GUID, UInt16*, Int32, UInt16*, UInt16**, Win32cr::Foundation::HRESULT),
+    revert_to_snapshot : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    query_revert_status : Proc(IVssBackupComponentsEx4*, UInt16*, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_metadata_ex : Proc(IVssBackupComponentsEx4*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_selected_for_restore_ex : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, LibC::GUID, Win32cr::Foundation::HRESULT),
+    unexpose_snapshot : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    set_authoritative_restore : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
+    set_roll_forward : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Storage::Vss::VSS_ROLLFORWARD_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_restore_name : Proc(IVssBackupComponentsEx4*, LibC::GUID, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    break_snapshot_set_ex : Proc(IVssBackupComponentsEx4*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    pre_fast_recovery : Proc(IVssBackupComponentsEx4*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    fast_recovery : Proc(IVssBackupComponentsEx4*, LibC::GUID, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_writer_status_ex : Proc(IVssBackupComponentsEx4*, UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BSTR*, Win32cr::Storage::Vss::VSS_WRITER_STATE*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    add_snapshot_to_recovery_set : Proc(IVssBackupComponentsEx4*, LibC::GUID, UInt32, UInt16*, Win32cr::Foundation::HRESULT),
+    recover_set : Proc(IVssBackupComponentsEx4*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_session_id : Proc(IVssBackupComponentsEx4*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_root_and_logical_prefix_paths : Proc(IVssBackupComponentsEx4*, UInt16*, UInt16**, UInt16**, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IVssBackupComponentsEx4, lpVtbl : IVssBackupComponentsEx4Vtable* do
+    GUID = LibC::GUID.new(0xf434c2fd_u32, 0xb553_u16, 0x4961_u16, StaticArray[0xa9_u8, 0xf9_u8, 0xa8_u8, 0xe9_u8, 0xb_u8, 0x67_u8, 0x3e_u8, 0x53_u8])
+    def query_interface(this : IVssBackupComponentsEx4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IVssBackupComponentsEx4*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IVssBackupComponentsEx4*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_writer_components_count(this : IVssBackupComponentsEx4*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components_count.call(this, pcComponents)
+    end
+    def get_writer_components(this : IVssBackupComponentsEx4*, iWriter : UInt32, ppWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_components.call(this, iWriter, ppWriter)
+    end
+    def initialize_for_backup(this : IVssBackupComponentsEx4*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_backup.call(this, bstrXML)
+    end
+    def set_backup_state(this : IVssBackupComponentsEx4*, bSelectComponents : UInt8, bBackupBootableSystemState : UInt8, backupType : Win32cr::Storage::Vss::VSS_BACKUP_TYPE, bPartialFileSupport : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_state.call(this, bSelectComponents, bBackupBootableSystemState, backupType, bPartialFileSupport)
+    end
+    def initialize_for_restore(this : IVssBackupComponentsEx4*, bstrXML : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_for_restore.call(this, bstrXML)
+    end
+    def set_restore_state(this : IVssBackupComponentsEx4*, restoreType : Win32cr::Storage::Vss::VSS_RESTORE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_state.call(this, restoreType)
+    end
+    def gather_writer_metadata(this : IVssBackupComponentsEx4*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_metadata.call(this, pAsync)
+    end
+    def get_writer_metadata_count(this : IVssBackupComponentsEx4*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_count.call(this, pcWriters)
+    end
+    def get_writer_metadata(this : IVssBackupComponentsEx4*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def free_writer_metadata(this : IVssBackupComponentsEx4*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_metadata.call(this)
+    end
+    def add_component(this : IVssBackupComponentsEx4*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_component.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName)
+    end
+    def prepare_for_backup(this : IVssBackupComponentsEx4*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_for_backup.call(this, ppAsync)
+    end
+    def abort_backup(this : IVssBackupComponentsEx4*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.abort_backup.call(this)
+    end
+    def gather_writer_status(this : IVssBackupComponentsEx4*, pAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.gather_writer_status.call(this, pAsync)
+    end
+    def get_writer_status_count(this : IVssBackupComponentsEx4*, pcWriters : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status_count.call(this, pcWriters)
+    end
+    def free_writer_status(this : IVssBackupComponentsEx4*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.free_writer_status.call(this)
+    end
+    def get_writer_status(this : IVssBackupComponentsEx4*, iWriter : UInt32, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriter : Win32cr::Foundation::BSTR*, pnStatus : Win32cr::Storage::Vss::VSS_WRITER_STATE*, phResultFailure : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status.call(this, iWriter, pidInstance, pidWriter, pbstrWriter, pnStatus, phResultFailure)
+    end
+    def set_backup_succeeded(this : IVssBackupComponentsEx4*, instanceId : LibC::GUID, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSucceded : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_succeeded.call(this, instanceId, writerId, ct, wszLogicalPath, wszComponentName, bSucceded)
+    end
+    def set_backup_options(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszBackupOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_backup_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszBackupOptions)
+    end
+    def set_selected_for_restore(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore)
+    end
+    def set_restore_options(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreOptions : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_options.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreOptions)
+    end
+    def set_additional_restores(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAdditionalRestores : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_additional_restores.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAdditionalRestores)
+    end
+    def set_previous_backup_stamp(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPreviousBackupStamp : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_previous_backup_stamp.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPreviousBackupStamp)
+    end
+    def save_as_xml(this : IVssBackupComponentsEx4*, pbstrXML : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as_xml.call(this, pbstrXML)
+    end
+    def backup_complete(this : IVssBackupComponentsEx4*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.backup_complete.call(this, ppAsync)
+    end
+    def add_alternative_location_mapping(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFilespec : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszDestination : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_alternative_location_mapping.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszPath, wszFilespec, bRecursive, wszDestination)
+    end
+    def add_restore_subcomponent(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, componentType : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszSubComponentLogicalPath : Win32cr::Foundation::PWSTR, wszSubComponentName : Win32cr::Foundation::PWSTR, bRepair : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_restore_subcomponent.call(this, writerId, componentType, wszLogicalPath, wszComponentName, wszSubComponentLogicalPath, wszSubComponentName, bRepair)
+    end
+    def set_file_restore_status(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, status : Win32cr::Storage::Vss::VSS_FILE_RESTORE_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_file_restore_status.call(this, writerId, ct, wszLogicalPath, wszComponentName, status)
+    end
+    def add_new_target(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszPath : Win32cr::Foundation::PWSTR, wszFileName : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszAlternatePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_new_target.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszPath, wszFileName, bRecursive, wszAlternatePath)
+    end
+    def set_ranges_file_path(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, iPartialFile : UInt32, wszRangesFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ranges_file_path.call(this, writerId, ct, wszLogicalPath, wszComponentName, iPartialFile, wszRangesFile)
+    end
+    def pre_restore(this : IVssBackupComponentsEx4*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_restore.call(this, ppAsync)
+    end
+    def post_restore(this : IVssBackupComponentsEx4*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.post_restore.call(this, ppAsync)
+    end
+    def set_context(this : IVssBackupComponentsEx4*, lContext : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_context.call(this, lContext)
+    end
+    def start_snapshot_set(this : IVssBackupComponentsEx4*, pSnapshotSetId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start_snapshot_set.call(this, pSnapshotSetId)
+    end
+    def add_to_snapshot_set(this : IVssBackupComponentsEx4*, pwszVolumeName : UInt16*, provider_id : LibC::GUID, pidSnapshot : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_to_snapshot_set.call(this, pwszVolumeName, provider_id, pidSnapshot)
+    end
+    def do_snapshot_set(this : IVssBackupComponentsEx4*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.do_snapshot_set.call(this, ppAsync)
+    end
+    def delete_snapshots(this : IVssBackupComponentsEx4*, source_object_id : LibC::GUID, eSourceObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, bForceDelete : Win32cr::Foundation::BOOL, plDeletedSnapshots : Int32*, pNondeletedSnapshotID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_snapshots.call(this, source_object_id, eSourceObjectType, bForceDelete, plDeletedSnapshots, pNondeletedSnapshotID)
+    end
+    def import_snapshots(this : IVssBackupComponentsEx4*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_snapshots.call(this, ppAsync)
+    end
+    def break_snapshot_set(this : IVssBackupComponentsEx4*, snapshot_set_id : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set.call(this, snapshot_set_id)
+    end
+    def get_snapshot_properties(this : IVssBackupComponentsEx4*, snapshot_id : LibC::GUID, pProp : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_snapshot_properties.call(this, snapshot_id, pProp)
+    end
+    def query(this : IVssBackupComponentsEx4*, queried_object_id : LibC::GUID, eQueriedObjectType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, eReturnedObjectsType : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, queried_object_id, eQueriedObjectType, eReturnedObjectsType, ppEnum)
+    end
+    def is_volume_supported(this : IVssBackupComponentsEx4*, provider_id : LibC::GUID, pwszVolumeName : UInt16*, pbSupportedByThisProvider : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_volume_supported.call(this, provider_id, pwszVolumeName, pbSupportedByThisProvider)
+    end
+    def disable_writer_classes(this : IVssBackupComponentsEx4*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def enable_writer_classes(this : IVssBackupComponentsEx4*, rgWriterClassId : LibC::GUID*, cClassId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enable_writer_classes.call(this, rgWriterClassId, cClassId)
+    end
+    def disable_writer_instances(this : IVssBackupComponentsEx4*, rgWriterInstanceId : LibC::GUID*, cInstanceId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_writer_instances.call(this, rgWriterInstanceId, cInstanceId)
+    end
+    def expose_snapshot(this : IVssBackupComponentsEx4*, snapshot_id : LibC::GUID, wszPathFromRoot : UInt16*, lAttributes : Int32, wszExpose : UInt16*, pwszExposed : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.expose_snapshot.call(this, snapshot_id, wszPathFromRoot, lAttributes, wszExpose, pwszExposed)
+    end
+    def revert_to_snapshot(this : IVssBackupComponentsEx4*, snapshot_id : LibC::GUID, bForceDismount : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert_to_snapshot.call(this, snapshot_id, bForceDismount)
+    end
+    def query_revert_status(this : IVssBackupComponentsEx4*, pwszVolume : UInt16*, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_revert_status.call(this, pwszVolume, ppAsync)
+    end
+    def get_writer_metadata_ex(this : IVssBackupComponentsEx4*, iWriter : UInt32, pidInstance : LibC::GUID*, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_metadata_ex.call(this, iWriter, pidInstance, ppMetadata)
+    end
+    def set_selected_for_restore_ex(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bSelectedForRestore : UInt8, instanceId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selected_for_restore_ex.call(this, writerId, ct, wszLogicalPath, wszComponentName, bSelectedForRestore, instanceId)
+    end
+    def unexpose_snapshot(this : IVssBackupComponentsEx4*, snapshotId : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unexpose_snapshot.call(this, snapshotId)
+    end
+    def set_authoritative_restore(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, bAuth : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_authoritative_restore.call(this, writerId, ct, wszLogicalPath, wszComponentName, bAuth)
+    end
+    def set_roll_forward(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, rollType : Win32cr::Storage::Vss::VSS_ROLLFORWARD_TYPE, wszRollForwardPoint : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_roll_forward.call(this, writerId, ct, wszLogicalPath, wszComponentName, rollType, wszRollForwardPoint)
+    end
+    def set_restore_name(this : IVssBackupComponentsEx4*, writerId : LibC::GUID, ct : Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, wszLogicalPath : Win32cr::Foundation::PWSTR, wszComponentName : Win32cr::Foundation::PWSTR, wszRestoreName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_restore_name.call(this, writerId, ct, wszLogicalPath, wszComponentName, wszRestoreName)
+    end
+    def break_snapshot_set_ex(this : IVssBackupComponentsEx4*, snapshot_set_id : LibC::GUID, dwBreakFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.break_snapshot_set_ex.call(this, snapshot_set_id, dwBreakFlags, ppAsync)
+    end
+    def pre_fast_recovery(this : IVssBackupComponentsEx4*, snapshot_set_id : LibC::GUID, dwPreFastRecoveryFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_fast_recovery.call(this, snapshot_set_id, dwPreFastRecoveryFlags, ppAsync)
+    end
+    def fast_recovery(this : IVssBackupComponentsEx4*, snapshot_set_id : LibC::GUID, dwFastRecoveryFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.fast_recovery.call(this, snapshot_set_id, dwFastRecoveryFlags, ppAsync)
+    end
+    def get_writer_status_ex(this : IVssBackupComponentsEx4*, iWriter : UInt32, pidInstance : LibC::GUID*, pidWriter : LibC::GUID*, pbstrWriter : Win32cr::Foundation::BSTR*, pnStatus : Win32cr::Storage::Vss::VSS_WRITER_STATE*, phrFailureWriter : Win32cr::Foundation::HRESULT*, phrApplication : Win32cr::Foundation::HRESULT*, pbstrApplicationMessage : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_status_ex.call(this, iWriter, pidInstance, pidWriter, pbstrWriter, pnStatus, phrFailureWriter, phrApplication, pbstrApplicationMessage)
+    end
+    def add_snapshot_to_recovery_set(this : IVssBackupComponentsEx4*, snapshotId : LibC::GUID, dwFlags : UInt32, pwszDestinationVolume : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_snapshot_to_recovery_set.call(this, snapshotId, dwFlags, pwszDestinationVolume)
+    end
+    def recover_set(this : IVssBackupComponentsEx4*, dwFlags : UInt32, ppAsync : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.recover_set.call(this, dwFlags, ppAsync)
+    end
+    def get_session_id(this : IVssBackupComponentsEx4*, idSession : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_session_id.call(this, idSession)
+    end
+    def get_root_and_logical_prefix_paths(this : IVssBackupComponentsEx4*, pwszFilePath : UInt16*, ppwszRootPath : UInt16**, ppwszLogicalPrefix : UInt16**, bNormalizeFQDNforRootPath : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_root_and_logical_prefix_paths.call(this, pwszFilePath, ppwszRootPath, ppwszLogicalPrefix, bNormalizeFQDNforRootPath)
+    end
+
+  end
+
+  @[Extern]
+
   record IVssAdminVtable,
     query_interface : Proc(IVssAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssAdmin*, UInt32),
@@ -2097,11 +3637,65 @@ module Win32cr::Storage::Vss
     {% end %}
   end
 
+  def createVssBackupComponentsInternal(ppBackup : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.CreateVssBackupComponentsInternal(ppBackup)
+    {% end %}
+  end
+
+  def createVssExamineWriterMetadataInternal(bstrXML : Win32cr::Foundation::BSTR, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.CreateVssExamineWriterMetadataInternal(bstrXML, ppMetadata)
+    {% end %}
+  end
+
+  def isVolumeSnapshottedInternal(pwszVolumeName : UInt16*, pbSnapshotsPresent : Win32cr::Foundation::BOOL*, plSnapshotCapability : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.IsVolumeSnapshottedInternal(pwszVolumeName, pbSnapshotsPresent, plSnapshotCapability)
+    {% end %}
+  end
+
+  def vssFreeSnapshotPropertiesInternal(pProp : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*) : Void
+    {% if !flag?(:docs) %}
+    C.VssFreeSnapshotPropertiesInternal(pProp)
+    {% end %}
+  end
+
+  def getProviderMgmtInterfaceInternal(provider_id : LibC::GUID, interface_id : LibC::GUID, ppItf : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetProviderMgmtInterfaceInternal(provider_id, interface_id, ppItf)
+    {% end %}
+  end
+
+  def shouldBlockRevertInternal(wszVolumeName : Win32cr::Foundation::PWSTR, pbBlock : Bool*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.ShouldBlockRevertInternal(wszVolumeName, pbBlock)
+    {% end %}
+  end
+
   @[Link("vssapi")]
   {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateVssExpressWriterInternal(ppWriter : Void**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun CreateVssBackupComponentsInternal(ppBackup : Void**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun CreateVssExamineWriterMetadataInternal(bstrXML : Win32cr::Foundation::BSTR, ppMetadata : Void**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun IsVolumeSnapshottedInternal(pwszVolumeName : UInt16*, pbSnapshotsPresent : Win32cr::Foundation::BOOL*, plSnapshotCapability : Int32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun VssFreeSnapshotPropertiesInternal(pProp : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP*) : Void
+
+    # :nodoc:
+    fun GetProviderMgmtInterfaceInternal(provider_id : LibC::GUID, interface_id : LibC::GUID, ppItf : Void**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun ShouldBlockRevertInternal(wszVolumeName : Win32cr::Foundation::PWSTR, pbBlock : Bool*) : Win32cr::Foundation::HRESULT
 
   end
   {% end %}

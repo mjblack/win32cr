@@ -12,6 +12,7 @@ module Win32cr::Networking::DeliveryOptimization
   IntegrityCheckInfo_PiecesHashFileDigest = "PiecesHashFileDigest"
   IntegrityCheckInfo_PiecesHashFileDigestAlgorithm = "PiecesHashFileDigestAlgorithm"
   IntegrityCheckInfo_HashOfHashes = "HashOfHashes"
+  LIBID_DeliveryOptimization = LibC::GUID.new(0x5b99fa76_u32, 0x721c_u16, 0x423c_u16, StaticArray[0xad_u8, 0xac_u8, 0x56_u8, 0xd0_u8, 0x3c_u8, 0x8a_u8, 0x80_u8, 0x7_u8])
 
   CLSID_DeliveryOptimization = LibC::GUID.new(0x5b99fa76_u32, 0x721c_u16, 0x423c_u16, StaticArray[0xad_u8, 0xac_u8, 0x56_u8, 0xd0_u8, 0x3c_u8, 0x8a_u8, 0x80_u8, 0x7_u8])
 

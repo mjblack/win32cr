@@ -389,6 +389,7 @@ module Win32cr::Devices::FunctionDiscovery
   E_FDPAIRING_AUTHNOTALLOWED = -1882193914_i32
   E_FDPAIRING_IPBUSDISABLED = -1882193913_i32
   E_FDPAIRING_NOPROFILES = -1882193912_i32
+  LIBID_PNPXAssociation = LibC::GUID.new(0xcee8ccc9_u32, 0x4f6b_u16, 0x4469_u16, StaticArray[0xa2_u8, 0x35_u8, 0x5a_u8, 0x22_u8, 0x86_u8, 0x9e_u8, 0xef_u8, 0x3_u8])
 
   CLSID_PNPXAssociation = LibC::GUID.new(0xcee8ccc9_u32, 0x4f6b_u16, 0x4469_u16, StaticArray[0xa2_u8, 0x35_u8, 0x5a_u8, 0x22_u8, 0x86_u8, 0x9e_u8, 0xef_u8, 0x3_u8])
 

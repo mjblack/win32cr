@@ -1221,6 +1221,150 @@ module Win32cr::Security::Authentication::WebAuthn
     {% end %}
   end
 
+  def webAuthNPluginGetAuthenticatorState(rclsid : LibC::GUID*, pluginAuthenticatorState : Win32cr::Security::Authentication::WebAuthn::AUTHENTICATOR_STATE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginGetAuthenticatorState(rclsid, pluginAuthenticatorState)
+    {% end %}
+  end
+
+  def webAuthNPluginAddAuthenticator(pPluginAddAuthenticatorOptions : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS*, ppPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginAddAuthenticator(pPluginAddAuthenticatorOptions, ppPluginAddAuthenticatorResponse)
+    {% end %}
+  end
+
+  def webAuthNPluginFreeAddAuthenticatorResponse(pPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE*) : Void
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginFreeAddAuthenticatorResponse(pPluginAddAuthenticatorResponse)
+    {% end %}
+  end
+
+  def webAuthNPluginRemoveAuthenticator(rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginRemoveAuthenticator(rclsid)
+    {% end %}
+  end
+
+  def webAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails)
+    {% end %}
+  end
+
+  def webAuthNPluginAuthenticatorAddCredentials(rclsid : LibC::GUID*, cCredentialDetails : UInt32, pCredentialDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginAuthenticatorAddCredentials(rclsid, cCredentialDetails, pCredentialDetails)
+    {% end %}
+  end
+
+  def webAuthNPluginAuthenticatorRemoveCredentials(rclsid : LibC::GUID*, cCredentialDetails : UInt32, pCredentialDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginAuthenticatorRemoveCredentials(rclsid, cCredentialDetails, pCredentialDetails)
+    {% end %}
+  end
+
+  def webAuthNPluginAuthenticatorRemoveAllCredentials(rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginAuthenticatorRemoveAllCredentials(rclsid)
+    {% end %}
+  end
+
+  def webAuthNPluginAuthenticatorGetAllCredentials(rclsid : LibC::GUID*, pcCredentialDetails : UInt32*, ppCredentialDetailsArray : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginAuthenticatorGetAllCredentials(rclsid, pcCredentialDetails, ppCredentialDetailsArray)
+    {% end %}
+  end
+
+  def webAuthNPluginAuthenticatorFreeCredentialDetailsArray(cCredentialDetails : UInt32, pCredentialDetailsArray : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS*) : Void
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginAuthenticatorFreeCredentialDetailsArray(cCredentialDetails, pCredentialDetailsArray)
+    {% end %}
+  end
+
+  def webAuthNPluginPerformUserVerification(pPluginUserVerification : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST*, pcbResponse : UInt32*, ppbResponse : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginPerformUserVerification(pPluginUserVerification, pcbResponse, ppbResponse)
+    {% end %}
+  end
+
+  def webAuthNPluginFreeUserVerificationResponse(ppbResponse : UInt8*) : Void
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginFreeUserVerificationResponse(ppbResponse)
+    {% end %}
+  end
+
+  def webAuthNPluginGetUserVerificationCount(rclsid : LibC::GUID*, pdwVerificationCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginGetUserVerificationCount(rclsid, pdwVerificationCount)
+    {% end %}
+  end
+
+  def webAuthNPluginGetUserVerificationPublicKey(rclsid : LibC::GUID*, pcbPublicKey : UInt32*, ppbPublicKey : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginGetUserVerificationPublicKey(rclsid, pcbPublicKey, ppbPublicKey)
+    {% end %}
+  end
+
+  def webAuthNPluginGetOperationSigningPublicKey(rclsid : LibC::GUID*, pcbOpSignPubKey : UInt32*, ppbOpSignPubKey : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginGetOperationSigningPublicKey(rclsid, pcbOpSignPubKey, ppbOpSignPubKey)
+    {% end %}
+  end
+
+  def webAuthNPluginFreePublicKeyResponse(pbOpSignPubKey : UInt8*) : Void
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginFreePublicKeyResponse(pbOpSignPubKey)
+    {% end %}
+  end
+
+  def webAuthNEncodeMakeCredentialResponse(pCredentialAttestation : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CREDENTIAL_ATTESTATION*, pcbResp : UInt32*, ppbResp : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNEncodeMakeCredentialResponse(pCredentialAttestation, pcbResp, ppbResp)
+    {% end %}
+  end
+
+  def webAuthNDecodeMakeCredentialRequest(cbEncoded : UInt32, pbEncoded : UInt8*, ppMakeCredentialRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNDecodeMakeCredentialRequest(cbEncoded, pbEncoded, ppMakeCredentialRequest)
+    {% end %}
+  end
+
+  def webAuthNFreeDecodedMakeCredentialRequest(pMakeCredentialRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST*) : Void
+    {% if !flag?(:docs) %}
+    C.WebAuthNFreeDecodedMakeCredentialRequest(pMakeCredentialRequest)
+    {% end %}
+  end
+
+  def webAuthNDecodeGetAssertionRequest(cbEncoded : UInt32, pbEncoded : UInt8*, ppGetAssertionRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNDecodeGetAssertionRequest(cbEncoded, pbEncoded, ppGetAssertionRequest)
+    {% end %}
+  end
+
+  def webAuthNFreeDecodedGetAssertionRequest(pGetAssertionRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST*) : Void
+    {% if !flag?(:docs) %}
+    C.WebAuthNFreeDecodedGetAssertionRequest(pGetAssertionRequest)
+    {% end %}
+  end
+
+  def webAuthNEncodeGetAssertionResponse(pGetAssertionResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE*, pcbResp : UInt32*, ppbResp : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNEncodeGetAssertionResponse(pGetAssertionResponse, pcbResp, ppbResp)
+    {% end %}
+  end
+
+  def webAuthNPluginRegisterStatusChangeCallback(callback : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK, context : Void*, rclsid : LibC::GUID*, pdwRegister : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginRegisterStatusChangeCallback(callback, context, rclsid, pdwRegister)
+    {% end %}
+  end
+
+  def webAuthNPluginUnregisterStatusChangeCallback(pdwRegister : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginUnregisterStatusChangeCallback(pdwRegister)
+    {% end %}
+  end
+
   @[Link("webauthn")]
   {% if !flag?(:docs) %}
   lib C
@@ -1268,6 +1412,78 @@ module Win32cr::Security::Authentication::WebAuthn
 
     # :nodoc:
     fun WebAuthNGetW3CExceptionDOMError(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginGetAuthenticatorState(rclsid : LibC::GUID*, pluginAuthenticatorState : Win32cr::Security::Authentication::WebAuthn::AUTHENTICATOR_STATE*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginAddAuthenticator(pPluginAddAuthenticatorOptions : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS*, ppPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginFreeAddAuthenticatorResponse(pPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE*) : Void
+
+    # :nodoc:
+    fun WebAuthNPluginRemoveAuthenticator(rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginAuthenticatorAddCredentials(rclsid : LibC::GUID*, cCredentialDetails : UInt32, pCredentialDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginAuthenticatorRemoveCredentials(rclsid : LibC::GUID*, cCredentialDetails : UInt32, pCredentialDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginAuthenticatorRemoveAllCredentials(rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginAuthenticatorGetAllCredentials(rclsid : LibC::GUID*, pcCredentialDetails : UInt32*, ppCredentialDetailsArray : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginAuthenticatorFreeCredentialDetailsArray(cCredentialDetails : UInt32, pCredentialDetailsArray : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS*) : Void
+
+    # :nodoc:
+    fun WebAuthNPluginPerformUserVerification(pPluginUserVerification : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST*, pcbResponse : UInt32*, ppbResponse : UInt8**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginFreeUserVerificationResponse(ppbResponse : UInt8*) : Void
+
+    # :nodoc:
+    fun WebAuthNPluginGetUserVerificationCount(rclsid : LibC::GUID*, pdwVerificationCount : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginGetUserVerificationPublicKey(rclsid : LibC::GUID*, pcbPublicKey : UInt32*, ppbPublicKey : UInt8**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginGetOperationSigningPublicKey(rclsid : LibC::GUID*, pcbOpSignPubKey : UInt32*, ppbOpSignPubKey : UInt8**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginFreePublicKeyResponse(pbOpSignPubKey : UInt8*) : Void
+
+    # :nodoc:
+    fun WebAuthNEncodeMakeCredentialResponse(pCredentialAttestation : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CREDENTIAL_ATTESTATION*, pcbResp : UInt32*, ppbResp : UInt8**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNDecodeMakeCredentialRequest(cbEncoded : UInt32, pbEncoded : UInt8*, ppMakeCredentialRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNFreeDecodedMakeCredentialRequest(pMakeCredentialRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST*) : Void
+
+    # :nodoc:
+    fun WebAuthNDecodeGetAssertionRequest(cbEncoded : UInt32, pbEncoded : UInt8*, ppGetAssertionRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNFreeDecodedGetAssertionRequest(pGetAssertionRequest : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST*) : Void
+
+    # :nodoc:
+    fun WebAuthNEncodeGetAssertionResponse(pGetAssertionResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE*, pcbResp : UInt32*, ppbResp : UInt8**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginRegisterStatusChangeCallback(callback : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK, context : Void*, rclsid : LibC::GUID*, pdwRegister : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginUnregisterStatusChangeCallback(pdwRegister : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
   {% end %}
