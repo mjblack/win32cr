@@ -4,6 +4,10 @@ require "./com.cr"
 require "./system_services.cr"
 require "./kernel.cr"
 require "./../security.cr"
+require "c/processthreadsapi"
+require "c/synchapi"
+require "c/winbase"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Threading
   extend self
@@ -1370,17 +1374,26 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def enterCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
-    #C.EnterCriticalSection(lpCriticalSection)
-  #end
+  # Forwards to `LibC.EnterCriticalSection`, which Crystal's standard library declares in `c/synchapi`.
+  def enterCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.EnterCriticalSection(Win32cr::LibCBridge.arg(lpCriticalSection, Pointer(::LibC::CRITICAL_SECTION)))
+    {% end %}
+  end
 
-  #def leaveCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
-    #C.LeaveCriticalSection(lpCriticalSection)
-  #end
+  # Forwards to `LibC.LeaveCriticalSection`, which Crystal's standard library declares in `c/synchapi`.
+  def leaveCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.LeaveCriticalSection(Win32cr::LibCBridge.arg(lpCriticalSection, Pointer(::LibC::CRITICAL_SECTION)))
+    {% end %}
+  end
 
-  #def initializeCriticalSectionAndSpinCount(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*, dwSpinCount : UInt32) : Win32cr::Foundation::BOOL
-    #C.InitializeCriticalSectionAndSpinCount(lpCriticalSection, dwSpinCount)
-  #end
+  # Forwards to `LibC.InitializeCriticalSectionAndSpinCount`, which Crystal's standard library declares in `c/synchapi`.
+  def initializeCriticalSectionAndSpinCount(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*, dwSpinCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.InitializeCriticalSectionAndSpinCount(Win32cr::LibCBridge.arg(lpCriticalSection, Pointer(::LibC::CRITICAL_SECTION)), Win32cr::LibCBridge.arg(dwSpinCount, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def initializeCriticalSectionEx(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*, dwSpinCount : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1394,13 +1407,19 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def tryEnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Win32cr::Foundation::BOOL
-    #C.TryEnterCriticalSection(lpCriticalSection)
-  #end
+  # Forwards to `LibC.TryEnterCriticalSection`, which Crystal's standard library declares in `c/synchapi`.
+  def tryEnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.TryEnterCriticalSection(Win32cr::LibCBridge.arg(lpCriticalSection, Pointer(::LibC::CRITICAL_SECTION))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def deleteCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
-    #C.DeleteCriticalSection(lpCriticalSection)
-  #end
+  # Forwards to `LibC.DeleteCriticalSection`, which Crystal's standard library declares in `c/synchapi`.
+  def deleteCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.DeleteCriticalSection(Win32cr::LibCBridge.arg(lpCriticalSection, Pointer(::LibC::CRITICAL_SECTION)))
+    {% end %}
+  end
 
   def initOnceInitialize(init_once : Win32cr::System::Threading::INIT_ONCE*) : Void
     {% if !flag?(:docs) %}
@@ -1426,21 +1445,33 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def initializeConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
-    #C.InitializeConditionVariable(condition_variable)
-  #end
+  # Forwards to `LibC.InitializeConditionVariable`, which Crystal's standard library declares in `c/synchapi`.
+  def initializeConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.InitializeConditionVariable(Win32cr::LibCBridge.arg(condition_variable, Pointer(::LibC::CONDITION_VARIABLE)))
+    {% end %}
+  end
 
-  #def wakeConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
-    #C.WakeConditionVariable(condition_variable)
-  #end
+  # Forwards to `LibC.WakeConditionVariable`, which Crystal's standard library declares in `c/synchapi`.
+  def wakeConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.WakeConditionVariable(Win32cr::LibCBridge.arg(condition_variable, Pointer(::LibC::CONDITION_VARIABLE)))
+    {% end %}
+  end
 
-  #def wakeAllConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
-    #C.WakeAllConditionVariable(condition_variable)
-  #end
+  # Forwards to `LibC.WakeAllConditionVariable`, which Crystal's standard library declares in `c/synchapi`.
+  def wakeAllConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.WakeAllConditionVariable(Win32cr::LibCBridge.arg(condition_variable, Pointer(::LibC::CONDITION_VARIABLE)))
+    {% end %}
+  end
 
-  #def sleepConditionVariableCS(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*, critical_section : Win32cr::System::Threading::CRITICAL_SECTION*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
-    #C.SleepConditionVariableCS(condition_variable, critical_section, dwMilliseconds)
-  #end
+  # Forwards to `LibC.SleepConditionVariableCS`, which Crystal's standard library declares in `c/synchapi`.
+  def sleepConditionVariableCS(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*, critical_section : Win32cr::System::Threading::CRITICAL_SECTION*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SleepConditionVariableCS(Win32cr::LibCBridge.arg(condition_variable, Pointer(::LibC::CONDITION_VARIABLE)), Win32cr::LibCBridge.arg(critical_section, Pointer(::LibC::CRITICAL_SECTION)), Win32cr::LibCBridge.arg(dwMilliseconds, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def sleepConditionVariableSRW(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*, srw_lock : Win32cr::System::Threading::SRWLOCK*, dwMilliseconds : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1472,9 +1503,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def waitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : Win32cr::Foundation::WAIT_EVENT
-    #C.WaitForSingleObject(hHandle, dwMilliseconds)
-  #end
+  # Forwards to `LibC.WaitForSingleObject`, which Crystal's standard library declares in `c/synchapi`.
+  def waitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : Win32cr::Foundation::WAIT_EVENT
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WaitForSingleObject(Win32cr::LibCBridge.arg(hHandle, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwMilliseconds, ::LibC::DWORD)), Win32cr::Foundation::WAIT_EVENT)
+    {% end %}
+  end
 
   def sleepEx(dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
     {% if !flag?(:docs) %}
@@ -1554,13 +1588,19 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def setWaitableTimer(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Int64*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
-    #C.SetWaitableTimer(hTimer, lpDueTime, lPeriod, pfnCompletionRoutine, lpArgToCompletionRoutine, fResume)
-  #end
+  # Forwards to `LibC.SetWaitableTimer`, which Crystal's standard library declares in `c/synchapi`.
+  def setWaitableTimer(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Int64*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetWaitableTimer(Win32cr::LibCBridge.arg(hTimer, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpDueTime, Pointer(::LibC::LARGE_INTEGER)), Win32cr::LibCBridge.arg(lPeriod, ::LibC::LONG), Win32cr::LibCBridge.arg(pfnCompletionRoutine, Pointer(::LibC::PTIMERAPCROUTINE)), Win32cr::LibCBridge.arg(lpArgToCompletionRoutine, Pointer(Void)), Win32cr::LibCBridge.arg(fResume, ::LibC::BOOL)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def cancelWaitableTimer(hTimer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
-    #C.CancelWaitableTimer(hTimer)
-  #end
+  # Forwards to `LibC.CancelWaitableTimer`, which Crystal's standard library declares in `c/synchapi`.
+  def cancelWaitableTimer(hTimer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CancelWaitableTimer(Win32cr::LibCBridge.arg(hTimer, ::LibC::HANDLE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def createMutexExA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
     {% if !flag?(:docs) %}
@@ -1592,9 +1632,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def createWaitableTimerExW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpTimerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
-    #C.CreateWaitableTimerExW(lpTimerAttributes, lpTimerName, dwFlags, dwDesiredAccess)
-  #end
+  # Forwards to `LibC.CreateWaitableTimerExW`, which Crystal's standard library declares in `c/synchapi`.
+  def createWaitableTimerExW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpTimerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateWaitableTimerExW(Win32cr::LibCBridge.arg(lpTimerAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES)), Win32cr::LibCBridge.arg(lpTimerName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwDesiredAccess, ::LibC::DWORD)), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def enterSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::SYNCHRONIZATION_BARRIER*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1614,9 +1657,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def sleep(dwMilliseconds : UInt32) : Void
-    #C.Sleep(dwMilliseconds)
-  #end
+  # Forwards to `LibC.Sleep`, which Crystal's standard library declares in `c/synchapi`.
+  def sleep(dwMilliseconds : UInt32) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.Sleep(Win32cr::LibCBridge.arg(dwMilliseconds, ::LibC::DWORD))
+    {% end %}
+  end
 
   def waitOnAddress(address : Void*, compare_address : Void*, address_size : LibC::UIntPtrT, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1690,9 +1736,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def queueUserAPC(pfnAPC : Win32cr::Foundation::PAPCFUNC, hThread : Win32cr::Foundation::HANDLE, dwData : LibC::UIntPtrT) : UInt32
-    #C.QueueUserAPC(pfnAPC, hThread, dwData)
-  #end
+  # Forwards to `LibC.QueueUserAPC`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def queueUserAPC(pfnAPC : Win32cr::Foundation::PAPCFUNC, hThread : Win32cr::Foundation::HANDLE, dwData : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.QueueUserAPC(Win32cr::LibCBridge.arg(pfnAPC, ::LibC::PAPCFUNC), Win32cr::LibCBridge.arg(hThread, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwData, ::LibC::ULONG_PTR)), UInt32)
+    {% end %}
+  end
 
   def queueUserAPC2(apc_routine : Win32cr::Foundation::PAPCFUNC, thread : Win32cr::Foundation::HANDLE, data : LibC::UIntPtrT, flags : Win32cr::System::Threading::QUEUE_USER_APC_FLAGS) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1700,33 +1749,54 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def getProcessTimes(hProcess : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
-    #C.GetProcessTimes(hProcess, lpCreationTime, lpExitTime, lpKernelTime, lpUserTime)
-  #end
+  # Forwards to `LibC.GetProcessTimes`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getProcessTimes(hProcess : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetProcessTimes(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpCreationTime, Pointer(::LibC::FILETIME)), Win32cr::LibCBridge.arg(lpExitTime, Pointer(::LibC::FILETIME)), Win32cr::LibCBridge.arg(lpKernelTime, Pointer(::LibC::FILETIME)), Win32cr::LibCBridge.arg(lpUserTime, Pointer(::LibC::FILETIME))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def getCurrentProcess : Win32cr::Foundation::HANDLE
-    #C.GetCurrentProcess
-  #end
+  # Forwards to `LibC.GetCurrentProcess`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getCurrentProcess : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetCurrentProcess, Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
-  #def getCurrentProcessId : UInt32
-    #C.GetCurrentProcessId
-  #end
+  # Forwards to `LibC.GetCurrentProcessId`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getCurrentProcessId : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetCurrentProcessId, UInt32)
+    {% end %}
+  end
 
-  #def exitProcess(uExitCode : UInt32) : Void
-    #C.ExitProcess(uExitCode)
-  #end
+  # Forwards to `LibC.ExitProcess`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def exitProcess(uExitCode : UInt32) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.ExitProcess(Win32cr::LibCBridge.arg(uExitCode, ::LibC::UInt))
+    {% end %}
+  end
 
-  #def terminateProcess(hProcess : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
-    #C.TerminateProcess(hProcess, uExitCode)
-  #end
+  # Forwards to `LibC.TerminateProcess`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def terminateProcess(hProcess : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.TerminateProcess(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(uExitCode, ::LibC::UInt)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def getExitCodeProcess(hProcess : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
-    #C.GetExitCodeProcess(hProcess, lpExitCode)
-  #end
+  # Forwards to `LibC.GetExitCodeProcess`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getExitCodeProcess(hProcess : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetExitCodeProcess(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpExitCode, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def switchToThread : Win32cr::Foundation::BOOL
-    #C.SwitchToThread
-  #end
+  # Forwards to `LibC.SwitchToThread`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def switchToThread : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SwitchToThread, Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def createThread(lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : Win32cr::System::Threading::THREAD_CREATION_FLAGS, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
     {% if !flag?(:docs) %}
@@ -1740,13 +1810,19 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def getCurrentThread : Win32cr::Foundation::HANDLE
-    #C.GetCurrentThread
-  #end
+  # Forwards to `LibC.GetCurrentThread`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getCurrentThread : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetCurrentThread, Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
-  #def getCurrentThreadId : UInt32
-    #C.GetCurrentThreadId
-  #end
+  # Forwards to `LibC.GetCurrentThreadId`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getCurrentThreadId : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetCurrentThreadId, UInt32)
+    {% end %}
+  end
 
   def openThread(dwDesiredAccess : Win32cr::System::Threading::THREAD_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwThreadId : UInt32) : Win32cr::Foundation::HANDLE
     {% if !flag?(:docs) %}
@@ -1796,25 +1872,40 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def suspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
-    #C.SuspendThread(hThread)
-  #end
+  # Forwards to `LibC.SuspendThread`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def suspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SuspendThread(Win32cr::LibCBridge.arg(hThread, ::LibC::HANDLE)), UInt32)
+    {% end %}
+  end
 
-  #def resumeThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
-    #C.ResumeThread(hThread)
-  #end
+  # Forwards to `LibC.ResumeThread`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def resumeThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ResumeThread(Win32cr::LibCBridge.arg(hThread, ::LibC::HANDLE)), UInt32)
+    {% end %}
+  end
 
-  #def tlsAlloc : UInt32
-    #C.TlsAlloc
-  #end
+  # Forwards to `LibC.TlsAlloc`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def tlsAlloc : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.TlsAlloc, UInt32)
+    {% end %}
+  end
 
-  #def tlsGetValue(dwTlsIndex : UInt32) : Void*
-    #C.TlsGetValue(dwTlsIndex)
-  #end
+  # Forwards to `LibC.TlsGetValue`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def tlsGetValue(dwTlsIndex : UInt32) : Void*
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.TlsGetValue(Win32cr::LibCBridge.arg(dwTlsIndex, ::LibC::DWORD)), Pointer(Void))
+    {% end %}
+  end
 
-  #def tlsSetValue(dwTlsIndex : UInt32, lpTlsValue : Void*) : Win32cr::Foundation::BOOL
-    #C.TlsSetValue(dwTlsIndex, lpTlsValue)
-  #end
+  # Forwards to `LibC.TlsSetValue`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def tlsSetValue(dwTlsIndex : UInt32, lpTlsValue : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.TlsSetValue(Win32cr::LibCBridge.arg(dwTlsIndex, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpTlsValue, Pointer(Void))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def tlsFree(dwTlsIndex : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1828,9 +1919,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def createProcessW(lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
-    #C.CreateProcessW(lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
-  #end
+  # Forwards to `LibC.CreateProcessW`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def createProcessW(lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateProcessW(Win32cr::LibCBridge.arg(lpApplicationName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpCommandLine, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpProcessAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES)), Win32cr::LibCBridge.arg(lpThreadAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES)), Win32cr::LibCBridge.arg(bInheritHandles, ::LibC::BOOL), Win32cr::LibCBridge.arg(dwCreationFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpEnvironment, Pointer(Void)), Win32cr::LibCBridge.arg(lpCurrentDirectory, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpStartupInfo, Pointer(::LibC::STARTUPINFOW)), Win32cr::LibCBridge.arg(lpProcessInformation, Pointer(::LibC::PROCESS_INFORMATION))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setProcessShutdownParameters(dwLevel : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1886,9 +1980,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def setThreadStackGuarantee(stack_size_in_bytes : UInt32*) : Win32cr::Foundation::BOOL
-    #C.SetThreadStackGuarantee(stack_size_in_bytes)
-  #end
+  # Forwards to `LibC.SetThreadStackGuarantee`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def setThreadStackGuarantee(stack_size_in_bytes : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetThreadStackGuarantee(Win32cr::LibCBridge.arg(stack_size_in_bytes, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getProcessId(process : Win32cr::Foundation::HANDLE) : UInt32
     {% if !flag?(:docs) %}
@@ -1962,9 +2059,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def getCurrentThreadStackLimits(low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*) : Void
-    #C.GetCurrentThreadStackLimits(low_limit, high_limit)
-  #end
+  # Forwards to `LibC.GetCurrentThreadStackLimits`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getCurrentThreadStackLimits(low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.GetCurrentThreadStackLimits(Win32cr::LibCBridge.arg(low_limit, Pointer(::LibC::ULONG_PTR)), Win32cr::LibCBridge.arg(high_limit, Pointer(::LibC::ULONG_PTR)))
+    {% end %}
+  end
 
   def getProcessMitigationPolicy(hProcess : Win32cr::Foundation::HANDLE, mitigation_policy : Win32cr::System::Threading::PROCESS_MITIGATION_POLICY, lpBuffer : Void*, dwLength : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1984,9 +2084,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def openProcess(dwDesiredAccess : Win32cr::System::Threading::PROCESS_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwProcessId : UInt32) : Win32cr::Foundation::HANDLE
-    #C.OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId)
-  #end
+  # Forwards to `LibC.OpenProcess`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def openProcess(dwDesiredAccess : Win32cr::System::Threading::PROCESS_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwProcessId : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.OpenProcess(Win32cr::LibCBridge.arg(dwDesiredAccess, ::LibC::DWORD), Win32cr::LibCBridge.arg(bInheritHandle, ::LibC::BOOL), Win32cr::LibCBridge.arg(dwProcessId, ::LibC::DWORD)), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def isProcessorFeaturePresent(processor_feature : Win32cr::System::Threading::PROCESSOR_FEATURE_ID) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -2162,9 +2265,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def setThreadDescription(hThread : Win32cr::Foundation::HANDLE, lpThreadDescription : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-    #C.SetThreadDescription(hThread, lpThreadDescription)
-  #end
+  # Forwards to `LibC.SetThreadDescription`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def setThreadDescription(hThread : Win32cr::Foundation::HANDLE, lpThreadDescription : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetThreadDescription(Win32cr::LibCBridge.arg(hThread, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpThreadDescription, ::LibC::LPWSTR)), Win32cr::Foundation::HRESULT)
+    {% end %}
+  end
 
   def getThreadDescription(hThread : Win32cr::Foundation::HANDLE, ppszThreadDescription : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
@@ -2868,9 +2974,12 @@ module Win32cr::System::Threading
     {% end %}
   end
 
-  #def getProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
-    #C.GetProcessAffinityMask(hProcess, lpProcessAffinityMask, lpSystemAffinityMask)
-  #end
+  # Forwards to `LibC.GetProcessAffinityMask`, which Crystal's standard library declares in `c/winbase`.
+  def getProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetProcessAffinityMask(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpProcessAffinityMask, Pointer(::LibC::DWORD_PTR)), Win32cr::LibCBridge.arg(lpSystemAffinityMask, Pointer(::LibC::DWORD_PTR))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, dwProcessAffinityMask : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -3276,15 +3385,15 @@ module Win32cr::System::Threading
     # :nodoc:
     fun InitializeCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun EnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun LeaveCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun InitializeCriticalSectionAndSpinCount(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*, dwSpinCount : UInt32) : Win32cr::Foundation::BOOL
 
@@ -3294,11 +3403,11 @@ module Win32cr::System::Threading
     # :nodoc:
     fun SetCriticalSectionSpinCount(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*, dwSpinCount : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun TryEnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun DeleteCriticalSection(lpCriticalSection : Win32cr::System::Threading::CRITICAL_SECTION*) : Void
 
@@ -3314,19 +3423,19 @@ module Win32cr::System::Threading
     # :nodoc:
     fun InitOnceComplete(lpInitOnce : Win32cr::System::Threading::INIT_ONCE*, dwFlags : UInt32, lpContext : Void*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun InitializeConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun WakeConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun WakeAllConditionVariable(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun SleepConditionVariableCS(condition_variable : Win32cr::System::Threading::CONDITION_VARIABLE*, critical_section : Win32cr::System::Threading::CRITICAL_SECTION*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
 
@@ -3345,7 +3454,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun ReleaseMutex(hMutex : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun WaitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : Win32cr::Foundation::WAIT_EVENT
 
@@ -3388,11 +3497,11 @@ module Win32cr::System::Threading
     # :nodoc:
     fun SetWaitableTimerEx(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Int64*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, wake_context : Win32cr::System::Threading::REASON_CONTEXT*, tolerable_delay : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun SetWaitableTimer(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Int64*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun CancelWaitableTimer(hTimer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
@@ -3411,7 +3520,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun CreateSemaphoreExW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun CreateWaitableTimerExW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpTimerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
 
@@ -3424,7 +3533,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun DeleteSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::SYNCHRONIZATION_BARRIER*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/synchapi)
     # :nodoc:
     #fun Sleep(dwMilliseconds : UInt32) : Void
 
@@ -3464,38 +3573,38 @@ module Win32cr::System::Threading
     # :nodoc:
     fun QueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun QueueUserAPC(pfnAPC : Win32cr::Foundation::PAPCFUNC, hThread : Win32cr::Foundation::HANDLE, dwData : LibC::UIntPtrT) : UInt32
 
     # :nodoc:
     fun QueueUserAPC2(apc_routine : Win32cr::Foundation::PAPCFUNC, thread : Win32cr::Foundation::HANDLE, data : LibC::UIntPtrT, flags : Win32cr::System::Threading::QUEUE_USER_APC_FLAGS) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetProcessTimes(hProcess : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetCurrentProcess : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetCurrentProcessId : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun ExitProcess(uExitCode : UInt32) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun TerminateProcess(hProcess : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetExitCodeProcess(hProcess : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun SwitchToThread : Win32cr::Foundation::BOOL
 
@@ -3505,11 +3614,11 @@ module Win32cr::System::Threading
     # :nodoc:
     fun CreateRemoteThread(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetCurrentThread : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetCurrentThreadId : UInt32
 
@@ -3537,23 +3646,23 @@ module Win32cr::System::Threading
     # :nodoc:
     fun GetExitCodeThread(hThread : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun SuspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun ResumeThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun TlsAlloc : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun TlsGetValue(dwTlsIndex : UInt32) : Void*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun TlsSetValue(dwTlsIndex : UInt32, lpTlsValue : Void*) : Win32cr::Foundation::BOOL
 
@@ -3563,7 +3672,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun CreateProcessA(lpApplicationName : Win32cr::Foundation::PSTR, lpCommandLine : Win32cr::Foundation::PSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun CreateProcessW(lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
 
@@ -3594,7 +3703,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun GetPriorityClass(hProcess : Win32cr::Foundation::HANDLE) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun SetThreadStackGuarantee(stack_size_in_bytes : UInt32*) : Win32cr::Foundation::BOOL
 
@@ -3634,7 +3743,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun CreateRemoteThreadEx(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetCurrentThreadStackLimits(low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*) : Void
 
@@ -3647,7 +3756,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun GetThreadTimes(hThread : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun OpenProcess(dwDesiredAccess : Win32cr::System::Threading::PROCESS_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwProcessId : UInt32) : Win32cr::Foundation::HANDLE
 
@@ -3738,7 +3847,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun GetMachineTypeAttributes(machine : UInt16, machine_type_attributes : Win32cr::System::Threading::MACHINE_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun SetThreadDescription(hThread : Win32cr::Foundation::HANDLE, lpThreadDescription : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
@@ -4093,7 +4202,7 @@ module Win32cr::System::Threading
     # :nodoc:
     fun SetProcessRestrictionExemption(fEnableExemption : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun GetProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 

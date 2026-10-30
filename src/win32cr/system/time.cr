@@ -1,4 +1,6 @@
 require "./../foundation.cr"
+require "c/timezoneapi"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Time
   extend self
@@ -67,13 +69,19 @@ module Win32cr::System::Time
     {% end %}
   end
 
-  #def getTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : UInt32
-    #C.GetTimeZoneInformation(lpTimeZoneInformation)
-  #end
+  # Forwards to `LibC.GetTimeZoneInformation`, which Crystal's standard library declares in `c/timezoneapi`.
+  def getTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetTimeZoneInformation(Win32cr::LibCBridge.arg(lpTimeZoneInformation, Pointer(::LibC::TIME_ZONE_INFORMATION))), UInt32)
+    {% end %}
+  end
 
-  #def setTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
-    #C.SetTimeZoneInformation(lpTimeZoneInformation)
-  #end
+  # Forwards to `LibC.SetTimeZoneInformation`, which Crystal's standard library declares in `c/timezoneapi`.
+  def setTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetTimeZoneInformation(Win32cr::LibCBridge.arg(lpTimeZoneInformation, Pointer(::LibC::TIME_ZONE_INFORMATION))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setDynamicTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -81,9 +89,12 @@ module Win32cr::System::Time
     {% end %}
   end
 
-  #def getDynamicTimeZoneInformation(pTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
-    #C.GetDynamicTimeZoneInformation(pTimeZoneInformation)
-  #end
+  # Forwards to `LibC.GetDynamicTimeZoneInformation`, which Crystal's standard library declares in `c/timezoneapi`.
+  def getDynamicTimeZoneInformation(pTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetDynamicTimeZoneInformation(Win32cr::LibCBridge.arg(pTimeZoneInformation, Pointer(::LibC::DYNAMIC_TIME_ZONE_INFORMATION))), UInt32)
+    {% end %}
+  end
 
   def getTimeZoneInformationForYear(wYear : UInt16, pdtzi : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, ptzi : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -143,18 +154,18 @@ module Win32cr::System::Time
     # :nodoc:
     fun SystemTimeToFileTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/timezoneapi)
     # :nodoc:
     #fun GetTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/timezoneapi)
     # :nodoc:
     #fun SetTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun SetDynamicTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/timezoneapi)
     # :nodoc:
     #fun GetDynamicTimeZoneInformation(pTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
 

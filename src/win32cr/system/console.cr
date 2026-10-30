@@ -2,6 +2,10 @@ require "./../foundation.cr"
 require "./../graphics/gdi.cr"
 require "./../security.cr"
 require "./../ui/windows_and_messaging.cr"
+require "c/consoleapi"
+require "c/consoleapi2"
+require "c/processenv"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Console
   extend self
@@ -478,21 +482,33 @@ module Win32cr::System::Console
     {% end %}
   end
 
-  #def getConsoleCP : UInt32
-    #C.GetConsoleCP
-  #end
+  # Forwards to `LibC.GetConsoleCP`, which Crystal's standard library declares in `c/consoleapi`.
+  def getConsoleCP : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetConsoleCP, UInt32)
+    {% end %}
+  end
 
-  #def getConsoleOutputCP : UInt32
-    #C.GetConsoleOutputCP
-  #end
+  # Forwards to `LibC.GetConsoleOutputCP`, which Crystal's standard library declares in `c/consoleapi`.
+  def getConsoleOutputCP : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetConsoleOutputCP, UInt32)
+    {% end %}
+  end
 
-  #def getConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, lpMode : Win32cr::System::Console::CONSOLE_MODE*) : Win32cr::Foundation::BOOL
-    #C.GetConsoleMode(hConsoleHandle, lpMode)
-  #end
+  # Forwards to `LibC.GetConsoleMode`, which Crystal's standard library declares in `c/consoleapi`.
+  def getConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, lpMode : Win32cr::System::Console::CONSOLE_MODE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetConsoleMode(Win32cr::LibCBridge.arg(hConsoleHandle, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpMode, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def setConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, dwMode : Win32cr::System::Console::CONSOLE_MODE) : Win32cr::Foundation::BOOL
-    #C.SetConsoleMode(hConsoleHandle, dwMode)
-  #end
+  # Forwards to `LibC.SetConsoleMode`, which Crystal's standard library declares in `c/consoleapi`.
+  def setConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, dwMode : Win32cr::System::Console::CONSOLE_MODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetConsoleMode(Win32cr::LibCBridge.arg(hConsoleHandle, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwMode, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getNumberOfConsoleInputEvents(hConsoleInput : Win32cr::Foundation::HANDLE, lpNumberOfEvents : UInt32*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -530,9 +546,12 @@ module Win32cr::System::Console
     {% end %}
   end
 
-  #def readConsoleW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
-    #C.ReadConsoleW(hConsoleInput, lpBuffer, nNumberOfCharsToRead, lpNumberOfCharsRead, pInputControl)
-  #end
+  # Forwards to `LibC.ReadConsoleW`, which Crystal's standard library declares in `c/consoleapi`.
+  def readConsoleW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ReadConsoleW(Win32cr::LibCBridge.arg(hConsoleInput, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpBuffer, Pointer(Void)), Win32cr::LibCBridge.arg(nNumberOfCharsToRead, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNumberOfCharsRead, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(pInputControl, Pointer(Void))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def writeConsoleA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::Foundation::PSTR, nNumberOfCharsToWrite : UInt32, lpNumberOfCharsWritten : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -546,9 +565,12 @@ module Win32cr::System::Console
     {% end %}
   end
 
-  #def setConsoleCtrlHandler(handler_routine : Win32cr::System::Console::PHANDLER_ROUTINE, add : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
-    #C.SetConsoleCtrlHandler(handler_routine, add)
-  #end
+  # Forwards to `LibC.SetConsoleCtrlHandler`, which Crystal's standard library declares in `c/consoleapi`.
+  def setConsoleCtrlHandler(handler_routine : Win32cr::System::Console::PHANDLER_ROUTINE, add : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetConsoleCtrlHandler(Win32cr::LibCBridge.arg(handler_routine, ::LibC::PHANDLER_ROUTINE), Win32cr::LibCBridge.arg(add, ::LibC::BOOL)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def createPseudoConsole(size : Win32cr::System::Console::COORD, hInput : Win32cr::Foundation::HANDLE, hOutput : Win32cr::Foundation::HANDLE, dwFlags : UInt32, phPC : Win32cr::System::Console::HPCON*) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
@@ -616,13 +638,19 @@ module Win32cr::System::Console
     {% end %}
   end
 
-  #def setConsoleCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
-    #C.SetConsoleCP(wCodePageID)
-  #end
+  # Forwards to `LibC.SetConsoleCP`, which Crystal's standard library declares in `c/consoleapi2`.
+  def setConsoleCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetConsoleCP(Win32cr::LibCBridge.arg(wCodePageID, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def setConsoleOutputCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
-    #C.SetConsoleOutputCP(wCodePageID)
-  #end
+  # Forwards to `LibC.SetConsoleOutputCP`, which Crystal's standard library declares in `c/consoleapi2`.
+  def setConsoleOutputCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetConsoleOutputCP(Win32cr::LibCBridge.arg(wCodePageID, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getConsoleCursorInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleCursorInfo : Win32cr::System::Console::CONSOLE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1248,9 +1276,12 @@ module Win32cr::System::Console
     {% end %}
   end
 
-  #def getStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE) : Win32cr::Foundation::HANDLE
-    #C.GetStdHandle(nStdHandle)
-  #end
+  # Forwards to `LibC.GetStdHandle`, which Crystal's standard library declares in `c/processenv`.
+  def getStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetStdHandle(Win32cr::LibCBridge.arg(nStdHandle, ::LibC::DWORD)), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def setStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE, hHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1280,19 +1311,19 @@ module Win32cr::System::Console
     # :nodoc:
     fun AttachConsole(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi)
     # :nodoc:
     #fun GetConsoleCP : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi)
     # :nodoc:
     #fun GetConsoleOutputCP : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi)
     # :nodoc:
     #fun GetConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, lpMode : Win32cr::System::Console::CONSOLE_MODE*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi)
     # :nodoc:
     #fun SetConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, dwMode : Win32cr::System::Console::CONSOLE_MODE) : Win32cr::Foundation::BOOL
 
@@ -1314,7 +1345,7 @@ module Win32cr::System::Console
     # :nodoc:
     fun ReadConsoleA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi)
     # :nodoc:
     #fun ReadConsoleW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
 
@@ -1324,7 +1355,7 @@ module Win32cr::System::Console
     # :nodoc:
     fun WriteConsoleW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::Foundation::PWSTR, nNumberOfCharsToWrite : UInt32, lpNumberOfCharsWritten : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi)
     # :nodoc:
     #fun SetConsoleCtrlHandler(handler_routine : Win32cr::System::Console::PHANDLER_ROUTINE, add : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
@@ -1361,11 +1392,11 @@ module Win32cr::System::Console
     # :nodoc:
     fun FlushConsoleInputBuffer(hConsoleInput : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi2)
     # :nodoc:
     #fun SetConsoleCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/consoleapi2)
     # :nodoc:
     #fun SetConsoleOutputCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
 
@@ -1681,7 +1712,7 @@ module Win32cr::System::Console
     # :nodoc:
     fun ConsoleControl(command : Win32cr::System::Console::CONSOLECONTROL, console_information : Void*, console_information_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processenv)
     # :nodoc:
     #fun GetStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE) : Win32cr::Foundation::HANDLE
 

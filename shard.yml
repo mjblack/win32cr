@@ -11,4 +11,4 @@ license: MIT
 dependencies:
   winmd:
     github: mjblack/winmd
-    version: "~> 1.4.0"
+    version: "~> 1.5.0"

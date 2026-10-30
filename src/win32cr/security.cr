@@ -1,4 +1,6 @@
 require "./foundation.cr"
+require "c/winbase"
+require "./libc_bridge.cr"
 
 module Win32cr::Security
   extend self
@@ -1898,9 +1900,12 @@ module Win32cr::Security
     {% end %}
   end
 
-  #def lookupAccountSidW(lpSystemName : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID, name : Win32cr::Foundation::PWSTR, cchName : UInt32*, referenced_domain_name : Win32cr::Foundation::PWSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
-    #C.LookupAccountSidW(lpSystemName, sid, name, cchName, referenced_domain_name, cchReferencedDomainName, peUse)
-  #end
+  # Forwards to `LibC.LookupAccountSidW`, which Crystal's standard library declares in `c/winbase`.
+  def lookupAccountSidW(lpSystemName : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID, name : Win32cr::Foundation::PWSTR, cchName : UInt32*, referenced_domain_name : Win32cr::Foundation::PWSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.LookupAccountSidW(Win32cr::LibCBridge.arg(lpSystemName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(sid, Pointer(::LibC::SID)), Win32cr::LibCBridge.arg(name, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(cchName, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(referenced_domain_name, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(cchReferencedDomainName, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(peUse, Pointer(::LibC::SID_NAME_USE))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def lookupAccountNameA(lpSystemName : Win32cr::Foundation::PSTR, lpAccountName : Win32cr::Foundation::PSTR, sid : Win32cr::Security::PSID, cbSid : UInt32*, referenced_domain_name : Win32cr::Foundation::PSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -1908,9 +1913,12 @@ module Win32cr::Security
     {% end %}
   end
 
-  #def lookupAccountNameW(lpSystemName : Win32cr::Foundation::PWSTR, lpAccountName : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID, cbSid : UInt32*, referenced_domain_name : Win32cr::Foundation::PWSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
-    #C.LookupAccountNameW(lpSystemName, lpAccountName, sid, cbSid, referenced_domain_name, cchReferencedDomainName, peUse)
-  #end
+  # Forwards to `LibC.LookupAccountNameW`, which Crystal's standard library declares in `c/winbase`.
+  def lookupAccountNameW(lpSystemName : Win32cr::Foundation::PWSTR, lpAccountName : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID, cbSid : UInt32*, referenced_domain_name : Win32cr::Foundation::PWSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.LookupAccountNameW(Win32cr::LibCBridge.arg(lpSystemName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpAccountName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(sid, Pointer(::LibC::SID)), Win32cr::LibCBridge.arg(cbSid, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(referenced_domain_name, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(cchReferencedDomainName, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(peUse, Pointer(::LibC::SID_NAME_USE))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def lookupPrivilegeValueA(lpSystemName : Win32cr::Foundation::PSTR, lpName : Win32cr::Foundation::PSTR, lpLuid : Win32cr::Foundation::LUID*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -2341,14 +2349,14 @@ module Win32cr::Security
     # :nodoc:
     fun LookupAccountSidA(lpSystemName : Win32cr::Foundation::PSTR, sid : Win32cr::Security::PSID, name : Win32cr::Foundation::PSTR, cchName : UInt32*, referenced_domain_name : Win32cr::Foundation::PSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun LookupAccountSidW(lpSystemName : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID, name : Win32cr::Foundation::PWSTR, cchName : UInt32*, referenced_domain_name : Win32cr::Foundation::PWSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun LookupAccountNameA(lpSystemName : Win32cr::Foundation::PSTR, lpAccountName : Win32cr::Foundation::PSTR, sid : Win32cr::Security::PSID, cbSid : UInt32*, referenced_domain_name : Win32cr::Foundation::PSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun LookupAccountNameW(lpSystemName : Win32cr::Foundation::PWSTR, lpAccountName : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID, cbSid : UInt32*, referenced_domain_name : Win32cr::Foundation::PWSTR, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
 

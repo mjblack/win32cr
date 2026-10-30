@@ -5,7 +5,8 @@
 #    repo) into winmd/, using the fetch script shipped with the winmd shard.
 # 3. Runs `winmd generate --source-format winmd` with the override files in
 #    this directory (data_type_aliases.json, dll_exceptions.json,
-#    fun_exceptions.json, overrides.json).
+#    overrides.json). Functions that Crystal's own LibC declares are found
+#    by winmd from the installed compiler; they need no exception list.
 #
 # Environment:
 #   WINMD_CACHE=1   reuse an already fetched winmd\Windows.Win32.winmd

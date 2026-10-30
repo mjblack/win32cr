@@ -2,6 +2,8 @@ require "./../networking/win_sock.cr"
 require "./../foundation.cr"
 require "./ndis.cr"
 require "./../system/io.cr"
+require "c/netioapi"
+require "./../libc_bridge.cr"
 
 module Win32cr::NetworkManagement::IpHelper
   extend self
@@ -4254,13 +4256,19 @@ module Win32cr::NetworkManagement::IpHelper
     {% end %}
   end
 
-  #def ifNametoindex(interface_name : Win32cr::Foundation::PSTR) : UInt32
-    #C.if_nametoindex(interface_name)
-  #end
+  # Forwards to `LibC.if_nametoindex`, which Crystal's standard library declares in `c/netioapi`.
+  def ifNametoindex(interface_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.if_nametoindex(Win32cr::LibCBridge.arg(interface_name, Pointer(::LibC::Char))), UInt32)
+    {% end %}
+  end
 
-  #def ifIndextoname(interface_index : UInt32, interface_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
-    #C.if_indextoname(interface_index, interface_name)
-  #end
+  # Forwards to `LibC.if_indextoname`, which Crystal's standard library declares in `c/netioapi`.
+  def ifIndextoname(interface_index : UInt32, interface_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.if_indextoname(Win32cr::LibCBridge.arg(interface_index, ::LibC::UInt), Win32cr::LibCBridge.arg(interface_name, Pointer(::LibC::Char))), Win32cr::Foundation::PSTR)
+    {% end %}
+  end
 
   def getCurrentThreadCompartmentId : Win32cr::NetworkManagement::Ndis::NET_IF_COMPARTMENT_ID
     {% if !flag?(:docs) %}
@@ -5012,11 +5020,11 @@ module Win32cr::NetworkManagement::IpHelper
     # :nodoc:
     fun ConvertInterfaceGuidToLuid(interface_guid : LibC::GUID*, interface_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH*) : Win32cr::Foundation::WIN32_ERROR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/netioapi)
     # :nodoc:
     #fun if_nametoindex(interface_name : Win32cr::Foundation::PSTR) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/netioapi)
     # :nodoc:
     #fun if_indextoname(interface_index : UInt32, interface_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
 

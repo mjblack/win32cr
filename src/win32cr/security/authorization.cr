@@ -3,6 +3,8 @@ require "./../security.cr"
 require "./../system/com.cr"
 require "./../system/variant.cr"
 require "./../system/threading.cr"
+require "c/sddl"
+require "./../libc_bridge.cr"
 
 module Win32cr::Security::Authorization
   extend self
@@ -6023,9 +6025,12 @@ module Win32cr::Security::Authorization
     {% end %}
   end
 
-  #def convertSidToStringSidW(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
-    #C.ConvertSidToStringSidW(sid, string_sid)
-  #end
+  # Forwards to `LibC.ConvertSidToStringSidW`, which Crystal's standard library declares in `c/sddl`.
+  def convertSidToStringSidW(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ConvertSidToStringSidW(Win32cr::LibCBridge.arg(sid, Pointer(::LibC::SID)), Win32cr::LibCBridge.arg(string_sid, Pointer(::LibC::LPWSTR))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def convertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6033,9 +6038,12 @@ module Win32cr::Security::Authorization
     {% end %}
   end
 
-  #def convertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
-    #C.ConvertStringSidToSidW(string_sid, sid)
-  #end
+  # Forwards to `LibC.ConvertStringSidToSidW`, which Crystal's standard library declares in `c/sddl`.
+  def convertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ConvertStringSidToSidW(Win32cr::LibCBridge.arg(string_sid, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(sid, Pointer(Pointer(::LibC::SID)))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def convertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor : Win32cr::Foundation::PSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6314,14 +6322,14 @@ module Win32cr::Security::Authorization
     # :nodoc:
     fun ConvertSidToStringSidA(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/sddl)
     # :nodoc:
     #fun ConvertSidToStringSidW(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun ConvertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/sddl)
     # :nodoc:
     #fun ConvertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
 

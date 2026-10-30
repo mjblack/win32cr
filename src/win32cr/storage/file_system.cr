@@ -3,6 +3,9 @@ require "./../security.cr"
 require "./../system/com.cr"
 require "./../security/cryptography.cr"
 require "./../system/io.cr"
+require "c/fileapi"
+require "c/winbase"
+require "./../libc_bridge.cr"
 
 module Win32cr::Storage::FileSystem
   extend self
@@ -4317,9 +4320,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def createDirectoryW(lpPathName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
-    #C.CreateDirectoryW(lpPathName, lpSecurityAttributes)
-  #end
+  # Forwards to `LibC.CreateDirectoryW`, which Crystal's standard library declares in `c/fileapi`.
+  def createDirectoryW(lpPathName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateDirectoryW(Win32cr::LibCBridge.arg(lpPathName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpSecurityAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def createFileA(lpFileName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
     {% if !flag?(:docs) %}
@@ -4327,9 +4333,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def createFileW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
-    #C.CreateFileW(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile)
-  #end
+  # Forwards to `LibC.CreateFileW`, which Crystal's standard library declares in `c/fileapi`.
+  def createFileW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateFileW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(dwDesiredAccess, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwShareMode, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpSecurityAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES)), Win32cr::LibCBridge.arg(dwCreationDisposition, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwFlagsAndAttributes, ::LibC::DWORD), Win32cr::LibCBridge.arg(hTemplateFile, ::LibC::HANDLE)), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def defineDosDeviceW(dwFlags : Win32cr::Storage::FileSystem::DEFINE_DOS_DEVICE_FLAGS, lpDeviceName : Win32cr::Foundation::PWSTR, lpTargetPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4343,9 +4352,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def deleteFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
-    #C.DeleteFileW(lpFileName)
-  #end
+  # Forwards to `LibC.DeleteFileW`, which Crystal's standard library declares in `c/fileapi`.
+  def deleteFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.DeleteFileW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def deleteVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4359,9 +4371,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def findClose(hFindFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
-    #C.FindClose(hFindFile)
-  #end
+  # Forwards to `LibC.FindClose`, which Crystal's standard library declares in `c/fileapi`.
+  def findClose(hFindFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FindClose(Win32cr::LibCBridge.arg(hFindFile, ::LibC::HANDLE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def findCloseChangeNotification(hChangeHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4387,9 +4402,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def findFirstFileW(lpFileName : Win32cr::Foundation::PWSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::HANDLE
-    #C.FindFirstFileW(lpFileName, lpFindFileData)
-  #end
+  # Forwards to `LibC.FindFirstFileW`, which Crystal's standard library declares in `c/fileapi`.
+  def findFirstFileW(lpFileName : Win32cr::Foundation::PWSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FindFirstFileW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpFindFileData, Pointer(::LibC::WIN32_FIND_DATAW))), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def findFirstFileExA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::FINDEX_INFO_LEVELS, lpFindFileData : Void*, fSearchOp : Win32cr::Storage::FileSystem::FINDEX_SEARCH_OPS, lpSearchFilter : Void*, dwAdditionalFlags : Win32cr::Storage::FileSystem::FIND_FIRST_EX_FLAGS) : Win32cr::Foundation::HANDLE
     {% if !flag?(:docs) %}
@@ -4421,9 +4439,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def findNextFileW(hFindFile : Win32cr::Foundation::HANDLE, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::BOOL
-    #C.FindNextFileW(hFindFile, lpFindFileData)
-  #end
+  # Forwards to `LibC.FindNextFileW`, which Crystal's standard library declares in `c/fileapi`.
+  def findNextFileW(hFindFile : Win32cr::Foundation::HANDLE, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FindNextFileW(Win32cr::LibCBridge.arg(hFindFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpFindFileData, Pointer(::LibC::WIN32_FIND_DATAW))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def findNextVolumeW(hFindVolume : Win32cr::Foundation::HANDLE, lpszVolumeName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4437,9 +4458,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def flushFileBuffers(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
-    #C.FlushFileBuffers(hFile)
-  #end
+  # Forwards to `LibC.FlushFileBuffers`, which Crystal's standard library declares in `c/fileapi`.
+  def flushFileBuffers(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FlushFileBuffers(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getDiskFreeSpaceA(lpRootPathName : Win32cr::Foundation::PSTR, lpSectorsPerCluster : UInt32*, lpBytesPerSector : UInt32*, lpNumberOfFreeClusters : UInt32*, lpTotalNumberOfClusters : UInt32*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4495,9 +4519,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def getFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR) : UInt32
-    #C.GetFileAttributesW(lpFileName)
-  #end
+  # Forwards to `LibC.GetFileAttributesW`, which Crystal's standard library declares in `c/fileapi`.
+  def getFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetFileAttributesW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR)), UInt32)
+    {% end %}
+  end
 
   def getFileAttributesExA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4505,13 +4532,19 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def getFileAttributesExW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
-    #C.GetFileAttributesExW(lpFileName, fInfoLevelId, lpFileInformation)
-  #end
+  # Forwards to `LibC.GetFileAttributesExW`, which Crystal's standard library declares in `c/fileapi`.
+  def getFileAttributesExW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetFileAttributesExW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(fInfoLevelId, ::LibC::GET_FILEEX_INFO_LEVELS), Win32cr::LibCBridge.arg(lpFileInformation, Pointer(Void))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def getFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, lpFileInformation : Win32cr::Storage::FileSystem::BY_HANDLE_FILE_INFORMATION*) : Win32cr::Foundation::BOOL
-    #C.GetFileInformationByHandle(hFile, lpFileInformation)
-  #end
+  # Forwards to `LibC.GetFileInformationByHandle`, which Crystal's standard library declares in `c/fileapi`.
+  def getFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, lpFileInformation : Win32cr::Storage::FileSystem::BY_HANDLE_FILE_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetFileInformationByHandle(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpFileInformation, Pointer(::LibC::BY_HANDLE_FILE_INFORMATION))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getFileSize(hFile : Win32cr::Foundation::HANDLE, lpFileSizeHigh : UInt32*) : UInt32
     {% if !flag?(:docs) %}
@@ -4525,9 +4558,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def getFileType(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FILE_TYPE
-    #C.GetFileType(hFile)
-  #end
+  # Forwards to `LibC.GetFileType`, which Crystal's standard library declares in `c/fileapi`.
+  def getFileType(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FILE_TYPE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetFileType(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE)), Win32cr::Storage::FileSystem::FILE_TYPE)
+    {% end %}
+  end
 
   def getFinalPathNameByHandleA(hFile : Win32cr::Foundation::HANDLE, lpszFilePath : Win32cr::Foundation::PSTR, cchFilePath : UInt32, dwFlags : Win32cr::Storage::FileSystem::GETFINALPATHNAMEBYHANDLE_FLAGS) : UInt32
     {% if !flag?(:docs) %}
@@ -4547,9 +4583,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def getFullPathNameW(lpFileName : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, lpFilePart : Win32cr::Foundation::PWSTR*) : UInt32
-    #C.GetFullPathNameW(lpFileName, nBufferLength, lpBuffer, lpFilePart)
-  #end
+  # Forwards to `LibC.GetFullPathNameW`, which Crystal's standard library declares in `c/fileapi`.
+  def getFullPathNameW(lpFileName : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, lpFilePart : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetFullPathNameW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(nBufferLength, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpBuffer, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpFilePart, Pointer(::LibC::LPWSTR))), UInt32)
+    {% end %}
+  end
 
   def getFullPathNameA(lpFileName : Win32cr::Foundation::PSTR, nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PSTR, lpFilePart : Win32cr::Foundation::PSTR*) : UInt32
     {% if !flag?(:docs) %}
@@ -4629,9 +4668,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def lockFileEx(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Storage::FileSystem::LOCK_FILE_FLAGS, dwReserved : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
-    #C.LockFileEx(hFile, dwFlags, dwReserved, nNumberOfBytesToLockLow, nNumberOfBytesToLockHigh, lpOverlapped)
-  #end
+  # Forwards to `LibC.LockFileEx`, which Crystal's standard library declares in `c/fileapi`.
+  def lockFileEx(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Storage::FileSystem::LOCK_FILE_FLAGS, dwReserved : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.LockFileEx(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwReserved, ::LibC::DWORD), Win32cr::LibCBridge.arg(nNumberOfBytesToLockLow, ::LibC::DWORD), Win32cr::LibCBridge.arg(nNumberOfBytesToLockHigh, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::OVERLAPPED))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def queryDosDeviceW(lpDeviceName : Win32cr::Foundation::PWSTR, lpTargetPath : Win32cr::Foundation::PWSTR, ucchMax : UInt32) : UInt32
     {% if !flag?(:docs) %}
@@ -4639,9 +4681,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def readFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToRead : UInt32, lpNumberOfBytesRead : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
-    #C.ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped)
-  #end
+  # Forwards to `LibC.ReadFile`, which Crystal's standard library declares in `c/fileapi`.
+  def readFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToRead : UInt32, lpNumberOfBytesRead : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ReadFile(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpBuffer, Pointer(Void)), Win32cr::LibCBridge.arg(nNumberOfBytesToRead, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNumberOfBytesRead, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::OVERLAPPED))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def readFileEx(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToRead : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4661,13 +4706,19 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def removeDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
-    #C.RemoveDirectoryW(lpPathName)
-  #end
+  # Forwards to `LibC.RemoveDirectoryW`, which Crystal's standard library declares in `c/fileapi`.
+  def removeDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.RemoveDirectoryW(Win32cr::LibCBridge.arg(lpPathName, ::LibC::LPWSTR)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def setEndOfFile(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
-    #C.SetEndOfFile(hFile)
-  #end
+  # Forwards to `LibC.SetEndOfFile`, which Crystal's standard library declares in `c/fileapi`.
+  def setEndOfFile(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetEndOfFile(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setFileAttributesA(lpFileName : Win32cr::Foundation::PSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4675,13 +4726,19 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def setFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
-    #C.SetFileAttributesW(lpFileName, dwFileAttributes)
-  #end
+  # Forwards to `LibC.SetFileAttributesW`, which Crystal's standard library declares in `c/fileapi`.
+  def setFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetFileAttributesW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(dwFileAttributes, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def setFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
-    #C.SetFileInformationByHandle(hFile, file_information_class, lpFileInformation, dwBufferSize)
-  #end
+  # Forwards to `LibC.SetFileInformationByHandle`, which Crystal's standard library declares in `c/fileapi`.
+  def setFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetFileInformationByHandle(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(file_information_class, ::LibC::FILE_INFO_BY_HANDLE_CLASS), Win32cr::LibCBridge.arg(lpFileInformation, Pointer(Void)), Win32cr::LibCBridge.arg(dwBufferSize, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setFilePointer(hFile : Win32cr::Foundation::HANDLE, lDistanceToMove : Int32, lpDistanceToMoveHigh : Int32*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : UInt32
     {% if !flag?(:docs) %}
@@ -4689,13 +4746,19 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def setFilePointerEx(hFile : Win32cr::Foundation::HANDLE, liDistanceToMove : Int64, lpNewFilePointer : Int64*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : Win32cr::Foundation::BOOL
-    #C.SetFilePointerEx(hFile, liDistanceToMove, lpNewFilePointer, dwMoveMethod)
-  #end
+  # Forwards to `LibC.SetFilePointerEx`, which Crystal's standard library declares in `c/fileapi`.
+  def setFilePointerEx(hFile : Win32cr::Foundation::HANDLE, liDistanceToMove : Int64, lpNewFilePointer : Int64*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetFilePointerEx(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(liDistanceToMove, ::LibC::LARGE_INTEGER), Win32cr::LibCBridge.arg(lpNewFilePointer, Pointer(::LibC::LARGE_INTEGER)), Win32cr::LibCBridge.arg(dwMoveMethod, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def setFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
-    #C.SetFileTime(hFile, lpCreationTime, lpLastAccessTime, lpLastWriteTime)
-  #end
+  # Forwards to `LibC.SetFileTime`, which Crystal's standard library declares in `c/fileapi`.
+  def setFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetFileTime(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpCreationTime, Pointer(::LibC::FILETIME)), Win32cr::LibCBridge.arg(lpLastAccessTime, Pointer(::LibC::FILETIME)), Win32cr::LibCBridge.arg(lpLastWriteTime, Pointer(::LibC::FILETIME))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setFileValidData(hFile : Win32cr::Foundation::HANDLE, valid_data_length : Int64) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4709,13 +4772,19 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def unlockFileEx(hFile : Win32cr::Foundation::HANDLE, dwReserved : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
-    #C.UnlockFileEx(hFile, dwReserved, nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh, lpOverlapped)
-  #end
+  # Forwards to `LibC.UnlockFileEx`, which Crystal's standard library declares in `c/fileapi`.
+  def unlockFileEx(hFile : Win32cr::Foundation::HANDLE, dwReserved : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.UnlockFileEx(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwReserved, ::LibC::DWORD), Win32cr::LibCBridge.arg(nNumberOfBytesToUnlockLow, ::LibC::DWORD), Win32cr::LibCBridge.arg(nNumberOfBytesToUnlockHigh, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::OVERLAPPED))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def writeFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToWrite : UInt32, lpNumberOfBytesWritten : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
-    #C.WriteFile(hFile, lpBuffer, nNumberOfBytesToWrite, lpNumberOfBytesWritten, lpOverlapped)
-  #end
+  # Forwards to `LibC.WriteFile`, which Crystal's standard library declares in `c/fileapi`.
+  def writeFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToWrite : UInt32, lpNumberOfBytesWritten : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WriteFile(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpBuffer, Pointer(Void)), Win32cr::LibCBridge.arg(nNumberOfBytesToWrite, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNumberOfBytesWritten, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::OVERLAPPED))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def writeFileEx(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToWrite : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -4729,9 +4798,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def getTempPathW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
-    #C.GetTempPathW(nBufferLength, lpBuffer)
-  #end
+  # Forwards to `LibC.GetTempPathW`, which Crystal's standard library declares in `c/fileapi`.
+  def getTempPathW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetTempPathW(Win32cr::LibCBridge.arg(nBufferLength, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpBuffer, ::LibC::LPWSTR)), UInt32)
+    {% end %}
+  end
 
   def getVolumeNameForVolumeMountPointW(lpszVolumeMountPoint : Win32cr::Foundation::PWSTR, lpszVolumeName : Win32cr::Foundation::PWSTR, cchBufferLength : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6149,9 +6221,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def getBinaryTypeW(lpApplicationName : Win32cr::Foundation::PWSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
-    #C.GetBinaryTypeW(lpApplicationName, lpBinaryType)
-  #end
+  # Forwards to `LibC.GetBinaryTypeW`, which Crystal's standard library declares in `c/winbase`.
+  def getBinaryTypeW(lpApplicationName : Win32cr::Foundation::PWSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetBinaryTypeW(Win32cr::LibCBridge.arg(lpApplicationName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpBinaryType, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getShortPathNameA(lpszLongPath : Win32cr::Foundation::PSTR, lpszShortPath : Win32cr::Foundation::PSTR, cchBuffer : UInt32) : UInt32
     {% if !flag?(:docs) %}
@@ -6171,9 +6246,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def setFileCompletionNotificationModes(file_handle : Win32cr::Foundation::HANDLE, flags : UInt8) : Win32cr::Foundation::BOOL
-    #C.SetFileCompletionNotificationModes(file_handle, flags)
-  #end
+  # Forwards to `LibC.SetFileCompletionNotificationModes`, which Crystal's standard library declares in `c/winbase`.
+  def setFileCompletionNotificationModes(file_handle : Win32cr::Foundation::HANDLE, flags : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SetFileCompletionNotificationModes(Win32cr::LibCBridge.arg(file_handle, ::LibC::HANDLE), Win32cr::LibCBridge.arg(flags, ::LibC::UChar)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setFileShortNameA(hFile : Win32cr::Foundation::HANDLE, lpShortName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6415,9 +6493,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def reOpenFile(hOriginalFile : Win32cr::Foundation::HANDLE, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
-    #C.ReOpenFile(hOriginalFile, dwDesiredAccess, dwShareMode, dwFlagsAndAttributes)
-  #end
+  # Forwards to `LibC.ReOpenFile`, which Crystal's standard library declares in `c/winbase`.
+  def reOpenFile(hOriginalFile : Win32cr::Foundation::HANDLE, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ReOpenFile(Win32cr::LibCBridge.arg(hOriginalFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwDesiredAccess, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwShareMode, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwFlagsAndAttributes, ::LibC::DWORD)), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def setFileAttributesTransactedA(lpFileName : Win32cr::Foundation::PSTR, dwFileAttributes : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6551,9 +6632,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def moveFileExW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
-    #C.MoveFileExW(lpExistingFileName, lpNewFileName, dwFlags)
-  #end
+  # Forwards to `LibC.MoveFileExW`, which Crystal's standard library declares in `c/winbase`.
+  def moveFileExW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.MoveFileExW(Win32cr::LibCBridge.arg(lpExistingFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpNewFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def moveFileWithProgressA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, lpProgressRoutine : Win32cr::Storage::FileSystem::LPPROGRESS_ROUTINE, lpData : Void*, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6597,9 +6681,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def createHardLinkW(lpFileName : Win32cr::Foundation::PWSTR, lpExistingFileName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
-    #C.CreateHardLinkW(lpFileName, lpExistingFileName, lpSecurityAttributes)
-  #end
+  # Forwards to `LibC.CreateHardLinkW`, which Crystal's standard library declares in `c/winbase`.
+  def createHardLinkW(lpFileName : Win32cr::Foundation::PWSTR, lpExistingFileName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateHardLinkW(Win32cr::LibCBridge.arg(lpFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpExistingFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpSecurityAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def createHardLinkTransactedA(lpFileName : Win32cr::Foundation::PSTR, lpExistingFileName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6739,9 +6826,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def getFileInformationByHandleEx(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
-    #C.GetFileInformationByHandleEx(hFile, file_information_class, lpFileInformation, dwBufferSize)
-  #end
+  # Forwards to `LibC.GetFileInformationByHandleEx`, which Crystal's standard library declares in `c/winbase`.
+  def getFileInformationByHandleEx(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetFileInformationByHandleEx(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(file_information_class, ::LibC::FILE_INFO_BY_HANDLE_CLASS), Win32cr::LibCBridge.arg(lpFileInformation, Pointer(Void)), Win32cr::LibCBridge.arg(dwBufferSize, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getFileInformationByName(file_name : Win32cr::Foundation::PWSTR, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_NAME_CLASS, file_info_buffer : Void*, file_info_buffer_size : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6761,9 +6851,12 @@ module Win32cr::Storage::FileSystem
     {% end %}
   end
 
-  #def createSymbolicLinkW(lpSymlinkFileName : Win32cr::Foundation::PWSTR, lpTargetFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
-    #C.CreateSymbolicLinkW(lpSymlinkFileName, lpTargetFileName, dwFlags)
-  #end
+  # Forwards to `LibC.CreateSymbolicLinkW`, which Crystal's standard library declares in `c/winbase`.
+  def createSymbolicLinkW(lpSymlinkFileName : Win32cr::Foundation::PWSTR, lpTargetFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateSymbolicLinkW(Win32cr::LibCBridge.arg(lpSymlinkFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpTargetFileName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD)), Win32cr::Foundation::BOOLEAN)
+    {% end %}
+  end
 
   def createSymbolicLinkTransactedA(lpSymlinkFileName : Win32cr::Foundation::PSTR, lpTargetFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS, hTransaction : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
     {% if !flag?(:docs) %}
@@ -6800,14 +6893,14 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun CreateDirectoryA(lpPathName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun CreateDirectoryW(lpPathName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CreateFileA(lpFileName : Win32cr::Foundation::PSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun CreateFileW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HANDLE
 
@@ -6817,7 +6910,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun DeleteFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun DeleteFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
@@ -6827,7 +6920,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun FileTimeToLocalFileTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpLocalFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun FindClose(hFindFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
@@ -6843,7 +6936,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun FindFirstFileA(lpFileName : Win32cr::Foundation::PSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun FindFirstFileW(lpFileName : Win32cr::Foundation::PWSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::HANDLE
 
@@ -6862,7 +6955,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun FindNextFileA(hFindFile : Win32cr::Foundation::HANDLE, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun FindNextFileW(hFindFile : Win32cr::Foundation::HANDLE, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*) : Win32cr::Foundation::BOOL
 
@@ -6872,7 +6965,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun FindVolumeClose(hFindVolume : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun FlushFileBuffers(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
@@ -6903,18 +6996,18 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun GetFileAttributesA(lpFileName : Win32cr::Foundation::PSTR) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun GetFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
     fun GetFileAttributesExA(lpFileName : Win32cr::Foundation::PSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun GetFileAttributesExW(lpFileName : Win32cr::Foundation::PWSTR, fInfoLevelId : Win32cr::Storage::FileSystem::GET_FILEEX_INFO_LEVELS, lpFileInformation : Void*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun GetFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, lpFileInformation : Win32cr::Storage::FileSystem::BY_HANDLE_FILE_INFORMATION*) : Win32cr::Foundation::BOOL
 
@@ -6924,7 +7017,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun GetFileSizeEx(hFile : Win32cr::Foundation::HANDLE, lpFileSize : Int64*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun GetFileType(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Storage::FileSystem::FILE_TYPE
 
@@ -6937,7 +7030,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun GetFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun GetFullPathNameW(lpFileName : Win32cr::Foundation::PWSTR, nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, lpFilePart : Win32cr::Foundation::PWSTR*) : UInt32
 
@@ -6980,14 +7073,14 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun LockFile(hFile : Win32cr::Foundation::HANDLE, dwFileOffsetLow : UInt32, dwFileOffsetHigh : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun LockFileEx(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Storage::FileSystem::LOCK_FILE_FLAGS, dwReserved : UInt32, nNumberOfBytesToLockLow : UInt32, nNumberOfBytesToLockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun QueryDosDeviceW(lpDeviceName : Win32cr::Foundation::PWSTR, lpTargetPath : Win32cr::Foundation::PWSTR, ucchMax : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun ReadFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToRead : UInt32, lpNumberOfBytesRead : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
@@ -7000,33 +7093,33 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun RemoveDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun RemoveDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun SetEndOfFile(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun SetFileAttributesA(lpFileName : Win32cr::Foundation::PSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun SetFileAttributesW(lpFileName : Win32cr::Foundation::PWSTR, dwFileAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun SetFileInformationByHandle(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun SetFilePointer(hFile : Win32cr::Foundation::HANDLE, lDistanceToMove : Int32, lpDistanceToMoveHigh : Int32*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun SetFilePointerEx(hFile : Win32cr::Foundation::HANDLE, liDistanceToMove : Int64, lpNewFilePointer : Int64*, dwMoveMethod : Win32cr::Storage::FileSystem::SET_FILE_POINTER_MOVE_METHOD) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun SetFileTime(hFile : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpLastAccessTime : Win32cr::Foundation::FILETIME*, lpLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
 
@@ -7036,11 +7129,11 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun UnlockFile(hFile : Win32cr::Foundation::HANDLE, dwFileOffsetLow : UInt32, dwFileOffsetHigh : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun UnlockFileEx(hFile : Win32cr::Foundation::HANDLE, dwReserved : UInt32, nNumberOfBytesToUnlockLow : UInt32, nNumberOfBytesToUnlockHigh : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun WriteFile(hFile : Win32cr::Foundation::HANDLE, lpBuffer : UInt8*, nNumberOfBytesToWrite : UInt32, lpNumberOfBytesWritten : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
@@ -7050,7 +7143,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun WriteFileGather(hFile : Win32cr::Foundation::HANDLE, aSegmentArray : Win32cr::Storage::FileSystem::FILE_SEGMENT_ELEMENT*, nNumberOfBytesToWrite : UInt32, lpReserved : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/fileapi)
     # :nodoc:
     #fun GetTempPathW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
 
@@ -7762,7 +7855,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun GetBinaryTypeA(lpApplicationName : Win32cr::Foundation::PSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun GetBinaryTypeW(lpApplicationName : Win32cr::Foundation::PWSTR, lpBinaryType : UInt32*) : Win32cr::Foundation::BOOL
 
@@ -7775,7 +7868,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun GetLongPathNameTransactedW(lpszShortPath : Win32cr::Foundation::PWSTR, lpszLongPath : Win32cr::Foundation::PWSTR, cchBuffer : UInt32, hTransaction : Win32cr::Foundation::HANDLE) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun SetFileCompletionNotificationModes(file_handle : Win32cr::Foundation::HANDLE, flags : UInt8) : Win32cr::Foundation::BOOL
 
@@ -7899,7 +7992,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun CreateFileTransactedW(lpFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwCreationDisposition : Win32cr::Storage::FileSystem::FILE_CREATION_DISPOSITION, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile : Win32cr::Foundation::HANDLE, hTransaction : Win32cr::Foundation::HANDLE, pusMiniVersion : Win32cr::Storage::FileSystem::TXFS_MINIVERSION*, lpExtendedParameter : Void*) : Win32cr::Foundation::HANDLE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun ReOpenFile(hOriginalFile : Win32cr::Foundation::HANDLE, dwDesiredAccess : UInt32, dwShareMode : Win32cr::Storage::FileSystem::FILE_SHARE_MODE, dwFlagsAndAttributes : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES) : Win32cr::Foundation::HANDLE
 
@@ -7969,7 +8062,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun MoveFileExA(lpExistingFileName : Win32cr::Foundation::PSTR, lpNewFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun MoveFileExW(lpExistingFileName : Win32cr::Foundation::PWSTR, lpNewFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::MOVE_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
@@ -7994,7 +8087,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun CreateHardLinkA(lpFileName : Win32cr::Foundation::PSTR, lpExistingFileName : Win32cr::Foundation::PSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun CreateHardLinkW(lpFileName : Win32cr::Foundation::PWSTR, lpExistingFileName : Win32cr::Foundation::PWSTR, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
@@ -8067,7 +8160,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun GetVolumePathNamesForVolumeNameA(lpszVolumeName : Win32cr::Foundation::PSTR, lpszVolumePathNames : Win32cr::Foundation::PSTR, cchBufferLength : UInt32, lpcchReturnLength : UInt32*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun GetFileInformationByHandleEx(hFile : Win32cr::Foundation::HANDLE, file_information_class : Win32cr::Storage::FileSystem::FILE_INFO_BY_HANDLE_CLASS, lpFileInformation : Void*, dwBufferSize : UInt32) : Win32cr::Foundation::BOOL
 
@@ -8080,7 +8173,7 @@ module Win32cr::Storage::FileSystem
     # :nodoc:
     fun CreateSymbolicLinkA(lpSymlinkFileName : Win32cr::Foundation::PSTR, lpTargetFileName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun CreateSymbolicLinkW(lpSymlinkFileName : Win32cr::Foundation::PWSTR, lpTargetFileName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Storage::FileSystem::SYMBOLIC_LINK_FLAGS) : Win32cr::Foundation::BOOLEAN
 

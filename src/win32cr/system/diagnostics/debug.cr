@@ -11,6 +11,13 @@ require "./../com/structured_storage.cr"
 require "./../ole.cr"
 require "./../../security/win_trust.cr"
 require "./../../ui/windows_and_messaging.cr"
+require "c/dbghelp"
+require "c/debugapi"
+require "c/errhandlingapi"
+require "c/processthreadsapi"
+require "c/winbase"
+require "c/winnt"
+require "./../../libc_bridge.cr"
 
 module Win32cr::System::Diagnostics::Debug
   extend self
@@ -6711,9 +6718,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def getThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
-    #C.GetThreadContext(hThread, lpContext)
-  #end
+  # Forwards to `LibC.GetThreadContext`, which Crystal's standard library declares in `c/processthreadsapi`.
+  def getThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetThreadContext(Win32cr::LibCBridge.arg(hThread, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpContext, Pointer(::LibC::CONTEXT))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def setThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6873,9 +6883,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def rtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
-    #C.RtlCaptureContext(context_record)
-  #end
+  # Forwards to `LibC.RtlCaptureContext`, which Crystal's standard library declares in `c/winnt`.
+  def rtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.RtlCaptureContext(Win32cr::LibCBridge.arg(context_record, Pointer(::LibC::CONTEXT)))
+    {% end %}
+  end
 
   def rtlUnwind(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*) : Void
     {% if !flag?(:docs) %}
@@ -6901,9 +6914,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def isDebuggerPresent : Win32cr::Foundation::BOOL
-    #C.IsDebuggerPresent
-  #end
+  # Forwards to `LibC.IsDebuggerPresent`, which Crystal's standard library declares in `c/debugapi`.
+  def isDebuggerPresent : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.IsDebuggerPresent, Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def debugBreak : Void
     {% if !flag?(:docs) %}
@@ -7031,9 +7047,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def addVectoredExceptionHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
-    #C.AddVectoredExceptionHandler(first, handler)
-  #end
+  # Forwards to `LibC.AddVectoredExceptionHandler`, which Crystal's standard library declares in `c/errhandlingapi`.
+  def addVectoredExceptionHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.AddVectoredExceptionHandler(Win32cr::LibCBridge.arg(first, ::LibC::DWORD), Win32cr::LibCBridge.arg(handler, ::LibC::PVECTORED_EXCEPTION_HANDLER)), Pointer(Void))
+    {% end %}
+  end
 
   def removeVectoredExceptionHandler(handle : Void*) : UInt32
     {% if !flag?(:docs) %}
@@ -7419,9 +7438,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def stackWalk64(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME64*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64) : Win32cr::Foundation::BOOL
-    #C.StackWalk64(machine_type, hProcess, hThread, stack_frame, context_record, read_memory_routine, function_table_access_routine, get_module_base_routine, translate_address)
-  #end
+  # Forwards to `LibC.StackWalk64`, which Crystal's standard library declares in `c/dbghelp`.
+  def stackWalk64(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME64*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.StackWalk64(Win32cr::LibCBridge.arg(machine_type, ::LibC::DWORD), Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(hThread, ::LibC::HANDLE), Win32cr::LibCBridge.arg(stack_frame, Pointer(::LibC::STACKFRAME64)), Win32cr::LibCBridge.arg(context_record, Pointer(Void)), Win32cr::LibCBridge.arg(read_memory_routine, ::LibC::PREAD_PROCESS_MEMORY_ROUTINE64), Win32cr::LibCBridge.arg(function_table_access_routine, ::LibC::PFUNCTION_TABLE_ACCESS_ROUTINE64), Win32cr::LibCBridge.arg(get_module_base_routine, ::LibC::PGET_MODULE_BASE_ROUTINE64), Win32cr::LibCBridge.arg(translate_address, ::LibC::PTRANSLATE_ADDRESS_ROUTINE64)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def stackWalkEx(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME_EX*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64, flags : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -7503,17 +7525,26 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def symSetOptions(sym_options : UInt32) : UInt32
-    #C.SymSetOptions(sym_options)
-  #end
+  # Forwards to `LibC.SymSetOptions`, which Crystal's standard library declares in `c/dbghelp`.
+  def symSetOptions(sym_options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymSetOptions(Win32cr::LibCBridge.arg(sym_options, ::LibC::DWORD)), UInt32)
+    {% end %}
+  end
 
-  #def symGetOptions : UInt32
-    #C.SymGetOptions
-  #end
+  # Forwards to `LibC.SymGetOptions`, which Crystal's standard library declares in `c/dbghelp`.
+  def symGetOptions : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymGetOptions, UInt32)
+    {% end %}
+  end
 
-  #def symCleanup(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
-    #C.SymCleanup(hProcess)
-  #end
+  # Forwards to `LibC.SymCleanup`, which Crystal's standard library declares in `c/dbghelp`.
+  def symCleanup(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymCleanup(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def symGetExtendedOption(option : Win32cr::System::Diagnostics::Debug::IMAGEHLP_EXTENDED_OPTIONS) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -7641,9 +7672,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def symGetModuleInfoW64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64*) : Win32cr::Foundation::BOOL
-    #C.SymGetModuleInfoW64(hProcess, qwAddr, module_info)
-  #end
+  # Forwards to `LibC.SymGetModuleInfoW64`, which Crystal's standard library declares in `c/dbghelp`.
+  def symGetModuleInfoW64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymGetModuleInfoW64(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(qwAddr, ::LibC::DWORD64), Win32cr::LibCBridge.arg(module_info, Pointer(::LibC::IMAGEHLP_MODULEW64))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
 {% if flag?(:i386) %}
   def symGetModuleInfo(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE*) : Win32cr::Foundation::BOOL
@@ -7661,9 +7695,12 @@ module Win32cr::System::Diagnostics::Debug
   end
 {% end %}
 
-  #def symGetModuleBase64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64) : UInt64
-    #C.SymGetModuleBase64(hProcess, qwAddr)
-  #end
+  # Forwards to `LibC.SymGetModuleBase64`, which Crystal's standard library declares in `c/dbghelp`.
+  def symGetModuleBase64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64) : UInt64
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymGetModuleBase64(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(qwAddr, ::LibC::DWORD64)), UInt64)
+    {% end %}
+  end
 
 {% if flag?(:i386) %}
   def symGetModuleBase(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32) : UInt32
@@ -7691,9 +7728,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def symGetLineFromAddrW64(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
-    #C.SymGetLineFromAddrW64(hProcess, dwAddr, pdwDisplacement, line)
-  #end
+  # Forwards to `LibC.SymGetLineFromAddrW64`, which Crystal's standard library declares in `c/dbghelp`.
+  def symGetLineFromAddrW64(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymGetLineFromAddrW64(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwAddr, ::LibC::DWORD64), Win32cr::LibCBridge.arg(pdwDisplacement, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(line, Pointer(::LibC::IMAGEHLP_LINEW64))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def symGetLineFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, inline_context : UInt32, qwModuleBaseAddress : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -7919,9 +7959,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def symInitializeW(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PWSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
-    #C.SymInitializeW(hProcess, user_search_path, fInvadeProcess)
-  #end
+  # Forwards to `LibC.SymInitializeW`, which Crystal's standard library declares in `c/dbghelp`.
+  def symInitializeW(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PWSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymInitializeW(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(user_search_path, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(fInvadeProcess, ::LibC::BOOL)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def symGetSearchPath(hProcess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, search_path_length : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -8057,9 +8100,12 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def symFromAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
-    #C.SymFromAddrW(hProcess, address, displacement, symbol)
-  #end
+  # Forwards to `LibC.SymFromAddrW`, which Crystal's standard library declares in `c/dbghelp`.
+  def symFromAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SymFromAddrW(Win32cr::LibCBridge.arg(hProcess, ::LibC::HANDLE), Win32cr::LibCBridge.arg(address, ::LibC::DWORD64), Win32cr::LibCBridge.arg(displacement, Pointer(::LibC::DWORD64)), Win32cr::LibCBridge.arg(symbol, Pointer(::LibC::SYMBOL_INFOW))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def symFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -8627,13 +8673,19 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
   end
 
-  #def formatMessageA(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32, arguments : Int8**) : UInt32
-    #C.FormatMessageA(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, arguments)
-  #end
+  # Forwards to `LibC.FormatMessageA`, which Crystal's standard library declares in `c/winbase`.
+  def formatMessageA(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32, arguments : Int8**) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FormatMessageA(Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpSource, Pointer(Void)), Win32cr::LibCBridge.arg(dwMessageId, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwLanguageId, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpBuffer, ::LibC::LPSTR), Win32cr::LibCBridge.arg(nSize, ::LibC::DWORD), Win32cr::LibCBridge.arg(arguments, Pointer(Void))), UInt32)
+    {% end %}
+  end
 
-  #def formatMessageW(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32, arguments : Int8**) : UInt32
-    #C.FormatMessageW(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, arguments)
-  #end
+  # Forwards to `LibC.FormatMessageW`, which Crystal's standard library declares in `c/winbase`.
+  def formatMessageW(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32, arguments : Int8**) : UInt32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.FormatMessageW(Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpSource, Pointer(Void)), Win32cr::LibCBridge.arg(dwMessageId, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwLanguageId, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpBuffer, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(nSize, ::LibC::DWORD), Win32cr::LibCBridge.arg(arguments, Pointer(Void))), UInt32)
+    {% end %}
+  end
 
   def copyContext(destination : Win32cr::System::Diagnostics::Debug::CONTEXT*, context_flags : Win32cr::System::Diagnostics::Debug::CONTEXT_FLAGS, source : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -8721,7 +8773,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun WriteProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesWritten : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/processthreadsapi)
     # :nodoc:
     #fun GetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
 
@@ -8820,7 +8872,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun RtlCaptureStackBackTrace(frames_to_skip : UInt32, frames_to_capture : UInt32, back_trace : Void**, back_trace_hash : UInt32*) : UInt16
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winnt)
     # :nodoc:
     #fun RtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
 
@@ -8836,7 +8888,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun RtlPcToFileHeader(pc_value : Void*, base_of_image : Void**) : Void*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/debugapi)
     # :nodoc:
     #fun IsDebuggerPresent : Win32cr::Foundation::BOOL
 
@@ -8903,7 +8955,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun SetErrorMode(uMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE) : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/errhandlingapi)
     # :nodoc:
     #fun AddVectoredExceptionHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
 
@@ -9105,7 +9157,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun UnDecorateSymbolNameW(name : Win32cr::Foundation::PWSTR, outputString : Win32cr::Foundation::PWSTR, maxStringLength : UInt32, flags : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun StackWalk64(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME64*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64) : Win32cr::Foundation::BOOL
 
@@ -9150,15 +9202,15 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun SymGetOmaps(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, omap_to : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapTo : UInt64*, omap_from : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapFrom : UInt64*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymSetOptions(sym_options : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymGetOptions : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymCleanup(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
@@ -9228,7 +9280,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun SymGetModuleInfo64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE64*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymGetModuleInfoW64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64*) : Win32cr::Foundation::BOOL
 
@@ -9242,7 +9294,7 @@ module Win32cr::System::Diagnostics::Debug
     fun SymGetModuleInfoW(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW*) : Win32cr::Foundation::BOOL
     {% end %}
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymGetModuleBase64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64) : UInt64
 
@@ -9260,7 +9312,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun SymGetLineFromAddr64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymGetLineFromAddrW64(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
 
@@ -9380,7 +9432,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun SymInitialize(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymInitializeW(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PWSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
@@ -9455,7 +9507,7 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun SymFromAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/dbghelp)
     # :nodoc:
     #fun SymFromAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
 
@@ -9749,11 +9801,11 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun DebugBreakProcess(process : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun FormatMessageA(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32, arguments : Int8**) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun FormatMessageW(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32, arguments : Int8**) : UInt32
 

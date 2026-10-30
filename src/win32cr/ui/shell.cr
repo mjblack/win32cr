@@ -22,6 +22,9 @@ require "./../network_management/ip_helper.cr"
 require "./../graphics/gdi_plus.cr"
 require "./../graphics/direct_composition.cr"
 require "./../system/com/urlmon.cr"
+require "c/shlobj_core"
+require "c/userenv"
+require "./../libc_bridge.cr"
 
 module Win32cr::UI::Shell
   extend self
@@ -30675,9 +30678,12 @@ module Win32cr::UI::Shell
     {% end %}
   end
 
-  #def getProfilesDirectoryW(lpProfileDir : Win32cr::Foundation::PWSTR, lpcchSize : UInt32*) : Win32cr::Foundation::BOOL
-    #C.GetProfilesDirectoryW(lpProfileDir, lpcchSize)
-  #end
+  # Forwards to `LibC.GetProfilesDirectoryW`, which Crystal's standard library declares in `c/userenv`.
+  def getProfilesDirectoryW(lpProfileDir : Win32cr::Foundation::PWSTR, lpcchSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetProfilesDirectoryW(Win32cr::LibCBridge.arg(lpProfileDir, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpcchSize, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def getProfileType(dwFlags : UInt32*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -31291,9 +31297,12 @@ module Win32cr::UI::Shell
     {% end %}
   end
 
-  #def sHGetKnownFolderPath(rfid : LibC::GUID*, dwFlags : Win32cr::UI::Shell::KNOWN_FOLDER_FLAG, hToken : Win32cr::Foundation::HANDLE, ppszPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
-    #C.SHGetKnownFolderPath(rfid, dwFlags, hToken, ppszPath)
-  #end
+  # Forwards to `LibC.SHGetKnownFolderPath`, which Crystal's standard library declares in `c/shlobj_core`.
+  def sHGetKnownFolderPath(rfid : LibC::GUID*, dwFlags : Win32cr::UI::Shell::KNOWN_FOLDER_FLAG, hToken : Win32cr::Foundation::HANDLE, ppszPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.SHGetKnownFolderPath(Win32cr::LibCBridge.arg(rfid, Pointer(::LibC::GUID)), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(hToken, ::LibC::HANDLE), Win32cr::LibCBridge.arg(ppszPath, Pointer(::LibC::LPWSTR))), Win32cr::Foundation::HRESULT)
+    {% end %}
+  end
 
   def sHGetKnownFolderItem(rfid : LibC::GUID*, flags : Win32cr::UI::Shell::KNOWN_FOLDER_FLAG, hToken : Win32cr::Foundation::HANDLE, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
@@ -34825,7 +34834,7 @@ module Win32cr::UI::Shell
     # :nodoc:
     fun GetProfilesDirectoryA(lpProfileDir : Win32cr::Foundation::PSTR, lpcchSize : UInt32*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/userenv)
     # :nodoc:
     #fun GetProfilesDirectoryW(lpProfileDir : Win32cr::Foundation::PWSTR, lpcchSize : UInt32*) : Win32cr::Foundation::BOOL
 
@@ -35135,7 +35144,7 @@ module Win32cr::UI::Shell
     # :nodoc:
     fun SHSetKnownFolderPath(rfid : LibC::GUID*, dwFlags : UInt32, hToken : Win32cr::Foundation::HANDLE, pszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/shlobj_core)
     # :nodoc:
     #fun SHGetKnownFolderPath(rfid : LibC::GUID*, dwFlags : Win32cr::UI::Shell::KNOWN_FOLDER_FLAG, hToken : Win32cr::Foundation::HANDLE, ppszPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 

@@ -2,6 +2,8 @@ require "./../foundation.cr"
 require "./com.cr"
 require "./variant.cr"
 require "./ole.cr"
+require "c/profileapi"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Performance
   extend self
@@ -5384,13 +5386,19 @@ module Win32cr::System::Performance
 
   end
 
-  #def queryPerformanceCounter(lpPerformanceCount : Int64*) : Win32cr::Foundation::BOOL
-    #C.QueryPerformanceCounter(lpPerformanceCount)
-  #end
+  # Forwards to `LibC.QueryPerformanceCounter`, which Crystal's standard library declares in `c/profileapi`.
+  def queryPerformanceCounter(lpPerformanceCount : Int64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.QueryPerformanceCounter(Win32cr::LibCBridge.arg(lpPerformanceCount, Pointer(::LibC::LARGE_INTEGER))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def queryPerformanceFrequency(lpFrequency : Int64*) : Win32cr::Foundation::BOOL
-    #C.QueryPerformanceFrequency(lpFrequency)
-  #end
+  # Forwards to `LibC.QueryPerformanceFrequency`, which Crystal's standard library declares in `c/profileapi`.
+  def queryPerformanceFrequency(lpFrequency : Int64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.QueryPerformanceFrequency(Win32cr::LibCBridge.arg(lpFrequency, Pointer(::LibC::LARGE_INTEGER))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def installPerfDllW(szComputerName : Win32cr::Foundation::PWSTR, lpIniFile : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
     {% if !flag?(:docs) %}
@@ -6196,11 +6204,11 @@ module Win32cr::System::Performance
   @[Link("pdh")]
   {% if !flag?(:docs) %}
   lib C
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/profileapi)
     # :nodoc:
     #fun QueryPerformanceCounter(lpPerformanceCount : Int64*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/profileapi)
     # :nodoc:
     #fun QueryPerformanceFrequency(lpFrequency : Int64*) : Win32cr::Foundation::BOOL
 

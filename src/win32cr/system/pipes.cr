@@ -2,6 +2,8 @@ require "./../foundation.cr"
 require "./../security.cr"
 require "./io.cr"
 require "./../storage/file_system.cr"
+require "c/winbase"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Pipes
   extend self
@@ -102,9 +104,12 @@ module Win32cr::System::Pipes
     {% end %}
   end
 
-  #def createNamedPipeA(lpName : Win32cr::Foundation::PSTR, dwOpenMode : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, dwPipeMode : Win32cr::System::Pipes::NAMED_PIPE_MODE, nMaxInstances : UInt32, nOutBufferSize : UInt32, nInBufferSize : UInt32, nDefaultTimeOut : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::HANDLE
-    #C.CreateNamedPipeA(lpName, dwOpenMode, dwPipeMode, nMaxInstances, nOutBufferSize, nInBufferSize, nDefaultTimeOut, lpSecurityAttributes)
-  #end
+  # Forwards to `LibC.CreateNamedPipeA`, which Crystal's standard library declares in `c/winbase`.
+  def createNamedPipeA(lpName : Win32cr::Foundation::PSTR, dwOpenMode : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, dwPipeMode : Win32cr::System::Pipes::NAMED_PIPE_MODE, nMaxInstances : UInt32, nOutBufferSize : UInt32, nInBufferSize : UInt32, nDefaultTimeOut : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CreateNamedPipeA(Win32cr::LibCBridge.arg(lpName, ::LibC::LPSTR), Win32cr::LibCBridge.arg(dwOpenMode, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwPipeMode, ::LibC::DWORD), Win32cr::LibCBridge.arg(nMaxInstances, ::LibC::DWORD), Win32cr::LibCBridge.arg(nOutBufferSize, ::LibC::DWORD), Win32cr::LibCBridge.arg(nInBufferSize, ::LibC::DWORD), Win32cr::LibCBridge.arg(nDefaultTimeOut, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpSecurityAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES))), Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def getNamedPipeHandleStateA(hNamedPipe : Win32cr::Foundation::HANDLE, lpState : Win32cr::System::Pipes::NAMED_PIPE_MODE*, lpCurInstances : UInt32*, lpMaxCollectionCount : UInt32*, lpCollectDataTimeout : UInt32*, lpUserName : Win32cr::Foundation::PSTR, nMaxUserNameSize : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -197,7 +202,7 @@ module Win32cr::System::Pipes
     # :nodoc:
     fun CallNamedPipeW(lpNamedPipeName : Win32cr::Foundation::PWSTR, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesRead : UInt32*, nTimeOut : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winbase)
     # :nodoc:
     #fun CreateNamedPipeA(lpName : Win32cr::Foundation::PSTR, dwOpenMode : Win32cr::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES, dwPipeMode : Win32cr::System::Pipes::NAMED_PIPE_MODE, nMaxInstances : UInt32, nOutBufferSize : UInt32, nInBufferSize : UInt32, nDefaultTimeOut : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::HANDLE
 
