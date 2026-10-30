@@ -1,0 +1,78 @@
+name: Check for new Windows metadata
+
+# Compares the Windows.Win32.winmd version pinned in winmd.version with the
+# newest Microsoft.Windows.SDK.Win32Metadata package on NuGet and sends an
+# email when a newer one is out, so it can be picked up with the
+# "Update Windows metadata" workflow:
+# https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata
+#
+# The email is sent over SMTP with these repository variables and secrets:
+#   vars.SMTP_SERVER, vars.SMTP_PORT                 - the mail server
+#   secrets.SMTP_USERNAME, secrets.SMTP_PASSWORD     - the mail account
+#   secrets.NOTIFY_EMAIL                             - the recipient
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Sunday at midnight (UTC)
+    - cron: "0 0 * * 0"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compare pinned and latest metadata
+        id: compare
+        shell: pwsh
+        run: |
+          $current = (Get-Content winmd.version | Where-Object { $_.Trim() -and -not $_.Trim().StartsWith("#") } | Select-Object -First 1).Trim()
+          $index = Invoke-RestMethod "https://api.nuget.org/v3-flatcontainer/microsoft.windows.sdk.win32metadata/index.json"
+
+          # NuGet version ordering: numeric part first, then a release sorts
+          # above any of its prereleases, then the prerelease label.
+          function SortKey([string]$v) {
+            $numeric, $label = $v.Split('-', 2)
+            [pscustomobject]@{ Numeric = [version]$numeric; IsRelease = [int](-not $label); Label = "$label" }
+          }
+          $sorted = $index.versions | Sort-Object { (SortKey $_).Numeric }, { (SortKey $_).IsRelease }, { (SortKey $_).Label }
+          $latest = $sorted | Select-Object -Last 1
+
+          Write-Host "Pinned metadata: $current"
+          Write-Host "Latest metadata: $latest"
+
+          $newer = $latest -ne $current -and [array]::IndexOf(@($sorted), $latest) -gt [array]::IndexOf(@($sorted), $current)
+          "current=$current" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "latest=$latest" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "newer=$($newer.ToString().ToLower())" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          if ($newer) {
+            "A newer Windows.Win32.winmd is available: **$latest** (pinned: $current)" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          } else {
+            "Windows.Win32.winmd $current is up to date." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          }
+
+      - name: Send notification email
+        if: ${{ steps.compare.outputs.newer == 'true' }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ vars.SMTP_SERVER }}
+          server_port: ${{ vars.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: win32cr metadata check <${{ secrets.SMTP_USERNAME }}>
+          subject: "win32cr: Windows.Win32.winmd ${{ steps.compare.outputs.latest }} is available"
+          body: |
+            A newer Windows.Win32.winmd is available on NuGet.
+
+            Pinned:  ${{ steps.compare.outputs.current }}
+            Latest:  ${{ steps.compare.outputs.latest }}
+
+            Package: https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/${{ steps.compare.outputs.latest }}
+
+            Run the "Update Windows metadata" workflow with metadata_version ${{ steps.compare.outputs.latest }} to update:
+            ${{ github.server_url }}/${{ github.repository }}/actions/workflows/update_metadata.yml
