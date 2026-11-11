@@ -4,11 +4,11 @@ version: 1.5.0
 authors:
   - Matthew J. Black <mjblack@gmail.com>
 
-crystal: ">= 1.15.0"
+crystal: ">= 1.21.0"
 
 license: MIT
 
 dependencies:
   winmd:
     github: mjblack/winmd
-    version: "~> 1.4.0"
+    version: "~> 1.5.0"

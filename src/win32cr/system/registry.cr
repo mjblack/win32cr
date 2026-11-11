@@ -1,5 +1,7 @@
 require "./../foundation.cr"
 require "./../security.cr"
+require "c/winreg"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Registry
   extend self
@@ -1055,9 +1057,12 @@ module Win32cr::System::Registry
     end
   end
 
-  #def regCloseKey(hKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
-    #C.RegCloseKey(hKey)
-  #end
+  # Forwards to `LibC.RegCloseKey`, which Crystal's standard library declares in `c/winreg`.
+  def regCloseKey(hKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.RegCloseKey(Win32cr::LibCBridge.arg(hKey, ::LibC::HKEY)), Win32cr::Foundation::WIN32_ERROR)
+    {% end %}
+  end
 
   def regOverridePredefKey(hKey : Win32cr::System::Registry::HKEY, hNewHKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
     {% if !flag?(:docs) %}
@@ -1233,9 +1238,12 @@ module Win32cr::System::Registry
     {% end %}
   end
 
-  #def regEnumKeyExW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : Win32cr::Foundation::PWSTR, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
-    #C.RegEnumKeyExW(hKey, dwIndex, lpName, lpcchName, lpReserved, lpClass, lpcchClass, lpftLastWriteTime)
-  #end
+  # Forwards to `LibC.RegEnumKeyExW`, which Crystal's standard library declares in `c/winreg`.
+  def regEnumKeyExW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : Win32cr::Foundation::PWSTR, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.RegEnumKeyExW(Win32cr::LibCBridge.arg(hKey, ::LibC::HKEY), Win32cr::LibCBridge.arg(dwIndex, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpcchName, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpReserved, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpClass, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpcchClass, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpftLastWriteTime, Pointer(::LibC::FILETIME))), Win32cr::Foundation::WIN32_ERROR)
+    {% end %}
+  end
 
   def regEnumValueA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpValueName : Win32cr::Foundation::PSTR, lpcchValueName : UInt32*, lpReserved : UInt32*, lpType : UInt32*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
     {% if !flag?(:docs) %}
@@ -1297,9 +1305,12 @@ module Win32cr::System::Registry
     {% end %}
   end
 
-  #def regOpenKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
-    #C.RegOpenKeyExW(hKey, lpSubKey, ulOptions, samDesired, phkResult)
-  #end
+  # Forwards to `LibC.RegOpenKeyExW`, which Crystal's standard library declares in `c/winreg`.
+  def regOpenKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.RegOpenKeyExW(Win32cr::LibCBridge.arg(hKey, ::LibC::HKEY), Win32cr::LibCBridge.arg(lpSubKey, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(ulOptions, ::LibC::DWORD), Win32cr::LibCBridge.arg(samDesired, ::LibC::REGSAM), Win32cr::LibCBridge.arg(phkResult, Pointer(::LibC::HKEY))), Win32cr::Foundation::WIN32_ERROR)
+    {% end %}
+  end
 
   def regOpenKeyTransactedA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*, hTransaction : Win32cr::Foundation::HANDLE, pExtendedParemeter : Void*) : Win32cr::Foundation::WIN32_ERROR
     {% if !flag?(:docs) %}
@@ -1319,9 +1330,12 @@ module Win32cr::System::Registry
     {% end %}
   end
 
-  #def regQueryInfoKeyW(hKey : Win32cr::System::Registry::HKEY, lpClass : Win32cr::Foundation::PWSTR, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
-    #C.RegQueryInfoKeyW(hKey, lpClass, lpcchClass, lpReserved, lpcSubKeys, lpcbMaxSubKeyLen, lpcbMaxClassLen, lpcValues, lpcbMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
-  #end
+  # Forwards to `LibC.RegQueryInfoKeyW`, which Crystal's standard library declares in `c/winreg`.
+  def regQueryInfoKeyW(hKey : Win32cr::System::Registry::HKEY, lpClass : Win32cr::Foundation::PWSTR, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.RegQueryInfoKeyW(Win32cr::LibCBridge.arg(hKey, ::LibC::HKEY), Win32cr::LibCBridge.arg(lpClass, ::LibC::LPSTR), Win32cr::LibCBridge.arg(lpcchClass, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpReserved, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpcSubKeys, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpcbMaxSubKeyLen, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpcbMaxClassLen, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpcValues, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpcbMaxValueNameLen, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpcbMaxValueLen, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpcbSecurityDescriptor, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpftLastWriteTime, Pointer(::LibC::FILETIME))), Win32cr::Foundation::WIN32_ERROR)
+    {% end %}
+  end
 
   def regQueryValueA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpData : Win32cr::Foundation::PSTR, lpcbData : Int32*) : Win32cr::Foundation::WIN32_ERROR
     {% if !flag?(:docs) %}
@@ -1353,9 +1367,12 @@ module Win32cr::System::Registry
     {% end %}
   end
 
-  #def regQueryValueExW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
-    #C.RegQueryValueExW(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData)
-  #end
+  # Forwards to `LibC.RegQueryValueExW`, which Crystal's standard library declares in `c/winreg`.
+  def regQueryValueExW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.RegQueryValueExW(Win32cr::LibCBridge.arg(hKey, ::LibC::HKEY), Win32cr::LibCBridge.arg(lpValueName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(lpReserved, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpType, Pointer(::LibC::RegistryRoutineFlags)), Win32cr::LibCBridge.arg(lpData, Pointer(::LibC::BYTE)), Win32cr::LibCBridge.arg(lpcbData, Pointer(::LibC::DWORD))), Win32cr::Foundation::WIN32_ERROR)
+    {% end %}
+  end
 
   def regReplaceKeyA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, lpNewFile : Win32cr::Foundation::PSTR, lpOldFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::WIN32_ERROR
     {% if !flag?(:docs) %}
@@ -1546,7 +1563,7 @@ module Win32cr::System::Registry
   @[Link("advapi32")]
   {% if !flag?(:docs) %}
   lib C
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winreg)
     # :nodoc:
     #fun RegCloseKey(hKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::WIN32_ERROR
 
@@ -1637,7 +1654,7 @@ module Win32cr::System::Registry
     # :nodoc:
     fun RegEnumKeyExA(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : Win32cr::Foundation::PSTR, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : Win32cr::Foundation::PSTR, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winreg)
     # :nodoc:
     #fun RegEnumKeyExW(hKey : Win32cr::System::Registry::HKEY, dwIndex : UInt32, lpName : Win32cr::Foundation::PWSTR, lpcchName : UInt32*, lpReserved : UInt32*, lpClass : Win32cr::Foundation::PWSTR, lpcchClass : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
@@ -1671,7 +1688,7 @@ module Win32cr::System::Registry
     # :nodoc:
     fun RegOpenKeyExA(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winreg)
     # :nodoc:
     #fun RegOpenKeyExW(hKey : Win32cr::System::Registry::HKEY, lpSubKey : Win32cr::Foundation::PWSTR, ulOptions : UInt32, samDesired : Win32cr::System::Registry::REG_SAM_FLAGS, phkResult : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::WIN32_ERROR
 
@@ -1684,7 +1701,7 @@ module Win32cr::System::Registry
     # :nodoc:
     fun RegQueryInfoKeyA(hKey : Win32cr::System::Registry::HKEY, lpClass : Win32cr::Foundation::PSTR, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winreg)
     # :nodoc:
     #fun RegQueryInfoKeyW(hKey : Win32cr::System::Registry::HKEY, lpClass : Win32cr::Foundation::PWSTR, lpcchClass : UInt32*, lpReserved : UInt32*, lpcSubKeys : UInt32*, lpcbMaxSubKeyLen : UInt32*, lpcbMaxClassLen : UInt32*, lpcValues : UInt32*, lpcbMaxValueNameLen : UInt32*, lpcbMaxValueLen : UInt32*, lpcbSecurityDescriptor : UInt32*, lpftLastWriteTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
 
@@ -1703,7 +1720,7 @@ module Win32cr::System::Registry
     # :nodoc:
     fun RegQueryValueExA(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winreg)
     # :nodoc:
     #fun RegQueryValueExW(hKey : Win32cr::System::Registry::HKEY, lpValueName : Win32cr::Foundation::PWSTR, lpReserved : UInt32*, lpType : Win32cr::System::Registry::REG_VALUE_TYPE*, lpData : UInt8*, lpcbData : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 

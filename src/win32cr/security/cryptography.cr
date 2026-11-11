@@ -3,6 +3,8 @@ require "./../system/registry.cr"
 require "./../security.cr"
 require "./../system/com.cr"
 require "./../system/variant.cr"
+require "c/wincrypt"
+require "./../libc_bridge.cr"
 
 module Win32cr::Security::Cryptography
   extend self
@@ -11355,9 +11357,12 @@ module Win32cr::Security::Cryptography
     {% end %}
   end
 
-  #def certCloseStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : UInt32) : Win32cr::Foundation::BOOL
-    #C.CertCloseStore(hCertStore, dwFlags)
-  #end
+  # Forwards to `LibC.CertCloseStore`, which Crystal's standard library declares in `c/wincrypt`.
+  def certCloseStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CertCloseStore(Win32cr::LibCBridge.arg(hCertStore, ::LibC::HCERTSTORE), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def certGetSubjectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
     {% if !flag?(:docs) %}
@@ -11365,9 +11370,12 @@ module Win32cr::Security::Cryptography
     {% end %}
   end
 
-  #def certEnumCertificatesInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
-    #C.CertEnumCertificatesInStore(hCertStore, pPrevCertContext)
-  #end
+  # Forwards to `LibC.CertEnumCertificatesInStore`, which Crystal's standard library declares in `c/wincrypt`.
+  def certEnumCertificatesInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CertEnumCertificatesInStore(Win32cr::LibCBridge.arg(hCertStore, ::LibC::HCERTSTORE), Win32cr::LibCBridge.arg(pPrevCertContext, Pointer(::LibC::CERT_CONTEXT))), Pointer(Win32cr::Security::Cryptography::CERT_CONTEXT))
+    {% end %}
+  end
 
   def certFindCertificateInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_FLAGS, pvFindPara : Void*, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
     {% if !flag?(:docs) %}
@@ -11729,9 +11737,12 @@ module Win32cr::Security::Cryptography
     {% end %}
   end
 
-  #def certGetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*, pcbUsage : UInt32*) : Win32cr::Foundation::BOOL
-    #C.CertGetEnhancedKeyUsage(pCertContext, dwFlags, pUsage, pcbUsage)
-  #end
+  # Forwards to `LibC.CertGetEnhancedKeyUsage`, which Crystal's standard library declares in `c/wincrypt`.
+  def certGetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*, pcbUsage : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CertGetEnhancedKeyUsage(Win32cr::LibCBridge.arg(pCertContext, Pointer(::LibC::CERT_CONTEXT)), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(pUsage, Pointer(::LibC::CERT_USAGE)), Win32cr::LibCBridge.arg(pcbUsage, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def certSetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -12165,9 +12176,12 @@ module Win32cr::Security::Cryptography
     {% end %}
   end
 
-  #def certOpenSystemStoreW(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::HCERTSTORE
-    #C.CertOpenSystemStoreW(hProv, szSubsystemProtocol)
-  #end
+  # Forwards to `LibC.CertOpenSystemStoreW`, which Crystal's standard library declares in `c/wincrypt`.
+  def certOpenSystemStoreW(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::HCERTSTORE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.CertOpenSystemStoreW(Win32cr::LibCBridge.arg(hProv, ::LibC::HCRYPTPROV_LEGACY), Win32cr::LibCBridge.arg(szSubsystemProtocol, ::LibC::LPWSTR)), Win32cr::Security::Cryptography::HCERTSTORE)
+    {% end %}
+  end
 
   def certAddEncodedCertificateToSystemStoreA(szCertStoreName : Win32cr::Foundation::PSTR, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -13696,14 +13710,14 @@ module Win32cr::Security::Cryptography
     # :nodoc:
     fun CertSaveStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwSaveAs : Win32cr::Security::Cryptography::CERT_STORE_SAVE_AS, dwSaveTo : Win32cr::Security::Cryptography::CERT_STORE_SAVE_TO, pvSaveToPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/wincrypt)
     # :nodoc:
     #fun CertCloseStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertGetSubjectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/wincrypt)
     # :nodoc:
     #fun CertEnumCertificatesInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
@@ -13887,7 +13901,7 @@ module Win32cr::Security::Cryptography
     # :nodoc:
     fun CertEnumPhysicalStore(pvSystemStore : Void*, dwFlags : UInt32, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CERT_ENUM_PHYSICAL_STORE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/wincrypt)
     # :nodoc:
     #fun CertGetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*, pcbUsage : UInt32*) : Win32cr::Foundation::BOOL
 
@@ -14107,7 +14121,7 @@ module Win32cr::Security::Cryptography
     # :nodoc:
     fun CertOpenSystemStoreA(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PSTR) : Win32cr::Security::Cryptography::HCERTSTORE
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/wincrypt)
     # :nodoc:
     #fun CertOpenSystemStoreW(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::HCERTSTORE
 

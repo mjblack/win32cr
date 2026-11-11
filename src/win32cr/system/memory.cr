@@ -1,5 +1,8 @@
 require "./../foundation.cr"
 require "./../security.cr"
+require "c/heapapi"
+require "c/memoryapi"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Memory
   extend self
@@ -488,17 +491,26 @@ module Win32cr::System::Memory
     {% end %}
   end
 
-  #def heapAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, dwBytes : LibC::UIntPtrT) : Void*
-    #C.HeapAlloc(hHeap, dwFlags, dwBytes)
-  #end
+  # Forwards to `LibC.HeapAlloc`, which Crystal's standard library declares in `c/heapapi`.
+  def heapAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, dwBytes : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.HeapAlloc(Win32cr::LibCBridge.arg(hHeap, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwBytes, ::LibC::SizeT)), Pointer(Void))
+    {% end %}
+  end
 
-  #def heapReAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*, dwBytes : LibC::UIntPtrT) : Void*
-    #C.HeapReAlloc(hHeap, dwFlags, lpMem, dwBytes)
-  #end
+  # Forwards to `LibC.HeapReAlloc`, which Crystal's standard library declares in `c/heapapi`.
+  def heapReAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*, dwBytes : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.HeapReAlloc(Win32cr::LibCBridge.arg(hHeap, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpMem, Pointer(Void)), Win32cr::LibCBridge.arg(dwBytes, ::LibC::SizeT)), Pointer(Void))
+    {% end %}
+  end
 
-  #def heapFree(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
-    #C.HeapFree(hHeap, dwFlags, lpMem)
-  #end
+  # Forwards to `LibC.HeapFree`, which Crystal's standard library declares in `c/heapapi`.
+  def heapFree(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.HeapFree(Win32cr::LibCBridge.arg(hHeap, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpMem, Pointer(Void))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def heapSize(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : LibC::UIntPtrT
     {% if !flag?(:docs) %}
@@ -506,9 +518,12 @@ module Win32cr::System::Memory
     {% end %}
   end
 
-  #def getProcessHeap : Win32cr::Foundation::HANDLE
-    #C.GetProcessHeap
-  #end
+  # Forwards to `LibC.GetProcessHeap`, which Crystal's standard library declares in `c/heapapi`.
+  def getProcessHeap : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetProcessHeap, Win32cr::Foundation::HANDLE)
+    {% end %}
+  end
 
   def heapCompact(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS) : LibC::UIntPtrT
     {% if !flag?(:docs) %}
@@ -564,21 +579,33 @@ module Win32cr::System::Memory
     {% end %}
   end
 
-  #def virtualAlloc(lpAddress : Void*, dwSize : LibC::UIntPtrT, flAllocationType : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS) : Void*
-    #C.VirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect)
-  #end
+  # Forwards to `LibC.VirtualAlloc`, which Crystal's standard library declares in `c/memoryapi`.
+  def virtualAlloc(lpAddress : Void*, dwSize : LibC::UIntPtrT, flAllocationType : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS) : Void*
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.VirtualAlloc(Win32cr::LibCBridge.arg(lpAddress, Pointer(Void)), Win32cr::LibCBridge.arg(dwSize, ::LibC::SizeT), Win32cr::LibCBridge.arg(flAllocationType, ::LibC::DWORD), Win32cr::LibCBridge.arg(flProtect, ::LibC::DWORD)), Pointer(Void))
+    {% end %}
+  end
 
-  #def virtualProtect(lpAddress : Void*, dwSize : LibC::UIntPtrT, flNewProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, lpflOldProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS*) : Win32cr::Foundation::BOOL
-    #C.VirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect)
-  #end
+  # Forwards to `LibC.VirtualProtect`, which Crystal's standard library declares in `c/memoryapi`.
+  def virtualProtect(lpAddress : Void*, dwSize : LibC::UIntPtrT, flNewProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, lpflOldProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.VirtualProtect(Win32cr::LibCBridge.arg(lpAddress, Pointer(Void)), Win32cr::LibCBridge.arg(dwSize, ::LibC::SizeT), Win32cr::LibCBridge.arg(flNewProtect, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpflOldProtect, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def virtualFree(lpAddress : Void*, dwSize : LibC::UIntPtrT, dwFreeType : Win32cr::System::Memory::VIRTUAL_FREE_TYPE) : Win32cr::Foundation::BOOL
-    #C.VirtualFree(lpAddress, dwSize, dwFreeType)
-  #end
+  # Forwards to `LibC.VirtualFree`, which Crystal's standard library declares in `c/memoryapi`.
+  def virtualFree(lpAddress : Void*, dwSize : LibC::UIntPtrT, dwFreeType : Win32cr::System::Memory::VIRTUAL_FREE_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.VirtualFree(Win32cr::LibCBridge.arg(lpAddress, Pointer(Void)), Win32cr::LibCBridge.arg(dwSize, ::LibC::SizeT), Win32cr::LibCBridge.arg(dwFreeType, ::LibC::DWORD)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def virtualQuery(lpAddress : Void*, lpBuffer : Win32cr::System::Memory::MEMORY_BASIC_INFORMATION*, dwLength : LibC::UIntPtrT) : LibC::UIntPtrT
-    #C.VirtualQuery(lpAddress, lpBuffer, dwLength)
-  #end
+  # Forwards to `LibC.VirtualQuery`, which Crystal's standard library declares in `c/memoryapi`.
+  def virtualQuery(lpAddress : Void*, lpBuffer : Win32cr::System::Memory::MEMORY_BASIC_INFORMATION*, dwLength : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.VirtualQuery(Win32cr::LibCBridge.arg(lpAddress, Pointer(Void)), Win32cr::LibCBridge.arg(lpBuffer, Pointer(::LibC::MEMORY_BASIC_INFORMATION)), Win32cr::LibCBridge.arg(dwLength, ::LibC::SizeT)), LibC::UIntPtrT)
+    {% end %}
+  end
 
   def virtualAllocEx(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, flAllocationType : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS) : Void*
     {% if !flag?(:docs) %}
@@ -610,9 +637,10 @@ module Win32cr::System::Memory
     {% end %}
   end
 
+  # Forwards to `LibC.MapViewOfFile`, which Crystal's standard library declares in `c/memoryapi`.
   def mapViewOfFile(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
     {% if !flag?(:docs) %}
-    C.MapViewOfFile(hFileMappingObject, dwDesiredAccess, dwFileOffsetHigh, dwFileOffsetLow, dwNumberOfBytesToMap)
+    Win32cr::LibCBridge.ret(::LibC.MapViewOfFile(Win32cr::LibCBridge.arg(hFileMappingObject, ::LibC::HANDLE), Win32cr::LibCBridge.arg(dwDesiredAccess, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwFileOffsetHigh, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwFileOffsetLow, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwNumberOfBytesToMap, ::LibC::SizeT)), Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS)
     {% end %}
   end
 
@@ -634,9 +662,10 @@ module Win32cr::System::Memory
     {% end %}
   end
 
+  # Forwards to `LibC.UnmapViewOfFile`, which Crystal's standard library declares in `c/memoryapi`.
   def unmapViewOfFile(lpBaseAddress : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
-    C.UnmapViewOfFile(lpBaseAddress)
+    Win32cr::LibCBridge.ret(::LibC.UnmapViewOfFile(Win32cr::LibCBridge.arg(lpBaseAddress, Pointer(Void))), Win32cr::Foundation::BOOL)
     {% end %}
   end
 
@@ -1042,9 +1071,10 @@ module Win32cr::System::Memory
     {% end %}
   end
 
+  # Forwards to `LibC.CreateFileMappingA`, which Crystal's standard library declares in `c/memoryapi`.
   def createFileMappingA(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
     {% if !flag?(:docs) %}
-    C.CreateFileMappingA(hFile, lpFileMappingAttributes, flProtect, dwMaximumSizeHigh, dwMaximumSizeLow, lpName)
+    Win32cr::LibCBridge.ret(::LibC.CreateFileMappingA(Win32cr::LibCBridge.arg(hFile, ::LibC::HANDLE), Win32cr::LibCBridge.arg(lpFileMappingAttributes, Pointer(::LibC::SECURITY_ATTRIBUTES)), Win32cr::LibCBridge.arg(flProtect, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwMaximumSizeHigh, ::LibC::DWORD), Win32cr::LibCBridge.arg(dwMaximumSizeLow, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpName, ::LibC::LPSTR)), Win32cr::Foundation::HANDLE)
     {% end %}
   end
 
@@ -1124,22 +1154,22 @@ module Win32cr::System::Memory
     # :nodoc:
     fun HeapDestroy(hHeap : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/heapapi)
     # :nodoc:
     #fun HeapAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, dwBytes : LibC::UIntPtrT) : Void*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/heapapi)
     # :nodoc:
     #fun HeapReAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*, dwBytes : LibC::UIntPtrT) : Void*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/heapapi)
     # :nodoc:
     #fun HeapFree(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun HeapSize(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : LibC::UIntPtrT
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/heapapi)
     # :nodoc:
     #fun GetProcessHeap : Win32cr::Foundation::HANDLE
 
@@ -1170,19 +1200,19 @@ module Win32cr::System::Memory
     # :nodoc:
     fun HeapQueryInformation(heap_handle : Win32cr::Foundation::HANDLE, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT, return_length : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/memoryapi)
     # :nodoc:
     #fun VirtualAlloc(lpAddress : Void*, dwSize : LibC::UIntPtrT, flAllocationType : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS) : Void*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/memoryapi)
     # :nodoc:
     #fun VirtualProtect(lpAddress : Void*, dwSize : LibC::UIntPtrT, flNewProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, lpflOldProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/memoryapi)
     # :nodoc:
     #fun VirtualFree(lpAddress : Void*, dwSize : LibC::UIntPtrT, dwFreeType : Win32cr::System::Memory::VIRTUAL_FREE_TYPE) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/memoryapi)
     # :nodoc:
     #fun VirtualQuery(lpAddress : Void*, lpBuffer : Win32cr::System::Memory::MEMORY_BASIC_INFORMATION*, dwLength : LibC::UIntPtrT) : LibC::UIntPtrT
 
@@ -1201,8 +1231,9 @@ module Win32cr::System::Memory
     # :nodoc:
     fun OpenFileMappingW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
+    # Commented out due to being part of LibC (declared in c/memoryapi)
     # :nodoc:
-    fun MapViewOfFile(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    #fun MapViewOfFile(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
     fun MapViewOfFileEx(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
@@ -1213,8 +1244,9 @@ module Win32cr::System::Memory
     # :nodoc:
     fun FlushViewOfFile(lpBaseAddress : Void*, dwNumberOfBytesToFlush : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
+    # Commented out due to being part of LibC (declared in c/memoryapi)
     # :nodoc:
-    fun UnmapViewOfFile(lpBaseAddress : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS) : Win32cr::Foundation::BOOL
+    #fun UnmapViewOfFile(lpBaseAddress : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetLargePageMinimum : LibC::UIntPtrT
@@ -1417,8 +1449,9 @@ module Win32cr::System::Memory
     # :nodoc:
     fun LocalFlags(hMem : Win32cr::Foundation::HLOCAL) : UInt32
 
+    # Commented out due to being part of LibC (declared in c/memoryapi)
     # :nodoc:
-    fun CreateFileMappingA(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    #fun CreateFileMappingA(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
     fun CreateFileMappingNumaA(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PSTR, nndPreferred : UInt32) : Win32cr::Foundation::HANDLE

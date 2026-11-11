@@ -1,5 +1,6 @@
 require "./macros"
 require "./win32cr/com_ptr"
+require "./win32cr/libc_bridge"
 
 module Win32cr
   VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
