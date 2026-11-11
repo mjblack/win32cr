@@ -5,6 +5,8 @@ require "./system_services.cr"
 require "./../security.cr"
 require "./variant.cr"
 require "./ole.cr"
+require "c/combaseapi"
+require "./../libc_bridge.cr"
 
 module Win32cr::System::Com
   extend self
@@ -6970,9 +6972,12 @@ module Win32cr::System::Com
     {% end %}
   end
 
-  #def coTaskMemFree(pv : Void*) : Void
-    #C.CoTaskMemFree(pv)
-  #end
+  # Forwards to `LibC.CoTaskMemFree`, which Crystal's standard library declares in `c/combaseapi`.
+  def coTaskMemFree(pv : Void*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.CoTaskMemFree(Win32cr::LibCBridge.arg(pv, Pointer(Void)))
+    {% end %}
+  end
 
   def coRegisterDeviceCatalog(deviceInstanceId : Win32cr::Foundation::PWSTR, cookie : Win32cr::System::Com::CO_DEVICE_CATALOG_COOKIE*) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
@@ -7330,7 +7335,7 @@ module Win32cr::System::Com
     # :nodoc:
     fun CoTaskMemRealloc(pv : Void*, cb : LibC::UIntPtrT) : Void*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/combaseapi)
     # :nodoc:
     #fun CoTaskMemFree(pv : Void*) : Void
 

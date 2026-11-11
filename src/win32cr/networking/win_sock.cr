@@ -2,6 +2,9 @@ require "./../foundation.cr"
 require "./../system/kernel.cr"
 require "./../system/io.cr"
 require "./../system/com.cr"
+require "c/winsock2"
+require "c/ws2tcpip"
+require "./../libc_bridge.cr"
 
 module Win32cr::Networking::WinSock
   extend self
@@ -5722,37 +5725,61 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def accept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*) : Win32cr::Networking::WinSock::SOCKET
-    #C.accept(s, addr, addrlen)
-  #end
+  # Forwards to `LibC.accept`, which Crystal's standard library declares in `c/winsock2`.
+  def accept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*) : Win32cr::Networking::WinSock::SOCKET
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.accept(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(addr, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(addrlen, Pointer(::LibC::Int))), Win32cr::Networking::WinSock::SOCKET)
+    {% end %}
+  end
 
-  #def bind(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
-    #C.bind(s, name, namelen)
-  #end
+  # Forwards to `LibC.bind`, which Crystal's standard library declares in `c/winsock2`.
+  def bind(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.bind(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(name, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(namelen, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
-  #def closesocket(s : Win32cr::Networking::WinSock::SOCKET) : Int32
-    #C.closesocket(s)
-  #end
+  # Forwards to `LibC.closesocket`, which Crystal's standard library declares in `c/winsock2`.
+  def closesocket(s : Win32cr::Networking::WinSock::SOCKET) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.closesocket(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET)), Int32)
+    {% end %}
+  end
 
-  #def connect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
-    #C.connect(s, name, namelen)
-  #end
+  # Forwards to `LibC.connect`, which Crystal's standard library declares in `c/winsock2`.
+  def connect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.connect(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(name, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(namelen, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
-  #def ioctlsocket(s : Win32cr::Networking::WinSock::SOCKET, cmd : Int32, argp : UInt32*) : Int32
-    #C.ioctlsocket(s, cmd, argp)
-  #end
+  # Forwards to `LibC.ioctlsocket`, which Crystal's standard library declares in `c/winsock2`.
+  def ioctlsocket(s : Win32cr::Networking::WinSock::SOCKET, cmd : Int32, argp : UInt32*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ioctlsocket(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(cmd, ::LibC::Int), Win32cr::LibCBridge.arg(argp, Pointer(UInt32))), Int32)
+    {% end %}
+  end
 
-  #def getpeername(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
-    #C.getpeername(s, name, namelen)
-  #end
+  # Forwards to `LibC.getpeername`, which Crystal's standard library declares in `c/winsock2`.
+  def getpeername(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.getpeername(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(name, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(namelen, Pointer(::LibC::Int))), Int32)
+    {% end %}
+  end
 
-  #def getsockname(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
-    #C.getsockname(s, name, namelen)
-  #end
+  # Forwards to `LibC.getsockname`, which Crystal's standard library declares in `c/winsock2`.
+  def getsockname(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.getsockname(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(name, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(namelen, Pointer(::LibC::Int))), Int32)
+    {% end %}
+  end
 
-  #def getsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32*) : Int32
-    #C.getsockopt(s, level, optname, optval, optlen)
-  #end
+  # Forwards to `LibC.getsockopt`, which Crystal's standard library declares in `c/winsock2`.
+  def getsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.getsockopt(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(level, ::LibC::Int), Win32cr::LibCBridge.arg(optname, ::LibC::Int), Win32cr::LibCBridge.arg(optval, Pointer(UInt8)), Win32cr::LibCBridge.arg(optlen, Pointer(::LibC::Int))), Int32)
+    {% end %}
+  end
 
   def htonl(hostlong : UInt32) : UInt32
     {% if !flag?(:docs) %}
@@ -5760,9 +5787,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def htons(hostshort : UInt16) : UInt16
-    #C.htons(hostshort)
-  #end
+  # Forwards to `LibC.htons`, which Crystal's standard library declares in `c/winsock2`.
+  def htons(hostshort : UInt16) : UInt16
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.htons(Win32cr::LibCBridge.arg(hostshort, ::LibC::UShort)), UInt16)
+    {% end %}
+  end
 
   def inetAddr(cp : Win32cr::Foundation::PSTR) : UInt32
     {% if !flag?(:docs) %}
@@ -5776,9 +5806,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def listen(s : Win32cr::Networking::WinSock::SOCKET, backlog : Int32) : Int32
-    #C.listen(s, backlog)
-  #end
+  # Forwards to `LibC.listen`, which Crystal's standard library declares in `c/winsock2`.
+  def listen(s : Win32cr::Networking::WinSock::SOCKET, backlog : Int32) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.listen(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(backlog, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
   def ntohl(netlong : UInt32) : UInt32
     {% if !flag?(:docs) %}
@@ -5786,17 +5819,26 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def ntohs(netshort : UInt16) : UInt16
-    #C.ntohs(netshort)
-  #end
+  # Forwards to `LibC.ntohs`, which Crystal's standard library declares in `c/winsock2`.
+  def ntohs(netshort : UInt16) : UInt16
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.ntohs(Win32cr::LibCBridge.arg(netshort, ::LibC::UShort)), UInt16)
+    {% end %}
+  end
 
-  #def recv(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
-    #C.recv(s, buf, len, flags)
-  #end
+  # Forwards to `LibC.recv`, which Crystal's standard library declares in `c/winsock2`.
+  def recv(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.recv(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(buf, Pointer(UInt8)), Win32cr::LibCBridge.arg(len, ::LibC::Int), Win32cr::LibCBridge.arg(flags, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
-  #def recvfrom(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, from : Win32cr::Networking::WinSock::SOCKADDR*, fromlen : Int32*) : Int32
-    #C.recvfrom(s, buf, len, flags, from, fromlen)
-  #end
+  # Forwards to `LibC.recvfrom`, which Crystal's standard library declares in `c/winsock2`.
+  def recvfrom(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, from : Win32cr::Networking::WinSock::SOCKADDR*, fromlen : Int32*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.recvfrom(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(buf, Pointer(::LibC::Char)), Win32cr::LibCBridge.arg(len, ::LibC::Int), Win32cr::LibCBridge.arg(flags, ::LibC::Int), Win32cr::LibCBridge.arg(from, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(fromlen, Pointer(::LibC::Int))), Int32)
+    {% end %}
+  end
 
   def select(nfds : Int32, readfds : Win32cr::Networking::WinSock::FD_SET*, writefds : Win32cr::Networking::WinSock::FD_SET*, exceptfds : Win32cr::Networking::WinSock::FD_SET*, timeout : Win32cr::Networking::WinSock::TIMEVAL*) : Int32
     {% if !flag?(:docs) %}
@@ -5804,9 +5846,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def send(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
-    #C.send(s, buf, len, flags)
-  #end
+  # Forwards to `LibC.send`, which Crystal's standard library declares in `c/winsock2`.
+  def send(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.send(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(buf, Pointer(UInt8)), Win32cr::LibCBridge.arg(len, ::LibC::Int), Win32cr::LibCBridge.arg(flags, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
   def sendto(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, to : Win32cr::Networking::WinSock::SOCKADDR*, tolen : Int32) : Int32
     {% if !flag?(:docs) %}
@@ -5814,17 +5859,26 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def setsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32) : Int32
-    #C.setsockopt(s, level, optname, optval, optlen)
-  #end
+  # Forwards to `LibC.setsockopt`, which Crystal's standard library declares in `c/winsock2`.
+  def setsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.setsockopt(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(level, ::LibC::Int), Win32cr::LibCBridge.arg(optname, ::LibC::Int), Win32cr::LibCBridge.arg(optval, Pointer(::LibC::Char)), Win32cr::LibCBridge.arg(optlen, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
-  #def shutdown(s : Win32cr::Networking::WinSock::SOCKET, how : Win32cr::Networking::WinSock::WINSOCK_SHUTDOWN_HOW) : Int32
-    #C.shutdown(s, how)
-  #end
+  # Forwards to `LibC.shutdown`, which Crystal's standard library declares in `c/winsock2`.
+  def shutdown(s : Win32cr::Networking::WinSock::SOCKET, how : Win32cr::Networking::WinSock::WINSOCK_SHUTDOWN_HOW) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.shutdown(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(how, ::LibC::Int)), Int32)
+    {% end %}
+  end
 
-  #def socket(af : Int32, type__ : Win32cr::Networking::WinSock::WINSOCK_SOCKET_TYPE, protocol : Int32) : Win32cr::Networking::WinSock::SOCKET
-    #C.socket(af, type__, protocol)
-  #end
+  # Forwards to `LibC.socket`, which Crystal's standard library declares in `c/winsock2`.
+  def socket(af : Int32, type__ : Win32cr::Networking::WinSock::WINSOCK_SOCKET_TYPE, protocol : Int32) : Win32cr::Networking::WinSock::SOCKET
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.socket(Win32cr::LibCBridge.arg(af, ::LibC::Int), Win32cr::LibCBridge.arg(type__, ::LibC::Int), Win32cr::LibCBridge.arg(protocol, ::LibC::Int)), Win32cr::Networking::WinSock::SOCKET)
+    {% end %}
+  end
 
   def gethostbyaddr(addr : Win32cr::Foundation::PSTR, len : Int32, type__ : Int32) : Win32cr::Networking::WinSock::HOSTENT*
     {% if !flag?(:docs) %}
@@ -5838,9 +5892,11 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def gethostname(name : Win32cr::Foundation::PSTR, namelen : Int32) : Int32
-    #C.gethostname(name, namelen)
-  #end
+  def gethostname(name : Win32cr::Foundation::PSTR, namelen : Int32) : Int32
+    {% if !flag?(:docs) %}
+    C.gethostname(name, namelen)
+    {% end %}
+  end
 
   def getHostNameW(name : Win32cr::Foundation::PWSTR, namelen : Int32) : Int32
     {% if !flag?(:docs) %}
@@ -5872,21 +5928,33 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSAStartup(wVersionRequested : UInt16, lpWSAData : Win32cr::Networking::WinSock::WSADATA*) : Int32
-    #C.WSAStartup(wVersionRequested, lpWSAData)
-  #end
+  # Forwards to `LibC.WSAStartup`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAStartup(wVersionRequested : UInt16, lpWSAData : Win32cr::Networking::WinSock::WSADATA*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAStartup(Win32cr::LibCBridge.arg(wVersionRequested, ::LibC::WORD), Win32cr::LibCBridge.arg(lpWSAData, Pointer(::LibC::WSAData))), Int32)
+    {% end %}
+  end
 
-  #def wSACleanup : Int32
-    #C.WSACleanup
-  #end
+  # Forwards to `LibC.WSACleanup`, which Crystal's standard library declares in `c/winsock2`.
+  def wSACleanup : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSACleanup, Int32)
+    {% end %}
+  end
 
-  #def wSASetLastError(iError : Int32) : Void
-    #C.WSASetLastError(iError)
-  #end
+  # Forwards to `LibC.WSASetLastError`, which Crystal's standard library declares in `c/winsock2`.
+  def wSASetLastError(iError : Int32) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.WSASetLastError(Win32cr::LibCBridge.arg(iError, ::LibC::Int))
+    {% end %}
+  end
 
-  #def wSAGetLastError : Win32cr::Networking::WinSock::WSA_ERROR
-    #C.WSAGetLastError
-  #end
+  # Forwards to `LibC.WSAGetLastError`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAGetLastError : Win32cr::Networking::WinSock::WSA_ERROR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAGetLastError, Win32cr::Networking::WinSock::WSA_ERROR)
+    {% end %}
+  end
 
   def wSAIsBlocking : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -5960,9 +6028,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSAAccept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*, lpfnCondition : Win32cr::Networking::WinSock::LPCONDITIONPROC, dwCallbackData : LibC::UIntPtrT) : Win32cr::Networking::WinSock::SOCKET
-    #C.WSAAccept(s, addr, addrlen, lpfnCondition, dwCallbackData)
-  #end
+  # Forwards to `LibC.WSAAccept`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAAccept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*, lpfnCondition : Win32cr::Networking::WinSock::LPCONDITIONPROC, dwCallbackData : LibC::UIntPtrT) : Win32cr::Networking::WinSock::SOCKET
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAAccept(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(addr, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(addrlen, Pointer(::LibC::Int)), Win32cr::LibCBridge.arg(lpfnCondition, ::LibC::LPCONDITIONPROC), Win32cr::LibCBridge.arg(dwCallbackData, Pointer(::LibC::DWORD))), Win32cr::Networking::WinSock::SOCKET)
+    {% end %}
+  end
 
   def wSACloseEvent(hEvent : Win32cr::Networking::WinSock::WSAEVENT) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -5970,9 +6041,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSAConnect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*) : Int32
-    #C.WSAConnect(s, name, namelen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS)
-  #end
+  # Forwards to `LibC.WSAConnect`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAConnect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAConnect(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(name, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(namelen, ::LibC::Int), Win32cr::LibCBridge.arg(lpCallerData, Pointer(::LibC::WSABUF)), Win32cr::LibCBridge.arg(lpCalleeData, Pointer(::LibC::WSABUF)), Win32cr::LibCBridge.arg(lpSQOS, ::LibC::LPQOS), Win32cr::LibCBridge.arg(lpGQOS, ::LibC::LPQOS)), Int32)
+    {% end %}
+  end
 
   def wSAConnectByNameW(s : Win32cr::Networking::WinSock::SOCKET, nodename : Win32cr::Foundation::PWSTR, servicename : Win32cr::Foundation::PWSTR, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::TIMEVAL*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -5992,9 +6066,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSACreateEvent : Win32cr::Networking::WinSock::WSAEVENT
-    #C.WSACreateEvent
-  #end
+  # Forwards to `LibC.WSACreateEvent`, which Crystal's standard library declares in `c/winsock2`.
+  def wSACreateEvent : Win32cr::Networking::WinSock::WSAEVENT
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSACreateEvent, Win32cr::Networking::WinSock::WSAEVENT)
+    {% end %}
+  end
 
   def wSADuplicateSocketA(s : Win32cr::Networking::WinSock::SOCKET, dwProcessId : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*) : Int32
     {% if !flag?(:docs) %}
@@ -6026,13 +6103,19 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSAEventSelect(s : Win32cr::Networking::WinSock::SOCKET, hEventObject : Win32cr::Networking::WinSock::WSAEVENT, lNetworkEvents : Int32) : Int32
-    #C.WSAEventSelect(s, hEventObject, lNetworkEvents)
-  #end
+  # Forwards to `LibC.WSAEventSelect`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAEventSelect(s : Win32cr::Networking::WinSock::SOCKET, hEventObject : Win32cr::Networking::WinSock::WSAEVENT, lNetworkEvents : Int32) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAEventSelect(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(hEventObject, ::LibC::WSAEVENT), Win32cr::LibCBridge.arg(lNetworkEvents, ::LibC::Long)), Int32)
+    {% end %}
+  end
 
-  #def wSAGetOverlappedResult(s : Win32cr::Networking::WinSock::SOCKET, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpcbTransfer : UInt32*, fWait : Win32cr::Foundation::BOOL, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
-    #C.WSAGetOverlappedResult(s, lpOverlapped, lpcbTransfer, fWait, lpdwFlags)
-  #end
+  # Forwards to `LibC.WSAGetOverlappedResult`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAGetOverlappedResult(s : Win32cr::Networking::WinSock::SOCKET, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpcbTransfer : UInt32*, fWait : Win32cr::Foundation::BOOL, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAGetOverlappedResult(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::WSAOVERLAPPED)), Win32cr::LibCBridge.arg(lpcbTransfer, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(fWait, ::LibC::BOOL), Win32cr::LibCBridge.arg(lpdwFlags, Pointer(::LibC::DWORD))), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
   def wSAGetQOSByName(s : Win32cr::Networking::WinSock::SOCKET, lpQOSName : Win32cr::Networking::WinSock::WSABUF*, lpQOS : Win32cr::Networking::WinSock::QOS*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6052,9 +6135,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSAIoctl(s : Win32cr::Networking::WinSock::SOCKET, dwIoControlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOutBuffer : Void*, cbOutBuffer : UInt32, lpcbBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
-    #C.WSAIoctl(s, dwIoControlCode, lpvInBuffer, cbInBuffer, lpvOutBuffer, cbOutBuffer, lpcbBytesReturned, lpOverlapped, lpCompletionRoutine)
-  #end
+  # Forwards to `LibC.WSAIoctl`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAIoctl(s : Win32cr::Networking::WinSock::SOCKET, dwIoControlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOutBuffer : Void*, cbOutBuffer : UInt32, lpcbBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAIoctl(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(dwIoControlCode, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpvInBuffer, Pointer(Void)), Win32cr::LibCBridge.arg(cbInBuffer, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpvOutBuffer, Pointer(Void)), Win32cr::LibCBridge.arg(cbOutBuffer, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpcbBytesReturned, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::WSAOVERLAPPED)), Win32cr::LibCBridge.arg(lpCompletionRoutine, Pointer(::LibC::WSAOVERLAPPED_COMPLETION_ROUTINE))), Int32)
+    {% end %}
+  end
 
   def wSAJoinLeaf(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
     {% if !flag?(:docs) %}
@@ -6074,9 +6160,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSARecv(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
-    #C.WSARecv(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd, lpFlags, lpOverlapped, lpCompletionRoutine)
-  #end
+  # Forwards to `LibC.WSARecv`, which Crystal's standard library declares in `c/winsock2`.
+  def wSARecv(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSARecv(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(lpBuffers, Pointer(::LibC::WSABUF)), Win32cr::LibCBridge.arg(dwBufferCount, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNumberOfBytesRecvd, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpFlags, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::WSAOVERLAPPED)), Win32cr::LibCBridge.arg(lpCompletionRoutine, Pointer(::LibC::WSAOVERLAPPED_COMPLETION_ROUTINE))), Int32)
+    {% end %}
+  end
 
   def wSARecvDisconnect(s : Win32cr::Networking::WinSock::SOCKET, lpInboundDisconnectData : Win32cr::Networking::WinSock::WSABUF*) : Int32
     {% if !flag?(:docs) %}
@@ -6084,17 +6173,26 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSARecvFrom(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpFrom : Win32cr::Networking::WinSock::SOCKADDR*, lpFromlen : Int32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
-    #C.WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd, lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine)
-  #end
+  # Forwards to `LibC.WSARecvFrom`, which Crystal's standard library declares in `c/winsock2`.
+  def wSARecvFrom(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpFrom : Win32cr::Networking::WinSock::SOCKADDR*, lpFromlen : Int32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSARecvFrom(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(lpBuffers, Pointer(::LibC::WSABUF)), Win32cr::LibCBridge.arg(dwBufferCount, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNumberOfBytesRecvd, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpFlags, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(lpFrom, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(lpFromlen, Pointer(::LibC::Int)), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::WSAOVERLAPPED)), Win32cr::LibCBridge.arg(lpCompletionRoutine, Pointer(::LibC::WSAOVERLAPPED_COMPLETION_ROUTINE))), Int32)
+    {% end %}
+  end
 
-  #def wSAResetEvent(hEvent : Win32cr::Networking::WinSock::WSAEVENT) : Win32cr::Foundation::BOOL
-    #C.WSAResetEvent(hEvent)
-  #end
+  # Forwards to `LibC.WSAResetEvent`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAResetEvent(hEvent : Win32cr::Networking::WinSock::WSAEVENT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAResetEvent(Win32cr::LibCBridge.arg(hEvent, ::LibC::WSAEVENT)), Win32cr::Foundation::BOOL)
+    {% end %}
+  end
 
-  #def wSASend(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
-    #C.WSASend(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent, dwFlags, lpOverlapped, lpCompletionRoutine)
-  #end
+  # Forwards to `LibC.WSASend`, which Crystal's standard library declares in `c/winsock2`.
+  def wSASend(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSASend(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(lpBuffers, Pointer(::LibC::WSABUF)), Win32cr::LibCBridge.arg(dwBufferCount, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNumberOfBytesSent, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::WSAOVERLAPPED)), Win32cr::LibCBridge.arg(lpCompletionRoutine, Pointer(::LibC::WSAOVERLAPPED_COMPLETION_ROUTINE))), Int32)
+    {% end %}
+  end
 
   def wSASendMsg(handle : Win32cr::Networking::WinSock::SOCKET, lpMsg : Win32cr::Networking::WinSock::WSAMSG*, dwFlags : UInt32, lpNumberOfBytesSent : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
     {% if !flag?(:docs) %}
@@ -6108,9 +6206,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSASendTo(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpTo : Win32cr::Networking::WinSock::SOCKADDR*, iTolen : Int32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
-    #C.WSASendTo(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent, dwFlags, lpTo, iTolen, lpOverlapped, lpCompletionRoutine)
-  #end
+  # Forwards to `LibC.WSASendTo`, which Crystal's standard library declares in `c/winsock2`.
+  def wSASendTo(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpTo : Win32cr::Networking::WinSock::SOCKADDR*, iTolen : Int32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSASendTo(Win32cr::LibCBridge.arg(s, ::LibC::SOCKET), Win32cr::LibCBridge.arg(lpBuffers, Pointer(::LibC::WSABUF)), Win32cr::LibCBridge.arg(dwBufferCount, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNumberOfBytesSent, Pointer(::LibC::DWORD)), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpTo, Pointer(::LibC::Sockaddr)), Win32cr::LibCBridge.arg(iTolen, ::LibC::Int), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::WSAOVERLAPPED)), Win32cr::LibCBridge.arg(lpCompletionRoutine, Pointer(::LibC::WSAOVERLAPPED_COMPLETION_ROUTINE))), Int32)
+    {% end %}
+  end
 
   def wSASetEvent(hEvent : Win32cr::Networking::WinSock::WSAEVENT) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
@@ -6124,13 +6225,19 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def wSASocketW(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
-    #C.WSASocketW(af, type__, protocol, lpProtocolInfo, g, dwFlags)
-  #end
+  # Forwards to `LibC.WSASocketW`, which Crystal's standard library declares in `c/winsock2`.
+  def wSASocketW(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSASocketW(Win32cr::LibCBridge.arg(af, ::LibC::Int), Win32cr::LibCBridge.arg(type__, ::LibC::Int), Win32cr::LibCBridge.arg(protocol, ::LibC::Int), Win32cr::LibCBridge.arg(lpProtocolInfo, Pointer(::LibC::WSAPROTOCOL_INFOW)), Win32cr::LibCBridge.arg(g, ::LibC::GROUP), Win32cr::LibCBridge.arg(dwFlags, ::LibC::DWORD)), Win32cr::Networking::WinSock::SOCKET)
+    {% end %}
+  end
 
-  #def wSAWaitForMultipleEvents(cEvents : UInt32, lphEvents : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwTimeout : UInt32, fAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WAIT_EVENT
-    #C.WSAWaitForMultipleEvents(cEvents, lphEvents, fWaitAll, dwTimeout, fAlertable)
-  #end
+  # Forwards to `LibC.WSAWaitForMultipleEvents`, which Crystal's standard library declares in `c/winsock2`.
+  def wSAWaitForMultipleEvents(cEvents : UInt32, lphEvents : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwTimeout : UInt32, fAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WAIT_EVENT
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.WSAWaitForMultipleEvents(Win32cr::LibCBridge.arg(cEvents, ::LibC::DWORD), Win32cr::LibCBridge.arg(lphEvents, Pointer(::LibC::WSAEVENT)), Win32cr::LibCBridge.arg(fWaitAll, ::LibC::BOOL), Win32cr::LibCBridge.arg(dwTimeout, ::LibC::DWORD), Win32cr::LibCBridge.arg(fAlertable, ::LibC::BOOL)), Win32cr::Foundation::WAIT_EVENT)
+    {% end %}
+  end
 
   def wSAAddressToStringA(lpsaAddress : Win32cr::Networking::WinSock::SOCKADDR*, dwAddressLength : UInt32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, lpszAddressString : Win32cr::Foundation::PSTR, lpdwAddressStringLength : UInt32*) : Int32
     {% if !flag?(:docs) %}
@@ -6606,9 +6713,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def getaddrinfo(pNodeName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pHints : Win32cr::Networking::WinSock::ADDRINFOA*, ppResult : Win32cr::Networking::WinSock::ADDRINFOA**) : Int32
-    #C.getaddrinfo(pNodeName, pServiceName, pHints, ppResult)
-  #end
+  # Forwards to `LibC.getaddrinfo`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def getaddrinfo(pNodeName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pHints : Win32cr::Networking::WinSock::ADDRINFOA*, ppResult : Win32cr::Networking::WinSock::ADDRINFOA**) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.getaddrinfo(Win32cr::LibCBridge.arg(pNodeName, Pointer(::LibC::Char)), Win32cr::LibCBridge.arg(pServiceName, Pointer(::LibC::Char)), Win32cr::LibCBridge.arg(pHints, Pointer(::LibC::Addrinfo)), Win32cr::LibCBridge.arg(ppResult, Pointer(Pointer(::LibC::Addrinfo)))), Int32)
+    {% end %}
+  end
 
   def getAddrInfoW(pNodeName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, pHints : Win32cr::Networking::WinSock::ADDRINFOW*, ppResult : Win32cr::Networking::WinSock::ADDRINFOW**) : Int32
     {% if !flag?(:docs) %}
@@ -6622,17 +6732,26 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def getAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::ADDRINFOEXW*, ppResult : Win32cr::Networking::WinSock::ADDRINFOEXW**, timeout : Win32cr::Networking::WinSock::TIMEVAL*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle : Win32cr::Foundation::HANDLE*) : Int32
-    #C.GetAddrInfoExW(pName, pServiceName, dwNameSpace, lpNspId, hints, ppResult, timeout, lpOverlapped, lpCompletionRoutine, lpHandle)
-  #end
+  # Forwards to `LibC.GetAddrInfoExW`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def getAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::ADDRINFOEXW*, ppResult : Win32cr::Networking::WinSock::ADDRINFOEXW**, timeout : Win32cr::Networking::WinSock::TIMEVAL*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle : Win32cr::Foundation::HANDLE*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetAddrInfoExW(Win32cr::LibCBridge.arg(pName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(pServiceName, ::LibC::LPWSTR), Win32cr::LibCBridge.arg(dwNameSpace, ::LibC::DWORD), Win32cr::LibCBridge.arg(lpNspId, Pointer(::LibC::GUID)), Win32cr::LibCBridge.arg(hints, Pointer(::LibC::ADDRINFOEXW)), Win32cr::LibCBridge.arg(ppResult, Pointer(Pointer(::LibC::ADDRINFOEXW))), Win32cr::LibCBridge.arg(timeout, Pointer(::LibC::Timeval)), Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::OVERLAPPED)), Win32cr::LibCBridge.arg(lpCompletionRoutine, ::LibC::LPLOOKUPSERVICE_COMPLETION_ROUTINE), Win32cr::LibCBridge.arg(lpHandle, Pointer(::LibC::HANDLE))), Int32)
+    {% end %}
+  end
 
-  #def getAddrInfoExCancel(lpHandle : Win32cr::Foundation::HANDLE*) : Int32
-    #C.GetAddrInfoExCancel(lpHandle)
-  #end
+  # Forwards to `LibC.GetAddrInfoExCancel`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def getAddrInfoExCancel(lpHandle : Win32cr::Foundation::HANDLE*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetAddrInfoExCancel(Win32cr::LibCBridge.arg(lpHandle, Pointer(::LibC::HANDLE))), Int32)
+    {% end %}
+  end
 
-  #def getAddrInfoExOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Int32
-    #C.GetAddrInfoExOverlappedResult(lpOverlapped)
-  #end
+  # Forwards to `LibC.GetAddrInfoExOverlappedResult`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def getAddrInfoExOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.GetAddrInfoExOverlappedResult(Win32cr::LibCBridge.arg(lpOverlapped, Pointer(::LibC::OVERLAPPED))), Int32)
+    {% end %}
+  end
 
   def setAddrInfoExA(pName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pAddresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, dwAddressCount : UInt32, lpBlob : Win32cr::System::Com::BLOB*, dwFlags : UInt32, dwNameSpace : UInt32, lpNspId : LibC::GUID*, timeout : Win32cr::Networking::WinSock::TIMEVAL*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
     {% if !flag?(:docs) %}
@@ -6646,9 +6765,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def freeaddrinfo(pAddrInfo : Win32cr::Networking::WinSock::ADDRINFOA*) : Void
-    #C.freeaddrinfo(pAddrInfo)
-  #end
+  # Forwards to `LibC.freeaddrinfo`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def freeaddrinfo(pAddrInfo : Win32cr::Networking::WinSock::ADDRINFOA*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.freeaddrinfo(Win32cr::LibCBridge.arg(pAddrInfo, Pointer(::LibC::Addrinfo)))
+    {% end %}
+  end
 
   def freeAddrInfoW(pAddrInfo : Win32cr::Networking::WinSock::ADDRINFOW*) : Void
     {% if !flag?(:docs) %}
@@ -6662,13 +6784,18 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def freeAddrInfoExW(pAddrInfoEx : Win32cr::Networking::WinSock::ADDRINFOEXW*) : Void
-    #C.FreeAddrInfoExW(pAddrInfoEx)
-  #end
+  # Forwards to `LibC.FreeAddrInfoExW`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def freeAddrInfoExW(pAddrInfoEx : Win32cr::Networking::WinSock::ADDRINFOEXW*) : Void
+    {% if !flag?(:docs) %}
+    ::LibC.FreeAddrInfoExW(Win32cr::LibCBridge.arg(pAddrInfoEx, Pointer(::LibC::ADDRINFOEXW)))
+    {% end %}
+  end
 
-  #def getnameinfo(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Win32cr::Networking::WinSock::Socklen_t, pNodeBuffer : Win32cr::Foundation::PSTR, node_buffer_size : UInt32, pServiceBuffer : Win32cr::Foundation::PSTR, service_buffer_size : UInt32, flags : Int32) : Int32
-    #C.getnameinfo(pSockaddr, sockaddr_length, pNodeBuffer, node_buffer_size, pServiceBuffer, service_buffer_size, flags)
-  #end
+  def getnameinfo(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Win32cr::Networking::WinSock::Socklen_t, pNodeBuffer : Win32cr::Foundation::PSTR, node_buffer_size : UInt32, pServiceBuffer : Win32cr::Foundation::PSTR, service_buffer_size : UInt32, flags : Int32) : Int32
+    {% if !flag?(:docs) %}
+    C.getnameinfo(pSockaddr, sockaddr_length, pNodeBuffer, node_buffer_size, pServiceBuffer, service_buffer_size, flags)
+    {% end %}
+  end
 
   def getNameInfoW(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Win32cr::Networking::WinSock::Socklen_t, pNodeBuffer : Win32cr::Foundation::PWSTR, node_buffer_size : UInt32, pServiceBuffer : Win32cr::Foundation::PWSTR, service_buffer_size : UInt32, flags : Int32) : Int32
     {% if !flag?(:docs) %}
@@ -6676,9 +6803,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def inetPton(family : Int32, pszAddrString : Win32cr::Foundation::PSTR, pAddrBuf : Void*) : Int32
-    #C.inet_pton(family, pszAddrString, pAddrBuf)
-  #end
+  # Forwards to `LibC.inet_pton`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def inetPton(family : Int32, pszAddrString : Win32cr::Foundation::PSTR, pAddrBuf : Void*) : Int32
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.inet_pton(Win32cr::LibCBridge.arg(family, ::LibC::Int), Win32cr::LibCBridge.arg(pszAddrString, Pointer(::LibC::Char)), Win32cr::LibCBridge.arg(pAddrBuf, Pointer(Void))), Int32)
+    {% end %}
+  end
 
   def inetPtonW(family : Int32, pszAddrString : Win32cr::Foundation::PWSTR, pAddrBuf : Void*) : Int32
     {% if !flag?(:docs) %}
@@ -6686,9 +6816,12 @@ module Win32cr::Networking::WinSock
     {% end %}
   end
 
-  #def inetNtop(family : Int32, pAddr : Void*, pStringBuf : Win32cr::Foundation::PSTR, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
-    #C.inet_ntop(family, pAddr, pStringBuf, string_buf_size)
-  #end
+  # Forwards to `LibC.inet_ntop`, which Crystal's standard library declares in `c/ws2tcpip`.
+  def inetNtop(family : Int32, pAddr : Void*, pStringBuf : Win32cr::Foundation::PSTR, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
+    Win32cr::LibCBridge.ret(::LibC.inet_ntop(Win32cr::LibCBridge.arg(family, ::LibC::Int), Win32cr::LibCBridge.arg(pAddr, Pointer(Void)), Win32cr::LibCBridge.arg(pStringBuf, Pointer(::LibC::Char)), Win32cr::LibCBridge.arg(string_buf_size, ::LibC::SizeT)), Win32cr::Foundation::PSTR)
+    {% end %}
+  end
 
   def inetNtopW(family : Int32, pAddr : Void*, pStringBuf : Win32cr::Foundation::PWSTR, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PWSTR
     {% if !flag?(:docs) %}
@@ -6840,42 +6973,42 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun __WSAFDIsSet(fd : Win32cr::Networking::WinSock::SOCKET, param1 : Win32cr::Networking::WinSock::FD_SET*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun accept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*) : Win32cr::Networking::WinSock::SOCKET
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun bind(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun closesocket(s : Win32cr::Networking::WinSock::SOCKET) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun connect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun ioctlsocket(s : Win32cr::Networking::WinSock::SOCKET, cmd : Int32, argp : UInt32*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun getpeername(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun getsockname(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun getsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32*) : Int32
 
     # :nodoc:
     fun htonl(hostlong : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun htons(hostshort : UInt16) : UInt16
 
@@ -6885,44 +7018,44 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun inet_ntoa(in__ : Win32cr::Networking::WinSock::IN_ADDR) : Win32cr::Foundation::PSTR
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun listen(s : Win32cr::Networking::WinSock::SOCKET, backlog : Int32) : Int32
 
     # :nodoc:
     fun ntohl(netlong : UInt32) : UInt32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun ntohs(netshort : UInt16) : UInt16
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun recv(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun recvfrom(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, from : Win32cr::Networking::WinSock::SOCKADDR*, fromlen : Int32*) : Int32
 
     # :nodoc:
     fun select(nfds : Int32, readfds : Win32cr::Networking::WinSock::FD_SET*, writefds : Win32cr::Networking::WinSock::FD_SET*, exceptfds : Win32cr::Networking::WinSock::FD_SET*, timeout : Win32cr::Networking::WinSock::TIMEVAL*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun send(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Win32cr::Networking::WinSock::SEND_RECV_FLAGS) : Int32
 
     # :nodoc:
     fun sendto(s : Win32cr::Networking::WinSock::SOCKET, buf : Win32cr::Foundation::PSTR, len : Int32, flags : Int32, to : Win32cr::Networking::WinSock::SOCKADDR*, tolen : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun setsockopt(s : Win32cr::Networking::WinSock::SOCKET, level : Int32, optname : Int32, optval : Win32cr::Foundation::PSTR, optlen : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun shutdown(s : Win32cr::Networking::WinSock::SOCKET, how : Win32cr::Networking::WinSock::WINSOCK_SHUTDOWN_HOW) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun socket(af : Int32, type__ : Win32cr::Networking::WinSock::WINSOCK_SOCKET_TYPE, protocol : Int32) : Win32cr::Networking::WinSock::SOCKET
 
@@ -6932,9 +7065,8 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun gethostbyname(name : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::HOSTENT*
 
-    # Commented out due to being part of LibC
     # :nodoc:
-    #fun gethostname(name : Win32cr::Foundation::PSTR, namelen : Int32) : Int32
+    fun gethostname(name : Win32cr::Foundation::PSTR, namelen : Int32) : Int32
 
     # :nodoc:
     fun GetHostNameW(name : Win32cr::Foundation::PWSTR, namelen : Int32) : Int32
@@ -6951,19 +7083,19 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun getprotobyname(name : Win32cr::Foundation::PSTR) : Win32cr::Networking::WinSock::PROTOENT*
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAStartup(wVersionRequested : UInt16, lpWSAData : Win32cr::Networking::WinSock::WSADATA*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSACleanup : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSASetLastError(iError : Int32) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAGetLastError : Win32cr::Networking::WinSock::WSA_ERROR
 
@@ -7003,14 +7135,14 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun WSAAsyncSelect(s : Win32cr::Networking::WinSock::SOCKET, hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, lEvent : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAAccept(s : Win32cr::Networking::WinSock::SOCKET, addr : Win32cr::Networking::WinSock::SOCKADDR*, addrlen : Int32*, lpfnCondition : Win32cr::Networking::WinSock::LPCONDITIONPROC, dwCallbackData : LibC::UIntPtrT) : Win32cr::Networking::WinSock::SOCKET
 
     # :nodoc:
     fun WSACloseEvent(hEvent : Win32cr::Networking::WinSock::WSAEVENT) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAConnect(s : Win32cr::Networking::WinSock::SOCKET, name : Win32cr::Networking::WinSock::SOCKADDR*, namelen : Int32, lpCallerData : Win32cr::Networking::WinSock::WSABUF*, lpCalleeData : Win32cr::Networking::WinSock::WSABUF*, lpSQOS : Win32cr::Networking::WinSock::QOS*, lpGQOS : Win32cr::Networking::WinSock::QOS*) : Int32
 
@@ -7023,7 +7155,7 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun WSAConnectByList(s : Win32cr::Networking::WinSock::SOCKET, socket_address : Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, local_address_length : UInt32*, local_address : Win32cr::Networking::WinSock::SOCKADDR*, remote_address_length : UInt32*, remote_address : Win32cr::Networking::WinSock::SOCKADDR*, timeout : Win32cr::Networking::WinSock::TIMEVAL*, reserved : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSACreateEvent : Win32cr::Networking::WinSock::WSAEVENT
 
@@ -7042,11 +7174,11 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun WSAEnumProtocolsW(lpiProtocols : Int32*, lpProtocolBuffer : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, lpdwBufferLength : UInt32*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAEventSelect(s : Win32cr::Networking::WinSock::SOCKET, hEventObject : Win32cr::Networking::WinSock::WSAEVENT, lNetworkEvents : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAGetOverlappedResult(s : Win32cr::Networking::WinSock::SOCKET, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpcbTransfer : UInt32*, fWait : Win32cr::Foundation::BOOL, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
@@ -7059,7 +7191,7 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun WSAHtons(s : Win32cr::Networking::WinSock::SOCKET, hostshort : UInt16, lpnetshort : UInt16*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAIoctl(s : Win32cr::Networking::WinSock::SOCKET, dwIoControlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOutBuffer : Void*, cbOutBuffer : UInt32, lpcbBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
@@ -7072,22 +7204,22 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun WSANtohs(s : Win32cr::Networking::WinSock::SOCKET, netshort : UInt16, lphostshort : UInt16*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSARecv(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
     # :nodoc:
     fun WSARecvDisconnect(s : Win32cr::Networking::WinSock::SOCKET, lpInboundDisconnectData : Win32cr::Networking::WinSock::WSABUF*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSARecvFrom(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesRecvd : UInt32*, lpFlags : UInt32*, lpFrom : Win32cr::Networking::WinSock::SOCKADDR*, lpFromlen : Int32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAResetEvent(hEvent : Win32cr::Networking::WinSock::WSAEVENT) : Win32cr::Foundation::BOOL
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSASend(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
@@ -7097,7 +7229,7 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun WSASendDisconnect(s : Win32cr::Networking::WinSock::SOCKET, lpOutboundDisconnectData : Win32cr::Networking::WinSock::WSABUF*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSASendTo(s : Win32cr::Networking::WinSock::SOCKET, lpBuffers : Win32cr::Networking::WinSock::WSABUF*, dwBufferCount : UInt32, lpNumberOfBytesSent : UInt32*, dwFlags : UInt32, lpTo : Win32cr::Networking::WinSock::SOCKADDR*, iTolen : Int32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE) : Int32
 
@@ -7107,11 +7239,11 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun WSASocketA(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOA*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSASocketW(af : Int32, type__ : Int32, protocol : Int32, lpProtocolInfo : Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, g : UInt32, dwFlags : UInt32) : Win32cr::Networking::WinSock::SOCKET
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/winsock2)
     # :nodoc:
     #fun WSAWaitForMultipleEvents(cEvents : UInt32, lphEvents : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwTimeout : UInt32, fAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WAIT_EVENT
 
@@ -7352,7 +7484,7 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun GetServiceW(dwNameSpace : UInt32, lpGuid : LibC::GUID*, lpServiceName : Win32cr::Foundation::PWSTR, dwProperties : UInt32, lpBuffer : Void*, lpdwBufferSize : UInt32*, lpServiceAsyncInfo : Win32cr::Networking::WinSock::SERVICE_ASYNC_INFO*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun getaddrinfo(pNodeName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, pHints : Win32cr::Networking::WinSock::ADDRINFOA*, ppResult : Win32cr::Networking::WinSock::ADDRINFOA**) : Int32
 
@@ -7362,15 +7494,15 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun GetAddrInfoExA(pName : Win32cr::Foundation::PSTR, pServiceName : Win32cr::Foundation::PSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::ADDRINFOEXA*, ppResult : Win32cr::Networking::WinSock::ADDRINFOEXA**, timeout : Win32cr::Networking::WinSock::TIMEVAL*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun GetAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, dwNameSpace : UInt32, lpNspId : LibC::GUID*, hints : Win32cr::Networking::WinSock::ADDRINFOEXW*, ppResult : Win32cr::Networking::WinSock::ADDRINFOEXW**, timeout : Win32cr::Networking::WinSock::TIMEVAL*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle : Win32cr::Foundation::HANDLE*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun GetAddrInfoExCancel(lpHandle : Win32cr::Foundation::HANDLE*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun GetAddrInfoExOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Int32
 
@@ -7380,7 +7512,7 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun SetAddrInfoExW(pName : Win32cr::Foundation::PWSTR, pServiceName : Win32cr::Foundation::PWSTR, pAddresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, dwAddressCount : UInt32, lpBlob : Win32cr::System::Com::BLOB*, dwFlags : UInt32, dwNameSpace : UInt32, lpNspId : LibC::GUID*, timeout : Win32cr::Networking::WinSock::TIMEVAL*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpCompletionRoutine : Win32cr::Networking::WinSock::LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle : Win32cr::Foundation::HANDLE*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun freeaddrinfo(pAddrInfo : Win32cr::Networking::WinSock::ADDRINFOA*) : Void
 
@@ -7390,25 +7522,24 @@ module Win32cr::Networking::WinSock
     # :nodoc:
     fun FreeAddrInfoEx(pAddrInfoEx : Win32cr::Networking::WinSock::ADDRINFOEXA*) : Void
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun FreeAddrInfoExW(pAddrInfoEx : Win32cr::Networking::WinSock::ADDRINFOEXW*) : Void
 
-    # Commented out due to being part of LibC
     # :nodoc:
-    #fun getnameinfo(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Win32cr::Networking::WinSock::Socklen_t, pNodeBuffer : Win32cr::Foundation::PSTR, node_buffer_size : UInt32, pServiceBuffer : Win32cr::Foundation::PSTR, service_buffer_size : UInt32, flags : Int32) : Int32
+    fun getnameinfo(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Win32cr::Networking::WinSock::Socklen_t, pNodeBuffer : Win32cr::Foundation::PSTR, node_buffer_size : UInt32, pServiceBuffer : Win32cr::Foundation::PSTR, service_buffer_size : UInt32, flags : Int32) : Int32
 
     # :nodoc:
     fun GetNameInfoW(pSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, sockaddr_length : Win32cr::Networking::WinSock::Socklen_t, pNodeBuffer : Win32cr::Foundation::PWSTR, node_buffer_size : UInt32, pServiceBuffer : Win32cr::Foundation::PWSTR, service_buffer_size : UInt32, flags : Int32) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun inet_pton(family : Int32, pszAddrString : Win32cr::Foundation::PSTR, pAddrBuf : Void*) : Int32
 
     # :nodoc:
     fun InetPtonW(family : Int32, pszAddrString : Win32cr::Foundation::PWSTR, pAddrBuf : Void*) : Int32
 
-    # Commented out due to being part of LibC
+    # Commented out due to being part of LibC (declared in c/ws2tcpip)
     # :nodoc:
     #fun inet_ntop(family : Int32, pAddr : Void*, pStringBuf : Win32cr::Foundation::PSTR, string_buf_size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
 
