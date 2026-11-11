@@ -791,7 +791,7 @@ module Win32cr::Security::Authentication::WebAuthn
   end
 
   @[Extern]
-  struct EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2
+  struct WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2
     property pwszAuthenticatorName : Win32cr::Foundation::PWSTR
     property pClsid : LibC::GUID*
     property pwszPluginRpId : Win32cr::Foundation::PWSTR
@@ -830,7 +830,7 @@ module Win32cr::Security::Authentication::WebAuthn
   end
 
   @[Extern]
-  struct EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2
+  struct WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2
     property pwszAuthenticatorName : Win32cr::Foundation::PWSTR
     property pClsid : LibC::GUID*
     property pClsidNew : LibC::GUID*
@@ -870,7 +870,7 @@ module Win32cr::Security::Authentication::WebAuthn
   end
 
   @[Extern]
-  struct EXPERIMENTAL_WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2
+  struct WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2
     property hwnd : Win32cr::Foundation::HWND
     property pGuidTransactionId : LibC::GUID*
     property pwszUsername : Win32cr::Foundation::PWSTR
@@ -1233,6 +1233,12 @@ module Win32cr::Security::Authentication::WebAuthn
     {% end %}
   end
 
+  def webAuthNPluginAddAuthenticator2(pPluginAddAuthenticatorOptions : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2*, ppPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginAddAuthenticator2(pPluginAddAuthenticatorOptions, ppPluginAddAuthenticatorResponse)
+    {% end %}
+  end
+
   def webAuthNPluginFreeAddAuthenticatorResponse(pPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE*) : Void
     {% if !flag?(:docs) %}
     C.WebAuthNPluginFreeAddAuthenticatorResponse(pPluginAddAuthenticatorResponse)
@@ -1248,6 +1254,12 @@ module Win32cr::Security::Authentication::WebAuthn
   def webAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS*) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
     C.WebAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails)
+    {% end %}
+  end
+
+  def webAuthNPluginUpdateAuthenticatorDetails2(pPluginUpdateAuthenticatorDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginUpdateAuthenticatorDetails2(pPluginUpdateAuthenticatorDetails)
     {% end %}
   end
 
@@ -1284,6 +1296,12 @@ module Win32cr::Security::Authentication::WebAuthn
   def webAuthNPluginPerformUserVerification(pPluginUserVerification : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST*, pcbResponse : UInt32*, ppbResponse : UInt8**) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
     C.WebAuthNPluginPerformUserVerification(pPluginUserVerification, pcbResponse, ppbResponse)
+    {% end %}
+  end
+
+  def webAuthNPluginPerformUserVerification2(pPluginUserVerification : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2*, pcbResponse : UInt32*, ppbResponse : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.WebAuthNPluginPerformUserVerification2(pPluginUserVerification, pcbResponse, ppbResponse)
     {% end %}
   end
 
@@ -1420,6 +1438,9 @@ module Win32cr::Security::Authentication::WebAuthn
     fun WebAuthNPluginAddAuthenticator(pPluginAddAuthenticatorOptions : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS*, ppPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE**) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
+    fun WebAuthNPluginAddAuthenticator2(pPluginAddAuthenticatorOptions : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2*, ppPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
     fun WebAuthNPluginFreeAddAuthenticatorResponse(pPluginAddAuthenticatorResponse : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE*) : Void
 
     # :nodoc:
@@ -1427,6 +1448,9 @@ module Win32cr::Security::Authentication::WebAuthn
 
     # :nodoc:
     fun WebAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginUpdateAuthenticatorDetails2(pPluginUpdateAuthenticatorDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun WebAuthNPluginAuthenticatorAddCredentials(rclsid : LibC::GUID*, cCredentialDetails : UInt32, pCredentialDetails : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS*) : Win32cr::Foundation::HRESULT
@@ -1445,6 +1469,9 @@ module Win32cr::Security::Authentication::WebAuthn
 
     # :nodoc:
     fun WebAuthNPluginPerformUserVerification(pPluginUserVerification : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST*, pcbResponse : UInt32*, ppbResponse : UInt8**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun WebAuthNPluginPerformUserVerification2(pPluginUserVerification : Win32cr::Security::Authentication::WebAuthn::WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2*, pcbResponse : UInt32*, ppbResponse : UInt8**) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun WebAuthNPluginFreeUserVerificationResponse(ppbResponse : UInt8*) : Void

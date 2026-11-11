@@ -133,6 +133,7 @@ module Win32cr::Graphics::Dxgi
     DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = 1024_i32
     DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = 2048_i32
     DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = 4096_i32
+    DXGI_SWAP_CHAIN_FLAG_USE_DEFAULT_COLOR_SPACE = 32768_i32
   end
   @[Flags]
   enum DXGI_ADAPTER_FLAG
@@ -240,6 +241,22 @@ module Win32cr::Graphics::Dxgi
     DXGI_GPU_PREFERENCE_UNSPECIFIED = 0_i32
     DXGI_GPU_PREFERENCE_MINIMUM_POWER = 1_i32
     DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE = 2_i32
+  end
+  enum DXGI_SINGLE_ADAPTER_HYBRID_MODE
+    DXGI_SINGLE_ADAPTER_HYBRID_MODE_UNSPECIFIED = 0_i32
+    DXGI_SINGLE_ADAPTER_HYBRID_MODE_MINIMUM_POWER = 1_i32
+    DXGI_SINGLE_ADAPTER_HYBRID_MODE_HIGH_PERFORMANCE = 2_i32
+  end
+  @[Flags]
+  enum DXGI_ADAPTER_FLAG4
+    DXGI_ADAPTER_FLAG4_NONE = 0_i32
+    DXGI_ADAPTER_FLAG4_REMOTE = 1_i32
+    DXGI_ADAPTER_FLAG4_SOFTWARE = 2_i32
+    DXGI_ADAPTER_FLAG4_ACG_COMPATIBLE = 4_i32
+    DXGI_ADAPTER_FLAG4_SUPPORT_MONITORED_FENCES = 8_i32
+    DXGI_ADAPTER_FLAG4_SUPPORT_NON_MONITORED_FENCES = 16_i32
+    DXGI_ADAPTER_FLAG4_KEYED_MUTEX_CONFORMANCE = 32_i32
+    DXGI_ADAPTER_FLAG4_SUPPORT_SINGLE_ADAPTER_HYBRID_MODE = 64_i32
   end
   @[Flags]
   enum DXGI_DEBUG_RLO_FLAGS
@@ -568,6 +585,12 @@ module Win32cr::Graphics::Dxgi
     DXGI_MSG_IDXGISwapChain_Present_11On12_Released_Resource = 296_i32
     DXGI_MSG_IDXGIFactory_CreateSwapChain_MultipleSwapchainRefToSurface_DeferredDtr = 297_i32
     DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior = 298_i32
+    DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpaceFlag = 299_i32
+    DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpace = 300_i32
+    DXGI_MSG_IDXGISwapChain5_ResizeBuffers2_InvalidColorSpace = 301_i32
+    DXGI_MSG_IDXGISwapChain5_SetColorSpace1_Unsupported = 302_i32
+    DXGI_MSG_IDXGIAdapter5_GetSingleAdapterHybridMode_Unsupported = 303_i32
+    DXGI_MSG_IDXGIAdapter5_SetSingleAdapterHybridMode_Unsupported = 304_i32
     DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow = 1000_i32
     DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_DISCARD_BufferCount = 1001_i32
     DXGI_MSG_Phone_IDXGISwapChain_SetFullscreenState_NotAvailable = 1002_i32
@@ -928,6 +951,42 @@ module Win32cr::Graphics::Dxgi
     property max_luminance : Float32
     property max_full_frame_luminance : Float32
     def initialize(@device_name : UInt16[32], @desktop_coordinates : Win32cr::Foundation::RECT, @attached_to_desktop : Win32cr::Foundation::BOOL, @rotation : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_ROTATION, @monitor : Win32cr::Graphics::Gdi::HMONITOR, @bits_per_color : UInt32, @color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, @red_primary : Float32[2], @green_primary : Float32[2], @blue_primary : Float32[2], @white_point : Float32[2], @min_luminance : Float32, @max_luminance : Float32, @max_full_frame_luminance : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DXGI_ADAPTER_DESC4
+    property description : UInt16[128]
+    property vendor_id : UInt32
+    property device_id : UInt32
+    property sub_sys_id : UInt32
+    property revision : UInt32
+    property dedicated_video_memory : LibC::UIntPtrT
+    property dedicated_system_memory : LibC::UIntPtrT
+    property shared_system_memory : LibC::UIntPtrT
+    property adapter_luid : Win32cr::Foundation::LUID
+    property flags : Win32cr::Graphics::Dxgi::DXGI_ADAPTER_FLAG4
+    property graphics_preemption_granularity : Win32cr::Graphics::Dxgi::DXGI_GRAPHICS_PREEMPTION_GRANULARITY
+    property compute_preemption_granularity : Win32cr::Graphics::Dxgi::DXGI_COMPUTE_PREEMPTION_GRANULARITY
+    def initialize(@description : UInt16[128], @vendor_id : UInt32, @device_id : UInt32, @sub_sys_id : UInt32, @revision : UInt32, @dedicated_video_memory : LibC::UIntPtrT, @dedicated_system_memory : LibC::UIntPtrT, @shared_system_memory : LibC::UIntPtrT, @adapter_luid : Win32cr::Foundation::LUID, @flags : Win32cr::Graphics::Dxgi::DXGI_ADAPTER_FLAG4, @graphics_preemption_granularity : Win32cr::Graphics::Dxgi::DXGI_GRAPHICS_PREEMPTION_GRANULARITY, @compute_preemption_granularity : Win32cr::Graphics::Dxgi::DXGI_COMPUTE_PREEMPTION_GRANULARITY)
+    end
+  end
+
+  @[Extern]
+  struct DXGI_SWAP_CHAIN_DESC2
+    property width : UInt32
+    property height : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property stereo : Win32cr::Foundation::BOOL
+    property sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC
+    property buffer_usage : Win32cr::Graphics::Dxgi::DXGI_USAGE
+    property buffer_count : UInt32
+    property scaling : Win32cr::Graphics::Dxgi::DXGI_SCALING
+    property swap_effect : Win32cr::Graphics::Dxgi::DXGI_SWAP_EFFECT
+    property alpha_mode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE
+    property flags : UInt32
+    property color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    def initialize(@width : UInt32, @height : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @stereo : Win32cr::Foundation::BOOL, @sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC, @buffer_usage : Win32cr::Graphics::Dxgi::DXGI_USAGE, @buffer_count : UInt32, @scaling : Win32cr::Graphics::Dxgi::DXGI_SCALING, @swap_effect : Win32cr::Graphics::Dxgi::DXGI_SWAP_EFFECT, @alpha_mode : Win32cr::Graphics::Dxgi::Common::DXGI_ALPHA_MODE, @flags : UInt32, @color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE)
     end
   end
 
@@ -4696,6 +4755,478 @@ module Win32cr::Graphics::Dxgi
     end
     def unregister_adapters_changed_event(this : IDXGIFactory7*, dwCookie : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_adapters_changed_event.call(this, dwCookie)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDXGIAdapter5Vtable,
+    query_interface : Proc(IDXGIAdapter5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDXGIAdapter5*, UInt32),
+    release : Proc(IDXGIAdapter5*, UInt32),
+    set_private_data : Proc(IDXGIAdapter5*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    set_private_data_interface : Proc(IDXGIAdapter5*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    get_private_data : Proc(IDXGIAdapter5*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
+    get_parent : Proc(IDXGIAdapter5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    enum_outputs : Proc(IDXGIAdapter5*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_desc : Proc(IDXGIAdapter5*, Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC*, Win32cr::Foundation::HRESULT),
+    check_interface_support : Proc(IDXGIAdapter5*, LibC::GUID*, Int64*, Win32cr::Foundation::HRESULT),
+    get_desc1 : Proc(IDXGIAdapter5*, Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC1*, Win32cr::Foundation::HRESULT),
+    get_desc2 : Proc(IDXGIAdapter5*, Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC2*, Win32cr::Foundation::HRESULT),
+    register_hardware_content_protection_teardown_status_event : Proc(IDXGIAdapter5*, Win32cr::Foundation::HANDLE, UInt32*, Win32cr::Foundation::HRESULT),
+    unregister_hardware_content_protection_teardown_status : Proc(IDXGIAdapter5*, UInt32, Void),
+    query_video_memory_info : Proc(IDXGIAdapter5*, UInt32, Win32cr::Graphics::Dxgi::DXGI_MEMORY_SEGMENT_GROUP, Win32cr::Graphics::Dxgi::DXGI_QUERY_VIDEO_MEMORY_INFO*, Win32cr::Foundation::HRESULT),
+    set_video_memory_reservation : Proc(IDXGIAdapter5*, UInt32, Win32cr::Graphics::Dxgi::DXGI_MEMORY_SEGMENT_GROUP, UInt64, Win32cr::Foundation::HRESULT),
+    register_video_memory_budget_change_notification_event : Proc(IDXGIAdapter5*, Win32cr::Foundation::HANDLE, UInt32*, Win32cr::Foundation::HRESULT),
+    unregister_video_memory_budget_change_notification : Proc(IDXGIAdapter5*, UInt32, Void),
+    get_desc3 : Proc(IDXGIAdapter5*, Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC3*, Win32cr::Foundation::HRESULT),
+    get_desc4 : Proc(IDXGIAdapter5*, Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC4*, Win32cr::Foundation::HRESULT),
+    get_single_adapter_hybrid_mode : Proc(IDXGIAdapter5*, Win32cr::Graphics::Dxgi::DXGI_SINGLE_ADAPTER_HYBRID_MODE*, Win32cr::Foundation::HRESULT),
+    set_single_adapter_hybrid_mode : Proc(IDXGIAdapter5*, Win32cr::Graphics::Dxgi::DXGI_SINGLE_ADAPTER_HYBRID_MODE, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDXGIAdapter5, lpVtbl : IDXGIAdapter5Vtable* do
+    GUID = LibC::GUID.new(0x9464643c_u32, 0xc95b_u16, 0x4674_u16, StaticArray[0x8a_u8, 0x7d_u8, 0xee_u8, 0x5_u8, 0x48_u8, 0xe8_u8, 0xc0_u8, 0x22_u8])
+    def query_interface(this : IDXGIAdapter5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDXGIAdapter5*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDXGIAdapter5*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_private_data(this : IDXGIAdapter5*, name : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data.call(this, name, data_size, pData)
+    end
+    def set_private_data_interface(this : IDXGIAdapter5*, name : LibC::GUID*, pUnknown : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data_interface.call(this, name, pUnknown)
+    end
+    def get_private_data(this : IDXGIAdapter5*, name : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_private_data.call(this, name, pDataSize, pData)
+    end
+    def get_parent(this : IDXGIAdapter5*, riid : LibC::GUID*, ppParent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_parent.call(this, riid, ppParent)
+    end
+    def enum_outputs(this : IDXGIAdapter5*, output : UInt32, ppOutput : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_outputs.call(this, output, ppOutput)
+    end
+    def get_desc(this : IDXGIAdapter5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc.call(this, pDesc)
+    end
+    def check_interface_support(this : IDXGIAdapter5*, interface_name : LibC::GUID*, pUMDVersion : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.check_interface_support.call(this, interface_name, pUMDVersion)
+    end
+    def get_desc1(this : IDXGIAdapter5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC1*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc1.call(this, pDesc)
+    end
+    def get_desc2(this : IDXGIAdapter5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc2.call(this, pDesc)
+    end
+    def register_hardware_content_protection_teardown_status_event(this : IDXGIAdapter5*, hEvent : Win32cr::Foundation::HANDLE, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_hardware_content_protection_teardown_status_event.call(this, hEvent, pdwCookie)
+    end
+    def unregister_hardware_content_protection_teardown_status(this : IDXGIAdapter5*, dwCookie : UInt32) : Void
+      @lpVtbl.try &.value.unregister_hardware_content_protection_teardown_status.call(this, dwCookie)
+    end
+    def query_video_memory_info(this : IDXGIAdapter5*, node_index : UInt32, memory_segment_group : Win32cr::Graphics::Dxgi::DXGI_MEMORY_SEGMENT_GROUP, pVideoMemoryInfo : Win32cr::Graphics::Dxgi::DXGI_QUERY_VIDEO_MEMORY_INFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_video_memory_info.call(this, node_index, memory_segment_group, pVideoMemoryInfo)
+    end
+    def set_video_memory_reservation(this : IDXGIAdapter5*, node_index : UInt32, memory_segment_group : Win32cr::Graphics::Dxgi::DXGI_MEMORY_SEGMENT_GROUP, reservation : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_video_memory_reservation.call(this, node_index, memory_segment_group, reservation)
+    end
+    def register_video_memory_budget_change_notification_event(this : IDXGIAdapter5*, hEvent : Win32cr::Foundation::HANDLE, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_video_memory_budget_change_notification_event.call(this, hEvent, pdwCookie)
+    end
+    def unregister_video_memory_budget_change_notification(this : IDXGIAdapter5*, dwCookie : UInt32) : Void
+      @lpVtbl.try &.value.unregister_video_memory_budget_change_notification.call(this, dwCookie)
+    end
+    def get_desc3(this : IDXGIAdapter5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc3.call(this, pDesc)
+    end
+    def get_desc4(this : IDXGIAdapter5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_ADAPTER_DESC4*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc4.call(this, pDesc)
+    end
+    def get_single_adapter_hybrid_mode(this : IDXGIAdapter5*, pSingleAdapterHybridMode : Win32cr::Graphics::Dxgi::DXGI_SINGLE_ADAPTER_HYBRID_MODE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_single_adapter_hybrid_mode.call(this, pSingleAdapterHybridMode)
+    end
+    def set_single_adapter_hybrid_mode(this : IDXGIAdapter5*, single_adapter_hybrid_mode : Win32cr::Graphics::Dxgi::DXGI_SINGLE_ADAPTER_HYBRID_MODE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_single_adapter_hybrid_mode.call(this, single_adapter_hybrid_mode)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDXGISwapChain5Vtable,
+    query_interface : Proc(IDXGISwapChain5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDXGISwapChain5*, UInt32),
+    release : Proc(IDXGISwapChain5*, UInt32),
+    set_private_data : Proc(IDXGISwapChain5*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    set_private_data_interface : Proc(IDXGISwapChain5*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    get_private_data : Proc(IDXGISwapChain5*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
+    get_parent : Proc(IDXGISwapChain5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_device : Proc(IDXGISwapChain5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    present : Proc(IDXGISwapChain5*, UInt32, Win32cr::Graphics::Dxgi::DXGI_PRESENT, Win32cr::Foundation::HRESULT),
+    get_buffer : Proc(IDXGISwapChain5*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_fullscreen_state : Proc(IDXGISwapChain5*, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::HRESULT),
+    get_fullscreen_state : Proc(IDXGISwapChain5*, Win32cr::Foundation::BOOL*, Void**, Win32cr::Foundation::HRESULT),
+    get_desc : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Win32cr::Foundation::HRESULT),
+    resize_buffers : Proc(IDXGISwapChain5*, UInt32, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FLAG, Win32cr::Foundation::HRESULT),
+    resize_target : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::Common::DXGI_MODE_DESC*, Win32cr::Foundation::HRESULT),
+    get_containing_output : Proc(IDXGISwapChain5*, Void**, Win32cr::Foundation::HRESULT),
+    get_frame_statistics : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_FRAME_STATISTICS*, Win32cr::Foundation::HRESULT),
+    get_last_present_count : Proc(IDXGISwapChain5*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_desc1 : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, Win32cr::Foundation::HRESULT),
+    get_fullscreen_desc : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FULLSCREEN_DESC*, Win32cr::Foundation::HRESULT),
+    get_hwnd : Proc(IDXGISwapChain5*, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
+    get_core_window : Proc(IDXGISwapChain5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    present1 : Proc(IDXGISwapChain5*, UInt32, Win32cr::Graphics::Dxgi::DXGI_PRESENT, Win32cr::Graphics::Dxgi::DXGI_PRESENT_PARAMETERS*, Win32cr::Foundation::HRESULT),
+    is_temporary_mono_supported : Proc(IDXGISwapChain5*, Win32cr::Foundation::BOOL),
+    get_restrict_to_output : Proc(IDXGISwapChain5*, Void**, Win32cr::Foundation::HRESULT),
+    set_background_color : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_RGBA*, Win32cr::Foundation::HRESULT),
+    get_background_color : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_RGBA*, Win32cr::Foundation::HRESULT),
+    set_rotation : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::Common::DXGI_MODE_ROTATION, Win32cr::Foundation::HRESULT),
+    get_rotation : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::Common::DXGI_MODE_ROTATION*, Win32cr::Foundation::HRESULT),
+    set_source_size : Proc(IDXGISwapChain5*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    get_source_size : Proc(IDXGISwapChain5*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_maximum_frame_latency : Proc(IDXGISwapChain5*, UInt32, Win32cr::Foundation::HRESULT),
+    get_maximum_frame_latency : Proc(IDXGISwapChain5*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_frame_latency_waitable_object : Proc(IDXGISwapChain5*, Win32cr::Foundation::HANDLE),
+    set_matrix_transform : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
+    get_matrix_transform : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_MATRIX_3X2_F*, Win32cr::Foundation::HRESULT),
+    get_current_back_buffer_index : Proc(IDXGISwapChain5*, UInt32),
+    check_color_space_support : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, UInt32*, Win32cr::Foundation::HRESULT),
+    set_color_space1 : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, Win32cr::Foundation::HRESULT),
+    resize_buffers1 : Proc(IDXGISwapChain5*, UInt32, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FLAG, UInt32*, Void**, Win32cr::Foundation::HRESULT),
+    set_hdr_meta_data : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_HDR_METADATA_TYPE, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    get_desc2 : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, Win32cr::Foundation::HRESULT),
+    get_color_space1 : Proc(IDXGISwapChain5*, Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE),
+    resize_buffers2 : Proc(IDXGISwapChain5*, UInt32, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, UInt32, UInt32*, Void**, Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDXGISwapChain5, lpVtbl : IDXGISwapChain5Vtable* do
+    GUID = LibC::GUID.new(0x9086bf22_u32, 0x9338_u16, 0x43bb_u16, StaticArray[0x87_u8, 0xce_u8, 0x77_u8, 0x90_u8, 0xb6_u8, 0x43_u8, 0x8a_u8, 0x7f_u8])
+    def query_interface(this : IDXGISwapChain5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDXGISwapChain5*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDXGISwapChain5*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_private_data(this : IDXGISwapChain5*, name : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data.call(this, name, data_size, pData)
+    end
+    def set_private_data_interface(this : IDXGISwapChain5*, name : LibC::GUID*, pUnknown : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data_interface.call(this, name, pUnknown)
+    end
+    def get_private_data(this : IDXGISwapChain5*, name : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_private_data.call(this, name, pDataSize, pData)
+    end
+    def get_parent(this : IDXGISwapChain5*, riid : LibC::GUID*, ppParent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_parent.call(this, riid, ppParent)
+    end
+    def get_device(this : IDXGISwapChain5*, riid : LibC::GUID*, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device.call(this, riid, ppDevice)
+    end
+    def present(this : IDXGISwapChain5*, sync_interval : UInt32, flags : Win32cr::Graphics::Dxgi::DXGI_PRESENT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.present.call(this, sync_interval, flags)
+    end
+    def get_buffer(this : IDXGISwapChain5*, buffer : UInt32, riid : LibC::GUID*, ppSurface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, buffer, riid, ppSurface)
+    end
+    def set_fullscreen_state(this : IDXGISwapChain5*, fullscreen : Win32cr::Foundation::BOOL, pTarget : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_fullscreen_state.call(this, fullscreen, pTarget)
+    end
+    def get_fullscreen_state(this : IDXGISwapChain5*, pFullscreen : Win32cr::Foundation::BOOL*, ppTarget : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_fullscreen_state.call(this, pFullscreen, ppTarget)
+    end
+    def get_desc(this : IDXGISwapChain5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc.call(this, pDesc)
+    end
+    def resize_buffers(this : IDXGISwapChain5*, buffer_count : UInt32, width : UInt32, height : UInt32, new_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, swap_chain_flags : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FLAG) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resize_buffers.call(this, buffer_count, width, height, new_format, swap_chain_flags)
+    end
+    def resize_target(this : IDXGISwapChain5*, pNewTargetParameters : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_DESC*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resize_target.call(this, pNewTargetParameters)
+    end
+    def get_containing_output(this : IDXGISwapChain5*, ppOutput : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_containing_output.call(this, ppOutput)
+    end
+    def get_frame_statistics(this : IDXGISwapChain5*, pStats : Win32cr::Graphics::Dxgi::DXGI_FRAME_STATISTICS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame_statistics.call(this, pStats)
+    end
+    def get_last_present_count(this : IDXGISwapChain5*, pLastPresentCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_last_present_count.call(this, pLastPresentCount)
+    end
+    def get_desc1(this : IDXGISwapChain5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc1.call(this, pDesc)
+    end
+    def get_fullscreen_desc(this : IDXGISwapChain5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FULLSCREEN_DESC*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_fullscreen_desc.call(this, pDesc)
+    end
+    def get_hwnd(this : IDXGISwapChain5*, pHwnd : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_hwnd.call(this, pHwnd)
+    end
+    def get_core_window(this : IDXGISwapChain5*, refiid : LibC::GUID*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_core_window.call(this, refiid, ppUnk)
+    end
+    def present1(this : IDXGISwapChain5*, sync_interval : UInt32, present_flags : Win32cr::Graphics::Dxgi::DXGI_PRESENT, pPresentParameters : Win32cr::Graphics::Dxgi::DXGI_PRESENT_PARAMETERS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.present1.call(this, sync_interval, present_flags, pPresentParameters)
+    end
+    def is_temporary_mono_supported(this : IDXGISwapChain5*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_temporary_mono_supported.call(this)
+    end
+    def get_restrict_to_output(this : IDXGISwapChain5*, ppRestrictToOutput : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_restrict_to_output.call(this, ppRestrictToOutput)
+    end
+    def set_background_color(this : IDXGISwapChain5*, pColor : Win32cr::Graphics::Dxgi::DXGI_RGBA*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_background_color.call(this, pColor)
+    end
+    def get_background_color(this : IDXGISwapChain5*, pColor : Win32cr::Graphics::Dxgi::DXGI_RGBA*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_background_color.call(this, pColor)
+    end
+    def set_rotation(this : IDXGISwapChain5*, rotation : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_ROTATION) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rotation.call(this, rotation)
+    end
+    def get_rotation(this : IDXGISwapChain5*, pRotation : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_ROTATION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rotation.call(this, pRotation)
+    end
+    def set_source_size(this : IDXGISwapChain5*, width : UInt32, height : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_source_size.call(this, width, height)
+    end
+    def get_source_size(this : IDXGISwapChain5*, pWidth : UInt32*, pHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_source_size.call(this, pWidth, pHeight)
+    end
+    def set_maximum_frame_latency(this : IDXGISwapChain5*, max_latency : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_maximum_frame_latency.call(this, max_latency)
+    end
+    def get_maximum_frame_latency(this : IDXGISwapChain5*, pMaxLatency : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_maximum_frame_latency.call(this, pMaxLatency)
+    end
+    def get_frame_latency_waitable_object(this : IDXGISwapChain5*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_frame_latency_waitable_object.call(this)
+    end
+    def set_matrix_transform(this : IDXGISwapChain5*, pMatrix : Win32cr::Graphics::Dxgi::DXGI_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_matrix_transform.call(this, pMatrix)
+    end
+    def get_matrix_transform(this : IDXGISwapChain5*, pMatrix : Win32cr::Graphics::Dxgi::DXGI_MATRIX_3X2_F*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_matrix_transform.call(this, pMatrix)
+    end
+    def get_current_back_buffer_index(this : IDXGISwapChain5*) : UInt32
+      @lpVtbl.try &.value.get_current_back_buffer_index.call(this)
+    end
+    def check_color_space_support(this : IDXGISwapChain5*, color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.check_color_space_support.call(this, color_space, pColorSpaceSupport)
+    end
+    def set_color_space1(this : IDXGISwapChain5*, color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_color_space1.call(this, color_space)
+    end
+    def resize_buffers1(this : IDXGISwapChain5*, buffer_count : UInt32, width : UInt32, height : UInt32, format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, swap_chain_flags : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FLAG, pCreationNodeMask : UInt32*, ppPresentQueue : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resize_buffers1.call(this, buffer_count, width, height, format, swap_chain_flags, pCreationNodeMask, ppPresentQueue)
+    end
+    def set_hdr_meta_data(this : IDXGISwapChain5*, type__ : Win32cr::Graphics::Dxgi::DXGI_HDR_METADATA_TYPE, size : UInt32, pMetaData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_hdr_meta_data.call(this, type__, size, pMetaData)
+    end
+    def get_desc2(this : IDXGISwapChain5*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc2.call(this, pDesc)
+    end
+    def get_color_space1(this : IDXGISwapChain5*) : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+      @lpVtbl.try &.value.get_color_space1.call(this)
+    end
+    def resize_buffers2(this : IDXGISwapChain5*, buffer_count : UInt32, width : UInt32, height : UInt32, format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, swap_chain_flags : UInt32, pCreationNodeMask : UInt32*, ppPresentQueue : Void**, color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resize_buffers2.call(this, buffer_count, width, height, format, swap_chain_flags, pCreationNodeMask, ppPresentQueue, color_space)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDXGIFactory8Vtable,
+    query_interface : Proc(IDXGIFactory8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDXGIFactory8*, UInt32),
+    release : Proc(IDXGIFactory8*, UInt32),
+    set_private_data : Proc(IDXGIFactory8*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    set_private_data_interface : Proc(IDXGIFactory8*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    get_private_data : Proc(IDXGIFactory8*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
+    get_parent : Proc(IDXGIFactory8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    enum_adapters : Proc(IDXGIFactory8*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    make_window_association : Proc(IDXGIFactory8*, Win32cr::Foundation::HWND, Win32cr::Graphics::Dxgi::DXGI_MWA_FLAGS, Win32cr::Foundation::HRESULT),
+    get_window_association : Proc(IDXGIFactory8*, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
+    create_swap_chain : Proc(IDXGIFactory8*, Void*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Void**, Win32cr::Foundation::HRESULT),
+    create_software_adapter : Proc(IDXGIFactory8*, Win32cr::Foundation::HMODULE, Void**, Win32cr::Foundation::HRESULT),
+    enum_adapters1 : Proc(IDXGIFactory8*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    is_current : Proc(IDXGIFactory8*, Win32cr::Foundation::BOOL),
+    is_windowed_stereo_enabled : Proc(IDXGIFactory8*, Win32cr::Foundation::BOOL),
+    create_swap_chain_for_hwnd : Proc(IDXGIFactory8*, Void*, Win32cr::Foundation::HWND, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FULLSCREEN_DESC*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_swap_chain_for_core_window : Proc(IDXGIFactory8*, Void*, Void*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_shared_resource_adapter_luid : Proc(IDXGIFactory8*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::LUID*, Win32cr::Foundation::HRESULT),
+    register_stereo_status_window : Proc(IDXGIFactory8*, Win32cr::Foundation::HWND, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    register_stereo_status_event : Proc(IDXGIFactory8*, Win32cr::Foundation::HANDLE, UInt32*, Win32cr::Foundation::HRESULT),
+    unregister_stereo_status : Proc(IDXGIFactory8*, UInt32, Void),
+    register_occlusion_status_window : Proc(IDXGIFactory8*, Win32cr::Foundation::HWND, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    register_occlusion_status_event : Proc(IDXGIFactory8*, Win32cr::Foundation::HANDLE, UInt32*, Win32cr::Foundation::HRESULT),
+    unregister_occlusion_status : Proc(IDXGIFactory8*, UInt32, Void),
+    create_swap_chain_for_composition : Proc(IDXGIFactory8*, Void*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_creation_flags : Proc(IDXGIFactory8*, Win32cr::Graphics::Dxgi::DXGI_CREATE_FACTORY_FLAGS),
+    enum_adapter_by_luid : Proc(IDXGIFactory8*, Win32cr::Foundation::LUID, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    enum_warp_adapter : Proc(IDXGIFactory8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    check_feature_support : Proc(IDXGIFactory8*, Win32cr::Graphics::Dxgi::DXGI_FEATURE, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    enum_adapter_by_gpu_preference : Proc(IDXGIFactory8*, UInt32, Win32cr::Graphics::Dxgi::DXGI_GPU_PREFERENCE, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    register_adapters_changed_event : Proc(IDXGIFactory8*, Win32cr::Foundation::HANDLE, UInt32*, Win32cr::Foundation::HRESULT),
+    unregister_adapters_changed_event : Proc(IDXGIFactory8*, UInt32, Win32cr::Foundation::HRESULT),
+    create_swap_chain_for_hwnd1 : Proc(IDXGIFactory8*, Void*, Win32cr::Foundation::HWND, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FULLSCREEN_DESC*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_swap_chain_for_core_window1 : Proc(IDXGIFactory8*, Void*, Void*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_swap_chain_for_composition1 : Proc(IDXGIFactory8*, Void*, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, Void*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDXGIFactory8, lpVtbl : IDXGIFactory8Vtable* do
+    GUID = LibC::GUID.new(0x693c45c1_u32, 0x39a7_u16, 0x4c1f_u16, StaticArray[0xbd_u8, 0xd3_u8, 0xd9_u8, 0xa3_u8, 0x22_u8, 0x9b_u8, 0x83_u8, 0x21_u8])
+    def query_interface(this : IDXGIFactory8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDXGIFactory8*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDXGIFactory8*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_private_data(this : IDXGIFactory8*, name : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data.call(this, name, data_size, pData)
+    end
+    def set_private_data_interface(this : IDXGIFactory8*, name : LibC::GUID*, pUnknown : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_private_data_interface.call(this, name, pUnknown)
+    end
+    def get_private_data(this : IDXGIFactory8*, name : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_private_data.call(this, name, pDataSize, pData)
+    end
+    def get_parent(this : IDXGIFactory8*, riid : LibC::GUID*, ppParent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_parent.call(this, riid, ppParent)
+    end
+    def enum_adapters(this : IDXGIFactory8*, adapter : UInt32, ppAdapter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_adapters.call(this, adapter, ppAdapter)
+    end
+    def make_window_association(this : IDXGIFactory8*, window_handle : Win32cr::Foundation::HWND, flags : Win32cr::Graphics::Dxgi::DXGI_MWA_FLAGS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.make_window_association.call(this, window_handle, flags)
+    end
+    def get_window_association(this : IDXGIFactory8*, pWindowHandle : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_window_association.call(this, pWindowHandle)
+    end
+    def create_swap_chain(this : IDXGIFactory8*, pDevice : Void*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain.call(this, pDevice, pDesc, ppSwapChain)
+    end
+    def create_software_adapter(this : IDXGIFactory8*, module__ : Win32cr::Foundation::HMODULE, ppAdapter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_software_adapter.call(this, module__, ppAdapter)
+    end
+    def enum_adapters1(this : IDXGIFactory8*, adapter : UInt32, ppAdapter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_adapters1.call(this, adapter, ppAdapter)
+    end
+    def is_current(this : IDXGIFactory8*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_current.call(this)
+    end
+    def is_windowed_stereo_enabled(this : IDXGIFactory8*) : Win32cr::Foundation::BOOL
+      @lpVtbl.try &.value.is_windowed_stereo_enabled.call(this)
+    end
+    def create_swap_chain_for_hwnd(this : IDXGIFactory8*, pDevice : Void*, hWnd : Win32cr::Foundation::HWND, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, pFullscreenDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FULLSCREEN_DESC*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_hwnd.call(this, pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain)
+    end
+    def create_swap_chain_for_core_window(this : IDXGIFactory8*, pDevice : Void*, pWindow : Void*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_core_window.call(this, pDevice, pWindow, pDesc, pRestrictToOutput, ppSwapChain)
+    end
+    def get_shared_resource_adapter_luid(this : IDXGIFactory8*, hResource : Win32cr::Foundation::HANDLE, pLuid : Win32cr::Foundation::LUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_shared_resource_adapter_luid.call(this, hResource, pLuid)
+    end
+    def register_stereo_status_window(this : IDXGIFactory8*, window_handle : Win32cr::Foundation::HWND, wMsg : UInt32, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_stereo_status_window.call(this, window_handle, wMsg, pdwCookie)
+    end
+    def register_stereo_status_event(this : IDXGIFactory8*, hEvent : Win32cr::Foundation::HANDLE, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_stereo_status_event.call(this, hEvent, pdwCookie)
+    end
+    def unregister_stereo_status(this : IDXGIFactory8*, dwCookie : UInt32) : Void
+      @lpVtbl.try &.value.unregister_stereo_status.call(this, dwCookie)
+    end
+    def register_occlusion_status_window(this : IDXGIFactory8*, window_handle : Win32cr::Foundation::HWND, wMsg : UInt32, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_occlusion_status_window.call(this, window_handle, wMsg, pdwCookie)
+    end
+    def register_occlusion_status_event(this : IDXGIFactory8*, hEvent : Win32cr::Foundation::HANDLE, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_occlusion_status_event.call(this, hEvent, pdwCookie)
+    end
+    def unregister_occlusion_status(this : IDXGIFactory8*, dwCookie : UInt32) : Void
+      @lpVtbl.try &.value.unregister_occlusion_status.call(this, dwCookie)
+    end
+    def create_swap_chain_for_composition(this : IDXGIFactory8*, pDevice : Void*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_composition.call(this, pDevice, pDesc, pRestrictToOutput, ppSwapChain)
+    end
+    def get_creation_flags(this : IDXGIFactory8*) : Win32cr::Graphics::Dxgi::DXGI_CREATE_FACTORY_FLAGS
+      @lpVtbl.try &.value.get_creation_flags.call(this)
+    end
+    def enum_adapter_by_luid(this : IDXGIFactory8*, adapter_luid : Win32cr::Foundation::LUID, riid : LibC::GUID*, ppvAdapter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_adapter_by_luid.call(this, adapter_luid, riid, ppvAdapter)
+    end
+    def enum_warp_adapter(this : IDXGIFactory8*, riid : LibC::GUID*, ppvAdapter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_warp_adapter.call(this, riid, ppvAdapter)
+    end
+    def check_feature_support(this : IDXGIFactory8*, feature : Win32cr::Graphics::Dxgi::DXGI_FEATURE, pFeatureSupportData : Void*, feature_support_data_size : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.check_feature_support.call(this, feature, pFeatureSupportData, feature_support_data_size)
+    end
+    def enum_adapter_by_gpu_preference(this : IDXGIFactory8*, adapter : UInt32, gpu_preference : Win32cr::Graphics::Dxgi::DXGI_GPU_PREFERENCE, riid : LibC::GUID*, ppvAdapter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_adapter_by_gpu_preference.call(this, adapter, gpu_preference, riid, ppvAdapter)
+    end
+    def register_adapters_changed_event(this : IDXGIFactory8*, hEvent : Win32cr::Foundation::HANDLE, pdwCookie : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_adapters_changed_event.call(this, hEvent, pdwCookie)
+    end
+    def unregister_adapters_changed_event(this : IDXGIFactory8*, dwCookie : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_adapters_changed_event.call(this, dwCookie)
+    end
+    def create_swap_chain_for_hwnd1(this : IDXGIFactory8*, pDevice : Void*, hWnd : Win32cr::Foundation::HWND, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, pFullscreenDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_FULLSCREEN_DESC*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_hwnd1.call(this, pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain)
+    end
+    def create_swap_chain_for_core_window1(this : IDXGIFactory8*, pDevice : Void*, pWindow : Void*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_core_window1.call(this, pDevice, pWindow, pDesc, pRestrictToOutput, ppSwapChain)
+    end
+    def create_swap_chain_for_composition1(this : IDXGIFactory8*, pDevice : Void*, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_composition1.call(this, pDevice, pDesc, pRestrictToOutput, ppSwapChain)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDXGIFactoryMedia2Vtable,
+    query_interface : Proc(IDXGIFactoryMedia2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDXGIFactoryMedia2*, UInt32),
+    release : Proc(IDXGIFactoryMedia2*, UInt32),
+    create_swap_chain_for_composition_surface_handle : Proc(IDXGIFactoryMedia2*, Void*, Win32cr::Foundation::HANDLE, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_decode_swap_chain_for_composition_surface_handle : Proc(IDXGIFactoryMedia2*, Void*, Win32cr::Foundation::HANDLE, Win32cr::Graphics::Dxgi::DXGI_DECODE_SWAP_CHAIN_DESC*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_swap_chain_for_composition_surface_handle1 : Proc(IDXGIFactoryMedia2*, Void*, Win32cr::Foundation::HANDLE, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, Void*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDXGIFactoryMedia2, lpVtbl : IDXGIFactoryMedia2Vtable* do
+    GUID = LibC::GUID.new(0x98ec0b90_u32, 0x2b18_u16, 0x42a6_u16, StaticArray[0x9f_u8, 0xcf_u8, 0x43_u8, 0xb4_u8, 0x6f_u8, 0x65_u8, 0x40_u8, 0x22_u8])
+    def query_interface(this : IDXGIFactoryMedia2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDXGIFactoryMedia2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDXGIFactoryMedia2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_swap_chain_for_composition_surface_handle(this : IDXGIFactoryMedia2*, pDevice : Void*, hSurface : Win32cr::Foundation::HANDLE, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC1*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_composition_surface_handle.call(this, pDevice, hSurface, pDesc, pRestrictToOutput, ppSwapChain)
+    end
+    def create_decode_swap_chain_for_composition_surface_handle(this : IDXGIFactoryMedia2*, pDevice : Void*, hSurface : Win32cr::Foundation::HANDLE, pDesc : Win32cr::Graphics::Dxgi::DXGI_DECODE_SWAP_CHAIN_DESC*, pYuvDecodeBuffers : Void*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decode_swap_chain_for_composition_surface_handle.call(this, pDevice, hSurface, pDesc, pYuvDecodeBuffers, pRestrictToOutput, ppSwapChain)
+    end
+    def create_swap_chain_for_composition_surface_handle1(this : IDXGIFactoryMedia2*, pDevice : Void*, hSurface : Win32cr::Foundation::HANDLE, pDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC2*, pRestrictToOutput : Void*, ppSwapChain : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_swap_chain_for_composition_surface_handle1.call(this, pDevice, hSurface, pDesc, pRestrictToOutput, ppSwapChain)
     end
 
   end

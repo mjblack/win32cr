@@ -3,6 +3,7 @@ require "./diagnostics/debug.cr"
 require "./com.cr"
 require "./../graphics/gdi.cr"
 require "./../security.cr"
+require "./system_information.cr"
 require "./power.cr"
 
 module Win32cr::System::SystemServices
@@ -520,11 +521,14 @@ module Win32cr::System::SystemServices
   ARM64_PREFETCH_L3 = 4_u32
   ARM64_PREFETCH_KEEP = 0_u32
   ARM64_PREFETCH_STRM = 1_u32
+  ARM64_SVCR_SM = 1_u64
+  ARM64_SVCR_ZA = 2_u64
   ARM64_MULT_INTRINS_SUPPORTED_ = 0_u32
   ARM64_MAX_BREAKPOINTS = 8_u32
   ARM64_MAX_WATCHPOINTS = 2_u32
   NONVOL_INT_NUMREG_ARM64 = 11_u32
   NONVOL_FP_NUMREG_ARM64 = 8_u32
+  ARM64_TPIDR2_BLOCK_ALIGN = 16_u32
   BREAK_DEBUG_BASE = 524288_u32
   ASSERT_BREAKPOINT = 524291_u32
   SIZE_OF_80387_REGISTERS = 80_u32
@@ -619,6 +623,8 @@ module Win32cr::System::SystemServices
   SECURITY_EDGE_CLOUD_INFRASTRUCTURE_SERVICE_ID_BASE_RID = 98_i32
   SECURITY_RESTRICTED_SERVICES_BASE_RID = 99_i32
   SECURITY_RESTRICTED_SERVICES_RID_COUNT = 6_i32
+  SECURITY_SHADOWADMINACCOUNT_RID = 100_i32
+  SECURITY_AGENTIC_PLATFORM_BASE_RID = 101_i32
   SECURITY_MAX_BASE_RID = 111_i32
   SECURITY_MAX_ALWAYS_FILTERED = 999_i32
   SECURITY_MIN_NEVER_FILTERED = 1000_i32
@@ -692,6 +698,7 @@ module Win32cr::System::SystemServices
   DOMAIN_ALIAS_RID_DEVICE_OWNERS = 583_i32
   DOMAIN_ALIAS_RID_USER_MODE_HARDWARE_OPERATORS = 584_i32
   DOMAIN_ALIAS_RID_OPENSSH_USERS = 585_i32
+  DOMAIN_ALIAS_RID_CUA_USERS = 586_i32
   SECURITY_APP_PACKAGE_BASE_RID = 2_i32
   SECURITY_BUILTIN_APP_PACKAGE_RID_COUNT = 2_i32
   SECURITY_APP_PACKAGE_RID_COUNT = 8_i32
@@ -837,6 +844,7 @@ module Win32cr::System::SystemServices
   SE_APP_SILO_PROMPT_FOR_ACCESS_CAPABILITY = "isolatedWin32-promptForAccess"
   SE_APP_SILO_ACCESS_TO_PUBLISHER_DIRECTORY_CAPABILITY = "isolatedWin32-accessToPublisherDirectory"
   SE_APP_SILO_PRINT_CAPABILITY = "isolatedWin32-print"
+  SE_APP_SILO_SCANNER_CAPABILITY = "isolatedWin32-scanner"
   POLICY_AUDIT_SUBCATEGORY_COUNT = 60_u32
   TOKEN_SOURCE_LENGTH = 8_u32
   CLAIM_SECURITY_ATTRIBUTE_TYPE_INVALID = 0_u32
@@ -955,6 +963,9 @@ module Win32cr::System::SystemServices
   XSTATE_LWP = 62_u32
   MAXIMUM_XSTATE_FEATURES = 64_u32
   XSTATE_ARM64_SVE = 2_u32
+  XSTATE_ARM64_SME_ZA = 3_u32
+  XSTATE_ARM64_SME_TPIDR2 = 4_u32
+  XSTATE_ARM64_SME_ZT = 5_u32
   XSTATE_FIRST_NON_LEGACY_FEATURE = 2_u32
   XSTATE_COMPACTION_ENABLE = 63_u32
   XSTATE_ALIGN_BIT = 1_u32
@@ -969,6 +980,8 @@ module Win32cr::System::SystemServices
   RUNTIME_REPORT_SIGNATURE_SCHEME_SHA512_RSA_PSS_SHA512 = 1_u32
   DRIVER_REPORT_DIGEST_MAX_SIZE = 64_u32
   DRIVER_REPORT_NAME_MAX_LENGTH = 32_u32
+  CODE_INTEGRITY_REPORT_GENERATION_VERSION_CURRENT = 1_u32
+  CODE_INTEGRITY_REPORT_RECORD_VERSION_CURRENT = 1_u32
   CFG_CALL_TARGET_VALID = 1_u32
   CFG_CALL_TARGET_PROCESSED = 2_u32
   CFG_CALL_TARGET_CONVERT_EXPORT_SUPPRESSED_TO_VALID = 4_u32
@@ -990,8 +1003,11 @@ module Win32cr::System::SystemServices
   MEM_EXTENDED_PARAMETER_NONPAGED_HUGE = 16_u32
   MEM_EXTENDED_PARAMETER_SOFT_FAULT_PAGES = 32_u32
   MEM_EXTENDED_PARAMETER_EC_CODE = 64_u32
+  MEM_EXTENDED_PARAMETER_SECURE_PAGES = 128_u32
+  MEM_EXTENDED_PARAMETER_TAGGED = 256_u32
   MEM_EXTENDED_PARAMETER_TYPE_BITS = 8_u32
   SEC_HUGE_PAGES = 131072_u32
+  MEM_SECTION_ATTRIBUTE_SECURE_PAGES = 1_u32
   WRITE_WATCH_FLAG_RESET = 1_u32
   VM_PREFETCH_TO_WORKING_SET = 1_u32
   ENCLAVE_TYPE_SGX = 1_u32
@@ -1241,6 +1257,9 @@ module Win32cr::System::SystemServices
   GUID_PROCESSOR_FREQUENCY_LIMIT = LibC::GUID.new(0x75b0ae3f_u32, 0xbce0_u16, 0x45a7_u16, StaticArray[0x8c_u8, 0x89_u8, 0xc9_u8, 0x61_u8, 0x1c_u8, 0x25_u8, 0xe1_u8, 0x0_u8])
   GUID_PROCESSOR_FREQUENCY_LIMIT_1 = LibC::GUID.new(0x75b0ae3f_u32, 0xbce0_u16, 0x45a7_u16, StaticArray[0x8c_u8, 0x89_u8, 0xc9_u8, 0x61_u8, 0x1c_u8, 0x25_u8, 0xe1_u8, 0x1_u8])
   GUID_PROCESSOR_FREQUENCY_LIMIT_2 = LibC::GUID.new(0x75b0ae3f_u32, 0xbce0_u16, 0x45a7_u16, StaticArray[0x8c_u8, 0x89_u8, 0xc9_u8, 0x61_u8, 0x1c_u8, 0x25_u8, 0xe1_u8, 0x2_u8])
+  GUID_PROCESSOR_FREQUENCY_MINIMUM = LibC::GUID.new(0x2ac92cea_u32, 0x5efa_u16, 0x4a1b_u16, StaticArray[0xbe_u8, 0xd5_u8, 0x1a_u8, 0x2b_u8, 0xd9_u8, 0xaa_u8, 0xb_u8, 0x94_u8])
+  GUID_PROCESSOR_FREQUENCY_MINIMUM_1 = LibC::GUID.new(0x2ac92cea_u32, 0x5efa_u16, 0x4a1b_u16, StaticArray[0xbe_u8, 0xd5_u8, 0x1a_u8, 0x2b_u8, 0xd9_u8, 0xaa_u8, 0xb_u8, 0x95_u8])
+  GUID_PROCESSOR_FREQUENCY_MINIMUM_2 = LibC::GUID.new(0x2ac92cea_u32, 0x5efa_u16, 0x4a1b_u16, StaticArray[0xbe_u8, 0xd5_u8, 0x1a_u8, 0x2b_u8, 0xd9_u8, 0xaa_u8, 0xb_u8, 0x96_u8])
   GUID_PROCESSOR_ALLOW_THROTTLING = LibC::GUID.new(0x3b04d4fd_u32, 0x1cc7_u16, 0x4f23_u16, StaticArray[0xab_u8, 0x1c_u8, 0xd1_u8, 0x33_u8, 0x78_u8, 0x19_u8, 0xc4_u8, 0xbb_u8])
   PROCESSOR_THROTTLE_DISABLED = 0_u32
   PROCESSOR_THROTTLE_ENABLED = 1_u32
@@ -1314,6 +1333,7 @@ module Win32cr::System::SystemServices
   GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_HISTORY_THRESHOLD = LibC::GUID.new(0x9ac18e92_u32, 0xaa3c_u16, 0x4e27_u16, StaticArray[0xb3_u8, 0x7_u8, 0x1_u8, 0xae_u8, 0x37_u8, 0x30_u8, 0x71_u8, 0x29_u8])
   GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_WEIGHTING = LibC::GUID.new(0x8809c2d8_u32, 0xb155_u16, 0x42d4_u16, StaticArray[0xbc_u8, 0xda_u8, 0xd_u8, 0x34_u8, 0x56_u8, 0x51_u8, 0xb1_u8, 0xdb_u8])
   GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_THRESHOLD = LibC::GUID.new(0x943c8cb6_u32, 0x6f93_u16, 0x4227_u16, StaticArray[0xad_u8, 0x87_u8, 0xe9_u8, 0xa3_u8, 0xfe_u8, 0xec_u8, 0x8_u8, 0xd1_u8])
+  GUID_PROCESSOR_PACKAGE_C6_POLICY = LibC::GUID.new(0xfc1b015c_u32, 0xeb75_u16, 0x496a_u16, StaticArray[0xab_u8, 0x47_u8, 0x2_u8, 0x8b_u8, 0x4_u8, 0x59_u8, 0xc8_u8, 0xf8_u8])
   GUID_PROCESSOR_PARKING_CORE_OVERRIDE = LibC::GUID.new(0xa55612aa_u32, 0xf624_u16, 0x42c6_u16, StaticArray[0xa4_u8, 0x43_u8, 0x73_u8, 0x97_u8, 0xd0_u8, 0x64_u8, 0xc0_u8, 0x4f_u8])
   GUID_PROCESSOR_PARKING_PERF_STATE = LibC::GUID.new(0x447235c7_u32, 0x6a8d_u16, 0x4cc0_u16, StaticArray[0x8e_u8, 0x24_u8, 0x9e_u8, 0xaf_u8, 0x70_u8, 0xb9_u8, 0x6e_u8, 0x2b_u8])
   GUID_PROCESSOR_PARKING_PERF_STATE_1 = LibC::GUID.new(0x447235c7_u32, 0x6a8d_u16, 0x4cc0_u16, StaticArray[0x8e_u8, 0x24_u8, 0x9e_u8, 0xaf_u8, 0x70_u8, 0xb9_u8, 0x6e_u8, 0x2c_u8])
@@ -1330,6 +1350,9 @@ module Win32cr::System::SystemServices
   GUID_PROCESSOR_PERF_LATENCY_HINT_PERF = LibC::GUID.new(0x619b7505_u32, 0x3b_u16, 0x4e82_u16, StaticArray[0xb7_u8, 0xa6_u8, 0x4d_u8, 0xd2_u8, 0x9c_u8, 0x30_u8, 0x9_u8, 0x71_u8])
   GUID_PROCESSOR_PERF_LATENCY_HINT_PERF_1 = LibC::GUID.new(0x619b7505_u32, 0x3b_u16, 0x4e82_u16, StaticArray[0xb7_u8, 0xa6_u8, 0x4d_u8, 0xd2_u8, 0x9c_u8, 0x30_u8, 0x9_u8, 0x72_u8])
   GUID_PROCESSOR_PERF_LATENCY_HINT_PERF_2 = LibC::GUID.new(0x619b7505_u32, 0x3b_u16, 0x4e82_u16, StaticArray[0xb7_u8, 0xa6_u8, 0x4d_u8, 0xd2_u8, 0x9c_u8, 0x30_u8, 0x9_u8, 0x73_u8])
+  GUID_PROCESSOR_PERF_LATENCY_HINT_FREQ = LibC::GUID.new(0x81202931_u32, 0xacbb_u16, 0x405c_u16, StaticArray[0xa7_u8, 0xee_u8, 0x3e_u8, 0x2b_u8, 0xa4_u8, 0x86_u8, 0x6f_u8, 0x6f_u8])
+  GUID_PROCESSOR_PERF_LATENCY_HINT_FREQ_1 = LibC::GUID.new(0x81202931_u32, 0xacbb_u16, 0x405c_u16, StaticArray[0xa7_u8, 0xee_u8, 0x3e_u8, 0x2b_u8, 0xa4_u8, 0x86_u8, 0x6f_u8, 0x70_u8])
+  GUID_PROCESSOR_PERF_LATENCY_HINT_FREQ_2 = LibC::GUID.new(0x81202931_u32, 0xacbb_u16, 0x405c_u16, StaticArray[0xa7_u8, 0xee_u8, 0x3e_u8, 0x2b_u8, 0xa4_u8, 0x86_u8, 0x6f_u8, 0x71_u8])
   GUID_PROCESSOR_PERF_LATENCY_HINT_EPP = LibC::GUID.new(0x4b70f900_u32, 0xcdd9_u16, 0x4e66_u16, StaticArray[0xaa_u8, 0x26_u8, 0xae_u8, 0x84_u8, 0x17_u8, 0xf9_u8, 0x81_u8, 0x73_u8])
   GUID_PROCESSOR_PERF_LATENCY_HINT_EPP_1 = LibC::GUID.new(0x4b70f900_u32, 0xcdd9_u16, 0x4e66_u16, StaticArray[0xaa_u8, 0x26_u8, 0xae_u8, 0x84_u8, 0x17_u8, 0xf9_u8, 0x81_u8, 0x74_u8])
   GUID_PROCESSOR_PERF_LATENCY_HINT_EPP_2 = LibC::GUID.new(0x4b70f900_u32, 0xcdd9_u16, 0x4e66_u16, StaticArray[0xaa_u8, 0x26_u8, 0xae_u8, 0x84_u8, 0x17_u8, 0xf9_u8, 0x81_u8, 0x75_u8])
@@ -1340,6 +1363,10 @@ module Win32cr::System::SystemServices
   PARKING_TOPOLOGY_POLICY_DISABLED = 0_u32
   PARKING_TOPOLOGY_POLICY_ROUNDROBIN = 1_u32
   PARKING_TOPOLOGY_POLICY_SEQUENTIAL = 2_u32
+  PARKING_TOPOLOGY_POLICY_ROUNDROBIN_P_ROUNDROBIN_E = 3_u32
+  PARKING_TOPOLOGY_POLICY_SEQUENTIAL_P_SEQUENTIAL_E = 4_u32
+  PARKING_TOPOLOGY_POLICY_ROUNDROBIN_P_SEQUENTIAL_E = 5_u32
+  PARKING_TOPOLOGY_POLICY_SEQUENTIAL_P_ROUNDROBIN_E = 6_u32
   GUID_PROCESSOR_SMT_UNPARKING_POLICY = LibC::GUID.new(0xb28a6829_u32, 0xc5f7_u16, 0x444e_u16, StaticArray[0x8f_u8, 0x61_u8, 0x10_u8, 0xe2_u8, 0x4e_u8, 0x85_u8, 0xc5_u8, 0x32_u8])
   SMT_UNPARKING_POLICY_CORE = 0_u32
   SMT_UNPARKING_POLICY_CORE_PER_THREAD = 1_u32
@@ -1918,6 +1945,8 @@ module Win32cr::System::SystemServices
   IMAGE_HOT_PATCH_INDIRECT = 376832_u32
   IMAGE_HOT_PATCH_NO_CALL_TARGET = 409600_u32
   IMAGE_HOT_PATCH_DYNAMIC_VALUE = 491520_u32
+  IMAGE_HOTSWAP_ENDPOINT_TABLE_SECTION = ".shsept"
+  IMAGE_HOTSWAP_ENDPOINT_INFO_V2 = 2_u32
   IMAGE_GUARD_CF_INSTRUMENTED = 256_u32
   IMAGE_GUARD_CFW_INSTRUMENTED = 512_u32
   IMAGE_GUARD_CF_FUNCTION_TABLE_PRESENT = 1024_u32
@@ -2050,6 +2079,7 @@ module Win32cr::System::SystemServices
   FAST_FAIL_CORRUPT_WOW64_STATE = 75_u32
   FAST_FAIL_INVALID_EXTENDED_STATE = 76_u32
   FAST_FAIL_KERNEL_POINTER_EXPECTED = 77_u32
+  FAST_FAIL_INVALID_SME_STATE = 78_u32
   FAST_FAIL_INVALID_FAST_FAIL_CODE = 4294967295_u32
   IS_TEXT_UNICODE_DBCS_LEADBYTE = 1024_u32
   IS_TEXT_UNICODE_UTF8 = 2048_u32
@@ -2090,6 +2120,7 @@ module Win32cr::System::SystemServices
   IMAGE_POLICY_SECTION_NAME = ".tPolicy"
   RTL_VIRTUAL_UNWIND2_VALIDATE_PAC = 1_u32
   HEAP_OPTIMIZE_RESOURCES_CURRENT_VERSION = 1_u32
+  HEAP_MEMORY_USAGE_INFO_CURRENT_VERSION = 1_u32
   WT_EXECUTEINUITHREAD = 2_u32
   WT_EXECUTEINPERSISTENTIOTHREAD = 64_u32
   WT_EXECUTEINLONGTHREAD = 16_u32
@@ -2520,9 +2551,13 @@ module Win32cr::System::SystemServices
     SERVERSILO_TERMINATING = 3_i32
     SERVERSILO_TERMINATED = 4_i32
   end
+  enum PROCESSOR_SHARED_COMPUTE_UNIT_TYPE
+    SharedComputeUnitArm64SMCU = 0_i32
+  end
   enum RUNTIME_REPORT_TYPE
     RuntimeReportTypeDriver = 0_i32
-    RuntimeReportTypeMax = 1_i32
+    RuntimeReportTypeCodeIntegrity = 1_i32
+    RuntimeReportTypeMax = 2_i32
   end
   enum SharedVirtualDiskSupportType
     SharedVirtualDisksUnsupported = 0_i32
@@ -2569,6 +2604,30 @@ module Win32cr::System::SystemServices
   end
   enum IMAGE_AUX_SYMBOL_TYPE
     IMAGE_AUX_SYMBOL_TYPE_TOKEN_DEF = 1_i32
+  end
+  enum IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN
+    EndpointReturnTypeNone = 0_i32
+    EndpointReturnTypeX0 = 1_i32
+    EndpointReturnTypeX0_X1 = 2_i32
+    EndpointReturnTypeX0_X2 = 3_i32
+    EndpointReturnTypeX0_X3 = 4_i32
+    EndpointReturnTypeQ0 = 5_i32
+    EndpointReturnTypeQ0_Q1 = 6_i32
+    EndpointReturnTypeQ0_Q2 = 7_i32
+    EndpointReturnTypeQ0_Q3 = 8_i32
+    EndpointReturnTypeX8 = 9_i32
+  end
+  enum IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG
+    EndpointParamRegNone = 0_i32
+    EndpointParamRegRAX = 1_i32
+    EndpointParamRegRCX = 2_i32
+    EndpointParamRegRDX = 3_i32
+    EndpointParamRegR8 = 9_i32
+    EndpointParamRegR9 = 10_i32
+    EndpointParamRegXMM0 = 200_i32
+    EndpointParamRegXMM1 = 201_i32
+    EndpointParamRegXMM2 = 202_i32
+    EndpointParamRegXMM3 = 203_i32
   end
   enum ARM64_FNPDATA_FLAGS
     PdataRefToFullXdata = 0_i32
@@ -3025,8 +3084,71 @@ module Win32cr::System::SystemServices
     property vector_length : UInt32
     property vector_register_offset : UInt32
     property predicate_register_offset : UInt32
-    property reserved : UInt32[5]
-    def initialize(@vector_length : UInt32, @vector_register_offset : UInt32, @predicate_register_offset : UInt32, @reserved : UInt32[5])
+    property anonymous : Anonymous_e__Union_
+    property reserved : UInt32[4]
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@vector_length : UInt32, @vector_register_offset : UInt32, @predicate_register_offset : UInt32, @anonymous : Anonymous_e__Union_, @reserved : UInt32[4])
+    end
+  end
+
+  @[Extern]
+  struct XSAVE_ARM64_SME_ZA_HEADER
+    property vector_length : UInt32
+    property anonymous : Anonymous_e__Union_
+    property reserved : UInt32[6]
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@vector_length : UInt32, @anonymous : Anonymous_e__Union_, @reserved : UInt32[6])
+    end
+  end
+
+  @[Extern]
+  struct XSAVE_ARM64_SME_TPIDR2_HEADER
+    property reserved : UInt32[8]
+    def initialize(@reserved : UInt32[8])
+    end
+  end
+
+  @[Extern]
+  struct XSAVE_ARM64_SME_ZT_HEADER
+    property register_count : UInt32
+    property reserved : UInt32[7]
+    def initialize(@register_count : UInt32, @reserved : UInt32[7])
     end
   end
 
@@ -3139,6 +3261,16 @@ module Win32cr::System::SystemServices
   end
 
   @[Extern]
+  struct ARM64_TPIDR2_BLOCK
+    property za_save_buffer : Void*
+    property num_za_save_slices : UInt16
+    property reserved1 : UInt16
+    property reserved2 : UInt32
+    def initialize(@za_save_buffer : Void*, @num_za_save_slices : UInt16, @reserved1 : UInt16, @reserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
   struct ATTRIBUTES_AND_SID
     property attributes : UInt32
     property sid_start : UInt32
@@ -3213,6 +3345,36 @@ module Win32cr::System::SystemServices
     property isolation_prefix : Win32cr::Foundation::PWSTR
     property isolation_enabled : Win32cr::Foundation::BOOLEAN
     def initialize(@isolation_prefix : Win32cr::Foundation::PWSTR, @isolation_enabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct SECURITY_CONTAINMENT_CONFIGURATION
+    property size : UInt32
+    property anonymous : Anonymous_e__Union_
+    property existing_token_handle : Win32cr::Foundation::HANDLE
+    property security_capabilities : Win32cr::Security::SECURITY_CAPABILITIES
+    property app_container_integrity_level : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@size : UInt32, @anonymous : Anonymous_e__Union_, @existing_token_handle : Win32cr::Foundation::HANDLE, @security_capabilities : Win32cr::Security::SECURITY_CAPABILITIES, @app_container_integrity_level : UInt32)
     end
   end
 
@@ -3833,6 +3995,17 @@ module Win32cr::System::SystemServices
   end
 
   @[Extern]
+  struct SHARED_COMPUTE_UNIT_RELATIONSHIP
+    property type__ : UInt32
+    property compute_unit_count : UInt32
+    property reserved : UInt8[14]
+    property group_count : UInt16
+    property group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY[1]
+    def initialize(@type__ : UInt32, @compute_unit_count : UInt32, @reserved : UInt8[14], @group_count : UInt16, @group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY[1])
+    end
+  end
+
+  @[Extern]
   struct RUNTIME_REPORT_PACKAGE_HEADER
     property magic : UInt32
     property package_version : UInt16
@@ -3874,7 +4047,7 @@ module Win32cr::System::SystemServices
     property publisher_thumbprint_hash_algorithm : UInt16
     property image_hash_offset : UInt32
     property publisher_thumbprint_offset : UInt32
-    property load_count : UInt16
+    property number_of_loading_times : UInt16
     property oem_name_size : UInt16
     property oem_name_offset : UInt32
     property flags : Flags_e__Union_
@@ -3898,7 +4071,7 @@ module Win32cr::System::SystemServices
     end
     end
 
-    def initialize(@internal_name : Win32cr::Foundation::CHAR[32], @image_hash_algorithm : UInt16, @publisher_thumbprint_hash_algorithm : UInt16, @image_hash_offset : UInt32, @publisher_thumbprint_offset : UInt32, @load_count : UInt16, @oem_name_size : UInt16, @oem_name_offset : UInt32, @flags : Flags_e__Union_, @padding : UInt16)
+    def initialize(@internal_name : Win32cr::Foundation::CHAR[32], @image_hash_algorithm : UInt16, @publisher_thumbprint_hash_algorithm : UInt16, @image_hash_offset : UInt32, @publisher_thumbprint_offset : UInt32, @number_of_loading_times : UInt16, @oem_name_size : UInt16, @oem_name_offset : UInt32, @flags : Flags_e__Union_, @padding : UInt16)
     end
   end
 
@@ -3928,6 +4101,35 @@ module Win32cr::System::SystemServices
     end
 
     def initialize(@header : Win32cr::System::SystemServices::RUNTIME_REPORT_HEADER, @number_of_drivers : UInt16, @flags : Flags_e__Union_, @driver_entries : Win32cr::System::SystemServices::DRIVER_INFO_ENTRY[1])
+    end
+  end
+
+  @[Extern]
+  struct CODE_INTEGRITY_RUNTIME_REPORT
+    property header : Win32cr::System::SystemServices::RUNTIME_REPORT_HEADER
+    property current_generation : UInt64
+    property number_of_generations : UInt32
+    def initialize(@header : Win32cr::System::SystemServices::RUNTIME_REPORT_HEADER, @current_generation : UInt64, @number_of_generations : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CODE_INTEGRITY_REPORT_GENERATION_HEADER
+    property version : UInt16
+    property reserved : UInt16
+    property record_size : UInt32
+    property commit_time : UInt64
+    def initialize(@version : UInt16, @reserved : UInt16, @record_size : UInt32, @commit_time : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct CODE_INTEGRITY_REPORT_RECORD_HEADER
+    property version : UInt16
+    property reserved : UInt16
+    property record_size : UInt32
+    property sipa_event_code : UInt32
+    def initialize(@version : UInt16, @reserved : UInt16, @record_size : UInt32, @sipa_event_code : UInt32)
     end
   end
 
@@ -5144,6 +5346,55 @@ module Win32cr::System::SystemServices
   end
 
   @[Extern]
+  struct IMAGE_HOTSWAP_ENDPOINT_INFO_HEADER_COMMON
+    property version : UInt32
+    property size : UInt32
+    def initialize(@version : UInt32, @size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON
+    property size : UInt32
+    property rva : UInt32
+    property name_size : UInt32
+    property name_offset : UInt32
+    def initialize(@size : UInt32, @rva : UInt32, @name_size : UInt32, @name_offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_HOTSWAP_X64_ENDPOINT_INFO_ENTRY_V2
+    property common : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON
+    property arg_regs : Win32cr::System::SystemServices::IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG[4]
+    property arg_stack_size : UInt32
+    property ret_reg : Win32cr::System::SystemServices::IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG
+    property name : UInt8[1]
+    def initialize(@common : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON, @arg_regs : Win32cr::System::SystemServices::IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG[4], @arg_stack_size : UInt32, @ret_reg : Win32cr::System::SystemServices::IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG, @name : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_ENTRY_V2
+    property common : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON
+    property int_args : UInt32
+    property float_args : UInt32
+    property arg_stack_size : UInt32
+    property return_type : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN
+    property name : UInt8[1]
+    def initialize(@common : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON, @int_args : UInt32, @float_args : UInt32, @arg_stack_size : UInt32, @return_type : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN, @name : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_HOTSWAP_ENDPOINT_INFO_HEADER_V2
+    property common : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ENDPOINT_INFO_HEADER_COMMON
+    property count : UInt32
+    def initialize(@common : Win32cr::System::SystemServices::IMAGE_HOTSWAP_ENDPOINT_INFO_HEADER_COMMON, @count : UInt32)
+    end
+  end
+
+  @[Extern]
   struct IMAGE_CE_RUNTIME_FUNCTION_ENTRY
     property func_start : UInt32
     property _bitfield : UInt32
@@ -5384,6 +5635,24 @@ module Win32cr::System::SystemServices
   end
 
   @[Extern]
+  struct HEAP_MEMORY_USAGE_ENTRY
+    property heap_handle : Void*
+    property total_committed_bytes : LibC::UIntPtrT
+    property total_reserved_bytes : LibC::UIntPtrT
+    def initialize(@heap_handle : Void*, @total_committed_bytes : LibC::UIntPtrT, @total_reserved_bytes : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct HEAP_MEMORY_USAGE_INFORMATION
+    property version : UInt16
+    property entry_count : LibC::UIntPtrT
+    property entries : Win32cr::System::SystemServices::HEAP_MEMORY_USAGE_ENTRY[1]
+    def initialize(@version : UInt16, @entry_count : LibC::UIntPtrT, @entries : Win32cr::System::SystemServices::HEAP_MEMORY_USAGE_ENTRY[1])
+    end
+  end
+
+  @[Extern]
   struct SUPPORTED_OS_INFO
     property major_version : UInt16
     property minor_version : UInt16
@@ -5395,6 +5664,32 @@ module Win32cr::System::SystemServices
   struct MAXVERSIONTESTED_INFO
     property max_version_tested : UInt64
     def initialize(@max_version_tested : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_FILE_MACHINES
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property value : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@value : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
     end
   end
 
@@ -5618,4 +5913,18 @@ module Win32cr::System::SystemServices
     end
   end
 
+  def rtlGetImageFileMachines(dos_file_name : Win32cr::Foundation::PWSTR, machine_type_flags : Win32cr::System::SystemServices::IMAGE_FILE_MACHINES*) : UInt32
+    {% if !flag?(:docs) %}
+    C.RtlGetImageFileMachines(dos_file_name, machine_type_flags)
+    {% end %}
+  end
+
+  @[Link("ntdll")]
+  {% if !flag?(:docs) %}
+  lib C
+    # :nodoc:
+    fun RtlGetImageFileMachines(dos_file_name : Win32cr::Foundation::PWSTR, machine_type_flags : Win32cr::System::SystemServices::IMAGE_FILE_MACHINES*) : UInt32
+
+  end
+  {% end %}
 end

@@ -70,6 +70,7 @@ module Win32cr::System::HostComputeSystem
     HcsResourceTypeJob = 2_i32
     HcsResourceTypeComObject = 3_i32
     HcsResourceTypeSocket = 4_i32
+    HcsResourceTypeSection = 5_i32
   end
   enum HCS_NOTIFICATION_FLAGS
     HcsNotificationFlagSuccess = 0_i32

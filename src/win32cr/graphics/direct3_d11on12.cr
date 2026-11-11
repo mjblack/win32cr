@@ -2,7 +2,6 @@ require "./../system/com.cr"
 require "./direct3_d.cr"
 require "./direct3_d11.cr"
 require "./../foundation.cr"
-require "./direct3_d12.cr"
 
 module Win32cr::Graphics::Direct3D11on12
   extend self
@@ -26,7 +25,7 @@ module Win32cr::Graphics::Direct3D11on12
     query_interface : Proc(ID3D11On12Device*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D11On12Device*, UInt32),
     release : Proc(ID3D11On12Device*, UInt32),
-    create_wrapped_resource : Proc(ID3D11On12Device*, Void*, Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_wrapped_resource : Proc(ID3D11On12Device*, Void*, Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, Void*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     release_wrapped_resources : Proc(ID3D11On12Device*, Void**, UInt32, Void),
     acquire_wrapped_resources : Proc(ID3D11On12Device*, Void**, UInt32, Void)
 
@@ -43,7 +42,7 @@ module Win32cr::Graphics::Direct3D11on12
     def release(this : ID3D11On12Device*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def create_wrapped_resource(this : ID3D11On12Device*, pResource12 : Void*, pFlags11 : Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, in_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, out_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, riid : LibC::GUID*, ppResource11 : Void**) : Win32cr::Foundation::HRESULT
+    def create_wrapped_resource(this : ID3D11On12Device*, pResource12 : Void*, pFlags11 : Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, in_state : Void*, out_state : Void*, riid : LibC::GUID*, ppResource11 : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_wrapped_resource.call(this, pResource12, pFlags11, in_state, out_state, riid, ppResource11)
     end
     def release_wrapped_resources(this : ID3D11On12Device*, ppResources : Void**, num_resources : UInt32) : Void
@@ -61,7 +60,7 @@ module Win32cr::Graphics::Direct3D11on12
     query_interface : Proc(ID3D11On12Device1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D11On12Device1*, UInt32),
     release : Proc(ID3D11On12Device1*, UInt32),
-    create_wrapped_resource : Proc(ID3D11On12Device1*, Void*, Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_wrapped_resource : Proc(ID3D11On12Device1*, Void*, Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, Void*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     release_wrapped_resources : Proc(ID3D11On12Device1*, Void**, UInt32, Void),
     acquire_wrapped_resources : Proc(ID3D11On12Device1*, Void**, UInt32, Void),
     get_d3_d12_device : Proc(ID3D11On12Device1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
@@ -79,7 +78,7 @@ module Win32cr::Graphics::Direct3D11on12
     def release(this : ID3D11On12Device1*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def create_wrapped_resource(this : ID3D11On12Device1*, pResource12 : Void*, pFlags11 : Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, in_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, out_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, riid : LibC::GUID*, ppResource11 : Void**) : Win32cr::Foundation::HRESULT
+    def create_wrapped_resource(this : ID3D11On12Device1*, pResource12 : Void*, pFlags11 : Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, in_state : Void*, out_state : Void*, riid : LibC::GUID*, ppResource11 : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_wrapped_resource.call(this, pResource12, pFlags11, in_state, out_state, riid, ppResource11)
     end
     def release_wrapped_resources(this : ID3D11On12Device1*, ppResources : Void**, num_resources : UInt32) : Void
@@ -100,7 +99,7 @@ module Win32cr::Graphics::Direct3D11on12
     query_interface : Proc(ID3D11On12Device2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D11On12Device2*, UInt32),
     release : Proc(ID3D11On12Device2*, UInt32),
-    create_wrapped_resource : Proc(ID3D11On12Device2*, Void*, Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_wrapped_resource : Proc(ID3D11On12Device2*, Void*, Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, Void*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     release_wrapped_resources : Proc(ID3D11On12Device2*, Void**, UInt32, Void),
     acquire_wrapped_resources : Proc(ID3D11On12Device2*, Void**, UInt32, Void),
     get_d3_d12_device : Proc(ID3D11On12Device2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
@@ -120,7 +119,7 @@ module Win32cr::Graphics::Direct3D11on12
     def release(this : ID3D11On12Device2*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def create_wrapped_resource(this : ID3D11On12Device2*, pResource12 : Void*, pFlags11 : Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, in_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, out_state : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_STATES, riid : LibC::GUID*, ppResource11 : Void**) : Win32cr::Foundation::HRESULT
+    def create_wrapped_resource(this : ID3D11On12Device2*, pResource12 : Void*, pFlags11 : Win32cr::Graphics::Direct3D11on12::D3D11_RESOURCE_FLAGS*, in_state : Void*, out_state : Void*, riid : LibC::GUID*, ppResource11 : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_wrapped_resource.call(this, pResource12, pFlags11, in_state, out_state, riid, ppResource11)
     end
     def release_wrapped_resources(this : ID3D11On12Device2*, ppResources : Void**, num_resources : UInt32) : Void

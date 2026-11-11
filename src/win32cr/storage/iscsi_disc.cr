@@ -48,6 +48,7 @@ module Win32cr::Storage::IscsiDisc
   IOCTL_MINIPORT_SIGNATURE_SET_TEMPERATURE_THRESHOLD = "SETTEMPT"
   IOCTL_MINIPORT_SIGNATURE_QUERY_PHYSICAL_TOPOLOGY = "TOPOLOGY"
   IOCTL_MINIPORT_SIGNATURE_ENDURANCE_INFO = "ENDURINF"
+  IOCTL_MINIPORT_SIGNATURE_BOOT_PARTITION = "BOOTPINF"
   NRB_FUNCTION_NVCACHE_INFO = 236_u32
   NRB_FUNCTION_SPINDLE_STATUS = 229_u32
   NRB_FUNCTION_NVCACHE_POWER_MODE_SET = 0_u32
@@ -137,6 +138,23 @@ module Win32cr::Storage::IscsiDisc
   STORAGE_FIRMWARE_DOWNLOAD_STRUCTURE_VERSION = 1_u32
   STORAGE_FIRMWARE_DOWNLOAD_STRUCTURE_VERSION_V2 = 2_u32
   STORAGE_FIRMWARE_ACTIVATE_STRUCTURE_VERSION = 1_u32
+  BOOT_PARTITION_STATUS_SUCCESS = 0_u32
+  BOOT_PARTITION_STATUS_ERROR = 1_u32
+  BOOT_PARTITION_STATUS_ILLEGAL_REQUEST = 2_u32
+  BOOT_PARTITION_STATUS_INVALID_PARAMETER = 3_u32
+  BOOT_PARTITION_STATUS_INPUT_BUFFER_TOO_BIG = 4_u32
+  BOOT_PARTITION_STATUS_OUTPUT_BUFFER_TOO_SMALL = 5_u32
+  BOOT_PARTITION_STATUS_INVALID_SLOT = 6_u32
+  BOOT_PARTITION_STATUS_INVALID_IMAGE = 7_u32
+  BOOT_PARTITION_STATUS_INVALID_ALIGNMENT = 8_u32
+  BOOT_PARTITION_STATUS_WRITE_PROHIBITED = 9_u32
+  BOOT_PARTITION_FUNCTION_DOWNLOAD = 1_u32
+  BOOT_PARTITION_FUNCTION_ACTIVATE = 2_u32
+  BOOT_PARTITION_FUNCTION_GET_INFO = 3_u32
+  STORAGE_BOOT_PARTITION_GET_INFO_STRUCTURE_VERSION_V1 = 1_u32
+  STORAGE_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION = 1_u32
+  STORAGE_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION = 1_u32
+  BOOT_PARTITION_REQUEST_BLOCK_STRUCTURE_VERSION = 1_u32
   DUMP_POINTERS_VERSION_1 = 1_u32
   DUMP_POINTERS_VERSION_2 = 2_u32
   DUMP_POINTERS_VERSION_3 = 3_u32
@@ -973,6 +991,53 @@ module Win32cr::Storage::IscsiDisc
     property slot_to_activate : UInt8
     property reserved0 : UInt8[3]
     def initialize(@version : UInt32, @size : UInt32, @slot_to_activate : UInt8, @reserved0 : UInt8[3])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_BOOT_PARTITION_INFO
+    property version : UInt32
+    property size : UInt32
+    property bpsz : UInt64
+    property image_payload_alignment : UInt32
+    property image_payload_max_size : UInt32
+    property slot_count : UInt8
+    property abpid : UInt8
+    def initialize(@version : UInt32, @size : UInt32, @bpsz : UInt64, @image_payload_alignment : UInt32, @image_payload_max_size : UInt32, @slot_count : UInt8, @abpid : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_BOOT_PARTITION_DOWNLOAD
+    property version : UInt32
+    property size : UInt32
+    property bpid : UInt8
+    property offset : UInt64
+    property buffer_size : UInt64
+    property image_buffer : UInt8[1]
+    def initialize(@version : UInt32, @size : UInt32, @bpid : UInt8, @offset : UInt64, @buffer_size : UInt64, @image_buffer : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_BOOT_PARTITION_ACTIVATE
+    property version : UInt32
+    property size : UInt32
+    property bpid : UInt8
+    property reserved0 : UInt8[3]
+    def initialize(@version : UInt32, @size : UInt32, @bpid : UInt8, @reserved0 : UInt8[3])
+    end
+  end
+
+  @[Extern]
+  struct BOOT_PARTITION_REQUEST_BLOCK
+    property version : UInt32
+    property size : UInt32
+    property function : UInt32
+    property flags : UInt32
+    property data_buffer_offset : UInt32
+    property data_buffer_length : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @function : UInt32, @flags : UInt32, @data_buffer_offset : UInt32, @data_buffer_length : UInt32)
     end
   end
 

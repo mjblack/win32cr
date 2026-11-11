@@ -82,6 +82,7 @@ module Win32cr::System::Power
   BATTERY_SET_DISCHARGE_SUPPORTED = 2_u32
   BATTERY_SET_CHARGINGSOURCE_SUPPORTED = 4_u32
   BATTERY_SET_CHARGER_ID_SUPPORTED = 8_u32
+  BATTERY_TEST_EXEMPT = 16_u32
   BATTERY_UNKNOWN_TIME = 4294967295_u32
   BATTERY_UNKNOWN_CURRENT = 4294967295_u32
   UNKNOWN_CURRENT = 4294967295_u32
@@ -533,7 +534,7 @@ module Win32cr::System::Power
     MonitorRequestReasonPdcSignalSensorsHumanPresence = 52_i32
     MonitorRequestReasonBatteryPreCritical = 53_i32
     MonitorRequestReasonUserInputTouch = 54_i32
-    MonitorRequestReasonAusterityBatteryDrain = 55_i32
+    MonitorRequestReasonRestrictedStandbyBatteryDrain = 55_i32
     MonitorRequestReasonDozeRestrictedStandby = 56_i32
     MonitorRequestReasonSmartRestrictedStandby = 57_i32
     MonitorRequestReasonMax = 58_i32

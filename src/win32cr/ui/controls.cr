@@ -4928,6 +4928,12 @@ module Win32cr::UI::Controls
     MDS_CHECKED = 5_i32
     MDS_HOTCHECKED = 6_i32
   end
+  @[Flags]
+  enum SYNTHETIC_DEVICE_CREATION_OPTIONS
+    SDCO_NONE = 0_i32
+    SDCO_PHYSICAL_SIZE = 1_i32
+    SDCO_TOUCHPAD_GESTURE_ONLY = 2_i32
+  end
   enum FEEDBACK_TYPE
     FEEDBACK_TOUCH_CONTACTVISUALIZATION = 1_i32
     FEEDBACK_PEN_BARRELVISUALIZATION = 2_i32
@@ -7815,6 +7821,19 @@ module Win32cr::UI::Controls
   end
 
   @[Extern]
+  struct SYNTHETIC_DEVICE_CREATION_PARAMS
+    property pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE
+    property maxCount : UInt32
+    property feedbackMode : Win32cr::UI::Input::Pointer::POINTER_FEEDBACK_MODE
+    property hMonitor : Win32cr::Graphics::Gdi::HMONITOR
+    property deviceWidth : UInt32
+    property deviceHeight : UInt32
+    property options : Win32cr::UI::Controls::SYNTHETIC_DEVICE_CREATION_OPTIONS
+    def initialize(@pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, @maxCount : UInt32, @feedbackMode : Win32cr::UI::Input::Pointer::POINTER_FEEDBACK_MODE, @hMonitor : Win32cr::Graphics::Gdi::HMONITOR, @deviceWidth : UInt32, @deviceHeight : UInt32, @options : Win32cr::UI::Controls::SYNTHETIC_DEVICE_CREATION_OPTIONS)
+    end
+  end
+
+  @[Extern]
   struct TOUCH_HIT_TESTING_PROXIMITY_EVALUATION
     property score : UInt16
     property adjustedPoint : Win32cr::Foundation::POINT
@@ -9312,6 +9331,12 @@ module Win32cr::UI::Controls
     {% end %}
   end
 
+  def createSyntheticPointerDevice2(pParams : Win32cr::UI::Controls::SYNTHETIC_DEVICE_CREATION_PARAMS*) : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE
+    {% if !flag?(:docs) %}
+    C.CreateSyntheticPointerDevice2(pParams)
+    {% end %}
+  end
+
   def registerTouchHitTestingWindow(hwnd : Win32cr::Foundation::HWND, value : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
     C.RegisterTouchHitTestingWindow(hwnd, value)
@@ -10018,6 +10043,9 @@ module Win32cr::UI::Controls
 
     # :nodoc:
     fun CreateSyntheticPointerDevice(pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, maxCount : UInt32, mode : Win32cr::UI::Input::Pointer::POINTER_FEEDBACK_MODE) : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE
+
+    # :nodoc:
+    fun CreateSyntheticPointerDevice2(pParams : Win32cr::UI::Controls::SYNTHETIC_DEVICE_CREATION_PARAMS*) : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE
 
     # :nodoc:
     fun RegisterTouchHitTestingWindow(hwnd : Win32cr::Foundation::HWND, value : UInt32) : Win32cr::Foundation::BOOL

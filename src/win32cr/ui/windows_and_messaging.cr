@@ -93,6 +93,7 @@ module Win32cr::UI::WindowsAndMessaging
   WARNING_RETURN_UNINIT_VAR__ = 6101_u32
   WARNING_DEREF_NULL_PTR__ = 6011_u32
   WARNING_MISSING_ZERO_TERMINATION2__ = 6054_u32
+  WARNING_WRITE_OVERRUN__ = 6386_u32
   WARNING_INVALID_PARAM_VALUE_1__ = 6387_u32
   WARNING_UNSAFE_STRING_FUNCTION__ = 25025_u32
   WARNING_INCORRECT_ANNOTATION__ = 26007_u32
@@ -484,6 +485,8 @@ module Win32cr::UI::WindowsAndMessaging
   WM_POINTERDEVICECHANGE = 568_u32
   WM_POINTERDEVICEINRANGE = 569_u32
   WM_POINTERDEVICEOUTOFRANGE = 570_u32
+  WM_STOPINERTIA = 571_u32
+  WM_ENDINERTIA = 572_u32
   WM_TOUCH = 576_u32
   WM_NCPOINTERUPDATE = 577_u32
   WM_NCPOINTERDOWN = 578_u32
@@ -4680,6 +4683,12 @@ module Win32cr::UI::WindowsAndMessaging
     {% end %}
   end
 
+  def reportWindowContentInertia(hWnd : Win32cr::Foundation::HWND, bStartInertia : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.ReportWindowContentInertia(hWnd, bStartInertia)
+    {% end %}
+  end
+
   def getInputState : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
     C.GetInputState
@@ -6072,6 +6081,24 @@ module Win32cr::UI::WindowsAndMessaging
     {% end %}
   end
 
+  def registerTouchpadCapableWindow(hWnd : Win32cr::Foundation::HWND, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.RegisterTouchpadCapableWindow(hWnd, fEnable)
+    {% end %}
+  end
+
+  def registerTouchpadCapableThread(fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.RegisterTouchpadCapableThread(fEnable)
+    {% end %}
+  end
+
+  def setMaxTouchpadSensitivity(maxSensitivity : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.SetMaxTouchpadSensitivity(maxSensitivity)
+    {% end %}
+  end
+
   def changeWindowMessageFilter(message : UInt32, dwFlag : Win32cr::UI::WindowsAndMessaging::CHANGE_WINDOW_MESSAGE_FILTER_FLAGS) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
     C.ChangeWindowMessageFilter(message, dwFlag)
@@ -6786,6 +6813,9 @@ module Win32cr::UI::WindowsAndMessaging
     fun IsCharLowerW(ch : UInt16) : Win32cr::Foundation::BOOL
 
     # :nodoc:
+    fun ReportWindowContentInertia(hWnd : Win32cr::Foundation::HWND, bStartInertia : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
     fun GetInputState : Win32cr::Foundation::BOOL
 
     # :nodoc:
@@ -7480,6 +7510,15 @@ module Win32cr::UI::WindowsAndMessaging
 
     # :nodoc:
     fun GetAltTabInfoW(hwnd : Win32cr::Foundation::HWND, iItem : Int32, pati : Win32cr::UI::WindowsAndMessaging::ALTTABINFO*, pszItemText : Win32cr::Foundation::PWSTR, cchItemText : UInt32) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun RegisterTouchpadCapableWindow(hWnd : Win32cr::Foundation::HWND, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun RegisterTouchpadCapableThread(fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun SetMaxTouchpadSensitivity(maxSensitivity : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun ChangeWindowMessageFilter(message : UInt32, dwFlag : Win32cr::UI::WindowsAndMessaging::CHANGE_WINDOW_MESSAGE_FILTER_FLAGS) : Win32cr::Foundation::BOOL

@@ -299,6 +299,7 @@ module Win32cr::System::Diagnostics::Debug
   CBA_SET_OPTIONS = 8_u32
   CBA_EVENT = 16_u32
   CBA_DEFERRED_SYMBOL_LOAD_PARTIAL = 32_u32
+  CBA_QUERY_IF_SYMBOL_DOWNLOAD_DISALLOWED = 64_u32
   CBA_DEBUG_INFO = 268435456_u32
   CBA_SRCSRV_INFO = 536870912_u32
   CBA_SRCSRV_EVENT = 1073741824_u32
@@ -402,9 +403,11 @@ module Win32cr::System::Diagnostics::Debug
   SSRVURI_HTTP_NORMAL = 1_u32
   SSRVURI_HTTP_COMPRESSED = 2_u32
   SSRVURI_HTTP_FILEPTR = 4_u32
+  SSRVURI_HTTP_MSFZ0 = 8_u32
   SSRVURI_UNC_NORMAL = 16_u32
   SSRVURI_UNC_COMPRESSED = 32_u32
   SSRVURI_UNC_FILEPTR = 64_u32
+  SSRVURI_UNC_MSFZ0 = 128_u32
   SSRVURI_HTTP_MASK = 15_u32
   SSRVURI_UNC_MASK = 240_u32
   SSRVURI_ALL = 255_u32
@@ -419,6 +422,7 @@ module Win32cr::System::Diagnostics::Debug
   SSRVACTION_HTTPSTATUS = 6_u32
   SSRVACTION_XMLOUTPUT = 7_u32
   SSRVACTION_CHECKSUMSTATUS = 8_u32
+  SSRVACTION_QUERY_IF_DOWNLOAD_DISALLOWED = 9_u32
   SYMSTOREOPT_ALT_INDEX = 16_u32
   SYMSTOREOPT_UNICODE = 32_u32
   SYMF_OMAP_GENERATED = 1_u32
@@ -449,6 +453,7 @@ module Win32cr::System::Diagnostics::Debug
   IMAGEHLP_RMAP_MAPPED_FLAT = 1_u32
   IMAGEHLP_RMAP_BIG_ENDIAN = 2_u32
   IMAGEHLP_RMAP_IGNORE_MISCOMPARE = 4_u32
+  IMAGEHLP_RMAP_NOBASERELOCATIONS = 134217728_u32
   IMAGEHLP_RMAP_FIXUP_ARM64X = 268435456_u32
   IMAGEHLP_RMAP_LOAD_RW_DATA_SECTIONS = 536870912_u32
   IMAGEHLP_RMAP_OMIT_SHARED_RW_DATA_SECTIONS = 1073741824_u32
@@ -493,9 +498,11 @@ module Win32cr::System::Diagnostics::Debug
   WHEA_ERROR_SOURCE_DESCRIPTOR_VERSION_10 = 10_u32
   WHEA_ERROR_SOURCE_DESCRIPTOR_VERSION_11 = 11_u32
   WHEA_MAX_MC_BANKS = 32_u32
+  WHEA_MAX_MC_BANKS64 = 64_u32
   WHEA_ERROR_SOURCE_FLAG_FIRMWAREFIRST = 1_u32
   WHEA_ERROR_SOURCE_FLAG_GLOBAL = 2_u32
   WHEA_ERROR_SOURCE_FLAG_GHES_ASSIST = 4_u32
+  WHEA_ERROR_SOURCE_FLAG_V2_DESCRIPTOR = 8_u32
   WHEA_ERROR_SOURCE_FLAG_DEFAULTSOURCE = 2147483648_u32
   WHEA_ERR_SRC_OVERRIDE_FLAG = 1073741824_u32
   WHEA_ERROR_SOURCE_INVALID_RELATED_SOURCE = 65535_u32
@@ -779,6 +786,7 @@ module Win32cr::System::Diagnostics::Debug
     BOOTPROC_INITIALIZATION_FAILED = 110_u32
     VSL_INITIALIZATION_FAILED = 111_u32
     SOFT_RESTART_FATAL_ERROR = 112_u32
+    SOFT_RESTART_LIVE_DUMP = 113_u32
     ASSIGN_DRIVE_LETTERS_FAILED = 114_u32
     CONFIG_LIST_FAILED = 115_u32
     BAD_SYSTEM_CONFIG_INFO = 116_u32
@@ -878,6 +886,7 @@ module Win32cr::System::Diagnostics::Debug
     SYSTEM_PTE_MISUSE = 218_u32
     DRIVER_CORRUPTED_SYSPTES = 219_u32
     DRIVER_INVALID_STACK_ACCESS = 220_u32
+    DRIVER_VERIFIER_MISMATCH = 221_u32
     POOL_CORRUPTION_IN_FILE_AREA = 222_u32
     IMPERSONATING_WORKER_THREAD = 223_u32
     ACPI_BIOS_FATAL_ERROR = 224_u32
@@ -1183,7 +1192,14 @@ module Win32cr::System::Diagnostics::Debug
     PROCESS_TERMINATE_LIKELY_DEADLOCK = 513_u32
     UNEXPECTED_CODEPATH = 514_u32
     INVALID_EXTENSION_STATE = 515_u32
-    STORAGE_DRIVER_LIVEDUMP = 519_u32
+    INVALID_CACHED_SYSTEM_TABLE = 516_u32
+    KCSAN_RACY_ACCESS = 517_u32
+    MULTITIER_MEMORY_DRIVER_INTERNAL = 518_u32
+    FILEINFO_POSSIBLE_DEADLOCK_LIVE_DUMP = 519_u32
+    STORAGE_DRIVER_LIVEDUMP = 520_u32
+    STORVSP_LIVEDUMP = 1073742345_u32
+    INTERRUPTS_STATE_MISMATCH = 522_u32
+    TEST_INITIATED_CRASH = 523_u32
     XBOX_VMCTRL_CS_TIMEOUT = 854_u32
     XBOX_CORRUPTED_IMAGE = 855_u32
     XBOX_INVERTED_FUNCTION_TABLE_OVERFLOW = 856_u32
@@ -1195,13 +1211,16 @@ module Win32cr::System::Diagnostics::Debug
     XBOX_360_SYSTEM_CRASH_RESERVED = 1056_u32
     XBOX_SECURITY_FAILUE = 1057_u32
     KERNEL_CFG_INIT_FAILURE = 1058_u32
+    ASSERTBUGCODE_I3CHOST_DRIVER = 1059_u32
     MANUALLY_INITIATED_POWER_BUTTON_HOLD_LIVE_DUMP = 4552_u32
+    MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP = 8648_u32
+    MANUALLY_INITIATED_POWER_BUTTON_HOLD_KERNEL_LIVE_DUMP = 12744_u32
     HYPERVISOR_ERROR = 131073_u32
     XBOX_MANUALLY_INITIATED_CRASH = 196614_u32
-    MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP = 8648_u32
     WINLOGON_FATAL_ERROR = 3221226010_u32
     MANUALLY_INITIATED_CRASH1 = 3735936685_u32
     BUGCHECK_CONTEXT_MODIFIER = 2147483648_u32
+    SMBD_BUGCHECK_CODE = 1397572164_u32
   end
   enum FACILITY_CODE : UInt32
     FACILITY_NULL = 0_u32
@@ -1666,6 +1685,8 @@ module Win32cr::System::Diagnostics::Debug
     ProcessVmCountersStream = 22_i32
     IptTraceStream = 23_i32
     ThreadNamesStream = 24_i32
+    CompressedMemoryStream = 25_i32
+    CompressedMemoryStreamSQL = 28672_i32
     Cestreamnull = 32768_i32
     Cestreamsysteminfo = 32769_i32
     Cestreamexception = 32770_i32
@@ -1715,6 +1736,8 @@ module Win32cr::System::Diagnostics::Debug
     VmQueryCallback = 18_i32
     VmPreReadCallback = 19_i32
     VmPostReadCallback = 20_i32
+    CompressedMemoryStreamStartCallback = 21_i32
+    CompressedMemoryStreamFinishCallback = 22_i32
   end
   enum THREAD_WRITE_FLAGS
     ThreadWriteThread = 1_i32
@@ -1762,9 +1785,10 @@ module Win32cr::System::Diagnostics::Debug
     MiniDumpWithIptTrace = 4194304_i32
     MiniDumpScanInaccessiblePartialPages = 8388608_i32
     MiniDumpFilterWriteCombinedMemory = 16777216_i32
-    MiniDumpValidTypeFlags = 33554431_i32
+    MiniDumpWithMemoryCompressed = 67108864_i32
+    MiniDumpValidTypeFlags = 100663295_i32
     MiniDumpNoIgnoreInaccessibleMemory = 33554432_i32
-    MiniDumpValidTypeFlagsEx = 67108863_i32
+    MiniDumpValidTypeFlagsEx = 134217727_i32
   end
   enum MINIDUMP_SECONDARY_FLAGS
     MiniSecondaryWithoutPowerInfo = 1_i32
@@ -1821,7 +1845,8 @@ module Win32cr::System::Diagnostics::Debug
     SYMOPT_EX_LASTVALIDDEBUGDIRECTORY = 1_i32
     SYMOPT_EX_NOIMPLICITPATTERNSEARCH = 2_i32
     SYMOPT_EX_NEVERLOADSYMBOLS = 3_i32
-    SYMOPT_EX_MAX = 4_i32
+    SYMOPT_EX_DISALLOW_NETWORK_PATHS = 4_i32
+    SYMOPT_EX_MAX = 5_i32
   end
   enum IMAGEHLP_SYMBOL_TYPE_INFO
     TI_GET_SYMTAG = 0_i32
@@ -3007,7 +3032,7 @@ module Win32cr::System::Diagnostics::Debug
     property enabled_features : UInt64
     property enabled_volatile_features : UInt64
     property size : UInt32
-    property anonymous : Anonymous_e__Union_
+    property anonymous1 : Anonymous1_e__Union_
     property features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64]
     property enabled_supervisor_features : UInt64
     property aligned_features : UInt64
@@ -3016,12 +3041,12 @@ module Win32cr::System::Diagnostics::Debug
     property enabled_user_visible_supervisor_features : UInt64
     property extended_feature_disable_features : UInt64
     property all_non_large_feature_size : UInt32
-    property max_sve_vector_length : UInt16
-    property spare1 : UInt16
+    property anonymous2 : Anonymous2_e__Union_
+    property spare : UInt64
 
-    # Nested Type Anonymous_e__Union_
+    # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    struct Anonymous_e__Union_
+    struct Anonymous1_e__Union_
     property control_flags : UInt32
     property anonymous : Anonymous_e__Struct_
 
@@ -3037,7 +3062,59 @@ module Win32cr::System::Diagnostics::Debug
     end
     end
 
-    def initialize(@enabled_features : UInt64, @enabled_volatile_features : UInt64, @size : UInt32, @anonymous : Anonymous_e__Union_, @features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64], @enabled_supervisor_features : UInt64, @aligned_features : UInt64, @all_feature_size : UInt32, @all_features : UInt32[64], @enabled_user_visible_supervisor_features : UInt64, @extended_feature_disable_features : UInt64, @all_non_large_feature_size : UInt32, @max_sve_vector_length : UInt16, @spare1 : UInt16)
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+
+      # Nested Type Anonymous1_e__Struct_
+      @[Extern]
+      struct Anonymous1_e__Struct_
+    property amd64_spare1 : UInt32[3]
+    def initialize(@amd64_spare1 : UInt32[3])
+    end
+      end
+
+
+      # Nested Type Anonymous2_e__Struct_
+      @[Extern]
+      struct Anonymous2_e__Struct_
+    property max_sve_vector_length : UInt16
+    property max_sme_vector_length : UInt16
+    property sme_zt_register_count : UInt16
+    property anonymous : Anonymous_e__Union_
+    property supported_sme_vector_lengths : UInt8
+    property arm64_spare : UInt8[3]
+
+        # Nested Type Anonymous_e__Union_
+        @[Extern(union: true)]
+        struct Anonymous_e__Union_
+    property arm64_flags : UInt16
+    property anonymous : Anonymous_e__Struct_
+
+          # Nested Type Anonymous_e__Struct_
+          @[Extern]
+          struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+          end
+
+    def initialize(@arm64_flags : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
+        end
+
+    def initialize(@max_sve_vector_length : UInt16, @max_sme_vector_length : UInt16, @sme_zt_register_count : UInt16, @anonymous : Anonymous_e__Union_, @supported_sme_vector_lengths : UInt8, @arm64_spare : UInt8[3])
+    end
+      end
+
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
+    end
+
+    def initialize(@enabled_features : UInt64, @enabled_volatile_features : UInt64, @size : UInt32, @anonymous1 : Anonymous1_e__Union_, @features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64], @enabled_supervisor_features : UInt64, @aligned_features : UInt64, @all_feature_size : UInt32, @all_features : UInt32[64], @enabled_user_visible_supervisor_features : UInt64, @extended_feature_disable_features : UInt64, @all_non_large_feature_size : UInt32, @anonymous2 : Anonymous2_e__Union_, @spare : UInt64)
     end
   end
 
@@ -4508,6 +4585,25 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
+  struct MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK
+    property max_parallelism : UInt32
+    property max_transfer_size : UInt32
+    property numa_node_info_array : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP*
+    property numa_node_info_array_size : UInt32
+    property reserved : UInt32
+    def initialize(@max_parallelism : UInt32, @max_transfer_size : UInt32, @numa_node_info_array : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP*, @numa_node_info_array_size : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK
+    property compressed_stream_size : UInt64
+    property stream_compression_rate : UInt32
+    def initialize(@compressed_stream_size : UInt64, @stream_compression_rate : UInt32)
+    end
+  end
+
+  @[Extern]
   struct MINIDUMP_CALLBACK_INPUT
     property process_id : UInt32
     property process_handle : Win32cr::Foundation::HANDLE
@@ -4529,7 +4625,8 @@ module Win32cr::System::Diagnostics::Debug
     property vm_query : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_QUERY_CALLBACK
     property vm_pre_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_PRE_READ_CALLBACK
     property vm_post_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_POST_READ_CALLBACK
-    def initialize(@status : Win32cr::Foundation::HRESULT, @thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_CALLBACK, @thread_ex : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX_CALLBACK, @module__ : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE_CALLBACK, @include_thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_THREAD_CALLBACK, @include_module : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_MODULE_CALLBACK, @io : Win32cr::System::Diagnostics::Debug::MINIDUMP_IO_CALLBACK, @read_memory_failure : Win32cr::System::Diagnostics::Debug::MINIDUMP_READ_MEMORY_FAILURE_CALLBACK, @secondary_flags : UInt32, @vm_query : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_QUERY_CALLBACK, @vm_pre_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_PRE_READ_CALLBACK, @vm_post_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_POST_READ_CALLBACK)
+    property compressed_memory_stream_finish : Win32cr::System::Diagnostics::Debug::MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK
+    def initialize(@status : Win32cr::Foundation::HRESULT, @thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_CALLBACK, @thread_ex : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX_CALLBACK, @module__ : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE_CALLBACK, @include_thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_THREAD_CALLBACK, @include_module : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_MODULE_CALLBACK, @io : Win32cr::System::Diagnostics::Debug::MINIDUMP_IO_CALLBACK, @read_memory_failure : Win32cr::System::Diagnostics::Debug::MINIDUMP_READ_MEMORY_FAILURE_CALLBACK, @secondary_flags : UInt32, @vm_query : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_QUERY_CALLBACK, @vm_pre_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_PRE_READ_CALLBACK, @vm_post_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_POST_READ_CALLBACK, @compressed_memory_stream_finish : Win32cr::System::Diagnostics::Debug::MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK)
     end
     end
 
@@ -4553,6 +4650,7 @@ module Win32cr::System::Diagnostics::Debug
     property anonymous3 : Anonymous3_e__Struct_
     property anonymous4 : Anonymous4_e__Struct_
     property anonymous5 : Anonymous5_e__Struct_
+    property compressed_memory_stream_start : Win32cr::System::Diagnostics::Debug::MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK
     property status : Win32cr::Foundation::HRESULT
 
       # Nested Type Anonymous1_e__Struct_
@@ -4604,7 +4702,7 @@ module Win32cr::System::Diagnostics::Debug
     end
       end
 
-    def initialize(@module_write_flags : UInt32, @thread_write_flags : UInt32, @secondary_flags : UInt32, @anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @handle : Win32cr::Foundation::HANDLE, @anonymous3 : Anonymous3_e__Struct_, @anonymous4 : Anonymous4_e__Struct_, @anonymous5 : Anonymous5_e__Struct_, @status : Win32cr::Foundation::HRESULT)
+    def initialize(@module_write_flags : UInt32, @thread_write_flags : UInt32, @secondary_flags : UInt32, @anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @handle : Win32cr::Foundation::HANDLE, @anonymous3 : Anonymous3_e__Struct_, @anonymous4 : Anonymous4_e__Struct_, @anonymous5 : Anonymous5_e__Struct_, @compressed_memory_stream_start : Win32cr::System::Diagnostics::Debug::MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK, @status : Win32cr::Foundation::HRESULT)
     end
     end
 
@@ -5907,6 +6005,19 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
+  struct WHEA_XPF_MCE_DESCRIPTOR_V2
+    property type__ : UInt16
+    property enabled : UInt8
+    property number_of_banks : UInt8
+    property flags : Win32cr::System::Diagnostics::Debug::XPF_MCE_FLAGS
+    property mcg_capability : UInt64
+    property mcg_global_control : UInt64
+    property banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[64]
+    def initialize(@type__ : UInt16, @enabled : UInt8, @number_of_banks : UInt8, @flags : Win32cr::System::Diagnostics::Debug::XPF_MCE_FLAGS, @mcg_capability : UInt64, @mcg_global_control : UInt64, @banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[64])
+    end
+  end
+
+  @[Extern]
   struct WHEA_XPF_CMC_DESCRIPTOR
     property type__ : UInt16
     property enabled : Win32cr::Foundation::BOOLEAN
@@ -5915,6 +6026,18 @@ module Win32cr::System::Diagnostics::Debug
     property notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR
     property banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32]
     def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN, @number_of_banks : UInt8, @reserved : UInt32, @notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR, @banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32])
+    end
+  end
+
+  @[Extern]
+  struct WHEA_XPF_CMC_DESCRIPTOR_V2
+    property type__ : UInt16
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property number_of_banks : UInt8
+    property reserved : UInt32
+    property notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR
+    property banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[64]
+    def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN, @number_of_banks : UInt8, @reserved : UInt32, @notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR, @banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[64])
     end
   end
 
@@ -6135,6 +6258,43 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
+  struct WHEA_ERROR_SOURCE_DESCRIPTOR_V2
+    property length : UInt32
+    property version : UInt32
+    property type__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_TYPE
+    property state : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_STATE
+    property max_raw_data_length : UInt32
+    property num_records_to_preallocate : UInt32
+    property max_sections_per_record : UInt32
+    property error_source_id : UInt32
+    property platform_error_source_id : UInt32
+    property flags : UInt32
+    property info : Info_e__Union_
+
+    # Nested Type Info_e__Union_
+    @[Extern(union: true)]
+    struct Info_e__Union_
+    property xpf_mce_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MCE_DESCRIPTOR_V2
+    property xpf_cmc_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_XPF_CMC_DESCRIPTOR_V2
+    property xpf_nmi_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_NMI_DESCRIPTOR
+    property ipf_mca_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_MCA_DESCRIPTOR
+    property ipf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CMC_DESCRIPTOR
+    property ipf_cpe_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CPE_DESCRIPTOR
+    property aer_rootport_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ROOTPORT_DESCRIPTOR
+    property aer_endpoint_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ENDPOINT_DESCRIPTOR
+    property aer_bridge_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_BRIDGE_DESCRIPTOR
+    property gen_err_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR
+    property gen_err_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR_V2
+    property device_driver_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_DEVICE_DRIVER_DESCRIPTOR
+    def initialize(@xpf_mce_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MCE_DESCRIPTOR_V2, @xpf_cmc_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_XPF_CMC_DESCRIPTOR_V2, @xpf_nmi_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_NMI_DESCRIPTOR, @ipf_mca_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_MCA_DESCRIPTOR, @ipf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CMC_DESCRIPTOR, @ipf_cpe_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CPE_DESCRIPTOR, @aer_rootport_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ROOTPORT_DESCRIPTOR, @aer_endpoint_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ENDPOINT_DESCRIPTOR, @aer_bridge_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_BRIDGE_DESCRIPTOR, @gen_err_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR, @gen_err_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR_V2, @device_driver_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_DEVICE_DRIVER_DESCRIPTOR)
+    end
+    end
+
+    def initialize(@length : UInt32, @version : UInt32, @type__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_TYPE, @state : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_STATE, @max_raw_data_length : UInt32, @num_records_to_preallocate : UInt32, @max_sections_per_record : UInt32, @error_source_id : UInt32, @platform_error_source_id : UInt32, @flags : UInt32, @info : Info_e__Union_)
+    end
+  end
+
+  @[Extern]
   struct IPMI_OS_SEL_RECORD
     property signature : UInt32
     property version : UInt32
@@ -6226,12 +6386,30 @@ module Win32cr::System::Diagnostics::Debug
     end
   end
 
+  @[Extern(union: true)]
+  struct MEMORY_DEFECT_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property as_uint16 : UInt16
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint16 : UInt16)
+    end
+  end
+
   @[Extern]
   struct MEMORY_DEFECT
-    property version : UInt32
+    property version : UInt16
+    property flags : Win32cr::System::Diagnostics::Debug::MEMORY_DEFECT_FLAGS
     property dimm_info : Win32cr::System::Diagnostics::Debug::DIMM_INFO
     property err_type : Win32cr::System::Diagnostics::Debug::PAGE_OFFLINE_ERROR_TYPES
-    def initialize(@version : UInt32, @dimm_info : Win32cr::System::Diagnostics::Debug::DIMM_INFO, @err_type : Win32cr::System::Diagnostics::Debug::PAGE_OFFLINE_ERROR_TYPES)
+    def initialize(@version : UInt16, @flags : Win32cr::System::Diagnostics::Debug::MEMORY_DEFECT_FLAGS, @dimm_info : Win32cr::System::Diagnostics::Debug::DIMM_INFO, @err_type : Win32cr::System::Diagnostics::Debug::PAGE_OFFLINE_ERROR_TYPES)
     end
   end
 
@@ -6699,6 +6877,14 @@ module Win32cr::System::Diagnostics::Debug
   end
 {% end %}
 
+{% if flag?(:arm) %}
+  def rtlVirtualUnwind2(handler_type : UInt32, image_base : LibC::UIntPtrT, control_pc : LibC::UIntPtrT, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, machine_frame_unwound : Win32cr::Foundation::BOOLEAN*, handler_data : Void**, establisher_frame : LibC::UIntPtrT*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*, low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*, handler_routine : Win32cr::System::Kernel::EXCEPTION_ROUTINE*, unwind_flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    C.RtlVirtualUnwind2(handler_type, image_base, control_pc, function_entry, context_record, machine_frame_unwound, handler_data, establisher_frame, context_pointers, low_limit, high_limit, handler_routine, unwind_flags)
+    {% end %}
+  end
+{% end %}
+
   def readProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesRead : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
     C.ReadProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead)
@@ -6738,14 +6924,6 @@ module Win32cr::System::Diagnostics::Debug
     C.Wow64SetThreadContext(hThread, lpContext)
     {% end %}
   end
-
-{% if flag?(:x86_64) %}
-  def rtlCaptureContext2(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
-    {% if !flag?(:docs) %}
-    C.RtlCaptureContext2(context_record)
-    {% end %}
-  end
-{% end %}
 
 {% if flag?(:x86_64) %}
   def rtlAddFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, base_address : UInt64) : Win32cr::Foundation::BOOLEAN
@@ -6819,6 +6997,14 @@ module Win32cr::System::Diagnostics::Debug
   end
 {% end %}
 
+{% if flag?(:x86_64) %}
+  def rtlVirtualUnwind2(handler_type : UInt32, image_base : UInt64, control_pc : UInt64, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, machine_frame_unwound : Win32cr::Foundation::BOOLEAN*, handler_data : Void**, establisher_frame : UInt64*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*, low_limit : UInt64*, high_limit : UInt64*, handler_routine : Win32cr::System::Kernel::EXCEPTION_ROUTINE*, unwind_flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    C.RtlVirtualUnwind2(handler_type, image_base, control_pc, function_entry, context_record, machine_frame_unwound, handler_data, establisher_frame, context_pointers, low_limit, high_limit, handler_routine, unwind_flags)
+    {% end %}
+  end
+{% end %}
+
 {% if flag?(:x86_64) || flag?(:arm) %}
   def checkSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
     {% if !flag?(:docs) %}
@@ -6876,6 +7062,12 @@ module Win32cr::System::Diagnostics::Debug
   #def rtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
     #C.RtlCaptureContext(context_record)
   #end
+
+  def rtlCaptureContext2(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
+    {% if !flag?(:docs) %}
+    C.RtlCaptureContext2(context_record)
+    {% end %}
+  end
 
   def rtlUnwind(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*) : Void
     {% if !flag?(:docs) %}
@@ -8715,6 +8907,11 @@ module Win32cr::System::Diagnostics::Debug
     fun RtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : LibC::UIntPtrT, control_pc : LibC::UIntPtrT, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : LibC::UIntPtrT*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
     {% end %}
 
+    {% if flag?(:arm) %}
+    # :nodoc:
+    fun RtlVirtualUnwind2(handler_type : UInt32, image_base : LibC::UIntPtrT, control_pc : LibC::UIntPtrT, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, machine_frame_unwound : Win32cr::Foundation::BOOLEAN*, handler_data : Void**, establisher_frame : LibC::UIntPtrT*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*, low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*, handler_routine : Win32cr::System::Kernel::EXCEPTION_ROUTINE*, unwind_flags : UInt32) : UInt32
+    {% end %}
+
     # :nodoc:
     fun ReadProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesRead : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
@@ -8736,11 +8933,6 @@ module Win32cr::System::Diagnostics::Debug
 
     # :nodoc:
     fun Wow64SetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::WOW64_CONTEXT*) : Win32cr::Foundation::BOOL
-
-    {% if flag?(:x86_64) %}
-    # :nodoc:
-    fun RtlCaptureContext2(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
-    {% end %}
 
     {% if flag?(:x86_64) %}
     # :nodoc:
@@ -8787,6 +8979,11 @@ module Win32cr::System::Diagnostics::Debug
     fun RtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : UInt64, control_pc : UInt64, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : UInt64*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
     {% end %}
 
+    {% if flag?(:x86_64) %}
+    # :nodoc:
+    fun RtlVirtualUnwind2(handler_type : UInt32, image_base : UInt64, control_pc : UInt64, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, machine_frame_unwound : Win32cr::Foundation::BOOLEAN*, handler_data : Void**, establisher_frame : UInt64*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*, low_limit : UInt64*, high_limit : UInt64*, handler_routine : Win32cr::System::Kernel::EXCEPTION_ROUTINE*, unwind_flags : UInt32) : UInt32
+    {% end %}
+
     {% if flag?(:x86_64) || flag?(:arm) %}
     # :nodoc:
     fun CheckSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
@@ -8823,6 +9020,9 @@ module Win32cr::System::Diagnostics::Debug
     # Commented out due to being part of LibC
     # :nodoc:
     #fun RtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
+
+    # :nodoc:
+    fun RtlCaptureContext2(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
 
     # :nodoc:
     fun RtlUnwind(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*) : Void

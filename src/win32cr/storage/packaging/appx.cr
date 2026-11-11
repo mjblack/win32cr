@@ -177,6 +177,20 @@ module Win32cr::Storage::Packaging::Appx
     PackageOrigin_DeveloperUnsigned = 4_i32
     PackageOrigin_DeveloperSigned = 5_i32
     PackageOrigin_LineOfBusiness = 6_i32
+    PackageOrigin_SignedSBOM = 7_i32
+  end
+  enum PackageOrigin2
+    PackageOrigin2_Unknown = 0_i32
+    PackageOrigin2_Unsigned = 1_i32
+    PackageOrigin2_Inbox = 2_i32
+    PackageOrigin2_Store = 3_i32
+    PackageOrigin2_DeveloperUnsigned = 4_i32
+    PackageOrigin2_DeveloperSigned = 5_i32
+    PackageOrigin2_LineOfBusiness = 6_i32
+    PackageOrigin2_SignedSBOM = 7_i32
+  end
+  enum AppModelPackageFeature
+    AppModelPackageFeature_SignedSBOM = 1_i32
   end
   @[Flags]
   enum CreatePackageDependencyOptions
@@ -3850,6 +3864,18 @@ module Win32cr::Storage::Packaging::Appx
     {% end %}
   end
 
+  def getStagedPackageOrigin2(packageFullName : Win32cr::Foundation::PWSTR, origin : Win32cr::Storage::Packaging::Appx::PackageOrigin2*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.GetStagedPackageOrigin2(packageFullName, origin)
+    {% end %}
+  end
+
+  def isPackageFeatureSupported(feature : Win32cr::Storage::Packaging::Appx::AppModelPackageFeature) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.IsPackageFeatureSupported(feature)
+    {% end %}
+  end
+
   def getCurrentPackageInfo(flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
     {% if !flag?(:docs) %}
     C.GetCurrentPackageInfo(flags, bufferLength, buffer, count)
@@ -4177,6 +4203,12 @@ module Win32cr::Storage::Packaging::Appx
 
     # :nodoc:
     fun GetStagedPackageOrigin(packageFullName : Win32cr::Foundation::PWSTR, origin : Win32cr::Storage::Packaging::Appx::PackageOrigin*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetStagedPackageOrigin2(packageFullName : Win32cr::Foundation::PWSTR, origin : Win32cr::Storage::Packaging::Appx::PackageOrigin2*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun IsPackageFeatureSupported(feature : Win32cr::Storage::Packaging::Appx::AppModelPackageFeature) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetCurrentPackageInfo(flags : UInt32, bufferLength : UInt32*, buffer : UInt8*, count : UInt32*) : Win32cr::Foundation::WIN32_ERROR

@@ -4,6 +4,9 @@ require "./system/win_rt.cr"
 
 module Win32cr::Gaming
   extend self
+  alias GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION = Void*
+  alias PGAMING_FULL_SCREEN_EXPERIENCE_CHANGE_ROUTINE = Proc(Void*, Void)
+
   alias GameUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Void)
 
   alias PlayerPickerUICompletionRoutine = Proc(Win32cr::Foundation::HRESULT, Void*, Win32cr::System::WinRT::HSTRING*, LibC::UIntPtrT, Void)
@@ -496,6 +499,42 @@ module Win32cr::Gaming
     {% end %}
   end
 
+  def isGamingFullScreenExperienceSupported : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.IsGamingFullScreenExperienceSupported
+    {% end %}
+  end
+
+  def isGamingFullScreenExperienceActive : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.IsGamingFullScreenExperienceActive
+    {% end %}
+  end
+
+  def canSetGamingFullScreenExperience : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.CanSetGamingFullScreenExperience
+    {% end %}
+  end
+
+  def setGamingFullScreenExperience(active : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SetGamingFullScreenExperience(active)
+    {% end %}
+  end
+
+  def registerGamingFullScreenExperienceChangeNotification(routine : Win32cr::Gaming::PGAMING_FULL_SCREEN_EXPERIENCE_CHANGE_ROUTINE, context : Void*, registration : Win32cr::Gaming::GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.RegisterGamingFullScreenExperienceChangeNotification(routine, context, registration)
+    {% end %}
+  end
+
+  def unregisterGamingFullScreenExperienceChangeNotification(registration : Win32cr::Gaming::GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION) : Void
+    {% if !flag?(:docs) %}
+    C.UnregisterGamingFullScreenExperienceChangeNotification(registration)
+    {% end %}
+  end
+
   def getGamingDeviceModelInformation(information : Win32cr::Gaming::GAMING_DEVICE_MODEL_INFORMATION*) : Win32cr::Foundation::HRESULT
     {% if !flag?(:docs) %}
     C.GetGamingDeviceModelInformation(information)
@@ -668,6 +707,24 @@ module Win32cr::Gaming
 
     # :nodoc:
     fun ReleaseExclusiveCpuSets : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun IsGamingFullScreenExperienceSupported : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun IsGamingFullScreenExperienceActive : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun CanSetGamingFullScreenExperience : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun SetGamingFullScreenExperience(active : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun RegisterGamingFullScreenExperienceChangeNotification(routine : Win32cr::Gaming::PGAMING_FULL_SCREEN_EXPERIENCE_CHANGE_ROUTINE, context : Void*, registration : Win32cr::Gaming::GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun UnregisterGamingFullScreenExperienceChangeNotification(registration : Win32cr::Gaming::GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION) : Void
 
     # :nodoc:
     fun GetGamingDeviceModelInformation(information : Win32cr::Gaming::GAMING_DEVICE_MODEL_INFORMATION*) : Win32cr::Foundation::HRESULT

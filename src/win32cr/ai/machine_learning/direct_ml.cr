@@ -1,5 +1,4 @@
 require "./../../foundation.cr"
-require "./../../graphics/direct3_d12.cr"
 require "./../../system/com.cr"
 
 module Win32cr::AI::MachineLearning::DirectML
@@ -2087,10 +2086,10 @@ module Win32cr::AI::MachineLearning::DirectML
   @[Extern]
   struct DML_BINDING_TABLE_DESC
     property dispatchable : Void*
-    property cpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE
-    property gpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_GPU_DESCRIPTOR_HANDLE
+    property cpu_descriptor_handle : Void*
+    property gpu_descriptor_handle : Void*
     property size_in_descriptors : UInt32
-    def initialize(@dispatchable : Void*, @cpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, @gpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_GPU_DESCRIPTOR_HANDLE, @size_in_descriptors : UInt32)
+    def initialize(@dispatchable : Void*, @cpu_descriptor_handle : Void*, @gpu_descriptor_handle : Void*, @size_in_descriptors : UInt32)
     end
   end
 

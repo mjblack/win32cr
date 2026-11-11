@@ -14,11 +14,6 @@ module Win32cr::System::Memory
   FILE_CACHE_MIN_HARD_ENABLE = 4_u32
   FILE_CACHE_MIN_HARD_DISABLE = 8_u32
   MEHC_PATROL_SCRUBBER_PRESENT = 1_u32
-  WIN32_MEMORY_NUMA_PERFORMANCE_ALL_TARGET_NODE = 4294967295_u32
-  WIN32_MEMORY_NUMA_PERFORMANCE_READ_LATENCY = 1_u32
-  WIN32_MEMORY_NUMA_PERFORMANCE_READ_BANDWIDTH = 2_u32
-  WIN32_MEMORY_NUMA_PERFORMANCE_WRITE_LATENCY = 4_u32
-  WIN32_MEMORY_NUMA_PERFORMANCE_WRITE_BANDWIDTH = 8_u32
 
   @[Flags]
   enum SECTION_FLAGS : UInt32
@@ -193,13 +188,15 @@ module Win32cr::System::Memory
     MemSectionExtendedParameterUserPhysicalFlags = 1_i32
     MemSectionExtendedParameterNumaNode = 2_i32
     MemSectionExtendedParameterSigningLevel = 3_i32
-    MemSectionExtendedParameterMax = 4_i32
+    MemSectionExtendedParameterAttributeFlags = 4_i32
+    MemSectionExtendedParameterMax = 5_i32
   end
   enum HEAP_INFORMATION_CLASS
     HeapCompatibilityInformation = 0_i32
     HeapEnableTerminationOnCorruption = 1_i32
     HeapOptimizeResources = 3_i32
     HeapTag = 7_i32
+    HeapMemoryUsageInformation = 8_i32
   end
 
   @[Extern]
@@ -319,13 +316,9 @@ module Win32cr::System::Memory
   end
 
   @[Extern]
-  struct WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY
-    property initiator_node_number : UInt32
-    property target_node_number : UInt32
-    property data_type : UInt8
+  struct NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION
     property flags : Flags_e__Struct_
     property min_transfer_size_in_bytes : UInt64
-    property entry_value : UInt64
 
     # Nested Type Flags_e__Struct_
     @[Extern]
@@ -335,15 +328,23 @@ module Win32cr::System::Memory
     end
     end
 
-    def initialize(@initiator_node_number : UInt32, @target_node_number : UInt32, @data_type : UInt8, @flags : Flags_e__Struct_, @min_transfer_size_in_bytes : UInt64, @entry_value : UInt64)
+    def initialize(@flags : Flags_e__Struct_, @min_transfer_size_in_bytes : UInt64)
     end
   end
 
   @[Extern]
-  struct WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT
-    property entry_count : UInt32
-    property performance_entries : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY[1]
-    def initialize(@entry_count : UInt32, @performance_entries : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY[1])
+  struct NUMA_NODE_MEMORY_PERFORMANCE_LATENCY
+    property condition : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION
+    property latency : UInt64
+    def initialize(@condition : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION, @latency : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH
+    property condition : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION
+    property bandwidth : UInt64
+    def initialize(@condition : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION, @bandwidth : UInt64)
     end
   end
 
@@ -903,15 +904,33 @@ module Win32cr::System::Memory
     {% end %}
   end
 
-  def getMemoryNumaClosestInitiatorNode(target_node_number : UInt32, initiator_node_number : UInt32*) : Win32cr::Foundation::BOOL
+  def getNumaNodeMemoryClosestInitiatorNode(target_node_number : UInt16, initiator_node_number : UInt16*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
-    C.GetMemoryNumaClosestInitiatorNode(target_node_number, initiator_node_number)
+    C.GetNumaNodeMemoryClosestInitiatorNode(target_node_number, initiator_node_number)
     {% end %}
   end
 
-  def getMemoryNumaPerformanceInformation(node_number : UInt32, data_type : UInt8, perf_info : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT**) : Win32cr::Foundation::BOOL
+  def getNumaNodeMemoryReadLatency(target_node_number : UInt16, initiator_node_number : UInt16, latency : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_LATENCY*) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
-    C.GetMemoryNumaPerformanceInformation(node_number, data_type, perf_info)
+    C.GetNumaNodeMemoryReadLatency(target_node_number, initiator_node_number, latency)
+    {% end %}
+  end
+
+  def getNumaNodeMemoryWriteLatency(target_node_number : UInt16, initiator_node_number : UInt16, latency : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_LATENCY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetNumaNodeMemoryWriteLatency(target_node_number, initiator_node_number, latency)
+    {% end %}
+  end
+
+  def getNumaNodeMemoryReadBandwidth(target_node_number : UInt16, initiator_node_number : UInt16, bandwidth : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetNumaNodeMemoryReadBandwidth(target_node_number, initiator_node_number, bandwidth)
+    {% end %}
+  end
+
+  def getNumaNodeMemoryWriteBandwidth(target_node_number : UInt16, initiator_node_number : UInt16, bandwidth : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetNumaNodeMemoryWriteBandwidth(target_node_number, initiator_node_number, bandwidth)
     {% end %}
   end
 
@@ -1330,10 +1349,19 @@ module Win32cr::System::Memory
     fun QueryPartitionInformation(partition : Win32cr::Foundation::HANDLE, partition_information_class : Win32cr::System::Memory::WIN32_MEMORY_PARTITION_INFORMATION_CLASS, partition_information : Void*, partition_information_length : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetMemoryNumaClosestInitiatorNode(target_node_number : UInt32, initiator_node_number : UInt32*) : Win32cr::Foundation::BOOL
+    fun GetNumaNodeMemoryClosestInitiatorNode(target_node_number : UInt16, initiator_node_number : UInt16*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetMemoryNumaPerformanceInformation(node_number : UInt32, data_type : UInt8, perf_info : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT**) : Win32cr::Foundation::BOOL
+    fun GetNumaNodeMemoryReadLatency(target_node_number : UInt16, initiator_node_number : UInt16, latency : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_LATENCY*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetNumaNodeMemoryWriteLatency(target_node_number : UInt16, initiator_node_number : UInt16, latency : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_LATENCY*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetNumaNodeMemoryReadBandwidth(target_node_number : UInt16, initiator_node_number : UInt16, bandwidth : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetNumaNodeMemoryWriteBandwidth(target_node_number : UInt16, initiator_node_number : UInt16, bandwidth : Win32cr::System::Memory::NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun RtlCompareMemory(source1 : Void*, source2 : Void*, length : LibC::UIntPtrT) : LibC::UIntPtrT

@@ -1417,6 +1417,7 @@ module Win32cr::Security::Cryptography::Certificates
     SCEPMessageGetCert = 21_i32
     SCEPMessageGetCRL = 22_i32
     SCEPMessageClaimChallengeAnswer = 41_i32
+    SCEPMessageGetCertifier = 198_i32
   end
   enum X509SCEPDisposition
     SCEPDispositionUnknown = -1_i32

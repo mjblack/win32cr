@@ -40,6 +40,8 @@ module Win32cr::Storage::Nvme
   GUID_OCP_DEVICE_TCG_CONFIGURATION = LibC::GUID.new(0xbd244006_u32, 0xe07e_u16, 0x83e6_u16, StaticArray[0xc0_u8, 0x47_u8, 0x54_u8, 0xfa_u8, 0x9d_u8, 0x2a_u8, 0xe0_u8, 0x54_u8])
   GUID_OCP_DEVICE_TCG_HISTORYGuid = LibC::GUID.new(0x704b513e_u32, 0x9c6_u16, 0x9490_u16, StaticArray[0x27_u8, 0x4e_u8, 0xd0_u8, 0x96_u8, 0x96_u8, 0x90_u8, 0xd7_u8, 0x88_u8])
   GUID_OCP_DEVICE_TCG_HISTORY = LibC::GUID.new(0x704b513e_u32, 0x9c6_u16, 0x9490_u16, StaticArray[0x27_u8, 0x4e_u8, 0xd0_u8, 0x96_u8, 0x96_u8, 0x90_u8, 0xd7_u8, 0x88_u8])
+  GUID_OCP_DSSD_SPECIFIC_INFORMATIONGuid = LibC::GUID.new(0x5bd594c1_u32, 0x94e0_u16, 0x9447_u16, StaticArray[0xa2_u8, 0x1d_u8, 0x29_u8, 0x99_u8, 0x8f_u8, 0x56_u8, 0xbe_u8, 0x6f_u8])
+  GUID_OCP_DSSD_SPECIFIC_INFORMATION = LibC::GUID.new(0x5bd594c1_u32, 0x94e0_u16, 0x9447_u16, StaticArray[0xa2_u8, 0x1d_u8, 0x29_u8, 0x99_u8, 0x8f_u8, 0x56_u8, 0xbe_u8, 0x6f_u8])
   GUID_MFND_CHILD_CONTROLLER_EVENT_LOG_PAGEGuid = LibC::GUID.new(0x98bcce18_u32, 0xa5f0_u16, 0xbf35_u16, StaticArray[0xa5_u8, 0x44_u8, 0xd9_u8, 0x7f_u8, 0x25_u8, 0x9d_u8, 0x66_u8, 0x9c_u8])
   GUID_MFND_CHILD_CONTROLLER_EVENT_LOG_PAGE = LibC::GUID.new(0x98bcce18_u32, 0xa5f0_u16, 0xbf35_u16, StaticArray[0xa5_u8, 0x44_u8, 0xd9_u8, 0x7f_u8, 0x25_u8, 0x9d_u8, 0x66_u8, 0x9c_u8])
   GUID_MFND_CHILD_CONTROLLER_QOS_STAT_LOG_PAGEGuid = LibC::GUID.new(0x9cb5fa26_u32, 0x652_u16, 0x4644_u16, StaticArray[0x87_u8, 0x3e_u8, 0x40_u8, 0x0_u8, 0x84_u8, 0x57_u8, 0x5f_u8, 0xf_u8])
@@ -66,6 +68,8 @@ module Win32cr::Storage::Nvme
   NVME_CDW10_LSP_ACTION_ESTABLISH_CONTEXT_AND_READ_LOG_DATA = 1_u32
   NVME_CDW10_LSP_ACTION_RELEASE_CONTEXT = 2_u32
   NVME_CDW10_LSP_ACTION_ESTABLISH_CONTEXT_AND_READ_512_BYTES_OF_HEADER = 3_u32
+  NVME_CDW10_LSP_BOOT_PARTITION_0 = 0_u32
+  NVME_CDW10_LSP_BOOT_PARTITION_1 = 1_u32
   NVME_NUM_LOG_PAGE_IDENTIFIERS = 256_u32
   NVME_MAX_LOG_PAGE_IDENTIFIER = 255_u32
   NVME_TELEMETRY_DATA_BLOCK_SIZE = 512_u32
@@ -608,7 +612,7 @@ module Win32cr::Storage::Nvme
     NVME_LOG_PAGE_FEATURE_IDENTIFIERS_SUPPORTED_AND_EFFECTS = 18_i32
     NVME_LOG_PAGE_NVME_MI_COMMANDS_SUPPORTED_AND_EFFECTS = 19_i32
     NVME_LOG_PAGE_COMMAND_AND_FEATURE_LOCKDOWN = 20_i32
-    NVME_LOG_PAGE_BOOT_PARTITON = 21_i32
+    NVME_LOG_PAGE_BOOT_PARTITION = 21_i32
     NVME_LOG_PAGE_ROTATIONAL_MEDIA_INFORMATION = 22_i32
     NVME_LOG_PAGE_DISCOVERY = 112_i32
     NVME_LOG_PAGE_RESERVATION_NOTIFICATION = 128_i32
@@ -661,6 +665,8 @@ module Win32cr::Storage::Nvme
     NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE = 1_i32
     NVME_FIRMWARE_ACTIVATE_ACTION_ACTIVATE = 2_i32
     NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE_IMMEDIATE = 3_i32
+    NVME_FIRMWARE_ACTIVATE_ACTION_REPLACE_BOOT_PARTITION = 6_i32
+    NVME_FIRMWARE_ACTIVATE_ACTION_ACTIVATE_BOOT_PARTITION = 7_i32
   end
   enum NVME_PROTECTION_INFORMATION_TYPES
     NVME_PROTECTION_INFORMATION_NOT_ENABLED = 0_i32
@@ -1091,6 +1097,23 @@ module Win32cr::Storage::Nvme
   end
 
   @[Extern(union: true)]
+  struct NVME_BOOT_PARTITION_INFORMATION
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
   struct NVME_CONTROLLER_MEMORY_BUFFER_SIZE
     property anonymous : Anonymous_e__Struct_
     property as_ulong : UInt32
@@ -1181,13 +1204,14 @@ module Win32cr::Storage::Nvme
     property acq : Win32cr::Storage::Nvme::NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS
     property cmbloc : Win32cr::Storage::Nvme::NVME_CONTROLLER_MEMORY_BUFFER_LOCATION
     property cmbsz : Win32cr::Storage::Nvme::NVME_CONTROLLER_MEMORY_BUFFER_SIZE
-    property reserved1 : UInt32[9]
+    property bpinfo : Win32cr::Storage::Nvme::NVME_BOOT_PARTITION_INFORMATION
+    property reserved1 : UInt32[8]
     property nssd : Win32cr::Storage::Nvme::NVME_NVM_SUBSYSTEM_SHUTDOWN
     property crto : Win32cr::Storage::Nvme::NVME_CONTROLLER_READY_TIMEOUTS
     property reserved2 : UInt32[933]
     property reserved3 : UInt32[64]
     property doorbells : UInt32[1]
-    def initialize(@cap : Win32cr::Storage::Nvme::NVME_CONTROLLER_CAPABILITIES, @vs : Win32cr::Storage::Nvme::NVME_VERSION, @intms : UInt32, @intmc : UInt32, @cc : Win32cr::Storage::Nvme::NVME_CONTROLLER_CONFIGURATION, @reserved0 : UInt32, @csts : Win32cr::Storage::Nvme::NVME_CONTROLLER_STATUS, @nssr : Win32cr::Storage::Nvme::NVME_NVM_SUBSYSTEM_RESET, @aqa : Win32cr::Storage::Nvme::NVME_ADMIN_QUEUE_ATTRIBUTES, @asq : Win32cr::Storage::Nvme::NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS, @acq : Win32cr::Storage::Nvme::NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS, @cmbloc : Win32cr::Storage::Nvme::NVME_CONTROLLER_MEMORY_BUFFER_LOCATION, @cmbsz : Win32cr::Storage::Nvme::NVME_CONTROLLER_MEMORY_BUFFER_SIZE, @reserved1 : UInt32[9], @nssd : Win32cr::Storage::Nvme::NVME_NVM_SUBSYSTEM_SHUTDOWN, @crto : Win32cr::Storage::Nvme::NVME_CONTROLLER_READY_TIMEOUTS, @reserved2 : UInt32[933], @reserved3 : UInt32[64], @doorbells : UInt32[1])
+    def initialize(@cap : Win32cr::Storage::Nvme::NVME_CONTROLLER_CAPABILITIES, @vs : Win32cr::Storage::Nvme::NVME_VERSION, @intms : UInt32, @intmc : UInt32, @cc : Win32cr::Storage::Nvme::NVME_CONTROLLER_CONFIGURATION, @reserved0 : UInt32, @csts : Win32cr::Storage::Nvme::NVME_CONTROLLER_STATUS, @nssr : Win32cr::Storage::Nvme::NVME_NVM_SUBSYSTEM_RESET, @aqa : Win32cr::Storage::Nvme::NVME_ADMIN_QUEUE_ATTRIBUTES, @asq : Win32cr::Storage::Nvme::NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS, @acq : Win32cr::Storage::Nvme::NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS, @cmbloc : Win32cr::Storage::Nvme::NVME_CONTROLLER_MEMORY_BUFFER_LOCATION, @cmbsz : Win32cr::Storage::Nvme::NVME_CONTROLLER_MEMORY_BUFFER_SIZE, @bpinfo : Win32cr::Storage::Nvme::NVME_BOOT_PARTITION_INFORMATION, @reserved1 : UInt32[8], @nssd : Win32cr::Storage::Nvme::NVME_NVM_SUBSYSTEM_SHUTDOWN, @crto : Win32cr::Storage::Nvme::NVME_CONTROLLER_READY_TIMEOUTS, @reserved2 : UInt32[933], @reserved3 : UInt32[64], @doorbells : UInt32[1])
     end
   end
 
@@ -3868,6 +3892,17 @@ module Win32cr::Storage::Nvme
     end
 
     def initialize(@afi : AFI_e__Struct_, @reserved0 : UInt8[7], @frs : UInt64[7], @reserved1 : UInt8[448])
+    end
+  end
+
+  @[Extern]
+  struct NVME_BOOT_PARTITION_LOG
+    property log_identifier : UInt8
+    property reserved0 : UInt8[3]
+    property bp_info : Win32cr::Storage::Nvme::NVME_BOOT_PARTITION_INFORMATION
+    property reserved1 : UInt8[8]
+    property boot_partition_data : UInt8[1]
+    def initialize(@log_identifier : UInt8, @reserved0 : UInt8[3], @bp_info : Win32cr::Storage::Nvme::NVME_BOOT_PARTITION_INFORMATION, @reserved1 : UInt8[8], @boot_partition_data : UInt8[1])
     end
   end
 

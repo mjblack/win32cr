@@ -373,6 +373,7 @@ module Win32cr::Security
     WinBuiltinDeviceOwnersSid = 119_i32
     WinBuiltinUserModeHardwareOperatorsSid = 120_i32
     WinBuiltinOpenSSHUsersSid = 121_i32
+    WinBuiltinCUAUsersSid = 122_i32
   end
   enum ACL_INFORMATION_CLASS
     AclRevisionInformation = 1_i32
@@ -448,7 +449,9 @@ module Win32cr::Security
     TokenIsAppSilo = 48_i32
     TokenLoggingInformation = 49_i32
     TokenLearningMode = 50_i32
-    MaxTokenInfoClass = 51_i32
+    TokenIsSystemManagedAdmin = 51_i32
+    TokenIsInstaller = 52_i32
+    MaxTokenInfoClass = 53_i32
   end
   enum MANDATORY_LEVEL
     MandatoryLevelUntrusted = 0_i32

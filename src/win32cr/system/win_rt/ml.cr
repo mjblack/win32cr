@@ -1,7 +1,6 @@
 require "./../com.cr"
 require "./../../foundation.cr"
 require "./../../ai/machine_learning/win_ml.cr"
-require "./../../graphics/direct3_d12.cr"
 
 module Win32cr::System::WinRT::ML
   extend self

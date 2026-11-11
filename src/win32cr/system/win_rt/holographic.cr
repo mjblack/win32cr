@@ -1,6 +1,5 @@
 require "./../win_rt.cr"
 require "./../../foundation.cr"
-require "./../../graphics/direct3_d12.cr"
 
 module Win32cr::System::WinRT::Holographic
   extend self
@@ -15,8 +14,8 @@ module Win32cr::System::WinRT::Holographic
     get_iids : Proc(IHolographicCameraInterop*, UInt32*, LibC::GUID**, Win32cr::Foundation::HRESULT),
     get_runtime_class_name : Proc(IHolographicCameraInterop*, Win32cr::System::WinRT::HSTRING*, Win32cr::Foundation::HRESULT),
     get_trust_level : Proc(IHolographicCameraInterop*, Win32cr::System::WinRT::TrustLevel*, Win32cr::Foundation::HRESULT),
-    create_direct3_d12_back_buffer_resource : Proc(IHolographicCameraInterop*, Void*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Void**, Win32cr::Foundation::HRESULT),
-    create_direct3_d12_hardware_protected_back_buffer_resource : Proc(IHolographicCameraInterop*, Void*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_direct3_d12_back_buffer_resource : Proc(IHolographicCameraInterop*, Void*, Void**, Void**, Win32cr::Foundation::HRESULT),
+    create_direct3_d12_hardware_protected_back_buffer_resource : Proc(IHolographicCameraInterop*, Void*, Void**, Void*, Void**, Win32cr::Foundation::HRESULT),
     acquire_direct3_d12_buffer_resource : Proc(IHolographicCameraInterop*, Void*, Void*, Win32cr::Foundation::HRESULT),
     acquire_direct3_d12_buffer_resource_with_timeout : Proc(IHolographicCameraInterop*, Void*, Void*, UInt64, Win32cr::Foundation::HRESULT),
     unacquire_direct3_d12_buffer_resource : Proc(IHolographicCameraInterop*, Void*, Win32cr::Foundation::HRESULT)
@@ -43,10 +42,10 @@ module Win32cr::System::WinRT::Holographic
     def get_trust_level(this : IHolographicCameraInterop*, trustLevel : Win32cr::System::WinRT::TrustLevel*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_trust_level.call(this, trustLevel)
     end
-    def create_direct3_d12_back_buffer_resource(this : IHolographicCameraInterop*, pDevice : Void*, pTexture2DDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, ppCreatedTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
+    def create_direct3_d12_back_buffer_resource(this : IHolographicCameraInterop*, pDevice : Void*, pTexture2DDesc : Void**, ppCreatedTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_direct3_d12_back_buffer_resource.call(this, pDevice, pTexture2DDesc, ppCreatedTexture2DResource)
     end
-    def create_direct3_d12_hardware_protected_back_buffer_resource(this : IHolographicCameraInterop*, pDevice : Void*, pTexture2DDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, pProtectedResourceSession : Void*, ppCreatedTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
+    def create_direct3_d12_hardware_protected_back_buffer_resource(this : IHolographicCameraInterop*, pDevice : Void*, pTexture2DDesc : Void**, pProtectedResourceSession : Void*, ppCreatedTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_direct3_d12_hardware_protected_back_buffer_resource.call(this, pDevice, pTexture2DDesc, pProtectedResourceSession, ppCreatedTexture2DResource)
     end
     def acquire_direct3_d12_buffer_resource(this : IHolographicCameraInterop*, pResourceToAcquire : Void*, pCommandQueue : Void*) : Win32cr::Foundation::HRESULT
@@ -113,8 +112,8 @@ module Win32cr::System::WinRT::Holographic
     get_iids : Proc(IHolographicQuadLayerInterop*, UInt32*, LibC::GUID**, Win32cr::Foundation::HRESULT),
     get_runtime_class_name : Proc(IHolographicQuadLayerInterop*, Win32cr::System::WinRT::HSTRING*, Win32cr::Foundation::HRESULT),
     get_trust_level : Proc(IHolographicQuadLayerInterop*, Win32cr::System::WinRT::TrustLevel*, Win32cr::Foundation::HRESULT),
-    create_direct3_d12_content_buffer_resource : Proc(IHolographicQuadLayerInterop*, Void*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Void**, Win32cr::Foundation::HRESULT),
-    create_direct3_d12_hardware_protected_content_buffer_resource : Proc(IHolographicQuadLayerInterop*, Void*, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_direct3_d12_content_buffer_resource : Proc(IHolographicQuadLayerInterop*, Void*, Void**, Void**, Win32cr::Foundation::HRESULT),
+    create_direct3_d12_hardware_protected_content_buffer_resource : Proc(IHolographicQuadLayerInterop*, Void*, Void**, Void*, Void**, Win32cr::Foundation::HRESULT),
     acquire_direct3_d12_buffer_resource : Proc(IHolographicQuadLayerInterop*, Void*, Void*, Win32cr::Foundation::HRESULT),
     acquire_direct3_d12_buffer_resource_with_timeout : Proc(IHolographicQuadLayerInterop*, Void*, Void*, UInt64, Win32cr::Foundation::HRESULT),
     unacquire_direct3_d12_buffer_resource : Proc(IHolographicQuadLayerInterop*, Void*, Win32cr::Foundation::HRESULT)
@@ -141,10 +140,10 @@ module Win32cr::System::WinRT::Holographic
     def get_trust_level(this : IHolographicQuadLayerInterop*, trustLevel : Win32cr::System::WinRT::TrustLevel*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_trust_level.call(this, trustLevel)
     end
-    def create_direct3_d12_content_buffer_resource(this : IHolographicQuadLayerInterop*, pDevice : Void*, pTexture2DDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, ppTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
+    def create_direct3_d12_content_buffer_resource(this : IHolographicQuadLayerInterop*, pDevice : Void*, pTexture2DDesc : Void**, ppTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_direct3_d12_content_buffer_resource.call(this, pDevice, pTexture2DDesc, ppTexture2DResource)
     end
-    def create_direct3_d12_hardware_protected_content_buffer_resource(this : IHolographicQuadLayerInterop*, pDevice : Void*, pTexture2DDesc : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_DESC*, pProtectedResourceSession : Void*, ppCreatedTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
+    def create_direct3_d12_hardware_protected_content_buffer_resource(this : IHolographicQuadLayerInterop*, pDevice : Void*, pTexture2DDesc : Void**, pProtectedResourceSession : Void*, ppCreatedTexture2DResource : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_direct3_d12_hardware_protected_content_buffer_resource.call(this, pDevice, pTexture2DDesc, pProtectedResourceSession, ppCreatedTexture2DResource)
     end
     def acquire_direct3_d12_buffer_resource(this : IHolographicQuadLayerInterop*, pResourceToAcquire : Void*, pCommandQueue : Void*) : Win32cr::Foundation::HRESULT

@@ -29,7 +29,7 @@ module Win32cr::Storage::Jet
   JET_efvWindowsServer2022 = 9360_u32
   JET_efvWindows11v21H2 = 9400_u32
   JET_efvWindows11v22H2 = 9480_u32
-  JET_efvWindows11v23H2 = 9600_u32
+  JET_efvWindowsServer2025 = 9620_u32
   JET_bitDefragmentBatchStart = 1_u32
   JET_bitDefragmentBatchStop = 2_u32
   JET_bitDefragmentAvailSpaceTreesOnly = 64_u32
@@ -231,7 +231,7 @@ module Win32cr::Storage::Jet
   JET_paramPerfmonRefreshInterval = 217_u32
   JET_paramEnableBlockCache = 218_u32
   JET_paramTraceFlags = 223_u32
-  JET_paramMaxValueInvalid = 232_u32
+  JET_paramMaxValueInvalid = 249_u32
   JET_sesparamCommitDefault = 4097_u32
   JET_sesparamTransactionLevel = 4099_u32
   JET_sesparamOperationContext = 4100_u32
@@ -577,6 +577,7 @@ module Win32cr::Storage::Jet
   JET_errNodeCorrupted = -358_i32
   JET_errBBTNodeCorrupted = -364_i32
   JET_errBBTBuffCorrupted = -365_i32
+  JET_errBadRootPageLink = -366_i32
   JET_wrnSeparateLongValue = 406_u32
   JET_errKeyTooBig = -408_i32
   JET_errCannotSeparateIntrinsicLV = -416_i32
@@ -666,7 +667,9 @@ module Win32cr::Storage::Jet
   JET_wrnFinishWithUndo = 588_u32
   JET_errLogSequenceChecksumMismatch = -590_i32
   JET_wrnDatabaseRepaired = 595_u32
+  JET_errPageInitializedMismatchUninitRemote = -596_i32
   JET_errPageInitializedMismatch = -596_i32
+  JET_errPageInitializedMismatchUninitLocal = -597_i32
   JET_errUnicodeTranslationBufferTooSmall = -601_i32
   JET_errUnicodeTranslationFail = -602_i32
   JET_errUnicodeNormalizationNotSupported = -603_i32
@@ -815,6 +818,7 @@ module Win32cr::Storage::Jet
   JET_errDatabaseNotReady = -1230_i32
   JET_errDatabaseAttachedForRecovery = -1231_i32
   JET_errTransactionsNotReadyDuringRecovery = -1232_i32
+  JET_errBlockedByCorruptionMark = -1233_i32
   JET_wrnTableEmpty = 1301_u32
   JET_errTableLocked = -1302_i32
   JET_errTableDuplicate = -1303_i32
@@ -971,6 +975,8 @@ module Win32cr::Storage::Jet
   JET_errFileIORetry = -4003_i32
   JET_errFileIOFail = -4004_i32
   JET_errFileCompressed = -4005_i32
+  JET_wrnCopyCompletedAlready = 8002_u32
+  JET_errCopySignatureMismatchCannotRestart = -8003_i32
   JET_errClientSpaceBegin = -10000_i32
   JET_errClientSpaceEnd = -11999_i32
   JET_BASE_NAME_LENGTH = 3_u32

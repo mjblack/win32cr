@@ -150,7 +150,8 @@ module Win32cr::System::JobObjects
     JobObjectReserved27Information = 49_i32
     JobObjectReserved28Information = 50_i32
     JobObjectNetworkAccountingInformation = 51_i32
-    MaxJobObjectInfoClass = 52_i32
+    JobObjectCpuPartition = 52_i32
+    MaxJobObjectInfoClass = 53_i32
   end
 
   @[Extern]

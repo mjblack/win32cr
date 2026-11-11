@@ -319,6 +319,7 @@ module Win32cr::System::Rpc
   Cbndrcontext = 20_u32
   USER_CALL_IS_ASYNC = 256_u32
   USER_CALL_NEW_CORRELATION_DESC = 512_u32
+  USER_MARSHALUNMARSHAL_DONT_CLEANUP_UNMARSHALLED_OBJECT = 32768_u32
   MIDL_WINRT_TYPE_SERIALIZATION_INFO_CURRENT_VERSION = 1_i32
   USER_MARSHAL_FC_BYTE = 1_u32
   USER_MARSHAL_FC_CHAR = 2_u32
@@ -1631,7 +1632,7 @@ module Win32cr::System::Rpc
     property full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*
     property full_ptr_ref_id : UInt32
     property pointer_length : UInt32
-    property _bitfield : Int32
+    property _bitfield : UInt32
     property dwDestContext : UInt32
     property pvDestContext : Void*
     property saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT**
@@ -1658,7 +1659,7 @@ module Win32cr::System::Rpc
     property pFullPtrFormat : UInt8*
     property reserved51_4 : LibC::IntPtrT
     property reserved51_5 : LibC::IntPtrT
-    def initialize(@rpc_msg : Win32cr::System::Rpc::RPC_MESSAGE*, @buffer : UInt8*, @buffer_start : UInt8*, @buffer_end : UInt8*, @buffer_mark : UInt8*, @buffer_length : UInt32, @memory_size : UInt32, @memory : UInt8*, @is_client : UInt8, @pad : UInt8, @uFlags2 : UInt16, @reuse_buffer : Int32, @pAllocAllNodesContext : Win32cr::System::Rpc::NDR_ALLOC_ALL_NODES_CONTEXT*, @pPointerQueueState : Win32cr::System::Rpc::NDR_POINTER_QUEUE_STATE*, @ignore_embedded_pointers : Int32, @pointer_buffer_mark : UInt8*, @corr_desp_increment : UInt8, @uFlags : UInt8, @unique_ptr_count : UInt16, @max_count : LibC::UIntPtrT, @offset : UInt32, @actual_count : UInt32, @pfnAllocate : Win32cr::System::Rpc::PFN_RPC_ALLOCATE, @pfnFree : Win32cr::System::Rpc::PFN_RPC_FREE, @stack_top : UInt8*, @pPresentedType : UInt8*, @pTransmitType : UInt8*, @saved_handle : Void*, @stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*, @full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*, @full_ptr_ref_id : UInt32, @pointer_length : UInt32, @_bitfield : Int32, @dwDestContext : UInt32, @pvDestContext : Void*, @saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT**, @param_number : Int32, @pRpcChannelBuffer : Void*, @pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*, @size_ptr_count_array : UInt32*, @size_ptr_offset_array : UInt32*, @size_ptr_length_array : UInt32*, @pArgQueue : Void*, @dwStubPhase : UInt32, @low_stack_mark : Void*, @pAsyncMsg : Win32cr::System::Rpc::PNDR_ASYNC_MESSAGE, @pCorrInfo : Win32cr::System::Rpc::PNDR_CORRELATION_INFO, @pCorrMemory : UInt8*, @pMemoryList : Void*, @pCSInfo : LibC::IntPtrT, @conformance_mark : UInt8*, @variance_mark : UInt8*, @unused : LibC::IntPtrT, @pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*, @context_handle_hash : Void*, @pUserMarshalList : Void*, @pFullPtrFormat : UInt8*, @reserved51_4 : LibC::IntPtrT, @reserved51_5 : LibC::IntPtrT)
+    def initialize(@rpc_msg : Win32cr::System::Rpc::RPC_MESSAGE*, @buffer : UInt8*, @buffer_start : UInt8*, @buffer_end : UInt8*, @buffer_mark : UInt8*, @buffer_length : UInt32, @memory_size : UInt32, @memory : UInt8*, @is_client : UInt8, @pad : UInt8, @uFlags2 : UInt16, @reuse_buffer : Int32, @pAllocAllNodesContext : Win32cr::System::Rpc::NDR_ALLOC_ALL_NODES_CONTEXT*, @pPointerQueueState : Win32cr::System::Rpc::NDR_POINTER_QUEUE_STATE*, @ignore_embedded_pointers : Int32, @pointer_buffer_mark : UInt8*, @corr_desp_increment : UInt8, @uFlags : UInt8, @unique_ptr_count : UInt16, @max_count : LibC::UIntPtrT, @offset : UInt32, @actual_count : UInt32, @pfnAllocate : Win32cr::System::Rpc::PFN_RPC_ALLOCATE, @pfnFree : Win32cr::System::Rpc::PFN_RPC_FREE, @stack_top : UInt8*, @pPresentedType : UInt8*, @pTransmitType : UInt8*, @saved_handle : Void*, @stub_desc : Win32cr::System::Rpc::MIDL_STUB_DESC*, @full_ptr_xlat_tables : Win32cr::System::Rpc::FULL_PTR_XLAT_TABLES*, @full_ptr_ref_id : UInt32, @pointer_length : UInt32, @_bitfield : UInt32, @dwDestContext : UInt32, @pvDestContext : Void*, @saved_context_handles : Win32cr::System::Rpc::NDR_SCONTEXT**, @param_number : Int32, @pRpcChannelBuffer : Void*, @pArrayInfo : Win32cr::System::Rpc::ARRAY_INFO*, @size_ptr_count_array : UInt32*, @size_ptr_offset_array : UInt32*, @size_ptr_length_array : UInt32*, @pArgQueue : Void*, @dwStubPhase : UInt32, @low_stack_mark : Void*, @pAsyncMsg : Win32cr::System::Rpc::PNDR_ASYNC_MESSAGE, @pCorrInfo : Win32cr::System::Rpc::PNDR_CORRELATION_INFO, @pCorrMemory : UInt8*, @pMemoryList : Void*, @pCSInfo : LibC::IntPtrT, @conformance_mark : UInt8*, @variance_mark : UInt8*, @unused : LibC::IntPtrT, @pContext : Win32cr::System::Rpc::NDR_PROC_CONTEXT_*, @context_handle_hash : Void*, @pUserMarshalList : Void*, @pFullPtrFormat : UInt8*, @reserved51_4 : LibC::IntPtrT, @reserved51_5 : LibC::IntPtrT)
     end
   end
 

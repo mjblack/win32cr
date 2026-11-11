@@ -646,6 +646,8 @@ module Win32cr::System::WindowsProgramming
   WLDP_HOST_XML = LibC::GUID.new(0x5594be58_u32, 0xc6bf_u16, 0x4295_u16, StaticArray[0x82_u8, 0xf4_u8, 0xd4_u8, 0x94_u8, 0xd2_u8, 0xe_u8, 0x3a_u8, 0x36_u8])
   WLDP_HOST_MSI = LibC::GUID.new(0x624eb611_u32, 0x6e7e_u16, 0x4eec_u16, StaticArray[0x9b_u8, 0xfe_u8, 0xf0_u8, 0xec_u8, 0xdb_u8, 0xfc_u8, 0xf3_u8, 0x90_u8])
   WLDP_HOST_OTHER = LibC::GUID.new(0x626cbec3_u32, 0xe1fa_u16, 0x4227_u16, StaticArray[0x98_u8, 0x0_u8, 0xed_u8, 0x21_u8, 0x2_u8, 0x74_u8, 0xcf_u8, 0x7c_u8])
+  WLDP_HOST_MCPB = LibC::GUID.new(0xdf153c35_u32, 0x140e_u16, 0x4444_u16, StaticArray[0xab_u8, 0x3a_u8, 0x83_u8, 0xd6_u8, 0xb9_u8, 0xb7_u8, 0xc1_u8, 0x5f_u8])
+  WLDP_HOST_MSIX = LibC::GUID.new(0xe96e8143_u32, 0xaa5a_u16, 0x4377_u16, StaticArray[0xbb_u8, 0x54_u8, 0x3b_u8, 0x82_u8, 0xfc_u8, 0x4d_u8, 0x90_u8, 0xe7_u8])
 
   CLSID_CameraUIControl = LibC::GUID.new(0x16d5a2be_u32, 0xb1c5_u16, 0x47b3_u16, StaticArray[0x8e_u8, 0xae_u8, 0xcc_u8, 0xbc_u8, 0xf4_u8, 0x52_u8, 0xc7_u8, 0xe8_u8])
 
@@ -917,6 +919,33 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
+  struct PROCESS_CREATION_SME_VECTOR_LENGTH
+    property anonymous : Anonymous_e__Union_
+    property reserved : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property data : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@data : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
   struct HW_PROFILE_INFOA
     property dwDockInfo : UInt32
     property szHwProfileGuid : Win32cr::Foundation::CHAR[39]
@@ -1022,7 +1051,7 @@ module Win32cr::System::WindowsProgramming
     property image_name : Win32cr::Foundation::UNICODE_STRING
     property base_priority : Int32
     property unique_process_id : Win32cr::Foundation::HANDLE
-    property reserved2 : Void*
+    property inherited_from_unique_process_id : Win32cr::Foundation::HANDLE
     property handle_count : UInt32
     property session_id : UInt32
     property reserved3 : Void*
@@ -1039,7 +1068,7 @@ module Win32cr::System::WindowsProgramming
     property peak_pagefile_usage : LibC::UIntPtrT
     property private_page_count : LibC::UIntPtrT
     property reserved7 : Int64[6]
-    def initialize(@next_entry_offset : UInt32, @number_of_threads : UInt32, @reserved1 : UInt8[48], @image_name : Win32cr::Foundation::UNICODE_STRING, @base_priority : Int32, @unique_process_id : Win32cr::Foundation::HANDLE, @reserved2 : Void*, @handle_count : UInt32, @session_id : UInt32, @reserved3 : Void*, @peak_virtual_size : LibC::UIntPtrT, @virtual_size : LibC::UIntPtrT, @reserved4 : UInt32, @peak_working_set_size : LibC::UIntPtrT, @working_set_size : LibC::UIntPtrT, @reserved5 : Void*, @quota_paged_pool_usage : LibC::UIntPtrT, @reserved6 : Void*, @quota_non_paged_pool_usage : LibC::UIntPtrT, @pagefile_usage : LibC::UIntPtrT, @peak_pagefile_usage : LibC::UIntPtrT, @private_page_count : LibC::UIntPtrT, @reserved7 : Int64[6])
+    def initialize(@next_entry_offset : UInt32, @number_of_threads : UInt32, @reserved1 : UInt8[48], @image_name : Win32cr::Foundation::UNICODE_STRING, @base_priority : Int32, @unique_process_id : Win32cr::Foundation::HANDLE, @inherited_from_unique_process_id : Win32cr::Foundation::HANDLE, @handle_count : UInt32, @session_id : UInt32, @reserved3 : Void*, @peak_virtual_size : LibC::UIntPtrT, @virtual_size : LibC::UIntPtrT, @reserved4 : UInt32, @peak_working_set_size : LibC::UIntPtrT, @working_set_size : LibC::UIntPtrT, @reserved5 : Void*, @quota_paged_pool_usage : LibC::UIntPtrT, @reserved6 : Void*, @quota_non_paged_pool_usage : LibC::UIntPtrT, @pagefile_usage : LibC::UIntPtrT, @peak_pagefile_usage : LibC::UIntPtrT, @private_page_count : LibC::UIntPtrT, @reserved7 : Int64[6])
     end
   end
 
@@ -1821,7 +1850,7 @@ module Win32cr::System::WindowsProgramming
     query_interface : Proc(IClipServiceNotificationHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IClipServiceNotificationHelper*, UInt32),
     release : Proc(IClipServiceNotificationHelper*, UInt32),
-    show_toast : Proc(IClipServiceNotificationHelper*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+    show_toast : Proc(IClipServiceNotificationHelper*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
@@ -1836,8 +1865,8 @@ module Win32cr::System::WindowsProgramming
     def release(this : IClipServiceNotificationHelper*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def show_toast(this : IClipServiceNotificationHelper*, titleText : Win32cr::Foundation::BSTR, bodyText : Win32cr::Foundation::BSTR, packageName : Win32cr::Foundation::BSTR, appId : Win32cr::Foundation::BSTR, launchCommand : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.show_toast.call(this, titleText, bodyText, packageName, appId, launchCommand)
+    def show_toast(this : IClipServiceNotificationHelper*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.show_toast.call(this)
     end
 
   end

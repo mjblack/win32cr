@@ -97,6 +97,8 @@ module Win32cr::System::RemoteDesktop
   WRDS_KEY_EXCHANGE_ALG_DH = 2_u32
   WRDS_LICENSE_PROTOCOL_VERSION = 65536_u32
   WRDS_LICENSE_PREAMBLE_VERSION = 3_u32
+  WRDS_CREDENTIAL_SCENARIO_INTERACTIVE_UNLOCK = LibC::GUID.new(0xb419e9ce_u32, 0x25cd_u16, 0x44bc_u16, StaticArray[0x8d_u8, 0xa5_u8, 0x6f_u8, 0xf7_u8, 0x5e_u8, 0xdd_u8, 0x1e_u8, 0x28_u8])
+  WRDS_CREDENTIAL_SCENARIO_INTERACTIVE_LOGON = LibC::GUID.new(0x75cc6d06_u32, 0x3a48_u16, 0x43a1_u16, StaticArray[0xbc_u8, 0xd0_u8, 0xcb_u8, 0x46_u8, 0xeb_u8, 0x8f_u8, 0x9a_u8, 0xae_u8])
   SINGLE_SESSION = 1_u32
   FORCE_REJOIN = 2_u32
   FORCE_REJOIN_IN_CLUSTERMODE = 3_u32
@@ -265,6 +267,7 @@ module Win32cr::System::RemoteDesktop
   DISPID_AX_REMOTEDESKTOPSIZECHANGED = 762_u32
   DISPID_AX_TOUCHPOINTERCURSORMOVED = 800_u32
   RDCLIENT_BITMAP_RENDER_SERVICE = LibC::GUID.new(0xe4cc08cb_u32, 0x942e_u16, 0x4b19_u16, StaticArray[0x85_u8, 0x4_u8, 0xbd_u8, 0x5a_u8, 0x89_u8, 0xa7_u8, 0x47_u8, 0xf5_u8])
+  RDCLIENT_WINDOW_INFO_SERVICE = LibC::GUID.new(0xa9a17a6b_u32, 0xcdb3_u16, 0x4e81_u16, StaticArray[0xb5_u8, 0xc8_u8, 0xbd_u8, 0x63_u8, 0x82_u8, 0x2a_u8, 0x8d_u8, 0x6c_u8])
   WTS_QUERY_ALLOWED_INITIAL_APP = LibC::GUID.new(0xc77d1b30_u32, 0x5be1_u16, 0x4c6b_u16, StaticArray[0xa0_u8, 0xe1_u8, 0xbd_u8, 0x6d_u8, 0x2e_u8, 0x5c_u8, 0x9f_u8, 0xcc_u8])
   WTS_QUERY_LOGON_SCREEN_SIZE = LibC::GUID.new(0x8b8e0fe7_u32, 0x804_u16, 0x4a0e_u16, StaticArray[0xb2_u8, 0x79_u8, 0x86_u8, 0x60_u8, 0xb1_u8, 0xdf_u8, 0x0_u8, 0x49_u8])
   WTS_QUERY_AUDIOENUM_DLL = LibC::GUID.new(0x9bf4fa97_u32, 0xc883_u16, 0x4c2a_u16, StaticArray[0x80_u8, 0xab_u8, 0x5a_u8, 0x39_u8, 0xc9_u8, 0xaf_u8, 0x0_u8, 0xdb_u8])
@@ -601,6 +604,10 @@ module Win32cr::System::RemoteDesktop
   enum TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE
     TSPUB_PLUGIN_PD_ASSIGNMENT_NEW = 0_i32
     TSPUB_PLUGIN_PD_ASSIGNMENT_EXISTING = 1_i32
+  end
+  enum RdpSessionType
+    Desktop = 0_i32
+    RemoteApp = 1_i32
   end
   enum WRdsGraphicsChannelType
     WRdsGraphicsChannelType_GuaranteedDelivery = 0_i32
@@ -1385,6 +1392,20 @@ module Win32cr::System::RemoteDesktop
     property dwFramesDelivered : UInt32
     property dwFramesDropped : UInt32
     def initialize(@dwFramesDelivered : UInt32, @dwFramesDropped : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WTSWindowInfo
+    property hwnd : Win32cr::Foundation::HWND
+    property height : Int32
+    property width : Int32
+    property view_width : Int32
+    property view_height : Int32
+    property view_offset_x : Int32
+    property view_offset_y : Int32
+    property scale : Float32
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @height : Int32, @width : Int32, @view_width : Int32, @view_height : Int32, @view_offset_x : Int32, @view_offset_y : Int32, @scale : Float32)
     end
   end
 
@@ -5098,6 +5119,76 @@ module Win32cr::System::RemoteDesktop
 
   @[Extern]
 
+  record IWTSWindowChangedCallbackVtable,
+    query_interface : Proc(IWTSWindowChangedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWTSWindowChangedCallback*, UInt32),
+    release : Proc(IWTSWindowChangedCallback*, UInt32),
+    window_changed : Proc(IWTSWindowChangedCallback*, Win32cr::System::RemoteDesktop::WTSWindowInfo*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IWTSWindowChangedCallback, lpVtbl : IWTSWindowChangedCallbackVtable* do
+    GUID = LibC::GUID.new(0xe8a47fd3_u32, 0x1af6_u16, 0x4d7f_u16, StaticArray[0x8e_u8, 0x15_u8, 0x51_u8, 0x5c_u8, 0xca_u8, 0xe1_u8, 0xc0_u8, 0xc_u8])
+    def query_interface(this : IWTSWindowChangedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWTSWindowChangedCallback*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWTSWindowChangedCallback*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def window_changed(this : IWTSWindowChangedCallback*, windowInfo : Win32cr::System::RemoteDesktop::WTSWindowInfo*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.window_changed.call(this, windowInfo)
+    end
+
+  end
+
+  @[Extern]
+
+  record IWTSWindowInfoServiceVtable,
+    query_interface : Proc(IWTSWindowInfoService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWTSWindowInfoService*, UInt32),
+    release : Proc(IWTSWindowInfoService*, UInt32),
+    get_window_info : Proc(IWTSWindowInfoService*, Win32cr::Foundation::HWND, Win32cr::System::RemoteDesktop::WTSWindowInfo*, Win32cr::Foundation::HRESULT),
+    get_rdp_client_process_id : Proc(IWTSWindowInfoService*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_rdp_session_type : Proc(IWTSWindowInfoService*, Win32cr::System::RemoteDesktop::RdpSessionType*, Win32cr::Foundation::HRESULT),
+    subscribe_window_changed : Proc(IWTSWindowInfoService*, Win32cr::Foundation::HWND, Void*, Win32cr::Foundation::HRESULT),
+    unsubscribe_window_changed : Proc(IWTSWindowInfoService*, Win32cr::Foundation::HWND, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IWTSWindowInfoService, lpVtbl : IWTSWindowInfoServiceVtable* do
+    GUID = LibC::GUID.new(0x2a002c7b_u32, 0x120_u16, 0x4d04_u16, StaticArray[0xbf_u8, 0xb1_u8, 0x3c_u8, 0x73_u8, 0x11_u8, 0xc_u8, 0x85_u8, 0x81_u8])
+    def query_interface(this : IWTSWindowInfoService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWTSWindowInfoService*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWTSWindowInfoService*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_window_info(this : IWTSWindowInfoService*, remoteHwnd : Win32cr::Foundation::HWND, windowInfo : Win32cr::System::RemoteDesktop::WTSWindowInfo*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_window_info.call(this, remoteHwnd, windowInfo)
+    end
+    def get_rdp_client_process_id(this : IWTSWindowInfoService*, processId : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rdp_client_process_id.call(this, processId)
+    end
+    def get_rdp_session_type(this : IWTSWindowInfoService*, sessionType : Win32cr::System::RemoteDesktop::RdpSessionType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rdp_session_type.call(this, sessionType)
+    end
+    def subscribe_window_changed(this : IWTSWindowInfoService*, remoteHwnd : Win32cr::Foundation::HWND, windowChanged : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.subscribe_window_changed.call(this, remoteHwnd, windowChanged)
+    end
+    def unsubscribe_window_changed(this : IWTSWindowInfoService*, remoteHwnd : Win32cr::Foundation::HWND, windowChanged : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unsubscribe_window_changed.call(this, remoteHwnd, windowChanged)
+    end
+
+  end
+
+  @[Extern]
+
   record IWRdsGraphicsChannelEventsVtable,
     query_interface : Proc(IWRdsGraphicsChannelEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWRdsGraphicsChannelEvents*, UInt32),
@@ -6309,6 +6400,133 @@ module Win32cr::System::RemoteDesktop
     end
     def get_serialized_user_credential(this : IWRdsProtocolConnection2*, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_serialized_user_credential.call(this, userCredential)
+    end
+
+  end
+
+  @[Extern]
+
+  record IWRdsProtocolConnection3_ExperimentalVtable,
+    query_interface : Proc(IWRdsProtocolConnection3_Experimental*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWRdsProtocolConnection3_Experimental*, UInt32),
+    release : Proc(IWRdsProtocolConnection3_Experimental*, UInt32),
+    get_logon_error_redirector : Proc(IWRdsProtocolConnection3_Experimental*, Void**, Win32cr::Foundation::HRESULT),
+    accept_connection : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::HRESULT),
+    get_client_data : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::System::RemoteDesktop::WTS_CLIENT_DATA*, Win32cr::Foundation::HRESULT),
+    get_client_monitor_data : Proc(IWRdsProtocolConnection3_Experimental*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_user_credentials : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::System::RemoteDesktop::WTS_USER_CREDENTIAL*, Win32cr::Foundation::HRESULT),
+    get_license_connection : Proc(IWRdsProtocolConnection3_Experimental*, Void**, Win32cr::Foundation::HRESULT),
+    authenticate_client_to_session : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, Win32cr::Foundation::HRESULT),
+    notify_session_id : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::HRESULT),
+    get_input_handles : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HRESULT),
+    get_video_handle : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::HANDLE_PTR*, Win32cr::Foundation::HRESULT),
+    connect_notify : Proc(IWRdsProtocolConnection3_Experimental*, UInt32, Win32cr::Foundation::HRESULT),
+    is_user_allowed_to_logon : Proc(IWRdsProtocolConnection3_Experimental*, UInt32, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    session_arbitration_enumeration : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::BOOL, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    logon_notify : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::HANDLE_PTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTINGS*, Win32cr::Foundation::HRESULT),
+    pre_disconnect : Proc(IWRdsProtocolConnection3_Experimental*, UInt32, Win32cr::Foundation::HRESULT),
+    disconnect_notify : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::HRESULT),
+    close : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::HRESULT),
+    get_protocol_status : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::System::RemoteDesktop::WTS_PROTOCOL_STATUS*, Win32cr::Foundation::HRESULT),
+    get_last_input_time : Proc(IWRdsProtocolConnection3_Experimental*, UInt64*, Win32cr::Foundation::HRESULT),
+    set_error_info : Proc(IWRdsProtocolConnection3_Experimental*, UInt32, Win32cr::Foundation::HRESULT),
+    create_virtual_channel : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL, UInt32, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT),
+    query_property : Proc(IWRdsProtocolConnection3_Experimental*, LibC::GUID, UInt32, UInt32, Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*, Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*, Win32cr::Foundation::HRESULT),
+    get_shadow_connection : Proc(IWRdsProtocolConnection3_Experimental*, Void**, Win32cr::Foundation::HRESULT),
+    notify_command_process_created : Proc(IWRdsProtocolConnection3_Experimental*, UInt32, Win32cr::Foundation::HRESULT),
+    get_serialized_user_credential : Proc(IWRdsProtocolConnection3_Experimental*, Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**, Win32cr::Foundation::HRESULT),
+    get_serialized_user_credential_interactively : Proc(IWRdsProtocolConnection3_Experimental*, LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IWRdsProtocolConnection3_Experimental, lpVtbl : IWRdsProtocolConnection3_ExperimentalVtable* do
+    GUID = LibC::GUID.new(0x3aa87da3_u32, 0xf60b_u16, 0x4280_u16, StaticArray[0xb3_u8, 0x85_u8, 0xf1_u8, 0xcc_u8, 0x22_u8, 0xad_u8, 0x5d_u8, 0x9f_u8])
+    def query_interface(this : IWRdsProtocolConnection3_Experimental*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWRdsProtocolConnection3_Experimental*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWRdsProtocolConnection3_Experimental*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_logon_error_redirector(this : IWRdsProtocolConnection3_Experimental*, ppLogonErrorRedir : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_logon_error_redirector.call(this, ppLogonErrorRedir)
+    end
+    def accept_connection(this : IWRdsProtocolConnection3_Experimental*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.accept_connection.call(this)
+    end
+    def get_client_data(this : IWRdsProtocolConnection3_Experimental*, pClientData : Win32cr::System::RemoteDesktop::WTS_CLIENT_DATA*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_client_data.call(this, pClientData)
+    end
+    def get_client_monitor_data(this : IWRdsProtocolConnection3_Experimental*, pNumMonitors : UInt32*, pPrimaryMonitor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_client_monitor_data.call(this, pNumMonitors, pPrimaryMonitor)
+    end
+    def get_user_credentials(this : IWRdsProtocolConnection3_Experimental*, pUserCreds : Win32cr::System::RemoteDesktop::WTS_USER_CREDENTIAL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_user_credentials.call(this, pUserCreds)
+    end
+    def get_license_connection(this : IWRdsProtocolConnection3_Experimental*, ppLicenseConnection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_license_connection.call(this, ppLicenseConnection)
+    end
+    def authenticate_client_to_session(this : IWRdsProtocolConnection3_Experimental*, session_id : Win32cr::System::RemoteDesktop::WTS_SESSION_ID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.authenticate_client_to_session.call(this, session_id)
+    end
+    def notify_session_id(this : IWRdsProtocolConnection3_Experimental*, session_id : Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, session_handle : Win32cr::Foundation::HANDLE_PTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_session_id.call(this, session_id, session_handle)
+    end
+    def get_input_handles(this : IWRdsProtocolConnection3_Experimental*, pKeyboardHandle : Win32cr::Foundation::HANDLE_PTR*, pMouseHandle : Win32cr::Foundation::HANDLE_PTR*, pBeepHandle : Win32cr::Foundation::HANDLE_PTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_input_handles.call(this, pKeyboardHandle, pMouseHandle, pBeepHandle)
+    end
+    def get_video_handle(this : IWRdsProtocolConnection3_Experimental*, pVideoHandle : Win32cr::Foundation::HANDLE_PTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_video_handle.call(this, pVideoHandle)
+    end
+    def connect_notify(this : IWRdsProtocolConnection3_Experimental*, session_id : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.connect_notify.call(this, session_id)
+    end
+    def is_user_allowed_to_logon(this : IWRdsProtocolConnection3_Experimental*, session_id : UInt32, user_token : Win32cr::Foundation::HANDLE_PTR, pDomainName : Win32cr::Foundation::PWSTR, pUserName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_user_allowed_to_logon.call(this, session_id, user_token, pDomainName, pUserName)
+    end
+    def session_arbitration_enumeration(this : IWRdsProtocolConnection3_Experimental*, hUserToken : Win32cr::Foundation::HANDLE_PTR, bSingleSessionPerUserEnabled : Win32cr::Foundation::BOOL, pSessionIdArray : UInt32*, pdwSessionIdentifierCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.session_arbitration_enumeration.call(this, hUserToken, bSingleSessionPerUserEnabled, pSessionIdArray, pdwSessionIdentifierCount)
+    end
+    def logon_notify(this : IWRdsProtocolConnection3_Experimental*, hClientToken : Win32cr::Foundation::HANDLE_PTR, wszUserName : Win32cr::Foundation::PWSTR, wszDomainName : Win32cr::Foundation::PWSTR, session_id : Win32cr::System::RemoteDesktop::WTS_SESSION_ID*, pWRdsConnectionSettings : Win32cr::System::RemoteDesktop::WRDS_CONNECTION_SETTINGS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.logon_notify.call(this, hClientToken, wszUserName, wszDomainName, session_id, pWRdsConnectionSettings)
+    end
+    def pre_disconnect(this : IWRdsProtocolConnection3_Experimental*, disconnect_reason : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_disconnect.call(this, disconnect_reason)
+    end
+    def disconnect_notify(this : IWRdsProtocolConnection3_Experimental*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disconnect_notify.call(this)
+    end
+    def close(this : IWRdsProtocolConnection3_Experimental*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+    def get_protocol_status(this : IWRdsProtocolConnection3_Experimental*, pProtocolStatus : Win32cr::System::RemoteDesktop::WTS_PROTOCOL_STATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_protocol_status.call(this, pProtocolStatus)
+    end
+    def get_last_input_time(this : IWRdsProtocolConnection3_Experimental*, pLastInputTime : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_last_input_time.call(this, pLastInputTime)
+    end
+    def set_error_info(this : IWRdsProtocolConnection3_Experimental*, ulError : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_error_info.call(this, ulError)
+    end
+    def create_virtual_channel(this : IWRdsProtocolConnection3_Experimental*, szEndpointName : Win32cr::Foundation::PSTR, bStatic : Win32cr::Foundation::BOOL, requested_priority : UInt32, phChannel : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_virtual_channel.call(this, szEndpointName, bStatic, requested_priority, phChannel)
+    end
+    def query_property(this : IWRdsProtocolConnection3_Experimental*, query_type : LibC::GUID, ulNumEntriesIn : UInt32, ulNumEntriesOut : UInt32, pPropertyEntriesIn : Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*, pPropertyEntriesOut : Win32cr::System::RemoteDesktop::WTS_PROPERTY_VALUE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_property.call(this, query_type, ulNumEntriesIn, ulNumEntriesOut, pPropertyEntriesIn, pPropertyEntriesOut)
+    end
+    def get_shadow_connection(this : IWRdsProtocolConnection3_Experimental*, ppShadowConnection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_shadow_connection.call(this, ppShadowConnection)
+    end
+    def notify_command_process_created(this : IWRdsProtocolConnection3_Experimental*, session_id : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_command_process_created.call(this, session_id)
+    end
+    def get_serialized_user_credential(this : IWRdsProtocolConnection3_Experimental*, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_user_credential.call(this, userCredential)
+    end
+    def get_serialized_user_credential_interactively(this : IWRdsProtocolConnection3_Experimental*, scenarioId : LibC::GUID*, usernameHint : Win32cr::Foundation::PWSTR, userCredential : Win32cr::System::RemoteDesktop::WTS_SERIALIZED_USER_CREDENTIAL**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_user_credential_interactively.call(this, scenarioId, usernameHint, userCredential)
     end
 
   end

@@ -4,7 +4,6 @@ require "./../system/variant.cr"
 require "./../graphics/gdi.cr"
 require "./../graphics/direct3_d9.cr"
 require "./../graphics/dxgi/common.cr"
-require "./../graphics/direct3_d12.cr"
 require "./dx_media_objects.cr"
 require "./../system/com/structured_storage.cr"
 require "./audio.cr"
@@ -640,6 +639,7 @@ module Win32cr::Media::MediaFoundation
   MFSampleExtension_VideoEncodeSatdMap = LibC::GUID.new(0xadf61d96_u32, 0xc2d3_u16, 0x4b57_u16, StaticArray[0xa1_u8, 0x38_u8, 0xdd_u8, 0xe4_u8, 0xd3_u8, 0x51_u8, 0xea_u8, 0xa9_u8])
   MFSampleExtension_VideoEncodeInputDeltaQPMap = LibC::GUID.new(0xdab419c3_u32, 0xbf21_u16, 0x4b46_u16, StaticArray[0x86_u8, 0x92_u8, 0x9a_u8, 0x7b_u8, 0xf0_u8, 0xa7_u8, 0x17_u8, 0x69_u8])
   MFSampleExtension_VideoEncodeInputAbsoluteQPMap = LibC::GUID.new(0x432a6e9a_u32, 0xf1ed_u16, 0x456e_u16, StaticArray[0x8d_u8, 0xc3_u8, 0x6f_u8, 0x89_u8, 0x85_u8, 0x64_u8, 0x9e_u8, 0xb9_u8])
+  MFSampleExtension_VideoEncodeD3D12ReconstructedPicture = LibC::GUID.new(0x3e8a1b7f_u32, 0x5c92_u16, 0x4d6e_u16, StaticArray[0xb8_u8, 0x34_u8, 0xf0_u8, 0xa7_u8, 0x29_u8, 0xe6_u8, 0x5c_u8, 0x48_u8])
   MFSampleExtension_PhotoThumbnail = LibC::GUID.new(0x74bbc85c_u32, 0xc8bb_u16, 0x42dc_u16, StaticArray[0xb5_u8, 0x86_u8, 0xda_u8, 0x17_u8, 0xff_u8, 0xd3_u8, 0x5d_u8, 0xcc_u8])
   MFSampleExtension_PhotoThumbnailMediaType = LibC::GUID.new(0x61ad5420_u32, 0xebf8_u16, 0x4143_u16, StaticArray[0x89_u8, 0xaf_u8, 0x6b_u8, 0xf2_u8, 0x5f_u8, 0x67_u8, 0x2d_u8, 0xef_u8])
   MFSampleExtension_CaptureMetadata = LibC::GUID.new(0x2ebe23a8_u32, 0xfaf5_u16, 0x444a_u16, StaticArray[0xa6_u8, 0xa2_u8, 0xeb_u8, 0x81_u8, 0x8_u8, 0x80_u8, 0xab_u8, 0x5d_u8])
@@ -2136,6 +2136,7 @@ module Win32cr::Media::MediaFoundation
   MF_SINK_WRITER_ENCODER_CONFIG = LibC::GUID.new(0xad91cd04_u32, 0xa7cc_u16, 0x4ac7_u16, StaticArray[0x99_u8, 0xb6_u8, 0xa5_u8, 0x7b_u8, 0x9a_u8, 0x4a_u8, 0x7c_u8, 0x70_u8])
   MF_READWRITE_DISABLE_CONVERTERS = LibC::GUID.new(0x98d5b065_u32, 0x1374_u16, 0x4847_u16, StaticArray[0x8d_u8, 0x5d_u8, 0x31_u8, 0x52_u8, 0xf_u8, 0xee_u8, 0x71_u8, 0x56_u8])
   MF_READWRITE_ENABLE_HARDWARE_TRANSFORMS = LibC::GUID.new(0xa634a91c_u32, 0x822b_u16, 0x41b9_u16, StaticArray[0xa4_u8, 0x94_u8, 0x4d_u8, 0xe4_u8, 0x64_u8, 0x36_u8, 0x12_u8, 0xb0_u8])
+  MF_READWRITE_USE_ONLY_HARDWARE_TRANSFORMS = LibC::GUID.new(0xf9074427_u32, 0xbf8b_u16, 0x4f69_u16, StaticArray[0xbb_u8, 0xaf_u8, 0x52_u8, 0x49_u8, 0x69_u8, 0x5_u8, 0x6f_u8, 0xb6_u8])
   MF_READWRITE_MMCSS_CLASS = LibC::GUID.new(0x39384300_u32, 0xd0eb_u16, 0x40b1_u16, StaticArray[0x87_u8, 0xa0_u8, 0x33_u8, 0x18_u8, 0x87_u8, 0x1b_u8, 0x5a_u8, 0x53_u8])
   MF_READWRITE_MMCSS_PRIORITY = LibC::GUID.new(0x43ad19ce_u32, 0xf33f_u16, 0x4ba9_u16, StaticArray[0xa5_u8, 0x80_u8, 0xe4_u8, 0xcd_u8, 0x12_u8, 0xf2_u8, 0xd1_u8, 0x44_u8])
   MF_READWRITE_MMCSS_CLASS_AUDIO = LibC::GUID.new(0x430847da_u32, 0x890_u16, 0x4b0e_u16, StaticArray[0x93_u8, 0x8c_u8, 0x5_u8, 0x43_u8, 0x32_u8, 0xc5_u8, 0x47_u8, 0xe1_u8])
@@ -3009,6 +3010,10 @@ module Win32cr::Media::MediaFoundation
 
   CLSID_CODECAPI_AVEncVideoInputAbsoluteQPBlockSettings = LibC::GUID.new(0xef95a145_u32, 0x4f91_u16, 0x4dea_u16, StaticArray[0x81_u8, 0x73_u8, 0xac_u8, 0xff_u8, 0x11_u8, 0x43_u8, 0x42_u8, 0x10_u8])
 
+  CLSID_CODECAPI_AVEncVideoD3D12ReconstructedPictureOutputMode = LibC::GUID.new(0x4a7b2e8f_u32, 0x1d93_u16, 0x4c6a_u16, StaticArray[0xb5_u8, 0x48_u8, 0x91_u8, 0xe2_u8, 0xf8_u8, 0xc5_u8, 0xa7_u8, 0xd3_u8])
+
+  CLSID_CODECAPI_AVEncAV1EncoderOperatingMode = LibC::GUID.new(0x8f2e1f91_u32, 0x5b4c_u16, 0x4e1a_u16, StaticArray[0x9c_u8, 0x3d_u8, 0x2f_u8, 0x6a_u8, 0x8b_u8, 0x1d_u8, 0x4e_u8, 0x7c_u8])
+
   CLSID_KSPROPSETID_OPMVideoOutput = LibC::GUID.new(0x6f414bb_u32, 0xf43a_u16, 0x4fe2_u16, StaticArray[0xa5_u8, 0x66_u8, 0x77_u8, 0x4b_u8, 0x4c_u8, 0x81_u8, 0xf0_u8, 0xdb_u8])
 
   enum MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS : UInt32
@@ -3363,7 +3368,6 @@ module Win32cr::Media::MediaFoundation
     D3D12_VIDEO_ENCODER_AV1_FEATURE_FLAG_ALLOW_HIGH_PRECISION_MV = 8388608_i32
     D3D12_VIDEO_ENCODER_AV1_FEATURE_FLAG_SKIP_MODE_PRESENT = 16777216_i32
     D3D12_VIDEO_ENCODER_AV1_FEATURE_FLAG_DELTA_LF_PARAMS = 33554432_i32
-    D3D12_VIDEO_ENCODER_AV1_FEATURE_FLAG_DISABLE_CDF_UPDATE_UNSUPPORTED = 67108864_i32
   end
   enum D3D12_VIDEO_ENCODER_AV1_TX_MODE
     D3D12_VIDEO_ENCODER_AV1_TX_MODE_ONLY4x4 = 0_i32
@@ -3710,10 +3714,6 @@ module Win32cr::Media::MediaFoundation
     D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_NONE = 0_i32
     D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_SEPARATE_COLOUR_PLANE_SUPPORT = 1_i32
     D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_SEPARATE_COLOUR_PLANE_REQUIRED = 2_i32
-    D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_TEMPORAL_MVP_ENABLED_SUPPORT = 4_i32
-    D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_TEMPORAL_MVP_ENABLED_REQUIRED = 8_i32
-    D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_STRONG_INTRA_SMOOTHING_ENABLED_SUPPORT = 16_i32
-    D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_STRONG_INTRA_SMOOTHING_ENABLED_REQUIRED = 32_i32
   end
   @[Flags]
   enum D3D12_VIDEO_ENCODER_SUPPORT_FLAGS
@@ -3742,7 +3742,6 @@ module Win32cr::Media::MediaFoundation
     D3D12_VIDEO_ENCODER_SUPPORT_FLAG_FRAME_PSNR_METADATA_AVAILABLE = 2097152_i32
     D3D12_VIDEO_ENCODER_SUPPORT_FLAG_SUBREGIONS_PSNR_METADATA_AVAILABLE = 4194304_i32
     D3D12_VIDEO_ENCODER_SUPPORT_FLAG_RATE_CONTROL_SPATIAL_ADAPTIVE_QP_AVAILABLE = 8388608_i32
-    D3D12_VIDEO_ENCODER_SUPPORT_FLAG_INTRA_REFRESH_NO_SUBREGION_LAYOUT_CONSTRAINTS_AVAILABLE = 16777216_i32
   end
   @[Flags]
   enum D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264_FLAGS
@@ -3777,8 +3776,6 @@ module Win32cr::Media::MediaFoundation
     D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_PERSISTENT_RICE_ADAPTATION = 16384_i32
     D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_CABAC_BYPASS_ALIGNMENT = 32768_i32
     D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_SEPARATE_COLOUR_PLANE = 65536_i32
-    D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_TEMPORAL_MVP_ENABLED = 131072_i32
-    D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_STRONG_INTRA_SMOOTHING_ENABLED = 262144_i32
   end
   enum D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE
     D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE_MAXIMUM = 0_i32
@@ -4620,6 +4617,7 @@ module Win32cr::Media::MediaFoundation
     Eavdecddoperationalmode_portable8 = 5_i32
     Eavdecddoperationalmode_portable11 = 6_i32
     Eavdecddoperationalmode_portable14 = 7_i32
+    Eavdecddoperationalmode_portable16 = 8_i32
   end
   enum Eavdecddmatrixdecodingmode
     Eavdecddmatrixdecodingmode_off = 0_i32
@@ -4645,6 +4643,16 @@ module Win32cr::Media::MediaFoundation
     Eavencchromaencodemode_420 = 0_i32
     Eavencchromaencodemode_444 = 1_i32
     Eavencchromaencodemode_444_v2 = 2_i32
+  end
+  enum Eavencvideod3d12reconstructedpictureoutputmode
+    Eavencvideoencoded3d12reconstructedpicturemode_none = 0_i32
+    Eavencvideoencoded3d12reconstructedpicturemode_copy = 1_i32
+    Eavencvideoencoded3d12reconstructedpicturemode_shared = 2_i32
+  end
+  enum Eav1encoderoperatingmode
+    Eav1encoderoperatingmode_auto = 0_i32
+    Eav1encoderoperatingmode_reference = 1_i32
+    Eav1encoderoperatingmode_optimized = 2_i32
   end
   enum DXVAHD_FRAME_FORMAT
     DXVAHD_FRAME_FORMAT_PROGRESSIVE = 0_i32
@@ -7246,8 +7254,8 @@ module Win32cr::Media::MediaFoundation
   struct D3D12_VIDEO_EXTENSION_COMMAND_INFO
     property command_id : LibC::GUID
     property name : Win32cr::Foundation::PWSTR
-    property command_list_support_flags : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_SUPPORT_FLAGS
-    def initialize(@command_id : LibC::GUID, @name : Win32cr::Foundation::PWSTR, @command_list_support_flags : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_SUPPORT_FLAGS)
+    property command_list_support_flags : Void*
+    def initialize(@command_id : LibC::GUID, @name : Win32cr::Foundation::PWSTR, @command_list_support_flags : Void*)
     end
   end
 
@@ -10426,6 +10434,16 @@ module Win32cr::Media::MediaFoundation
   end
 
   @[Extern]
+  struct MFVideoNormalizedRect
+    property left : Float32
+    property top : Float32
+    property right : Float32
+    property bottom : Float32
+    def initialize(@left : Float32, @top : Float32, @right : Float32, @bottom : Float32)
+    end
+  end
+
+  @[Extern]
   struct MFCLOCK_PROPERTIES
     property qwCorrelationRate : UInt64
     property guidClockId : LibC::GUID
@@ -10736,16 +10754,6 @@ module Win32cr::Media::MediaFoundation
     property cFramesWritten : UInt32
     property cFramesDropped : UInt32
     def initialize(@cFramesWritten : UInt32, @cFramesDropped : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct MFVideoNormalizedRect
-    property left : Float32
-    property top : Float32
-    property right : Float32
-    property bottom : Float32
-    def initialize(@left : Float32, @top : Float32, @right : Float32, @bottom : Float32)
     end
   end
 
@@ -11403,44 +11411,12 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecoderHeapVtable,
-    query_interface : Proc(ID3D12VideoDecoderHeap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecoderHeap*, UInt32),
-    release : Proc(ID3D12VideoDecoderHeap*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecoderHeap*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecoderHeap*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecoderHeap*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecoderHeap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecoderHeap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_desc : Proc(ID3D12VideoDecoderHeap*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC)
 
 
   @[Extern]
   record ID3D12VideoDecoderHeap, lpVtbl : ID3D12VideoDecoderHeapVtable* do
     GUID = LibC::GUID.new(0x946b7c9_u32, 0xebf6_u16, 0x4047_u16, StaticArray[0xbb_u8, 0x73_u8, 0x86_u8, 0x83_u8, 0xe2_u8, 0x7d_u8, 0xbb_u8, 0x1f_u8])
-    def query_interface(this : ID3D12VideoDecoderHeap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecoderHeap*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecoderHeap*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecoderHeap*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecoderHeap*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecoderHeap*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecoderHeap*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecoderHeap*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_desc(this : ID3D12VideoDecoderHeap*) : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC
       @lpVtbl.try &.value.get_desc.call(this)
     end
@@ -11489,44 +11465,12 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecoderVtable,
-    query_interface : Proc(ID3D12VideoDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecoder*, UInt32),
-    release : Proc(ID3D12VideoDecoder*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecoder*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecoder*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecoder*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecoder*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_desc : Proc(ID3D12VideoDecoder*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_DESC)
 
 
   @[Extern]
   record ID3D12VideoDecoder, lpVtbl : ID3D12VideoDecoderVtable* do
     GUID = LibC::GUID.new(0xc59b6bdc_u32, 0x7720_u16, 0x4074_u16, StaticArray[0xa1_u8, 0x36_u8, 0x17_u8, 0xa1_u8, 0x56_u8, 0x3_u8, 0x74_u8, 0x70_u8])
-    def query_interface(this : ID3D12VideoDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecoder*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecoder*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecoder*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecoder*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecoder*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecoder*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecoder*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_desc(this : ID3D12VideoDecoder*) : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_DESC
       @lpVtbl.try &.value.get_desc.call(this)
     end
@@ -11536,14 +11480,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoProcessorVtable,
-    query_interface : Proc(ID3D12VideoProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoProcessor*, UInt32),
-    release : Proc(ID3D12VideoProcessor*, UInt32),
-    get_private_data : Proc(ID3D12VideoProcessor*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoProcessor*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoProcessor*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoProcessor*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_node_mask : Proc(ID3D12VideoProcessor*, UInt32),
     get_num_input_stream_descs : Proc(ID3D12VideoProcessor*, UInt32),
     get_input_stream_descs : Proc(ID3D12VideoProcessor*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, Win32cr::Foundation::HRESULT),
@@ -11553,30 +11489,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoProcessor, lpVtbl : ID3D12VideoProcessorVtable* do
     GUID = LibC::GUID.new(0x304fdb32_u32, 0xbede_u16, 0x410a_u16, StaticArray[0x85_u8, 0x45_u8, 0x94_u8, 0x3a_u8, 0xc6_u8, 0xa4_u8, 0x61_u8, 0x38_u8])
-    def query_interface(this : ID3D12VideoProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoProcessor*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoProcessor*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoProcessor*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoProcessor*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoProcessor*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoProcessor*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoProcessor*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_node_mask(this : ID3D12VideoProcessor*) : UInt32
       @lpVtbl.try &.value.get_node_mask.call(this)
     end
@@ -11595,61 +11507,25 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecodeCommandListVtable,
-    query_interface : Proc(ID3D12VideoDecodeCommandList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecodeCommandList*, UInt32),
-    release : Proc(ID3D12VideoDecodeCommandList*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecodeCommandList*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecodeCommandList*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecodeCommandList*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecodeCommandList*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecodeCommandList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoDecodeCommandList*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoDecodeCommandList*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoDecodeCommandList*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoDecodeCommandList*, Void),
-    resource_barrier : Proc(ID3D12VideoDecodeCommandList*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoDecodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoDecodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoDecodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoDecodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoDecodeCommandList*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoDecodeCommandList*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoDecodeCommandList*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoDecodeCommandList*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoDecodeCommandList*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoDecodeCommandList*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoDecodeCommandList*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoDecodeCommandList*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoDecodeCommandList*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoDecodeCommandList*, Void),
     decode_frame : Proc(ID3D12VideoDecodeCommandList*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
+    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList*, UInt32, Void**, Void**, Void)
 
 
   @[Extern]
   record ID3D12VideoDecodeCommandList, lpVtbl : ID3D12VideoDecodeCommandListVtable* do
     GUID = LibC::GUID.new(0x3b60536e_u32, 0xad29_u16, 0x4e64_u16, StaticArray[0xa2_u8, 0x69_u8, 0xf8_u8, 0x53_u8, 0x83_u8, 0x7e_u8, 0x5e_u8, 0x53_u8])
-    def query_interface(this : ID3D12VideoDecodeCommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecodeCommandList*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecodeCommandList*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecodeCommandList*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecodeCommandList*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecodeCommandList*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecodeCommandList*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecodeCommandList*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoDecodeCommandList*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoDecodeCommandList*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -11659,22 +11535,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoDecodeCommandList*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoDecodeCommandList*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoDecodeCommandList*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoDecodeCommandList*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoDecodeCommandList*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoDecodeCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoDecodeCommandList*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoDecodeCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoDecodeCommandList*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoDecodeCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoDecodeCommandList*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoDecodeCommandList*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoDecodeCommandList*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoDecodeCommandList*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -11689,7 +11565,7 @@ module Win32cr::Media::MediaFoundation
     def decode_frame(this : ID3D12VideoDecodeCommandList*, pDecoder : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.decode_frame.call(this, pDecoder, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
 
@@ -11698,61 +11574,25 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoProcessCommandListVtable,
-    query_interface : Proc(ID3D12VideoProcessCommandList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoProcessCommandList*, UInt32),
-    release : Proc(ID3D12VideoProcessCommandList*, UInt32),
-    get_private_data : Proc(ID3D12VideoProcessCommandList*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoProcessCommandList*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoProcessCommandList*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoProcessCommandList*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoProcessCommandList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoProcessCommandList*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoProcessCommandList*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoProcessCommandList*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoProcessCommandList*, Void),
-    resource_barrier : Proc(ID3D12VideoProcessCommandList*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoProcessCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoProcessCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoProcessCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoProcessCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoProcessCommandList*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoProcessCommandList*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoProcessCommandList*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoProcessCommandList*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoProcessCommandList*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoProcessCommandList*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoProcessCommandList*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoProcessCommandList*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoProcessCommandList*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoProcessCommandList*, Void),
     process_frames : Proc(ID3D12VideoProcessCommandList*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
+    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList*, UInt32, Void**, Void**, Void)
 
 
   @[Extern]
   record ID3D12VideoProcessCommandList, lpVtbl : ID3D12VideoProcessCommandListVtable* do
     GUID = LibC::GUID.new(0xaeb2543a_u32, 0x167f_u16, 0x4682_u16, StaticArray[0xac_u8, 0xc8_u8, 0xd1_u8, 0x59_u8, 0xed_u8, 0x4a_u8, 0x62_u8, 0x9_u8])
-    def query_interface(this : ID3D12VideoProcessCommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoProcessCommandList*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoProcessCommandList*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoProcessCommandList*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoProcessCommandList*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoProcessCommandList*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoProcessCommandList*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoProcessCommandList*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoProcessCommandList*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoProcessCommandList*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -11762,22 +11602,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoProcessCommandList*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoProcessCommandList*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoProcessCommandList*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoProcessCommandList*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoProcessCommandList*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoProcessCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoProcessCommandList*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoProcessCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoProcessCommandList*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoProcessCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoProcessCommandList*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoProcessCommandList*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoProcessCommandList*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoProcessCommandList*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -11792,7 +11632,7 @@ module Win32cr::Media::MediaFoundation
     def process_frames(this : ID3D12VideoProcessCommandList*, pVideoProcessor : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, num_input_streams : UInt32, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.process_frames.call(this, pVideoProcessor, pOutputArguments, num_input_streams, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoProcessCommandList*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoProcessCommandList*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
 
@@ -11801,62 +11641,26 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecodeCommandList1Vtable,
-    query_interface : Proc(ID3D12VideoDecodeCommandList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecodeCommandList1*, UInt32),
-    release : Proc(ID3D12VideoDecodeCommandList1*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecodeCommandList1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecodeCommandList1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecodeCommandList1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecodeCommandList1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecodeCommandList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoDecodeCommandList1*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoDecodeCommandList1*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoDecodeCommandList1*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoDecodeCommandList1*, Void),
-    resource_barrier : Proc(ID3D12VideoDecodeCommandList1*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoDecodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoDecodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoDecodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoDecodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoDecodeCommandList1*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoDecodeCommandList1*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoDecodeCommandList1*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoDecodeCommandList1*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoDecodeCommandList1*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoDecodeCommandList1*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoDecodeCommandList1*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoDecodeCommandList1*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoDecodeCommandList1*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoDecodeCommandList1*, Void),
     decode_frame : Proc(ID3D12VideoDecodeCommandList1*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList1*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList1*, UInt32, Void**, Void**, Void),
     decode_frame1 : Proc(ID3D12VideoDecodeCommandList1*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void)
 
 
   @[Extern]
   record ID3D12VideoDecodeCommandList1, lpVtbl : ID3D12VideoDecodeCommandList1Vtable* do
     GUID = LibC::GUID.new(0xd52f011b_u32, 0xb56e_u16, 0x453c_u16, StaticArray[0xa0_u8, 0x5a_u8, 0xa7_u8, 0xf3_u8, 0x11_u8, 0xc8_u8, 0xf4_u8, 0x72_u8])
-    def query_interface(this : ID3D12VideoDecodeCommandList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecodeCommandList1*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecodeCommandList1*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecodeCommandList1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecodeCommandList1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecodeCommandList1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecodeCommandList1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecodeCommandList1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoDecodeCommandList1*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoDecodeCommandList1*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -11866,22 +11670,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoDecodeCommandList1*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoDecodeCommandList1*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoDecodeCommandList1*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoDecodeCommandList1*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoDecodeCommandList1*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoDecodeCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoDecodeCommandList1*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoDecodeCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoDecodeCommandList1*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoDecodeCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoDecodeCommandList1*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoDecodeCommandList1*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoDecodeCommandList1*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoDecodeCommandList1*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -11896,7 +11700,7 @@ module Win32cr::Media::MediaFoundation
     def decode_frame(this : ID3D12VideoDecodeCommandList1*, pDecoder : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.decode_frame.call(this, pDecoder, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList1*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList1*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def decode_frame1(this : ID3D12VideoDecodeCommandList1*, pDecoder : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
@@ -11908,62 +11712,26 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoProcessCommandList1Vtable,
-    query_interface : Proc(ID3D12VideoProcessCommandList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoProcessCommandList1*, UInt32),
-    release : Proc(ID3D12VideoProcessCommandList1*, UInt32),
-    get_private_data : Proc(ID3D12VideoProcessCommandList1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoProcessCommandList1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoProcessCommandList1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoProcessCommandList1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoProcessCommandList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoProcessCommandList1*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoProcessCommandList1*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoProcessCommandList1*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoProcessCommandList1*, Void),
-    resource_barrier : Proc(ID3D12VideoProcessCommandList1*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoProcessCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoProcessCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoProcessCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoProcessCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoProcessCommandList1*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoProcessCommandList1*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoProcessCommandList1*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoProcessCommandList1*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoProcessCommandList1*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoProcessCommandList1*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoProcessCommandList1*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoProcessCommandList1*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoProcessCommandList1*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoProcessCommandList1*, Void),
     process_frames : Proc(ID3D12VideoProcessCommandList1*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList1*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList1*, UInt32, Void**, Void**, Void),
     process_frames1 : Proc(ID3D12VideoProcessCommandList1*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*, Void)
 
 
   @[Extern]
   record ID3D12VideoProcessCommandList1, lpVtbl : ID3D12VideoProcessCommandList1Vtable* do
     GUID = LibC::GUID.new(0x542c5c4d_u32, 0x7596_u16, 0x434f_u16, StaticArray[0x8c_u8, 0x93_u8, 0x4e_u8, 0xfa_u8, 0x67_u8, 0x66_u8, 0xf2_u8, 0x67_u8])
-    def query_interface(this : ID3D12VideoProcessCommandList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoProcessCommandList1*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoProcessCommandList1*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoProcessCommandList1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoProcessCommandList1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoProcessCommandList1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoProcessCommandList1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoProcessCommandList1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoProcessCommandList1*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoProcessCommandList1*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -11973,22 +11741,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoProcessCommandList1*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoProcessCommandList1*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoProcessCommandList1*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoProcessCommandList1*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoProcessCommandList1*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoProcessCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoProcessCommandList1*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoProcessCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoProcessCommandList1*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoProcessCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoProcessCommandList1*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoProcessCommandList1*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoProcessCommandList1*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoProcessCommandList1*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -12003,7 +11771,7 @@ module Win32cr::Media::MediaFoundation
     def process_frames(this : ID3D12VideoProcessCommandList1*, pVideoProcessor : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, num_input_streams : UInt32, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.process_frames.call(this, pVideoProcessor, pOutputArguments, num_input_streams, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoProcessCommandList1*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoProcessCommandList1*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def process_frames1(this : ID3D12VideoProcessCommandList1*, pVideoProcessor : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, num_input_streams : UInt32, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*) : Void
@@ -12015,14 +11783,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoMotionEstimatorVtable,
-    query_interface : Proc(ID3D12VideoMotionEstimator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoMotionEstimator*, UInt32),
-    release : Proc(ID3D12VideoMotionEstimator*, UInt32),
-    get_private_data : Proc(ID3D12VideoMotionEstimator*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoMotionEstimator*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoMotionEstimator*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoMotionEstimator*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoMotionEstimator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_desc : Proc(ID3D12VideoMotionEstimator*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_DESC),
     get_protected_resource_session : Proc(ID3D12VideoMotionEstimator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
@@ -12030,30 +11790,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoMotionEstimator, lpVtbl : ID3D12VideoMotionEstimatorVtable* do
     GUID = LibC::GUID.new(0x33fdae0e_u32, 0x98b_u16, 0x428f_u16, StaticArray[0x87_u8, 0xbb_u8, 0x34_u8, 0xb6_u8, 0x95_u8, 0xde_u8, 0x8_u8, 0xf8_u8])
-    def query_interface(this : ID3D12VideoMotionEstimator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoMotionEstimator*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoMotionEstimator*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoMotionEstimator*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoMotionEstimator*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoMotionEstimator*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoMotionEstimator*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoMotionEstimator*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_desc(this : ID3D12VideoMotionEstimator*) : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_DESC
       @lpVtbl.try &.value.get_desc.call(this)
     end
@@ -12066,14 +11802,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoMotionVectorHeapVtable,
-    query_interface : Proc(ID3D12VideoMotionVectorHeap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoMotionVectorHeap*, UInt32),
-    release : Proc(ID3D12VideoMotionVectorHeap*, UInt32),
-    get_private_data : Proc(ID3D12VideoMotionVectorHeap*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoMotionVectorHeap*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoMotionVectorHeap*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoMotionVectorHeap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoMotionVectorHeap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_desc : Proc(ID3D12VideoMotionVectorHeap*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC),
     get_protected_resource_session : Proc(ID3D12VideoMotionVectorHeap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
@@ -12081,30 +11809,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoMotionVectorHeap, lpVtbl : ID3D12VideoMotionVectorHeapVtable* do
     GUID = LibC::GUID.new(0x5be17987_u32, 0x743a_u16, 0x4061_u16, StaticArray[0x83_u8, 0x4b_u8, 0x23_u8, 0xd2_u8, 0x2d_u8, 0xae_u8, 0xa5_u8, 0x5_u8])
-    def query_interface(this : ID3D12VideoMotionVectorHeap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoMotionVectorHeap*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoMotionVectorHeap*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoMotionVectorHeap*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoMotionVectorHeap*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoMotionVectorHeap*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoMotionVectorHeap*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoMotionVectorHeap*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_desc(this : ID3D12VideoMotionVectorHeap*) : Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC
       @lpVtbl.try &.value.get_desc.call(this)
     end
@@ -12164,63 +11868,27 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncodeCommandListVtable,
-    query_interface : Proc(ID3D12VideoEncodeCommandList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncodeCommandList*, UInt32),
-    release : Proc(ID3D12VideoEncodeCommandList*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncodeCommandList*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncodeCommandList*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncodeCommandList*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncodeCommandList*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncodeCommandList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoEncodeCommandList*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoEncodeCommandList*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoEncodeCommandList*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoEncodeCommandList*, Void),
-    resource_barrier : Proc(ID3D12VideoEncodeCommandList*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoEncodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoEncodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoEncodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoEncodeCommandList*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoEncodeCommandList*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoEncodeCommandList*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoEncodeCommandList*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoEncodeCommandList*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoEncodeCommandList*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoEncodeCommandList*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoEncodeCommandList*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoEncodeCommandList*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoEncodeCommandList*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoEncodeCommandList*, Void),
     estimate_motion : Proc(ID3D12VideoEncodeCommandList*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*, Void),
     resolve_motion_vector_heap : Proc(ID3D12VideoEncodeCommandList*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList*, UInt32, Void**, Void**, Void),
     set_protected_resource_session : Proc(ID3D12VideoEncodeCommandList*, Void*, Void)
 
 
   @[Extern]
   record ID3D12VideoEncodeCommandList, lpVtbl : ID3D12VideoEncodeCommandListVtable* do
     GUID = LibC::GUID.new(0x8455293a_u32, 0xcbd_u16, 0x4831_u16, StaticArray[0x9b_u8, 0x39_u8, 0xfb_u8, 0xdb_u8, 0xab_u8, 0x72_u8, 0x47_u8, 0x23_u8])
-    def query_interface(this : ID3D12VideoEncodeCommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncodeCommandList*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncodeCommandList*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncodeCommandList*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncodeCommandList*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncodeCommandList*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncodeCommandList*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncodeCommandList*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoEncodeCommandList*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoEncodeCommandList*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -12230,22 +11898,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoEncodeCommandList*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoEncodeCommandList*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoEncodeCommandList*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoEncodeCommandList*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoEncodeCommandList*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoEncodeCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoEncodeCommandList*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoEncodeCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoEncodeCommandList*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoEncodeCommandList*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoEncodeCommandList*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoEncodeCommandList*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoEncodeCommandList*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoEncodeCommandList*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -12263,7 +11931,7 @@ module Win32cr::Media::MediaFoundation
     def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
       @lpVtbl.try &.value.resolve_motion_vector_heap.call(this, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def set_protected_resource_session(this : ID3D12VideoEncodeCommandList*, pProtectedResourceSession : Void*) : Void
@@ -12275,14 +11943,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecoder1Vtable,
-    query_interface : Proc(ID3D12VideoDecoder1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecoder1*, UInt32),
-    release : Proc(ID3D12VideoDecoder1*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecoder1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecoder1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecoder1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecoder1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecoder1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_desc : Proc(ID3D12VideoDecoder1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_DESC),
     get_protected_resource_session : Proc(ID3D12VideoDecoder1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
@@ -12290,30 +11950,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoDecoder1, lpVtbl : ID3D12VideoDecoder1Vtable* do
     GUID = LibC::GUID.new(0x79a2e5fb_u32, 0xccd2_u16, 0x469a_u16, StaticArray[0x9f_u8, 0xde_u8, 0x19_u8, 0x5d_u8, 0x10_u8, 0x95_u8, 0x1f_u8, 0x7e_u8])
-    def query_interface(this : ID3D12VideoDecoder1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecoder1*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecoder1*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecoder1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecoder1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecoder1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecoder1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecoder1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_desc(this : ID3D12VideoDecoder1*) : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_DESC
       @lpVtbl.try &.value.get_desc.call(this)
     end
@@ -12326,14 +11962,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecoderHeap1Vtable,
-    query_interface : Proc(ID3D12VideoDecoderHeap1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecoderHeap1*, UInt32),
-    release : Proc(ID3D12VideoDecoderHeap1*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecoderHeap1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecoderHeap1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecoderHeap1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecoderHeap1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecoderHeap1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_desc : Proc(ID3D12VideoDecoderHeap1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC),
     get_protected_resource_session : Proc(ID3D12VideoDecoderHeap1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
@@ -12341,30 +11969,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoDecoderHeap1, lpVtbl : ID3D12VideoDecoderHeap1Vtable* do
     GUID = LibC::GUID.new(0xda1d98c5_u32, 0x539f_u16, 0x41b2_u16, StaticArray[0xbf_u8, 0x6b_u8, 0x11_u8, 0x98_u8, 0xa0_u8, 0x3b_u8, 0x6d_u8, 0x26_u8])
-    def query_interface(this : ID3D12VideoDecoderHeap1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecoderHeap1*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecoderHeap1*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecoderHeap1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecoderHeap1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecoderHeap1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecoderHeap1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecoderHeap1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_desc(this : ID3D12VideoDecoderHeap1*) : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODER_HEAP_DESC
       @lpVtbl.try &.value.get_desc.call(this)
     end
@@ -12377,14 +11981,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoProcessor1Vtable,
-    query_interface : Proc(ID3D12VideoProcessor1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoProcessor1*, UInt32),
-    release : Proc(ID3D12VideoProcessor1*, UInt32),
-    get_private_data : Proc(ID3D12VideoProcessor1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoProcessor1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoProcessor1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoProcessor1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoProcessor1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_node_mask : Proc(ID3D12VideoProcessor1*, UInt32),
     get_num_input_stream_descs : Proc(ID3D12VideoProcessor1*, UInt32),
     get_input_stream_descs : Proc(ID3D12VideoProcessor1*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, Win32cr::Foundation::HRESULT),
@@ -12395,30 +11991,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoProcessor1, lpVtbl : ID3D12VideoProcessor1Vtable* do
     GUID = LibC::GUID.new(0xf3cfe615_u32, 0x553f_u16, 0x425c_u16, StaticArray[0x86_u8, 0xd8_u8, 0xee_u8, 0x8c_u8, 0x1b_u8, 0x1f_u8, 0xb0_u8, 0x1c_u8])
-    def query_interface(this : ID3D12VideoProcessor1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoProcessor1*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoProcessor1*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoProcessor1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoProcessor1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoProcessor1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoProcessor1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoProcessor1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_node_mask(this : ID3D12VideoProcessor1*) : UInt32
       @lpVtbl.try &.value.get_node_mask.call(this)
     end
@@ -12440,14 +12012,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoExtensionCommandVtable,
-    query_interface : Proc(ID3D12VideoExtensionCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoExtensionCommand*, UInt32),
-    release : Proc(ID3D12VideoExtensionCommand*, UInt32),
-    get_private_data : Proc(ID3D12VideoExtensionCommand*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoExtensionCommand*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoExtensionCommand*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoExtensionCommand*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoExtensionCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_desc : Proc(ID3D12VideoExtensionCommand*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_DESC),
     get_protected_resource_session : Proc(ID3D12VideoExtensionCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
@@ -12455,30 +12019,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoExtensionCommand, lpVtbl : ID3D12VideoExtensionCommandVtable* do
     GUID = LibC::GUID.new(0x554e41e8_u32, 0xae8e_u16, 0x4a8c_u16, StaticArray[0xb7_u8, 0xd2_u8, 0x5b_u8, 0x4f_u8, 0x27_u8, 0x4a_u8, 0x30_u8, 0xe4_u8])
-    def query_interface(this : ID3D12VideoExtensionCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoExtensionCommand*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoExtensionCommand*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoExtensionCommand*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoExtensionCommand*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoExtensionCommand*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoExtensionCommand*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoExtensionCommand*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_desc(this : ID3D12VideoExtensionCommand*) : Win32cr::Media::MediaFoundation::D3D12_VIDEO_EXTENSION_COMMAND_DESC
       @lpVtbl.try &.value.get_desc.call(this)
     end
@@ -12558,29 +12098,20 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecodeCommandList2Vtable,
-    query_interface : Proc(ID3D12VideoDecodeCommandList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecodeCommandList2*, UInt32),
-    release : Proc(ID3D12VideoDecodeCommandList2*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecodeCommandList2*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecodeCommandList2*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecodeCommandList2*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecodeCommandList2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecodeCommandList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoDecodeCommandList2*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoDecodeCommandList2*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoDecodeCommandList2*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoDecodeCommandList2*, Void),
-    resource_barrier : Proc(ID3D12VideoDecodeCommandList2*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoDecodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoDecodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoDecodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoDecodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoDecodeCommandList2*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoDecodeCommandList2*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoDecodeCommandList2*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoDecodeCommandList2*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoDecodeCommandList2*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoDecodeCommandList2*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoDecodeCommandList2*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoDecodeCommandList2*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoDecodeCommandList2*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoDecodeCommandList2*, Void),
     decode_frame : Proc(ID3D12VideoDecodeCommandList2*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList2*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList2*, UInt32, Void**, Void**, Void),
     decode_frame1 : Proc(ID3D12VideoDecodeCommandList2*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void),
     set_protected_resource_session : Proc(ID3D12VideoDecodeCommandList2*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoDecodeCommandList2*, Void*, Void*, LibC::UIntPtrT, Void),
@@ -12590,33 +12121,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoDecodeCommandList2, lpVtbl : ID3D12VideoDecodeCommandList2Vtable* do
     GUID = LibC::GUID.new(0x6e120880_u32, 0xc114_u16, 0x4153_u16, StaticArray[0x80_u8, 0x36_u8, 0xd2_u8, 0x47_u8, 0x5_u8, 0x1e_u8, 0x17_u8, 0x29_u8])
-    def query_interface(this : ID3D12VideoDecodeCommandList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecodeCommandList2*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecodeCommandList2*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecodeCommandList2*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecodeCommandList2*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecodeCommandList2*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecodeCommandList2*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecodeCommandList2*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoDecodeCommandList2*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoDecodeCommandList2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -12626,22 +12130,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoDecodeCommandList2*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoDecodeCommandList2*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoDecodeCommandList2*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoDecodeCommandList2*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoDecodeCommandList2*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoDecodeCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoDecodeCommandList2*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoDecodeCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoDecodeCommandList2*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoDecodeCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoDecodeCommandList2*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoDecodeCommandList2*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoDecodeCommandList2*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoDecodeCommandList2*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -12656,7 +12160,7 @@ module Win32cr::Media::MediaFoundation
     def decode_frame(this : ID3D12VideoDecodeCommandList2*, pDecoder : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.decode_frame.call(this, pDecoder, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList2*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList2*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def decode_frame1(this : ID3D12VideoDecodeCommandList2*, pDecoder : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
@@ -12677,66 +12181,30 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoDecodeCommandList3Vtable,
-    query_interface : Proc(ID3D12VideoDecodeCommandList3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoDecodeCommandList3*, UInt32),
-    release : Proc(ID3D12VideoDecodeCommandList3*, UInt32),
-    get_private_data : Proc(ID3D12VideoDecodeCommandList3*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoDecodeCommandList3*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoDecodeCommandList3*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoDecodeCommandList3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoDecodeCommandList3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoDecodeCommandList3*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoDecodeCommandList3*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoDecodeCommandList3*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoDecodeCommandList3*, Void),
-    resource_barrier : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoDecodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoDecodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoDecodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoDecodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoDecodeCommandList3*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoDecodeCommandList3*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoDecodeCommandList3*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoDecodeCommandList3*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoDecodeCommandList3*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoDecodeCommandList3*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoDecodeCommandList3*, Void),
     decode_frame : Proc(ID3D12VideoDecodeCommandList3*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Void**, Void**, Void),
     decode_frame1 : Proc(ID3D12VideoDecodeCommandList3*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void),
     set_protected_resource_session : Proc(ID3D12VideoDecodeCommandList3*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoDecodeCommandList3*, Void*, Void*, LibC::UIntPtrT, Void),
     execute_extension_command : Proc(ID3D12VideoDecodeCommandList3*, Void*, Void*, LibC::UIntPtrT, Void),
-    barrier : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*, Void)
+    barrier : Proc(ID3D12VideoDecodeCommandList3*, UInt32, Void**, Void)
 
 
   @[Extern]
   record ID3D12VideoDecodeCommandList3, lpVtbl : ID3D12VideoDecodeCommandList3Vtable* do
     GUID = LibC::GUID.new(0x2aee8c37_u32, 0x9562_u16, 0x42da_u16, StaticArray[0x8a_u8, 0xbf_u8, 0x61_u8, 0xef_u8, 0xeb_u8, 0x2e_u8, 0x45_u8, 0x13_u8])
-    def query_interface(this : ID3D12VideoDecodeCommandList3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoDecodeCommandList3*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoDecodeCommandList3*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoDecodeCommandList3*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoDecodeCommandList3*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoDecodeCommandList3*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoDecodeCommandList3*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoDecodeCommandList3*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoDecodeCommandList3*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoDecodeCommandList3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -12746,22 +12214,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoDecodeCommandList3*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoDecodeCommandList3*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoDecodeCommandList3*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoDecodeCommandList3*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoDecodeCommandList3*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoDecodeCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoDecodeCommandList3*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoDecodeCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoDecodeCommandList3*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoDecodeCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoDecodeCommandList3*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoDecodeCommandList3*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoDecodeCommandList3*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoDecodeCommandList3*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -12776,7 +12244,7 @@ module Win32cr::Media::MediaFoundation
     def decode_frame(this : ID3D12VideoDecodeCommandList3*, pDecoder : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.decode_frame.call(this, pDecoder, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList3*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoDecodeCommandList3*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def decode_frame1(this : ID3D12VideoDecodeCommandList3*, pDecoder : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
@@ -12791,7 +12259,7 @@ module Win32cr::Media::MediaFoundation
     def execute_extension_command(this : ID3D12VideoDecodeCommandList3*, pExtensionCommand : Void*, pExecutionParameters : Void*, execution_parameters_size_in_bytes : LibC::UIntPtrT) : Void
       @lpVtbl.try &.value.execute_extension_command.call(this, pExtensionCommand, pExecutionParameters, execution_parameters_size_in_bytes)
     end
-    def barrier(this : ID3D12VideoDecodeCommandList3*, num_barrier_groups : UInt32, pBarrierGroups : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*) : Void
+    def barrier(this : ID3D12VideoDecodeCommandList3*, num_barrier_groups : UInt32, pBarrierGroups : Void**) : Void
       @lpVtbl.try &.value.barrier.call(this, num_barrier_groups, pBarrierGroups)
     end
 
@@ -12800,29 +12268,20 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoProcessCommandList2Vtable,
-    query_interface : Proc(ID3D12VideoProcessCommandList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoProcessCommandList2*, UInt32),
-    release : Proc(ID3D12VideoProcessCommandList2*, UInt32),
-    get_private_data : Proc(ID3D12VideoProcessCommandList2*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoProcessCommandList2*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoProcessCommandList2*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoProcessCommandList2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoProcessCommandList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoProcessCommandList2*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoProcessCommandList2*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoProcessCommandList2*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoProcessCommandList2*, Void),
-    resource_barrier : Proc(ID3D12VideoProcessCommandList2*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoProcessCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoProcessCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoProcessCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoProcessCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoProcessCommandList2*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoProcessCommandList2*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoProcessCommandList2*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoProcessCommandList2*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoProcessCommandList2*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoProcessCommandList2*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoProcessCommandList2*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoProcessCommandList2*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoProcessCommandList2*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoProcessCommandList2*, Void),
     process_frames : Proc(ID3D12VideoProcessCommandList2*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList2*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList2*, UInt32, Void**, Void**, Void),
     process_frames1 : Proc(ID3D12VideoProcessCommandList2*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*, Void),
     set_protected_resource_session : Proc(ID3D12VideoProcessCommandList2*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoProcessCommandList2*, Void*, Void*, LibC::UIntPtrT, Void),
@@ -12832,33 +12291,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoProcessCommandList2, lpVtbl : ID3D12VideoProcessCommandList2Vtable* do
     GUID = LibC::GUID.new(0xdb525ae4_u32, 0x6ad6_u16, 0x473c_u16, StaticArray[0xba_u8, 0xa7_u8, 0x59_u8, 0xb2_u8, 0xe3_u8, 0x70_u8, 0x82_u8, 0xe4_u8])
-    def query_interface(this : ID3D12VideoProcessCommandList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoProcessCommandList2*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoProcessCommandList2*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoProcessCommandList2*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoProcessCommandList2*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoProcessCommandList2*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoProcessCommandList2*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoProcessCommandList2*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoProcessCommandList2*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoProcessCommandList2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -12868,22 +12300,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoProcessCommandList2*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoProcessCommandList2*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoProcessCommandList2*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoProcessCommandList2*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoProcessCommandList2*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoProcessCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoProcessCommandList2*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoProcessCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoProcessCommandList2*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoProcessCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoProcessCommandList2*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoProcessCommandList2*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoProcessCommandList2*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoProcessCommandList2*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -12898,7 +12330,7 @@ module Win32cr::Media::MediaFoundation
     def process_frames(this : ID3D12VideoProcessCommandList2*, pVideoProcessor : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, num_input_streams : UInt32, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.process_frames.call(this, pVideoProcessor, pOutputArguments, num_input_streams, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoProcessCommandList2*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoProcessCommandList2*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def process_frames1(this : ID3D12VideoProcessCommandList2*, pVideoProcessor : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, num_input_streams : UInt32, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*) : Void
@@ -12919,66 +12351,30 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoProcessCommandList3Vtable,
-    query_interface : Proc(ID3D12VideoProcessCommandList3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoProcessCommandList3*, UInt32),
-    release : Proc(ID3D12VideoProcessCommandList3*, UInt32),
-    get_private_data : Proc(ID3D12VideoProcessCommandList3*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoProcessCommandList3*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoProcessCommandList3*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoProcessCommandList3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoProcessCommandList3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoProcessCommandList3*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoProcessCommandList3*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoProcessCommandList3*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoProcessCommandList3*, Void),
-    resource_barrier : Proc(ID3D12VideoProcessCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoProcessCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoProcessCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoProcessCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoProcessCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoProcessCommandList3*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoProcessCommandList3*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoProcessCommandList3*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoProcessCommandList3*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoProcessCommandList3*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoProcessCommandList3*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoProcessCommandList3*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoProcessCommandList3*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoProcessCommandList3*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoProcessCommandList3*, Void),
     process_frames : Proc(ID3D12VideoProcessCommandList3*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoProcessCommandList3*, UInt32, Void**, Void**, Void),
     process_frames1 : Proc(ID3D12VideoProcessCommandList3*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*, Void),
     set_protected_resource_session : Proc(ID3D12VideoProcessCommandList3*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoProcessCommandList3*, Void*, Void*, LibC::UIntPtrT, Void),
     execute_extension_command : Proc(ID3D12VideoProcessCommandList3*, Void*, Void*, LibC::UIntPtrT, Void),
-    barrier : Proc(ID3D12VideoProcessCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*, Void)
+    barrier : Proc(ID3D12VideoProcessCommandList3*, UInt32, Void**, Void)
 
 
   @[Extern]
   record ID3D12VideoProcessCommandList3, lpVtbl : ID3D12VideoProcessCommandList3Vtable* do
     GUID = LibC::GUID.new(0x1a0a4ca4_u32, 0x9f08_u16, 0x40ce_u16, StaticArray[0x95_u8, 0x58_u8, 0xb4_u8, 0x11_u8, 0xfd_u8, 0x26_u8, 0x66_u8, 0xff_u8])
-    def query_interface(this : ID3D12VideoProcessCommandList3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoProcessCommandList3*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoProcessCommandList3*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoProcessCommandList3*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoProcessCommandList3*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoProcessCommandList3*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoProcessCommandList3*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoProcessCommandList3*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoProcessCommandList3*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoProcessCommandList3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -12988,22 +12384,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoProcessCommandList3*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoProcessCommandList3*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoProcessCommandList3*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoProcessCommandList3*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoProcessCommandList3*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoProcessCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoProcessCommandList3*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoProcessCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoProcessCommandList3*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoProcessCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoProcessCommandList3*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoProcessCommandList3*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoProcessCommandList3*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoProcessCommandList3*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -13018,7 +12414,7 @@ module Win32cr::Media::MediaFoundation
     def process_frames(this : ID3D12VideoProcessCommandList3*, pVideoProcessor : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, num_input_streams : UInt32, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*) : Void
       @lpVtbl.try &.value.process_frames.call(this, pVideoProcessor, pOutputArguments, num_input_streams, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoProcessCommandList3*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoProcessCommandList3*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def process_frames1(this : ID3D12VideoProcessCommandList3*, pVideoProcessor : Void*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, num_input_streams : UInt32, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*) : Void
@@ -13033,7 +12429,7 @@ module Win32cr::Media::MediaFoundation
     def execute_extension_command(this : ID3D12VideoProcessCommandList3*, pExtensionCommand : Void*, pExecutionParameters : Void*, execution_parameters_size_in_bytes : LibC::UIntPtrT) : Void
       @lpVtbl.try &.value.execute_extension_command.call(this, pExtensionCommand, pExecutionParameters, execution_parameters_size_in_bytes)
     end
-    def barrier(this : ID3D12VideoProcessCommandList3*, num_barrier_groups : UInt32, pBarrierGroups : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*) : Void
+    def barrier(this : ID3D12VideoProcessCommandList3*, num_barrier_groups : UInt32, pBarrierGroups : Void**) : Void
       @lpVtbl.try &.value.barrier.call(this, num_barrier_groups, pBarrierGroups)
     end
 
@@ -13042,30 +12438,21 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncodeCommandList1Vtable,
-    query_interface : Proc(ID3D12VideoEncodeCommandList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncodeCommandList1*, UInt32),
-    release : Proc(ID3D12VideoEncodeCommandList1*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncodeCommandList1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncodeCommandList1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncodeCommandList1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncodeCommandList1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncodeCommandList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoEncodeCommandList1*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoEncodeCommandList1*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoEncodeCommandList1*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoEncodeCommandList1*, Void),
-    resource_barrier : Proc(ID3D12VideoEncodeCommandList1*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoEncodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoEncodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoEncodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoEncodeCommandList1*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoEncodeCommandList1*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoEncodeCommandList1*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoEncodeCommandList1*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoEncodeCommandList1*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoEncodeCommandList1*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoEncodeCommandList1*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoEncodeCommandList1*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoEncodeCommandList1*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoEncodeCommandList1*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoEncodeCommandList1*, Void),
     estimate_motion : Proc(ID3D12VideoEncodeCommandList1*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*, Void),
     resolve_motion_vector_heap : Proc(ID3D12VideoEncodeCommandList1*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList1*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList1*, UInt32, Void**, Void**, Void),
     set_protected_resource_session : Proc(ID3D12VideoEncodeCommandList1*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoEncodeCommandList1*, Void*, Void*, LibC::UIntPtrT, Void),
     execute_extension_command : Proc(ID3D12VideoEncodeCommandList1*, Void*, Void*, LibC::UIntPtrT, Void)
@@ -13074,33 +12461,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoEncodeCommandList1, lpVtbl : ID3D12VideoEncodeCommandList1Vtable* do
     GUID = LibC::GUID.new(0x94971eca_u32, 0x2bdb_u16, 0x4769_u16, StaticArray[0x88_u8, 0xcf_u8, 0x36_u8, 0x75_u8, 0xea_u8, 0x75_u8, 0x7e_u8, 0xbc_u8])
-    def query_interface(this : ID3D12VideoEncodeCommandList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncodeCommandList1*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncodeCommandList1*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncodeCommandList1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncodeCommandList1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncodeCommandList1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncodeCommandList1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncodeCommandList1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoEncodeCommandList1*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoEncodeCommandList1*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -13110,22 +12470,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoEncodeCommandList1*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoEncodeCommandList1*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoEncodeCommandList1*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoEncodeCommandList1*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoEncodeCommandList1*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoEncodeCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoEncodeCommandList1*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoEncodeCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoEncodeCommandList1*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoEncodeCommandList1*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoEncodeCommandList1*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoEncodeCommandList1*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoEncodeCommandList1*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoEncodeCommandList1*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -13143,7 +12503,7 @@ module Win32cr::Media::MediaFoundation
     def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList1*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
       @lpVtbl.try &.value.resolve_motion_vector_heap.call(this, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList1*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList1*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def set_protected_resource_session(this : ID3D12VideoEncodeCommandList1*, pProtectedResourceSession : Void*) : Void
@@ -13161,14 +12521,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncoderVtable,
-    query_interface : Proc(ID3D12VideoEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncoder*, UInt32),
-    release : Proc(ID3D12VideoEncoder*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncoder*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncoder*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncoder*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncoder*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_node_mask : Proc(ID3D12VideoEncoder*, UInt32),
     get_encoder_flags : Proc(ID3D12VideoEncoder*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_FLAGS),
     get_codec : Proc(ID3D12VideoEncoder*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC),
@@ -13181,30 +12533,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoEncoder, lpVtbl : ID3D12VideoEncoderVtable* do
     GUID = LibC::GUID.new(0x2e0d212d_u32, 0x8df9_u16, 0x44a6_u16, StaticArray[0xa7_u8, 0x70_u8, 0xbb_u8, 0x28_u8, 0x9b_u8, 0x18_u8, 0x27_u8, 0x37_u8])
-    def query_interface(this : ID3D12VideoEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncoder*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncoder*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncoder*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncoder*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncoder*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncoder*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncoder*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_node_mask(this : ID3D12VideoEncoder*) : UInt32
       @lpVtbl.try &.value.get_node_mask.call(this)
     end
@@ -13232,14 +12560,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncoderHeapVtable,
-    query_interface : Proc(ID3D12VideoEncoderHeap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncoderHeap*, UInt32),
-    release : Proc(ID3D12VideoEncoderHeap*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncoderHeap*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncoderHeap*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncoderHeap*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncoderHeap*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncoderHeap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_node_mask : Proc(ID3D12VideoEncoderHeap*, UInt32),
     get_encoder_heap_flags : Proc(ID3D12VideoEncoderHeap*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_FLAGS),
     get_codec : Proc(ID3D12VideoEncoderHeap*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC),
@@ -13252,30 +12572,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoEncoderHeap, lpVtbl : ID3D12VideoEncoderHeapVtable* do
     GUID = LibC::GUID.new(0x22b35d96_u32, 0x876a_u16, 0x44c0_u16, StaticArray[0xb2_u8, 0x5e_u8, 0xfb_u8, 0x8c_u8, 0x9c_u8, 0x7f_u8, 0x1c_u8, 0x4a_u8])
-    def query_interface(this : ID3D12VideoEncoderHeap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncoderHeap*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncoderHeap*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncoderHeap*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncoderHeap*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncoderHeap*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncoderHeap*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncoderHeap*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_node_mask(this : ID3D12VideoEncoderHeap*) : UInt32
       @lpVtbl.try &.value.get_node_mask.call(this)
     end
@@ -13378,30 +12674,21 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncodeCommandList2Vtable,
-    query_interface : Proc(ID3D12VideoEncodeCommandList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncodeCommandList2*, UInt32),
-    release : Proc(ID3D12VideoEncodeCommandList2*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncodeCommandList2*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncodeCommandList2*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncodeCommandList2*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncodeCommandList2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncodeCommandList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoEncodeCommandList2*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoEncodeCommandList2*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoEncodeCommandList2*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoEncodeCommandList2*, Void),
-    resource_barrier : Proc(ID3D12VideoEncodeCommandList2*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoEncodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoEncodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoEncodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoEncodeCommandList2*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoEncodeCommandList2*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoEncodeCommandList2*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoEncodeCommandList2*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoEncodeCommandList2*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoEncodeCommandList2*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoEncodeCommandList2*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoEncodeCommandList2*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoEncodeCommandList2*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoEncodeCommandList2*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoEncodeCommandList2*, Void),
     estimate_motion : Proc(ID3D12VideoEncodeCommandList2*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*, Void),
     resolve_motion_vector_heap : Proc(ID3D12VideoEncodeCommandList2*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList2*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList2*, UInt32, Void**, Void**, Void),
     set_protected_resource_session : Proc(ID3D12VideoEncodeCommandList2*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoEncodeCommandList2*, Void*, Void*, LibC::UIntPtrT, Void),
     execute_extension_command : Proc(ID3D12VideoEncodeCommandList2*, Void*, Void*, LibC::UIntPtrT, Void),
@@ -13412,33 +12699,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoEncodeCommandList2, lpVtbl : ID3D12VideoEncodeCommandList2Vtable* do
     GUID = LibC::GUID.new(0x895491e2_u32, 0xe701_u16, 0x46a9_u16, StaticArray[0x9a_u8, 0x1f_u8, 0x8d_u8, 0x34_u8, 0x80_u8, 0xed_u8, 0x86_u8, 0x7a_u8])
-    def query_interface(this : ID3D12VideoEncodeCommandList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncodeCommandList2*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncodeCommandList2*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncodeCommandList2*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncodeCommandList2*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncodeCommandList2*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncodeCommandList2*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncodeCommandList2*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoEncodeCommandList2*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoEncodeCommandList2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -13448,22 +12708,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoEncodeCommandList2*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoEncodeCommandList2*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoEncodeCommandList2*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoEncodeCommandList2*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoEncodeCommandList2*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoEncodeCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoEncodeCommandList2*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoEncodeCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoEncodeCommandList2*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoEncodeCommandList2*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoEncodeCommandList2*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoEncodeCommandList2*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoEncodeCommandList2*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoEncodeCommandList2*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -13481,7 +12741,7 @@ module Win32cr::Media::MediaFoundation
     def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList2*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
       @lpVtbl.try &.value.resolve_motion_vector_heap.call(this, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList2*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList2*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def set_protected_resource_session(this : ID3D12VideoEncodeCommandList2*, pProtectedResourceSession : Void*) : Void
@@ -13505,68 +12765,32 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncodeCommandList3Vtable,
-    query_interface : Proc(ID3D12VideoEncodeCommandList3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncodeCommandList3*, UInt32),
-    release : Proc(ID3D12VideoEncodeCommandList3*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncodeCommandList3*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncodeCommandList3*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncodeCommandList3*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncodeCommandList3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncodeCommandList3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoEncodeCommandList3*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoEncodeCommandList3*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoEncodeCommandList3*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoEncodeCommandList3*, Void),
-    resource_barrier : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoEncodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoEncodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoEncodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoEncodeCommandList3*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoEncodeCommandList3*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoEncodeCommandList3*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoEncodeCommandList3*, Void),
     estimate_motion : Proc(ID3D12VideoEncodeCommandList3*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*, Void),
     resolve_motion_vector_heap : Proc(ID3D12VideoEncodeCommandList3*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Void**, Void**, Void),
     set_protected_resource_session : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void*, LibC::UIntPtrT, Void),
     execute_extension_command : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void*, LibC::UIntPtrT, Void),
     encode_frame : Proc(ID3D12VideoEncodeCommandList3*, Void*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS*, Void),
     resolve_encoder_output_metadata : Proc(ID3D12VideoEncodeCommandList3*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS*, Void),
-    barrier : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*, Void)
+    barrier : Proc(ID3D12VideoEncodeCommandList3*, UInt32, Void**, Void)
 
 
   @[Extern]
   record ID3D12VideoEncodeCommandList3, lpVtbl : ID3D12VideoEncodeCommandList3Vtable* do
     GUID = LibC::GUID.new(0x7f027b22_u32, 0x1515_u16, 0x4e85_u16, StaticArray[0xaa_u8, 0xd_u8, 0x2_u8, 0x64_u8, 0x86_u8, 0x58_u8, 0x5_u8, 0x76_u8])
-    def query_interface(this : ID3D12VideoEncodeCommandList3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncodeCommandList3*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncodeCommandList3*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncodeCommandList3*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncodeCommandList3*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncodeCommandList3*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncodeCommandList3*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncodeCommandList3*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoEncodeCommandList3*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoEncodeCommandList3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -13576,22 +12800,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoEncodeCommandList3*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoEncodeCommandList3*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoEncodeCommandList3*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoEncodeCommandList3*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoEncodeCommandList3*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoEncodeCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoEncodeCommandList3*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoEncodeCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoEncodeCommandList3*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoEncodeCommandList3*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoEncodeCommandList3*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoEncodeCommandList3*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoEncodeCommandList3*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoEncodeCommandList3*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -13609,7 +12833,7 @@ module Win32cr::Media::MediaFoundation
     def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList3*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
       @lpVtbl.try &.value.resolve_motion_vector_heap.call(this, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList3*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList3*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def set_protected_resource_session(this : ID3D12VideoEncodeCommandList3*, pProtectedResourceSession : Void*) : Void
@@ -13627,7 +12851,7 @@ module Win32cr::Media::MediaFoundation
     def resolve_encoder_output_metadata(this : ID3D12VideoEncodeCommandList3*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS*) : Void
       @lpVtbl.try &.value.resolve_encoder_output_metadata.call(this, pInputArguments, pOutputArguments)
     end
-    def barrier(this : ID3D12VideoEncodeCommandList3*, num_barrier_groups : UInt32, pBarrierGroups : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*) : Void
+    def barrier(this : ID3D12VideoEncodeCommandList3*, num_barrier_groups : UInt32, pBarrierGroups : Void**) : Void
       @lpVtbl.try &.value.barrier.call(this, num_barrier_groups, pBarrierGroups)
     end
 
@@ -13636,14 +12860,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncoderHeap1Vtable,
-    query_interface : Proc(ID3D12VideoEncoderHeap1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncoderHeap1*, UInt32),
-    release : Proc(ID3D12VideoEncoderHeap1*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncoderHeap1*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncoderHeap1*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncoderHeap1*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncoderHeap1*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncoderHeap1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_node_mask : Proc(ID3D12VideoEncoderHeap1*, UInt32),
     get_encoder_heap_flags : Proc(ID3D12VideoEncoderHeap1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_HEAP_FLAGS),
     get_codec : Proc(ID3D12VideoEncoderHeap1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_CODEC),
@@ -13657,30 +12873,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoEncoderHeap1, lpVtbl : ID3D12VideoEncoderHeap1Vtable* do
     GUID = LibC::GUID.new(0xea8f1968_u32, 0x4aa0_u16, 0x43a4_u16, StaticArray[0x9d_u8, 0x30_u8, 0xba_u8, 0x86_u8, 0xec_u8, 0x84_u8, 0xd4_u8, 0xf9_u8])
-    def query_interface(this : ID3D12VideoEncoderHeap1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncoderHeap1*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncoderHeap1*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncoderHeap1*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncoderHeap1*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncoderHeap1*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncoderHeap1*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncoderHeap1*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
     def get_node_mask(this : ID3D12VideoEncoderHeap1*) : UInt32
       @lpVtbl.try &.value.get_node_mask.call(this)
     end
@@ -13790,36 +12982,27 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
 
   record ID3D12VideoEncodeCommandList4Vtable,
-    query_interface : Proc(ID3D12VideoEncodeCommandList4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(ID3D12VideoEncodeCommandList4*, UInt32),
-    release : Proc(ID3D12VideoEncodeCommandList4*, UInt32),
-    get_private_data : Proc(ID3D12VideoEncodeCommandList4*, LibC::GUID*, UInt32*, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data : Proc(ID3D12VideoEncodeCommandList4*, LibC::GUID*, UInt32, Void*, Win32cr::Foundation::HRESULT),
-    set_private_data_interface : Proc(ID3D12VideoEncodeCommandList4*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
-    set_name : Proc(ID3D12VideoEncodeCommandList4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_device : Proc(ID3D12VideoEncodeCommandList4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    get_type : Proc(ID3D12VideoEncodeCommandList4*, Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE),
     close : Proc(ID3D12VideoEncodeCommandList4*, Win32cr::Foundation::HRESULT),
     reset : Proc(ID3D12VideoEncodeCommandList4*, Void*, Win32cr::Foundation::HRESULT),
     clear_state : Proc(ID3D12VideoEncodeCommandList4*, Void),
-    resource_barrier : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*, Void),
-    discard_resource : Proc(ID3D12VideoEncodeCommandList4*, Void*, Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*, Void),
-    begin_query : Proc(ID3D12VideoEncodeCommandList4*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    end_query : Proc(ID3D12VideoEncodeCommandList4*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, Void),
-    resolve_query_data : Proc(ID3D12VideoEncodeCommandList4*, Void*, Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, UInt32, UInt32, Void*, UInt64, Void),
-    set_predication : Proc(ID3D12VideoEncodeCommandList4*, Void*, UInt64, Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP, Void),
+    resource_barrier : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Void**, Void),
+    discard_resource : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void**, Void),
+    begin_query : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void*, UInt32, Void),
+    end_query : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void*, UInt32, Void),
+    resolve_query_data : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void*, UInt32, UInt32, Void*, UInt64, Void),
+    set_predication : Proc(ID3D12VideoEncodeCommandList4*, Void*, UInt64, Void*, Void),
     set_marker : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Void*, UInt32, Void),
     begin_event : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Void*, UInt32, Void),
     end_event : Proc(ID3D12VideoEncodeCommandList4*, Void),
     estimate_motion : Proc(ID3D12VideoEncodeCommandList4*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*, Void),
     resolve_motion_vector_heap : Proc(ID3D12VideoEncodeCommandList4*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*, Void),
-    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void),
+    write_buffer_immediate : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Void**, Void**, Void),
     set_protected_resource_session : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void),
     initialize_extension_command : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void*, LibC::UIntPtrT, Void),
     execute_extension_command : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void*, LibC::UIntPtrT, Void),
     encode_frame : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS*, Void),
     resolve_encoder_output_metadata : Proc(ID3D12VideoEncodeCommandList4*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS*, Void),
-    barrier : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*, Void),
+    barrier : Proc(ID3D12VideoEncodeCommandList4*, UInt32, Void**, Void),
     encode_frame1 : Proc(ID3D12VideoEncodeCommandList4*, Void*, Void*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS1*, Void),
     resolve_encoder_output_metadata1 : Proc(ID3D12VideoEncodeCommandList4*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS1*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS1*, Void),
     resolve_input_param_layout : Proc(ID3D12VideoEncodeCommandList4*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_INPUT_PARAM_LAYOUT_INPUT_ARGUMENTS*, Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_INPUT_PARAM_LAYOUT_OUTPUT_ARGUMENTS*, Void)
@@ -13828,33 +13011,6 @@ module Win32cr::Media::MediaFoundation
   @[Extern]
   record ID3D12VideoEncodeCommandList4, lpVtbl : ID3D12VideoEncodeCommandList4Vtable* do
     GUID = LibC::GUID.new(0x69aeb5b7_u32, 0x55f2_u16, 0x4012_u16, StaticArray[0x8b_u8, 0x73_u8, 0x3a_u8, 0x88_u8, 0xd6_u8, 0x5a_u8, 0x20_u8, 0x4c_u8])
-    def query_interface(this : ID3D12VideoEncodeCommandList4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : ID3D12VideoEncodeCommandList4*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : ID3D12VideoEncodeCommandList4*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_private_data(this : ID3D12VideoEncodeCommandList4*, guid : LibC::GUID*, pDataSize : UInt32*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_private_data.call(this, guid, pDataSize, pData)
-    end
-    def set_private_data(this : ID3D12VideoEncodeCommandList4*, guid : LibC::GUID*, data_size : UInt32, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data.call(this, guid, data_size, pData)
-    end
-    def set_private_data_interface(this : ID3D12VideoEncodeCommandList4*, guid : LibC::GUID*, pData : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_private_data_interface.call(this, guid, pData)
-    end
-    def set_name(this : ID3D12VideoEncodeCommandList4*, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_name.call(this, name)
-    end
-    def get_device(this : ID3D12VideoEncodeCommandList4*, riid : LibC::GUID*, ppvDevice : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_device.call(this, riid, ppvDevice)
-    end
-    def get_type(this : ID3D12VideoEncodeCommandList4*) : Win32cr::Graphics::Direct3D12::D3D12_COMMAND_LIST_TYPE
-      @lpVtbl.try &.value.get_type.call(this)
-    end
     def close(this : ID3D12VideoEncodeCommandList4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
@@ -13864,22 +13020,22 @@ module Win32cr::Media::MediaFoundation
     def clear_state(this : ID3D12VideoEncodeCommandList4*) : Void
       @lpVtbl.try &.value.clear_state.call(this)
     end
-    def resource_barrier(this : ID3D12VideoEncodeCommandList4*, num_barriers : UInt32, pBarriers : Win32cr::Graphics::Direct3D12::D3D12_RESOURCE_BARRIER*) : Void
+    def resource_barrier(this : ID3D12VideoEncodeCommandList4*, num_barriers : UInt32, pBarriers : Void**) : Void
       @lpVtbl.try &.value.resource_barrier.call(this, num_barriers, pBarriers)
     end
-    def discard_resource(this : ID3D12VideoEncodeCommandList4*, pResource : Void*, pRegion : Win32cr::Graphics::Direct3D12::D3D12_DISCARD_REGION*) : Void
+    def discard_resource(this : ID3D12VideoEncodeCommandList4*, pResource : Void*, pRegion : Void**) : Void
       @lpVtbl.try &.value.discard_resource.call(this, pResource, pRegion)
     end
-    def begin_query(this : ID3D12VideoEncodeCommandList4*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def begin_query(this : ID3D12VideoEncodeCommandList4*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.begin_query.call(this, pQueryHeap, type__, index)
     end
-    def end_query(this : ID3D12VideoEncodeCommandList4*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, index : UInt32) : Void
+    def end_query(this : ID3D12VideoEncodeCommandList4*, pQueryHeap : Void*, type__ : Void*, index : UInt32) : Void
       @lpVtbl.try &.value.end_query.call(this, pQueryHeap, type__, index)
     end
-    def resolve_query_data(this : ID3D12VideoEncodeCommandList4*, pQueryHeap : Void*, type__ : Win32cr::Graphics::Direct3D12::D3D12_QUERY_TYPE, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
+    def resolve_query_data(this : ID3D12VideoEncodeCommandList4*, pQueryHeap : Void*, type__ : Void*, start_index : UInt32, num_queries : UInt32, pDestinationBuffer : Void*, aligned_destination_buffer_offset : UInt64) : Void
       @lpVtbl.try &.value.resolve_query_data.call(this, pQueryHeap, type__, start_index, num_queries, pDestinationBuffer, aligned_destination_buffer_offset)
     end
-    def set_predication(this : ID3D12VideoEncodeCommandList4*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Win32cr::Graphics::Direct3D12::D3D12_PREDICATION_OP) : Void
+    def set_predication(this : ID3D12VideoEncodeCommandList4*, pBuffer : Void*, aligned_buffer_offset : UInt64, operation : Void*) : Void
       @lpVtbl.try &.value.set_predication.call(this, pBuffer, aligned_buffer_offset, operation)
     end
     def set_marker(this : ID3D12VideoEncodeCommandList4*, metadata : UInt32, pData : Void*, size : UInt32) : Void
@@ -13897,7 +13053,7 @@ module Win32cr::Media::MediaFoundation
     def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList4*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
       @lpVtbl.try &.value.resolve_motion_vector_heap.call(this, pOutputArguments, pInputArguments)
     end
-    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList4*, count : UInt32, pParams : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pModes : Win32cr::Graphics::Direct3D12::D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    def write_buffer_immediate(this : ID3D12VideoEncodeCommandList4*, count : UInt32, pParams : Void**, pModes : Void**) : Void
       @lpVtbl.try &.value.write_buffer_immediate.call(this, count, pParams, pModes)
     end
     def set_protected_resource_session(this : ID3D12VideoEncodeCommandList4*, pProtectedResourceSession : Void*) : Void
@@ -13915,7 +13071,7 @@ module Win32cr::Media::MediaFoundation
     def resolve_encoder_output_metadata(this : ID3D12VideoEncodeCommandList4*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS*) : Void
       @lpVtbl.try &.value.resolve_encoder_output_metadata.call(this, pInputArguments, pOutputArguments)
     end
-    def barrier(this : ID3D12VideoEncodeCommandList4*, num_barrier_groups : UInt32, pBarrierGroups : Win32cr::Graphics::Direct3D12::D3D12_BARRIER_GROUP*) : Void
+    def barrier(this : ID3D12VideoEncodeCommandList4*, num_barrier_groups : UInt32, pBarrierGroups : Void**) : Void
       @lpVtbl.try &.value.barrier.call(this, num_barrier_groups, pBarrierGroups)
     end
     def encode_frame1(this : ID3D12VideoEncodeCommandList4*, pEncoder : Void*, pHeap : Void*, pInputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS1*, pOutputArguments : Win32cr::Media::MediaFoundation::D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS1*) : Void
@@ -26570,6 +25726,37 @@ module Win32cr::Media::MediaFoundation
     end
     def get_audio_endpoint_id(this : IMFMediaEngineAudioEndpointId*, ppszEndpointId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_audio_endpoint_id.call(this, ppszEndpointId)
+    end
+
+  end
+
+  @[Extern]
+
+  record IMFMediaEngineVideoRendererEffectVtable,
+    query_interface : Proc(IMFMediaEngineVideoRendererEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMFMediaEngineVideoRendererEffect*, UInt32),
+    release : Proc(IMFMediaEngineVideoRendererEffect*, UInt32),
+    set_effect : Proc(IMFMediaEngineVideoRendererEffect*, Void*, Win32cr::Foundation::HRESULT),
+    clear_effect : Proc(IMFMediaEngineVideoRendererEffect*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IMFMediaEngineVideoRendererEffect, lpVtbl : IMFMediaEngineVideoRendererEffectVtable* do
+    GUID = LibC::GUID.new(0x6bdf1188_u32, 0x6ec8_u16, 0x44ff_u16, StaticArray[0x8c_u8, 0xcc_u8, 0xbf_u8, 0xca_u8, 0xd_u8, 0x12_u8, 0xaf_u8, 0xa3_u8])
+    def query_interface(this : IMFMediaEngineVideoRendererEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMFMediaEngineVideoRendererEffect*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMFMediaEngineVideoRendererEffect*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_effect(this : IMFMediaEngineVideoRendererEffect*, pEffect : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_effect.call(this, pEffect)
+    end
+    def clear_effect(this : IMFMediaEngineVideoRendererEffect*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_effect.call(this)
     end
 
   end

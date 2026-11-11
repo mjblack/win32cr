@@ -32,6 +32,7 @@ module Win32cr::System::Ioctl
   GUID_DEVINTERFACE_UNIFIED_ACCESS_RPMB = LibC::GUID.new(0x27447c21_u32, 0xbcc3_u16, 0x4d07_u16, StaticArray[0xa0_u8, 0x5b_u8, 0xa3_u8, 0x39_u8, 0x5b_u8, 0xb4_u8, 0xee_u8, 0xe7_u8])
   GUID_DEVICEDUMP_STORAGE_DEVICE = LibC::GUID.new(0xd8e2592f_u32, 0x1aab_u16, 0x4d56_u16, StaticArray[0xa7_u8, 0x46_u8, 0x1f_u8, 0x75_u8, 0x85_u8, 0xdf_u8, 0x40_u8, 0xf4_u8])
   GUID_DEVICEDUMP_DRIVER_STORAGE_PORT = LibC::GUID.new(0xda82441d_u32, 0x7142_u16, 0x4bc1_u16, StaticArray[0xb8_u8, 0x44_u8, 0x8_u8, 0x7_u8, 0xc5_u8, 0xa4_u8, 0xb6_u8, 0x7f_u8])
+  GUID_STORPORT_PAGING_DEVICE_DUMP = LibC::GUID.new(0xc939c73b_u32, 0x17dc_u16, 0x4a44_u16, StaticArray[0x90_u8, 0x4c_u8, 0xe2_u8, 0xd9_u8, 0x87_u8, 0xf5_u8, 0x26_u8, 0x49_u8])
   DEVPKEY_Storage_Portable = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 2_u32)
   DEVPKEY_Storage_Removable_Media = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 3_u32)
   DEVPKEY_Storage_System_Critical = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 4_u32)
@@ -92,6 +93,9 @@ module Win32cr::System::Ioctl
   IOCTL_STORAGE_FIRMWARE_GET_INFO = 2956288_u32
   IOCTL_STORAGE_FIRMWARE_DOWNLOAD = 3005444_u32
   IOCTL_STORAGE_FIRMWARE_ACTIVATE = 3005448_u32
+  IOCTL_STORAGE_BOOT_PARTITION_DOWNLOAD = 3005452_u32
+  IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE = 3005456_u32
+  IOCTL_STORAGE_BOOT_PARTITION_GET_INFO = 2956308_u32
   IOCTL_STORAGE_ENABLE_IDLE_POWER = 2956416_u32
   IOCTL_STORAGE_GET_IDLE_POWERUP_REASON = 2956420_u32
   IOCTL_STORAGE_POWER_ACTIVE = 2956424_u32
@@ -201,6 +205,10 @@ module Win32cr::System::Ioctl
   TC_PUBLIC_DATA_TYPE_ATASMART = "ATASMARTPages"
   CDB_SIZE = 16_u32
   TELEMETRY_COMMAND_SIZE = 16_u32
+  STOR_MAX_PAGING_DEVICES = 16_u32
+  STOR_PAGING_DEVICE_MINIPORT_NAME_LENGTH = 32_u32
+  STOR_PAGING_DEVICE_MODEL_NAME_LENGTH = 64_u32
+  STOR_PAGING_DEVICE_FW_REVISION_LENGTH = 16_u32
   DEVICEDUMP_CAP_PRIVATE_SECTION = 1_u32
   DEVICEDUMP_CAP_RESTRICTED_SECTION = 2_u32
   STORAGE_IDLE_POWERUP_REASON_VERSION_V1 = 1_u32
@@ -220,6 +228,12 @@ module Win32cr::System::Ioctl
   STORAGE_HW_FIRMWARE_REQUEST_FLAG_SWITCH_TO_EXISTING_FIRMWARE = 2147483648_u32
   STORAGE_HW_FIRMWARE_INVALID_SLOT = 255_u32
   STORAGE_HW_FIRMWARE_REVISION_LENGTH = 16_u32
+  STORAGE_HW_BOOT_PARTITION_REQUEST_FLAG_CONTROLLER = 1_u32
+  STORAGE_HW_BOOT_PARTITION_REQUEST_REPLACE_EXISTING_BOOT_PARTITION = 1073741824_u32
+  STORAGE_HW_BOOT_PARTITION_REQUEST_ACTIVATE_EXISTING_BOOT_PARTITION = 2147483648_u32
+  STORAGE_HW_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION = 1_u32
+  STORAGE_HW_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION = 1_u32
+  STORAGE_HW_BOOT_PARTITION_INFO_STRUCTURE_VERSION_V1 = 1_u32
   STORAGE_PROTOCOL_STRUCTURE_VERSION = 1_u32
   STORAGE_PROTOCOL_COMMAND_FLAG_ADAPTER_REQUEST = 2147483648_u32
   STORAGE_PROTOCOL_STATUS_PENDING = 0_u32
@@ -331,6 +345,8 @@ module Win32cr::System::Ioctl
   FILE_DEVICE_SVM = 99_u32
   FILE_DEVICE_HARDWARE_ACCELERATOR = 100_u32
   FILE_DEVICE_I3C = 101_u32
+  FILE_DEVICE_MULTITIER_MEMORY = 102_u32
+  FILE_DEVICE_CXL_TYPE3 = 103_u32
   METHOD_BUFFERED = 0_u32
   METHOD_IN_DIRECT = 1_u32
   METHOD_OUT_DIRECT = 2_u32
@@ -795,6 +811,12 @@ module Win32cr::System::Ioctl
   FSCTL_REFS_QUERY_ROLLBACK_PROTECTION_INFO = 590996_u32
   FSCTL_FILE_SOV_CHECK_RANGE = 591000_u32
   FSCTL_CASCADES_REFS_SET_FILE_REMOTE = 591004_u32
+  FSCTL_CIMFS_QUERY_BACKING_REGION_NAMES = 591008_u32
+  FSCTL_REFS_VOLUME_ATTESTATION_PREPARE_TO_SIGN = 591012_u32
+  FSCTL_REFS_VOLUME_ATTESTATION_INJECT_CERTIFICATE = 591016_u32
+  FSCTL_REFS_VOLUME_ATTESTATION_BIND_TO_TPM = 591020_u32
+  FSCTL_REFS_VOLUME_ATTESTATION_QUERY_STATUS = 591024_u32
+  FSCTL_REFS_VOLUME_ATTESTATION_RESET = 591028_u32
   GET_VOLUME_BITMAP_FLAG_MASK_METADATA = 1_u32
   FLAG_USN_TRACK_MODIFIED_RANGES_ENABLE = 1_u32
   USN_PAGE_SIZE = 4096_u32
@@ -961,10 +983,14 @@ module Win32cr::System::Ioctl
   REQUEST_OPLOCK_INPUT_FLAG_REQUEST = 1_u32
   REQUEST_OPLOCK_INPUT_FLAG_ACK = 2_u32
   REQUEST_OPLOCK_INPUT_FLAG_COMPLETE_ACK_ON_CLOSE = 4_u32
+  REQUEST_OPLOCK_INPUT_FLAG_RH_ALWAYS_BLOCK_UNTIL_ACK = 8_u32
+  REQUEST_OPLOCK_INPUT_FLAG_RH_IGNORE_WRITES = 16_u32
+  REQUEST_OPLOCK_INPUT_FLAG_RH_NO_NON_CACHED_IO = 32_u32
   REQUEST_OPLOCK_CURRENT_VERSION = 1_u32
   REQUEST_OPLOCK_OUTPUT_FLAG_ACK_REQUIRED = 1_u32
   REQUEST_OPLOCK_OUTPUT_FLAG_MODES_PROVIDED = 2_u32
   REQUEST_OPLOCK_OUTPUT_FLAG_WRITABLE_SECTION_PRESENT = 4_u32
+  REQUEST_OPLOCK_OUTPUT_FLAG_NON_CACHED_IO_PRESENT = 8_u32
   QUERY_DEPENDENT_VOLUME_REQUEST_FLAG_HOST_VOLUMES = 1_u32
   QUERY_DEPENDENT_VOLUME_REQUEST_FLAG_GUEST_VOLUMES = 2_u32
   SD_GLOBAL_CHANGE_TYPE_MACHINE_SID = 1_u32
@@ -1078,6 +1104,28 @@ module Win32cr::System::Ioctl
   PROJFS_PROTOCOL_VERSION = 3_u32
   EFS_TRACKED_OFFSET_HEADER_FLAG = 1_u32
   SPACES_TRACKED_OFFSET_HEADER_FLAG = 2_u32
+  CxlType3CommandEffectsLog = LibC::GUID.new(0xb5c0a90d_u32, 0x41bf_u16, 0x784b_u16, StaticArray[0x8f_u8, 0x79_u8, 0x96_u8, 0xb1_u8, 0x62_u8, 0x3b_u8, 0x3f_u8, 0x17_u8])
+  CxlType3VendorDebugLog = LibC::GUID.new(0xd919185e_u32, 0xa911_u16, 0xc40_u16, StaticArray[0x81_u8, 0x1f_u8, 0xd6_u8, 0x7_u8, 0x19_u8, 0x40_u8, 0x3d_u8, 0x86_u8])
+  CxlType3ComponentStateDumpLog = LibC::GUID.new(0xcfb4fab3_u32, 0xb601_u16, 0x3243_u16, StaticArray[0x94_u8, 0x3e_u8, 0x5e_u8, 0x99_u8, 0x62_u8, 0xf2_u8, 0x35_u8, 0x67_u8])
+  CxlType3DDR5ErrorCheckScrubLog = LibC::GUID.new(0x600d72f1_u32, 0xa9a7_u16, 0x643_u16, StaticArray[0xa0_u8, 0x3_u8, 0x11_u8, 0x94_u8, 0x8f_u8, 0x9e_u8, 0x7_u8, 0x7c_u8])
+  CxlType3MediaTestCapabilityLog = LibC::GUID.new(0x2ca3dfe6_u32, 0x3ed1_u16, 0x5c4a_u16, StaticArray[0x8c_u8, 0xa8_u8, 0x99_u8, 0xbe_u8, 0xbb_u8, 0xf7_u8, 0x31_u8, 0xa4_u8])
+  CxlType3MediaTestResultsShortLog = LibC::GUID.new(0x2255252c_u32, 0xe48c_u16, 0xec11_u16, StaticArray[0xb9_u8, 0x9_u8, 0x2_u8, 0x42_u8, 0xac_u8, 0x12_u8, 0x0_u8, 0x2_u8])
+  CxlType3MediaTestResultsLongLog = LibC::GUID.new(0x3e0bfec1_u32, 0x7a_u16, 0x8e44_u16, StaticArray[0xa2_u8, 0x4e_u8, 0xa6_u8, 0xaa_u8, 0xbb_u8, 0xfe_u8, 0x58_u8, 0x7a_u8])
+  CxlType3EventRecord_GeneralMedia = LibC::GUID.new(0x770acdfb_u32, 0x60c2_u16, 0x7f41_u16, StaticArray[0x85_u8, 0xa9_u8, 0x8_u8, 0x8b_u8, 0x16_u8, 0x21_u8, 0xeb_u8, 0xa6_u8])
+  CxlType3EventRecord_DRAM = LibC::GUID.new(0xb3cb1d60_u32, 0x69c_u16, 0xab4e_u16, StaticArray[0xb8_u8, 0xaf_u8, 0x4e_u8, 0x9b_u8, 0xfb_u8, 0x5c_u8, 0x96_u8, 0x24_u8])
+  CxlType3EventRecord_MemoryModule = LibC::GUID.new(0x757492fe_u32, 0x59dd_u16, 0x3943_u16, StaticArray[0xa5_u8, 0x86_u8, 0x79_u8, 0xba_u8, 0xb1_u8, 0x13_u8, 0xb7_u8, 0x74_u8])
+  CxlType3EventRecord_MemorySparing = LibC::GUID.new(0x403a1fe7_u32, 0x292d_u16, 0x9240_u16, StaticArray[0x8a_u8, 0x39_u8, 0x4d_u8, 0x1c_u8, 0x96_u8, 0x6c_u8, 0x7c_u8, 0x65_u8])
+  CxlType3EventRecord_DynamicCapacity = LibC::GUID.new(0xa7af95ca_u32, 0x83f1_u16, 0x1840_u16, StaticArray[0x8c_u8, 0x2f_u8, 0x95_u8, 0x26_u8, 0x8e_u8, 0x10_u8, 0x1a_u8, 0x2a_u8])
+  CXL_COMPONENT_REGISTER_BLOCK_ID = 1_u32
+  CXL_DEVICE_REGISTER_BLOCK_ID = 3_u32
+  CXL_MEMORY_LOW_PART_MASK = 4026531840_u32
+  CXL_COMPONENT_REGISTER_SIZE = 65536_u32
+  CXL_CACHEMEM_PRIMARY_RANGE_OFFSET = 4096_u32
+  CXL_MAILBOX_COMMAND_TIMEOUT_IN_SEC = 2_u32
+  CXL_FIRMWARE_REVISION_LENGTH = 16_u32
+  CXL_MAXIMUM_FIRMWARE_SLOTS = 4_u32
+  CXL_DPA_ADDRESS_MASK = 18446744073709551552_u64
+  CXL_CLEAR_POISON_WRITE_DATA_SIZE = 64_u32
 
   @[Flags]
   enum GPT_ATTRIBUTES : UInt64
@@ -1929,6 +1977,337 @@ module Win32cr::System::Ioctl
     FSBPIO_OUTFL_STREAM_BYPASS_PAUSED = 2_i32
     FSBPIO_OUTFL_FILTER_ATTACH_BLOCKED = 4_i32
     FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER = 8_i32
+  end
+  enum CXL_CACHEMEM_CAPABILITY_ID
+    CxlCacheMemCapabilityID_NullCapability = 0_i32
+    CxlCacheMemCapabilityID_Capability = 1_i32
+    CxlCacheMemCapabilityID_RASCapability = 2_i32
+    CxlCacheMemCapabilityID_SecurityCapability = 3_i32
+    CxlCacheMemCapabilityID_LinkCapability = 4_i32
+    CxlCacheMemCapabilityID_HDMDecoderCapability = 5_i32
+    CxlCacheMemCapabilityID_ExtendedSecurityCapability = 6_i32
+    CxlCacheMemCapabilityID_IDECapability = 7_i32
+    CxlCacheMemCapabilityID_SnoopFilterCapability = 8_i32
+    CxlCacheMemCapabilityID_TimeoutAndIsolationCapability = 9_i32
+    CxlCacheMemCapabilityID_ExtendedRegisterCapability = 10_i32
+    CxlCacheMemCapabilityID_BIRouteTableCapability = 11_i32
+    CxlCacheMemCapabilityID_BIDecoderCapability = 12_i32
+    CxlCacheMemCapabilityID_CacheIDRouteTableCapability = 13_i32
+    CxlCacheMemCapabilityID_CacheIDDecoderCapability = 14_i32
+    CxlCacheMemCapabilityID_ExtendedHDMDecoderCapability = 15_i32
+    CxlCacheMemCapabilityID_ExtendedMetadataCapability = 16_i32
+  end
+  enum CXL_HDM_DECODER_COUNT
+    CxlHdmDecoderCount_1 = 0_i32
+    CxlHdmDecoderCount_2 = 1_i32
+    CxlHdmDecoderCount_4 = 2_i32
+    CxlHdmDecoderCount_6 = 3_i32
+    CxlHdmDecoderCount_8 = 4_i32
+    CxlHdmDecoderCount_10 = 5_i32
+    CxlHdmDecoderCount_12 = 6_i32
+    CxlHdmDecoderCount_14 = 7_i32
+    CxlHdmDecoderCount_16 = 8_i32
+    CxlHdmDecoderCount_20 = 9_i32
+    CxlHdmDecoderCount_24 = 10_i32
+    CxlHdmDecoderCount_28 = 11_i32
+    CxlHdmDecoderCount_32 = 12_i32
+    CxlHdmDecoderCount_Max = 13_i32
+  end
+  enum CXL_INTERLEAVE_WAYS
+    CxlInterleaveWays_1Way = 0_i32
+    CxlInterleaveWays_2Way = 1_i32
+    CxlInterleaveWays_4Way = 2_i32
+    CxlInterleaveWays_8Way = 3_i32
+    CxlInterleaveWays_16Way = 4_i32
+    CxlInterleaveWays_3Way = 8_i32
+    CxlInterleaveWays_6Way = 9_i32
+    CxlInterleaveWays_12Way = 10_i32
+    CxlInterleaveWays_Max = 11_i32
+  end
+  enum CXL_INTERLEAVE_GRANULARITY
+    CxlInterleaveGranularity_256 = 0_i32
+    CxlInterleaveGranularity_512 = 1_i32
+    CxlInterleaveGranularity_1024 = 2_i32
+    CxlInterleaveGranularity_2048 = 3_i32
+    CxlInterleaveGranularity_4096 = 4_i32
+    CxlInterleaveGranularity_8192 = 5_i32
+    CxlInterleaveGranularity_16384 = 6_i32
+    CxlInterleaveGranularity_Max = 7_i32
+  end
+  enum CXL_DEVICE_CAPABILITY_ARRAY_TYPE
+    CxlDeviceCapabilityArrayType_InferredFromPciClassCode = 0_i32
+    CxlDeviceCapabilityArrayType_MemoryDeviceCapabilities = 1_i32
+    CxlDeviceCapabilityArrayType_SwitchMailboxCCICapabilities = 2_i32
+    CxlDeviceCapabilityArrayType_Max = 3_i32
+  end
+  enum CXL_DEVICE_CAPABILITY_ID
+    CxlDeviceCapabilityID_CapabilityArray = 0_i32
+    CxlDeviceCapabilityID_DeviceStatusRegisters = 1_i32
+    CxlDeviceCapabilityID_PrimaryMailboxRegisters = 2_i32
+    CxlDeviceCapabilityID_SecondaryMailboxRegisters = 3_i32
+    CxlDeviceCapabilityID_MemoryDeviceStatusRegisters = 16384_i32
+  end
+  enum CXL_MAILBOX_CAPABILITY_TYPE
+    CxlMailboxCapabilityType_InferredFromPciClassCode = 0_i32
+    CxlMailboxCapabilityType_MemoryDeviceCommands = 1_i32
+    CxlMailboxCapabilityType_FMApiCommands = 2_i32
+    CxlMailboxCapabilityType_Max = 3_i32
+  end
+  enum CXL_COMMAND_RETURN_CODE
+    CxlCommandReturnCode_Success = 0_i32
+    CxlCommandReturnCode_BackgroundCommandStarted = 1_i32
+    CxlCommandReturnCode_InvalidInput = 2_i32
+    CxlCommandReturnCode_Unsupported = 3_i32
+    CxlCommandReturnCode_InternalError = 4_i32
+    CxlCommandReturnCode_RetryRequired = 5_i32
+    CxlCommandReturnCode_Busy = 6_i32
+    CxlCommandReturnCode_MediaDisabled = 7_i32
+    CxlCommandReturnCode_FWTransferInProgress = 8_i32
+    CxlCommandReturnCode_FWTransferOutOfOrder = 9_i32
+    CxlCommandReturnCode_FWVerificationFailed = 10_i32
+    CxlCommandReturnCode_InvalidSlot = 11_i32
+    CxlCommandReturnCode_ActivationFailed_FWRolledBack = 12_i32
+    CxlCommandReturnCode_ActivationFailed_ColdResetRequired = 13_i32
+    CxlCommandReturnCode_InvalidHandle = 14_i32
+    CxlCommandReturnCode_InvalidPhysicalAddress = 15_i32
+    CxlCommandReturnCode_InjectPoisonLimitReached = 16_i32
+    CxlCommandReturnCode_PermanentMediaFailure = 17_i32
+    CxlCommandReturnCode_Aborted = 18_i32
+    CxlCommandReturnCode_InvalidSecurityState = 19_i32
+    CxlCommandReturnCode_IncorrectPassphrase = 20_i32
+    CxlCommandReturnCode_UnsupportedMailboxOrCCI = 21_i32
+    CxlCommandReturnCode_InvalidPayloadLength = 22_i32
+    CxlCommandReturnCode_InvalidLog = 23_i32
+    CxlCommandReturnCode_Interrupted = 24_i32
+    CxlCommandReturnCode_UnsupportedFeatureVersion = 25_i32
+    CxlCommandReturnCode_UnsupportedFeatureSelectionValue = 26_i32
+    CxlCommandReturnCode_FeatureTransferInProgress = 27_i32
+    CxlCommandReturnCode_FeatureTransferOutOfOrder = 28_i32
+    CxlCommandReturnCode_ResourcesExhausted = 29_i32
+    CxlCommandReturnCode_InvalidExtentList = 30_i32
+    CxlCommandReturnCode_TransferOutOfOrder = 31_i32
+    CxlCommandReturnCode_RequestAbortNotSupportedByBackgroundOperation = 32_i32
+    CxlCommandReturnCode_Max = 33_i32
+  end
+  enum CXL_MEMORY_DEVICE_MEDIA_STATUS
+    CxlMemoryDeviceMediaStatus_NotReady = 0_i32
+    CxlMemoryDeviceMediaStatus_Ready = 1_i32
+    CxlMemoryDeviceMediaStatus_Error = 2_i32
+    CxlMemoryDeviceMediaStatus_Disabled = 3_i32
+    CxlMemoryDeviceMediaStatus_Max = 4_i32
+  end
+  enum CXL_MAILBOX_COMMAND
+    CxlMailboxCommand_Identify = 1_i32
+    CxlMailboxCommand_BackgroundOperationStatus = 2_i32
+    CxlMailboxCommand_GetResponseMessageLimit = 3_i32
+    CxlMailboxCommand_SetResponseMessageLimit = 4_i32
+    CxlMailboxCommand_RequestAbortBackgroundOperation = 5_i32
+    CxlMailboxCommand_GetEventRecords = 256_i32
+    CxlMailboxCommand_ClearEventRecords = 257_i32
+    CxlMailboxCommand_GetEventInterruptPolicy = 258_i32
+    CxlMailboxCommand_SetEventInterruptPolicy = 259_i32
+    CxlMailboxCommand_GetMCTPEventInterruptPolicy = 260_i32
+    CxlMailboxCommand_SetMCTPEventInterruptPolicy = 261_i32
+    CxlMailboxCommand_EventNotification = 262_i32
+    CxlMailboxCommand_GFDEnhancedEventNotification = 263_i32
+    CxlMailboxCommand_GFDtoGAEEnhancedEventNotification = 264_i32
+    CxlMailboxCommand_GetGAMBuffer = 265_i32
+    CxlMailboxCommand_SetGAMBuffer = 266_i32
+    CxlMailboxCommand_GetFWInfo = 512_i32
+    CxlMailboxCommand_TransferFW = 513_i32
+    CxlMailboxCommand_ActivateFW = 514_i32
+    CxlMailboxCommand_GetTimestamp = 768_i32
+    CxlMailboxCommand_SetTimestamp = 769_i32
+    CxlMailboxCommand_GetSupportedLogs = 1024_i32
+    CxlMailboxCommand_GetLog = 1025_i32
+    CxlMailboxCommand_GetLogCapabilities = 1026_i32
+    CxlMailboxCommand_ClearLog = 1027_i32
+    CxlMailboxCommand_PopulateLog = 1028_i32
+    CxlMailboxCommand_GetSupportedLogSubList = 1029_i32
+    CxlMailboxCommand_GetSupportedFeatures = 1280_i32
+    CxlMailboxCommand_GetFeature = 1281_i32
+    CxlMailboxCommand_SetFeature = 1282_i32
+    CxlMailboxCommand_PerformMaintenance = 1536_i32
+    CxlMailboxCommand_IdentifyPBRComponent = 1792_i32
+    CxlMailboxCommand_ClaimOwnership = 1793_i32
+    CxlMailboxCommand_ReadCDAT = 1794_i32
+    CxlMailboxCommand_IdentifyMemoryDevice = 16384_i32
+    CxlMailboxCommand_GetPartitionInfo = 16640_i32
+    CxlMailboxCommand_SetPartitionInfo = 16641_i32
+    CxlMailboxCommand_GetLSA = 16642_i32
+    CxlMailboxCommand_SetLSA = 16643_i32
+    CxlMailboxCommand_GetHealthInfo = 16896_i32
+    CxlMailboxCommand_GetAlertConfiguration = 16897_i32
+    CxlMailboxCommand_SetAlertConfiguration = 16898_i32
+    CxlMailboxCommand_GetShutdownState = 16899_i32
+    CxlMailboxCommand_SetShutdownState = 16900_i32
+    CxlMailboxCommand_GetPoisonList = 17152_i32
+    CxlMailboxCommand_InjectPoison = 17153_i32
+    CxlMailboxCommand_ClearPoison = 17154_i32
+    CxlMailboxCommand_GetScanMediaCapabilities = 17155_i32
+    CxlMailboxCommand_ScanMedia = 17156_i32
+    CxlMailboxCommand_GetScanMediaResults = 17157_i32
+    CxlMailboxCommand_Sanitize = 17408_i32
+    CxlMailboxCommand_SecureErase = 17409_i32
+    CxlMailboxCommand_MediaOperations = 17410_i32
+    CxlMailboxCommand_GetSecurityState = 17664_i32
+    CxlMailboxCommand_SetPassphrase = 17665_i32
+    CxlMailboxCommand_DisablePassphrase = 17666_i32
+    CxlMailboxCommand_Unlock = 17667_i32
+    CxlMailboxCommand_FreezeSecurityState = 17668_i32
+    CxlMailboxCommand_passphraseSecureErase = 17669_i32
+    CxlMailboxCommand_SecuritySend = 17920_i32
+    CxlMailboxCommand_SecurityReceive = 17921_i32
+    CxlMailboxCommand_GetSLDQoSControl = 18176_i32
+    CxlMailboxCommand_SetSLDQoSControl = 18177_i32
+    CxlMailboxCommand_GetSLDQoSStatus = 18178_i32
+    CxlMailboxCommand_GetDynamicCapacityConfiguration = 18432_i32
+    CxlMailboxCommand_GetDynamicCapacityExtentList = 18433_i32
+    CxlMailboxCommand_AddDynamicCapacityResponse = 18434_i32
+    CxlMailboxCommand_ReleaseDynamicCapacity = 18435_i32
+    CxlMailboxCommand_IdentifyGFD = 18688_i32
+    CxlMailboxCommand_GetGFDStatus = 18689_i32
+    CxlMailboxCommand_GetGFDDcRegionConfiguration = 18690_i32
+    CxlMailboxCommand_SetGFDDcRegionConfiguration = 18691_i32
+    CxlMailboxCommand_GetGFDDcRegionExtentLists = 18692_i32
+    CxlMailboxCommand_GetGFDDmpConfiguration = 18693_i32
+    CxlMailboxCommand_SetGFDDmpConfiguration = 18694_i32
+    CxlMailboxCommand_GFDDynamicCapacityAdd = 18695_i32
+    CxlMailboxCommand_GFDDynamicCapacityRelease = 18696_i32
+    CxlMailboxCommand_GFDDynamicCapacityAddReference = 18697_i32
+    CxlMailboxCommand_GFDDynamicCapacityRemoveReference = 18698_i32
+    CxlMailboxCommand_GFDDynamicCapacityListTags = 18699_i32
+    CxlMailboxCommand_GetGFDSatEntry = 18700_i32
+    CxlMailboxCommand_SetGFDSatEntry = 18701_i32
+    CxlMailboxCommand_GetGFDQoSControl = 18702_i32
+    CxlMailboxCommand_SetGFDQoSControl = 18703_i32
+    CxlMailboxCommand_GetGFDQoSStatus = 18704_i32
+    CxlMailboxCommand_GetGFDQoSBWLimit = 18705_i32
+    CxlMailboxCommand_SetGFDQoSBWLimit = 18706_i32
+    CxlMailboxCommand_GetGDTConfiguration = 18707_i32
+    CxlMailboxCommand_SetGDTConfiguration = 18708_i32
+  end
+  enum CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION
+    CxlMailboxTransferFWAction_FullFWTransfer = 0_i32
+    CxlMailboxTransferFWAction_InitiateFWTransfer = 1_i32
+    CxlMailboxTransferFWAction_ContinueFWTransfer = 2_i32
+    CxlMailboxTransferFWAction_EndTransfer = 3_i32
+    CxlMailboxTransferFWAction_AbortTransfer = 4_i32
+    CxlMailboxTransferFWAction_Max = 5_i32
+  end
+  enum CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION
+    CxlMailboxActivateFWAction_Online = 0_i32
+    CxlMailboxActivateFWAction_OnNextReset = 1_i32
+    CxlMailboxActivateFWAction_Max = 2_i32
+  end
+  enum CXL_EVENT_RECORD_SEVERITY
+    CxlEventRecordSeverity_Informational = 0_i32
+    CxlEventRecordSeverity_Warning = 1_i32
+    CxlEventRecordSeverity_Failure = 2_i32
+    CxlEventRecordSeverity_Fatal = 3_i32
+    CxlEventRecordSeverity_Max = 4_i32
+  end
+  enum CXL_MAILBOX_INTERRUPT_POLICY_MODE
+    CxlMailboxInterruptPolicyMode_NoInterrupts = 0_i32
+    CxlMailboxInterruptPolicyMode_MsiMsiX = 1_i32
+    CxlMailboxInterruptPolicyMode_FwInterrupt = 2_i32
+    CxlMailboxInterruptPolicyMode_Reserved = 3_i32
+  end
+  enum CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE
+    CxlMailboxErrorRecordSource_Unknown = 0_i32
+    CxlMailboxErrorRecordSource_External = 1_i32
+    CxlMailboxErrorRecordSource_Internal = 2_i32
+    CxlMailboxErrorRecordSource_Injected = 3_i32
+    CxlMailboxErrorRecordSource_VendorSpecific = 4_i32
+    CxlMailboxErrorRecordSource_Max = 5_i32
+  end
+  enum CXL_TRANSACTION_TYPE
+    CxlTransactionType_Unknown = 0_i32
+    CxlTransactionType_HostRead = 1_i32
+    CxlTransactionType_HostWrite = 2_i32
+    CxlTransactionType_HostScanMedia = 3_i32
+    CxlTransactionType_HostInjectPoison = 4_i32
+    CxlTransactionType_MediaPatrolScrub = 5_i32
+    CxlTransactionType_MediaManagement = 6_i32
+    CxlTransactionType_InternalMediaCheckScrub = 7_i32
+    CxlTransactionType_MediaInitialization = 8_i32
+  end
+  enum CXL_MEMORY_EVENT_SUBTYPE
+    CxlMemoryEventSubtype_NotReported = 0_i32
+    CxlMemoryEventSubtype_InternalDatapathError = 1_i32
+    CxlMemoryEventSubtype_MediaLinkCommandTrainingError = 2_i32
+    CxlMemoryEventSubtype_MediaLinkDataTrainingError = 3_i32
+    CxlMemoryEventSubtype_MediaLinkCrcError = 4_i32
+  end
+  enum CXL_GENERAL_MEDIA_EVENT_TYPE
+    CxlGeneralMediaEventType_MediaEccError = 0_i32
+    CxlGeneralMediaEventType_InvAddress = 1_i32
+    CxlGeneralMediaEventType_DataPathError = 2_i32
+    CxlGeneralMediaEventType_TeStateViolation = 3_i32
+    CxlGeneralMediaEventType_ScrubMediaEccError = 4_i32
+    CxlGeneralMediaEventType_AdvProgCorrMemErrCounterExp = 5_i32
+    CxlGeneralMediaEventType_CkidViolation = 6_i32
+  end
+  enum CXL_DRAM_EVENT_TYPE
+    CxlDRAMEventType_MediaEccError = 0_i32
+    CxlDRAMEventType_ScrubMediaEccError = 1_i32
+    CxlDRAMEventType_InvAddress = 2_i32
+    CxlDRAMEventType_DataPathError = 3_i32
+    CxlDRAMEventType_TeStateViolation = 4_i32
+    CxlDRAMEventType_AdvProgCorrMemErrCounterExp = 5_i32
+    CxlDRAMEventType_CkidViolation = 6_i32
+  end
+  enum CXL_MEDIA_STATUS
+    CxlMediaStatus_Normal = 0_i32
+    CxlMediaStatus_NotReady = 1_i32
+    CxlMediaStatus_WritePersistencyLost = 2_i32
+    CxlMediaStatus_AllDataLost = 3_i32
+    CxlMediaStatus_WritePersistencyLossPowerLoss = 4_i32
+    CxlMediaStatus_WritePersistencyLossShutdown = 5_i32
+    CxlMediaStatus_WritePersistencyLossImminent = 6_i32
+    CxlMediaStatus_AllDataLossPowerLoss = 7_i32
+    CxlMediaStatus_AllDataLossShutdown = 8_i32
+    CxlMediaStatus_AllDataLossImminent = 9_i32
+  end
+  enum CXL_ADDITIONAL_HEALTH_STATUS
+    CxlAdditionalHealthStatus_Normal = 0_i32
+    CxlAdditionalHealthStatus_Warning = 1_i32
+    CxlAdditionalHealthStatus_Critical = 2_i32
+  end
+  enum CXL_DEVICE_EVENT_TYPE
+    CxlDeviceEventType_HealthStatusChange = 0_i32
+    CxlDeviceEventType_MediaStatusChange = 1_i32
+    CxlDeviceEventType_LifeUsedChange = 2_i32
+    CxlDeviceEventType_TemperatureChange = 3_i32
+    CxlDeviceEventType_DataPathError = 4_i32
+    CxlDeviceEventType_LsaError = 5_i32
+    CxlDeviceEventType_UnrecorverableInternalSideBandBusError = 6_i32
+    CxlDeviceEventType_MemoryMediaFruError = 7_i32
+    CxlDeviceEventType_PowerManagementFault = 8_i32
+  end
+  enum CXL_DEVICE_EVENT_SUBTYPE
+    CxlDeviceEventSubtype_NotReported = 0_i32
+    CxlDeviceEventSubtype_InvalidConfigurationData = 1_i32
+    CxlDeviceEventSubtype_UnsupportedConfigurationData = 2_i32
+    CxlDeviceEventSubtype_UnsuportedMemoryMediaFru = 3_i32
+  end
+  enum CXL_SPARING_RESULT
+    CxlSparingResult_Success = 0_i32
+    CxlSparingResult_ResourcesExhausted = 1_i32
+    CxlSparingResult_GeneralFailure = 255_i32
+  end
+  enum CXL_SPARE_RESOURCES
+    CxlSpareResources_NoneAvailable = 0_i32
+    CxlSpareResources_OneAvailable = 1_i32
+    CxlSpareResources_TwoAvailable = 2_i32
+    CxlSpareResources_ThreeOrMoreAvailable = 3_i32
+  end
+  enum CXL_MAILBOX_EVENT_LOG
+    CxlMailboxEventRecords_InformationalEventLog = 0_i32
+    CxlMailboxEventRecords_WarningEventLog = 1_i32
+    CxlMailboxEventRecords_FailureEventLog = 2_i32
+    CxlMailboxEventRecords_FatalEventLog = 3_i32
+    CxlMailboxEventRecords_DynamicCapacityEventLog = 4_i32
   end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
@@ -3889,6 +4268,46 @@ module Win32cr::System::Ioctl
   end
 
   @[Extern]
+  struct STOR_PAGING_DEVICE_DUMP_ENTRY
+    property miniport_name : Win32cr::Foundation::CHAR[33]
+    property model_name : Win32cr::Foundation::CHAR[65]
+    property firmware_revision : Win32cr::Foundation::CHAR[17]
+    property paging_path_count : UInt16
+    property flags : Flags_e__Union_
+
+    # Nested Type Flags_e__Union_
+    @[Extern(union: true)]
+    struct Flags_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property as_uchar : UInt8
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uchar : UInt8)
+    end
+    end
+
+    def initialize(@miniport_name : Win32cr::Foundation::CHAR[33], @model_name : Win32cr::Foundation::CHAR[65], @firmware_revision : Win32cr::Foundation::CHAR[17], @paging_path_count : UInt16, @flags : Flags_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct STOR_PAGING_DEVICE_DUMP_DATA
+    property descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION
+    property entry_count : UInt32
+    property entry_size : UInt32
+    property entries : Win32cr::System::Ioctl::STOR_PAGING_DEVICE_DUMP_ENTRY[1]
+    def initialize(@descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION, @entry_count : UInt32, @entry_size : UInt32, @entries : Win32cr::System::Ioctl::STOR_PAGING_DEVICE_DUMP_ENTRY[1])
+    end
+  end
+
+  @[Extern]
   struct STORAGE_IDLE_POWER
     property version : UInt32
     property size : UInt32
@@ -4056,6 +4475,45 @@ module Win32cr::System::Ioctl
     property slot : UInt8
     property reserved0 : UInt8[3]
     def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @slot : UInt8, @reserved0 : UInt8[3])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_HW_BOOT_PARTITION_ACTIVATE
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property bpid : UInt8
+    property reserved : UInt8[3]
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @bpid : UInt8, @reserved : UInt8[3])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_HW_BOOT_PARTITION_DOWNLOAD
+    property version : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property bpid : UInt8
+    property reserved : UInt8[3]
+    property offset : UInt64
+    property buffer_size : UInt64
+    property image_buffer : UInt8[1]
+    def initialize(@version : UInt32, @size : UInt32, @flags : UInt32, @bpid : UInt8, @reserved : UInt8[3], @offset : UInt64, @buffer_size : UInt64, @image_buffer : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_HW_BOOT_PARTITION_INFO
+    property version : UInt32
+    property size : UInt32
+    property bpsz : UInt64
+    property flags : UInt32
+    property image_payload_alignment : UInt32
+    property image_payload_max_size : UInt32
+    property slot_count : UInt8
+    property abpid : UInt8
+    def initialize(@version : UInt32, @size : UInt32, @bpsz : UInt64, @flags : UInt32, @image_payload_alignment : UInt32, @image_payload_max_size : UInt32, @slot_count : UInt8, @abpid : UInt8)
     end
   end
 
@@ -4695,6 +5153,7 @@ module Win32cr::System::Ioctl
   @[Extern]
   struct PARTITION_INFORMATION_EX
     property partition_style : Win32cr::System::Ioctl::PARTITION_STYLE
+    property partition_ordinal : UInt16
     property starting_offset : Int64
     property partition_length : Int64
     property partition_number : UInt32
@@ -4711,7 +5170,7 @@ module Win32cr::System::Ioctl
     end
     end
 
-    def initialize(@partition_style : Win32cr::System::Ioctl::PARTITION_STYLE, @starting_offset : Int64, @partition_length : Int64, @partition_number : UInt32, @rewrite_partition : Win32cr::Foundation::BOOLEAN, @is_service_partition : Win32cr::Foundation::BOOLEAN, @anonymous : Anonymous_e__Union_)
+    def initialize(@partition_style : Win32cr::System::Ioctl::PARTITION_STYLE, @partition_ordinal : UInt16, @starting_offset : Int64, @partition_length : Int64, @partition_number : UInt32, @rewrite_partition : Win32cr::Foundation::BOOLEAN, @is_service_partition : Win32cr::Foundation::BOOLEAN, @anonymous : Anonymous_e__Union_)
     end
   end
 
@@ -7690,6 +8149,1233 @@ module Win32cr::System::Ioctl
     property flags : UInt16
     property tracked_offset_callback : Win32cr::System::Ioctl::PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK
     def initialize(@validation : UInt16, @flags : UInt16, @tracked_offset_callback : Win32cr::System::Ioctl::PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_CAPABILITY_HEADER_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_CACHEMEM_CAPABILITY_HEADER_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_CACHEMEM_REGISTERS
+    property capability_header_register : Win32cr::System::Ioctl::CXL_CAPABILITY_HEADER_REGISTER
+    property cache_mem_capability_header_register : Win32cr::System::Ioctl::CXL_CACHEMEM_CAPABILITY_HEADER_REGISTER[1]
+    def initialize(@capability_header_register : Win32cr::System::Ioctl::CXL_CAPABILITY_HEADER_REGISTER, @cache_mem_capability_header_register : Win32cr::System::Ioctl::CXL_CACHEMEM_CAPABILITY_HEADER_REGISTER[1])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_DECODER_CAPABILITY_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_DECODER_GLOBAL_CONTROL_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_MEMORY_BASE_LOW
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_MEMORY_SIZE_LOW
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_DECODER_CONTROL_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_DECODER_DPA_SKIP_LOW_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_DECODER_TARGET_LIST_LOW_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_HDM_DECODER_TARGET_LIST_HIGH_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_HDM_DECODER_REGISTERS
+    property memory_base_low : Win32cr::System::Ioctl::CXL_HDM_MEMORY_BASE_LOW
+    property memory_base_high : UInt32
+    property memory_size_low : Win32cr::System::Ioctl::CXL_HDM_MEMORY_SIZE_LOW
+    property memory_size_high : UInt32
+    property control : Win32cr::System::Ioctl::CXL_HDM_DECODER_CONTROL_REGISTER
+    property u1 : U1_e__union_
+    property u2 : U2_e__union_
+    property reserved : UInt32
+
+    # Nested Type U1_e__union_
+    @[Extern(union: true)]
+    struct U1_e__union_
+    property target_list_low : Win32cr::System::Ioctl::CXL_HDM_DECODER_TARGET_LIST_LOW_REGISTER
+    property dpa_skip_low : Win32cr::System::Ioctl::CXL_HDM_DECODER_DPA_SKIP_LOW_REGISTER
+    def initialize(@target_list_low : Win32cr::System::Ioctl::CXL_HDM_DECODER_TARGET_LIST_LOW_REGISTER, @dpa_skip_low : Win32cr::System::Ioctl::CXL_HDM_DECODER_DPA_SKIP_LOW_REGISTER)
+    end
+    end
+
+
+    # Nested Type U2_e__union_
+    @[Extern(union: true)]
+    struct U2_e__union_
+    property target_list_high : Win32cr::System::Ioctl::CXL_HDM_DECODER_TARGET_LIST_HIGH_REGISTER
+    property dpa_skip_high : UInt32
+    def initialize(@target_list_high : Win32cr::System::Ioctl::CXL_HDM_DECODER_TARGET_LIST_HIGH_REGISTER, @dpa_skip_high : UInt32)
+    end
+    end
+
+    def initialize(@memory_base_low : Win32cr::System::Ioctl::CXL_HDM_MEMORY_BASE_LOW, @memory_base_high : UInt32, @memory_size_low : Win32cr::System::Ioctl::CXL_HDM_MEMORY_SIZE_LOW, @memory_size_high : UInt32, @control : Win32cr::System::Ioctl::CXL_HDM_DECODER_CONTROL_REGISTER, @u1 : U1_e__union_, @u2 : U2_e__union_, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_HDM_DECODER_CAPABILITY_STRUCTURE
+    property capability_register : Win32cr::System::Ioctl::CXL_HDM_DECODER_CAPABILITY_REGISTER
+    property global_control_register : Win32cr::System::Ioctl::CXL_HDM_DECODER_GLOBAL_CONTROL_REGISTER
+    property reserved : UInt32[2]
+    property decoders : Win32cr::System::Ioctl::CXL_HDM_DECODER_REGISTERS[1]
+    def initialize(@capability_register : Win32cr::System::Ioctl::CXL_HDM_DECODER_CAPABILITY_REGISTER, @global_control_register : Win32cr::System::Ioctl::CXL_HDM_DECODER_GLOBAL_CONTROL_REGISTER, @reserved : UInt32[2], @decoders : Win32cr::System::Ioctl::CXL_HDM_DECODER_REGISTERS[1])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_RAS_UNCORRECTABLE_ERROR_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_RAS_UNCORRECTABLE_ERROR_MASK_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_RAS_UNCORRECTABLE_ERROR_SEVERITY_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_RAS_CORRECTABLE_ERROR_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_RAS_CORRECTABLE_ERROR_MASK_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_RAS_ERROR_CAPABILITY_AND_CONTROL_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_RAS_HEADER_LOG_REGISTERS
+    property header_log_array : UInt32[16]
+    def initialize(@header_log_array : UInt32[16])
+    end
+  end
+
+  @[Extern]
+  struct CXL_RAS_CAPABILITY_STRUCTURE
+    property uncorrectable_error_status_register : Win32cr::System::Ioctl::CXL_RAS_UNCORRECTABLE_ERROR_STATUS_REGISTER
+    property uncorrectable_error_mask_register : Win32cr::System::Ioctl::CXL_RAS_UNCORRECTABLE_ERROR_MASK_REGISTER
+    property uncorrectable_error_severity_register : Win32cr::System::Ioctl::CXL_RAS_UNCORRECTABLE_ERROR_SEVERITY_REGISTER
+    property correctable_error_status_register : Win32cr::System::Ioctl::CXL_RAS_CORRECTABLE_ERROR_STATUS_REGISTER
+    property correctable_error_mask_register : Win32cr::System::Ioctl::CXL_RAS_CORRECTABLE_ERROR_MASK_REGISTER
+    property error_capability_and_control_register : Win32cr::System::Ioctl::CXL_RAS_ERROR_CAPABILITY_AND_CONTROL_REGISTER
+    property header_log_registers : Win32cr::System::Ioctl::CXL_RAS_HEADER_LOG_REGISTERS
+    def initialize(@uncorrectable_error_status_register : Win32cr::System::Ioctl::CXL_RAS_UNCORRECTABLE_ERROR_STATUS_REGISTER, @uncorrectable_error_mask_register : Win32cr::System::Ioctl::CXL_RAS_UNCORRECTABLE_ERROR_MASK_REGISTER, @uncorrectable_error_severity_register : Win32cr::System::Ioctl::CXL_RAS_UNCORRECTABLE_ERROR_SEVERITY_REGISTER, @correctable_error_status_register : Win32cr::System::Ioctl::CXL_RAS_CORRECTABLE_ERROR_STATUS_REGISTER, @correctable_error_mask_register : Win32cr::System::Ioctl::CXL_RAS_CORRECTABLE_ERROR_MASK_REGISTER, @error_capability_and_control_register : Win32cr::System::Ioctl::CXL_RAS_ERROR_CAPABILITY_AND_CONTROL_REGISTER, @header_log_registers : Win32cr::System::Ioctl::CXL_RAS_HEADER_LOG_REGISTERS)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER_HEADER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER
+    property header : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER_HEADER
+    property capabilities_count : UInt16
+    property reserved : UInt16
+    property reserved1 : UInt32[2]
+    def initialize(@header : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER_HEADER, @capabilities_count : UInt16, @reserved : UInt16, @reserved1 : UInt32[2])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_DEVICE_CAPABILITY_HEADER_REGISTER_HEADER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_DEVICE_CAPABILITY_HEADER_REGISTER
+    property header : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITY_HEADER_REGISTER_HEADER
+    property offset : UInt32
+    property length : UInt32
+    property reserved : UInt32
+    def initialize(@header : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITY_HEADER_REGISTER_HEADER, @offset : UInt32, @length : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_DEVICE_REGISTERS
+    property capability_array_register : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER
+    property capability_header_register : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITY_HEADER_REGISTER[1]
+    def initialize(@capability_array_register : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER, @capability_header_register : Win32cr::System::Ioctl::CXL_DEVICE_CAPABILITY_HEADER_REGISTER[1])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_EVENT_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_DEVICE_STATUS_REGISTERS
+    property event_status_register : Win32cr::System::Ioctl::CXL_EVENT_STATUS_REGISTER
+    def initialize(@event_status_register : Win32cr::System::Ioctl::CXL_EVENT_STATUS_REGISTER)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_MAILBOX_CAPABILITY_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_MAILBOX_CONTROL_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_COMMAND_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulonglong : UInt64
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulonglong : UInt64)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_MAILBOX_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulonglong : UInt64
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulonglong : UInt64)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_BACKGROUND_COMMAND_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulonglong : UInt64
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulonglong : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct CXL_COMMAND_PAYLOAD_REGISTERS
+    property payload : UInt32[1]
+    def initialize(@payload : UInt32[1])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_REGISTERS
+    property capability_register : Win32cr::System::Ioctl::CXL_MAILBOX_CAPABILITY_REGISTER
+    property control_register : Win32cr::System::Ioctl::CXL_MAILBOX_CONTROL_REGISTER
+    property command_register : Win32cr::System::Ioctl::CXL_COMMAND_REGISTER
+    property status_register : Win32cr::System::Ioctl::CXL_MAILBOX_STATUS_REGISTER
+    property background_command_status_register : Win32cr::System::Ioctl::CXL_BACKGROUND_COMMAND_STATUS_REGISTER
+    property payload_registers : Win32cr::System::Ioctl::CXL_COMMAND_PAYLOAD_REGISTERS
+    def initialize(@capability_register : Win32cr::System::Ioctl::CXL_MAILBOX_CAPABILITY_REGISTER, @control_register : Win32cr::System::Ioctl::CXL_MAILBOX_CONTROL_REGISTER, @command_register : Win32cr::System::Ioctl::CXL_COMMAND_REGISTER, @status_register : Win32cr::System::Ioctl::CXL_MAILBOX_STATUS_REGISTER, @background_command_status_register : Win32cr::System::Ioctl::CXL_BACKGROUND_COMMAND_STATUS_REGISTER, @payload_registers : Win32cr::System::Ioctl::CXL_COMMAND_PAYLOAD_REGISTERS)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct CXL_MEMORY_DEVICE_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_ulonglong : UInt64
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulonglong : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MEMORY_DEVICE_STATUS_REGISTERS
+    property memory_device_status_register : Win32cr::System::Ioctl::CXL_MEMORY_DEVICE_STATUS_REGISTER
+    def initialize(@memory_device_status_register : Win32cr::System::Ioctl::CXL_MEMORY_DEVICE_STATUS_REGISTER)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_MEMORY_DEVICE_IDENTIFY_INFO
+    property fw_revision : Win32cr::Foundation::CHAR[16]
+    property total_capacity : UInt8[8]
+    property volatile_only_capacity : UInt8[8]
+    property persistent_only_capacity : UInt8[8]
+    property partition_alignment : UInt8[8]
+    property information_event_log_size : UInt8[2]
+    property warning_event_log_size : UInt8[2]
+    property failure_event_log_size : UInt8[2]
+    property fatal_event_log_size : UInt8[2]
+    property lsa_size : UInt8[4]
+    property poison_list_maximum_media_error_records : UInt8[3]
+    property inject_poison_limit : UInt8[2]
+    property poison_handling_capabilities : PoisonHandlingCapabilities_e__Struct_
+    property qo_s_telemetry_capabilities : QoSTelemetryCapabilities_e__Struct_
+    property dynamic_capacity_event_log_size : UInt8[2]
+    property reserved : UInt8[3]
+
+    # Nested Type PoisonHandlingCapabilities_e__Struct_
+    @[Extern]
+    struct PoisonHandlingCapabilities_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+
+    # Nested Type QoSTelemetryCapabilities_e__Struct_
+    @[Extern]
+    struct QoSTelemetryCapabilities_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@fw_revision : Win32cr::Foundation::CHAR[16], @total_capacity : UInt8[8], @volatile_only_capacity : UInt8[8], @persistent_only_capacity : UInt8[8], @partition_alignment : UInt8[8], @information_event_log_size : UInt8[2], @warning_event_log_size : UInt8[2], @failure_event_log_size : UInt8[2], @fatal_event_log_size : UInt8[2], @lsa_size : UInt8[4], @poison_list_maximum_media_error_records : UInt8[3], @inject_poison_limit : UInt8[2], @poison_handling_capabilities : PoisonHandlingCapabilities_e__Struct_, @qo_s_telemetry_capabilities : QoSTelemetryCapabilities_e__Struct_, @dynamic_capacity_event_log_size : UInt8[2], @reserved : UInt8[3])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_FIRMWARE_INFO
+    property fw_slots_supported : UInt8
+    property fw_slot_info : FWSlotInfo_e__Struct_
+    property fw_activation_capabilities : FWActivationCapabilities_e__Struct_
+    property reserved3 : UInt8[13]
+    property slot_fw_revisions : Win32cr::Foundation::CHAR[64]
+
+    # Nested Type FWSlotInfo_e__Struct_
+    @[Extern]
+    struct FWSlotInfo_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+
+    # Nested Type FWActivationCapabilities_e__Struct_
+    @[Extern]
+    struct FWActivationCapabilities_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@fw_slots_supported : UInt8, @fw_slot_info : FWSlotInfo_e__Struct_, @fw_activation_capabilities : FWActivationCapabilities_e__Struct_, @reserved3 : UInt8[13], @slot_fw_revisions : Win32cr::Foundation::CHAR[64])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_TRANSFER_FIRMWARE
+    property action : UInt8
+    property slot : UInt8
+    property reserved : UInt16
+    property offset : UInt32
+    property reserved2 : UInt8[120]
+    property data : UInt8[1]
+    def initialize(@action : UInt8, @slot : UInt8, @reserved : UInt16, @offset : UInt32, @reserved2 : UInt8[120], @data : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_ACTIVATE_FIRMWARE
+    property action : UInt8
+    property slot : UInt8
+    def initialize(@action : UInt8, @slot : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_SUPPORTED_LOG_ENTRY
+    property log_identifier : LibC::GUID
+    property log_size : UInt32
+    def initialize(@log_identifier : LibC::GUID, @log_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_SUPPORTED_LOGS
+    property number_of_supported_logs_entries : UInt16
+    property reserved : UInt8[6]
+    property supported_log_entries : Win32cr::System::Ioctl::CXL_MAILBOX_SUPPORTED_LOG_ENTRY[1]
+    def initialize(@number_of_supported_logs_entries : UInt16, @reserved : UInt8[6], @supported_log_entries : Win32cr::System::Ioctl::CXL_MAILBOX_SUPPORTED_LOG_ENTRY[1])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_LOG_CAPABILITIES_INPUT
+    property log_identifier : LibC::GUID
+    def initialize(@log_identifier : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_LOG_CAPABILITIES_OUTPUT
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_LOG_INPUT
+    property log_identifier : LibC::GUID
+    property offset : UInt32
+    property length : UInt32
+    def initialize(@log_identifier : LibC::GUID, @offset : UInt32, @length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_CEL_ENTRY
+    property opcode : UInt16
+    property command_effect : CommandEffect_e__Struct_
+
+    # Nested Type CommandEffect_e__Struct_
+    @[Extern]
+    struct CommandEffect_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@opcode : UInt16, @command_effect : CommandEffect_e__Struct_)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_CEL_LOG
+    property log_entry : Win32cr::System::Ioctl::CXL_MAILBOX_CEL_ENTRY[1]
+    def initialize(@log_entry : Win32cr::System::Ioctl::CXL_MAILBOX_CEL_ENTRY[1])
+    end
+  end
+
+  @[Extern]
+  struct CXL_INTERRUPT_POLICY
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_INTERRUPT_POLICY
+    property informational_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    property warning_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    property failure_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    property fatal_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    property dynamic_capacity_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    def initialize(@informational_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY, @warning_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY, @failure_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY, @fatal_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY, @dynamic_capacity_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_INTERRUPT_POLICY_2_0
+    property informational_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    property warning_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    property failure_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    property fatal_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY
+    def initialize(@informational_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY, @warning_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY, @failure_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY, @fatal_event_log_interrupt_settings : Win32cr::System::Ioctl::CXL_INTERRUPT_POLICY)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_INJECT_POISON_INPUT
+    property inject_poison_physical_address : UInt64
+    def initialize(@inject_poison_physical_address : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_CLEAR_POISON_INPUT
+    property clear_poison_physical_address : UInt64
+    property clear_poison_write_data : UInt8[64]
+    def initialize(@clear_poison_physical_address : UInt64, @clear_poison_write_data : UInt8[64])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_POISON_LIST_INPUT
+    property _bitfield : UInt64
+    property physical_address_length : UInt64
+    def initialize(@_bitfield : UInt64, @physical_address_length : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_MEDIA_ERROR_RECORD
+    property _bitfield : UInt64
+    property media_error_length : UInt32
+    property reserved1 : UInt8[4]
+    def initialize(@_bitfield : UInt64, @media_error_length : UInt32, @reserved1 : UInt8[4])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_POISON_LIST_OUTPUT
+    property poison_list_flags : PoisonListFlags_e__Struct_
+    property reserved : UInt8
+    property overflow_timestamp : UInt64
+    property media_error_record_count : UInt16
+    property reserved1 : UInt8[20]
+    property media_error_records : Win32cr::System::Ioctl::CXL_MAILBOX_MEDIA_ERROR_RECORD[1]
+
+    # Nested Type PoisonListFlags_e__Struct_
+    @[Extern]
+    struct PoisonListFlags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@poison_list_flags : PoisonListFlags_e__Struct_, @reserved : UInt8, @overflow_timestamp : UInt64, @media_error_record_count : UInt16, @reserved1 : UInt8[20], @media_error_records : Win32cr::System::Ioctl::CXL_MAILBOX_MEDIA_ERROR_RECORD[1])
+    end
+  end
+
+  @[Extern]
+  struct CXL_COMMON_EVENT_RECORD_HEADER
+    property event_record_identifier : LibC::GUID
+    property event_record_length : UInt8
+    property event_record_flags : EventRecordFlags_e__Union_
+    property reserved : UInt8
+    property event_record_handle : UInt16
+    property related_event_record_handle : UInt16
+    property event_record_timestamp : UInt64
+    property maintenance_operation_class : UInt8
+    property maintenance_operation_subclass : UInt8
+    property ld_id : UInt16
+    property head_id : UInt8
+    property reserved1 : UInt8[11]
+
+    # Nested Type EventRecordFlags_e__Union_
+    @[Extern(union: true)]
+    struct EventRecordFlags_e__Union_
+    property bits : Bits_e__struct_
+    property as_ushort : UInt16
+
+      # Nested Type Bits_e__struct_
+      @[Extern]
+      struct Bits_e__struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
+
+    def initialize(@bits : Bits_e__struct_, @as_ushort : UInt16)
+    end
+    end
+
+    def initialize(@event_record_identifier : LibC::GUID, @event_record_length : UInt8, @event_record_flags : EventRecordFlags_e__Union_, @reserved : UInt8, @event_record_handle : UInt16, @related_event_record_handle : UInt16, @event_record_timestamp : UInt64, @maintenance_operation_class : UInt8, @maintenance_operation_subclass : UInt8, @ld_id : UInt16, @head_id : UInt8, @reserved1 : UInt8[11])
+    end
+  end
+
+  @[Extern]
+  struct CXL_COMMON_EVENT_RECORD
+    property header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER
+    property event_record_data : UInt8[80]
+    def initialize(@header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER, @event_record_data : UInt8[80])
+    end
+  end
+
+  @[Extern]
+  struct CXL_GENERAL_MEDIA_EVENT_RECORD
+    property header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER
+    property physical_address : PhysicalAddress_e__Struct_
+    property memory_event_descriptor : MemoryEventDescriptor_e__Struct_
+    property memory_event_type : UInt8
+    property transaction_type : UInt8
+    property validity_flags : ValidityFlags_e__Struct_
+    property channel : UInt8
+    property rank : UInt8
+    property device : UInt8[3]
+    property component_identifier : UInt8[16]
+    property adv_prog_corr_mem_err_threshold_event_flags : AdvProgCorrMemErrThresholdEventFlags_e__Struct_
+    property corrected_memory_count_at_event : UInt8[3]
+    property memory_event_sub_type : UInt8
+    property reserved : UInt8[41]
+
+    # Nested Type PhysicalAddress_e__Struct_
+    @[Extern]
+    struct PhysicalAddress_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
+
+    # Nested Type MemoryEventDescriptor_e__Struct_
+    @[Extern]
+    struct MemoryEventDescriptor_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+
+    # Nested Type ValidityFlags_e__Struct_
+    @[Extern]
+    struct ValidityFlags_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+
+    # Nested Type AdvProgCorrMemErrThresholdEventFlags_e__Struct_
+    @[Extern]
+    struct AdvProgCorrMemErrThresholdEventFlags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER, @physical_address : PhysicalAddress_e__Struct_, @memory_event_descriptor : MemoryEventDescriptor_e__Struct_, @memory_event_type : UInt8, @transaction_type : UInt8, @validity_flags : ValidityFlags_e__Struct_, @channel : UInt8, @rank : UInt8, @device : UInt8[3], @component_identifier : UInt8[16], @adv_prog_corr_mem_err_threshold_event_flags : AdvProgCorrMemErrThresholdEventFlags_e__Struct_, @corrected_memory_count_at_event : UInt8[3], @memory_event_sub_type : UInt8, @reserved : UInt8[41])
+    end
+  end
+
+  @[Extern]
+  struct CXL_DRAM_EVENT_RECORD
+    property header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER
+    property physical_address : PhysicalAddress_e__Struct_
+    property memory_event_descriptor : MemoryEventDescriptor_e__Struct_
+    property memory_event_type : UInt8
+    property transaction_type : UInt8
+    property validity_flags : ValidityFlags_e__Struct_
+    property channel : UInt8
+    property rank : UInt8
+    property nibble_mask : UInt8[3]
+    property bank_group : UInt8
+    property bank : UInt8
+    property row : UInt8[3]
+    property column : UInt8[2]
+    property correction_mask : UInt8[32]
+    property component_identifier : UInt8[16]
+    property sub_channel : UInt8
+    property adv_prog_corr_mem_err_threshold_event_flags : AdvProgCorrMemErrThresholdEventFlags_e__Struct_
+    property cvme_count_at_event : UInt8[3]
+    property memory_event_sub_type : UInt8
+    property reserved : UInt8
+
+    # Nested Type PhysicalAddress_e__Struct_
+    @[Extern]
+    struct PhysicalAddress_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
+
+    # Nested Type MemoryEventDescriptor_e__Struct_
+    @[Extern]
+    struct MemoryEventDescriptor_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+
+    # Nested Type ValidityFlags_e__Struct_
+    @[Extern]
+    struct ValidityFlags_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+
+    # Nested Type AdvProgCorrMemErrThresholdEventFlags_e__Struct_
+    @[Extern]
+    struct AdvProgCorrMemErrThresholdEventFlags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER, @physical_address : PhysicalAddress_e__Struct_, @memory_event_descriptor : MemoryEventDescriptor_e__Struct_, @memory_event_type : UInt8, @transaction_type : UInt8, @validity_flags : ValidityFlags_e__Struct_, @channel : UInt8, @rank : UInt8, @nibble_mask : UInt8[3], @bank_group : UInt8, @bank : UInt8, @row : UInt8[3], @column : UInt8[2], @correction_mask : UInt8[32], @component_identifier : UInt8[16], @sub_channel : UInt8, @adv_prog_corr_mem_err_threshold_event_flags : AdvProgCorrMemErrThresholdEventFlags_e__Struct_, @cvme_count_at_event : UInt8[3], @memory_event_sub_type : UInt8, @reserved : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct CXL_DEVICE_HEALTH_INFO
+    property health_status : HealthStatus_e__Union_
+    property media_status : UInt8
+    property additional_status : AdditionalStatus_e__Union_
+    property life_used : UInt8
+    property device_temperature : UInt16
+    property dirty_shutdown_count : UInt32
+    property corrected_volatile_error_count : UInt32
+    property corrected_persistent_error_count : UInt32
+
+    # Nested Type HealthStatus_e__Union_
+    @[Extern(union: true)]
+    struct HealthStatus_e__Union_
+    property bits : Bits_e__struct_
+    property as_uchar : UInt8
+
+      # Nested Type Bits_e__struct_
+      @[Extern]
+      struct Bits_e__struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bits : Bits_e__struct_, @as_uchar : UInt8)
+    end
+    end
+
+
+    # Nested Type AdditionalStatus_e__Union_
+    @[Extern(union: true)]
+    struct AdditionalStatus_e__Union_
+    property bits : Bits_e__struct_
+    property as_uchar : UInt8
+
+      # Nested Type Bits_e__struct_
+      @[Extern]
+      struct Bits_e__struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bits : Bits_e__struct_, @as_uchar : UInt8)
+    end
+    end
+
+    def initialize(@health_status : HealthStatus_e__Union_, @media_status : UInt8, @additional_status : AdditionalStatus_e__Union_, @life_used : UInt8, @device_temperature : UInt16, @dirty_shutdown_count : UInt32, @corrected_volatile_error_count : UInt32, @corrected_persistent_error_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MEMORY_MODULE_EVENT_RECORD
+    property header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER
+    property device_event_type : UInt8
+    property device_health_info : Win32cr::System::Ioctl::CXL_DEVICE_HEALTH_INFO
+    property validity_flags : ValidityFlags_e__Struct_
+    property component_identifier : UInt8[16]
+    property device_event_subtype : UInt8
+    property reserved : UInt8[42]
+
+    # Nested Type ValidityFlags_e__Struct_
+    @[Extern]
+    struct ValidityFlags_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER, @device_event_type : UInt8, @device_health_info : Win32cr::System::Ioctl::CXL_DEVICE_HEALTH_INFO, @validity_flags : ValidityFlags_e__Struct_, @component_identifier : UInt8[16], @device_event_subtype : UInt8, @reserved : UInt8[42])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MEMORY_SPARING_EVENT_RECORD
+    property header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER
+    property maintenance_operation_class : UInt8
+    property maintenance_operation_subclass : UInt8
+    property flags : Flags_e__Struct_
+    property result : UInt8
+    property validity_flags : ValidityFlags_e__Struct_
+    property reserved : UInt8[6]
+    property spare_resource_available : UInt16
+    property channel : UInt8
+    property rank : UInt8
+    property nibble_mask : UInt8[3]
+    property bank_group : UInt8
+    property bank : UInt8
+    property row : UInt8[3]
+    property column : UInt8[2]
+    property component_identifier : UInt8[16]
+    property sub_channel : UInt8
+    property reserved3 : UInt8[37]
+
+    # Nested Type Flags_e__Struct_
+    @[Extern]
+    struct Flags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+
+    # Nested Type ValidityFlags_e__Struct_
+    @[Extern]
+    struct ValidityFlags_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@header : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD_HEADER, @maintenance_operation_class : UInt8, @maintenance_operation_subclass : UInt8, @flags : Flags_e__Struct_, @result : UInt8, @validity_flags : ValidityFlags_e__Struct_, @reserved : UInt8[6], @spare_resource_available : UInt16, @channel : UInt8, @rank : UInt8, @nibble_mask : UInt8[3], @bank_group : UInt8, @bank : UInt8, @row : UInt8[3], @column : UInt8[2], @component_identifier : UInt8[16], @sub_channel : UInt8, @reserved3 : UInt8[37])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_EVENT_RECORDS_INPUT
+    property event_log : UInt8
+    def initialize(@event_log : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_EVENT_RECORDS_OUTPUT
+    property flags : Flags_e__Struct_
+    property reserved : UInt8
+    property overflow_error_count : UInt16
+    property first_overflow_event_timestamp : UInt64
+    property last_overflow_event_timestamp : UInt64
+    property event_record_count : UInt16
+    property reserved1 : UInt8[10]
+    property event_records : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD[1]
+
+    # Nested Type Flags_e__Struct_
+    @[Extern]
+    struct Flags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@flags : Flags_e__Struct_, @reserved : UInt8, @overflow_error_count : UInt16, @first_overflow_event_timestamp : UInt64, @last_overflow_event_timestamp : UInt64, @event_record_count : UInt16, @reserved1 : UInt8[10], @event_records : Win32cr::System::Ioctl::CXL_COMMON_EVENT_RECORD[1])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_CLEAR_EVENT_RECORDS_INPUT
+    property event_log : UInt8
+    property clear_event_flags : ClearEventFlags_e__Struct_
+    property number_of_event_record_handles : UInt8
+    property reserved : UInt8[3]
+    property event_record_handles : UInt16[1]
+
+    # Nested Type ClearEventFlags_e__Struct_
+    @[Extern]
+    struct ClearEventFlags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@event_log : UInt8, @clear_event_flags : ClearEventFlags_e__Struct_, @number_of_event_record_handles : UInt8, @reserved : UInt8[3], @event_record_handles : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_GET_ALERT_CONFIG_OUTPUT
+    property valid_alerts : ValidAlerts_e__Union_
+    property programmable_alerts : ProgrammableAlerts_e__Union_
+    property life_used_critical_threshold : UInt8
+    property life_used_programmable_warning_threshold : UInt8
+    property device_over_temperature_critical_threshold : UInt16
+    property device_under_temperature_critical_threshold : UInt16
+    property device_over_temperature_programmable_warning_threshold : UInt16
+    property device_under_temperature_programmable_warning_threshold : UInt16
+    property corrected_volatile_memory_programmable_warning_threshold : UInt16
+    property corrected_persistent_memory_programmable_warning_threshold : UInt16
+
+    # Nested Type ValidAlerts_e__Union_
+    @[Extern(union: true)]
+    struct ValidAlerts_e__Union_
+    property bits : Bits_e__struct_
+    property as_uchar : UInt8
+
+      # Nested Type Bits_e__struct_
+      @[Extern]
+      struct Bits_e__struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bits : Bits_e__struct_, @as_uchar : UInt8)
+    end
+    end
+
+
+    # Nested Type ProgrammableAlerts_e__Union_
+    @[Extern(union: true)]
+    struct ProgrammableAlerts_e__Union_
+    property bits : Bits_e__struct_
+    property as_uchar : UInt8
+
+      # Nested Type Bits_e__struct_
+      @[Extern]
+      struct Bits_e__struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bits : Bits_e__struct_, @as_uchar : UInt8)
+    end
+    end
+
+    def initialize(@valid_alerts : ValidAlerts_e__Union_, @programmable_alerts : ProgrammableAlerts_e__Union_, @life_used_critical_threshold : UInt8, @life_used_programmable_warning_threshold : UInt8, @device_over_temperature_critical_threshold : UInt16, @device_under_temperature_critical_threshold : UInt16, @device_over_temperature_programmable_warning_threshold : UInt16, @device_under_temperature_programmable_warning_threshold : UInt16, @corrected_volatile_memory_programmable_warning_threshold : UInt16, @corrected_persistent_memory_programmable_warning_threshold : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CXL_MAILBOX_SET_ALERT_CONFIG_INPUT
+    property valid_alert_actions : ValidAlertActions_e__Union_
+    property enable_alert_actions : EnableAlertActions_e__Union_
+    property life_used_programmable_warning_threshold : UInt8
+    property reserved : UInt8
+    property device_over_temperature_programmable_warning_threshold : UInt16
+    property device_under_temperature_programmable_warning_threshold : UInt16
+    property corrected_volatile_memory_programmable_warning_threshold : UInt16
+    property corrected_persistent_memory_programmable_warning_threshold : UInt16
+
+    # Nested Type ValidAlertActions_e__Union_
+    @[Extern(union: true)]
+    struct ValidAlertActions_e__Union_
+    property bits : Bits_e__struct_
+    property as_uchar : UInt8
+
+      # Nested Type Bits_e__struct_
+      @[Extern]
+      struct Bits_e__struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bits : Bits_e__struct_, @as_uchar : UInt8)
+    end
+    end
+
+
+    # Nested Type EnableAlertActions_e__Union_
+    @[Extern(union: true)]
+    struct EnableAlertActions_e__Union_
+    property bits : Bits_e__struct_
+    property as_uchar : UInt8
+
+      # Nested Type Bits_e__struct_
+      @[Extern]
+      struct Bits_e__struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bits : Bits_e__struct_, @as_uchar : UInt8)
+    end
+    end
+
+    def initialize(@valid_alert_actions : ValidAlertActions_e__Union_, @enable_alert_actions : EnableAlertActions_e__Union_, @life_used_programmable_warning_threshold : UInt8, @reserved : UInt8, @device_over_temperature_programmable_warning_threshold : UInt16, @device_under_temperature_programmable_warning_threshold : UInt16, @corrected_volatile_memory_programmable_warning_threshold : UInt16, @corrected_persistent_memory_programmable_warning_threshold : UInt16)
     end
   end
 

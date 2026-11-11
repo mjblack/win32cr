@@ -1,5 +1,4 @@
 require "./../../foundation.cr"
-require "./../../graphics/direct3_d12.cr"
 require "./../../system/com.cr"
 
 module Win32cr::AI::MachineLearning::WinML

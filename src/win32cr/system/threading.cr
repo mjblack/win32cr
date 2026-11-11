@@ -423,6 +423,7 @@ module Win32cr::System::Threading
     PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE = 86_u32
     PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE = 87_u32
     PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE = 88_u32
+    PF_UMONITOR_INSTRUCTION_AVAILABLE = 89_u32
   end
   enum GET_GUI_RESOURCES_FLAGS : UInt32
     GR_GLOBAL = 4294967294_u32
@@ -637,7 +638,8 @@ module Win32cr::System::Threading
     ProcessRedirectionTrustPolicy = 16_i32
     ProcessUserPointerAuthPolicy = 17_i32
     ProcessSEHOPPolicy = 18_i32
-    MaxProcessMitigationPolicy = 19_i32
+    ProcessActivationContextTrustPolicy = 19_i32
+    MaxProcessMitigationPolicy = 20_i32
   end
   enum UMS_THREAD_INFO_CLASS
     UmsThreadInvalidInfoClass = 0_i32
@@ -679,6 +681,8 @@ module Win32cr::System::Threading
     ProcThreadAttributeEnableOptionalXStateFeatures = 27_u32
     ProcThreadAttributeTrustedApp = 29_u32
     ProcThreadAttributeSveVectorLength = 30_u32
+    ProcThreadAttributeSmeVectorLength = 31_u32
+    ProcThreadAttributeContainmentConfiguration = 33_u32
   end
 
   @[Extern]

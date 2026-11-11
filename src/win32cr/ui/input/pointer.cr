@@ -51,6 +51,19 @@ module Win32cr::UI::Input::Pointer
     POINTER_FEEDBACK_INDIRECT = 2_i32
     POINTER_FEEDBACK_NONE = 3_i32
   end
+  enum TOUCHPAD_ACTION
+    TA_3FINGER_TAP = 0_i32
+    TA_3FINGER_PRESS = 1_i32
+    TA_3FINGER_RELEASE = 2_i32
+    TA_4FINGER_TAP = 3_i32
+    TA_4FINGER_PRESS = 4_i32
+    TA_4FINGER_RELEASE = 5_i32
+    TA_5FINGER_TAP = 6_i32
+    TA_5FINGER_PRESS = 7_i32
+    TA_5FINGER_RELEASE = 8_i32
+    TA_INERTIA_STOP = 9_i32
+    TA_INERTIA_END = 10_i32
+  end
   enum POINTER_DEVICE_TYPE
     POINTER_DEVICE_TYPE_INTEGRATED_PEN = 1_i32
     POINTER_DEVICE_TYPE_EXTERNAL_PEN = 2_i32
@@ -320,6 +333,30 @@ module Win32cr::UI::Input::Pointer
     {% end %}
   end
 
+  def getPointerTouchpadInfo(pointerId : UInt32, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetPointerTouchpadInfo(pointerId, touchpadInfo)
+    {% end %}
+  end
+
+  def getPointerTouchpadInfoHistory(pointerId : UInt32, entriesCount : UInt32*, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetPointerTouchpadInfoHistory(pointerId, entriesCount, touchpadInfo)
+    {% end %}
+  end
+
+  def getPointerFrameTouchpadInfo(pointerId : UInt32, pointerCount : UInt32*, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetPointerFrameTouchpadInfo(pointerId, pointerCount, touchpadInfo)
+    {% end %}
+  end
+
+  def getPointerFrameTouchpadInfoHistory(pointerId : UInt32, entriesCount : UInt32*, pointerCount : UInt32*, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetPointerFrameTouchpadInfoHistory(pointerId, entriesCount, pointerCount, touchpadInfo)
+    {% end %}
+  end
+
   def skipPointerFrameMessages(pointerId : UInt32) : Win32cr::Foundation::BOOL
     {% if !flag?(:docs) %}
     C.SkipPointerFrameMessages(pointerId)
@@ -335,6 +372,12 @@ module Win32cr::UI::Input::Pointer
   def destroySyntheticPointerDevice(device : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE) : Void
     {% if !flag?(:docs) %}
     C.DestroySyntheticPointerDevice(device)
+    {% end %}
+  end
+
+  def injectTouchpadAction(hDevice : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE, action : Win32cr::UI::Input::Pointer::TOUCHPAD_ACTION) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.InjectTouchpadAction(hDevice, action)
     {% end %}
   end
 
@@ -447,6 +490,18 @@ module Win32cr::UI::Input::Pointer
     fun GetPointerFramePenInfoHistory(pointerId : UInt32, entriesCount : UInt32*, pointerCount : UInt32*, penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
+    fun GetPointerTouchpadInfo(pointerId : UInt32, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetPointerTouchpadInfoHistory(pointerId : UInt32, entriesCount : UInt32*, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetPointerFrameTouchpadInfo(pointerId : UInt32, pointerCount : UInt32*, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetPointerFrameTouchpadInfoHistory(pointerId : UInt32, entriesCount : UInt32*, pointerCount : UInt32*, touchpadInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
     fun SkipPointerFrameMessages(pointerId : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
@@ -454,6 +509,9 @@ module Win32cr::UI::Input::Pointer
 
     # :nodoc:
     fun DestroySyntheticPointerDevice(device : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE) : Void
+
+    # :nodoc:
+    fun InjectTouchpadAction(hDevice : Win32cr::UI::Input::Pointer::HSYNTHETICPOINTERDEVICE, action : Win32cr::UI::Input::Pointer::TOUCHPAD_ACTION) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun EnableMouseInPointer(fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL

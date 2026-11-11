@@ -48,6 +48,7 @@ module Win32cr::Graphics::DXCore
     AdapterInUseProcessSet = 8_u32
     AdapterEngineFrequencyHertz = 9_u32
     AdapterMemoryFrequencyHertz = 10_u32
+    SingleAdapterHybridMode = 11_u32
   end
   enum DXCoreSegmentGroup : UInt32
     Local = 0_u32
@@ -61,6 +62,11 @@ module Win32cr::Graphics::DXCore
   end
   enum DXCoreAdapterPreference : UInt32
     Hardware = 0_u32
+    MinimumPower = 1_u32
+    HighPerformance = 2_u32
+  end
+  enum DXCoreSingleAdapterHybridMode : UInt32
+    Unspecified = 0_u32
     MinimumPower = 1_u32
     HighPerformance = 2_u32
   end

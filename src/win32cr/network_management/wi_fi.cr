@@ -610,6 +610,7 @@ module Win32cr::NetworkManagement::WiFi
   DEVPKEY_PciRootBus_PCIExpressCapabilityControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 16_u32)
   DEVPKEY_PciRootBus_NativePciExpressControl = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 17_u32)
   DEVPKEY_PciRootBus_SystemMsiSupport = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 18_u32)
+  DEVPKEY_PciRootBus_Segment = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0xd817fc28_u32, 0x793e_u16, 0x4b9e_u16, StaticArray[0x99_u8, 0x70_u8, 0x46_u8, 0x9d_u8, 0x8b_u8, 0xe6_u8, 0x30_u8, 0x73_u8]), 19_u32)
   DEVPKEY_PciDevice_DeviceType = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 1_u32)
   DEVPKEY_PciDevice_CurrentSpeedAndMode = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 2_u32)
   DEVPKEY_PciDevice_BaseClass = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 3_u32)
@@ -657,6 +658,7 @@ module Win32cr::NetworkManagement::WiFi
   DEVPKEY_PciDevice_ParentSerialNumber = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 45_u32)
   DEVPKEY_PciDevice_SupportsDmwrOnEntireDeviceTree = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 46_u32)
   DEVPKEY_PciDevice_IsTunneledDevice = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 47_u32)
+  DEVPKEY_PciDevice_TeeIOSupported = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x3ab22e31_u32, 0x8264_u16, 0x4b4e_u16, StaticArray[0x9a_u8, 0xf5_u8, 0xa8_u8, 0xd2_u8, 0xd8_u8, 0xe3_u8, 0x3e_u8, 0x62_u8]), 48_u32)
   WLAN_API_VERSION_1_0 = 1_u32
   WLAN_API_VERSION_2_0 = 2_u32
   WLAN_API_VERSION = 2_u32
@@ -1005,6 +1007,7 @@ module Win32cr::NetworkManagement::WiFi
     DevProp_PciDevice_SriovSupport_MissingPfDriver = 2_u32
     DevProp_PciDevice_SriovSupport_NoBusResource = 3_u32
     DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace = 4_u32
+    DevProp_PciDevice_SriovSupport_NoSriovCap = 5_u32
   end
   enum DEVPROP_PCIDEVICE_ACSSUPPORT : UInt32
     DevProp_PciDevice_AcsSupport_Present = 0_u32

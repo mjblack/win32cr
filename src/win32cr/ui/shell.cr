@@ -1166,6 +1166,7 @@ module Win32cr::UI::Shell
   ABE_TOP = 1_u32
   ABE_RIGHT = 2_u32
   ABE_BOTTOM = 3_u32
+  ABC_OVERLAYDESKTOPICONS = 1_u32
   FO_MOVE = 1_u32
   FO_COPY = 2_u32
   FO_DELETE = 3_u32

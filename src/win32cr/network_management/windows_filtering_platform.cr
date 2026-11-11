@@ -3459,17 +3459,6 @@ module Win32cr::NetworkManagement::WindowsFilteringPlatform
   end
 
   @[Extern]
-  struct FWPM_LAYER_STATISTICS0
-    property layerId : LibC::GUID
-    property classifyPermitCount : UInt32
-    property classifyBlockCount : UInt32
-    property classifyVetoCount : UInt32
-    property numCacheEntries : UInt32
-    def initialize(@layerId : LibC::GUID, @classifyPermitCount : UInt32, @classifyBlockCount : UInt32, @classifyVetoCount : UInt32, @numCacheEntries : UInt32)
-    end
-  end
-
-  @[Extern]
   struct FWPM_LAYER_STATISTICS1
     property layerId : LibC::GUID
     property classifyPermitCount : UInt32
@@ -3479,48 +3468,6 @@ module Win32cr::NetworkManagement::WindowsFilteringPlatform
     property filterCount : UInt32
     property totalFilterSize : UInt32
     def initialize(@layerId : LibC::GUID, @classifyPermitCount : UInt32, @classifyBlockCount : UInt32, @classifyVetoCount : UInt32, @numCacheEntries : UInt32, @filterCount : UInt32, @totalFilterSize : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct FWPM_STATISTICS0
-    property numLayerStatistics : UInt32
-    property layerStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER_STATISTICS0*
-    property inboundAllowedConnectionsV4 : UInt32
-    property inboundBlockedConnectionsV4 : UInt32
-    property outboundAllowedConnectionsV4 : UInt32
-    property outboundBlockedConnectionsV4 : UInt32
-    property inboundAllowedConnectionsV6 : UInt32
-    property inboundBlockedConnectionsV6 : UInt32
-    property outboundAllowedConnectionsV6 : UInt32
-    property outboundBlockedConnectionsV6 : UInt32
-    property inboundActiveConnectionsV4 : UInt32
-    property outboundActiveConnectionsV4 : UInt32
-    property inboundActiveConnectionsV6 : UInt32
-    property outboundActiveConnectionsV6 : UInt32
-    property reauthDirInbound : UInt64
-    property reauthDirOutbound : UInt64
-    property reauthFamilyV4 : UInt64
-    property reauthFamilyV6 : UInt64
-    property reauthProtoOther : UInt64
-    property reauthProtoIPv4 : UInt64
-    property reauthProtoIPv6 : UInt64
-    property reauthProtoICMP : UInt64
-    property reauthProtoICMP6 : UInt64
-    property reauthProtoUDP : UInt64
-    property reauthProtoTCP : UInt64
-    property reauthReasonPolicyChange : UInt64
-    property reauthReasonNewArrivalInterface : UInt64
-    property reauthReasonNewNextHopInterface : UInt64
-    property reauthReasonProfileCrossing : UInt64
-    property reauthReasonClassifyCompletion : UInt64
-    property reauthReasonIPSecPropertiesChanged : UInt64
-    property reauthReasonMidStreamInspection : UInt64
-    property reauthReasonSocketPropertyChanged : UInt64
-    property reauthReasonNewInboundMCastBCastPacket : UInt64
-    property reauthReasonEDPPolicyChanged : UInt64
-    property reauthReasonProxyHandleChanged : UInt64
-    def initialize(@numLayerStatistics : UInt32, @layerStatistics : Win32cr::NetworkManagement::WindowsFilteringPlatform::FWPM_LAYER_STATISTICS0*, @inboundAllowedConnectionsV4 : UInt32, @inboundBlockedConnectionsV4 : UInt32, @outboundAllowedConnectionsV4 : UInt32, @outboundBlockedConnectionsV4 : UInt32, @inboundAllowedConnectionsV6 : UInt32, @inboundBlockedConnectionsV6 : UInt32, @outboundAllowedConnectionsV6 : UInt32, @outboundBlockedConnectionsV6 : UInt32, @inboundActiveConnectionsV4 : UInt32, @outboundActiveConnectionsV4 : UInt32, @inboundActiveConnectionsV6 : UInt32, @outboundActiveConnectionsV6 : UInt32, @reauthDirInbound : UInt64, @reauthDirOutbound : UInt64, @reauthFamilyV4 : UInt64, @reauthFamilyV6 : UInt64, @reauthProtoOther : UInt64, @reauthProtoIPv4 : UInt64, @reauthProtoIPv6 : UInt64, @reauthProtoICMP : UInt64, @reauthProtoICMP6 : UInt64, @reauthProtoUDP : UInt64, @reauthProtoTCP : UInt64, @reauthReasonPolicyChange : UInt64, @reauthReasonNewArrivalInterface : UInt64, @reauthReasonNewNextHopInterface : UInt64, @reauthReasonProfileCrossing : UInt64, @reauthReasonClassifyCompletion : UInt64, @reauthReasonIPSecPropertiesChanged : UInt64, @reauthReasonMidStreamInspection : UInt64, @reauthReasonSocketPropertyChanged : UInt64, @reauthReasonNewInboundMCastBCastPacket : UInt64, @reauthReasonEDPPolicyChanged : UInt64, @reauthReasonProxyHandleChanged : UInt64)
     end
   end
 

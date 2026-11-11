@@ -313,10 +313,60 @@ module Win32cr::NetworkManagement::QoS
   SIPAEV_AMD_PSP_DF_RIB14 = 33381_u32
   SIPAEV_AMD_PSP_DF_RIB15 = 33382_u32
   SIPAEV_AMD_SECURE_DEBUG_UNLOCK = 33383_u32
+  SIPAEV_AMD_PROMONTORY_21 = 33384_u32
+  SIPAEV_AMD_MPIO_E32_PHY_FW = 33385_u32
+  SIPAEV_AMD_MPIO_C20_PHY_FW = 33386_u32
+  SIPAEV_AMD_PMU3_DATA = 33387_u32
+  SIPAEV_AMD_PMU4_DATA = 33388_u32
+  SIPAEV_AMD_PMU5_DATA = 33389_u32
+  SIPAEV_AMD_PMU6_DATA = 33390_u32
+  SIPAEV_AMD_PMU7_DATA = 33391_u32
+  SIPAEV_AMD_PMU8_DATA = 33392_u32
+  SIPAEV_AMD_PMU9_DATA = 33393_u32
+  SIPAEV_AMD_PMU10_DATA = 33394_u32
+  SIPAEV_AMD_PMU11_DATA = 33395_u32
+  SIPAEV_AMD_PMU12_DATA = 33396_u32
+  SIPAEV_AMD_PMU13_DATA = 33397_u32
+  SIPAEV_AMD_PMU14_DATA = 33398_u32
+  SIPAEV_AMD_PMU15_DATA = 33399_u32
+  SIPAEV_AMD_PMU3 = 33400_u32
+  SIPAEV_AMD_PMU4 = 33401_u32
+  SIPAEV_AMD_PMU5 = 33402_u32
+  SIPAEV_AMD_PMU6 = 33403_u32
+  SIPAEV_AMD_PMU7 = 33404_u32
+  SIPAEV_AMD_PMU8 = 33405_u32
+  SIPAEV_AMD_PMU9 = 33406_u32
+  SIPAEV_AMD_PMU10 = 33407_u32
+  SIPAEV_AMD_PMU11 = 33408_u32
+  SIPAEV_AMD_PMU12 = 33409_u32
+  SIPAEV_AMD_PMU13 = 33410_u32
+  SIPAEV_AMD_PMU14 = 33411_u32
+  SIPAEV_AMD_PMU15 = 33412_u32
+  SIPAEV_AMD_MINIZSC_MSMU = 33413_u32
+  SIPAEV_AMD_DMCU_ERAM = 33414_u32
+  SIPAEV_AMD_DMCU_ISR = 33415_u32
+  SIPAEV_AMD_DMUB_ERAM = 33416_u32
+  SIPAEV_AMD_DMUB_ISR = 33417_u32
+  SIPAEV_AMD_UZSC_MSMU = 33418_u32
+  SIPAEV_AMD_MINIZSC_MSMU_1 = 33419_u32
+  SIPAEV_AMD_S3_IMAGE = 33420_u32
   SIPAEV_AMD_PSP_BL_END = 33535_u32
   SIPAEV_AMD_FTPM_DRV = 33536_u32
   SIPAEV_AMD_DRTM_DRV = 33537_u32
   SIPAEV_AMD_AGESA_DRV = 33538_u32
+  SIPAEV_AMD_PSP_SOC_DRIVER = 33539_u32
+  SIPAEV_AMD_PSP_HAD_DRIVER = 33540_u32
+  SIPAEV_AMD_PSP_BOOT_DRIVER = 33541_u32
+  SIPAEV_AMD_PSP_INTERFACE_DRIVER = 33542_u32
+  SIPAEV_AMD_PSP_SFDR_DRIVER = 33543_u32
+  SIPAEV_AMD_DRV_SEV = 33544_u32
+  SIPAEV_AMD_DRV_RAS = 33545_u32
+  SIPAEV_AMD_DRV_ASD = 33546_u32
+  SIPAEV_AMD_DRV_MFD = 33547_u32
+  SIPAEV_AMD_DRV_FHP = 33548_u32
+  SIPAEV_AMD_DRV_SPDM = 33549_u32
+  SIPAEV_AMD_DRV_PLAT = 33550_u32
+  SIPAEV_AMD_DRV_IPKEYMGR = 33551_u32
   SIPAEV_AMD_PSP_END = 33791_u32
   SIPAEV_ARM_BASE = 36864_u32
   SIPAEV_ARM_PCR_SCHEMA = 36865_u32
@@ -402,11 +452,16 @@ module Win32cr::NetworkManagement::QoS
   SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH = 327733_u32
   SIPAEVENT_REFS_ROLLBACK_PROTECTION_VERIFICATION_SUCCEEDED = 327734_u32
   SIPAEVENT_REFS_ROLLBACK_PROTECTION_VOLUME_FIRST_EVER_MOUNT = 327735_u32
+  SIPAEVENT_SI_POLICY_SUPPLEMENTAL_SIGNER = 327736_u32
+  SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY = 327737_u32
   SIPAEVENT_VSM_SEALED_SI_POLICY = 327738_u32
   SIPAEVENT_VSM_DRTM_KEYROLL_DETECTED = 327739_u32
   SIPAEVENT_VSM_SRTM_UNSEAL_POLICY = 327740_u32
   SIPAEVENT_VSM_SRTM_ANTI_ROLLBACK_COUNTER = 327741_u32
+  SIPAEVENT_REFS_ATTESTATION_SUMMARY = 327742_u32
   SIPAEVENT_VTL1_DUMP_CONFIG = 327744_u32
+  SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER_VERSION = 1_u32
+  SIPAEVENT_REFS_ATTESTATION_SUMMARY_HEADER_VERSION = 1_u32
   SIPAEVENT_NOAUTHORITY = 393217_u32
   SIPAEVENT_AUTHORITYPUBKEY = 393218_u32
   SIPAEVENT_FILEPATH = 458753_u32
@@ -531,6 +586,13 @@ module Win32cr::NetworkManagement::QoS
     FILTERSPECV4_GPI = 4_i32
     FILTERSPECV6_GPI = 5_i32
     FILTERSPEC_END = 6_i32
+  end
+  @[Flags]
+  enum SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_NONE = 0_i32
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_CERTIFICATE = 1_i32
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_TPM = 2_i32
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_KEY_RING = 4_i32
   end
 
   @[Extern]
@@ -998,6 +1060,43 @@ module Win32cr::NetworkManagement::QoS
   end
 
   @[Extern]
+  struct SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER
+    property size : UInt32
+    property version : UInt32
+    property leaf_certificate_fingerprint_size : UInt32
+    property leaf_certificate_fingerprint : UInt8[64]
+    property root_certificate_fingerprint_size : UInt32
+    property root_certificate_fingerprint : UInt8[64]
+    property attested_hash_size : UInt32
+    property attested_hash : UInt8[64]
+    property user_payload_offset : UInt32
+    property user_payload_size : UInt32
+    property leaf_certificate_issuer_blob_offset : UInt32
+    property leaf_certificate_issuer_blob_size : UInt32
+    property leaf_certificate_subject_blob_offset : UInt32
+    property leaf_certificate_subject_blob_size : UInt32
+    property reserved : UInt64[2]
+    property data : UInt8[1]
+    def initialize(@size : UInt32, @version : UInt32, @leaf_certificate_fingerprint_size : UInt32, @leaf_certificate_fingerprint : UInt8[64], @root_certificate_fingerprint_size : UInt32, @root_certificate_fingerprint : UInt8[64], @attested_hash_size : UInt32, @attested_hash : UInt8[64], @user_payload_offset : UInt32, @user_payload_size : UInt32, @leaf_certificate_issuer_blob_offset : UInt32, @leaf_certificate_issuer_blob_size : UInt32, @leaf_certificate_subject_blob_offset : UInt32, @leaf_certificate_subject_blob_size : UInt32, @reserved : UInt64[2], @data : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_REFS_ATTESTATION_SUMMARY_HEADER
+    property size : UInt32
+    property version : UInt32
+    property attested_type : Win32cr::NetworkManagement::QoS::SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE
+    property attested_hash_size : UInt32
+    property attested_hash : UInt8[64]
+    property proof_of_origin_hash_size : UInt32
+    property proof_of_origin_hash : UInt8[64]
+    property reserved : UInt64[4]
+    property certificate_header : Win32cr::NetworkManagement::QoS::SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER
+    def initialize(@size : UInt32, @version : UInt32, @attested_type : Win32cr::NetworkManagement::QoS::SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE, @attested_hash_size : UInt32, @attested_hash : UInt8[64], @proof_of_origin_hash_size : UInt32, @proof_of_origin_hash : UInt8[64], @reserved : UInt64[4], @certificate_header : Win32cr::NetworkManagement::QoS::SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER)
+    end
+  end
+
+  @[Extern]
   struct WBCL_Iterator
     property firstElementPtr : Void*
     property logSize : UInt32
@@ -1112,6 +1211,16 @@ module Win32cr::NetworkManagement::QoS
     property ek_us_count : UInt16
     property var_length_data : UInt8[1]
     def initialize(@root_id : UInt32, @certificates_length : UInt32, @certificates_count : UInt16, @policy_name_length : UInt16, @ek_us_length : UInt16, @ek_us_count : UInt16, @var_length_data : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY_INFO_V1
+    property payload_version : UInt32
+    property var_data_offset : UInt32
+    property policy_name_length : UInt16
+    property base_policy_id_length : UInt16
+    def initialize(@payload_version : UInt32, @var_data_offset : UInt32, @policy_name_length : UInt16, @base_policy_id_length : UInt16)
     end
   end
 

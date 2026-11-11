@@ -22,6 +22,8 @@ module Win32cr::System::Diagnostics::Debug::Extensions
 
   alias PDEBUG_EXTENSION_UNLOAD = Proc(Void)
 
+  alias PDEBUG_EXTENSION_ISEXTENSIONAPI = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
+
   alias PDEBUG_EXTENSION_NOTIFY = Proc(UInt32, UInt64, Void)
 
   alias PDEBUG_EXTENSION_CALL = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)
@@ -468,6 +470,9 @@ module Win32cr::System::Diagnostics::Debug::Extensions
   DEBUG_STACK_FRAME_OFFSETS = 4096_u32
   DEBUG_STACK_PROVIDER = 8192_u32
   DEBUG_STACK_FRAME_ARCH = 16384_u32
+  IMAGE_FILE_MACHINE_CHPE_X86 = 14948_u32
+  IMAGE_FILE_MACHINE_ARM64EC = 42561_u32
+  IMAGE_FILE_MACHINE_ARM64X = 42574_u32
   DEBUG_CLASS_UNINITIALIZED = 0_u32
   DEBUG_CLASS_KERNEL = 1_u32
   DEBUG_CLASS_USER_WINDOWS = 2_u32
@@ -785,6 +790,8 @@ module Win32cr::System::Diagnostics::Debug::Extensions
   DEBUG_CES_ASSEMBLY_OPTIONS = 4096_u32
   DEBUG_CES_EXPRESSION_SYNTAX = 8192_u32
   DEBUG_CES_TEXT_REPLACEMENTS = 16384_u32
+  DEBUG_CES_VIEWS = 32768_u32
+  DEBUG_CES_STEP_FILTERS = 65536_u32
   DEBUG_CSS_ALL = 4294967295_u32
   DEBUG_CSS_LOADS = 1_u32
   DEBUG_CSS_UNLOADS = 2_u32
@@ -1207,6 +1214,12 @@ module Win32cr::System::Diagnostics::Debug::Extensions
     FormatEscapedStringWithQuote = 13_i32
     FormatUTF32String = 14_i32
     FormatQuotedUTF32String = 15_i32
+  end
+  enum PreferredGraphForm
+    GraphFormUnspecified = 0_i32
+    GraphFormGraph = 1_i32
+    GraphFormTree = 2_i32
+    GraphFormLinearFlow = 3_i32
   end
   enum RawSearchFlags
     RawSearchNone = 0_i32
@@ -2366,8 +2379,8 @@ module Win32cr::System::Diagnostics::Debug::Extensions
     property virtual : Win32cr::Foundation::BOOL
     property frame_number : UInt32
     property inline_frame_context : UInt32
-    property reserved1 : UInt32
-    def initialize(@instruction_offset : UInt64, @return_offset : UInt64, @frame_offset : UInt64, @stack_offset : UInt64, @func_table_entry : UInt64, @params : UInt64[4], @reserved : UInt64[6], @virtual : Win32cr::Foundation::BOOL, @frame_number : UInt32, @inline_frame_context : UInt32, @reserved1 : UInt32)
+    property frame_machine : UInt32
+    def initialize(@instruction_offset : UInt64, @return_offset : UInt64, @frame_offset : UInt64, @stack_offset : UInt64, @func_table_entry : UInt64, @params : UInt64[4], @reserved : UInt64[6], @virtual : Win32cr::Foundation::BOOL, @frame_number : UInt32, @inline_frame_context : UInt32, @frame_machine : UInt32)
     end
   end
 
@@ -3612,7 +3625,8 @@ module Win32cr::System::Diagnostics::Debug::Extensions
     property shadow_stack_enabled : UInt64
     property pointer_auth_mask : UInt64
     property offset_prcb_exception_stack : UInt16
-    def initialize(@header : Win32cr::System::Diagnostics::Debug::Extensions::DBGKD_DEBUG_DATA_HEADER64, @kern_base : UInt64, @breakpoint_with_status : UInt64, @saved_context : UInt64, @th_callback_stack : UInt16, @next_callback : UInt16, @frame_pointer : UInt16, @_bitfield : UInt16, @ki_call_user_mode : UInt64, @ke_user_callback_dispatcher : UInt64, @ps_loaded_module_list : UInt64, @ps_active_process_head : UInt64, @psp_cid_table : UInt64, @exp_system_resources_list : UInt64, @exp_paged_pool_descriptor : UInt64, @exp_number_of_paged_pools : UInt64, @ke_time_increment : UInt64, @ke_bug_check_callback_list_head : UInt64, @ki_bugcheck_data : UInt64, @iop_error_log_list_head : UInt64, @obp_root_directory_object : UInt64, @obp_type_object_type : UInt64, @mm_system_cache_start : UInt64, @mm_system_cache_end : UInt64, @mm_system_cache_ws : UInt64, @mm_pfn_database : UInt64, @mm_system_ptes_start : UInt64, @mm_system_ptes_end : UInt64, @mm_subsection_base : UInt64, @mm_number_of_paging_files : UInt64, @mm_lowest_physical_page : UInt64, @mm_highest_physical_page : UInt64, @mm_number_of_physical_pages : UInt64, @mm_maximum_non_paged_pool_in_bytes : UInt64, @mm_non_paged_system_start : UInt64, @mm_non_paged_pool_start : UInt64, @mm_non_paged_pool_end : UInt64, @mm_paged_pool_start : UInt64, @mm_paged_pool_end : UInt64, @mm_paged_pool_information : UInt64, @mm_page_size : UInt64, @mm_size_of_paged_pool_in_bytes : UInt64, @mm_total_commit_limit : UInt64, @mm_total_committed_pages : UInt64, @mm_shared_commit : UInt64, @mm_driver_commit : UInt64, @mm_process_commit : UInt64, @mm_paged_pool_commit : UInt64, @mm_extended_commit : UInt64, @mm_zeroed_page_list_head : UInt64, @mm_free_page_list_head : UInt64, @mm_standby_page_list_head : UInt64, @mm_modified_page_list_head : UInt64, @mm_modified_no_write_page_list_head : UInt64, @mm_available_pages : UInt64, @mm_resident_available_pages : UInt64, @pool_track_table : UInt64, @non_paged_pool_descriptor : UInt64, @mm_highest_user_address : UInt64, @mm_system_range_start : UInt64, @mm_user_probe_address : UInt64, @kd_print_circular_buffer : UInt64, @kd_print_circular_buffer_end : UInt64, @kd_print_write_pointer : UInt64, @kd_print_rollover_count : UInt64, @mm_loaded_user_image_list : UInt64, @nt_build_lab : UInt64, @ki_normal_system_call : UInt64, @ki_processor_block : UInt64, @mm_unloaded_drivers : UInt64, @mm_last_unloaded_driver : UInt64, @mm_triage_action_taken : UInt64, @mm_special_pool_tag : UInt64, @kernel_verifier : UInt64, @mm_verifier_data : UInt64, @mm_allocated_non_paged_pool : UInt64, @mm_peak_commitment : UInt64, @mm_total_commit_limit_maximum : UInt64, @cm_nt_csd_version : UInt64, @mm_physical_memory_block : UInt64, @mm_session_base : UInt64, @mm_session_size : UInt64, @mm_system_parent_table_page : UInt64, @mm_virtual_translation_base : UInt64, @offset_k_thread_next_processor : UInt16, @offset_k_thread_teb : UInt16, @offset_k_thread_kernel_stack : UInt16, @offset_k_thread_initial_stack : UInt16, @offset_k_thread_apc_process : UInt16, @offset_k_thread_state : UInt16, @offset_k_thread_b_store : UInt16, @offset_k_thread_b_store_limit : UInt16, @size_e_process : UInt16, @offset_eprocess_peb : UInt16, @offset_eprocess_parent_cid : UInt16, @offset_eprocess_directory_table_base : UInt16, @size_prcb : UInt16, @offset_prcb_dpc_routine : UInt16, @offset_prcb_current_thread : UInt16, @offset_prcb_mhz : UInt16, @offset_prcb_cpu_type : UInt16, @offset_prcb_vendor_string : UInt16, @offset_prcb_proc_state_context : UInt16, @offset_prcb_number : UInt16, @size_e_thread : UInt16, @l1tf_high_physical_bit_index : UInt8, @l1tf_swizzle_bit_index : UInt8, @padding0 : UInt32, @kd_print_circular_buffer_ptr : UInt64, @kd_print_buffer_size : UInt64, @ke_loader_block : UInt64, @size_pcr : UInt16, @offset_pcr_self_pcr : UInt16, @offset_pcr_current_prcb : UInt16, @offset_pcr_contained_prcb : UInt16, @offset_pcr_initial_b_store : UInt16, @offset_pcr_b_store_limit : UInt16, @offset_pcr_initial_stack : UInt16, @offset_pcr_stack_limit : UInt16, @offset_prcb_pcr_page : UInt16, @offset_prcb_proc_state_special_reg : UInt16, @gdt_r0_code : UInt16, @gdt_r0_data : UInt16, @gdt_r0_pcr : UInt16, @gdt_r3_code : UInt16, @gdt_r3_data : UInt16, @gdt_r3_teb : UInt16, @gdt_ldt : UInt16, @gdt_tss : UInt16, @gdt64_r3_cm_code : UInt16, @gdt64_r3_cm_teb : UInt16, @iop_num_triage_dump_data_blocks : UInt64, @iop_triage_dump_data_blocks : UInt64, @vf_crash_data_block : UInt64, @mm_bad_pages_detected : UInt64, @mm_zeroed_page_single_bit_errors_detected : UInt64, @etwp_debugger_data : UInt64, @offset_prcb_context : UInt16, @offset_prcb_max_breakpoints : UInt16, @offset_prcb_max_watchpoints : UInt16, @offset_k_thread_stack_limit : UInt32, @offset_k_thread_stack_base : UInt32, @offset_k_thread_queue_list_entry : UInt32, @offset_e_thread_irp_list : UInt32, @offset_prcb_idle_thread : UInt16, @offset_prcb_normal_dpc_state : UInt16, @offset_prcb_dpc_stack : UInt16, @offset_prcb_isr_stack : UInt16, @size_kdpc_stack_frame : UInt16, @offset_k_pri_queue_thread_list_head : UInt16, @offset_k_thread_wait_reason : UInt16, @padding1 : UInt16, @pte_base : UInt64, @retpoline_stub_function_table : UInt64, @retpoline_stub_function_table_size : UInt32, @retpoline_stub_offset : UInt32, @retpoline_stub_size : UInt32, @offset_e_process_mm_hot_patch_context : UInt16, @offset_k_thread_shadow_stack_limit : UInt32, @offset_k_thread_shadow_stack_base : UInt32, @shadow_stack_enabled : UInt64, @pointer_auth_mask : UInt64, @offset_prcb_exception_stack : UInt16)
+    property pointer_ignore_bits : UInt64
+    def initialize(@header : Win32cr::System::Diagnostics::Debug::Extensions::DBGKD_DEBUG_DATA_HEADER64, @kern_base : UInt64, @breakpoint_with_status : UInt64, @saved_context : UInt64, @th_callback_stack : UInt16, @next_callback : UInt16, @frame_pointer : UInt16, @_bitfield : UInt16, @ki_call_user_mode : UInt64, @ke_user_callback_dispatcher : UInt64, @ps_loaded_module_list : UInt64, @ps_active_process_head : UInt64, @psp_cid_table : UInt64, @exp_system_resources_list : UInt64, @exp_paged_pool_descriptor : UInt64, @exp_number_of_paged_pools : UInt64, @ke_time_increment : UInt64, @ke_bug_check_callback_list_head : UInt64, @ki_bugcheck_data : UInt64, @iop_error_log_list_head : UInt64, @obp_root_directory_object : UInt64, @obp_type_object_type : UInt64, @mm_system_cache_start : UInt64, @mm_system_cache_end : UInt64, @mm_system_cache_ws : UInt64, @mm_pfn_database : UInt64, @mm_system_ptes_start : UInt64, @mm_system_ptes_end : UInt64, @mm_subsection_base : UInt64, @mm_number_of_paging_files : UInt64, @mm_lowest_physical_page : UInt64, @mm_highest_physical_page : UInt64, @mm_number_of_physical_pages : UInt64, @mm_maximum_non_paged_pool_in_bytes : UInt64, @mm_non_paged_system_start : UInt64, @mm_non_paged_pool_start : UInt64, @mm_non_paged_pool_end : UInt64, @mm_paged_pool_start : UInt64, @mm_paged_pool_end : UInt64, @mm_paged_pool_information : UInt64, @mm_page_size : UInt64, @mm_size_of_paged_pool_in_bytes : UInt64, @mm_total_commit_limit : UInt64, @mm_total_committed_pages : UInt64, @mm_shared_commit : UInt64, @mm_driver_commit : UInt64, @mm_process_commit : UInt64, @mm_paged_pool_commit : UInt64, @mm_extended_commit : UInt64, @mm_zeroed_page_list_head : UInt64, @mm_free_page_list_head : UInt64, @mm_standby_page_list_head : UInt64, @mm_modified_page_list_head : UInt64, @mm_modified_no_write_page_list_head : UInt64, @mm_available_pages : UInt64, @mm_resident_available_pages : UInt64, @pool_track_table : UInt64, @non_paged_pool_descriptor : UInt64, @mm_highest_user_address : UInt64, @mm_system_range_start : UInt64, @mm_user_probe_address : UInt64, @kd_print_circular_buffer : UInt64, @kd_print_circular_buffer_end : UInt64, @kd_print_write_pointer : UInt64, @kd_print_rollover_count : UInt64, @mm_loaded_user_image_list : UInt64, @nt_build_lab : UInt64, @ki_normal_system_call : UInt64, @ki_processor_block : UInt64, @mm_unloaded_drivers : UInt64, @mm_last_unloaded_driver : UInt64, @mm_triage_action_taken : UInt64, @mm_special_pool_tag : UInt64, @kernel_verifier : UInt64, @mm_verifier_data : UInt64, @mm_allocated_non_paged_pool : UInt64, @mm_peak_commitment : UInt64, @mm_total_commit_limit_maximum : UInt64, @cm_nt_csd_version : UInt64, @mm_physical_memory_block : UInt64, @mm_session_base : UInt64, @mm_session_size : UInt64, @mm_system_parent_table_page : UInt64, @mm_virtual_translation_base : UInt64, @offset_k_thread_next_processor : UInt16, @offset_k_thread_teb : UInt16, @offset_k_thread_kernel_stack : UInt16, @offset_k_thread_initial_stack : UInt16, @offset_k_thread_apc_process : UInt16, @offset_k_thread_state : UInt16, @offset_k_thread_b_store : UInt16, @offset_k_thread_b_store_limit : UInt16, @size_e_process : UInt16, @offset_eprocess_peb : UInt16, @offset_eprocess_parent_cid : UInt16, @offset_eprocess_directory_table_base : UInt16, @size_prcb : UInt16, @offset_prcb_dpc_routine : UInt16, @offset_prcb_current_thread : UInt16, @offset_prcb_mhz : UInt16, @offset_prcb_cpu_type : UInt16, @offset_prcb_vendor_string : UInt16, @offset_prcb_proc_state_context : UInt16, @offset_prcb_number : UInt16, @size_e_thread : UInt16, @l1tf_high_physical_bit_index : UInt8, @l1tf_swizzle_bit_index : UInt8, @padding0 : UInt32, @kd_print_circular_buffer_ptr : UInt64, @kd_print_buffer_size : UInt64, @ke_loader_block : UInt64, @size_pcr : UInt16, @offset_pcr_self_pcr : UInt16, @offset_pcr_current_prcb : UInt16, @offset_pcr_contained_prcb : UInt16, @offset_pcr_initial_b_store : UInt16, @offset_pcr_b_store_limit : UInt16, @offset_pcr_initial_stack : UInt16, @offset_pcr_stack_limit : UInt16, @offset_prcb_pcr_page : UInt16, @offset_prcb_proc_state_special_reg : UInt16, @gdt_r0_code : UInt16, @gdt_r0_data : UInt16, @gdt_r0_pcr : UInt16, @gdt_r3_code : UInt16, @gdt_r3_data : UInt16, @gdt_r3_teb : UInt16, @gdt_ldt : UInt16, @gdt_tss : UInt16, @gdt64_r3_cm_code : UInt16, @gdt64_r3_cm_teb : UInt16, @iop_num_triage_dump_data_blocks : UInt64, @iop_triage_dump_data_blocks : UInt64, @vf_crash_data_block : UInt64, @mm_bad_pages_detected : UInt64, @mm_zeroed_page_single_bit_errors_detected : UInt64, @etwp_debugger_data : UInt64, @offset_prcb_context : UInt16, @offset_prcb_max_breakpoints : UInt16, @offset_prcb_max_watchpoints : UInt16, @offset_k_thread_stack_limit : UInt32, @offset_k_thread_stack_base : UInt32, @offset_k_thread_queue_list_entry : UInt32, @offset_e_thread_irp_list : UInt32, @offset_prcb_idle_thread : UInt16, @offset_prcb_normal_dpc_state : UInt16, @offset_prcb_dpc_stack : UInt16, @offset_prcb_isr_stack : UInt16, @size_kdpc_stack_frame : UInt16, @offset_k_pri_queue_thread_list_head : UInt16, @offset_k_thread_wait_reason : UInt16, @padding1 : UInt16, @pte_base : UInt64, @retpoline_stub_function_table : UInt64, @retpoline_stub_function_table_size : UInt32, @retpoline_stub_offset : UInt32, @retpoline_stub_size : UInt32, @offset_e_process_mm_hot_patch_context : UInt16, @offset_k_thread_shadow_stack_limit : UInt32, @offset_k_thread_shadow_stack_base : UInt32, @shadow_stack_enabled : UInt64, @pointer_auth_mask : UInt64, @offset_prcb_exception_stack : UInt16, @pointer_ignore_bits : UInt64)
     end
   end
 
@@ -18359,6 +18373,101 @@ module Win32cr::System::Diagnostics::Debug::Extensions
 
   @[Extern]
 
+  record IDebugHostModule6Vtable,
+    query_interface : Proc(IDebugHostModule6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDebugHostModule6*, UInt32),
+    release : Proc(IDebugHostModule6*, UInt32),
+    get_context : Proc(IDebugHostModule6*, Void**, Win32cr::Foundation::HRESULT),
+    enumerate_children : Proc(IDebugHostModule6*, Win32cr::System::Diagnostics::Debug::Extensions::SymbolKind, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_symbol_kind : Proc(IDebugHostModule6*, Win32cr::System::Diagnostics::Debug::Extensions::SymbolKind*, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IDebugHostModule6*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_type : Proc(IDebugHostModule6*, Void**, Win32cr::Foundation::HRESULT),
+    get_containing_module : Proc(IDebugHostModule6*, Void**, Win32cr::Foundation::HRESULT),
+    compare_against : Proc(IDebugHostModule6*, Void*, UInt32, Bool*, Win32cr::Foundation::HRESULT),
+    get_image_name : Proc(IDebugHostModule6*, UInt8, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_base_location : Proc(IDebugHostModule6*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IDebugHostModule6*, UInt64*, UInt64*, Win32cr::Foundation::HRESULT),
+    find_type_by_name : Proc(IDebugHostModule6*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    find_symbol_by_rva : Proc(IDebugHostModule6*, UInt64, Void**, Win32cr::Foundation::HRESULT),
+    find_symbol_by_name : Proc(IDebugHostModule6*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    find_containing_symbol_by_rva : Proc(IDebugHostModule6*, UInt64, Void**, UInt64*, Win32cr::Foundation::HRESULT),
+    get_range : Proc(IDebugHostModule6*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::Foundation::HRESULT),
+    find_type_by_name2 : Proc(IDebugHostModule6*, Void*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_primary_compiler_information : Proc(IDebugHostModule6*, Win32cr::System::Diagnostics::Debug::Extensions::KnownCompiler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_architecture_by_rva : Proc(IDebugHostModule6*, UInt64, UInt32*, UInt64*, UInt64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDebugHostModule6, lpVtbl : IDebugHostModule6Vtable* do
+    GUID = LibC::GUID.new(0x10efc47e_u32, 0x68d4_u16, 0x4f87_u16, StaticArray[0x81_u8, 0xf_u8, 0x67_u8, 0x29_u8, 0xa8_u8, 0x5_u8, 0x94_u8, 0xa_u8])
+    def query_interface(this : IDebugHostModule6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDebugHostModule6*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDebugHostModule6*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_context(this : IDebugHostModule6*, context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_context.call(this, context)
+    end
+    def enumerate_children(this : IDebugHostModule6*, kind : Win32cr::System::Diagnostics::Debug::Extensions::SymbolKind, name : Win32cr::Foundation::PWSTR, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_children.call(this, kind, name, ppEnum)
+    end
+    def get_symbol_kind(this : IDebugHostModule6*, kind : Win32cr::System::Diagnostics::Debug::Extensions::SymbolKind*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_symbol_kind.call(this, kind)
+    end
+    def get_name(this : IDebugHostModule6*, symbolName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_name.call(this, symbolName)
+    end
+    def get_type(this : IDebugHostModule6*, type__ : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type.call(this, type__)
+    end
+    def get_containing_module(this : IDebugHostModule6*, containingModule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_containing_module.call(this, containingModule)
+    end
+    def compare_against(this : IDebugHostModule6*, pComparisonSymbol : Void*, comparisonFlags : UInt32, pMatches : Bool*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.compare_against.call(this, pComparisonSymbol, comparisonFlags, pMatches)
+    end
+    def get_image_name(this : IDebugHostModule6*, allowPath : UInt8, imageName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_image_name.call(this, allowPath, imageName)
+    end
+    def get_base_location(this : IDebugHostModule6*, moduleBaseLocation : Win32cr::System::Diagnostics::Debug::Extensions::Location*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_base_location.call(this, moduleBaseLocation)
+    end
+    def get_version(this : IDebugHostModule6*, fileVersion : UInt64*, productVersion : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, fileVersion, productVersion)
+    end
+    def find_type_by_name(this : IDebugHostModule6*, typeName : Win32cr::Foundation::PWSTR, type__ : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_type_by_name.call(this, typeName, type__)
+    end
+    def find_symbol_by_rva(this : IDebugHostModule6*, rva : UInt64, symbol : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_symbol_by_rva.call(this, rva, symbol)
+    end
+    def find_symbol_by_name(this : IDebugHostModule6*, symbolName : Win32cr::Foundation::PWSTR, symbol : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_symbol_by_name.call(this, symbolName, symbol)
+    end
+    def find_containing_symbol_by_rva(this : IDebugHostModule6*, rva : UInt64, symbol : Void**, offset : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_containing_symbol_by_rva.call(this, rva, symbol, offset)
+    end
+    def get_range(this : IDebugHostModule6*, moduleStart : Win32cr::System::Diagnostics::Debug::Extensions::Location*, moduleEnd : Win32cr::System::Diagnostics::Debug::Extensions::Location*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_range.call(this, moduleStart, moduleEnd)
+    end
+    def find_type_by_name2(this : IDebugHostModule6*, pEnclosingSymbol : Void*, typeName : Win32cr::Foundation::PWSTR, type__ : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_type_by_name2.call(this, pEnclosingSymbol, typeName, type__)
+    end
+    def get_primary_compiler_information(this : IDebugHostModule6*, pCompilerId : Win32cr::System::Diagnostics::Debug::Extensions::KnownCompiler*, pPrimaryCompilerString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_primary_compiler_information.call(this, pCompilerId, pPrimaryCompilerString)
+    end
+    def get_architecture_by_rva(this : IDebugHostModule6*, rva : UInt64, pMachineArchitecture : UInt32*, pRangeRvaStart : UInt64*, pRangeRvaEnd : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_architecture_by_rva.call(this, rva, pMachineArchitecture, pRangeRvaStart, pRangeRvaEnd)
+    end
+
+  end
+
+  @[Extern]
+
   record IDebugHostTypeVtable,
     query_interface : Proc(IDebugHostType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostType*, UInt32),
@@ -19861,6 +19970,69 @@ module Win32cr::System::Diagnostics::Debug::Extensions
     end
     def demangle_symbol_name(this : IDebugHostSymbols2*, pSymbol : Void*, flags : UInt32, pDemangledSymbolName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.demangle_symbol_name.call(this, pSymbol, flags, pDemangledSymbolName)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDebugHostSymbols3Vtable,
+    query_interface : Proc(IDebugHostSymbols3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDebugHostSymbols3*, UInt32),
+    release : Proc(IDebugHostSymbols3*, UInt32),
+    create_module_signature : Proc(IDebugHostSymbols3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_type_signature : Proc(IDebugHostSymbols3*, Win32cr::Foundation::PWSTR, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_type_signature_for_module_range : Proc(IDebugHostSymbols3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    enumerate_modules : Proc(IDebugHostSymbols3*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    find_module_by_name : Proc(IDebugHostSymbols3*, Void*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    find_module_by_location : Proc(IDebugHostSymbols3*, Void*, Win32cr::System::Diagnostics::Debug::Extensions::Location, Void**, Win32cr::Foundation::HRESULT),
+    get_most_derived_object : Proc(IDebugHostSymbols3*, Void*, Win32cr::System::Diagnostics::Debug::Extensions::Location, Void*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Void**, Win32cr::Foundation::HRESULT),
+    demangle_symbol_name : Proc(IDebugHostSymbols3*, Void*, UInt32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    create_module_signature2 : Proc(IDebugHostSymbols3*, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_type_signature_for_module_range2 : Proc(IDebugHostSymbols3*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDebugHostSymbols3, lpVtbl : IDebugHostSymbols3Vtable* do
+    GUID = LibC::GUID.new(0x8535e318_u32, 0x4f4b_u16, 0x4ace_u16, StaticArray[0xa2_u8, 0x1b_u8, 0xaf_u8, 0x9e_u8, 0x13_u8, 0x4a_u8, 0x4e_u8, 0x9b_u8])
+    def query_interface(this : IDebugHostSymbols3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDebugHostSymbols3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDebugHostSymbols3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_module_signature(this : IDebugHostSymbols3*, pwszModuleName : Win32cr::Foundation::PWSTR, pwszMinVersion : Win32cr::Foundation::PWSTR, pwszMaxVersion : Win32cr::Foundation::PWSTR, ppModuleSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_module_signature.call(this, pwszModuleName, pwszMinVersion, pwszMaxVersion, ppModuleSignature)
+    end
+    def create_type_signature(this : IDebugHostSymbols3*, signatureSpecification : Win32cr::Foundation::PWSTR, module__ : Void*, typeSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_type_signature.call(this, signatureSpecification, module__, typeSignature)
+    end
+    def create_type_signature_for_module_range(this : IDebugHostSymbols3*, signatureSpecification : Win32cr::Foundation::PWSTR, moduleName : Win32cr::Foundation::PWSTR, minVersion : Win32cr::Foundation::PWSTR, maxVersion : Win32cr::Foundation::PWSTR, typeSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_type_signature_for_module_range.call(this, signatureSpecification, moduleName, minVersion, maxVersion, typeSignature)
+    end
+    def enumerate_modules(this : IDebugHostSymbols3*, context : Void*, moduleEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_modules.call(this, context, moduleEnum)
+    end
+    def find_module_by_name(this : IDebugHostSymbols3*, context : Void*, moduleName : Win32cr::Foundation::PWSTR, module__ : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_module_by_name.call(this, context, moduleName, module__)
+    end
+    def find_module_by_location(this : IDebugHostSymbols3*, context : Void*, moduleLocation : Win32cr::System::Diagnostics::Debug::Extensions::Location, module__ : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_module_by_location.call(this, context, moduleLocation, module__)
+    end
+    def get_most_derived_object(this : IDebugHostSymbols3*, pContext : Void*, location : Win32cr::System::Diagnostics::Debug::Extensions::Location, objectType : Void*, derivedLocation : Win32cr::System::Diagnostics::Debug::Extensions::Location*, derivedType : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_most_derived_object.call(this, pContext, location, objectType, derivedLocation, derivedType)
+    end
+    def demangle_symbol_name(this : IDebugHostSymbols3*, pSymbol : Void*, flags : UInt32, pDemangledSymbolName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.demangle_symbol_name.call(this, pSymbol, flags, pDemangledSymbolName)
+    end
+    def create_module_signature2(this : IDebugHostSymbols3*, pwszModuleName : Win32cr::Foundation::PWSTR, allowLooseNameMatch : UInt8, pwszMinVersion : Win32cr::Foundation::PWSTR, pwszMaxVersion : Win32cr::Foundation::PWSTR, ppModuleSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_module_signature2.call(this, pwszModuleName, allowLooseNameMatch, pwszMinVersion, pwszMaxVersion, ppModuleSignature)
+    end
+    def create_type_signature_for_module_range2(this : IDebugHostSymbols3*, signatureSpecification : Win32cr::Foundation::PWSTR, moduleName : Win32cr::Foundation::PWSTR, allowLooseNameMatch : UInt8, minVersion : Win32cr::Foundation::PWSTR, maxVersion : Win32cr::Foundation::PWSTR, typeSignature : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_type_signature_for_module_range2.call(this, signatureSpecification, moduleName, allowLooseNameMatch, minVersion, maxVersion, typeSignature)
     end
 
   end
@@ -22038,6 +22210,61 @@ module Win32cr::System::Diagnostics::Debug::Extensions
     end
     def is_no_return_function(this : IDebugHostFunctionIntrospection3*, pIsNoReturnFunction : Bool*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_no_return_function.call(this, pIsNoReturnFunction)
+    end
+
+  end
+
+  @[Extern]
+
+  record IDebugHostFunctionIntrospection4Vtable,
+    query_interface : Proc(IDebugHostFunctionIntrospection4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDebugHostFunctionIntrospection4*, UInt32),
+    release : Proc(IDebugHostFunctionIntrospection4*, UInt32),
+    enumerate_locals_details : Proc(IDebugHostFunctionIntrospection4*, Void**, Win32cr::Foundation::HRESULT),
+    enumerate_inline_functions_by_rva : Proc(IDebugHostFunctionIntrospection4*, UInt64, Void**, Win32cr::Foundation::HRESULT),
+    find_containing_code_range_by_rva : Proc(IDebugHostFunctionIntrospection4*, UInt64, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::Foundation::HRESULT),
+    find_source_location_by_rva : Proc(IDebugHostFunctionIntrospection4*, UInt64, Win32cr::Foundation::BSTR*, UInt64*, Win32cr::Foundation::HRESULT),
+    enumerate_locals_details_ex : Proc(IDebugHostFunctionIntrospection4*, UInt8, Void**, Win32cr::Foundation::HRESULT),
+    is_no_return_function : Proc(IDebugHostFunctionIntrospection4*, Bool*, Win32cr::Foundation::HRESULT),
+    get_prologue_range : Proc(IDebugHostFunctionIntrospection4*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::Foundation::HRESULT),
+    get_epilogue_range : Proc(IDebugHostFunctionIntrospection4*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::System::Diagnostics::Debug::Extensions::Location*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IDebugHostFunctionIntrospection4, lpVtbl : IDebugHostFunctionIntrospection4Vtable* do
+    GUID = LibC::GUID.new(0xf93f6699_u32, 0x1f2e_u16, 0x4fb2_u16, StaticArray[0x81_u8, 0x64_u8, 0x36_u8, 0x3a_u8, 0x78_u8, 0xf7_u8, 0x91_u8, 0x4e_u8])
+    def query_interface(this : IDebugHostFunctionIntrospection4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDebugHostFunctionIntrospection4*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDebugHostFunctionIntrospection4*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def enumerate_locals_details(this : IDebugHostFunctionIntrospection4*, localsEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_locals_details.call(this, localsEnum)
+    end
+    def enumerate_inline_functions_by_rva(this : IDebugHostFunctionIntrospection4*, rva : UInt64, inlinesEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_inline_functions_by_rva.call(this, rva, inlinesEnum)
+    end
+    def find_containing_code_range_by_rva(this : IDebugHostFunctionIntrospection4*, rva : UInt64, rangeStart : Win32cr::System::Diagnostics::Debug::Extensions::Location*, rangeEnd : Win32cr::System::Diagnostics::Debug::Extensions::Location*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_containing_code_range_by_rva.call(this, rva, rangeStart, rangeEnd)
+    end
+    def find_source_location_by_rva(this : IDebugHostFunctionIntrospection4*, rva : UInt64, sourceFile : Win32cr::Foundation::BSTR*, sourceLine : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_source_location_by_rva.call(this, rva, sourceFile, sourceLine)
+    end
+    def enumerate_locals_details_ex(this : IDebugHostFunctionIntrospection4*, enumerateInlinedLocals : UInt8, localsEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_locals_details_ex.call(this, enumerateInlinedLocals, localsEnum)
+    end
+    def is_no_return_function(this : IDebugHostFunctionIntrospection4*, pIsNoReturnFunction : Bool*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_no_return_function.call(this, pIsNoReturnFunction)
+    end
+    def get_prologue_range(this : IDebugHostFunctionIntrospection4*, pPrologueStart : Win32cr::System::Diagnostics::Debug::Extensions::Location*, pPrologueEnd : Win32cr::System::Diagnostics::Debug::Extensions::Location*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_prologue_range.call(this, pPrologueStart, pPrologueEnd)
+    end
+    def get_epilogue_range(this : IDebugHostFunctionIntrospection4*, pEpilogueStart : Win32cr::System::Diagnostics::Debug::Extensions::Location*, pEpilogueEnd : Win32cr::System::Diagnostics::Debug::Extensions::Location*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_epilogue_range.call(this, pEpilogueStart, pEpilogueEnd)
     end
 
   end

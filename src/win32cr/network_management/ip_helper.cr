@@ -3648,12 +3648,6 @@ module Win32cr::NetworkManagement::IpHelper
     {% end %}
   end
 
-  def getBestInterfaceEx(pDestAddr : Win32cr::Networking::WinSock::SOCKADDR*, pdwBestIfIndex : UInt32*) : UInt32
-    {% if !flag?(:docs) %}
-    C.GetBestInterfaceEx(pDestAddr, pdwBestIfIndex)
-    {% end %}
-  end
-
   def getBestRoute(dwDestAddr : UInt32, dwSourceAddr : UInt32, pBestRoute : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*) : UInt32
     {% if !flag?(:docs) %}
     C.GetBestRoute(dwDestAddr, dwSourceAddr, pBestRoute)
@@ -4179,6 +4173,12 @@ module Win32cr::NetworkManagement::IpHelper
   def createSortedAddressPairs(source_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, source_address_count : UInt32, destination_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address_count : UInt32, address_sort_options : UInt32, sorted_address_pair_list : Win32cr::Networking::WinSock::SOCKADDR_IN6_PAIR**, sorted_address_pair_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
     {% if !flag?(:docs) %}
     C.CreateSortedAddressPairs(source_address_list, source_address_count, destination_address_list, destination_address_count, address_sort_options, sorted_address_pair_list, sorted_address_pair_count)
+    {% end %}
+  end
+
+  def getBestInterfaceEx(destination_address : Win32cr::Networking::WinSock::SOCKADDR*, best_if_index : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
+    C.GetBestInterfaceEx(destination_address, best_if_index)
     {% end %}
   end
 
@@ -4710,9 +4710,6 @@ module Win32cr::NetworkManagement::IpHelper
     fun GetBestInterface(dwDestAddr : UInt32, pdwBestIfIndex : UInt32*) : UInt32
 
     # :nodoc:
-    fun GetBestInterfaceEx(pDestAddr : Win32cr::Networking::WinSock::SOCKADDR*, pdwBestIfIndex : UInt32*) : UInt32
-
-    # :nodoc:
     fun GetBestRoute(dwDestAddr : UInt32, dwSourceAddr : UInt32, pBestRoute : Win32cr::NetworkManagement::IpHelper::MIB_IPFORWARDROW*) : UInt32
 
     # :nodoc:
@@ -4975,6 +4972,9 @@ module Win32cr::NetworkManagement::IpHelper
 
     # :nodoc:
     fun CreateSortedAddressPairs(source_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, source_address_count : UInt32, destination_address_list : Win32cr::Networking::WinSock::SOCKADDR_IN6*, destination_address_count : UInt32, address_sort_options : UInt32, sorted_address_pair_list : Win32cr::Networking::WinSock::SOCKADDR_IN6_PAIR**, sorted_address_pair_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun GetBestInterfaceEx(destination_address : Win32cr::Networking::WinSock::SOCKADDR*, best_if_index : UInt32*) : UInt32
 
     # :nodoc:
     fun ConvertCompartmentGuidToId(compartment_guid : LibC::GUID*, compartment_id : UInt32*) : Win32cr::Foundation::WIN32_ERROR

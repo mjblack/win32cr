@@ -64,6 +64,7 @@ module Win32cr::System::Environment
   ENCLAVE_REPORT_DATA_LENGTH = 64_u32
   VBS_ENCLAVE_VARDATA_INVALID = 0_u32
   VBS_ENCLAVE_VARDATA_MODULE = 1_u32
+  VBS_ENCLAVE_VARDATA_PACKAGE = 2_u32
   ENCLAVE_VBS_BASIC_KEY_FLAG_MEASUREMENT = 1_u32
   ENCLAVE_VBS_BASIC_KEY_FLAG_FAMILY_ID = 2_u32
   ENCLAVE_VBS_BASIC_KEY_FLAG_IMAGE_ID = 4_u32
@@ -92,6 +93,14 @@ module Win32cr::System::Environment
     property signing_level : UInt32
     property enclave_type : UInt32
     def initialize(@owner_id : UInt8[32], @unique_id : UInt8[32], @author_id : UInt8[32], @family_id : UInt8[16], @image_id : UInt8[16], @enclave_svn : UInt32, @secure_kernel_svn : UInt32, @platform_svn : UInt32, @flags : UInt32, @signing_level : UInt32, @enclave_type : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ENCLAVE_PACKAGE_IDENTITY
+    property package_id : UInt8[32]
+    property package_svn : UInt64
+    def initialize(@package_id : UInt8[32], @package_svn : UInt64)
     end
   end
 
@@ -135,6 +144,14 @@ module Win32cr::System::Environment
     property svn : UInt32
     property module_name : UInt16[1]
     def initialize(@header : Win32cr::System::Environment::VBS_ENCLAVE_REPORT_VARDATA_HEADER, @unique_id : UInt8[32], @author_id : UInt8[32], @family_id : UInt8[16], @image_id : UInt8[16], @svn : UInt32, @module_name : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct VBS_ENCLAVE_REPORT_PACKAGE_ID
+    property header : Win32cr::System::Environment::VBS_ENCLAVE_REPORT_VARDATA_HEADER
+    property package_identity : Win32cr::System::Environment::ENCLAVE_PACKAGE_IDENTITY
+    def initialize(@header : Win32cr::System::Environment::VBS_ENCLAVE_REPORT_VARDATA_HEADER, @package_identity : Win32cr::System::Environment::ENCLAVE_PACKAGE_IDENTITY)
     end
   end
 

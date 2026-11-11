@@ -247,6 +247,7 @@ module Win32cr::Storage::FileSystem
   SHI1005_FLAGS_COMPRESS_DATA = 1048576_u32
   SHI1005_FLAGS_ISOLATED_TRANSPORT = 2097152_u32
   SHI1005_FLAGS_DISABLE_DIRECTORY_HANDLE_LEASING = 4194304_u32
+  SHI1005_FLAGS_DISABLE_CLIENT_METADATA_CACHING = 8388608_u32
   SESI1_NUM_ELEMENTS = 8_u32
   SESI2_NUM_ELEMENTS = 9_u32
   STATSOPT_CLR = 1_u32
@@ -1309,7 +1310,9 @@ module Win32cr::Storage::FileSystem
     COPYFILE2_CALLBACK_STREAM_FINISHED = 4_i32
     COPYFILE2_CALLBACK_POLL_CONTINUE = 5_i32
     COPYFILE2_CALLBACK_ERROR = 6_i32
-    COPYFILE2_CALLBACK_MAX = 7_i32
+    COPYFILE2_CALLBACK_SPARSE_CHUNK_STARTED = 7_i32
+    COPYFILE2_CALLBACK_SPARSE_CHUNK_FINISHED = 8_i32
+    COPYFILE2_CALLBACK_MAX = 9_i32
   end
   enum COPYFILE2_MESSAGE_ACTION
     COPYFILE2_PROGRESS_CONTINUE = 0_i32
@@ -3569,6 +3572,7 @@ module Win32cr::Storage::FileSystem
     property stream_finished : StreamFinished_e__Struct_
     property poll_continue : PollContinue_e__Struct_
     property error : Error_e__Struct_
+    property sparse_chunk_status : SparseChunkStatus_e__Struct_
 
       # Nested Type ChunkStarted_e__Struct_
       @[Extern]
@@ -3659,7 +3663,18 @@ module Win32cr::Storage::FileSystem
     end
       end
 
-    def initialize(@chunk_started : ChunkStarted_e__Struct_, @chunk_finished : ChunkFinished_e__Struct_, @stream_started : StreamStarted_e__Struct_, @stream_finished : StreamFinished_e__Struct_, @poll_continue : PollContinue_e__Struct_, @error : Error_e__Struct_)
+
+      # Nested Type SparseChunkStatus_e__Struct_
+      @[Extern]
+      struct SparseChunkStatus_e__Struct_
+    property uliChunkNumber : UInt64
+    property uliChunkSize : UInt64
+    property uliChunkOffset : UInt64
+    def initialize(@uliChunkNumber : UInt64, @uliChunkSize : UInt64, @uliChunkOffset : UInt64)
+    end
+      end
+
+    def initialize(@chunk_started : ChunkStarted_e__Struct_, @chunk_finished : ChunkFinished_e__Struct_, @stream_started : StreamStarted_e__Struct_, @stream_finished : StreamFinished_e__Struct_, @poll_continue : PollContinue_e__Struct_, @error : Error_e__Struct_, @sparse_chunk_status : SparseChunkStatus_e__Struct_)
     end
     end
 

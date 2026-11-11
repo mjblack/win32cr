@@ -1,7 +1,6 @@
 require "./../foundation.cr"
 require "./../system/com.cr"
 require "./direct3_d9.cr"
-require "./direct3_d12.cr"
 
 module Win32cr::Graphics::Direct3D9on12
   extend self

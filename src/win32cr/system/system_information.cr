@@ -1,3 +1,4 @@
+require "./system_services.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::SystemInformation
@@ -118,11 +119,13 @@ module Win32cr::System::SystemInformation
   NTDDI_WIN11_ZN = 167772174_u32
   NTDDI_WIN11_GA = 167772175_u32
   NTDDI_WIN11_GE = 167772176_u32
-  WDK_NTDDI_VERSION = 167772176_u32
+  NTDDI_WIN11_DT = 167772177_u32
+  NTDDI_WIN11_BR = 167772178_u32
+  WDK_NTDDI_VERSION = 167772178_u32
   OSVERSION_MASK = 4294901760_u32
   SPVERSION_MASK = 65280_u32
   SUBVERSION_MASK = 255_u32
-  NTDDI_VERSION = 167772176_u32
+  NTDDI_VERSION = 167772178_u32
   SCEX2_ALT_NETBIOS_NAME = 1_u32
 
   @[Flags]
@@ -482,6 +485,7 @@ module Win32cr::System::SystemInformation
     RelationProcessorDie = 5_i32
     RelationNumaNodeEx = 6_i32
     RelationProcessorModule = 7_i32
+    RelationProcessorSharedComputeUnit = 8_i32
     RelationAll = 65535_i32
   end
   enum PROCESSOR_CACHE_TYPE
@@ -743,7 +747,8 @@ module Win32cr::System::SystemInformation
     property numa_node : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP
     property cache : Win32cr::System::SystemInformation::CACHE_RELATIONSHIP
     property group : Win32cr::System::SystemInformation::GROUP_RELATIONSHIP
-    def initialize(@processor : Win32cr::System::SystemInformation::PROCESSOR_RELATIONSHIP, @numa_node : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP, @cache : Win32cr::System::SystemInformation::CACHE_RELATIONSHIP, @group : Win32cr::System::SystemInformation::GROUP_RELATIONSHIP)
+    property shared_compute_unit : Win32cr::System::SystemServices::SHARED_COMPUTE_UNIT_RELATIONSHIP
+    def initialize(@processor : Win32cr::System::SystemInformation::PROCESSOR_RELATIONSHIP, @numa_node : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP, @cache : Win32cr::System::SystemInformation::CACHE_RELATIONSHIP, @group : Win32cr::System::SystemInformation::GROUP_RELATIONSHIP, @shared_compute_unit : Win32cr::System::SystemServices::SHARED_COMPUTE_UNIT_RELATIONSHIP)
     end
     end
 
